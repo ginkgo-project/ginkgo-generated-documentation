@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/271925380 branch based on develop. Ginkgo version 1.3.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/273115341 branch based on develop. Ginkgo version 1.3.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -82,7 +82,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>The Incomplete Sparse Approximate Inverse (ISAI) Preconditioner generates an approximate inverse matrix for a given lower triangular matrix L or upper triangular matrix U.  
+<p>The Incomplete Sparse Approximate Inverse (ISAI) Preconditioner generates an approximate inverse matrix for a given square matrix A, lower triangular matrix L, upper triangular matrix U or symmetric positive (spd) matrix B.  
  <a href="classgko_1_1preconditioner_1_1Isai.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="isai_8hpp_source.html">ginkgo/core/preconditioner/isai.hpp</a>&gt;</code></p>
@@ -108,12 +108,18 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>value_type</b> = Val
 <tr class="memitem:a82646f5ae5f773e2d32cd225c2c438f7"><td class="memItemLeft" align="right" valign="top"><a id="a82646f5ae5f773e2d32cd225c2c438f7"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>index_type</b> = IndexType</td></tr>
 <tr class="separator:a82646f5ae5f773e2d32cd225c2c438f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3f34f9df16ee7e3be1e4eb4fccc62b9"><td class="memItemLeft" align="right" valign="top"><a id="ae3f34f9df16ee7e3be1e4eb4fccc62b9"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>transposed_type</b> = <a class="el" href="classgko_1_1preconditioner_1_1Isai.html">Isai</a>&lt; IsaiType==isai_type::lower ? isai_type::upper :isai_type::lower, ValueType, IndexType &gt;</td></tr>
-<tr class="separator:ae3f34f9df16ee7e3be1e4eb4fccc62b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b54c3890ec913e059784f3d2a4e0846"><td class="memItemLeft" align="right" valign="top"><a id="a0b54c3890ec913e059784f3d2a4e0846"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>transposed_type</b> = <a class="el" href="classgko_1_1preconditioner_1_1Isai.html">Isai</a>&lt; IsaiType==isai_type::general ? isai_type::general :IsaiType==isai_type::spd ? isai_type::spd :IsaiType==isai_type::lower ? isai_type::upper :isai_type::lower, ValueType, IndexType &gt;</td></tr>
+<tr class="separator:a0b54c3890ec913e059784f3d2a4e0846"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cfc503777429d8f5451b0aff6c603a2"><td class="memItemLeft" align="right" valign="top"><a id="a1cfc503777429d8f5451b0aff6c603a2"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>Comp</b> = <a class="el" href="classgko_1_1Composition.html">Composition</a>&lt; ValueType &gt;</td></tr>
+<tr class="separator:a1cfc503777429d8f5451b0aff6c603a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab2ac0f513b91c51504f9477c37c8014a"><td class="memItemLeft" align="right" valign="top"><a id="ab2ac0f513b91c51504f9477c37c8014a"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>Csr</b> = <a class="el" href="classgko_1_1matrix_1_1Csr.html">matrix::Csr</a>&lt; ValueType, IndexType &gt;</td></tr>
 <tr class="separator:ab2ac0f513b91c51504f9477c37c8014a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfef6ea3615a85d440f9d11ab2c15f1a"><td class="memItemLeft" align="right" valign="top"><a id="adfef6ea3615a85d440f9d11ab2c15f1a"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>Dense</b> = <a class="el" href="classgko_1_1matrix_1_1Dense.html">matrix::Dense</a>&lt; ValueType &gt;</td></tr>
+<tr class="separator:adfef6ea3615a85d440f9d11ab2c15f1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_types_classgko_1_1EnablePolymorphicAssignment"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classgko_1_1EnablePolymorphicAssignment')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classgko_1_1EnablePolymorphicAssignment.html">gko::EnablePolymorphicAssignment&lt; Isai&lt; IsaiType, ValueType, IndexType &gt; &gt;</a></td></tr>
 <tr class="memitem:a2e92aa4e8262a8f6625330b76a24deeb inherit pub_types_classgko_1_1EnablePolymorphicAssignment"><td class="memItemLeft" align="right" valign="top"><a id="a2e92aa4e8262a8f6625330b76a24deeb"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>result_type</b> = Isai&lt; IsaiType, ValueType, IndexType &gt;</td></tr>
@@ -125,9 +131,9 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>result_type</b> = Is
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3151e65a57c5c003aaf05c23da37d7bf"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; const <a class="el" href="classgko_1_1matrix_1_1Csr.html">Csr</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1preconditioner_1_1Isai.html#a3151e65a57c5c003aaf05c23da37d7bf">get_approximate_inverse</a> () const</td></tr>
-<tr class="memdesc:a3151e65a57c5c003aaf05c23da37d7bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the approximate inverse of the given matrix (either L or U, depending on the template parameter IsaiType).  <a href="classgko_1_1preconditioner_1_1Isai.html#a3151e65a57c5c003aaf05c23da37d7bf">More...</a><br /></td></tr>
-<tr class="separator:a3151e65a57c5c003aaf05c23da37d7bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76b0195c7742295144b38edcc6bd4a0b"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; const typename std::conditional&lt; IsaiType==isai_type::spd, <a class="el" href="classgko_1_1Composition.html">Comp</a>, <a class="el" href="classgko_1_1matrix_1_1Csr.html">Csr</a> &gt;::type &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1preconditioner_1_1Isai.html#a76b0195c7742295144b38edcc6bd4a0b">get_approximate_inverse</a> () const</td></tr>
+<tr class="memdesc:a76b0195c7742295144b38edcc6bd4a0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the approximate inverse of the given matrix (either a CSR matrix for IsaiType general, upper or lower or a composition of two CSR matrices for IsaiType spd).  <a href="classgko_1_1preconditioner_1_1Isai.html#a76b0195c7742295144b38edcc6bd4a0b">More...</a><br /></td></tr>
+<tr class="separator:a76b0195c7742295144b38edcc6bd4a0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab59a756bf9f6985f5feef19d1b65e937"><td class="memItemLeft" align="right" valign="top"><a id="ab59a756bf9f6985f5feef19d1b65e937"></a>
 const <a class="el" href="structgko_1_1preconditioner_1_1Isai_1_1parameters__type.html">parameters_type</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get_parameters</b> () const</td></tr>
 <tr class="separator:ab59a756bf9f6985f5feef19d1b65e937"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -276,22 +282,32 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>EnableLinOp&lt; Isai
 <tr class="memitem:ae31a8c0f0aa79a6d6ae8e3266ed60171"><td class="memItemLeft" align="right" valign="top"><a id="ae31a8c0f0aa79a6d6ae8e3266ed60171"></a>
 class&#160;</td><td class="memItemRight" valign="bottom"><b>EnablePolymorphicObject&lt; Isai, LinOp &gt;</b></td></tr>
 <tr class="separator:ae31a8c0f0aa79a6d6ae8e3266ed60171"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7f6a64a731e3af1e74da13edaaf9295"><td class="memItemLeft" align="right" valign="top"><a id="ac7f6a64a731e3af1e74da13edaaf9295"></a>
-class&#160;</td><td class="memItemRight" valign="bottom"><b>Isai&lt; IsaiType==isai_type::lower ? isai_type::upper :isai_type::lower, ValueType, IndexType &gt;</b></td></tr>
-<tr class="separator:ac7f6a64a731e3af1e74da13edaaf9295"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83141faba9d3493cbcd3aae5db1938db"><td class="memItemLeft" align="right" valign="top"><a id="a83141faba9d3493cbcd3aae5db1938db"></a>
+class&#160;</td><td class="memItemRight" valign="bottom"><b>Isai&lt; isai_type::general, ValueType, IndexType &gt;</b></td></tr>
+<tr class="separator:a83141faba9d3493cbcd3aae5db1938db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86df81671457d662ff89c3cb68981754"><td class="memItemLeft" align="right" valign="top"><a id="a86df81671457d662ff89c3cb68981754"></a>
+class&#160;</td><td class="memItemRight" valign="bottom"><b>Isai&lt; isai_type::lower, ValueType, IndexType &gt;</b></td></tr>
+<tr class="separator:a86df81671457d662ff89c3cb68981754"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaaf3d4c12c491227cdcf64b1b9af8f01"><td class="memItemLeft" align="right" valign="top"><a id="aaaf3d4c12c491227cdcf64b1b9af8f01"></a>
+class&#160;</td><td class="memItemRight" valign="bottom"><b>Isai&lt; isai_type::upper, ValueType, IndexType &gt;</b></td></tr>
+<tr class="separator:aaaf3d4c12c491227cdcf64b1b9af8f01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac658f5d16a9476f3bb3bd1e857d0a2ba"><td class="memItemLeft" align="right" valign="top"><a id="ac658f5d16a9476f3bb3bd1e857d0a2ba"></a>
+class&#160;</td><td class="memItemRight" valign="bottom"><b>Isai&lt; isai_type::spd, ValueType, IndexType &gt;</b></td></tr>
+<tr class="separator:ac658f5d16a9476f3bb3bd1e857d0a2ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;isai_type IsaiType, typename ValueType, typename IndexType&gt;<br />
 class gko::preconditioner::Isai&lt; IsaiType, ValueType, IndexType &gt;</h3>
 
-<p>The Incomplete Sparse Approximate Inverse (ISAI) Preconditioner generates an approximate inverse matrix for a given lower triangular matrix L or upper triangular matrix U. </p>
-<p>Using the preconditioner computes <img class="formulaInl" alt="$aiU * x$" src="form_38.png"/> or <img class="formulaInl" alt="$aiL * x$" src="form_39.png"/> (depending on the type of the <a class="el" href="classgko_1_1preconditioner_1_1Isai.html" title="The Incomplete Sparse Approximate Inverse (ISAI) Preconditioner generates an approximate inverse matr...">Isai</a>) for a given vector x (may have multiple right hand sides). aiU and aiL are the approximate inverses for U and L respectively.</p>
-<p>The sparsity pattern used for the approximate inverse is the same as the sparsity pattern of the respective triangular matrix.</p>
+<p>The Incomplete Sparse Approximate Inverse (ISAI) Preconditioner generates an approximate inverse matrix for a given square matrix A, lower triangular matrix L, upper triangular matrix U or symmetric positive (spd) matrix B. </p>
+<p>Using the preconditioner computes <img class="formulaInl" alt="$aiA * x$" src="form_38.png"/>, <img class="formulaInl" alt="$aiU * x$" src="form_39.png"/>, <img class="formulaInl" alt="$aiL * x$" src="form_40.png"/> or <img class="formulaInl" alt="$aiC^T * aiC * x$" src="form_41.png"/> (depending on the type of the <a class="el" href="classgko_1_1preconditioner_1_1Isai.html" title="The Incomplete Sparse Approximate Inverse (ISAI) Preconditioner generates an approximate inverse matr...">Isai</a>) for a given vector x (may have multiple right hand sides). aiA, aiU and aiL are the approximate inverses for A, U and L respectively. aiC is an approximation to C, the exact Cholesky factor of B (This is commonly referred to as a Factorized Sparse Approximate Inverse, short FSPAI).</p>
+<p>The sparsity pattern used for the approximate inverse of A, L and U is the same as the sparsity pattern of the respective matrix. For B, the sparsity pattern used for the approximate inverse is the same as the sparsity pattern of the lower triangular half of B.</p>
+<p>Note that, except for the spd case, for a matrix A generally ISAI(A)^T != ISAI(A^T).</p>
 <p>For more details on the algorithm, see the paper <a href="https://doi.org/10.1016/j.parco.2017.10.003">Incomplete Sparse Approximate Inverses for Parallel Preconditioning</a>, which is the basis for this work.</p>
 <dl class="section note"><dt>Note</dt><dd>GPU implementations can only handle the vector unit width <code>width</code> (warp size for CUDA) as number of elements per row in the sparse matrix. If there are more than <code>width</code> elements per row, the remaining elements will be ignored.</dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">IsaiType</td><td>determines if the ISAI is generated for a lower triangular matrix or an upper triangular matrix </td></tr>
+    <tr><td class="paramname">IsaiType</td><td>determines if the ISAI is generated for a general square matrix, a lower triangular matrix, an upper triangular matrix or an spd matrix </td></tr>
     <tr><td class="paramname">ValueType</td><td>precision of matrix elements </td></tr>
     <tr><td class="paramname">IndexType</td><td>precision of matrix indexes </td></tr>
   </table>
@@ -330,8 +346,8 @@ template&lt;isai_type IsaiType, typename ValueType , typename IndexType &gt; </d
 
 </div>
 </div>
-<a id="a3151e65a57c5c003aaf05c23da37d7bf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3151e65a57c5c003aaf05c23da37d7bf">&#9670;&nbsp;</a></span>get_approximate_inverse()</h2>
+<a id="a76b0195c7742295144b38edcc6bd4a0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76b0195c7742295144b38edcc6bd4a0b">&#9670;&nbsp;</a></span>get_approximate_inverse()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -342,7 +358,7 @@ template&lt;isai_type IsaiType, typename ValueType , typename IndexType &gt; </d
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::shared_ptr&lt;const <a class="el" href="classgko_1_1matrix_1_1Csr.html">Csr</a>&gt; <a class="el" href="classgko_1_1preconditioner_1_1Isai.html">gko::preconditioner::Isai</a>&lt; IsaiType, ValueType, IndexType &gt;::get_approximate_inverse </td>
+          <td class="memname">std::shared_ptr&lt;const typename std::conditional&lt;IsaiType == isai_type::spd, <a class="el" href="classgko_1_1Composition.html">Comp</a>, <a class="el" href="classgko_1_1matrix_1_1Csr.html">Csr</a>&gt;::type&gt; <a class="el" href="classgko_1_1preconditioner_1_1Isai.html">gko::preconditioner::Isai</a>&lt; IsaiType, ValueType, IndexType &gt;::get_approximate_inverse </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -355,8 +371,10 @@ template&lt;isai_type IsaiType, typename ValueType , typename IndexType &gt; </d
 </table>
 </div><div class="memdoc">
 
-<p>Returns the approximate inverse of the given matrix (either L or U, depending on the template parameter IsaiType). </p>
+<p>Returns the approximate inverse of the given matrix (either a CSR matrix for IsaiType general, upper or lower or a composition of two CSR matrices for IsaiType spd). </p>
 <dl class="section return"><dt>Returns</dt><dd>the generated approximate inverse </dd></dl>
+
+<p class="reference">References <a class="el" href="namespacegko.html#a73ce7e87aec389b5210630bb617b4baa">gko::as()</a>.</p>
 
 </div>
 </div>

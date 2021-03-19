@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/271925380 branch based on develop. Ginkgo version 1.3.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/273115341 branch based on develop. Ginkgo version 1.3.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -92,13 +92,13 @@ $(function() {
 </ol> </td> </tr> </table>
  <a class="anchor" id="Intro"></a> <a class="anchor" id="Introduction"></a></p><h1>Introduction</h1>
 <p>This example solves a 2D heat conduction equation</p>
-<p><img class="formulaInl" alt="$ u : [0, d]^2 \rightarrow R\\ \partial_t u = \delta u + f $" src="form_52.png"/></p>
+<p><img class="formulaInl" alt="$ u : [0, d]^2 \rightarrow R\\ \partial_t u = \delta u + f $" src="form_54.png"/></p>
 <p>with Dirichlet boundary conditions and given initial condition and constant-in-time source function f.</p>
-<p>The partial differential equation (PDE) is solved with a finite difference spatial discretization on an equidistant grid: For <code>n</code> grid points, and grid distance <img class="formulaInl" alt="$h = 1/n$" src="form_53.png"/> we write</p>
-<p><img class="formulaInl" alt="$ u_{i,j}' = \alpha\frac{u_{i-1,j}+u_{i+1,j}+u_{i,j-1}+u_{i,j+1}-4u_{i,j}}{h^2}+f_{i,j} $" src="form_54.png"/></p>
-<p>We then build an implicit Euler integrator by discretizing with time step <img class="formulaInl" alt="$\tau$" src="form_55.png"/></p>
-<p><img class="formulaInl" alt="$ \frac{u_{i,j}^{k+1} - u_{i,j}^k}{\tau} = \alpha\frac{u_{i-1,j}^{k+1}+u_{i+1,j}^{k+1} -u_{i,j-1}^{k+1}-u_{i,j+1}^{k+1}+4u_{i,j}^{k+1}}{h^2} +f_{i,j} $" src="form_56.png"/></p>
-<p>and solve the resulting linear system for <img class="formulaInl" alt="$ u_{\cdot}^{k+1}$" src="form_57.png"/> using Ginkgo's CG solver preconditioned with an incomplete Cholesky factorization for each time step, occasionally writing the resulting grid values into a video file using OpenCV and a custom color mapping.</p>
+<p>The partial differential equation (PDE) is solved with a finite difference spatial discretization on an equidistant grid: For <code>n</code> grid points, and grid distance <img class="formulaInl" alt="$h = 1/n$" src="form_55.png"/> we write</p>
+<p><img class="formulaInl" alt="$ u_{i,j}' = \alpha\frac{u_{i-1,j}+u_{i+1,j}+u_{i,j-1}+u_{i,j+1}-4u_{i,j}}{h^2}+f_{i,j} $" src="form_56.png"/></p>
+<p>We then build an implicit Euler integrator by discretizing with time step <img class="formulaInl" alt="$\tau$" src="form_57.png"/></p>
+<p><img class="formulaInl" alt="$ \frac{u_{i,j}^{k+1} - u_{i,j}^k}{\tau} = \alpha\frac{u_{i-1,j}^{k+1}+u_{i+1,j}^{k+1} -u_{i,j-1}^{k+1}-u_{i,j+1}^{k+1}+4u_{i,j}^{k+1}}{h^2} +f_{i,j} $" src="form_58.png"/></p>
+<p>and solve the resulting linear system for <img class="formulaInl" alt="$ u_{\cdot}^{k+1}$" src="form_59.png"/> using Ginkgo's CG solver preconditioned with an incomplete Cholesky factorization for each time step, occasionally writing the resulting grid values into a video file using OpenCV and a custom color mapping.</p>
 <p>The intention of this example is to provide a mini-app showing matrix assembly, vector initialization, solver setup and the use of Ginkgo in a more complex setting.</p>
 <p><a class="anchor" id="Abouttheexample"></a></p><h3>About the example </h3>
 <p><a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
