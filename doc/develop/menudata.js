@@ -24,7 +24,10 @@ var menudata={children:[
 {text:"Main Page",url:"index.html"},
 {text:"Tutorial",url:"https://github.com/ginkgo-project/ginkgo/wiki/Tutorial:-Building-a-Poisson-Solver"},
 {text:"Examples",url:"Examples.html"},
+{text:"Publications",url:"citing_ginkgo.html",children:[
 {text:"Citing Ginkgo",url:"citing_ginkgo.html"},
+{text:"Ginkgo White Paper",url:"https://www.arxiv-vanity.com/papers/2006.16852/"},
+{text:"Slides and Outreach",url:"https://github.com/ginkgo-project/outreach"}]},
 {text:"Contributing To Ginkgo",url:"contributing_guidelines.html"},
 {text:"Using Ginkgo",url:"install_ginkgo.html",children:[
 {text:"Installing Ginkgo",url:"install_ginkgo.html"},
