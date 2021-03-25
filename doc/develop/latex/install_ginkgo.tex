@@ -39,6 +39,9 @@ Replace {\ttfamily \mbox{[}O\+P\+T\+I\+O\+NS\mbox{]}} with desired cmake options
 \item {\ttfamily 0} disables all output in the main libraries,
 \item {\ttfamily 1} enables a few important messages related to unexpected behavior (default).
 \end{DoxyItemize}
+\item {\ttfamily G\+I\+N\+K\+G\+O\+\_\+\+I\+N\+S\+T\+A\+L\+L\+\_\+\+R\+P\+A\+TH} allows setting any R\+P\+A\+TH information when installing the Ginkgo libraries. If this is {\ttfamily O\+FF}, the behavior is the same as if all other R\+P\+A\+TH flags are set to {\ttfamily O\+FF} as well. The default is {\ttfamily ON}.
+\item {\ttfamily G\+I\+N\+K\+G\+O\+\_\+\+I\+N\+S\+T\+A\+L\+L\+\_\+\+R\+P\+A\+T\+H\+\_\+\+O\+R\+I\+G\+IN} adds \$\+O\+R\+I\+G\+IN (Linux) or @loader\+\_\+path (Mac\+OS) to the installation R\+P\+A\+TH. The default is {\ttfamily ON}.
+\item {\ttfamily G\+I\+N\+K\+G\+O\+\_\+\+I\+N\+S\+T\+A\+L\+L\+\_\+\+R\+P\+A\+T\+H\+\_\+\+D\+E\+P\+E\+N\+D\+E\+N\+C\+I\+ES} adds the dependencies to the installation R\+P\+A\+TH. The default is {\ttfamily O\+FF}.
 \item {\ttfamily -\/D\+C\+M\+A\+K\+E\+\_\+\+I\+N\+S\+T\+A\+L\+L\+\_\+\+P\+R\+E\+F\+IX=path} sets the installation path for {\ttfamily make install}. The default value is usually something like {\ttfamily /usr/local}.
 \item {\ttfamily -\/D\+C\+M\+A\+K\+E\+\_\+\+B\+U\+I\+L\+D\+\_\+\+T\+Y\+PE=type} specifies which configuration will be used for this build of Ginkgo. The default is {\ttfamily R\+E\+L\+E\+A\+SE}. Supported values are C\+Make\textquotesingle{}s standard build types such as {\ttfamily D\+E\+B\+UG} and {\ttfamily R\+E\+L\+E\+A\+SE} and the Ginkgo specific {\ttfamily C\+O\+V\+E\+R\+A\+GE}, {\ttfamily A\+S\+AN} (Address\+Sanitizer), {\ttfamily L\+S\+AN} (Leak\+Sanitizer), {\ttfamily T\+S\+AN} (Thread\+Sanitizer) and {\ttfamily U\+B\+S\+AN} (undefined behavior sanitizer) types.
 \item {\ttfamily -\/D\+B\+U\+I\+L\+D\+\_\+\+S\+H\+A\+R\+E\+D\+\_\+\+L\+I\+BS=\{ON, O\+FF\}} builds ginkgo as shared libraries ({\ttfamily O\+FF}) or as dynamic libraries ({\ttfamily ON}), default is {\ttfamily ON}.
@@ -152,10 +155,13 @@ Ginkgo\textquotesingle{}s H\+IP backend adds a dependency to the following packa
 \end{DoxyItemize}\hypertarget{install_ginkgo_autotoc_md4}{}\doxysubsubsection{Changing the paths to search for H\+I\+P and other packages}\label{install_ginkgo_autotoc_md4}
 All H\+IP installation paths can be configured through the use of environment variables or C\+Make variables. This way of configuring the paths is currently imposed by the {\ttfamily H\+IP} tool suite. The variables are the following\+:
 \begin{DoxyItemize}
-\item C\+Make {\ttfamily -\/D\+H\+I\+P\+\_\+\+P\+A\+TH=} or environment {\ttfamily export H\+I\+P\+\_\+\+P\+A\+TH=}\+: sets the {\ttfamily H\+IP} installation path. The default value is {\ttfamily /opt/rocm/hip}.
-\item C\+Make {\ttfamily -\/D\+H\+I\+P\+B\+L\+A\+S\+\_\+\+P\+A\+TH=} or environment {\ttfamily export H\+I\+P\+B\+L\+A\+S\+\_\+\+P\+A\+TH=}\+: sets the {\ttfamily hip\+B\+L\+AS} installation path. The default value is {\ttfamily /opt/rocm/hipblas}.
-\item C\+Make {\ttfamily -\/D\+H\+I\+P\+S\+P\+A\+R\+S\+E\+\_\+\+P\+A\+TH=} or environment {\ttfamily export H\+I\+P\+S\+P\+A\+R\+S\+E\+\_\+\+P\+A\+TH=}\+: sets the {\ttfamily hip\+S\+P\+A\+R\+SE} installation path. The default value is {\ttfamily /opt/rocm/hipsparse}.
-\item C\+Make {\ttfamily -\/D\+H\+C\+C\+\_\+\+P\+A\+TH=} or environment {\ttfamily export H\+C\+C\+\_\+\+P\+A\+TH=}\+: sets the {\ttfamily H\+CC} installation path, for A\+MD backends. The default value is {\ttfamily /opt/rocm/hcc}.
+\item C\+Make {\ttfamily -\/D\+R\+O\+C\+M\+\_\+\+P\+A\+TH=} or environment {\ttfamily export R\+O\+C\+M\+\_\+\+P\+A\+TH=}\+: sets the {\ttfamily R\+O\+CM} installation path. The default value is {\ttfamily /opt/rocm/}.
+\item C\+Make {\ttfamily -\/D\+H\+I\+P\+\_\+\+C\+L\+A\+N\+G\+\_\+\+P\+A\+TH} or environment {\ttfamily export H\+I\+P\+\_\+\+C\+L\+A\+N\+G\+\_\+\+P\+A\+TH=}\+: sets the {\ttfamily H\+IP} compatible {\ttfamily clang} binary path. The default value is {\ttfamily \$\{R\+O\+C\+M\+\_\+\+P\+A\+TH\}/llvm/bin}.
+\item C\+Make {\ttfamily -\/D\+H\+I\+P\+\_\+\+P\+A\+TH=} or environment {\ttfamily export H\+I\+P\+\_\+\+P\+A\+TH=}\+: sets the {\ttfamily H\+IP} installation path. The default value is {\ttfamily \$\{R\+O\+C\+M\+\_\+\+P\+A\+TH\}/hip}.
+\item C\+Make {\ttfamily -\/D\+H\+I\+P\+B\+L\+A\+S\+\_\+\+P\+A\+TH=} or environment {\ttfamily export H\+I\+P\+B\+L\+A\+S\+\_\+\+P\+A\+TH=}\+: sets the {\ttfamily hip\+B\+L\+AS} installation path. The default value is {\ttfamily \$\{R\+O\+C\+M\+\_\+\+P\+A\+TH\}/hipblas}.
+\item C\+Make {\ttfamily -\/D\+H\+I\+P\+S\+P\+A\+R\+S\+E\+\_\+\+P\+A\+TH=} or environment {\ttfamily export H\+I\+P\+S\+P\+A\+R\+S\+E\+\_\+\+P\+A\+TH=}\+: sets the {\ttfamily hip\+S\+P\+A\+R\+SE} installation path. The default value is {\ttfamily \$\{R\+O\+C\+M\+\_\+\+P\+A\+TH\}/hipsparse}.
+\item C\+Make {\ttfamily -\/D\+R\+O\+C\+R\+A\+N\+D\+\_\+\+P\+A\+TH=} or environment {\ttfamily export R\+O\+C\+R\+A\+N\+D\+\_\+\+P\+A\+TH=}\+: sets the {\ttfamily roc\+R\+A\+ND} installation path. The default value is {\ttfamily \$\{R\+O\+C\+M\+\_\+\+P\+A\+TH\}/rocrand}.
+\item C\+Make {\ttfamily -\/D\+H\+I\+P\+R\+A\+N\+D\+\_\+\+P\+A\+TH=} or environment {\ttfamily export H\+I\+P\+R\+A\+N\+D\+\_\+\+P\+A\+TH=}\+: sets the {\ttfamily hip\+R\+A\+ND} installation path. The default value is {\ttfamily \$\{R\+O\+C\+M\+\_\+\+P\+A\+TH\}/hiprand}.
 \item environment {\ttfamily export C\+U\+D\+A\+\_\+\+P\+A\+TH=}\+: where {\ttfamily hipcc} can find {\ttfamily C\+U\+DA} if it is not in the default {\ttfamily /usr/local/cuda} path.
 \end{DoxyItemize}\hypertarget{install_ginkgo_autotoc_md5}{}\doxysubsubsection{H\+I\+P platform detection of A\+M\+D and N\+V\+I\+D\+IA}\label{install_ginkgo_autotoc_md5}
 By default, Ginkgo uses the output of {\ttfamily /opt/rocm/hip/bin/hipconfig -\/-\/platform} to select the backend. The accepted values are either {\ttfamily hcc} (A\+MD) or {\ttfamily nvcc} (N\+V\+I\+D\+IA). When on an A\+MD or N\+V\+I\+D\+IA system, this should output the correct platform by default. When on a system without G\+P\+Us, this should output {\ttfamily hcc} by default. To change this value, export the environment variable {\ttfamily H\+I\+P\+\_\+\+P\+L\+A\+T\+F\+O\+RM} like so\+: 
@@ -164,7 +170,7 @@ By default, Ginkgo uses the output of {\ttfamily /opt/rocm/hip/bin/hipconfig -\/
 \end{DoxyCode}
 
 
-When using {\ttfamily H\+I\+P\+\_\+\+P\+L\+A\+T\+F\+O\+RM=hcc}, note that two {\ttfamily H\+IP} compilers can be set, the old {\ttfamily hcc} or since R\+O\+Cm 3.\+5, {\ttfamily clang}. On newer installations, {\ttfamily clang} should be set by default, but if encountering any problem try to manually set the {\ttfamily H\+IP} compiler to {\ttfamily clang}\+: 
+When using {\ttfamily H\+I\+P\+\_\+\+P\+L\+A\+T\+F\+O\+RM=hcc}, note that two {\ttfamily H\+IP} compilers can be set, the old {\ttfamily hcc} or since R\+O\+Cm 3.\+5, {\ttfamily clang}. Ginkgo is only compatible with the {\ttfamily clang} based installations. Although this setting should be automatically done, it is also possible to manually set the {\ttfamily H\+IP} compiler to {\ttfamily clang}\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{export HIP\_COMPILER=clang}
 \end{DoxyCode}
@@ -172,7 +178,6 @@ When using {\ttfamily H\+I\+P\+\_\+\+P\+L\+A\+T\+F\+O\+RM=hcc}, note that two {\
 Platform specific compilation flags can be given through the following C\+Make variables\+:
 \begin{DoxyItemize}
 \item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+H\+I\+P\+\_\+\+C\+O\+M\+P\+I\+L\+E\+R\+\_\+\+F\+L\+A\+GS=}\+: compilation flags given to all platforms.
-\item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+H\+I\+P\+\_\+\+H\+C\+C\+\_\+\+C\+O\+M\+P\+I\+L\+E\+R\+\_\+\+F\+L\+A\+GS=}\+: compilation flags given to A\+MD platforms.
 \item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+H\+I\+P\+\_\+\+N\+V\+C\+C\+\_\+\+C\+O\+M\+P\+I\+L\+E\+R\+\_\+\+F\+L\+A\+GS=}\+: compilation flags given to N\+V\+I\+D\+IA platforms.
 \item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+H\+I\+P\+\_\+\+C\+L\+A\+N\+G\+\_\+\+C\+O\+M\+P\+I\+L\+E\+R\+\_\+\+F\+L\+A\+GS=}\+: compilation flags given to A\+MD clang compiler.
 \end{DoxyItemize}\hypertarget{install_ginkgo_autotoc_md7}{}\doxysubsection{Third party libraries and packages}\label{install_ginkgo_autotoc_md7}
@@ -187,7 +192,7 @@ Ginkgo relies on third party packages in different cases. These third party pack
 \item G\+I\+N\+K\+G\+O\+\_\+\+B\+U\+I\+L\+D\+\_\+\+H\+W\+L\+OC=ON\+: \href{https://www.open-mpi.org/projects/hwloc}{\texttt{ hwloc}} to detect and control cores and devices.
 \end{DoxyItemize}
 
-Usually, Ginkgo uses the internal version of each package. For each of the packages {\ttfamily G\+T\+E\+ST}, {\ttfamily G\+F\+L\+A\+GS}, {\ttfamily R\+A\+P\+I\+D\+J\+S\+ON} and {\ttfamily C\+AS}, it is possible to force Ginkgo to try to use an external version of a package. For this, Ginkgo provides two ways to find packages. To rely on the C\+Make {\ttfamily find\+\_\+package} command, use the C\+Make option {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+U\+S\+E\+\_\+\+E\+X\+T\+E\+R\+N\+A\+L\+\_\+$<$package$>$=ON}. {\ttfamily H\+W\+L\+OC} works the opposite way, Ginkgo always looks for the system\textquotesingle{}s {\ttfamily hwloc} first.
+Usually, Ginkgo uses the internal version of each package. For each of the packages {\ttfamily G\+T\+E\+ST}, {\ttfamily G\+F\+L\+A\+GS}, {\ttfamily R\+A\+P\+I\+D\+J\+S\+ON} and {\ttfamily C\+AS}, it is possible to force Ginkgo to try to use an external version of a package. For this, Ginkgo provides two ways to find packages. To rely on the C\+Make {\ttfamily find\+\_\+package} command, use the C\+Make option {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+U\+S\+E\+\_\+\+E\+X\+T\+E\+R\+N\+A\+L\+\_\+$<$package$>$=ON}. {\ttfamily H\+W\+L\+OC} works the opposite way, Ginkgo always looks for the system\textquotesingle{}s {\ttfamily hwloc} first. In addition, when installing Ginkgo, {\ttfamily hwloc} will be installed as well into the Ginkgo directory if there were no system {\ttfamily hwloc} detected.
 
 Note that, if the external packages were not installed to the default location, the C\+Make option {\ttfamily -\/D\+C\+M\+A\+K\+E\+\_\+\+P\+R\+E\+F\+I\+X\+\_\+\+P\+A\+TH=$<$path-\/list$>$} needs to be set to the semicolon ({\ttfamily ;}) separated list of install paths of these external packages. For more Information, see the \href{https://cmake.org/cmake/help/v3.9/variable/CMAKE_PREFIX_PATH.html}{\texttt{ C\+Make documentation for C\+M\+A\+K\+E\+\_\+\+P\+R\+E\+F\+I\+X\+\_\+\+P\+A\+TH}} for details.
 
@@ -198,7 +203,9 @@ To manually configure the paths, Ginkgo relies on the \href{https://xsdk.info/po
 \item {\ttfamily -\/D\+T\+P\+L\+\_\+$<$package$>$\+\_\+\+I\+N\+C\+L\+U\+D\+E\+\_\+\+D\+I\+RS=/path/to/header/directory}
 \end{DoxyItemize}
 
-When applicable (e.\+g. for {\ttfamily G\+Test} libraries), a {\ttfamily ;} separated list can be given to the {\ttfamily T\+P\+L\+\_\+$<$package$>$\+\_\+\{L\+I\+B\+R\+A\+R\+I\+E\+S$\vert$\+I\+N\+C\+L\+U\+D\+E\+\_\+\+D\+I\+RS\}} variables.\hypertarget{install_ginkgo_autotoc_md8}{}\doxysubsection{Installing Ginkgo}\label{install_ginkgo_autotoc_md8}
+When applicable (e.\+g. for {\ttfamily G\+Test} libraries), a {\ttfamily ;} separated list can be given to the {\ttfamily T\+P\+L\+\_\+$<$package$>$\+\_\+\{L\+I\+B\+R\+A\+R\+I\+E\+S$\vert$\+I\+N\+C\+L\+U\+D\+E\+\_\+\+D\+I\+RS\}} variables.
+
+Note that for convenience, the options {\ttfamily G\+I\+N\+K\+G\+O\+\_\+\+I\+N\+S\+T\+A\+L\+L\+\_\+\+R\+P\+A\+TH\mbox{[}\+\_\+.$\ast$\mbox{]}} can be used to make bind the Ginkgo shared libraries to the path of its dependencies.\hypertarget{install_ginkgo_autotoc_md8}{}\doxysubsection{Installing Ginkgo}\label{install_ginkgo_autotoc_md8}
 To install Ginkgo into the specified folder, execute the following command in the build folder
 
 
