@@ -71,9 +71,8 @@ void \mbox{\hyperlink{classgko_1_1log_1_1Record_a5193e064d6541cde6b456d6d9d0f616
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1stop_1_1Criterion}{stop\+::\+Criterion}}\textquotesingle{}s check completed event. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classgko_1_1log_1_1Record_a98999c72a91fd2fc061b03a40ea1c3fd}{on\+\_\+iteration\+\_\+complete}} (const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$solver, const \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \&num\+\_\+iterations, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$residual, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$solution=nullptr, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$residual\+\_\+norm=nullptr) const override
 \begin{DoxyCompactList}\small\item\em Register the {\ttfamily iteration\+\_\+complete} event which logs every completed iterations. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classgko_1_1log_1_1Record_a166418805a00df3cc58b2373fbc9a65a}\label{classgko_1_1log_1_1Record_a166418805a00df3cc58b2373fbc9a65a}} 
-void {\bfseries on\+\_\+iteration\+\_\+complete} (const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$solver, const \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \&num\+\_\+iterations, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$residual, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$solution, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$residual\+\_\+norm, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$implicit\+\_\+sq\+\_\+residual\+\_\+norm) const override
-\item 
+void \mbox{\hyperlink{classgko_1_1log_1_1Record_a166418805a00df3cc58b2373fbc9a65a}{on\+\_\+iteration\+\_\+complete}} (const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$solver, const \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \&num\+\_\+iterations, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$residual, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$solution, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$residual\+\_\+norm, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$implicit\+\_\+sq\+\_\+residual\+\_\+norm) const override
+\begin{DoxyCompactList}\small\item\em Register the {\ttfamily iteration\+\_\+complete} event which logs every completed iterations. \end{DoxyCompactList}\item 
 const \mbox{\hyperlink{structgko_1_1log_1_1Record_1_1logged__data}{logged\+\_\+data}} \& \mbox{\hyperlink{classgko_1_1log_1_1Record_ae64de3b730322ec8be7353aba30899b2}{get}} () const noexcept
 \begin{DoxyCompactList}\small\item\em Returns the logged data. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structgko_1_1log_1_1Record_1_1logged__data}{logged\+\_\+data}} \& \mbox{\hyperlink{classgko_1_1log_1_1Record_a714affcca3269fed88b982e7db011184}{get}} () noexcept
@@ -274,9 +273,12 @@ Parameters are the Criterion, the stopping\+Id, the finalized boolean, the stopp
 \hline
 {\em one\+\_\+changed} & whether at least one right hand side converged or not \\
 \hline
-{\em all\+\_\+converged} & whether all right hand sides \\
+{\em all\+\_\+converged} & whether all right hand sides\\
 \hline
 \end{DoxyParams}
+\begin{DoxyNote}{Note}
+The on\+\_\+criterion\+\_\+check\+\_\+completed function that this macro declares is deprecated. Please use the one with the additional implicit\+\_\+tau\+\_\+sq parameter as below. 
+\end{DoxyNote}
 
 
 Reimplemented from \mbox{\hyperlink{classgko_1_1log_1_1Logger}{gko\+::log\+::\+Logger}}.
@@ -354,11 +356,11 @@ Reimplemented from \mbox{\hyperlink{classgko_1_1log_1_1Logger}{gko\+::log\+::\+L
 
 Reimplemented from \mbox{\hyperlink{classgko_1_1log_1_1Logger}{gko\+::log\+::\+Logger}}.
 
-\mbox{\Hypertarget{classgko_1_1log_1_1Record_a98999c72a91fd2fc061b03a40ea1c3fd}\label{classgko_1_1log_1_1Record_a98999c72a91fd2fc061b03a40ea1c3fd}} 
+\mbox{\Hypertarget{classgko_1_1log_1_1Record_a166418805a00df3cc58b2373fbc9a65a}\label{classgko_1_1log_1_1Record_a166418805a00df3cc58b2373fbc9a65a}} 
 \index{gko::log::Record@{gko::log::Record}!on\_iteration\_complete@{on\_iteration\_complete}}
 \index{on\_iteration\_complete@{on\_iteration\_complete}!gko::log::Record@{gko::log::Record}}
-\doxysubsubsection{\texorpdfstring{on\_iteration\_complete()}{on\_iteration\_complete()}}
-{\footnotesize\ttfamily void gko\+::log\+::\+Record\+::on\+\_\+iteration\+\_\+complete (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{solver,  }\item[{const \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \&}]{it,  }\item[{const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{r,  }\item[{const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{x = {\ttfamily nullptr},  }\item[{const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{tau = {\ttfamily nullptr} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+\doxysubsubsection{\texorpdfstring{on\_iteration\_complete()}{on\_iteration\_complete()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void gko\+::log\+::\+Record\+::on\+\_\+iteration\+\_\+complete (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{solver,  }\item[{const \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \&}]{it,  }\item[{const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{r,  }\item[{const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{x,  }\item[{const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{tau,  }\item[{const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{implicit\+\_\+tau\+\_\+sq }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
@@ -374,7 +376,37 @@ Register the {\ttfamily iteration\+\_\+complete} event which logs every complete
 \hline
 {\em tau} & the residual norm (optional) \\
 \hline
+{\em implicit\+\_\+tau\+\_\+sq} & the implicit residual norm squared (optional) \\
+\hline
 \end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classgko_1_1log_1_1Logger}{gko\+::log\+::\+Logger}}.
+
+\mbox{\Hypertarget{classgko_1_1log_1_1Record_a98999c72a91fd2fc061b03a40ea1c3fd}\label{classgko_1_1log_1_1Record_a98999c72a91fd2fc061b03a40ea1c3fd}} 
+\index{gko::log::Record@{gko::log::Record}!on\_iteration\_complete@{on\_iteration\_complete}}
+\index{on\_iteration\_complete@{on\_iteration\_complete}!gko::log::Record@{gko::log::Record}}
+\doxysubsubsection{\texorpdfstring{on\_iteration\_complete()}{on\_iteration\_complete()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void gko\+::log\+::\+Record\+::on\+\_\+iteration\+\_\+complete (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{solver,  }\item[{const \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \&}]{it,  }\item[{const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{r,  }\item[{const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{x = {\ttfamily nullptr},  }\item[{const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{tau = {\ttfamily nullptr} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Register the {\ttfamily iteration\+\_\+complete} event which logs every completed iterations. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em it} & the current iteration count \\
+\hline
+{\em r} & the residual \\
+\hline
+{\em x} & the solution vector (optional) \\
+\hline
+{\em tau} & the residual norm (optional)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+The on\+\_\+iteration\+\_\+complete function that this macro declares is deprecated. Please use the one with the additional implicit\+\_\+tau\+\_\+sq parameter as below. 
+\end{DoxyNote}
 
 
 Reimplemented from \mbox{\hyperlink{classgko_1_1log_1_1Logger}{gko\+::log\+::\+Logger}}.

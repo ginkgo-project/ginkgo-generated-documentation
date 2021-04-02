@@ -1,14 +1,14 @@
 var searchData=
 [
-  ['machinetopology_1259',['MachineTopology',['../classgko_1_1MachineTopology.html',1,'gko']]],
-  ['matrix_5fassembly_5fdata_1260',['matrix_assembly_data',['../classgko_1_1matrix__assembly__data.html',1,'gko']]],
-  ['matrix_5fdata_1261',['matrix_data',['../structgko_1_1matrix__data.html',1,'gko']]],
-  ['max_5foperaton_1262',['max_operaton',['../structgko_1_1accessor_1_1max__operaton.html',1,'gko::accessor']]],
-  ['merge_5fpath_1263',['merge_path',['../classgko_1_1matrix_1_1Csr_1_1merge__path.html',1,'gko::matrix::Csr']]],
-  ['min_5foperaton_1264',['min_operaton',['../structgko_1_1accessor_1_1min__operaton.html',1,'gko::accessor']]],
-  ['minimal_5fstorage_5flimit_1265',['minimal_storage_limit',['../classgko_1_1matrix_1_1Hybrid_1_1minimal__storage__limit.html',1,'gko::matrix::Hybrid']]],
-  ['mmul_5foperation_1266',['mmul_operation',['../structgko_1_1accessor_1_1mmul__operation.html',1,'gko::accessor']]],
-  ['mod_1267',['mod',['../structgko_1_1accessor_1_1mod.html',1,'gko::accessor']]],
-  ['mul_1268',['mul',['../structgko_1_1accessor_1_1mul.html',1,'gko::accessor']]],
-  ['multigridlevel_1269',['MultigridLevel',['../classgko_1_1multigrid_1_1MultigridLevel.html',1,'gko::multigrid']]]
+  ['machinetopology_1261',['MachineTopology',['../classgko_1_1MachineTopology.html',1,'gko']]],
+  ['matrix_5fassembly_5fdata_1262',['matrix_assembly_data',['../classgko_1_1matrix__assembly__data.html',1,'gko']]],
+  ['matrix_5fdata_1263',['matrix_data',['../structgko_1_1matrix__data.html',1,'gko']]],
+  ['max_5foperaton_1264',['max_operaton',['../structgko_1_1accessor_1_1max__operaton.html',1,'gko::accessor']]],
+  ['merge_5fpath_1265',['merge_path',['../classgko_1_1matrix_1_1Csr_1_1merge__path.html',1,'gko::matrix::Csr']]],
+  ['min_5foperaton_1266',['min_operaton',['../structgko_1_1accessor_1_1min__operaton.html',1,'gko::accessor']]],
+  ['minimal_5fstorage_5flimit_1267',['minimal_storage_limit',['../classgko_1_1matrix_1_1Hybrid_1_1minimal__storage__limit.html',1,'gko::matrix::Hybrid']]],
+  ['mmul_5foperation_1268',['mmul_operation',['../structgko_1_1accessor_1_1mmul__operation.html',1,'gko::accessor']]],
+  ['mod_1269',['mod',['../structgko_1_1accessor_1_1mod.html',1,'gko::accessor']]],
+  ['mul_1270',['mul',['../structgko_1_1accessor_1_1mul.html',1,'gko::accessor']]],
+  ['multigridlevel_1271',['MultigridLevel',['../classgko_1_1multigrid_1_1MultigridLevel.html',1,'gko::multigrid']]]
 ];
