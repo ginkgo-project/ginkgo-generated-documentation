@@ -164,13 +164,13 @@ All H\+IP installation paths can be configured through the use of environment va
 \item C\+Make {\ttfamily -\/D\+H\+I\+P\+R\+A\+N\+D\+\_\+\+P\+A\+TH=} or environment {\ttfamily export H\+I\+P\+R\+A\+N\+D\+\_\+\+P\+A\+TH=}\+: sets the {\ttfamily hip\+R\+A\+ND} installation path. The default value is {\ttfamily \$\{R\+O\+C\+M\+\_\+\+P\+A\+TH\}/hiprand}.
 \item environment {\ttfamily export C\+U\+D\+A\+\_\+\+P\+A\+TH=}\+: where {\ttfamily hipcc} can find {\ttfamily C\+U\+DA} if it is not in the default {\ttfamily /usr/local/cuda} path.
 \end{DoxyItemize}\hypertarget{install_ginkgo_autotoc_md5}{}\doxysubsubsection{H\+I\+P platform detection of A\+M\+D and N\+V\+I\+D\+IA}\label{install_ginkgo_autotoc_md5}
-By default, Ginkgo uses the output of {\ttfamily /opt/rocm/hip/bin/hipconfig -\/-\/platform} to select the backend. The accepted values are either {\ttfamily hcc} (A\+MD) or {\ttfamily nvcc} (N\+V\+I\+D\+IA). When on an A\+MD or N\+V\+I\+D\+IA system, this should output the correct platform by default. When on a system without G\+P\+Us, this should output {\ttfamily hcc} by default. To change this value, export the environment variable {\ttfamily H\+I\+P\+\_\+\+P\+L\+A\+T\+F\+O\+RM} like so\+: 
+By default, Ginkgo uses the output of {\ttfamily /opt/rocm/hip/bin/hipconfig -\/-\/platform} to select the backend. The accepted values are either {\ttfamily hcc} ({\ttfamily amd} with R\+O\+CM $>$= 4.\+1) or {\ttfamily nvcc} ({\ttfamily nvidia} with R\+O\+CM $>$= 4.\+1). When on an A\+MD or N\+V\+I\+D\+IA system, this should output the correct platform by default. When on a system without G\+P\+Us, this should output {\ttfamily hcc} by default. To change this value, export the environment variable {\ttfamily H\+I\+P\+\_\+\+P\+L\+A\+T\+F\+O\+RM} like so\+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{export HIP\_PLATFORM=nvcc}
+\DoxyCodeLine{export HIP\_PLATFORM=nvcc \# or nvidia for ROCM >= 4.1}
 \end{DoxyCode}
 
 
-When using {\ttfamily H\+I\+P\+\_\+\+P\+L\+A\+T\+F\+O\+RM=hcc}, note that two {\ttfamily H\+IP} compilers can be set, the old {\ttfamily hcc} or since R\+O\+Cm 3.\+5, {\ttfamily clang}. Ginkgo is only compatible with the {\ttfamily clang} based installations. Although this setting should be automatically done, it is also possible to manually set the {\ttfamily H\+IP} compiler to {\ttfamily clang}\+: 
+When using {\ttfamily H\+I\+P\+\_\+\+P\+L\+A\+T\+F\+O\+RM=hcc} (or {\ttfamily amd}), note that two {\ttfamily H\+IP} compilers can be set\+: the old {\ttfamily hcc}, or since R\+O\+Cm 3.\+5, {\ttfamily clang}. Ginkgo is only compatible with the {\ttfamily clang} based installations. Although this setting should be automatically done, it is also possible to manually set the {\ttfamily H\+IP} compiler to {\ttfamily clang}\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{export HIP\_COMPILER=clang}
 \end{DoxyCode}

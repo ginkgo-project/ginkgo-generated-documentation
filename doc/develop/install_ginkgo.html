@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/280333727 branch based on develop. Ginkgo version 1.3.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/282320701 branch based on develop. Ginkgo version 1.4.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -219,8 +219,8 @@ Changing the paths to search for HIP and other packages</h3>
 </ul>
 <h3><a class="anchor" id="autotoc_md5"></a>
 HIP platform detection of AMD and NVIDIA</h3>
-<p>By default, Ginkgo uses the output of <code>/opt/rocm/hip/bin/hipconfig --platform</code> to select the backend. The accepted values are either <code>hcc</code> (AMD) or <code>nvcc</code> (NVIDIA). When on an AMD or NVIDIA system, this should output the correct platform by default. When on a system without GPUs, this should output <code>hcc</code> by default. To change this value, export the environment variable <code>HIP_PLATFORM</code> like so: </p><div class="fragment"><div class="line">export HIP_PLATFORM=nvcc</div>
-</div><!-- fragment --><p>When using <code>HIP_PLATFORM=hcc</code>, note that two <code>HIP</code> compilers can be set, the old <code>hcc</code> or since ROCm 3.5, <code>clang</code>. Ginkgo is only compatible with the <code>clang</code> based installations. Although this setting should be automatically done, it is also possible to manually set the <code>HIP</code> compiler to <code>clang</code>: </p><div class="fragment"><div class="line">export HIP_COMPILER=clang</div>
+<p>By default, Ginkgo uses the output of <code>/opt/rocm/hip/bin/hipconfig --platform</code> to select the backend. The accepted values are either <code>hcc</code> (<code>amd</code> with ROCM &gt;= 4.1) or <code>nvcc</code> (<code>nvidia</code> with ROCM &gt;= 4.1). When on an AMD or NVIDIA system, this should output the correct platform by default. When on a system without GPUs, this should output <code>hcc</code> by default. To change this value, export the environment variable <code>HIP_PLATFORM</code> like so: </p><div class="fragment"><div class="line">export HIP_PLATFORM=nvcc # or nvidia for ROCM &gt;= 4.1</div>
+</div><!-- fragment --><p>When using <code>HIP_PLATFORM=hcc</code> (or <code>amd</code>), note that two <code>HIP</code> compilers can be set: the old <code>hcc</code>, or since ROCm 3.5, <code>clang</code>. Ginkgo is only compatible with the <code>clang</code> based installations. Although this setting should be automatically done, it is also possible to manually set the <code>HIP</code> compiler to <code>clang</code>: </p><div class="fragment"><div class="line">export HIP_COMPILER=clang</div>
 </div><!-- fragment --><h3><a class="anchor" id="autotoc_md6"></a>
 Setting platform specific compilation flags</h3>
 <p>Platform specific compilation flags can be given through the following CMake variables:</p><ul>
