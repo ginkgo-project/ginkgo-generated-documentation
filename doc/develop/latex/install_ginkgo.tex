@@ -26,7 +26,7 @@ Replace {\ttfamily \mbox{[}O\+P\+T\+I\+O\+NS\mbox{]}} with desired cmake options
 \item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+B\+U\+I\+L\+D\+\_\+\+D\+P\+C\+PP=\{ON, O\+FF\}} builds optimized D\+P\+C++ versions of the kernels (requires {\ttfamily C\+M\+A\+K\+E\+\_\+\+C\+X\+X\+\_\+\+C\+O\+M\+P\+I\+L\+ER} to be set to the {\ttfamily dpcpp} compiler). The default is {\ttfamily ON} if {\ttfamily C\+M\+A\+K\+E\+\_\+\+C\+X\+X\+\_\+\+C\+O\+M\+P\+I\+L\+ER} is a D\+P\+C++ compiler, {\ttfamily O\+FF} otherwise.
 \item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+B\+U\+I\+L\+D\+\_\+\+H\+IP=\{ON, O\+FF\}} builds optimized H\+IP versions of the kernels (requires H\+IP), default is {\ttfamily ON} if an installation of H\+IP could be detected, {\ttfamily O\+FF} otherwise.
 \item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+H\+I\+P\+\_\+\+A\+M\+D\+G\+PU=\char`\"{}gpuarch1;gpuarch2\char`\"{}} the amdgpu\+\_\+target(s) variable passed to hipcc for the {\ttfamily hcc} H\+IP backend. The default is none (auto).
-\item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+B\+U\+I\+L\+D\+\_\+\+H\+W\+L\+OC=\{ON, O\+FF\}} builds Ginkgo with H\+W\+L\+OC. If system H\+W\+L\+OC is not found, Ginkgo will try to build it. Default is {\ttfamily ON}.
+\item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+B\+U\+I\+L\+D\+\_\+\+H\+W\+L\+OC=\{ON, O\+FF\}} builds Ginkgo with H\+W\+L\+OC. If system H\+W\+L\+OC is not found, Ginkgo will try to build it. Default is {\ttfamily ON} on Linux. Ginkgo does not support H\+W\+L\+OC on Windows/\+Mac\+OS, so the default is {\ttfamily O\+FF} on Windows/\+Mac\+OS.
 \item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+B\+U\+I\+L\+D\+\_\+\+D\+OC=\{ON, O\+FF\}} creates an H\+T\+ML version of Ginkgo\textquotesingle{}s documentation from inline comments in the code. The default is {\ttfamily O\+FF}.
 \item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+D\+O\+C\+\_\+\+G\+E\+N\+E\+R\+A\+T\+E\+\_\+\+E\+X\+A\+M\+P\+L\+ES=\{ON, O\+FF\}} generates the documentation of examples in Ginkgo. The default is {\ttfamily ON}.
 \item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+D\+O\+C\+\_\+\+G\+E\+N\+E\+R\+A\+T\+E\+\_\+\+P\+DF=\{ON, O\+FF\}} generates a P\+DF version of Ginkgo\textquotesingle{}s documentation from inline comments in the code. The default is {\ttfamily O\+FF}.
@@ -51,7 +51,7 @@ Replace {\ttfamily \mbox{[}O\+P\+T\+I\+O\+NS\mbox{]}} with desired cmake options
 \item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+C\+U\+D\+A\+\_\+\+A\+R\+C\+H\+I\+T\+E\+C\+T\+U\+R\+ES=$<$list$>$} where {\ttfamily $<$list$>$} is a semicolon ({\ttfamily ;}) separated list of architectures. Supported values are\+:
 \begin{DoxyItemize}
 \item {\ttfamily Auto}
-\item {\ttfamily Kepler}, {\ttfamily Maxwell}, {\ttfamily Pascal}, {\ttfamily Volta}, {\ttfamily Ampere}
+\item {\ttfamily Kepler}, {\ttfamily Maxwell}, {\ttfamily Pascal}, {\ttfamily Volta}, {\ttfamily Turing}, {\ttfamily Ampere}
 \item {\ttfamily C\+O\+DE}, {\ttfamily C\+O\+D\+E(\+C\+O\+M\+P\+U\+T\+E)}, {\ttfamily (C\+O\+M\+P\+U\+TE)}
 \end{DoxyItemize}
 
@@ -76,7 +76,7 @@ Depending on the configuration settings, some manual work might be required\+:
 \begin{DoxyItemize}
 \item Build Ginkgo as shared library\+: Add {\ttfamily P\+R\+O\+J\+E\+C\+T\+\_\+\+B\+I\+N\+A\+R\+Y\+\_\+\+D\+I\+R/\+G\+I\+N\+K\+G\+O\+\_\+\+W\+I\+N\+D\+O\+W\+S\+\_\+\+S\+H\+A\+R\+E\+D\+\_\+\+L\+I\+B\+R\+A\+R\+Y\+\_\+\+R\+E\+L\+P\+A\+TH} into the environment variable {\ttfamily P\+A\+TH}. {\ttfamily G\+I\+N\+K\+G\+O\+\_\+\+W\+I\+N\+D\+O\+W\+S\+\_\+\+S\+H\+A\+R\+E\+D\+\_\+\+L\+I\+B\+R\+A\+R\+Y\+\_\+\+R\+E\+L\+P\+A\+TH} is {\ttfamily windows\+\_\+shared\+\_\+library} by default. More Details are available in the Installation page.
 \begin{DoxyItemize}
-\item cmd\+: {\ttfamily set P\+A\+TH=\char`\"{}$<$\+P\+R\+O\+J\+E\+C\+T\+\_\+\+B\+I\+N\+A\+R\+Y\+\_\+\+D\+I\+R/\+G\+I\+N\+K\+G\+O\+\_\+\+W\+I\+N\+D\+O\+W\+S\+\_\+\+S\+H\+A\+R\+E\+D\+\_\+\+L\+I\+B\+R\+A\+R\+Y\+\_\+\+R\+E\+L\+P\+A\+T\+H$>$;\%\+P\+A\+T\+H\%\char`\"{}}
+\item cmd\+: {\ttfamily set P\+A\+TH=$<$P\+R\+O\+J\+E\+C\+T\+\_\+\+B\+I\+N\+A\+R\+Y\+\_\+\+D\+I\+R/\+G\+I\+N\+K\+G\+O\+\_\+\+W\+I\+N\+D\+O\+W\+S\+\_\+\+S\+H\+A\+R\+E\+D\+\_\+\+L\+I\+B\+R\+A\+R\+Y\+\_\+\+R\+E\+L\+P\+A\+TH$>$;P\+A\+TH\%}
 \item powershell\+: {\ttfamily \begin{DoxyParagraph}{env}
 A\+TH="$<$P\+R\+O\+J\+E\+C\+T\+\_\+\+B\+I\+N\+A\+R\+Y\+\_\+\+D\+I\+R/\+G\+I\+N\+K\+G\+O\+\_\+\+W\+I\+N\+D\+O\+W\+S\+\_\+\+S\+H\+A\+R\+E\+D\+\_\+\+L\+I\+B\+R\+A\+R\+Y\+\_\+\+R\+E\+L\+P\+A\+TH$>$;
 \end{DoxyParagraph}
@@ -90,7 +90,7 @@ C\+Make will give the following error message if the path is not correct.
  where {\ttfamily $<$path$>$} is the needed {\ttfamily $<$P\+R\+O\+J\+E\+C\+T\+\_\+\+B\+I\+N\+A\+R\+Y\+\_\+\+D\+I\+R/\+G\+I\+N\+K\+G\+O\+\_\+\+W\+I\+N\+D\+O\+W\+S\+\_\+\+S\+H\+A\+R\+E\+D\+\_\+\+L\+I\+B\+R\+A\+R\+Y\+\_\+\+R\+E\+L\+P\+A\+TH$>$}.
 \item Build Ginkgo with Debug mode\+: Some Debug build specific issues can appear depending on the machine and environment. The known issues are the following\+:
 \begin{DoxyEnumerate}
-\item {\ttfamily bigobj} issue\+: encountering {\ttfamily too many sections} needs the compilation flags {\ttfamily \textbackslash{}bigobj} or {\ttfamily -\/Wa,-\/mbig-\/obj}
+\item {\ttfamily bigobj} issue\+: encountering {\ttfamily too many sections} needs the compilation flags {\ttfamily /bigobj} or {\ttfamily -\/Wa,-\/mbig-\/obj}
 \item {\ttfamily ld} issue\+: encountering {\ttfamily ld\+: error\+: export ordinal too large} needs the compilation flag {\ttfamily -\/O1}
 \end{DoxyEnumerate}
 
@@ -100,11 +100,11 @@ The following are the details for different environments\+:
 \begin{DoxyEnumerate}
 \item {\ttfamily bigobj} issue
 \begin{DoxyItemize}
-\item {\ttfamily cmake -\/D\+C\+M\+A\+K\+E\+\_\+\+C\+X\+X\+\_\+\+F\+L\+A\+GS=\textbackslash{}bigobj $<$other parameters$>$ $<$source\+\_\+folder$>$} which might overwrite the default settings.
-\item add {\ttfamily \textbackslash{}bigobj} into the environment variable {\ttfamily C\+X\+X\+F\+L\+A\+GS} (only available in the first cmake configuration)
+\item {\ttfamily cmake -\/D\+C\+M\+A\+K\+E\+\_\+\+C\+X\+X\+\_\+\+F\+L\+A\+GS=/bigobj $<$other parameters$>$ $<$source\+\_\+folder$>$} which might overwrite the default settings.
+\item add {\ttfamily /bigobj} into the environment variable {\ttfamily C\+X\+X\+F\+L\+A\+GS} (only available in the first cmake configuration)
 \begin{DoxyItemize}
-\item cmd\+: {\ttfamily set C\+X\+X\+F\+L\+A\+GS=\textbackslash{}bigobj}
-\item powershell\+: {\ttfamily \$env\+:C\+X\+X\+F\+L\+A\+GS=\textbackslash{}bigobj}
+\item cmd\+: {\ttfamily set C\+X\+X\+F\+L\+A\+GS=/bigobj}
+\item powershell\+: {\ttfamily \$env\+:C\+X\+X\+F\+L\+A\+GS=/bigobj}
 \end{DoxyItemize}
 \end{DoxyItemize}
 \item {\ttfamily ld} issue ({\itshape Microsoft Visual Studio} does not have this issue)
@@ -143,7 +143,8 @@ The following are the details for different environments\+:
 \end{DoxyItemize}
 \end{DoxyEnumerate}
 \end{DoxyItemize}
-\item Build Ginkgo in {\itshape Min\+GW}\+: If encountering the issue {\ttfamily cc1plus.\+exe\+: out of memory allocating 65536 bytes}, please follow the workaround in \href{https://www.intel.com/content/www/us/en/programmable/support/support-resources/knowledge-base/embedded/2016/cc1plus-exe--out-of-memory-allocating-65536-bytes.html}{\texttt{ reference}}, or trying to compile ginkgo again might work.
+\item Possible issue when switching static/shared of Ginkgo with M\+S\+VC in the same build directory\+:\textbackslash{} If an issue occurs from mixing M\+D/\+MT runtime library when enabling {\ttfamily G\+I\+N\+K\+G\+O\+\_\+\+B\+U\+I\+L\+D\+\_\+\+B\+E\+N\+C\+H\+M\+A\+R\+KS}, it means the third-\/party flags are not updated correctly. To update the third party flags, turn off {\ttfamily G\+I\+N\+K\+G\+O\+\_\+\+S\+K\+I\+P\+\_\+\+D\+E\+P\+E\+N\+D\+E\+N\+C\+Y\+\_\+\+U\+P\+D\+A\+TE} ({\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+S\+K\+I\+P\+\_\+\+D\+E\+P\+E\+N\+D\+E\+N\+C\+Y\+\_\+\+U\+P\+D\+A\+TE=O\+FF}).
+\item Build Ginkgo in {\itshape Min\+GW}\+:\textbackslash{} If encountering the issue {\ttfamily cc1plus.\+exe\+: out of memory allocating 65536 bytes}, please follow the workaround in \href{https://www.intel.com/content/www/us/en/programmable/support/support-resources/knowledge-base/embedded/2016/cc1plus-exe--out-of-memory-allocating-65536-bytes.html}{\texttt{ reference}}, or trying to compile ginkgo again might work.
 \end{DoxyItemize}\hypertarget{install_ginkgo_autotoc_md2}{}\doxysubsection{Building Ginkgo with H\+I\+P support}\label{install_ginkgo_autotoc_md2}
 Ginkgo provides a \href{https://github.com/ROCm-Developer-Tools/HIP}{\texttt{ H\+IP}} backend. This allows to compile optimized versions of the kernels for either A\+MD or N\+V\+I\+D\+IA G\+P\+Us. The C\+Make configuration step will try to auto-\/detect the presence of H\+IP either at {\ttfamily /opt/rocm/hip} or at the path specified by {\ttfamily H\+I\+P\+\_\+\+P\+A\+TH} as a C\+Make parameter ({\ttfamily -\/D\+H\+I\+P\+\_\+\+P\+A\+TH=}) or environment variable ({\ttfamily export H\+I\+P\+\_\+\+P\+A\+TH=}), unless {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+B\+U\+I\+L\+D\+\_\+\+H\+IP=O\+N/\+O\+FF} is set explicitly.\hypertarget{install_ginkgo_autotoc_md3}{}\doxysubsubsection{H\+I\+P dependencies for Ginkgo}\label{install_ginkgo_autotoc_md3}
 Ginkgo\textquotesingle{}s H\+IP backend adds a dependency to the following packages\+:

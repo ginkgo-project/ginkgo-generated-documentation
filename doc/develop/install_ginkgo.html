@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/286397091 branch based on develop. Ginkgo version 1.4.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/287035962 branch based on develop. Ginkgo version 1.4.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -90,7 +90,7 @@ Building</h2>
 <li><code>-DGINKGO_BUILD_DPCPP={ON, OFF}</code> builds optimized DPC++ versions of the kernels (requires <code>CMAKE_CXX_COMPILER</code> to be set to the <code>dpcpp</code> compiler). The default is <code>ON</code> if <code>CMAKE_CXX_COMPILER</code> is a DPC++ compiler, <code>OFF</code> otherwise.</li>
 <li><code>-DGINKGO_BUILD_HIP={ON, OFF}</code> builds optimized HIP versions of the kernels (requires HIP), default is <code>ON</code> if an installation of HIP could be detected, <code>OFF</code> otherwise.</li>
 <li><code>-DGINKGO_HIP_AMDGPU="gpuarch1;gpuarch2"</code> the amdgpu_target(s) variable passed to hipcc for the <code>hcc</code> HIP backend. The default is none (auto).</li>
-<li><code>-DGINKGO_BUILD_HWLOC={ON, OFF}</code> builds Ginkgo with HWLOC. If system HWLOC is not found, Ginkgo will try to build it. Default is <code>ON</code>.</li>
+<li><code>-DGINKGO_BUILD_HWLOC={ON, OFF}</code> builds Ginkgo with HWLOC. If system HWLOC is not found, Ginkgo will try to build it. Default is <code>ON</code> on Linux. Ginkgo does not support HWLOC on Windows/MacOS, so the default is <code>OFF</code> on Windows/MacOS.</li>
 <li><code>-DGINKGO_BUILD_DOC={ON, OFF}</code> creates an HTML version of Ginkgo's documentation from inline comments in the code. The default is <code>OFF</code>.</li>
 <li><code>-DGINKGO_DOC_GENERATE_EXAMPLES={ON, OFF}</code> generates the documentation of examples in Ginkgo. The default is <code>ON</code>.</li>
 <li><code>-DGINKGO_DOC_GENERATE_PDF={ON, OFF}</code> generates a PDF version of Ginkgo's documentation from inline comments in the code. The default is <code>OFF</code>.</li>
@@ -114,7 +114,7 @@ Building</h2>
 <li><code>-DCMAKE_CUDA_HOST_COMPILER=path</code> instructs the build system to explicitly set CUDA's host compiler to the path given as argument. By default, CUDA uses its toolchain's host compiler. Setting this option may help if you're experiencing linking errors due to ABI incompatibilities. This option is supported since <a href="https://github.com/Kitware/CMake/commit/489c52ce680df6439f9c1e553cd2925ca8944cb1">CMake 3.8</a> but <a href="https://cmake.org/cmake/help/v3.10/variable/CMAKE_CUDA_HOST_COMPILER.html">documented starting from 3.10</a>.</li>
 <li><p class="startli"><code>-DGINKGO_CUDA_ARCHITECTURES=&lt;list&gt;</code> where <code>&lt;list&gt;</code> is a semicolon (<code>;</code>) separated list of architectures. Supported values are:</p><ul>
 <li><code>Auto</code></li>
-<li><code>Kepler</code>, <code>Maxwell</code>, <code>Pascal</code>, <code>Volta</code>, <code>Ampere</code></li>
+<li><code>Kepler</code>, <code>Maxwell</code>, <code>Pascal</code>, <code>Volta</code>, <code>Turing</code>, <code>Ampere</code></li>
 <li><code>CODE</code>, <code>CODE(COMPUTE)</code>, <code>(COMPUTE)</code></li>
 </ul>
 <p class="startli"><code>Auto</code> will automatically detect the present CUDA-enabled GPU architectures in the system. <code>Kepler</code>, <code>Maxwell</code>, <code>Pascal</code>, <code>Volta</code> and <code>Ampere</code> will add flags for all architectures of that particular NVIDIA GPU generation. <code>COMPUTE</code> and <code>CODE</code> are placeholders that should be replaced with compute and code numbers (e.g. for <code>compute_70</code> and <code>sm_70</code> <code>COMPUTE</code> and <code>CODE</code> should be replaced with <code>70</code>. Default is <code>Auto</code>. For a more detailed explanation of this option see the <a href="https://github.com/ginkgo-project/CudaArchitectureSelector/blob/master/CudaArchitectureSelector.cmake#L58"><code>ARCHITECTURES</code> specification list</a> section in the documentation of the CudaArchitectureSelector CMake module.</p>
@@ -132,7 +132,7 @@ Building</h2>
 Building Ginkgo in Windows</h2>
 <p>Depending on the configuration settings, some manual work might be required:</p><ul>
 <li><p class="startli">Build Ginkgo as shared library: Add <code>PROJECT_BINARY_DIR/GINKGO_WINDOWS_SHARED_LIBRARY_RELPATH</code> into the environment variable <code>PATH</code>. <code>GINKGO_WINDOWS_SHARED_LIBRARY_RELPATH</code> is <code>windows_shared_library</code> by default. More Details are available in the Installation page.</p><ul>
-<li>cmd: <code>set PATH="&lt;PROJECT_BINARY_DIR/GINKGO_WINDOWS_SHARED_LIBRARY_RELPATH&gt;;%PATH%"</code></li>
+<li>cmd: <code>set PATH=&lt;PROJECT_BINARY_DIR/GINKGO_WINDOWS_SHARED_LIBRARY_RELPATH&gt;;PATH%</code></li>
 <li>powershell: <code><dl class="section rcs"><dt>env</dt><dd>ATH="&lt;PROJECT_BINARY_DIR/GINKGO_WINDOWS_SHARED_LIBRARY_RELPATH&gt;;</dd></dl>
 env:PATH"</code></li>
 </ul>
@@ -140,16 +140,16 @@ env:PATH"</code></li>
 </div><!-- fragment --><p> where <code>&lt;path&gt;</code> is the needed <code>&lt;PROJECT_BINARY_DIR/GINKGO_WINDOWS_SHARED_LIBRARY_RELPATH&gt;</code>.</p>
 </li>
 <li><p class="startli">Build Ginkgo with Debug mode: Some Debug build specific issues can appear depending on the machine and environment. The known issues are the following:</p><ol type="1">
-<li><code>bigobj</code> issue: encountering <code>too many sections</code> needs the compilation flags <code>\bigobj</code> or <code>-Wa,-mbig-obj</code></li>
+<li><code>bigobj</code> issue: encountering <code>too many sections</code> needs the compilation flags <code>/bigobj</code> or <code>-Wa,-mbig-obj</code></li>
 <li><code>ld</code> issue: encountering <code>ld: error: export ordinal too large</code> needs the compilation flag <code>-O1</code></li>
 </ol>
 <p class="startli">The following are the details for different environments:</p><ul>
 <li><em>Microsoft Visual Studio</em>:<ol type="1">
 <li><code>bigobj</code> issue<ul>
-<li><code>cmake -DCMAKE_CXX_FLAGS=\bigobj &lt;other parameters&gt; &lt;source_folder&gt;</code> which might overwrite the default settings.</li>
-<li>add <code>\bigobj</code> into the environment variable <code>CXXFLAGS</code> (only available in the first cmake configuration)<ul>
-<li>cmd: <code>set CXXFLAGS=\bigobj</code></li>
-<li>powershell: <code>$env:CXXFLAGS=\bigobj</code></li>
+<li><code>cmake -DCMAKE_CXX_FLAGS=/bigobj &lt;other parameters&gt; &lt;source_folder&gt;</code> which might overwrite the default settings.</li>
+<li>add <code>/bigobj</code> into the environment variable <code>CXXFLAGS</code> (only available in the first cmake configuration)<ul>
+<li>cmd: <code>set CXXFLAGS=/bigobj</code></li>
+<li>powershell: <code>$env:CXXFLAGS=/bigobj</code></li>
 </ul>
 </li>
 </ul>
@@ -192,7 +192,8 @@ env:PATH"</code></li>
 </li>
 </ul>
 </li>
-<li>Build Ginkgo in <em>MinGW</em>: If encountering the issue <code>cc1plus.exe: out of memory allocating 65536 bytes</code>, please follow the workaround in <a href="https://www.intel.com/content/www/us/en/programmable/support/support-resources/knowledge-base/embedded/2016/cc1plus-exe--out-of-memory-allocating-65536-bytes.html">reference</a>, or trying to compile ginkgo again might work.</li>
+<li>Possible issue when switching static/shared of Ginkgo with MSVC in the same build directory:\ If an issue occurs from mixing MD/MT runtime library when enabling <code>GINKGO_BUILD_BENCHMARKS</code>, it means the third-party flags are not updated correctly. To update the third party flags, turn off <code>GINKGO_SKIP_DEPENDENCY_UPDATE</code> (<code>-DGINKGO_SKIP_DEPENDENCY_UPDATE=OFF</code>).</li>
+<li>Build Ginkgo in <em>MinGW</em>:\ If encountering the issue <code>cc1plus.exe: out of memory allocating 65536 bytes</code>, please follow the workaround in <a href="https://www.intel.com/content/www/us/en/programmable/support/support-resources/knowledge-base/embedded/2016/cc1plus-exe--out-of-memory-allocating-65536-bytes.html">reference</a>, or trying to compile ginkgo again might work.</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md2"></a>
 Building Ginkgo with HIP support</h2>
