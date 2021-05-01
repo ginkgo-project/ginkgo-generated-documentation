@@ -222,6 +222,8 @@ void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_ae6c4c15972b76bf7d8f6d50a96abd
 \begin{DoxyCompactList}\small\item\em Adds {\ttfamily b} scaled by {\ttfamily alpha} to the matrix (aka\+: B\+L\+AS axpy). \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_acb568ff44addb095b82bbd2fbe704761}{compute\+\_\+dot}} (const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$b, \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$result) const
 \begin{DoxyCompactList}\small\item\em Computes the column-\/wise dot product of this matrix and {\ttfamily b}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a1cb6e3ec8c01320d4a708d651a3a5169}{compute\+\_\+conj\+\_\+dot}} (const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$b, \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$result) const
+\begin{DoxyCompactList}\small\item\em Computes the column-\/wise dot product of {\ttfamily conj(this matrix)} and {\ttfamily b}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a97fd354c4a26814586cd256b5f0d7bea}{compute\+\_\+norm2}} (\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$result) const
 \begin{DoxyCompactList}\small\item\em Computes the Euclidian (L$^\wedge$2) norm of this matrix. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_ad606073cc426e9164bb2445354f22366}{create\+\_\+submatrix}} (const \mbox{\hyperlink{structgko_1_1span}{span}} \&rows, const \mbox{\hyperlink{structgko_1_1span}{span}} \&columns, const \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} stride)
@@ -510,6 +512,28 @@ a pointer to the new absolute object
 
 Implements \mbox{\hyperlink{classgko_1_1EnableAbsoluteComputation_ac30ab2b34bfa3e28e3324cb46f5f030a}{gko\+::\+Enable\+Absolute\+Computation$<$ remove\+\_\+complex$<$ Dense$<$ Value\+Type $>$ $>$ $>$}}.
 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a1cb6e3ec8c01320d4a708d651a3a5169}\label{classgko_1_1matrix_1_1Dense_a1cb6e3ec8c01320d4a708d651a3a5169}} 
+\index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!compute\_conj\_dot@{compute\_conj\_dot}}
+\index{compute\_conj\_dot@{compute\_conj\_dot}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{compute\_conj\_dot()}{compute\_conj\_dot()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::compute\+\_\+conj\+\_\+dot (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{b,  }\item[{\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{result }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Computes the column-\/wise dot product of {\ttfamily conj(this matrix)} and {\ttfamily b}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & a \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} matrix of same dimension as this \\
+\hline
+{\em result} & a \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} row vector, used to store the dot product (the number of column in the vector must match the number of columns of this) \\
+\hline
+\end{DoxyParams}
+
+
+References gko\+::\+Polymorphic\+Object\+::get\+\_\+executor(), and gko\+::make\+\_\+temporary\+\_\+clone().
+
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_acb568ff44addb095b82bbd2fbe704761}\label{classgko_1_1matrix_1_1Dense_acb568ff44addb095b82bbd2fbe704761}} 
 \index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!compute\_dot@{compute\_dot}}
 \index{compute\_dot@{compute\_dot}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
@@ -520,8 +544,6 @@ void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$
 
 
 Computes the column-\/wise dot product of this matrix and {\ttfamily b}. 
-
-The conjugate of this is taken.
 
 
 \begin{DoxyParams}{Parameters}
