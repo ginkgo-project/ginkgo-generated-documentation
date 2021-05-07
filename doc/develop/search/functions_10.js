@@ -6,7 +6,7 @@ var searchData=
   ['set_5fdeterministic_1673',['set_deterministic',['../classgko_1_1solver_1_1Idr.html#a72f7124b7acc0bb5a54a7c31e93abffb',1,'gko::solver::Idr']]],
   ['set_5fexecutor_1674',['set_executor',['../classgko_1_1Array.html#a44dd24e909f518f08320c3065e087d85',1,'gko::Array']]],
   ['set_5fkappa_1675',['set_kappa',['../classgko_1_1solver_1_1Idr.html#a1552bbc46e5961608fe41521b6b846dc',1,'gko::solver::Idr']]],
-  ['set_5fkrylov_5fdim_1676',['set_krylov_dim',['../classgko_1_1solver_1_1Gmres.html#aec85204e331ac7ce6832a41a5a27bc9b',1,'gko::solver::Gmres']]],
+  ['set_5fkrylov_5fdim_1676',['set_krylov_dim',['../classgko_1_1solver_1_1CbGmres.html#a3540b93ed61652d2ead150e117a80bc3',1,'gko::solver::CbGmres::set_krylov_dim()'],['../classgko_1_1solver_1_1Gmres.html#adf13991ee95a65952105d2be6659c7d3',1,'gko::solver::Gmres::set_krylov_dim()']]],
   ['set_5fpermute_5fmask_1677',['set_permute_mask',['../classgko_1_1matrix_1_1Permutation.html#ad1fbbe30f0c282aa02558163a6820434',1,'gko::matrix::Permutation']]],
   ['set_5fpreconditioner_1678',['set_preconditioner',['../classgko_1_1Preconditionable.html#a95db3e56eb17efbcde951c5ed144582d',1,'gko::Preconditionable']]],
   ['set_5fsolver_1679',['set_solver',['../classgko_1_1solver_1_1Ir.html#a1eaca6f9b06ed821c1b4a91ddf796d30',1,'gko::solver::Ir']]],

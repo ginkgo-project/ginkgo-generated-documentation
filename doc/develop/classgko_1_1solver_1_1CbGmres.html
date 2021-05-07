@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/298743761 branch based on develop. Ginkgo version 1.4.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/299216128 branch based on develop. Ginkgo version 1.4.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -119,8 +119,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a147d0f4d9c38a53fb2617d632c48f1f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the system operator (matrix) of the linear system.  <a href="classgko_1_1solver_1_1CbGmres.html#a147d0f4d9c38a53fb2617d632c48f1f8">More...</a><br /></td></tr>
 <tr class="separator:a147d0f4d9c38a53fb2617d632c48f1f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2252efc61d8eebee57d835a9bb7fa602"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1solver_1_1CbGmres.html#a2252efc61d8eebee57d835a9bb7fa602">get_krylov_dim</a> () const</td></tr>
-<tr class="memdesc:a2252efc61d8eebee57d835a9bb7fa602"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the krylov dimension.  <a href="classgko_1_1solver_1_1CbGmres.html#a2252efc61d8eebee57d835a9bb7fa602">More...</a><br /></td></tr>
+<tr class="memdesc:a2252efc61d8eebee57d835a9bb7fa602"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the Krylov dimension.  <a href="classgko_1_1solver_1_1CbGmres.html#a2252efc61d8eebee57d835a9bb7fa602">More...</a><br /></td></tr>
 <tr class="separator:a2252efc61d8eebee57d835a9bb7fa602"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3540b93ed61652d2ead150e117a80bc3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1solver_1_1CbGmres.html#a3540b93ed61652d2ead150e117a80bc3">set_krylov_dim</a> (<a class="el" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> other)</td></tr>
+<tr class="memdesc:a3540b93ed61652d2ead150e117a80bc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the Krylov dimension.  <a href="classgko_1_1solver_1_1CbGmres.html#a3540b93ed61652d2ead150e117a80bc3">More...</a><br /></td></tr>
+<tr class="separator:a3540b93ed61652d2ead150e117a80bc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41e1ad42633172166c72ca6a0ba8cd67"><td class="memItemLeft" align="right" valign="top">cb_gmres::storage_precision&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1solver_1_1CbGmres.html#a41e1ad42633172166c72ca6a0ba8cd67">get_storage_precision</a> () const</td></tr>
 <tr class="memdesc:a41e1ad42633172166c72ca6a0ba8cd67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the storage precision used internally.  <a href="classgko_1_1solver_1_1CbGmres.html#a41e1ad42633172166c72ca6a0ba8cd67">More...</a><br /></td></tr>
 <tr class="separator:a41e1ad42633172166c72ca6a0ba8cd67"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -281,7 +284,7 @@ class gko::solver::CbGmres&lt; ValueType &gt;</h3>
 
 <p>CB-GMRES or the compressed basis generalized minimal residual method is an iterative type Krylov subspace method which is suitable for nonsymmetric linear systems. </p>
 <p>The implementation in Ginkgo makes use of the merged kernel to make the best use of data locality. The inner operations in one iteration of CB-GMRES are merged into 2 separate steps. Classical Gram-Schmidt with reorthogonalization is used.</p>
-<p>The krylov basis can be stored in reduced precision (compressed) to reduce memory accesses, while all computations (including krylov basis operations) are performed in the same arithmetic precision ValueType. By default, the krylov basis are stored in one precision lower than ValueType.</p>
+<p>The Krylov basis can be stored in reduced precision (compressed) to reduce memory accesses, while all computations (including Krylov basis operations) are performed in the same arithmetic precision ValueType. By default, the Krylov basis are stored in one precision lower than ValueType.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">ValueType</td><td>the arithmetic precision and the precision of matrix elements </td></tr>
@@ -314,8 +317,8 @@ template&lt;typename ValueType  = default_precision&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Returns the krylov dimension. </p>
-<dl class="section return"><dt>Returns</dt><dd>the krylov dimension </dd></dl>
+<p>Returns the Krylov dimension. </p>
+<dl class="section return"><dt>Returns</dt><dd>the Krylov dimension </dd></dl>
 
 </div>
 </div>
@@ -376,6 +379,42 @@ template&lt;typename ValueType  = default_precision&gt; </div>
 
 <p>Gets the system operator (matrix) of the linear system. </p>
 <dl class="section return"><dt>Returns</dt><dd>the system operator (matrix) </dd></dl>
+
+</div>
+</div>
+<a id="a3540b93ed61652d2ead150e117a80bc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3540b93ed61652d2ead150e117a80bc3">&#9670;&nbsp;</a></span>set_krylov_dim()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ValueType  = default_precision&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classgko_1_1solver_1_1CbGmres.html">gko::solver::CbGmres</a>&lt; ValueType &gt;::set_krylov_dim </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a>&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the Krylov dimension. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>the new Krylov dimension </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

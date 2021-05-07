@@ -38,7 +38,9 @@ using {\bfseries value\+\_\+type} = Value\+Type
 std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1solver_1_1CbGmres_a147d0f4d9c38a53fb2617d632c48f1f8}{get\+\_\+system\+\_\+matrix}} () const
 \begin{DoxyCompactList}\small\item\em Gets the system operator (matrix) of the linear system. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{classgko_1_1solver_1_1CbGmres_a2252efc61d8eebee57d835a9bb7fa602}{get\+\_\+krylov\+\_\+dim}} () const
-\begin{DoxyCompactList}\small\item\em Returns the krylov dimension. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Returns the Krylov dimension. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1solver_1_1CbGmres_a3540b93ed61652d2ead150e117a80bc3}{set\+\_\+krylov\+\_\+dim}} (\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} other)
+\begin{DoxyCompactList}\small\item\em Sets the Krylov dimension. \end{DoxyCompactList}\item 
 cb\+\_\+gmres\+::storage\+\_\+precision \mbox{\hyperlink{classgko_1_1solver_1_1CbGmres_a41e1ad42633172166c72ca6a0ba8cd67}{get\+\_\+storage\+\_\+precision}} () const
 \begin{DoxyCompactList}\small\item\em Returns the storage precision used internally. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classgko_1_1solver_1_1CbGmres_ae47a69f661ae781b1a4ca7ce7c5c3d0b}\label{classgko_1_1solver_1_1CbGmres_ae47a69f661ae781b1a4ca7ce7c5c3d0b}} 
@@ -69,7 +71,7 @@ C\+B-\/\+G\+M\+R\+ES or the compressed basis generalized minimal residual method
 
 The implementation in Ginkgo makes use of the merged kernel to make the best use of data locality. The inner operations in one iteration of C\+B-\/\+G\+M\+R\+ES are merged into 2 separate steps. Classical Gram-\/\+Schmidt with reorthogonalization is used.
 
-The krylov basis can be stored in reduced precision (compressed) to reduce memory accesses, while all computations (including krylov basis operations) are performed in the same arithmetic precision Value\+Type. By default, the krylov basis are stored in one precision lower than Value\+Type.
+The Krylov basis can be stored in reduced precision (compressed) to reduce memory accesses, while all computations (including Krylov basis operations) are performed in the same arithmetic precision Value\+Type. By default, the Krylov basis are stored in one precision lower than Value\+Type.
 
 
 \begin{DoxyTemplParams}{Template Parameters}
@@ -88,10 +90,10 @@ The krylov basis can be stored in reduced precision (compressed) to reduce memor
 
 
 
-Returns the krylov dimension. 
+Returns the Krylov dimension. 
 
 \begin{DoxyReturn}{Returns}
-the krylov dimension 
+the Krylov dimension 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classgko_1_1solver_1_1CbGmres_a41e1ad42633172166c72ca6a0ba8cd67}\label{classgko_1_1solver_1_1CbGmres_a41e1ad42633172166c72ca6a0ba8cd67}} 
 \index{gko::solver::CbGmres$<$ ValueType $>$@{gko::solver::CbGmres$<$ ValueType $>$}!get\_storage\_precision@{get\_storage\_precision}}
@@ -121,6 +123,22 @@ Gets the system operator (matrix) of the linear system.
 \begin{DoxyReturn}{Returns}
 the system operator (matrix) 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1solver_1_1CbGmres_a3540b93ed61652d2ead150e117a80bc3}\label{classgko_1_1solver_1_1CbGmres_a3540b93ed61652d2ead150e117a80bc3}} 
+\index{gko::solver::CbGmres$<$ ValueType $>$@{gko::solver::CbGmres$<$ ValueType $>$}!set\_krylov\_dim@{set\_krylov\_dim}}
+\index{set\_krylov\_dim@{set\_krylov\_dim}!gko::solver::CbGmres$<$ ValueType $>$@{gko::solver::CbGmres$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{set\_krylov\_dim()}{set\_krylov\_dim()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1solver_1_1CbGmres}{gko\+::solver\+::\+Cb\+Gmres}}$<$ Value\+Type $>$\+::set\+\_\+krylov\+\_\+dim (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the Krylov dimension. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & the new Krylov dimension \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
