@@ -345,6 +345,10 @@ constexpr \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64
 \begin{DoxyCompactList}\small\item\em Calls the given function with the given Lin\+Ops temporarily converted to matrix\+::\+Dense$<$\+Value\+Type$>$$\ast$ as parameters. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Value\+Type , typename Function $>$ }\\void \mbox{\hyperlink{namespacegko_aaebbe93d733274398213df2d3acf1b79}{precision\+\_\+dispatch\+\_\+real\+\_\+complex}} (Function fn, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$alpha, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$in, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$beta, \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$out)
 \begin{DoxyCompactList}\small\item\em Calls the given function with the given Lin\+Ops temporarily converted to matrix\+::\+Dense$<$\+Value\+Type$>$$\ast$ as parameters. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Value\+Type , typename Function $>$ }\\void \mbox{\hyperlink{namespacegko_a205901dcce27e1df970c569d46d87551}{mixed\+\_\+precision\+\_\+dispatch}} (Function fn, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$in, \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$out)
+\begin{DoxyCompactList}\small\item\em Calls the given function with each given argument \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} converted into matrix\+::\+Dense$<$\+Value\+Type$>$ as parameters. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Value\+Type , typename Function , std\+::enable\+\_\+if\+\_\+t$<$ is\+\_\+complex$<$ Value\+Type $>$()$>$ $\ast$  = nullptr$>$ }\\void \mbox{\hyperlink{namespacegko_a3b9785eed86179e15b8fb4e74f7e9f89}{mixed\+\_\+precision\+\_\+dispatch\+\_\+real\+\_\+complex}} (Function fn, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$in, \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$out)
+\begin{DoxyCompactList}\small\item\em Calls the given function with the given Lin\+Ops cast to their dynamic type matrix\+::\+Dense$<$\+Value\+Type$>$$\ast$ as parameters. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{namespacegko_a22cd8a74bb04c04ba81d88de0d0677b2}\label{namespacegko_a22cd8a74bb04c04ba81d88de0d0677b2}} 
 constexpr bool {\bfseries operator$<$} (const \mbox{\hyperlink{structgko_1_1span}{span}} \&first, const \mbox{\hyperlink{structgko_1_1span}{span}} \&second)
 \item 
@@ -1636,6 +1640,53 @@ x $<$= y ? x \+: y
 
 Referenced by gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::load\+\_\+balance\+::clac\+\_\+size().
 
+\mbox{\Hypertarget{namespacegko_a205901dcce27e1df970c569d46d87551}\label{namespacegko_a205901dcce27e1df970c569d46d87551}} 
+\index{gko@{gko}!mixed\_precision\_dispatch@{mixed\_precision\_dispatch}}
+\index{mixed\_precision\_dispatch@{mixed\_precision\_dispatch}!gko@{gko}}
+\doxysubsubsection{\texorpdfstring{mixed\_precision\_dispatch()}{mixed\_precision\_dispatch()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type , typename Function $>$ \\
+void gko\+::mixed\+\_\+precision\+\_\+dispatch (\begin{DoxyParamCaption}\item[{Function}]{fn,  }\item[{const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{in,  }\item[{\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{out }\end{DoxyParamCaption})}
+
+
+
+Calls the given function with each given argument \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} converted into matrix\+::\+Dense$<$\+Value\+Type$>$ as parameters. 
+
+If G\+I\+N\+K\+G\+O\+\_\+\+M\+I\+X\+E\+D\+\_\+\+P\+R\+E\+C\+I\+S\+I\+ON is defined, this means that the function will be called with its dynamic type as a static type, so the (templated/generic) function will be instantiated with all pairs of Dense$<$\+Value\+Type$>$ and Dense$<$next\+\_\+precision$<$\+Value\+Type$>$$>$ parameter types, and the appropriate overload will be called based on the dynamic type of the parameter.
+
+If G\+I\+N\+K\+G\+O\+\_\+\+M\+I\+X\+E\+D\+\_\+\+P\+R\+E\+C\+I\+S\+I\+ON is not defined, it will behave exactly like precision\+\_\+dispatch.
+
+
+\begin{DoxyParams}{Parameters}
+{\em fn} & the given function. It will be called with one const and one non-\/const matrix\+::\+Dense$<$...$>$ parameter based on the dynamic type of the inputs (G\+I\+N\+K\+G\+O\+\_\+\+M\+I\+X\+E\+D\+\_\+\+P\+R\+E\+C\+I\+S\+I\+ON) or of type matrix\+::\+Dense$<$\+Value\+Type$>$ (no G\+I\+N\+K\+G\+O\+\_\+\+M\+I\+X\+E\+D\+\_\+\+P\+R\+E\+C\+I\+S\+I\+ON). \\
+\hline
+{\em in} & The first parameter to be cast (G\+I\+N\+K\+G\+O\+\_\+\+M\+I\+X\+E\+D\+\_\+\+P\+R\+E\+C\+I\+S\+I\+ON) or converted (no G\+I\+N\+K\+G\+O\+\_\+\+M\+I\+X\+E\+D\+\_\+\+P\+R\+E\+C\+I\+S\+I\+ON) and used to call {\ttfamily fn}. \\
+\hline
+{\em out} & The second parameter to be cast (G\+I\+N\+K\+G\+O\+\_\+\+M\+I\+X\+E\+D\+\_\+\+P\+R\+E\+C\+I\+S\+I\+ON) or converted (no G\+I\+N\+K\+G\+O\+\_\+\+M\+I\+X\+E\+D\+\_\+\+P\+R\+E\+C\+I\+S\+I\+ON) and used to call {\ttfamily fn}.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Value\+Type} & the value type to use for the parameters of {\ttfamily fn} (no G\+I\+N\+K\+G\+O\+\_\+\+M\+I\+X\+E\+D\+\_\+\+P\+R\+E\+C\+I\+S\+I\+ON). With G\+I\+N\+K\+G\+O\+\_\+\+M\+I\+X\+E\+D\+\_\+\+P\+R\+E\+C\+I\+S\+I\+ON enabled, it only matters whether this type is complex or real. \\
+\hline
+{\em Function} & the function pointer, lambda or other functor type to call with the converted arguments. \\
+\hline
+\end{DoxyTemplParams}
+\mbox{\Hypertarget{namespacegko_a3b9785eed86179e15b8fb4e74f7e9f89}\label{namespacegko_a3b9785eed86179e15b8fb4e74f7e9f89}} 
+\index{gko@{gko}!mixed\_precision\_dispatch\_real\_complex@{mixed\_precision\_dispatch\_real\_complex}}
+\index{mixed\_precision\_dispatch\_real\_complex@{mixed\_precision\_dispatch\_real\_complex}!gko@{gko}}
+\doxysubsubsection{\texorpdfstring{mixed\_precision\_dispatch\_real\_complex()}{mixed\_precision\_dispatch\_real\_complex()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type , typename Function , std\+::enable\+\_\+if\+\_\+t$<$ is\+\_\+complex$<$ Value\+Type $>$()$>$ $\ast$  = nullptr$>$ \\
+void gko\+::mixed\+\_\+precision\+\_\+dispatch\+\_\+real\+\_\+complex (\begin{DoxyParamCaption}\item[{Function}]{fn,  }\item[{const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{in,  }\item[{\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{out }\end{DoxyParamCaption})}
+
+
+
+Calls the given function with the given Lin\+Ops cast to their dynamic type matrix\+::\+Dense$<$\+Value\+Type$>$$\ast$ as parameters. 
+
+If Value\+Type is real and both {\ttfamily in} and {\ttfamily out} are complex, uses matrix\+::\+Dense\+::get\+\_\+real\+\_\+view() to convert them into real matrices after precision conversion.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{namespacegko_a205901dcce27e1df970c569d46d87551}{mixed\+\_\+precision\+\_\+dispatch()}} 
+\end{DoxySeeAlso}
 \mbox{\Hypertarget{namespacegko_a0059e27f8f4bc348ff65c1e60caf47c8}\label{namespacegko_a0059e27f8f4bc348ff65c1e60caf47c8}} 
 \index{gko@{gko}!one@{one}}
 \index{one@{one}!gko@{gko}}

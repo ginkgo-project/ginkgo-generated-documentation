@@ -20,10 +20,12 @@ var searchData=
   ['min_5foperaton_680',['min_operaton',['../structgko_1_1accessor_1_1min__operaton.html',1,'gko::accessor']]],
   ['minimal_5fstorage_5flimit_681',['minimal_storage_limit',['../classgko_1_1matrix_1_1Hybrid_1_1minimal__storage__limit.html',1,'gko::matrix::Hybrid&lt; ValueType, IndexType &gt;::minimal_storage_limit'],['../classgko_1_1matrix_1_1Hybrid_1_1minimal__storage__limit.html#ac7851b3c053f239e98e197cc2ef81f1e',1,'gko::matrix::Hybrid::minimal_storage_limit::minimal_storage_limit()']]],
   ['minor_682',['minor',['../structgko_1_1version.html#abb548e6dca39e0a3718ecf13cafbba36',1,'gko::version']]],
-  ['mmul_5foperation_683',['mmul_operation',['../structgko_1_1accessor_1_1mmul__operation.html',1,'gko::accessor']]],
-  ['mod_684',['mod',['../structgko_1_1accessor_1_1mod.html',1,'gko::accessor']]],
-  ['mode_685',['mode',['../group__stop.html#ga5fe97c4263e876f68b5d4a21f0e615b9',1,'gko::stop']]],
-  ['move_5fto_686',['move_to',['../classgko_1_1ConvertibleTo.html#ab9047c7c49e0f83c79b54c0034d6197b',1,'gko::ConvertibleTo::move_to()'],['../classgko_1_1EnablePolymorphicAssignment.html#a0a4cf244139e7761d6a91c61e029810e',1,'gko::EnablePolymorphicAssignment::move_to()'],['../classgko_1_1preconditioner_1_1Jacobi.html#a6d5e28b3033772bfc6c96fbe3caca003',1,'gko::preconditioner::Jacobi::move_to()']]],
-  ['mul_687',['mul',['../structgko_1_1accessor_1_1mul.html',1,'gko::accessor']]],
-  ['multigridlevel_688',['MultigridLevel',['../classgko_1_1multigrid_1_1MultigridLevel.html',1,'gko::multigrid']]]
+  ['mixed_5fprecision_5fdispatch_683',['mixed_precision_dispatch',['../namespacegko.html#a205901dcce27e1df970c569d46d87551',1,'gko']]],
+  ['mixed_5fprecision_5fdispatch_5freal_5fcomplex_684',['mixed_precision_dispatch_real_complex',['../namespacegko.html#a3b9785eed86179e15b8fb4e74f7e9f89',1,'gko']]],
+  ['mmul_5foperation_685',['mmul_operation',['../structgko_1_1accessor_1_1mmul__operation.html',1,'gko::accessor']]],
+  ['mod_686',['mod',['../structgko_1_1accessor_1_1mod.html',1,'gko::accessor']]],
+  ['mode_687',['mode',['../group__stop.html#ga5fe97c4263e876f68b5d4a21f0e615b9',1,'gko::stop']]],
+  ['move_5fto_688',['move_to',['../classgko_1_1ConvertibleTo.html#ab9047c7c49e0f83c79b54c0034d6197b',1,'gko::ConvertibleTo::move_to()'],['../classgko_1_1EnablePolymorphicAssignment.html#a0a4cf244139e7761d6a91c61e029810e',1,'gko::EnablePolymorphicAssignment::move_to()'],['../classgko_1_1preconditioner_1_1Jacobi.html#a6d5e28b3033772bfc6c96fbe3caca003',1,'gko::preconditioner::Jacobi::move_to()']]],
+  ['mul_689',['mul',['../structgko_1_1accessor_1_1mul.html',1,'gko::accessor']]],
+  ['multigridlevel_690',['MultigridLevel',['../classgko_1_1multigrid_1_1MultigridLevel.html',1,'gko::multigrid']]]
 ];

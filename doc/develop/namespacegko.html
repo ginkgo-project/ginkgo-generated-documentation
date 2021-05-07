@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/298629016 branch based on develop. Ginkgo version 1.4.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/298743761 branch based on develop. Ginkgo version 1.4.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -606,6 +606,14 @@ template&lt;typename T &gt; </td></tr>
 <tr class="memitem:aaebbe93d733274398213df2d3acf1b79"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegko.html#aaebbe93d733274398213df2d3acf1b79">precision_dispatch_real_complex</a> (Function fn, const <a class="el" href="classgko_1_1LinOp.html">LinOp</a> *alpha, const <a class="el" href="classgko_1_1LinOp.html">LinOp</a> *in, const <a class="el" href="classgko_1_1LinOp.html">LinOp</a> *beta, <a class="el" href="classgko_1_1LinOp.html">LinOp</a> *out)</td></tr>
 <tr class="memdesc:aaebbe93d733274398213df2d3acf1b79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls the given function with the given LinOps temporarily converted to matrix::Dense&lt;ValueType&gt;* as parameters.  <a href="namespacegko.html#aaebbe93d733274398213df2d3acf1b79">More...</a><br /></td></tr>
 <tr class="separator:aaebbe93d733274398213df2d3acf1b79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a205901dcce27e1df970c569d46d87551"><td class="memTemplParams" colspan="2">template&lt;typename ValueType , typename Function &gt; </td></tr>
+<tr class="memitem:a205901dcce27e1df970c569d46d87551"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegko.html#a205901dcce27e1df970c569d46d87551">mixed_precision_dispatch</a> (Function fn, const <a class="el" href="classgko_1_1LinOp.html">LinOp</a> *in, <a class="el" href="classgko_1_1LinOp.html">LinOp</a> *out)</td></tr>
+<tr class="memdesc:a205901dcce27e1df970c569d46d87551"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls the given function with each given argument <a class="el" href="classgko_1_1LinOp.html">LinOp</a> converted into matrix::Dense&lt;ValueType&gt; as parameters.  <a href="namespacegko.html#a205901dcce27e1df970c569d46d87551">More...</a><br /></td></tr>
+<tr class="separator:a205901dcce27e1df970c569d46d87551"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b9785eed86179e15b8fb4e74f7e9f89"><td class="memTemplParams" colspan="2">template&lt;typename ValueType , typename Function , std::enable_if_t&lt; is_complex&lt; ValueType &gt;()&gt; *  = nullptr&gt; </td></tr>
+<tr class="memitem:a3b9785eed86179e15b8fb4e74f7e9f89"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegko.html#a3b9785eed86179e15b8fb4e74f7e9f89">mixed_precision_dispatch_real_complex</a> (Function fn, const <a class="el" href="classgko_1_1LinOp.html">LinOp</a> *in, <a class="el" href="classgko_1_1LinOp.html">LinOp</a> *out)</td></tr>
+<tr class="memdesc:a3b9785eed86179e15b8fb4e74f7e9f89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls the given function with the given LinOps cast to their dynamic type matrix::Dense&lt;ValueType&gt;* as parameters.  <a href="namespacegko.html#a3b9785eed86179e15b8fb4e74f7e9f89">More...</a><br /></td></tr>
+<tr class="separator:a3b9785eed86179e15b8fb4e74f7e9f89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22cd8a74bb04c04ba81d88de0d0677b2"><td class="memItemLeft" align="right" valign="top"><a id="a22cd8a74bb04c04ba81d88de0d0677b2"></a>
 constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;</b> (const <a class="el" href="structgko_1_1span.html">span</a> &amp;first, const <a class="el" href="structgko_1_1span.html">span</a> &amp;second)</td></tr>
 <tr class="separator:a22cd8a74bb04c04ba81d88de0d0677b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -2614,6 +2622,101 @@ template&lt;typename T &gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>x &lt;= y ? x : y </dd></dl>
 
 <p class="reference">Referenced by <a class="el" href="classgko_1_1matrix_1_1Csr_1_1load__balance.html#ac0413220bebe762defe180d900240fac">gko::matrix::Csr&lt; ValueType, IndexType &gt;::load_balance::clac_size()</a>.</p>
+
+</div>
+</div>
+<a id="a205901dcce27e1df970c569d46d87551"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a205901dcce27e1df970c569d46d87551">&#9670;&nbsp;</a></span>mixed_precision_dispatch()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ValueType , typename Function &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void gko::mixed_precision_dispatch </td>
+          <td>(</td>
+          <td class="paramtype">Function&#160;</td>
+          <td class="paramname"><em>fn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classgko_1_1LinOp.html">LinOp</a> *&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classgko_1_1LinOp.html">LinOp</a> *&#160;</td>
+          <td class="paramname"><em>out</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calls the given function with each given argument <a class="el" href="classgko_1_1LinOp.html">LinOp</a> converted into matrix::Dense&lt;ValueType&gt; as parameters. </p>
+<p>If GINKGO_MIXED_PRECISION is defined, this means that the function will be called with its dynamic type as a static type, so the (templated/generic) function will be instantiated with all pairs of Dense&lt;ValueType&gt; and Dense&lt;next_precision&lt;ValueType&gt;&gt; parameter types, and the appropriate overload will be called based on the dynamic type of the parameter.</p>
+<p>If GINKGO_MIXED_PRECISION is not defined, it will behave exactly like precision_dispatch.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fn</td><td>the given function. It will be called with one const and one non-const matrix::Dense&lt;...&gt; parameter based on the dynamic type of the inputs (GINKGO_MIXED_PRECISION) or of type matrix::Dense&lt;ValueType&gt; (no GINKGO_MIXED_PRECISION). </td></tr>
+    <tr><td class="paramname">in</td><td>The first parameter to be cast (GINKGO_MIXED_PRECISION) or converted (no GINKGO_MIXED_PRECISION) and used to call <code>fn</code>. </td></tr>
+    <tr><td class="paramname">out</td><td>The second parameter to be cast (GINKGO_MIXED_PRECISION) or converted (no GINKGO_MIXED_PRECISION) and used to call <code>fn</code>.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">ValueType</td><td>the value type to use for the parameters of <code>fn</code> (no GINKGO_MIXED_PRECISION). With GINKGO_MIXED_PRECISION enabled, it only matters whether this type is complex or real. </td></tr>
+    <tr><td class="paramname">Function</td><td>the function pointer, lambda or other functor type to call with the converted arguments. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3b9785eed86179e15b8fb4e74f7e9f89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b9785eed86179e15b8fb4e74f7e9f89">&#9670;&nbsp;</a></span>mixed_precision_dispatch_real_complex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ValueType , typename Function , std::enable_if_t&lt; is_complex&lt; ValueType &gt;()&gt; *  = nullptr&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void gko::mixed_precision_dispatch_real_complex </td>
+          <td>(</td>
+          <td class="paramtype">Function&#160;</td>
+          <td class="paramname"><em>fn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classgko_1_1LinOp.html">LinOp</a> *&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classgko_1_1LinOp.html">LinOp</a> *&#160;</td>
+          <td class="paramname"><em>out</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calls the given function with the given LinOps cast to their dynamic type matrix::Dense&lt;ValueType&gt;* as parameters. </p>
+<p>If ValueType is real and both <code>in</code> and <code>out</code> are complex, uses matrix::Dense::get_real_view() to convert them into real matrices after precision conversion.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="namespacegko.html#a205901dcce27e1df970c569d46d87551" title="Calls the given function with each given argument LinOp converted into matrix::Dense&lt;ValueType&gt; as pa...">mixed_precision_dispatch()</a> </dd></dl>
 
 </div>
 </div>
