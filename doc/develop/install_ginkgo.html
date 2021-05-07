@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/299285093 branch based on develop. Ginkgo version 1.4.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/299389975 branch based on develop. Ginkgo version 1.4.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -120,8 +120,6 @@ Building</h2>
 </ul>
 <p class="startli"><code>Auto</code> will automatically detect the present CUDA-enabled GPU architectures in the system. <code>Kepler</code>, <code>Maxwell</code>, <code>Pascal</code>, <code>Volta</code> and <code>Ampere</code> will add flags for all architectures of that particular NVIDIA GPU generation. <code>COMPUTE</code> and <code>CODE</code> are placeholders that should be replaced with compute and code numbers (e.g. for <code>compute_70</code> and <code>sm_70</code> <code>COMPUTE</code> and <code>CODE</code> should be replaced with <code>70</code>. Default is <code>Auto</code>. For a more detailed explanation of this option see the <a href="https://github.com/ginkgo-project/CudaArchitectureSelector/blob/master/CudaArchitectureSelector.cmake#L58"><code>ARCHITECTURES</code> specification list</a> section in the documentation of the CudaArchitectureSelector CMake module.</p>
 </li>
-<li><code>-DGINKGO_WINDOWS_SHARED_LIBRARY_RELPATH=&lt;path&gt;</code> where &lt;path&gt; is a relative path built with <code>PROJECT_BINARY_DIR</code>. Users must add the absolute path (<code>PROJECT_BINARY_DIR</code>/<code>GINKGO_WINDOWS_SHARED_LIBRARY_RELPATH</code>) into the environment variable PATH when building shared libraries and executable program, default is <code>windows_shared_library</code>.</li>
-<li><code>-DGINKGO_CHECK_PATH={ON, OFF}</code> checks if the environment variable PATH is valid. It is checked only when building shared libraries and executable program, default is <code>ON</code>.</li>
 </ul>
 <p>For example, to build everything (in debug mode), use:</p>
 <div class="fragment"><div class="line">cmake  -G &quot;Unix Makefiles&quot; -H. -BDebug -DCMAKE_BUILD_TYPE=Debug -DGINKGO_DEVEL_TOOLS=ON \</div>
@@ -132,68 +130,7 @@ Building</h2>
 <h2><a class="anchor" id="autotoc_md1"></a>
 Building Ginkgo in Windows</h2>
 <p>Depending on the configuration settings, some manual work might be required:</p><ul>
-<li><p class="startli">Build Ginkgo as shared library: Add <code>PROJECT_BINARY_DIR/GINKGO_WINDOWS_SHARED_LIBRARY_RELPATH</code> into the environment variable <code>PATH</code>. <code>GINKGO_WINDOWS_SHARED_LIBRARY_RELPATH</code> is <code>windows_shared_library</code> by default. More Details are available in the Installation page.</p><ul>
-<li>cmd: <code>set PATH=&lt;PROJECT_BINARY_DIR/GINKGO_WINDOWS_SHARED_LIBRARY_RELPATH&gt;;PATH%</code></li>
-<li>powershell: <code><dl class="section rcs"><dt>env</dt><dd>ATH="&lt;PROJECT_BINARY_DIR/GINKGO_WINDOWS_SHARED_LIBRARY_RELPATH&gt;;</dd></dl>
-env:PATH"</code></li>
-</ul>
-<p class="startli">CMake will give the following error message if the path is not correct. </p><div class="fragment"><div class="line">Did not find this build in the environment variable PATH. Please add &lt;path&gt; into the environment variable PATH.</div>
-</div><!-- fragment --><p> where <code>&lt;path&gt;</code> is the needed <code>&lt;PROJECT_BINARY_DIR/GINKGO_WINDOWS_SHARED_LIBRARY_RELPATH&gt;</code>.</p>
-</li>
-<li><p class="startli">Build Ginkgo with Debug mode: Some Debug build specific issues can appear depending on the machine and environment. The known issues are the following:</p><ol type="1">
-<li><code>bigobj</code> issue: encountering <code>too many sections</code> needs the compilation flags <code>/bigobj</code> or <code>-Wa,-mbig-obj</code></li>
-<li><code>ld</code> issue: encountering <code>ld: error: export ordinal too large</code> needs the compilation flag <code>-O1</code></li>
-</ol>
-<p class="startli">The following are the details for different environments:</p><ul>
-<li><em>Microsoft Visual Studio</em>:<ol type="1">
-<li><code>bigobj</code> issue<ul>
-<li><code>cmake -DCMAKE_CXX_FLAGS=/bigobj &lt;other parameters&gt; &lt;source_folder&gt;</code> which might overwrite the default settings.</li>
-<li>add <code>/bigobj</code> into the environment variable <code>CXXFLAGS</code> (only available in the first cmake configuration)<ul>
-<li>cmd: <code>set CXXFLAGS=/bigobj</code></li>
-<li>powershell: <code>$env:CXXFLAGS=/bigobj</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>ld</code> issue (<em>Microsoft Visual Studio</em> does not have this issue)</li>
-</ol>
-</li>
-<li><em>Cygwin</em>:<ol type="1">
-<li><code>bigobj</code> issue<ul>
-<li>add <code>-Wa,-mbig-obj -O1</code> into the environment variable <code>CXXFLAGS</code> (only available in the first cmake configuration)<ul>
-<li><code>export CXXFLAGS="-Wa,-mbig-obj -O1"</code></li>
-</ul>
-</li>
-<li><code>cmake -DCMAKE_CXX_FLAGS=-Wa,-mbig-obj &lt;other parameters&gt; &lt;source_folder&gt;</code>, which might overwrite the default settings.</li>
-</ul>
-</li>
-<li><code>ld</code> issue (If building Ginkgo as static library, this is not needed)<ul>
-<li><code>cmake -DGINKGO_COMPILER_FLAGS="-Wpedantic -O1" &lt;other parameters&gt; &lt;source_folder&gt;</code> (<code>GINKGO_COMPILER_FLAGS</code> is <code>-Wpedantic</code> by default)</li>
-<li>add <code>-O1</code> in the environement variable <code>CXX_FLAGS</code> or <code>CMAKE_CXX_FLAGS</code></li>
-</ul>
-</li>
-</ol>
-</li>
-<li><em>MinGW</em>:<ol type="1">
-<li><code>bigobj</code> issue<ul>
-<li>add <code>-Wa,-mbig-obj -O1</code> into the environment variable <code>CXXFLAGS</code> (only available in the first cmake configuration)<ul>
-<li>cmd: <code>set CXXFLAGS="-Wa,-mbig-obj"</code></li>
-<li>powershell: <code>$env:CXXFLAGS="-Wa,-mbig-obj"</code></li>
-</ul>
-</li>
-<li><code>cmake -DCMAKE_CXX_FLAGS=-Wa,-mbig-obj &lt;other parameters&gt; &lt;source_folder&gt;</code>, which might overwrite the default settings.</li>
-</ul>
-</li>
-<li><code>ld</code> issue (If building Ginkgo as static library, this is not needed)<ul>
-<li><code>cmake -DGINKGO_COMPILER_FLAGS="-Wpedantic -O1" &lt;other parameters&gt; &lt;source_folder&gt;</code> (<code>GINKGO_COMPILER_FLAGS</code> is <code>-Wpedantic</code> by default)</li>
-<li>add <code>-O1</code> in the environement variable <code>CXX_FLAGS</code> or <code>CMAKE_CXX_FLAGS</code></li>
-</ul>
-</li>
-</ol>
-</li>
-</ul>
-</li>
-<li>Possible issue when switching static/shared of Ginkgo with MSVC in the same build directory:\ If an issue occurs from mixing MD/MT runtime library when enabling <code>GINKGO_BUILD_BENCHMARKS</code>, it means the third-party flags are not updated correctly. To update the third party flags, turn off <code>GINKGO_SKIP_DEPENDENCY_UPDATE</code> (<code>-DGINKGO_SKIP_DEPENDENCY_UPDATE=OFF</code>).</li>
+<li>Build Ginkgo with Debug mode: Some Debug build specific issues can appear depending on the machine and environment: When you encounter the error message <code>ld: error: export ordinal too large</code>, add the compilation flag <code>-O1</code> by adding <code>-DCMAKE_CXX_FLAGS=-O1</code> to the CMake invocation.</li>
 <li>Build Ginkgo in <em>MinGW</em>:\ If encountering the issue <code>cc1plus.exe: out of memory allocating 65536 bytes</code>, please follow the workaround in <a href="https://www.intel.com/content/www/us/en/programmable/support/support-resources/knowledge-base/embedded/2016/cc1plus-exe--out-of-memory-allocating-65536-bytes.html">reference</a>, or trying to compile ginkgo again might work.</li>
 </ul>
 <h2><a class="anchor" id="autotoc_md2"></a>

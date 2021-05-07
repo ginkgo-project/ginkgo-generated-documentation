@@ -57,8 +57,6 @@ Replace {\ttfamily \mbox{[}O\+P\+T\+I\+O\+NS\mbox{]}} with desired cmake options
 \end{DoxyItemize}
 
 {\ttfamily Auto} will automatically detect the present C\+U\+D\+A-\/enabled G\+PU architectures in the system. {\ttfamily Kepler}, {\ttfamily Maxwell}, {\ttfamily Pascal}, {\ttfamily Volta} and {\ttfamily Ampere} will add flags for all architectures of that particular N\+V\+I\+D\+IA G\+PU generation. {\ttfamily C\+O\+M\+P\+U\+TE} and {\ttfamily C\+O\+DE} are placeholders that should be replaced with compute and code numbers (e.\+g. for {\ttfamily compute\+\_\+70} and {\ttfamily sm\+\_\+70} {\ttfamily C\+O\+M\+P\+U\+TE} and {\ttfamily C\+O\+DE} should be replaced with {\ttfamily 70}. Default is {\ttfamily Auto}. For a more detailed explanation of this option see the \href{https://github.com/ginkgo-project/CudaArchitectureSelector/blob/master/CudaArchitectureSelector.cmake\#L58}{\texttt{ {\ttfamily A\+R\+C\+H\+I\+T\+E\+C\+T\+U\+R\+ES} specification list}} section in the documentation of the Cuda\+Architecture\+Selector C\+Make module.
-\item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+W\+I\+N\+D\+O\+W\+S\+\_\+\+S\+H\+A\+R\+E\+D\+\_\+\+L\+I\+B\+R\+A\+R\+Y\+\_\+\+R\+E\+L\+P\+A\+TH=$<$path$>$} where $<$path$>$ is a relative path built with {\ttfamily P\+R\+O\+J\+E\+C\+T\+\_\+\+B\+I\+N\+A\+R\+Y\+\_\+\+D\+IR}. Users must add the absolute path ({\ttfamily P\+R\+O\+J\+E\+C\+T\+\_\+\+B\+I\+N\+A\+R\+Y\+\_\+\+D\+IR}/{\ttfamily G\+I\+N\+K\+G\+O\+\_\+\+W\+I\+N\+D\+O\+W\+S\+\_\+\+S\+H\+A\+R\+E\+D\+\_\+\+L\+I\+B\+R\+A\+R\+Y\+\_\+\+R\+E\+L\+P\+A\+TH}) into the environment variable P\+A\+TH when building shared libraries and executable program, default is {\ttfamily windows\+\_\+shared\+\_\+library}.
-\item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+C\+H\+E\+C\+K\+\_\+\+P\+A\+TH=\{ON, O\+FF\}} checks if the environment variable P\+A\+TH is valid. It is checked only when building shared libraries and executable program, default is {\ttfamily ON}.
 \end{DoxyItemize}
 
 For example, to build everything (in debug mode), use\+:
@@ -75,76 +73,7 @@ For example, to build everything (in debug mode), use\+:
 N\+O\+TE\+: Ginkgo is known to work with the {\ttfamily Unix Makefiles}, {\ttfamily Ninja}, {\ttfamily Min\+GW Makefiles} and {\ttfamily Visual Studio 16 2019} based generators. Other C\+Make generators are untested.\hypertarget{install_ginkgo_autotoc_md1}{}\doxysubsection{Building Ginkgo in Windows}\label{install_ginkgo_autotoc_md1}
 Depending on the configuration settings, some manual work might be required\+:
 \begin{DoxyItemize}
-\item Build Ginkgo as shared library\+: Add {\ttfamily P\+R\+O\+J\+E\+C\+T\+\_\+\+B\+I\+N\+A\+R\+Y\+\_\+\+D\+I\+R/\+G\+I\+N\+K\+G\+O\+\_\+\+W\+I\+N\+D\+O\+W\+S\+\_\+\+S\+H\+A\+R\+E\+D\+\_\+\+L\+I\+B\+R\+A\+R\+Y\+\_\+\+R\+E\+L\+P\+A\+TH} into the environment variable {\ttfamily P\+A\+TH}. {\ttfamily G\+I\+N\+K\+G\+O\+\_\+\+W\+I\+N\+D\+O\+W\+S\+\_\+\+S\+H\+A\+R\+E\+D\+\_\+\+L\+I\+B\+R\+A\+R\+Y\+\_\+\+R\+E\+L\+P\+A\+TH} is {\ttfamily windows\+\_\+shared\+\_\+library} by default. More Details are available in the Installation page.
-\begin{DoxyItemize}
-\item cmd\+: {\ttfamily set P\+A\+TH=$<$P\+R\+O\+J\+E\+C\+T\+\_\+\+B\+I\+N\+A\+R\+Y\+\_\+\+D\+I\+R/\+G\+I\+N\+K\+G\+O\+\_\+\+W\+I\+N\+D\+O\+W\+S\+\_\+\+S\+H\+A\+R\+E\+D\+\_\+\+L\+I\+B\+R\+A\+R\+Y\+\_\+\+R\+E\+L\+P\+A\+TH$>$;P\+A\+TH\%}
-\item powershell\+: {\ttfamily \begin{DoxyParagraph}{env}
-A\+TH="$<$P\+R\+O\+J\+E\+C\+T\+\_\+\+B\+I\+N\+A\+R\+Y\+\_\+\+D\+I\+R/\+G\+I\+N\+K\+G\+O\+\_\+\+W\+I\+N\+D\+O\+W\+S\+\_\+\+S\+H\+A\+R\+E\+D\+\_\+\+L\+I\+B\+R\+A\+R\+Y\+\_\+\+R\+E\+L\+P\+A\+TH$>$;
-\end{DoxyParagraph}
-env\+:P\+A\+TH"}
-\end{DoxyItemize}
-
-C\+Make will give the following error message if the path is not correct. 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{Did not find this build in the environment variable PATH. Please add <path> into the environment variable PATH.}
-\end{DoxyCode}
- where {\ttfamily $<$path$>$} is the needed {\ttfamily $<$P\+R\+O\+J\+E\+C\+T\+\_\+\+B\+I\+N\+A\+R\+Y\+\_\+\+D\+I\+R/\+G\+I\+N\+K\+G\+O\+\_\+\+W\+I\+N\+D\+O\+W\+S\+\_\+\+S\+H\+A\+R\+E\+D\+\_\+\+L\+I\+B\+R\+A\+R\+Y\+\_\+\+R\+E\+L\+P\+A\+TH$>$}.
-\item Build Ginkgo with Debug mode\+: Some Debug build specific issues can appear depending on the machine and environment. The known issues are the following\+:
-\begin{DoxyEnumerate}
-\item {\ttfamily bigobj} issue\+: encountering {\ttfamily too many sections} needs the compilation flags {\ttfamily /bigobj} or {\ttfamily -\/Wa,-\/mbig-\/obj}
-\item {\ttfamily ld} issue\+: encountering {\ttfamily ld\+: error\+: export ordinal too large} needs the compilation flag {\ttfamily -\/O1}
-\end{DoxyEnumerate}
-
-The following are the details for different environments\+:
-\begin{DoxyItemize}
-\item {\itshape Microsoft Visual Studio}\+:
-\begin{DoxyEnumerate}
-\item {\ttfamily bigobj} issue
-\begin{DoxyItemize}
-\item {\ttfamily cmake -\/D\+C\+M\+A\+K\+E\+\_\+\+C\+X\+X\+\_\+\+F\+L\+A\+GS=/bigobj $<$other parameters$>$ $<$source\+\_\+folder$>$} which might overwrite the default settings.
-\item add {\ttfamily /bigobj} into the environment variable {\ttfamily C\+X\+X\+F\+L\+A\+GS} (only available in the first cmake configuration)
-\begin{DoxyItemize}
-\item cmd\+: {\ttfamily set C\+X\+X\+F\+L\+A\+GS=/bigobj}
-\item powershell\+: {\ttfamily \$env\+:C\+X\+X\+F\+L\+A\+GS=/bigobj}
-\end{DoxyItemize}
-\end{DoxyItemize}
-\item {\ttfamily ld} issue ({\itshape Microsoft Visual Studio} does not have this issue)
-\end{DoxyEnumerate}
-\item {\itshape Cygwin}\+:
-\begin{DoxyEnumerate}
-\item {\ttfamily bigobj} issue
-\begin{DoxyItemize}
-\item add {\ttfamily -\/Wa,-\/mbig-\/obj -\/O1} into the environment variable {\ttfamily C\+X\+X\+F\+L\+A\+GS} (only available in the first cmake configuration)
-\begin{DoxyItemize}
-\item {\ttfamily export C\+X\+X\+F\+L\+A\+GS=\char`\"{}-\/\+Wa,-\/mbig-\/obj -\/\+O1\char`\"{}}
-\end{DoxyItemize}
-\item {\ttfamily cmake -\/D\+C\+M\+A\+K\+E\+\_\+\+C\+X\+X\+\_\+\+F\+L\+A\+GS=-\/Wa,-\/mbig-\/obj $<$other parameters$>$ $<$source\+\_\+folder$>$}, which might overwrite the default settings.
-\end{DoxyItemize}
-\item {\ttfamily ld} issue (If building Ginkgo as static library, this is not needed)
-\begin{DoxyItemize}
-\item {\ttfamily cmake -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+C\+O\+M\+P\+I\+L\+E\+R\+\_\+\+F\+L\+A\+GS=\char`\"{}-\/\+Wpedantic -\/\+O1\char`\"{} $<$other parameters$>$ $<$source\+\_\+folder$>$} ({\ttfamily G\+I\+N\+K\+G\+O\+\_\+\+C\+O\+M\+P\+I\+L\+E\+R\+\_\+\+F\+L\+A\+GS} is {\ttfamily -\/Wpedantic} by default)
-\item add {\ttfamily -\/O1} in the environement variable {\ttfamily C\+X\+X\+\_\+\+F\+L\+A\+GS} or {\ttfamily C\+M\+A\+K\+E\+\_\+\+C\+X\+X\+\_\+\+F\+L\+A\+GS}
-\end{DoxyItemize}
-\end{DoxyEnumerate}
-\item {\itshape Min\+GW}\+:
-\begin{DoxyEnumerate}
-\item {\ttfamily bigobj} issue
-\begin{DoxyItemize}
-\item add {\ttfamily -\/Wa,-\/mbig-\/obj -\/O1} into the environment variable {\ttfamily C\+X\+X\+F\+L\+A\+GS} (only available in the first cmake configuration)
-\begin{DoxyItemize}
-\item cmd\+: {\ttfamily set C\+X\+X\+F\+L\+A\+GS=\char`\"{}-\/\+Wa,-\/mbig-\/obj\char`\"{}}
-\item powershell\+: {\ttfamily \$env\+:C\+X\+X\+F\+L\+A\+GS=\char`\"{}-\/\+Wa,-\/mbig-\/obj\char`\"{}}
-\end{DoxyItemize}
-\item {\ttfamily cmake -\/D\+C\+M\+A\+K\+E\+\_\+\+C\+X\+X\+\_\+\+F\+L\+A\+GS=-\/Wa,-\/mbig-\/obj $<$other parameters$>$ $<$source\+\_\+folder$>$}, which might overwrite the default settings.
-\end{DoxyItemize}
-\item {\ttfamily ld} issue (If building Ginkgo as static library, this is not needed)
-\begin{DoxyItemize}
-\item {\ttfamily cmake -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+C\+O\+M\+P\+I\+L\+E\+R\+\_\+\+F\+L\+A\+GS=\char`\"{}-\/\+Wpedantic -\/\+O1\char`\"{} $<$other parameters$>$ $<$source\+\_\+folder$>$} ({\ttfamily G\+I\+N\+K\+G\+O\+\_\+\+C\+O\+M\+P\+I\+L\+E\+R\+\_\+\+F\+L\+A\+GS} is {\ttfamily -\/Wpedantic} by default)
-\item add {\ttfamily -\/O1} in the environement variable {\ttfamily C\+X\+X\+\_\+\+F\+L\+A\+GS} or {\ttfamily C\+M\+A\+K\+E\+\_\+\+C\+X\+X\+\_\+\+F\+L\+A\+GS}
-\end{DoxyItemize}
-\end{DoxyEnumerate}
-\end{DoxyItemize}
-\item Possible issue when switching static/shared of Ginkgo with M\+S\+VC in the same build directory\+:\textbackslash{} If an issue occurs from mixing M\+D/\+MT runtime library when enabling {\ttfamily G\+I\+N\+K\+G\+O\+\_\+\+B\+U\+I\+L\+D\+\_\+\+B\+E\+N\+C\+H\+M\+A\+R\+KS}, it means the third-\/party flags are not updated correctly. To update the third party flags, turn off {\ttfamily G\+I\+N\+K\+G\+O\+\_\+\+S\+K\+I\+P\+\_\+\+D\+E\+P\+E\+N\+D\+E\+N\+C\+Y\+\_\+\+U\+P\+D\+A\+TE} ({\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+S\+K\+I\+P\+\_\+\+D\+E\+P\+E\+N\+D\+E\+N\+C\+Y\+\_\+\+U\+P\+D\+A\+TE=O\+FF}).
+\item Build Ginkgo with Debug mode\+: Some Debug build specific issues can appear depending on the machine and environment\+: When you encounter the error message {\ttfamily ld\+: error\+: export ordinal too large}, add the compilation flag {\ttfamily -\/O1} by adding {\ttfamily -\/D\+C\+M\+A\+K\+E\+\_\+\+C\+X\+X\+\_\+\+F\+L\+A\+GS=-\/O1} to the C\+Make invocation.
 \item Build Ginkgo in {\itshape Min\+GW}\+:\textbackslash{} If encountering the issue {\ttfamily cc1plus.\+exe\+: out of memory allocating 65536 bytes}, please follow the workaround in \href{https://www.intel.com/content/www/us/en/programmable/support/support-resources/knowledge-base/embedded/2016/cc1plus-exe--out-of-memory-allocating-65536-bytes.html}{\texttt{ reference}}, or trying to compile ginkgo again might work.
 \end{DoxyItemize}\hypertarget{install_ginkgo_autotoc_md2}{}\doxysubsection{Building Ginkgo with H\+I\+P support}\label{install_ginkgo_autotoc_md2}
 Ginkgo provides a \href{https://github.com/ROCm-Developer-Tools/HIP}{\texttt{ H\+IP}} backend. This allows to compile optimized versions of the kernels for either A\+MD or N\+V\+I\+D\+IA G\+P\+Us. The C\+Make configuration step will try to auto-\/detect the presence of H\+IP either at {\ttfamily /opt/rocm/hip} or at the path specified by {\ttfamily H\+I\+P\+\_\+\+P\+A\+TH} as a C\+Make parameter ({\ttfamily -\/D\+H\+I\+P\+\_\+\+P\+A\+TH=}) or environment variable ({\ttfamily export H\+I\+P\+\_\+\+P\+A\+TH=}), unless {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+B\+U\+I\+L\+D\+\_\+\+H\+IP=O\+N/\+O\+FF} is set explicitly.\hypertarget{install_ginkgo_autotoc_md3}{}\doxysubsubsection{H\+I\+P dependencies for Ginkgo}\label{install_ginkgo_autotoc_md3}
