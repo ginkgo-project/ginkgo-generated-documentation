@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/299216128 branch based on develop. Ginkgo version 1.4.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/299285093 branch based on develop. Ginkgo version 1.4.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -440,6 +440,12 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nam
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
+<tr class="memitem:afbed8e2cbd3ee4ca962e12f688858bdb"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegko.html#afbed8e2cbd3ee4ca962e12f688858bdb">allocation_mode</a> { <b>device</b>, 
+<b>unified_global</b>, 
+<b>unified_host</b>
+ }</td></tr>
+<tr class="memdesc:afbed8e2cbd3ee4ca962e12f688858bdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specify the mode of allocation for CUDA/HIP GPUs.  <a href="namespacegko.html#afbed8e2cbd3ee4ca962e12f688858bdb">More...</a><br /></td></tr>
+<tr class="separator:afbed8e2cbd3ee4ca962e12f688858bdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae749a5ea11a93c1bcc9158d9a6e9fb68"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegko.html#ae749a5ea11a93c1bcc9158d9a6e9fb68">layout_type</a> { <a class="el" href="namespacegko.html#ae749a5ea11a93c1bcc9158d9a6e9fb68af1f713c9e000f5d3f280adbd124df4f5">layout_type::array</a>, 
 <a class="el" href="namespacegko.html#ae749a5ea11a93c1bcc9158d9a6e9fb68af5d7aa3ba4929cc12dc51a92c59fabd3">layout_type::coordinate</a>
  }</td></tr>
@@ -1119,6 +1125,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>operator&gt;=</b> (co
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
+<tr class="memitem:a75fb6095836eeaadd8ae9137b9d224c2"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="namespacegko.html#afbed8e2cbd3ee4ca962e12f688858bdb">allocation_mode</a>&#160;</td><td class="memItemRight" valign="bottom"><b>default_cuda_alloc_mode</b></td></tr>
+<tr class="separator:a75fb6095836eeaadd8ae9137b9d224c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dc4eaf27900ef925725bf542d705351"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="namespacegko.html#afbed8e2cbd3ee4ca962e12f688858bdb">allocation_mode</a>&#160;</td><td class="memItemRight" valign="bottom"><b>default_hip_alloc_mode</b></td></tr>
+<tr class="separator:a6dc4eaf27900ef925725bf542d705351"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acae2e648052ec788bd8ba9e0192652a6"><td class="memItemLeft" align="right" valign="top"><a id="acae2e648052ec788bd8ba9e0192652a6"></a>
 constexpr <a class="el" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegko.html#acae2e648052ec788bd8ba9e0192652a6">byte_size</a> = CHAR_BIT</td></tr>
 <tr class="memdesc:acae2e648052ec788bd8ba9e0192652a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of bits in a byte. <br /></td></tr>
@@ -1252,6 +1262,33 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="afbed8e2cbd3ee4ca962e12f688858bdb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbed8e2cbd3ee4ca962e12f688858bdb">&#9670;&nbsp;</a></span>allocation_mode</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespacegko.html#afbed8e2cbd3ee4ca962e12f688858bdb">gko::allocation_mode</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Specify the mode of allocation for CUDA/HIP GPUs. </p>
+<p><code>device</code> allocates memory on the device and Unified Memory model is not used.</p>
+<p><code>unified_global</code> allocates memory on the device, but is accessible by the host through the Unified memory model.</p>
+<p><code>unified_host</code> allocates memory on the host and it is not available on devices which do not have concurrent acesses switched on, but this access can be explictly switched on, when necessary. </p>
+
+</div>
+</div>
 <a id="ae749a5ea11a93c1bcc9158d9a6e9fb68"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae749a5ea11a93c1bcc9158d9a6e9fb68">&#9670;&nbsp;</a></span>layout_type</h2>
 
@@ -3832,6 +3869,55 @@ template&lt;typename T &gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>additive identity for T</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>This version takes an unused reference argument to avoid complicated calls like <code>zero&lt;decltype(x)&gt;()</code>. Instead, it allows <code>zero(x)</code>. </dd></dl>
 
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a75fb6095836eeaadd8ae9137b9d224c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75fb6095836eeaadd8ae9137b9d224c2">&#9670;&nbsp;</a></span>default_cuda_alloc_mode</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="namespacegko.html#afbed8e2cbd3ee4ca962e12f688858bdb">allocation_mode</a> gko::default_cuda_alloc_mode</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">    allocation_mode::unified_global</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a6dc4eaf27900ef925725bf542d705351"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6dc4eaf27900ef925725bf542d705351">&#9670;&nbsp;</a></span>default_hip_alloc_mode</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="namespacegko.html#afbed8e2cbd3ee4ca962e12f688858bdb">allocation_mode</a> gko::default_hip_alloc_mode</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">    allocation_mode::unified_global</div>
+</div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->

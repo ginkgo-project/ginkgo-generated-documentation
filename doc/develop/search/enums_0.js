@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['isai_5ftype_1813',['isai_type',['../namespacegko_1_1preconditioner.html#a918dfc2ae55135bbd6e1e01d0c6031ab',1,'gko::preconditioner']]]
+  ['allocation_5fmode_1814',['allocation_mode',['../namespacegko.html#afbed8e2cbd3ee4ca962e12f688858bdb',1,'gko']]]
 ];

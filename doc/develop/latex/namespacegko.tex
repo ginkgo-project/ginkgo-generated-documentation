@@ -254,6 +254,11 @@ using \mbox{\hyperlink{namespacegko_a1d44e117d2f74b34bdc83ac5c0c6b605}{default\+
 \doxysubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
+enum \mbox{\hyperlink{namespacegko_afbed8e2cbd3ee4ca962e12f688858bdb}{allocation\+\_\+mode}} \{ {\bfseries device}, 
+{\bfseries unified\+\_\+global}, 
+{\bfseries unified\+\_\+host}
+ \}
+\begin{DoxyCompactList}\small\item\em Specify the mode of allocation for C\+U\+D\+A/\+H\+IP G\+P\+Us. \end{DoxyCompactList}\item 
 enum \mbox{\hyperlink{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68}{layout\+\_\+type}} \{ \mbox{\hyperlink{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68af1f713c9e000f5d3f280adbd124df4f5}{layout\+\_\+type\+::array}}, 
 \mbox{\hyperlink{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68af5d7aa3ba4929cc12dc51a92c59fabd3}{layout\+\_\+type\+::coordinate}}
  \}
@@ -720,6 +725,10 @@ bool \mbox{\hyperlink{namespacegko_accf1dbf5054c76e154490d825b0f44ee}{operator!=
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
+constexpr \mbox{\hyperlink{namespacegko_afbed8e2cbd3ee4ca962e12f688858bdb}{allocation\+\_\+mode}} {\bfseries default\+\_\+cuda\+\_\+alloc\+\_\+mode}
+\item 
+constexpr \mbox{\hyperlink{namespacegko_afbed8e2cbd3ee4ca962e12f688858bdb}{allocation\+\_\+mode}} {\bfseries default\+\_\+hip\+\_\+alloc\+\_\+mode}
+\item 
 \mbox{\Hypertarget{namespacegko_acae2e648052ec788bd8ba9e0192652a6}\label{namespacegko_acae2e648052ec788bd8ba9e0192652a6}} 
 constexpr \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{namespacegko_acae2e648052ec788bd8ba9e0192652a6}{byte\+\_\+size}} = C\+H\+A\+R\+\_\+\+B\+IT
 \begin{DoxyCompactList}\small\item\em Number of bits in a byte. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -822,7 +831,21 @@ to\+\_\+real is alias of remove\+\_\+complex
 
 
 \doxysubsection{Enumeration Type Documentation}
-\mbox{\Hypertarget{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68}\label{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68}} 
+\mbox{\Hypertarget{namespacegko_afbed8e2cbd3ee4ca962e12f688858bdb}\label{namespacegko_afbed8e2cbd3ee4ca962e12f688858bdb}} 
+\index{gko@{gko}!allocation\_mode@{allocation\_mode}}
+\index{allocation\_mode@{allocation\_mode}!gko@{gko}}
+\doxysubsubsection{\texorpdfstring{allocation\_mode}{allocation\_mode}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{namespacegko_afbed8e2cbd3ee4ca962e12f688858bdb}{gko\+::allocation\+\_\+mode}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Specify the mode of allocation for C\+U\+D\+A/\+H\+IP G\+P\+Us. 
+
+{\ttfamily device} allocates memory on the device and Unified Memory model is not used.
+
+{\ttfamily unified\+\_\+global} allocates memory on the device, but is accessible by the host through the Unified memory model.
+
+{\ttfamily unified\+\_\+host} allocates memory on the host and it is not available on devices which do not have concurrent acesses switched on, but this access can be explictly switched on, when necessary. \mbox{\Hypertarget{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68}\label{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68}} 
 \index{gko@{gko}!layout\_type@{layout\_type}}
 \index{layout\_type@{layout\_type}!gko@{gko}}
 \doxysubsubsection{\texorpdfstring{layout\_type}{layout\_type}}
@@ -2270,3 +2293,30 @@ additive identity for T
 \begin{DoxyNote}{Note}
 This version takes an unused reference argument to avoid complicated calls like {\ttfamily zero$<$decltype(x)$>$()}. Instead, it allows {\ttfamily zero(x)}. 
 \end{DoxyNote}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespacegko_a75fb6095836eeaadd8ae9137b9d224c2}\label{namespacegko_a75fb6095836eeaadd8ae9137b9d224c2}} 
+\index{gko@{gko}!default\_cuda\_alloc\_mode@{default\_cuda\_alloc\_mode}}
+\index{default\_cuda\_alloc\_mode@{default\_cuda\_alloc\_mode}!gko@{gko}}
+\doxysubsubsection{\texorpdfstring{default\_cuda\_alloc\_mode}{default\_cuda\_alloc\_mode}}
+{\footnotesize\ttfamily constexpr \mbox{\hyperlink{namespacegko_afbed8e2cbd3ee4ca962e12f688858bdb}{allocation\+\_\+mode}} gko\+::default\+\_\+cuda\+\_\+alloc\+\_\+mode\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{    allocation\_mode::unified\_global}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacegko_a6dc4eaf27900ef925725bf542d705351}\label{namespacegko_a6dc4eaf27900ef925725bf542d705351}} 
+\index{gko@{gko}!default\_hip\_alloc\_mode@{default\_hip\_alloc\_mode}}
+\index{default\_hip\_alloc\_mode@{default\_hip\_alloc\_mode}!gko@{gko}}
+\doxysubsubsection{\texorpdfstring{default\_hip\_alloc\_mode}{default\_hip\_alloc\_mode}}
+{\footnotesize\ttfamily constexpr \mbox{\hyperlink{namespacegko_afbed8e2cbd3ee4ca962e12f688858bdb}{allocation\+\_\+mode}} gko\+::default\+\_\+hip\+\_\+alloc\+\_\+mode\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{    allocation\_mode::unified\_global}
+
+\end{DoxyCode}
