@@ -662,6 +662,8 @@ constexpr bool {\bfseries operator!=} (const \mbox{\hyperlink{structgko_1_1span}
 \item 
 {\footnotesize template$<$typename T $>$ }\\detail\+::temporary\+\_\+clone$<$ T $>$ \mbox{\hyperlink{namespacegko_a2166ec09e3e8a0ef437aee9c2b97f422}{make\+\_\+temporary\+\_\+clone}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, T $\ast$ptr)
 \begin{DoxyCompactList}\small\item\em Creates a temporary\+\_\+clone. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\detail\+::temporary\+\_\+clone$<$ T $>$ \mbox{\hyperlink{namespacegko_a0132e53621ce6f4222a2684ea6d6f021}{make\+\_\+temporary\+\_\+output\+\_\+clone}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, T $\ast$ptr)
+\begin{DoxyCompactList}\small\item\em Creates a uninitialized temporary\+\_\+clone that will be copied back to the input afterwards. \end{DoxyCompactList}\item 
 constexpr bool \mbox{\hyperlink{namespacegko_a4dbafa6e062c2036991ec8c3f6b201cf}{operator==}} (\mbox{\hyperlink{classgko_1_1precision__reduction}{precision\+\_\+reduction}} x, \mbox{\hyperlink{classgko_1_1precision__reduction}{precision\+\_\+reduction}} y) noexcept
 \begin{DoxyCompactList}\small\item\em Checks if two \mbox{\hyperlink{classgko_1_1precision__reduction}{precision\+\_\+reduction}} encodings are equal. \end{DoxyCompactList}\item 
 constexpr bool \mbox{\hyperlink{namespacegko_a61d408b4cd77aae6cac7a40c8307fddb}{operator!=}} (\mbox{\hyperlink{classgko_1_1precision__reduction}{precision\+\_\+reduction}} x, \mbox{\hyperlink{classgko_1_1precision__reduction}{precision\+\_\+reduction}} y) noexcept
@@ -1543,7 +1545,7 @@ This is a helper function which avoids the need to explicitly specify the type o
 \end{DoxyParams}
 
 
-Referenced by gko\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::add\+\_\+scaled(), gko\+::\+Lin\+Op\+::apply(), gko\+::matrix\+::\+Coo$<$ Value\+Type, Index\+Type $>$\+::apply2(), gko\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::compute\+\_\+conj\+\_\+dot(), gko\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::compute\+\_\+dot(), gko\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::compute\+\_\+norm2(), and gko\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::scale().
+Referenced by gko\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::add\+\_\+scaled(), gko\+::\+Lin\+Op\+::apply(), gko\+::matrix\+::\+Coo$<$ Value\+Type, Index\+Type $>$\+::apply2(), gko\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::compute\+\_\+conj\+\_\+dot(), gko\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::compute\+\_\+dot(), and gko\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::scale().
 
 \mbox{\Hypertarget{namespacegko_a6470e8e212add7923569e6b885a74610}\label{namespacegko_a6470e8e212add7923569e6b885a74610}} 
 \index{gko@{gko}!make\_temporary\_conversion@{make\_temporary\_conversion}}
@@ -1607,6 +1609,32 @@ a detail\+::temporary\+\_\+conversion pointing to the (potentially converted) ob
 {\em Value\+Type} & the value type into whose associated \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{matrix\+::\+Dense}} type to convert the input \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}. \\
 \hline
 \end{DoxyTemplParams}
+\mbox{\Hypertarget{namespacegko_a0132e53621ce6f4222a2684ea6d6f021}\label{namespacegko_a0132e53621ce6f4222a2684ea6d6f021}} 
+\index{gko@{gko}!make\_temporary\_output\_clone@{make\_temporary\_output\_clone}}
+\index{make\_temporary\_output\_clone@{make\_temporary\_output\_clone}!gko@{gko}}
+\doxysubsubsection{\texorpdfstring{make\_temporary\_output\_clone()}{make\_temporary\_output\_clone()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+detail\+::temporary\+\_\+clone$<$T$>$ gko\+::make\+\_\+temporary\+\_\+output\+\_\+clone (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{T $\ast$}]{ptr }\end{DoxyParamCaption})}
+
+
+
+Creates a uninitialized temporary\+\_\+clone that will be copied back to the input afterwards. 
+
+It can be used for output parameters to avoid an unnecessary copy in make\+\_\+temporary\+\_\+clone.
+
+This is a helper function which avoids the need to explicitly specify the type of the object, as would be the case if using the constructor of temporary\+\_\+clone.
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & the executor where the uninitialized clone will be created \\
+\hline
+{\em ptr} & a pointer to the object of which the clone will be created \\
+\hline
+\end{DoxyParams}
+
+
+Referenced by gko\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::compute\+\_\+conj\+\_\+dot(), gko\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::compute\+\_\+dot(), and gko\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::compute\+\_\+norm2().
+
 \mbox{\Hypertarget{namespacegko_af1812df45c6ec07780d579a12b64c753}\label{namespacegko_af1812df45c6ec07780d579a12b64c753}} 
 \index{gko@{gko}!max@{max}}
 \index{max@{max}!gko@{gko}}

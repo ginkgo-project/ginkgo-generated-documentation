@@ -40,6 +40,9 @@ using {\bfseries mat\+\_\+data32} = \mbox{\hyperlink{structgko_1_1matrix__data}{
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a7982c70b98f1f7de90f15f72e5f728b5}\label{classgko_1_1matrix_1_1Dense_a7982c70b98f1f7de90f15f72e5f728b5}} 
 using {\bfseries absolute\+\_\+type} = \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{remove\+\_\+complex}}$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} $>$
 \item 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_af79f2301e156a0c577aa27c05ad95a8b}\label{classgko_1_1matrix_1_1Dense_af79f2301e156a0c577aa27c05ad95a8b}} 
+using {\bfseries real\+\_\+type} = absolute\+\_\+type
+\item 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_ab7a004b777d6c178051f19b044b9da56}\label{classgko_1_1matrix_1_1Dense_ab7a004b777d6c178051f19b044b9da56}} 
 using {\bfseries complex\+\_\+type} = \mbox{\hyperlink{namespacegko_acc281c8ff5bfa4fd6f25afcce466b1af}{to\+\_\+complex}}$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} $>$
 \item 
@@ -48,6 +51,12 @@ using {\bfseries row\+\_\+major\+\_\+range} = \mbox{\hyperlink{classgko_1_1range
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a3216c0a499ec68231672d98fe34857fb}\label{classgko_1_1matrix_1_1Dense_a3216c0a499ec68231672d98fe34857fb}} 
+void {\bfseries convert\+\_\+to} (\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ Value\+Type $>$ $\ast$result) const override
+\item 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a86453dd136184ef7b83a6ac8bcca4d4c}\label{classgko_1_1matrix_1_1Dense_a86453dd136184ef7b83a6ac8bcca4d4c}} 
+void {\bfseries move\+\_\+to} (\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ Value\+Type $>$ $\ast$result) override
 \item 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a53159abfbafcc99554e1397bac5ff1b2}\label{classgko_1_1matrix_1_1Dense_a53159abfbafcc99554e1397bac5ff1b2}} 
 void {\bfseries convert\+\_\+to} (\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ \mbox{\hyperlink{namespacegko_a6362f751c7753cf4fa0a4771d56e8ede}{next\+\_\+precision}}$<$ Value\+Type $>$$>$ $\ast$result) const override
@@ -143,20 +152,36 @@ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbo
 \begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a19890b1448497a50d57c16ed4c3bd820}{conj\+\_\+transpose}} () const override
 \begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the conjugate transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a49e62f5eb87fe4718ce028ece951647d}{transpose}} (\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} $\ast$output) const
+\begin{DoxyCompactList}\small\item\em Writes the transposed matrix into the given output matrix. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a7b782aa191fd724833b6404dae29add4}{conj\+\_\+transpose}} (\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} $\ast$output) const
+\begin{DoxyCompactList}\small\item\em Writes the conjugate-\/transposed matrix into the given output matrix. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_af8eb9f6120517fbc19cee8e9ddfceb05}{fill}} (const Value\+Type value)
+\begin{DoxyCompactList}\small\item\em Fill the dense matrix with a given value. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_aa67d4586ffe777b7d757db5fd9c40a04}{permute}} (const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{int32}} $>$ $\ast$permutation\+\_\+indices) const override
 \begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the symmetric row and column permutation of the \mbox{\hyperlink{classgko_1_1Permutable}{Permutable}} object. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_afc21476430471d324334a568c0459b79}{permute}} (const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}} $>$ $\ast$permutation\+\_\+indices) const override
 \begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the symmetric row and column permutation of the \mbox{\hyperlink{classgko_1_1Permutable}{Permutable}} object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a184f83a00c1200afe448a4d28d404245}{permute}} (const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{int32}} $>$ $\ast$permutation\+\_\+indices, \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} $\ast$output) const
+\begin{DoxyCompactList}\small\item\em Writes the symmetrically permuted matrix into the given output matrix. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a88841f1640f67ea18009a0dca35f36b3}{permute}} (const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}} $>$ $\ast$permutation\+\_\+indices, \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} $\ast$output) const
+\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a868294036aeec9333cecabbef0551bc9}{inverse\+\_\+permute}} (const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{int32}} $>$ $\ast$permutation\+\_\+indices) const override
 \begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the symmetric inverse row and column permutation of the \mbox{\hyperlink{classgko_1_1Permutable}{Permutable}} object. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_abf8febe4884856aada94e697134fed5b}{inverse\+\_\+permute}} (const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}} $>$ $\ast$permutation\+\_\+indices) const override
 \begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the symmetric inverse row and column permutation of the \mbox{\hyperlink{classgko_1_1Permutable}{Permutable}} object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a6db286ddd62319f1957b5c7c1330cbfe}{inverse\+\_\+permute}} (const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{int32}} $>$ $\ast$permutation\+\_\+indices, \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} $\ast$output) const
+\begin{DoxyCompactList}\small\item\em Writes the inverse symmetrically permuted matrix into the given output matrix. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_acc53e6d073e1cd58cd2754fb42799ce9}{inverse\+\_\+permute}} (const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}} $>$ $\ast$permutation\+\_\+indices, \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} $\ast$output) const
+\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a685cf7dd460327568c1a65a676395a84}{row\+\_\+permute}} (const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{int32}} $>$ $\ast$permutation\+\_\+indices) const override
 \begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the row permutation of the \mbox{\hyperlink{classgko_1_1Permutable}{Permutable}} object. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_aeee1695589ffafcdff32950dde5eab52}{row\+\_\+permute}} (const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}} $>$ $\ast$permutation\+\_\+indices) const override
 \begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the row permutation of the \mbox{\hyperlink{classgko_1_1Permutable}{Permutable}} object. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_af8eb9f6120517fbc19cee8e9ddfceb05}{fill}} (const Value\+Type value)
-\begin{DoxyCompactList}\small\item\em Fill the dense matrix with a given value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a20b27b6020d7d0fcabc081a55b04aff0}{row\+\_\+permute}} (const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{int32}} $>$ $\ast$permutation\+\_\+indices, \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} $\ast$output) const
+\begin{DoxyCompactList}\small\item\em Writes the row-\/permuted matrix into the given output matrix. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a949f4cf21f602d92bccf746fa01e78d2}{row\+\_\+permute}} (const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}} $>$ $\ast$permutation\+\_\+indices, \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} $\ast$output) const
+\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a5eb042462d750c84908fb5a3fac62dd5}{row\+\_\+gather}} (const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{int32}} $>$ $\ast$gather\+\_\+indices) const
 \begin{DoxyCompactList}\small\item\em Create a \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} matrix consisting of the given rows from this matrix. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a075300eaaaffbc2c8f548417d2fe9baa}{row\+\_\+gather}} (const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}} $>$ $\ast$gather\+\_\+indices) const
@@ -169,36 +194,52 @@ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbo
 \begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the column permutation of the \mbox{\hyperlink{classgko_1_1Permutable}{Permutable}} object. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a4fb7205bb0932ccd95be8daeef602935}{column\+\_\+permute}} (const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}} $>$ $\ast$permutation\+\_\+indices) const override
 \begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the column permutation of the \mbox{\hyperlink{classgko_1_1Permutable}{Permutable}} object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_ae5da39f57efddb5cb195a4d615001541}{column\+\_\+permute}} (const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{int32}} $>$ $\ast$permutation\+\_\+indices, \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} $\ast$output) const
+\begin{DoxyCompactList}\small\item\em Writes the column-\/permuted matrix into the given output matrix. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a278e22ef10bb5f28e72d5b6427370b7d}{column\+\_\+permute}} (const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}} $>$ $\ast$permutation\+\_\+indices, \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} $\ast$output) const
+\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a9eef661abb7d097ca0dcb407fbbac2ab}{inverse\+\_\+row\+\_\+permute}} (const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{int32}} $>$ $\ast$permutation\+\_\+indices) const override
 \begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the row permutation of the inverse permuted object. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a231711c105ba46fd48be32f997a811aa}{inverse\+\_\+row\+\_\+permute}} (const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}} $>$ $\ast$permutation\+\_\+indices) const override
 \begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the row permutation of the inverse permuted object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a758f304c44874cefefad543888dc690b}{inverse\+\_\+row\+\_\+permute}} (const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{int32}} $>$ $\ast$permutation\+\_\+indices, \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} $\ast$output) const
+\begin{DoxyCompactList}\small\item\em Writes the inverse row-\/permuted matrix into the given output matrix. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a28f46df32f014a04070947c10f39a6f4}{inverse\+\_\+row\+\_\+permute}} (const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}} $>$ $\ast$permutation\+\_\+indices, \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} $\ast$output) const
+\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_af4421d30735edac95994b0c749f90be5}{inverse\+\_\+column\+\_\+permute}} (const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{int32}} $>$ $\ast$permutation\+\_\+indices) const override
 \begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the row permutation of the inverse permuted object. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a4ddd3de77b7837c6abab52214a0b848f}{inverse\+\_\+column\+\_\+permute}} (const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}} $>$ $\ast$permutation\+\_\+indices) const override
 \begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the row permutation of the inverse permuted object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_abada337ea27a86ae863c78cf7263b726}{inverse\+\_\+column\+\_\+permute}} (const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{int32}} $>$ $\ast$permutation\+\_\+indices, \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} $\ast$output) const
+\begin{DoxyCompactList}\small\item\em Writes the inverse column-\/permuted matrix into the given output matrix. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a074224a95e836a69cfe561b98c357e07}{inverse\+\_\+column\+\_\+permute}} (const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}} $>$ $\ast$permutation\+\_\+indices, \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} $\ast$output) const
+\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal}{Diagonal}}$<$ Value\+Type $>$ $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a533aa6d9c41c38e0b9353b0e0ef255a1}{extract\+\_\+diagonal}} () const override
 \begin{DoxyCompactList}\small\item\em Extracts the diagonal entries of the matrix into a vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a8177073081652da9e27145e28653181a}{extract\+\_\+diagonal}} (\mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal}{Diagonal}}$<$ Value\+Type $>$ $\ast$output) const
+\begin{DoxyCompactList}\small\item\em Writes the diagonal of this matrix into an existing diagonal matrix. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ absolute\+\_\+type $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a0cac589a24090e4fe9a2b31f85830c95}{compute\+\_\+absolute}} () const override
 \begin{DoxyCompactList}\small\item\em Gets the Absolute\+Lin\+Op. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_ae87da881af138a1fcffd305b013a0d36}{compute\+\_\+absolute}} (absolute\+\_\+type $\ast$output) const
+\begin{DoxyCompactList}\small\item\em Writes the absolute values of this matrix into an existing matrix. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_ac86f11554ae7cd5814852d6e1a0b9d4d}\label{classgko_1_1matrix_1_1Dense_ac86f11554ae7cd5814852d6e1a0b9d4d}} 
 void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_ac86f11554ae7cd5814852d6e1a0b9d4d}{compute\+\_\+absolute\+\_\+inplace}} () override
 \begin{DoxyCompactList}\small\item\em Compute absolute inplace on each element. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ complex\+\_\+type $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a01b9a6f6f3b72f1d2b6044afb0f78791}{make\+\_\+complex}} () const
 \begin{DoxyCompactList}\small\item\em Creates a complex copy of the original matrix. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a383c1a6ab4fbbaaa1b782e3e4b9f0bbb}{make\+\_\+complex}} (\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ \mbox{\hyperlink{namespacegko_acc281c8ff5bfa4fd6f25afcce466b1af}{to\+\_\+complex}}$<$ Value\+Type $>$$>$ $\ast$result) const
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_ac39e8e17c7e102ad491328959ca8f8d3}{make\+\_\+complex}} (complex\+\_\+type $\ast$result) const
 \begin{DoxyCompactList}\small\item\em Writes a complex copy of the original matrix to a given complex matrix. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a22aef32e5ef01fc568304f4f2c50e149}\label{classgko_1_1matrix_1_1Dense_a22aef32e5ef01fc568304f4f2c50e149}} 
-std\+::unique\+\_\+ptr$<$ absolute\+\_\+type $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a22aef32e5ef01fc568304f4f2c50e149}{get\+\_\+real}} () const
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a3e1f9cd7db8e957fb56eb807ecf6022e}\label{classgko_1_1matrix_1_1Dense_a3e1f9cd7db8e957fb56eb807ecf6022e}} 
+std\+::unique\+\_\+ptr$<$ real\+\_\+type $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a3e1f9cd7db8e957fb56eb807ecf6022e}{get\+\_\+real}} () const
 \begin{DoxyCompactList}\small\item\em Creates a new real matrix and extracts the real part of the original matrix into that. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a522a139c88df694eebaca4417cdec435}\label{classgko_1_1matrix_1_1Dense_a522a139c88df694eebaca4417cdec435}} 
-void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a522a139c88df694eebaca4417cdec435}{get\+\_\+real}} (\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{remove\+\_\+complex}}$<$ Value\+Type $>$$>$ $\ast$result) const
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a08bed1d6c12bd324fa6b2fd9fcf3c85c}\label{classgko_1_1matrix_1_1Dense_a08bed1d6c12bd324fa6b2fd9fcf3c85c}} 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a08bed1d6c12bd324fa6b2fd9fcf3c85c}{get\+\_\+real}} (real\+\_\+type $\ast$result) const
 \begin{DoxyCompactList}\small\item\em Extracts the real part of the original matrix into a given real matrix. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_ab64d0517184c733678626046a143bbb5}\label{classgko_1_1matrix_1_1Dense_ab64d0517184c733678626046a143bbb5}} 
-std\+::unique\+\_\+ptr$<$ absolute\+\_\+type $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_ab64d0517184c733678626046a143bbb5}{get\+\_\+imag}} () const
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a614721573b172e5ea937ef5cc532d8c5}\label{classgko_1_1matrix_1_1Dense_a614721573b172e5ea937ef5cc532d8c5}} 
+std\+::unique\+\_\+ptr$<$ real\+\_\+type $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a614721573b172e5ea937ef5cc532d8c5}{get\+\_\+imag}} () const
 \begin{DoxyCompactList}\small\item\em Creates a new real matrix and extracts the imaginary part of the original matrix into that. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a97c1bc820617b5b4c2088e6854d5451e}\label{classgko_1_1matrix_1_1Dense_a97c1bc820617b5b4c2088e6854d5451e}} 
-void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a97c1bc820617b5b4c2088e6854d5451e}{get\+\_\+imag}} (\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{remove\+\_\+complex}}$<$ Value\+Type $>$$>$ $\ast$result) const
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a433bebde39ddeb4183d28d2829cff54b}\label{classgko_1_1matrix_1_1Dense_a433bebde39ddeb4183d28d2829cff54b}} 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a433bebde39ddeb4183d28d2829cff54b}{get\+\_\+imag}} (real\+\_\+type $\ast$result) const
 \begin{DoxyCompactList}\small\item\em Extracts the imaginary part of the original matrix into a given real matrix. \end{DoxyCompactList}\item 
 value\+\_\+type $\ast$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a3bc458e02fab8e4c9f60f70bd4d5a4f9}{get\+\_\+values}} () noexcept
 \begin{DoxyCompactList}\small\item\em Returns a pointer to the array of values of the matrix. \end{DoxyCompactList}\item 
@@ -447,7 +488,7 @@ Referenced by gko\+::initialize().
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a109d52e8106978de5b4306169b5fb414}\label{classgko_1_1matrix_1_1Dense_a109d52e8106978de5b4306169b5fb414}} 
 \index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!column\_permute@{column\_permute}}
 \index{column\_permute@{column\_permute}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
-\doxysubsubsection{\texorpdfstring{column\_permute()}{column\_permute()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\doxysubsubsection{\texorpdfstring{column\_permute()}{column\_permute()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
 std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::column\+\_\+permute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{int32}} $>$ $\ast$}]{permutation\+\_\+indices }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
@@ -469,10 +510,31 @@ a pointer to the new column permuted object
 
 Implements \mbox{\hyperlink{classgko_1_1Permutable_a271cdd29fcb10275a348902f1b0926f7}{gko\+::\+Permutable$<$ int32 $>$}}.
 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_ae5da39f57efddb5cb195a4d615001541}\label{classgko_1_1matrix_1_1Dense_ae5da39f57efddb5cb195a4d615001541}} 
+\index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!column\_permute@{column\_permute}}
+\index{column\_permute@{column\_permute}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{column\_permute()}{column\_permute()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::column\+\_\+permute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{int32}} $>$ $\ast$}]{permutation\+\_\+indices,  }\item[{\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ Value\+Type $>$ $\ast$}]{output }\end{DoxyParamCaption}) const}
+
+
+
+Writes the column-\/permuted matrix into the given output matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em permutation\+\_\+indices} & The array containing permutation indices. It must have {\ttfamily this-\/$>$\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\+\_\+size()}}\mbox{[}1\mbox{]}} elements. \\
+\hline
+{\em output} & The output matrix. It must have the dimensions {\ttfamily this-\/$>$\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\+\_\+size()}}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+Dense\+::column\+\_\+permute(const Array$<$int32$>$$\ast$) 
+\end{DoxySeeAlso}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a4fb7205bb0932ccd95be8daeef602935}\label{classgko_1_1matrix_1_1Dense_a4fb7205bb0932ccd95be8daeef602935}} 
 \index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!column\_permute@{column\_permute}}
 \index{column\_permute@{column\_permute}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
-\doxysubsubsection{\texorpdfstring{column\_permute()}{column\_permute()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\doxysubsubsection{\texorpdfstring{column\_permute()}{column\_permute()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
 std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::column\+\_\+permute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}} $>$ $\ast$}]{permutation\+\_\+indices }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
@@ -494,10 +556,21 @@ a pointer to the new column permuted object
 
 Implements \mbox{\hyperlink{classgko_1_1Permutable_a271cdd29fcb10275a348902f1b0926f7}{gko\+::\+Permutable$<$ int64 $>$}}.
 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a278e22ef10bb5f28e72d5b6427370b7d}\label{classgko_1_1matrix_1_1Dense_a278e22ef10bb5f28e72d5b6427370b7d}} 
+\index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!column\_permute@{column\_permute}}
+\index{column\_permute@{column\_permute}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{column\_permute()}{column\_permute()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::column\+\_\+permute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}} $>$ $\ast$}]{permutation\+\_\+indices,  }\item[{\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ Value\+Type $>$ $\ast$}]{output }\end{DoxyParamCaption}) const}
+
+
+
+
+
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a0cac589a24090e4fe9a2b31f85830c95}\label{classgko_1_1matrix_1_1Dense_a0cac589a24090e4fe9a2b31f85830c95}} 
 \index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!compute\_absolute@{compute\_absolute}}
 \index{compute\_absolute@{compute\_absolute}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
-\doxysubsubsection{\texorpdfstring{compute\_absolute()}{compute\_absolute()}}
+\doxysubsubsection{\texorpdfstring{compute\_absolute()}{compute\_absolute()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
 std\+::unique\+\_\+ptr$<$absolute\+\_\+type$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::compute\+\_\+absolute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
@@ -512,6 +585,25 @@ a pointer to the new absolute object
 
 Implements \mbox{\hyperlink{classgko_1_1EnableAbsoluteComputation_ac30ab2b34bfa3e28e3324cb46f5f030a}{gko\+::\+Enable\+Absolute\+Computation$<$ remove\+\_\+complex$<$ Dense$<$ Value\+Type $>$ $>$ $>$}}.
 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_ae87da881af138a1fcffd305b013a0d36}\label{classgko_1_1matrix_1_1Dense_ae87da881af138a1fcffd305b013a0d36}} 
+\index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!compute\_absolute@{compute\_absolute}}
+\index{compute\_absolute@{compute\_absolute}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{compute\_absolute()}{compute\_absolute()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::compute\+\_\+absolute (\begin{DoxyParamCaption}\item[{absolute\+\_\+type $\ast$}]{output }\end{DoxyParamCaption}) const}
+
+
+
+Writes the absolute values of this matrix into an existing matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em output} & The output matrix. Its size must match the size of this matrix. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a0cac589a24090e4fe9a2b31f85830c95}{Dense\+::compute\+\_\+absolute()}} 
+\end{DoxySeeAlso}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a1cb6e3ec8c01320d4a708d651a3a5169}\label{classgko_1_1matrix_1_1Dense_a1cb6e3ec8c01320d4a708d651a3a5169}} 
 \index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!compute\_conj\_dot@{compute\_conj\_dot}}
 \index{compute\_conj\_dot@{compute\_conj\_dot}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
@@ -532,7 +624,7 @@ Computes the column-\/wise dot product of {\ttfamily conj(this matrix)} and {\tt
 \end{DoxyParams}
 
 
-References gko\+::\+Polymorphic\+Object\+::get\+\_\+executor(), and gko\+::make\+\_\+temporary\+\_\+clone().
+References gko\+::\+Polymorphic\+Object\+::get\+\_\+executor(), gko\+::make\+\_\+temporary\+\_\+clone(), and gko\+::make\+\_\+temporary\+\_\+output\+\_\+clone().
 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_acb568ff44addb095b82bbd2fbe704761}\label{classgko_1_1matrix_1_1Dense_acb568ff44addb095b82bbd2fbe704761}} 
 \index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!compute\_dot@{compute\_dot}}
@@ -554,7 +646,7 @@ Computes the column-\/wise dot product of this matrix and {\ttfamily b}.
 \end{DoxyParams}
 
 
-References gko\+::\+Polymorphic\+Object\+::get\+\_\+executor(), and gko\+::make\+\_\+temporary\+\_\+clone().
+References gko\+::\+Polymorphic\+Object\+::get\+\_\+executor(), gko\+::make\+\_\+temporary\+\_\+clone(), and gko\+::make\+\_\+temporary\+\_\+output\+\_\+clone().
 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a97fd354c4a26814586cd256b5f0d7bea}\label{classgko_1_1matrix_1_1Dense_a97fd354c4a26814586cd256b5f0d7bea}} 
 \index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!compute\_norm2@{compute\_norm2}}
@@ -574,12 +666,12 @@ Computes the Euclidian (L$^\wedge$2) norm of this matrix.
 \end{DoxyParams}
 
 
-References gko\+::\+Polymorphic\+Object\+::get\+\_\+executor(), and gko\+::make\+\_\+temporary\+\_\+clone().
+References gko\+::\+Polymorphic\+Object\+::get\+\_\+executor(), and gko\+::make\+\_\+temporary\+\_\+output\+\_\+clone().
 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a19890b1448497a50d57c16ed4c3bd820}\label{classgko_1_1matrix_1_1Dense_a19890b1448497a50d57c16ed4c3bd820}} 
 \index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!conj\_transpose@{conj\_transpose}}
 \index{conj\_transpose@{conj\_transpose}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
-\doxysubsubsection{\texorpdfstring{conj\_transpose()}{conj\_transpose()}}
+\doxysubsubsection{\texorpdfstring{conj\_transpose()}{conj\_transpose()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
 std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::conj\+\_\+transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
@@ -594,6 +686,22 @@ a pointer to the new conjugate transposed object
 
 Implements \mbox{\hyperlink{classgko_1_1Transposable_ab41b669288740cf2a6f7bf76e875b077}{gko\+::\+Transposable}}.
 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a7b782aa191fd724833b6404dae29add4}\label{classgko_1_1matrix_1_1Dense_a7b782aa191fd724833b6404dae29add4}} 
+\index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!conj\_transpose@{conj\_transpose}}
+\index{conj\_transpose@{conj\_transpose}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{conj\_transpose()}{conj\_transpose()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::conj\+\_\+transpose (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ Value\+Type $>$ $\ast$}]{output }\end{DoxyParamCaption}) const}
+
+
+
+Writes the conjugate-\/transposed matrix into the given output matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em output} & The output matrix. It must have the dimensions {\ttfamily \mbox{\hyperlink{namespacegko_a9b6a9d7018703d6d1f2140054e2afe4a}{gko\+::transpose}}(this-\/$>$\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\+\_\+size()}})} \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a42971e5349decc17ec015a8548ce9f11}\label{classgko_1_1matrix_1_1Dense_a42971e5349decc17ec015a8548ce9f11}} 
 \index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!create\_real\_view@{create\_real\_view}}
 \index{create\_real\_view@{create\_real\_view}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
@@ -735,7 +843,7 @@ a \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} matrix with the type of 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a533aa6d9c41c38e0b9353b0e0ef255a1}\label{classgko_1_1matrix_1_1Dense_a533aa6d9c41c38e0b9353b0e0ef255a1}} 
 \index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!extract\_diagonal@{extract\_diagonal}}
 \index{extract\_diagonal@{extract\_diagonal}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
-\doxysubsubsection{\texorpdfstring{extract\_diagonal()}{extract\_diagonal()}}
+\doxysubsubsection{\texorpdfstring{extract\_diagonal()}{extract\_diagonal()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
 std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal}{Diagonal}}$<$Value\+Type$>$ $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::extract\+\_\+diagonal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
@@ -752,6 +860,25 @@ Extracts the diagonal entries of the matrix into a vector.
 
 Implements \mbox{\hyperlink{classgko_1_1DiagonalExtractable_a3a748eb3a1ced4e679b67a0e20f46336}{gko\+::\+Diagonal\+Extractable$<$ Value\+Type $>$}}.
 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a8177073081652da9e27145e28653181a}\label{classgko_1_1matrix_1_1Dense_a8177073081652da9e27145e28653181a}} 
+\index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!extract\_diagonal@{extract\_diagonal}}
+\index{extract\_diagonal@{extract\_diagonal}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{extract\_diagonal()}{extract\_diagonal()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::extract\+\_\+diagonal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal}{Diagonal}}$<$ Value\+Type $>$ $\ast$}]{output }\end{DoxyParamCaption}) const}
+
+
+
+Writes the diagonal of this matrix into an existing diagonal matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em output} & The output matrix. Its size must match the size of this matrix\textquotesingle{}s diagonal. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a533aa6d9c41c38e0b9353b0e0ef255a1}{Dense\+::extract\+\_\+diagonal()}} 
+\end{DoxySeeAlso}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_af8eb9f6120517fbc19cee8e9ddfceb05}\label{classgko_1_1matrix_1_1Dense_af8eb9f6120517fbc19cee8e9ddfceb05}} 
 \index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!fill@{fill}}
 \index{fill@{fill}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
@@ -854,7 +981,7 @@ Referenced by gko\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::create\+\_\+real\+\
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_af4421d30735edac95994b0c749f90be5}\label{classgko_1_1matrix_1_1Dense_af4421d30735edac95994b0c749f90be5}} 
 \index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!inverse\_column\_permute@{inverse\_column\_permute}}
 \index{inverse\_column\_permute@{inverse\_column\_permute}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
-\doxysubsubsection{\texorpdfstring{inverse\_column\_permute()}{inverse\_column\_permute()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\doxysubsubsection{\texorpdfstring{inverse\_column\_permute()}{inverse\_column\_permute()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
 std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::inverse\+\_\+column\+\_\+permute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{int32}} $>$ $\ast$}]{permutation\+\_\+indices }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
@@ -876,10 +1003,31 @@ a pointer to the new inverse permuted object
 
 Implements \mbox{\hyperlink{classgko_1_1Permutable_a6dc3cb59a94847013feec67f8a52ccb4}{gko\+::\+Permutable$<$ int32 $>$}}.
 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_abada337ea27a86ae863c78cf7263b726}\label{classgko_1_1matrix_1_1Dense_abada337ea27a86ae863c78cf7263b726}} 
+\index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!inverse\_column\_permute@{inverse\_column\_permute}}
+\index{inverse\_column\_permute@{inverse\_column\_permute}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{inverse\_column\_permute()}{inverse\_column\_permute()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::inverse\+\_\+column\+\_\+permute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{int32}} $>$ $\ast$}]{permutation\+\_\+indices,  }\item[{\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ Value\+Type $>$ $\ast$}]{output }\end{DoxyParamCaption}) const}
+
+
+
+Writes the inverse column-\/permuted matrix into the given output matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em permutation\+\_\+indices} & The array containing permutation indices. It must have {\ttfamily this-\/$>$\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\+\_\+size()}}\mbox{[}1\mbox{]}} elements. \\
+\hline
+{\em output} & The output matrix. It must have the dimensions {\ttfamily this-\/$>$\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\+\_\+size()}}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+Dense\+::inverse\+\_\+column\+\_\+permute(const Array$<$int32$>$$\ast$) 
+\end{DoxySeeAlso}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a4ddd3de77b7837c6abab52214a0b848f}\label{classgko_1_1matrix_1_1Dense_a4ddd3de77b7837c6abab52214a0b848f}} 
 \index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!inverse\_column\_permute@{inverse\_column\_permute}}
 \index{inverse\_column\_permute@{inverse\_column\_permute}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
-\doxysubsubsection{\texorpdfstring{inverse\_column\_permute()}{inverse\_column\_permute()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\doxysubsubsection{\texorpdfstring{inverse\_column\_permute()}{inverse\_column\_permute()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
 std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::inverse\+\_\+column\+\_\+permute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}} $>$ $\ast$}]{permutation\+\_\+indices }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
@@ -901,10 +1049,21 @@ a pointer to the new inverse permuted object
 
 Implements \mbox{\hyperlink{classgko_1_1Permutable_a6dc3cb59a94847013feec67f8a52ccb4}{gko\+::\+Permutable$<$ int64 $>$}}.
 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a074224a95e836a69cfe561b98c357e07}\label{classgko_1_1matrix_1_1Dense_a074224a95e836a69cfe561b98c357e07}} 
+\index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!inverse\_column\_permute@{inverse\_column\_permute}}
+\index{inverse\_column\_permute@{inverse\_column\_permute}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{inverse\_column\_permute()}{inverse\_column\_permute()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::inverse\+\_\+column\+\_\+permute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}} $>$ $\ast$}]{permutation\+\_\+indices,  }\item[{\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ Value\+Type $>$ $\ast$}]{output }\end{DoxyParamCaption}) const}
+
+
+
+
+
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a868294036aeec9333cecabbef0551bc9}\label{classgko_1_1matrix_1_1Dense_a868294036aeec9333cecabbef0551bc9}} 
 \index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!inverse\_permute@{inverse\_permute}}
 \index{inverse\_permute@{inverse\_permute}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
-\doxysubsubsection{\texorpdfstring{inverse\_permute()}{inverse\_permute()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\doxysubsubsection{\texorpdfstring{inverse\_permute()}{inverse\_permute()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
 std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::inverse\+\_\+permute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{int32}} $>$ $\ast$}]{permutation\+\_\+indices }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
@@ -926,10 +1085,31 @@ a pointer to the new permuted object
 
 Reimplemented from \mbox{\hyperlink{classgko_1_1Permutable_a47bba8cf9e8d352289728bbb69b4f35f}{gko\+::\+Permutable$<$ int32 $>$}}.
 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a6db286ddd62319f1957b5c7c1330cbfe}\label{classgko_1_1matrix_1_1Dense_a6db286ddd62319f1957b5c7c1330cbfe}} 
+\index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!inverse\_permute@{inverse\_permute}}
+\index{inverse\_permute@{inverse\_permute}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{inverse\_permute()}{inverse\_permute()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::inverse\+\_\+permute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{int32}} $>$ $\ast$}]{permutation\+\_\+indices,  }\item[{\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ Value\+Type $>$ $\ast$}]{output }\end{DoxyParamCaption}) const}
+
+
+
+Writes the inverse symmetrically permuted matrix into the given output matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em permutation\+\_\+indices} & The array containing permutation indices. It must have {\ttfamily this-\/$>$\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\+\_\+size()}}\mbox{[}0\mbox{]}} elements. \\
+\hline
+{\em output} & The output matrix. It must have the dimensions {\ttfamily this-\/$>$\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\+\_\+size()}}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+Dense\+::inverse\+\_\+permute(const Array$<$int32$>$$\ast$) 
+\end{DoxySeeAlso}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_abf8febe4884856aada94e697134fed5b}\label{classgko_1_1matrix_1_1Dense_abf8febe4884856aada94e697134fed5b}} 
 \index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!inverse\_permute@{inverse\_permute}}
 \index{inverse\_permute@{inverse\_permute}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
-\doxysubsubsection{\texorpdfstring{inverse\_permute()}{inverse\_permute()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\doxysubsubsection{\texorpdfstring{inverse\_permute()}{inverse\_permute()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
 std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::inverse\+\_\+permute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}} $>$ $\ast$}]{permutation\+\_\+indices }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
@@ -951,10 +1131,21 @@ a pointer to the new permuted object
 
 Reimplemented from \mbox{\hyperlink{classgko_1_1Permutable_a47bba8cf9e8d352289728bbb69b4f35f}{gko\+::\+Permutable$<$ int64 $>$}}.
 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_acc53e6d073e1cd58cd2754fb42799ce9}\label{classgko_1_1matrix_1_1Dense_acc53e6d073e1cd58cd2754fb42799ce9}} 
+\index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!inverse\_permute@{inverse\_permute}}
+\index{inverse\_permute@{inverse\_permute}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{inverse\_permute()}{inverse\_permute()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::inverse\+\_\+permute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}} $>$ $\ast$}]{permutation\+\_\+indices,  }\item[{\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ Value\+Type $>$ $\ast$}]{output }\end{DoxyParamCaption}) const}
+
+
+
+
+
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a9eef661abb7d097ca0dcb407fbbac2ab}\label{classgko_1_1matrix_1_1Dense_a9eef661abb7d097ca0dcb407fbbac2ab}} 
 \index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!inverse\_row\_permute@{inverse\_row\_permute}}
 \index{inverse\_row\_permute@{inverse\_row\_permute}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
-\doxysubsubsection{\texorpdfstring{inverse\_row\_permute()}{inverse\_row\_permute()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\doxysubsubsection{\texorpdfstring{inverse\_row\_permute()}{inverse\_row\_permute()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
 std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::inverse\+\_\+row\+\_\+permute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{int32}} $>$ $\ast$}]{permutation\+\_\+indices }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
@@ -976,10 +1167,31 @@ a pointer to the new inverse permuted object
 
 Implements \mbox{\hyperlink{classgko_1_1Permutable_a639aaa94116c70bb428d9e66ec87b1c6}{gko\+::\+Permutable$<$ int32 $>$}}.
 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a758f304c44874cefefad543888dc690b}\label{classgko_1_1matrix_1_1Dense_a758f304c44874cefefad543888dc690b}} 
+\index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!inverse\_row\_permute@{inverse\_row\_permute}}
+\index{inverse\_row\_permute@{inverse\_row\_permute}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{inverse\_row\_permute()}{inverse\_row\_permute()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::inverse\+\_\+row\+\_\+permute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{int32}} $>$ $\ast$}]{permutation\+\_\+indices,  }\item[{\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ Value\+Type $>$ $\ast$}]{output }\end{DoxyParamCaption}) const}
+
+
+
+Writes the inverse row-\/permuted matrix into the given output matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em permutation\+\_\+indices} & The array containing permutation indices. It must have {\ttfamily this-\/$>$\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\+\_\+size()}}\mbox{[}0\mbox{]}} elements. \\
+\hline
+{\em output} & The output matrix. It must have the dimensions {\ttfamily this-\/$>$\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\+\_\+size()}}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+Dense\+::inverse\+\_\+row\+\_\+permute(const Array$<$int32$>$$\ast$) 
+\end{DoxySeeAlso}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a231711c105ba46fd48be32f997a811aa}\label{classgko_1_1matrix_1_1Dense_a231711c105ba46fd48be32f997a811aa}} 
 \index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!inverse\_row\_permute@{inverse\_row\_permute}}
 \index{inverse\_row\_permute@{inverse\_row\_permute}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
-\doxysubsubsection{\texorpdfstring{inverse\_row\_permute()}{inverse\_row\_permute()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\doxysubsubsection{\texorpdfstring{inverse\_row\_permute()}{inverse\_row\_permute()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
 std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::inverse\+\_\+row\+\_\+permute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}} $>$ $\ast$}]{permutation\+\_\+indices }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
@@ -1001,6 +1213,17 @@ a pointer to the new inverse permuted object
 
 Implements \mbox{\hyperlink{classgko_1_1Permutable_a639aaa94116c70bb428d9e66ec87b1c6}{gko\+::\+Permutable$<$ int64 $>$}}.
 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a28f46df32f014a04070947c10f39a6f4}\label{classgko_1_1matrix_1_1Dense_a28f46df32f014a04070947c10f39a6f4}} 
+\index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!inverse\_row\_permute@{inverse\_row\_permute}}
+\index{inverse\_row\_permute@{inverse\_row\_permute}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{inverse\_row\_permute()}{inverse\_row\_permute()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::inverse\+\_\+row\+\_\+permute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}} $>$ $\ast$}]{permutation\+\_\+indices,  }\item[{\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ Value\+Type $>$ $\ast$}]{output }\end{DoxyParamCaption}) const}
+
+
+
+
+
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a01b9a6f6f3b72f1d2b6044afb0f78791}\label{classgko_1_1matrix_1_1Dense_a01b9a6f6f3b72f1d2b6044afb0f78791}} 
 \index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!make\_complex@{make\_complex}}
 \index{make\_complex@{make\_complex}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
@@ -1012,12 +1235,12 @@ std\+::unique\+\_\+ptr$<$complex\+\_\+type$>$ \mbox{\hyperlink{classgko_1_1matri
 
 Creates a complex copy of the original matrix. 
 
-If the original matrix was real, the imaginary part of the result will be zero. \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a383c1a6ab4fbbaaa1b782e3e4b9f0bbb}\label{classgko_1_1matrix_1_1Dense_a383c1a6ab4fbbaaa1b782e3e4b9f0bbb}} 
+If the original matrix was real, the imaginary part of the result will be zero. \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_ac39e8e17c7e102ad491328959ca8f8d3}\label{classgko_1_1matrix_1_1Dense_ac39e8e17c7e102ad491328959ca8f8d3}} 
 \index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!make\_complex@{make\_complex}}
 \index{make\_complex@{make\_complex}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
 \doxysubsubsection{\texorpdfstring{make\_complex()}{make\_complex()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
-void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::make\+\_\+complex (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ \mbox{\hyperlink{namespacegko_acc281c8ff5bfa4fd6f25afcce466b1af}{to\+\_\+complex}}$<$ Value\+Type $>$$>$ $\ast$}]{result }\end{DoxyParamCaption}) const}
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::make\+\_\+complex (\begin{DoxyParamCaption}\item[{complex\+\_\+type $\ast$}]{result }\end{DoxyParamCaption}) const}
 
 
 
@@ -1026,7 +1249,7 @@ Writes a complex copy of the original matrix to a given complex matrix.
 If the original matrix was real, the imaginary part of the result will be zero. \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_aa67d4586ffe777b7d757db5fd9c40a04}\label{classgko_1_1matrix_1_1Dense_aa67d4586ffe777b7d757db5fd9c40a04}} 
 \index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!permute@{permute}}
 \index{permute@{permute}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
-\doxysubsubsection{\texorpdfstring{permute()}{permute()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\doxysubsubsection{\texorpdfstring{permute()}{permute()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
 std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::permute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{int32}} $>$ $\ast$}]{permutation\+\_\+indices }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
@@ -1048,10 +1271,31 @@ a pointer to the new permuted object
 
 Reimplemented from \mbox{\hyperlink{classgko_1_1Permutable_a55e937e01ef3c198c027d7d62a26fe07}{gko\+::\+Permutable$<$ int32 $>$}}.
 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a184f83a00c1200afe448a4d28d404245}\label{classgko_1_1matrix_1_1Dense_a184f83a00c1200afe448a4d28d404245}} 
+\index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!permute@{permute}}
+\index{permute@{permute}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{permute()}{permute()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::permute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{int32}} $>$ $\ast$}]{permutation\+\_\+indices,  }\item[{\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ Value\+Type $>$ $\ast$}]{output }\end{DoxyParamCaption}) const}
+
+
+
+Writes the symmetrically permuted matrix into the given output matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em permutation\+\_\+indices} & The array containing permutation indices. It must have {\ttfamily this-\/$>$\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\+\_\+size()}}\mbox{[}0\mbox{]}} elements. \\
+\hline
+{\em output} & The output matrix. It must have the dimensions {\ttfamily this-\/$>$\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\+\_\+size()}}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+Dense\+::permute(const Array$<$int32$>$$\ast$) 
+\end{DoxySeeAlso}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_afc21476430471d324334a568c0459b79}\label{classgko_1_1matrix_1_1Dense_afc21476430471d324334a568c0459b79}} 
 \index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!permute@{permute}}
 \index{permute@{permute}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
-\doxysubsubsection{\texorpdfstring{permute()}{permute()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\doxysubsubsection{\texorpdfstring{permute()}{permute()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
 std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::permute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}} $>$ $\ast$}]{permutation\+\_\+indices }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
@@ -1072,6 +1316,17 @@ a pointer to the new permuted object
 
 
 Reimplemented from \mbox{\hyperlink{classgko_1_1Permutable_a55e937e01ef3c198c027d7d62a26fe07}{gko\+::\+Permutable$<$ int64 $>$}}.
+
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a88841f1640f67ea18009a0dca35f36b3}\label{classgko_1_1matrix_1_1Dense_a88841f1640f67ea18009a0dca35f36b3}} 
+\index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!permute@{permute}}
+\index{permute@{permute}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{permute()}{permute()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::permute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}} $>$ $\ast$}]{permutation\+\_\+indices,  }\item[{\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ Value\+Type $>$ $\ast$}]{output }\end{DoxyParamCaption}) const}
+
+
+
+
 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a5eb042462d750c84908fb5a3fac62dd5}\label{classgko_1_1matrix_1_1Dense_a5eb042462d750c84908fb5a3fac62dd5}} 
 \index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!row\_gather@{row\_gather}}
@@ -1150,7 +1405,7 @@ Copies the given rows from this matrix into {\ttfamily row\+\_\+gathered}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a685cf7dd460327568c1a65a676395a84}\label{classgko_1_1matrix_1_1Dense_a685cf7dd460327568c1a65a676395a84}} 
 \index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!row\_permute@{row\_permute}}
 \index{row\_permute@{row\_permute}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
-\doxysubsubsection{\texorpdfstring{row\_permute()}{row\_permute()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\doxysubsubsection{\texorpdfstring{row\_permute()}{row\_permute()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
 std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::row\+\_\+permute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{int32}} $>$ $\ast$}]{permutation\+\_\+indices }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
@@ -1172,10 +1427,31 @@ a pointer to the new permuted object
 
 Implements \mbox{\hyperlink{classgko_1_1Permutable_ac3ac436c5621afd4cd1a36902f5c6c9b}{gko\+::\+Permutable$<$ int32 $>$}}.
 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a20b27b6020d7d0fcabc081a55b04aff0}\label{classgko_1_1matrix_1_1Dense_a20b27b6020d7d0fcabc081a55b04aff0}} 
+\index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!row\_permute@{row\_permute}}
+\index{row\_permute@{row\_permute}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{row\_permute()}{row\_permute()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::row\+\_\+permute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{int32}} $>$ $\ast$}]{permutation\+\_\+indices,  }\item[{\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ Value\+Type $>$ $\ast$}]{output }\end{DoxyParamCaption}) const}
+
+
+
+Writes the row-\/permuted matrix into the given output matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em permutation\+\_\+indices} & The array containing permutation indices. It must have {\ttfamily this-\/$>$\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\+\_\+size()}}\mbox{[}0\mbox{]}} elements. \\
+\hline
+{\em output} & The output matrix. It must have the dimensions {\ttfamily this-\/$>$\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\+\_\+size()}}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See also}
+Dense\+::row\+\_\+permute(const Array$<$int32$>$$\ast$) 
+\end{DoxySeeAlso}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_aeee1695589ffafcdff32950dde5eab52}\label{classgko_1_1matrix_1_1Dense_aeee1695589ffafcdff32950dde5eab52}} 
 \index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!row\_permute@{row\_permute}}
 \index{row\_permute@{row\_permute}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
-\doxysubsubsection{\texorpdfstring{row\_permute()}{row\_permute()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\doxysubsubsection{\texorpdfstring{row\_permute()}{row\_permute()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
 std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::row\+\_\+permute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}} $>$ $\ast$}]{permutation\+\_\+indices }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
@@ -1196,6 +1472,17 @@ a pointer to the new permuted object
 
 
 Implements \mbox{\hyperlink{classgko_1_1Permutable_ac3ac436c5621afd4cd1a36902f5c6c9b}{gko\+::\+Permutable$<$ int64 $>$}}.
+
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a949f4cf21f602d92bccf746fa01e78d2}\label{classgko_1_1matrix_1_1Dense_a949f4cf21f602d92bccf746fa01e78d2}} 
+\index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!row\_permute@{row\_permute}}
+\index{row\_permute@{row\_permute}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{row\_permute()}{row\_permute()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::row\+\_\+permute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}} $>$ $\ast$}]{permutation\+\_\+indices,  }\item[{\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ Value\+Type $>$ $\ast$}]{output }\end{DoxyParamCaption}) const}
+
+
+
+
 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a35cb8dfff52daf3aa8995597d26981ec}\label{classgko_1_1matrix_1_1Dense_a35cb8dfff52daf3aa8995597d26981ec}} 
 \index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!scale@{scale}}
@@ -1220,7 +1507,7 @@ References gko\+::\+Polymorphic\+Object\+::get\+\_\+executor(), and gko\+::make\
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a64ea8e876f5390a535a2ef486bd5ab9a}\label{classgko_1_1matrix_1_1Dense_a64ea8e876f5390a535a2ef486bd5ab9a}} 
 \index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!transpose@{transpose}}
 \index{transpose@{transpose}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
-\doxysubsubsection{\texorpdfstring{transpose()}{transpose()}}
+\doxysubsubsection{\texorpdfstring{transpose()}{transpose()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
 std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
@@ -1235,6 +1522,22 @@ a pointer to the new transposed object
 
 Implements \mbox{\hyperlink{classgko_1_1Transposable_a5c6b778b71b47d53e0bda6ccf894d318}{gko\+::\+Transposable}}.
 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a49e62f5eb87fe4718ce028ece951647d}\label{classgko_1_1matrix_1_1Dense_a49e62f5eb87fe4718ce028ece951647d}} 
+\index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!transpose@{transpose}}
+\index{transpose@{transpose}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{transpose()}{transpose()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::transpose (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ Value\+Type $>$ $\ast$}]{output }\end{DoxyParamCaption}) const}
+
+
+
+Writes the transposed matrix into the given output matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em output} & The output matrix. It must have the dimensions {\ttfamily \mbox{\hyperlink{namespacegko_a9b6a9d7018703d6d1f2140054e2afe4a}{gko\+::transpose}}(this-\/$>$\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\+\_\+size()}})} \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
