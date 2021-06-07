@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['running_20the_20benchmarks_1843',['Running the benchmarks',['../benchmarking_ginkgo.html',1,'']]]
+  ['running_20the_20benchmarks_1844',['Running the benchmarks',['../benchmarking_ginkgo.html',1,'']]]
 ];
