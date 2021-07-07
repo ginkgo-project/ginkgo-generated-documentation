@@ -96,6 +96,33 @@ The following graph shows the connections between example programs and how they 
 \mbox{\hyperlink{ginkgo_ranges}{The ginkgo-\/ranges program}} &Using the ranges concept to factorize a matrix with the LU factorization. 
 
 \\\cline{1-2}
+\mbox{\hyperlink{mixed_spmv}{The mixed-\/spmv program}} &Shows the Ginkgo mixed precision spmv functionality. 
+
+\\\cline{1-2}
+\mbox{\hyperlink{mixed_precision_ir}{The mixed-\/precision-\/ir program}} &Manual implementation of a Mixed Precision Iterative Refinement (M\+P\+IR) solver. 
+
+\\\cline{1-2}
+\mbox{\hyperlink{adaptiveprecision_blockjacobi}{The adaptiveprecision-\/blockjacobi program}} &Shows how to use the adaptive precision block-\/\+Jacobi preconditioner. 
+
+\\\cline{1-2}
+\mbox{\hyperlink{cb_gmres}{The cb-\/gmres program}} &Using the Ginkgo C\+B-\/\+G\+M\+R\+ES solver (Compressed Basis G\+M\+R\+ES). 
+
+\\\cline{1-2}
+\mbox{\hyperlink{heat_equation}{The heat-\/equation program}} &Solving a 2D heat equation and showing matrix assembly, vector initalization and solver setup in a more complex setting with output visualization. 
+
+\\\cline{1-2}
+\mbox{\hyperlink{iterative_refinement}{The iterative-\/refinement program}} &Using a low accuracy CG solver as an inner solver to an iterative refinement (IR) method which solves a linear system. 
+
+\\\cline{1-2}
+\mbox{\hyperlink{ir_ilu_preconditioned_solver}{The ir-\/ilu-\/preconditioned-\/solver program}} &Combining iterative refinement with the adaptive precision block-\/\+Jacobi preconditioner to approximate triangular systems occurring in I\+LU preconditioning. 
+
+\\\cline{1-2}
+\mbox{\hyperlink{par_ilu_convergence}{The par-\/ilu-\/convergence program}} &Convergence analysis at the examples of parallel incomplete factorization solver. 
+
+\\\cline{1-2}
+\mbox{\hyperlink{preconditioner_export}{The preconditioner-\/export program}} &Explicit generation and storage of preconditioners for given matrices. 
+
+\\\cline{1-2}
 \end{longtabu}
 
 
@@ -109,22 +136,25 @@ The following graph shows the connections between example programs and how they 
 \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
 \hline
-Solving a simple linear system with choice of executors.  &\mbox{\hyperlink{simple_solver}{The simple-\/solver program}}  
+Solving a simple linear system with choice of executors  &\mbox{\hyperlink{simple_solver}{The simple-\/solver program}}  
 
 \\\cline{1-2}
-Debug the performance of a solver using loggers.  &\mbox{\hyperlink{performance_debugging}{The performance-\/debugging program}}  
+Debug the performance of a solver or preconditioner  &\mbox{\hyperlink{performance_debugging}{The performance-\/debugging program}} \mbox{\hyperlink{preconditioner_export}{The preconditioner-\/export program}}  
 
 \\\cline{1-2}
 Using the C\+U\+DA executor  &\mbox{\hyperlink{minimal_cuda_solver}{The minimal-\/cuda-\/solver program}}  
 
 \\\cline{1-2}
-Using preconditioners  &\mbox{\hyperlink{preconditioned_solver}{The preconditioned-\/solver program}}, \mbox{\hyperlink{ilu_preconditioned_solver}{The ilu-\/preconditioned-\/solver program}}  
+Using preconditioners  &\mbox{\hyperlink{preconditioned_solver}{The preconditioned-\/solver program}}, \mbox{\hyperlink{ilu_preconditioned_solver}{The ilu-\/preconditioned-\/solver program}}, \mbox{\hyperlink{ir_ilu_preconditioned_solver}{The ir-\/ilu-\/preconditioned-\/solver program}}, \mbox{\hyperlink{adaptiveprecision_blockjacobi}{The adaptiveprecision-\/blockjacobi program}}, \mbox{\hyperlink{par_ilu_convergence}{The par-\/ilu-\/convergence program}}, \mbox{\hyperlink{preconditioner_export}{The preconditioner-\/export program}}  
+
+\\\cline{1-2}
+Iterative refinement  &\mbox{\hyperlink{iterative_refinement}{The iterative-\/refinement program}}, \mbox{\hyperlink{mixed_precision_ir}{The mixed-\/precision-\/ir program}}, \mbox{\hyperlink{ir_ilu_preconditioned_solver}{The ir-\/ilu-\/preconditioned-\/solver program}}  
 
 \\\cline{1-2}
 Solving a physically relevant problem  &\mbox{\hyperlink{poisson_solver}{The poisson-\/solver program}}, \mbox{\hyperlink{three_pt_stencil_solver}{The three-\/pt-\/stencil-\/solver program}}, \mbox{\hyperlink{nine_pt_stencil_solver}{The nine-\/pt-\/stencil-\/solver program}}, \mbox{\hyperlink{custom_matrix_format}{The custom-\/matrix-\/format program}}  
 
 \\\cline{1-2}
-Reading in a matrix and right hand side from a file.  &\mbox{\hyperlink{simple_solver}{The simple-\/solver program}}, \mbox{\hyperlink{minimal_cuda_solver}{The minimal-\/cuda-\/solver program}}, \mbox{\hyperlink{preconditioned_solver}{The preconditioned-\/solver program}}, \mbox{\hyperlink{ilu_preconditioned_solver}{The ilu-\/preconditioned-\/solver program}}, \mbox{\hyperlink{inverse_iteration}{The inverse-\/iteration program}}, \mbox{\hyperlink{simple_solver_logging}{The simple-\/solver-\/logging program}}, \mbox{\hyperlink{papi_logging}{The papi-\/logging program}}, \mbox{\hyperlink{custom_stopping_criterion}{The custom-\/stopping-\/criterion program}}, \mbox{\hyperlink{custom_logger}{The custom-\/logger program}}  
+Reading in a matrix and right hand side from a file  &\mbox{\hyperlink{simple_solver}{The simple-\/solver program}}, \mbox{\hyperlink{minimal_cuda_solver}{The minimal-\/cuda-\/solver program}}, \mbox{\hyperlink{preconditioned_solver}{The preconditioned-\/solver program}}, \mbox{\hyperlink{ilu_preconditioned_solver}{The ilu-\/preconditioned-\/solver program}}, \mbox{\hyperlink{inverse_iteration}{The inverse-\/iteration program}}, \mbox{\hyperlink{simple_solver_logging}{The simple-\/solver-\/logging program}}, \mbox{\hyperlink{papi_logging}{The papi-\/logging program}}, \mbox{\hyperlink{custom_stopping_criterion}{The custom-\/stopping-\/criterion program}}, \mbox{\hyperlink{custom_logger}{The custom-\/logger program}}  
 
 \\\cline{1-2}
 \end{longtabu}
@@ -135,7 +165,7 @@ Reading in a matrix and right hand side from a file.  &\mbox{\hyperlink{simple_s
 \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
 \hline
-Using Ginkgo with external libraries.  &\mbox{\hyperlink{external_lib_interfacing}{The external-\/lib-\/interfacing program}}  
+Using Ginkgo with external libraries  &\mbox{\hyperlink{external_lib_interfacing}{The external-\/lib-\/interfacing program}}  
 
 \\\cline{1-2}
 Customizing Ginkgo  &\mbox{\hyperlink{custom_logger}{The custom-\/logger program}}, \mbox{\hyperlink{custom_stopping_criterion}{The custom-\/stopping-\/criterion program}}, \mbox{\hyperlink{custom_matrix_format}{The custom-\/matrix-\/format program}}  
@@ -144,16 +174,19 @@ Customizing Ginkgo  &\mbox{\hyperlink{custom_logger}{The custom-\/logger program
 Writing your own matrix format  &\mbox{\hyperlink{custom_matrix_format}{The custom-\/matrix-\/format program}}  
 
 \\\cline{1-2}
-Using Ginkgo to construct more complex linear algebra routines.  &\mbox{\hyperlink{inverse_iteration}{The inverse-\/iteration program}}  
+Using Ginkgo to construct more complex linear algebra routines  &\mbox{\hyperlink{inverse_iteration}{The inverse-\/iteration program}}  
 
 \\\cline{1-2}
-Logging within Ginkgo.  &\mbox{\hyperlink{simple_solver_logging}{The simple-\/solver-\/logging program}}, \mbox{\hyperlink{papi_logging}{The papi-\/logging program}}, \mbox{\hyperlink{custom_logger}{The custom-\/logger program}}  
+Logging within Ginkgo  &\mbox{\hyperlink{simple_solver_logging}{The simple-\/solver-\/logging program}}, \mbox{\hyperlink{papi_logging}{The papi-\/logging program}}, \mbox{\hyperlink{performance_debugging}{The performance-\/debugging program}} \mbox{\hyperlink{custom_logger}{The custom-\/logger program}}  
 
 \\\cline{1-2}
-Constructing your own stopping criterion.  &\mbox{\hyperlink{custom_stopping_criterion}{The custom-\/stopping-\/criterion program}}  
+Constructing your own stopping criterion  &\mbox{\hyperlink{custom_stopping_criterion}{The custom-\/stopping-\/criterion program}}  
 
 \\\cline{1-2}
-Using ranges in Ginkgo.  &\mbox{\hyperlink{ginkgo_ranges}{The ginkgo-\/ranges program}}   \\\cline{1-2}
+Using ranges in Ginkgo  &\mbox{\hyperlink{ginkgo_ranges}{The ginkgo-\/ranges program}}  
+
+\\\cline{1-2}
+Mixed precision  &\mbox{\hyperlink{mixed_spmv}{The mixed-\/spmv program}}, \mbox{\hyperlink{mixed_precision_ir}{The mixed-\/precision-\/ir program}}, \mbox{\hyperlink{adaptiveprecision_blockjacobi}{The adaptiveprecision-\/blockjacobi program}}   \\\cline{1-2}
 \end{longtabu}
 
 \end{DoxyEnumerate}
