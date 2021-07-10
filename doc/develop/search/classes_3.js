@@ -1,13 +1,13 @@
 var searchData=
 [
-  ['default_5fconverter_1025',['default_converter',['../structgko_1_1default__converter.html',1,'gko']]],
-  ['dense_1026',['Dense',['../classgko_1_1matrix_1_1Dense.html',1,'gko::matrix']]],
-  ['diagonal_1027',['Diagonal',['../classgko_1_1matrix_1_1Diagonal.html',1,'gko::matrix']]],
-  ['diagonalextractable_1028',['DiagonalExtractable',['../classgko_1_1DiagonalExtractable.html',1,'gko']]],
-  ['dim_1029',['dim',['../structgko_1_1dim.html',1,'gko']]],
-  ['dim_3c_201u_2c_20dimensiontype_20_3e_1030',['dim&lt; 1u, DimensionType &gt;',['../structgko_1_1dim_3_011u_00_01DimensionType_01_4.html',1,'gko']]],
-  ['dim_3c_202_20_3e_1031',['dim&lt; 2 &gt;',['../structgko_1_1dim.html',1,'gko']]],
-  ['dimensionmismatch_1032',['DimensionMismatch',['../classgko_1_1DimensionMismatch.html',1,'gko']]],
-  ['div_1033',['div',['../structgko_1_1accessor_1_1div.html',1,'gko::accessor']]],
-  ['dpcppexecutor_1034',['DpcppExecutor',['../classgko_1_1DpcppExecutor.html',1,'gko']]]
+  ['default_5fconverter_1026',['default_converter',['../structgko_1_1default__converter.html',1,'gko']]],
+  ['dense_1027',['Dense',['../classgko_1_1matrix_1_1Dense.html',1,'gko::matrix']]],
+  ['diagonal_1028',['Diagonal',['../classgko_1_1matrix_1_1Diagonal.html',1,'gko::matrix']]],
+  ['diagonalextractable_1029',['DiagonalExtractable',['../classgko_1_1DiagonalExtractable.html',1,'gko']]],
+  ['dim_1030',['dim',['../structgko_1_1dim.html',1,'gko']]],
+  ['dim_3c_201u_2c_20dimensiontype_20_3e_1031',['dim&lt; 1u, DimensionType &gt;',['../structgko_1_1dim_3_011u_00_01DimensionType_01_4.html',1,'gko']]],
+  ['dim_3c_202_20_3e_1032',['dim&lt; 2 &gt;',['../structgko_1_1dim.html',1,'gko']]],
+  ['dimensionmismatch_1033',['DimensionMismatch',['../classgko_1_1DimensionMismatch.html',1,'gko']]],
+  ['div_1034',['div',['../structgko_1_1accessor_1_1div.html',1,'gko::accessor']]],
+  ['dpcppexecutor_1035',['DpcppExecutor',['../classgko_1_1DpcppExecutor.html',1,'gko']]]
 ];
