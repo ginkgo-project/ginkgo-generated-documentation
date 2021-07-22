@@ -9,21 +9,97 @@ The Synthesizer namespace.
 \begin{DoxyCompactItemize}
 \item 
 struct \mbox{\hyperlink{structgko_1_1syn_1_1range}{range}}
-\item 
+\begin{DoxyCompactList}\small\item\em range records start, end, step in template \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structgko_1_1syn_1_1type__list}{type\+\_\+list}}
-\item 
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{structgko_1_1syn_1_1type__list}{type\+\_\+list}} records several types in template \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structgko_1_1syn_1_1value__list}{value\+\_\+list}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{structgko_1_1syn_1_1value__list}{value\+\_\+list}} records several values with the same type in template. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{namespacegko_1_1syn_a2a428ac3d9404c3216521b1378f0dffd}\label{namespacegko_1_1syn_a2a428ac3d9404c3216521b1378f0dffd}} 
-{\footnotesize template$<$typename List1 , typename List2 $>$ }\\using {\bfseries concatenate} = typename detail\+::concatenate\+\_\+impl$<$ List1, List2 $>$\+::type
+{\footnotesize template$<$typename List1 , typename List2 $>$ }\\using \mbox{\hyperlink{namespacegko_1_1syn_a2a428ac3d9404c3216521b1378f0dffd}{concatenate}} = typename detail\+::concatenate\+\_\+impl$<$ List1, List2 $>$\+::type
+\begin{DoxyCompactList}\small\item\em concatenate combines two \mbox{\hyperlink{structgko_1_1syn_1_1value__list}{value\+\_\+list}} into one \mbox{\hyperlink{structgko_1_1syn_1_1value__list}{value\+\_\+list}}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\using \mbox{\hyperlink{namespacegko_1_1syn_aee837cdba7817c4f016cbb2a837053b8}{as\+\_\+list}} = typename detail\+::as\+\_\+list\+\_\+impl$<$ T $>$\+::type
+\begin{DoxyCompactList}\small\item\em as\+\_\+list$<$\+T$>$ gives the alias type of as\+\_\+list\+\_\+impl$<$\+T$>$\+::type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{namespacegko_1_1syn_aee837cdba7817c4f016cbb2a837053b8}\label{namespacegko_1_1syn_aee837cdba7817c4f016cbb2a837053b8}} 
-{\footnotesize template$<$typename T $>$ }\\using {\bfseries as\+\_\+list} = typename detail\+::as\+\_\+list\+\_\+impl$<$ T $>$\+::type
-\end{DoxyCompactItemize}
+{\footnotesize template$<$typename T , T... Value$>$ }\\constexpr \mbox{\hyperlink{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68af1f713c9e000f5d3f280adbd124df4f5}{std\+::array}}$<$ T, sizeof...(Value)$>$ \mbox{\hyperlink{namespacegko_1_1syn_ac5773ae591e9e433d7eaf3e29c9da40a}{as\+\_\+array}} (\mbox{\hyperlink{structgko_1_1syn_1_1value__list}{value\+\_\+list}}$<$ T, Value... $>$ vl)
+\begin{DoxyCompactList}\small\item\em as\+\_\+array$<$\+T$>$ returns the array from \mbox{\hyperlink{structgko_1_1syn_1_1value__list}{value\+\_\+list}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 The Synthesizer namespace. 
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{namespacegko_1_1syn_aee837cdba7817c4f016cbb2a837053b8}\label{namespacegko_1_1syn_aee837cdba7817c4f016cbb2a837053b8}} 
+\index{gko::syn@{gko::syn}!as\_list@{as\_list}}
+\index{as\_list@{as\_list}!gko::syn@{gko::syn}}
+\doxysubsubsection{\texorpdfstring{as\_list}{as\_list}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+using \mbox{\hyperlink{namespacegko_1_1syn_aee837cdba7817c4f016cbb2a837053b8}{gko\+::syn\+::as\+\_\+list}} = typedef typename detail\+::as\+\_\+list\+\_\+impl$<$T$>$\+::type}
+
+
+
+as\+\_\+list$<$\+T$>$ gives the alias type of as\+\_\+list\+\_\+impl$<$\+T$>$\+::type. 
+
+It gives a list (itself) if input is already a list, or generates list type from range input.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & list or range \\
+\hline
+\end{DoxyTemplParams}
+\mbox{\Hypertarget{namespacegko_1_1syn_a2a428ac3d9404c3216521b1378f0dffd}\label{namespacegko_1_1syn_a2a428ac3d9404c3216521b1378f0dffd}} 
+\index{gko::syn@{gko::syn}!concatenate@{concatenate}}
+\index{concatenate@{concatenate}!gko::syn@{gko::syn}}
+\doxysubsubsection{\texorpdfstring{concatenate}{concatenate}}
+{\footnotesize\ttfamily template$<$typename List1 , typename List2 $>$ \\
+using \mbox{\hyperlink{namespacegko_1_1syn_a2a428ac3d9404c3216521b1378f0dffd}{gko\+::syn\+::concatenate}} = typedef typename detail\+::concatenate\+\_\+impl$<$List1, List2$>$\+::type}
+
+
+
+concatenate combines two \mbox{\hyperlink{structgko_1_1syn_1_1value__list}{value\+\_\+list}} into one \mbox{\hyperlink{structgko_1_1syn_1_1value__list}{value\+\_\+list}}. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em List1} & the first list \\
+\hline
+{\em List2} & the second list \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacegko_1_1syn_ac5773ae591e9e433d7eaf3e29c9da40a}\label{namespacegko_1_1syn_ac5773ae591e9e433d7eaf3e29c9da40a}} 
+\index{gko::syn@{gko::syn}!as\_array@{as\_array}}
+\index{as\_array@{as\_array}!gko::syn@{gko::syn}}
+\doxysubsubsection{\texorpdfstring{as\_array()}{as\_array()}}
+{\footnotesize\ttfamily template$<$typename T , T... Value$>$ \\
+constexpr \mbox{\hyperlink{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68af1f713c9e000f5d3f280adbd124df4f5}{std\+::array}}$<$T, sizeof...(Value)$>$ gko\+::syn\+::as\+\_\+array (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgko_1_1syn_1_1value__list}{value\+\_\+list}}$<$ T, Value... $>$}]{vl }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+as\+\_\+array$<$\+T$>$ returns the array from \mbox{\hyperlink{structgko_1_1syn_1_1value__list}{value\+\_\+list}}. 
+
+It will be helpful if using for in runtime on the array.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & the type of \mbox{\hyperlink{structgko_1_1syn_1_1value__list}{value\+\_\+list}} \\
+\hline
+{\em Value} & the values of \mbox{\hyperlink{structgko_1_1syn_1_1value__list}{value\+\_\+list}}\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em \mbox{\hyperlink{structgko_1_1syn_1_1value__list}{value\+\_\+list}}} & the input \mbox{\hyperlink{structgko_1_1syn_1_1value__list}{value\+\_\+list}}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68af1f713c9e000f5d3f280adbd124df4f5}{std\+::array}} the \mbox{\hyperlink{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68af1f713c9e000f5d3f280adbd124df4f5}{std\+::array}} contains the values of \mbox{\hyperlink{structgko_1_1syn_1_1value__list}{value\+\_\+list}} 
+\end{DoxyReturn}
+
+
+References gko\+::array.
+
