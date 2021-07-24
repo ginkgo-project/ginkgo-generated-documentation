@@ -259,8 +259,12 @@ Value\+Type \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a34ba8a7f392c65c481a93d
 \begin{DoxyCompactList}\small\item\em Returns a single element of the matrix. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a35cb8dfff52daf3aa8995597d26981ec}{scale}} (const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$alpha)
 \begin{DoxyCompactList}\small\item\em Scales the matrix with a scalar (aka\+: B\+L\+AS scal). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a714cd2fdfe58a7d41a213a937c68f70a}{inv\+\_\+scale}} (const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$alpha)
+\begin{DoxyCompactList}\small\item\em Scales the matrix with the inverse of a scalar. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_ae6c4c15972b76bf7d8f6d50a96abda8d}{add\+\_\+scaled}} (const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$alpha, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$b)
 \begin{DoxyCompactList}\small\item\em Adds {\ttfamily b} scaled by {\ttfamily alpha} to the matrix (aka\+: B\+L\+AS axpy). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_afb59901a63d4f30536e98e08ff982cd7}{sub\+\_\+scaled}} (const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$alpha, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$b)
+\begin{DoxyCompactList}\small\item\em Subtracts {\ttfamily b} scaled by {\ttfamily alpha} fron the matrix (aka\+: B\+L\+AS axpy). \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_acb568ff44addb095b82bbd2fbe704761}{compute\+\_\+dot}} (const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$b, \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$result) const
 \begin{DoxyCompactList}\small\item\em Computes the column-\/wise dot product of this matrix and {\ttfamily b}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a1cb6e3ec8c01320d4a708d651a3a5169}{compute\+\_\+conj\+\_\+dot}} (const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$b, \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$result) const
@@ -978,6 +982,26 @@ References gko\+::\+Array$<$ Value\+Type $>$\+::get\+\_\+data().
 
 Referenced by gko\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::create\+\_\+real\+\_\+view().
 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a714cd2fdfe58a7d41a213a937c68f70a}\label{classgko_1_1matrix_1_1Dense_a714cd2fdfe58a7d41a213a937c68f70a}} 
+\index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!inv\_scale@{inv\_scale}}
+\index{inv\_scale@{inv\_scale}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{inv\_scale()}{inv\_scale()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::inv\+\_\+scale (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{alpha }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Scales the matrix with the inverse of a scalar. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em alpha} & If alpha is 1x1 \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} matrix, the entire matrix is scaled by 1 / alpha. If it is a \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} row vector of values, then i-\/th column of the matrix is scaled with the inverse of the i-\/th element of alpha (the number of columns of alpha has to match the number of columns of the matrix). \\
+\hline
+\end{DoxyParams}
+
+
+References gko\+::\+Polymorphic\+Object\+::get\+\_\+executor(), and gko\+::make\+\_\+temporary\+\_\+clone().
+
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_af4421d30735edac95994b0c749f90be5}\label{classgko_1_1matrix_1_1Dense_af4421d30735edac95994b0c749f90be5}} 
 \index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!inverse\_column\_permute@{inverse\_column\_permute}}
 \index{inverse\_column\_permute@{inverse\_column\_permute}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
@@ -1498,6 +1522,28 @@ Scales the matrix with a scalar (aka\+: B\+L\+AS scal).
 
 \begin{DoxyParams}{Parameters}
 {\em alpha} & If alpha is 1x1 \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} matrix, the entire matrix is scaled by alpha. If it is a \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} row vector of values, then i-\/th column of the matrix is scaled with the i-\/th element of alpha (the number of columns of alpha has to match the number of columns of the matrix). \\
+\hline
+\end{DoxyParams}
+
+
+References gko\+::\+Polymorphic\+Object\+::get\+\_\+executor(), and gko\+::make\+\_\+temporary\+\_\+clone().
+
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_afb59901a63d4f30536e98e08ff982cd7}\label{classgko_1_1matrix_1_1Dense_afb59901a63d4f30536e98e08ff982cd7}} 
+\index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!sub\_scaled@{sub\_scaled}}
+\index{sub\_scaled@{sub\_scaled}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{sub\_scaled()}{sub\_scaled()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::sub\+\_\+scaled (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{alpha,  }\item[{const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Subtracts {\ttfamily b} scaled by {\ttfamily alpha} fron the matrix (aka\+: B\+L\+AS axpy). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em alpha} & If alpha is 1x1 \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} matrix, b is scaled by alpha. If it is a \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} row vector of values, then i-\/th column of b is scaled with the i-\/th element of alpha (the number of columns of alpha has to match the number of columns of the matrix). \\
+\hline
+{\em b} & a matrix of the same dimension as this \\
 \hline
 \end{DoxyParams}
 
