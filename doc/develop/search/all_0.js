@@ -9,7 +9,7 @@ var searchData=
   ['accessor_6',['accessor',['../classgko_1_1range.html#a3332728e51dadcf6517847cef3000a17',1,'gko::range']]],
   ['accuracy_7',['accuracy',['../structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type.html#ad4fd0de7ce4d390584e947afb6d0ce73',1,'gko::preconditioner::Jacobi::parameters_type']]],
   ['add_8',['add',['../structgko_1_1accessor_1_1add.html',1,'gko::accessor']]],
-  ['add_5flogger_9',['add_logger',['../classgko_1_1log_1_1Loggable.html#aa2bb887b5ef7e75fa1a30ee1896ed932',1,'gko::log::Loggable::add_logger()'],['../classgko_1_1log_1_1EnableLogging.html#a7b3493c14a37b4d46487d9c636d784f2',1,'gko::log::EnableLogging::add_logger()']]],
+  ['add_5flogger_9',['add_logger',['../classgko_1_1log_1_1Loggable.html#aa2bb887b5ef7e75fa1a30ee1896ed932',1,'gko::log::Loggable']]],
   ['add_5fscaled_10',['add_scaled',['../classgko_1_1matrix_1_1Dense.html#ae6c4c15972b76bf7d8f6d50a96abda8d',1,'gko::matrix::Dense']]],
   ['add_5fvalue_11',['add_value',['../classgko_1_1matrix__assembly__data.html#a0927a396f936167366bce13745156cf5',1,'gko::matrix_assembly_data']]],
   ['all_5fevents_5fmask_12',['all_events_mask',['../classgko_1_1log_1_1Logger.html#a02534863a2d2f92dfeb2c39038365532',1,'gko::log::Logger']]],

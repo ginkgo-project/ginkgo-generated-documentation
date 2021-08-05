@@ -1,7 +1,7 @@
 var searchData=
 [
   ['abs_1377',['abs',['../namespacegko.html#adeb470aaf293d7c5548392b2f451e8e4',1,'gko']]],
-  ['add_5flogger_1378',['add_logger',['../classgko_1_1log_1_1Loggable.html#aa2bb887b5ef7e75fa1a30ee1896ed932',1,'gko::log::Loggable::add_logger()'],['../classgko_1_1log_1_1EnableLogging.html#a7b3493c14a37b4d46487d9c636d784f2',1,'gko::log::EnableLogging::add_logger()']]],
+  ['add_5flogger_1378',['add_logger',['../classgko_1_1log_1_1Loggable.html#aa2bb887b5ef7e75fa1a30ee1896ed932',1,'gko::log::Loggable']]],
   ['add_5fscaled_1379',['add_scaled',['../classgko_1_1matrix_1_1Dense.html#ae6c4c15972b76bf7d8f6d50a96abda8d',1,'gko::matrix::Dense']]],
   ['add_5fvalue_1380',['add_value',['../classgko_1_1matrix__assembly__data.html#a0927a396f936167366bce13745156cf5',1,'gko::matrix_assembly_data']]],
   ['alloc_1381',['alloc',['../classgko_1_1Executor.html#a5a216c2b1f7ceb8a0190c08941c1c687',1,'gko::Executor']]],

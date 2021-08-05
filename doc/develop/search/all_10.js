@@ -20,7 +20,7 @@ var searchData=
   ['relativeresidualnorm_793',['RelativeResidualNorm',['../classgko_1_1stop_1_1RelativeResidualNorm.html',1,'gko::stop']]],
   ['relaxation_5ffactor_794',['relaxation_factor',['../structgko_1_1solver_1_1Ir_1_1parameters__type.html#adde5da5ddad690e275111ea316757707',1,'gko::solver::Ir::parameters_type']]],
   ['remove_5fcomplex_795',['remove_complex',['../namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3',1,'gko']]],
-  ['remove_5flogger_796',['remove_logger',['../classgko_1_1log_1_1Loggable.html#a5de4092a74cf04f30f13636d49aaec8b',1,'gko::log::Loggable::remove_logger()'],['../classgko_1_1log_1_1EnableLogging.html#aba5317f8a03956a61d770e9b07fc65cc',1,'gko::log::EnableLogging::remove_logger()']]],
+  ['remove_5flogger_796',['remove_logger',['../classgko_1_1log_1_1Loggable.html#a5de4092a74cf04f30f13636d49aaec8b',1,'gko::log::Loggable']]],
   ['reorderingbase_797',['ReorderingBase',['../classgko_1_1reorder_1_1ReorderingBase.html',1,'gko::reorder']]],
   ['reorderingbaseargs_798',['ReorderingBaseArgs',['../structgko_1_1reorder_1_1ReorderingBaseArgs.html',1,'gko::reorder']]],
   ['reorderingbasefactory_799',['ReorderingBaseFactory',['../namespacegko_1_1reorder.html#af22857fcb83663b7e2d2b6e023afd350',1,'gko::reorder']]],
