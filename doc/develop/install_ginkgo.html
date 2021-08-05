@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/347917035 branch based on develop. Ginkgo version 1.4.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/348321563 branch based on develop. Ginkgo version 1.4.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -71,7 +71,7 @@ $(function() {
 <div class="contents">
 <div class="textblock"><h2><a class="anchor" id="autotoc_md0"></a>
 Building</h2>
-<p>Use the standard cmake build procedure:</p>
+<p>Use the standard CMake build procedure:</p>
 <div class="fragment"><div class="line">mkdir build; cd build</div>
 <div class="line">cmake -G &quot;Unix Makefiles&quot; [OPTIONS] .. &amp;&amp; make</div>
 </div><!-- fragment --><p> Use <code>cmake --build .</code> in some systems like MinGW or Microsoft Visual Studio which do not use <code>make</code>.</p>
@@ -137,15 +137,6 @@ Building Ginkgo in Windows</h2>
 Building Ginkgo with HIP support</h2>
 <p>Ginkgo provides a <a href="https://github.com/ROCm-Developer-Tools/HIP">HIP</a> backend. This allows to compile optimized versions of the kernels for either AMD or NVIDIA GPUs. The CMake configuration step will try to auto-detect the presence of HIP either at <code>/opt/rocm/hip</code> or at the path specified by <code>HIP_PATH</code> as a CMake parameter (<code>-DHIP_PATH=</code>) or environment variable (<code>export HIP_PATH=</code>), unless <code>-DGINKGO_BUILD_HIP=ON/OFF</code> is set explicitly.</p>
 <h3><a class="anchor" id="autotoc_md3"></a>
-HIP dependencies for Ginkgo</h3>
-<p>Ginkgo's HIP backend adds a dependency to the following packages:</p><ul>
-<li>HIP,</li>
-<li>hipBLAS,</li>
-<li>hipSPARSE,</li>
-<li>rocRAND,</li>
-<li>rocThrust.</li>
-</ul>
-<h3><a class="anchor" id="autotoc_md4"></a>
 Changing the paths to search for HIP and other packages</h3>
 <p>All HIP installation paths can be configured through the use of environment variables or CMake variables. This way of configuring the paths is currently imposed by the <code>HIP</code> tool suite. The variables are the following:</p><ul>
 <li>CMake <code>-DROCM_PATH=</code> or environment <code>export ROCM_PATH=</code>: sets the <code>ROCM</code> installation path. The default value is <code>/opt/rocm/</code>.</li>
@@ -157,18 +148,17 @@ Changing the paths to search for HIP and other packages</h3>
 <li>CMake <code>-DHIPRAND_PATH=</code> or environment <code>export HIPRAND_PATH=</code>: sets the <code>hipRAND</code> installation path. The default value is <code>${ROCM_PATH}/hiprand</code>.</li>
 <li>environment <code>export CUDA_PATH=</code>: where <code>hipcc</code> can find <code>CUDA</code> if it is not in the default <code>/usr/local/cuda</code> path.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md5"></a>
+<h3><a class="anchor" id="autotoc_md4"></a>
 HIP platform detection of AMD and NVIDIA</h3>
 <p>By default, Ginkgo uses the output of <code>/opt/rocm/hip/bin/hipconfig --platform</code> to select the backend. The accepted values are either <code>hcc</code> (<code>amd</code> with ROCM &gt;= 4.1) or <code>nvcc</code> (<code>nvidia</code> with ROCM &gt;= 4.1). When on an AMD or NVIDIA system, this should output the correct platform by default. When on a system without GPUs, this should output <code>hcc</code> by default. To change this value, export the environment variable <code>HIP_PLATFORM</code> like so: </p><div class="fragment"><div class="line">export HIP_PLATFORM=nvcc # or nvidia for ROCM &gt;= 4.1</div>
-</div><!-- fragment --><p>When using <code>HIP_PLATFORM=hcc</code> (or <code>amd</code>), note that two <code>HIP</code> compilers can be set: the old <code>hcc</code>, or since ROCm 3.5, <code>clang</code>. Ginkgo is only compatible with the <code>clang</code> based installations. Although this setting should be automatically done, it is also possible to manually set the <code>HIP</code> compiler to <code>clang</code>: </p><div class="fragment"><div class="line">export HIP_COMPILER=clang</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md6"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md5"></a>
 Setting platform specific compilation flags</h3>
 <p>Platform specific compilation flags can be given through the following CMake variables:</p><ul>
 <li><code>-DGINKGO_HIP_COMPILER_FLAGS=</code>: compilation flags given to all platforms.</li>
 <li><code>-DGINKGO_HIP_NVCC_COMPILER_FLAGS=</code>: compilation flags given to NVIDIA platforms.</li>
 <li><code>-DGINKGO_HIP_CLANG_COMPILER_FLAGS=</code>: compilation flags given to AMD clang compiler.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md7"></a>
+<h2><a class="anchor" id="autotoc_md6"></a>
 Third party libraries and packages</h2>
 <p>Ginkgo relies on third party packages in different cases. These third party packages can be turned off by disabling the relevant options.</p>
 <ul>
@@ -180,7 +170,7 @@ Third party libraries and packages</h2>
 <p>Ginkgo attempts to use pre-installed versions of these package if they match version requirements using <code>find_package</code>. Otherwise, the configuration step will download the files for each of the packages <code>GTest</code>, <code>gflags</code>, <code>RapidJSON</code> and <code>hwloc</code> and build them internally.</p>
 <p>Note that, if the external packages were not installed to the default location, the CMake option <code>-DCMAKE_PREFIX_PATH=&lt;path-list&gt;</code> needs to be set to the semicolon (<code>;</code>) separated list of install paths of these external packages. For more Information, see the <a href="https://cmake.org/cmake/help/v3.9/variable/CMAKE_PREFIX_PATH.html">CMake documentation for CMAKE_PREFIX_PATH</a> for details.</p>
 <p>For convenience, the options <code>GINKGO_INSTALL_RPATH[_.*]</code> can be used to bind the installed Ginkgo shared libraries to the path of its dependencies.</p>
-<h2><a class="anchor" id="autotoc_md8"></a>
+<h2><a class="anchor" id="autotoc_md7"></a>
 Installing Ginkgo</h2>
 <p>To install Ginkgo into the specified folder, execute the following command in the build folder</p>
 <div class="fragment"><div class="line">make install</div>

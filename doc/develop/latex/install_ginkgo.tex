@@ -1,5 +1,5 @@
 \hypertarget{install_ginkgo_autotoc_md0}{}\doxysubsection{Building}\label{install_ginkgo_autotoc_md0}
-Use the standard cmake build procedure\+:
+Use the standard C\+Make build procedure\+:
 
 
 \begin{DoxyCode}{0}
@@ -76,15 +76,7 @@ Depending on the configuration settings, some manual work might be required\+:
 \item Build Ginkgo with Debug mode\+: Some Debug build specific issues can appear depending on the machine and environment\+: When you encounter the error message {\ttfamily ld\+: error\+: export ordinal too large}, add the compilation flag {\ttfamily -\/O1} by adding {\ttfamily -\/D\+C\+M\+A\+K\+E\+\_\+\+C\+X\+X\+\_\+\+F\+L\+A\+GS=-\/O1} to the C\+Make invocation.
 \item Build Ginkgo in {\itshape Min\+GW}\+:\textbackslash{} If encountering the issue {\ttfamily cc1plus.\+exe\+: out of memory allocating 65536 bytes}, please follow the workaround in \href{https://www.intel.com/content/www/us/en/programmable/support/support-resources/knowledge-base/embedded/2016/cc1plus-exe--out-of-memory-allocating-65536-bytes.html}{\texttt{ reference}}, or trying to compile ginkgo again might work.
 \end{DoxyItemize}\hypertarget{install_ginkgo_autotoc_md2}{}\doxysubsection{Building Ginkgo with H\+I\+P support}\label{install_ginkgo_autotoc_md2}
-Ginkgo provides a \href{https://github.com/ROCm-Developer-Tools/HIP}{\texttt{ H\+IP}} backend. This allows to compile optimized versions of the kernels for either A\+MD or N\+V\+I\+D\+IA G\+P\+Us. The C\+Make configuration step will try to auto-\/detect the presence of H\+IP either at {\ttfamily /opt/rocm/hip} or at the path specified by {\ttfamily H\+I\+P\+\_\+\+P\+A\+TH} as a C\+Make parameter ({\ttfamily -\/D\+H\+I\+P\+\_\+\+P\+A\+TH=}) or environment variable ({\ttfamily export H\+I\+P\+\_\+\+P\+A\+TH=}), unless {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+B\+U\+I\+L\+D\+\_\+\+H\+IP=O\+N/\+O\+FF} is set explicitly.\hypertarget{install_ginkgo_autotoc_md3}{}\doxysubsubsection{H\+I\+P dependencies for Ginkgo}\label{install_ginkgo_autotoc_md3}
-Ginkgo\textquotesingle{}s H\+IP backend adds a dependency to the following packages\+:
-\begin{DoxyItemize}
-\item H\+IP,
-\item hip\+B\+L\+AS,
-\item hip\+S\+P\+A\+R\+SE,
-\item roc\+R\+A\+ND,
-\item roc\+Thrust.
-\end{DoxyItemize}\hypertarget{install_ginkgo_autotoc_md4}{}\doxysubsubsection{Changing the paths to search for H\+I\+P and other packages}\label{install_ginkgo_autotoc_md4}
+Ginkgo provides a \href{https://github.com/ROCm-Developer-Tools/HIP}{\texttt{ H\+IP}} backend. This allows to compile optimized versions of the kernels for either A\+MD or N\+V\+I\+D\+IA G\+P\+Us. The C\+Make configuration step will try to auto-\/detect the presence of H\+IP either at {\ttfamily /opt/rocm/hip} or at the path specified by {\ttfamily H\+I\+P\+\_\+\+P\+A\+TH} as a C\+Make parameter ({\ttfamily -\/D\+H\+I\+P\+\_\+\+P\+A\+TH=}) or environment variable ({\ttfamily export H\+I\+P\+\_\+\+P\+A\+TH=}), unless {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+B\+U\+I\+L\+D\+\_\+\+H\+IP=O\+N/\+O\+FF} is set explicitly.\hypertarget{install_ginkgo_autotoc_md3}{}\doxysubsubsection{Changing the paths to search for H\+I\+P and other packages}\label{install_ginkgo_autotoc_md3}
 All H\+IP installation paths can be configured through the use of environment variables or C\+Make variables. This way of configuring the paths is currently imposed by the {\ttfamily H\+IP} tool suite. The variables are the following\+:
 \begin{DoxyItemize}
 \item C\+Make {\ttfamily -\/D\+R\+O\+C\+M\+\_\+\+P\+A\+TH=} or environment {\ttfamily export R\+O\+C\+M\+\_\+\+P\+A\+TH=}\+: sets the {\ttfamily R\+O\+CM} installation path. The default value is {\ttfamily /opt/rocm/}.
@@ -95,24 +87,18 @@ All H\+IP installation paths can be configured through the use of environment va
 \item C\+Make {\ttfamily -\/D\+R\+O\+C\+R\+A\+N\+D\+\_\+\+P\+A\+TH=} or environment {\ttfamily export R\+O\+C\+R\+A\+N\+D\+\_\+\+P\+A\+TH=}\+: sets the {\ttfamily roc\+R\+A\+ND} installation path. The default value is {\ttfamily \$\{R\+O\+C\+M\+\_\+\+P\+A\+TH\}/rocrand}.
 \item C\+Make {\ttfamily -\/D\+H\+I\+P\+R\+A\+N\+D\+\_\+\+P\+A\+TH=} or environment {\ttfamily export H\+I\+P\+R\+A\+N\+D\+\_\+\+P\+A\+TH=}\+: sets the {\ttfamily hip\+R\+A\+ND} installation path. The default value is {\ttfamily \$\{R\+O\+C\+M\+\_\+\+P\+A\+TH\}/hiprand}.
 \item environment {\ttfamily export C\+U\+D\+A\+\_\+\+P\+A\+TH=}\+: where {\ttfamily hipcc} can find {\ttfamily C\+U\+DA} if it is not in the default {\ttfamily /usr/local/cuda} path.
-\end{DoxyItemize}\hypertarget{install_ginkgo_autotoc_md5}{}\doxysubsubsection{H\+I\+P platform detection of A\+M\+D and N\+V\+I\+D\+IA}\label{install_ginkgo_autotoc_md5}
+\end{DoxyItemize}\hypertarget{install_ginkgo_autotoc_md4}{}\doxysubsubsection{H\+I\+P platform detection of A\+M\+D and N\+V\+I\+D\+IA}\label{install_ginkgo_autotoc_md4}
 By default, Ginkgo uses the output of {\ttfamily /opt/rocm/hip/bin/hipconfig -\/-\/platform} to select the backend. The accepted values are either {\ttfamily hcc} ({\ttfamily amd} with R\+O\+CM $>$= 4.\+1) or {\ttfamily nvcc} ({\ttfamily nvidia} with R\+O\+CM $>$= 4.\+1). When on an A\+MD or N\+V\+I\+D\+IA system, this should output the correct platform by default. When on a system without G\+P\+Us, this should output {\ttfamily hcc} by default. To change this value, export the environment variable {\ttfamily H\+I\+P\+\_\+\+P\+L\+A\+T\+F\+O\+RM} like so\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{export HIP\_PLATFORM=nvcc \# or nvidia for ROCM >= 4.1}
 \end{DoxyCode}
-
-
-When using {\ttfamily H\+I\+P\+\_\+\+P\+L\+A\+T\+F\+O\+RM=hcc} (or {\ttfamily amd}), note that two {\ttfamily H\+IP} compilers can be set\+: the old {\ttfamily hcc}, or since R\+O\+Cm 3.\+5, {\ttfamily clang}. Ginkgo is only compatible with the {\ttfamily clang} based installations. Although this setting should be automatically done, it is also possible to manually set the {\ttfamily H\+IP} compiler to {\ttfamily clang}\+: 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{export HIP\_COMPILER=clang}
-\end{DoxyCode}
-\hypertarget{install_ginkgo_autotoc_md6}{}\doxysubsubsection{Setting platform specific compilation flags}\label{install_ginkgo_autotoc_md6}
+\hypertarget{install_ginkgo_autotoc_md5}{}\doxysubsubsection{Setting platform specific compilation flags}\label{install_ginkgo_autotoc_md5}
 Platform specific compilation flags can be given through the following C\+Make variables\+:
 \begin{DoxyItemize}
 \item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+H\+I\+P\+\_\+\+C\+O\+M\+P\+I\+L\+E\+R\+\_\+\+F\+L\+A\+GS=}\+: compilation flags given to all platforms.
 \item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+H\+I\+P\+\_\+\+N\+V\+C\+C\+\_\+\+C\+O\+M\+P\+I\+L\+E\+R\+\_\+\+F\+L\+A\+GS=}\+: compilation flags given to N\+V\+I\+D\+IA platforms.
 \item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+H\+I\+P\+\_\+\+C\+L\+A\+N\+G\+\_\+\+C\+O\+M\+P\+I\+L\+E\+R\+\_\+\+F\+L\+A\+GS=}\+: compilation flags given to A\+MD clang compiler.
-\end{DoxyItemize}\hypertarget{install_ginkgo_autotoc_md7}{}\doxysubsection{Third party libraries and packages}\label{install_ginkgo_autotoc_md7}
+\end{DoxyItemize}\hypertarget{install_ginkgo_autotoc_md6}{}\doxysubsection{Third party libraries and packages}\label{install_ginkgo_autotoc_md6}
 Ginkgo relies on third party packages in different cases. These third party packages can be turned off by disabling the relevant options.
 
 
@@ -127,7 +113,7 @@ Ginkgo attempts to use pre-\/installed versions of these package if they match v
 
 Note that, if the external packages were not installed to the default location, the C\+Make option {\ttfamily -\/D\+C\+M\+A\+K\+E\+\_\+\+P\+R\+E\+F\+I\+X\+\_\+\+P\+A\+TH=$<$path-\/list$>$} needs to be set to the semicolon ({\ttfamily ;}) separated list of install paths of these external packages. For more Information, see the \href{https://cmake.org/cmake/help/v3.9/variable/CMAKE_PREFIX_PATH.html}{\texttt{ C\+Make documentation for C\+M\+A\+K\+E\+\_\+\+P\+R\+E\+F\+I\+X\+\_\+\+P\+A\+TH}} for details.
 
-For convenience, the options {\ttfamily G\+I\+N\+K\+G\+O\+\_\+\+I\+N\+S\+T\+A\+L\+L\+\_\+\+R\+P\+A\+TH\mbox{[}\+\_\+.$\ast$\mbox{]}} can be used to bind the installed Ginkgo shared libraries to the path of its dependencies.\hypertarget{install_ginkgo_autotoc_md8}{}\doxysubsection{Installing Ginkgo}\label{install_ginkgo_autotoc_md8}
+For convenience, the options {\ttfamily G\+I\+N\+K\+G\+O\+\_\+\+I\+N\+S\+T\+A\+L\+L\+\_\+\+R\+P\+A\+TH\mbox{[}\+\_\+.$\ast$\mbox{]}} can be used to bind the installed Ginkgo shared libraries to the path of its dependencies.\hypertarget{install_ginkgo_autotoc_md7}{}\doxysubsection{Installing Ginkgo}\label{install_ginkgo_autotoc_md7}
 To install Ginkgo into the specified folder, execute the following command in the build folder
 
 
