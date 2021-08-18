@@ -163,11 +163,12 @@ var searchData=
   ['group_5fpower_582',['group_power',['../structgko_1_1preconditioner_1_1block__interleaved__storage__scheme.html#a8fa279f4178c767bdbf52ef4d7e23ad1',1,'gko::preconditioner::block_interleaved_storage_scheme']]],
   ['log_583',['log',['../namespacegko_1_1log.html',1,'gko']]],
   ['matrix_584',['matrix',['../namespacegko_1_1matrix.html',1,'gko']]],
-  ['name_5fdemangling_585',['name_demangling',['../namespacegko_1_1name__demangling.html',1,'gko']]],
-  ['preconditioner_586',['preconditioner',['../namespacegko_1_1preconditioner.html',1,'gko']]],
-  ['reorder_587',['reorder',['../namespacegko_1_1reorder.html',1,'gko']]],
-  ['solver_588',['solver',['../namespacegko_1_1solver.html',1,'gko']]],
-  ['stop_589',['stop',['../namespacegko_1_1stop.html',1,'gko']]],
-  ['syn_590',['syn',['../namespacegko_1_1syn.html',1,'gko']]],
-  ['xstd_591',['xstd',['../namespacegko_1_1xstd.html',1,'gko']]]
+  ['multigrid_585',['multigrid',['../namespacegko_1_1multigrid.html',1,'gko']]],
+  ['name_5fdemangling_586',['name_demangling',['../namespacegko_1_1name__demangling.html',1,'gko']]],
+  ['preconditioner_587',['preconditioner',['../namespacegko_1_1preconditioner.html',1,'gko']]],
+  ['reorder_588',['reorder',['../namespacegko_1_1reorder.html',1,'gko']]],
+  ['solver_589',['solver',['../namespacegko_1_1solver.html',1,'gko']]],
+  ['stop_590',['stop',['../namespacegko_1_1stop.html',1,'gko']]],
+  ['syn_591',['syn',['../namespacegko_1_1syn.html',1,'gko']]],
+  ['xstd_592',['xstd',['../namespacegko_1_1xstd.html',1,'gko']]]
 ];
