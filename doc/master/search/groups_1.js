@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['executors_1489',['Executors',['../group__Executor.html',1,'']]]
+  ['dpc_2b_2b_20executor_1852',['DPC++ Executor',['../group__exec__dpcpp.html',1,'']]]
 ];

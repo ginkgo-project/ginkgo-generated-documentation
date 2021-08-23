@@ -221,18 +221,18 @@ Computes the 1-\/norm of the error given the computed {\ttfamily u} and the corr
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} Closure, \textcolor{keyword}{typename} ValueType, \textcolor{keyword}{typename} IndexType>}
-\DoxyCodeLine{\mbox{\hyperlink{namespacegko_adfcb75c44f6b6c701989419c166f6e7e}{gko::remove\_complex<ValueType>}} calculate\_error(IndexType dp, \textcolor{keyword}{const} ValueType *u,}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} calculate\_error(IndexType dp, \textcolor{keyword}{const} ValueType *u,}
 \DoxyCodeLine{                                               Closure correct\_u)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{const} ValueType h = 1.0 / (dp + 1);}
-\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_adfcb75c44f6b6c701989419c166f6e7e}{gko::remove\_complex<ValueType>}} error = 0.0;}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} error = 0.0;}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (IndexType j = 0; j < dp; ++j) \{}
 \DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keyword}{auto} xi = ValueType(j + 1) * h;}
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (IndexType i = 0; i < dp; ++i) \{}
 \DoxyCodeLine{            \textcolor{keyword}{using} std::abs;}
 \DoxyCodeLine{            \textcolor{keyword}{const} \textcolor{keyword}{auto} yi = ValueType(i + 1) * h;}
 \DoxyCodeLine{            error +=}
-\DoxyCodeLine{                \mbox{\hyperlink{namespacegko_a57797fc0a00fd4b7ff34ca4bfc84bc51}{abs}}(u[i * dp + j] -\/ correct\_u(xi, yi)) / \mbox{\hyperlink{namespacegko_a57797fc0a00fd4b7ff34ca4bfc84bc51}{abs}}(correct\_u(xi, yi));}
+\DoxyCodeLine{                \mbox{\hyperlink{namespacegko_adeb470aaf293d7c5548392b2f451e8e4}{abs}}(u[i * dp + j] -\/ correct\_u(xi, yi)) / \mbox{\hyperlink{namespacegko_adeb470aaf293d7c5548392b2f451e8e4}{abs}}(correct\_u(xi, yi));}
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{    \textcolor{keywordflow}{return} error;}
@@ -243,7 +243,7 @@ Computes the 1-\/norm of the error given the computed {\ttfamily u} and the corr
 \DoxyCodeLine{\textcolor{keywordtype}{void} solve\_system(\textcolor{keyword}{const} std::string \&executor\_string,}
 \DoxyCodeLine{                  \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} discretization\_points, IndexType *row\_ptrs,}
 \DoxyCodeLine{                  IndexType *col\_idxs, ValueType *values, ValueType *rhs,}
-\DoxyCodeLine{                  ValueType *u, \mbox{\hyperlink{namespacegko_adfcb75c44f6b6c701989419c166f6e7e}{gko::remove\_complex<ValueType>}} reduction\_factor)}
+\DoxyCodeLine{                  ValueType *u, \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} reduction\_factor)}
 \DoxyCodeLine{\{}
 \end{DoxyCode}
 
@@ -272,13 +272,18 @@ Figure out where to run the code
 \DoxyCodeLine{        \{\textcolor{stringliteral}{"omp"}, [] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(); \}\},}
 \DoxyCodeLine{        \{\textcolor{stringliteral}{"cuda"},}
 \DoxyCodeLine{         [] \{}
-\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_aa577135e082f9be20617e9d66209ca25}{gko::CudaExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(),}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a5dcec3ca1c458382e01191b727959a81}{gko::CudaExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(),}
 \DoxyCodeLine{                                              \textcolor{keyword}{true});}
 \DoxyCodeLine{         \}\},}
 \DoxyCodeLine{        \{\textcolor{stringliteral}{"hip"},}
 \DoxyCodeLine{         [] \{}
-\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_abee0dc3dfc064c9edbdc02c2b3b11264}{gko::HipExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(),}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_ad3a72bc42254fb8730bc2090147447d9}{gko::HipExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(),}
 \DoxyCodeLine{                                             \textcolor{keyword}{true});}
+\DoxyCodeLine{         \}\},}
+\DoxyCodeLine{        \{\textcolor{stringliteral}{"dpcpp"},}
+\DoxyCodeLine{         [] \{}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1DpcppExecutor_ac46044fcb00b2d224b45d93eaf8c579d}{gko::DpcppExecutor::create}}(0,}
+\DoxyCodeLine{                                               \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}());}
 \DoxyCodeLine{         \}\},}
 \DoxyCodeLine{        \{\textcolor{stringliteral}{"reference"}, [] \{ \textcolor{keywordflow}{return} gko::ReferenceExecutor::create(); \}\}\};}
 \end{DoxyCode}
@@ -345,7 +350,7 @@ Generate solver
 \DoxyCodeLine{    cg::build()}
 \DoxyCodeLine{        .with\_criteria(}
 \DoxyCodeLine{            gko::stop::Iteration::build().with\_max\_iters(dp\_2).on(exec),}
-\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNormReduction}{gko::stop::ResidualNormReduction<ValueType>::build}}()}
+\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
 \DoxyCodeLine{                .with\_reduction\_factor(reduction\_factor)}
 \DoxyCodeLine{                .on(exec))}
 \DoxyCodeLine{        .with\_preconditioner(bj::build().on(exec))}
@@ -364,20 +369,31 @@ Solve system
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[])}
 \DoxyCodeLine{\{}
-\DoxyCodeLine{    \textcolor{keywordflow}{if} (argc < 2) \{}
-\DoxyCodeLine{        std::cerr << \textcolor{stringliteral}{"Usage: "} << argv[0] << \textcolor{stringliteral}{" DISCRETIZATION\_POINTS [executor]"}}
-\DoxyCodeLine{                  << \textcolor{stringliteral}{" [stencil\_alpha] [stencil\_beta] [stencil\_gamma]"}}
-\DoxyCodeLine{                  << std::endl;}
-\DoxyCodeLine{        std::exit(-\/1);}
-\DoxyCodeLine{    \}}
 \DoxyCodeLine{    \textcolor{keyword}{using} ValueType = double;}
 \DoxyCodeLine{    \textcolor{keyword}{using} IndexType = int;}
+\end{DoxyCode}
+
+
+Print version information
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::cout << \mbox{\hyperlink{classgko_1_1version__info_a6daeb8a087cfb57fa055526fc133d8eb}{gko::version\_info::get}}() << std::endl;}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keywordtype}{int} discretization\_points = argc >= 2 ? std::atoi(argv[1]) : 100;}
-\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} executor\_string = argc >= 3 ? argv[2] : \textcolor{stringliteral}{"reference"};}
-\DoxyCodeLine{    \textcolor{keyword}{const} ValueType alpha\_c = argc >= 4 ? std::atof(argv[3]) : default\_alpha;}
-\DoxyCodeLine{    \textcolor{keyword}{const} ValueType beta\_c = argc >= 5 ? std::atof(argv[4]) : default\_beta;}
-\DoxyCodeLine{    \textcolor{keyword}{const} ValueType gamma\_c = argc >= 6 ? std::atof(argv[5]) : default\_gamma;}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (argc == 2 \&\& std::string(argv[1]) == \textcolor{stringliteral}{"-\/-\/help"}) \{}
+\DoxyCodeLine{    std::cerr}
+\DoxyCodeLine{        << \textcolor{stringliteral}{"Usage: "} << argv[0]}
+\DoxyCodeLine{        << \textcolor{stringliteral}{" [executor] [DISCRETIZATION\_POINTS] [alpha] [beta] [gamma]"}}
+\DoxyCodeLine{        << std::endl;}
+\DoxyCodeLine{    std::exit(-\/1);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} executor\_string = argc >= 2 ? argv[1] : \textcolor{stringliteral}{"reference"};}
+\DoxyCodeLine{\textcolor{keyword}{const} IndexType discretization\_points =}
+\DoxyCodeLine{    argc >= 3 ? std::atoi(argv[2]) : 100;}
+\DoxyCodeLine{\textcolor{keyword}{const} ValueType alpha\_c = argc >= 4 ? std::atof(argv[3]) : default\_alpha;}
+\DoxyCodeLine{\textcolor{keyword}{const} ValueType beta\_c = argc >= 5 ? std::atof(argv[4]) : default\_beta;}
+\DoxyCodeLine{\textcolor{keyword}{const} ValueType gamma\_c = argc >= 6 ? std::atof(argv[5]) : default\_gamma;}
 \end{DoxyCode}
 
 
@@ -387,7 +403,7 @@ clang-\/format off
 \begin{DoxyCode}{0}
 \DoxyCodeLine{std::array<ValueType, 9> coefs\{}
 \DoxyCodeLine{    gamma\_c, beta\_c, gamma\_c,}
-\DoxyCodeLine{          beta\_c, alpha\_c, beta\_c,}
+\DoxyCodeLine{        beta\_c, alpha\_c, beta\_c,}
 \DoxyCodeLine{    gamma\_c, beta\_c, gamma\_c\};}
 \end{DoxyCode}
 
@@ -447,25 +463,30 @@ looking for solution u = x$^\wedge$3\+: f = 6x, u(0) = 0, u(1) = 1
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{    generate\_rhs(dp, f, correct\_u, rhs.data(), coefs.data());}
+\DoxyCodeLine{generate\_rhs(dp, f, correct\_u, rhs.data(), coefs.data());}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_adfcb75c44f6b6c701989419c166f6e7e}{gko::remove\_complex<ValueType>}} reduction\_factor = 1e-\/7;}
+\DoxyCodeLine{\textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} reduction\_factor = 1e-\/7;}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{auto} start\_time = std::chrono::steady\_clock::now();}
-\DoxyCodeLine{    solve\_system(executor\_string, dp, row\_ptrs.data(), col\_idxs.data(),}
-\DoxyCodeLine{                 values.data(), rhs.data(), u.data(), reduction\_factor);}
-\DoxyCodeLine{    \textcolor{keyword}{auto} stop\_time = std::chrono::steady\_clock::now();}
-\DoxyCodeLine{    \textcolor{keyword}{auto} runtime\_duration =}
-\DoxyCodeLine{        static\_cast<double>(}
-\DoxyCodeLine{            std::chrono::duration\_cast<std::chrono::nanoseconds>(stop\_time -\/}
-\DoxyCodeLine{                                                                 start\_time)}
-\DoxyCodeLine{                .count()) *}
-\DoxyCodeLine{        1e-\/6;}
-\DoxyCodeLine{}
-\DoxyCodeLine{    print\_solution(dp, u.data());}
+\DoxyCodeLine{\textcolor{keyword}{auto} start\_time = std::chrono::steady\_clock::now();}
+\DoxyCodeLine{solve\_system(executor\_string, dp, row\_ptrs.data(), col\_idxs.data(),}
+\DoxyCodeLine{             values.data(), rhs.data(), u.data(), reduction\_factor);}
+\DoxyCodeLine{\textcolor{keyword}{auto} stop\_time = std::chrono::steady\_clock::now();}
+\DoxyCodeLine{\textcolor{keyword}{auto} runtime\_duration =}
+\DoxyCodeLine{    static\_cast<double>(}
+\DoxyCodeLine{        std::chrono::duration\_cast<std::chrono::nanoseconds>(stop\_time -\/}
+\DoxyCodeLine{                                                             start\_time)}
+\DoxyCodeLine{            .count()) *}
+\DoxyCodeLine{    1e-\/6;}
+\end{DoxyCode}
+
+
+Uncomment to print the solution print\+\_\+solution(dp, u.\+data());
+
+
+\begin{DoxyCode}{0}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"The average relative error is "}}
 \DoxyCodeLine{              << calculate\_error(dp, u.data(), correct\_u) /}
-\DoxyCodeLine{                     \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{namespacegko_adfcb75c44f6b6c701989419c166f6e7e}{gko::remove\_complex<ValueType>}}\textcolor{keyword}{>}(dp\_2)}
+\DoxyCodeLine{                     \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}}\textcolor{keyword}{>}(dp\_2)}
 \DoxyCodeLine{              << std::endl;}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"The runtime is "} << std::to\_string(runtime\_duration) << \textcolor{stringliteral}{" ms"}}
 \DoxyCodeLine{              << std::endl;}
@@ -474,23 +495,12 @@ looking for solution u = x$^\wedge$3\+: f = 6x, u(0) = 0, u(1) = 1
  \label{_Results}%
 \doxysection*{Results}
 
-The expected output of the relative error at K=10 should be
+The expected output should be
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{0.00150263 0.00676184 0.0210368 0.0488355 0.0946657 0.163035 0.258452 0.385425 0.54846 0.752066}
-\DoxyCodeLine{0.00676184 0.012021 0.026296 0.0540947 0.0999249 0.168295 0.263712 0.390684 0.553719 0.757325}
-\DoxyCodeLine{0.0210368 0.026296 0.040571 0.0683697 0.1142 0.18257 0.277987 0.404959 0.567994 0.7716}
-\DoxyCodeLine{0.0488354 0.0540947 0.0683697 0.0961683 0.141998 0.210368 0.305785 0.432757 0.595793 0.799399}
-\DoxyCodeLine{0.0946656 0.0999248 0.1142 0.141998 0.187829 0.256198 0.351615 0.478588 0.641623 0.845229}
-\DoxyCodeLine{0.163035 0.168295 0.182569 0.210368 0.256198 0.324568 0.419985 0.546957 0.709993 0.913599}
-\DoxyCodeLine{0.258452 0.263711 0.277987 0.305785 0.351615 0.419985 0.515402 0.642374 0.80541 1.00902}
-\DoxyCodeLine{0.385424 0.390684 0.404959 0.432757 0.478588 0.546957 0.642374 0.769346 0.932382 1.13599}
-\DoxyCodeLine{0.54846 0.553719 0.567994 0.595793 0.641623 0.709992 0.805409 0.932382 1.09542 1.29902}
-\DoxyCodeLine{0.752066 0.757325 0.7716 0.799399 0.845229 0.913599 1.00902 1.13599 1.29902 1.50263}
-\DoxyCodeLine{}
-\DoxyCodeLine{The average relative error is 1.4283e-\/07}
-\DoxyCodeLine{The runtime is 5.784994 ms}
+\DoxyCodeLine{The average relative error is 6.35715e-\/06}
+\DoxyCodeLine{The runtime is 167.320520 ms}
 \end{DoxyCode}
 
 
@@ -503,7 +513,7 @@ The expected output of the relative error at K=10 should be
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{/*******************************<GINKGO LICENSE>******************************}}
-\DoxyCodeLine{\textcolor{comment}{Copyright (c) 2017-\/2020, the Ginkgo authors}}
+\DoxyCodeLine{\textcolor{comment}{Copyright (c) 2017-\/2021, the Ginkgo authors}}
 \DoxyCodeLine{\textcolor{comment}{All rights reserved.}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{Redistribution and use in source and binary forms, with or without}}
@@ -683,18 +693,18 @@ The expected output of the relative error at K=10 should be
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} Closure, \textcolor{keyword}{typename} ValueType, \textcolor{keyword}{typename} IndexType>}
-\DoxyCodeLine{\mbox{\hyperlink{namespacegko_adfcb75c44f6b6c701989419c166f6e7e}{gko::remove\_complex<ValueType>}} calculate\_error(IndexType dp, \textcolor{keyword}{const} ValueType *u,}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} calculate\_error(IndexType dp, \textcolor{keyword}{const} ValueType *u,}
 \DoxyCodeLine{                                               Closure correct\_u)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{const} ValueType h = 1.0 / (dp + 1);}
-\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_adfcb75c44f6b6c701989419c166f6e7e}{gko::remove\_complex<ValueType>}} error = 0.0;}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} error = 0.0;}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (IndexType j = 0; j < dp; ++j) \{}
 \DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keyword}{auto} xi = ValueType(j + 1) * h;}
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (IndexType i = 0; i < dp; ++i) \{}
 \DoxyCodeLine{            \textcolor{keyword}{using} std::abs;}
 \DoxyCodeLine{            \textcolor{keyword}{const} \textcolor{keyword}{auto} yi = ValueType(i + 1) * h;}
 \DoxyCodeLine{            error +=}
-\DoxyCodeLine{                \mbox{\hyperlink{namespacegko_a57797fc0a00fd4b7ff34ca4bfc84bc51}{abs}}(u[i * dp + j] -\/ correct\_u(xi, yi)) / \mbox{\hyperlink{namespacegko_a57797fc0a00fd4b7ff34ca4bfc84bc51}{abs}}(correct\_u(xi, yi));}
+\DoxyCodeLine{                \mbox{\hyperlink{namespacegko_adeb470aaf293d7c5548392b2f451e8e4}{abs}}(u[i * dp + j] -\/ correct\_u(xi, yi)) / \mbox{\hyperlink{namespacegko_adeb470aaf293d7c5548392b2f451e8e4}{abs}}(correct\_u(xi, yi));}
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{    \textcolor{keywordflow}{return} error;}
@@ -705,7 +715,7 @@ The expected output of the relative error at K=10 should be
 \DoxyCodeLine{\textcolor{keywordtype}{void} solve\_system(\textcolor{keyword}{const} std::string \&executor\_string,}
 \DoxyCodeLine{                  \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} discretization\_points, IndexType *row\_ptrs,}
 \DoxyCodeLine{                  IndexType *col\_idxs, ValueType *values, ValueType *rhs,}
-\DoxyCodeLine{                  ValueType *u, \mbox{\hyperlink{namespacegko_adfcb75c44f6b6c701989419c166f6e7e}{gko::remove\_complex<ValueType>}} reduction\_factor)}
+\DoxyCodeLine{                  ValueType *u, \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} reduction\_factor)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{using} vec = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}};}
 \DoxyCodeLine{    \textcolor{keyword}{using} mtx = \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<ValueType, IndexType>}};}
@@ -721,13 +731,18 @@ The expected output of the relative error at K=10 should be
 \DoxyCodeLine{            \{\textcolor{stringliteral}{"omp"}, [] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(); \}\},}
 \DoxyCodeLine{            \{\textcolor{stringliteral}{"cuda"},}
 \DoxyCodeLine{             [] \{}
-\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_aa577135e082f9be20617e9d66209ca25}{gko::CudaExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(),}
+\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a5dcec3ca1c458382e01191b727959a81}{gko::CudaExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(),}
 \DoxyCodeLine{                                                  \textcolor{keyword}{true});}
 \DoxyCodeLine{             \}\},}
 \DoxyCodeLine{            \{\textcolor{stringliteral}{"hip"},}
 \DoxyCodeLine{             [] \{}
-\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_abee0dc3dfc064c9edbdc02c2b3b11264}{gko::HipExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(),}
+\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_ad3a72bc42254fb8730bc2090147447d9}{gko::HipExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(),}
 \DoxyCodeLine{                                                 \textcolor{keyword}{true});}
+\DoxyCodeLine{             \}\},}
+\DoxyCodeLine{            \{\textcolor{stringliteral}{"dpcpp"},}
+\DoxyCodeLine{             [] \{}
+\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1DpcppExecutor_ac46044fcb00b2d224b45d93eaf8c579d}{gko::DpcppExecutor::create}}(0,}
+\DoxyCodeLine{                                                   \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}());}
 \DoxyCodeLine{             \}\},}
 \DoxyCodeLine{            \{\textcolor{stringliteral}{"reference"}, [] \{ \textcolor{keywordflow}{return} gko::ReferenceExecutor::create(); \}\}\};}
 \DoxyCodeLine{}
@@ -751,7 +766,7 @@ The expected output of the relative error at K=10 should be
 \DoxyCodeLine{        cg::build()}
 \DoxyCodeLine{            .with\_criteria(}
 \DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(dp\_2).on(exec),}
-\DoxyCodeLine{                \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNormReduction}{gko::stop::ResidualNormReduction<ValueType>::build}}()}
+\DoxyCodeLine{                \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
 \DoxyCodeLine{                    .with\_reduction\_factor(reduction\_factor)}
 \DoxyCodeLine{                    .on(exec))}
 \DoxyCodeLine{            .with\_preconditioner(bj::build().on(exec))}
@@ -764,24 +779,29 @@ The expected output of the relative error at K=10 should be
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[])}
 \DoxyCodeLine{\{}
-\DoxyCodeLine{    \textcolor{keywordflow}{if} (argc < 2) \{}
-\DoxyCodeLine{        std::cerr << \textcolor{stringliteral}{"Usage: "} << argv[0] << \textcolor{stringliteral}{" DISCRETIZATION\_POINTS [executor]"}}
-\DoxyCodeLine{                  << \textcolor{stringliteral}{" [stencil\_alpha] [stencil\_beta] [stencil\_gamma]"}}
-\DoxyCodeLine{                  << std::endl;}
-\DoxyCodeLine{        std::exit(-\/1);}
-\DoxyCodeLine{    \}}
 \DoxyCodeLine{    \textcolor{keyword}{using} ValueType = double;}
 \DoxyCodeLine{    \textcolor{keyword}{using} IndexType = int;}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keywordtype}{int} discretization\_points = argc >= 2 ? std::atoi(argv[1]) : 100;}
-\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} executor\_string = argc >= 3 ? argv[2] : \textcolor{stringliteral}{"reference"};}
+\DoxyCodeLine{    std::cout << \mbox{\hyperlink{classgko_1_1version__info_a6daeb8a087cfb57fa055526fc133d8eb}{gko::version\_info::get}}() << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (argc == 2 \&\& std::string(argv[1]) == \textcolor{stringliteral}{"-\/-\/help"}) \{}
+\DoxyCodeLine{        std::cerr}
+\DoxyCodeLine{            << \textcolor{stringliteral}{"Usage: "} << argv[0]}
+\DoxyCodeLine{            << \textcolor{stringliteral}{" [executor] [DISCRETIZATION\_POINTS] [alpha] [beta] [gamma]"}}
+\DoxyCodeLine{            << std::endl;}
+\DoxyCodeLine{        std::exit(-\/1);}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} executor\_string = argc >= 2 ? argv[1] : \textcolor{stringliteral}{"reference"};}
+\DoxyCodeLine{    \textcolor{keyword}{const} IndexType discretization\_points =}
+\DoxyCodeLine{        argc >= 3 ? std::atoi(argv[2]) : 100;}
 \DoxyCodeLine{    \textcolor{keyword}{const} ValueType alpha\_c = argc >= 4 ? std::atof(argv[3]) : default\_alpha;}
 \DoxyCodeLine{    \textcolor{keyword}{const} ValueType beta\_c = argc >= 5 ? std::atof(argv[4]) : default\_beta;}
 \DoxyCodeLine{    \textcolor{keyword}{const} ValueType gamma\_c = argc >= 6 ? std::atof(argv[5]) : default\_gamma;}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::array<ValueType, 9> coefs\{}
 \DoxyCodeLine{        gamma\_c, beta\_c, gamma\_c,}
-\DoxyCodeLine{          beta\_c, alpha\_c, beta\_c,}
+\DoxyCodeLine{        beta\_c, alpha\_c, beta\_c,}
 \DoxyCodeLine{        gamma\_c, beta\_c, gamma\_c\};}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} dp = discretization\_points;}
@@ -804,7 +824,7 @@ The expected output of the relative error at K=10 should be
 \DoxyCodeLine{                            coefs.data());}
 \DoxyCodeLine{    generate\_rhs(dp, f, correct\_u, rhs.data(), coefs.data());}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_adfcb75c44f6b6c701989419c166f6e7e}{gko::remove\_complex<ValueType>}} reduction\_factor = 1e-\/7;}
+\DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} reduction\_factor = 1e-\/7;}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} start\_time = std::chrono::steady\_clock::now();}
 \DoxyCodeLine{    solve\_system(executor\_string, dp, row\_ptrs.data(), col\_idxs.data(),}
@@ -817,10 +837,9 @@ The expected output of the relative error at K=10 should be
 \DoxyCodeLine{                .count()) *}
 \DoxyCodeLine{        1e-\/6;}
 \DoxyCodeLine{}
-\DoxyCodeLine{    print\_solution(dp, u.data());}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"The average relative error is "}}
 \DoxyCodeLine{              << calculate\_error(dp, u.data(), correct\_u) /}
-\DoxyCodeLine{                     \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{namespacegko_adfcb75c44f6b6c701989419c166f6e7e}{gko::remove\_complex<ValueType>}}\textcolor{keyword}{>}(dp\_2)}
+\DoxyCodeLine{                     \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}}\textcolor{keyword}{>}(dp\_2)}
 \DoxyCodeLine{              << std::endl;}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"The runtime is "} << std::to\_string(runtime\_duration) << \textcolor{stringliteral}{" ms"}}
 \DoxyCodeLine{              << std::endl;}

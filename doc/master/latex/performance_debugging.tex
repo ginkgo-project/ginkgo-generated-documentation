@@ -73,7 +73,7 @@ utilities for computing norms and residuals
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType>}
-\DoxyCodeLine{\mbox{\hyperlink{namespacegko_adfcb75c44f6b6c701989419c166f6e7e}{gko::remove\_complex<ValueType>}} compute\_norm(\textcolor{keyword}{const} vec<ValueType> *b)}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} compute\_norm(\textcolor{keyword}{const} vec<ValueType> *b)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} exec = b-\/>get\_executor();}
 \DoxyCodeLine{    \textcolor{keyword}{auto} b\_norm = gko::initialize<real\_vec<ValueType>>(\{0.0\}, exec);}
@@ -83,7 +83,7 @@ utilities for computing norms and residuals
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType>}
-\DoxyCodeLine{\mbox{\hyperlink{namespacegko_adfcb75c44f6b6c701989419c166f6e7e}{gko::remove\_complex<ValueType>}} compute\_residual\_norm(}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} compute\_residual\_norm(}
 \DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *system\_matrix, \textcolor{keyword}{const} vec<ValueType> *b,}
 \DoxyCodeLine{    \textcolor{keyword}{const} vec<ValueType> *x)}
 \DoxyCodeLine{\{}
@@ -432,7 +432,7 @@ Pick a residual norm reduction value
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_adfcb75c44f6b6c701989419c166f6e7e}{gko::remove\_complex<ValueType>}} reduction\_factor = 1e-\/12;}
+\DoxyCodeLine{\textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} reduction\_factor = 1e-\/12;}
 \end{DoxyCode}
 
 
@@ -464,17 +464,45 @@ Figure out where to run the code
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{std::shared\_ptr<gko::Executor> exec;}
-\DoxyCodeLine{\textcolor{keywordflow}{if} (argc == 1 || std::string(argv[1]) == \textcolor{stringliteral}{"reference"}) \{}
-\DoxyCodeLine{    exec = gko::ReferenceExecutor::create();}
-\DoxyCodeLine{\} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (argc > 1 \&\& std::string(argv[1]) == \textcolor{stringliteral}{"omp"}) \{}
-\DoxyCodeLine{    exec = \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}();}
-\DoxyCodeLine{\} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (argc > 1 \&\& std::string(argv[1]) == \textcolor{stringliteral}{"cuda"} \&\&}
-\DoxyCodeLine{           \mbox{\hyperlink{classgko_1_1CudaExecutor_aef0258494d14de0e56149b920c5173e5}{gko::CudaExecutor::get\_num\_devices}}() > 0) \{}
-\DoxyCodeLine{    exec = \mbox{\hyperlink{classgko_1_1CudaExecutor_aa577135e082f9be20617e9d66209ca25}{gko::CudaExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(), \textcolor{keyword}{true});}
-\DoxyCodeLine{\} \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{    print\_usage(argv[0]);}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (argc == 2 \&\& (std::string(argv[1]) == \textcolor{stringliteral}{"-\/-\/help"})) \{}
+\DoxyCodeLine{    std::cerr << \textcolor{stringliteral}{"Usage: "} << argv[0] << \textcolor{stringliteral}{" [executor]"} << std::endl;}
+\DoxyCodeLine{    std::exit(-\/1);}
 \DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+Figure out where to run the code
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} executor\_string = argc >= 2 ? argv[1] : \textcolor{stringliteral}{"reference"};}
+\DoxyCodeLine{std::map<std::string, std::function<std::shared\_ptr<gko::Executor>()>>}
+\DoxyCodeLine{    exec\_map\{}
+\DoxyCodeLine{        \{\textcolor{stringliteral}{"omp"}, [] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(); \}\},}
+\DoxyCodeLine{        \{\textcolor{stringliteral}{"cuda"},}
+\DoxyCodeLine{         [] \{}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a5dcec3ca1c458382e01191b727959a81}{gko::CudaExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(),}
+\DoxyCodeLine{                                              \textcolor{keyword}{true});}
+\DoxyCodeLine{         \}\},}
+\DoxyCodeLine{        \{\textcolor{stringliteral}{"hip"},}
+\DoxyCodeLine{         [] \{}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_ad3a72bc42254fb8730bc2090147447d9}{gko::HipExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(),}
+\DoxyCodeLine{                                             \textcolor{keyword}{true});}
+\DoxyCodeLine{         \}\},}
+\DoxyCodeLine{        \{\textcolor{stringliteral}{"dpcpp"},}
+\DoxyCodeLine{         [] \{}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1DpcppExecutor_ac46044fcb00b2d224b45d93eaf8c579d}{gko::DpcppExecutor::create}}(0,}
+\DoxyCodeLine{                                               \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}());}
+\DoxyCodeLine{         \}\},}
+\DoxyCodeLine{        \{\textcolor{stringliteral}{"reference"}, [] \{ \textcolor{keywordflow}{return} gko::ReferenceExecutor::create(); \}\}\};}
+\end{DoxyCode}
+
+
+executor where Ginkgo will perform the computation
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} exec = exec\_map.at(executor\_string)();  \textcolor{comment}{// throws if not valid}}
 \end{DoxyCode}
 
 
@@ -545,7 +573,7 @@ Declare the solver factory. The preconditioner\textquotesingle{}s arguments shou
 \DoxyCodeLine{\textcolor{keyword}{auto} solver\_factory =}
 \DoxyCodeLine{    solver::build()}
 \DoxyCodeLine{        .with\_criteria(}
-\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNormReduction}{gko::stop::ResidualNormReduction<ValueType>::build}}()}
+\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
 \DoxyCodeLine{                .with\_reduction\_factor(reduction\_factor)}
 \DoxyCodeLine{                .on(exec),}
 \DoxyCodeLine{            gko::stop::Iteration::build().with\_max\_iters(max\_iters).on(}
@@ -584,7 +612,7 @@ Generate and call apply on a solver
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{    solver\_factory-\/>generate(A)-\/>apply(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(b), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(x\_clone));}
-\DoxyCodeLine{    exec-\/>synchronize();}
+\DoxyCodeLine{    exec-\/>\mbox{\hyperlink{classgko_1_1Executor_a24eeee7648c0f0fd07c9866d07154875}{synchronize}}();}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
 
@@ -609,7 +637,7 @@ Synchronize ensures no operation are ongoing
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{exec-\/>synchronize();}
+\DoxyCodeLine{exec-\/>\mbox{\hyperlink{classgko_1_1Executor_a24eeee7648c0f0fd07c9866d07154875}{synchronize}}();}
 \end{DoxyCode}
 
 
@@ -626,7 +654,7 @@ Generate a solver
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{auto} generated\_solver = solver\_factory-\/>generate(A);}
-\DoxyCodeLine{exec-\/>synchronize();}
+\DoxyCodeLine{exec-\/>\mbox{\hyperlink{classgko_1_1Executor_a24eeee7648c0f0fd07c9866d07154875}{synchronize}}();}
 \end{DoxyCode}
 
 
@@ -660,10 +688,10 @@ Similarly time the apply
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{exec-\/>synchronize();}
+\DoxyCodeLine{exec-\/>\mbox{\hyperlink{classgko_1_1Executor_a24eeee7648c0f0fd07c9866d07154875}{synchronize}}();}
 \DoxyCodeLine{\textcolor{keyword}{auto} a\_tic = std::chrono::steady\_clock::now();}
 \DoxyCodeLine{generated\_solver-\/>apply(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(b), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(x\_clone));}
-\DoxyCodeLine{exec-\/>synchronize();}
+\DoxyCodeLine{exec-\/>\mbox{\hyperlink{classgko_1_1Executor_a24eeee7648c0f0fd07c9866d07154875}{synchronize}}();}
 \DoxyCodeLine{\textcolor{keyword}{auto} a\_tac = std::chrono::steady\_clock::now();}
 \DoxyCodeLine{\textcolor{keyword}{auto} apply\_time =}
 \DoxyCodeLine{    std::chrono::duration\_cast<std::chrono::nanoseconds>(a\_tac -\/ a\_tic);}
@@ -887,7 +915,7 @@ Here is a sample output in the file log.\+txt\+:
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{/*******************************<GINKGO LICENSE>******************************}}
-\DoxyCodeLine{\textcolor{comment}{Copyright (c) 2017-\/2020, the Ginkgo authors}}
+\DoxyCodeLine{\textcolor{comment}{Copyright (c) 2017-\/2021, the Ginkgo authors}}
 \DoxyCodeLine{\textcolor{comment}{All rights reserved.}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{Redistribution and use in source and binary forms, with or without}}
@@ -967,7 +995,7 @@ Here is a sample output in the file log.\+txt\+:
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType>}
-\DoxyCodeLine{\mbox{\hyperlink{namespacegko_adfcb75c44f6b6c701989419c166f6e7e}{gko::remove\_complex<ValueType>}} compute\_norm(\textcolor{keyword}{const} vec<ValueType> *b)}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} compute\_norm(\textcolor{keyword}{const} vec<ValueType> *b)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} exec = b-\/>get\_executor();}
 \DoxyCodeLine{    \textcolor{keyword}{auto} b\_norm = gko::initialize<real\_vec<ValueType>>(\{0.0\}, exec);}
@@ -977,7 +1005,7 @@ Here is a sample output in the file log.\+txt\+:
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType>}
-\DoxyCodeLine{\mbox{\hyperlink{namespacegko_adfcb75c44f6b6c701989419c166f6e7e}{gko::remove\_complex<ValueType>}} compute\_residual\_norm(}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} compute\_residual\_norm(}
 \DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *system\_matrix, \textcolor{keyword}{const} vec<ValueType> *b,}
 \DoxyCodeLine{    \textcolor{keyword}{const} vec<ValueType> *x)}
 \DoxyCodeLine{\{}
@@ -1218,7 +1246,7 @@ Here is a sample output in the file log.\+txt\+:
 \DoxyCodeLine{    \textcolor{keyword}{using} mtx = \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<ValueType, IndexType>}};}
 \DoxyCodeLine{    \textcolor{keyword}{using} solver = \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{gko::solver::Cg<ValueType>}};}
 \DoxyCodeLine{    \textcolor{keyword}{using} preconditioner = \mbox{\hyperlink{classgko_1_1matrix_1_1IdentityFactory}{gko::matrix::IdentityFactory<ValueType>}};}
-\DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_adfcb75c44f6b6c701989419c166f6e7e}{gko::remove\_complex<ValueType>}} reduction\_factor = 1e-\/12;}
+\DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} reduction\_factor = 1e-\/12;}
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} of\_name = \textcolor{stringliteral}{"log.txt"};}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -1226,17 +1254,33 @@ Here is a sample output in the file log.\+txt\+:
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::cout << \mbox{\hyperlink{classgko_1_1version__info_a6daeb8a087cfb57fa055526fc133d8eb}{gko::version\_info::get}}() << std::endl;}
 \DoxyCodeLine{}
-\DoxyCodeLine{    std::shared\_ptr<gko::Executor> exec;}
-\DoxyCodeLine{    \textcolor{keywordflow}{if} (argc == 1 || std::string(argv[1]) == \textcolor{stringliteral}{"reference"}) \{}
-\DoxyCodeLine{        exec = gko::ReferenceExecutor::create();}
-\DoxyCodeLine{    \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (argc > 1 \&\& std::string(argv[1]) == \textcolor{stringliteral}{"omp"}) \{}
-\DoxyCodeLine{        exec = \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}();}
-\DoxyCodeLine{    \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (argc > 1 \&\& std::string(argv[1]) == \textcolor{stringliteral}{"cuda"} \&\&}
-\DoxyCodeLine{               \mbox{\hyperlink{classgko_1_1CudaExecutor_aef0258494d14de0e56149b920c5173e5}{gko::CudaExecutor::get\_num\_devices}}() > 0) \{}
-\DoxyCodeLine{        exec = \mbox{\hyperlink{classgko_1_1CudaExecutor_aa577135e082f9be20617e9d66209ca25}{gko::CudaExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(), \textcolor{keyword}{true});}
-\DoxyCodeLine{    \} \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{        print\_usage(argv[0]);}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (argc == 2 \&\& (std::string(argv[1]) == \textcolor{stringliteral}{"-\/-\/help"})) \{}
+\DoxyCodeLine{        std::cerr << \textcolor{stringliteral}{"Usage: "} << argv[0] << \textcolor{stringliteral}{" [executor]"} << std::endl;}
+\DoxyCodeLine{        std::exit(-\/1);}
 \DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} executor\_string = argc >= 2 ? argv[1] : \textcolor{stringliteral}{"reference"};}
+\DoxyCodeLine{    std::map<std::string, std::function<std::shared\_ptr<gko::Executor>()>>}
+\DoxyCodeLine{        exec\_map\{}
+\DoxyCodeLine{            \{\textcolor{stringliteral}{"omp"}, [] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(); \}\},}
+\DoxyCodeLine{            \{\textcolor{stringliteral}{"cuda"},}
+\DoxyCodeLine{             [] \{}
+\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a5dcec3ca1c458382e01191b727959a81}{gko::CudaExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(),}
+\DoxyCodeLine{                                                  \textcolor{keyword}{true});}
+\DoxyCodeLine{             \}\},}
+\DoxyCodeLine{            \{\textcolor{stringliteral}{"hip"},}
+\DoxyCodeLine{             [] \{}
+\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_ad3a72bc42254fb8730bc2090147447d9}{gko::HipExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(),}
+\DoxyCodeLine{                                                 \textcolor{keyword}{true});}
+\DoxyCodeLine{             \}\},}
+\DoxyCodeLine{            \{\textcolor{stringliteral}{"dpcpp"},}
+\DoxyCodeLine{             [] \{}
+\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1DpcppExecutor_ac46044fcb00b2d224b45d93eaf8c579d}{gko::DpcppExecutor::create}}(0,}
+\DoxyCodeLine{                                                   \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}());}
+\DoxyCodeLine{             \}\},}
+\DoxyCodeLine{            \{\textcolor{stringliteral}{"reference"}, [] \{ \textcolor{keywordflow}{return} gko::ReferenceExecutor::create(); \}\}\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} exec = exec\_map.at(executor\_string)();  \textcolor{comment}{// throws if not valid}}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::string input\_mtx = \textcolor{stringliteral}{"data/A.mtx"};}
 \DoxyCodeLine{    \textcolor{keywordflow}{if} (argc == 3) \{}
@@ -1255,7 +1299,7 @@ Here is a sample output in the file log.\+txt\+:
 \DoxyCodeLine{    \textcolor{keyword}{auto} solver\_factory =}
 \DoxyCodeLine{        solver::build()}
 \DoxyCodeLine{            .with\_criteria(}
-\DoxyCodeLine{                \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNormReduction}{gko::stop::ResidualNormReduction<ValueType>::build}}()}
+\DoxyCodeLine{                \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
 \DoxyCodeLine{                    .with\_reduction\_factor(reduction\_factor)}
 \DoxyCodeLine{                    .on(exec),}
 \DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(max\_iters).on(}
@@ -1269,26 +1313,26 @@ Here is a sample output in the file log.\+txt\+:
 \DoxyCodeLine{        \textcolor{keyword}{auto} x\_clone = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(x);}
 \DoxyCodeLine{}
 \DoxyCodeLine{        solver\_factory-\/>generate(A)-\/>apply(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(b), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(x\_clone));}
-\DoxyCodeLine{        exec-\/>synchronize();}
+\DoxyCodeLine{        exec-\/>\mbox{\hyperlink{classgko_1_1Executor_a24eeee7648c0f0fd07c9866d07154875}{synchronize}}();}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{        \textcolor{keyword}{auto} x\_clone = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(x);}
 \DoxyCodeLine{}
-\DoxyCodeLine{        exec-\/>synchronize();}
+\DoxyCodeLine{        exec-\/>\mbox{\hyperlink{classgko_1_1Executor_a24eeee7648c0f0fd07c9866d07154875}{synchronize}}();}
 \DoxyCodeLine{        \textcolor{keyword}{auto} g\_tic = std::chrono::steady\_clock::now();}
 \DoxyCodeLine{        \textcolor{keyword}{auto} generated\_solver = solver\_factory-\/>generate(A);}
-\DoxyCodeLine{        exec-\/>synchronize();}
+\DoxyCodeLine{        exec-\/>\mbox{\hyperlink{classgko_1_1Executor_a24eeee7648c0f0fd07c9866d07154875}{synchronize}}();}
 \DoxyCodeLine{        \textcolor{keyword}{auto} g\_tac = std::chrono::steady\_clock::now();}
 \DoxyCodeLine{        \textcolor{keyword}{auto} generate\_time =}
 \DoxyCodeLine{            std::chrono::duration\_cast<std::chrono::nanoseconds>(g\_tac -\/ g\_tic);}
 \DoxyCodeLine{        output\_file << \textcolor{stringliteral}{"Generate time (ns): "} << generate\_time.count()}
 \DoxyCodeLine{                    << std::endl;}
 \DoxyCodeLine{}
-\DoxyCodeLine{        exec-\/>synchronize();}
+\DoxyCodeLine{        exec-\/>\mbox{\hyperlink{classgko_1_1Executor_a24eeee7648c0f0fd07c9866d07154875}{synchronize}}();}
 \DoxyCodeLine{        \textcolor{keyword}{auto} a\_tic = std::chrono::steady\_clock::now();}
 \DoxyCodeLine{        generated\_solver-\/>apply(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(b), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(x\_clone));}
-\DoxyCodeLine{        exec-\/>synchronize();}
+\DoxyCodeLine{        exec-\/>\mbox{\hyperlink{classgko_1_1Executor_a24eeee7648c0f0fd07c9866d07154875}{synchronize}}();}
 \DoxyCodeLine{        \textcolor{keyword}{auto} a\_tac = std::chrono::steady\_clock::now();}
 \DoxyCodeLine{        \textcolor{keyword}{auto} apply\_time =}
 \DoxyCodeLine{            std::chrono::duration\_cast<std::chrono::nanoseconds>(a\_tac -\/ a\_tic);}

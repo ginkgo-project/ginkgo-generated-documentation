@@ -24,7 +24,10 @@ var menudata={children:[
 {text:"Main Page",url:"index.html"},
 {text:"Tutorial",url:"https://github.com/ginkgo-project/ginkgo/wiki/Tutorial:-Building-a-Poisson-Solver"},
 {text:"Examples",url:"Examples.html"},
+{text:"Publications",url:"citing_ginkgo.html",children:[
 {text:"Citing Ginkgo",url:"citing_ginkgo.html"},
+{text:"Ginkgo White Paper",url:"https://www.arxiv-vanity.com/papers/2006.16852/"},
+{text:"Slides and Outreach",url:"https://github.com/ginkgo-project/outreach"}]},
 {text:"Contributing To Ginkgo",url:"contributing_guidelines.html"},
 {text:"Using Ginkgo",url:"install_ginkgo.html",children:[
 {text:"Installing Ginkgo",url:"install_ginkgo.html"},
@@ -47,6 +50,7 @@ var menudata={children:[
 {text:"m",url:"namespacemembers.html#index_m"},
 {text:"n",url:"namespacemembers.html#index_n"},
 {text:"o",url:"namespacemembers.html#index_o"},
+{text:"p",url:"namespacemembers.html#index_p"},
 {text:"r",url:"namespacemembers.html#index_r"},
 {text:"s",url:"namespacemembers.html#index_s"},
 {text:"t",url:"namespacemembers.html#index_t"},
@@ -61,6 +65,7 @@ var menudata={children:[
 {text:"l",url:"namespacemembers_func.html#index_l"},
 {text:"m",url:"namespacemembers_func.html#index_m"},
 {text:"o",url:"namespacemembers_func.html#index_o"},
+{text:"p",url:"namespacemembers_func.html#index_p"},
 {text:"r",url:"namespacemembers_func.html#index_r"},
 {text:"s",url:"namespacemembers_func.html#index_s"},
 {text:"t",url:"namespacemembers_func.html#index_t"},

@@ -20,7 +20,9 @@ Collaboration diagram for gko\+::matrix\+::Csr$<$ Value\+Type, Index\+Type $>$\+
 \begin{DoxyCompactList}\small\item\em Creates an automatical strategy with C\+U\+DA executor. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1automatical_a9ec5b221681ed8e5f33fd77c9b781690}{automatical}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1HipExecutor}{Hip\+Executor}} $>$ exec)
 \begin{DoxyCompactList}\small\item\em Creates an automatical strategy with H\+IP executor. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1automatical_aded15aecba0706d609e7557a585a686a}{automatical}} (int64\+\_\+t nwarps, int warp\+\_\+size=32, bool cuda\+\_\+strategy=true)
+\mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1automatical_a97deccea06b6b863118fee067662ae4e}{automatical}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1DpcppExecutor}{Dpcpp\+Executor}} $>$ exec)
+\begin{DoxyCompactList}\small\item\em Creates an automatical strategy with Dpcpp executor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1automatical_a270b30353a7069d11d44bad9f05d0a1d}{automatical}} (int64\+\_\+t nwarps, int warp\+\_\+size=32, bool cuda\+\_\+strategy=true, std\+::string strategy\+\_\+name=\char`\"{}none\char`\"{})
 \begin{DoxyCompactList}\small\item\em Creates an automatical strategy with specified parameters. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1automatical_aefa241047539f2ee7784a54cf5051720}{process}} (const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ index\+\_\+type $>$ \&mtx\+\_\+row\+\_\+ptrs, \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ index\+\_\+type $>$ $\ast$mtx\+\_\+srow) override
 \begin{DoxyCompactList}\small\item\em Computes srow according to row pointers. \end{DoxyCompactList}\item 
@@ -38,13 +40,13 @@ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1strategy
 const index\+\_\+type {\bfseries nvidia\+\_\+row\+\_\+len\+\_\+limit} = 1024
 \item 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_1_1automatical_ac1f75409470cd36a437d76a2bc4e79fd}\label{classgko_1_1matrix_1_1Csr_1_1automatical_ac1f75409470cd36a437d76a2bc4e79fd}} 
-const index\+\_\+type {\bfseries nvidia\+\_\+nnz\+\_\+limit} = 1e6
+const index\+\_\+type {\bfseries nvidia\+\_\+nnz\+\_\+limit} \{static\+\_\+cast$<$index\+\_\+type$>$(1e6)\}
 \item 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_1_1automatical_a21ff9463860ca7269f16f5cee771d999}\label{classgko_1_1matrix_1_1Csr_1_1automatical_a21ff9463860ca7269f16f5cee771d999}} 
 const index\+\_\+type {\bfseries amd\+\_\+row\+\_\+len\+\_\+limit} = 768
 \item 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_1_1automatical_a2cdf9df0edbbaff89c3bb7e5979953c7}\label{classgko_1_1matrix_1_1Csr_1_1automatical_a2cdf9df0edbbaff89c3bb7e5979953c7}} 
-const index\+\_\+type {\bfseries amd\+\_\+nnz\+\_\+limit} = 1e8
+const index\+\_\+type {\bfseries amd\+\_\+nnz\+\_\+limit} \{static\+\_\+cast$<$index\+\_\+type$>$(1e8)\}
 \end{DoxyCompactItemize}
 
 
@@ -52,7 +54,7 @@ const index\+\_\+type {\bfseries amd\+\_\+nnz\+\_\+limit} = 1e8
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_1_1automatical_a5e3cff9dc55b22b01ddf3db31731b267}\label{classgko_1_1matrix_1_1Csr_1_1automatical_a5e3cff9dc55b22b01ddf3db31731b267}} 
 \index{gko::matrix::Csr$<$ ValueType, IndexType $>$::automatical@{gko::matrix::Csr$<$ ValueType, IndexType $>$::automatical}!automatical@{automatical}}
 \index{automatical@{automatical}!gko::matrix::Csr$<$ ValueType, IndexType $>$::automatical@{gko::matrix::Csr$<$ ValueType, IndexType $>$::automatical}}
-\doxysubsubsection{\texorpdfstring{automatical()}{automatical()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+\doxysubsubsection{\texorpdfstring{automatical()}{automatical()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
 \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko\+::matrix\+::\+Csr}}$<$ Value\+Type, Index\+Type $>$\+::automatical\+::automatical (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1CudaExecutor}{Cuda\+Executor}} $>$}]{exec }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
@@ -68,7 +70,7 @@ Creates an automatical strategy with C\+U\+DA executor.
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_1_1automatical_a9ec5b221681ed8e5f33fd77c9b781690}\label{classgko_1_1matrix_1_1Csr_1_1automatical_a9ec5b221681ed8e5f33fd77c9b781690}} 
 \index{gko::matrix::Csr$<$ ValueType, IndexType $>$::automatical@{gko::matrix::Csr$<$ ValueType, IndexType $>$::automatical}!automatical@{automatical}}
 \index{automatical@{automatical}!gko::matrix::Csr$<$ ValueType, IndexType $>$::automatical@{gko::matrix::Csr$<$ ValueType, IndexType $>$::automatical}}
-\doxysubsubsection{\texorpdfstring{automatical()}{automatical()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+\doxysubsubsection{\texorpdfstring{automatical()}{automatical()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
 \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko\+::matrix\+::\+Csr}}$<$ Value\+Type, Index\+Type $>$\+::automatical\+::automatical (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1HipExecutor}{Hip\+Executor}} $>$}]{exec }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
@@ -81,12 +83,31 @@ Creates an automatical strategy with H\+IP executor.
 {\em exec} & the H\+IP executor \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_1_1automatical_aded15aecba0706d609e7557a585a686a}\label{classgko_1_1matrix_1_1Csr_1_1automatical_aded15aecba0706d609e7557a585a686a}} 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_1_1automatical_a97deccea06b6b863118fee067662ae4e}\label{classgko_1_1matrix_1_1Csr_1_1automatical_a97deccea06b6b863118fee067662ae4e}} 
 \index{gko::matrix::Csr$<$ ValueType, IndexType $>$::automatical@{gko::matrix::Csr$<$ ValueType, IndexType $>$::automatical}!automatical@{automatical}}
 \index{automatical@{automatical}!gko::matrix::Csr$<$ ValueType, IndexType $>$::automatical@{gko::matrix::Csr$<$ ValueType, IndexType $>$::automatical}}
-\doxysubsubsection{\texorpdfstring{automatical()}{automatical()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+\doxysubsubsection{\texorpdfstring{automatical()}{automatical()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
-\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko\+::matrix\+::\+Csr}}$<$ Value\+Type, Index\+Type $>$\+::automatical\+::automatical (\begin{DoxyParamCaption}\item[{int64\+\_\+t}]{nwarps,  }\item[{int}]{warp\+\_\+size = {\ttfamily 32},  }\item[{bool}]{cuda\+\_\+strategy = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko\+::matrix\+::\+Csr}}$<$ Value\+Type, Index\+Type $>$\+::automatical\+::automatical (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1DpcppExecutor}{Dpcpp\+Executor}} $>$}]{exec }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates an automatical strategy with Dpcpp executor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & the Dpcpp executor\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+T\+O\+DO\+: porting -\/ we hardcode the subgroup size is 16 and the number of threads in a S\+I\+MD unit is 7 
+\end{DoxyNote}
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_1_1automatical_a270b30353a7069d11d44bad9f05d0a1d}\label{classgko_1_1matrix_1_1Csr_1_1automatical_a270b30353a7069d11d44bad9f05d0a1d}} 
+\index{gko::matrix::Csr$<$ ValueType, IndexType $>$::automatical@{gko::matrix::Csr$<$ ValueType, IndexType $>$::automatical}!automatical@{automatical}}
+\index{automatical@{automatical}!gko::matrix::Csr$<$ ValueType, IndexType $>$::automatical@{gko::matrix::Csr$<$ ValueType, IndexType $>$::automatical}}
+\doxysubsubsection{\texorpdfstring{automatical()}{automatical()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko\+::matrix\+::\+Csr}}$<$ Value\+Type, Index\+Type $>$\+::automatical\+::automatical (\begin{DoxyParamCaption}\item[{int64\+\_\+t}]{nwarps,  }\item[{int}]{warp\+\_\+size = {\ttfamily 32},  }\item[{bool}]{cuda\+\_\+strategy = {\ttfamily true},  }\item[{std\+::string}]{strategy\+\_\+name = {\ttfamily \char`\"{}none\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
