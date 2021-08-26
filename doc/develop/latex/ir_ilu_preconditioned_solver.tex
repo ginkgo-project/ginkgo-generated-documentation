@@ -115,12 +115,9 @@ Create R\+HS and initial guess as 1
 \DoxyCodeLine{\textcolor{keywordflow}{for} (\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} i = 0; i < num\_rows; i++) \{}
 \DoxyCodeLine{    host\_x-\/>at(i, 0) = 1.;}
 \DoxyCodeLine{\}}
-\DoxyCodeLine{\textcolor{keyword}{auto} x = vec::create(exec);}
-\DoxyCodeLine{\textcolor{keyword}{auto} b = vec::create(exec);}
-\DoxyCodeLine{x-\/>copy\_from(host\_x.get());}
-\DoxyCodeLine{b-\/>copy\_from(host\_x.get());}
-\DoxyCodeLine{\textcolor{keyword}{auto} clone\_x = vec::create(exec);}
-\DoxyCodeLine{clone\_x-\/>copy\_from(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(x));}
+\DoxyCodeLine{\textcolor{keyword}{auto} x = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(exec, host\_x);}
+\DoxyCodeLine{\textcolor{keyword}{auto} b = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(exec, host\_x);}
+\DoxyCodeLine{\textcolor{keyword}{auto} clone\_x = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(exec, x);}
 \end{DoxyCode}
 
 
@@ -410,12 +407,9 @@ This is the expected output\+:
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} i = 0; i < num\_rows; i++) \{}
 \DoxyCodeLine{        host\_x-\/>at(i, 0) = 1.;}
 \DoxyCodeLine{    \}}
-\DoxyCodeLine{    \textcolor{keyword}{auto} x = vec::create(exec);}
-\DoxyCodeLine{    \textcolor{keyword}{auto} b = vec::create(exec);}
-\DoxyCodeLine{    x-\/>copy\_from(host\_x.get());}
-\DoxyCodeLine{    b-\/>copy\_from(host\_x.get());}
-\DoxyCodeLine{    \textcolor{keyword}{auto} clone\_x = vec::create(exec);}
-\DoxyCodeLine{    clone\_x-\/>copy\_from(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(x));}
+\DoxyCodeLine{    \textcolor{keyword}{auto} x = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(exec, host\_x);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} b = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(exec, host\_x);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} clone\_x = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(exec, x);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} par\_ilu\_fact =}
 \DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1factorization_1_1ParIlu}{gko::factorization::ParIlu<ValueType, IndexType>::build}}().on(exec);}

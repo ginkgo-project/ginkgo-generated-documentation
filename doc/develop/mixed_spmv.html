@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/359075507 branch based on develop. Ginkgo version 1.5.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/359716700 branch based on develop. Ginkgo version 1.5.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -261,9 +261,8 @@ $(function() {
 <div class="line">    host_b-&gt;at(i, 0) = get_rand_value&lt;HighPrecision&gt;(dist, rand_engine);</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>copy the data from host to device</p>
-<div class="fragment"><div class="line"><span class="keyword">auto</span> hp_b = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">share</a>(hp_vec::create(exec));</div>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> hp_b = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">share</a>(<a class="code" href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a>(exec, host_b));</div>
 <div class="line"><span class="keyword">auto</span> lp_b = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">share</a>(lp_vec::create(exec));</div>
-<div class="line">hp_b-&gt;copy_from(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(host_b));</div>
 <div class="line">lp_b-&gt;copy_from(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(hp_b));</div>
 </div><!-- fragment --><p>create several result x vector in different precision</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> hp_x = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">share</a>(hp_vec::create(exec, x_dim));</div>
@@ -483,9 +482,8 @@ $(function() {
 <div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; host_b-&gt;get_size()[0]; i++) {</div>
 <div class="line">        host_b-&gt;at(i, 0) = get_rand_value&lt;HighPrecision&gt;(dist, rand_engine);</div>
 <div class="line">    }</div>
-<div class="line">    <span class="keyword">auto</span> hp_b = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">share</a>(hp_vec::create(exec));</div>
+<div class="line">    <span class="keyword">auto</span> hp_b = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">share</a>(<a class="code" href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a>(exec, host_b));</div>
 <div class="line">    <span class="keyword">auto</span> lp_b = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">share</a>(lp_vec::create(exec));</div>
-<div class="line">    hp_b-&gt;copy_from(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(host_b));</div>
 <div class="line">    lp_b-&gt;copy_from(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(hp_b));</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">auto</span> hp_x = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">share</a>(hp_vec::create(exec, x_dim));</div>
@@ -547,6 +545,7 @@ $(function() {
 <div class="ttc" id="anamespacegko_html_ae749a5ea11a93c1bcc9158d9a6e9fb68af1f713c9e000f5d3f280adbd124df4f5"><div class="ttname"><a href="namespacegko.html#ae749a5ea11a93c1bcc9158d9a6e9fb68af1f713c9e000f5d3f280adbd124df4f5">gko::layout_type::array</a></div><div class="ttdoc">The matrix should be written as dense matrix in column-major order.</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Dense_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Dense.html">gko::matrix::Dense</a></div><div class="ttdoc">Dense is a matrix format which explicitly stores all values of the matrix.</div><div class="ttdef"><b>Definition:</b> coo.hpp:55</div></div>
 <div class="ttc" id="aclassgko_1_1OmpExecutor_html_a33ca05fdd0fc928ee262fc9425304874"><div class="ttname"><a href="classgko_1_1OmpExecutor.html#a33ca05fdd0fc928ee262fc9425304874">gko::OmpExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; OmpExecutor &gt; create()</div><div class="ttdoc">Creates a new OmpExecutor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1163</div></div>
+<div class="ttc" id="anamespacegko_html_a1beb80750459e4201aa9d882d2d074c3"><div class="ttname"><a href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a></div><div class="ttdeci">detail::cloned_type&lt; Pointer &gt; clone(const Pointer &amp;p)</div><div class="ttdoc">Creates a unique clone of the object pointed to by p.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:160</div></div>
 <div class="ttc" id="aclassgko_1_1version__info_html_a6daeb8a087cfb57fa055526fc133d8eb"><div class="ttname"><a href="classgko_1_1version__info.html#a6daeb8a087cfb57fa055526fc133d8eb">gko::version_info::get</a></div><div class="ttdeci">static const version_info &amp; get()</div><div class="ttdoc">Returns an instance of version_info.</div><div class="ttdef"><b>Definition:</b> version.hpp:168</div></div>
 <div class="ttc" id="anamespacegko_html_a4edc2273b5627ec552ea423b60493be3"><div class="ttname"><a href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">gko::lend</a></div><div class="ttdeci">std::enable_if&lt; detail::have_ownership_s&lt; Pointer &gt;::value, detail::pointee&lt; Pointer &gt; * &gt;::type lend(const Pointer &amp;p)</div><div class="ttdoc">Returns a non-owning (plain) pointer to the object pointed to by p.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:253</div></div>
 <div class="ttc" id="astructgko_1_1dim_html"><div class="ttname"><a href="structgko_1_1dim.html">gko::dim&lt; 2 &gt;</a></div></div>

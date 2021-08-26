@@ -304,9 +304,8 @@ copy the data from host to device
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{auto} hp\_b = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{share}}(hp\_vec::create(exec));}
+\DoxyCodeLine{\textcolor{keyword}{auto} hp\_b = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{share}}(\mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(exec, host\_b));}
 \DoxyCodeLine{\textcolor{keyword}{auto} lp\_b = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{share}}(lp\_vec::create(exec));}
-\DoxyCodeLine{hp\_b-\/>copy\_from(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(host\_b));}
 \DoxyCodeLine{lp\_b-\/>copy\_from(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(hp\_b));}
 \end{DoxyCode}
 
@@ -586,9 +585,8 @@ The following is the expected result (omp)\+:
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < host\_b-\/>get\_size()[0]; i++) \{}
 \DoxyCodeLine{        host\_b-\/>at(i, 0) = get\_rand\_value<HighPrecision>(dist, rand\_engine);}
 \DoxyCodeLine{    \}}
-\DoxyCodeLine{    \textcolor{keyword}{auto} hp\_b = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{share}}(hp\_vec::create(exec));}
+\DoxyCodeLine{    \textcolor{keyword}{auto} hp\_b = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{share}}(\mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(exec, host\_b));}
 \DoxyCodeLine{    \textcolor{keyword}{auto} lp\_b = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{share}}(lp\_vec::create(exec));}
-\DoxyCodeLine{    hp\_b-\/>copy\_from(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(host\_b));}
 \DoxyCodeLine{    lp\_b-\/>copy\_from(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(hp\_b));}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} hp\_x = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{share}}(hp\_vec::create(exec, x\_dim));}
