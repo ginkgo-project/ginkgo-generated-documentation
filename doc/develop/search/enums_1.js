@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['isai_5ftype_1842',['isai_type',['../namespacegko_1_1preconditioner.html#a918dfc2ae55135bbd6e1e01d0c6031ab',1,'gko::preconditioner']]]
+  ['cycle_1907',['cycle',['../namespacegko_1_1solver_1_1multigrid.html#a4f89fc8a003f879d4ff2f482c2fbab68',1,'gko::solver::multigrid']]]
 ];

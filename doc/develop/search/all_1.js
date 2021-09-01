@@ -19,5 +19,6 @@ var searchData=
   ['block_5fpointers_56',['block_pointers',['../structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type.html#ab70db5d25c2efd13579170b28218ea66',1,'gko::preconditioner::Jacobi::parameters_type']]],
   ['blocksizeerror_57',['BlockSizeError',['../classgko_1_1BlockSizeError.html',1,'gko::BlockSizeError&lt; IndexType &gt;'],['../classgko_1_1BlockSizeError.html#a861999cfafdd726814ef4bcd06734bd7',1,'gko::BlockSizeError::BlockSizeError()']]],
   ['both_5ffactors_58',['both_factors',['../structgko_1_1factorization_1_1Ic_1_1parameters__type.html#afb4c7814334072ab39c2e2b04925cdc4',1,'gko::factorization::Ic::parameters_type::both_factors()'],['../structgko_1_1factorization_1_1ParIc_1_1parameters__type.html#abfa3c5afbc05b7c25b09ae225e6c966a',1,'gko::factorization::ParIc::parameters_type::both_factors()']]],
-  ['byte_5fsize_59',['byte_size',['../namespacegko.html#acae2e648052ec788bd8ba9e0192652a6',1,'gko']]]
+  ['build_5fsmoother_59',['build_smoother',['../namespacegko_1_1solver.html#ac565c4b95ad0c67492073d993a9170cc',1,'gko::solver::build_smoother(std::shared_ptr&lt; const LinOpFactory &gt; factory, size_type iteration=1, ValueType relaxation_factor=0.9)'],['../namespacegko_1_1solver.html#aadb962ce0b5566e83fcdb22dda6e3cf8',1,'gko::solver::build_smoother(std::shared_ptr&lt; const LinOp &gt; solver, size_type iteration=1, ValueType relaxation_factor=0.9)']]],
+  ['byte_5fsize_60',['byte_size',['../namespacegko.html#acae2e648052ec788bd8ba9e0192652a6',1,'gko']]]
 ];

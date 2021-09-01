@@ -5,6 +5,11 @@
 The ginkgo Solve namespace.  
 
 
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacegko_1_1solver_1_1multigrid}{multigrid}}
+\begin{DoxyCompactList}\small\item\em The solver multigrid namespace. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
@@ -32,6 +37,8 @@ class \mbox{\hyperlink{classgko_1_1solver_1_1Ir}{Ir}}
 \begin{DoxyCompactList}\small\item\em Iterative refinement (IR) is an iterative method that uses another coarse method to approximate the error of the current solution via the current residual. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1solver_1_1LowerTrs}{Lower\+Trs}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1solver_1_1LowerTrs}{Lower\+Trs}} is the triangular solver which solves the system L x = b, when L is a lower triangular matrix. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1solver_1_1Multigrid}{Multigrid}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1solver_1_1Multigrid}{Multigrid}} methods have a hierarchy of many levels, whose corase level is a subset of the fine level, of the problem. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1solver_1_1UpperTrs}{Upper\+Trs}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1solver_1_1UpperTrs}{Upper\+Trs}} is the triangular solver which solves the system U x = b, when U is an upper triangular matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Typedefs}
@@ -40,6 +47,13 @@ class \mbox{\hyperlink{classgko_1_1solver_1_1UpperTrs}{Upper\+Trs}}
 \mbox{\Hypertarget{namespacegko_1_1solver_a5fcaaa5232692e8fa4425aacc0fa03db}\label{namespacegko_1_1solver_a5fcaaa5232692e8fa4425aacc0fa03db}} 
 {\footnotesize template$<$typename Value\+Type  = default\+\_\+precision$>$ }\\using {\bfseries Richardson} = \mbox{\hyperlink{classgko_1_1solver_1_1Ir}{Ir}}$<$ Value\+Type $>$
 \end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Value\+Type $>$ }\\auto \mbox{\hyperlink{namespacegko_1_1solver_ac565c4b95ad0c67492073d993a9170cc}{build\+\_\+smoother}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOpFactory}{Lin\+Op\+Factory}} $>$ factory, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} iteration=1, Value\+Type relaxation\+\_\+factor=0.\+9)
+\begin{DoxyCompactList}\small\item\em build\+\_\+smoother gives a shortcut to build a smoother by I\+R(\+Richardson) with limited stop criterion(iterations and relacation\+\_\+factor). \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Value\+Type $>$ }\\auto \mbox{\hyperlink{namespacegko_1_1solver_aadb962ce0b5566e83fcdb22dda6e3cf8}{build\+\_\+smoother}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ solver, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} iteration=1, Value\+Type relaxation\+\_\+factor=0.\+9)
+\begin{DoxyCompactList}\small\item\em build\+\_\+smoother gives a shortcut to build a smoother by I\+R(\+Richardson) with limited stop criterion(iterations and relacation\+\_\+factor). \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -52,3 +66,54 @@ constexpr \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\
 The ginkgo Solve namespace. 
 
 The ginkgo Solver namespace. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacegko_1_1solver_aadb962ce0b5566e83fcdb22dda6e3cf8}\label{namespacegko_1_1solver_aadb962ce0b5566e83fcdb22dda6e3cf8}} 
+\index{gko::solver@{gko::solver}!build\_smoother@{build\_smoother}}
+\index{build\_smoother@{build\_smoother}!gko::solver@{gko::solver}}
+\doxysubsubsection{\texorpdfstring{build\_smoother()}{build\_smoother()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type $>$ \\
+auto gko\+::solver\+::build\+\_\+smoother (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$}]{solver,  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{iteration = {\ttfamily 1},  }\item[{Value\+Type}]{relaxation\+\_\+factor = {\ttfamily 0.9} }\end{DoxyParamCaption})}
+
+
+
+build\+\_\+smoother gives a shortcut to build a smoother by I\+R(\+Richardson) with limited stop criterion(iterations and relacation\+\_\+factor). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em solver} & the shared pointer of solver \\
+\hline
+{\em iteration} & the maximum number of iteraion, which default is 1 \\
+\hline
+{\em relaxation\+\_\+factor} & the relaxation factor for Richardson\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the pointer of Ir(\+Richardson)
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+this is the overload function for \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}. 
+\end{DoxyNote}
+\mbox{\Hypertarget{namespacegko_1_1solver_ac565c4b95ad0c67492073d993a9170cc}\label{namespacegko_1_1solver_ac565c4b95ad0c67492073d993a9170cc}} 
+\index{gko::solver@{gko::solver}!build\_smoother@{build\_smoother}}
+\index{build\_smoother@{build\_smoother}!gko::solver@{gko::solver}}
+\doxysubsubsection{\texorpdfstring{build\_smoother()}{build\_smoother()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type $>$ \\
+auto gko\+::solver\+::build\+\_\+smoother (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOpFactory}{Lin\+Op\+Factory}} $>$}]{factory,  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{iteration = {\ttfamily 1},  }\item[{Value\+Type}]{relaxation\+\_\+factor = {\ttfamily 0.9} }\end{DoxyParamCaption})}
+
+
+
+build\+\_\+smoother gives a shortcut to build a smoother by I\+R(\+Richardson) with limited stop criterion(iterations and relacation\+\_\+factor). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em factory} & the shared pointer of factory \\
+\hline
+{\em iteration} & the maximum number of iteraion, which default is 1 \\
+\hline
+{\em relaxation\+\_\+factor} & the relaxation factor for Richardson\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the pointer of Ir(\+Richardson) 
+\end{DoxyReturn}

@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/363002002 branch based on develop. Ginkgo version 1.5.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/363426142 branch based on develop. Ginkgo version 1.5.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -98,6 +98,10 @@ template&lt;typename... Args&gt; </td></tr>
 template&lt;typename... Args&gt; </td></tr>
 <tr class="memitem:a7c0098b5ac45480b0f893c71dcfe5e74"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>with_deterministic</b> (Args &amp;&amp;... _value) const -&gt; const std::decay_t&lt; decltype(*this)&gt; &amp;</td></tr>
 <tr class="separator:a7c0098b5ac45480b0f893c71dcfe5e74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c831e392fcd30a17c0bdba613169f26"><td class="memTemplParams" colspan="2"><a id="a7c831e392fcd30a17c0bdba613169f26"></a>
+template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a7c831e392fcd30a17c0bdba613169f26"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>with_skip_sorting</b> (Args &amp;&amp;... _value) const -&gt; const std::decay_t&lt; decltype(*this)&gt; &amp;</td></tr>
+<tr class="separator:a7c831e392fcd30a17c0bdba613169f26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classgko_1_1enable__parameters__type"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classgko_1_1enable__parameters__type')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classgko_1_1enable__parameters__type.html">gko::enable_parameters_type&lt; parameters_type, Factory &gt;</a></td></tr>
 <tr class="memitem:a07bc1963e83201576761e013f22ce621 inherit pub_methods_classgko_1_1enable__parameters__type"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; Factory &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1enable__parameters__type.html#a07bc1963e83201576761e013f22ce621">on</a> (std::shared_ptr&lt; const <a class="el" href="classgko_1_1Executor.html">Executor</a> &gt; exec) const</td></tr>
 <tr class="memdesc:a07bc1963e83201576761e013f22ce621 inherit pub_methods_classgko_1_1enable__parameters__type"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new factory on the specified executor.  <a href="classgko_1_1enable__parameters__type.html#a07bc1963e83201576761e013f22ce621">More...</a><br /></td></tr>
@@ -114,6 +118,9 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:ab2ab44e115df987f8b368cd1fe28db4b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgko_1_1multigrid_1_1AmgxPgm_1_1parameters__type.html#ab2ab44e115df987f8b368cd1fe28db4b">deterministic</a> { false }</td></tr>
 <tr class="memdesc:ab2ab44e115df987f8b368cd1fe28db4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use the deterministic assign_to_exist_agg method or not.  <a href="structgko_1_1multigrid_1_1AmgxPgm_1_1parameters__type.html#ab2ab44e115df987f8b368cd1fe28db4b">More...</a><br /></td></tr>
 <tr class="separator:ab2ab44e115df987f8b368cd1fe28db4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac14371dff307e265e3a390b7e228b8f1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgko_1_1multigrid_1_1AmgxPgm_1_1parameters__type.html#ac14371dff307e265e3a390b7e228b8f1">skip_sorting</a> { false }</td></tr>
+<tr class="memdesc:ac14371dff307e265e3a390b7e228b8f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <code>system_matrix</code>, which will be given to this factory, must be sorted (first by row, then by column) in order for the algorithm to work.  <a href="structgko_1_1multigrid_1_1AmgxPgm_1_1parameters__type.html#ac14371dff307e265e3a390b7e228b8f1">More...</a><br /></td></tr>
+<tr class="separator:ac14371dff307e265e3a390b7e228b8f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -201,6 +208,33 @@ template&lt;typename ValueType  = default_precision, typename IndexType  = int32
 
 <p>The maximum ratio of unassigned number, which is valid in the interval 0.0 ~ 1.0. </p>
 <p>We use the same default value as NVIDIA AMGX Reference Manual (October 2017, API Version 2, <a href="https://github.com/NVIDIA/AMGX/blob/main/doc/AMGX_Reference.pdf">https://github.com/NVIDIA/AMGX/blob/main/doc/AMGX_Reference.pdf</a>). </p>
+
+</div>
+</div>
+<a id="ac14371dff307e265e3a390b7e228b8f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac14371dff307e265e3a390b7e228b8f1">&#9670;&nbsp;</a></span>skip_sorting</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ValueType  = default_precision, typename IndexType  = int32&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classgko_1_1multigrid_1_1AmgxPgm.html">gko::multigrid::AmgxPgm</a>&lt; ValueType, IndexType &gt;::parameters_type::skip_sorting { false }</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">mutable</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The <code>system_matrix</code>, which will be given to this factory, must be sorted (first by row, then by column) in order for the algorithm to work. </p>
+<p>If it is known that the matrix will be sorted, this parameter can be set to <code>true</code> to skip the sorting (therefore, shortening the runtime). However, if it is unknown or if the matrix is known to be not sorted, it must remain <code>false</code>, otherwise, this multigrid_level might be incorrect. </p>
 
 </div>
 </div>
