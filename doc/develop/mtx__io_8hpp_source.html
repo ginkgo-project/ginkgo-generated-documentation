@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/363426142 branch based on develop. Ginkgo version 1.5.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/363787367 branch based on develop. Ginkgo version 1.5.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -119,7 +119,7 @@ $(function() {
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType = default_precision, <span class="keyword">typename</span> IndexType = <span class="keywordtype">int</span>32&gt;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;matrix_data&lt;ValueType, IndexType&gt; <a class="code" href="namespacegko.html#a0b476e0e3df616b08efe85000bff8da0">read_raw</a>(std::istream &amp;is);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;matrix_data&lt;ValueType, IndexType&gt; <a class="code" href="namespacegko.html#a0b476e0e3df616b08efe85000bff8da0">read_raw</a>(std::istream&amp; is);</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
 <div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="namespacegko.html#ae749a5ea11a93c1bcc9158d9a6e9fb68">   67</a></span>&#160;<span class="keyword">enum class</span> <a class="code" href="namespacegko.html#ae749a5ea11a93c1bcc9158d9a6e9fb68">layout_type</a> {</div>
@@ -129,12 +129,12 @@ $(function() {
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType, <span class="keyword">typename</span> IndexType&gt;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keywordtype">void</span> <a class="code" href="namespacegko.html#ab31feb99c64fc6df58ac09abd4af69b6">write_raw</a>(std::ostream &amp;os, <span class="keyword">const</span> matrix_data&lt;ValueType, IndexType&gt; &amp;data,</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keywordtype">void</span> <a class="code" href="namespacegko.html#ab31feb99c64fc6df58ac09abd4af69b6">write_raw</a>(std::ostream&amp; os, <span class="keyword">const</span> matrix_data&lt;ValueType, IndexType&gt;&amp; data,</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;               <a class="code" href="namespacegko.html#ae749a5ea11a93c1bcc9158d9a6e9fb68">layout_type</a> layout = <a class="code" href="namespacegko.html#ae749a5ea11a93c1bcc9158d9a6e9fb68af1f713c9e000f5d3f280adbd124df4f5">layout_type::array</a>);</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> MatrixType, <span class="keyword">typename</span> StreamType, <span class="keyword">typename</span>... MatrixArgs&gt;</div>
-<div class="line"><a name="l00113"></a><span class="lineno"><a class="line" href="namespacegko.html#a92cf0178c1c55419d32d2bb527e57e5b">  113</a></span>&#160;<span class="keyword">inline</span> std::unique_ptr&lt;MatrixType&gt; <a class="code" href="namespacegko.html#a92cf0178c1c55419d32d2bb527e57e5b">read</a>(StreamType &amp;&amp;is, MatrixArgs &amp;&amp;... args)</div>
+<div class="line"><a name="l00113"></a><span class="lineno"><a class="line" href="namespacegko.html#a92cf0178c1c55419d32d2bb527e57e5b">  113</a></span>&#160;<span class="keyword">inline</span> std::unique_ptr&lt;MatrixType&gt; <a class="code" href="namespacegko.html#a92cf0178c1c55419d32d2bb527e57e5b">read</a>(StreamType&amp;&amp; is, MatrixArgs&amp;&amp;... args)</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;{</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keyword">auto</span> mtx = MatrixType::create(std::forward&lt;MatrixArgs&gt;(args)...);</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    mtx-&gt;read(<a class="code" href="namespacegko.html#a0b476e0e3df616b08efe85000bff8da0">read_raw</a>&lt;<span class="keyword">typename</span> MatrixType::value_type,</div>
@@ -144,7 +144,7 @@ $(function() {
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> MatrixType, <span class="keyword">typename</span> StreamType&gt;</div>
-<div class="line"><a name="l00134"></a><span class="lineno"><a class="line" href="namespacegko.html#a859dc47a462721d83728d91ab7fa2148">  134</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="namespacegko.html#a859dc47a462721d83728d91ab7fa2148">write</a>(StreamType &amp;&amp;os, MatrixType *matrix,</div>
+<div class="line"><a name="l00134"></a><span class="lineno"><a class="line" href="namespacegko.html#a859dc47a462721d83728d91ab7fa2148">  134</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="namespacegko.html#a859dc47a462721d83728d91ab7fa2148">write</a>(StreamType&amp;&amp; os, MatrixType* matrix,</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                  <a class="code" href="namespacegko.html#ae749a5ea11a93c1bcc9158d9a6e9fb68">layout_type</a> layout = <a class="code" href="namespacegko.html#ae749a5ea11a93c1bcc9158d9a6e9fb68af1f713c9e000f5d3f280adbd124df4f5">layout_type::array</a>)</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;{</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    <a class="code" href="structgko_1_1matrix__data.html">matrix_data</a>&lt;<span class="keyword">typename</span> MatrixType::value_type,</div>

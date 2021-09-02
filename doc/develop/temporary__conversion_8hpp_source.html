@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/363426142 branch based on develop. Ginkgo version 1.5.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/363787367 branch based on develop. Ginkgo version 1.5.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -125,8 +125,8 @@ $(function() {
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> CopyType, <span class="keyword">typename</span> OrigType&gt;</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">class </span>convert_back_deleter {</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keyword">using</span> pointer = CopyType *;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keyword">using</span> original_pointer = OrigType *;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keyword">using</span> pointer = CopyType*;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keyword">using</span> original_pointer = OrigType*;</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    convert_back_deleter(original_pointer original) : original_{original} {}</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
@@ -145,8 +145,8 @@ $(function() {
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> CopyType, <span class="keyword">typename</span> OrigType&gt;</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="keyword">class </span>convert_back_deleter&lt;const CopyType, const OrigType&gt; {</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keyword">using</span> pointer = <span class="keyword">const</span> CopyType *;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keyword">using</span> original_pointer = <span class="keyword">const</span> OrigType *;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keyword">using</span> pointer = <span class="keyword">const</span> CopyType*;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keyword">using</span> original_pointer = <span class="keyword">const</span> OrigType*;</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    convert_back_deleter(original_pointer) {}</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordtype">void</span> operator()(pointer ptr)<span class="keyword"> const </span>{ <span class="keyword">delete</span> ptr; }</div>
@@ -156,8 +156,8 @@ $(function() {
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span>... ConversionCandidates&gt;</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="keyword">struct </span>conversion_helper {</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> TargetType, <span class="keyword">typename</span> MaybeConstLinOp&gt;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;TargetType, std::function&lt;void(TargetType *)&gt;&gt;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    convert(MaybeConstLinOp *obj)</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;TargetType, std::function&lt;void(TargetType*)&gt;&gt;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    convert(MaybeConstLinOp* obj)</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    {</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        <span class="keywordflow">return</span> convert_impl&lt;TargetType, MaybeConstLinOp,</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                            ConversionCandidates...&gt;(obj);</div>
@@ -165,15 +165,15 @@ $(function() {
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> TargetType, <span class="keyword">typename</span> MaybeConstLinOp,</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;              <span class="keyword">typename</span> FirstCandidate, <span class="keyword">typename</span>... TrailingCandidates&gt;</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;TargetType, std::function&lt;void(TargetType *)&gt;&gt;</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    convert_impl(MaybeConstLinOp *obj)</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;TargetType, std::function&lt;void(TargetType*)&gt;&gt;</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    convert_impl(MaybeConstLinOp* obj)</div>
 <div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    {</div>
 <div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        <span class="comment">// make candidate_type conditionally const based on whether obj is const</span></div>
 <div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        <span class="keyword">using</span> candidate_type =</div>
 <div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            std::conditional_t&lt;std::is_const&lt;MaybeConstLinOp&gt;::value,</div>
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                               <span class="keyword">const</span> FirstCandidate, FirstCandidate&gt;;</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        candidate_type *cast_obj{};</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        <span class="keywordflow">if</span> ((cast_obj = dynamic_cast&lt;candidate_type *&gt;(obj))) {</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        candidate_type* cast_obj{};</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        <span class="keywordflow">if</span> ((cast_obj = dynamic_cast&lt;candidate_type*&gt;(obj))) {</div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;            <span class="comment">// if the cast is successful, obj is of dynamic type candidate_type</span></div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;            <span class="comment">// so we can convert from this type to TargetType</span></div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;            <span class="keyword">auto</span> converted = TargetType::create(obj-&gt;get_executor());</div>
@@ -199,8 +199,8 @@ $(function() {
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="keyword">template</span> &lt;&gt;</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="keyword">struct </span>conversion_helper&lt;&gt; {</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> MaybeConstLinOp&gt;</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;T, std::function&lt;void(T *)&gt;&gt; convert(</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        MaybeConstLinOp *obj)</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;T, std::function&lt;void(T*)&gt;&gt; convert(</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        MaybeConstLinOp* obj)</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    {</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        <span class="comment">// return nullptr if no previous candidates matched</span></div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        <span class="keywordflow">return</span> {<span class="keyword">nullptr</span>, null_deleter&lt;T&gt;{}};</div>
@@ -212,15 +212,15 @@ $(function() {
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="keyword">class </span>temporary_conversion {</div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <span class="keyword">using</span> value_type = T;</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <span class="keyword">using</span> pointer = T *;</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <span class="keyword">using</span> pointer = T*;</div>
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <span class="keyword">using</span> lin_op_type =</div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        std::conditional_t&lt;std::is_const&lt;T&gt;::value, <span class="keyword">const</span> LinOp, LinOp&gt;;</div>
 <div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
 <div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... ConversionCandidates&gt;</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    <span class="keyword">static</span> temporary_conversion create(lin_op_type *ptr)</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    <span class="keyword">static</span> temporary_conversion create(lin_op_type* ptr)</div>
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    {</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        T *cast_ptr{};</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        <span class="keywordflow">if</span> ((cast_ptr = dynamic_cast&lt;T *&gt;(ptr))) {</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        T* cast_ptr{};</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        <span class="keywordflow">if</span> ((cast_ptr = dynamic_cast&lt;T*&gt;(ptr))) {</div>
 <div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;            <span class="keywordflow">return</span> handle_type{cast_ptr, null_deleter&lt;T&gt;{}};</div>
 <div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;            <span class="keywordflow">return</span> conversion_helper&lt;ConversionCandidates...&gt;::template convert&lt;</div>
@@ -228,16 +228,16 @@ $(function() {
 <div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;        }</div>
 <div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    }</div>
 <div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160; </div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    T *get()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> handle_.get(); }</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    T* get()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> handle_.get(); }</div>
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160; </div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    T *operator-&gt;()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> handle_.get(); }</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    T* operator-&gt;()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> handle_.get(); }</div>
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160; </div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    <span class="keyword">explicit</span> <span class="keyword">operator</span> bool() { <span class="keywordflow">return</span> static_cast&lt;bool&gt;(handle_); }</div>
 <div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160; </div>
 <div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    <span class="comment">// std::function deleter allows to decide the (type of) deleter at</span></div>
 <div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    <span class="comment">// runtime</span></div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    <span class="keyword">using</span> handle_type = std::unique_ptr&lt;T, std::function&lt;void(T *)&gt;&gt;;</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    <span class="keyword">using</span> handle_type = std::unique_ptr&lt;T, std::function&lt;void(T*)&gt;&gt;;</div>
 <div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160; </div>
 <div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    temporary_conversion(handle_type handle) : handle_{std::move(handle)} {}</div>
 <div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160; </div>

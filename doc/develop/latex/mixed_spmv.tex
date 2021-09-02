@@ -92,7 +92,7 @@ Add the random header to generate random vectors.
 \DoxyCodeLine{ * /}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType, \textcolor{keyword}{typename} ValueDistribution, \textcolor{keyword}{typename} Engine>}
 \DoxyCodeLine{\textcolor{keyword}{typename} std::enable\_if<!gko::is\_complex\_s<ValueType>::value, ValueType>::type}
-\DoxyCodeLine{get\_rand\_value(ValueDistribution \&\&value\_dist, Engine \&\&gen)}
+\DoxyCodeLine{get\_rand\_value(ValueDistribution\&\& value\_dist, Engine\&\& gen)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keywordflow}{return} value\_dist(gen);}
 \DoxyCodeLine{\}}
@@ -104,7 +104,7 @@ Add the random header to generate random vectors.
 \DoxyCodeLine{ * /}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType, \textcolor{keyword}{typename} ValueDistribution, \textcolor{keyword}{typename} Engine>}
 \DoxyCodeLine{\textcolor{keyword}{typename} std::enable\_if<gko::is\_complex\_s<ValueType>::value, ValueType>::type}
-\DoxyCodeLine{get\_rand\_value(ValueDistribution \&\&value\_dist, Engine \&\&gen)}
+\DoxyCodeLine{get\_rand\_value(ValueDistribution\&\& value\_dist, Engine\&\& gen)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keywordflow}{return} ValueType(value\_dist(gen), value\_dist(gen));}
 \DoxyCodeLine{\}}
@@ -123,7 +123,7 @@ Add the random header to generate random vectors.
 \DoxyCodeLine{    \textcolor{keywordtype}{int} warmup = 2;}
 \DoxyCodeLine{    \textcolor{keywordtype}{int} rep = 10;}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < warmup; i++) \{}
-\DoxyCodeLine{        A-\/>apply(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(b), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(x));}
+\DoxyCodeLine{        A-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(b), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x));}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{    \textcolor{keywordtype}{double} total\_sec = 0;}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < rep; i++) \{}
@@ -144,7 +144,7 @@ synchronize to make sure data is already on device
 \begin{DoxyCode}{0}
 \DoxyCodeLine{exec-\/>synchronize();}
 \DoxyCodeLine{\textcolor{keyword}{auto} start = std::chrono::steady\_clock::now();}
-\DoxyCodeLine{A-\/>apply(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(b), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(xx));}
+\DoxyCodeLine{A-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(b), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(xx));}
 \end{DoxyCode}
 
 
@@ -171,7 +171,7 @@ copy the result back to x
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{            x-\/>copy\_from(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(xx));}
+\DoxyCodeLine{            x-\/>copy\_from(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(xx));}
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
@@ -182,7 +182,7 @@ copy the result back to x
 \DoxyCodeLine{\}  \textcolor{comment}{// namespace}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[])}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
 \end{DoxyCode}
 
@@ -266,7 +266,7 @@ executor where Ginkgo will perform the computation
  \doxysubsubsection*{Preparing your data and transfer to the proper device.}
 
 Read the matrix using the read function and set the right hand side randomly. \begin{DoxyNote}{Note}
-Ginkgo uses C++ smart pointers to automatically manage memory. To this end, we use our own object ownership transfer functions that under the hood call the required smart pointer functions to manage object ownership. The \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko\+::share}} , \mbox{\hyperlink{namespacegko_acbd3fd6d07e498892881e8e2ab0b4167}{gko\+::give}} and \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko\+::lend}} are the functions that you would need to use.
+Ginkgo uses C++ smart pointers to automatically manage memory. To this end, we use our own object ownership transfer functions that under the hood call the required smart pointer functions to manage object ownership. The \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko\+::share}} , \mbox{\hyperlink{namespacegko_acbd3fd6d07e498892881e8e2ab0b4167}{gko\+::give}} and \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko\+::lend}} are the functions that you would need to use.
 \end{DoxyNote}
 read the matrix into High\+Precision and Low\+Precision.
 
@@ -306,7 +306,7 @@ copy the data from host to device
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{auto} hp\_b = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{share}}(\mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(exec, host\_b));}
 \DoxyCodeLine{\textcolor{keyword}{auto} lp\_b = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{share}}(lp\_vec::create(exec));}
-\DoxyCodeLine{lp\_b-\/>copy\_from(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(hp\_b));}
+\DoxyCodeLine{lp\_b-\/>copy\_from(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(hp\_b));}
 \end{DoxyCode}
 
 
@@ -382,15 +382,15 @@ To measure error of result. neg\+\_\+one is an object that represent the number 
 \DoxyCodeLine{    \textcolor{keyword}{auto} lplp\_diff = hp\_x-\/>clone();}
 \DoxyCodeLine{    \textcolor{keyword}{auto} lphp\_diff = hp\_x-\/>clone();}
 \DoxyCodeLine{}
-\DoxyCodeLine{    hp\_x-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(hp\_x\_norm));}
-\DoxyCodeLine{    lp\_diff-\/>add\_scaled(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(lp\_x));}
-\DoxyCodeLine{    lp\_diff-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(lp\_diff\_norm));}
-\DoxyCodeLine{    hplp\_diff-\/>add\_scaled(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(hplp\_x));}
-\DoxyCodeLine{    hplp\_diff-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(hplp\_diff\_norm));}
-\DoxyCodeLine{    lplp\_diff-\/>add\_scaled(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(lplp\_x));}
-\DoxyCodeLine{    lplp\_diff-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(lplp\_diff\_norm));}
-\DoxyCodeLine{    lphp\_diff-\/>add\_scaled(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(lphp\_x));}
-\DoxyCodeLine{    lphp\_diff-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(lphp\_diff\_norm));}
+\DoxyCodeLine{    hp\_x-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(hp\_x\_norm));}
+\DoxyCodeLine{    lp\_diff-\/>add\_scaled(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(lp\_x));}
+\DoxyCodeLine{    lp\_diff-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(lp\_diff\_norm));}
+\DoxyCodeLine{    hplp\_diff-\/>add\_scaled(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(hplp\_x));}
+\DoxyCodeLine{    hplp\_diff-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(hplp\_diff\_norm));}
+\DoxyCodeLine{    lplp\_diff-\/>add\_scaled(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(lplp\_x));}
+\DoxyCodeLine{    lplp\_diff-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(lplp\_diff\_norm));}
+\DoxyCodeLine{    lphp\_diff-\/>add\_scaled(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(lphp\_x));}
+\DoxyCodeLine{    lphp\_diff-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(lphp\_diff\_norm));}
 \DoxyCodeLine{    exec-\/>synchronize();}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::cout.precision(10);}
@@ -487,14 +487,14 @@ The following is the expected result (omp)\+:
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType, \textcolor{keyword}{typename} ValueDistribution, \textcolor{keyword}{typename} Engine>}
 \DoxyCodeLine{\textcolor{keyword}{typename} std::enable\_if<!gko::is\_complex\_s<ValueType>::value, ValueType>::type}
-\DoxyCodeLine{get\_rand\_value(ValueDistribution \&\&value\_dist, Engine \&\&gen)}
+\DoxyCodeLine{get\_rand\_value(ValueDistribution\&\& value\_dist, Engine\&\& gen)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keywordflow}{return} value\_dist(gen);}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType, \textcolor{keyword}{typename} ValueDistribution, \textcolor{keyword}{typename} Engine>}
 \DoxyCodeLine{\textcolor{keyword}{typename} std::enable\_if<gko::is\_complex\_s<ValueType>::value, ValueType>::type}
-\DoxyCodeLine{get\_rand\_value(ValueDistribution \&\&value\_dist, Engine \&\&gen)}
+\DoxyCodeLine{get\_rand\_value(ValueDistribution\&\& value\_dist, Engine\&\& gen)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keywordflow}{return} ValueType(value\_dist(gen), value\_dist(gen));}
 \DoxyCodeLine{\}}
@@ -507,20 +507,20 @@ The following is the expected result (omp)\+:
 \DoxyCodeLine{    \textcolor{keywordtype}{int} warmup = 2;}
 \DoxyCodeLine{    \textcolor{keywordtype}{int} rep = 10;}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < warmup; i++) \{}
-\DoxyCodeLine{        A-\/>apply(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(b), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(x));}
+\DoxyCodeLine{        A-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(b), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x));}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{    \textcolor{keywordtype}{double} total\_sec = 0;}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < rep; i++) \{}
 \DoxyCodeLine{        \textcolor{keyword}{auto} xx = x-\/>clone();}
 \DoxyCodeLine{        exec-\/>synchronize();}
 \DoxyCodeLine{        \textcolor{keyword}{auto} start = std::chrono::steady\_clock::now();}
-\DoxyCodeLine{        A-\/>apply(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(b), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(xx));}
+\DoxyCodeLine{        A-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(b), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(xx));}
 \DoxyCodeLine{        exec-\/>synchronize();}
 \DoxyCodeLine{        \textcolor{keyword}{auto} stop = std::chrono::steady\_clock::now();}
 \DoxyCodeLine{        std::chrono::duration<double> duration\_time = stop -\/ start;}
 \DoxyCodeLine{        total\_sec += duration\_time.count();}
 \DoxyCodeLine{        \textcolor{keywordflow}{if} (i + 1 == rep) \{}
-\DoxyCodeLine{            x-\/>copy\_from(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(xx));}
+\DoxyCodeLine{            x-\/>copy\_from(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(xx));}
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
@@ -531,7 +531,7 @@ The following is the expected result (omp)\+:
 \DoxyCodeLine{\}  \textcolor{comment}{// namespace}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[])}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{using} HighPrecision = double;}
 \DoxyCodeLine{    \textcolor{keyword}{using} RealValueType = \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<HighPrecision>}};}
@@ -587,7 +587,7 @@ The following is the expected result (omp)\+:
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{    \textcolor{keyword}{auto} hp\_b = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{share}}(\mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(exec, host\_b));}
 \DoxyCodeLine{    \textcolor{keyword}{auto} lp\_b = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{share}}(lp\_vec::create(exec));}
-\DoxyCodeLine{    lp\_b-\/>copy\_from(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(hp\_b));}
+\DoxyCodeLine{    lp\_b-\/>copy\_from(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(hp\_b));}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} hp\_x = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{share}}(hp\_vec::create(exec, x\_dim));}
 \DoxyCodeLine{    \textcolor{keyword}{auto} lp\_x = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{share}}(lp\_vec::create(exec, x\_dim));}
@@ -614,15 +614,15 @@ The following is the expected result (omp)\+:
 \DoxyCodeLine{    \textcolor{keyword}{auto} lplp\_diff = hp\_x-\/>clone();}
 \DoxyCodeLine{    \textcolor{keyword}{auto} lphp\_diff = hp\_x-\/>clone();}
 \DoxyCodeLine{}
-\DoxyCodeLine{    hp\_x-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(hp\_x\_norm));}
-\DoxyCodeLine{    lp\_diff-\/>add\_scaled(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(lp\_x));}
-\DoxyCodeLine{    lp\_diff-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(lp\_diff\_norm));}
-\DoxyCodeLine{    hplp\_diff-\/>add\_scaled(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(hplp\_x));}
-\DoxyCodeLine{    hplp\_diff-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(hplp\_diff\_norm));}
-\DoxyCodeLine{    lplp\_diff-\/>add\_scaled(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(lplp\_x));}
-\DoxyCodeLine{    lplp\_diff-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(lplp\_diff\_norm));}
-\DoxyCodeLine{    lphp\_diff-\/>add\_scaled(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(lphp\_x));}
-\DoxyCodeLine{    lphp\_diff-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(lphp\_diff\_norm));}
+\DoxyCodeLine{    hp\_x-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(hp\_x\_norm));}
+\DoxyCodeLine{    lp\_diff-\/>add\_scaled(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(lp\_x));}
+\DoxyCodeLine{    lp\_diff-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(lp\_diff\_norm));}
+\DoxyCodeLine{    hplp\_diff-\/>add\_scaled(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(hplp\_x));}
+\DoxyCodeLine{    hplp\_diff-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(hplp\_diff\_norm));}
+\DoxyCodeLine{    lplp\_diff-\/>add\_scaled(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(lplp\_x));}
+\DoxyCodeLine{    lplp\_diff-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(lplp\_diff\_norm));}
+\DoxyCodeLine{    lphp\_diff-\/>add\_scaled(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(lphp\_x));}
+\DoxyCodeLine{    lphp\_diff-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(lphp\_diff\_norm));}
 \DoxyCodeLine{    exec-\/>synchronize();}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::cout.precision(10);}

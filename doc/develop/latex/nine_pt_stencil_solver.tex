@@ -103,9 +103,9 @@ Creates a stencil matrix in C\+SR format for the given number of discretization 
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType, \textcolor{keyword}{typename} IndexType>}
-\DoxyCodeLine{\textcolor{keywordtype}{void} generate\_stencil\_matrix(IndexType dp, IndexType *row\_ptrs,}
-\DoxyCodeLine{                             IndexType *col\_idxs, ValueType *values,}
-\DoxyCodeLine{                             ValueType *coefs)}
+\DoxyCodeLine{\textcolor{keywordtype}{void} generate\_stencil\_matrix(IndexType dp, IndexType* row\_ptrs,}
+\DoxyCodeLine{                             IndexType* col\_idxs, ValueType* values,}
+\DoxyCodeLine{                             ValueType* coefs)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    IndexType pos = 0;}
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} dp\_2 = dp * dp;}
@@ -137,8 +137,8 @@ Generates the R\+HS vector given {\ttfamily f} and the boundary conditions.
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} Closure, \textcolor{keyword}{typename} ClosureT, \textcolor{keyword}{typename} ValueType,}
 \DoxyCodeLine{          \textcolor{keyword}{typename} IndexType>}
-\DoxyCodeLine{\textcolor{keywordtype}{void} generate\_rhs(IndexType dp, Closure f, ClosureT u, ValueType *rhs,}
-\DoxyCodeLine{                  ValueType *coefs)}
+\DoxyCodeLine{\textcolor{keywordtype}{void} generate\_rhs(IndexType dp, Closure f, ClosureT u, ValueType* rhs,}
+\DoxyCodeLine{                  ValueType* coefs)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} dp\_2 = dp * dp;}
 \DoxyCodeLine{    \textcolor{keyword}{const} ValueType h = 1.0 / (dp + 1.0);}
@@ -203,7 +203,7 @@ Prints the solution {\ttfamily u}.
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType, \textcolor{keyword}{typename} IndexType>}
-\DoxyCodeLine{\textcolor{keywordtype}{void} print\_solution(IndexType dp, \textcolor{keyword}{const} ValueType *u)}
+\DoxyCodeLine{\textcolor{keywordtype}{void} print\_solution(IndexType dp, \textcolor{keyword}{const} ValueType* u)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (IndexType i = 0; i < dp; ++i) \{}
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (IndexType j = 0; j < dp; ++j) \{}
@@ -221,7 +221,7 @@ Computes the 1-\/norm of the error given the computed {\ttfamily u} and the corr
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} Closure, \textcolor{keyword}{typename} ValueType, \textcolor{keyword}{typename} IndexType>}
-\DoxyCodeLine{\mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} calculate\_error(IndexType dp, \textcolor{keyword}{const} ValueType *u,}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} calculate\_error(IndexType dp, \textcolor{keyword}{const} ValueType* u,}
 \DoxyCodeLine{                                               Closure correct\_u)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{const} ValueType h = 1.0 / (dp + 1);}
@@ -240,10 +240,10 @@ Computes the 1-\/norm of the error given the computed {\ttfamily u} and the corr
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType, \textcolor{keyword}{typename} IndexType>}
-\DoxyCodeLine{\textcolor{keywordtype}{void} solve\_system(\textcolor{keyword}{const} std::string \&executor\_string,}
-\DoxyCodeLine{                  \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} discretization\_points, IndexType *row\_ptrs,}
-\DoxyCodeLine{                  IndexType *col\_idxs, ValueType *values, ValueType *rhs,}
-\DoxyCodeLine{                  ValueType *u, \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} reduction\_factor)}
+\DoxyCodeLine{\textcolor{keywordtype}{void} solve\_system(\textcolor{keyword}{const} std::string\& executor\_string,}
+\DoxyCodeLine{                  \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} discretization\_points, IndexType* row\_ptrs,}
+\DoxyCodeLine{                  IndexType* col\_idxs, ValueType* values, ValueType* rhs,}
+\DoxyCodeLine{                  ValueType* u, \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} reduction\_factor)}
 \DoxyCodeLine{\{}
 \end{DoxyCode}
 
@@ -258,7 +258,7 @@ Some shortcuts
 \DoxyCodeLine{\textcolor{keyword}{using} bj = \mbox{\hyperlink{classgko_1_1preconditioner_1_1Jacobi}{gko::preconditioner::Jacobi<ValueType, IndexType>}};}
 \DoxyCodeLine{\textcolor{keyword}{using} val\_array = \mbox{\hyperlink{classgko_1_1Array}{gko::Array<ValueType>}};}
 \DoxyCodeLine{\textcolor{keyword}{using} idx\_array = \mbox{\hyperlink{classgko_1_1Array}{gko::Array<IndexType>}};}
-\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} \&dp = discretization\_points;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto}\& dp = discretization\_points;}
 \DoxyCodeLine{\textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} dp\_2 = dp * dp;}
 \end{DoxyCode}
 
@@ -363,11 +363,11 @@ Solve system
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{    solver-\/>apply(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(b), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(x));}
+\DoxyCodeLine{    solver-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(x));}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[])}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{using} ValueType = double;}
 \DoxyCodeLine{    \textcolor{keyword}{using} IndexType = int;}
@@ -602,9 +602,9 @@ The expected output should be
 \DoxyCodeLine{\textcolor{comment}{ */}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType, \textcolor{keyword}{typename} IndexType>}
-\DoxyCodeLine{\textcolor{keywordtype}{void} generate\_stencil\_matrix(IndexType dp, IndexType *row\_ptrs,}
-\DoxyCodeLine{                             IndexType *col\_idxs, ValueType *values,}
-\DoxyCodeLine{                             ValueType *coefs)}
+\DoxyCodeLine{\textcolor{keywordtype}{void} generate\_stencil\_matrix(IndexType dp, IndexType* row\_ptrs,}
+\DoxyCodeLine{                             IndexType* col\_idxs, ValueType* values,}
+\DoxyCodeLine{                             ValueType* coefs)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    IndexType pos = 0;}
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} dp\_2 = dp * dp;}
@@ -631,8 +631,8 @@ The expected output should be
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} Closure, \textcolor{keyword}{typename} ClosureT, \textcolor{keyword}{typename} ValueType,}
 \DoxyCodeLine{          \textcolor{keyword}{typename} IndexType>}
-\DoxyCodeLine{\textcolor{keywordtype}{void} generate\_rhs(IndexType dp, Closure f, ClosureT u, ValueType *rhs,}
-\DoxyCodeLine{                  ValueType *coefs)}
+\DoxyCodeLine{\textcolor{keywordtype}{void} generate\_rhs(IndexType dp, Closure f, ClosureT u, ValueType* rhs,}
+\DoxyCodeLine{                  ValueType* coefs)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} dp\_2 = dp * dp;}
 \DoxyCodeLine{    \textcolor{keyword}{const} ValueType h = 1.0 / (dp + 1.0);}
@@ -680,7 +680,7 @@ The expected output should be
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType, \textcolor{keyword}{typename} IndexType>}
-\DoxyCodeLine{\textcolor{keywordtype}{void} print\_solution(IndexType dp, \textcolor{keyword}{const} ValueType *u)}
+\DoxyCodeLine{\textcolor{keywordtype}{void} print\_solution(IndexType dp, \textcolor{keyword}{const} ValueType* u)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (IndexType i = 0; i < dp; ++i) \{}
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (IndexType j = 0; j < dp; ++j) \{}
@@ -693,7 +693,7 @@ The expected output should be
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} Closure, \textcolor{keyword}{typename} ValueType, \textcolor{keyword}{typename} IndexType>}
-\DoxyCodeLine{\mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} calculate\_error(IndexType dp, \textcolor{keyword}{const} ValueType *u,}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} calculate\_error(IndexType dp, \textcolor{keyword}{const} ValueType* u,}
 \DoxyCodeLine{                                               Closure correct\_u)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{const} ValueType h = 1.0 / (dp + 1);}
@@ -712,10 +712,10 @@ The expected output should be
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType, \textcolor{keyword}{typename} IndexType>}
-\DoxyCodeLine{\textcolor{keywordtype}{void} solve\_system(\textcolor{keyword}{const} std::string \&executor\_string,}
-\DoxyCodeLine{                  \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} discretization\_points, IndexType *row\_ptrs,}
-\DoxyCodeLine{                  IndexType *col\_idxs, ValueType *values, ValueType *rhs,}
-\DoxyCodeLine{                  ValueType *u, \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} reduction\_factor)}
+\DoxyCodeLine{\textcolor{keywordtype}{void} solve\_system(\textcolor{keyword}{const} std::string\& executor\_string,}
+\DoxyCodeLine{                  \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} discretization\_points, IndexType* row\_ptrs,}
+\DoxyCodeLine{                  IndexType* col\_idxs, ValueType* values, ValueType* rhs,}
+\DoxyCodeLine{                  ValueType* u, \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} reduction\_factor)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{using} vec = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}};}
 \DoxyCodeLine{    \textcolor{keyword}{using} mtx = \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<ValueType, IndexType>}};}
@@ -723,7 +723,7 @@ The expected output should be
 \DoxyCodeLine{    \textcolor{keyword}{using} bj = \mbox{\hyperlink{classgko_1_1preconditioner_1_1Jacobi}{gko::preconditioner::Jacobi<ValueType, IndexType>}};}
 \DoxyCodeLine{    \textcolor{keyword}{using} val\_array = \mbox{\hyperlink{classgko_1_1Array}{gko::Array<ValueType>}};}
 \DoxyCodeLine{    \textcolor{keyword}{using} idx\_array = \mbox{\hyperlink{classgko_1_1Array}{gko::Array<IndexType>}};}
-\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} \&dp = discretization\_points;}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto}\& dp = discretization\_points;}
 \DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} dp\_2 = dp * dp;}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::map<std::string, std::function<std::shared\_ptr<gko::Executor>()>>}
@@ -773,11 +773,11 @@ The expected output should be
 \DoxyCodeLine{            .on(exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} solver = solver\_gen-\/>generate(\mbox{\hyperlink{namespacegko_acbd3fd6d07e498892881e8e2ab0b4167}{gko::give}}(matrix));}
 \DoxyCodeLine{}
-\DoxyCodeLine{    solver-\/>apply(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(b), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(x));}
+\DoxyCodeLine{    solver-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(x));}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[])}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{using} ValueType = double;}
 \DoxyCodeLine{    \textcolor{keyword}{using} IndexType = int;}

@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/363426142 branch based on develop. Ginkgo version 1.5.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/363787367 branch based on develop. Ginkgo version 1.5.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -296,9 +296,9 @@ Linear operator as a concept</h1>
 <div class="line">    <span class="keyword">auto</span> tmp = <a class="code" href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a>(x0);</div>
 <div class="line">    <span class="keyword">auto</span> <a class="code" href="namespacegko.html#a0059e27f8f4bc348ff65c1e60caf47c8">one</a> = Dense&lt;&gt;::create(L-&gt;get_executor(), {1.0,});</div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; iters; ++i) {</div>
-<div class="line">        L-&gt;apply(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">gko::lend</a>(tmp), <a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">gko::lend</a>(x));</div>
-<div class="line">        x-&gt;add_scaled(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">gko::lend</a>(<a class="code" href="namespacegko.html#a0059e27f8f4bc348ff65c1e60caf47c8">one</a>), <a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">gko::lend</a>(b));</div>
-<div class="line">        tmp-&gt;copy_from(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">gko::lend</a>(x));</div>
+<div class="line">        L-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(tmp), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(x));</div>
+<div class="line">        x-&gt;add_scaled(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(<a class="code" href="namespacegko.html#a0059e27f8f4bc348ff65c1e60caf47c8">one</a>), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b));</div>
+<div class="line">        tmp-&gt;copy_from(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(x));</div>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">return</span> x;</div>
 <div class="line">}</div>
@@ -473,8 +473,8 @@ Linear operator as a concept</h1>
 <b>Value:</b><div class="fragment"><div class="line"><span class="keyword">mutable</span> _name{__VA_ARGS__};                                              \</div>
 <div class="line">                                                                             \</div>
 <div class="line">    template &lt;<span class="keyword">typename</span>... Args&gt;                                              \</div>
-<div class="line">    auto with_##_name(Args &amp;&amp;... _value)                                     \</div>
-<div class="line">        const-&gt;const std::decay_t&lt;decltype(*<span class="keyword">this</span>)&gt; &amp;                         \</div>
+<div class="line">    auto with_##_name(Args&amp;&amp;... _value)                                      \</div>
+<div class="line">        const-&gt;const std::decay_t&lt;decltype(*<span class="keyword">this</span>)&gt;&amp;                          \</div>
 <div class="line">    {                                                                        \</div>
 <div class="line">        using type = decltype(this-&gt;_name);                                  \</div>
 <div class="line">        this-&gt;_name = type{std::forward&lt;Args&gt;(_value)...};                   \</div>
@@ -605,7 +605,7 @@ template&lt;typename ConcreteFactory , typename ConcreteLinOp , typename Paramet
 </div><!-- contents -->
 <div class="ttc" id="anamespacegko_html_a1beb80750459e4201aa9d882d2d074c3"><div class="ttname"><a href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a></div><div class="ttdeci">detail::cloned_type&lt; Pointer &gt; clone(const Pointer &amp;p)</div><div class="ttdoc">Creates a unique clone of the object pointed to by p.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:160</div></div>
 <div class="ttc" id="anamespacegko_html_a73ce7e87aec389b5210630bb617b4baa"><div class="ttname"><a href="namespacegko.html#a73ce7e87aec389b5210630bb617b4baa">gko::as</a></div><div class="ttdeci">std::decay&lt; T &gt;::type * as(U *obj)</div><div class="ttdoc">Performs polymorphic type conversion.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:289</div></div>
-<div class="ttc" id="anamespacegko_html_a4edc2273b5627ec552ea423b60493be3"><div class="ttname"><a href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">gko::lend</a></div><div class="ttdeci">std::enable_if&lt; detail::have_ownership_s&lt; Pointer &gt;::value, detail::pointee&lt; Pointer &gt; * &gt;::type lend(const Pointer &amp;p)</div><div class="ttdoc">Returns a non-owning (plain) pointer to the object pointed to by p.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:253</div></div>
+<div class="ttc" id="anamespacegko_html_a014ec51e675c425bb83908361f630450"><div class="ttname"><a href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a></div><div class="ttdeci">std::enable_if&lt; detail::have_ownership_s&lt; Pointer &gt;::value, detail::pointee&lt; Pointer &gt; * &gt;::type lend(const Pointer &amp;p)</div><div class="ttdoc">Returns a non-owning (plain) pointer to the object pointed to by p.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:253</div></div>
 <div class="ttc" id="anamespacegko_html_a0059e27f8f4bc348ff65c1e60caf47c8"><div class="ttname"><a href="namespacegko.html#a0059e27f8f4bc348ff65c1e60caf47c8">gko::one</a></div><div class="ttdeci">constexpr T one()</div><div class="ttdoc">Returns the multiplicative identity for T.</div><div class="ttdef"><b>Definition:</b> math.hpp:756</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

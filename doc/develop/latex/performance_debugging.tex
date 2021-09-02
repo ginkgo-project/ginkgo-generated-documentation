@@ -66,34 +66,34 @@ utilities for computing norms and residuals
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType>}
-\DoxyCodeLine{ValueType get\_first\_element(\textcolor{keyword}{const} vec<ValueType> *norm)}
+\DoxyCodeLine{ValueType get\_first\_element(\textcolor{keyword}{const} vec<ValueType>* norm)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keywordflow}{return} norm-\/>get\_executor()-\/>copy\_val\_to\_host(norm-\/>get\_const\_values());}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType>}
-\DoxyCodeLine{\mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} compute\_norm(\textcolor{keyword}{const} vec<ValueType> *b)}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} compute\_norm(\textcolor{keyword}{const} vec<ValueType>* b)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} exec = b-\/>get\_executor();}
 \DoxyCodeLine{    \textcolor{keyword}{auto} b\_norm = gko::initialize<real\_vec<ValueType>>(\{0.0\}, exec);}
-\DoxyCodeLine{    b-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(b\_norm));}
-\DoxyCodeLine{    \textcolor{keywordflow}{return} get\_first\_element(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(b\_norm));}
+\DoxyCodeLine{    b-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b\_norm));}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} get\_first\_element(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b\_norm));}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType>}
 \DoxyCodeLine{\mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} compute\_residual\_norm(}
-\DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *system\_matrix, \textcolor{keyword}{const} vec<ValueType> *b,}
-\DoxyCodeLine{    \textcolor{keyword}{const} vec<ValueType> *x)}
+\DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* system\_matrix, \textcolor{keyword}{const} vec<ValueType>* b,}
+\DoxyCodeLine{    \textcolor{keyword}{const} vec<ValueType>* x)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} exec = system\_matrix-\/>\mbox{\hyperlink{classgko_1_1PolymorphicObject_ab40586bff071b7f11c2cf6b5cbf598eb}{get\_executor}}();}
 \DoxyCodeLine{    \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_a0059e27f8f4bc348ff65c1e60caf47c8}{one}} = gko::initialize<vec<ValueType>>(\{1.0\}, exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} neg\_one = gko::initialize<vec<ValueType>>(\{-\/1.0\}, exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} res = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(b);}
-\DoxyCodeLine{    system\_matrix-\/>\mbox{\hyperlink{classgko_1_1LinOp_a0449b2fc705d2f970855af23b5e2788e}{apply}}(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(one), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(x), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(neg\_one),}
-\DoxyCodeLine{                         \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(res));}
-\DoxyCodeLine{    \textcolor{keywordflow}{return} compute\_norm(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(res));}
+\DoxyCodeLine{    system\_matrix-\/>\mbox{\hyperlink{classgko_1_1LinOp_a0449b2fc705d2f970855af23b5e2788e}{apply}}(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(x), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(neg\_one),}
+\DoxyCodeLine{                         \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(res));}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} compute\_norm(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(res));}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -109,62 +109,62 @@ A logger that accumulates the time of all operations. For each operation type (a
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{struct }OperationLogger : \mbox{\hyperlink{classgko_1_1log_1_1Logger}{gko::log::Logger}} \{}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_allocation\_started(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}} *exec,}
-\DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} \&)\textcolor{keyword}{ const override}}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_allocation\_started(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}}* exec,}
+\DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}}\&)\textcolor{keyword}{ const override}}
 \DoxyCodeLine{\textcolor{keyword}{    }\{}
 \DoxyCodeLine{        this-\/>start\_operation(exec, \textcolor{stringliteral}{"allocate"});}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_allocation\_completed(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}} *exec,}
-\DoxyCodeLine{                                 \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} \&,}
-\DoxyCodeLine{                                 \textcolor{keyword}{const} gko::uintptr \&)\textcolor{keyword}{ const override}}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_allocation\_completed(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}}* exec,}
+\DoxyCodeLine{                                 \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}}\&,}
+\DoxyCodeLine{                                 \textcolor{keyword}{const} gko::uintptr\&)\textcolor{keyword}{ const override}}
 \DoxyCodeLine{\textcolor{keyword}{    }\{}
 \DoxyCodeLine{        this-\/>end\_operation(exec, \textcolor{stringliteral}{"allocate"});}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_free\_started(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}} *exec,}
-\DoxyCodeLine{                         \textcolor{keyword}{const} gko::uintptr \&)\textcolor{keyword}{ const override}}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_free\_started(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}}* exec,}
+\DoxyCodeLine{                         \textcolor{keyword}{const} gko::uintptr\&)\textcolor{keyword}{ const override}}
 \DoxyCodeLine{\textcolor{keyword}{    }\{}
 \DoxyCodeLine{        this-\/>start\_operation(exec, \textcolor{stringliteral}{"free"});}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_free\_completed(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}} *exec,}
-\DoxyCodeLine{                           \textcolor{keyword}{const} gko::uintptr \&)\textcolor{keyword}{ const override}}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_free\_completed(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}}* exec,}
+\DoxyCodeLine{                           \textcolor{keyword}{const} gko::uintptr\&)\textcolor{keyword}{ const override}}
 \DoxyCodeLine{\textcolor{keyword}{    }\{}
 \DoxyCodeLine{        this-\/>end\_operation(exec, \textcolor{stringliteral}{"free"});}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_copy\_started(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}} *from, \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}} *to,}
-\DoxyCodeLine{                         \textcolor{keyword}{const} gko::uintptr \&, \textcolor{keyword}{const} gko::uintptr \&,}
-\DoxyCodeLine{                         \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} \&)\textcolor{keyword}{ const override}}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_copy\_started(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}}* from, \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}}* to,}
+\DoxyCodeLine{                         \textcolor{keyword}{const} gko::uintptr\&, \textcolor{keyword}{const} gko::uintptr\&,}
+\DoxyCodeLine{                         \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}}\&)\textcolor{keyword}{ const override}}
 \DoxyCodeLine{\textcolor{keyword}{    }\{}
 \DoxyCodeLine{        from-\/>\mbox{\hyperlink{classgko_1_1Executor_a24eeee7648c0f0fd07c9866d07154875}{synchronize}}();}
 \DoxyCodeLine{        this-\/>start\_operation(to, \textcolor{stringliteral}{"copy"});}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_copy\_completed(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}} *from, \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}} *to,}
-\DoxyCodeLine{                           \textcolor{keyword}{const} gko::uintptr \&, \textcolor{keyword}{const} gko::uintptr \&,}
-\DoxyCodeLine{                           \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} \&)\textcolor{keyword}{ const override}}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_copy\_completed(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}}* from, \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}}* to,}
+\DoxyCodeLine{                           \textcolor{keyword}{const} gko::uintptr\&, \textcolor{keyword}{const} gko::uintptr\&,}
+\DoxyCodeLine{                           \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}}\&)\textcolor{keyword}{ const override}}
 \DoxyCodeLine{\textcolor{keyword}{    }\{}
 \DoxyCodeLine{        from-\/>\mbox{\hyperlink{classgko_1_1Executor_a24eeee7648c0f0fd07c9866d07154875}{synchronize}}();}
 \DoxyCodeLine{        this-\/>end\_operation(to, \textcolor{stringliteral}{"copy"});}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_operation\_launched(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}} *exec,}
-\DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Operation}{gko::Operation}} *op)\textcolor{keyword}{ const override}}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_operation\_launched(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}}* exec,}
+\DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Operation}{gko::Operation}}* op)\textcolor{keyword}{ const override}}
 \DoxyCodeLine{\textcolor{keyword}{    }\{}
 \DoxyCodeLine{        this-\/>start\_operation(exec, op-\/>\mbox{\hyperlink{classgko_1_1Operation_ab3b940849d1daf02830f3387c52888d0}{get\_name}}());}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_operation\_completed(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}} *exec,}
-\DoxyCodeLine{                                \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Operation}{gko::Operation}} *op)\textcolor{keyword}{ const override}}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_operation\_completed(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}}* exec,}
+\DoxyCodeLine{                                \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Operation}{gko::Operation}}* op)\textcolor{keyword}{ const override}}
 \DoxyCodeLine{\textcolor{keyword}{    }\{}
 \DoxyCodeLine{        this-\/>end\_operation(exec, op-\/>\mbox{\hyperlink{classgko_1_1Operation_ab3b940849d1daf02830f3387c52888d0}{get\_name}}());}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} write\_data(std::ostream \&ostream)}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} write\_data(std::ostream\& ostream)}
 \DoxyCodeLine{    \{}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto} \&entry : total) \{}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& entry : total) \{}
 \DoxyCodeLine{            ostream << \textcolor{stringliteral}{"\(\backslash\)t"} << entry.first.c\_str() << \textcolor{stringliteral}{": "}}
 \DoxyCodeLine{                    << std::chrono::duration\_cast<std::chrono::nanoseconds>(}
 \DoxyCodeLine{                           entry.second)}
@@ -185,8 +185,8 @@ Helper which synchronizes and starts the time before every operation.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keywordtype}{void} start\_operation(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}} *exec,}
-\DoxyCodeLine{                     \textcolor{keyword}{const} std::string \&name)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\textcolor{keywordtype}{void} start\_operation(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}}* exec,}
+\DoxyCodeLine{                     \textcolor{keyword}{const} std::string\& name)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{}\{}
 \DoxyCodeLine{    nested.emplace\_back(0);}
 \DoxyCodeLine{    exec-\/>\mbox{\hyperlink{classgko_1_1Executor_a24eeee7648c0f0fd07c9866d07154875}{synchronize}}();}
@@ -199,7 +199,7 @@ Helper to compute the end time and store the operation\textquotesingle{}s time a
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keywordtype}{void} end\_operation(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}} *exec, \textcolor{keyword}{const} std::string \&name)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\textcolor{keywordtype}{void} end\_operation(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}}* exec, \textcolor{keyword}{const} std::string\& name)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{}\{}
 \DoxyCodeLine{    exec-\/>\mbox{\hyperlink{classgko_1_1Executor_a24eeee7648c0f0fd07c9866d07154875}{synchronize}}();}
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} end = std::chrono::steady\_clock::now();}
@@ -244,9 +244,9 @@ Store amount of bytes allocated on every allocation
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keywordtype}{void} on\_allocation\_completed(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}} *,}
-\DoxyCodeLine{                             \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} \&num\_bytes,}
-\DoxyCodeLine{                             \textcolor{keyword}{const} gko::uintptr \&location)\textcolor{keyword}{ const override}}
+\DoxyCodeLine{\textcolor{keywordtype}{void} on\_allocation\_completed(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}}*,}
+\DoxyCodeLine{                             \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}}\& num\_bytes,}
+\DoxyCodeLine{                             \textcolor{keyword}{const} gko::uintptr\& location)\textcolor{keyword}{ const override}}
 \DoxyCodeLine{\textcolor{keyword}{}\{}
 \DoxyCodeLine{    storage[location] = num\_bytes;}
 \DoxyCodeLine{\}}
@@ -257,8 +257,8 @@ Reset the amount of bytes on every free
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keywordtype}{void} on\_free\_completed(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}} *,}
-\DoxyCodeLine{                       \textcolor{keyword}{const} gko::uintptr \&location)\textcolor{keyword}{ const override}}
+\DoxyCodeLine{\textcolor{keywordtype}{void} on\_free\_completed(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}}*,}
+\DoxyCodeLine{                       \textcolor{keyword}{const} gko::uintptr\& location)\textcolor{keyword}{ const override}}
 \DoxyCodeLine{\textcolor{keyword}{}\{}
 \DoxyCodeLine{    storage[location] = 0;}
 \DoxyCodeLine{\}}
@@ -269,10 +269,10 @@ Write the data after summing the total from all allocations
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} write\_data(std::ostream \&ostream)}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} write\_data(std::ostream\& ostream)}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{        \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} total\{\};}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto} \&e : storage) \{}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& e : storage) \{}
 \DoxyCodeLine{            total += e.second;}
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{        ostream << \textcolor{stringliteral}{"Storage: "} << total << std::endl;}
@@ -301,10 +301,10 @@ Depending on the available information, store the norm or compute it from the re
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_iteration\_complete(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *, \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} \&,}
-\DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *residual,}
-\DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *solution,}
-\DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *residual\_norm)\textcolor{keyword}{ const override}}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_iteration\_complete(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}*, \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}}\&,}
+\DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* residual,}
+\DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* solution,}
+\DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* residual\_norm)\textcolor{keyword}{ const override}}
 \DoxyCodeLine{\textcolor{keyword}{    }\{}
 \DoxyCodeLine{        \textcolor{keywordflow}{if} (residual\_norm) \{}
 \DoxyCodeLine{            rec\_res\_norms.push\_back(utils::get\_first\_element(}
@@ -322,32 +322,32 @@ Depending on the available information, store the norm or compute it from the re
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{    ResidualLogger(std::shared\_ptr<const gko::Executor> exec,}
-\DoxyCodeLine{                   \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *matrix, \textcolor{keyword}{const} vec<ValueType> *b)}
+\DoxyCodeLine{                   \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* matrix, \textcolor{keyword}{const} vec<ValueType>* b)}
 \DoxyCodeLine{        : \mbox{\hyperlink{namespacegko}{gko}}::log::Logger(exec, \mbox{\hyperlink{namespacegko}{gko}}::log::Logger::iteration\_complete\_mask),}
 \DoxyCodeLine{          matrix\{matrix\},}
 \DoxyCodeLine{          b\{b\}}
 \DoxyCodeLine{    \{\}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} write\_data(std::ostream \&ostream)}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} write\_data(std::ostream\& ostream)}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{        ostream << \textcolor{stringliteral}{"Recurrent Residual Norms: "} << std::endl;}
 \DoxyCodeLine{        ostream << \textcolor{stringliteral}{"["} << std::endl;}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto} \&entry : rec\_res\_norms) \{}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& entry : rec\_res\_norms) \{}
 \DoxyCodeLine{            ostream << \textcolor{stringliteral}{"\(\backslash\)t"} << entry << std::endl;}
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{        ostream << \textcolor{stringliteral}{"];"} << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{        ostream << \textcolor{stringliteral}{"True Residual Norms: "} << std::endl;}
 \DoxyCodeLine{        ostream << \textcolor{stringliteral}{"["} << std::endl;}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto} \&entry : true\_res\_norms) \{}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& entry : true\_res\_norms) \{}
 \DoxyCodeLine{            ostream << \textcolor{stringliteral}{"\(\backslash\)t"} << entry << std::endl;}
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{        ostream << \textcolor{stringliteral}{"];"} << std::endl;}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
-\DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *matrix;}
-\DoxyCodeLine{    \textcolor{keyword}{const} vec<ValueType> *b;}
+\DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* matrix;}
+\DoxyCodeLine{    \textcolor{keyword}{const} vec<ValueType>* b;}
 \DoxyCodeLine{    \textcolor{keyword}{mutable} std::vector<gko::remove\_complex<ValueType>> rec\_res\_norms;}
 \DoxyCodeLine{    \textcolor{keyword}{mutable} std::vector<gko::remove\_complex<ValueType>> true\_res\_norms;}
 \DoxyCodeLine{\};}
@@ -364,7 +364,7 @@ Print usage help
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keywordtype}{void} print\_usage(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *filename)}
+\DoxyCodeLine{\textcolor{keywordtype}{void} print\_usage(\textcolor{keyword}{const} \textcolor{keywordtype}{char}* filename)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    std::cerr << \textcolor{stringliteral}{"Usage: "} << filename << \textcolor{stringliteral}{" [executor] [matrix file]"}}
 \DoxyCodeLine{              << std::endl;}
@@ -376,7 +376,7 @@ Print usage help
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType>}
-\DoxyCodeLine{\textcolor{keywordtype}{void} print\_vector(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}} *vec)}
+\DoxyCodeLine{\textcolor{keywordtype}{void} print\_vector(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}}* vec)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} elements\_to\_print = std::min(\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}}(10), vec-\/>\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\_size}}()[0]);}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"["} << std::endl;}
@@ -390,7 +390,7 @@ Print usage help
 \DoxyCodeLine{\}  \textcolor{comment}{// namespace}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[])}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
 \end{DoxyCode}
 
@@ -545,7 +545,7 @@ Remove the storage logger
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{exec-\/>remove\_logger(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(storage\_logger));}
+\DoxyCodeLine{exec-\/>remove\_logger(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(storage\_logger));}
 \end{DoxyCode}
 
 
@@ -611,7 +611,7 @@ Generate and call apply on a solver
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{    solver\_factory-\/>generate(A)-\/>apply(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(b), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(x\_clone));}
+\DoxyCodeLine{    solver\_factory-\/>generate(A)-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(x\_clone));}
 \DoxyCodeLine{    exec-\/>\mbox{\hyperlink{classgko_1_1Executor_a24eeee7648c0f0fd07c9866d07154875}{synchronize}}();}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
@@ -690,7 +690,7 @@ Similarly time the apply
 \begin{DoxyCode}{0}
 \DoxyCodeLine{exec-\/>\mbox{\hyperlink{classgko_1_1Executor_a24eeee7648c0f0fd07c9866d07154875}{synchronize}}();}
 \DoxyCodeLine{\textcolor{keyword}{auto} a\_tic = std::chrono::steady\_clock::now();}
-\DoxyCodeLine{generated\_solver-\/>apply(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(b), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(x\_clone));}
+\DoxyCodeLine{generated\_solver-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(x\_clone));}
 \DoxyCodeLine{exec-\/>\mbox{\hyperlink{classgko_1_1Executor_a24eeee7648c0f0fd07c9866d07154875}{synchronize}}();}
 \DoxyCodeLine{\textcolor{keyword}{auto} a\_tac = std::chrono::steady\_clock::now();}
 \DoxyCodeLine{\textcolor{keyword}{auto} apply\_time =}
@@ -703,8 +703,8 @@ Compute the residual norm
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{    \textcolor{keyword}{auto} residual = utils::compute\_residual\_norm(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(A), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(b),}
-\DoxyCodeLine{                                                 \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(x\_clone));}
+\DoxyCodeLine{    \textcolor{keyword}{auto} residual = utils::compute\_residual\_norm(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(A), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b),}
+\DoxyCodeLine{                                                 \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(x\_clone));}
 \DoxyCodeLine{    output\_file << \textcolor{stringliteral}{"Residual\_norm: "} << residual << std::endl;}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
@@ -746,7 +746,7 @@ Remove the generate logger from the executor
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{exec-\/>remove\_logger(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(gen\_logger));}
+\DoxyCodeLine{exec-\/>remove\_logger(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(gen\_logger));}
 \end{DoxyCode}
 
 
@@ -773,7 +773,7 @@ Create a Residual\+Logger to log the recurent residual
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{auto} res\_logger = std::make\_shared<loggers::ResidualLogger<ValueType>>(}
-\DoxyCodeLine{    exec, \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(A), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(b));}
+\DoxyCodeLine{    exec, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(A), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b));}
 \DoxyCodeLine{generated\_solver-\/>add\_logger(res\_logger);}
 \end{DoxyCode}
 
@@ -782,8 +782,8 @@ Solve the system
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{generated\_solver-\/>apply(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(b), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(x));}
-\DoxyCodeLine{exec-\/>remove\_logger(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(apply\_logger));}
+\DoxyCodeLine{generated\_solver-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(x));}
+\DoxyCodeLine{exec-\/>remove\_logger(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(apply\_logger));}
 \end{DoxyCode}
 
 
@@ -803,7 +803,7 @@ Print solution
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{std::cout << \textcolor{stringliteral}{"Solution, first ten entries: \(\backslash\)n"};}
-\DoxyCodeLine{print\_vector(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(x));}
+\DoxyCodeLine{print\_vector(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(x));}
 \end{DoxyCode}
 
 
@@ -988,34 +988,34 @@ Here is a sample output in the file log.\+txt\+:
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType>}
-\DoxyCodeLine{ValueType get\_first\_element(\textcolor{keyword}{const} vec<ValueType> *norm)}
+\DoxyCodeLine{ValueType get\_first\_element(\textcolor{keyword}{const} vec<ValueType>* norm)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keywordflow}{return} norm-\/>get\_executor()-\/>copy\_val\_to\_host(norm-\/>get\_const\_values());}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType>}
-\DoxyCodeLine{\mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} compute\_norm(\textcolor{keyword}{const} vec<ValueType> *b)}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} compute\_norm(\textcolor{keyword}{const} vec<ValueType>* b)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} exec = b-\/>get\_executor();}
 \DoxyCodeLine{    \textcolor{keyword}{auto} b\_norm = gko::initialize<real\_vec<ValueType>>(\{0.0\}, exec);}
-\DoxyCodeLine{    b-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(b\_norm));}
-\DoxyCodeLine{    \textcolor{keywordflow}{return} get\_first\_element(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(b\_norm));}
+\DoxyCodeLine{    b-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b\_norm));}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} get\_first\_element(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b\_norm));}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType>}
 \DoxyCodeLine{\mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} compute\_residual\_norm(}
-\DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *system\_matrix, \textcolor{keyword}{const} vec<ValueType> *b,}
-\DoxyCodeLine{    \textcolor{keyword}{const} vec<ValueType> *x)}
+\DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* system\_matrix, \textcolor{keyword}{const} vec<ValueType>* b,}
+\DoxyCodeLine{    \textcolor{keyword}{const} vec<ValueType>* x)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} exec = system\_matrix-\/>\mbox{\hyperlink{classgko_1_1PolymorphicObject_ab40586bff071b7f11c2cf6b5cbf598eb}{get\_executor}}();}
 \DoxyCodeLine{    \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_a0059e27f8f4bc348ff65c1e60caf47c8}{one}} = gko::initialize<vec<ValueType>>(\{1.0\}, exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} neg\_one = gko::initialize<vec<ValueType>>(\{-\/1.0\}, exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} res = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(b);}
-\DoxyCodeLine{    system\_matrix-\/>\mbox{\hyperlink{classgko_1_1LinOp_a0449b2fc705d2f970855af23b5e2788e}{apply}}(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(one), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(x), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(neg\_one),}
-\DoxyCodeLine{                         \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(res));}
-\DoxyCodeLine{    \textcolor{keywordflow}{return} compute\_norm(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(res));}
+\DoxyCodeLine{    system\_matrix-\/>\mbox{\hyperlink{classgko_1_1LinOp_a0449b2fc705d2f970855af23b5e2788e}{apply}}(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(x), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(neg\_one),}
+\DoxyCodeLine{                         \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(res));}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} compute\_norm(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(res));}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -1026,62 +1026,62 @@ Here is a sample output in the file log.\+txt\+:
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{struct }OperationLogger : \mbox{\hyperlink{classgko_1_1log_1_1Logger}{gko::log::Logger}} \{}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_allocation\_started(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}} *exec,}
-\DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} \&)\textcolor{keyword}{ const override}}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_allocation\_started(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}}* exec,}
+\DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}}\&)\textcolor{keyword}{ const override}}
 \DoxyCodeLine{\textcolor{keyword}{    }\{}
 \DoxyCodeLine{        this-\/>start\_operation(exec, \textcolor{stringliteral}{"allocate"});}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_allocation\_completed(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}} *exec,}
-\DoxyCodeLine{                                 \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} \&,}
-\DoxyCodeLine{                                 \textcolor{keyword}{const} gko::uintptr \&)\textcolor{keyword}{ const override}}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_allocation\_completed(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}}* exec,}
+\DoxyCodeLine{                                 \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}}\&,}
+\DoxyCodeLine{                                 \textcolor{keyword}{const} gko::uintptr\&)\textcolor{keyword}{ const override}}
 \DoxyCodeLine{\textcolor{keyword}{    }\{}
 \DoxyCodeLine{        this-\/>end\_operation(exec, \textcolor{stringliteral}{"allocate"});}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_free\_started(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}} *exec,}
-\DoxyCodeLine{                         \textcolor{keyword}{const} gko::uintptr \&)\textcolor{keyword}{ const override}}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_free\_started(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}}* exec,}
+\DoxyCodeLine{                         \textcolor{keyword}{const} gko::uintptr\&)\textcolor{keyword}{ const override}}
 \DoxyCodeLine{\textcolor{keyword}{    }\{}
 \DoxyCodeLine{        this-\/>start\_operation(exec, \textcolor{stringliteral}{"free"});}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_free\_completed(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}} *exec,}
-\DoxyCodeLine{                           \textcolor{keyword}{const} gko::uintptr \&)\textcolor{keyword}{ const override}}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_free\_completed(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}}* exec,}
+\DoxyCodeLine{                           \textcolor{keyword}{const} gko::uintptr\&)\textcolor{keyword}{ const override}}
 \DoxyCodeLine{\textcolor{keyword}{    }\{}
 \DoxyCodeLine{        this-\/>end\_operation(exec, \textcolor{stringliteral}{"free"});}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_copy\_started(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}} *from, \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}} *to,}
-\DoxyCodeLine{                         \textcolor{keyword}{const} gko::uintptr \&, \textcolor{keyword}{const} gko::uintptr \&,}
-\DoxyCodeLine{                         \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} \&)\textcolor{keyword}{ const override}}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_copy\_started(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}}* from, \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}}* to,}
+\DoxyCodeLine{                         \textcolor{keyword}{const} gko::uintptr\&, \textcolor{keyword}{const} gko::uintptr\&,}
+\DoxyCodeLine{                         \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}}\&)\textcolor{keyword}{ const override}}
 \DoxyCodeLine{\textcolor{keyword}{    }\{}
 \DoxyCodeLine{        from-\/>\mbox{\hyperlink{classgko_1_1Executor_a24eeee7648c0f0fd07c9866d07154875}{synchronize}}();}
 \DoxyCodeLine{        this-\/>start\_operation(to, \textcolor{stringliteral}{"copy"});}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_copy\_completed(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}} *from, \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}} *to,}
-\DoxyCodeLine{                           \textcolor{keyword}{const} gko::uintptr \&, \textcolor{keyword}{const} gko::uintptr \&,}
-\DoxyCodeLine{                           \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} \&)\textcolor{keyword}{ const override}}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_copy\_completed(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}}* from, \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}}* to,}
+\DoxyCodeLine{                           \textcolor{keyword}{const} gko::uintptr\&, \textcolor{keyword}{const} gko::uintptr\&,}
+\DoxyCodeLine{                           \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}}\&)\textcolor{keyword}{ const override}}
 \DoxyCodeLine{\textcolor{keyword}{    }\{}
 \DoxyCodeLine{        from-\/>\mbox{\hyperlink{classgko_1_1Executor_a24eeee7648c0f0fd07c9866d07154875}{synchronize}}();}
 \DoxyCodeLine{        this-\/>end\_operation(to, \textcolor{stringliteral}{"copy"});}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_operation\_launched(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}} *exec,}
-\DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Operation}{gko::Operation}} *op)\textcolor{keyword}{ const override}}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_operation\_launched(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}}* exec,}
+\DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Operation}{gko::Operation}}* op)\textcolor{keyword}{ const override}}
 \DoxyCodeLine{\textcolor{keyword}{    }\{}
 \DoxyCodeLine{        this-\/>start\_operation(exec, op-\/>\mbox{\hyperlink{classgko_1_1Operation_ab3b940849d1daf02830f3387c52888d0}{get\_name}}());}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_operation\_completed(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}} *exec,}
-\DoxyCodeLine{                                \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Operation}{gko::Operation}} *op)\textcolor{keyword}{ const override}}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_operation\_completed(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}}* exec,}
+\DoxyCodeLine{                                \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Operation}{gko::Operation}}* op)\textcolor{keyword}{ const override}}
 \DoxyCodeLine{\textcolor{keyword}{    }\{}
 \DoxyCodeLine{        this-\/>end\_operation(exec, op-\/>\mbox{\hyperlink{classgko_1_1Operation_ab3b940849d1daf02830f3387c52888d0}{get\_name}}());}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} write\_data(std::ostream \&ostream)}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} write\_data(std::ostream\& ostream)}
 \DoxyCodeLine{    \{}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto} \&entry : total) \{}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& entry : total) \{}
 \DoxyCodeLine{            ostream << \textcolor{stringliteral}{"\(\backslash\)t"} << entry.first.c\_str() << \textcolor{stringliteral}{": "}}
 \DoxyCodeLine{                    << std::chrono::duration\_cast<std::chrono::nanoseconds>(}
 \DoxyCodeLine{                           entry.second)}
@@ -1095,15 +1095,15 @@ Here is a sample output in the file log.\+txt\+:
 \DoxyCodeLine{    \{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} start\_operation(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}} *exec,}
-\DoxyCodeLine{                         \textcolor{keyword}{const} std::string \&name)\textcolor{keyword}{ const}}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} start\_operation(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}}* exec,}
+\DoxyCodeLine{                         \textcolor{keyword}{const} std::string\& name)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{    }\{}
 \DoxyCodeLine{        nested.emplace\_back(0);}
 \DoxyCodeLine{        exec-\/>\mbox{\hyperlink{classgko_1_1Executor_a24eeee7648c0f0fd07c9866d07154875}{synchronize}}();}
 \DoxyCodeLine{        start[name] = std::chrono::steady\_clock::now();}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} end\_operation(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}} *exec, \textcolor{keyword}{const} std::string \&name)\textcolor{keyword}{ const}}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} end\_operation(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}}* exec, \textcolor{keyword}{const} std::string\& name)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{    }\{}
 \DoxyCodeLine{        exec-\/>\mbox{\hyperlink{classgko_1_1Executor_a24eeee7648c0f0fd07c9866d07154875}{synchronize}}();}
 \DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keyword}{auto} end = std::chrono::steady\_clock::now();}
@@ -1122,23 +1122,23 @@ Here is a sample output in the file log.\+txt\+:
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{struct }StorageLogger : \mbox{\hyperlink{classgko_1_1log_1_1Logger}{gko::log::Logger}} \{}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_allocation\_completed(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}} *,}
-\DoxyCodeLine{                                 \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} \&num\_bytes,}
-\DoxyCodeLine{                                 \textcolor{keyword}{const} gko::uintptr \&location)\textcolor{keyword}{ const override}}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_allocation\_completed(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}}*,}
+\DoxyCodeLine{                                 \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}}\& num\_bytes,}
+\DoxyCodeLine{                                 \textcolor{keyword}{const} gko::uintptr\& location)\textcolor{keyword}{ const override}}
 \DoxyCodeLine{\textcolor{keyword}{    }\{}
 \DoxyCodeLine{        storage[location] = num\_bytes;}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_free\_completed(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}} *,}
-\DoxyCodeLine{                           \textcolor{keyword}{const} gko::uintptr \&location)\textcolor{keyword}{ const override}}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_free\_completed(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}}*,}
+\DoxyCodeLine{                           \textcolor{keyword}{const} gko::uintptr\& location)\textcolor{keyword}{ const override}}
 \DoxyCodeLine{\textcolor{keyword}{    }\{}
 \DoxyCodeLine{        storage[location] = 0;}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} write\_data(std::ostream \&ostream)}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} write\_data(std::ostream\& ostream)}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{        \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} total\{\};}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto} \&e : storage) \{}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& e : storage) \{}
 \DoxyCodeLine{            total += e.second;}
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{        ostream << \textcolor{stringliteral}{"Storage: "} << total << std::endl;}
@@ -1155,10 +1155,10 @@ Here is a sample output in the file log.\+txt\+:
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType>}
 \DoxyCodeLine{\textcolor{keyword}{struct }ResidualLogger : \mbox{\hyperlink{classgko_1_1log_1_1Logger}{gko::log::Logger}} \{}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_iteration\_complete(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *, \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} \&,}
-\DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *residual,}
-\DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *solution,}
-\DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *residual\_norm)\textcolor{keyword}{ const override}}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_iteration\_complete(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}*, \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}}\&,}
+\DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* residual,}
+\DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* solution,}
+\DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* residual\_norm)\textcolor{keyword}{ const override}}
 \DoxyCodeLine{\textcolor{keyword}{    }\{}
 \DoxyCodeLine{        \textcolor{keywordflow}{if} (residual\_norm) \{}
 \DoxyCodeLine{            rec\_res\_norms.push\_back(utils::get\_first\_element(}
@@ -1176,32 +1176,32 @@ Here is a sample output in the file log.\+txt\+:
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{    ResidualLogger(std::shared\_ptr<const gko::Executor> exec,}
-\DoxyCodeLine{                   \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *matrix, \textcolor{keyword}{const} vec<ValueType> *b)}
+\DoxyCodeLine{                   \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* matrix, \textcolor{keyword}{const} vec<ValueType>* b)}
 \DoxyCodeLine{        : \mbox{\hyperlink{namespacegko}{gko}}::log::Logger(exec, \mbox{\hyperlink{namespacegko}{gko}}::log::Logger::iteration\_complete\_mask),}
 \DoxyCodeLine{          matrix\{matrix\},}
 \DoxyCodeLine{          b\{b\}}
 \DoxyCodeLine{    \{\}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} write\_data(std::ostream \&ostream)}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} write\_data(std::ostream\& ostream)}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{        ostream << \textcolor{stringliteral}{"Recurrent Residual Norms: "} << std::endl;}
 \DoxyCodeLine{        ostream << \textcolor{stringliteral}{"["} << std::endl;}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto} \&entry : rec\_res\_norms) \{}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& entry : rec\_res\_norms) \{}
 \DoxyCodeLine{            ostream << \textcolor{stringliteral}{"\(\backslash\)t"} << entry << std::endl;}
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{        ostream << \textcolor{stringliteral}{"];"} << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{        ostream << \textcolor{stringliteral}{"True Residual Norms: "} << std::endl;}
 \DoxyCodeLine{        ostream << \textcolor{stringliteral}{"["} << std::endl;}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto} \&entry : true\_res\_norms) \{}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& entry : true\_res\_norms) \{}
 \DoxyCodeLine{            ostream << \textcolor{stringliteral}{"\(\backslash\)t"} << entry << std::endl;}
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{        ostream << \textcolor{stringliteral}{"];"} << std::endl;}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
-\DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *matrix;}
-\DoxyCodeLine{    \textcolor{keyword}{const} vec<ValueType> *b;}
+\DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* matrix;}
+\DoxyCodeLine{    \textcolor{keyword}{const} vec<ValueType>* b;}
 \DoxyCodeLine{    \textcolor{keyword}{mutable} std::vector<gko::remove\_complex<ValueType>> rec\_res\_norms;}
 \DoxyCodeLine{    \textcolor{keyword}{mutable} std::vector<gko::remove\_complex<ValueType>> true\_res\_norms;}
 \DoxyCodeLine{\};}
@@ -1213,7 +1213,7 @@ Here is a sample output in the file log.\+txt\+:
 \DoxyCodeLine{\textcolor{keyword}{namespace }\{}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordtype}{void} print\_usage(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *filename)}
+\DoxyCodeLine{\textcolor{keywordtype}{void} print\_usage(\textcolor{keyword}{const} \textcolor{keywordtype}{char}* filename)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    std::cerr << \textcolor{stringliteral}{"Usage: "} << filename << \textcolor{stringliteral}{" [executor] [matrix file]"}}
 \DoxyCodeLine{              << std::endl;}
@@ -1225,7 +1225,7 @@ Here is a sample output in the file log.\+txt\+:
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType>}
-\DoxyCodeLine{\textcolor{keywordtype}{void} print\_vector(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}} *vec)}
+\DoxyCodeLine{\textcolor{keywordtype}{void} print\_vector(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}}* vec)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} elements\_to\_print = std::min(\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}}(10), vec-\/>\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\_size}}()[0]);}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"["} << std::endl;}
@@ -1239,7 +1239,7 @@ Here is a sample output in the file log.\+txt\+:
 \DoxyCodeLine{\}  \textcolor{comment}{// namespace}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[])}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{using} ValueType = double;}
 \DoxyCodeLine{    \textcolor{keyword}{using} IndexType = int;}
@@ -1290,7 +1290,7 @@ Here is a sample output in the file log.\+txt\+:
 \DoxyCodeLine{    \textcolor{keyword}{auto} storage\_logger = std::make\_shared<loggers::StorageLogger>(exec);}
 \DoxyCodeLine{    exec-\/>add\_logger(storage\_logger);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} A = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(gko::read<mtx>(std::ifstream(input\_mtx), exec));}
-\DoxyCodeLine{    exec-\/>remove\_logger(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(storage\_logger));}
+\DoxyCodeLine{    exec-\/>remove\_logger(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(storage\_logger));}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} max\_iters = A-\/>get\_size()[0];}
 \DoxyCodeLine{    \textcolor{keyword}{auto} b = utils::create\_vector<ValueType>(exec, A-\/>get\_size()[0], 1.0);}
@@ -1312,7 +1312,7 @@ Here is a sample output in the file log.\+txt\+:
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{        \textcolor{keyword}{auto} x\_clone = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(x);}
 \DoxyCodeLine{}
-\DoxyCodeLine{        solver\_factory-\/>generate(A)-\/>apply(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(b), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(x\_clone));}
+\DoxyCodeLine{        solver\_factory-\/>generate(A)-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(x\_clone));}
 \DoxyCodeLine{        exec-\/>\mbox{\hyperlink{classgko_1_1Executor_a24eeee7648c0f0fd07c9866d07154875}{synchronize}}();}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
@@ -1331,15 +1331,15 @@ Here is a sample output in the file log.\+txt\+:
 \DoxyCodeLine{}
 \DoxyCodeLine{        exec-\/>\mbox{\hyperlink{classgko_1_1Executor_a24eeee7648c0f0fd07c9866d07154875}{synchronize}}();}
 \DoxyCodeLine{        \textcolor{keyword}{auto} a\_tic = std::chrono::steady\_clock::now();}
-\DoxyCodeLine{        generated\_solver-\/>apply(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(b), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(x\_clone));}
+\DoxyCodeLine{        generated\_solver-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(x\_clone));}
 \DoxyCodeLine{        exec-\/>\mbox{\hyperlink{classgko_1_1Executor_a24eeee7648c0f0fd07c9866d07154875}{synchronize}}();}
 \DoxyCodeLine{        \textcolor{keyword}{auto} a\_tac = std::chrono::steady\_clock::now();}
 \DoxyCodeLine{        \textcolor{keyword}{auto} apply\_time =}
 \DoxyCodeLine{            std::chrono::duration\_cast<std::chrono::nanoseconds>(a\_tac -\/ a\_tic);}
 \DoxyCodeLine{        output\_file << \textcolor{stringliteral}{"Apply time (ns): "} << apply\_time.count() << std::endl;}
 \DoxyCodeLine{}
-\DoxyCodeLine{        \textcolor{keyword}{auto} residual = utils::compute\_residual\_norm(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(A), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(b),}
-\DoxyCodeLine{                                                     \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(x\_clone));}
+\DoxyCodeLine{        \textcolor{keyword}{auto} residual = utils::compute\_residual\_norm(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(A), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b),}
+\DoxyCodeLine{                                                     \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(x\_clone));}
 \DoxyCodeLine{        output\_file << \textcolor{stringliteral}{"Residual\_norm: "} << residual << std::endl;}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
@@ -1347,24 +1347,24 @@ Here is a sample output in the file log.\+txt\+:
 \DoxyCodeLine{        \textcolor{keyword}{auto} gen\_logger = std::make\_shared<loggers::OperationLogger>(exec);}
 \DoxyCodeLine{        exec-\/>add\_logger(gen\_logger);}
 \DoxyCodeLine{        \textcolor{keyword}{auto} generated\_solver = solver\_factory-\/>generate(A);}
-\DoxyCodeLine{        exec-\/>remove\_logger(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(gen\_logger));}
+\DoxyCodeLine{        exec-\/>remove\_logger(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(gen\_logger));}
 \DoxyCodeLine{        output\_file << \textcolor{stringliteral}{"Generate operations times (ns):"} << std::endl;}
 \DoxyCodeLine{        gen\_logger-\/>write\_data(output\_file);}
 \DoxyCodeLine{}
 \DoxyCodeLine{        \textcolor{keyword}{auto} apply\_logger = std::make\_shared<loggers::OperationLogger>(exec);}
 \DoxyCodeLine{        exec-\/>add\_logger(apply\_logger);}
 \DoxyCodeLine{        \textcolor{keyword}{auto} res\_logger = std::make\_shared<loggers::ResidualLogger<ValueType>>(}
-\DoxyCodeLine{            exec, \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(A), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(b));}
+\DoxyCodeLine{            exec, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(A), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b));}
 \DoxyCodeLine{        generated\_solver-\/>add\_logger(res\_logger);}
-\DoxyCodeLine{        generated\_solver-\/>apply(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(b), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(x));}
-\DoxyCodeLine{        exec-\/>remove\_logger(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(apply\_logger));}
+\DoxyCodeLine{        generated\_solver-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(x));}
+\DoxyCodeLine{        exec-\/>remove\_logger(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(apply\_logger));}
 \DoxyCodeLine{        output\_file << \textcolor{stringliteral}{"Apply operations times (ns):"} << std::endl;}
 \DoxyCodeLine{        apply\_logger-\/>write\_data(output\_file);}
 \DoxyCodeLine{        res\_logger-\/>write\_data(output\_file);}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Solution, first ten entries: \(\backslash\)n"};}
-\DoxyCodeLine{    print\_vector(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(x));}
+\DoxyCodeLine{    print\_vector(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(x));}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"The performance and residual data can be found in "} << of\_name}
 \DoxyCodeLine{              << std::endl;}

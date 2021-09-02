@@ -45,8 +45,8 @@ A C\+U\+DA kernel implementing the stencil, which will be used if running on the
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType>}
-\DoxyCodeLine{\textcolor{keywordtype}{void} stencil\_kernel(std::size\_t size, \textcolor{keyword}{const} ValueType *coefs,}
-\DoxyCodeLine{                    \textcolor{keyword}{const} ValueType *b, ValueType *x);}
+\DoxyCodeLine{\textcolor{keywordtype}{void} stencil\_kernel(std::size\_t size, \textcolor{keyword}{const} ValueType* coefs,}
+\DoxyCodeLine{                    \textcolor{keyword}{const} ValueType* b, ValueType* x);}
 \end{DoxyCode}
 
 
@@ -86,7 +86,7 @@ For simplicity, we assume that there is always only one right hand side and the 
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keywordtype}{void} apply\_impl(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *b, \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *x)\textcolor{keyword}{ const override}}
+\DoxyCodeLine{\textcolor{keywordtype}{void} apply\_impl(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* b, \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* x)\textcolor{keyword}{ const override}}
 \DoxyCodeLine{\textcolor{keyword}{}\{}
 \end{DoxyCode}
 
@@ -105,8 +105,8 @@ we need separate implementations depending on the executor, so we create an oper
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{struct }stencil\_operation : \mbox{\hyperlink{classgko_1_1Operation}{gko::Operation}} \{}
-\DoxyCodeLine{    stencil\_operation(\textcolor{keyword}{const} coef\_type \&coefficients, \textcolor{keyword}{const} vec *b,}
-\DoxyCodeLine{                      vec *x)}
+\DoxyCodeLine{    stencil\_operation(\textcolor{keyword}{const} coef\_type\& coefficients, \textcolor{keyword}{const} vec* b,}
+\DoxyCodeLine{                      vec* x)}
 \DoxyCodeLine{        : coefficients\{coefficients\}, b\{b\}, x\{x\}}
 \DoxyCodeLine{    \{\}}
 \end{DoxyCode}
@@ -152,9 +152,9 @@ We do not provide an implementation for reference executor. If not provided, Gin
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{        \textcolor{keyword}{const} coef\_type \&coefficients;}
-\DoxyCodeLine{        \textcolor{keyword}{const} vec *b;}
-\DoxyCodeLine{        vec *x;}
+\DoxyCodeLine{        \textcolor{keyword}{const} coef\_type\& coefficients;}
+\DoxyCodeLine{        \textcolor{keyword}{const} vec* b;}
+\DoxyCodeLine{        vec* x;}
 \DoxyCodeLine{    \};}
 \DoxyCodeLine{    this-\/>get\_executor()-\/>run(}
 \DoxyCodeLine{        stencil\_operation(coefficients, dense\_b, dense\_x));}
@@ -166,15 +166,15 @@ There is also a version of the apply function which does the operation x = alpha
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} apply\_impl(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *alpha, \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *b,}
-\DoxyCodeLine{                    \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *beta, \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *x)\textcolor{keyword}{ const override}}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} apply\_impl(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* alpha, \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* b,}
+\DoxyCodeLine{                    \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* beta, \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* x)\textcolor{keyword}{ const override}}
 \DoxyCodeLine{\textcolor{keyword}{    }\{}
 \DoxyCodeLine{        \textcolor{keyword}{auto} dense\_b = gko::as<vec>(b);}
 \DoxyCodeLine{        \textcolor{keyword}{auto} dense\_x = gko::as<vec>(x);}
 \DoxyCodeLine{        \textcolor{keyword}{auto} tmp\_x = dense\_x-\/>clone();}
-\DoxyCodeLine{        this-\/>apply\_impl(b, \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(tmp\_x));}
+\DoxyCodeLine{        this-\/>apply\_impl(b, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(tmp\_x));}
 \DoxyCodeLine{        dense\_x-\/>scale(beta);}
-\DoxyCodeLine{        dense\_x-\/>add\_scaled(alpha, \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(tmp\_x));}
+\DoxyCodeLine{        dense\_x-\/>add\_scaled(alpha, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(tmp\_x));}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
@@ -188,7 +188,7 @@ Creates a stencil matrix in C\+SR format for the given number of discretization 
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType, \textcolor{keyword}{typename} IndexType>}
-\DoxyCodeLine{\textcolor{keywordtype}{void} generate\_stencil\_matrix(\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<ValueType, IndexType>}} *matrix)}
+\DoxyCodeLine{\textcolor{keywordtype}{void} generate\_stencil\_matrix(\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<ValueType, IndexType>}}* matrix)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} discretization\_points = matrix-\/>\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\_size}}()[0];}
 \DoxyCodeLine{    \textcolor{keyword}{auto} row\_ptrs = matrix-\/>\mbox{\hyperlink{classgko_1_1matrix_1_1Csr_a068e5158cf282fa977f0a137f8cd7f03}{get\_row\_ptrs}}();}
@@ -217,7 +217,7 @@ Generates the R\+HS vector given {\ttfamily f} and the boundary conditions.
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} Closure, \textcolor{keyword}{typename} ValueType>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} generate\_rhs(Closure f, ValueType u0, ValueType u1,}
-\DoxyCodeLine{                  \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}} *rhs)}
+\DoxyCodeLine{                  \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}}* rhs)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} discretization\_points = rhs-\/>\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\_size}}()[0];}
 \DoxyCodeLine{    \textcolor{keyword}{auto} values = rhs-\/>\mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a3bc458e02fab8e4c9f60f70bd4d5a4f9}{get\_values}}();}
@@ -238,7 +238,7 @@ Prints the solution {\ttfamily u}.
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} print\_solution(ValueType u0, ValueType u1,}
-\DoxyCodeLine{                    \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}} *u)}
+\DoxyCodeLine{                    \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}}* u)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    std::cout << u0 << \textcolor{charliteral}{'\(\backslash\)n'};}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < u-\/>\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\_size}}()[0]; ++i) \{}
@@ -255,7 +255,7 @@ Computes the 1-\/norm of the error given the computed {\ttfamily u} and the corr
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} Closure, \textcolor{keyword}{typename} ValueType>}
 \DoxyCodeLine{\textcolor{keywordtype}{double} calculate\_error(\textcolor{keywordtype}{int} discretization\_points,}
-\DoxyCodeLine{                       \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}} *u,}
+\DoxyCodeLine{                       \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}}* u,}
 \DoxyCodeLine{                       Closure correct\_u)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} h = 1.0 / (discretization\_points + 1);}
@@ -270,7 +270,7 @@ Computes the 1-\/norm of the error given the computed {\ttfamily u} and the corr
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[])}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
 \end{DoxyCode}
 
@@ -355,7 +355,7 @@ initialize vectors
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{auto} rhs = vec::create(app\_exec, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}(discretization\_points, 1));}
-\DoxyCodeLine{generate\_rhs(f, u0, u1, \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(rhs));}
+\DoxyCodeLine{generate\_rhs(f, u0, u1, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(rhs));}
 \DoxyCodeLine{\textcolor{keyword}{auto} u = vec::create(app\_exec, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}(discretization\_points, 1));}
 \DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < u-\/>\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\_size}}()[0]; ++i) \{}
 \DoxyCodeLine{    u-\/>\mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a3bc458e02fab8e4c9f60f70bd4d5a4f9}{get\_values}}()[i] = 0.0;}
@@ -386,11 +386,11 @@ notice how our custom Stencil\+Matrix can be used in the same way as any built-\
 \begin{DoxyCode}{0}
 \DoxyCodeLine{        -\/>generate(StencilMatrix<ValueType>::create(exec, discretization\_points,}
 \DoxyCodeLine{                                                    -\/1, 2, -\/1))}
-\DoxyCodeLine{        -\/>apply(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(rhs), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(u));}
+\DoxyCodeLine{        -\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(rhs), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(u));}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"\(\backslash\)nSolve complete."}}
 \DoxyCodeLine{              << \textcolor{stringliteral}{"\(\backslash\)nThe average relative error is "}}
-\DoxyCodeLine{              << calculate\_error(discretization\_points, \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(u), correct\_u) /}
+\DoxyCodeLine{              << calculate\_error(discretization\_points, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(u), correct\_u) /}
 \DoxyCodeLine{                     discretization\_points}
 \DoxyCodeLine{              << std::endl;}
 \DoxyCodeLine{\}}
@@ -448,8 +448,8 @@ notice how our custom Stencil\+Matrix can be used in the same way as any built-\
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType>}
-\DoxyCodeLine{\textcolor{keywordtype}{void} stencil\_kernel(std::size\_t size, \textcolor{keyword}{const} ValueType *coefs,}
-\DoxyCodeLine{                    \textcolor{keyword}{const} ValueType *b, ValueType *x);}
+\DoxyCodeLine{\textcolor{keywordtype}{void} stencil\_kernel(std::size\_t size, \textcolor{keyword}{const} ValueType* coefs,}
+\DoxyCodeLine{                    \textcolor{keyword}{const} ValueType* b, ValueType* x);}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType>}
@@ -467,14 +467,14 @@ notice how our custom Stencil\+Matrix can be used in the same way as any built-\
 \DoxyCodeLine{    \textcolor{keyword}{using} vec = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}};}
 \DoxyCodeLine{    \textcolor{keyword}{using} coef\_type = \mbox{\hyperlink{classgko_1_1Array}{gko::Array<ValueType>}};}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} apply\_impl(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *b, \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *x)\textcolor{keyword}{ const override}}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} apply\_impl(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* b, \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* x)\textcolor{keyword}{ const override}}
 \DoxyCodeLine{\textcolor{keyword}{    }\{}
 \DoxyCodeLine{        \textcolor{keyword}{auto} dense\_b = gko::as<vec>(b);}
 \DoxyCodeLine{        \textcolor{keyword}{auto} dense\_x = gko::as<vec>(x);}
 \DoxyCodeLine{}
 \DoxyCodeLine{        \textcolor{keyword}{struct }stencil\_operation : \mbox{\hyperlink{classgko_1_1Operation}{gko::Operation}} \{}
-\DoxyCodeLine{            stencil\_operation(\textcolor{keyword}{const} coef\_type \&coefficients, \textcolor{keyword}{const} vec *b,}
-\DoxyCodeLine{                              vec *x)}
+\DoxyCodeLine{            stencil\_operation(\textcolor{keyword}{const} coef\_type\& coefficients, \textcolor{keyword}{const} vec* b,}
+\DoxyCodeLine{                              vec* x)}
 \DoxyCodeLine{                : coefficients\{coefficients\}, b\{b\}, x\{x\}}
 \DoxyCodeLine{            \{\}}
 \DoxyCodeLine{}
@@ -503,23 +503,23 @@ notice how our custom Stencil\+Matrix can be used in the same way as any built-\
 \DoxyCodeLine{            \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
-\DoxyCodeLine{            \textcolor{keyword}{const} coef\_type \&coefficients;}
-\DoxyCodeLine{            \textcolor{keyword}{const} vec *b;}
-\DoxyCodeLine{            vec *x;}
+\DoxyCodeLine{            \textcolor{keyword}{const} coef\_type\& coefficients;}
+\DoxyCodeLine{            \textcolor{keyword}{const} vec* b;}
+\DoxyCodeLine{            vec* x;}
 \DoxyCodeLine{        \};}
 \DoxyCodeLine{        this-\/>get\_executor()-\/>run(}
 \DoxyCodeLine{            stencil\_operation(coefficients, dense\_b, dense\_x));}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} apply\_impl(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *alpha, \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *b,}
-\DoxyCodeLine{                    \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *beta, \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *x)\textcolor{keyword}{ const override}}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} apply\_impl(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* alpha, \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* b,}
+\DoxyCodeLine{                    \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* beta, \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* x)\textcolor{keyword}{ const override}}
 \DoxyCodeLine{\textcolor{keyword}{    }\{}
 \DoxyCodeLine{        \textcolor{keyword}{auto} dense\_b = gko::as<vec>(b);}
 \DoxyCodeLine{        \textcolor{keyword}{auto} dense\_x = gko::as<vec>(x);}
 \DoxyCodeLine{        \textcolor{keyword}{auto} tmp\_x = dense\_x-\/>clone();}
-\DoxyCodeLine{        this-\/>apply\_impl(b, \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(tmp\_x));}
+\DoxyCodeLine{        this-\/>apply\_impl(b, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(tmp\_x));}
 \DoxyCodeLine{        dense\_x-\/>scale(beta);}
-\DoxyCodeLine{        dense\_x-\/>add\_scaled(alpha, \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(tmp\_x));}
+\DoxyCodeLine{        dense\_x-\/>add\_scaled(alpha, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(tmp\_x));}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
@@ -528,7 +528,7 @@ notice how our custom Stencil\+Matrix can be used in the same way as any built-\
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType, \textcolor{keyword}{typename} IndexType>}
-\DoxyCodeLine{\textcolor{keywordtype}{void} generate\_stencil\_matrix(\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<ValueType, IndexType>}} *matrix)}
+\DoxyCodeLine{\textcolor{keywordtype}{void} generate\_stencil\_matrix(\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<ValueType, IndexType>}}* matrix)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} discretization\_points = matrix-\/>\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\_size}}()[0];}
 \DoxyCodeLine{    \textcolor{keyword}{auto} row\_ptrs = matrix-\/>\mbox{\hyperlink{classgko_1_1matrix_1_1Csr_a068e5158cf282fa977f0a137f8cd7f03}{get\_row\_ptrs}}();}
@@ -552,7 +552,7 @@ notice how our custom Stencil\+Matrix can be used in the same way as any built-\
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} Closure, \textcolor{keyword}{typename} ValueType>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} generate\_rhs(Closure f, ValueType u0, ValueType u1,}
-\DoxyCodeLine{                  \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}} *rhs)}
+\DoxyCodeLine{                  \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}}* rhs)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} discretization\_points = rhs-\/>\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\_size}}()[0];}
 \DoxyCodeLine{    \textcolor{keyword}{auto} values = rhs-\/>\mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a3bc458e02fab8e4c9f60f70bd4d5a4f9}{get\_values}}();}
@@ -568,7 +568,7 @@ notice how our custom Stencil\+Matrix can be used in the same way as any built-\
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} print\_solution(ValueType u0, ValueType u1,}
-\DoxyCodeLine{                    \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}} *u)}
+\DoxyCodeLine{                    \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}}* u)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    std::cout << u0 << \textcolor{charliteral}{'\(\backslash\)n'};}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < u-\/>\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\_size}}()[0]; ++i) \{}
@@ -580,7 +580,7 @@ notice how our custom Stencil\+Matrix can be used in the same way as any built-\
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} Closure, \textcolor{keyword}{typename} ValueType>}
 \DoxyCodeLine{\textcolor{keywordtype}{double} calculate\_error(\textcolor{keywordtype}{int} discretization\_points,}
-\DoxyCodeLine{                       \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}} *u,}
+\DoxyCodeLine{                       \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}}* u,}
 \DoxyCodeLine{                       Closure correct\_u)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} h = 1.0 / (discretization\_points + 1);}
@@ -595,7 +595,7 @@ notice how our custom Stencil\+Matrix can be used in the same way as any built-\
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[])}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{using} ValueType = double;}
 \DoxyCodeLine{    \textcolor{keyword}{using} RealValueType = \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}};}
@@ -642,7 +642,7 @@ notice how our custom Stencil\+Matrix can be used in the same way as any built-\
 \DoxyCodeLine{    \textcolor{keyword}{auto} u1 = correct\_u(1);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} rhs = vec::create(app\_exec, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}(discretization\_points, 1));}
-\DoxyCodeLine{    generate\_rhs(f, u0, u1, \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(rhs));}
+\DoxyCodeLine{    generate\_rhs(f, u0, u1, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(rhs));}
 \DoxyCodeLine{    \textcolor{keyword}{auto} u = vec::create(app\_exec, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}(discretization\_points, 1));}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < u-\/>\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\_size}}()[0]; ++i) \{}
 \DoxyCodeLine{        u-\/>\mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a3bc458e02fab8e4c9f60f70bd4d5a4f9}{get\_values}}()[i] = 0.0;}
@@ -659,11 +659,11 @@ notice how our custom Stencil\+Matrix can be used in the same way as any built-\
 \DoxyCodeLine{        .on(exec)}
 \DoxyCodeLine{        -\/>generate(StencilMatrix<ValueType>::create(exec, discretization\_points,}
 \DoxyCodeLine{                                                    -\/1, 2, -\/1))}
-\DoxyCodeLine{        -\/>apply(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(rhs), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(u));}
+\DoxyCodeLine{        -\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(rhs), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(u));}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"\(\backslash\)nSolve complete."}}
 \DoxyCodeLine{              << \textcolor{stringliteral}{"\(\backslash\)nThe average relative error is "}}
-\DoxyCodeLine{              << calculate\_error(discretization\_points, \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(u), correct\_u) /}
+\DoxyCodeLine{              << calculate\_error(discretization\_points, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(u), correct\_u) /}
 \DoxyCodeLine{                     discretization\_points}
 \DoxyCodeLine{              << std::endl;}
 \DoxyCodeLine{\}}

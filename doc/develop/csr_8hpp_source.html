@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/363426142 branch based on develop. Ginkgo version 1.5.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/363787367 branch based on develop. Ginkgo version 1.5.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -147,7 +147,7 @@ $(function() {
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType = default_precision, <span class="keyword">typename</span> IndexType = <span class="keywordtype">int</span>32&gt;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keywordtype">void</span> strategy_rebuild_helper(<a class="code" href="classgko_1_1matrix_1_1Csr.html">Csr&lt;ValueType, IndexType&gt;</a> *result);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keywordtype">void</span> strategy_rebuild_helper(<a class="code" href="classgko_1_1matrix_1_1Csr.html">Csr&lt;ValueType, IndexType&gt;</a>* result);</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;}  <span class="comment">// namespace detail</span></div>
@@ -200,8 +200,8 @@ $(function() {
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
 <div class="line"><a name="l00180"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr_1_1strategy__type.html#a0c22b251b0c1dfd087a5c097488febe0">  180</a></span>&#160;        std::string <a class="code" href="classgko_1_1matrix_1_1Csr_1_1strategy__type.html#a0c22b251b0c1dfd087a5c097488febe0">get_name</a>() { <span class="keywordflow">return</span> name_; }</div>
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; </div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classgko_1_1matrix_1_1Csr_1_1strategy__type.html#a58bda9208766e57d861262d4059b65b4">process</a>(<span class="keyword">const</span> <a class="code" href="classgko_1_1Array.html">Array&lt;index_type&gt;</a> &amp;mtx_row_ptrs,</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;                             <a class="code" href="classgko_1_1Array.html">Array&lt;index_type&gt;</a> *mtx_srow) = 0;</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classgko_1_1matrix_1_1Csr_1_1strategy__type.html#a58bda9208766e57d861262d4059b65b4">process</a>(<span class="keyword">const</span> <a class="code" href="classgko_1_1Array.html">Array&lt;index_type&gt;</a>&amp; mtx_row_ptrs,</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;                             <a class="code" href="classgko_1_1Array.html">Array&lt;index_type&gt;</a>* mtx_srow) = 0;</div>
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        <span class="keyword">virtual</span> int64_t <a class="code" href="classgko_1_1matrix_1_1Csr_1_1strategy__type.html#a07a6dda9dd04ed8abd914f3a69f330f2">clac_size</a>(<span class="keyword">const</span> int64_t nnz) = 0;</div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
@@ -218,14 +218,14 @@ $(function() {
 <div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00224"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr_1_1classical.html#a98620198be4dc96d661b7bd1007407b2">  224</a></span>&#160;        <a class="code" href="classgko_1_1matrix_1_1Csr_1_1classical.html#a98620198be4dc96d661b7bd1007407b2">classical</a>() : <a class="code" href="classgko_1_1matrix_1_1Csr_1_1strategy__type.html">strategy_type</a>(<span class="stringliteral">&quot;classical&quot;</span>), max_length_per_row_(0) {}</div>
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160; </div>
-<div class="line"><a name="l00226"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr_1_1classical.html#a2844a228c3a3f827c8ad9cab5c0e453f">  226</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classgko_1_1matrix_1_1Csr_1_1classical.html#a2844a228c3a3f827c8ad9cab5c0e453f">process</a>(<span class="keyword">const</span> <a class="code" href="classgko_1_1Array.html">Array&lt;index_type&gt;</a> &amp;mtx_row_ptrs,</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;                     <a class="code" href="classgko_1_1Array.html">Array&lt;index_type&gt;</a> *mtx_srow)<span class="keyword"> override</span></div>
+<div class="line"><a name="l00226"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr_1_1classical.html#a2844a228c3a3f827c8ad9cab5c0e453f">  226</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classgko_1_1matrix_1_1Csr_1_1classical.html#a2844a228c3a3f827c8ad9cab5c0e453f">process</a>(<span class="keyword">const</span> <a class="code" href="classgko_1_1Array.html">Array&lt;index_type&gt;</a>&amp; mtx_row_ptrs,</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;                     <a class="code" href="classgko_1_1Array.html">Array&lt;index_type&gt;</a>* mtx_srow)<span class="keyword"> override</span></div>
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="keyword">        </span>{</div>
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;            <span class="keyword">auto</span> host_mtx_exec = mtx_row_ptrs.<a class="code" href="classgko_1_1Array.html#a820e5930cb5072acc7673fdb2d11efcd">get_executor</a>()-&gt;get_master();</div>
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;            <a class="code" href="classgko_1_1Array.html">Array&lt;index_type&gt;</a> row_ptrs_host(host_mtx_exec);</div>
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">bool</span> is_mtx_on_host{host_mtx_exec ==</div>
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;                                      mtx_row_ptrs.<a class="code" href="classgko_1_1Array.html#a820e5930cb5072acc7673fdb2d11efcd">get_executor</a>()};</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;            <span class="keyword">const</span> index_type *row_ptrs{};</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;            <span class="keyword">const</span> index_type* row_ptrs{};</div>
 <div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;            <span class="keywordflow">if</span> (is_mtx_on_host) {</div>
 <div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                row_ptrs = mtx_row_ptrs.<a class="code" href="classgko_1_1Array.html#a5a46e0920b649cdb062f5e415922d1aa">get_const_data</a>();</div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;            } <span class="keywordflow">else</span> {</div>
@@ -260,8 +260,8 @@ $(function() {
 <div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00274"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr_1_1merge__path.html#a3761055a7460cbdfb2fb330fda047e7a">  274</a></span>&#160;        <a class="code" href="classgko_1_1matrix_1_1Csr_1_1merge__path.html#a3761055a7460cbdfb2fb330fda047e7a">merge_path</a>() : <a class="code" href="classgko_1_1matrix_1_1Csr_1_1strategy__type.html">strategy_type</a>(<span class="stringliteral">&quot;merge_path&quot;</span>) {}</div>
 <div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160; </div>
-<div class="line"><a name="l00276"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr_1_1merge__path.html#afe80aaab5ab3a0945488dad118d9ab8d">  276</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classgko_1_1matrix_1_1Csr_1_1merge__path.html#afe80aaab5ab3a0945488dad118d9ab8d">process</a>(<span class="keyword">const</span> <a class="code" href="classgko_1_1Array.html">Array&lt;index_type&gt;</a> &amp;mtx_row_ptrs,</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;                     <a class="code" href="classgko_1_1Array.html">Array&lt;index_type&gt;</a> *mtx_srow)<span class="keyword"> override</span></div>
+<div class="line"><a name="l00276"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr_1_1merge__path.html#afe80aaab5ab3a0945488dad118d9ab8d">  276</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classgko_1_1matrix_1_1Csr_1_1merge__path.html#afe80aaab5ab3a0945488dad118d9ab8d">process</a>(<span class="keyword">const</span> <a class="code" href="classgko_1_1Array.html">Array&lt;index_type&gt;</a>&amp; mtx_row_ptrs,</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;                     <a class="code" href="classgko_1_1Array.html">Array&lt;index_type&gt;</a>* mtx_srow)<span class="keyword"> override</span></div>
 <div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="keyword">        </span>{}</div>
 <div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160; </div>
 <div class="line"><a name="l00280"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr_1_1merge__path.html#a2072b7810a1fbc515ca87807ed8adcdb">  280</a></span>&#160;        int64_t <a class="code" href="classgko_1_1matrix_1_1Csr_1_1merge__path.html#a2072b7810a1fbc515ca87807ed8adcdb">clac_size</a>(<span class="keyword">const</span> int64_t nnz)<span class="keyword"> override </span>{ <span class="keywordflow">return</span> 0; }</div>
@@ -276,8 +276,8 @@ $(function() {
 <div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00299"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr_1_1cusparse.html#a9aae722e5f5838291bf1f1798277a83c">  299</a></span>&#160;        <a class="code" href="classgko_1_1matrix_1_1Csr_1_1cusparse.html#a9aae722e5f5838291bf1f1798277a83c">cusparse</a>() : <a class="code" href="classgko_1_1matrix_1_1Csr_1_1strategy__type.html">strategy_type</a>(<span class="stringliteral">&quot;cusparse&quot;</span>) {}</div>
 <div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160; </div>
-<div class="line"><a name="l00301"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr_1_1cusparse.html#acf64bdc81eee1fb3f46fd80f5d920939">  301</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classgko_1_1matrix_1_1Csr_1_1cusparse.html#acf64bdc81eee1fb3f46fd80f5d920939">process</a>(<span class="keyword">const</span> <a class="code" href="classgko_1_1Array.html">Array&lt;index_type&gt;</a> &amp;mtx_row_ptrs,</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;                     <a class="code" href="classgko_1_1Array.html">Array&lt;index_type&gt;</a> *mtx_srow)<span class="keyword"> override</span></div>
+<div class="line"><a name="l00301"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr_1_1cusparse.html#acf64bdc81eee1fb3f46fd80f5d920939">  301</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classgko_1_1matrix_1_1Csr_1_1cusparse.html#acf64bdc81eee1fb3f46fd80f5d920939">process</a>(<span class="keyword">const</span> <a class="code" href="classgko_1_1Array.html">Array&lt;index_type&gt;</a>&amp; mtx_row_ptrs,</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;                     <a class="code" href="classgko_1_1Array.html">Array&lt;index_type&gt;</a>* mtx_srow)<span class="keyword"> override</span></div>
 <div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="keyword">        </span>{}</div>
 <div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160; </div>
 <div class="line"><a name="l00305"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr_1_1cusparse.html#a094614c818d821cb0a71a4266fbef2d0">  305</a></span>&#160;        int64_t <a class="code" href="classgko_1_1matrix_1_1Csr_1_1cusparse.html#a094614c818d821cb0a71a4266fbef2d0">clac_size</a>(<span class="keyword">const</span> int64_t nnz)<span class="keyword"> override </span>{ <span class="keywordflow">return</span> 0; }</div>
@@ -292,8 +292,8 @@ $(function() {
 <div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00323"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr_1_1sparselib.html#a2b50338d0f7679bc94b09d63341c5c6f">  323</a></span>&#160;        <a class="code" href="classgko_1_1matrix_1_1Csr_1_1sparselib.html#a2b50338d0f7679bc94b09d63341c5c6f">sparselib</a>() : <a class="code" href="classgko_1_1matrix_1_1Csr_1_1strategy__type.html">strategy_type</a>(<span class="stringliteral">&quot;sparselib&quot;</span>) {}</div>
 <div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160; </div>
-<div class="line"><a name="l00325"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr_1_1sparselib.html#a19f58c2a93c2ee247cc2406514219a94">  325</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classgko_1_1matrix_1_1Csr_1_1sparselib.html#a19f58c2a93c2ee247cc2406514219a94">process</a>(<span class="keyword">const</span> <a class="code" href="classgko_1_1Array.html">Array&lt;index_type&gt;</a> &amp;mtx_row_ptrs,</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;                     <a class="code" href="classgko_1_1Array.html">Array&lt;index_type&gt;</a> *mtx_srow)<span class="keyword"> override</span></div>
+<div class="line"><a name="l00325"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr_1_1sparselib.html#a19f58c2a93c2ee247cc2406514219a94">  325</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classgko_1_1matrix_1_1Csr_1_1sparselib.html#a19f58c2a93c2ee247cc2406514219a94">process</a>(<span class="keyword">const</span> <a class="code" href="classgko_1_1Array.html">Array&lt;index_type&gt;</a>&amp; mtx_row_ptrs,</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;                     <a class="code" href="classgko_1_1Array.html">Array&lt;index_type&gt;</a>* mtx_srow)<span class="keyword"> override</span></div>
 <div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;<span class="keyword">        </span>{}</div>
 <div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160; </div>
 <div class="line"><a name="l00329"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr_1_1sparselib.html#a106f7ba1d05091e56d27c3b50f141740">  329</a></span>&#160;        int64_t <a class="code" href="classgko_1_1matrix_1_1Csr_1_1sparselib.html#a106f7ba1d05091e56d27c3b50f141740">clac_size</a>(<span class="keyword">const</span> int64_t nnz)<span class="keyword"> override </span>{ <span class="keywordflow">return</span> 0; }</div>
@@ -334,8 +334,8 @@ $(function() {
 <div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;              strategy_name_(strategy_name)</div>
 <div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;        {}</div>
 <div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160; </div>
-<div class="line"><a name="l00402"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr_1_1load__balance.html#aba6c8c9169c1068c30ac9df19ec862ff">  402</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classgko_1_1matrix_1_1Csr_1_1load__balance.html#aba6c8c9169c1068c30ac9df19ec862ff">process</a>(<span class="keyword">const</span> <a class="code" href="classgko_1_1Array.html">Array&lt;index_type&gt;</a> &amp;mtx_row_ptrs,</div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;                     <a class="code" href="classgko_1_1Array.html">Array&lt;index_type&gt;</a> *mtx_srow)<span class="keyword"> override</span></div>
+<div class="line"><a name="l00402"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr_1_1load__balance.html#aba6c8c9169c1068c30ac9df19ec862ff">  402</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classgko_1_1matrix_1_1Csr_1_1load__balance.html#aba6c8c9169c1068c30ac9df19ec862ff">process</a>(<span class="keyword">const</span> <a class="code" href="classgko_1_1Array.html">Array&lt;index_type&gt;</a>&amp; mtx_row_ptrs,</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;                     <a class="code" href="classgko_1_1Array.html">Array&lt;index_type&gt;</a>* mtx_srow)<span class="keyword"> override</span></div>
 <div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;<span class="keyword">        </span>{</div>
 <div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;            <span class="keyword">auto</span> nwarps = mtx_srow-&gt;<a class="code" href="classgko_1_1Array.html#ad4a2aa179d350634e6579f144b6b2cf0">get_num_elems</a>();</div>
 <div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160; </div>
@@ -348,8 +348,8 @@ $(function() {
 <div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;                                          mtx_row_ptrs.<a class="code" href="classgko_1_1Array.html#a820e5930cb5072acc7673fdb2d11efcd">get_executor</a>()};</div>
 <div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;                <a class="code" href="classgko_1_1Array.html">Array&lt;index_type&gt;</a> row_ptrs_host(host_mtx_exec);</div>
 <div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;                <a class="code" href="classgko_1_1Array.html">Array&lt;index_type&gt;</a> srow_host(host_srow_exec);</div>
-<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;                <span class="keyword">const</span> index_type *row_ptrs{};</div>
-<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;                index_type *srow{};</div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;                <span class="keyword">const</span> index_type* row_ptrs{};</div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;                index_type* srow{};</div>
 <div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;                <span class="keywordflow">if</span> (is_srow_on_host) {</div>
 <div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;                    srow = mtx_srow-&gt;<a class="code" href="classgko_1_1Array.html#a9acf29878703bb8767e3cea2ba499dae">get_data</a>();</div>
 <div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;                } <span class="keywordflow">else</span> {</div>
@@ -482,8 +482,8 @@ $(function() {
 <div class="line"><a name="l00579"></a><span class="lineno">  579</span>&#160;              max_length_per_row_(0)</div>
 <div class="line"><a name="l00580"></a><span class="lineno">  580</span>&#160;        {}</div>
 <div class="line"><a name="l00581"></a><span class="lineno">  581</span>&#160; </div>
-<div class="line"><a name="l00582"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr_1_1automatical.html#aefa241047539f2ee7784a54cf5051720">  582</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classgko_1_1matrix_1_1Csr_1_1automatical.html#aefa241047539f2ee7784a54cf5051720">process</a>(<span class="keyword">const</span> <a class="code" href="classgko_1_1Array.html">Array&lt;index_type&gt;</a> &amp;mtx_row_ptrs,</div>
-<div class="line"><a name="l00583"></a><span class="lineno">  583</span>&#160;                     <a class="code" href="classgko_1_1Array.html">Array&lt;index_type&gt;</a> *mtx_srow)<span class="keyword"> override</span></div>
+<div class="line"><a name="l00582"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr_1_1automatical.html#aefa241047539f2ee7784a54cf5051720">  582</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classgko_1_1matrix_1_1Csr_1_1automatical.html#aefa241047539f2ee7784a54cf5051720">process</a>(<span class="keyword">const</span> <a class="code" href="classgko_1_1Array.html">Array&lt;index_type&gt;</a>&amp; mtx_row_ptrs,</div>
+<div class="line"><a name="l00583"></a><span class="lineno">  583</span>&#160;                     <a class="code" href="classgko_1_1Array.html">Array&lt;index_type&gt;</a>* mtx_srow)<span class="keyword"> override</span></div>
 <div class="line"><a name="l00584"></a><span class="lineno">  584</span>&#160;<span class="keyword">        </span>{</div>
 <div class="line"><a name="l00585"></a><span class="lineno">  585</span>&#160;            <span class="comment">// if the number of stored elements is larger than &lt;nnz_limit&gt; or</span></div>
 <div class="line"><a name="l00586"></a><span class="lineno">  586</span>&#160;            <span class="comment">// the maximum number of stored elements per row is larger than</span></div>
@@ -508,7 +508,7 @@ $(function() {
 <div class="line"><a name="l00605"></a><span class="lineno">  605</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">bool</span> is_mtx_on_host{host_mtx_exec ==</div>
 <div class="line"><a name="l00606"></a><span class="lineno">  606</span>&#160;                                      mtx_row_ptrs.<a class="code" href="classgko_1_1Array.html#a820e5930cb5072acc7673fdb2d11efcd">get_executor</a>()};</div>
 <div class="line"><a name="l00607"></a><span class="lineno">  607</span>&#160;            <a class="code" href="classgko_1_1Array.html">Array&lt;index_type&gt;</a> row_ptrs_host(host_mtx_exec);</div>
-<div class="line"><a name="l00608"></a><span class="lineno">  608</span>&#160;            <span class="keyword">const</span> index_type *row_ptrs{};</div>
+<div class="line"><a name="l00608"></a><span class="lineno">  608</span>&#160;            <span class="keyword">const</span> index_type* row_ptrs{};</div>
 <div class="line"><a name="l00609"></a><span class="lineno">  609</span>&#160;            <span class="keywordflow">if</span> (is_mtx_on_host) {</div>
 <div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160;                row_ptrs = mtx_row_ptrs.<a class="code" href="classgko_1_1Array.html#a5a46e0920b649cdb062f5e415922d1aa">get_const_data</a>();</div>
 <div class="line"><a name="l00611"></a><span class="lineno">  611</span>&#160;            } <span class="keywordflow">else</span> {</div>
@@ -581,7 +581,7 @@ $(function() {
 <div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160;        index_type max_length_per_row_;</div>
 <div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;    };</div>
 <div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160; </div>
-<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;    <span class="keywordtype">void</span> convert_to(<a class="code" href="classgko_1_1matrix_1_1Csr.html">Csr&lt;ValueType, IndexType&gt;</a> *result)<span class="keyword"> const override</span></div>
+<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;    <span class="keywordtype">void</span> convert_to(<a class="code" href="classgko_1_1matrix_1_1Csr.html">Csr&lt;ValueType, IndexType&gt;</a>* result)<span class="keyword"> const override</span></div>
 <div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;<span class="keyword">    </span>{</div>
 <div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;        <span class="keywordtype">bool</span> same_executor = this-&gt;<a class="code" href="classgko_1_1PolymorphicObject.html#ab40586bff071b7f11c2cf6b5cbf598eb">get_executor</a>() == result-&gt;<a class="code" href="classgko_1_1PolymorphicObject.html#ab40586bff071b7f11c2cf6b5cbf598eb">get_executor</a>();</div>
 <div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;        <span class="comment">// NOTE: as soon as strategies are improved, this can be reverted</span></div>
@@ -598,7 +598,7 @@ $(function() {
 <div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;        <span class="comment">// END NOTE</span></div>
 <div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;    }</div>
 <div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160; </div>
-<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;    <span class="keywordtype">void</span> move_to(Csr&lt;ValueType, IndexType&gt; *result)<span class="keyword"> override</span></div>
+<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;    <span class="keywordtype">void</span> move_to(Csr&lt;ValueType, IndexType&gt;* result)<span class="keyword"> override</span></div>
 <div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160;<span class="keyword">    </span>{</div>
 <div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;        <span class="keywordtype">bool</span> same_executor = this-&gt;<a class="code" href="classgko_1_1PolymorphicObject.html#ab40586bff071b7f11c2cf6b5cbf598eb">get_executor</a>() == result-&gt;get_executor();</div>
 <div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;        <a class="code" href="classgko_1_1EnablePolymorphicAssignment.html#a0a4cf244139e7761d6a91c61e029810e">EnableLinOp&lt;Csr&gt;::move_to</a>(result);</div>
@@ -610,59 +610,59 @@ $(function() {
 <div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>Csr&lt;<a class="code" href="namespacegko.html#a6362f751c7753cf4fa0a4771d56e8ede">next_precision</a>&lt;ValueType&gt;, IndexType&gt;;</div>
 <div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160; </div>
 <div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;    <span class="keywordtype">void</span> convert_to(</div>
-<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;        Csr&lt;next_precision&lt;ValueType&gt;, IndexType&gt; *result) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;        Csr&lt;next_precision&lt;ValueType&gt;, IndexType&gt;* result) <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160; </div>
-<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;    <span class="keywordtype">void</span> move_to(Csr&lt;next_precision&lt;ValueType&gt;, IndexType&gt; *result) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;    <span class="keywordtype">void</span> move_to(Csr&lt;next_precision&lt;ValueType&gt;, IndexType&gt;* result) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160; </div>
-<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;    <span class="keywordtype">void</span> convert_to(Dense&lt;ValueType&gt; *other) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;    <span class="keywordtype">void</span> convert_to(Dense&lt;ValueType&gt;* other) <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160; </div>
-<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;    <span class="keywordtype">void</span> move_to(Dense&lt;ValueType&gt; *other) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;    <span class="keywordtype">void</span> move_to(Dense&lt;ValueType&gt;* other) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160; </div>
-<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;    <span class="keywordtype">void</span> convert_to(Coo&lt;ValueType, IndexType&gt; *result) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;    <span class="keywordtype">void</span> convert_to(Coo&lt;ValueType, IndexType&gt;* result) <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160; </div>
-<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160;    <span class="keywordtype">void</span> move_to(Coo&lt;ValueType, IndexType&gt; *result) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160;    <span class="keywordtype">void</span> move_to(Coo&lt;ValueType, IndexType&gt;* result) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160; </div>
-<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;    <span class="keywordtype">void</span> convert_to(Ell&lt;ValueType, IndexType&gt; *result) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;    <span class="keywordtype">void</span> convert_to(Ell&lt;ValueType, IndexType&gt;* result) <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160; </div>
-<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;    <span class="keywordtype">void</span> move_to(Ell&lt;ValueType, IndexType&gt; *result) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;    <span class="keywordtype">void</span> move_to(Ell&lt;ValueType, IndexType&gt;* result) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160; </div>
-<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160;    <span class="keywordtype">void</span> convert_to(Hybrid&lt;ValueType, IndexType&gt; *result) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160;    <span class="keywordtype">void</span> convert_to(Hybrid&lt;ValueType, IndexType&gt;* result) <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160; </div>
-<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;    <span class="keywordtype">void</span> move_to(Hybrid&lt;ValueType, IndexType&gt; *result) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;    <span class="keywordtype">void</span> move_to(Hybrid&lt;ValueType, IndexType&gt;* result) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160; </div>
-<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;    <span class="keywordtype">void</span> convert_to(Sellp&lt;ValueType, IndexType&gt; *result) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;    <span class="keywordtype">void</span> convert_to(Sellp&lt;ValueType, IndexType&gt;* result) <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160; </div>
-<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;    <span class="keywordtype">void</span> move_to(Sellp&lt;ValueType, IndexType&gt; *result) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;    <span class="keywordtype">void</span> move_to(Sellp&lt;ValueType, IndexType&gt;* result) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160; </div>
-<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;    <span class="keywordtype">void</span> convert_to(SparsityCsr&lt;ValueType, IndexType&gt; *result) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;    <span class="keywordtype">void</span> convert_to(SparsityCsr&lt;ValueType, IndexType&gt;* result) <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160; </div>
-<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;    <span class="keywordtype">void</span> move_to(SparsityCsr&lt;ValueType, IndexType&gt; *result) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;    <span class="keywordtype">void</span> move_to(SparsityCsr&lt;ValueType, IndexType&gt;* result) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160; </div>
-<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1matrix_1_1Csr.html#ac4db41146ed3c3a8653b03d6b2c6c675">read</a>(<span class="keyword">const</span> mat_data &amp;data) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1matrix_1_1Csr.html#ac4db41146ed3c3a8653b03d6b2c6c675">read</a>(<span class="keyword">const</span> mat_data&amp; data) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160; </div>
-<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1matrix_1_1Csr.html#a205fc391f4cf4f7718a55b0a61f62bc9">write</a>(mat_data &amp;data) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1matrix_1_1Csr.html#a205fc391f4cf4f7718a55b0a61f62bc9">write</a>(mat_data&amp; data) <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160; </div>
 <div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;    std::unique_ptr&lt;LinOp&gt; <a class="code" href="classgko_1_1matrix_1_1Csr.html#ab79e609214d6b4834d5961ee0a7d3519">transpose</a>() <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160; </div>
 <div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160;    std::unique_ptr&lt;LinOp&gt; <a class="code" href="classgko_1_1matrix_1_1Csr.html#a38820451af5424f18b767667f3067d72">conj_transpose</a>() <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160; </div>
 <div class="line"><a name="l00746"></a><span class="lineno">  746</span>&#160;    std::unique_ptr&lt;LinOp&gt; <a class="code" href="classgko_1_1matrix_1_1Csr.html#ab47da11c7ef41997576bcbf9abe5c52e">permute</a>(</div>
-<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160;        <span class="keyword">const</span> Array&lt;IndexType&gt; *permutation_indices) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160;        <span class="keyword">const</span> Array&lt;IndexType&gt;* permutation_indices) <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00748"></a><span class="lineno">  748</span>&#160; </div>
 <div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160;    std::unique_ptr&lt;LinOp&gt; <a class="code" href="classgko_1_1matrix_1_1Csr.html#a086daaecd3370fc8b4cc7c0b6f0f738e">inverse_permute</a>(</div>
-<div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160;        <span class="keyword">const</span> Array&lt;IndexType&gt; *inverse_permutation_indices) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160;        <span class="keyword">const</span> Array&lt;IndexType&gt;* inverse_permutation_indices) <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160; </div>
 <div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;    std::unique_ptr&lt;LinOp&gt; <a class="code" href="classgko_1_1matrix_1_1Csr.html#aa63ffa1f1a4018ce065e582cb8bbda9f">row_permute</a>(</div>
-<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;        <span class="keyword">const</span> Array&lt;IndexType&gt; *permutation_indices) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;        <span class="keyword">const</span> Array&lt;IndexType&gt;* permutation_indices) <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160; </div>
 <div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;    std::unique_ptr&lt;LinOp&gt; <a class="code" href="classgko_1_1matrix_1_1Csr.html#ab997c891391daa9bea6c3925c329c3fe">column_permute</a>(</div>
-<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;        <span class="keyword">const</span> Array&lt;IndexType&gt; *permutation_indices) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;        <span class="keyword">const</span> Array&lt;IndexType&gt;* permutation_indices) <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160; </div>
 <div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;    std::unique_ptr&lt;LinOp&gt; <a class="code" href="classgko_1_1matrix_1_1Csr.html#ab7a2eebfaa32a42b0102323788c45376">inverse_row_permute</a>(</div>
-<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;        <span class="keyword">const</span> Array&lt;IndexType&gt; *inverse_permutation_indices) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;        <span class="keyword">const</span> Array&lt;IndexType&gt;* inverse_permutation_indices) <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160; </div>
 <div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160;    std::unique_ptr&lt;LinOp&gt; <a class="code" href="classgko_1_1matrix_1_1Csr.html#aecc82797062952e616b46a9bc0dbd09c">inverse_column_permute</a>(</div>
-<div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160;        <span class="keyword">const</span> Array&lt;IndexType&gt; *inverse_permutation_indices) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160;        <span class="keyword">const</span> Array&lt;IndexType&gt;* inverse_permutation_indices) <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160; </div>
 <div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160;    std::unique_ptr&lt;Diagonal&lt;ValueType&gt;&gt; <a class="code" href="classgko_1_1matrix_1_1Csr.html#a0eac89f0f2fed5da01c009b6b529043e">extract_diagonal</a>() <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160; </div>
@@ -680,30 +680,30 @@ $(function() {
 <div class="line"><a name="l00780"></a><span class="lineno">  780</span>&#160;<span class="comment">     */</span></div>
 <div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160;    <span class="keywordtype">bool</span> is_sorted_by_column_index() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00782"></a><span class="lineno">  782</span>&#160; </div>
-<div class="line"><a name="l00788"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr.html#a929b0a194e6aeb1252b8e6781d162e83">  788</a></span>&#160;    value_type *<a class="code" href="classgko_1_1matrix_1_1Csr.html#a929b0a194e6aeb1252b8e6781d162e83">get_values</a>() noexcept { <span class="keywordflow">return</span> values_.<a class="code" href="classgko_1_1Array.html#a9acf29878703bb8767e3cea2ba499dae">get_data</a>(); }</div>
+<div class="line"><a name="l00788"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr.html#a929b0a194e6aeb1252b8e6781d162e83">  788</a></span>&#160;    value_type* <a class="code" href="classgko_1_1matrix_1_1Csr.html#a929b0a194e6aeb1252b8e6781d162e83">get_values</a>() noexcept { <span class="keywordflow">return</span> values_.<a class="code" href="classgko_1_1Array.html#a9acf29878703bb8767e3cea2ba499dae">get_data</a>(); }</div>
 <div class="line"><a name="l00789"></a><span class="lineno">  789</span>&#160; </div>
-<div class="line"><a name="l00797"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr.html#a1801347665214bbefc837b44ba0695ff">  797</a></span>&#160;    <span class="keyword">const</span> value_type *<a class="code" href="classgko_1_1matrix_1_1Csr.html#a1801347665214bbefc837b44ba0695ff">get_const_values</a>() const noexcept</div>
+<div class="line"><a name="l00797"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr.html#a1801347665214bbefc837b44ba0695ff">  797</a></span>&#160;    <span class="keyword">const</span> value_type* <a class="code" href="classgko_1_1matrix_1_1Csr.html#a1801347665214bbefc837b44ba0695ff">get_const_values</a>() const noexcept</div>
 <div class="line"><a name="l00798"></a><span class="lineno">  798</span>&#160;    {</div>
 <div class="line"><a name="l00799"></a><span class="lineno">  799</span>&#160;        <span class="keywordflow">return</span> values_.<a class="code" href="classgko_1_1Array.html#a5a46e0920b649cdb062f5e415922d1aa">get_const_data</a>();</div>
 <div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160;    }</div>
 <div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160; </div>
-<div class="line"><a name="l00807"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr.html#a81c6294177a1be4873804c8a85a9fc64">  807</a></span>&#160;    index_type *<a class="code" href="classgko_1_1matrix_1_1Csr.html#a81c6294177a1be4873804c8a85a9fc64">get_col_idxs</a>() noexcept { <span class="keywordflow">return</span> col_idxs_.<a class="code" href="classgko_1_1Array.html#a9acf29878703bb8767e3cea2ba499dae">get_data</a>(); }</div>
+<div class="line"><a name="l00807"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr.html#a81c6294177a1be4873804c8a85a9fc64">  807</a></span>&#160;    index_type* <a class="code" href="classgko_1_1matrix_1_1Csr.html#a81c6294177a1be4873804c8a85a9fc64">get_col_idxs</a>() noexcept { <span class="keywordflow">return</span> col_idxs_.<a class="code" href="classgko_1_1Array.html#a9acf29878703bb8767e3cea2ba499dae">get_data</a>(); }</div>
 <div class="line"><a name="l00808"></a><span class="lineno">  808</span>&#160; </div>
-<div class="line"><a name="l00816"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr.html#ac9d640d26449e0ee46c7cb2b80100d65">  816</a></span>&#160;    <span class="keyword">const</span> index_type *<a class="code" href="classgko_1_1matrix_1_1Csr.html#ac9d640d26449e0ee46c7cb2b80100d65">get_const_col_idxs</a>() const noexcept</div>
+<div class="line"><a name="l00816"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr.html#ac9d640d26449e0ee46c7cb2b80100d65">  816</a></span>&#160;    <span class="keyword">const</span> index_type* <a class="code" href="classgko_1_1matrix_1_1Csr.html#ac9d640d26449e0ee46c7cb2b80100d65">get_const_col_idxs</a>() const noexcept</div>
 <div class="line"><a name="l00817"></a><span class="lineno">  817</span>&#160;    {</div>
 <div class="line"><a name="l00818"></a><span class="lineno">  818</span>&#160;        <span class="keywordflow">return</span> col_idxs_.<a class="code" href="classgko_1_1Array.html#a5a46e0920b649cdb062f5e415922d1aa">get_const_data</a>();</div>
 <div class="line"><a name="l00819"></a><span class="lineno">  819</span>&#160;    }</div>
 <div class="line"><a name="l00820"></a><span class="lineno">  820</span>&#160; </div>
-<div class="line"><a name="l00826"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr.html#a068e5158cf282fa977f0a137f8cd7f03">  826</a></span>&#160;    index_type *<a class="code" href="classgko_1_1matrix_1_1Csr.html#a068e5158cf282fa977f0a137f8cd7f03">get_row_ptrs</a>() noexcept { <span class="keywordflow">return</span> row_ptrs_.<a class="code" href="classgko_1_1Array.html#a9acf29878703bb8767e3cea2ba499dae">get_data</a>(); }</div>
+<div class="line"><a name="l00826"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr.html#a068e5158cf282fa977f0a137f8cd7f03">  826</a></span>&#160;    index_type* <a class="code" href="classgko_1_1matrix_1_1Csr.html#a068e5158cf282fa977f0a137f8cd7f03">get_row_ptrs</a>() noexcept { <span class="keywordflow">return</span> row_ptrs_.<a class="code" href="classgko_1_1Array.html#a9acf29878703bb8767e3cea2ba499dae">get_data</a>(); }</div>
 <div class="line"><a name="l00827"></a><span class="lineno">  827</span>&#160; </div>
-<div class="line"><a name="l00835"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr.html#a50c9ce521649450d7ae5ff488e42c190">  835</a></span>&#160;    <span class="keyword">const</span> index_type *<a class="code" href="classgko_1_1matrix_1_1Csr.html#a50c9ce521649450d7ae5ff488e42c190">get_const_row_ptrs</a>() const noexcept</div>
+<div class="line"><a name="l00835"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr.html#a50c9ce521649450d7ae5ff488e42c190">  835</a></span>&#160;    <span class="keyword">const</span> index_type* <a class="code" href="classgko_1_1matrix_1_1Csr.html#a50c9ce521649450d7ae5ff488e42c190">get_const_row_ptrs</a>() const noexcept</div>
 <div class="line"><a name="l00836"></a><span class="lineno">  836</span>&#160;    {</div>
 <div class="line"><a name="l00837"></a><span class="lineno">  837</span>&#160;        <span class="keywordflow">return</span> row_ptrs_.<a class="code" href="classgko_1_1Array.html#a5a46e0920b649cdb062f5e415922d1aa">get_const_data</a>();</div>
 <div class="line"><a name="l00838"></a><span class="lineno">  838</span>&#160;    }</div>
 <div class="line"><a name="l00839"></a><span class="lineno">  839</span>&#160; </div>
-<div class="line"><a name="l00845"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr.html#a919fb1efdcbde6fba7eb18bdc39ba46a">  845</a></span>&#160;    index_type *<a class="code" href="classgko_1_1matrix_1_1Csr.html#a919fb1efdcbde6fba7eb18bdc39ba46a">get_srow</a>() noexcept { <span class="keywordflow">return</span> srow_.<a class="code" href="classgko_1_1Array.html#a9acf29878703bb8767e3cea2ba499dae">get_data</a>(); }</div>
+<div class="line"><a name="l00845"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr.html#a919fb1efdcbde6fba7eb18bdc39ba46a">  845</a></span>&#160;    index_type* <a class="code" href="classgko_1_1matrix_1_1Csr.html#a919fb1efdcbde6fba7eb18bdc39ba46a">get_srow</a>() noexcept { <span class="keywordflow">return</span> srow_.<a class="code" href="classgko_1_1Array.html#a9acf29878703bb8767e3cea2ba499dae">get_data</a>(); }</div>
 <div class="line"><a name="l00846"></a><span class="lineno">  846</span>&#160; </div>
-<div class="line"><a name="l00854"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr.html#ac046f27c47848bf31c9234567661ef48">  854</a></span>&#160;    <span class="keyword">const</span> index_type *<a class="code" href="classgko_1_1matrix_1_1Csr.html#ac046f27c47848bf31c9234567661ef48">get_const_srow</a>() const noexcept</div>
+<div class="line"><a name="l00854"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Csr.html#ac046f27c47848bf31c9234567661ef48">  854</a></span>&#160;    <span class="keyword">const</span> index_type* <a class="code" href="classgko_1_1matrix_1_1Csr.html#ac046f27c47848bf31c9234567661ef48">get_const_srow</a>() const noexcept</div>
 <div class="line"><a name="l00855"></a><span class="lineno">  855</span>&#160;    {</div>
 <div class="line"><a name="l00856"></a><span class="lineno">  856</span>&#160;        <span class="keywordflow">return</span> srow_.<a class="code" href="classgko_1_1Array.html#a5a46e0920b649cdb062f5e415922d1aa">get_const_data</a>();</div>
 <div class="line"><a name="l00857"></a><span class="lineno">  857</span>&#160;    }</div>
@@ -735,7 +735,7 @@ $(function() {
 <div class="line"><a name="l00908"></a><span class="lineno">  908</span>&#160;        : <a class="code" href="classgko_1_1matrix_1_1Csr.html">Csr</a>(std::move(exec), <a class="code" href="structgko_1_1dim.html">dim</a>&lt;2&gt;{}, {}, std::move(strategy))</div>
 <div class="line"><a name="l00909"></a><span class="lineno">  909</span>&#160;    {}</div>
 <div class="line"><a name="l00910"></a><span class="lineno">  910</span>&#160; </div>
-<div class="line"><a name="l00919"></a><span class="lineno">  919</span>&#160;    Csr(std::shared_ptr&lt;const Executor&gt; exec, <span class="keyword">const</span> dim&lt;2&gt; &amp;size = dim&lt;2&gt;{},</div>
+<div class="line"><a name="l00919"></a><span class="lineno">  919</span>&#160;    Csr(std::shared_ptr&lt;const Executor&gt; exec, <span class="keyword">const</span> dim&lt;2&gt;&amp; size = dim&lt;2&gt;{},</div>
 <div class="line"><a name="l00920"></a><span class="lineno">  920</span>&#160;        <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> num_nonzeros = {},</div>
 <div class="line"><a name="l00921"></a><span class="lineno">  921</span>&#160;        std::shared_ptr&lt;strategy_type&gt; strategy = std::make_shared&lt;sparselib&gt;())</div>
 <div class="line"><a name="l00922"></a><span class="lineno">  922</span>&#160;        : EnableLinOp&lt;Csr&gt;(exec, size),</div>
@@ -748,8 +748,8 @@ $(function() {
 <div class="line"><a name="l00929"></a><span class="lineno">  929</span>&#160; </div>
 <div class="line"><a name="l00950"></a><span class="lineno">  950</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValuesArray, <span class="keyword">typename</span> ColIdxsArray,</div>
 <div class="line"><a name="l00951"></a><span class="lineno">  951</span>&#160;              <span class="keyword">typename</span> RowPtrsArray&gt;</div>
-<div class="line"><a name="l00952"></a><span class="lineno">  952</span>&#160;    Csr(std::shared_ptr&lt;const Executor&gt; exec, <span class="keyword">const</span> dim&lt;2&gt; &amp;size,</div>
-<div class="line"><a name="l00953"></a><span class="lineno">  953</span>&#160;        ValuesArray &amp;&amp;values, ColIdxsArray &amp;&amp;col_idxs, RowPtrsArray &amp;&amp;row_ptrs,</div>
+<div class="line"><a name="l00952"></a><span class="lineno">  952</span>&#160;    Csr(std::shared_ptr&lt;const Executor&gt; exec, <span class="keyword">const</span> dim&lt;2&gt;&amp; size,</div>
+<div class="line"><a name="l00953"></a><span class="lineno">  953</span>&#160;        ValuesArray&amp;&amp; values, ColIdxsArray&amp;&amp; col_idxs, RowPtrsArray&amp;&amp; row_ptrs,</div>
 <div class="line"><a name="l00954"></a><span class="lineno">  954</span>&#160;        std::shared_ptr&lt;strategy_type&gt; strategy = std::make_shared&lt;sparselib&gt;())</div>
 <div class="line"><a name="l00955"></a><span class="lineno">  955</span>&#160;        : EnableLinOp&lt;Csr&gt;(exec, size),</div>
 <div class="line"><a name="l00956"></a><span class="lineno">  956</span>&#160;          values_{exec, std::forward&lt;ValuesArray&gt;(values)},</div>
@@ -763,24 +763,24 @@ $(function() {
 <div class="line"><a name="l00964"></a><span class="lineno">  964</span>&#160;        this-&gt;make_srow();</div>
 <div class="line"><a name="l00965"></a><span class="lineno">  965</span>&#160;    }</div>
 <div class="line"><a name="l00966"></a><span class="lineno">  966</span>&#160; </div>
-<div class="line"><a name="l00967"></a><span class="lineno">  967</span>&#160;    <span class="keywordtype">void</span> apply_impl(<span class="keyword">const</span> LinOp *b, LinOp *x) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00967"></a><span class="lineno">  967</span>&#160;    <span class="keywordtype">void</span> apply_impl(<span class="keyword">const</span> LinOp* b, LinOp* x) <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00968"></a><span class="lineno">  968</span>&#160; </div>
-<div class="line"><a name="l00969"></a><span class="lineno">  969</span>&#160;    <span class="keywordtype">void</span> apply_impl(<span class="keyword">const</span> LinOp *alpha, <span class="keyword">const</span> LinOp *b, <span class="keyword">const</span> LinOp *beta,</div>
-<div class="line"><a name="l00970"></a><span class="lineno">  970</span>&#160;                    LinOp *x) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00969"></a><span class="lineno">  969</span>&#160;    <span class="keywordtype">void</span> apply_impl(<span class="keyword">const</span> LinOp* alpha, <span class="keyword">const</span> LinOp* b, <span class="keyword">const</span> LinOp* beta,</div>
+<div class="line"><a name="l00970"></a><span class="lineno">  970</span>&#160;                    LinOp* x) <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00971"></a><span class="lineno">  971</span>&#160; </div>
 <div class="line"><a name="l00972"></a><span class="lineno">  972</span>&#160;    <span class="comment">// TODO clean this up as soon as we improve strategy_type</span></div>
 <div class="line"><a name="l00973"></a><span class="lineno">  973</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> CsrType&gt;</div>
-<div class="line"><a name="l00974"></a><span class="lineno">  974</span>&#160;    <span class="keywordtype">void</span> convert_strategy_helper(CsrType *result)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00974"></a><span class="lineno">  974</span>&#160;    <span class="keywordtype">void</span> convert_strategy_helper(CsrType* result)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00975"></a><span class="lineno">  975</span>&#160;<span class="keyword">    </span>{</div>
 <div class="line"><a name="l00976"></a><span class="lineno">  976</span>&#160;        <span class="keyword">auto</span> strat = this-&gt;<a class="code" href="classgko_1_1matrix_1_1Csr.html#ada0db14e65dfe027f483dc449f704a7e">get_strategy</a>().get();</div>
 <div class="line"><a name="l00977"></a><span class="lineno">  977</span>&#160;        std::shared_ptr&lt;typename CsrType::strategy_type&gt; new_strat;</div>
-<div class="line"><a name="l00978"></a><span class="lineno">  978</span>&#160;        <span class="keywordflow">if</span> (dynamic_cast&lt;classical *&gt;(strat)) {</div>
+<div class="line"><a name="l00978"></a><span class="lineno">  978</span>&#160;        <span class="keywordflow">if</span> (dynamic_cast&lt;classical*&gt;(strat)) {</div>
 <div class="line"><a name="l00979"></a><span class="lineno">  979</span>&#160;            new_strat = std::make_shared&lt;typename CsrType::classical&gt;();</div>
-<div class="line"><a name="l00980"></a><span class="lineno">  980</span>&#160;        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (dynamic_cast&lt;merge_path *&gt;(strat)) {</div>
+<div class="line"><a name="l00980"></a><span class="lineno">  980</span>&#160;        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (dynamic_cast&lt;merge_path*&gt;(strat)) {</div>
 <div class="line"><a name="l00981"></a><span class="lineno">  981</span>&#160;            new_strat = std::make_shared&lt;typename CsrType::merge_path&gt;();</div>
-<div class="line"><a name="l00982"></a><span class="lineno">  982</span>&#160;        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (dynamic_cast&lt;cusparse *&gt;(strat)) {</div>
+<div class="line"><a name="l00982"></a><span class="lineno">  982</span>&#160;        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (dynamic_cast&lt;cusparse*&gt;(strat)) {</div>
 <div class="line"><a name="l00983"></a><span class="lineno">  983</span>&#160;            new_strat = std::make_shared&lt;typename CsrType::cusparse&gt;();</div>
-<div class="line"><a name="l00984"></a><span class="lineno">  984</span>&#160;        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (dynamic_cast&lt;sparselib *&gt;(strat)) {</div>
+<div class="line"><a name="l00984"></a><span class="lineno">  984</span>&#160;        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (dynamic_cast&lt;sparselib*&gt;(strat)) {</div>
 <div class="line"><a name="l00985"></a><span class="lineno">  985</span>&#160;            new_strat = std::make_shared&lt;typename CsrType::sparselib&gt;();</div>
 <div class="line"><a name="l00986"></a><span class="lineno">  986</span>&#160;        } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00987"></a><span class="lineno">  987</span>&#160;            <span class="keyword">auto</span> rexec = result-&gt;get_executor();</div>
@@ -789,7 +789,7 @@ $(function() {
 <div class="line"><a name="l00990"></a><span class="lineno">  990</span>&#160;            <span class="keyword">auto</span> hip_exec = std::dynamic_pointer_cast&lt;const HipExecutor&gt;(rexec);</div>
 <div class="line"><a name="l00991"></a><span class="lineno">  991</span>&#160;            <span class="keyword">auto</span> dpcpp_exec =</div>
 <div class="line"><a name="l00992"></a><span class="lineno">  992</span>&#160;                std::dynamic_pointer_cast&lt;const DpcppExecutor&gt;(rexec);</div>
-<div class="line"><a name="l00993"></a><span class="lineno">  993</span>&#160;            <span class="keyword">auto</span> lb = dynamic_cast&lt;load_balance *&gt;(strat);</div>
+<div class="line"><a name="l00993"></a><span class="lineno">  993</span>&#160;            <span class="keyword">auto</span> lb = dynamic_cast&lt;load_balance*&gt;(strat);</div>
 <div class="line"><a name="l00994"></a><span class="lineno">  994</span>&#160;            <span class="keywordflow">if</span> (cuda_exec) {</div>
 <div class="line"><a name="l00995"></a><span class="lineno">  995</span>&#160;                <span class="keywordflow">if</span> (lb) {</div>
 <div class="line"><a name="l00996"></a><span class="lineno">  996</span>&#160;                    new_strat =</div>
@@ -895,7 +895,7 @@ $(function() {
 <div class="line"><a name="l01099"></a><span class="lineno"> 1099</span>&#160; </div>
 <div class="line"><a name="l01100"></a><span class="lineno"> 1100</span>&#160; </div>
 <div class="line"><a name="l01107"></a><span class="lineno"> 1107</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType, <span class="keyword">typename</span> IndexType&gt;</div>
-<div class="line"><a name="l01108"></a><span class="lineno"> 1108</span>&#160;<span class="keywordtype">void</span> strategy_rebuild_helper(Csr&lt;ValueType, IndexType&gt; *result)</div>
+<div class="line"><a name="l01108"></a><span class="lineno"> 1108</span>&#160;<span class="keywordtype">void</span> strategy_rebuild_helper(Csr&lt;ValueType, IndexType&gt;* result)</div>
 <div class="line"><a name="l01109"></a><span class="lineno"> 1109</span>&#160;{</div>
 <div class="line"><a name="l01110"></a><span class="lineno"> 1110</span>&#160;    <span class="keyword">using</span> load_balance = <span class="keyword">typename</span> Csr&lt;ValueType, IndexType&gt;::load_balance;</div>
 <div class="line"><a name="l01111"></a><span class="lineno"> 1111</span>&#160;    <span class="keyword">using</span> automatical = <span class="keyword">typename</span> Csr&lt;ValueType, IndexType&gt;::automatical;</div>
