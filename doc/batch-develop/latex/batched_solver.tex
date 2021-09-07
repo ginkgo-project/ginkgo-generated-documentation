@@ -1,0 +1,771 @@
+Using and interfacing with a batched solver..
+
+ \label{_Batched Solver}%
+ \label{_Usingbatchedsolvers}%
+\doxysection*{Using batched solvers}
+
+This example shows how to use Ginkgo batched solvers with data coming from an application. The \char`\"{}application\char`\"{} in this case is just a function in the example itself; nevertheless, the steps to be taken are shown.
+
+A `batch' here means a set of small linear systems that can be solved independently, but each system is too small to use an entire computing device. For now, a batch of sparse matrices is required to have a common sparsity pattern for all the matrices. \label{_CommProg}%
+ \doxysection*{The commented program}
+
+\label{_Includefiles}%
+ \doxysubsubsection*{Include files}
+
+This is the main ginkgo header file.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <random>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <string>}}
+\end{DoxyCode}
+
+
+\label{_Typealiasesforconvenience}%
+ \doxysubsubsection*{Type aliases for convenience}
+
+Use some shortcuts. In Ginkgo, vectors are seen as a \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}} with one column/one row. The advantage of this concept is that using multiple vectors is a now a natural extension of adding columns/rows are necessary.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using} value\_type = double;}
+\DoxyCodeLine{\textcolor{keyword}{using} real\_type = \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<value\_type>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} index\_type = int;}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\_type}} = \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}};}
+\DoxyCodeLine{\textcolor{keyword}{using} vec\_type = \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{gko::matrix::BatchDense<value\_type>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} real\_vec\_type = \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{gko::matrix::BatchDense<real\_type>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} mtx\_type = \mbox{\hyperlink{classgko_1_1matrix_1_1BatchCsr}{gko::matrix::BatchCsr<value\_type, index\_type>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} solver\_type = \mbox{\hyperlink{classgko_1_1solver_1_1BatchBicgstab}{gko::solver::BatchBicgstab<value\_type>}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{/ **}
+\DoxyCodeLine{ * Structure to simulate application data related to the linear systems}
+\DoxyCodeLine{ * to be solved.}
+\DoxyCodeLine{ *}
+\DoxyCodeLine{ * We use raw pointers below to demonstrate how to handle the situation when}
+\DoxyCodeLine{ * the application only gives us raw pointers. Ideally, \mbox{\hyperlink{namespacegko_a0059e27f8f4bc348ff65c1e60caf47c8}{one}} should use}
+\DoxyCodeLine{ * Ginkgo\textcolor{stringliteral}{'s \(\backslash\)ref Array class here.}}
+\DoxyCodeLine{\textcolor{stringliteral}{ * /}}
+\DoxyCodeLine{\textcolor{stringliteral}{struct ApplSysData \{}}
+\end{DoxyCode}
+
+
+Number of small systems in the batch.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\_type}} nsystems;}
+\end{DoxyCode}
+
+
+Number of rows in each system.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int} nrows;}
+\end{DoxyCode}
+
+
+Number of non-\/zeros in each system matrix.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int} nnz;}
+\end{DoxyCode}
+
+
+Row pointers for one matrix
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{index\_type* row\_ptrs;}
+\end{DoxyCode}
+
+
+Column indices of non-\/zeros for one matrix
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{index\_type* col\_idxs;}
+\end{DoxyCode}
+
+
+Nonzero values for all matrices in the batch, concatenated
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{value\_type* all\_values;}
+\end{DoxyCode}
+
+
+R\+HS vectors for all systems in the batch, concatenated
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    value\_type* all\_rhs;}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{/ **}
+\DoxyCodeLine{ * Generates a batch of tridiagonal systems.}
+\DoxyCodeLine{ *}
+\DoxyCodeLine{ * @param nrows  Number of rows in each system.}
+\DoxyCodeLine{ * @param nsystems  Number of systems in the batch.}
+\DoxyCodeLine{ * @param exec  The device executor to use \textcolor{keywordflow}{for} the solver.}
+\DoxyCodeLine{ *   Normally, the application may not deal with Ginkgo executors, nor \textcolor{keywordflow}{do} we}
+\DoxyCodeLine{ *   need it to. Here, we use the executor \textcolor{keywordflow}{for} backend-\/independent device}
+\DoxyCodeLine{ *   memory allocation. The application, \textcolor{keywordflow}{for} example, might assume Hip}
+\DoxyCodeLine{ *   (\textcolor{keywordflow}{for} AMD GPUs) and use `hipMalloc` directly.}
+\DoxyCodeLine{ * /}
+\DoxyCodeLine{ApplSysData appl\_generate\_system(\textcolor{keyword}{const} \textcolor{keywordtype}{int} nrows, \textcolor{keyword}{const} size\_type nsystems,}
+\DoxyCodeLine{                                 std::shared\_ptr<gko::Executor> exec);}
+\DoxyCodeLine{}
+\DoxyCodeLine{/ **}
+\DoxyCodeLine{ * Deallocate application data.}
+\DoxyCodeLine{ * /}
+\DoxyCodeLine{\textcolor{keywordtype}{void} appl\_clean\_up(ApplSysData\& appl\_data, std::shared\_ptr<gko::Executor> exec);}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
+\DoxyCodeLine{\{}
+\end{DoxyCode}
+
+
+Print the ginkgo version information.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::cout << \mbox{\hyperlink{classgko_1_1version__info_a6daeb8a087cfb57fa055526fc133d8eb}{gko::version\_info::get}}() << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (argc == 2 \&\& (std::string(argv[1]) == \textcolor{stringliteral}{"-\/-\/help"})) \{}
+\DoxyCodeLine{    std::cerr << \textcolor{stringliteral}{"Usage: "} << argv[0] << \textcolor{stringliteral}{" [executor] "} << std::endl;}
+\DoxyCodeLine{    std::exit(-\/1);}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+\label{_Wheredoyouwanttorunyoursolver}%
+ \doxysubsubsection*{Where do you want to run your solver ?}
+
+The \mbox{\hyperlink{classgko_1_1Executor}{gko\+::\+Executor}} class is one of the cornerstones of Ginkgo. Currently, we have support for an \mbox{\hyperlink{classgko_1_1OmpExecutor}{gko\+::\+Omp\+Executor}}, which uses Open\+MP multi-\/threading in most of its kernels, a \mbox{\hyperlink{classgko_1_1ReferenceExecutor}{gko\+::\+Reference\+Executor}}, a single threaded specialization of the Open\+MP executor and a \mbox{\hyperlink{classgko_1_1CudaExecutor}{gko\+::\+Cuda\+Executor}} which runs the code on a N\+V\+I\+D\+IA G\+PU if available. \begin{DoxyNote}{Note}
+With the help of C++, you see that you only ever need to change the executor and all the other functions/ routines within Ginkgo should automatically work and run on the executor with any other changes.
+\end{DoxyNote}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} executor\_string = argc >= 2 ? argv[1] : \textcolor{stringliteral}{"reference"};}
+\DoxyCodeLine{std::map<std::string, std::function<std::shared\_ptr<gko::Executor>()>>}
+\DoxyCodeLine{    exec\_map\{}
+\DoxyCodeLine{        \{\textcolor{stringliteral}{"omp"}, [] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(); \}\},}
+\DoxyCodeLine{        \{\textcolor{stringliteral}{"cuda"},}
+\DoxyCodeLine{         [] \{}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a5dcec3ca1c458382e01191b727959a81}{gko::CudaExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(),}
+\DoxyCodeLine{                                              \textcolor{keyword}{true});}
+\DoxyCodeLine{         \}\},}
+\DoxyCodeLine{        \{\textcolor{stringliteral}{"hip"},}
+\DoxyCodeLine{         [] \{}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_ad3a72bc42254fb8730bc2090147447d9}{gko::HipExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(),}
+\DoxyCodeLine{                                             \textcolor{keyword}{true});}
+\DoxyCodeLine{         \}\},}
+\DoxyCodeLine{        \{\textcolor{stringliteral}{"dpcpp"},}
+\DoxyCodeLine{         [] \{}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1DpcppExecutor_ac46044fcb00b2d224b45d93eaf8c579d}{gko::DpcppExecutor::create}}(0,}
+\DoxyCodeLine{                                               \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}());}
+\DoxyCodeLine{         \}\},}
+\DoxyCodeLine{        \{\textcolor{stringliteral}{"reference"}, [] \{ \textcolor{keywordflow}{return} gko::ReferenceExecutor::create(); \}\}\};}
+\end{DoxyCode}
+
+
+executor where Ginkgo will perform the computation
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} exec = exec\_map.at(executor\_string)();  \textcolor{comment}{// throws if not valid}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\_type}} num\_systems = argc >= 3 ? std::atoi(argv[2]) : 2;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} num\_rows = 35;  \textcolor{comment}{// per system}}
+\end{DoxyCode}
+
+
+The \char`\"{}application\char`\"{} generates the batch of linear systems on the device
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} appl\_sys = appl\_generate\_system(num\_rows, num\_systems, exec);}
+\end{DoxyCode}
+
+
+Create batch\+\_\+dim object to describe the dimensions of the batch matrix.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} batch\_mat\_size =}
+\DoxyCodeLine{    \mbox{\hyperlink{structgko_1_1batch__dim}{gko::batch\_dim<>}}(num\_systems, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}(num\_rows, num\_rows));}
+\DoxyCodeLine{\textcolor{keyword}{auto} batch\_vec\_size =}
+\DoxyCodeLine{    \mbox{\hyperlink{structgko_1_1batch__dim}{gko::batch\_dim<>}}(num\_systems, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}(num\_rows, 1));}
+\end{DoxyCode}
+
+
+\label{_Useofapplicationallocatedmemory}%
+ \doxysubsubsection*{Use of application-\/allocated memory}
+
+We can either work on the existing memory allocated in the application, or we can copy it for the linear solve. Note\+: it is not possible to use data through a const pointer directly. Because our pointers are not const, we can just \textquotesingle{}wrap\textquotesingle{} the given pointers into Ginkgo Array views so that we can create a Ginkgo matrix out of them. Ginkgo expects the nonzero values for all the small matrices to be allocated contiguously, one matrix after the other.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} vals\_view = \mbox{\hyperlink{classgko_1_1Array_ae8e2b4841e60741227daf3367de6ecde}{gko::Array<value\_type>::view}}(}
+\DoxyCodeLine{    exec, num\_systems * appl\_sys.nnz, appl\_sys.all\_values);}
+\DoxyCodeLine{\textcolor{keyword}{auto} rowptrs\_view =}
+\DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1Array_ae8e2b4841e60741227daf3367de6ecde}{gko::Array<index\_type>::view}}(exec, num\_rows + 1, appl\_sys.row\_ptrs);}
+\DoxyCodeLine{\textcolor{keyword}{auto} colidxs\_view =}
+\DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1Array_ae8e2b4841e60741227daf3367de6ecde}{gko::Array<index\_type>::view}}(exec, appl\_sys.nnz, appl\_sys.col\_idxs);}
+\DoxyCodeLine{\textcolor{keyword}{auto} A = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(mtx\_type::create(exec, batch\_mat\_size, vals\_view,}
+\DoxyCodeLine{                                     colidxs\_view, rowptrs\_view));}
+\end{DoxyCode}
+
+
+\label{_Batchstride}%
+ \doxysubsubsection*{Batch stride}
+
+batch\+\_\+stride object specifies the access stride within the individual matrices (vectors) in the batch. In this case, we specify a stride of 1 as the common value for all the matrices.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} batch\_vec\_stride = \mbox{\hyperlink{classgko_1_1batch__stride}{gko::batch\_stride}}(num\_systems, 1);}
+\end{DoxyCode}
+
+
+Create R\+HS, again reusing application allocation
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} b\_view = \mbox{\hyperlink{classgko_1_1Array_ae8e2b4841e60741227daf3367de6ecde}{gko::Array<value\_type>::view}}(exec, num\_systems * num\_rows,}
+\DoxyCodeLine{                                           appl\_sys.all\_rhs);}
+\DoxyCodeLine{\textcolor{keyword}{auto} b = vec\_type::create(exec, batch\_vec\_size, b\_view, batch\_vec\_stride);}
+\end{DoxyCode}
+
+
+Create initial guess as 0 and copy to device
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} x = vec\_type::create(exec);}
+\DoxyCodeLine{\textcolor{keyword}{auto} host\_x =}
+\DoxyCodeLine{    vec\_type::create(exec-\/>get\_master(), batch\_vec\_size, batch\_vec\_stride);}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (size\_type isys = 0; isys < num\_systems; isys++) \{}
+\DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} irow = 0; irow < num\_rows; irow++) \{}
+\DoxyCodeLine{        host\_x-\/>at(isys, irow, 0) = gko::zero<value\_type>();}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{x-\/>copy\_from(host\_x.get());}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{const} real\_type reduction\_factor\{1e-\/6\};}
+\end{DoxyCode}
+
+
+\label{_Createthebatchsolverfactory}%
+ \doxysubsubsection*{Create the batch solver factory}
+
+Create a batched solver factory with relevant parameters.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} solver\_gen =}
+\DoxyCodeLine{    solver\_type::build()}
+\DoxyCodeLine{        .with\_max\_iterations(500)}
+\DoxyCodeLine{        .with\_residual\_tol(reduction\_factor)}
+\DoxyCodeLine{        .with\_tolerance\_type(gko::stop::batch::ToleranceType::relative)}
+\DoxyCodeLine{        .with\_preconditioner(gko::preconditioner::batch::type::jacobi)}
+\DoxyCodeLine{        .on(exec);}
+\end{DoxyCode}
+
+
+\label{_Batchlogger}%
+ \doxysubsubsection*{Batch logger}
+
+Create a logger to obtain the iteration counts and \char`\"{}implicit\char`\"{} residual norms for every system after the solve.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::shared\_ptr<const gko::log::BatchConvergence<value\_type>> logger =}
+\DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1log_1_1BatchConvergence_ad5908d7498e0c03641267b8c81f80313}{gko::log::BatchConvergence<value\_type>::create}}(exec);}
+\end{DoxyCode}
+
+
+@sec3\{Generate and solve\} Generate the batch solver from the batch matrix
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} solver = solver\_gen-\/>generate(A);}
+\end{DoxyCode}
+
+
+add the logger to the solver
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{solver-\/>add\_logger(logger);}
+\end{DoxyCode}
+
+
+Solve the batch system
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{solver-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(b), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x));}
+\end{DoxyCode}
+
+
+This is not necessary, but one might want to remove the logger before the next solve using the same solver object. solver-\/$>$remove\+\_\+logger(logger.\+get());
+
+@sec3\{Check result\} Compute norm of R\+HS on the device and automatically copy to host
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} b\_norm = gko::batch\_initialize<real\_vec\_type>(num\_systems, \{0.0\},}
+\DoxyCodeLine{                                                   exec-\/>get\_master());}
+\DoxyCodeLine{b-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(b\_norm));}
+\end{DoxyCode}
+
+
+we need constants on the device
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_a0059e27f8f4bc348ff65c1e60caf47c8}{one}} = gko::batch\_initialize<vec\_type>(num\_systems, \{1.0\}, exec);}
+\DoxyCodeLine{\textcolor{keyword}{auto} neg\_one = gko::batch\_initialize<vec\_type>(num\_systems, \{-\/1.0\}, exec);}
+\end{DoxyCode}
+
+
+allocate and compute the residual
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} res = vec\_type::create(exec, batch\_vec\_size);}
+\DoxyCodeLine{res-\/>copy\_from(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(b));}
+\DoxyCodeLine{A-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(res));}
+\end{DoxyCode}
+
+
+allocate and compute residual norm
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} res\_norm = gko::batch\_initialize<real\_vec\_type>(num\_systems, \{0.0\},}
+\DoxyCodeLine{                                                     exec-\/>get\_master());}
+\DoxyCodeLine{res-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(res\_norm));}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"Residual norm sqrt(r\string^T r):\(\backslash\)n"};}
+\end{DoxyCode}
+
+
+\char`\"{}unbatch\char`\"{} converts a batch object into a vector of objects of the corresponding single type, eg. Batch\+Dense -\/-\/$>$ vector$<$\+Dense$>$.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} unb\_res = res\_norm-\/>unbatch();}
+\DoxyCodeLine{\textcolor{keyword}{auto} unb\_bnorm = b\_norm-\/>unbatch();}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (size\_type i = 0; i < num\_systems; ++i) \{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{" System no. "} << i}
+\DoxyCodeLine{              << \textcolor{stringliteral}{": residual norm = "} << unb\_res[i]-\/>at(0, 0)}
+\DoxyCodeLine{              << \textcolor{stringliteral}{", internal residual norm = "}}
+\DoxyCodeLine{              << logger-\/>get\_residual\_norm()-\/>at(i, 0, 0)}
+\DoxyCodeLine{              << \textcolor{stringliteral}{", iterations = "}}
+\DoxyCodeLine{              << logger-\/>get\_num\_iterations().get\_const\_data()[i]}
+\DoxyCodeLine{              << std::endl;}
+\DoxyCodeLine{    \textcolor{keyword}{const} real\_type relresnorm =}
+\DoxyCodeLine{        unb\_res[i]-\/>at(0, 0) / unb\_bnorm[i]-\/>at(0, 0);}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (!(relresnorm <= reduction\_factor)) \{}
+\DoxyCodeLine{        std::cout << \textcolor{stringliteral}{"System "} << i << \textcolor{stringliteral}{" converged only to "} << relresnorm}
+\DoxyCodeLine{                  << \textcolor{stringliteral}{" relative residual."} << std::endl;}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+Ginkgo objects are cleaned up automatically; but the \char`\"{}application\char`\"{} still needs to clean up its data in this case.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    appl\_clean\_up(appl\_sys, exec);}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{ApplSysData appl\_generate\_system(\textcolor{keyword}{const} \textcolor{keywordtype}{int} nrows, \textcolor{keyword}{const} size\_type nsystems,}
+\DoxyCodeLine{                                 std::shared\_ptr<gko::Executor> exec)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keywordtype}{int} nnz = nrows * 3 -\/ 2;}
+\end{DoxyCode}
+
+
+Random number generator
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::ranlux48 rgen(15);}
+\end{DoxyCode}
+
+
+std\+::uniform\+\_\+real\+\_\+distribution$<$real\+\_\+type$>$ distb(0.\+75, 1.\+0);
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    std::normal\_distribution<real\_type> distb(0.5, 0.1);}
+\DoxyCodeLine{    std::vector<real\_type> spacings(nsystems * nrows);}
+\DoxyCodeLine{    std::generate(spacings.begin(), spacings.end(),}
+\DoxyCodeLine{                  [\&]() \{ \textcolor{keywordflow}{return} distb(rgen); \});}
+\DoxyCodeLine{}
+\DoxyCodeLine{    std::vector<value\_type> allvalues(nnz * nsystems);}
+\DoxyCodeLine{    \textcolor{keywordflow}{for} (size\_type isys = 0; isys < nsystems; isys++) \{}
+\DoxyCodeLine{        allvalues[isys * nnz] = 2.0 / spacings[isys * nrows];}
+\DoxyCodeLine{        allvalues[isys * nnz + 1] = -\/1.0;}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} irow = 0; irow < nrows -\/ 2; irow++) \{}
+\DoxyCodeLine{            allvalues[isys * nnz + 2 + irow * 3] = -\/1.0;}
+\DoxyCodeLine{            allvalues[isys * nnz + 2 + irow * 3 + 1] =}
+\DoxyCodeLine{                2.0 / spacings[isys * nrows + irow + 1];}
+\DoxyCodeLine{            allvalues[isys * nnz + 2 + irow * 3 + 2] = -\/1.0;}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{        allvalues[isys * nnz + 2 + (nrows -\/ 2) * 3] = -\/1.0;}
+\DoxyCodeLine{        allvalues[isys * nnz + 2 + (nrows -\/ 2) * 3 + 1] =}
+\DoxyCodeLine{            2.0 / spacings[(isys + 1) * nrows -\/ 1];}
+\DoxyCodeLine{        assert(isys * nnz + 2 + (nrows -\/ 2) * 3 + 2 == (isys + 1) * nnz);}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    std::vector<index\_type> rowptrs(nrows + 1);}
+\DoxyCodeLine{    rowptrs[0] = 0;}
+\DoxyCodeLine{    rowptrs[1] = 2;}
+\DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 2; i < nrows; i++) \{}
+\DoxyCodeLine{        rowptrs[i] = rowptrs[i -\/ 1] + 3;}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    rowptrs[nrows] = rowptrs[nrows -\/ 1] + 2;}
+\DoxyCodeLine{    assert(rowptrs[nrows] == nnz);}
+\DoxyCodeLine{}
+\DoxyCodeLine{    std::vector<index\_type> colidxs(nnz);}
+\DoxyCodeLine{    colidxs[0] = 0;}
+\DoxyCodeLine{    colidxs[1] = 1;}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keywordtype}{int} nnz\_per\_row = 3;}
+\DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} irow = 1; irow < nrows -\/ 1; irow++) \{}
+\DoxyCodeLine{        colidxs[2 + (irow -\/ 1) * nnz\_per\_row] = irow -\/ 1;}
+\DoxyCodeLine{        colidxs[2 + (irow -\/ 1) * nnz\_per\_row + 1] = irow;}
+\DoxyCodeLine{        colidxs[2 + (irow -\/ 1) * nnz\_per\_row + 2] = irow + 1;}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    colidxs[2 + (nrows -\/ 2) * nnz\_per\_row] = nrows -\/ 2;}
+\DoxyCodeLine{    colidxs[2 + (nrows -\/ 2) * nnz\_per\_row + 1] = nrows -\/ 1;}
+\DoxyCodeLine{    assert(2 + (nrows -\/ 2) * nnz\_per\_row + 1 == nnz -\/ 1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{    std::vector<value\_type> allb(nrows * nsystems);}
+\DoxyCodeLine{    \textcolor{keywordflow}{for} (size\_type isys = 0; isys < nsystems; isys++) \{}
+\DoxyCodeLine{        \textcolor{keyword}{const} value\_type bval = distb(rgen);}
+\DoxyCodeLine{        std::fill(allb.begin() + isys * nrows,}
+\DoxyCodeLine{                  allb.begin() + (isys + 1) * nrows, bval);}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    index\_type* \textcolor{keyword}{const} row\_ptrs = exec-\/>alloc<index\_type>(nrows + 1);}
+\DoxyCodeLine{    exec-\/>copy\_from(exec-\/>get\_master().get(), static\_cast<size\_type>(nrows + 1),}
+\DoxyCodeLine{                    rowptrs.data(), row\_ptrs);}
+\DoxyCodeLine{    index\_type* \textcolor{keyword}{const} col\_idxs = exec-\/>alloc<index\_type>(nnz);}
+\DoxyCodeLine{    exec-\/>copy\_from(exec-\/>get\_master().get(), static\_cast<size\_type>(nnz),}
+\DoxyCodeLine{                    colidxs.data(), col\_idxs);}
+\DoxyCodeLine{    value\_type* \textcolor{keyword}{const} all\_values = exec-\/>alloc<value\_type>(nsystems * nnz);}
+\DoxyCodeLine{    exec-\/>copy\_from(exec-\/>get\_master().get(), nsystems * nnz, allvalues.data(),}
+\DoxyCodeLine{                    all\_values);}
+\DoxyCodeLine{    value\_type* \textcolor{keyword}{const} all\_b = exec-\/>alloc<value\_type>(nsystems * nrows);}
+\DoxyCodeLine{    exec-\/>copy\_from(exec-\/>get\_master().get(), nsystems * nrows, allb.data(),}
+\DoxyCodeLine{                    all\_b);}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} \{nsystems, nrows, nnz, row\_ptrs, col\_idxs, all\_values, all\_b\};}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void} appl\_clean\_up(ApplSysData\& appl\_data, std::shared\_ptr<gko::Executor> exec)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    exec-\/>free(appl\_data.row\_ptrs);}
+\DoxyCodeLine{    exec-\/>free(appl\_data.col\_idxs);}
+\DoxyCodeLine{    exec-\/>free(appl\_data.all\_values);}
+\DoxyCodeLine{    exec-\/>free(appl\_data.all\_rhs);}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+ \label{_Results}%
+\doxysection*{Results}
+
+The following is the expected result on the reference executor\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Residual norm sqrt(r\string^T r):}
+\DoxyCodeLine{ System no. 0: residual norm = 2.16283e-\/06, internal residual norm = 2.16283e-\/06, iterations = 6}
+\DoxyCodeLine{ System no. 1: residual norm = 1.07502e-\/06, internal residual norm = 1.07502e-\/06, iterations = 6}
+\end{DoxyCode}
+
+
+\label{_Commentsaboutprogramminganddebugging}%
+\doxysubsubsection*{Comments about programming and debugging }
+
+\label{_PlainProg}%
+ \doxysection*{The plain program}
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{/*******************************<GINKGO LICENSE>******************************}}
+\DoxyCodeLine{\textcolor{comment}{Copyright (c) 2017-\/2021, the Ginkgo authors}}
+\DoxyCodeLine{\textcolor{comment}{All rights reserved.}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{Redistribution and use in source and binary forms, with or without}}
+\DoxyCodeLine{\textcolor{comment}{modification, are permitted provided that the following conditions}}
+\DoxyCodeLine{\textcolor{comment}{are met:}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{1. Redistributions of source code must retain the above copyright}}
+\DoxyCodeLine{\textcolor{comment}{notice, this list of conditions and the following disclaimer.}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{2. Redistributions in binary form must reproduce the above copyright}}
+\DoxyCodeLine{\textcolor{comment}{notice, this list of conditions and the following disclaimer in the}}
+\DoxyCodeLine{\textcolor{comment}{documentation and/or other materials provided with the distribution.}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{3. Neither the name of the copyright holder nor the names of its}}
+\DoxyCodeLine{\textcolor{comment}{contributors may be used to endorse or promote products derived from}}
+\DoxyCodeLine{\textcolor{comment}{this software without specific prior written permission.}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS}}
+\DoxyCodeLine{\textcolor{comment}{IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED}}
+\DoxyCodeLine{\textcolor{comment}{TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A}}
+\DoxyCodeLine{\textcolor{comment}{PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT}}
+\DoxyCodeLine{\textcolor{comment}{HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,}}
+\DoxyCodeLine{\textcolor{comment}{SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT}}
+\DoxyCodeLine{\textcolor{comment}{LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,}}
+\DoxyCodeLine{\textcolor{comment}{DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY}}
+\DoxyCodeLine{\textcolor{comment}{THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT}}
+\DoxyCodeLine{\textcolor{comment}{(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE}}
+\DoxyCodeLine{\textcolor{comment}{OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.}}
+\DoxyCodeLine{\textcolor{comment}{******************************<GINKGO LICENSE>*******************************/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <random>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{using} value\_type = double;}
+\DoxyCodeLine{\textcolor{keyword}{using} real\_type = \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<value\_type>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} index\_type = int;}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\_type}} = \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}};}
+\DoxyCodeLine{\textcolor{keyword}{using} vec\_type = \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{gko::matrix::BatchDense<value\_type>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} real\_vec\_type = \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{gko::matrix::BatchDense<real\_type>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} mtx\_type = \mbox{\hyperlink{classgko_1_1matrix_1_1BatchCsr}{gko::matrix::BatchCsr<value\_type, index\_type>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} solver\_type = \mbox{\hyperlink{classgko_1_1solver_1_1BatchBicgstab}{gko::solver::BatchBicgstab<value\_type>}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{struct }ApplSysData \{}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\_type}} nsystems;}
+\DoxyCodeLine{    \textcolor{keywordtype}{int} nrows;}
+\DoxyCodeLine{    \textcolor{keywordtype}{int} nnz;}
+\DoxyCodeLine{    index\_type* row\_ptrs;}
+\DoxyCodeLine{    index\_type* col\_idxs;}
+\DoxyCodeLine{    value\_type* all\_values;}
+\DoxyCodeLine{    value\_type* all\_rhs;}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{ApplSysData appl\_generate\_system(\textcolor{keyword}{const} \textcolor{keywordtype}{int} nrows, \textcolor{keyword}{const} size\_type nsystems,}
+\DoxyCodeLine{                                 std::shared\_ptr<gko::Executor> exec);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void} appl\_clean\_up(ApplSysData\& appl\_data, std::shared\_ptr<gko::Executor> exec);}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    std::cout << \mbox{\hyperlink{classgko_1_1version__info_a6daeb8a087cfb57fa055526fc133d8eb}{gko::version\_info::get}}() << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (argc == 2 \&\& (std::string(argv[1]) == \textcolor{stringliteral}{"-\/-\/help"})) \{}
+\DoxyCodeLine{        std::cerr << \textcolor{stringliteral}{"Usage: "} << argv[0] << \textcolor{stringliteral}{" [executor] "} << std::endl;}
+\DoxyCodeLine{        std::exit(-\/1);}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} executor\_string = argc >= 2 ? argv[1] : \textcolor{stringliteral}{"reference"};}
+\DoxyCodeLine{    std::map<std::string, std::function<std::shared\_ptr<gko::Executor>()>>}
+\DoxyCodeLine{        exec\_map\{}
+\DoxyCodeLine{            \{\textcolor{stringliteral}{"omp"}, [] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(); \}\},}
+\DoxyCodeLine{            \{\textcolor{stringliteral}{"cuda"},}
+\DoxyCodeLine{             [] \{}
+\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a5dcec3ca1c458382e01191b727959a81}{gko::CudaExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(),}
+\DoxyCodeLine{                                                  \textcolor{keyword}{true});}
+\DoxyCodeLine{             \}\},}
+\DoxyCodeLine{            \{\textcolor{stringliteral}{"hip"},}
+\DoxyCodeLine{             [] \{}
+\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_ad3a72bc42254fb8730bc2090147447d9}{gko::HipExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(),}
+\DoxyCodeLine{                                                 \textcolor{keyword}{true});}
+\DoxyCodeLine{             \}\},}
+\DoxyCodeLine{            \{\textcolor{stringliteral}{"dpcpp"},}
+\DoxyCodeLine{             [] \{}
+\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1DpcppExecutor_ac46044fcb00b2d224b45d93eaf8c579d}{gko::DpcppExecutor::create}}(0,}
+\DoxyCodeLine{                                                   \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}());}
+\DoxyCodeLine{             \}\},}
+\DoxyCodeLine{            \{\textcolor{stringliteral}{"reference"}, [] \{ \textcolor{keywordflow}{return} gko::ReferenceExecutor::create(); \}\}\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} exec = exec\_map.at(executor\_string)();  \textcolor{comment}{// throws if not valid}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\_type}} num\_systems = argc >= 3 ? std::atoi(argv[2]) : 2;}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keywordtype}{int} num\_rows = 35;  \textcolor{comment}{// per system}}
+\DoxyCodeLine{    \textcolor{keyword}{auto} appl\_sys = appl\_generate\_system(num\_rows, num\_systems, exec);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} batch\_mat\_size =}
+\DoxyCodeLine{        \mbox{\hyperlink{structgko_1_1batch__dim}{gko::batch\_dim<>}}(num\_systems, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}(num\_rows, num\_rows));}
+\DoxyCodeLine{    \textcolor{keyword}{auto} batch\_vec\_size =}
+\DoxyCodeLine{        \mbox{\hyperlink{structgko_1_1batch__dim}{gko::batch\_dim<>}}(num\_systems, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}(num\_rows, 1));}
+\DoxyCodeLine{    \textcolor{keyword}{auto} vals\_view = \mbox{\hyperlink{classgko_1_1Array_ae8e2b4841e60741227daf3367de6ecde}{gko::Array<value\_type>::view}}(}
+\DoxyCodeLine{        exec, num\_systems * appl\_sys.nnz, appl\_sys.all\_values);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} rowptrs\_view =}
+\DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1Array_ae8e2b4841e60741227daf3367de6ecde}{gko::Array<index\_type>::view}}(exec, num\_rows + 1, appl\_sys.row\_ptrs);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} colidxs\_view =}
+\DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1Array_ae8e2b4841e60741227daf3367de6ecde}{gko::Array<index\_type>::view}}(exec, appl\_sys.nnz, appl\_sys.col\_idxs);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} A = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(mtx\_type::create(exec, batch\_mat\_size, vals\_view,}
+\DoxyCodeLine{                                         colidxs\_view, rowptrs\_view));}
+\DoxyCodeLine{    \textcolor{keyword}{auto} batch\_vec\_stride = \mbox{\hyperlink{classgko_1_1batch__stride}{gko::batch\_stride}}(num\_systems, 1);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} b\_view = \mbox{\hyperlink{classgko_1_1Array_ae8e2b4841e60741227daf3367de6ecde}{gko::Array<value\_type>::view}}(exec, num\_systems * num\_rows,}
+\DoxyCodeLine{                                               appl\_sys.all\_rhs);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} b = vec\_type::create(exec, batch\_vec\_size, b\_view, batch\_vec\_stride);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} x = vec\_type::create(exec);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} host\_x =}
+\DoxyCodeLine{        vec\_type::create(exec-\/>get\_master(), batch\_vec\_size, batch\_vec\_stride);}
+\DoxyCodeLine{    \textcolor{keywordflow}{for} (size\_type isys = 0; isys < num\_systems; isys++) \{}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} irow = 0; irow < num\_rows; irow++) \{}
+\DoxyCodeLine{            host\_x-\/>at(isys, irow, 0) = gko::zero<value\_type>();}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    x-\/>copy\_from(host\_x.get());}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{const} real\_type reduction\_factor\{1e-\/6\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{auto} solver\_gen =}
+\DoxyCodeLine{        solver\_type::build()}
+\DoxyCodeLine{            .with\_max\_iterations(500)}
+\DoxyCodeLine{            .with\_residual\_tol(reduction\_factor)}
+\DoxyCodeLine{            .with\_tolerance\_type(gko::stop::batch::ToleranceType::relative)}
+\DoxyCodeLine{            .with\_preconditioner(gko::preconditioner::batch::type::jacobi)}
+\DoxyCodeLine{            .on(exec);}
+\DoxyCodeLine{}
+\DoxyCodeLine{    std::shared\_ptr<const gko::log::BatchConvergence<value\_type>> logger =}
+\DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1log_1_1BatchConvergence_ad5908d7498e0c03641267b8c81f80313}{gko::log::BatchConvergence<value\_type>::create}}(exec);}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{auto} solver = solver\_gen-\/>generate(A);}
+\DoxyCodeLine{    solver-\/>add\_logger(logger);}
+\DoxyCodeLine{    solver-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(b), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x));}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{auto} b\_norm = gko::batch\_initialize<real\_vec\_type>(num\_systems, \{0.0\},}
+\DoxyCodeLine{                                                       exec-\/>get\_master());}
+\DoxyCodeLine{    b-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(b\_norm));}
+\DoxyCodeLine{    \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_a0059e27f8f4bc348ff65c1e60caf47c8}{one}} = gko::batch\_initialize<vec\_type>(num\_systems, \{1.0\}, exec);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} neg\_one = gko::batch\_initialize<vec\_type>(num\_systems, \{-\/1.0\}, exec);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} res = vec\_type::create(exec, batch\_vec\_size);}
+\DoxyCodeLine{    res-\/>copy\_from(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(b));}
+\DoxyCodeLine{    A-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(res));}
+\DoxyCodeLine{    \textcolor{keyword}{auto} res\_norm = gko::batch\_initialize<real\_vec\_type>(num\_systems, \{0.0\},}
+\DoxyCodeLine{                                                         exec-\/>get\_master());}
+\DoxyCodeLine{    res-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(res\_norm));}
+\DoxyCodeLine{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Residual norm sqrt(r\string^T r):\(\backslash\)n"};}
+\DoxyCodeLine{    \textcolor{keyword}{auto} unb\_res = res\_norm-\/>unbatch();}
+\DoxyCodeLine{    \textcolor{keyword}{auto} unb\_bnorm = b\_norm-\/>unbatch();}
+\DoxyCodeLine{    \textcolor{keywordflow}{for} (size\_type i = 0; i < num\_systems; ++i) \{}
+\DoxyCodeLine{        std::cout << \textcolor{stringliteral}{" System no. "} << i}
+\DoxyCodeLine{                  << \textcolor{stringliteral}{": residual norm = "} << unb\_res[i]-\/>at(0, 0)}
+\DoxyCodeLine{                  << \textcolor{stringliteral}{", internal residual norm = "}}
+\DoxyCodeLine{                  << logger-\/>get\_residual\_norm()-\/>at(i, 0, 0)}
+\DoxyCodeLine{                  << \textcolor{stringliteral}{", iterations = "}}
+\DoxyCodeLine{                  << logger-\/>get\_num\_iterations().get\_const\_data()[i]}
+\DoxyCodeLine{                  << std::endl;}
+\DoxyCodeLine{        \textcolor{keyword}{const} real\_type relresnorm =}
+\DoxyCodeLine{            unb\_res[i]-\/>at(0, 0) / unb\_bnorm[i]-\/>at(0, 0);}
+\DoxyCodeLine{        \textcolor{keywordflow}{if} (!(relresnorm <= reduction\_factor)) \{}
+\DoxyCodeLine{            std::cout << \textcolor{stringliteral}{"System "} << i << \textcolor{stringliteral}{" converged only to "} << relresnorm}
+\DoxyCodeLine{                      << \textcolor{stringliteral}{" relative residual."} << std::endl;}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    appl\_clean\_up(appl\_sys, exec);}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{ApplSysData appl\_generate\_system(\textcolor{keyword}{const} \textcolor{keywordtype}{int} nrows, \textcolor{keyword}{const} size\_type nsystems,}
+\DoxyCodeLine{                                 std::shared\_ptr<gko::Executor> exec)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keywordtype}{int} nnz = nrows * 3 -\/ 2;}
+\DoxyCodeLine{    std::ranlux48 rgen(15);}
+\DoxyCodeLine{    std::normal\_distribution<real\_type> distb(0.5, 0.1);}
+\DoxyCodeLine{    std::vector<real\_type> spacings(nsystems * nrows);}
+\DoxyCodeLine{    std::generate(spacings.begin(), spacings.end(),}
+\DoxyCodeLine{                  [\&]() \{ \textcolor{keywordflow}{return} distb(rgen); \});}
+\DoxyCodeLine{}
+\DoxyCodeLine{    std::vector<value\_type> allvalues(nnz * nsystems);}
+\DoxyCodeLine{    \textcolor{keywordflow}{for} (size\_type isys = 0; isys < nsystems; isys++) \{}
+\DoxyCodeLine{        allvalues[isys * nnz] = 2.0 / spacings[isys * nrows];}
+\DoxyCodeLine{        allvalues[isys * nnz + 1] = -\/1.0;}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} irow = 0; irow < nrows -\/ 2; irow++) \{}
+\DoxyCodeLine{            allvalues[isys * nnz + 2 + irow * 3] = -\/1.0;}
+\DoxyCodeLine{            allvalues[isys * nnz + 2 + irow * 3 + 1] =}
+\DoxyCodeLine{                2.0 / spacings[isys * nrows + irow + 1];}
+\DoxyCodeLine{            allvalues[isys * nnz + 2 + irow * 3 + 2] = -\/1.0;}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{        allvalues[isys * nnz + 2 + (nrows -\/ 2) * 3] = -\/1.0;}
+\DoxyCodeLine{        allvalues[isys * nnz + 2 + (nrows -\/ 2) * 3 + 1] =}
+\DoxyCodeLine{            2.0 / spacings[(isys + 1) * nrows -\/ 1];}
+\DoxyCodeLine{        assert(isys * nnz + 2 + (nrows -\/ 2) * 3 + 2 == (isys + 1) * nnz);}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    std::vector<index\_type> rowptrs(nrows + 1);}
+\DoxyCodeLine{    rowptrs[0] = 0;}
+\DoxyCodeLine{    rowptrs[1] = 2;}
+\DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 2; i < nrows; i++) \{}
+\DoxyCodeLine{        rowptrs[i] = rowptrs[i -\/ 1] + 3;}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    rowptrs[nrows] = rowptrs[nrows -\/ 1] + 2;}
+\DoxyCodeLine{    assert(rowptrs[nrows] == nnz);}
+\DoxyCodeLine{}
+\DoxyCodeLine{    std::vector<index\_type> colidxs(nnz);}
+\DoxyCodeLine{    colidxs[0] = 0;}
+\DoxyCodeLine{    colidxs[1] = 1;}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keywordtype}{int} nnz\_per\_row = 3;}
+\DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} irow = 1; irow < nrows -\/ 1; irow++) \{}
+\DoxyCodeLine{        colidxs[2 + (irow -\/ 1) * nnz\_per\_row] = irow -\/ 1;}
+\DoxyCodeLine{        colidxs[2 + (irow -\/ 1) * nnz\_per\_row + 1] = irow;}
+\DoxyCodeLine{        colidxs[2 + (irow -\/ 1) * nnz\_per\_row + 2] = irow + 1;}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    colidxs[2 + (nrows -\/ 2) * nnz\_per\_row] = nrows -\/ 2;}
+\DoxyCodeLine{    colidxs[2 + (nrows -\/ 2) * nnz\_per\_row + 1] = nrows -\/ 1;}
+\DoxyCodeLine{    assert(2 + (nrows -\/ 2) * nnz\_per\_row + 1 == nnz -\/ 1);}
+\DoxyCodeLine{}
+\DoxyCodeLine{    std::vector<value\_type> allb(nrows * nsystems);}
+\DoxyCodeLine{    \textcolor{keywordflow}{for} (size\_type isys = 0; isys < nsystems; isys++) \{}
+\DoxyCodeLine{        \textcolor{keyword}{const} value\_type bval = distb(rgen);}
+\DoxyCodeLine{        std::fill(allb.begin() + isys * nrows,}
+\DoxyCodeLine{                  allb.begin() + (isys + 1) * nrows, bval);}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    index\_type* \textcolor{keyword}{const} row\_ptrs = exec-\/>alloc<index\_type>(nrows + 1);}
+\DoxyCodeLine{    exec-\/>copy\_from(exec-\/>get\_master().get(), static\_cast<size\_type>(nrows + 1),}
+\DoxyCodeLine{                    rowptrs.data(), row\_ptrs);}
+\DoxyCodeLine{    index\_type* \textcolor{keyword}{const} col\_idxs = exec-\/>alloc<index\_type>(nnz);}
+\DoxyCodeLine{    exec-\/>copy\_from(exec-\/>get\_master().get(), static\_cast<size\_type>(nnz),}
+\DoxyCodeLine{                    colidxs.data(), col\_idxs);}
+\DoxyCodeLine{    value\_type* \textcolor{keyword}{const} all\_values = exec-\/>alloc<value\_type>(nsystems * nnz);}
+\DoxyCodeLine{    exec-\/>copy\_from(exec-\/>get\_master().get(), nsystems * nnz, allvalues.data(),}
+\DoxyCodeLine{                    all\_values);}
+\DoxyCodeLine{    value\_type* \textcolor{keyword}{const} all\_b = exec-\/>alloc<value\_type>(nsystems * nrows);}
+\DoxyCodeLine{    exec-\/>copy\_from(exec-\/>get\_master().get(), nsystems * nrows, allb.data(),}
+\DoxyCodeLine{                    all\_b);}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} \{nsystems, nrows, nnz, row\_ptrs, col\_idxs, all\_values, all\_b\};}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void} appl\_clean\_up(ApplSysData\& appl\_data, std::shared\_ptr<gko::Executor> exec)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    exec-\/>free(appl\_data.row\_ptrs);}
+\DoxyCodeLine{    exec-\/>free(appl\_data.col\_idxs);}
+\DoxyCodeLine{    exec-\/>free(appl\_data.all\_values);}
+\DoxyCodeLine{    exec-\/>free(appl\_data.all\_rhs);}
+\DoxyCodeLine{\}}
+\end{DoxyCodeInclude}
+ 

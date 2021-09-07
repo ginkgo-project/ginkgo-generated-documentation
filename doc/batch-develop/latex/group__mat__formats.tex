@@ -1,0 +1,457 @@
+\hypertarget{group__mat__formats}{}\doxysection{Sp\+MV employing different Matrix formats}
+\label{group__mat__formats}\index{SpMV employing different Matrix formats@{SpMV employing different Matrix formats}}
+
+
+A module dedicated to the implementation and usage of the various Matrix Formats in Ginkgo.  
+
+
+Collaboration diagram for Sp\+MV employing different Matrix formats\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__mat__formats}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classgko_1_1matrix_1_1BatchCsr}{gko\+::matrix\+::\+Batch\+Csr$<$ Value\+Type, Index\+Type $>$}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1matrix_1_1BatchCsr}{Batch\+Csr}} is a matrix format which stores only the nonzero coefficients by compressing each row of the matrix (compressed sparse row format). \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{gko\+::matrix\+::\+Batch\+Dense$<$ Value\+Type $>$}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{Batch\+Dense}} is a batch matrix format which explicitly stores all values of the matrix in each of the batches. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1matrix_1_1Coo}{gko\+::matrix\+::\+Coo$<$ Value\+Type, Index\+Type $>$}}
+\begin{DoxyCompactList}\small\item\em C\+OO stores a matrix in the coordinate matrix format. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$}}
+\begin{DoxyCompactList}\small\item\em C\+SR is a matrix format which stores only the nonzero coefficients by compressing each row of the matrix (compressed sparse row format). \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense$<$ Value\+Type $>$}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} is a matrix format which explicitly stores all values of the matrix. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal}{gko\+::matrix\+::\+Diagonal$<$ Value\+Type $>$}}
+\begin{DoxyCompactList}\small\item\em This class is a utility which efficiently implements the diagonal matrix (a linear operator which scales a vector row wise). \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1matrix_1_1Ell}{gko\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$}}
+\begin{DoxyCompactList}\small\item\em E\+LL is a matrix format where stride with explicit zeros is used such that all rows have the same number of stored elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr$<$ Value\+Type, Index\+Type $>$}}
+\begin{DoxyCompactList}\small\item\em Fixed-\/block compressed sparse row storage matrix format. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1matrix_1_1Hybrid}{gko\+::matrix\+::\+Hybrid$<$ Value\+Type, Index\+Type $>$}}
+\begin{DoxyCompactList}\small\item\em H\+Y\+B\+R\+ID is a matrix format which splits the matrix into E\+L\+L\+P\+A\+CK and C\+OO format. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1matrix_1_1Identity}{gko\+::matrix\+::\+Identity$<$ Value\+Type $>$}}
+\begin{DoxyCompactList}\small\item\em This class is a utility which efficiently implements the identity matrix (a linear operator which maps each vector to itself). \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1matrix_1_1IdentityFactory}{gko\+::matrix\+::\+Identity\+Factory$<$ Value\+Type $>$}}
+\begin{DoxyCompactList}\small\item\em This factory is a utility which can be used to generate \mbox{\hyperlink{classgko_1_1matrix_1_1Identity}{Identity}} operators. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1matrix_1_1Permutation}{gko\+::matrix\+::\+Permutation$<$ Index\+Type $>$}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1matrix_1_1Permutation}{Permutation}} is a matrix \char`\"{}format\char`\"{} which stores the row and column permutation arrays which can be used for re-\/ordering the rows and columns a matrix. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1matrix_1_1Sellp}{gko\+::matrix\+::\+Sellp$<$ Value\+Type, Index\+Type $>$}}
+\begin{DoxyCompactList}\small\item\em S\+E\+L\+L-\/P is a matrix format similar to E\+LL format. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1matrix_1_1SparsityCsr}{gko\+::matrix\+::\+Sparsity\+Csr$<$ Value\+Type, Index\+Type $>$}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1matrix_1_1SparsityCsr}{Sparsity\+Csr}} is a matrix format which stores only the sparsity pattern of a sparse matrix by compressing each row of the matrix (compressed sparse row format). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Matrix , typename... T\+Args$>$ }\\std\+::unique\+\_\+ptr$<$ Matrix $>$ \mbox{\hyperlink{group__mat__formats_ga0cf3d991a615a3bd74ee6fa414bdb8d4}{gko\+::batch\+\_\+initialize}} (std\+::vector$<$ \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} $>$ stride, std\+::initializer\+\_\+list$<$ std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$$>$ vals, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, T\+Args \&\&... create\+\_\+args)
+\begin{DoxyCompactList}\small\item\em Creates and initializes a batch of column-\/vectors. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Matrix , typename... T\+Args$>$ }\\std\+::unique\+\_\+ptr$<$ Matrix $>$ \mbox{\hyperlink{group__mat__formats_gaa9ea553b8c853a143b4bc51068f83533}{gko\+::batch\+\_\+initialize}} (std\+::initializer\+\_\+list$<$ std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$$>$ vals, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, T\+Args \&\&... create\+\_\+args)
+\begin{DoxyCompactList}\small\item\em Creates and initializes a batch of column-\/vectors. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Matrix , typename... T\+Args$>$ }\\std\+::unique\+\_\+ptr$<$ Matrix $>$ \mbox{\hyperlink{group__mat__formats_ga5ee0d945d26608767930f524ae53c3cf}{gko\+::batch\+\_\+initialize}} (std\+::vector$<$ \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} $>$ stride, std\+::initializer\+\_\+list$<$ std\+::initializer\+\_\+list$<$ std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$$>$$>$ vals, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, T\+Args \&\&... create\+\_\+args)
+\begin{DoxyCompactList}\small\item\em Creates and initializes a batch of matrices. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Matrix , typename... T\+Args$>$ }\\std\+::unique\+\_\+ptr$<$ Matrix $>$ \mbox{\hyperlink{group__mat__formats_ga0d90c05fdeac8bb3275515b03dc17db5}{gko\+::batch\+\_\+initialize}} (std\+::initializer\+\_\+list$<$ std\+::initializer\+\_\+list$<$ std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$$>$$>$ vals, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, T\+Args \&\&... create\+\_\+args)
+\begin{DoxyCompactList}\small\item\em Creates and initializes a batch of matrices. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Matrix , typename... T\+Args$>$ }\\std\+::unique\+\_\+ptr$<$ Matrix $>$ \mbox{\hyperlink{group__mat__formats_ga2ca43a173d9ca2e20ffc94e625130ff7}{gko\+::batch\+\_\+initialize}} (std\+::vector$<$ \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} $>$ stride, const \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} num\+\_\+vectors, std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$ vals, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, T\+Args \&\&... create\+\_\+args)
+\begin{DoxyCompactList}\small\item\em Creates and initializes a batch column-\/vector by making copies of the single input column vector. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Matrix , typename... T\+Args$>$ }\\std\+::unique\+\_\+ptr$<$ Matrix $>$ \mbox{\hyperlink{group__mat__formats_ga4ab76cc64a0f2b2ff446851c46692a4c}{gko\+::batch\+\_\+initialize}} (const \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} num\+\_\+vectors, std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$ vals, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, T\+Args \&\&... create\+\_\+args)
+\begin{DoxyCompactList}\small\item\em Creates and initializes a column-\/vector from copies of a given vector. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Matrix , typename... T\+Args$>$ }\\std\+::unique\+\_\+ptr$<$ Matrix $>$ \mbox{\hyperlink{group__mat__formats_ga6d9ae09ab6980d22c0c0e1d43a8a0145}{gko\+::batch\+\_\+initialize}} (std\+::vector$<$ \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} $>$ stride, const \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} num\+\_\+matrices, std\+::initializer\+\_\+list$<$ std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$$>$ vals, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, T\+Args \&\&... create\+\_\+args)
+\begin{DoxyCompactList}\small\item\em Creates and initializes a matrix from copies of a given matrix. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Matrix , typename... T\+Args$>$ }\\std\+::unique\+\_\+ptr$<$ Matrix $>$ \mbox{\hyperlink{group__mat__formats_gac520568e95aaf846317e132000f6bdde}{gko\+::batch\+\_\+initialize}} (const \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} num\+\_\+matrices, std\+::initializer\+\_\+list$<$ std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$$>$ vals, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, T\+Args \&\&... create\+\_\+args)
+\begin{DoxyCompactList}\small\item\em Creates and initializes a matrix from copies of a given matrix. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Matrix , typename... T\+Args$>$ }\\std\+::unique\+\_\+ptr$<$ Matrix $>$ \mbox{\hyperlink{group__mat__formats_ga2f54bac1e95fb3ef03974fa9c9088491}{gko\+::initialize}} (\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} stride, std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$ vals, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, T\+Args \&\&... create\+\_\+args)
+\begin{DoxyCompactList}\small\item\em Creates and initializes a column-\/vector. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Matrix , typename... T\+Args$>$ }\\std\+::unique\+\_\+ptr$<$ Matrix $>$ \mbox{\hyperlink{group__mat__formats_gaac5f7b4ff3b43dbc6918c687dd7d2d2e}{gko\+::initialize}} (std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$ vals, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, T\+Args \&\&... create\+\_\+args)
+\begin{DoxyCompactList}\small\item\em Creates and initializes a column-\/vector. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Matrix , typename... T\+Args$>$ }\\std\+::unique\+\_\+ptr$<$ Matrix $>$ \mbox{\hyperlink{group__mat__formats_gaaf2520e5921e1bea00853c290f4fc28f}{gko\+::initialize}} (\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} stride, std\+::initializer\+\_\+list$<$ std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$$>$ vals, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, T\+Args \&\&... create\+\_\+args)
+\begin{DoxyCompactList}\small\item\em Creates and initializes a matrix. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Matrix , typename... T\+Args$>$ }\\std\+::unique\+\_\+ptr$<$ Matrix $>$ \mbox{\hyperlink{group__mat__formats_gabe4ff67be5b3aae4e981b33ea9883385}{gko\+::initialize}} (std\+::initializer\+\_\+list$<$ std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$$>$ vals, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, T\+Args \&\&... create\+\_\+args)
+\begin{DoxyCompactList}\small\item\em Creates and initializes a matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A module dedicated to the implementation and usage of the various Matrix Formats in Ginkgo. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{group__mat__formats_gac520568e95aaf846317e132000f6bdde}\label{group__mat__formats_gac520568e95aaf846317e132000f6bdde}} 
+\index{SpMV employing different Matrix formats@{SpMV employing different Matrix formats}!batch\_initialize@{batch\_initialize}}
+\index{batch\_initialize@{batch\_initialize}!SpMV employing different Matrix formats@{SpMV employing different Matrix formats}}
+\doxysubsubsection{\texorpdfstring{batch\_initialize()}{batch\_initialize()}\hspace{0.1cm}{\footnotesize\ttfamily [1/8]}}
+{\footnotesize\ttfamily template$<$typename Matrix , typename... T\+Args$>$ \\
+std\+::unique\+\_\+ptr$<$Matrix$>$ gko\+::batch\+\_\+initialize (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{num\+\_\+matrices,  }\item[{std\+::initializer\+\_\+list$<$ std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$$>$}]{vals,  }\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{T\+Args \&\&...}]{create\+\_\+args }\end{DoxyParamCaption})}
+
+
+
+Creates and initializes a matrix from copies of a given matrix. 
+
+This function first creates a temporary Dense matrix, fills it with passed in values, and then converts the matrix to the requested type. The stride of the intermediate Dense matrix is set to 1.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Matrix} & matrix type to initialize (Dense has to implement the Convertible\+To$<$\+Matrix$>$ interface) \\
+\hline
+{\em T\+Args} & argument types for Matrix\+::create method (not including the implied \mbox{\hyperlink{classgko_1_1Executor}{Executor}} as the first argument)\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em num\+\_\+vectors} & The number of times the input vector is copied into the final output \\
+\hline
+{\em vals} & values used to initialize the vector \\
+\hline
+{\em exec} & \mbox{\hyperlink{classgko_1_1Executor}{Executor}} associated to the vector \\
+\hline
+{\em create\+\_\+args} & additional arguments passed to Matrix\+::create, not including the \mbox{\hyperlink{classgko_1_1Executor}{Executor}}, which is passed as the first argument \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__mat__formats_ga4ab76cc64a0f2b2ff446851c46692a4c}\label{group__mat__formats_ga4ab76cc64a0f2b2ff446851c46692a4c}} 
+\index{SpMV employing different Matrix formats@{SpMV employing different Matrix formats}!batch\_initialize@{batch\_initialize}}
+\index{batch\_initialize@{batch\_initialize}!SpMV employing different Matrix formats@{SpMV employing different Matrix formats}}
+\doxysubsubsection{\texorpdfstring{batch\_initialize()}{batch\_initialize()}\hspace{0.1cm}{\footnotesize\ttfamily [2/8]}}
+{\footnotesize\ttfamily template$<$typename Matrix , typename... T\+Args$>$ \\
+std\+::unique\+\_\+ptr$<$Matrix$>$ gko\+::batch\+\_\+initialize (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{num\+\_\+vectors,  }\item[{std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$}]{vals,  }\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{T\+Args \&\&...}]{create\+\_\+args }\end{DoxyParamCaption})}
+
+
+
+Creates and initializes a column-\/vector from copies of a given vector. 
+
+This function first creates a temporary Dense matrix, fills it with passed in values, and then converts the matrix to the requested type. The stride of the intermediate Dense matrix is set to 1.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Matrix} & matrix type to initialize (Dense has to implement the Convertible\+To$<$\+Matrix$>$ interface) \\
+\hline
+{\em T\+Args} & argument types for Matrix\+::create method (not including the implied \mbox{\hyperlink{classgko_1_1Executor}{Executor}} as the first argument)\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em num\+\_\+vectors} & The number of times the input vector is copied into the final output \\
+\hline
+{\em vals} & values used to initialize the vector \\
+\hline
+{\em exec} & \mbox{\hyperlink{classgko_1_1Executor}{Executor}} associated to the vector \\
+\hline
+{\em create\+\_\+args} & additional arguments passed to Matrix\+::create, not including the \mbox{\hyperlink{classgko_1_1Executor}{Executor}}, which is passed as the first argument \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__mat__formats_ga0d90c05fdeac8bb3275515b03dc17db5}\label{group__mat__formats_ga0d90c05fdeac8bb3275515b03dc17db5}} 
+\index{SpMV employing different Matrix formats@{SpMV employing different Matrix formats}!batch\_initialize@{batch\_initialize}}
+\index{batch\_initialize@{batch\_initialize}!SpMV employing different Matrix formats@{SpMV employing different Matrix formats}}
+\doxysubsubsection{\texorpdfstring{batch\_initialize()}{batch\_initialize()}\hspace{0.1cm}{\footnotesize\ttfamily [3/8]}}
+{\footnotesize\ttfamily template$<$typename Matrix , typename... T\+Args$>$ \\
+std\+::unique\+\_\+ptr$<$Matrix$>$ gko\+::batch\+\_\+initialize (\begin{DoxyParamCaption}\item[{std\+::initializer\+\_\+list$<$ std\+::initializer\+\_\+list$<$ std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$$>$$>$}]{vals,  }\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{T\+Args \&\&...}]{create\+\_\+args }\end{DoxyParamCaption})}
+
+
+
+Creates and initializes a batch of matrices. 
+
+This function first creates a temporary Dense matrix, fills it with passed in values, and then converts the matrix to the requested type. The stride of the intermediate Dense matrix is set to the number of columns of the initializer list.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Matrix} & matrix type to initialize (Dense has to implement the Convertible\+To$<$\+Matrix$>$ interface) \\
+\hline
+{\em T\+Args} & argument types for Matrix\+::create method (not including the implied \mbox{\hyperlink{classgko_1_1Executor}{Executor}} as the first argument)\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em vals} & values used to initialize the matrix \\
+\hline
+{\em exec} & \mbox{\hyperlink{classgko_1_1Executor}{Executor}} associated to the matrix \\
+\hline
+{\em create\+\_\+args} & additional arguments passed to Matrix\+::create, not including the \mbox{\hyperlink{classgko_1_1Executor}{Executor}}, which is passed as the first argument \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__mat__formats_gaa9ea553b8c853a143b4bc51068f83533}\label{group__mat__formats_gaa9ea553b8c853a143b4bc51068f83533}} 
+\index{SpMV employing different Matrix formats@{SpMV employing different Matrix formats}!batch\_initialize@{batch\_initialize}}
+\index{batch\_initialize@{batch\_initialize}!SpMV employing different Matrix formats@{SpMV employing different Matrix formats}}
+\doxysubsubsection{\texorpdfstring{batch\_initialize()}{batch\_initialize()}\hspace{0.1cm}{\footnotesize\ttfamily [4/8]}}
+{\footnotesize\ttfamily template$<$typename Matrix , typename... T\+Args$>$ \\
+std\+::unique\+\_\+ptr$<$Matrix$>$ gko\+::batch\+\_\+initialize (\begin{DoxyParamCaption}\item[{std\+::initializer\+\_\+list$<$ std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$$>$}]{vals,  }\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{T\+Args \&\&...}]{create\+\_\+args }\end{DoxyParamCaption})}
+
+
+
+Creates and initializes a batch of column-\/vectors. 
+
+This function first creates a temporary Dense matrix, fills it with passed in values, and then converts the matrix to the requested type. The stride of the intermediate Dense matrix is set to 1.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Matrix} & matrix type to initialize (Dense has to implement the Convertible\+To$<$\+Matrix$>$ interface) \\
+\hline
+{\em T\+Args} & argument types for Matrix\+::create method (not including the implied \mbox{\hyperlink{classgko_1_1Executor}{Executor}} as the first argument)\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em vals} & values used to initialize the vector \\
+\hline
+{\em exec} & \mbox{\hyperlink{classgko_1_1Executor}{Executor}} associated to the vector \\
+\hline
+{\em create\+\_\+args} & additional arguments passed to Matrix\+::create, not including the \mbox{\hyperlink{classgko_1_1Executor}{Executor}}, which is passed as the first argument \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__mat__formats_ga6d9ae09ab6980d22c0c0e1d43a8a0145}\label{group__mat__formats_ga6d9ae09ab6980d22c0c0e1d43a8a0145}} 
+\index{SpMV employing different Matrix formats@{SpMV employing different Matrix formats}!batch\_initialize@{batch\_initialize}}
+\index{batch\_initialize@{batch\_initialize}!SpMV employing different Matrix formats@{SpMV employing different Matrix formats}}
+\doxysubsubsection{\texorpdfstring{batch\_initialize()}{batch\_initialize()}\hspace{0.1cm}{\footnotesize\ttfamily [5/8]}}
+{\footnotesize\ttfamily template$<$typename Matrix , typename... T\+Args$>$ \\
+std\+::unique\+\_\+ptr$<$Matrix$>$ gko\+::batch\+\_\+initialize (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} $>$}]{stride,  }\item[{const \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{num\+\_\+matrices,  }\item[{std\+::initializer\+\_\+list$<$ std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$$>$}]{vals,  }\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{T\+Args \&\&...}]{create\+\_\+args }\end{DoxyParamCaption})}
+
+
+
+Creates and initializes a matrix from copies of a given matrix. 
+
+This function first creates a temporary batch dense matrix, fills it with passed in values, and then converts the matrix to the requested type.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Matrix} & matrix type to initialize (Dense has to implement the Convertible\+To$<$\+Matrix$>$ interface) \\
+\hline
+{\em T\+Args} & argument types for Matrix\+::create method (not including the implied \mbox{\hyperlink{classgko_1_1Executor}{Executor}} as the first argument)\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em stride} & row strides for the temporary batch dense matrix \\
+\hline
+{\em num\+\_\+matrices} & The number of times the input matrix is copied into the final output \\
+\hline
+{\em vals} & values used to initialize each vector in the temp. batch \\
+\hline
+{\em exec} & \mbox{\hyperlink{classgko_1_1Executor}{Executor}} associated to the vector \\
+\hline
+{\em create\+\_\+args} & additional arguments passed to Matrix\+::create, not including the \mbox{\hyperlink{classgko_1_1Executor}{Executor}}, which is passed as the first argument \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__mat__formats_ga2ca43a173d9ca2e20ffc94e625130ff7}\label{group__mat__formats_ga2ca43a173d9ca2e20ffc94e625130ff7}} 
+\index{SpMV employing different Matrix formats@{SpMV employing different Matrix formats}!batch\_initialize@{batch\_initialize}}
+\index{batch\_initialize@{batch\_initialize}!SpMV employing different Matrix formats@{SpMV employing different Matrix formats}}
+\doxysubsubsection{\texorpdfstring{batch\_initialize()}{batch\_initialize()}\hspace{0.1cm}{\footnotesize\ttfamily [6/8]}}
+{\footnotesize\ttfamily template$<$typename Matrix , typename... T\+Args$>$ \\
+std\+::unique\+\_\+ptr$<$Matrix$>$ gko\+::batch\+\_\+initialize (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} $>$}]{stride,  }\item[{const \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{num\+\_\+vectors,  }\item[{std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$}]{vals,  }\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{T\+Args \&\&...}]{create\+\_\+args }\end{DoxyParamCaption})}
+
+
+
+Creates and initializes a batch column-\/vector by making copies of the single input column vector. 
+
+This function first creates a temporary batch dense matrix, fills it with passed in values, and then converts the matrix to the requested type.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Matrix} & matrix type to initialize (Dense has to implement the Convertible\+To$<$\+Matrix$>$ interface) \\
+\hline
+{\em T\+Args} & argument types for Matrix\+::create method (not including the implied \mbox{\hyperlink{classgko_1_1Executor}{Executor}} as the first argument)\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em stride} & row strides for the temporary batch dense matrix \\
+\hline
+{\em num\+\_\+vectors} & The number of times the input vector is copied into the final output \\
+\hline
+{\em vals} & values used to initialize each vector in the temp. batch \\
+\hline
+{\em exec} & \mbox{\hyperlink{classgko_1_1Executor}{Executor}} associated to the vector \\
+\hline
+{\em create\+\_\+args} & additional arguments passed to Matrix\+::create, not including the \mbox{\hyperlink{classgko_1_1Executor}{Executor}}, which is passed as the first argument \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__mat__formats_ga5ee0d945d26608767930f524ae53c3cf}\label{group__mat__formats_ga5ee0d945d26608767930f524ae53c3cf}} 
+\index{SpMV employing different Matrix formats@{SpMV employing different Matrix formats}!batch\_initialize@{batch\_initialize}}
+\index{batch\_initialize@{batch\_initialize}!SpMV employing different Matrix formats@{SpMV employing different Matrix formats}}
+\doxysubsubsection{\texorpdfstring{batch\_initialize()}{batch\_initialize()}\hspace{0.1cm}{\footnotesize\ttfamily [7/8]}}
+{\footnotesize\ttfamily template$<$typename Matrix , typename... T\+Args$>$ \\
+std\+::unique\+\_\+ptr$<$Matrix$>$ gko\+::batch\+\_\+initialize (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} $>$}]{stride,  }\item[{std\+::initializer\+\_\+list$<$ std\+::initializer\+\_\+list$<$ std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$$>$$>$}]{vals,  }\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{T\+Args \&\&...}]{create\+\_\+args }\end{DoxyParamCaption})}
+
+
+
+Creates and initializes a batch of matrices. 
+
+This function first creates a temporary Dense matrix, fills it with passed in values, and then converts the matrix to the requested type.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Matrix} & matrix type to initialize (Dense has to implement the Convertible\+To$<$\+Matrix$>$ interface) \\
+\hline
+{\em T\+Args} & argument types for Matrix\+::create method (not including the implied \mbox{\hyperlink{classgko_1_1Executor}{Executor}} as the first argument)\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em stride} & row stride for the temporary Dense matrix \\
+\hline
+{\em vals} & values used to initialize the matrix \\
+\hline
+{\em exec} & \mbox{\hyperlink{classgko_1_1Executor}{Executor}} associated to the matrix \\
+\hline
+{\em create\+\_\+args} & additional arguments passed to Matrix\+::create, not including the \mbox{\hyperlink{classgko_1_1Executor}{Executor}}, which is passed as the first argument \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__mat__formats_ga0cf3d991a615a3bd74ee6fa414bdb8d4}\label{group__mat__formats_ga0cf3d991a615a3bd74ee6fa414bdb8d4}} 
+\index{SpMV employing different Matrix formats@{SpMV employing different Matrix formats}!batch\_initialize@{batch\_initialize}}
+\index{batch\_initialize@{batch\_initialize}!SpMV employing different Matrix formats@{SpMV employing different Matrix formats}}
+\doxysubsubsection{\texorpdfstring{batch\_initialize()}{batch\_initialize()}\hspace{0.1cm}{\footnotesize\ttfamily [8/8]}}
+{\footnotesize\ttfamily template$<$typename Matrix , typename... T\+Args$>$ \\
+std\+::unique\+\_\+ptr$<$Matrix$>$ gko\+::batch\+\_\+initialize (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} $>$}]{stride,  }\item[{std\+::initializer\+\_\+list$<$ std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$$>$}]{vals,  }\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{T\+Args \&\&...}]{create\+\_\+args }\end{DoxyParamCaption})}
+
+
+
+Creates and initializes a batch of column-\/vectors. 
+
+This function first creates a temporary Dense matrix, fills it with passed in values, and then converts the matrix to the requested type.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Matrix} & matrix type to initialize (Dense has to implement the Convertible\+To$<$\+Matrix$>$ interface) \\
+\hline
+{\em T\+Args} & argument types for Matrix\+::create method (not including the implied \mbox{\hyperlink{classgko_1_1Executor}{Executor}} as the first argument)\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em stride} & row stride for the temporary Dense matrix \\
+\hline
+{\em vals} & values used to initialize the batch vector \\
+\hline
+{\em exec} & \mbox{\hyperlink{classgko_1_1Executor}{Executor}} associated to the vector \\
+\hline
+{\em create\+\_\+args} & additional arguments passed to Matrix\+::create, not including the \mbox{\hyperlink{classgko_1_1Executor}{Executor}}, which is passed as the first argument \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__mat__formats_gaaf2520e5921e1bea00853c290f4fc28f}\label{group__mat__formats_gaaf2520e5921e1bea00853c290f4fc28f}} 
+\index{SpMV employing different Matrix formats@{SpMV employing different Matrix formats}!initialize@{initialize}}
+\index{initialize@{initialize}!SpMV employing different Matrix formats@{SpMV employing different Matrix formats}}
+\doxysubsubsection{\texorpdfstring{initialize()}{initialize()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$typename Matrix , typename... T\+Args$>$ \\
+std\+::unique\+\_\+ptr$<$Matrix$>$ gko\+::initialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{stride,  }\item[{std\+::initializer\+\_\+list$<$ std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$$>$}]{vals,  }\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{T\+Args \&\&...}]{create\+\_\+args }\end{DoxyParamCaption})}
+
+
+
+Creates and initializes a matrix. 
+
+This function first creates a temporary Dense matrix, fills it with passed in values, and then converts the matrix to the requested type.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Matrix} & matrix type to initialize (Dense has to implement the Convertible\+To$<$\+Matrix$>$ interface) \\
+\hline
+{\em T\+Args} & argument types for Matrix\+::create method (not including the implied \mbox{\hyperlink{classgko_1_1Executor}{Executor}} as the first argument)\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em stride} & row stride for the temporary Dense matrix \\
+\hline
+{\em vals} & values used to initialize the matrix \\
+\hline
+{\em exec} & \mbox{\hyperlink{classgko_1_1Executor}{Executor}} associated to the matrix \\
+\hline
+{\em create\+\_\+args} & additional arguments passed to Matrix\+::create, not including the \mbox{\hyperlink{classgko_1_1Executor}{Executor}}, which is passed as the first argument \\
+\hline
+\end{DoxyParams}
+
+
+References gko\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::at().
+
+\mbox{\Hypertarget{group__mat__formats_ga2f54bac1e95fb3ef03974fa9c9088491}\label{group__mat__formats_ga2f54bac1e95fb3ef03974fa9c9088491}} 
+\index{SpMV employing different Matrix formats@{SpMV employing different Matrix formats}!initialize@{initialize}}
+\index{initialize@{initialize}!SpMV employing different Matrix formats@{SpMV employing different Matrix formats}}
+\doxysubsubsection{\texorpdfstring{initialize()}{initialize()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$typename Matrix , typename... T\+Args$>$ \\
+std\+::unique\+\_\+ptr$<$Matrix$>$ gko\+::initialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{stride,  }\item[{std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$}]{vals,  }\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{T\+Args \&\&...}]{create\+\_\+args }\end{DoxyParamCaption})}
+
+
+
+Creates and initializes a column-\/vector. 
+
+This function first creates a temporary Dense matrix, fills it with passed in values, and then converts the matrix to the requested type.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Matrix} & matrix type to initialize (Dense has to implement the Convertible\+To$<$\+Matrix$>$ interface) \\
+\hline
+{\em T\+Args} & argument types for Matrix\+::create method (not including the implied \mbox{\hyperlink{classgko_1_1Executor}{Executor}} as the first argument)\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em stride} & row stride for the temporary Dense matrix \\
+\hline
+{\em vals} & values used to initialize the vector \\
+\hline
+{\em exec} & \mbox{\hyperlink{classgko_1_1Executor}{Executor}} associated to the vector \\
+\hline
+{\em create\+\_\+args} & additional arguments passed to Matrix\+::create, not including the \mbox{\hyperlink{classgko_1_1Executor}{Executor}}, which is passed as the first argument \\
+\hline
+\end{DoxyParams}
+
+
+References gko\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::at().
+
+\mbox{\Hypertarget{group__mat__formats_gabe4ff67be5b3aae4e981b33ea9883385}\label{group__mat__formats_gabe4ff67be5b3aae4e981b33ea9883385}} 
+\index{SpMV employing different Matrix formats@{SpMV employing different Matrix formats}!initialize@{initialize}}
+\index{initialize@{initialize}!SpMV employing different Matrix formats@{SpMV employing different Matrix formats}}
+\doxysubsubsection{\texorpdfstring{initialize()}{initialize()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$typename Matrix , typename... T\+Args$>$ \\
+std\+::unique\+\_\+ptr$<$Matrix$>$ gko\+::initialize (\begin{DoxyParamCaption}\item[{std\+::initializer\+\_\+list$<$ std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$$>$}]{vals,  }\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{T\+Args \&\&...}]{create\+\_\+args }\end{DoxyParamCaption})}
+
+
+
+Creates and initializes a matrix. 
+
+This function first creates a temporary Dense matrix, fills it with passed in values, and then converts the matrix to the requested type. The stride of the intermediate Dense matrix is set to the number of columns of the initializer list.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Matrix} & matrix type to initialize (Dense has to implement the Convertible\+To$<$\+Matrix$>$ interface) \\
+\hline
+{\em T\+Args} & argument types for Matrix\+::create method (not including the implied \mbox{\hyperlink{classgko_1_1Executor}{Executor}} as the first argument)\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em vals} & values used to initialize the matrix \\
+\hline
+{\em exec} & \mbox{\hyperlink{classgko_1_1Executor}{Executor}} associated to the matrix \\
+\hline
+{\em create\+\_\+args} & additional arguments passed to Matrix\+::create, not including the \mbox{\hyperlink{classgko_1_1Executor}{Executor}}, which is passed as the first argument \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__mat__formats_gaac5f7b4ff3b43dbc6918c687dd7d2d2e}\label{group__mat__formats_gaac5f7b4ff3b43dbc6918c687dd7d2d2e}} 
+\index{SpMV employing different Matrix formats@{SpMV employing different Matrix formats}!initialize@{initialize}}
+\index{initialize@{initialize}!SpMV employing different Matrix formats@{SpMV employing different Matrix formats}}
+\doxysubsubsection{\texorpdfstring{initialize()}{initialize()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$typename Matrix , typename... T\+Args$>$ \\
+std\+::unique\+\_\+ptr$<$Matrix$>$ gko\+::initialize (\begin{DoxyParamCaption}\item[{std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$}]{vals,  }\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{T\+Args \&\&...}]{create\+\_\+args }\end{DoxyParamCaption})}
+
+
+
+Creates and initializes a column-\/vector. 
+
+This function first creates a temporary Dense matrix, fills it with passed in values, and then converts the matrix to the requested type. The stride of the intermediate Dense matrix is set to 1.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Matrix} & matrix type to initialize (Dense has to implement the Convertible\+To$<$\+Matrix$>$ interface) \\
+\hline
+{\em T\+Args} & argument types for Matrix\+::create method (not including the implied \mbox{\hyperlink{classgko_1_1Executor}{Executor}} as the first argument)\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em vals} & values used to initialize the vector \\
+\hline
+{\em exec} & \mbox{\hyperlink{classgko_1_1Executor}{Executor}} associated to the vector \\
+\hline
+{\em create\+\_\+args} & additional arguments passed to Matrix\+::create, not including the \mbox{\hyperlink{classgko_1_1Executor}{Executor}}, which is passed as the first argument \\
+\hline
+\end{DoxyParams}

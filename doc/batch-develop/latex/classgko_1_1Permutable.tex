@@ -1,0 +1,204 @@
+\hypertarget{classgko_1_1Permutable}{}\doxysection{gko\+::Permutable$<$ Index\+Type $>$ Class Template Reference}
+\label{classgko_1_1Permutable}\index{gko::Permutable$<$ IndexType $>$@{gko::Permutable$<$ IndexType $>$}}
+
+
+Linear operators which support permutation should implement the \mbox{\hyperlink{classgko_1_1Permutable}{Permutable}} interface.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/base/lin\+\_\+op.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1Permutable_a55e937e01ef3c198c027d7d62a26fe07}{permute}} (const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ Index\+Type $>$ $\ast$permutation\+\_\+indices) const
+\begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the symmetric row and column permutation of the \mbox{\hyperlink{classgko_1_1Permutable}{Permutable}} object. \end{DoxyCompactList}\item 
+virtual std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1Permutable_a47bba8cf9e8d352289728bbb69b4f35f}{inverse\+\_\+permute}} (const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ Index\+Type $>$ $\ast$permutation\+\_\+indices) const
+\begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the symmetric inverse row and column permutation of the \mbox{\hyperlink{classgko_1_1Permutable}{Permutable}} object. \end{DoxyCompactList}\item 
+virtual std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1Permutable_ac3ac436c5621afd4cd1a36902f5c6c9b}{row\+\_\+permute}} (const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ Index\+Type $>$ $\ast$permutation\+\_\+indices) const =0
+\begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the row permutation of the \mbox{\hyperlink{classgko_1_1Permutable}{Permutable}} object. \end{DoxyCompactList}\item 
+virtual std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1Permutable_a271cdd29fcb10275a348902f1b0926f7}{column\+\_\+permute}} (const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ Index\+Type $>$ $\ast$permutation\+\_\+indices) const =0
+\begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the column permutation of the \mbox{\hyperlink{classgko_1_1Permutable}{Permutable}} object. \end{DoxyCompactList}\item 
+virtual std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1Permutable_a639aaa94116c70bb428d9e66ec87b1c6}{inverse\+\_\+row\+\_\+permute}} (const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ Index\+Type $>$ $\ast$permutation\+\_\+indices) const =0
+\begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the row permutation of the inverse permuted object. \end{DoxyCompactList}\item 
+virtual std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1Permutable_a6dc3cb59a94847013feec67f8a52ccb4}{inverse\+\_\+column\+\_\+permute}} (const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ Index\+Type $>$ $\ast$permutation\+\_\+indices) const =0
+\begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the row permutation of the inverse permuted object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Index\+Type$>$\newline
+class gko\+::\+Permutable$<$ Index\+Type $>$}
+
+Linear operators which support permutation should implement the \mbox{\hyperlink{classgko_1_1Permutable}{Permutable}} interface. 
+
+It provides functions to permute the rows and columns of a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}, independently or symmetrically, and with a regular or inverted permutation.
+
+After a regular row permutation with permutation array {\ttfamily perm} the row {\ttfamily i} in the output \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} contains the row {\ttfamily perm\mbox{[}i\mbox{]}} from the input \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}. After an inverse row permutation, the row {\ttfamily perm\mbox{[}i\mbox{]}} in the output \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} contains the row {\ttfamily i} from the input \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}. Equivalently, after a column permutation, the output stores in column {\ttfamily i} the column {\ttfamily perm\mbox{[}i\mbox{]}} from the input, and an inverse column permutation stores in column {\ttfamily perm\mbox{[}i\mbox{]}} the column {\ttfamily i} from the input. A symmetric permutation is functionally equivalent to calling {\ttfamily as$<$\mbox{\hyperlink{classgko_1_1Permutable}{Permutable}}$>$(A-\/$>$row\+\_\+permute(perm))-\/$>$column\+\_\+permute(perm)}, but the implementation can provide better performance due to kernel fusion.\hypertarget{classgko_1_1Permutable_autotoc_md79}{}\doxysubsubsection{Example\+: Permuting a Csr matrix\+:}\label{classgko_1_1Permutable_autotoc_md79}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ \{c++\}}
+\DoxyCodeLine{\textcolor{comment}{//Permuting an object of LinOp type.}}
+\DoxyCodeLine{\textcolor{comment}{//The object you want to permute.}}
+\DoxyCodeLine{\textcolor{keyword}{auto} op = matrix::Csr::create(exec);}
+\DoxyCodeLine{\textcolor{comment}{//Permute the object by first converting it to a Permutable type.}}
+\DoxyCodeLine{\textcolor{keyword}{auto} perm = op-\/>row\_permute(permutation\_indices);}
+\end{DoxyCode}
+ 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1Permutable_a271cdd29fcb10275a348902f1b0926f7}\label{classgko_1_1Permutable_a271cdd29fcb10275a348902f1b0926f7}} 
+\index{gko::Permutable$<$ IndexType $>$@{gko::Permutable$<$ IndexType $>$}!column\_permute@{column\_permute}}
+\index{column\_permute@{column\_permute}!gko::Permutable$<$ IndexType $>$@{gko::Permutable$<$ IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{column\_permute()}{column\_permute()}}
+{\footnotesize\ttfamily template$<$typename Index\+Type$>$ \\
+virtual std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1Permutable}{gko\+::\+Permutable}}$<$ Index\+Type $>$\+::column\+\_\+permute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ Index\+Type $>$ $\ast$}]{permutation\+\_\+indices }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the column permutation of the \mbox{\hyperlink{classgko_1_1Permutable}{Permutable}} object. 
+
+In the resulting \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}, the column {\ttfamily i} contains the input column {\ttfamily perm\mbox{[}i\mbox{]}}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em permutation\+\_\+indices} & the array of indices containing the permutation order {\ttfamily perm}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer to the new column permuted object 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a4fb7205bb0932ccd95be8daeef602935}{gko\+::matrix\+::\+Dense$<$ Value\+Type $>$}}, \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a109d52e8106978de5b4306169b5fb414}{gko\+::matrix\+::\+Dense$<$ Value\+Type $>$}}, and \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_ab997c891391daa9bea6c3925c329c3fe}{gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$}}.
+
+\mbox{\Hypertarget{classgko_1_1Permutable_a6dc3cb59a94847013feec67f8a52ccb4}\label{classgko_1_1Permutable_a6dc3cb59a94847013feec67f8a52ccb4}} 
+\index{gko::Permutable$<$ IndexType $>$@{gko::Permutable$<$ IndexType $>$}!inverse\_column\_permute@{inverse\_column\_permute}}
+\index{inverse\_column\_permute@{inverse\_column\_permute}!gko::Permutable$<$ IndexType $>$@{gko::Permutable$<$ IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{inverse\_column\_permute()}{inverse\_column\_permute()}}
+{\footnotesize\ttfamily template$<$typename Index\+Type$>$ \\
+virtual std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1Permutable}{gko\+::\+Permutable}}$<$ Index\+Type $>$\+::inverse\+\_\+column\+\_\+permute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ Index\+Type $>$ $\ast$}]{permutation\+\_\+indices }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the row permutation of the inverse permuted object. 
+
+In the resulting \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}, the column {\ttfamily perm\mbox{[}i\mbox{]}} contains the input column {\ttfamily i}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em permutation\+\_\+indices} & the array of indices containing the permutation order {\ttfamily perm}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer to the new inverse permuted object 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a4ddd3de77b7837c6abab52214a0b848f}{gko\+::matrix\+::\+Dense$<$ Value\+Type $>$}}, \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_af4421d30735edac95994b0c749f90be5}{gko\+::matrix\+::\+Dense$<$ Value\+Type $>$}}, and \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_aecc82797062952e616b46a9bc0dbd09c}{gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$}}.
+
+\mbox{\Hypertarget{classgko_1_1Permutable_a47bba8cf9e8d352289728bbb69b4f35f}\label{classgko_1_1Permutable_a47bba8cf9e8d352289728bbb69b4f35f}} 
+\index{gko::Permutable$<$ IndexType $>$@{gko::Permutable$<$ IndexType $>$}!inverse\_permute@{inverse\_permute}}
+\index{inverse\_permute@{inverse\_permute}!gko::Permutable$<$ IndexType $>$@{gko::Permutable$<$ IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{inverse\_permute()}{inverse\_permute()}}
+{\footnotesize\ttfamily template$<$typename Index\+Type$>$ \\
+virtual std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1Permutable}{gko\+::\+Permutable}}$<$ Index\+Type $>$\+::inverse\+\_\+permute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ Index\+Type $>$ $\ast$}]{permutation\+\_\+indices }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the symmetric inverse row and column permutation of the \mbox{\hyperlink{classgko_1_1Permutable}{Permutable}} object. 
+
+In the resulting \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}, the entry at location {\ttfamily (perm\mbox{[}i\mbox{]},perm\mbox{[}j\mbox{]})} contains the input value {\ttfamily (i,j)}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em permutation\+\_\+indices} & the array of indices containing the permutation order.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer to the new permuted object 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_abf8febe4884856aada94e697134fed5b}{gko\+::matrix\+::\+Dense$<$ Value\+Type $>$}}, \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a868294036aeec9333cecabbef0551bc9}{gko\+::matrix\+::\+Dense$<$ Value\+Type $>$}}, and \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_a086daaecd3370fc8b4cc7c0b6f0f738e}{gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$}}.
+
+\mbox{\Hypertarget{classgko_1_1Permutable_a639aaa94116c70bb428d9e66ec87b1c6}\label{classgko_1_1Permutable_a639aaa94116c70bb428d9e66ec87b1c6}} 
+\index{gko::Permutable$<$ IndexType $>$@{gko::Permutable$<$ IndexType $>$}!inverse\_row\_permute@{inverse\_row\_permute}}
+\index{inverse\_row\_permute@{inverse\_row\_permute}!gko::Permutable$<$ IndexType $>$@{gko::Permutable$<$ IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{inverse\_row\_permute()}{inverse\_row\_permute()}}
+{\footnotesize\ttfamily template$<$typename Index\+Type$>$ \\
+virtual std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1Permutable}{gko\+::\+Permutable}}$<$ Index\+Type $>$\+::inverse\+\_\+row\+\_\+permute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ Index\+Type $>$ $\ast$}]{permutation\+\_\+indices }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the row permutation of the inverse permuted object. 
+
+In the resulting \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}, the row {\ttfamily perm\mbox{[}i\mbox{]}} contains the input row {\ttfamily i}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em permutation\+\_\+indices} & the array of indices containing the permutation order {\ttfamily perm}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer to the new inverse permuted object 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a231711c105ba46fd48be32f997a811aa}{gko\+::matrix\+::\+Dense$<$ Value\+Type $>$}}, \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a9eef661abb7d097ca0dcb407fbbac2ab}{gko\+::matrix\+::\+Dense$<$ Value\+Type $>$}}, and \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_ab7a2eebfaa32a42b0102323788c45376}{gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$}}.
+
+\mbox{\Hypertarget{classgko_1_1Permutable_a55e937e01ef3c198c027d7d62a26fe07}\label{classgko_1_1Permutable_a55e937e01ef3c198c027d7d62a26fe07}} 
+\index{gko::Permutable$<$ IndexType $>$@{gko::Permutable$<$ IndexType $>$}!permute@{permute}}
+\index{permute@{permute}!gko::Permutable$<$ IndexType $>$@{gko::Permutable$<$ IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{permute()}{permute()}}
+{\footnotesize\ttfamily template$<$typename Index\+Type$>$ \\
+virtual std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1Permutable}{gko\+::\+Permutable}}$<$ Index\+Type $>$\+::permute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ Index\+Type $>$ $\ast$}]{permutation\+\_\+indices }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the symmetric row and column permutation of the \mbox{\hyperlink{classgko_1_1Permutable}{Permutable}} object. 
+
+In the resulting \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}, the entry at location {\ttfamily (i,j)} contains the input value {\ttfamily (perm\mbox{[}i\mbox{]},perm\mbox{[}j\mbox{]})}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em permutation\+\_\+indices} & the array of indices containing the permutation order.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer to the new permuted object 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_afc21476430471d324334a568c0459b79}{gko\+::matrix\+::\+Dense$<$ Value\+Type $>$}}, \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_aa67d4586ffe777b7d757db5fd9c40a04}{gko\+::matrix\+::\+Dense$<$ Value\+Type $>$}}, and \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_ab47da11c7ef41997576bcbf9abe5c52e}{gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$}}.
+
+\mbox{\Hypertarget{classgko_1_1Permutable_ac3ac436c5621afd4cd1a36902f5c6c9b}\label{classgko_1_1Permutable_ac3ac436c5621afd4cd1a36902f5c6c9b}} 
+\index{gko::Permutable$<$ IndexType $>$@{gko::Permutable$<$ IndexType $>$}!row\_permute@{row\_permute}}
+\index{row\_permute@{row\_permute}!gko::Permutable$<$ IndexType $>$@{gko::Permutable$<$ IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{row\_permute()}{row\_permute()}}
+{\footnotesize\ttfamily template$<$typename Index\+Type$>$ \\
+virtual std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1Permutable}{gko\+::\+Permutable}}$<$ Index\+Type $>$\+::row\+\_\+permute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ Index\+Type $>$ $\ast$}]{permutation\+\_\+indices }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the row permutation of the \mbox{\hyperlink{classgko_1_1Permutable}{Permutable}} object. 
+
+In the resulting \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}, the row {\ttfamily i} contains the input row {\ttfamily perm\mbox{[}i\mbox{]}}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em permutation\+\_\+indices} & the array of indices containing the permutation order.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a pointer to the new permuted object 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_aeee1695589ffafcdff32950dde5eab52}{gko\+::matrix\+::\+Dense$<$ Value\+Type $>$}}, \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a685cf7dd460327568c1a65a676395a84}{gko\+::matrix\+::\+Dense$<$ Value\+Type $>$}}, and \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_aa63ffa1f1a4018ce065e582cb8bbda9f}{gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/base/lin\+\_\+op.\+hpp\end{DoxyCompactItemize}

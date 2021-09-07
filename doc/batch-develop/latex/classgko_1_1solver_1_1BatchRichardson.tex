@@ -1,0 +1,175 @@
+\hypertarget{classgko_1_1solver_1_1BatchRichardson}{}\doxysection{gko\+::solver\+::Batch\+Richardson$<$ Value\+Type $>$ Class Template Reference}
+\label{classgko_1_1solver_1_1BatchRichardson}\index{gko::solver::BatchRichardson$<$ ValueType $>$@{gko::solver::BatchRichardson$<$ ValueType $>$}}
+
+
+The (preconditioned) Richardson solver is an iterative method that uses a preconditioner to approximate the error of the current solution via the current (preconditioned) residual.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/solver/batch\+\_\+richardson.\+hpp$>$}
+
+
+
+Collaboration diagram for gko\+::solver\+::Batch\+Richardson$<$ Value\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1solver_1_1BatchRichardson__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classgko_1_1solver_1_1BatchRichardson_1_1Factory}{Factory}}
+\item 
+struct \mbox{\hyperlink{structgko_1_1solver_1_1BatchRichardson_1_1parameters__type}{parameters\+\_\+type}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchRichardson_a3441bef28c01550658fd6a29a0a5d2a5}\label{classgko_1_1solver_1_1BatchRichardson_a3441bef28c01550658fd6a29a0a5d2a5}} 
+using {\bfseries value\+\_\+type} = Value\+Type
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchRichardson_a5a673f4c3452ed3b6ee78fbba59ebf06}\label{classgko_1_1solver_1_1BatchRichardson_a5a673f4c3452ed3b6ee78fbba59ebf06}} 
+using {\bfseries real\+\_\+type} = \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko\+::remove\+\_\+complex}}$<$ Value\+Type $>$
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchRichardson_a6d9efa1fa776073bad2ad42c43d71a01}\label{classgko_1_1solver_1_1BatchRichardson_a6d9efa1fa776073bad2ad42c43d71a01}} 
+using {\bfseries transposed\+\_\+type} = \mbox{\hyperlink{classgko_1_1solver_1_1BatchRichardson}{Batch\+Richardson}}$<$ Value\+Type $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1solver_1_1BatchRichardson_a9ce481814e932fbf379172db312b6d90}{get\+\_\+system\+\_\+matrix}} () const
+\begin{DoxyCompactList}\small\item\em Returns the system operator (matrix) of the linear system. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1solver_1_1BatchRichardson_a94d4b9038b42d75466b4d13bc77490ca}{transpose}} () const override
+\begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} containing the transposes of the distinct entries of the \mbox{\hyperlink{classgko_1_1BatchTransposable}{Batch\+Transposable}} object. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1solver_1_1BatchRichardson_aebf7d39716f3b934b7a69b10220537c8}{conj\+\_\+transpose}} () const override
+\begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} containing the conjugate transpose of the distinct entries of the \mbox{\hyperlink{classgko_1_1BatchTransposable}{Batch\+Transposable}} object. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classgko_1_1solver_1_1BatchRichardson_aff3369bb6d3e7fc1fc4a0ada9164c7f9}{apply\+\_\+uses\+\_\+initial\+\_\+guess}} () const override
+\begin{DoxyCompactList}\small\item\em Return true as iterative solvers use the data in x as an initial guess. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchRichardson_a667d2b68c764f8cd5a8583dac4a85d07}\label{classgko_1_1solver_1_1BatchRichardson_a667d2b68c764f8cd5a8583dac4a85d07}} 
+const \mbox{\hyperlink{structgko_1_1solver_1_1BatchRichardson_1_1parameters__type}{parameters\+\_\+type}} \& {\bfseries get\+\_\+parameters} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchRichardson_a7472cacf897f5f3d28e258a1aad6d27b}\label{classgko_1_1solver_1_1BatchRichardson_a7472cacf897f5f3d28e258a1aad6d27b}} 
+static auto {\bfseries build} () -\/$>$ decltype(\mbox{\hyperlink{classgko_1_1solver_1_1BatchRichardson_1_1Factory}{Factory}} \+::create())
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchRichardson_a55ab90fcb6ea1abcbba16530829d98e4}\label{classgko_1_1solver_1_1BatchRichardson_a55ab90fcb6ea1abcbba16530829d98e4}} 
+class {\bfseries Enable\+Batch\+Lin\+Op$<$ Batch\+Richardson $>$}
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchRichardson_abf4086909fb1f5688d8c2ce7e86111fb}\label{classgko_1_1solver_1_1BatchRichardson_abf4086909fb1f5688d8c2ce7e86111fb}} 
+class {\bfseries Enable\+Polymorphic\+Object$<$ Batch\+Richardson, Batch\+Lin\+Op $>$}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Value\+Type = default\+\_\+precision$>$\newline
+class gko\+::solver\+::\+Batch\+Richardson$<$ Value\+Type $>$}
+
+The (preconditioned) Richardson solver is an iterative method that uses a preconditioner to approximate the error of the current solution via the current (preconditioned) residual. 
+
+This solver applies the Richardson iteration to a batch of linear systems.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{solution = initial\_guess}
+\DoxyCodeLine{\textcolor{keywordflow}{while} not converged:}
+\DoxyCodeLine{    residual = b -\/ A solution}
+\DoxyCodeLine{    error = preconditioner(A, residual)}
+\DoxyCodeLine{    solution = solution + relaxation\_factor * error}
+\end{DoxyCode}
+
+
+Unless otherwise specified via the {\ttfamily preconditioner} factory parameter, this implementation uses the Jacobi preconditioner as the default preconditioner. The only stopping criterion currently available is controlled by the {\ttfamily max\+\_\+iterations} and {\ttfamily rel\+\_\+residual\+\_\+tol} factory parameters. The solver is stopped whrn the maximum iterations are reached, or the relative residual is smaller than the specified tolerance.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classgko_1_1solver_1_1Ir}{Ir}}
+\end{DoxySeeAlso}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Value\+Type} & precision of matrix elements \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchRichardson_aff3369bb6d3e7fc1fc4a0ada9164c7f9}\label{classgko_1_1solver_1_1BatchRichardson_aff3369bb6d3e7fc1fc4a0ada9164c7f9}} 
+\index{gko::solver::BatchRichardson$<$ ValueType $>$@{gko::solver::BatchRichardson$<$ ValueType $>$}!apply\_uses\_initial\_guess@{apply\_uses\_initial\_guess}}
+\index{apply\_uses\_initial\_guess@{apply\_uses\_initial\_guess}!gko::solver::BatchRichardson$<$ ValueType $>$@{gko::solver::BatchRichardson$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{apply\_uses\_initial\_guess()}{apply\_uses\_initial\_guess()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+bool \mbox{\hyperlink{classgko_1_1solver_1_1BatchRichardson}{gko\+::solver\+::\+Batch\+Richardson}}$<$ Value\+Type $>$\+::apply\+\_\+uses\+\_\+initial\+\_\+guess (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Return true as iterative solvers use the data in x as an initial guess. 
+
+\begin{DoxyReturn}{Returns}
+true as iterative solvers use the data in x as an initial guess. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classgko_1_1BatchLinOp_aa4f3a56335bb677c161c31128e0155e5}{gko\+::\+Batch\+Lin\+Op}}.
+
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchRichardson_aebf7d39716f3b934b7a69b10220537c8}\label{classgko_1_1solver_1_1BatchRichardson_aebf7d39716f3b934b7a69b10220537c8}} 
+\index{gko::solver::BatchRichardson$<$ ValueType $>$@{gko::solver::BatchRichardson$<$ ValueType $>$}!conj\_transpose@{conj\_transpose}}
+\index{conj\_transpose@{conj\_transpose}!gko::solver::BatchRichardson$<$ ValueType $>$@{gko::solver::BatchRichardson$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{conj\_transpose()}{conj\_transpose()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1solver_1_1BatchRichardson}{gko\+::solver\+::\+Batch\+Richardson}}$<$ Value\+Type $>$\+::conj\+\_\+transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns a \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} containing the conjugate transpose of the distinct entries of the \mbox{\hyperlink{classgko_1_1BatchTransposable}{Batch\+Transposable}} object. 
+
+\begin{DoxyReturn}{Returns}
+a pointer to the new conjugate transposed object 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classgko_1_1BatchTransposable_a53d1cf352635aa1bfbe0ae90a4c961ce}{gko\+::\+Batch\+Transposable}}.
+
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchRichardson_a9ce481814e932fbf379172db312b6d90}\label{classgko_1_1solver_1_1BatchRichardson_a9ce481814e932fbf379172db312b6d90}} 
+\index{gko::solver::BatchRichardson$<$ ValueType $>$@{gko::solver::BatchRichardson$<$ ValueType $>$}!get\_system\_matrix@{get\_system\_matrix}}
+\index{get\_system\_matrix@{get\_system\_matrix}!gko::solver::BatchRichardson$<$ ValueType $>$@{gko::solver::BatchRichardson$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_system\_matrix()}{get\_system\_matrix()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1solver_1_1BatchRichardson}{gko\+::solver\+::\+Batch\+Richardson}}$<$ Value\+Type $>$\+::get\+\_\+system\+\_\+matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the system operator (matrix) of the linear system. 
+
+\begin{DoxyReturn}{Returns}
+the system operator (matrix) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchRichardson_a94d4b9038b42d75466b4d13bc77490ca}\label{classgko_1_1solver_1_1BatchRichardson_a94d4b9038b42d75466b4d13bc77490ca}} 
+\index{gko::solver::BatchRichardson$<$ ValueType $>$@{gko::solver::BatchRichardson$<$ ValueType $>$}!transpose@{transpose}}
+\index{transpose@{transpose}!gko::solver::BatchRichardson$<$ ValueType $>$@{gko::solver::BatchRichardson$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{transpose()}{transpose()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1solver_1_1BatchRichardson}{gko\+::solver\+::\+Batch\+Richardson}}$<$ Value\+Type $>$\+::transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns a \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} containing the transposes of the distinct entries of the \mbox{\hyperlink{classgko_1_1BatchTransposable}{Batch\+Transposable}} object. 
+
+\begin{DoxyReturn}{Returns}
+a pointer to the new transposed object 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classgko_1_1BatchTransposable_af4685c379616cb410287f979ee437e81}{gko\+::\+Batch\+Transposable}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/solver/batch\+\_\+richardson.\+hpp\end{DoxyCompactItemize}

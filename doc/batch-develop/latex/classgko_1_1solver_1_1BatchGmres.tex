@@ -1,0 +1,204 @@
+\hypertarget{classgko_1_1solver_1_1BatchGmres}{}\doxysection{gko\+::solver\+::Batch\+Gmres$<$ Value\+Type $>$ Class Template Reference}
+\label{classgko_1_1solver_1_1BatchGmres}\index{gko::solver::BatchGmres$<$ ValueType $>$@{gko::solver::BatchGmres$<$ ValueType $>$}}
+
+
+G\+M\+R\+ES or the generalized minimal residual method is an iterative type Krylov subspace method which is suitable for nonsymmetric linear systems.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/solver/batch\+\_\+gmres.\+hpp$>$}
+
+
+
+Collaboration diagram for gko\+::solver\+::Batch\+Gmres$<$ Value\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1solver_1_1BatchGmres__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classgko_1_1solver_1_1BatchGmres_1_1Factory}{Factory}}
+\item 
+struct \mbox{\hyperlink{structgko_1_1solver_1_1BatchGmres_1_1parameters__type}{parameters\+\_\+type}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchGmres_a8834b8c71ec22707bac5c1afc0211faa}\label{classgko_1_1solver_1_1BatchGmres_a8834b8c71ec22707bac5c1afc0211faa}} 
+using {\bfseries value\+\_\+type} = Value\+Type
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchGmres_a97751901e2958f07e53aedb77d612270}\label{classgko_1_1solver_1_1BatchGmres_a97751901e2958f07e53aedb77d612270}} 
+using {\bfseries real\+\_\+type} = \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko\+::remove\+\_\+complex}}$<$ Value\+Type $>$
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchGmres_a69b65cedaac88487de1f40453a886e77}\label{classgko_1_1solver_1_1BatchGmres_a69b65cedaac88487de1f40453a886e77}} 
+using {\bfseries transposed\+\_\+type} = \mbox{\hyperlink{classgko_1_1solver_1_1BatchGmres}{Batch\+Gmres}}$<$ Value\+Type $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1solver_1_1BatchGmres_a70406f1cd0cb5a4915cfdbe96f85eabb}{get\+\_\+system\+\_\+matrix}} () const
+\begin{DoxyCompactList}\small\item\em Returns the system operator (matrix) of the linear system. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1solver_1_1BatchGmres_a2edfead69f8f4ee7e68d3494561ae146}{transpose}} () const override
+\begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} containing the transposes of the distinct entries of the \mbox{\hyperlink{classgko_1_1BatchTransposable}{Batch\+Transposable}} object. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1solver_1_1BatchGmres_a5509845c734ed33d70f896349a87548b}{conj\+\_\+transpose}} () const override
+\begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} containing the conjugate transpose of the distinct entries of the \mbox{\hyperlink{classgko_1_1BatchTransposable}{Batch\+Transposable}} object. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classgko_1_1solver_1_1BatchGmres_a290ef863d6c22499d37ccdfbcab52f37}{apply\+\_\+uses\+\_\+initial\+\_\+guess}} () const override
+\begin{DoxyCompactList}\small\item\em Return true as iterative solvers use the data in x as an initial guess. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classgko_1_1solver_1_1BatchGmres_aeab38ee274944679c7f7214f5e368c57}{get\+\_\+restart\+\_\+number}} () const
+\begin{DoxyCompactList}\small\item\em Gets the restart parameter of the solver. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1solver_1_1BatchGmres_ab4f0130538bad4a74f60b5bdee2940ee}{set\+\_\+restart\+\_\+number}} (const int \&other)
+\begin{DoxyCompactList}\small\item\em Sets the restart paramter. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchGmres_a5a947266f4688c48906daac629863221}\label{classgko_1_1solver_1_1BatchGmres_a5a947266f4688c48906daac629863221}} 
+const \mbox{\hyperlink{structgko_1_1solver_1_1BatchGmres_1_1parameters__type}{parameters\+\_\+type}} \& {\bfseries get\+\_\+parameters} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchGmres_aa0914a328036b8cff29458db4eb8dc61}\label{classgko_1_1solver_1_1BatchGmres_aa0914a328036b8cff29458db4eb8dc61}} 
+static auto {\bfseries build} () -\/$>$ decltype(\mbox{\hyperlink{classgko_1_1solver_1_1BatchGmres_1_1Factory}{Factory}} \+::create())
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchGmres_afbcc2ee80fcc5879b10a708b37b18ebd}\label{classgko_1_1solver_1_1BatchGmres_afbcc2ee80fcc5879b10a708b37b18ebd}} 
+class {\bfseries Enable\+Batch\+Lin\+Op$<$ Batch\+Gmres $>$}
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchGmres_a379665403c996663e3876f1db2e1990b}\label{classgko_1_1solver_1_1BatchGmres_a379665403c996663e3876f1db2e1990b}} 
+class {\bfseries Enable\+Polymorphic\+Object$<$ Batch\+Gmres, Batch\+Lin\+Op $>$}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Value\+Type = default\+\_\+precision$>$\newline
+class gko\+::solver\+::\+Batch\+Gmres$<$ Value\+Type $>$}
+
+G\+M\+R\+ES or the generalized minimal residual method is an iterative type Krylov subspace method which is suitable for nonsymmetric linear systems. 
+
+This solver solves a batch of linear systems using G\+M\+R\+ES algorithm.
+
+Unless otherwise specified via the {\ttfamily preconditioner} factory parameter, this implementation does not use any preconditioner by default. The type of tolerance( absolute or relative ) and the maximum number of iterations to be used in the stopping criterion can be set via the factory parameters.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Value\+Type} & precision of matrix elements \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchGmres_a290ef863d6c22499d37ccdfbcab52f37}\label{classgko_1_1solver_1_1BatchGmres_a290ef863d6c22499d37ccdfbcab52f37}} 
+\index{gko::solver::BatchGmres$<$ ValueType $>$@{gko::solver::BatchGmres$<$ ValueType $>$}!apply\_uses\_initial\_guess@{apply\_uses\_initial\_guess}}
+\index{apply\_uses\_initial\_guess@{apply\_uses\_initial\_guess}!gko::solver::BatchGmres$<$ ValueType $>$@{gko::solver::BatchGmres$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{apply\_uses\_initial\_guess()}{apply\_uses\_initial\_guess()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+bool \mbox{\hyperlink{classgko_1_1solver_1_1BatchGmres}{gko\+::solver\+::\+Batch\+Gmres}}$<$ Value\+Type $>$\+::apply\+\_\+uses\+\_\+initial\+\_\+guess (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Return true as iterative solvers use the data in x as an initial guess. 
+
+\begin{DoxyReturn}{Returns}
+true as iterative solvers use the data in x as an initial guess. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classgko_1_1BatchLinOp_aa4f3a56335bb677c161c31128e0155e5}{gko\+::\+Batch\+Lin\+Op}}.
+
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchGmres_a5509845c734ed33d70f896349a87548b}\label{classgko_1_1solver_1_1BatchGmres_a5509845c734ed33d70f896349a87548b}} 
+\index{gko::solver::BatchGmres$<$ ValueType $>$@{gko::solver::BatchGmres$<$ ValueType $>$}!conj\_transpose@{conj\_transpose}}
+\index{conj\_transpose@{conj\_transpose}!gko::solver::BatchGmres$<$ ValueType $>$@{gko::solver::BatchGmres$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{conj\_transpose()}{conj\_transpose()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1solver_1_1BatchGmres}{gko\+::solver\+::\+Batch\+Gmres}}$<$ Value\+Type $>$\+::conj\+\_\+transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns a \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} containing the conjugate transpose of the distinct entries of the \mbox{\hyperlink{classgko_1_1BatchTransposable}{Batch\+Transposable}} object. 
+
+\begin{DoxyReturn}{Returns}
+a pointer to the new conjugate transposed object 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classgko_1_1BatchTransposable_a53d1cf352635aa1bfbe0ae90a4c961ce}{gko\+::\+Batch\+Transposable}}.
+
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchGmres_aeab38ee274944679c7f7214f5e368c57}\label{classgko_1_1solver_1_1BatchGmres_aeab38ee274944679c7f7214f5e368c57}} 
+\index{gko::solver::BatchGmres$<$ ValueType $>$@{gko::solver::BatchGmres$<$ ValueType $>$}!get\_restart\_number@{get\_restart\_number}}
+\index{get\_restart\_number@{get\_restart\_number}!gko::solver::BatchGmres$<$ ValueType $>$@{gko::solver::BatchGmres$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_restart\_number()}{get\_restart\_number()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+int \mbox{\hyperlink{classgko_1_1solver_1_1BatchGmres}{gko\+::solver\+::\+Batch\+Gmres}}$<$ Value\+Type $>$\+::get\+\_\+restart\+\_\+number (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the restart parameter of the solver. 
+
+\begin{DoxyReturn}{Returns}
+the restart number 
+\end{DoxyReturn}
+
+
+References gko\+::solver\+::\+Batch\+Gmres$<$ Value\+Type $>$\+::parameters\+\_\+type\+::restart.
+
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchGmres_a70406f1cd0cb5a4915cfdbe96f85eabb}\label{classgko_1_1solver_1_1BatchGmres_a70406f1cd0cb5a4915cfdbe96f85eabb}} 
+\index{gko::solver::BatchGmres$<$ ValueType $>$@{gko::solver::BatchGmres$<$ ValueType $>$}!get\_system\_matrix@{get\_system\_matrix}}
+\index{get\_system\_matrix@{get\_system\_matrix}!gko::solver::BatchGmres$<$ ValueType $>$@{gko::solver::BatchGmres$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_system\_matrix()}{get\_system\_matrix()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1solver_1_1BatchGmres}{gko\+::solver\+::\+Batch\+Gmres}}$<$ Value\+Type $>$\+::get\+\_\+system\+\_\+matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the system operator (matrix) of the linear system. 
+
+\begin{DoxyReturn}{Returns}
+the system operator (matrix) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchGmres_ab4f0130538bad4a74f60b5bdee2940ee}\label{classgko_1_1solver_1_1BatchGmres_ab4f0130538bad4a74f60b5bdee2940ee}} 
+\index{gko::solver::BatchGmres$<$ ValueType $>$@{gko::solver::BatchGmres$<$ ValueType $>$}!set\_restart\_number@{set\_restart\_number}}
+\index{set\_restart\_number@{set\_restart\_number}!gko::solver::BatchGmres$<$ ValueType $>$@{gko::solver::BatchGmres$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{set\_restart\_number()}{set\_restart\_number()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1solver_1_1BatchGmres}{gko\+::solver\+::\+Batch\+Gmres}}$<$ Value\+Type $>$\+::set\+\_\+restart\+\_\+number (\begin{DoxyParamCaption}\item[{const int \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the restart paramter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & the new restart number \\
+\hline
+\end{DoxyParams}
+
+
+References gko\+::solver\+::\+Batch\+Gmres$<$ Value\+Type $>$\+::parameters\+\_\+type\+::restart.
+
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchGmres_a2edfead69f8f4ee7e68d3494561ae146}\label{classgko_1_1solver_1_1BatchGmres_a2edfead69f8f4ee7e68d3494561ae146}} 
+\index{gko::solver::BatchGmres$<$ ValueType $>$@{gko::solver::BatchGmres$<$ ValueType $>$}!transpose@{transpose}}
+\index{transpose@{transpose}!gko::solver::BatchGmres$<$ ValueType $>$@{gko::solver::BatchGmres$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{transpose()}{transpose()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1solver_1_1BatchGmres}{gko\+::solver\+::\+Batch\+Gmres}}$<$ Value\+Type $>$\+::transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns a \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} containing the transposes of the distinct entries of the \mbox{\hyperlink{classgko_1_1BatchTransposable}{Batch\+Transposable}} object. 
+
+\begin{DoxyReturn}{Returns}
+a pointer to the new transposed object 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classgko_1_1BatchTransposable_af4685c379616cb410287f979ee437e81}{gko\+::\+Batch\+Transposable}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/solver/batch\+\_\+gmres.\+hpp\end{DoxyCompactItemize}

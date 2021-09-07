@@ -1,0 +1,377 @@
+\hypertarget{classgko_1_1solver_1_1BatchIdr}{}\doxysection{gko\+::solver\+::Batch\+Idr$<$ Value\+Type $>$ Class Template Reference}
+\label{classgko_1_1solver_1_1BatchIdr}\index{gko::solver::BatchIdr$<$ ValueType $>$@{gko::solver::BatchIdr$<$ ValueType $>$}}
+
+
+I\+D\+R(s) is an efficient method for solving large nonsymmetric systems of linear equations.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/solver/batch\+\_\+idr.\+hpp$>$}
+
+
+
+Collaboration diagram for gko\+::solver\+::Batch\+Idr$<$ Value\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1solver_1_1BatchIdr__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classgko_1_1solver_1_1BatchIdr_1_1Factory}{Factory}}
+\item 
+struct \mbox{\hyperlink{structgko_1_1solver_1_1BatchIdr_1_1parameters__type}{parameters\+\_\+type}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchIdr_a2fe2dcdb2973343c94b7dd9230e98b5e}\label{classgko_1_1solver_1_1BatchIdr_a2fe2dcdb2973343c94b7dd9230e98b5e}} 
+using {\bfseries value\+\_\+type} = Value\+Type
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchIdr_ae6da3bbd517799a98eb3822ea3d75522}\label{classgko_1_1solver_1_1BatchIdr_ae6da3bbd517799a98eb3822ea3d75522}} 
+using {\bfseries real\+\_\+type} = \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko\+::remove\+\_\+complex}}$<$ Value\+Type $>$
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchIdr_a45ae5f7205c27a182e53d3a15bc4d443}\label{classgko_1_1solver_1_1BatchIdr_a45ae5f7205c27a182e53d3a15bc4d443}} 
+using {\bfseries transposed\+\_\+type} = \mbox{\hyperlink{classgko_1_1solver_1_1BatchIdr}{Batch\+Idr}}$<$ Value\+Type $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1solver_1_1BatchIdr_a6b2d44e9fd8f6a67c5999e8b00c47a55}{get\+\_\+system\+\_\+matrix}} () const
+\begin{DoxyCompactList}\small\item\em Returns the system operator (matrix) of the linear system. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1solver_1_1BatchIdr_a79c4a80fa787873614a8ff771e73fa80}{transpose}} () const override
+\begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} containing the transposes of the distinct entries of the \mbox{\hyperlink{classgko_1_1BatchTransposable}{Batch\+Transposable}} object. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1solver_1_1BatchIdr_abe1c25fc98190d5f3eae0160ea7d77ab}{conj\+\_\+transpose}} () const override
+\begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} containing the conjugate transpose of the distinct entries of the \mbox{\hyperlink{classgko_1_1BatchTransposable}{Batch\+Transposable}} object. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classgko_1_1solver_1_1BatchIdr_ad5aa9c4a44f78ee946fa06359e7aab65}{apply\+\_\+uses\+\_\+initial\+\_\+guess}} () const override
+\begin{DoxyCompactList}\small\item\em Return true as iterative solvers use the data in x as an initial guess. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{classgko_1_1solver_1_1BatchIdr_ab4285be5fafae3acb5574e899e271b85}{get\+\_\+subspace\+\_\+dim}} () const
+\begin{DoxyCompactList}\small\item\em Gets the subspace dimension of the solver. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1solver_1_1BatchIdr_a15cead8c6e64bfdca55ad0b64866aedd}{set\+\_\+subspace\+\_\+dim}} (const \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} other)
+\begin{DoxyCompactList}\small\item\em Sets the subspace dimension of the solver. \end{DoxyCompactList}\item 
+real\+\_\+type \mbox{\hyperlink{classgko_1_1solver_1_1BatchIdr_a8c60feaddba962534d8767894aab95a4}{get\+\_\+kappa}} () const
+\begin{DoxyCompactList}\small\item\em Gets the kappa parameter of the solver. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1solver_1_1BatchIdr_ae55b1e4b1b5f6b897731a9ef05ea5b77}{set\+\_\+kappa}} (const real\+\_\+type other)
+\begin{DoxyCompactList}\small\item\em Sets the kappa parameter of the solver. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classgko_1_1solver_1_1BatchIdr_a43f93bf5bf2d832180038fd8ab0de590}{get\+\_\+complex\+\_\+subspace}} () const
+\begin{DoxyCompactList}\small\item\em Gets the complex\+\_\+subspace parameter of the solver. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1solver_1_1BatchIdr_a5467de25f697636a9f92d6876bed51a6}{set\+\_\+complex\+\_\+subspace}} (const bool other)
+\begin{DoxyCompactList}\small\item\em Sets the complex\+\_\+subspace parameter of the solver. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classgko_1_1solver_1_1BatchIdr_abb9c54e4ac5a810302f57a0eb0a83bf4}{get\+\_\+deterministic}} () const
+\begin{DoxyCompactList}\small\item\em Gets the deterministic parameter of the solver. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1solver_1_1BatchIdr_ad7f273499b293b7a52cde97857bb85fc}{set\+\_\+deterministic}} (const bool other)
+\begin{DoxyCompactList}\small\item\em Sets the deterministic parameter of the solver. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classgko_1_1solver_1_1BatchIdr_a6b0aaeaad7dd2a4fc5581cf1b1d8f328}{get\+\_\+smoothing}} () const
+\begin{DoxyCompactList}\small\item\em Gets the smoothing paramter of solver. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1solver_1_1BatchIdr_aebca56192e730659b185acfc14234691}{set\+\_\+smoothing}} (const bool other)
+\begin{DoxyCompactList}\small\item\em Sets the smoothing paramter of solver. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchIdr_a5ab9a9fc5dd5f8e3d0807484e0d4c120}\label{classgko_1_1solver_1_1BatchIdr_a5ab9a9fc5dd5f8e3d0807484e0d4c120}} 
+const \mbox{\hyperlink{structgko_1_1solver_1_1BatchIdr_1_1parameters__type}{parameters\+\_\+type}} \& {\bfseries get\+\_\+parameters} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchIdr_a14fa6469089448f5bc0018f72fd883bb}\label{classgko_1_1solver_1_1BatchIdr_a14fa6469089448f5bc0018f72fd883bb}} 
+static auto {\bfseries build} () -\/$>$ decltype(\mbox{\hyperlink{classgko_1_1solver_1_1BatchIdr_1_1Factory}{Factory}} \+::create())
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchIdr_aae281e7bb58d88099e2ad411dab603df}\label{classgko_1_1solver_1_1BatchIdr_aae281e7bb58d88099e2ad411dab603df}} 
+class {\bfseries Enable\+Batch\+Lin\+Op$<$ Batch\+Idr $>$}
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchIdr_a96a544945506c4c1256b5278bc601593}\label{classgko_1_1solver_1_1BatchIdr_a96a544945506c4c1256b5278bc601593}} 
+class {\bfseries Enable\+Polymorphic\+Object$<$ Batch\+Idr, Batch\+Lin\+Op $>$}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Value\+Type = default\+\_\+precision$>$\newline
+class gko\+::solver\+::\+Batch\+Idr$<$ Value\+Type $>$}
+
+I\+D\+R(s) is an efficient method for solving large nonsymmetric systems of linear equations. 
+
+The implemented version is the one presented in the paper \char`\"{}\+Algorithm 913\+: An elegant I\+D\+R(s) variant that efficiently exploits
+biorthogonality properties\char`\"{} by M. B. Van Gijzen and P. Sonneveld.
+
+The method is based on the induced dimension reduction theorem which provides a way to construct subsequent residuals that lie in a sequence of shrinking subspaces. These subspaces are spanned by s vectors which are first generated randomly and then orthonormalized. They are stored in a dense matrix.
+
+This solver solves a batch of linear systems using the I\+D\+R(s) algorithm.
+
+Unless otherwise specified via the {\ttfamily preconditioner} factory parameter, this implementation does not use any preconditioner by default. The type of tolerance( absolute or relative ) and the maximum number of iterations to be used in the stopping criterion can be set via the factory parameters.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Value\+Type} & precision of matrix elements \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchIdr_ad5aa9c4a44f78ee946fa06359e7aab65}\label{classgko_1_1solver_1_1BatchIdr_ad5aa9c4a44f78ee946fa06359e7aab65}} 
+\index{gko::solver::BatchIdr$<$ ValueType $>$@{gko::solver::BatchIdr$<$ ValueType $>$}!apply\_uses\_initial\_guess@{apply\_uses\_initial\_guess}}
+\index{apply\_uses\_initial\_guess@{apply\_uses\_initial\_guess}!gko::solver::BatchIdr$<$ ValueType $>$@{gko::solver::BatchIdr$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{apply\_uses\_initial\_guess()}{apply\_uses\_initial\_guess()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+bool \mbox{\hyperlink{classgko_1_1solver_1_1BatchIdr}{gko\+::solver\+::\+Batch\+Idr}}$<$ Value\+Type $>$\+::apply\+\_\+uses\+\_\+initial\+\_\+guess (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Return true as iterative solvers use the data in x as an initial guess. 
+
+\begin{DoxyReturn}{Returns}
+true as iterative solvers use the data in x as an initial guess. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classgko_1_1BatchLinOp_aa4f3a56335bb677c161c31128e0155e5}{gko\+::\+Batch\+Lin\+Op}}.
+
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchIdr_abe1c25fc98190d5f3eae0160ea7d77ab}\label{classgko_1_1solver_1_1BatchIdr_abe1c25fc98190d5f3eae0160ea7d77ab}} 
+\index{gko::solver::BatchIdr$<$ ValueType $>$@{gko::solver::BatchIdr$<$ ValueType $>$}!conj\_transpose@{conj\_transpose}}
+\index{conj\_transpose@{conj\_transpose}!gko::solver::BatchIdr$<$ ValueType $>$@{gko::solver::BatchIdr$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{conj\_transpose()}{conj\_transpose()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1solver_1_1BatchIdr}{gko\+::solver\+::\+Batch\+Idr}}$<$ Value\+Type $>$\+::conj\+\_\+transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns a \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} containing the conjugate transpose of the distinct entries of the \mbox{\hyperlink{classgko_1_1BatchTransposable}{Batch\+Transposable}} object. 
+
+\begin{DoxyReturn}{Returns}
+a pointer to the new conjugate transposed object 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classgko_1_1BatchTransposable_a53d1cf352635aa1bfbe0ae90a4c961ce}{gko\+::\+Batch\+Transposable}}.
+
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchIdr_a43f93bf5bf2d832180038fd8ab0de590}\label{classgko_1_1solver_1_1BatchIdr_a43f93bf5bf2d832180038fd8ab0de590}} 
+\index{gko::solver::BatchIdr$<$ ValueType $>$@{gko::solver::BatchIdr$<$ ValueType $>$}!get\_complex\_subspace@{get\_complex\_subspace}}
+\index{get\_complex\_subspace@{get\_complex\_subspace}!gko::solver::BatchIdr$<$ ValueType $>$@{gko::solver::BatchIdr$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_complex\_subspace()}{get\_complex\_subspace()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+bool \mbox{\hyperlink{classgko_1_1solver_1_1BatchIdr}{gko\+::solver\+::\+Batch\+Idr}}$<$ Value\+Type $>$\+::get\+\_\+complex\+\_\+subspace (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the complex\+\_\+subspace parameter of the solver. 
+
+\begin{DoxyReturn}{Returns}
+the complex\+\_\+subspace parameter 
+\end{DoxyReturn}
+
+
+References gko\+::solver\+::\+Batch\+Idr$<$ Value\+Type $>$\+::parameters\+\_\+type\+::complex\+\_\+subspace.
+
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchIdr_abb9c54e4ac5a810302f57a0eb0a83bf4}\label{classgko_1_1solver_1_1BatchIdr_abb9c54e4ac5a810302f57a0eb0a83bf4}} 
+\index{gko::solver::BatchIdr$<$ ValueType $>$@{gko::solver::BatchIdr$<$ ValueType $>$}!get\_deterministic@{get\_deterministic}}
+\index{get\_deterministic@{get\_deterministic}!gko::solver::BatchIdr$<$ ValueType $>$@{gko::solver::BatchIdr$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_deterministic()}{get\_deterministic()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+bool \mbox{\hyperlink{classgko_1_1solver_1_1BatchIdr}{gko\+::solver\+::\+Batch\+Idr}}$<$ Value\+Type $>$\+::get\+\_\+deterministic (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the deterministic parameter of the solver. 
+
+\begin{DoxyReturn}{Returns}
+the deterministic parameter 
+\end{DoxyReturn}
+
+
+References gko\+::solver\+::\+Batch\+Idr$<$ Value\+Type $>$\+::parameters\+\_\+type\+::deterministic.
+
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchIdr_a8c60feaddba962534d8767894aab95a4}\label{classgko_1_1solver_1_1BatchIdr_a8c60feaddba962534d8767894aab95a4}} 
+\index{gko::solver::BatchIdr$<$ ValueType $>$@{gko::solver::BatchIdr$<$ ValueType $>$}!get\_kappa@{get\_kappa}}
+\index{get\_kappa@{get\_kappa}!gko::solver::BatchIdr$<$ ValueType $>$@{gko::solver::BatchIdr$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_kappa()}{get\_kappa()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+real\+\_\+type \mbox{\hyperlink{classgko_1_1solver_1_1BatchIdr}{gko\+::solver\+::\+Batch\+Idr}}$<$ Value\+Type $>$\+::get\+\_\+kappa (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the kappa parameter of the solver. 
+
+\begin{DoxyReturn}{Returns}
+the kappa parameter 
+\end{DoxyReturn}
+
+
+References gko\+::solver\+::\+Batch\+Idr$<$ Value\+Type $>$\+::parameters\+\_\+type\+::kappa.
+
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchIdr_a6b0aaeaad7dd2a4fc5581cf1b1d8f328}\label{classgko_1_1solver_1_1BatchIdr_a6b0aaeaad7dd2a4fc5581cf1b1d8f328}} 
+\index{gko::solver::BatchIdr$<$ ValueType $>$@{gko::solver::BatchIdr$<$ ValueType $>$}!get\_smoothing@{get\_smoothing}}
+\index{get\_smoothing@{get\_smoothing}!gko::solver::BatchIdr$<$ ValueType $>$@{gko::solver::BatchIdr$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_smoothing()}{get\_smoothing()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+bool \mbox{\hyperlink{classgko_1_1solver_1_1BatchIdr}{gko\+::solver\+::\+Batch\+Idr}}$<$ Value\+Type $>$\+::get\+\_\+smoothing (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the smoothing paramter of solver. 
+
+\begin{DoxyReturn}{Returns}
+the smoothing paramter 
+\end{DoxyReturn}
+
+
+References gko\+::solver\+::\+Batch\+Idr$<$ Value\+Type $>$\+::parameters\+\_\+type\+::smoothing.
+
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchIdr_ab4285be5fafae3acb5574e899e271b85}\label{classgko_1_1solver_1_1BatchIdr_ab4285be5fafae3acb5574e899e271b85}} 
+\index{gko::solver::BatchIdr$<$ ValueType $>$@{gko::solver::BatchIdr$<$ ValueType $>$}!get\_subspace\_dim@{get\_subspace\_dim}}
+\index{get\_subspace\_dim@{get\_subspace\_dim}!gko::solver::BatchIdr$<$ ValueType $>$@{gko::solver::BatchIdr$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_subspace\_dim()}{get\_subspace\_dim()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{classgko_1_1solver_1_1BatchIdr}{gko\+::solver\+::\+Batch\+Idr}}$<$ Value\+Type $>$\+::get\+\_\+subspace\+\_\+dim (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the subspace dimension of the solver. 
+
+\begin{DoxyReturn}{Returns}
+the subspace Dimension 
+\end{DoxyReturn}
+
+
+References gko\+::solver\+::\+Batch\+Idr$<$ Value\+Type $>$\+::parameters\+\_\+type\+::subspace\+\_\+dim.
+
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchIdr_a6b2d44e9fd8f6a67c5999e8b00c47a55}\label{classgko_1_1solver_1_1BatchIdr_a6b2d44e9fd8f6a67c5999e8b00c47a55}} 
+\index{gko::solver::BatchIdr$<$ ValueType $>$@{gko::solver::BatchIdr$<$ ValueType $>$}!get\_system\_matrix@{get\_system\_matrix}}
+\index{get\_system\_matrix@{get\_system\_matrix}!gko::solver::BatchIdr$<$ ValueType $>$@{gko::solver::BatchIdr$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_system\_matrix()}{get\_system\_matrix()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1solver_1_1BatchIdr}{gko\+::solver\+::\+Batch\+Idr}}$<$ Value\+Type $>$\+::get\+\_\+system\+\_\+matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the system operator (matrix) of the linear system. 
+
+\begin{DoxyReturn}{Returns}
+the system operator (matrix) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchIdr_a5467de25f697636a9f92d6876bed51a6}\label{classgko_1_1solver_1_1BatchIdr_a5467de25f697636a9f92d6876bed51a6}} 
+\index{gko::solver::BatchIdr$<$ ValueType $>$@{gko::solver::BatchIdr$<$ ValueType $>$}!set\_complex\_subspace@{set\_complex\_subspace}}
+\index{set\_complex\_subspace@{set\_complex\_subspace}!gko::solver::BatchIdr$<$ ValueType $>$@{gko::solver::BatchIdr$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{set\_complex\_subspace()}{set\_complex\_subspace()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1solver_1_1BatchIdr}{gko\+::solver\+::\+Batch\+Idr}}$<$ Value\+Type $>$\+::set\+\_\+complex\+\_\+subspace (\begin{DoxyParamCaption}\item[{const bool}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the complex\+\_\+subspace parameter of the solver. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & the new complex\+\_\+subspace parameter \\
+\hline
+\end{DoxyParams}
+
+
+References gko\+::solver\+::\+Batch\+Idr$<$ Value\+Type $>$\+::parameters\+\_\+type\+::complex\+\_\+subspace.
+
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchIdr_ad7f273499b293b7a52cde97857bb85fc}\label{classgko_1_1solver_1_1BatchIdr_ad7f273499b293b7a52cde97857bb85fc}} 
+\index{gko::solver::BatchIdr$<$ ValueType $>$@{gko::solver::BatchIdr$<$ ValueType $>$}!set\_deterministic@{set\_deterministic}}
+\index{set\_deterministic@{set\_deterministic}!gko::solver::BatchIdr$<$ ValueType $>$@{gko::solver::BatchIdr$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{set\_deterministic()}{set\_deterministic()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1solver_1_1BatchIdr}{gko\+::solver\+::\+Batch\+Idr}}$<$ Value\+Type $>$\+::set\+\_\+deterministic (\begin{DoxyParamCaption}\item[{const bool}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the deterministic parameter of the solver. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & the new deterministic parameter \\
+\hline
+\end{DoxyParams}
+
+
+References gko\+::solver\+::\+Batch\+Idr$<$ Value\+Type $>$\+::parameters\+\_\+type\+::deterministic.
+
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchIdr_ae55b1e4b1b5f6b897731a9ef05ea5b77}\label{classgko_1_1solver_1_1BatchIdr_ae55b1e4b1b5f6b897731a9ef05ea5b77}} 
+\index{gko::solver::BatchIdr$<$ ValueType $>$@{gko::solver::BatchIdr$<$ ValueType $>$}!set\_kappa@{set\_kappa}}
+\index{set\_kappa@{set\_kappa}!gko::solver::BatchIdr$<$ ValueType $>$@{gko::solver::BatchIdr$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{set\_kappa()}{set\_kappa()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1solver_1_1BatchIdr}{gko\+::solver\+::\+Batch\+Idr}}$<$ Value\+Type $>$\+::set\+\_\+kappa (\begin{DoxyParamCaption}\item[{const real\+\_\+type}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the kappa parameter of the solver. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & the new kappa parameter \\
+\hline
+\end{DoxyParams}
+
+
+References gko\+::solver\+::\+Batch\+Idr$<$ Value\+Type $>$\+::parameters\+\_\+type\+::kappa.
+
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchIdr_aebca56192e730659b185acfc14234691}\label{classgko_1_1solver_1_1BatchIdr_aebca56192e730659b185acfc14234691}} 
+\index{gko::solver::BatchIdr$<$ ValueType $>$@{gko::solver::BatchIdr$<$ ValueType $>$}!set\_smoothing@{set\_smoothing}}
+\index{set\_smoothing@{set\_smoothing}!gko::solver::BatchIdr$<$ ValueType $>$@{gko::solver::BatchIdr$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{set\_smoothing()}{set\_smoothing()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1solver_1_1BatchIdr}{gko\+::solver\+::\+Batch\+Idr}}$<$ Value\+Type $>$\+::set\+\_\+smoothing (\begin{DoxyParamCaption}\item[{const bool}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the smoothing paramter of solver. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & the new smoothing paramter \\
+\hline
+\end{DoxyParams}
+
+
+References gko\+::solver\+::\+Batch\+Idr$<$ Value\+Type $>$\+::parameters\+\_\+type\+::smoothing.
+
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchIdr_a15cead8c6e64bfdca55ad0b64866aedd}\label{classgko_1_1solver_1_1BatchIdr_a15cead8c6e64bfdca55ad0b64866aedd}} 
+\index{gko::solver::BatchIdr$<$ ValueType $>$@{gko::solver::BatchIdr$<$ ValueType $>$}!set\_subspace\_dim@{set\_subspace\_dim}}
+\index{set\_subspace\_dim@{set\_subspace\_dim}!gko::solver::BatchIdr$<$ ValueType $>$@{gko::solver::BatchIdr$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{set\_subspace\_dim()}{set\_subspace\_dim()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1solver_1_1BatchIdr}{gko\+::solver\+::\+Batch\+Idr}}$<$ Value\+Type $>$\+::set\+\_\+subspace\+\_\+dim (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the subspace dimension of the solver. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & the new subspace Dimension \\
+\hline
+\end{DoxyParams}
+
+
+References gko\+::solver\+::\+Batch\+Idr$<$ Value\+Type $>$\+::parameters\+\_\+type\+::subspace\+\_\+dim.
+
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchIdr_a79c4a80fa787873614a8ff771e73fa80}\label{classgko_1_1solver_1_1BatchIdr_a79c4a80fa787873614a8ff771e73fa80}} 
+\index{gko::solver::BatchIdr$<$ ValueType $>$@{gko::solver::BatchIdr$<$ ValueType $>$}!transpose@{transpose}}
+\index{transpose@{transpose}!gko::solver::BatchIdr$<$ ValueType $>$@{gko::solver::BatchIdr$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{transpose()}{transpose()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1solver_1_1BatchIdr}{gko\+::solver\+::\+Batch\+Idr}}$<$ Value\+Type $>$\+::transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns a \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} containing the transposes of the distinct entries of the \mbox{\hyperlink{classgko_1_1BatchTransposable}{Batch\+Transposable}} object. 
+
+\begin{DoxyReturn}{Returns}
+a pointer to the new transposed object 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classgko_1_1BatchTransposable_af4685c379616cb410287f979ee437e81}{gko\+::\+Batch\+Transposable}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/solver/batch\+\_\+idr.\+hpp\end{DoxyCompactItemize}

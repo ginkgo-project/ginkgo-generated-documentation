@@ -1,0 +1,158 @@
+\hypertarget{classgko_1_1solver_1_1BatchDirect}{}\doxysection{gko\+::solver\+::Batch\+Direct$<$ Value\+Type $>$ Class Template Reference}
+\label{classgko_1_1solver_1_1BatchDirect}\index{gko::solver::BatchDirect$<$ ValueType $>$@{gko::solver::BatchDirect$<$ ValueType $>$}}
+
+
+Solves a batch of linear systems using a vendor-\/provided dense batched direct solver.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/solver/batch\+\_\+direct.\+hpp$>$}
+
+
+
+Collaboration diagram for gko\+::solver\+::Batch\+Direct$<$ Value\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1solver_1_1BatchDirect__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classgko_1_1solver_1_1BatchDirect_1_1Factory}{Factory}}
+\item 
+struct \mbox{\hyperlink{structgko_1_1solver_1_1BatchDirect_1_1parameters__type}{parameters\+\_\+type}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchDirect_ae92de5830e8b5dd7bc6619752e815eb2}\label{classgko_1_1solver_1_1BatchDirect_ae92de5830e8b5dd7bc6619752e815eb2}} 
+using {\bfseries value\+\_\+type} = Value\+Type
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchDirect_a49e5319b92faa463b713be6b494e6fc4}\label{classgko_1_1solver_1_1BatchDirect_a49e5319b92faa463b713be6b494e6fc4}} 
+using {\bfseries real\+\_\+type} = \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko\+::remove\+\_\+complex}}$<$ Value\+Type $>$
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchDirect_a16dd21495b3136602b129a7405fe45cb}\label{classgko_1_1solver_1_1BatchDirect_a16dd21495b3136602b129a7405fe45cb}} 
+using {\bfseries transposed\+\_\+type} = \mbox{\hyperlink{classgko_1_1solver_1_1BatchDirect}{Batch\+Direct}}$<$ Value\+Type $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1solver_1_1BatchDirect_a653c0f46e52e48d0a8bf29d7231ee5db}{get\+\_\+system\+\_\+matrix}} () const
+\begin{DoxyCompactList}\small\item\em Returns the system operator (matrix) of the linear system. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1solver_1_1BatchDirect_a8a43388c1e470abf713ed9c0f58db354}{transpose}} () const override
+\begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} containing the transposes of the distinct entries of the \mbox{\hyperlink{classgko_1_1BatchTransposable}{Batch\+Transposable}} object. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1solver_1_1BatchDirect_ae29e735451e515a450999f870917b9ce}{conj\+\_\+transpose}} () const override
+\begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} containing the conjugate transpose of the distinct entries of the \mbox{\hyperlink{classgko_1_1BatchTransposable}{Batch\+Transposable}} object. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classgko_1_1solver_1_1BatchDirect_a956e51b8e1afc39747490547b243e10a}{apply\+\_\+uses\+\_\+initial\+\_\+guess}} () const override
+\begin{DoxyCompactList}\small\item\em Return true as iterative solvers use the data in x as an initial guess. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchDirect_a171423940bef965155f8cdaf35e4e37a}\label{classgko_1_1solver_1_1BatchDirect_a171423940bef965155f8cdaf35e4e37a}} 
+const \mbox{\hyperlink{structgko_1_1solver_1_1BatchDirect_1_1parameters__type}{parameters\+\_\+type}} \& {\bfseries get\+\_\+parameters} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchDirect_a29588e39190ab8ed10763e08751f19bb}\label{classgko_1_1solver_1_1BatchDirect_a29588e39190ab8ed10763e08751f19bb}} 
+static auto {\bfseries build} () -\/$>$ decltype(\mbox{\hyperlink{classgko_1_1solver_1_1BatchDirect_1_1Factory}{Factory}} \+::create())
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchDirect_ad759f9c493f8794bf2893b3edddb1a82}\label{classgko_1_1solver_1_1BatchDirect_ad759f9c493f8794bf2893b3edddb1a82}} 
+class {\bfseries Enable\+Batch\+Lin\+Op$<$ Batch\+Direct $>$}
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchDirect_ad3dab40e3494e0eb668f456846ba8ac9}\label{classgko_1_1solver_1_1BatchDirect_ad3dab40e3494e0eb668f456846ba8ac9}} 
+class {\bfseries Enable\+Polymorphic\+Object$<$ Batch\+Direct, Batch\+Lin\+Op $>$}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Value\+Type = default\+\_\+precision$>$\newline
+class gko\+::solver\+::\+Batch\+Direct$<$ Value\+Type $>$}
+
+Solves a batch of linear systems using a vendor-\/provided dense batched direct solver. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Value\+Type} & precision of matrix elements \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchDirect_a956e51b8e1afc39747490547b243e10a}\label{classgko_1_1solver_1_1BatchDirect_a956e51b8e1afc39747490547b243e10a}} 
+\index{gko::solver::BatchDirect$<$ ValueType $>$@{gko::solver::BatchDirect$<$ ValueType $>$}!apply\_uses\_initial\_guess@{apply\_uses\_initial\_guess}}
+\index{apply\_uses\_initial\_guess@{apply\_uses\_initial\_guess}!gko::solver::BatchDirect$<$ ValueType $>$@{gko::solver::BatchDirect$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{apply\_uses\_initial\_guess()}{apply\_uses\_initial\_guess()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+bool \mbox{\hyperlink{classgko_1_1solver_1_1BatchDirect}{gko\+::solver\+::\+Batch\+Direct}}$<$ Value\+Type $>$\+::apply\+\_\+uses\+\_\+initial\+\_\+guess (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Return true as iterative solvers use the data in x as an initial guess. 
+
+\begin{DoxyReturn}{Returns}
+true as iterative solvers use the data in x as an initial guess. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classgko_1_1BatchLinOp_aa4f3a56335bb677c161c31128e0155e5}{gko\+::\+Batch\+Lin\+Op}}.
+
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchDirect_ae29e735451e515a450999f870917b9ce}\label{classgko_1_1solver_1_1BatchDirect_ae29e735451e515a450999f870917b9ce}} 
+\index{gko::solver::BatchDirect$<$ ValueType $>$@{gko::solver::BatchDirect$<$ ValueType $>$}!conj\_transpose@{conj\_transpose}}
+\index{conj\_transpose@{conj\_transpose}!gko::solver::BatchDirect$<$ ValueType $>$@{gko::solver::BatchDirect$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{conj\_transpose()}{conj\_transpose()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1solver_1_1BatchDirect}{gko\+::solver\+::\+Batch\+Direct}}$<$ Value\+Type $>$\+::conj\+\_\+transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns a \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} containing the conjugate transpose of the distinct entries of the \mbox{\hyperlink{classgko_1_1BatchTransposable}{Batch\+Transposable}} object. 
+
+\begin{DoxyReturn}{Returns}
+a pointer to the new conjugate transposed object 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classgko_1_1BatchTransposable_a53d1cf352635aa1bfbe0ae90a4c961ce}{gko\+::\+Batch\+Transposable}}.
+
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchDirect_a653c0f46e52e48d0a8bf29d7231ee5db}\label{classgko_1_1solver_1_1BatchDirect_a653c0f46e52e48d0a8bf29d7231ee5db}} 
+\index{gko::solver::BatchDirect$<$ ValueType $>$@{gko::solver::BatchDirect$<$ ValueType $>$}!get\_system\_matrix@{get\_system\_matrix}}
+\index{get\_system\_matrix@{get\_system\_matrix}!gko::solver::BatchDirect$<$ ValueType $>$@{gko::solver::BatchDirect$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_system\_matrix()}{get\_system\_matrix()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1solver_1_1BatchDirect}{gko\+::solver\+::\+Batch\+Direct}}$<$ Value\+Type $>$\+::get\+\_\+system\+\_\+matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the system operator (matrix) of the linear system. 
+
+\begin{DoxyReturn}{Returns}
+the system operator (matrix) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchDirect_a8a43388c1e470abf713ed9c0f58db354}\label{classgko_1_1solver_1_1BatchDirect_a8a43388c1e470abf713ed9c0f58db354}} 
+\index{gko::solver::BatchDirect$<$ ValueType $>$@{gko::solver::BatchDirect$<$ ValueType $>$}!transpose@{transpose}}
+\index{transpose@{transpose}!gko::solver::BatchDirect$<$ ValueType $>$@{gko::solver::BatchDirect$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{transpose()}{transpose()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1solver_1_1BatchDirect}{gko\+::solver\+::\+Batch\+Direct}}$<$ Value\+Type $>$\+::transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns a \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} containing the transposes of the distinct entries of the \mbox{\hyperlink{classgko_1_1BatchTransposable}{Batch\+Transposable}} object. 
+
+\begin{DoxyReturn}{Returns}
+a pointer to the new transposed object 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classgko_1_1BatchTransposable_af4685c379616cb410287f979ee437e81}{gko\+::\+Batch\+Transposable}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/solver/batch\+\_\+direct.\+hpp\end{DoxyCompactItemize}

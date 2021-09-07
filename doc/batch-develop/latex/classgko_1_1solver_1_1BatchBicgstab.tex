@@ -1,0 +1,164 @@
+\hypertarget{classgko_1_1solver_1_1BatchBicgstab}{}\doxysection{gko\+::solver\+::Batch\+Bicgstab$<$ Value\+Type $>$ Class Template Reference}
+\label{classgko_1_1solver_1_1BatchBicgstab}\index{gko::solver::BatchBicgstab$<$ ValueType $>$@{gko::solver::BatchBicgstab$<$ ValueType $>$}}
+
+
+Bi\+C\+G\+S\+T\+AB or the Bi-\/\+Conjugate Gradient-\/\+Stabilized is a Krylov subspace solver.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/solver/batch\+\_\+bicgstab.\+hpp$>$}
+
+
+
+Collaboration diagram for gko\+::solver\+::Batch\+Bicgstab$<$ Value\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1solver_1_1BatchBicgstab__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classgko_1_1solver_1_1BatchBicgstab_1_1Factory}{Factory}}
+\item 
+struct \mbox{\hyperlink{structgko_1_1solver_1_1BatchBicgstab_1_1parameters__type}{parameters\+\_\+type}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchBicgstab_ad8507018b9a8cbe730cd6f2884877e6b}\label{classgko_1_1solver_1_1BatchBicgstab_ad8507018b9a8cbe730cd6f2884877e6b}} 
+using {\bfseries value\+\_\+type} = Value\+Type
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchBicgstab_a2227401416ba870c9993dfb30d2977a4}\label{classgko_1_1solver_1_1BatchBicgstab_a2227401416ba870c9993dfb30d2977a4}} 
+using {\bfseries real\+\_\+type} = \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko\+::remove\+\_\+complex}}$<$ Value\+Type $>$
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchBicgstab_a1f426913ea1540a35fac0734c6bc29cb}\label{classgko_1_1solver_1_1BatchBicgstab_a1f426913ea1540a35fac0734c6bc29cb}} 
+using {\bfseries transposed\+\_\+type} = \mbox{\hyperlink{classgko_1_1solver_1_1BatchBicgstab}{Batch\+Bicgstab}}$<$ Value\+Type $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1solver_1_1BatchBicgstab_ae53b215549efa4ddff23f5b9febccf2a}{get\+\_\+system\+\_\+matrix}} () const
+\begin{DoxyCompactList}\small\item\em Returns the system operator (matrix) of the linear system. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1solver_1_1BatchBicgstab_a53dab45eedcb91ca668d557cd2badd5a}{transpose}} () const override
+\begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} containing the transposes of the distinct entries of the \mbox{\hyperlink{classgko_1_1BatchTransposable}{Batch\+Transposable}} object. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1solver_1_1BatchBicgstab_a611b4efbe3dff31eac6bc4f9809b2c92}{conj\+\_\+transpose}} () const override
+\begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} containing the conjugate transpose of the distinct entries of the \mbox{\hyperlink{classgko_1_1BatchTransposable}{Batch\+Transposable}} object. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classgko_1_1solver_1_1BatchBicgstab_a3948eeea22733c5407284a622fdd14f2}{apply\+\_\+uses\+\_\+initial\+\_\+guess}} () const override
+\begin{DoxyCompactList}\small\item\em Return true as iterative solvers use the data in x as an initial guess. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchBicgstab_a3c8a429592a09174a30a34b79eb6044d}\label{classgko_1_1solver_1_1BatchBicgstab_a3c8a429592a09174a30a34b79eb6044d}} 
+const \mbox{\hyperlink{structgko_1_1solver_1_1BatchBicgstab_1_1parameters__type}{parameters\+\_\+type}} \& {\bfseries get\+\_\+parameters} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchBicgstab_aa7eba2e3b75e3b66abe9cb1fee2b2c05}\label{classgko_1_1solver_1_1BatchBicgstab_aa7eba2e3b75e3b66abe9cb1fee2b2c05}} 
+static auto {\bfseries build} () -\/$>$ decltype(\mbox{\hyperlink{classgko_1_1solver_1_1BatchBicgstab_1_1Factory}{Factory}} \+::create())
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchBicgstab_abe33aec6fe074512a3c3a28c9c51fd61}\label{classgko_1_1solver_1_1BatchBicgstab_abe33aec6fe074512a3c3a28c9c51fd61}} 
+class {\bfseries Enable\+Batch\+Lin\+Op$<$ Batch\+Bicgstab $>$}
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchBicgstab_ac7e273cac2ac5e72fc89ec9146b674ca}\label{classgko_1_1solver_1_1BatchBicgstab_ac7e273cac2ac5e72fc89ec9146b674ca}} 
+class {\bfseries Enable\+Polymorphic\+Object$<$ Batch\+Bicgstab, Batch\+Lin\+Op $>$}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Value\+Type = default\+\_\+precision$>$\newline
+class gko\+::solver\+::\+Batch\+Bicgstab$<$ Value\+Type $>$}
+
+Bi\+C\+G\+S\+T\+AB or the Bi-\/\+Conjugate Gradient-\/\+Stabilized is a Krylov subspace solver. 
+
+Being a generic solver, it is capable of solving general matrices, including non-\/s.\+p.\+d matrices.
+
+This solver solves a batch of linear systems using \mbox{\hyperlink{classgko_1_1solver_1_1Bicgstab}{Bicgstab}} algorithm.
+
+Unless otherwise specified via the {\ttfamily preconditioner} factory parameter, this implementation does not use any preconditioner by default. The type of tolerance( absolute or relative ) and the maximum number of iterations to be used in the stopping criterion can be set via the factory parameters.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Value\+Type} & precision of matrix elements \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchBicgstab_a3948eeea22733c5407284a622fdd14f2}\label{classgko_1_1solver_1_1BatchBicgstab_a3948eeea22733c5407284a622fdd14f2}} 
+\index{gko::solver::BatchBicgstab$<$ ValueType $>$@{gko::solver::BatchBicgstab$<$ ValueType $>$}!apply\_uses\_initial\_guess@{apply\_uses\_initial\_guess}}
+\index{apply\_uses\_initial\_guess@{apply\_uses\_initial\_guess}!gko::solver::BatchBicgstab$<$ ValueType $>$@{gko::solver::BatchBicgstab$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{apply\_uses\_initial\_guess()}{apply\_uses\_initial\_guess()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+bool \mbox{\hyperlink{classgko_1_1solver_1_1BatchBicgstab}{gko\+::solver\+::\+Batch\+Bicgstab}}$<$ Value\+Type $>$\+::apply\+\_\+uses\+\_\+initial\+\_\+guess (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Return true as iterative solvers use the data in x as an initial guess. 
+
+\begin{DoxyReturn}{Returns}
+true as iterative solvers use the data in x as an initial guess. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classgko_1_1BatchLinOp_aa4f3a56335bb677c161c31128e0155e5}{gko\+::\+Batch\+Lin\+Op}}.
+
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchBicgstab_a611b4efbe3dff31eac6bc4f9809b2c92}\label{classgko_1_1solver_1_1BatchBicgstab_a611b4efbe3dff31eac6bc4f9809b2c92}} 
+\index{gko::solver::BatchBicgstab$<$ ValueType $>$@{gko::solver::BatchBicgstab$<$ ValueType $>$}!conj\_transpose@{conj\_transpose}}
+\index{conj\_transpose@{conj\_transpose}!gko::solver::BatchBicgstab$<$ ValueType $>$@{gko::solver::BatchBicgstab$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{conj\_transpose()}{conj\_transpose()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1solver_1_1BatchBicgstab}{gko\+::solver\+::\+Batch\+Bicgstab}}$<$ Value\+Type $>$\+::conj\+\_\+transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns a \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} containing the conjugate transpose of the distinct entries of the \mbox{\hyperlink{classgko_1_1BatchTransposable}{Batch\+Transposable}} object. 
+
+\begin{DoxyReturn}{Returns}
+a pointer to the new conjugate transposed object 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classgko_1_1BatchTransposable_a53d1cf352635aa1bfbe0ae90a4c961ce}{gko\+::\+Batch\+Transposable}}.
+
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchBicgstab_ae53b215549efa4ddff23f5b9febccf2a}\label{classgko_1_1solver_1_1BatchBicgstab_ae53b215549efa4ddff23f5b9febccf2a}} 
+\index{gko::solver::BatchBicgstab$<$ ValueType $>$@{gko::solver::BatchBicgstab$<$ ValueType $>$}!get\_system\_matrix@{get\_system\_matrix}}
+\index{get\_system\_matrix@{get\_system\_matrix}!gko::solver::BatchBicgstab$<$ ValueType $>$@{gko::solver::BatchBicgstab$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_system\_matrix()}{get\_system\_matrix()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1solver_1_1BatchBicgstab}{gko\+::solver\+::\+Batch\+Bicgstab}}$<$ Value\+Type $>$\+::get\+\_\+system\+\_\+matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the system operator (matrix) of the linear system. 
+
+\begin{DoxyReturn}{Returns}
+the system operator (matrix) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1solver_1_1BatchBicgstab_a53dab45eedcb91ca668d557cd2badd5a}\label{classgko_1_1solver_1_1BatchBicgstab_a53dab45eedcb91ca668d557cd2badd5a}} 
+\index{gko::solver::BatchBicgstab$<$ ValueType $>$@{gko::solver::BatchBicgstab$<$ ValueType $>$}!transpose@{transpose}}
+\index{transpose@{transpose}!gko::solver::BatchBicgstab$<$ ValueType $>$@{gko::solver::BatchBicgstab$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{transpose()}{transpose()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1solver_1_1BatchBicgstab}{gko\+::solver\+::\+Batch\+Bicgstab}}$<$ Value\+Type $>$\+::transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns a \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} containing the transposes of the distinct entries of the \mbox{\hyperlink{classgko_1_1BatchTransposable}{Batch\+Transposable}} object. 
+
+\begin{DoxyReturn}{Returns}
+a pointer to the new transposed object 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classgko_1_1BatchTransposable_af4685c379616cb410287f979ee437e81}{gko\+::\+Batch\+Transposable}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/solver/batch\+\_\+bicgstab.\+hpp\end{DoxyCompactItemize}
