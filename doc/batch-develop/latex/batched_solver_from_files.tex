@@ -205,13 +205,17 @@ The number of rows in each system is taken as the 0th dimension of the size of t
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{x-\/>copy\_from(host\_x.get());}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keyword}{const} real\_type reduction\_factor\{1e-\/6\};}
 \end{DoxyCode}
 
 
 \label{_Createthebatchsolverfactory}%
  \doxysubsubsection*{Create the batch solver factory}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} real\_type reduction\_factor\{1e-\/6\};}
+\end{DoxyCode}
+
 
 Create a batched solver factory with relevant parameters.
 
@@ -247,7 +251,7 @@ Create a logger to obtain the iteration counts and \char`\"{}implicit\char`\"{} 
 \end{DoxyCode}
 
 
-Generate the batch solver from the batch matrix
+@sec3\{Generate and solve\} Generate the batch solver from the batch matrix
 
 
 \begin{DoxyCode}{0}
@@ -282,7 +286,7 @@ This is not necessary, but one might want to remove the logger before the next s
 \end{DoxyCode}
 
 
-Compute norms of R\+HS and final residual to check the result
+@sec3\{Check result\} Compute norms of R\+HS and final residual to check the result
 
 
 \begin{DoxyCode}{0}
@@ -506,7 +510,6 @@ The following is the expected result on the reference executor\+:
 \DoxyCodeLine{    x-\/>copy\_from(host\_x.get());}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{const} real\_type reduction\_factor\{1e-\/6\};}
-\DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} solver\_gen =}
 \DoxyCodeLine{        solver\_type::build()}
 \DoxyCodeLine{            .with\_max\_iterations(500)}

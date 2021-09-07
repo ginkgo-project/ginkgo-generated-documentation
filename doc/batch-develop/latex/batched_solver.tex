@@ -41,17 +41,19 @@ Use some shortcuts. In Ginkgo, vectors are seen as a \mbox{\hyperlink{classgko_1
 \DoxyCodeLine{\textcolor{keyword}{using} real\_vec\_type = \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{gko::matrix::BatchDense<real\_type>}};}
 \DoxyCodeLine{\textcolor{keyword}{using} mtx\_type = \mbox{\hyperlink{classgko_1_1matrix_1_1BatchCsr}{gko::matrix::BatchCsr<value\_type, index\_type>}};}
 \DoxyCodeLine{\textcolor{keyword}{using} solver\_type = \mbox{\hyperlink{classgko_1_1solver_1_1BatchBicgstab}{gko::solver::BatchBicgstab<value\_type>}};}
-\DoxyCodeLine{}
-\DoxyCodeLine{}
-\DoxyCodeLine{/ **}
-\DoxyCodeLine{ * Structure to simulate application data related to the linear systems}
-\DoxyCodeLine{ * to be solved.}
-\DoxyCodeLine{ *}
-\DoxyCodeLine{ * We use raw pointers below to demonstrate how to handle the situation when}
-\DoxyCodeLine{ * the application only gives us raw pointers. Ideally, \mbox{\hyperlink{namespacegko_a0059e27f8f4bc348ff65c1e60caf47c8}{one}} should use}
-\DoxyCodeLine{ * Ginkgo\textcolor{stringliteral}{'s \(\backslash\)ref Array class here.}}
-\DoxyCodeLine{\textcolor{stringliteral}{ * /}}
-\DoxyCodeLine{\textcolor{stringliteral}{struct ApplSysData \{}}
+\end{DoxyCode}
+
+
+\label{_Applicationstructuresandfunctions}%
+ \doxysubsubsection*{\textquotesingle{}Application\textquotesingle{} structures and functions}
+
+Structure to simulate application data related to the linear systems to be solved.
+
+We use raw pointers below to demonstrate how to handle the situation when the application only gives us raw pointers. Ideally, one should use Ginkgo\textquotesingle{}s \mbox{\hyperlink{classgko_1_1Array}{gko\+::\+Array}} class here.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{struct }ApplSysData \{}
 \end{DoxyCode}
 
 
@@ -109,25 +111,31 @@ R\+HS vectors for all systems in the batch, concatenated
 \begin{DoxyCode}{0}
 \DoxyCodeLine{    value\_type* all\_rhs;}
 \DoxyCodeLine{\};}
-\DoxyCodeLine{}
-\DoxyCodeLine{}
-\DoxyCodeLine{/ **}
-\DoxyCodeLine{ * Generates a batch of tridiagonal systems.}
-\DoxyCodeLine{ *}
-\DoxyCodeLine{ * @param nrows  Number of rows in each system.}
-\DoxyCodeLine{ * @param nsystems  Number of systems in the batch.}
-\DoxyCodeLine{ * @param exec  The device executor to use \textcolor{keywordflow}{for} the solver.}
-\DoxyCodeLine{ *   Normally, the application may not deal with Ginkgo executors, nor \textcolor{keywordflow}{do} we}
-\DoxyCodeLine{ *   need it to. Here, we use the executor \textcolor{keywordflow}{for} backend-\/independent device}
-\DoxyCodeLine{ *   memory allocation. The application, \textcolor{keywordflow}{for} example, might assume Hip}
-\DoxyCodeLine{ *   (\textcolor{keywordflow}{for} AMD GPUs) and use `hipMalloc` directly.}
-\DoxyCodeLine{ * /}
+\end{DoxyCode}
+
+
+Generates a batch of tridiagonal systems.
+
+
+\begin{DoxyParams}{Parameters}
+{\em nrows} & Number of rows in each system. \\
+\hline
+{\em nsystems} & Number of systems in the batch. \\
+\hline
+{\em exec} & The device executor to use for the solver. Normally, the application may not deal with Ginkgo executors, nor do we need it to. Here, we use the executor for backend-\/independent device memory allocation. The application, for example, might assume Hip (for A\+MD G\+P\+Us) and use {\ttfamily hip\+Malloc} directly.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}{0}
 \DoxyCodeLine{ApplSysData appl\_generate\_system(\textcolor{keyword}{const} \textcolor{keywordtype}{int} nrows, \textcolor{keyword}{const} size\_type nsystems,}
 \DoxyCodeLine{                                 std::shared\_ptr<gko::Executor> exec);}
-\DoxyCodeLine{}
-\DoxyCodeLine{/ **}
-\DoxyCodeLine{ * Deallocate application data.}
-\DoxyCodeLine{ * /}
+\end{DoxyCode}
+
+
+Deallocate application data.
+
+
+\begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keywordtype}{void} appl\_clean\_up(ApplSysData\& appl\_data, std::shared\_ptr<gko::Executor> exec);}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -191,6 +199,9 @@ executor where Ginkgo will perform the computation
 \end{DoxyCode}
 
 
+\label{_Generatedata}%
+ \doxysubsubsection*{Generate data}
+
 The \char`\"{}application\char`\"{} generates the batch of linear systems on the device
 
 
@@ -228,8 +239,8 @@ We can either work on the existing memory allocated in the application, or we ca
 \end{DoxyCode}
 
 
-\label{_Batchstride}%
- \doxysubsubsection*{Batch stride}
+\label{_RHSandsolutionvectors}%
+ \doxysubsubsection*{R\+HS and solution vectors}
 
 batch\+\_\+stride object specifies the access stride within the individual matrices (vectors) in the batch. In this case, we specify a stride of 1 as the common value for all the matrices.
 
@@ -262,13 +273,17 @@ Create initial guess as 0 and copy to device
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{x-\/>copy\_from(host\_x.get());}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keyword}{const} real\_type reduction\_factor\{1e-\/6\};}
 \end{DoxyCode}
 
 
 \label{_Createthebatchsolverfactory}%
  \doxysubsubsection*{Create the batch solver factory}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} real\_type reduction\_factor\{1e-\/6\};}
+\end{DoxyCode}
+
 
 Create a batched solver factory with relevant parameters.
 
@@ -399,21 +414,7 @@ Ginkgo objects are cleaned up automatically; but the \char`\"{}application\char`
 \DoxyCodeLine{                                 std::shared\_ptr<gko::Executor> exec)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keywordtype}{int} nnz = nrows * 3 -\/ 2;}
-\end{DoxyCode}
-
-
-Random number generator
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{std::ranlux48 rgen(15);}
-\end{DoxyCode}
-
-
-std\+::uniform\+\_\+real\+\_\+distribution$<$real\+\_\+type$>$ distb(0.\+75, 1.\+0);
-
-
-\begin{DoxyCode}{0}
+\DoxyCodeLine{    std::ranlux48 rgen(15);}
 \DoxyCodeLine{    std::normal\_distribution<real\_type> distb(0.5, 0.1);}
 \DoxyCodeLine{    std::vector<real\_type> spacings(nsystems * nrows);}
 \DoxyCodeLine{    std::generate(spacings.begin(), spacings.end(),}
@@ -639,7 +640,6 @@ The following is the expected result on the reference executor\+:
 \DoxyCodeLine{    x-\/>copy\_from(host\_x.get());}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{const} real\_type reduction\_factor\{1e-\/6\};}
-\DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} solver\_gen =}
 \DoxyCodeLine{        solver\_type::build()}
 \DoxyCodeLine{            .with\_max\_iterations(500)}

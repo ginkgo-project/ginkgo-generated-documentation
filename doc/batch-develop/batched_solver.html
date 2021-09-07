@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/366558518 branch based on develop. Ginkgo version 1.5.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/366691059 branch based on develop. Ginkgo version 1.5.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -82,9 +82,11 @@ $(function() {
     <ul>
         <li><a href="#Includefiles">Include files</a>
         <li><a href="#Typealiasesforconvenience">Type aliases for convenience</a>
+        <li><a href="#Applicationstructuresandfunctions">'Application' structures and functions</a>
         <li><a href="#Wheredoyouwanttorunyoursolver">Where do you want to run your solver ?</a>
+        <li><a href="#Generatedata">Generate data</a>
         <li><a href="#Useofapplicationallocatedmemory">Use of application-allocated memory</a>
-        <li><a href="#Batchstride">Batch stride</a>
+        <li><a href="#RHSandsolutionvectors">RHS and solution vectors</a>
         <li><a href="#Createthebatchsolverfactory">Create the batch solver factory</a>
         <li><a href="#Batchlogger">Batch logger</a>
       </ul>
@@ -117,17 +119,10 @@ $(function() {
 <div class="line"><span class="keyword">using</span> real_vec_type = <a class="code" href="classgko_1_1matrix_1_1BatchDense.html">gko::matrix::BatchDense&lt;real_type&gt;</a>;</div>
 <div class="line"><span class="keyword">using</span> mtx_type = <a class="code" href="classgko_1_1matrix_1_1BatchCsr.html">gko::matrix::BatchCsr&lt;value_type, index_type&gt;</a>;</div>
 <div class="line"><span class="keyword">using</span> solver_type = <a class="code" href="classgko_1_1solver_1_1BatchBicgstab.html">gko::solver::BatchBicgstab&lt;value_type&gt;</a>;</div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line">/ **</div>
-<div class="line"> * Structure to simulate application data related to the linear systems</div>
-<div class="line"> * to be solved.</div>
-<div class="line"> *</div>
-<div class="line"> * We use raw pointers below to demonstrate how to handle the situation when</div>
-<div class="line"> * the application only gives us raw pointers. Ideally, <a class="code" href="namespacegko.html#a0059e27f8f4bc348ff65c1e60caf47c8">one</a> should use</div>
-<div class="line"> * Ginkgo<span class="stringliteral">&#39;s \ref Array class here.</span></div>
-<div class="line"><span class="stringliteral"> * /</span></div>
-<div class="line"><span class="stringliteral">struct ApplSysData {</span></div>
+</div><!-- fragment --><p><a class="anchor" id="Applicationstructuresandfunctions"></a> </p><h3>'Application' structures and functions</h3>
+<p>Structure to simulate application data related to the linear systems to be solved.</p>
+<p>We use raw pointers below to demonstrate how to handle the situation when the application only gives us raw pointers. Ideally, one should use Ginkgo's <a class="el" href="classgko_1_1Array.html" title="An Array is a container which encapsulates fixed-sized arrays, stored on the Executor tied to the Arr...">gko::Array</a> class here.</p>
+<div class="fragment"><div class="line"><span class="keyword">struct </span>ApplSysData {</div>
 </div><!-- fragment --><p>Number of small systems in the batch.</p>
 <div class="fragment"><div class="line"><a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> nsystems;</div>
 </div><!-- fragment --><p>Number of rows in each system.</p>
@@ -143,26 +138,19 @@ $(function() {
 </div><!-- fragment --><p>RHS vectors for all systems in the batch, concatenated</p>
 <div class="fragment"><div class="line">    value_type* all_rhs;</div>
 <div class="line">};</div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line">/ **</div>
-<div class="line"> * Generates a batch of tridiagonal systems.</div>
-<div class="line"> *</div>
-<div class="line"> * @param nrows  Number of rows in each system.</div>
-<div class="line"> * @param nsystems  Number of systems in the batch.</div>
-<div class="line"> * @param exec  The device executor to use <span class="keywordflow">for</span> the solver.</div>
-<div class="line"> *   Normally, the application may not deal with Ginkgo executors, nor <span class="keywordflow">do</span> we</div>
-<div class="line"> *   need it to. Here, we use the executor <span class="keywordflow">for</span> backend-independent device</div>
-<div class="line"> *   memory allocation. The application, <span class="keywordflow">for</span> example, might assume Hip</div>
-<div class="line"> *   (<span class="keywordflow">for</span> AMD GPUs) and use `hipMalloc` directly.</div>
-<div class="line"> * /</div>
-<div class="line">ApplSysData appl_generate_system(<span class="keyword">const</span> <span class="keywordtype">int</span> nrows, <span class="keyword">const</span> size_type nsystems,</div>
+</div><!-- fragment --><p>Generates a batch of tridiagonal systems.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nrows</td><td>Number of rows in each system. </td></tr>
+    <tr><td class="paramname">nsystems</td><td>Number of systems in the batch. </td></tr>
+    <tr><td class="paramname">exec</td><td>The device executor to use for the solver. Normally, the application may not deal with Ginkgo executors, nor do we need it to. Here, we use the executor for backend-independent device memory allocation. The application, for example, might assume Hip (for AMD GPUs) and use <code>hipMalloc</code> directly.</td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line">ApplSysData appl_generate_system(<span class="keyword">const</span> <span class="keywordtype">int</span> nrows, <span class="keyword">const</span> size_type nsystems,</div>
 <div class="line">                                 std::shared_ptr&lt;gko::Executor&gt; exec);</div>
-<div class="line"> </div>
-<div class="line">/ **</div>
-<div class="line"> * Deallocate application data.</div>
-<div class="line"> * /</div>
-<div class="line"><span class="keywordtype">void</span> appl_clean_up(ApplSysData&amp; appl_data, std::shared_ptr&lt;gko::Executor&gt; exec);</div>
+</div><!-- fragment --><p>Deallocate application data.</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> appl_clean_up(ApplSysData&amp; appl_data, std::shared_ptr&lt;gko::Executor&gt; exec);</div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
@@ -201,7 +189,8 @@ $(function() {
 <div class="line"> </div>
 <div class="line"><span class="keyword">const</span> <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> num_systems = argc &gt;= 3 ? std::atoi(argv[2]) : 2;</div>
 <div class="line"><span class="keyword">const</span> <span class="keywordtype">int</span> num_rows = 35;  <span class="comment">// per system</span></div>
-</div><!-- fragment --><p>The "application" generates the batch of linear systems on the device</p>
+</div><!-- fragment --><p><a class="anchor" id="Generatedata"></a> </p><h3>Generate data</h3>
+<p>The "application" generates the batch of linear systems on the device</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> appl_sys = appl_generate_system(num_rows, num_systems, exec);</div>
 </div><!-- fragment --><p>Create batch_dim object to describe the dimensions of the batch matrix.</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> batch_mat_size =</div>
@@ -218,7 +207,7 @@ $(function() {
 <div class="line">    <a class="code" href="classgko_1_1Array.html#ae8e2b4841e60741227daf3367de6ecde">gko::Array&lt;index_type&gt;::view</a>(exec, appl_sys.nnz, appl_sys.col_idxs);</div>
 <div class="line"><span class="keyword">auto</span> A = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a>(mtx_type::create(exec, batch_mat_size, vals_view,</div>
 <div class="line">                                     colidxs_view, rowptrs_view));</div>
-</div><!-- fragment --><p><a class="anchor" id="Batchstride"></a> </p><h3>Batch stride</h3>
+</div><!-- fragment --><p><a class="anchor" id="RHSandsolutionvectors"></a> </p><h3>RHS and solution vectors</h3>
 <p>batch_stride object specifies the access stride within the individual matrices (vectors) in the batch. In this case, we specify a stride of 1 as the common value for all the matrices.</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> batch_vec_stride = <a class="code" href="classgko_1_1batch__stride.html">gko::batch_stride</a>(num_systems, 1);</div>
 </div><!-- fragment --><p>Create RHS, again reusing application allocation</p>
@@ -235,10 +224,9 @@ $(function() {
 <div class="line">    }</div>
 <div class="line">}</div>
 <div class="line">x-&gt;copy_from(host_x.get());</div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">const</span> real_type reduction_factor{1e-6};</div>
 </div><!-- fragment --><p><a class="anchor" id="Createthebatchsolverfactory"></a> </p><h3>Create the batch solver factory</h3>
-<p>Create a batched solver factory with relevant parameters.</p>
+<div class="fragment"><div class="line"><span class="keyword">const</span> real_type reduction_factor{1e-6};</div>
+</div><!-- fragment --><p>Create a batched solver factory with relevant parameters.</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> solver_gen =</div>
 <div class="line">    solver_type::build()</div>
 <div class="line">        .with_max_iterations(500)</div>
@@ -301,10 +289,8 @@ $(function() {
 <div class="line">                                 std::shared_ptr&lt;gko::Executor&gt; exec)</div>
 <div class="line">{</div>
 <div class="line">    <span class="keyword">const</span> <span class="keywordtype">int</span> nnz = nrows * 3 - 2;</div>
-</div><!-- fragment --><p>Random number generator</p>
-<div class="fragment"><div class="line">std::ranlux48 rgen(15);</div>
-</div><!-- fragment --><p>std::uniform_real_distribution&lt;real_type&gt; distb(0.75, 1.0);</p>
-<div class="fragment"><div class="line">    std::normal_distribution&lt;real_type&gt; distb(0.5, 0.1);</div>
+<div class="line">    std::ranlux48 rgen(15);</div>
+<div class="line">    std::normal_distribution&lt;real_type&gt; distb(0.5, 0.1);</div>
 <div class="line">    std::vector&lt;real_type&gt; spacings(nsystems * nrows);</div>
 <div class="line">    std::generate(spacings.begin(), spacings.end(),</div>
 <div class="line">                  [&amp;]() { <span class="keywordflow">return</span> distb(rgen); });</div>
@@ -514,7 +500,6 @@ $(function() {
 <div class="line">    x-&gt;copy_from(host_x.get());</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">const</span> real_type reduction_factor{1e-6};</div>
-<div class="line"> </div>
 <div class="line">    <span class="keyword">auto</span> solver_gen =</div>
 <div class="line">        solver_type::build()</div>
 <div class="line">            .with_max_iterations(500)</div>
