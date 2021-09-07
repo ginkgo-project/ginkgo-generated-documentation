@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/366691059 branch based on develop. Ginkgo version 1.5.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/366792838 branch based on develop. Ginkgo version 1.5.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -86,6 +86,8 @@ $(function() {
         <li><a href="#Readbatchfromfiles">Read batch from files</a>
         <li><a href="#Createthebatchsolverfactory">Create the batch solver factory</a>
         <li><a href="#Batchlogger">Batch logger</a>
+        <li><a href="#Generateandsolve">Generate and solve</a>
+        <li><a href="#Checkresult">Check result</a>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
   <li value="3"> <a href="#Results" class=bold>Results</a>
@@ -219,7 +221,8 @@ $(function() {
 <p>Create a logger to obtain the iteration counts and "implicit" residual norms for every system after the solve.</p>
 <div class="fragment"><div class="line">std::shared_ptr&lt;const gko::log::BatchConvergence&lt;value_type&gt;&gt; logger =</div>
 <div class="line">    <a class="code" href="classgko_1_1log_1_1BatchConvergence.html#ad5908d7498e0c03641267b8c81f80313">gko::log::BatchConvergence&lt;value_type&gt;::create</a>(exec);</div>
-</div><!-- fragment --><p>@sec3{Generate and solve} Generate the batch solver from the batch matrix</p>
+</div><!-- fragment --><p><a class="anchor" id="Generateandsolve"></a> </p><h3>Generate and solve</h3>
+<p>Generate the batch solver from the batch matrix</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> solver = solver_gen-&gt;generate(A);</div>
 </div><!-- fragment --><p>add the logger to the solver</p>
 <div class="fragment"><div class="line">solver-&gt;add_logger(logger);</div>
@@ -230,7 +233,8 @@ $(function() {
 <div class="line">std::chrono::steady_clock::time_point t2 = std::chrono::steady_clock::now();</div>
 </div><!-- fragment --><p>This is not necessary, but one might want to remove the logger before the next solve using the same solver object.</p>
 <div class="fragment"><div class="line">solver-&gt;remove_logger(logger.get());</div>
-</div><!-- fragment --><p>@sec3{Check result} Compute norms of RHS and final residual to check the result</p>
+</div><!-- fragment --><p><a class="anchor" id="Checkresult"></a> </p><h3>Check result</h3>
+<p>Compute norms of RHS and final residual to check the result</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> b_norm = gko::batch_initialize&lt;real_vec_type&gt;(num_total_systems, {0.0},</div>
 <div class="line">                                                   exec-&gt;get_master());</div>
 <div class="line">b-&gt;compute_norm2(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(b_norm));</div>
