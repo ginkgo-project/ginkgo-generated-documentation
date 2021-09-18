@@ -1,16 +1,16 @@
 var searchData=
 [
-  ['ic_1293',['Ic',['../classgko_1_1factorization_1_1Ic.html',1,'gko::factorization::Ic&lt; ValueType, IndexType &gt;'],['../classgko_1_1preconditioner_1_1Ic.html',1,'gko::preconditioner::Ic&lt; LSolverType, IndexType &gt;']]],
-  ['identity_1294',['Identity',['../classgko_1_1matrix_1_1Identity.html',1,'gko::matrix']]],
-  ['identityfactory_1295',['IdentityFactory',['../classgko_1_1matrix_1_1IdentityFactory.html',1,'gko::matrix']]],
-  ['idr_1296',['Idr',['../classgko_1_1solver_1_1Idr.html',1,'gko::solver']]],
-  ['ilu_1297',['Ilu',['../classgko_1_1factorization_1_1Ilu.html',1,'gko::factorization::Ilu&lt; ValueType, IndexType &gt;'],['../classgko_1_1preconditioner_1_1Ilu.html',1,'gko::preconditioner::Ilu&lt; LSolverType, USolverType, ReverseApply, IndexType &gt;']]],
-  ['imag_5foperaton_1298',['imag_operaton',['../structgko_1_1accessor_1_1imag__operaton.html',1,'gko::accessor']]],
-  ['imbalance_5fbounded_5flimit_1299',['imbalance_bounded_limit',['../classgko_1_1matrix_1_1Hybrid_1_1imbalance__bounded__limit.html',1,'gko::matrix::Hybrid']]],
-  ['imbalance_5flimit_1300',['imbalance_limit',['../classgko_1_1matrix_1_1Hybrid_1_1imbalance__limit.html',1,'gko::matrix::Hybrid']]],
-  ['implicitresidualnorm_1301',['ImplicitResidualNorm',['../classgko_1_1stop_1_1ImplicitResidualNorm.html',1,'gko::stop']]],
-  ['ir_1302',['Ir',['../classgko_1_1solver_1_1Ir.html',1,'gko::solver']]],
-  ['isai_1303',['Isai',['../classgko_1_1preconditioner_1_1Isai.html',1,'gko::preconditioner']]],
-  ['iteration_1304',['Iteration',['../classgko_1_1stop_1_1Iteration.html',1,'gko::stop']]],
-  ['iteration_5fcomplete_5fdata_1305',['iteration_complete_data',['../structgko_1_1log_1_1iteration__complete__data.html',1,'gko::log']]]
+  ['ic_1350',['Ic',['../classgko_1_1factorization_1_1Ic.html',1,'gko::factorization::Ic&lt; ValueType, IndexType &gt;'],['../classgko_1_1preconditioner_1_1Ic.html',1,'gko::preconditioner::Ic&lt; LSolverType, IndexType &gt;']]],
+  ['identity_1351',['Identity',['../classgko_1_1matrix_1_1Identity.html',1,'gko::matrix']]],
+  ['identityfactory_1352',['IdentityFactory',['../classgko_1_1matrix_1_1IdentityFactory.html',1,'gko::matrix']]],
+  ['idr_1353',['Idr',['../classgko_1_1solver_1_1Idr.html',1,'gko::solver']]],
+  ['ilu_1354',['Ilu',['../classgko_1_1factorization_1_1Ilu.html',1,'gko::factorization::Ilu&lt; ValueType, IndexType &gt;'],['../classgko_1_1preconditioner_1_1Ilu.html',1,'gko::preconditioner::Ilu&lt; LSolverType, USolverType, ReverseApply, IndexType &gt;']]],
+  ['imag_5foperaton_1355',['imag_operaton',['../structgko_1_1accessor_1_1imag__operaton.html',1,'gko::accessor']]],
+  ['imbalance_5fbounded_5flimit_1356',['imbalance_bounded_limit',['../classgko_1_1matrix_1_1Hybrid_1_1imbalance__bounded__limit.html',1,'gko::matrix::Hybrid']]],
+  ['imbalance_5flimit_1357',['imbalance_limit',['../classgko_1_1matrix_1_1Hybrid_1_1imbalance__limit.html',1,'gko::matrix::Hybrid']]],
+  ['implicitresidualnorm_1358',['ImplicitResidualNorm',['../classgko_1_1stop_1_1ImplicitResidualNorm.html',1,'gko::stop']]],
+  ['ir_1359',['Ir',['../classgko_1_1solver_1_1Ir.html',1,'gko::solver']]],
+  ['isai_1360',['Isai',['../classgko_1_1preconditioner_1_1Isai.html',1,'gko::preconditioner']]],
+  ['iteration_1361',['Iteration',['../classgko_1_1stop_1_1Iteration.html',1,'gko::stop']]],
+  ['iteration_5fcomplete_5fdata_1362',['iteration_complete_data',['../structgko_1_1log_1_1iteration__complete__data.html',1,'gko::log']]]
 ];

@@ -69,6 +69,8 @@ class \mbox{\hyperlink{classgko_1_1CudaError}{Cuda\+Error}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1CudaError}{Cuda\+Error}} is thrown when a C\+U\+DA routine throws a non-\/zero error code. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1CudaExecutor}{Cuda\+Executor}}
 \begin{DoxyCompactList}\small\item\em This is the \mbox{\hyperlink{classgko_1_1Executor}{Executor}} subclass which represents the C\+U\+DA device. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1CufftError}{Cufft\+Error}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1CufftError}{Cufft\+Error}} is thrown when a cu\+F\+FT routine throws a non-\/zero error code. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1CurandError}{Curand\+Error}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1CurandError}{Curand\+Error}} is thrown when a cu\+R\+A\+ND routine throws a non-\/zero error code. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1CusparseError}{Cusparse\+Error}}
@@ -117,6 +119,8 @@ class \mbox{\hyperlink{classgko_1_1HipError}{Hip\+Error}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1HipError}{Hip\+Error}} is thrown when a H\+IP routine throws a non-\/zero error code. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1HipExecutor}{Hip\+Executor}}
 \begin{DoxyCompactList}\small\item\em This is the \mbox{\hyperlink{classgko_1_1Executor}{Executor}} subclass which represents the H\+IP enhanced device. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1HipfftError}{Hipfft\+Error}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1HipfftError}{Hipfft\+Error}} is thrown when a hip\+F\+FT routine throws a non-\/zero error code. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1HiprandError}{Hiprand\+Error}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1HiprandError}{Hiprand\+Error}} is thrown when a hip\+R\+A\+ND routine throws a non-\/zero error code. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1HipsparseError}{Hipsparse\+Error}}
@@ -322,6 +326,10 @@ constexpr \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64
 \mbox{\Hypertarget{namespacegko_ac677f1a4d6794c15b200b4a6cc5b1bbd}\label{namespacegko_ac677f1a4d6794c15b200b4a6cc5b1bbd}} 
 {\footnotesize template$<$typename T $>$ }\\constexpr xstd\+::enable\+\_\+if\+\_\+t$<$ \mbox{\hyperlink{namespacegko_aeede19206954d5c8ebd04c95cf63bb88}{is\+\_\+complex\+\_\+s}}$<$ T $>$\+::value, \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{remove\+\_\+complex}}$<$ T $>$ $>$ {\bfseries abs} (const T \&x)
 \item 
+{\footnotesize template$<$typename T $>$ }\\constexpr T \mbox{\hyperlink{namespacegko_a0603ce0a60183a6698ac9b523694fb68}{pi}} ()
+\begin{DoxyCompactList}\small\item\em Returns the value of pi. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\constexpr std\+::complex$<$ \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{remove\+\_\+complex}}$<$ T $>$ $>$ \mbox{\hyperlink{namespacegko_ab92d450201f5b215901c0f8c3e2e376c}{unit\+\_\+root}} (\mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}} n, \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}} k=1)
+\begin{DoxyCompactList}\small\item\em Returns the value of exp(2 $\ast$ pi $\ast$ i $\ast$ k / n), i.\+e. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename T $>$ }\\constexpr \mbox{\hyperlink{namespacegko_a318c831e3fe269ba04c6ed8bf5a71073}{uint32}} \mbox{\hyperlink{namespacegko_a4eea40e4123a3fdb60fcd92f902c6d6d}{get\+\_\+significant\+\_\+bit}} (const T \&n, \mbox{\hyperlink{namespacegko_a318c831e3fe269ba04c6ed8bf5a71073}{uint32}} hint=0u) noexcept
 \begin{DoxyCompactList}\small\item\em Returns the position of the most significant bit of the number. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename T $>$ }\\constexpr T \mbox{\hyperlink{namespacegko_ad39645fe8148a8a812a9528865a77600}{get\+\_\+superior\+\_\+power}} (const T \&base, const T \&limit, const T \&hint=T\{1\}) noexcept
@@ -1758,6 +1766,10 @@ Returns the multiplicative identity for T.
 \begin{DoxyReturn}{Returns}
 the multiplicative identity for T 
 \end{DoxyReturn}
+
+
+Referenced by unit\+\_\+root().
+
 \mbox{\Hypertarget{namespacegko_ab4f16ecf0a759f46259cf9518f1e4568}\label{namespacegko_ab4f16ecf0a759f46259cf9518f1e4568}} 
 \index{gko@{gko}!one@{one}}
 \index{one@{one}!gko@{gko}}
@@ -1927,6 +1939,22 @@ Checks if two \mbox{\hyperlink{classgko_1_1precision__reduction}{precision\+\_\+
 \begin{DoxyReturn}{Returns}
 true if and only if {\ttfamily x} and {\ttfamily y} are the same encodings 
 \end{DoxyReturn}
+\mbox{\Hypertarget{namespacegko_a0603ce0a60183a6698ac9b523694fb68}\label{namespacegko_a0603ce0a60183a6698ac9b523694fb68}} 
+\index{gko@{gko}!pi@{pi}}
+\index{pi@{pi}!gko@{gko}}
+\doxysubsubsection{\texorpdfstring{pi()}{pi()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+constexpr T gko\+::pi (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Returns the value of pi. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & the value type to return \\
+\hline
+\end{DoxyTemplParams}
 \mbox{\Hypertarget{namespacegko_a3c46f1caf8135f7492aa83d9ac3bc83e}\label{namespacegko_a3c46f1caf8135f7492aa83d9ac3bc83e}} 
 \index{gko@{gko}!precision\_dispatch@{precision\_dispatch}}
 \index{precision\_dispatch@{precision\_dispatch}!gko@{gko}}
@@ -2256,6 +2284,35 @@ a \mbox{\hyperlink{structgko_1_1dim}{dim$<$2$>$}} object with its dimensions swa
 
 
 Referenced by gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type, Index\+Type $>$\+::conj\+\_\+transpose(), gko\+::preconditioner\+::\+Ilu$<$ L\+Solver\+Type, U\+Solver\+Type, Reverse\+Apply, Index\+Type $>$\+::conj\+\_\+transpose(), gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type, Index\+Type $>$\+::transpose(), and gko\+::preconditioner\+::\+Ilu$<$ L\+Solver\+Type, U\+Solver\+Type, Reverse\+Apply, Index\+Type $>$\+::transpose().
+
+\mbox{\Hypertarget{namespacegko_ab92d450201f5b215901c0f8c3e2e376c}\label{namespacegko_ab92d450201f5b215901c0f8c3e2e376c}} 
+\index{gko@{gko}!unit\_root@{unit\_root}}
+\index{unit\_root@{unit\_root}!gko@{gko}}
+\doxysubsubsection{\texorpdfstring{unit\_root()}{unit\_root()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+constexpr std\+::complex$<$\mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{remove\+\_\+complex}}$<$T$>$ $>$ gko\+::unit\+\_\+root (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}}}]{n,  }\item[{\mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}}}]{k = {\ttfamily 1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Returns the value of exp(2 $\ast$ pi $\ast$ i $\ast$ k / n), i.\+e. 
+
+an nth root of unity.
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & the denominator of the argument \\
+\hline
+{\em k} & the numerator of the argument. Defaults to 1.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & the corresponding real value type. \\
+\hline
+\end{DoxyTemplParams}
+
+
+References one().
 
 \mbox{\Hypertarget{namespacegko_a859dc47a462721d83728d91ab7fa2148}\label{namespacegko_a859dc47a462721d83728d91ab7fa2148}} 
 \index{gko@{gko}!write@{write}}

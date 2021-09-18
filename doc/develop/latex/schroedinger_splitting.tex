@@ -1,0 +1,562 @@
+The Schroedinger equation example..
+
+This example depends on heat-\/equation.
+
+ \label{_Intro}%
+ \label{_Introduction}%
+\doxysection*{Introduction}
+
+This example shows how to use the F\+FT and i\+F\+FT implementations in Ginkgo to solve the non-\/linear Schrödinger equation with a splitting method.
+
+The non-\/linear Schrödinger equation (N\+LS) is given by
+
+$ i \partial_t \theta = -\delta \theta + |\theta|^2 \theta $
+
+Here $\theta$ is the wave function of a single particle in two dimensions. Its magnitude $|\theta|^2$ describes the probability distribution of the particle\textquotesingle{}s position.
+
+This equation can be split in to its linear (1) and non-\/linear (2) part
+
+\begin{align*} (1) \quad i \partial_t \theta &= -\delta \theta\\ (2) \quad i \partial_t \theta &= |\theta|^2 \theta \end{align*}
+
+For both of these equations, we can compute exact solutions, assuming periodic boundary conditions and using the Fourier series expansion for (1) and using the fact that $| \theta |^2$ is constant in (2)\+:
+
+\begin{align*} (\hat 1) \quad \quad \partial_t \hat\theta_k &= -i |k|^2 \theta \\ (2\text{'}) \quad \partial_t |\theta|^2 &= i |\theta|^2 (\theta - \theta) = 0 \end{align*}
+
+The exact solutions are then given by
+
+\begin{align*} (\hat 1) \quad \hat\theta(t) &= e^{-i |k|^2 t} \hat\theta(0)\\ (2\text{'}) \quad \theta(t) &= e^{-i |\theta|^2 t} \theta(0) \end{align*}
+
+These partial solutions can be used to approximate a solution to the full N\+LS by alternating between small time steps for (1) and (2).
+
+For nicer visual results, we add another constant potential term V(x) \textbackslash{}theta to the non-\/linear part, which turns it into the Gross–\+Pitaevskii equation.
+
+\label{_Abouttheexample}%
+\doxysubsubsection*{About the example }
+
+\label{_CommProg}%
+ \doxysection*{The commented program}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{/ *****************************<DESCRIPTION>***********************************}
+\DoxyCodeLine{This example shows how to use the FFT and iFFT implementations in Ginkgo}
+\DoxyCodeLine{to solve the non-\/linear Schrödinger equation with a splitting method.}
+\DoxyCodeLine{}
+\DoxyCodeLine{The non-\/linear Schrödinger equation (NLS) is given by}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{    i \(\backslash\)partial\_t \(\backslash\)theta = -\/\(\backslash\)delta \(\backslash\)theta + |\(\backslash\)theta|\string^2 \(\backslash\)theta}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{Here \(\backslash\)theta is the wave \textcolor{keyword}{function} of a single particle in two dimensions.}
+\DoxyCodeLine{Its magnitude |\(\backslash\)theta|\string^2 describes the probability distribution of the}
+\DoxyCodeLine{particle\textcolor{stringliteral}{'s position.}}
+\DoxyCodeLine{\textcolor{stringliteral}{}}
+\DoxyCodeLine{\textcolor{stringliteral}{This equation can be split in to its linear (1) and non-\/linear (2) part}}
+\DoxyCodeLine{\textcolor{stringliteral}{}}
+\DoxyCodeLine{\textcolor{stringliteral}{\(\backslash\)f\{align*\}\{}}
+\DoxyCodeLine{\textcolor{stringliteral}{    (1) \(\backslash\)quad i \(\backslash\)partial\_t \(\backslash\)theta \&= -\/\(\backslash\)delta \(\backslash\)theta\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\textcolor{stringliteral}{    (2) \(\backslash\)quad i \(\backslash\)partial\_t \(\backslash\)theta \&= |\(\backslash\)theta|\string^2 \(\backslash\)theta}}
+\DoxyCodeLine{\textcolor{stringliteral}{\(\backslash\)f\}}}
+\DoxyCodeLine{\textcolor{stringliteral}{}}
+\DoxyCodeLine{\textcolor{stringliteral}{For both of these equations, we can compute exact solutions, assuming periodic}}
+\DoxyCodeLine{\textcolor{stringliteral}{boundary conditions and using the Fourier series expansion for (1) and using the}}
+\DoxyCodeLine{\textcolor{stringliteral}{fact that | \(\backslash\)theta |\string^2 is constant in (2):}}
+\DoxyCodeLine{\textcolor{stringliteral}{}}
+\DoxyCodeLine{\textcolor{stringliteral}{\(\backslash\)f\{align*\}\{}}
+\DoxyCodeLine{\textcolor{stringliteral}{    (\(\backslash\)hat 1) \(\backslash\)quad \(\backslash\)quad \(\backslash\)partial\_t \(\backslash\)hat\(\backslash\)theta\_k \&= -\/i |k|\string^2 \(\backslash\)theta \(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\textcolor{stringliteral}{    (2'}) \(\backslash\)quad \(\backslash\)partial\_t |\(\backslash\)theta|\string^2 \&= i |\(\backslash\)theta|\string^2 (\(\backslash\)theta -\/ \(\backslash\)theta) = 0}
+\DoxyCodeLine{\(\backslash\)f\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{The exact solutions are then given by}
+\DoxyCodeLine{}
+\DoxyCodeLine{\(\backslash\)f\{align*\}\{}
+\DoxyCodeLine{    (\(\backslash\)hat 1) \(\backslash\)quad \(\backslash\)hat\(\backslash\)theta(t) \&= e\string^\{-\/i |k|\string^2 t\} \(\backslash\)hat\(\backslash\)theta(0)\(\backslash\)\(\backslash\)}
+\DoxyCodeLine{    (2\textcolor{stringliteral}{') \(\backslash\)quad \(\backslash\)theta(t) \&= e\string^\{-\/i |\(\backslash\)theta|\string^2 t\} \(\backslash\)theta(0)}}
+\DoxyCodeLine{\textcolor{stringliteral}{\(\backslash\)f\}}}
+\DoxyCodeLine{\textcolor{stringliteral}{}}
+\DoxyCodeLine{\textcolor{stringliteral}{These partial solutions can be used to approximate a solution to the full NLS}}
+\DoxyCodeLine{\textcolor{stringliteral}{by alternating between small time steps for (1) and (2).}}
+\DoxyCodeLine{\textcolor{stringliteral}{}}
+\DoxyCodeLine{\textcolor{stringliteral}{For nicer visual results, we add another constant potential term V(x) \(\backslash\)theta}}
+\DoxyCodeLine{\textcolor{stringliteral}{to the non-\/linear part, which turns it into the Gross–Pitaevskii equation.}}
+\DoxyCodeLine{\textcolor{stringliteral}{}}
+\DoxyCodeLine{\textcolor{stringliteral}{*****************************<DESCRIPTION>********************************** /}}
+\DoxyCodeLine{\textcolor{stringliteral}{}}
+\DoxyCodeLine{\textcolor{stringliteral}{\#include <ginkgo/ginkgo.hpp>}}
+\DoxyCodeLine{\textcolor{stringliteral}{}}
+\DoxyCodeLine{\textcolor{stringliteral}{\#include <algorithm>}}
+\DoxyCodeLine{\textcolor{stringliteral}{\#include <chrono>}}
+\DoxyCodeLine{\textcolor{stringliteral}{\#include <fstream>}}
+\DoxyCodeLine{\textcolor{stringliteral}{\#include <iostream>}}
+\DoxyCodeLine{\textcolor{stringliteral}{\#include <utility>}}
+\DoxyCodeLine{\textcolor{stringliteral}{}}
+\DoxyCodeLine{\textcolor{stringliteral}{\#include <opencv2/core.hpp>}}
+\DoxyCodeLine{\textcolor{stringliteral}{\#include <opencv2/videoio.hpp>}}
+\end{DoxyCode}
+
+
+This function implements a simple Ginkgo-\/themed clamped color mapping for values in the range \mbox{[}0,5\mbox{]}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} set\_val(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}* data, \textcolor{keywordtype}{double} value)}
+\DoxyCodeLine{\{}
+\end{DoxyCode}
+
+
+R\+GB values for the 6 colors used for values 0, 1, ..., 5 We will interpolate linearly between these values.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{double} col\_r[] = \{255, 221, 129, 201, 249, 255\};}
+\DoxyCodeLine{\textcolor{keywordtype}{double} col\_g[] = \{255, 220, 130, 161, 158, 204\};}
+\DoxyCodeLine{\textcolor{keywordtype}{double} col\_b[] = \{255, 220, 133, 93, 24, 8\};}
+\DoxyCodeLine{value = std::max(0.0, value);}
+\DoxyCodeLine{\textcolor{keyword}{auto} i = std::max(0, std::min(4, \textcolor{keywordtype}{int}(value)));}
+\DoxyCodeLine{\textcolor{keyword}{auto} d = std::max(0.0, std::min(1.0, value -\/ i));}
+\end{DoxyCode}
+
+
+Open\+CV uses B\+GR instead of R\+GB by default, revert indices
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    data[2] = static\_cast<unsigned char>(col\_r[i + 1] * d + col\_r[i] * (1 -\/ d));}
+\DoxyCodeLine{    data[1] = static\_cast<unsigned char>(col\_g[i + 1] * d + col\_g[i] * (1 -\/ d));}
+\DoxyCodeLine{    data[0] = static\_cast<unsigned char>(col\_b[i + 1] * d + col\_b[i] * (1 -\/ d));}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+Initialize video output with given dimension and F\+PS (frames per seconds)
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::pair<cv::VideoWriter, cv::Mat> build\_output(\textcolor{keywordtype}{int} n, \textcolor{keywordtype}{double} fps)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    cv::Size videosize\{n, n\};}
+\DoxyCodeLine{    \textcolor{keyword}{auto} output =}
+\DoxyCodeLine{        std::make\_pair(cv::VideoWriter\{\}, cv::Mat\{videosize, CV\_8UC3\});}
+\DoxyCodeLine{    \textcolor{keyword}{auto} fourcc = cv::VideoWriter::fourcc(\textcolor{charliteral}{'a'}, \textcolor{charliteral}{'v'}, \textcolor{charliteral}{'c'}, \textcolor{charliteral}{'1'});}
+\DoxyCodeLine{    output.first.open(\textcolor{stringliteral}{"nls.mp4"}, fourcc, fps, videosize);}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} output;}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+Write the current frame to video output using the above color mapping
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} output\_timestep(std::pair<cv::VideoWriter, cv::Mat>\& output, \textcolor{keywordtype}{int} n,}
+\DoxyCodeLine{                     \textcolor{keyword}{const} std::complex<double>* data)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < n; i++) \{}
+\DoxyCodeLine{        \textcolor{keyword}{auto} row = output.second.ptr(i);}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j < n; j++) \{}
+\DoxyCodeLine{            set\_val(\&row[3 * j], \mbox{\hyperlink{namespacegko_adeb470aaf293d7c5548392b2f451e8e4}{abs}}(data[i * n + j]));}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    output.first.write(output.second);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keyword}{using} vec = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<std::complex<double>}}>;}
+\DoxyCodeLine{    \textcolor{keyword}{using} real\_vec = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<double>}};}
+\DoxyCodeLine{    \textcolor{keyword}{using} fft2 = \mbox{\hyperlink{classgko_1_1matrix_1_1Fft2}{gko::matrix::Fft2}};}
+\end{DoxyCode}
+
+
+Problem parameters\+: simulation length
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} t0 = 15.0;}
+\end{DoxyCode}
+
+
+scaling factor for non-\/linearity
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} nonlinear\_scale = 1.0;}
+\end{DoxyCode}
+
+
+scaling factor for potential
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} potential\_scale = 3.0;}
+\end{DoxyCode}
+
+
+Simulation parameters\+: time scaling factor
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} time\_scale = 0.25;}
+\end{DoxyCode}
+
+
+number of grid points in each dimension
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} n = 256;}
+\end{DoxyCode}
+
+
+number of simulation steps per second
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} steps\_per\_sec = 1000;}
+\end{DoxyCode}
+
+
+number of video frames per second
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} fps = 25;}
+\end{DoxyCode}
+
+
+number of grid points
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} n2 = n * n;}
+\end{DoxyCode}
+
+
+phase difference between neighboring grid points
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} h = 2.0 * gko::pi<double>() / n;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} h2 = h * h;}
+\end{DoxyCode}
+
+
+time step size for the simulation
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} tau = 1.0 / steps\_per\_sec;}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} idx = [\&](\textcolor{keywordtype}{int} i, \textcolor{keywordtype}{int} j) \{ \textcolor{keywordflow}{return} i * n + j; \};}
+\end{DoxyCode}
+
+
+create an Open\+MP executor
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} exec = \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}();}
+\end{DoxyCode}
+
+
+load initial state vector
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::ifstream initial\_stream(\textcolor{stringliteral}{"data/gko\_logo\_2d.mtx"});}
+\DoxyCodeLine{std::ifstream potential\_stream(\textcolor{stringliteral}{"data/gko\_text\_2d.mtx"});}
+\DoxyCodeLine{\textcolor{keyword}{auto} amplitude = gko::read<vec>(initial\_stream, exec);}
+\DoxyCodeLine{\textcolor{keyword}{auto} potential = gko::read<real\_vec>(potential\_stream, exec);}
+\end{DoxyCode}
+
+
+create vector for frequency space representation
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} frequency = vec::create(exec, amplitude-\/>get\_size());}
+\end{DoxyCode}
+
+
+create Fourier matrix
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} fft = fft2::create(exec, n, n);}
+\DoxyCodeLine{\textcolor{keyword}{auto} ifft = fft-\/>conj\_transpose();}
+\end{DoxyCode}
+
+
+prepare video output
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} output = build\_output(n, fps);}
+\end{DoxyCode}
+
+
+time stamp of the last output frame (sentinel value)
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{double} last\_t = -\/t0;}
+\end{DoxyCode}
+
+
+execute splitting method\+: time step in linear part, then non-\/linear part
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{double} t = 0; t < t0; t += tau) \{}
+\end{DoxyCode}
+
+
+if enough time has passed, output the next frame
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (t -\/ last\_t > 1.0 / fps) \{}
+\DoxyCodeLine{    last\_t = t;}
+\DoxyCodeLine{    std::cout << t << std::endl;}
+\DoxyCodeLine{    output\_timestep(output, n, amplitude-\/>get\_const\_values());}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+time step in linear part
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{fft-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(amplitude), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(frequency));}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < n; i++) \{}
+\DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j < n; j++) \{}
+\DoxyCodeLine{        frequency-\/>at(idx(i, j)) *=}
+\DoxyCodeLine{            std::polar(1.0, -\/h2 * (i * i + j * j) * tau * time\_scale);}
+\end{DoxyCode}
+
+
+scale by F\+F\+T$\ast$i\+F\+FT normalization factor
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{        frequency-\/>at(idx(i, j)) *= 1.0 / n2;}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{ifft-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(frequency), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(amplitude));}
+\end{DoxyCode}
+
+
+time step in non-\/linear part
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < n; i++) \{}
+\DoxyCodeLine{            \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j < n; j++) \{}
+\DoxyCodeLine{                amplitude-\/>at(idx(i, j)) *= std::polar(}
+\DoxyCodeLine{                    1.0, -\/(nonlinear\_scale *}
+\DoxyCodeLine{                               \mbox{\hyperlink{namespacegko_abbb55709b10d707b2cbef803832aa834}{gko::squared\_norm}}(amplitude-\/>at(idx(i, j))) +}
+\DoxyCodeLine{                           potential\_scale * potential-\/>at(idx(i, j))) *}
+\DoxyCodeLine{                             tau * time\_scale);}
+\DoxyCodeLine{            \}}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+ \label{_Results}%
+\doxysection*{Results}
+
+The program will generate a video file named nls.\+mp4 and output the timestamp of each generated frame.
+
+\label{_Commentsaboutprogramminganddebugging}%
+\doxysubsubsection*{Comments about programming and debugging }
+
+\label{_PlainProg}%
+ \doxysection*{The plain program}
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{/*******************************<GINKGO LICENSE>******************************}}
+\DoxyCodeLine{\textcolor{comment}{Copyright (c) 2017-\/2021, the Ginkgo authors}}
+\DoxyCodeLine{\textcolor{comment}{All rights reserved.}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{Redistribution and use in source and binary forms, with or without}}
+\DoxyCodeLine{\textcolor{comment}{modification, are permitted provided that the following conditions}}
+\DoxyCodeLine{\textcolor{comment}{are met:}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{1. Redistributions of source code must retain the above copyright}}
+\DoxyCodeLine{\textcolor{comment}{notice, this list of conditions and the following disclaimer.}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{2. Redistributions in binary form must reproduce the above copyright}}
+\DoxyCodeLine{\textcolor{comment}{notice, this list of conditions and the following disclaimer in the}}
+\DoxyCodeLine{\textcolor{comment}{documentation and/or other materials provided with the distribution.}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{3. Neither the name of the copyright holder nor the names of its}}
+\DoxyCodeLine{\textcolor{comment}{contributors may be used to endorse or promote products derived from}}
+\DoxyCodeLine{\textcolor{comment}{this software without specific prior written permission.}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS}}
+\DoxyCodeLine{\textcolor{comment}{IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED}}
+\DoxyCodeLine{\textcolor{comment}{TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A}}
+\DoxyCodeLine{\textcolor{comment}{PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT}}
+\DoxyCodeLine{\textcolor{comment}{HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,}}
+\DoxyCodeLine{\textcolor{comment}{SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT}}
+\DoxyCodeLine{\textcolor{comment}{LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,}}
+\DoxyCodeLine{\textcolor{comment}{DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY}}
+\DoxyCodeLine{\textcolor{comment}{THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT}}
+\DoxyCodeLine{\textcolor{comment}{(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE}}
+\DoxyCodeLine{\textcolor{comment}{OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.}}
+\DoxyCodeLine{\textcolor{comment}{******************************<GINKGO LICENSE>*******************************/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{/*****************************<DESCRIPTION>***********************************}}
+\DoxyCodeLine{\textcolor{comment}{This example shows how to use the FFT and iFFT implementations in Ginkgo}}
+\DoxyCodeLine{\textcolor{comment}{to solve the non-\/linear Schrödinger equation with a splitting method.}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{The non-\/linear Schrödinger equation (NLS) is given by}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{@f\$}}
+\DoxyCodeLine{\textcolor{comment}{    i \(\backslash\)partial\_t \(\backslash\)theta = -\/\(\backslash\)delta \(\backslash\)theta + |\(\backslash\)theta|\string^2 \(\backslash\)theta}}
+\DoxyCodeLine{\textcolor{comment}{@f\$}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{Here @f\$\(\backslash\)theta@f\$ is the wave function of a single particle in two dimensions.}}
+\DoxyCodeLine{\textcolor{comment}{Its magnitude @f\$|\(\backslash\)theta|\string^2@f\$ describes the probability distribution of the}}
+\DoxyCodeLine{\textcolor{comment}{particle's position.}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{This equation can be split in to its linear (1) and non-\/linear (2) part}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\(\backslash\)f\{align*\}\{}}
+\DoxyCodeLine{\textcolor{comment}{    (1) \(\backslash\)quad i \(\backslash\)partial\_t \(\backslash\)theta \&= -\/\(\backslash\)delta \(\backslash\)theta\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\textcolor{comment}{    (2) \(\backslash\)quad i \(\backslash\)partial\_t \(\backslash\)theta \&= |\(\backslash\)theta|\string^2 \(\backslash\)theta}}
+\DoxyCodeLine{\textcolor{comment}{\(\backslash\)f\}}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{For both of these equations, we can compute exact solutions, assuming periodic}}
+\DoxyCodeLine{\textcolor{comment}{boundary conditions and using the Fourier series expansion for (1) and using the}}
+\DoxyCodeLine{\textcolor{comment}{fact that @f\$| \(\backslash\)theta |\string^2@f\$ is constant in (2):}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\(\backslash\)f\{align*\}\{}}
+\DoxyCodeLine{\textcolor{comment}{    (\(\backslash\)hat 1) \(\backslash\)quad \(\backslash\)quad \(\backslash\)partial\_t \(\backslash\)hat\(\backslash\)theta\_k \&= -\/i |k|\string^2 \(\backslash\)theta \(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\textcolor{comment}{    (2') \(\backslash\)quad \(\backslash\)partial\_t |\(\backslash\)theta|\string^2 \&= i |\(\backslash\)theta|\string^2 (\(\backslash\)theta -\/ \(\backslash\)theta) = 0}}
+\DoxyCodeLine{\textcolor{comment}{\(\backslash\)f\}}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{The exact solutions are then given by}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{\(\backslash\)f\{align*\}\{}}
+\DoxyCodeLine{\textcolor{comment}{    (\(\backslash\)hat 1) \(\backslash\)quad \(\backslash\)hat\(\backslash\)theta(t) \&= e\string^\{-\/i |k|\string^2 t\} \(\backslash\)hat\(\backslash\)theta(0)\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\textcolor{comment}{    (2') \(\backslash\)quad \(\backslash\)theta(t) \&= e\string^\{-\/i |\(\backslash\)theta|\string^2 t\} \(\backslash\)theta(0)}}
+\DoxyCodeLine{\textcolor{comment}{\(\backslash\)f\}}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{These partial solutions can be used to approximate a solution to the full NLS}}
+\DoxyCodeLine{\textcolor{comment}{by alternating between small time steps for (1) and (2).}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{For nicer visual results, we add another constant potential term V(x) \(\backslash\)theta}}
+\DoxyCodeLine{\textcolor{comment}{to the non-\/linear part, which turns it into the Gross–Pitaevskii equation.}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{*****************************<DESCRIPTION>**********************************/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <algorithm>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <chrono>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <utility>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <opencv2/core.hpp>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <opencv2/videoio.hpp>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void} set\_val(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}* data, \textcolor{keywordtype}{double} value)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keywordtype}{double} col\_r[] = \{255, 221, 129, 201, 249, 255\};}
+\DoxyCodeLine{    \textcolor{keywordtype}{double} col\_g[] = \{255, 220, 130, 161, 158, 204\};}
+\DoxyCodeLine{    \textcolor{keywordtype}{double} col\_b[] = \{255, 220, 133, 93, 24, 8\};}
+\DoxyCodeLine{    value = std::max(0.0, value);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} i = std::max(0, std::min(4, \textcolor{keywordtype}{int}(value)));}
+\DoxyCodeLine{    \textcolor{keyword}{auto} d = std::max(0.0, std::min(1.0, value -\/ i));}
+\DoxyCodeLine{    data[2] = static\_cast<unsigned char>(col\_r[i + 1] * d + col\_r[i] * (1 -\/ d));}
+\DoxyCodeLine{    data[1] = static\_cast<unsigned char>(col\_g[i + 1] * d + col\_g[i] * (1 -\/ d));}
+\DoxyCodeLine{    data[0] = static\_cast<unsigned char>(col\_b[i + 1] * d + col\_b[i] * (1 -\/ d));}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::pair<cv::VideoWriter, cv::Mat> build\_output(\textcolor{keywordtype}{int} n, \textcolor{keywordtype}{double} fps)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    cv::Size videosize\{n, n\};}
+\DoxyCodeLine{    \textcolor{keyword}{auto} output =}
+\DoxyCodeLine{        std::make\_pair(cv::VideoWriter\{\}, cv::Mat\{videosize, CV\_8UC3\});}
+\DoxyCodeLine{    \textcolor{keyword}{auto} fourcc = cv::VideoWriter::fourcc(\textcolor{charliteral}{'a'}, \textcolor{charliteral}{'v'}, \textcolor{charliteral}{'c'}, \textcolor{charliteral}{'1'});}
+\DoxyCodeLine{    output.first.open(\textcolor{stringliteral}{"nls.mp4"}, fourcc, fps, videosize);}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} output;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void} output\_timestep(std::pair<cv::VideoWriter, cv::Mat>\& output, \textcolor{keywordtype}{int} n,}
+\DoxyCodeLine{                     \textcolor{keyword}{const} std::complex<double>* data)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < n; i++) \{}
+\DoxyCodeLine{        \textcolor{keyword}{auto} row = output.second.ptr(i);}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j < n; j++) \{}
+\DoxyCodeLine{            set\_val(\&row[3 * j], \mbox{\hyperlink{namespacegko_adeb470aaf293d7c5548392b2f451e8e4}{abs}}(data[i * n + j]));}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    output.first.write(output.second);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keyword}{using} vec = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<std::complex<double>}}>;}
+\DoxyCodeLine{    \textcolor{keyword}{using} real\_vec = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<double>}};}
+\DoxyCodeLine{    \textcolor{keyword}{using} fft2 = \mbox{\hyperlink{classgko_1_1matrix_1_1Fft2}{gko::matrix::Fft2}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} t0 = 15.0;}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} nonlinear\_scale = 1.0;}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} potential\_scale = 3.0;}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} time\_scale = 0.25;}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} n = 256;}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} steps\_per\_sec = 1000;}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} fps = 25;}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} n2 = n * n;}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} h = 2.0 * gko::pi<double>() / n;}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} h2 = h * h;}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} tau = 1.0 / steps\_per\_sec;}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} idx = [\&](\textcolor{keywordtype}{int} i, \textcolor{keywordtype}{int} j) \{ \textcolor{keywordflow}{return} i * n + j; \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{auto} exec = \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}();}
+\DoxyCodeLine{    std::ifstream initial\_stream(\textcolor{stringliteral}{"data/gko\_logo\_2d.mtx"});}
+\DoxyCodeLine{    std::ifstream potential\_stream(\textcolor{stringliteral}{"data/gko\_text\_2d.mtx"});}
+\DoxyCodeLine{    \textcolor{keyword}{auto} amplitude = gko::read<vec>(initial\_stream, exec);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} potential = gko::read<real\_vec>(potential\_stream, exec);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} frequency = vec::create(exec, amplitude-\/>get\_size());}
+\DoxyCodeLine{    \textcolor{keyword}{auto} fft = fft2::create(exec, n, n);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} ifft = fft-\/>conj\_transpose();}
+\DoxyCodeLine{    \textcolor{keyword}{auto} output = build\_output(n, fps);}
+\DoxyCodeLine{    \textcolor{keywordtype}{double} last\_t = -\/t0;}
+\DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{double} t = 0; t < t0; t += tau) \{}
+\DoxyCodeLine{        \textcolor{keywordflow}{if} (t -\/ last\_t > 1.0 / fps) \{}
+\DoxyCodeLine{            last\_t = t;}
+\DoxyCodeLine{            std::cout << t << std::endl;}
+\DoxyCodeLine{            output\_timestep(output, n, amplitude-\/>get\_const\_values());}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{        fft-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(amplitude), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(frequency));}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < n; i++) \{}
+\DoxyCodeLine{            \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j < n; j++) \{}
+\DoxyCodeLine{                frequency-\/>at(idx(i, j)) *=}
+\DoxyCodeLine{                    std::polar(1.0, -\/h2 * (i * i + j * j) * tau * time\_scale);}
+\DoxyCodeLine{                frequency-\/>at(idx(i, j)) *= 1.0 / n2;}
+\DoxyCodeLine{            \}}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{        ifft-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(frequency), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(amplitude));}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < n; i++) \{}
+\DoxyCodeLine{            \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j < n; j++) \{}
+\DoxyCodeLine{                amplitude-\/>at(idx(i, j)) *= std::polar(}
+\DoxyCodeLine{                    1.0, -\/(nonlinear\_scale *}
+\DoxyCodeLine{                               \mbox{\hyperlink{namespacegko_abbb55709b10d707b2cbef803832aa834}{gko::squared\_norm}}(amplitude-\/>at(idx(i, j))) +}
+\DoxyCodeLine{                           potential\_scale * potential-\/>at(idx(i, j))) *}
+\DoxyCodeLine{                             tau * time\_scale);}
+\DoxyCodeLine{            \}}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{\}}
+\end{DoxyCodeInclude}
+ 
