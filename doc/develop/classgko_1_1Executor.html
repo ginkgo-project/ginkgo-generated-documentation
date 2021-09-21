@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/373362719 branch based on develop. Ginkgo version 1.5.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/373569619 branch based on develop. Ginkgo version 1.5.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -177,7 +177,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>ReferenceExecutor</b
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The first step in using the Ginkgo library consists of creating an executor. </p>
-<p>Executors are used to specify the location for the data of linear algebra objects, and to determine where the operations will be executed. Ginkgo currently supports three different executor types:</p>
+<p>Executors are used to specify the location for the data of linear algebra objects, and to determine where the operations will be executed. Ginkgo currently supports five different executor types:</p>
 <ul>
 <li><a class="el" href="classgko_1_1OmpExecutor.html" title="This is the Executor subclass which represents the OpenMP device (typically CPU).">OmpExecutor</a> specifies that the data should be stored and the associated operations executed on an OpenMP-supporting device (e.g. host CPU);</li>
 <li><a class="el" href="classgko_1_1CudaExecutor.html" title="This is the Executor subclass which represents the CUDA device.">CudaExecutor</a> specifies that the data should be stored and the operations executed on the NVIDIA GPU accelerator;</li>
@@ -613,7 +613,8 @@ template&lt;typename ClosureOmp , typename ClosureCuda , typename ClosureHip , t
   <table class="tparams">
     <tr><td class="paramname">ClosureOmp</td><td>type of op_omp </td></tr>
     <tr><td class="paramname">ClosureCuda</td><td>type of op_cuda </td></tr>
-    <tr><td class="paramname">ClosureHip</td><td>type of op_hip</td></tr>
+    <tr><td class="paramname">ClosureHip</td><td>type of op_hip </td></tr>
+    <tr><td class="paramname">ClosureDpcpp</td><td>type of op_dpcpp</td></tr>
   </table>
   </dd>
 </dl>
@@ -622,6 +623,7 @@ template&lt;typename ClosureOmp , typename ClosureCuda , typename ClosureHip , t
     <tr><td class="paramname">op_omp</td><td>functor to run in case of a <a class="el" href="classgko_1_1OmpExecutor.html" title="This is the Executor subclass which represents the OpenMP device (typically CPU).">OmpExecutor</a> or <a class="el" href="classgko_1_1ReferenceExecutor.html" title="This is a specialization of the OmpExecutor, which runs the reference implementations of the kernels ...">ReferenceExecutor</a> </td></tr>
     <tr><td class="paramname">op_cuda</td><td>functor to run in case of a <a class="el" href="classgko_1_1CudaExecutor.html" title="This is the Executor subclass which represents the CUDA device.">CudaExecutor</a> </td></tr>
     <tr><td class="paramname">op_hip</td><td>functor to run in case of a <a class="el" href="classgko_1_1HipExecutor.html" title="This is the Executor subclass which represents the HIP enhanced device.">HipExecutor</a> </td></tr>
+    <tr><td class="paramname">op_dpcpp</td><td>functor to run in case of a <a class="el" href="classgko_1_1DpcppExecutor.html" title="This is the Executor subclass which represents a DPC++ enhanced device.">DpcppExecutor</a> </td></tr>
   </table>
   </dd>
 </dl>

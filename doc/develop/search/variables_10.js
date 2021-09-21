@@ -5,7 +5,7 @@ var searchData=
   ['smoother_5fiters_1918',['smoother_iters',['../structgko_1_1solver_1_1Multigrid_1_1parameters__type.html#a88fd9e554c67014556e1da4d96e8c6d3',1,'gko::solver::Multigrid::parameters_type']]],
   ['smoother_5frelax_1919',['smoother_relax',['../structgko_1_1solver_1_1Multigrid_1_1parameters__type.html#a53ee23a630f6bce8940c98cc9000c561',1,'gko::solver::Multigrid::parameters_type']]],
   ['solver_1920',['solver',['../structgko_1_1solver_1_1Ir_1_1parameters__type.html#a787aaabdad4c273ef2ec9ff93672db82',1,'gko::solver::Ir::parameters_type']]],
-  ['solver_5fselector_1921',['solver_selector',['../structgko_1_1solver_1_1Multigrid_1_1parameters__type.html#a7d98c8a8a6964999f4872c50c170c7ec',1,'gko::solver::Multigrid::parameters_type']]],
+  ['solver_5fselector_1921',['solver_selector',['../structgko_1_1solver_1_1Multigrid_1_1parameters__type.html#ac722bf3fa49f15200604b9e30f492621',1,'gko::solver::Multigrid::parameters_type']]],
   ['sparsity_5fpower_1922',['sparsity_power',['../structgko_1_1preconditioner_1_1Isai_1_1parameters__type.html#a24629edfcca9106e2bb310bdbca2c28c',1,'gko::preconditioner::Isai::parameters_type']]],
   ['storage_5foptimization_1923',['storage_optimization',['../structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type.html#a51d0eec65f99d6dd5b0ebe5ba69390dd',1,'gko::preconditioner::Jacobi::parameters_type']]],
   ['storage_5fprecision_1924',['storage_precision',['../structgko_1_1solver_1_1CbGmres_1_1parameters__type.html#ae28cef8c0fe5f51e914fb2486eb4f125',1,'gko::solver::CbGmres::parameters_type']]],

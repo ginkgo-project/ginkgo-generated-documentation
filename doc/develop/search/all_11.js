@@ -25,7 +25,7 @@ var searchData=
   ['smoother_5fiters_889',['smoother_iters',['../structgko_1_1solver_1_1Multigrid_1_1parameters__type.html#a88fd9e554c67014556e1da4d96e8c6d3',1,'gko::solver::Multigrid::parameters_type']]],
   ['smoother_5frelax_890',['smoother_relax',['../structgko_1_1solver_1_1Multigrid_1_1parameters__type.html#a53ee23a630f6bce8940c98cc9000c561',1,'gko::solver::Multigrid::parameters_type']]],
   ['solver_891',['solver',['../structgko_1_1solver_1_1Ir_1_1parameters__type.html#a787aaabdad4c273ef2ec9ff93672db82',1,'gko::solver::Ir::parameters_type']]],
-  ['solver_5fselector_892',['solver_selector',['../structgko_1_1solver_1_1Multigrid_1_1parameters__type.html#a7d98c8a8a6964999f4872c50c170c7ec',1,'gko::solver::Multigrid::parameters_type']]],
+  ['solver_5fselector_892',['solver_selector',['../structgko_1_1solver_1_1Multigrid_1_1parameters__type.html#ac722bf3fa49f15200604b9e30f492621',1,'gko::solver::Multigrid::parameters_type']]],
   ['solvers_893',['Solvers',['../group__solvers.html',1,'']]],
   ['sort_5fby_5fcolumn_5findex_894',['sort_by_column_index',['../classgko_1_1matrix_1_1Csr.html#ac817665ebedfc099180a785d813db8ef',1,'gko::matrix::Csr::sort_by_column_index()'],['../classgko_1_1matrix_1_1Fbcsr.html#a8e67294878a2da394e296f3c1426f14b',1,'gko::matrix::Fbcsr::sort_by_column_index()'],['../classgko_1_1matrix_1_1SparsityCsr.html#ada754f69e64b81679d1b65df27810d07',1,'gko::matrix::SparsityCsr::sort_by_column_index()']]],
   ['span_895',['span',['../structgko_1_1span.html',1,'gko::span'],['../structgko_1_1span.html#a2aafb0414ef14fac91296066f7426d6d',1,'gko::span::span(size_type point) noexcept'],['../structgko_1_1span.html#a1566e1ab67312a6b9ece66fa4f5c8799',1,'gko::span::span(size_type begin, size_type end) noexcept']]],
