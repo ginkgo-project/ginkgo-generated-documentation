@@ -215,6 +215,8 @@ class \mbox{\hyperlink{classgko_1_1WritableToMatrixData}{Writable\+To\+Matrix\+D
 \mbox{\Hypertarget{namespacegko_a373c2b4782d95e675d7e91a75bab101d}\label{namespacegko_a373c2b4782d95e675d7e91a75bab101d}} 
 {\footnotesize template$<$typename T $>$ }\\using \mbox{\hyperlink{namespacegko_a373c2b4782d95e675d7e91a75bab101d}{increase\+\_\+precision}} = typename detail\+::increase\+\_\+precision\+\_\+impl$<$ T $>$\+::type
 \begin{DoxyCompactList}\small\item\em Obtains the next type in the hierarchy with higher precision than T. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename... Ts$>$ }\\using \mbox{\hyperlink{namespacegko_a6837b759dc528737540a83c79fbdda29}{highest\+\_\+precision}} = typename detail\+::highest\+\_\+precision\+\_\+variadic$<$ Ts... $>$\+::type
+\begin{DoxyCompactList}\small\item\em Obtains the smallest arithmetic type that is able to store elements of all template parameter types exactly. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{namespacegko_a512fc29f227f5d452e13787bf3df7d48}\label{namespacegko_a512fc29f227f5d452e13787bf3df7d48}} 
 {\footnotesize template$<$typename T , size\+\_\+type Limit = sizeof(uint16) $\ast$ byte\+\_\+size$>$ }\\using \mbox{\hyperlink{namespacegko_a512fc29f227f5d452e13787bf3df7d48}{truncate\+\_\+type}} = std\+::conditional\+\_\+t$<$ detail\+::type\+\_\+size\+\_\+impl$<$ T $>$\+::value $>$=2 $\ast$Limit, typename detail\+::truncate\+\_\+type\+\_\+impl$<$ T $>$\+::type, T $>$
 \begin{DoxyCompactList}\small\item\em Truncates the type by half (by dropping bits), but ensures that it is at least {\ttfamily Limit} bits wide. \end{DoxyCompactList}\item 
@@ -758,7 +760,20 @@ constexpr \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\
 The Ginkgo namespace. 
 
 \doxysubsection{Typedef Documentation}
-\mbox{\Hypertarget{namespacegko_a7a3f195040a356643b3e8659554c7a48}\label{namespacegko_a7a3f195040a356643b3e8659554c7a48}} 
+\mbox{\Hypertarget{namespacegko_a6837b759dc528737540a83c79fbdda29}\label{namespacegko_a6837b759dc528737540a83c79fbdda29}} 
+\index{gko@{gko}!highest\_precision@{highest\_precision}}
+\index{highest\_precision@{highest\_precision}!gko@{gko}}
+\doxysubsubsection{\texorpdfstring{highest\_precision}{highest\_precision}}
+{\footnotesize\ttfamily template$<$typename... Ts$>$ \\
+using \mbox{\hyperlink{namespacegko_a6837b759dc528737540a83c79fbdda29}{gko\+::highest\+\_\+precision}} = typedef typename detail\+::highest\+\_\+precision\+\_\+variadic$<$Ts...$>$\+::type}
+
+
+
+Obtains the smallest arithmetic type that is able to store elements of all template parameter types exactly. 
+
+All template type parameters need to be either real or complex types, mixing them is not possible.
+
+Formally, it computes a right-\/fold over the type list, with the highest precision of a pair of real arithmetic types T1, T2 computed as {\ttfamily decltype(T1\{\} + T2\{\})}, or {\ttfamily std\+::complex$<$highest\+\_\+precision$<$remove\+\_\+complex$<$T1$>$, remove\+\_\+complex$<$T2$>$$>$$>$} for complex types. \mbox{\Hypertarget{namespacegko_a7a3f195040a356643b3e8659554c7a48}\label{namespacegko_a7a3f195040a356643b3e8659554c7a48}} 
 \index{gko@{gko}!is\_complex\_or\_scalar\_s@{is\_complex\_or\_scalar\_s}}
 \index{is\_complex\_or\_scalar\_s@{is\_complex\_or\_scalar\_s}!gko@{gko}}
 \doxysubsubsection{\texorpdfstring{is\_complex\_or\_scalar\_s}{is\_complex\_or\_scalar\_s}}

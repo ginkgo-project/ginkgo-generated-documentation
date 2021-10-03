@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/381145250 branch based on develop. Ginkgo version 1.5.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/381411771 branch based on develop. Ginkgo version 1.5.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -391,6 +391,10 @@ template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a373c2b4782d95e675d7e91a75bab101d"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegko.html#a373c2b4782d95e675d7e91a75bab101d">increase_precision</a> = typename detail::increase_precision_impl&lt; T &gt;::type</td></tr>
 <tr class="memdesc:a373c2b4782d95e675d7e91a75bab101d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtains the next type in the hierarchy with higher precision than T. <br /></td></tr>
 <tr class="separator:a373c2b4782d95e675d7e91a75bab101d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6837b759dc528737540a83c79fbdda29"><td class="memTemplParams" colspan="2">template&lt;typename... Ts&gt; </td></tr>
+<tr class="memitem:a6837b759dc528737540a83c79fbdda29"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegko.html#a6837b759dc528737540a83c79fbdda29">highest_precision</a> = typename detail::highest_precision_variadic&lt; Ts... &gt;::type</td></tr>
+<tr class="memdesc:a6837b759dc528737540a83c79fbdda29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtains the smallest arithmetic type that is able to store elements of all template parameter types exactly.  <a href="namespacegko.html#a6837b759dc528737540a83c79fbdda29">More...</a><br /></td></tr>
+<tr class="separator:a6837b759dc528737540a83c79fbdda29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a512fc29f227f5d452e13787bf3df7d48"><td class="memTemplParams" colspan="2"><a id="a512fc29f227f5d452e13787bf3df7d48"></a>
 template&lt;typename T , size_type Limit = sizeof(uint16) * byte_size&gt; </td></tr>
 <tr class="memitem:a512fc29f227f5d452e13787bf3df7d48"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegko.html#a512fc29f227f5d452e13787bf3df7d48">truncate_type</a> = std::conditional_t&lt; detail::type_size_impl&lt; T &gt;::value &gt;=2 *Limit, typename detail::truncate_type_impl&lt; T &gt;::type, T &gt;</td></tr>
@@ -1171,6 +1175,26 @@ constexpr <a class="el" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The Ginkgo namespace. </p>
 </div><h2 class="groupheader">Typedef Documentation</h2>
+<a id="a6837b759dc528737540a83c79fbdda29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6837b759dc528737540a83c79fbdda29">&#9670;&nbsp;</a></span>highest_precision</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Ts&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespacegko.html#a6837b759dc528737540a83c79fbdda29">gko::highest_precision</a> = typedef typename detail::highest_precision_variadic&lt;Ts...&gt;::type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Obtains the smallest arithmetic type that is able to store elements of all template parameter types exactly. </p>
+<p>All template type parameters need to be either real or complex types, mixing them is not possible.</p>
+<p>Formally, it computes a right-fold over the type list, with the highest precision of a pair of real arithmetic types T1, T2 computed as <code>decltype(T1{} + T2{})</code>, or <code>std::complex&lt;highest_precision&lt;remove_complex&lt;T1&gt;, remove_complex&lt;T2&gt;&gt;&gt;</code> for complex types. </p>
+
+</div>
+</div>
 <a id="a7a3f195040a356643b3e8659554c7a48"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7a3f195040a356643b3e8659554c7a48">&#9670;&nbsp;</a></span>is_complex_or_scalar_s</h2>
 
