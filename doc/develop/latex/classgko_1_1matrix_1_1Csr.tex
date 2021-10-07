@@ -161,7 +161,11 @@ const index\+\_\+type $\ast$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_ac046f27
 std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1strategy__type}{strategy\+\_\+type}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_ada0db14e65dfe027f483dc449f704a7e}{get\+\_\+strategy}} () const noexcept
 \begin{DoxyCompactList}\small\item\em Returns the strategy. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_a3e0f6f2a9d773de0551068d514bf9703}{set\+\_\+strategy}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1strategy__type}{strategy\+\_\+type}} $>$ strategy)
-\begin{DoxyCompactList}\small\item\em Set the strategy. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Set the strategy. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_af7735090a0e2d7e13ce5ec5c046f69e5}{scale}} (const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$alpha)
+\begin{DoxyCompactList}\small\item\em Scales the matrix with a scalar. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_afed96de4d6859e457dde15c2cb31ec8b}{inv\+\_\+scale}} (const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$alpha)
+\begin{DoxyCompactList}\small\item\em Scales the matrix with the inverse of a scalar. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
@@ -528,6 +532,26 @@ the values of the matrix.
 
 References gko\+::\+Array$<$ Value\+Type $>$\+::get\+\_\+data().
 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_afed96de4d6859e457dde15c2cb31ec8b}\label{classgko_1_1matrix_1_1Csr_afed96de4d6859e457dde15c2cb31ec8b}} 
+\index{gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}!inv\_scale@{inv\_scale}}
+\index{inv\_scale@{inv\_scale}!gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{inv\_scale()}{inv\_scale()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko\+::matrix\+::\+Csr}}$<$ Value\+Type, Index\+Type $>$\+::inv\+\_\+scale (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{alpha }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Scales the matrix with the inverse of a scalar. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em alpha} & The entire matrix is scaled by 1 / alpha. alpha has to be a 1x1 \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} matrix. \\
+\hline
+\end{DoxyParams}
+
+
+References gko\+::\+Polymorphic\+Object\+::get\+\_\+executor(), and gko\+::make\+\_\+temporary\+\_\+clone().
+
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_aecc82797062952e616b46a9bc0dbd09c}\label{classgko_1_1matrix_1_1Csr_aecc82797062952e616b46a9bc0dbd09c}} 
 \index{gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}!inverse\_column\_permute@{inverse\_column\_permute}}
 \index{inverse\_column\_permute@{inverse\_column\_permute}!gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}}
@@ -672,6 +696,26 @@ a pointer to the new permuted object
 
 
 Implements \mbox{\hyperlink{classgko_1_1Permutable_ac3ac436c5621afd4cd1a36902f5c6c9b}{gko\+::\+Permutable$<$ Index\+Type $>$}}.
+
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_af7735090a0e2d7e13ce5ec5c046f69e5}\label{classgko_1_1matrix_1_1Csr_af7735090a0e2d7e13ce5ec5c046f69e5}} 
+\index{gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}!scale@{scale}}
+\index{scale@{scale}!gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{scale()}{scale()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko\+::matrix\+::\+Csr}}$<$ Value\+Type, Index\+Type $>$\+::scale (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{alpha }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Scales the matrix with a scalar. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em alpha} & The entire matrix is scaled by alpha. alpha has to be a 1x1 \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} matrix. \\
+\hline
+\end{DoxyParams}
+
+
+References gko\+::\+Polymorphic\+Object\+::get\+\_\+executor(), and gko\+::make\+\_\+temporary\+\_\+clone().
 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_a3e0f6f2a9d773de0551068d514bf9703}\label{classgko_1_1matrix_1_1Csr_a3e0f6f2a9d773de0551068d514bf9703}} 
 \index{gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}!set\_strategy@{set\_strategy}}

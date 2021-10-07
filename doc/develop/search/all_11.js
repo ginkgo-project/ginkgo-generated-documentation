@@ -2,7 +2,7 @@ var searchData=
 [
   ['spmv_20employing_20different_20matrix_20formats_868',['SpMV employing different Matrix formats',['../group__mat__formats.html',1,'']]],
   ['safe_5fdivide_869',['safe_divide',['../namespacegko.html#aa1470fdc2a75dcda76bea4b879a29886',1,'gko']]],
-  ['scale_870',['scale',['../classgko_1_1matrix_1_1Dense.html#a35cb8dfff52daf3aa8995597d26981ec',1,'gko::matrix::Dense']]],
+  ['scale_870',['scale',['../classgko_1_1matrix_1_1Csr.html#af7735090a0e2d7e13ce5ec5c046f69e5',1,'gko::matrix::Csr::scale()'],['../classgko_1_1matrix_1_1Dense.html#a35cb8dfff52daf3aa8995597d26981ec',1,'gko::matrix::Dense::scale()']]],
   ['sellp_871',['Sellp',['../classgko_1_1matrix_1_1Sellp.html',1,'gko::matrix']]],
   ['set_5fblock_5fsize_872',['set_block_size',['../classgko_1_1matrix_1_1Fbcsr.html#a3c23a78ca8906fbe96c1d2c948df1642',1,'gko::matrix::Fbcsr']]],
   ['set_5fcomplex_5fsubpsace_873',['set_complex_subpsace',['../classgko_1_1solver_1_1Idr.html#a1e08efc79a76f2e2501b841a9c8f8e2b',1,'gko::solver::Idr']]],
