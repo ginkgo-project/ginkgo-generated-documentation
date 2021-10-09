@@ -88,6 +88,11 @@ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$ \mbox{\hyperlink{clas
 \begin{DoxyCompactList}\small\item\em Performs the operation x = alpha $\ast$ \mbox{\hyperlink{classgko_1_1matrix_1_1Coo}{Coo}} $\ast$ b + x. \end{DoxyCompactList}\item 
 const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$ \mbox{\hyperlink{classgko_1_1matrix_1_1Coo_a05062dbf88132edf3a13d23783a8b07d}{apply2}} (const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$alpha, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$b, \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$x) const
 \begin{DoxyCompactList}\small\item\em Performs the operation x = alpha $\ast$ \mbox{\hyperlink{classgko_1_1matrix_1_1Coo}{Coo}} $\ast$ b + x. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::unique\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Coo}{Coo}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Coo_aa608f2f45d71876cc9858dccedbabe0c}{create\+\_\+const}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \&size, gko\+::detail\+::\+Const\+Array\+View$<$ Value\+Type $>$ \&\&values, gko\+::detail\+::\+Const\+Array\+View$<$ Index\+Type $>$ \&\&col\+\_\+idxs, gko\+::detail\+::\+Const\+Array\+View$<$ Index\+Type $>$ \&\&row\+\_\+idxs)
+\begin{DoxyCompactList}\small\item\em Creates a constant (immutable) \mbox{\hyperlink{classgko_1_1matrix_1_1Coo}{Coo}} matrix from a set of constant arrays. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
@@ -112,7 +117,6 @@ class {\bfseries Coo$<$ to\+\_\+complex$<$ Value\+Type $>$, Index\+Type $>$}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Coo_a12deb8a1b944cf409ac6e85151db2c25}\label{classgko_1_1matrix_1_1Coo_a12deb8a1b944cf409ac6e85151db2c25}} 
 class {\bfseries Coo$<$ next\+\_\+precision$<$ Value\+Type $>$, Index\+Type $>$}
 \end{DoxyCompactItemize}
-\doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
@@ -247,6 +251,33 @@ a pointer to the new absolute object
 
 Implements \mbox{\hyperlink{classgko_1_1EnableAbsoluteComputation_ac30ab2b34bfa3e28e3324cb46f5f030a}{gko\+::\+Enable\+Absolute\+Computation$<$ remove\+\_\+complex$<$ Coo$<$ Value\+Type, Index\+Type $>$ $>$ $>$}}.
 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Coo_aa608f2f45d71876cc9858dccedbabe0c}\label{classgko_1_1matrix_1_1Coo_aa608f2f45d71876cc9858dccedbabe0c}} 
+\index{gko::matrix::Coo$<$ ValueType, IndexType $>$@{gko::matrix::Coo$<$ ValueType, IndexType $>$}!create\_const@{create\_const}}
+\index{create\_const@{create\_const}!gko::matrix::Coo$<$ ValueType, IndexType $>$@{gko::matrix::Coo$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{create\_const()}{create\_const()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+static std\+::unique\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1matrix_1_1Coo}{Coo}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Coo}{gko\+::matrix\+::\+Coo}}$<$ Value\+Type, Index\+Type $>$\+::create\+\_\+const (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \&}]{size,  }\item[{gko\+::detail\+::\+Const\+Array\+View$<$ Value\+Type $>$ \&\&}]{values,  }\item[{gko\+::detail\+::\+Const\+Array\+View$<$ Index\+Type $>$ \&\&}]{col\+\_\+idxs,  }\item[{gko\+::detail\+::\+Const\+Array\+View$<$ Index\+Type $>$ \&\&}]{row\+\_\+idxs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Creates a constant (immutable) \mbox{\hyperlink{classgko_1_1matrix_1_1Coo}{Coo}} matrix from a set of constant arrays. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & the executor to create the matrix on \\
+\hline
+{\em size} & the dimensions of the matrix \\
+\hline
+{\em values} & the value array of the matrix \\
+\hline
+{\em col\+\_\+idxs} & the column index array of the matrix \\
+\hline
+{\em row\+\_\+ptrs} & the row index array of the matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A smart pointer to the constant matrix wrapping the input arrays (if they reside on the same executor as the matrix) or a copy of these arrays on the correct executor. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Coo_a718eae56f6939543529ad5522d2d14e5}\label{classgko_1_1matrix_1_1Coo_a718eae56f6939543529ad5522d2d14e5}} 
 \index{gko::matrix::Coo$<$ ValueType, IndexType $>$@{gko::matrix::Coo$<$ ValueType, IndexType $>$}!extract\_diagonal@{extract\_diagonal}}
 \index{extract\_diagonal@{extract\_diagonal}!gko::matrix::Coo$<$ ValueType, IndexType $>$@{gko::matrix::Coo$<$ ValueType, IndexType $>$}}

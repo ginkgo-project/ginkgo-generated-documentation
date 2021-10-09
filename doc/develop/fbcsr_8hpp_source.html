@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/384396121 branch based on develop. Ginkgo version 1.5.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/385425344 branch based on develop. Ginkgo version 1.5.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -258,66 +258,81 @@ $(function() {
 <div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160; </div>
 <div class="line"><a name="l00321"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Fbcsr.html#af29a823fd47588118ae75ab4bb36753b">  321</a></span>&#160;    index_type <a class="code" href="classgko_1_1matrix_1_1Fbcsr.html#af29a823fd47588118ae75ab4bb36753b">get_num_block_cols</a>() const noexcept { <span class="keywordflow">return</span> nbcols_; }</div>
 <div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160; </div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    <a class="code" href="classgko_1_1matrix_1_1Fbcsr.html">Fbcsr</a>(std::shared_ptr&lt;const Executor&gt; exec, <span class="keywordtype">int</span> block_size = 1)</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;        : <a class="code" href="classgko_1_1matrix_1_1Fbcsr.html">Fbcsr</a>(std::move(exec), <a class="code" href="structgko_1_1dim.html">dim</a>&lt;2&gt;{}, {}, block_size)</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    {}</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160; </div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    Fbcsr(std::shared_ptr&lt;const Executor&gt; exec, <span class="keyword">const</span> dim&lt;2&gt;&amp; size,</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;          <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> num_nonzeros, <span class="keywordtype">int</span> block_size)</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;        : EnableLinOp&lt;Fbcsr&gt;(exec, size),</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;          bs_{block_size},</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;          nbcols_{static_cast&lt;index_type&gt;(</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;              detail::get_num_blocks(block_size, size[1]))},</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;          values_(exec, num_nonzeros),</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;          col_idxs_(exec, detail::get_num_blocks(block_size * block_size,</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;                                                 num_nonzeros)),</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;          row_ptrs_(exec, detail::get_num_blocks(block_size, size[0]) + 1)</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;    {}</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160; </div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValuesArray, <span class="keyword">typename</span> ColIdxsArray,</div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;              <span class="keyword">typename</span> RowPtrsArray&gt;</div>
-<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;    Fbcsr(std::shared_ptr&lt;const Executor&gt; exec, <span class="keyword">const</span> dim&lt;2&gt;&amp; size,</div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;          <span class="keywordtype">int</span> block_size, ValuesArray&amp;&amp; values, ColIdxsArray&amp;&amp; col_idxs,</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;          RowPtrsArray&amp;&amp; row_ptrs)</div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;        : EnableLinOp&lt;Fbcsr&gt;(exec, size),</div>
-<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;          bs_{block_size},</div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;          nbcols_{static_cast&lt;index_type&gt;(</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;              detail::get_num_blocks(block_size, size[1]))},</div>
-<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;          values_{exec, std::forward&lt;ValuesArray&gt;(values)},</div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;          col_idxs_{exec, std::forward&lt;ColIdxsArray&gt;(col_idxs)},</div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;          row_ptrs_{exec, std::forward&lt;RowPtrsArray&gt;(row_ptrs)}</div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;    {</div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;        GKO_ASSERT_EQ(values_.<a class="code" href="classgko_1_1Array.html#ad4a2aa179d350634e6579f144b6b2cf0">get_num_elems</a>(),</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;                      col_idxs_.<a class="code" href="classgko_1_1Array.html#ad4a2aa179d350634e6579f144b6b2cf0">get_num_elems</a>() * bs_ * bs_);</div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;        GKO_ASSERT_EQ(this-&gt;<a class="code" href="classgko_1_1LinOp.html#a31b3c003388eb0b95393154f68c2b98d">get_size</a>()[0] / bs_ + 1, row_ptrs_.<a class="code" href="classgko_1_1Array.html#ad4a2aa179d350634e6579f144b6b2cf0">get_num_elems</a>());</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;    }</div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160; </div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;    <span class="keywordtype">void</span> apply_impl(<span class="keyword">const</span> LinOp* b, LinOp* x) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160; </div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;    <span class="keywordtype">void</span> apply_impl(<span class="keyword">const</span> LinOp* alpha, <span class="keyword">const</span> LinOp* b, <span class="keyword">const</span> LinOp* beta,</div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;                    LinOp* x) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160; </div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;    <span class="keywordtype">int</span> bs_;                      </div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;    index_type nbcols_;           </div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;    Array&lt;value_type&gt; values_;    </div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;    Array&lt;index_type&gt; col_idxs_;  </div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;    Array&lt;index_type&gt; row_ptrs_;  </div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;};</div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160; </div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160; </div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;}  <span class="comment">// namespace matrix</span></div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;}  <span class="comment">// namespace gko</span></div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160; </div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160; </div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_MATRIX_FBCSR_HPP_</span></div>
+<div class="line"><a name="l00336"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Fbcsr.html#ac1cd171d0a967f93aee7f2ba9855ab76">  336</a></span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;const Fbcsr&gt; <a class="code" href="classgko_1_1matrix_1_1Fbcsr.html#ac1cd171d0a967f93aee7f2ba9855ab76">create_const</a>(</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;        std::shared_ptr&lt;const Executor&gt; exec, <span class="keyword">const</span> <a class="code" href="structgko_1_1dim.html">dim&lt;2&gt;</a>&amp; size, <span class="keywordtype">int</span> blocksize,</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;        gko::detail::ConstArrayView&lt;ValueType&gt;&amp;&amp; values,</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;        gko::detail::ConstArrayView&lt;IndexType&gt;&amp;&amp; col_idxs,</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;        gko::detail::ConstArrayView&lt;IndexType&gt;&amp;&amp; row_ptrs)</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    {</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;        <span class="comment">// cast const-ness away, but return a const object afterwards,</span></div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;        <span class="comment">// so we can ensure that no modifications take place.</span></div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;        <span class="keywordflow">return</span> std::unique_ptr&lt;const Fbcsr&gt;(</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;            <span class="keyword">new</span> <a class="code" href="classgko_1_1matrix_1_1Fbcsr.html">Fbcsr</a>{exec, size, blocksize,</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;                      gko::detail::array_const_cast(std::move(values)),</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;                      gko::detail::array_const_cast(std::move(col_idxs)),</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;                      gko::detail::array_const_cast(std::move(row_ptrs))});</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;    }</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160; </div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;    <a class="code" href="classgko_1_1matrix_1_1Fbcsr.html">Fbcsr</a>(std::shared_ptr&lt;const Executor&gt; exec, <span class="keywordtype">int</span> block_size = 1)</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;        : <a class="code" href="classgko_1_1matrix_1_1Fbcsr.html">Fbcsr</a>(std::move(exec), <a class="code" href="structgko_1_1dim.html">dim</a>&lt;2&gt;{}, {}, block_size)</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;    {}</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160; </div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;    Fbcsr(std::shared_ptr&lt;const Executor&gt; exec, <span class="keyword">const</span> dim&lt;2&gt;&amp; size,</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;          <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> num_nonzeros, <span class="keywordtype">int</span> block_size)</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;        : EnableLinOp&lt;Fbcsr&gt;(exec, size),</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;          bs_{block_size},</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;          nbcols_{static_cast&lt;index_type&gt;(</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;              detail::get_num_blocks(block_size, size[1]))},</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;          values_(exec, num_nonzeros),</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;          col_idxs_(exec, detail::get_num_blocks(block_size * block_size,</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;                                                 num_nonzeros)),</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;          row_ptrs_(exec, detail::get_num_blocks(block_size, size[0]) + 1)</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;    {}</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160; </div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValuesArray, <span class="keyword">typename</span> ColIdxsArray,</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;              <span class="keyword">typename</span> RowPtrsArray&gt;</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;    Fbcsr(std::shared_ptr&lt;const Executor&gt; exec, <span class="keyword">const</span> dim&lt;2&gt;&amp; size,</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;          <span class="keywordtype">int</span> block_size, ValuesArray&amp;&amp; values, ColIdxsArray&amp;&amp; col_idxs,</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;          RowPtrsArray&amp;&amp; row_ptrs)</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;        : EnableLinOp&lt;Fbcsr&gt;(exec, size),</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;          bs_{block_size},</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;          nbcols_{static_cast&lt;index_type&gt;(</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;              detail::get_num_blocks(block_size, size[1]))},</div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;          values_{exec, std::forward&lt;ValuesArray&gt;(values)},</div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;          col_idxs_{exec, std::forward&lt;ColIdxsArray&gt;(col_idxs)},</div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;          row_ptrs_{exec, std::forward&lt;RowPtrsArray&gt;(row_ptrs)}</div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;    {</div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;        GKO_ASSERT_EQ(values_.<a class="code" href="classgko_1_1Array.html#ad4a2aa179d350634e6579f144b6b2cf0">get_num_elems</a>(),</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;                      col_idxs_.<a class="code" href="classgko_1_1Array.html#ad4a2aa179d350634e6579f144b6b2cf0">get_num_elems</a>() * bs_ * bs_);</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;        GKO_ASSERT_EQ(this-&gt;<a class="code" href="classgko_1_1LinOp.html#a31b3c003388eb0b95393154f68c2b98d">get_size</a>()[0] / bs_ + 1, row_ptrs_.<a class="code" href="classgko_1_1Array.html#ad4a2aa179d350634e6579f144b6b2cf0">get_num_elems</a>());</div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;    }</div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160; </div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;    <span class="keywordtype">void</span> apply_impl(<span class="keyword">const</span> LinOp* b, LinOp* x) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160; </div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;    <span class="keywordtype">void</span> apply_impl(<span class="keyword">const</span> LinOp* alpha, <span class="keyword">const</span> LinOp* b, <span class="keyword">const</span> LinOp* beta,</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;                    LinOp* x) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160; </div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;    <span class="keywordtype">int</span> bs_;                      </div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;    index_type nbcols_;           </div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;    Array&lt;value_type&gt; values_;    </div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;    Array&lt;index_type&gt; col_idxs_;  </div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;    Array&lt;index_type&gt; row_ptrs_;  </div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;};</div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160; </div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160; </div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;}  <span class="comment">// namespace matrix</span></div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;}  <span class="comment">// namespace gko</span></div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160; </div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160; </div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_MATRIX_FBCSR_HPP_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassgko_1_1matrix_1_1Fbcsr_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Fbcsr.html">gko::matrix::Fbcsr</a></div><div class="ttdoc">Fixed-block compressed sparse row storage matrix format.</div><div class="ttdef"><b>Definition:</b> fbcsr.hpp:56</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Fbcsr_html_a59511a9d356956f89cf54c6de0650925"><div class="ttname"><a href="classgko_1_1matrix_1_1Fbcsr.html#a59511a9d356956f89cf54c6de0650925">gko::matrix::Fbcsr::get_block_size</a></div><div class="ttdeci">int get_block_size() const noexcept</div><div class="ttdef"><b>Definition:</b> fbcsr.hpp:301</div></div>
-<div class="ttc" id="aclassgko_1_1Array_html_a5a46e0920b649cdb062f5e415922d1aa"><div class="ttname"><a href="classgko_1_1Array.html#a5a46e0920b649cdb062f5e415922d1aa">gko::Array::get_const_data</a></div><div class="ttdeci">const value_type * get_const_data() const noexcept</div><div class="ttdoc">Returns a constant pointer to the block of memory used to store the elements of the Array.</div><div class="ttdef"><b>Definition:</b> array.hpp:512</div></div>
+<div class="ttc" id="aclassgko_1_1Array_html_a5a46e0920b649cdb062f5e415922d1aa"><div class="ttname"><a href="classgko_1_1Array.html#a5a46e0920b649cdb062f5e415922d1aa">gko::Array::get_const_data</a></div><div class="ttdeci">const value_type * get_const_data() const noexcept</div><div class="ttdoc">Returns a constant pointer to the block of memory used to store the elements of the Array.</div><div class="ttdef"><b>Definition:</b> array.hpp:639</div></div>
 <div class="ttc" id="aclassgko_1_1LinOp_html"><div class="ttname"><a href="classgko_1_1LinOp.html">gko::LinOp</a></div><div class="ttdef"><b>Definition:</b> lin_op.hpp:145</div></div>
-<div class="ttc" id="aclassgko_1_1Array_html_a9acf29878703bb8767e3cea2ba499dae"><div class="ttname"><a href="classgko_1_1Array.html#a9acf29878703bb8767e3cea2ba499dae">gko::Array::get_data</a></div><div class="ttdeci">value_type * get_data() noexcept</div><div class="ttdoc">Returns a pointer to the block of memory used to store the elements of the Array.</div><div class="ttdef"><b>Definition:</b> array.hpp:503</div></div>
+<div class="ttc" id="aclassgko_1_1Array_html_a9acf29878703bb8767e3cea2ba499dae"><div class="ttname"><a href="classgko_1_1Array.html#a9acf29878703bb8767e3cea2ba499dae">gko::Array::get_data</a></div><div class="ttdeci">value_type * get_data() noexcept</div><div class="ttdoc">Returns a pointer to the block of memory used to store the elements of the Array.</div><div class="ttdef"><b>Definition:</b> array.hpp:630</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Fbcsr_html_a58ce599ddacd69551d66240e87044472"><div class="ttname"><a href="classgko_1_1matrix_1_1Fbcsr.html#a58ce599ddacd69551d66240e87044472">gko::matrix::Fbcsr::get_const_values</a></div><div class="ttdeci">const value_type * get_const_values() const noexcept</div><div class="ttdef"><b>Definition:</b> fbcsr.hpp:243</div></div>
 <div class="ttc" id="aclassgko_1_1EnableCreateMethod_html"><div class="ttname"><a href="classgko_1_1EnableCreateMethod.html">gko::EnableCreateMethod</a></div><div class="ttdoc">This mixin implements a static create() method on ConcreteType that dynamically allocates the memory,...</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:641</div></div>
 <div class="ttc" id="aclassgko_1_1DiagonalExtractable_html"><div class="ttname"><a href="classgko_1_1DiagonalExtractable.html">gko::DiagonalExtractable</a></div><div class="ttdoc">The diagonal of a LinOp implementing this interface can be extracted.</div><div class="ttdef"><b>Definition:</b> lin_op.hpp:688</div></div>
@@ -331,8 +346,8 @@ $(function() {
 <div class="ttc" id="aclassgko_1_1matrix_1_1Fbcsr_html_af29a823fd47588118ae75ab4bb36753b"><div class="ttname"><a href="classgko_1_1matrix_1_1Fbcsr.html#af29a823fd47588118ae75ab4bb36753b">gko::matrix::Fbcsr::get_num_block_cols</a></div><div class="ttdeci">index_type get_num_block_cols() const noexcept</div><div class="ttdef"><b>Definition:</b> fbcsr.hpp:321</div></div>
 <div class="ttc" id="anamespacegko_html"><div class="ttname"><a href="namespacegko.html">gko</a></div><div class="ttdoc">The Ginkgo namespace.</div><div class="ttdef"><b>Definition:</b> abstract_factory.hpp:45</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Fbcsr_html_a04161ad12ebd514ccbecb92adea89dbb"><div class="ttname"><a href="classgko_1_1matrix_1_1Fbcsr.html#a04161ad12ebd514ccbecb92adea89dbb">gko::matrix::Fbcsr::get_const_col_idxs</a></div><div class="ttdeci">const index_type * get_const_col_idxs() const noexcept</div><div class="ttdef"><b>Definition:</b> fbcsr.hpp:260</div></div>
-<div class="ttc" id="aclassgko_1_1Array_html_ad4a2aa179d350634e6579f144b6b2cf0"><div class="ttname"><a href="classgko_1_1Array.html#ad4a2aa179d350634e6579f144b6b2cf0">gko::Array::get_num_elems</a></div><div class="ttdeci">size_type get_num_elems() const noexcept</div><div class="ttdoc">Returns the number of elements in the Array.</div><div class="ttdef"><b>Definition:</b> array.hpp:494</div></div>
-<div class="ttc" id="astructgko_1_1dim_html"><div class="ttname"><a href="structgko_1_1dim.html">gko::dim</a></div><div class="ttdoc">A type representing the dimensions of a multidimensional object.</div><div class="ttdef"><b>Definition:</b> dim.hpp:55</div></div>
+<div class="ttc" id="aclassgko_1_1Array_html_ad4a2aa179d350634e6579f144b6b2cf0"><div class="ttname"><a href="classgko_1_1Array.html#ad4a2aa179d350634e6579f144b6b2cf0">gko::Array::get_num_elems</a></div><div class="ttdeci">size_type get_num_elems() const noexcept</div><div class="ttdoc">Returns the number of elements in the Array.</div><div class="ttdef"><b>Definition:</b> array.hpp:621</div></div>
+<div class="ttc" id="astructgko_1_1dim_html"><div class="ttname"><a href="structgko_1_1dim.html">gko::dim&lt; 2 &gt;</a></div></div>
 <div class="ttc" id="astructgko_1_1matrix__data_html"><div class="ttname"><a href="structgko_1_1matrix__data.html">gko::matrix_data</a></div><div class="ttdoc">This structure is used as an intermediate data type to store a sparse matrix.</div><div class="ttdef"><b>Definition:</b> matrix_data.hpp:104</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Fbcsr_html_a8e67294878a2da394e296f3c1426f14b"><div class="ttname"><a href="classgko_1_1matrix_1_1Fbcsr.html#a8e67294878a2da394e296f3c1426f14b">gko::matrix::Fbcsr::sort_by_column_index</a></div><div class="ttdeci">void sort_by_column_index()</div><div class="ttdoc">Sorts the values blocks and block-column indices in each row by column index.</div></div>
 <div class="ttc" id="anamespacegko_html_a6362f751c7753cf4fa0a4771d56e8ede"><div class="ttname"><a href="namespacegko.html#a6362f751c7753cf4fa0a4771d56e8ede">gko::next_precision</a></div><div class="ttdeci">typename detail::next_precision_impl&lt; T &gt;::type next_precision</div><div class="ttdoc">Obtains the next type in the singly-linked precision list.</div><div class="ttdef"><b>Definition:</b> math.hpp:494</div></div>
@@ -343,6 +358,7 @@ $(function() {
 <div class="ttc" id="aclassgko_1_1matrix_1_1Fbcsr_html_a869c20e101a02e08a839f2756d62e149"><div class="ttname"><a href="classgko_1_1matrix_1_1Fbcsr.html#a869c20e101a02e08a839f2756d62e149">gko::matrix::Fbcsr::compute_absolute</a></div><div class="ttdeci">std::unique_ptr&lt; absolute_type &gt; compute_absolute() const override</div><div class="ttdoc">Gets the AbsoluteLinOp.</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Fbcsr_html_a35b1732314c6b648ff2293f574cd35c8"><div class="ttname"><a href="classgko_1_1matrix_1_1Fbcsr.html#a35b1732314c6b648ff2293f574cd35c8">gko::matrix::Fbcsr::get_num_block_rows</a></div><div class="ttdeci">index_type get_num_block_rows() const noexcept</div><div class="ttdef"><b>Definition:</b> fbcsr.hpp:313</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Fbcsr_html_a079ec6400ad8ebf4ff93087e8c7823e4"><div class="ttname"><a href="classgko_1_1matrix_1_1Fbcsr.html#a079ec6400ad8ebf4ff93087e8c7823e4">gko::matrix::Fbcsr::get_num_stored_blocks</a></div><div class="ttdeci">size_type get_num_stored_blocks() const noexcept</div><div class="ttdef"><b>Definition:</b> fbcsr.hpp:293</div></div>
+<div class="ttc" id="aclassgko_1_1matrix_1_1Fbcsr_html_ac1cd171d0a967f93aee7f2ba9855ab76"><div class="ttname"><a href="classgko_1_1matrix_1_1Fbcsr.html#ac1cd171d0a967f93aee7f2ba9855ab76">gko::matrix::Fbcsr::create_const</a></div><div class="ttdeci">static std::unique_ptr&lt; const Fbcsr &gt; create_const(std::shared_ptr&lt; const Executor &gt; exec, const dim&lt; 2 &gt; &amp;size, int blocksize, gko::detail::ConstArrayView&lt; ValueType &gt; &amp;&amp;values, gko::detail::ConstArrayView&lt; IndexType &gt; &amp;&amp;col_idxs, gko::detail::ConstArrayView&lt; IndexType &gt; &amp;&amp;row_ptrs)</div><div class="ttdoc">Creates a constant (immutable) Fbcsr matrix from a constant array.</div><div class="ttdef"><b>Definition:</b> fbcsr.hpp:336</div></div>
 <div class="ttc" id="aclassgko_1_1ConvertibleTo_html"><div class="ttname"><a href="classgko_1_1ConvertibleTo.html">gko::ConvertibleTo</a></div><div class="ttdoc">ConvertibleTo interface is used to mark that the implementer can be converted to the object of Result...</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:390</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Fbcsr_html_a653635da873278c23a9e828c9acd1cfa"><div class="ttname"><a href="classgko_1_1matrix_1_1Fbcsr.html#a653635da873278c23a9e828c9acd1cfa">gko::matrix::Fbcsr::get_col_idxs</a></div><div class="ttdeci">index_type * get_col_idxs() noexcept</div><div class="ttdef"><b>Definition:</b> fbcsr.hpp:251</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1FbcsrBuilder_html"><div class="ttname"><a href="classgko_1_1matrix_1_1FbcsrBuilder.html">gko::matrix::FbcsrBuilder</a></div><div class="ttdef"><b>Definition:</b> fbcsr.hpp:59</div></div>

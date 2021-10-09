@@ -106,6 +106,11 @@ index\+\_\+type \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr_a35b1732314c6b648ff
 \item 
 index\+\_\+type \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr_af29a823fd47588118ae75ab4bb36753b}{get\+\_\+num\+\_\+block\+\_\+cols}} () const noexcept
 \end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::unique\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr_ac1cd171d0a967f93aee7f2ba9855ab76}{create\+\_\+const}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \&size, int blocksize, gko\+::detail\+::\+Const\+Array\+View$<$ Value\+Type $>$ \&\&values, gko\+::detail\+::\+Const\+Array\+View$<$ Index\+Type $>$ \&\&col\+\_\+idxs, gko\+::detail\+::\+Const\+Array\+View$<$ Index\+Type $>$ \&\&row\+\_\+ptrs)
+\begin{DoxyCompactList}\small\item\em Creates a constant (immutable) \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}} matrix from a constant array. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
@@ -130,7 +135,6 @@ class {\bfseries Fbcsr$<$ to\+\_\+complex$<$ Value\+Type $>$, Index\+Type $>$}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_a2cb06a9ea5724c567084f743e410a456}\label{classgko_1_1matrix_1_1Fbcsr_a2cb06a9ea5724c567084f743e410a456}} 
 class {\bfseries Fbcsr$<$ next\+\_\+precision$<$ Value\+Type $>$, Index\+Type $>$}
 \end{DoxyCompactItemize}
-\doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
@@ -237,6 +241,35 @@ Get the block sparsity pattern in C\+S\+R-\/like format.
 \begin{DoxyNote}{Note}
 The actual non-\/zero values are never copied; the result always has a value array of size 1 with the value 1. 
 \end{DoxyNote}
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_ac1cd171d0a967f93aee7f2ba9855ab76}\label{classgko_1_1matrix_1_1Fbcsr_ac1cd171d0a967f93aee7f2ba9855ab76}} 
+\index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!create\_const@{create\_const}}
+\index{create\_const@{create\_const}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{create\_const()}{create\_const()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+static std\+::unique\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::create\+\_\+const (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \&}]{size,  }\item[{int}]{blocksize,  }\item[{gko\+::detail\+::\+Const\+Array\+View$<$ Value\+Type $>$ \&\&}]{values,  }\item[{gko\+::detail\+::\+Const\+Array\+View$<$ Index\+Type $>$ \&\&}]{col\+\_\+idxs,  }\item[{gko\+::detail\+::\+Const\+Array\+View$<$ Index\+Type $>$ \&\&}]{row\+\_\+ptrs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Creates a constant (immutable) \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}} matrix from a constant array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & the executor to create the matrix on \\
+\hline
+{\em size} & the dimensions of the matrix \\
+\hline
+{\em blocksize} & the block size of the matrix \\
+\hline
+{\em values} & the value array of the matrix \\
+\hline
+{\em col\+\_\+idxs} & the block column index array of the matrix \\
+\hline
+{\em row\+\_\+ptrs} & the block row pointer array of the matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A smart pointer to the constant matrix wrapping the input arrays (if they reside on the same executor as the matrix) or a copy of the arrays on the correct executor. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_ad6c0c036b0d2c2bed257af959e03b75b}\label{classgko_1_1matrix_1_1Fbcsr_ad6c0c036b0d2c2bed257af959e03b75b}} 
 \index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!extract\_diagonal@{extract\_diagonal}}
 \index{extract\_diagonal@{extract\_diagonal}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
