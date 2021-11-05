@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/394127920 branch based on develop. Ginkgo version 1.5.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/402409702 branch based on develop. Ginkgo version 1.5.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -279,6 +279,9 @@ $(function() {
 <li>get_global_block_offset()
 : <a class="el" href="structgko_1_1preconditioner_1_1block__interleaved__storage__scheme.html#ad8356b187814609c7d77bd03e025c48f">gko::preconditioner::block_interleaved_storage_scheme&lt; IndexType &gt;</a>
 </li>
+<li>get_global_index()
+: <a class="el" href="classgko_1_1IndexSet.html#a682d3560a996f20daa7aea489c8c87a8">gko::IndexSet&lt; IndexType &gt;</a>
+</li>
 <li>get_group_offset()
 : <a class="el" href="structgko_1_1preconditioner_1_1block__interleaved__storage__scheme.html#a66a04b4dc90547fde872359c78ee22a4">gko::preconditioner::block_interleaved_storage_scheme&lt; IndexType &gt;</a>
 </li>
@@ -319,6 +322,9 @@ $(function() {
 </li>
 <li>get_lh_solver()
 : <a class="el" href="classgko_1_1preconditioner_1_1Ic.html#abeedef49ea383aa54cdaef48e5f01b68">gko::preconditioner::Ic&lt; LSolverType, IndexType &gt;</a>
+</li>
+<li>get_local_index()
+: <a class="el" href="classgko_1_1IndexSet.html#a211b6f07cf0823154a64ccae02c564ef">gko::IndexSet&lt; IndexType &gt;</a>
 </li>
 <li>get_loggers()
 : <a class="el" href="classgko_1_1log_1_1Loggable.html#a3a2edb59ebfc1e2a3cf541397cad448f">gko::log::Loggable</a>
@@ -385,6 +391,7 @@ $(function() {
 </li>
 <li>get_num_elems()
 : <a class="el" href="classgko_1_1Array.html#ad4a2aa179d350634e6579f144b6b2cf0">gko::Array&lt; ValueType &gt;</a>
+, <a class="el" href="classgko_1_1IndexSet.html#afea0a9e4f38678524344cc9c4b73db3b">gko::IndexSet&lt; IndexType &gt;</a>
 </li>
 <li>get_num_iterations()
 : <a class="el" href="classgko_1_1log_1_1Convergence.html#ae4f2ae84d87df2bffa814f51a8f09793">gko::log::Convergence&lt; ValueType &gt;</a>
@@ -424,6 +431,9 @@ $(function() {
 </li>
 <li>get_num_stored_elements_per_row()
 : <a class="el" href="classgko_1_1matrix_1_1Ell.html#a08f9b04b356e58ab57d03ce335ff11ce">gko::matrix::Ell&lt; ValueType, IndexType &gt;</a>
+</li>
+<li>get_num_subsets()
+: <a class="el" href="classgko_1_1IndexSet.html#a525ec8f651b7aaf5ecbf047697a4dba0">gko::IndexSet&lt; IndexType &gt;</a>
 </li>
 <li>get_num_warps()
 : <a class="el" href="classgko_1_1CudaExecutor.html#aa9d77db0b87322a8bef12380029b5310">gko::CudaExecutor</a>
@@ -514,7 +524,8 @@ $(function() {
 : <a class="el" href="classgko_1_1Perturbation.html#af3a1d57c22b34f276a9222eb248825ae">gko::Perturbation&lt; ValueType &gt;</a>
 </li>
 <li>get_size()
-: <a class="el" href="classgko_1_1LinOp.html#a31b3c003388eb0b95393154f68c2b98d">gko::LinOp</a>
+: <a class="el" href="classgko_1_1IndexSet.html#a6369b1ebdc53713eab7a6790c8ee1a00">gko::IndexSet&lt; IndexType &gt;</a>
+, <a class="el" href="classgko_1_1LinOp.html#a31b3c003388eb0b95393154f68c2b98d">gko::LinOp</a>
 , <a class="el" href="classgko_1_1matrix__assembly__data.html#aad7c0d3e33c899e0966d8b843b1c6439">gko::matrix_assembly_data&lt; ValueType, IndexType &gt;</a>
 </li>
 <li>get_slice_lengths()
@@ -551,7 +562,7 @@ $(function() {
 </li>
 <li>get_strategy()
 : <a class="el" href="classgko_1_1matrix_1_1Csr.html#ada0db14e65dfe027f483dc449f704a7e">gko::matrix::Csr&lt; ValueType, IndexType &gt;</a>
-, <a class="el" href="classgko_1_1matrix_1_1Hybrid.html#a49f2e04153b44a60e4e9cb1afe1a635b">gko::matrix::Hybrid&lt; ValueType, IndexType &gt;</a>
+, <a class="el" href="classgko_1_1matrix_1_1Hybrid.html#a9a1eabe0a4ca0a6ae0b922b65c938286">gko::matrix::Hybrid&lt; ValueType, IndexType &gt;</a>
 </li>
 <li>get_stride()
 : <a class="el" href="classgko_1_1matrix_1_1Dense.html#a8c1b220b9b9292893d9be22d632a9a0e">gko::matrix::Dense&lt; ValueType &gt;</a>
@@ -564,8 +575,17 @@ $(function() {
 <li>get_subgroup_sizes()
 : <a class="el" href="classgko_1_1DpcppExecutor.html#a5a8a807279c9dfeef114bd8875c7a369">gko::DpcppExecutor</a>
 </li>
+<li>get_subsets_begin()
+: <a class="el" href="classgko_1_1IndexSet.html#a7ff3a7c9c9d72648f44db3ff0dcc970c">gko::IndexSet&lt; IndexType &gt;</a>
+</li>
+<li>get_subsets_end()
+: <a class="el" href="classgko_1_1IndexSet.html#a13d5befb6738b61580e335c531a114a0">gko::IndexSet&lt; IndexType &gt;</a>
+</li>
 <li>get_subspace_dim()
 : <a class="el" href="classgko_1_1solver_1_1Idr.html#ac265f8be9752fde6368b86a1c9a41570">gko::solver::Idr&lt; ValueType &gt;</a>
+</li>
+<li>get_superset_indices()
+: <a class="el" href="classgko_1_1IndexSet.html#a0e789e5aec948193783c143f5a8eb897">gko::IndexSet&lt; IndexType &gt;</a>
 </li>
 <li>get_system_matrix()
 : <a class="el" href="classgko_1_1multigrid_1_1AmgxPgm.html#a0f16c51d1d27de42483099cf89de6b59">gko::multigrid::AmgxPgm&lt; ValueType, IndexType &gt;</a>
