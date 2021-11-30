@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/415841690 branch based on develop. Ginkgo version 1.5.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/418682264 branch based on develop. Ginkgo version 1.5.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -448,67 +448,76 @@ $(function() {
 <div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;<span class="keywordtype">void</span> <a class="code" href="namespacegko.html#aa561f81bd3644847487162261d22bcb8">reduce_add</a>(<span class="keyword">const</span> Array&lt;ValueType&gt;&amp; input_arr, Array&lt;ValueType&gt;&amp; result);</div>
 <div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160; </div>
 <div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160; </div>
-<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;<span class="keyword">namespace </span>detail {</div>
-<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160; </div>
-<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160; </div>
-<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;<span class="keyword">struct </span>temporary_clone_helper&lt;Array&lt;T&gt;&gt; {</div>
-<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;Array&lt;T&gt;&gt; create(</div>
-<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;        std::shared_ptr&lt;const Executor&gt; exec, Array&lt;T&gt;* ptr, <span class="keywordtype">bool</span> copy_data)</div>
-<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160;    {</div>
-<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;        <span class="keywordflow">if</span> (copy_data) {</div>
-<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;            <span class="keywordflow">return</span> std::make_unique&lt;Array&lt;T&gt;&gt;(std::move(exec), *ptr);</div>
-<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;            <span class="keywordflow">return</span> std::make_unique&lt;Array&lt;T&gt;&gt;(std::move(exec),</div>
-<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;                                              ptr-&gt;get_num_elems());</div>
-<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;        }</div>
-<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;    }</div>
-<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160;};</div>
-<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160; </div>
-<div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00746"></a><span class="lineno">  746</span>&#160;<span class="keyword">struct </span>temporary_clone_helper&lt;const Array&lt;T&gt;&gt; {</div>
-<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;const Array&lt;T&gt;&gt; create(</div>
-<div class="line"><a name="l00748"></a><span class="lineno">  748</span>&#160;        std::shared_ptr&lt;const Executor&gt; exec, <span class="keyword">const</span> Array&lt;T&gt;* ptr, <span class="keywordtype">bool</span>)</div>
-<div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160;    {</div>
-<div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160;        <span class="keywordflow">return</span> std::make_unique&lt;const Array&lt;T&gt;&gt;(std::move(exec), *ptr);</div>
-<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;    }</div>
-<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;};</div>
-<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160; </div>
-<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160; </div>
-<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;<span class="comment">// specialization for non-constant arrays, copying back via assignment</span></div>
-<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;<span class="keyword">class </span>copy_back_deleter&lt;Array&lt;T&gt;&gt; {</div>
-<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;    <span class="keyword">using</span> pointer = Array&lt;T&gt;*;</div>
-<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160; </div>
-<div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160;    copy_back_deleter(pointer original) : original_{original} {}</div>
-<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160; </div>
-<div class="line"><a name="l00774"></a><span class="lineno">  774</span>&#160;    <span class="keywordtype">void</span> operator()(pointer ptr)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00775"></a><span class="lineno">  775</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160;        *original_ = *ptr;</div>
-<div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160;        <span class="keyword">delete</span> ptr;</div>
-<div class="line"><a name="l00778"></a><span class="lineno">  778</span>&#160;    }</div>
+<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType&gt;</div>
+<div class="line"><a name="l00740"></a><span class="lineno"><a class="line" href="namespacegko.html#a55f15cbab9cd48c00c00f22a65e8dd43">  740</a></span>&#160;<a class="code" href="classgko_1_1Array.html">Array&lt;ValueType&gt;</a> <a class="code" href="namespacegko.html#a55f15cbab9cd48c00c00f22a65e8dd43">make_array_view</a>(std::shared_ptr&lt;const Executor&gt; exec,</div>
+<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;                                 <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> size, ValueType* data)</div>
+<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;{</div>
+<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classgko_1_1Array.html#ae8e2b4841e60741227daf3367de6ecde">Array&lt;ValueType&gt;::view</a>(exec, size, data);</div>
+<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160;}</div>
+<div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160; </div>
+<div class="line"><a name="l00746"></a><span class="lineno">  746</span>&#160; </div>
+<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160;<span class="keyword">namespace </span>detail {</div>
+<div class="line"><a name="l00748"></a><span class="lineno">  748</span>&#160; </div>
+<div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160; </div>
+<div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;<span class="keyword">struct </span>temporary_clone_helper&lt;Array&lt;T&gt;&gt; {</div>
+<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;Array&lt;T&gt;&gt; create(</div>
+<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;        std::shared_ptr&lt;const Executor&gt; exec, Array&lt;T&gt;* ptr, <span class="keywordtype">bool</span> copy_data)</div>
+<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;    {</div>
+<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;        <span class="keywordflow">if</span> (copy_data) {</div>
+<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;            <span class="keywordflow">return</span> std::make_unique&lt;Array&lt;T&gt;&gt;(std::move(exec), *ptr);</div>
+<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;            <span class="keywordflow">return</span> std::make_unique&lt;Array&lt;T&gt;&gt;(std::move(exec),</div>
+<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;                                              ptr-&gt;get_num_elems());</div>
+<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;        }</div>
+<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160;    }</div>
+<div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160;};</div>
+<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160; </div>
+<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160;<span class="keyword">struct </span>temporary_clone_helper&lt;const Array&lt;T&gt;&gt; {</div>
+<div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;const Array&lt;T&gt;&gt; create(</div>
+<div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160;        std::shared_ptr&lt;const Executor&gt; exec, <span class="keyword">const</span> Array&lt;T&gt;* ptr, <span class="keywordtype">bool</span>)</div>
+<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160;    {</div>
+<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160;        <span class="keywordflow">return</span> std::make_unique&lt;const Array&lt;T&gt;&gt;(std::move(exec), *ptr);</div>
+<div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160;    }</div>
+<div class="line"><a name="l00771"></a><span class="lineno">  771</span>&#160;};</div>
+<div class="line"><a name="l00772"></a><span class="lineno">  772</span>&#160; </div>
+<div class="line"><a name="l00773"></a><span class="lineno">  773</span>&#160; </div>
+<div class="line"><a name="l00774"></a><span class="lineno">  774</span>&#160;<span class="comment">// specialization for non-constant arrays, copying back via assignment</span></div>
+<div class="line"><a name="l00775"></a><span class="lineno">  775</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160;<span class="keyword">class </span>copy_back_deleter&lt;Array&lt;T&gt;&gt; {</div>
+<div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00778"></a><span class="lineno">  778</span>&#160;    <span class="keyword">using</span> pointer = Array&lt;T&gt;*;</div>
 <div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160; </div>
-<div class="line"><a name="l00780"></a><span class="lineno">  780</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160;    pointer original_;</div>
-<div class="line"><a name="l00782"></a><span class="lineno">  782</span>&#160;};</div>
-<div class="line"><a name="l00783"></a><span class="lineno">  783</span>&#160; </div>
-<div class="line"><a name="l00784"></a><span class="lineno">  784</span>&#160; </div>
-<div class="line"><a name="l00797"></a><span class="lineno">  797</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType&gt;</div>
-<div class="line"><a name="l00798"></a><span class="lineno">  798</span>&#160;Array&lt;ValueType&gt; array_const_cast(ConstArrayView&lt;ValueType&gt; view)</div>
-<div class="line"><a name="l00799"></a><span class="lineno">  799</span>&#160;{</div>
-<div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classgko_1_1Array.html#ae8e2b4841e60741227daf3367de6ecde">Array&lt;ValueType&gt;::view</a>(</div>
-<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160;        view.get_executor(), view.get_num_elems(),</div>
-<div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;        const_cast&lt;ValueType*&gt;(view.get_const_data()));</div>
-<div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160;}</div>
-<div class="line"><a name="l00804"></a><span class="lineno">  804</span>&#160; </div>
-<div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160; </div>
-<div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160;}  <span class="comment">// namespace detail</span></div>
-<div class="line"><a name="l00807"></a><span class="lineno">  807</span>&#160;}  <span class="comment">// namespace gko</span></div>
-<div class="line"><a name="l00808"></a><span class="lineno">  808</span>&#160; </div>
-<div class="line"><a name="l00809"></a><span class="lineno">  809</span>&#160; </div>
-<div class="line"><a name="l00810"></a><span class="lineno">  810</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_BASE_ARRAY_HPP_</span></div>
+<div class="line"><a name="l00786"></a><span class="lineno">  786</span>&#160;    copy_back_deleter(pointer original) : original_{original} {}</div>
+<div class="line"><a name="l00787"></a><span class="lineno">  787</span>&#160; </div>
+<div class="line"><a name="l00793"></a><span class="lineno">  793</span>&#160;    <span class="keywordtype">void</span> operator()(pointer ptr)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00794"></a><span class="lineno">  794</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00795"></a><span class="lineno">  795</span>&#160;        *original_ = *ptr;</div>
+<div class="line"><a name="l00796"></a><span class="lineno">  796</span>&#160;        <span class="keyword">delete</span> ptr;</div>
+<div class="line"><a name="l00797"></a><span class="lineno">  797</span>&#160;    }</div>
+<div class="line"><a name="l00798"></a><span class="lineno">  798</span>&#160; </div>
+<div class="line"><a name="l00799"></a><span class="lineno">  799</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160;    pointer original_;</div>
+<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160;};</div>
+<div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160; </div>
+<div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160; </div>
+<div class="line"><a name="l00816"></a><span class="lineno">  816</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType&gt;</div>
+<div class="line"><a name="l00817"></a><span class="lineno">  817</span>&#160;Array&lt;ValueType&gt; array_const_cast(ConstArrayView&lt;ValueType&gt; view)</div>
+<div class="line"><a name="l00818"></a><span class="lineno">  818</span>&#160;{</div>
+<div class="line"><a name="l00819"></a><span class="lineno">  819</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classgko_1_1Array.html#ae8e2b4841e60741227daf3367de6ecde">Array&lt;ValueType&gt;::view</a>(</div>
+<div class="line"><a name="l00820"></a><span class="lineno">  820</span>&#160;        view.get_executor(), view.get_num_elems(),</div>
+<div class="line"><a name="l00821"></a><span class="lineno">  821</span>&#160;        const_cast&lt;ValueType*&gt;(view.get_const_data()));</div>
+<div class="line"><a name="l00822"></a><span class="lineno">  822</span>&#160;}</div>
+<div class="line"><a name="l00823"></a><span class="lineno">  823</span>&#160; </div>
+<div class="line"><a name="l00824"></a><span class="lineno">  824</span>&#160; </div>
+<div class="line"><a name="l00825"></a><span class="lineno">  825</span>&#160;}  <span class="comment">// namespace detail</span></div>
+<div class="line"><a name="l00826"></a><span class="lineno">  826</span>&#160;}  <span class="comment">// namespace gko</span></div>
+<div class="line"><a name="l00827"></a><span class="lineno">  827</span>&#160; </div>
+<div class="line"><a name="l00828"></a><span class="lineno">  828</span>&#160; </div>
+<div class="line"><a name="l00829"></a><span class="lineno">  829</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_BASE_ARRAY_HPP_</span></div>
 </div><!-- fragment --></div><!-- contents -->
+<div class="ttc" id="anamespacegko_html_a55f15cbab9cd48c00c00f22a65e8dd43"><div class="ttname"><a href="namespacegko.html#a55f15cbab9cd48c00c00f22a65e8dd43">gko::make_array_view</a></div><div class="ttdeci">Array&lt; ValueType &gt; make_array_view(std::shared_ptr&lt; const Executor &gt; exec, size_type size, ValueType *data)</div><div class="ttdoc">Helper function to create an array view deducing the value type.</div><div class="ttdef"><b>Definition:</b> array.hpp:740</div></div>
 <div class="ttc" id="aclassgko_1_1Array_html_a4a179243b98f648c8947eafe804384c4"><div class="ttname"><a href="classgko_1_1Array.html#a4a179243b98f648c8947eafe804384c4">gko::Array::fill</a></div><div class="ttdeci">void fill(const value_type value)</div><div class="ttdoc">Fill the array with the given value.</div></div>
 <div class="ttc" id="aclassgko_1_1executor__deleter_html"><div class="ttname"><a href="classgko_1_1executor__deleter.html">gko::executor_deleter</a></div><div class="ttdoc">This is a deleter that uses an executor's free method to deallocate the data.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1056</div></div>
 <div class="ttc" id="aclassgko_1_1Array_html_a5a46e0920b649cdb062f5e415922d1aa"><div class="ttname"><a href="classgko_1_1Array.html#a5a46e0920b649cdb062f5e415922d1aa">gko::Array::get_const_data</a></div><div class="ttdeci">const value_type * get_const_data() const noexcept</div><div class="ttdoc">Returns a constant pointer to the block of memory used to store the elements of the Array.</div><div class="ttdef"><b>Definition:</b> array.hpp:639</div></div>
