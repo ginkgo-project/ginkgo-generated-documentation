@@ -356,6 +356,14 @@ constexpr \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64
 \begin{DoxyCompactList}\small\item\em Checks if all components of a complex value are finite, meaning they are neither +/-\/ infinity nor NaN. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename T $>$ }\\T \mbox{\hyperlink{namespacegko_aa1470fdc2a75dcda76bea4b879a29886}{safe\+\_\+divide}} (T a, T b)
 \begin{DoxyCompactList}\small\item\em Computes the quotient of the given parameters, guarding against division by zero. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\std\+::enable\+\_\+if\+\_\+t$<$!\mbox{\hyperlink{namespacegko_aeede19206954d5c8ebd04c95cf63bb88}{is\+\_\+complex\+\_\+s}}$<$ T $>$\+::value, bool $>$ \mbox{\hyperlink{namespacegko_ae8b5bfaadc2c5a40f17f0459a3aa412d}{is\+\_\+nan}} (const T \&value)
+\begin{DoxyCompactList}\small\item\em Checks if a floating point number is NaN. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\std\+::enable\+\_\+if\+\_\+t$<$ \mbox{\hyperlink{namespacegko_aeede19206954d5c8ebd04c95cf63bb88}{is\+\_\+complex\+\_\+s}}$<$ T $>$\+::value, bool $>$ \mbox{\hyperlink{namespacegko_abb8963a80e755ccccebd819827995e1e}{is\+\_\+nan}} (const T \&value)
+\begin{DoxyCompactList}\small\item\em Checks if any component of a complex value is NaN. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\constexpr std\+::enable\+\_\+if\+\_\+t$<$!\mbox{\hyperlink{namespacegko_aeede19206954d5c8ebd04c95cf63bb88}{is\+\_\+complex\+\_\+s}}$<$ T $>$\+::value, T $>$ \mbox{\hyperlink{namespacegko_a4235252c8531e7028f76eff44b14dc53}{nan}} ()
+\begin{DoxyCompactList}\small\item\em Returns a quiet NaN of the given type. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\constexpr std\+::enable\+\_\+if\+\_\+t$<$ \mbox{\hyperlink{namespacegko_aeede19206954d5c8ebd04c95cf63bb88}{is\+\_\+complex\+\_\+s}}$<$ T $>$\+::value, T $>$ \mbox{\hyperlink{namespacegko_a2fab450618d0d6a0bab20cead0d5b60b}{nan}} ()
+\begin{DoxyCompactList}\small\item\em Returns a complex with both components quiet NaN. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ }\\\mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$ \mbox{\hyperlink{namespacegko_a0b476e0e3df616b08efe85000bff8da0}{read\+\_\+raw}} (std\+::istream \&is)
 \begin{DoxyCompactList}\small\item\em Reads a matrix stored in matrix market format from an input stream. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Value\+Type , typename Index\+Type $>$ }\\void \mbox{\hyperlink{namespacegko_ab31feb99c64fc6df58ac09abd4af69b6}{write\+\_\+raw}} (std\+::ostream \&os, const \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$ \&data, \mbox{\hyperlink{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68}{layout\+\_\+type}} layout=\mbox{\hyperlink{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68af1f713c9e000f5d3f280adbd124df4f5}{layout\+\_\+type\+::array}})
@@ -1521,6 +1529,54 @@ Checks if all components of a complex value are finite, meaning they are neither
 
 References is\+\_\+finite().
 
+\mbox{\Hypertarget{namespacegko_ae8b5bfaadc2c5a40f17f0459a3aa412d}\label{namespacegko_ae8b5bfaadc2c5a40f17f0459a3aa412d}} 
+\index{gko@{gko}!is\_nan@{is\_nan}}
+\index{is\_nan@{is\_nan}!gko@{gko}}
+\doxysubsubsection{\texorpdfstring{is\_nan()}{is\_nan()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::enable\+\_\+if\+\_\+t$<$!\mbox{\hyperlink{namespacegko_aeede19206954d5c8ebd04c95cf63bb88}{is\+\_\+complex\+\_\+s}}$<$T$>$\+::value, bool$>$ gko\+::is\+\_\+nan (\begin{DoxyParamCaption}\item[{const T \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if a floating point number is NaN. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & type of the value to check\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & value to check\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if the value is NaN. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegko_abb8963a80e755ccccebd819827995e1e}\label{namespacegko_abb8963a80e755ccccebd819827995e1e}} 
+\index{gko@{gko}!is\_nan@{is\_nan}}
+\index{is\_nan@{is\_nan}!gko@{gko}}
+\doxysubsubsection{\texorpdfstring{is\_nan()}{is\_nan()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::enable\+\_\+if\+\_\+t$<$\mbox{\hyperlink{namespacegko_aeede19206954d5c8ebd04c95cf63bb88}{is\+\_\+complex\+\_\+s}}$<$T$>$\+::value, bool$>$ gko\+::is\+\_\+nan (\begin{DoxyParamCaption}\item[{const T \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if any component of a complex value is NaN. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & complex type of the value to check\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & complex value to check\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if any component of the given value is NaN. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{namespacegko_a014ec51e675c425bb83908361f630450}\label{namespacegko_a014ec51e675c425bb83908361f630450}} 
 \index{gko@{gko}!lend@{lend}}
 \index{lend@{lend}!gko@{gko}}
@@ -1816,6 +1872,52 @@ If Value\+Type is real and both {\ttfamily in} and {\ttfamily out} are complex, 
 \begin{DoxySeeAlso}{See also}
 \mbox{\hyperlink{namespacegko_a205901dcce27e1df970c569d46d87551}{mixed\+\_\+precision\+\_\+dispatch()}} 
 \end{DoxySeeAlso}
+\mbox{\Hypertarget{namespacegko_a4235252c8531e7028f76eff44b14dc53}\label{namespacegko_a4235252c8531e7028f76eff44b14dc53}} 
+\index{gko@{gko}!nan@{nan}}
+\index{nan@{nan}!gko@{gko}}
+\doxysubsubsection{\texorpdfstring{nan()}{nan()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+constexpr std\+::enable\+\_\+if\+\_\+t$<$!\mbox{\hyperlink{namespacegko_aeede19206954d5c8ebd04c95cf63bb88}{is\+\_\+complex\+\_\+s}}$<$T$>$\+::value, T$>$ gko\+::nan (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Returns a quiet NaN of the given type. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & the type of the object\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+NaN. 
+\end{DoxyReturn}
+
+
+Referenced by nan().
+
+\mbox{\Hypertarget{namespacegko_a2fab450618d0d6a0bab20cead0d5b60b}\label{namespacegko_a2fab450618d0d6a0bab20cead0d5b60b}} 
+\index{gko@{gko}!nan@{nan}}
+\index{nan@{nan}!gko@{gko}}
+\doxysubsubsection{\texorpdfstring{nan()}{nan()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+constexpr std\+::enable\+\_\+if\+\_\+t$<$\mbox{\hyperlink{namespacegko_aeede19206954d5c8ebd04c95cf63bb88}{is\+\_\+complex\+\_\+s}}$<$T$>$\+::value, T$>$ gko\+::nan (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Returns a complex with both components quiet NaN. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & the type of the object\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+complex\{NaN, NaN\}. 
+\end{DoxyReturn}
+
+
+References nan().
+
 \mbox{\Hypertarget{namespacegko_a0059e27f8f4bc348ff65c1e60caf47c8}\label{namespacegko_a0059e27f8f4bc348ff65c1e60caf47c8}} 
 \index{gko@{gko}!one@{one}}
 \index{one@{one}!gko@{gko}}

@@ -32,12 +32,13 @@ var searchData=
   ['is_5fcontiguous_694',['is_contiguous',['../classgko_1_1IndexSet.html#a4b753925eaf5cb382514bcebaf8d5941',1,'gko::IndexSet']]],
   ['is_5ffinalized_695',['is_finalized',['../classgko_1_1stopping__status.html#a7c8b094d37449098ca4ddb1f4bbf10bd',1,'gko::stopping_status']]],
   ['is_5ffinite_696',['is_finite',['../namespacegko.html#a58498d28d199c188555a48fda471f103',1,'gko::is_finite(const T &amp;value)'],['../namespacegko.html#a737d84b498f462463fa40846e22aec6d',1,'gko::is_finite(const T &amp;value)']]],
-  ['is_5fowning_697',['is_owning',['../classgko_1_1Array.html#a18164d25e9e87bdc6b8af7ce9956199a',1,'gko::Array']]],
-  ['is_5fsorted_5fby_5fcolumn_5findex_698',['is_sorted_by_column_index',['../classgko_1_1matrix_1_1Fbcsr.html#aecdf3fe50a7c9a318dd74dd3decff851',1,'gko::matrix::Fbcsr']]],
-  ['is_5fvalid_699',['is_valid',['../structgko_1_1span.html#a32a87f434708e6857820858503f9b133',1,'gko::span']]],
-  ['isai_700',['Isai',['../classgko_1_1preconditioner_1_1Isai.html',1,'gko::preconditioner']]],
-  ['isai_5ftype_701',['isai_type',['../namespacegko_1_1preconditioner.html#a918dfc2ae55135bbd6e1e01d0c6031ab',1,'gko::preconditioner']]],
-  ['iteration_702',['Iteration',['../classgko_1_1stop_1_1Iteration.html',1,'gko::stop']]],
-  ['iteration_5fcomplete_5fdata_703',['iteration_complete_data',['../structgko_1_1log_1_1iteration__complete__data.html',1,'gko::log']]],
-  ['iterations_704',['iterations',['../structgko_1_1factorization_1_1ParIc_1_1parameters__type.html#a358fe00ecabfa3fb2b06bf90175020a4',1,'gko::factorization::ParIc::parameters_type::iterations()'],['../structgko_1_1factorization_1_1ParIct_1_1parameters__type.html#a4d677e4243e1c6749a0bb6ada7bdaf5d',1,'gko::factorization::ParIct::parameters_type::iterations()'],['../structgko_1_1factorization_1_1ParIlu_1_1parameters__type.html#acf87db3479a61d53d301101b51e419c6',1,'gko::factorization::ParIlu::parameters_type::iterations()'],['../structgko_1_1factorization_1_1ParIlut_1_1parameters__type.html#aed39c89593c4e33f8473cc641fc4a44c',1,'gko::factorization::ParIlut::parameters_type::iterations()']]]
+  ['is_5fnan_697',['is_nan',['../namespacegko.html#ae8b5bfaadc2c5a40f17f0459a3aa412d',1,'gko::is_nan(const T &amp;value)'],['../namespacegko.html#abb8963a80e755ccccebd819827995e1e',1,'gko::is_nan(const T &amp;value)']]],
+  ['is_5fowning_698',['is_owning',['../classgko_1_1Array.html#a18164d25e9e87bdc6b8af7ce9956199a',1,'gko::Array']]],
+  ['is_5fsorted_5fby_5fcolumn_5findex_699',['is_sorted_by_column_index',['../classgko_1_1matrix_1_1Fbcsr.html#aecdf3fe50a7c9a318dd74dd3decff851',1,'gko::matrix::Fbcsr']]],
+  ['is_5fvalid_700',['is_valid',['../structgko_1_1span.html#a32a87f434708e6857820858503f9b133',1,'gko::span']]],
+  ['isai_701',['Isai',['../classgko_1_1preconditioner_1_1Isai.html',1,'gko::preconditioner']]],
+  ['isai_5ftype_702',['isai_type',['../namespacegko_1_1preconditioner.html#a918dfc2ae55135bbd6e1e01d0c6031ab',1,'gko::preconditioner']]],
+  ['iteration_703',['Iteration',['../classgko_1_1stop_1_1Iteration.html',1,'gko::stop']]],
+  ['iteration_5fcomplete_5fdata_704',['iteration_complete_data',['../structgko_1_1log_1_1iteration__complete__data.html',1,'gko::log']]],
+  ['iterations_705',['iterations',['../structgko_1_1factorization_1_1ParIc_1_1parameters__type.html#a358fe00ecabfa3fb2b06bf90175020a4',1,'gko::factorization::ParIc::parameters_type::iterations()'],['../structgko_1_1factorization_1_1ParIct_1_1parameters__type.html#a4d677e4243e1c6749a0bb6ada7bdaf5d',1,'gko::factorization::ParIct::parameters_type::iterations()'],['../structgko_1_1factorization_1_1ParIlu_1_1parameters__type.html#acf87db3479a61d53d301101b51e419c6',1,'gko::factorization::ParIlu::parameters_type::iterations()'],['../structgko_1_1factorization_1_1ParIlut_1_1parameters__type.html#aed39c89593c4e33f8473cc641fc4a44c',1,'gko::factorization::ParIlut::parameters_type::iterations()']]]
 ];
