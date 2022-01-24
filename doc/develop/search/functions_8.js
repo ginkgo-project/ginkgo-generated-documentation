@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['imag_1767',['imag',['../namespacegko.html#a0ac423659071783d3b7f8a66ea480f49',1,'gko']]],
+  ['imag_1767',['imag',['../namespacegko.html#a795f649e3744fbfe128aec0b0f928aaa',1,'gko']]],
   ['imbalance_5fbounded_5flimit_1768',['imbalance_bounded_limit',['../classgko_1_1matrix_1_1Hybrid_1_1imbalance__bounded__limit.html#a97e364f42ea8a12cc04f3d49b0c4da8f',1,'gko::matrix::Hybrid::imbalance_bounded_limit']]],
   ['imbalance_5flimit_1769',['imbalance_limit',['../classgko_1_1matrix_1_1Hybrid_1_1imbalance__limit.html#ab835e526a3de2da3d827dcdb740f3b75',1,'gko::matrix::Hybrid::imbalance_limit']]],
   ['indexset_1770',['IndexSet',['../classgko_1_1IndexSet.html#ae5193c5d696cf66872af8e529956d9fb',1,'gko::IndexSet::IndexSet(std::shared_ptr&lt; const Executor &gt; exec)'],['../classgko_1_1IndexSet.html#a4a7e5bf2f364877d09fd7700dd6aa3d4',1,'gko::IndexSet::IndexSet(std::shared_ptr&lt; const gko::Executor &gt; executor, const index_type size, const gko::Array&lt; index_type &gt; &amp;indices, const bool is_sorted=false)'],['../classgko_1_1IndexSet.html#a158fd46f4660d2e2b00941296ac996d9',1,'gko::IndexSet::IndexSet(std::shared_ptr&lt; const Executor &gt; exec, const IndexSet &amp;other)']]],

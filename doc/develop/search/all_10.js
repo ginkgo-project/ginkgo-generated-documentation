@@ -10,7 +10,7 @@ var searchData=
   ['readablefrommatrixdata_865',['ReadableFromMatrixData',['../classgko_1_1ReadableFromMatrixData.html',1,'gko']]],
   ['readablefrommatrixdata_3c_20valuetype_2c_20int32_20_3e_866',['ReadableFromMatrixData&lt; ValueType, int32 &gt;',['../classgko_1_1ReadableFromMatrixData.html',1,'gko']]],
   ['readablefrommatrixdata_3c_20valuetype_2c_20int64_20_3e_867',['ReadableFromMatrixData&lt; ValueType, int64 &gt;',['../classgko_1_1ReadableFromMatrixData.html',1,'gko']]],
-  ['real_868',['real',['../namespacegko.html#a85e29870bacc4e660be5acbbf742305e',1,'gko']]],
+  ['real_868',['real',['../namespacegko.html#af21648097306adbabc6234b4609ce297',1,'gko']]],
   ['real_5foperaton_869',['real_operaton',['../structgko_1_1accessor_1_1real__operaton.html',1,'gko::accessor']]],
   ['record_870',['Record',['../classgko_1_1log_1_1Record.html',1,'gko::log']]],
   ['reduce_5fadd_871',['reduce_add',['../namespacegko.html#aa561f81bd3644847487162261d22bcb8',1,'gko::reduce_add(const Array&lt; ValueType &gt; &amp;input_arr, const ValueType init_val=0)'],['../namespacegko.html#aa6587bad10f98549c76d45f4f628cdd9',1,'gko::reduce_add(const Array&lt; ValueType &gt; &amp;input_arr, Array&lt; ValueType &gt; &amp;result)']]],
