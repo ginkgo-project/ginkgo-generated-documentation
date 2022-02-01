@@ -34,27 +34,45 @@
 \form#33:$\left(R = A - L \cdot U\right)\vert_\mathcal{S} = 0\vert_\mathcal{S}$
 \form#34:$ILU(0)$
 \form#35:$R = A - LU$
-\form#36:$LL^H*x = b$
-\form#37:$LUx = b$
-\form#38:$aiA * x$
-\form#39:$aiU * x$
-\form#40:$aiL * x$
-\form#41:$aiC^T * aiC * x$
-\form#42:$|(Av_n)^H * v_n / (norm(Av_n) * norm(v_n))| < kappa$
-\form#43:$ || r || < \tau $
-\form#44:$ \frac{|| r ||}{|| r_0||} < \tau $
-\form#45:$ \frac{|| r ||}{|| b ||} < \tau $
-\form#46:$ u : [0, 1] \rightarrow R\\ u'' = f\\ u(0) = u0\\ u(1) = u1 $
-\form#47:$ u(x + h) = u(x) - u'(x)h + 1/2 u''(x)h^2 + O(h^3)\\ u(x - h) = u(x) + u'(x)h + 1/2 u''(x)h^2 + O(h^3) / +\\ ---------------------- \\ -u(x - h) + 2u(x) + -u(x + h) = -f(x)h^2 + O(h^3) $
-\form#48:$x1, ..., xk, $
-\form#49:$ h = 1 / (K + 1)$
-\form#50:$ 2u_1 - u_2 = -f_1 h^2 + u0\\ -u_(k-1) + 2u_k - u_(k+1) = -f_k h^2, k = 2, ..., K - 1\\ -u_(K-1) + 2u_K = -f_K h^2 + u1\\ $
-\form#51:$`f` $
-\form#52:$`f(x) = 6x`$
-\form#53:$`u(x) = x^3`$
-\form#54:$ u : [0, d]^2 \rightarrow R\\ \partial_t u = \delta u + f $
-\form#55:$h = 1/n$
-\form#56:$ u_{i,j}' = \alpha\frac{u_{i-1,j}+u_{i+1,j}+u_{i,j-1}+u_{i,j+1}-4u_{i,j}}{h^2}+f_{i,j} $
-\form#57:$\tau$
-\form#58:$ \frac{u_{i,j}^{k+1} - u_{i,j}^k}{\tau} = \alpha\frac{u_{i-1,j}^{k+1}+u_{i+1,j}^{k+1} -u_{i,j-1}^{k+1}-u_{i,j+1}^{k+1}+4u_{i,j}^{k+1}}{h^2} +f_{i,j} $
-\form#59:$ u_{\cdot}^{k+1}$
+\form#36:$\omega = e^{-2\pi i / n}$
+\form#37:$\omega = e^{2 \pi i / n}$
+\form#38:\[ x_k = \sum_{j=0}^{n-1} \omega^{jk} b_j \]
+\form#39:$n_1, n_2$
+\form#40:$\omega = e^{-2\pi i / (n_1 n_2)}$
+\form#41:$\omega = e^{2 \pi i / (n_1 n_2)}$
+\form#42:\[ x_{k_1 n_2 + k_2} = \sum_{i_1=0}^{n_1-1} \sum_{i_2=0}^{n_2-1} \omega^{i_1 k_1 + i_2 k_2} b_{i_1 n_2 + i_2} \]
+\form#43:$n_1, n_2, n_3$
+\form#44:$\omega = e^{-2\pi i / (n_1 n_2 n_3)}$
+\form#45:$\omega = e^{2 \pi i / (n_1 n_2 n_3)}$
+\form#46:\[ x_{k_1 n_2 n_3 + k_2 n_3 + k_3} = \sum_{i_1=0}^{n_1-1} \sum_{i_2=0}^{n_2-1} \sum_{i_3=0}^{n_3-1} \omega^{i_1 k_1 + i_2 k_2 + i_3 k_3} b_{i_1 n_2 n_3 + i_2 n_3 + i_3} \]
+\form#47:$LL^H*x = b$
+\form#48:$LUx = b$
+\form#49:$aiA * x$
+\form#50:$aiU * x$
+\form#51:$aiL * x$
+\form#52:$aiC^T * aiC * x$
+\form#53:$|(Av_n)^H * v_n / (norm(Av_n) * norm(v_n))| < kappa$
+\form#54:$ || r || < \tau $
+\form#55:$ \frac{|| r ||}{|| r_0||} < \tau $
+\form#56:$ \frac{|| r ||}{|| b ||} < \tau $
+\form#57:$ u : [0, 1] \rightarrow R\\ u'' = f\\ u(0) = u0\\ u(1) = u1 $
+\form#58:$ u(x + h) = u(x) - u'(x)h + 1/2 u''(x)h^2 + O(h^3)\\ u(x - h) = u(x) + u'(x)h + 1/2 u''(x)h^2 + O(h^3) / +\\ ---------------------- \\ -u(x - h) + 2u(x) + -u(x + h) = -f(x)h^2 + O(h^3) $
+\form#59:$x1, ..., xk, $
+\form#60:$ h = 1 / (K + 1)$
+\form#61:$ 2u_1 - u_2 = -f_1 h^2 + u0\\ -u_(k-1) + 2u_k - u_(k+1) = -f_k h^2, k = 2, ..., K - 1\\ -u_(K-1) + 2u_K = -f_K h^2 + u1\\ $
+\form#62:$`f` $
+\form#63:$`f(x) = 6x`$
+\form#64:$`u(x) = x^3`$
+\form#65:$ u : [0, d]^2 \rightarrow R\\ \partial_t u = \delta u + f $
+\form#66:$h = 1/n$
+\form#67:$ u_{i,j}' = \alpha\frac{u_{i-1,j}+u_{i+1,j}+u_{i,j-1}+u_{i,j+1}-4u_{i,j}}{h^2}+f_{i,j} $
+\form#68:$\tau$
+\form#69:$ \frac{u_{i,j}^{k+1} - u_{i,j}^k}{\tau} = \alpha\frac{u_{i-1,j}^{k+1}+u_{i+1,j}^{k+1} -u_{i,j-1}^{k+1}-u_{i,j+1}^{k+1}+4u_{i,j}^{k+1}}{h^2} +f_{i,j} $
+\form#70:$ u_{\cdot}^{k+1}$
+\form#71:$ i \partial_t \theta = -\delta \theta + |\theta|^2 \theta $
+\form#72:$\theta$
+\form#73:$|\theta|^2$
+\form#74:\begin{align*} (1) \quad i \partial_t \theta &= -\delta \theta\\ (2) \quad i \partial_t \theta &= |\theta|^2 \theta \end{align*}
+\form#75:$| \theta |^2$
+\form#76:\begin{align*} (\hat 1) \quad \quad \partial_t \hat\theta_k &= -i |k|^2 \theta \\ (2') \quad \partial_t |\theta|^2 &= i |\theta|^2 (\theta - \theta) = 0 \end{align*}
+\form#77:\begin{align*} (\hat 1) \quad \hat\theta(t) &= e^{-i |k|^2 t} \hat\theta(0)\\ (2') \quad \theta(t) &= e^{-i |\theta|^2 t} \theta(0) \end{align*}

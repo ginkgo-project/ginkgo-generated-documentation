@@ -338,7 +338,13 @@ Solve the batch system
 \end{DoxyCode}
 
 
-This is not necessary, but one might want to remove the logger before the next solve using the same solver object. solver-\/$>$remove\+\_\+logger(logger.\+get());
+This is not necessary, but one might want to remove the logger before the next solve using the same solver object.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{solver-\/>remove\_logger(logger.get());}
+\end{DoxyCode}
+
 
 \label{_Checkresult}%
  \doxysubsubsection*{Check result}
@@ -516,7 +522,7 @@ The following is the expected result on the reference executor\+:
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{/*******************************<GINKGO LICENSE>******************************}}
-\DoxyCodeLine{\textcolor{comment}{Copyright (c) 2017-\/2021, the Ginkgo authors}}
+\DoxyCodeLine{\textcolor{comment}{Copyright (c) 2017-\/2022, the Ginkgo authors}}
 \DoxyCodeLine{\textcolor{comment}{All rights reserved.}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{Redistribution and use in source and binary forms, with or without}}
@@ -660,6 +666,7 @@ The following is the expected result on the reference executor\+:
 \DoxyCodeLine{    \textcolor{keyword}{auto} solver = solver\_gen-\/>generate(A);}
 \DoxyCodeLine{    solver-\/>add\_logger(logger);}
 \DoxyCodeLine{    solver-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(b), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x));}
+\DoxyCodeLine{    solver-\/>remove\_logger(logger.get());}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} b\_norm = gko::batch\_initialize<real\_vec\_type>(num\_systems, \{0.0\},}
 \DoxyCodeLine{                                                       exec-\/>get\_master());}

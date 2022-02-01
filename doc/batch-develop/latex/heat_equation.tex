@@ -43,7 +43,7 @@ The intention of this example is to provide a mini-\/app showing matrix assembly
 \DoxyCodeLine{}
 \DoxyCodeLine{The partial differential equation (PDE) is solved with a finite difference}
 \DoxyCodeLine{spatial discretization on an equidistant grid: For `n` grid points,}
-\DoxyCodeLine{and grid distance h = 1/n we \mbox{\hyperlink{namespacegko_a859dc47a462721d83728d91ab7fa2148}{write}}}
+\DoxyCodeLine{and grid distance h = 1/n we \mbox{\hyperlink{namespacegko_aa24837da3770b3dddf981d9bfe0d3b52}{write}}}
 \DoxyCodeLine{}
 \DoxyCodeLine{    u\_\{i,j\}\textcolor{stringliteral}{' = \(\backslash\)alpha (u\_\{i-\/1,j\} + u\_\{i+1,j\} + u\_\{i,j-\/1\} + u\_\{i,j+1\}}}
 \DoxyCodeLine{\textcolor{stringliteral}{                   -\/ 4 u\_\{i,j\}) / h\string^2}}
@@ -237,8 +237,8 @@ load heat source and initial state vectors
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{std::ifstream source\_stream(\textcolor{stringliteral}{"data/source.mtx"});}
-\DoxyCodeLine{std::ifstream initial\_stream(\textcolor{stringliteral}{"data/initial.mtx"});}
+\DoxyCodeLine{std::ifstream initial\_stream(\textcolor{stringliteral}{"data/gko\_logo\_2d.mtx"});}
+\DoxyCodeLine{std::ifstream source\_stream(\textcolor{stringliteral}{"data/gko\_text\_2d.mtx"});}
 \DoxyCodeLine{\textcolor{keyword}{auto} source = gko::read<vec>(source\_stream, exec);}
 \DoxyCodeLine{\textcolor{keyword}{auto} in\_vector = gko::read<vec>(initial\_stream, exec);}
 \end{DoxyCode}
@@ -396,7 +396,7 @@ The program will generate a video file named heat.\+mp4 and output the timestamp
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{/*******************************<GINKGO LICENSE>******************************}}
-\DoxyCodeLine{\textcolor{comment}{Copyright (c) 2017-\/2021, the Ginkgo authors}}
+\DoxyCodeLine{\textcolor{comment}{Copyright (c) 2017-\/2022, the Ginkgo authors}}
 \DoxyCodeLine{\textcolor{comment}{All rights reserved.}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{Redistribution and use in source and binary forms, with or without}}
@@ -528,8 +528,8 @@ The program will generate a video file named heat.\+mp4 and output the timestamp
 \DoxyCodeLine{    \textcolor{keyword}{auto} tau = 1.0 / steps\_per\_sec;}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} exec = \mbox{\hyperlink{classgko_1_1CudaExecutor_a5dcec3ca1c458382e01191b727959a81}{gko::CudaExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}());}
-\DoxyCodeLine{    std::ifstream source\_stream(\textcolor{stringliteral}{"data/source.mtx"});}
-\DoxyCodeLine{    std::ifstream initial\_stream(\textcolor{stringliteral}{"data/initial.mtx"});}
+\DoxyCodeLine{    std::ifstream initial\_stream(\textcolor{stringliteral}{"data/gko\_logo\_2d.mtx"});}
+\DoxyCodeLine{    std::ifstream source\_stream(\textcolor{stringliteral}{"data/gko\_text\_2d.mtx"});}
 \DoxyCodeLine{    \textcolor{keyword}{auto} source = gko::read<vec>(source\_stream, exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} in\_vector = gko::read<vec>(initial\_stream, exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} out\_vector = in\_vector-\/>clone();}

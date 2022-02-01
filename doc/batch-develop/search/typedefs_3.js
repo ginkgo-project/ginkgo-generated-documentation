@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['enabledefaultbatchlinopfactory_2106',['EnableDefaultBatchLinOpFactory',['../group__BatchLinOp.html#ga3f94abb7e9e96e7d7c84f7250689ea2a',1,'gko']]],
-  ['enabledefaultcriterionfactory_2107',['EnableDefaultCriterionFactory',['../namespacegko_1_1stop.html#ab045b6fd7571f3234d9a63a5ee5a2252',1,'gko::stop']]],
-  ['enabledefaultlinopfactory_2108',['EnableDefaultLinOpFactory',['../group__LinOp.html#ga24628d477cba68b31cea690572c51912',1,'gko']]],
-  ['enabledefaultreorderingbasefactory_2109',['EnableDefaultReorderingBaseFactory',['../namespacegko_1_1reorder.html#a17edd2d82d2a872bb4f50a70fcaa105b',1,'gko::reorder']]]
+  ['enabledefaultbatchlinopfactory_2250',['EnableDefaultBatchLinOpFactory',['../group__BatchLinOp.html#ga3f94abb7e9e96e7d7c84f7250689ea2a',1,'gko']]],
+  ['enabledefaultcriterionfactory_2251',['EnableDefaultCriterionFactory',['../namespacegko_1_1stop.html#ab045b6fd7571f3234d9a63a5ee5a2252',1,'gko::stop']]],
+  ['enabledefaultlinopfactory_2252',['EnableDefaultLinOpFactory',['../group__LinOp.html#ga24628d477cba68b31cea690572c51912',1,'gko']]],
+  ['enabledefaultreorderingbasefactory_2253',['EnableDefaultReorderingBaseFactory',['../namespacegko_1_1reorder.html#a17edd2d82d2a872bb4f50a70fcaa105b',1,'gko::reorder']]]
 ];

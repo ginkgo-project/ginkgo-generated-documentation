@@ -19,11 +19,6 @@ Collaboration diagram for gko\+::matrix\+\_\+data$<$ Value\+Type, Index\+Type $>
 \includegraphics[width=350pt]{structgko_1_1matrix__data__coll__graph}
 \end{center}
 \end{figure}
-\doxysubsection*{Classes}
-\begin{DoxyCompactItemize}
-\item 
-struct \mbox{\hyperlink{structgko_1_1matrix__data_1_1nonzero__type}{nonzero\+\_\+type}}
-\begin{DoxyCompactList}\small\item\em Type used to store nonzeros. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
@@ -32,6 +27,9 @@ using {\bfseries value\+\_\+type} = Value\+Type
 \item 
 \mbox{\Hypertarget{structgko_1_1matrix__data_a60fc773e696c9295aff1d9f685a67712}\label{structgko_1_1matrix__data_a60fc773e696c9295aff1d9f685a67712}} 
 using {\bfseries index\+\_\+type} = Index\+Type
+\item 
+\mbox{\Hypertarget{structgko_1_1matrix__data_a083205dc2d87cf76f02d050a2cc576bd}\label{structgko_1_1matrix__data_a083205dc2d87cf76f02d050a2cc576bd}} 
+using {\bfseries nonzero\+\_\+type} = \mbox{\hyperlink{structgko_1_1matrix__data__entry}{matrix\+\_\+data\+\_\+entry}}$<$ value\+\_\+type, index\+\_\+type $>$
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -50,7 +48,10 @@ using {\bfseries index\+\_\+type} = Index\+Type
 \begin{DoxyCompactList}\small\item\em Initializes a matrix from a range. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{structgko_1_1matrix__data_ac83a3b5d892fbd132fd9a7f50b0f83b8}\label{structgko_1_1matrix__data_ac83a3b5d892fbd132fd9a7f50b0f83b8}} 
 void \mbox{\hyperlink{structgko_1_1matrix__data_ac83a3b5d892fbd132fd9a7f50b0f83b8}{ensure\+\_\+row\+\_\+major\+\_\+order}} ()
-\begin{DoxyCompactList}\small\item\em Sorts the nonzero vector so the values follow row-\/major order. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Sorts the nonzero vector so the values follow row-\/major order. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structgko_1_1matrix__data_a7b360eaf4c11e846c561f2910e2d425f}\label{structgko_1_1matrix__data_a7b360eaf4c11e846c561f2910e2d425f}} 
+void {\bfseries remove\+\_\+zeros} ()
+\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -74,7 +75,7 @@ static \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} \mbox{\hyp
 \mbox{\Hypertarget{structgko_1_1matrix__data_a30716bd9e39a7beed52fc56d737fc07b}\label{structgko_1_1matrix__data_a30716bd9e39a7beed52fc56d737fc07b}} 
 \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \mbox{\hyperlink{structgko_1_1matrix__data_a30716bd9e39a7beed52fc56d737fc07b}{size}}
 \begin{DoxyCompactList}\small\item\em Size of the matrix. \end{DoxyCompactList}\item 
-std\+::vector$<$ \mbox{\hyperlink{structgko_1_1matrix__data_1_1nonzero__type}{nonzero\+\_\+type}} $>$ \mbox{\hyperlink{structgko_1_1matrix__data_a4f6be92270fa96bccdc502c83d248dc0}{nonzeros}}
+std\+::vector$<$ \mbox{\hyperlink{structgko_1_1matrix__data__entry}{nonzero\+\_\+type}} $>$ \mbox{\hyperlink{structgko_1_1matrix__data_a4f6be92270fa96bccdc502c83d248dc0}{nonzeros}}
 \begin{DoxyCompactList}\small\item\em A vector of tuples storing the non-\/zeros of the matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -89,7 +90,7 @@ The matrix is stored as a sequence of nonzero elements, where each element is a 
 \begin{DoxyNote}{Note}
 All Ginkgo functions returning such a structure will return the nonzeros sorted in row-\/major order. 
 
-All Ginkgo functions that take this structure as input expect that the nonzeros are sorted in row-\/major order. 
+All Ginkgo functions that take this structure as input expect that the nonzeros are sorted in row-\/major order and that the index pair (row\+\_\+index, column\+\_\+index) of each nonzero is unique. 
 
 This structure is not optimized for usual access patterns and it can only exist on the C\+PU. Thus, it should only be used for utility functions which do not have to be optimized for performance.
 \end{DoxyNote}
@@ -461,7 +462,7 @@ References gko\+::matrix\+\_\+data$<$ Value\+Type, Index\+Type $>$\+::diag().
 \index{nonzeros@{nonzeros}!gko::matrix\_data$<$ ValueType, IndexType $>$@{gko::matrix\_data$<$ ValueType, IndexType $>$}}
 \doxysubsubsection{\texorpdfstring{nonzeros}{nonzeros}}
 {\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
-std\+::vector$<$\mbox{\hyperlink{structgko_1_1matrix__data_1_1nonzero__type}{nonzero\+\_\+type}}$>$ \mbox{\hyperlink{structgko_1_1matrix__data}{gko\+::matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$\+::nonzeros}
+std\+::vector$<$\mbox{\hyperlink{structgko_1_1matrix__data__entry}{nonzero\+\_\+type}}$>$ \mbox{\hyperlink{structgko_1_1matrix__data}{gko\+::matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$\+::nonzeros}
 
 
 

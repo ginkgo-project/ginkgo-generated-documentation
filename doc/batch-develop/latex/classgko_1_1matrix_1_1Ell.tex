@@ -31,6 +31,9 @@ using {\bfseries index\+\_\+type} = Index\+Type
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Ell_a993ff3d650fa2f2c72777b856531163a}\label{classgko_1_1matrix_1_1Ell_a993ff3d650fa2f2c72777b856531163a}} 
 using {\bfseries mat\+\_\+data} = \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$
 \item 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Ell_a540903440ffd066f515a298594fb365e}\label{classgko_1_1matrix_1_1Ell_a540903440ffd066f515a298594fb365e}} 
+using {\bfseries device\+\_\+mat\+\_\+data} = \mbox{\hyperlink{structgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$
+\item 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Ell_acd351481953bc4482110d5cfe3de43ac}\label{classgko_1_1matrix_1_1Ell_acd351481953bc4482110d5cfe3de43ac}} 
 using {\bfseries absolute\+\_\+type} = \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{remove\+\_\+complex}}$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Ell}{Ell}} $>$
 \end{DoxyCompactItemize}
@@ -57,6 +60,8 @@ void {\bfseries move\+\_\+to} (\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}}
 \item 
 void \mbox{\hyperlink{classgko_1_1matrix_1_1Ell_a2c877d9f7bbc57f97df5ab443954a6fd}{read}} (const \mbox{\hyperlink{structgko_1_1matrix__data}{mat\+\_\+data}} \&data) override
 \begin{DoxyCompactList}\small\item\em Reads a matrix from a \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} structure. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Ell_a5eb0aea1411b32a23c428c11cc12d7d1}{read}} (const \mbox{\hyperlink{structgko_1_1device__matrix__data}{device\+\_\+mat\+\_\+data}} \&data) override
+\begin{DoxyCompactList}\small\item\em Reads a matrix from a \mbox{\hyperlink{structgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} structure. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classgko_1_1matrix_1_1Ell_afa9148a16a9255003055d8e9156ee941}{write}} (\mbox{\hyperlink{structgko_1_1matrix__data}{mat\+\_\+data}} \&data) const override
 \begin{DoxyCompactList}\small\item\em Writes a matrix to a \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} structure. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal}{Diagonal}}$<$ Value\+Type $>$ $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Ell_a2c247f0fdadbf1a87045256c56bd8071}{extract\+\_\+diagonal}} () const override
@@ -88,6 +93,11 @@ index\+\_\+type \& \mbox{\hyperlink{classgko_1_1matrix_1_1Ell_a1ef17227a6de85a1c
 \begin{DoxyCompactList}\small\item\em Returns the {\ttfamily idx}-\/th column index of the {\ttfamily row}-\/th row . \end{DoxyCompactList}\item 
 index\+\_\+type \mbox{\hyperlink{classgko_1_1matrix_1_1Ell_a1ac1702011ead4e56857de130b4a5301}{col\+\_\+at}} (\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} row, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} idx) const noexcept
 \begin{DoxyCompactList}\small\item\em Returns the {\ttfamily idx}-\/th column index of the {\ttfamily row}-\/th row . \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::unique\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Ell}{Ell}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Ell_af0c99c390d27cd44b78f7494a6266a4a}{create\+\_\+const}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \&size, gko\+::detail\+::\+Const\+Array\+View$<$ Value\+Type $>$ \&\&values, gko\+::detail\+::\+Const\+Array\+View$<$ Index\+Type $>$ \&\&col\+\_\+idxs, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} num\+\_\+stored\+\_\+elements\+\_\+per\+\_\+row, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} stride)
+\begin{DoxyCompactList}\small\item\em Creates a constant (immutable) \mbox{\hyperlink{classgko_1_1matrix_1_1Ell}{Ell}} matrix from a set of constant arrays. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
@@ -109,7 +119,6 @@ class {\bfseries Ell$<$ to\+\_\+complex$<$ Value\+Type $>$, Index\+Type $>$}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Ell_a89acd0bfc3d7c2054773d8e306a60ced}\label{classgko_1_1matrix_1_1Ell_a89acd0bfc3d7c2054773d8e306a60ced}} 
 class {\bfseries Ell$<$ next\+\_\+precision$<$ Value\+Type $>$, Index\+Type $>$}
 \end{DoxyCompactItemize}
-\doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
@@ -198,6 +207,35 @@ a pointer to the new absolute object
 
 Implements \mbox{\hyperlink{classgko_1_1EnableAbsoluteComputation_ac30ab2b34bfa3e28e3324cb46f5f030a}{gko\+::\+Enable\+Absolute\+Computation$<$ remove\+\_\+complex$<$ Ell$<$ Value\+Type, Index\+Type $>$ $>$ $>$}}.
 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Ell_af0c99c390d27cd44b78f7494a6266a4a}\label{classgko_1_1matrix_1_1Ell_af0c99c390d27cd44b78f7494a6266a4a}} 
+\index{gko::matrix::Ell$<$ ValueType, IndexType $>$@{gko::matrix::Ell$<$ ValueType, IndexType $>$}!create\_const@{create\_const}}
+\index{create\_const@{create\_const}!gko::matrix::Ell$<$ ValueType, IndexType $>$@{gko::matrix::Ell$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{create\_const()}{create\_const()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+static std\+::unique\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1matrix_1_1Ell}{Ell}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Ell}{gko\+::matrix\+::\+Ell}}$<$ Value\+Type, Index\+Type $>$\+::create\+\_\+const (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \&}]{size,  }\item[{gko\+::detail\+::\+Const\+Array\+View$<$ Value\+Type $>$ \&\&}]{values,  }\item[{gko\+::detail\+::\+Const\+Array\+View$<$ Index\+Type $>$ \&\&}]{col\+\_\+idxs,  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{num\+\_\+stored\+\_\+elements\+\_\+per\+\_\+row,  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{stride }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Creates a constant (immutable) \mbox{\hyperlink{classgko_1_1matrix_1_1Ell}{Ell}} matrix from a set of constant arrays. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & the executor to create the matrix on \\
+\hline
+{\em size} & the dimensions of the matrix \\
+\hline
+{\em values} & the value array of the matrix \\
+\hline
+{\em col\+\_\+idxs} & the column index array of the matrix \\
+\hline
+{\em num\+\_\+stored\+\_\+elements\+\_\+per\+\_\+row} & the number of stored nonzeros per row \\
+\hline
+{\em stride} & the column-\/stride of the value and column index array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A smart pointer to the constant matrix wrapping the input arrays (if they reside on the same executor as the matrix) or a copy of the arrays on the correct executor. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Ell_a2c247f0fdadbf1a87045256c56bd8071}\label{classgko_1_1matrix_1_1Ell_a2c247f0fdadbf1a87045256c56bd8071}} 
 \index{gko::matrix::Ell$<$ ValueType, IndexType $>$@{gko::matrix::Ell$<$ ValueType, IndexType $>$}!extract\_diagonal@{extract\_diagonal}}
 \index{extract\_diagonal@{extract\_diagonal}!gko::matrix::Ell$<$ ValueType, IndexType $>$@{gko::matrix::Ell$<$ ValueType, IndexType $>$}}
@@ -350,10 +388,30 @@ the values of the matrix.
 
 References gko\+::\+Array$<$ Value\+Type $>$\+::get\+\_\+data().
 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Ell_a5eb0aea1411b32a23c428c11cc12d7d1}\label{classgko_1_1matrix_1_1Ell_a5eb0aea1411b32a23c428c11cc12d7d1}} 
+\index{gko::matrix::Ell$<$ ValueType, IndexType $>$@{gko::matrix::Ell$<$ ValueType, IndexType $>$}!read@{read}}
+\index{read@{read}!gko::matrix::Ell$<$ ValueType, IndexType $>$@{gko::matrix::Ell$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{read()}{read()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Ell}{gko\+::matrix\+::\+Ell}}$<$ Value\+Type, Index\+Type $>$\+::read (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structgko_1_1device__matrix__data}{device\+\_\+mat\+\_\+data}} \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reads a matrix from a \mbox{\hyperlink{structgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} structure. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & the \mbox{\hyperlink{structgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} structure. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classgko_1_1ReadableFromMatrixData_a02785ab361765a981b9e1677704fffdb}{gko\+::\+Readable\+From\+Matrix\+Data$<$ Value\+Type, Index\+Type $>$}}.
+
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Ell_a2c877d9f7bbc57f97df5ab443954a6fd}\label{classgko_1_1matrix_1_1Ell_a2c877d9f7bbc57f97df5ab443954a6fd}} 
 \index{gko::matrix::Ell$<$ ValueType, IndexType $>$@{gko::matrix::Ell$<$ ValueType, IndexType $>$}!read@{read}}
 \index{read@{read}!gko::matrix::Ell$<$ ValueType, IndexType $>$@{gko::matrix::Ell$<$ ValueType, IndexType $>$}}
-\doxysubsubsection{\texorpdfstring{read()}{read()}}
+\doxysubsubsection{\texorpdfstring{read()}{read()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
 void \mbox{\hyperlink{classgko_1_1matrix_1_1Ell}{gko\+::matrix\+::\+Ell}}$<$ Value\+Type, Index\+Type $>$\+::read (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structgko_1_1matrix__data}{mat\+\_\+data}} \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 

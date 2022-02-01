@@ -40,6 +40,13 @@ Use some shortcuts. In Ginkgo, vectors are seen as a \mbox{\hyperlink{classgko_1
 \DoxyCodeLine{\textcolor{keyword}{using} vec\_type = \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{gko::matrix::BatchDense<value\_type>}};}
 \DoxyCodeLine{\textcolor{keyword}{using} real\_vec\_type = \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{gko::matrix::BatchDense<real\_type>}};}
 \DoxyCodeLine{\textcolor{keyword}{using} mtx\_type = \mbox{\hyperlink{classgko_1_1matrix_1_1BatchCsr}{gko::matrix::BatchCsr<value\_type, index\_type>}};}
+\end{DoxyCode}
+
+
+using mtx\+\_\+type = gko\+::matrix\+::\+Batch\+Ell$<$value\+\_\+type, index\+\_\+type$>$;
+
+
+\begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{using} solver\_type = \mbox{\hyperlink{classgko_1_1solver_1_1BatchBicgstab}{gko::solver::BatchBicgstab<value\_type>}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -226,15 +233,13 @@ Create a batched solver factory with relevant parameters.
 \DoxyCodeLine{        .with\_max\_iterations(500)}
 \DoxyCodeLine{        .with\_residual\_tol(reduction\_factor)}
 \DoxyCodeLine{        .with\_tolerance\_type(gko::stop::batch::ToleranceType::relative)}
-\DoxyCodeLine{        .with\_preconditioner(gko::preconditioner::batch::type::jacobi)}
 \end{DoxyCode}
 
 
-Set the number of intermediate vectors to store in G\+PU shared memory rather than global memory. Lower values will enable problems with larger individual systems to be solved, while larger values will speed up the solve but will only work for smaller systems. For Bi\+C\+G\+Stab, 10 is the maximum required.
+.with\+\_\+preconditioner(gko\+::preconditioner\+::batch\+::type\+::jacobi)
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{.with\_num\_shared\_vectors(10)}
 \DoxyCodeLine{.on(exec);}
 \end{DoxyCode}
 
@@ -389,7 +394,7 @@ The following is the expected result on the reference executor\+:
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{/*******************************<GINKGO LICENSE>******************************}}
-\DoxyCodeLine{\textcolor{comment}{Copyright (c) 2017-\/2021, the Ginkgo authors}}
+\DoxyCodeLine{\textcolor{comment}{Copyright (c) 2017-\/2022, the Ginkgo authors}}
 \DoxyCodeLine{\textcolor{comment}{All rights reserved.}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{Redistribution and use in source and binary forms, with or without}}
@@ -521,8 +526,6 @@ The following is the expected result on the reference executor\+:
 \DoxyCodeLine{            .with\_max\_iterations(500)}
 \DoxyCodeLine{            .with\_residual\_tol(reduction\_factor)}
 \DoxyCodeLine{            .with\_tolerance\_type(gko::stop::batch::ToleranceType::relative)}
-\DoxyCodeLine{            .with\_preconditioner(gko::preconditioner::batch::type::jacobi)}
-\DoxyCodeLine{            .with\_num\_shared\_vectors(10)}
 \DoxyCodeLine{            .on(exec);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::shared\_ptr<const gko::log::BatchConvergence<value\_type>> logger =}
