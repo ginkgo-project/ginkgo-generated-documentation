@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/458619948 branch based on develop. Ginkgo version 1.5.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/460640540 branch based on develop. Ginkgo version 1.5.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -302,7 +302,7 @@ $(function() {
 <div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;            <span class="keywordflow">return</span> strategy_.<a class="code" href="classgko_1_1matrix_1_1Hybrid_1_1imbalance__limit.html#aa95250e2c38d516dbd2fbf5bdfa67e72">compute_ell_num_stored_elements_per_row</a>(row_nnz);</div>
 <div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;        }</div>
 <div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160; </div>
-<div class="line"><a name="l00354"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Hybrid_1_1minimal__storage__limit.html#a57595cf6ad873dbd75d73cccdfeb71a6">  354</a></span>&#160;        <span class="keyword">auto</span> <a class="code" href="classgko_1_1matrix_1_1Hybrid_1_1minimal__storage__limit.html#a57595cf6ad873dbd75d73cccdfeb71a6">get_percentage</a>() { <span class="keywordflow">return</span> strategy_.<a class="code" href="classgko_1_1matrix_1_1Hybrid_1_1imbalance__limit.html#a45fbcc5d1cb4a6e32a535d965b734da5">get_percentage</a>(); }</div>
+<div class="line"><a name="l00354"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Hybrid_1_1minimal__storage__limit.html#a2c30363cf1049d056594779857ea2112">  354</a></span>&#160;        <span class="keyword">auto</span> <a class="code" href="classgko_1_1matrix_1_1Hybrid_1_1minimal__storage__limit.html#a2c30363cf1049d056594779857ea2112">get_percentage</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> strategy_.<a class="code" href="classgko_1_1matrix_1_1Hybrid_1_1imbalance__limit.html#a45fbcc5d1cb4a6e32a535d965b734da5">get_percentage</a>(); }</div>
 <div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160; </div>
 <div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;    <span class="keyword">private</span>:</div>
 <div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;        <a class="code" href="classgko_1_1matrix_1_1Hybrid_1_1imbalance__limit.html">imbalance_limit</a> strategy_;</div>
@@ -491,65 +491,67 @@ $(function() {
 <div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;          strategy_(std::move(strategy))</div>
 <div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;    {}</div>
 <div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160; </div>
-<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;    <span class="keywordtype">void</span> apply_impl(<span class="keyword">const</span> LinOp* b, LinOp* x) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160; </div>
-<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;    <span class="keywordtype">void</span> apply_impl(<span class="keyword">const</span> LinOp* alpha, <span class="keyword">const</span> LinOp* b, <span class="keyword">const</span> LinOp* beta,</div>
-<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;                    LinOp* x) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160; </div>
-<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160;    std::shared_ptr&lt;ell_type&gt; ell_;</div>
-<div class="line"><a name="l00746"></a><span class="lineno">  746</span>&#160;    std::shared_ptr&lt;coo_type&gt; coo_;</div>
-<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160;    std::shared_ptr&lt;strategy_type&gt; strategy_;</div>
-<div class="line"><a name="l00748"></a><span class="lineno">  748</span>&#160;};</div>
-<div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160; </div>
+<div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160;    <span class="keywordtype">void</span> resize(dim&lt;2&gt; new_size, <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> ell_row_nnz, <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> coo_nnz);</div>
 <div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160; </div>
-<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType, <span class="keyword">typename</span> IndexType&gt;</div>
-<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> HybType&gt;</div>
-<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;std::shared_ptr&lt;typename HybType::strategy_type&gt;</div>
-<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;<a class="code" href="classgko_1_1matrix_1_1Hybrid.html#a9a1eabe0a4ca0a6ae0b922b65c938286">Hybrid&lt;ValueType, IndexType&gt;::get_strategy</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;    static_assert(</div>
-<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;        std::is_same&lt;HybType, Hybrid&lt;<span class="keyword">typename</span> HybType::value_type,</div>
-<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;                                     <span class="keyword">typename</span> HybType::index_type&gt;&gt;::value,</div>
-<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;        <span class="stringliteral">&quot;The given `HybType` type must be of type `matrix::Hybrid`!&quot;</span>);</div>
-<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160; </div>
-<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160;    std::shared_ptr&lt;typename HybType::strategy_type&gt; strategy;</div>
-<div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160;    <span class="keywordflow">if</span> (std::dynamic_pointer_cast&lt;automatic&gt;(strategy_)) {</div>
-<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160;        strategy = std::make_shared&lt;typename HybType::automatic&gt;();</div>
-<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<span class="keyword">auto</span> temp = std::dynamic_pointer_cast&lt;minimal_storage_limit&gt;(</div>
-<div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160;                   strategy_)) {</div>
-<div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160;        <span class="comment">// minimal_storage_limit is related to ValueType and IndexType size.</span></div>
-<div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160;        <span class="keywordflow">if</span> (<span class="keyword">sizeof</span>(value_type) == <span class="keyword">sizeof</span>(<span class="keyword">typename</span> HybType::value_type) &amp;&amp;</div>
-<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160;            <span class="keyword">sizeof</span>(index_type) == <span class="keyword">sizeof</span>(<span class="keyword">typename</span> HybType::index_type)) {</div>
-<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160;            strategy =</div>
-<div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160;                std::make_shared&lt;typename HybType::minimal_storage_limit&gt;();</div>
-<div class="line"><a name="l00771"></a><span class="lineno">  771</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00772"></a><span class="lineno">  772</span>&#160;            strategy = std::make_shared&lt;typename HybType::imbalance_limit&gt;(</div>
-<div class="line"><a name="l00773"></a><span class="lineno">  773</span>&#160;                temp-&gt;get_percentage());</div>
-<div class="line"><a name="l00774"></a><span class="lineno">  774</span>&#160;        }</div>
-<div class="line"><a name="l00775"></a><span class="lineno">  775</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<span class="keyword">auto</span> temp = std::dynamic_pointer_cast&lt;imbalance_bounded_limit&gt;(</div>
-<div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160;                   strategy_)) {</div>
-<div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160;        strategy = std::make_shared&lt;typename HybType::imbalance_bounded_limit&gt;(</div>
-<div class="line"><a name="l00778"></a><span class="lineno">  778</span>&#160;            temp-&gt;get_percentage(), temp-&gt;get_ratio());</div>
-<div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<span class="keyword">auto</span> temp =</div>
-<div class="line"><a name="l00780"></a><span class="lineno">  780</span>&#160;                   std::dynamic_pointer_cast&lt;imbalance_limit&gt;(strategy_)) {</div>
-<div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160;        strategy = std::make_shared&lt;typename HybType::imbalance_limit&gt;(</div>
-<div class="line"><a name="l00782"></a><span class="lineno">  782</span>&#160;            temp-&gt;get_percentage());</div>
-<div class="line"><a name="l00783"></a><span class="lineno">  783</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<span class="keyword">auto</span> temp = std::dynamic_pointer_cast&lt;column_limit&gt;(strategy_)) {</div>
-<div class="line"><a name="l00784"></a><span class="lineno">  784</span>&#160;        strategy = std::make_shared&lt;typename HybType::column_limit&gt;(</div>
-<div class="line"><a name="l00785"></a><span class="lineno">  785</span>&#160;            temp-&gt;get_num_columns());</div>
-<div class="line"><a name="l00786"></a><span class="lineno">  786</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00787"></a><span class="lineno">  787</span>&#160;        GKO_NOT_SUPPORTED(strategy_);</div>
-<div class="line"><a name="l00788"></a><span class="lineno">  788</span>&#160;    }</div>
-<div class="line"><a name="l00789"></a><span class="lineno">  789</span>&#160;    <span class="keywordflow">return</span> strategy;</div>
-<div class="line"><a name="l00790"></a><span class="lineno">  790</span>&#160;}</div>
-<div class="line"><a name="l00791"></a><span class="lineno">  791</span>&#160; </div>
-<div class="line"><a name="l00792"></a><span class="lineno">  792</span>&#160; </div>
-<div class="line"><a name="l00793"></a><span class="lineno">  793</span>&#160;}  <span class="comment">// namespace matrix</span></div>
-<div class="line"><a name="l00794"></a><span class="lineno">  794</span>&#160;}  <span class="comment">// namespace gko</span></div>
-<div class="line"><a name="l00795"></a><span class="lineno">  795</span>&#160; </div>
-<div class="line"><a name="l00796"></a><span class="lineno">  796</span>&#160; </div>
-<div class="line"><a name="l00797"></a><span class="lineno">  797</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_MATRIX_HYBRID_HPP_</span></div>
+<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;    <span class="keywordtype">void</span> apply_impl(<span class="keyword">const</span> LinOp* b, LinOp* x) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160; </div>
+<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;    <span class="keywordtype">void</span> apply_impl(<span class="keyword">const</span> LinOp* alpha, <span class="keyword">const</span> LinOp* b, <span class="keyword">const</span> LinOp* beta,</div>
+<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;                    LinOp* x) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160; </div>
+<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;    std::shared_ptr&lt;ell_type&gt; ell_;</div>
+<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;    std::shared_ptr&lt;coo_type&gt; coo_;</div>
+<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;    std::shared_ptr&lt;strategy_type&gt; strategy_;</div>
+<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;};</div>
+<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160; </div>
+<div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160; </div>
+<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType, <span class="keyword">typename</span> IndexType&gt;</div>
+<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> HybType&gt;</div>
+<div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160;std::shared_ptr&lt;typename HybType::strategy_type&gt;</div>
+<div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160;<a class="code" href="classgko_1_1matrix_1_1Hybrid.html#a9a1eabe0a4ca0a6ae0b922b65c938286">Hybrid&lt;ValueType, IndexType&gt;::get_strategy</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160;    static_assert(</div>
+<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160;        std::is_same&lt;HybType, Hybrid&lt;<span class="keyword">typename</span> HybType::value_type,</div>
+<div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160;                                     <span class="keyword">typename</span> HybType::index_type&gt;&gt;::value,</div>
+<div class="line"><a name="l00771"></a><span class="lineno">  771</span>&#160;        <span class="stringliteral">&quot;The given `HybType` type must be of type `matrix::Hybrid`!&quot;</span>);</div>
+<div class="line"><a name="l00772"></a><span class="lineno">  772</span>&#160; </div>
+<div class="line"><a name="l00773"></a><span class="lineno">  773</span>&#160;    std::shared_ptr&lt;typename HybType::strategy_type&gt; strategy;</div>
+<div class="line"><a name="l00774"></a><span class="lineno">  774</span>&#160;    <span class="keywordflow">if</span> (std::dynamic_pointer_cast&lt;automatic&gt;(strategy_)) {</div>
+<div class="line"><a name="l00775"></a><span class="lineno">  775</span>&#160;        strategy = std::make_shared&lt;typename HybType::automatic&gt;();</div>
+<div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<span class="keyword">auto</span> temp = std::dynamic_pointer_cast&lt;minimal_storage_limit&gt;(</div>
+<div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160;                   strategy_)) {</div>
+<div class="line"><a name="l00778"></a><span class="lineno">  778</span>&#160;        <span class="comment">// minimal_storage_limit is related to ValueType and IndexType size.</span></div>
+<div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160;        <span class="keywordflow">if</span> (<span class="keyword">sizeof</span>(value_type) == <span class="keyword">sizeof</span>(<span class="keyword">typename</span> HybType::value_type) &amp;&amp;</div>
+<div class="line"><a name="l00780"></a><span class="lineno">  780</span>&#160;            <span class="keyword">sizeof</span>(index_type) == <span class="keyword">sizeof</span>(<span class="keyword">typename</span> HybType::index_type)) {</div>
+<div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160;            strategy =</div>
+<div class="line"><a name="l00782"></a><span class="lineno">  782</span>&#160;                std::make_shared&lt;typename HybType::minimal_storage_limit&gt;();</div>
+<div class="line"><a name="l00783"></a><span class="lineno">  783</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00784"></a><span class="lineno">  784</span>&#160;            strategy = std::make_shared&lt;typename HybType::imbalance_limit&gt;(</div>
+<div class="line"><a name="l00785"></a><span class="lineno">  785</span>&#160;                temp-&gt;get_percentage());</div>
+<div class="line"><a name="l00786"></a><span class="lineno">  786</span>&#160;        }</div>
+<div class="line"><a name="l00787"></a><span class="lineno">  787</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<span class="keyword">auto</span> temp = std::dynamic_pointer_cast&lt;imbalance_bounded_limit&gt;(</div>
+<div class="line"><a name="l00788"></a><span class="lineno">  788</span>&#160;                   strategy_)) {</div>
+<div class="line"><a name="l00789"></a><span class="lineno">  789</span>&#160;        strategy = std::make_shared&lt;typename HybType::imbalance_bounded_limit&gt;(</div>
+<div class="line"><a name="l00790"></a><span class="lineno">  790</span>&#160;            temp-&gt;get_percentage(), temp-&gt;get_ratio());</div>
+<div class="line"><a name="l00791"></a><span class="lineno">  791</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<span class="keyword">auto</span> temp =</div>
+<div class="line"><a name="l00792"></a><span class="lineno">  792</span>&#160;                   std::dynamic_pointer_cast&lt;imbalance_limit&gt;(strategy_)) {</div>
+<div class="line"><a name="l00793"></a><span class="lineno">  793</span>&#160;        strategy = std::make_shared&lt;typename HybType::imbalance_limit&gt;(</div>
+<div class="line"><a name="l00794"></a><span class="lineno">  794</span>&#160;            temp-&gt;get_percentage());</div>
+<div class="line"><a name="l00795"></a><span class="lineno">  795</span>&#160;    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<span class="keyword">auto</span> temp = std::dynamic_pointer_cast&lt;column_limit&gt;(strategy_)) {</div>
+<div class="line"><a name="l00796"></a><span class="lineno">  796</span>&#160;        strategy = std::make_shared&lt;typename HybType::column_limit&gt;(</div>
+<div class="line"><a name="l00797"></a><span class="lineno">  797</span>&#160;            temp-&gt;get_num_columns());</div>
+<div class="line"><a name="l00798"></a><span class="lineno">  798</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00799"></a><span class="lineno">  799</span>&#160;        GKO_NOT_SUPPORTED(strategy_);</div>
+<div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160;    }</div>
+<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160;    <span class="keywordflow">return</span> strategy;</div>
+<div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;}</div>
+<div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160; </div>
+<div class="line"><a name="l00804"></a><span class="lineno">  804</span>&#160; </div>
+<div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160;}  <span class="comment">// namespace matrix</span></div>
+<div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160;}  <span class="comment">// namespace gko</span></div>
+<div class="line"><a name="l00807"></a><span class="lineno">  807</span>&#160; </div>
+<div class="line"><a name="l00808"></a><span class="lineno">  808</span>&#160; </div>
+<div class="line"><a name="l00809"></a><span class="lineno">  809</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_MATRIX_HYBRID_HPP_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassgko_1_1matrix_1_1Hybrid_html_a9b066402b6f3727196c9945a80f08a6e"><div class="ttname"><a href="classgko_1_1matrix_1_1Hybrid.html#a9b066402b6f3727196c9945a80f08a6e">gko::matrix::Hybrid::get_const_coo_values</a></div><div class="ttdeci">const value_type * get_const_coo_values() const noexcept</div><div class="ttdoc">Returns the values of the coo part.</div><div class="ttdef"><b>Definition:</b> hybrid.hpp:542</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Hybrid_html_a3a2d9b00dd8b2333b05a97d968dfabff"><div class="ttname"><a href="classgko_1_1matrix_1_1Hybrid.html#a3a2d9b00dd8b2333b05a97d968dfabff">gko::matrix::Hybrid::ell_col_at</a></div><div class="ttdeci">index_type ell_col_at(size_type row, size_type idx) const noexcept</div><div class="ttdoc">Returns the idx-th column index of the row-th row in the ell part.</div><div class="ttdef"><b>Definition:</b> hybrid.hpp:516</div></div>
@@ -582,6 +584,7 @@ $(function() {
 <div class="ttc" id="aclassgko_1_1matrix_1_1Hybrid_html_a7eff2922ae21e9722b343ca1832d8bf5"><div class="ttname"><a href="classgko_1_1matrix_1_1Hybrid.html#a7eff2922ae21e9722b343ca1832d8bf5">gko::matrix::Hybrid::read</a></div><div class="ttdeci">void read(const mat_data &amp;data) override</div><div class="ttdoc">Reads a matrix from a matrix_data structure.</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Hybrid_html_aa64e1442587df4be9bc55f38d91be26d"><div class="ttname"><a href="classgko_1_1matrix_1_1Hybrid.html#aa64e1442587df4be9bc55f38d91be26d">gko::matrix::Hybrid::get_coo_row_idxs</a></div><div class="ttdeci">index_type * get_coo_row_idxs() noexcept</div><div class="ttdoc">Returns the row indexes of the coo part.</div><div class="ttdef"><b>Definition:</b> hybrid.hpp:571</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Hybrid_1_1column__limit_html_afb410def66106b711ac094fd31d48aba"><div class="ttname"><a href="classgko_1_1matrix_1_1Hybrid_1_1column__limit.html#afb410def66106b711ac094fd31d48aba">gko::matrix::Hybrid::column_limit::compute_ell_num_stored_elements_per_row</a></div><div class="ttdeci">size_type compute_ell_num_stored_elements_per_row(Array&lt; size_type &gt; *row_nnz) const override</div><div class="ttdoc">Computes the number of stored elements per row of the ell part.</div><div class="ttdef"><b>Definition:</b> hybrid.hpp:217</div></div>
+<div class="ttc" id="aclassgko_1_1matrix_1_1Hybrid_1_1minimal__storage__limit_html_a2c30363cf1049d056594779857ea2112"><div class="ttname"><a href="classgko_1_1matrix_1_1Hybrid_1_1minimal__storage__limit.html#a2c30363cf1049d056594779857ea2112">gko::matrix::Hybrid::minimal_storage_limit::get_percentage</a></div><div class="ttdeci">auto get_percentage() const</div><div class="ttdoc">Get the percent setting.</div><div class="ttdef"><b>Definition:</b> hybrid.hpp:354</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Hybrid_html_a2472495b537b47555a04aa6ba11d5817"><div class="ttname"><a href="classgko_1_1matrix_1_1Hybrid.html#a2472495b537b47555a04aa6ba11d5817">gko::matrix::Hybrid::get_ell_stride</a></div><div class="ttdeci">size_type get_ell_stride() const noexcept</div><div class="ttdoc">Returns the stride of the ell part.</div><div class="ttdef"><b>Definition:</b> hybrid.hpp:462</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Hybrid_html_af792e702c3650f4e77e8cb256250f21e"><div class="ttname"><a href="classgko_1_1matrix_1_1Hybrid.html#af792e702c3650f4e77e8cb256250f21e">gko::matrix::Hybrid::get_const_ell_values</a></div><div class="ttdeci">const value_type * get_const_ell_values() const noexcept</div><div class="ttdoc">Returns the values of the ell part.</div><div class="ttdef"><b>Definition:</b> hybrid.hpp:423</div></div>
 <div class="ttc" id="anamespacegko_html"><div class="ttname"><a href="namespacegko.html">gko</a></div><div class="ttdoc">The Ginkgo namespace.</div><div class="ttdef"><b>Definition:</b> abstract_factory.hpp:45</div></div>
@@ -593,7 +596,6 @@ $(function() {
 <div class="ttc" id="aclassgko_1_1matrix_1_1Hybrid_html_ab637e1576b6449407ee2b57ac203e0f7"><div class="ttname"><a href="classgko_1_1matrix_1_1Hybrid.html#ab637e1576b6449407ee2b57ac203e0f7">gko::matrix::Hybrid::get_const_coo_col_idxs</a></div><div class="ttdeci">const index_type * get_const_coo_col_idxs() const noexcept</div><div class="ttdoc">Returns the column indexes of the coo part.</div><div class="ttdef"><b>Definition:</b> hybrid.hpp:561</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Hybrid_1_1strategy__type_html_ae4e8729245df69e1b48ec56846e43b88"><div class="ttname"><a href="classgko_1_1matrix_1_1Hybrid_1_1strategy__type.html#ae4e8729245df69e1b48ec56846e43b88">gko::matrix::Hybrid::strategy_type::get_coo_nnz</a></div><div class="ttdeci">size_type get_coo_nnz() const noexcept</div><div class="ttdoc">Returns the number of nonzeros of the coo part.</div><div class="ttdef"><b>Definition:</b> hybrid.hpp:163</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Hybrid_1_1minimal__storage__limit_html_a381273c294099363637e40cb536fa63a"><div class="ttname"><a href="classgko_1_1matrix_1_1Hybrid_1_1minimal__storage__limit.html#a381273c294099363637e40cb536fa63a">gko::matrix::Hybrid::minimal_storage_limit::compute_ell_num_stored_elements_per_row</a></div><div class="ttdeci">size_type compute_ell_num_stored_elements_per_row(Array&lt; size_type &gt; *row_nnz) const override</div><div class="ttdoc">Computes the number of stored elements per row of the ell part.</div><div class="ttdef"><b>Definition:</b> hybrid.hpp:343</div></div>
-<div class="ttc" id="aclassgko_1_1matrix_1_1Hybrid_1_1minimal__storage__limit_html_a57595cf6ad873dbd75d73cccdfeb71a6"><div class="ttname"><a href="classgko_1_1matrix_1_1Hybrid_1_1minimal__storage__limit.html#a57595cf6ad873dbd75d73cccdfeb71a6">gko::matrix::Hybrid::minimal_storage_limit::get_percentage</a></div><div class="ttdeci">auto get_percentage()</div><div class="ttdoc">Get the percent setting.</div><div class="ttdef"><b>Definition:</b> hybrid.hpp:354</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Hybrid_1_1imbalance__bounded__limit_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Hybrid_1_1imbalance__bounded__limit.html">gko::matrix::Hybrid::imbalance_bounded_limit</a></div><div class="ttdoc">imbalance_bounded_limit is a strategy_type which decides the number of stored elements per row of the...</div><div class="ttdef"><b>Definition:</b> hybrid.hpp:288</div></div>
 <div class="ttc" id="aclassgko_1_1Array_html"><div class="ttname"><a href="classgko_1_1Array.html">gko::Array&lt; size_type &gt;</a></div></div>
 <div class="ttc" id="anamespacegko_html_a6362f751c7753cf4fa0a4771d56e8ede"><div class="ttname"><a href="namespacegko.html#a6362f751c7753cf4fa0a4771d56e8ede">gko::next_precision</a></div><div class="ttdeci">typename detail::next_precision_impl&lt; T &gt;::type next_precision</div><div class="ttdoc">Obtains the next type in the singly-linked precision list.</div><div class="ttdef"><b>Definition:</b> math.hpp:495</div></div>
@@ -609,9 +611,9 @@ $(function() {
 <div class="ttc" id="aclassgko_1_1matrix_1_1Hybrid_html_a5a0b57a9285424720218ff03dad6846c"><div class="ttname"><a href="classgko_1_1matrix_1_1Hybrid.html#a5a0b57a9285424720218ff03dad6846c">gko::matrix::Hybrid::ell_val_at</a></div><div class="ttdeci">value_type &amp; ell_val_at(size_type row, size_type idx) noexcept</div><div class="ttdoc">Returns the idx-th non-zero element of the row-th row in the ell part.</div><div class="ttdef"><b>Definition:</b> hybrid.hpp:485</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Hybrid_html_a626c07541641bcdfd9a7f61322a89cbe"><div class="ttname"><a href="classgko_1_1matrix_1_1Hybrid.html#a626c07541641bcdfd9a7f61322a89cbe">gko::matrix::Hybrid::write</a></div><div class="ttdeci">void write(mat_data &amp;data) const override</div><div class="ttdoc">Writes a matrix to a matrix_data structure.</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Hybrid_1_1imbalance__limit_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Hybrid_1_1imbalance__limit.html">gko::matrix::Hybrid::imbalance_limit</a></div><div class="ttdoc">imbalance_limit is a strategy_type which decides the number of stored elements per row of the ell par...</div><div class="ttdef"><b>Definition:</b> hybrid.hpp:241</div></div>
-<div class="ttc" id="aclassgko_1_1matrix_1_1Ell_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Ell.html">gko::matrix::Ell</a></div><div class="ttdoc">ELL is a matrix format where stride with explicit zeros is used such that all rows have the same numb...</div><div class="ttdef"><b>Definition:</b> csr.hpp:53</div></div>
+<div class="ttc" id="aclassgko_1_1matrix_1_1Ell_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Ell.html">gko::matrix::Ell</a></div><div class="ttdoc">ELL is a matrix format where stride with explicit zeros is used such that all rows have the same numb...</div><div class="ttdef"><b>Definition:</b> csr.hpp:56</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Hybrid_html_a3e0ab990e82db430d0e05fe165a11620"><div class="ttname"><a href="classgko_1_1matrix_1_1Hybrid.html#a3e0ab990e82db430d0e05fe165a11620">gko::matrix::Hybrid::ell_val_at</a></div><div class="ttdeci">value_type ell_val_at(size_type row, size_type idx) const noexcept</div><div class="ttdoc">Returns the idx-th non-zero element of the row-th row in the ell part.</div><div class="ttdef"><b>Definition:</b> hybrid.hpp:493</div></div>
-<div class="ttc" id="aclassgko_1_1matrix_1_1Hybrid_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Hybrid.html">gko::matrix::Hybrid</a></div><div class="ttdoc">HYBRID is a matrix format which splits the matrix into ELLPACK and COO format.</div><div class="ttdef"><b>Definition:</b> csr.hpp:56</div></div>
+<div class="ttc" id="aclassgko_1_1matrix_1_1Hybrid_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Hybrid.html">gko::matrix::Hybrid</a></div><div class="ttdoc">HYBRID is a matrix format which splits the matrix into ELLPACK and COO format.</div><div class="ttdef"><b>Definition:</b> coo.hpp:60</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Hybrid_html_a99ab36f3aeae944db440a8bbe324aaff"><div class="ttname"><a href="classgko_1_1matrix_1_1Hybrid.html#a99ab36f3aeae944db440a8bbe324aaff">gko::matrix::Hybrid::get_ell_num_stored_elements</a></div><div class="ttdeci">size_type get_ell_num_stored_elements() const noexcept</div><div class="ttdoc">Returns the number of elements explicitly stored in the ell part.</div><div class="ttdef"><b>Definition:</b> hybrid.hpp:469</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Hybrid_html_a199565373adafb3c9a4e983810c582ea"><div class="ttname"><a href="classgko_1_1matrix_1_1Hybrid.html#a199565373adafb3c9a4e983810c582ea">gko::matrix::Hybrid::extract_diagonal</a></div><div class="ttdeci">std::unique_ptr&lt; Diagonal&lt; ValueType &gt; &gt; extract_diagonal() const override</div><div class="ttdoc">Extracts the diagonal entries of the matrix into a vector.</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Hybrid_1_1automatic_html_a804d556fbcbe8ed754e167f270b16118"><div class="ttname"><a href="classgko_1_1matrix_1_1Hybrid_1_1automatic.html#a804d556fbcbe8ed754e167f270b16118">gko::matrix::Hybrid::automatic::compute_ell_num_stored_elements_per_row</a></div><div class="ttdeci">size_type compute_ell_num_stored_elements_per_row(Array&lt; size_type &gt; *row_nnz) const override</div><div class="ttdoc">Computes the number of stored elements per row of the ell part.</div><div class="ttdef"><b>Definition:</b> hybrid.hpp:372</div></div>
@@ -624,7 +626,7 @@ $(function() {
 <div class="ttc" id="aclassgko_1_1matrix_1_1Hybrid_1_1imbalance__bounded__limit_html_ae63efeeecdb8ad40616a73f9e757f2b8"><div class="ttname"><a href="classgko_1_1matrix_1_1Hybrid_1_1imbalance__bounded__limit.html#ae63efeeecdb8ad40616a73f9e757f2b8">gko::matrix::Hybrid::imbalance_bounded_limit::get_ratio</a></div><div class="ttdeci">auto get_ratio() const</div><div class="ttdoc">Get the ratio setting.</div><div class="ttdef"><b>Definition:</b> hybrid.hpp:319</div></div>
 <div class="ttc" id="anamespacegko_html_a70dbe01ff95c7b953d3d737424c6feb5"><div class="ttname"><a href="namespacegko.html#a70dbe01ff95c7b953d3d737424c6feb5">gko::zero</a></div><div class="ttdeci">constexpr T zero()</div><div class="ttdoc">Returns the additive identity for T.</div><div class="ttdef"><b>Definition:</b> math.hpp:770</div></div>
 <div class="ttc" id="anamespacegko_html_acc281c8ff5bfa4fd6f25afcce466b1af"><div class="ttname"><a href="namespacegko.html#acc281c8ff5bfa4fd6f25afcce466b1af">gko::to_complex</a></div><div class="ttdeci">typename detail::to_complex_s&lt; T &gt;::type to_complex</div><div class="ttdoc">Obtain the type which adds the complex of complex/scalar type or the template parameter of class by a...</div><div class="ttdef"><b>Definition:</b> math.hpp:378</div></div>
-<div class="ttc" id="aclassgko_1_1matrix_1_1Coo_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Coo.html">gko::matrix::Coo</a></div><div class="ttdoc">COO stores a matrix in the coordinate matrix format.</div><div class="ttdef"><b>Definition:</b> coo.hpp:77</div></div>
+<div class="ttc" id="aclassgko_1_1matrix_1_1Coo_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Coo.html">gko::matrix::Coo</a></div><div class="ttdoc">COO stores a matrix in the coordinate matrix format.</div><div class="ttdef"><b>Definition:</b> coo.hpp:78</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
