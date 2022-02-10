@@ -1,13 +1,13 @@
 var searchData=
 [
-  ['sellp_1478',['Sellp',['../classgko_1_1matrix_1_1Sellp.html',1,'gko::matrix']]],
-  ['span_1479',['span',['../structgko_1_1span.html',1,'gko']]],
-  ['sparselib_1480',['sparselib',['../classgko_1_1matrix_1_1Csr_1_1sparselib.html',1,'gko::matrix::Csr']]],
-  ['sparsitycsr_1481',['SparsityCsr',['../classgko_1_1matrix_1_1SparsityCsr.html',1,'gko::matrix']]],
-  ['squared_5fnorm_5foperaton_1482',['squared_norm_operaton',['../structgko_1_1accessor_1_1squared__norm__operaton.html',1,'gko::accessor']]],
-  ['stopping_5fstatus_1483',['stopping_status',['../classgko_1_1stopping__status.html',1,'gko']]],
-  ['strategy_5ftype_1484',['strategy_type',['../classgko_1_1matrix_1_1Csr_1_1strategy__type.html',1,'gko::matrix::Csr&lt; ValueType, IndexType &gt;::strategy_type'],['../classgko_1_1matrix_1_1Hybrid_1_1strategy__type.html',1,'gko::matrix::Hybrid&lt; ValueType, IndexType &gt;::strategy_type']]],
-  ['stream_1485',['Stream',['../classgko_1_1log_1_1Stream.html',1,'gko::log']]],
-  ['streamerror_1486',['StreamError',['../classgko_1_1StreamError.html',1,'gko']]],
-  ['sub_1487',['sub',['../structgko_1_1accessor_1_1sub.html',1,'gko::accessor']]]
+  ['sellp_1479',['Sellp',['../classgko_1_1matrix_1_1Sellp.html',1,'gko::matrix']]],
+  ['span_1480',['span',['../structgko_1_1span.html',1,'gko']]],
+  ['sparselib_1481',['sparselib',['../classgko_1_1matrix_1_1Csr_1_1sparselib.html',1,'gko::matrix::Csr']]],
+  ['sparsitycsr_1482',['SparsityCsr',['../classgko_1_1matrix_1_1SparsityCsr.html',1,'gko::matrix']]],
+  ['squared_5fnorm_5foperaton_1483',['squared_norm_operaton',['../structgko_1_1accessor_1_1squared__norm__operaton.html',1,'gko::accessor']]],
+  ['stopping_5fstatus_1484',['stopping_status',['../classgko_1_1stopping__status.html',1,'gko']]],
+  ['strategy_5ftype_1485',['strategy_type',['../classgko_1_1matrix_1_1Hybrid_1_1strategy__type.html',1,'gko::matrix::Hybrid&lt; ValueType, IndexType &gt;::strategy_type'],['../classgko_1_1matrix_1_1Csr_1_1strategy__type.html',1,'gko::matrix::Csr&lt; ValueType, IndexType &gt;::strategy_type']]],
+  ['stream_1486',['Stream',['../classgko_1_1log_1_1Stream.html',1,'gko::log']]],
+  ['streamerror_1487',['StreamError',['../classgko_1_1StreamError.html',1,'gko']]],
+  ['sub_1488',['sub',['../structgko_1_1accessor_1_1sub.html',1,'gko::accessor']]]
 ];
