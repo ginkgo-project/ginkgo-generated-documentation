@@ -45,6 +45,8 @@ void \mbox{\hyperlink{classgko_1_1device__matrix__data_a78a09fe708c05b511d9b7d5d
 \begin{DoxyCompactList}\small\item\em Sorts the matrix entries in row-\/major order This means that they will be sorted by row index first, and then by column index inside each row. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classgko_1_1device__matrix__data_ad4fb4fc719d1127c009c9908c9ad7927}{remove\+\_\+zeros}} ()
 \begin{DoxyCompactList}\small\item\em Removes all zero entries from the storage. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1device__matrix__data_a8b58afc780989cfcba739829572fe7ab}{sum\+\_\+duplicates}} ()
+\begin{DoxyCompactList}\small\item\em Sums up all duplicate entries pointing to the same non-\/zero location. \end{DoxyCompactList}\item 
 std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ \mbox{\hyperlink{classgko_1_1device__matrix__data_ae857ccd7c5fdf388d01914112e3be524}{get\+\_\+executor}} () const
 \begin{DoxyCompactList}\small\item\em Returns the executor used to store the \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} entries. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \mbox{\hyperlink{classgko_1_1device__matrix__data_a227a9e5ad03e0b7a47c8d468cbf3c0cb}{get\+\_\+size}} () const
@@ -425,7 +427,18 @@ The resulting storage should be assumed uninitialized.
 {\em new\+\_\+num\+\_\+entries} & the new number of stored matrix entries. \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1device__matrix__data_a8b58afc780989cfcba739829572fe7ab}\label{classgko_1_1device__matrix__data_a8b58afc780989cfcba739829572fe7ab}} 
+\index{gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}!sum\_duplicates@{sum\_duplicates}}
+\index{sum\_duplicates@{sum\_duplicates}!gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{sum\_duplicates()}{sum\_duplicates()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type, typename Index\+Type$>$ \\
+void \mbox{\hyperlink{classgko_1_1device__matrix__data}{gko\+::device\+\_\+matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$\+::sum\+\_\+duplicates (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+
+
+Sums up all duplicate entries pointing to the same non-\/zero location. 
+
+The output will be sorted in row-\/major order, and it will only reallocate if duplicates exist. 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
