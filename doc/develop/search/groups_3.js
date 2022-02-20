@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['factorizations_2077',['Factorizations',['../group__factor.html',1,'']]]
+  ['factorizations_2084',['Factorizations',['../group__factor.html',1,'']]]
 ];
