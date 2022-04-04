@@ -64,6 +64,12 @@ void {\bfseries convert\+\_\+to} (\mbox{\hyperlink{classgko_1_1matrix_1_1BatchCs
 \mbox{\Hypertarget{classgko_1_1matrix_1_1BatchDense_a26de91916535f6c2e852d5431472c437}\label{classgko_1_1matrix_1_1BatchDense_a26de91916535f6c2e852d5431472c437}} 
 void {\bfseries move\+\_\+to} (\mbox{\hyperlink{classgko_1_1matrix_1_1BatchCsr}{Batch\+Csr}}$<$ Value\+Type, index\+\_\+type $>$ $\ast$result) override
 \item 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1BatchDense_a8e7a9b2b43c43773fbcd5da6cc4e7b9b}\label{classgko_1_1matrix_1_1BatchDense_a8e7a9b2b43c43773fbcd5da6cc4e7b9b}} 
+void {\bfseries convert\+\_\+to} (\mbox{\hyperlink{classgko_1_1matrix_1_1BatchDiagonal}{Batch\+Diagonal}}$<$ Value\+Type $>$ $\ast$result) const override
+\item 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1BatchDense_a44ccdff27d194c3d69d374b21c3e96e4}\label{classgko_1_1matrix_1_1BatchDense_a44ccdff27d194c3d69d374b21c3e96e4}} 
+void {\bfseries move\+\_\+to} (\mbox{\hyperlink{classgko_1_1matrix_1_1BatchDiagonal}{Batch\+Diagonal}}$<$ Value\+Type $>$ $\ast$result) override
+\item 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1BatchDense_a2cb175b643d41ea6de0f6114aa9939b4}\label{classgko_1_1matrix_1_1BatchDense_a2cb175b643d41ea6de0f6114aa9939b4}} 
 void {\bfseries read} (const std\+::vector$<$ \mbox{\hyperlink{structgko_1_1matrix__data}{mat\+\_\+data}} $>$ \&data) override
 \item 
@@ -116,7 +122,9 @@ void \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense_a5d1c41124c3dcca1de27852e
 \begin{DoxyCompactItemize}
 \item 
 static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{Batch\+Dense}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense_a0a4893dd7c6f68589508b6190489c753}{create\+\_\+with\+\_\+config\+\_\+of}} (const \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{Batch\+Dense}} $\ast$other)
-\begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{Batch\+Dense}} matrix with the configuration of another \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{Batch\+Dense}} matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{Batch\+Dense}} matrix with the configuration of another \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{Batch\+Dense}} matrix. \end{DoxyCompactList}\item 
+static std\+::unique\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{Batch\+Dense}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense_ab2ed78c5acb13d75ffeca838874bbba8}{create\+\_\+const}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const \mbox{\hyperlink{structgko_1_1batch__dim}{batch\+\_\+dim}}$<$ 2 $>$ \&sizes, gko\+::detail\+::\+Const\+Array\+View$<$ Value\+Type $>$ \&\&values, const \mbox{\hyperlink{classgko_1_1batch__stride}{batch\+\_\+stride}} \&strides)
+\begin{DoxyCompactList}\small\item\em Creates a constant (immutable) batch dense matrix from a constant array. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
@@ -128,9 +136,6 @@ class {\bfseries Enable\+Polymorphic\+Object$<$ Batch\+Dense, Batch\+Lin\+Op $>$
 \item 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1BatchDense_ab2653e17ca1d12743c10117358e03662}\label{classgko_1_1matrix_1_1BatchDense_ab2653e17ca1d12743c10117358e03662}} 
 class {\bfseries Batch\+Dense$<$ to\+\_\+complex$<$ Value\+Type $>$ $>$}
-\item 
-\mbox{\Hypertarget{classgko_1_1matrix_1_1BatchDense_a9d8063d7ec6a71d93b4b9afdfeaf22cb}\label{classgko_1_1matrix_1_1BatchDense_a9d8063d7ec6a71d93b4b9afdfeaf22cb}} 
-class {\bfseries Batch\+Csr$<$ Value\+Type, int32 $>$}
 \item 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1BatchDense_a37d28cdae65f7699f0212f6033e3974d}\label{classgko_1_1matrix_1_1BatchDense_a37d28cdae65f7699f0212f6033e3974d}} 
 class {\bfseries Batch\+Dense$<$ next\+\_\+precision$<$ Value\+Type $>$ $>$}
@@ -160,7 +165,7 @@ While this format is not very useful for storing sparse matrices, it is often su
 \index{gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}!add\_scaled@{add\_scaled}}
 \index{add\_scaled@{add\_scaled}!gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}}
 \doxysubsubsection{\texorpdfstring{add\_scaled()}{add\_scaled()}}
-{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
 void \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{gko\+::matrix\+::\+Batch\+Dense}}$<$ Value\+Type $>$\+::add\+\_\+scaled (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} $\ast$}]{alpha,  }\item[{const \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} $\ast$}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
@@ -174,11 +179,15 @@ Adds {\ttfamily b} scaled by {\ttfamily alpha} to the matrix (aka\+: B\+L\+AS ax
 {\em b} & a matrix of the same dimension as this \\
 \hline
 \end{DoxyParams}
+
+
+References gko\+::\+Polymorphic\+Object\+::get\+\_\+executor(), and gko\+::make\+\_\+temporary\+\_\+clone().
+
 \mbox{\Hypertarget{classgko_1_1matrix_1_1BatchDense_a6f2252627c348d78913dcd5273e218a3}\label{classgko_1_1matrix_1_1BatchDense_a6f2252627c348d78913dcd5273e218a3}} 
 \index{gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}!at@{at}}
 \index{at@{at}!gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}}
 \doxysubsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
-{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
 Value\+Type \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{gko\+::matrix\+::\+Batch\+Dense}}$<$ Value\+Type $>$\+::at (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{batch,  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{idx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
 
 
@@ -197,11 +206,15 @@ Returns a single element for a particular batch.
 \begin{DoxyNote}{Note}
 the method has to be called on the same \mbox{\hyperlink{classgko_1_1Executor}{Executor}} the matrix is stored at (e.\+g. trying to call this method on a G\+PU matrix from the O\+MP results in a runtime error) 
 \end{DoxyNote}
+
+
+References gko\+::\+Array$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+data().
+
 \mbox{\Hypertarget{classgko_1_1matrix_1_1BatchDense_aebfc782da67ad2eb85e13b3eb4aae92e}\label{classgko_1_1matrix_1_1BatchDense_aebfc782da67ad2eb85e13b3eb4aae92e}} 
 \index{gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}!at@{at}}
 \index{at@{at}!gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}}
 \doxysubsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
 Value\+Type\& \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{gko\+::matrix\+::\+Batch\+Dense}}$<$ Value\+Type $>$\+::at (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{batch,  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{idx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
 
 
@@ -220,11 +233,15 @@ Useful for iterating across all elements of the matrix. However, it is less effi
 \begin{DoxyNote}{Note}
 the method has to be called on the same \mbox{\hyperlink{classgko_1_1Executor}{Executor}} the matrix is stored at (e.\+g. trying to call this method on a G\+PU matrix from the O\+MP results in a runtime error) 
 \end{DoxyNote}
+
+
+References gko\+::\+Array$<$ Value\+Type $>$\+::get\+\_\+data().
+
 \mbox{\Hypertarget{classgko_1_1matrix_1_1BatchDense_ab27b39ab90c4168928c1999355531f7c}\label{classgko_1_1matrix_1_1BatchDense_ab27b39ab90c4168928c1999355531f7c}} 
 \index{gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}!at@{at}}
 \index{at@{at}!gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}}
 \doxysubsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
-{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
 value\+\_\+type \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{gko\+::matrix\+::\+Batch\+Dense}}$<$ Value\+Type $>$\+::at (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{batch,  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{row,  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{col }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
 
 
@@ -243,11 +260,15 @@ Returns a single element for a particular batch.
 \begin{DoxyNote}{Note}
 the method has to be called on the same \mbox{\hyperlink{classgko_1_1Executor}{Executor}} the matrix is stored at (e.\+g. trying to call this method on a G\+PU matrix from the O\+MP results in a runtime error) 
 \end{DoxyNote}
+
+
+References gko\+::\+Array$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+data(), and gko\+::\+Batch\+Lin\+Op\+::get\+\_\+num\+\_\+batch\+\_\+entries().
+
 \mbox{\Hypertarget{classgko_1_1matrix_1_1BatchDense_a5e8ea3187e4c70c7de34030bcf581916}\label{classgko_1_1matrix_1_1BatchDense_a5e8ea3187e4c70c7de34030bcf581916}} 
 \index{gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}!at@{at}}
 \index{at@{at}!gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}}
 \doxysubsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
 value\+\_\+type\& \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{gko\+::matrix\+::\+Batch\+Dense}}$<$ Value\+Type $>$\+::at (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{batch,  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{row,  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{col }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
 
 
@@ -268,13 +289,17 @@ the method has to be called on the same \mbox{\hyperlink{classgko_1_1Executor}{E
 \end{DoxyNote}
 
 
-Referenced by gko\+::matrix\+::\+Batch\+Dense$<$ value\+\_\+type $>$\+::unbatch().
+References gko\+::\+Array$<$ Value\+Type $>$\+::get\+\_\+data(), and gko\+::\+Batch\+Lin\+Op\+::get\+\_\+num\+\_\+batch\+\_\+entries().
+
+
+
+Referenced by gko\+::matrix\+::\+Batch\+Dense$<$ Value\+Type $>$\+::unbatch().
 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1BatchDense_aa036a00d08180fe1dcae091886f1215c}\label{classgko_1_1matrix_1_1BatchDense_aa036a00d08180fe1dcae091886f1215c}} 
 \index{gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}!compute\_dot@{compute\_dot}}
 \index{compute\_dot@{compute\_dot}!gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}}
 \doxysubsubsection{\texorpdfstring{compute\_dot()}{compute\_dot()}}
-{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
 void \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{gko\+::matrix\+::\+Batch\+Dense}}$<$ Value\+Type $>$\+::compute\+\_\+dot (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} $\ast$}]{b,  }\item[{\mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} $\ast$}]{result }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
@@ -290,11 +315,15 @@ If the matrix has complex value\+\_\+type, then the conjugate of this is taken.
 {\em result} & a \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{Batch\+Dense}} row vector, used to store the dot product (the number of column in the vector must match the number of columns of this) \\
 \hline
 \end{DoxyParams}
+
+
+References gko\+::\+Polymorphic\+Object\+::get\+\_\+executor(), and gko\+::make\+\_\+temporary\+\_\+clone().
+
 \mbox{\Hypertarget{classgko_1_1matrix_1_1BatchDense_a5d1c41124c3dcca1de27852e3523ab34}\label{classgko_1_1matrix_1_1BatchDense_a5d1c41124c3dcca1de27852e3523ab34}} 
 \index{gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}!compute\_norm2@{compute\_norm2}}
 \index{compute\_norm2@{compute\_norm2}!gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}}
 \doxysubsubsection{\texorpdfstring{compute\_norm2()}{compute\_norm2()}}
-{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
 void \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{gko\+::matrix\+::\+Batch\+Dense}}$<$ Value\+Type $>$\+::compute\+\_\+norm2 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} $\ast$}]{result }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
@@ -306,11 +335,15 @@ Computes the Euclidean (L$^\wedge$2) norm of each matrix in this batch.
 {\em result} & a \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{Batch\+Dense}} row vector, used to store the norm (the number of columns in the vector must match the number of columns of this) \\
 \hline
 \end{DoxyParams}
+
+
+References gko\+::\+Polymorphic\+Object\+::get\+\_\+executor(), and gko\+::make\+\_\+temporary\+\_\+clone().
+
 \mbox{\Hypertarget{classgko_1_1matrix_1_1BatchDense_ade041209ae88073ccbd30c84f4920364}\label{classgko_1_1matrix_1_1BatchDense_ade041209ae88073ccbd30c84f4920364}} 
 \index{gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}!conj\_transpose@{conj\_transpose}}
 \index{conj\_transpose@{conj\_transpose}!gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}}
 \doxysubsubsection{\texorpdfstring{conj\_transpose()}{conj\_transpose()}}
-{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
 std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{gko\+::matrix\+::\+Batch\+Dense}}$<$ Value\+Type $>$\+::conj\+\_\+transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
@@ -324,11 +357,36 @@ a pointer to the new conjugate transposed object
 
 Implements \mbox{\hyperlink{classgko_1_1BatchTransposable_a53d1cf352635aa1bfbe0ae90a4c961ce}{gko\+::\+Batch\+Transposable}}.
 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1BatchDense_ab2ed78c5acb13d75ffeca838874bbba8}\label{classgko_1_1matrix_1_1BatchDense_ab2ed78c5acb13d75ffeca838874bbba8}} 
+\index{gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}!create\_const@{create\_const}}
+\index{create\_const@{create\_const}!gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{create\_const()}{create\_const()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+static std\+::unique\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{Batch\+Dense}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{gko\+::matrix\+::\+Batch\+Dense}}$<$ Value\+Type $>$\+::create\+\_\+const (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const \mbox{\hyperlink{structgko_1_1batch__dim}{batch\+\_\+dim}}$<$ 2 $>$ \&}]{sizes,  }\item[{gko\+::detail\+::\+Const\+Array\+View$<$ Value\+Type $>$ \&\&}]{values,  }\item[{const \mbox{\hyperlink{classgko_1_1batch__stride}{batch\+\_\+stride}} \&}]{strides }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Creates a constant (immutable) batch dense matrix from a constant array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & the executor to create the matrix on \\
+\hline
+{\em size} & the dimensions of the matrix \\
+\hline
+{\em values} & the value array of the matrix \\
+\hline
+{\em stride} & the row-\/stride of the matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A smart pointer to the constant matrix wrapping the input array (if it resides on the same executor as the matrix) or a copy of the array on the correct executor. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1BatchDense_a0a4893dd7c6f68589508b6190489c753}\label{classgko_1_1matrix_1_1BatchDense_a0a4893dd7c6f68589508b6190489c753}} 
 \index{gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}!create\_with\_config\_of@{create\_with\_config\_of}}
 \index{create\_with\_config\_of@{create\_with\_config\_of}!gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}}
 \doxysubsubsection{\texorpdfstring{create\_with\_config\_of()}{create\_with\_config\_of()}}
-{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
 static std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{Batch\+Dense}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{gko\+::matrix\+::\+Batch\+Dense}}$<$ Value\+Type $>$\+::create\+\_\+with\+\_\+config\+\_\+of (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{Batch\+Dense}}$<$ Value\+Type $>$ $\ast$}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
 
@@ -344,7 +402,7 @@ Creates a \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{Batch\+Dense}} matr
 \index{gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}!get\_const\_values@{get\_const\_values}}
 \index{get\_const\_values@{get\_const\_values}!gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}}
 \doxysubsubsection{\texorpdfstring{get\_const\_values()}{get\_const\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
 const value\+\_\+type$\ast$ \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{gko\+::matrix\+::\+Batch\+Dense}}$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
 
 
@@ -359,13 +417,17 @@ This is the constant version of the function, which can be significantly more me
 \end{DoxyNote}
 
 
-Referenced by gko\+::matrix\+::\+Batch\+Dense$<$ value\+\_\+type $>$\+::unbatch().
+References gko\+::\+Array$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+data().
+
+
+
+Referenced by gko\+::matrix\+::\+Batch\+Dense$<$ Value\+Type $>$\+::unbatch().
 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1BatchDense_aeac327fc967d1963d5784bac53c74a91}\label{classgko_1_1matrix_1_1BatchDense_aeac327fc967d1963d5784bac53c74a91}} 
 \index{gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}!get\_const\_values@{get\_const\_values}}
 \index{get\_const\_values@{get\_const\_values}!gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}}
 \doxysubsubsection{\texorpdfstring{get\_const\_values()}{get\_const\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
 const value\+\_\+type$\ast$ \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{gko\+::matrix\+::\+Batch\+Dense}}$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{batch }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
 
 
@@ -378,11 +440,15 @@ the pointer to the array of values
 \begin{DoxyNote}{Note}
 This is the constant version of the function, which can be significantly more memory efficient than the non-\/constant version, so always prefer this version. 
 \end{DoxyNote}
+
+
+References gko\+::\+Array$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+data(), and gko\+::\+Batch\+Lin\+Op\+::get\+\_\+num\+\_\+batch\+\_\+entries().
+
 \mbox{\Hypertarget{classgko_1_1matrix_1_1BatchDense_a846dc8c66d747185fc23a36e1043b18c}\label{classgko_1_1matrix_1_1BatchDense_a846dc8c66d747185fc23a36e1043b18c}} 
 \index{gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}!get\_num\_stored\_elements@{get\_num\_stored\_elements}}
 \index{get\_num\_stored\_elements@{get\_num\_stored\_elements}!gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}}
 \doxysubsubsection{\texorpdfstring{get\_num\_stored\_elements()}{get\_num\_stored\_elements()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
 \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{gko\+::matrix\+::\+Batch\+Dense}}$<$ Value\+Type $>$\+::get\+\_\+num\+\_\+stored\+\_\+elements (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
 
 
@@ -392,11 +458,15 @@ Returns the number of elements explicitly stored in the batch matrix, cumulative
 \begin{DoxyReturn}{Returns}
 the number of elements explicitly stored in the matrix, cumulative across all the batches 
 \end{DoxyReturn}
+
+
+References gko\+::\+Array$<$ Value\+Type $>$\+::get\+\_\+num\+\_\+elems().
+
 \mbox{\Hypertarget{classgko_1_1matrix_1_1BatchDense_a885d796fd130e5b08f09c2afc2b14bf3}\label{classgko_1_1matrix_1_1BatchDense_a885d796fd130e5b08f09c2afc2b14bf3}} 
 \index{gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}!get\_num\_stored\_elements@{get\_num\_stored\_elements}}
 \index{get\_num\_stored\_elements@{get\_num\_stored\_elements}!gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}}
 \doxysubsubsection{\texorpdfstring{get\_num\_stored\_elements()}{get\_num\_stored\_elements()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
 \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{gko\+::matrix\+::\+Batch\+Dense}}$<$ Value\+Type $>$\+::get\+\_\+num\+\_\+stored\+\_\+elements (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{batch }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
 
 
@@ -411,11 +481,15 @@ Returns the number of elements explicitly stored at a specific batch index.
 \begin{DoxyReturn}{Returns}
 the number of elements explicitly stored in the matrix 
 \end{DoxyReturn}
+
+
+References gko\+::\+Array$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+data(), and gko\+::\+Batch\+Lin\+Op\+::get\+\_\+num\+\_\+batch\+\_\+entries().
+
 \mbox{\Hypertarget{classgko_1_1matrix_1_1BatchDense_a26ddf0aff411e54fe91256431d2252ae}\label{classgko_1_1matrix_1_1BatchDense_a26ddf0aff411e54fe91256431d2252ae}} 
 \index{gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}!get\_stride@{get\_stride}}
 \index{get\_stride@{get\_stride}!gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}}
 \doxysubsubsection{\texorpdfstring{get\_stride()}{get\_stride()}}
-{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
 const \mbox{\hyperlink{classgko_1_1batch__stride}{batch\+\_\+stride}}\& \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{gko\+::matrix\+::\+Batch\+Dense}}$<$ Value\+Type $>$\+::get\+\_\+stride (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
 
 
@@ -427,13 +501,13 @@ the \mbox{\hyperlink{classgko_1_1batch__stride}{batch\+\_\+stride}} of the matri
 \end{DoxyReturn}
 
 
-Referenced by gko\+::matrix\+::\+Batch\+Dense$<$ value\+\_\+type $>$\+::unbatch().
+Referenced by gko\+::matrix\+::\+Batch\+Dense$<$ Value\+Type $>$\+::unbatch().
 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1BatchDense_a4526c20e4e2ed0dfb3986ae6a0e983a5}\label{classgko_1_1matrix_1_1BatchDense_a4526c20e4e2ed0dfb3986ae6a0e983a5}} 
 \index{gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}!get\_values@{get\_values}}
 \index{get\_values@{get\_values}!gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}}
 \doxysubsubsection{\texorpdfstring{get\_values()}{get\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
 value\+\_\+type$\ast$ \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{gko\+::matrix\+::\+Batch\+Dense}}$<$ Value\+Type $>$\+::get\+\_\+values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
 
 
@@ -443,11 +517,15 @@ Returns a pointer to the array of values of the matrix.
 \begin{DoxyReturn}{Returns}
 the pointer to the array of values 
 \end{DoxyReturn}
+
+
+References gko\+::\+Array$<$ Value\+Type $>$\+::get\+\_\+data().
+
 \mbox{\Hypertarget{classgko_1_1matrix_1_1BatchDense_a58316413f8a1fc860d25f950af1f1f5b}\label{classgko_1_1matrix_1_1BatchDense_a58316413f8a1fc860d25f950af1f1f5b}} 
 \index{gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}!get\_values@{get\_values}}
 \index{get\_values@{get\_values}!gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}}
 \doxysubsubsection{\texorpdfstring{get\_values()}{get\_values()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
 value\+\_\+type$\ast$ \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{gko\+::matrix\+::\+Batch\+Dense}}$<$ Value\+Type $>$\+::get\+\_\+values (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{batch }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
 
 
@@ -457,11 +535,15 @@ Returns a pointer to the array of values of the matrix.
 \begin{DoxyReturn}{Returns}
 the pointer to the array of values 
 \end{DoxyReturn}
+
+
+References gko\+::\+Array$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+data(), gko\+::\+Array$<$ Value\+Type $>$\+::get\+\_\+data(), and gko\+::\+Batch\+Lin\+Op\+::get\+\_\+num\+\_\+batch\+\_\+entries().
+
 \mbox{\Hypertarget{classgko_1_1matrix_1_1BatchDense_a2ae51b3fb0ef8ecce13dc01c7bf59c36}\label{classgko_1_1matrix_1_1BatchDense_a2ae51b3fb0ef8ecce13dc01c7bf59c36}} 
 \index{gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}!scale@{scale}}
 \index{scale@{scale}!gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}}
 \doxysubsubsection{\texorpdfstring{scale()}{scale()}}
-{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
 void \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{gko\+::matrix\+::\+Batch\+Dense}}$<$ Value\+Type $>$\+::scale (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} $\ast$}]{alpha }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
@@ -473,11 +555,15 @@ Scales the matrix with a scalar (aka\+: B\+L\+AS scal).
 {\em alpha} & If alpha is 1x1 \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{Batch\+Dense}} matrix, the entire matrix (all batches) is scaled by alpha. If it is a \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{Batch\+Dense}} row vector of values, then i-\/th column of the matrix is scaled with the i-\/th element of alpha (the number of columns of alpha has to match the number of columns of the matrix). \\
 \hline
 \end{DoxyParams}
+
+
+References gko\+::\+Polymorphic\+Object\+::get\+\_\+executor(), and gko\+::make\+\_\+temporary\+\_\+clone().
+
 \mbox{\Hypertarget{classgko_1_1matrix_1_1BatchDense_a0cda9e7aa0361059650563fbb47ad8ee}\label{classgko_1_1matrix_1_1BatchDense_a0cda9e7aa0361059650563fbb47ad8ee}} 
 \index{gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}!transpose@{transpose}}
 \index{transpose@{transpose}!gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}}
 \doxysubsubsection{\texorpdfstring{transpose()}{transpose()}}
-{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
 std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{gko\+::matrix\+::\+Batch\+Dense}}$<$ Value\+Type $>$\+::transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
@@ -495,7 +581,7 @@ Implements \mbox{\hyperlink{classgko_1_1BatchTransposable_af4685c379616cb410287f
 \index{gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}!unbatch@{unbatch}}
 \index{unbatch@{unbatch}!gko::matrix::BatchDense$<$ ValueType $>$@{gko::matrix::BatchDense$<$ ValueType $>$}}
 \doxysubsubsection{\texorpdfstring{unbatch()}{unbatch()}}
-{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
 std\+::vector$<$std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{unbatch\+\_\+type}}$>$ $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{gko\+::matrix\+::\+Batch\+Dense}}$<$ Value\+Type $>$\+::unbatch (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
@@ -507,7 +593,11 @@ a std\+::vector containing the \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Den
 \end{DoxyReturn}
 
 
+References gko\+::matrix\+::\+Batch\+Dense$<$ Value\+Type $>$\+::at(), gko\+::\+Array$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+data(), gko\+::matrix\+::\+Batch\+Dense$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+values(), gko\+::\+Polymorphic\+Object\+::get\+\_\+executor(), gko\+::\+Batch\+Lin\+Op\+::get\+\_\+num\+\_\+batch\+\_\+entries(), gko\+::\+Batch\+Lin\+Op\+::get\+\_\+size(), and gko\+::matrix\+::\+Batch\+Dense$<$ Value\+Type $>$\+::get\+\_\+stride().
+
+
+
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-ginkgo/core/base/batch\+\_\+lin\+\_\+op.\+hpp\item 
+ginkgo/core/matrix/batch\+\_\+csr.\+hpp\item 
 ginkgo/core/matrix/batch\+\_\+dense.\+hpp\end{DoxyCompactItemize}

@@ -63,6 +63,8 @@ class \mbox{\hyperlink{classgko_1_1BatchReadableFromMatrixData}{Batch\+Readable\
 \begin{DoxyCompactList}\small\item\em A \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} implementing this interface can read its data from a \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} structure. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1BatchScalable}{Batch\+Scalable}}
 \begin{DoxyCompactList}\small\item\em A batch made up of entities that can scaled from the left and right by scaling vectors. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1BatchScaledIdentityAddable}{Batch\+Scaled\+Identity\+Addable}}
+\begin{DoxyCompactList}\small\item\em Adds the operation M $<$-\/ a I + b M for batch matrix M, batch identity operator I and batch scalars a and b. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1BatchTransposable}{Batch\+Transposable}}
 \begin{DoxyCompactList}\small\item\em Batch Linear operators which support transposition of the distinct batch entries should implement the \mbox{\hyperlink{classgko_1_1BatchTransposable}{Batch\+Transposable}} interface. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1BatchWritableToMatrixData}{Batch\+Writable\+To\+Matrix\+Data}}
@@ -93,7 +95,7 @@ class \mbox{\hyperlink{classgko_1_1CusparseError}{Cusparse\+Error}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1CusparseError}{Cusparse\+Error}} is thrown when a cu\+S\+P\+A\+R\+SE routine throws a non-\/zero error code. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structgko_1_1default__converter}{default\+\_\+converter}}
 \begin{DoxyCompactList}\small\item\em Used to convert objects of type {\ttfamily S} to objects of type {\ttfamily R} using static\+\_\+cast. \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{structgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}}
+class \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}}
 \begin{DoxyCompactList}\small\item\em This type is a device-\/side equivalent to \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}}. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1DiagonalExtractable}{Diagonal\+Extractable}}
 \begin{DoxyCompactList}\small\item\em The diagonal of a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} implementing this interface can be extracted. \end{DoxyCompactList}\item 
@@ -115,8 +117,6 @@ class \mbox{\hyperlink{classgko_1_1EnableAbstractPolymorphicObject}{Enable\+Abst
 \begin{DoxyCompactList}\small\item\em This mixin inherits from (a subclass of) \mbox{\hyperlink{classgko_1_1PolymorphicObject}{Polymorphic\+Object}} and provides a base implementation of a new abstract object. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1EnableBatchLinOp}{Enable\+Batch\+Lin\+Op}}
 \begin{DoxyCompactList}\small\item\em The \mbox{\hyperlink{classgko_1_1EnableBatchLinOp}{Enable\+Batch\+Lin\+Op}} mixin can be used to provide sensible default implementations of the majority of the \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} and \mbox{\hyperlink{classgko_1_1PolymorphicObject}{Polymorphic\+Object}} interface. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classgko_1_1EnableBatchScaledSolver}{Enable\+Batch\+Scaled\+Solver}}
-\begin{DoxyCompactList}\small\item\em Provides basic functionality for solvers which need to be composed with batch scaling. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1EnableBatchScaling}{Enable\+Batch\+Scaling}}
 \begin{DoxyCompactList}\small\item\em Default batch scalable interface with some type-\/checking. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1EnableCreateMethod}{Enable\+Create\+Method}}
@@ -149,7 +149,7 @@ class \mbox{\hyperlink{classgko_1_1HiprandError}{Hiprand\+Error}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1HiprandError}{Hiprand\+Error}} is thrown when a hip\+R\+A\+ND routine throws a non-\/zero error code. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1HipsparseError}{Hipsparse\+Error}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1HipsparseError}{Hipsparse\+Error}} is thrown when a hip\+S\+P\+A\+R\+SE routine throws a non-\/zero error code. \end{DoxyCompactList}\item 
-class \mbox{\hyperlink{classgko_1_1IndexSet}{Index\+Set}}
+class \mbox{\hyperlink{classgko_1_1index__set}{index\+\_\+set}}
 \begin{DoxyCompactList}\small\item\em An index set class represents an ordered set of intervals. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1KernelNotFound}{Kernel\+Not\+Found}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1KernelNotFound}{Kernel\+Not\+Found}} is thrown if Ginkgo cannot find a kernel which satisfies the criteria imposed by the input arguments. \end{DoxyCompactList}\item 
@@ -201,6 +201,8 @@ class \mbox{\hyperlink{classgko_1_1ReadableFromMatrixData}{Readable\+From\+Matri
 \begin{DoxyCompactList}\small\item\em A \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} implementing this interface can read its data from a \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} structure. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1ReferenceExecutor}{Reference\+Executor}}
 \begin{DoxyCompactList}\small\item\em This is a specialization of the \mbox{\hyperlink{classgko_1_1OmpExecutor}{Omp\+Executor}}, which runs the reference implementations of the kernels used for debugging purposes. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1ScaledIdentityAddable}{Scaled\+Identity\+Addable}}
+\begin{DoxyCompactList}\small\item\em Adds the operation M $<$-\/ a I + b M for matrix M, identity operator I and scalars a and b, where M is the calling object. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structgko_1_1span}{span}}
 \begin{DoxyCompactList}\small\item\em A span is a lightweight structure used to create sub-\/ranges from other ranges. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1stopping__status}{stopping\+\_\+status}}
@@ -211,6 +213,8 @@ class \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}}
 \begin{DoxyCompactList}\small\item\em Linear operators which support transposition should implement the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} interface. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1truncated}{truncated}}
 \item 
+class \mbox{\hyperlink{classgko_1_1UnsupportedMatrixProperty}{Unsupported\+Matrix\+Property}}
+\begin{DoxyCompactList}\small\item\em Exception throws if a matrix does not have a property required by a numerical method. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1UseComposition}{Use\+Composition}}
 \begin{DoxyCompactList}\small\item\em The \mbox{\hyperlink{classgko_1_1UseComposition}{Use\+Composition}} class can be used to store the composition information in \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1ValueMismatch}{Value\+Mismatch}}
@@ -344,26 +348,21 @@ constexpr \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64
 \begin{DoxyCompactList}\small\item\em Returns the multiplicative identity for T. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename T $>$ }\\constexpr T \mbox{\hyperlink{namespacegko_ab4f16ecf0a759f46259cf9518f1e4568}{one}} (const T \&)
 \begin{DoxyCompactList}\small\item\em Returns the multiplicative identity for T. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\constexpr bool \mbox{\hyperlink{namespacegko_a785976e6dbc9d8511325617ca46040bf}{is\+\_\+zero}} (T value)
+\begin{DoxyCompactList}\small\item\em Returns true if and only if the given value is zero. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\constexpr bool \mbox{\hyperlink{namespacegko_aef9b29733e6eb45475a2b84f79a6d012}{is\+\_\+nonzero}} (T value)
+\begin{DoxyCompactList}\small\item\em Returns true if and only if the given value is not zero. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename T $>$ }\\constexpr T \mbox{\hyperlink{namespacegko_af1812df45c6ec07780d579a12b64c753}{max}} (const T \&x, const T \&y)
 \begin{DoxyCompactList}\small\item\em Returns the larger of the arguments. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename T $>$ }\\constexpr T \mbox{\hyperlink{namespacegko_aaaf8487194bcb40b528969c187a413a0}{min}} (const T \&x, const T \&y)
 \begin{DoxyCompactList}\small\item\em Returns the smaller of the arguments. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename T $>$ }\\constexpr std\+::enable\+\_\+if\+\_\+t$<$!\mbox{\hyperlink{namespacegko_aeede19206954d5c8ebd04c95cf63bb88}{is\+\_\+complex\+\_\+s}}$<$ T $>$\+::value, T $>$ \mbox{\hyperlink{namespacegko_a85e29870bacc4e660be5acbbf742305e}{real}} (const T \&x)
+{\footnotesize template$<$typename T $>$ }\\constexpr auto \mbox{\hyperlink{namespacegko_af21648097306adbabc6234b4609ce297}{real}} (const T \&x)
 \begin{DoxyCompactList}\small\item\em Returns the real part of the object. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{namespacegko_a11e23f11f738d46497b5d7fe562f128a}\label{namespacegko_a11e23f11f738d46497b5d7fe562f128a}} 
-{\footnotesize template$<$typename T $>$ }\\constexpr std\+::enable\+\_\+if\+\_\+t$<$ \mbox{\hyperlink{namespacegko_aeede19206954d5c8ebd04c95cf63bb88}{is\+\_\+complex\+\_\+s}}$<$ T $>$\+::value, \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{remove\+\_\+complex}}$<$ T $>$ $>$ {\bfseries real} (const T \&x)
-\item 
-{\footnotesize template$<$typename T $>$ }\\constexpr std\+::enable\+\_\+if\+\_\+t$<$!\mbox{\hyperlink{namespacegko_aeede19206954d5c8ebd04c95cf63bb88}{is\+\_\+complex\+\_\+s}}$<$ T $>$\+::value, T $>$ \mbox{\hyperlink{namespacegko_a0ac423659071783d3b7f8a66ea480f49}{imag}} (const T \&)
+{\footnotesize template$<$typename T $>$ }\\constexpr auto \mbox{\hyperlink{namespacegko_a795f649e3744fbfe128aec0b0f928aaa}{imag}} (const T \&x)
 \begin{DoxyCompactList}\small\item\em Returns the imaginary part of the object. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{namespacegko_a41050e9c27c6da9af7a758b03316e403}\label{namespacegko_a41050e9c27c6da9af7a758b03316e403}} 
-{\footnotesize template$<$typename T $>$ }\\constexpr std\+::enable\+\_\+if\+\_\+t$<$ \mbox{\hyperlink{namespacegko_aeede19206954d5c8ebd04c95cf63bb88}{is\+\_\+complex\+\_\+s}}$<$ T $>$\+::value, \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{remove\+\_\+complex}}$<$ T $>$ $>$ {\bfseries imag} (const T \&x)
-\item 
-{\footnotesize template$<$typename T $>$ }\\std\+::enable\+\_\+if\+\_\+t$<$!\mbox{\hyperlink{namespacegko_aeede19206954d5c8ebd04c95cf63bb88}{is\+\_\+complex\+\_\+s}}$<$ T $>$\+::value, T $>$ \mbox{\hyperlink{namespacegko_ab0fb2f831ecd3f5549a59e4845bd7110}{conj}} (const T \&x)
+{\footnotesize template$<$typename T $>$ }\\constexpr auto \mbox{\hyperlink{namespacegko_ad79fd5c1fb85403796c40c0a916a15f2}{conj}} (const T \&x)
 \begin{DoxyCompactList}\small\item\em Returns the conjugate of an object. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{namespacegko_a5a975d1b9b023cc3bb530b8e1c7dde6d}\label{namespacegko_a5a975d1b9b023cc3bb530b8e1c7dde6d}} 
-{\footnotesize template$<$typename T $>$ }\\std\+::enable\+\_\+if\+\_\+t$<$ \mbox{\hyperlink{namespacegko_aeede19206954d5c8ebd04c95cf63bb88}{is\+\_\+complex\+\_\+s}}$<$ T $>$\+::value, T $>$ {\bfseries conj} (const T \&x)
-\item 
-{\footnotesize template$<$typename T $>$ }\\constexpr auto \mbox{\hyperlink{namespacegko_abbb55709b10d707b2cbef803832aa834}{squared\+\_\+norm}} (const T \&x) -\/$>$ decltype(\mbox{\hyperlink{namespacegko_a85e29870bacc4e660be5acbbf742305e}{real}}(\mbox{\hyperlink{namespacegko_ab0fb2f831ecd3f5549a59e4845bd7110}{conj}}(x) $\ast$x))
+{\footnotesize template$<$typename T $>$ }\\constexpr auto \mbox{\hyperlink{namespacegko_abbb55709b10d707b2cbef803832aa834}{squared\+\_\+norm}} (const T \&x) -\/$>$ decltype(\mbox{\hyperlink{namespacegko_af21648097306adbabc6234b4609ce297}{real}}(\mbox{\hyperlink{namespacegko_ad79fd5c1fb85403796c40c0a916a15f2}{conj}}(x) $\ast$x))
 \begin{DoxyCompactList}\small\item\em Returns the squared norm of the object. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename T $>$ }\\constexpr xstd\+::enable\+\_\+if\+\_\+t$<$!\mbox{\hyperlink{namespacegko_aeede19206954d5c8ebd04c95cf63bb88}{is\+\_\+complex\+\_\+s}}$<$ T $>$\+::value, T $>$ \mbox{\hyperlink{namespacegko_adeb470aaf293d7c5548392b2f451e8e4}{abs}} (const T \&x)
 \begin{DoxyCompactList}\small\item\em Returns the absolute value of the object. \end{DoxyCompactList}\item 
@@ -394,12 +393,24 @@ constexpr \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64
 \begin{DoxyCompactList}\small\item\em Returns a complex with both components quiet NaN. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ }\\\mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$ \mbox{\hyperlink{namespacegko_a0b476e0e3df616b08efe85000bff8da0}{read\+\_\+raw}} (std\+::istream \&is)
 \begin{DoxyCompactList}\small\item\em Reads a matrix stored in matrix market format from an input stream. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ }\\\mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$ \mbox{\hyperlink{namespacegko_a4c57f7b636344e8b4d17d42d2f17358f}{read\+\_\+binary\+\_\+raw}} (std\+::istream \&is)
+\begin{DoxyCompactList}\small\item\em Reads a matrix stored in Ginkgo\textquotesingle{}s binary matrix format from an input stream. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ }\\\mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$ \mbox{\hyperlink{namespacegko_a3b610840dd471007b09be2fc1fe4b1e7}{read\+\_\+generic\+\_\+raw}} (std\+::istream \&is)
+\begin{DoxyCompactList}\small\item\em Reads a matrix stored in either binary or matrix market format from an input stream. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Value\+Type , typename Index\+Type $>$ }\\void \mbox{\hyperlink{namespacegko_ab31feb99c64fc6df58ac09abd4af69b6}{write\+\_\+raw}} (std\+::ostream \&os, const \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$ \&data, \mbox{\hyperlink{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68}{layout\+\_\+type}} layout=\mbox{\hyperlink{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68af1f713c9e000f5d3f280adbd124df4f5}{layout\+\_\+type\+::array}})
 \begin{DoxyCompactList}\small\item\em Writes a \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} structure to a stream in matrix market format. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Value\+Type , typename Index\+Type $>$ }\\void \mbox{\hyperlink{namespacegko_a3b27a0c0282115116c160884dc0a9468}{write\+\_\+binary\+\_\+raw}} (std\+::ostream \&os, const \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$ \&data)
+\begin{DoxyCompactList}\small\item\em Writes a \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} structure to a stream in binary format. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Matrix\+Type , typename Stream\+Type , typename... Matrix\+Args$>$ }\\std\+::unique\+\_\+ptr$<$ Matrix\+Type $>$ \mbox{\hyperlink{namespacegko_a92cf0178c1c55419d32d2bb527e57e5b}{read}} (Stream\+Type \&\&is, Matrix\+Args \&\&... args)
 \begin{DoxyCompactList}\small\item\em Reads a matrix stored in matrix market format from an input stream. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Matrix\+Type , typename Stream\+Type , typename... Matrix\+Args$>$ }\\std\+::unique\+\_\+ptr$<$ Matrix\+Type $>$ \mbox{\hyperlink{namespacegko_ad10dc71f76a4125568cb0ab5add863cd}{read\+\_\+binary}} (Stream\+Type \&\&is, Matrix\+Args \&\&... args)
+\begin{DoxyCompactList}\small\item\em Reads a matrix stored in binary format from an input stream. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Matrix\+Type , typename Stream\+Type , typename... Matrix\+Args$>$ }\\std\+::unique\+\_\+ptr$<$ Matrix\+Type $>$ \mbox{\hyperlink{namespacegko_ac71759a8a78d3c4946a11ce4b378a88e}{read\+\_\+generic}} (Stream\+Type \&\&is, Matrix\+Args \&\&... args)
+\begin{DoxyCompactList}\small\item\em Reads a matrix stored either in binary or matrix market format from an input stream. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Matrix\+Type , typename Stream\+Type $>$ }\\void \mbox{\hyperlink{namespacegko_aa24837da3770b3dddf981d9bfe0d3b52}{write}} (Stream\+Type \&\&os, Matrix\+Type $\ast$matrix, \mbox{\hyperlink{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68}{layout\+\_\+type}} layout=detail\+::mtx\+\_\+io\+\_\+traits$<$ std\+::remove\+\_\+const\+\_\+t$<$ Matrix\+Type $>$$>$\+::default\+\_\+layout)
-\begin{DoxyCompactList}\small\item\em Reads a matrix stored in matrix market format from an input stream. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Writes a matrix into an output stream in matrix market format. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Matrix\+Type , typename Stream\+Type $>$ }\\void \mbox{\hyperlink{namespacegko_a1280f63daa434fc2afe2cf7974608d81}{write\+\_\+binary}} (Stream\+Type \&\&os, Matrix\+Type $\ast$matrix)
+\begin{DoxyCompactList}\small\item\em Writes a matrix into an output stream in binary format. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename R , typename T $>$ }\\std\+::unique\+\_\+ptr$<$ R, std\+::function$<$ void(R $\ast$)$>$ $>$ \mbox{\hyperlink{namespacegko_abb378b82b7b7c6347ebdfb4c2ddc9366}{copy\+\_\+and\+\_\+convert\+\_\+to}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, T $\ast$obj)
 \begin{DoxyCompactList}\small\item\em Converts the object to R and places it on \mbox{\hyperlink{classgko_1_1Executor}{Executor}} exec. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename R , typename T $>$ }\\std\+::unique\+\_\+ptr$<$ const R, std\+::function$<$ void(const R $\ast$)$>$ $>$ \mbox{\hyperlink{namespacegko_a3f3a167c72a0659cb9003b64c7b754d0}{copy\+\_\+and\+\_\+convert\+\_\+to}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const T $\ast$obj)
@@ -801,6 +812,10 @@ std\+::ostream \& \mbox{\hyperlink{namespacegko_ad9e3ba96a10fe47a03ceef39b45bd43
 \begin{DoxyCompactList}\small\item\em Creates and initializes a matrix from copies of a given matrix. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Matrix , typename... T\+Args$>$ }\\std\+::unique\+\_\+ptr$<$ Matrix $>$ \mbox{\hyperlink{group__mat__formats_gac520568e95aaf846317e132000f6bdde}{batch\+\_\+initialize}} (const \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} num\+\_\+matrices, std\+::initializer\+\_\+list$<$ std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$$>$ vals, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, T\+Args \&\&... create\+\_\+args)
 \begin{DoxyCompactList}\small\item\em Creates and initializes a matrix from copies of a given matrix. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Value\+Type $>$ }\\std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDiagonal}{matrix\+::\+Batch\+Diagonal}}$<$ Value\+Type $>$ $>$ \mbox{\hyperlink{group__mat__formats_ga6c2738614bd41283b541046e720cbd95}{batch\+\_\+diagonal\+\_\+initialize}} (std\+::initializer\+\_\+list$<$ std\+::initializer\+\_\+list$<$ Value\+Type $>$$>$ vals, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec)
+\begin{DoxyCompactList}\small\item\em Creates and initializes a batch of diagonal matrices. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Value\+Type $>$ }\\std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDiagonal}{matrix\+::\+Batch\+Diagonal}}$<$ Value\+Type $>$ $>$ \mbox{\hyperlink{group__mat__formats_ga722cca4ffc7d449b6a6a9a5661800624}{batch\+\_\+diagonal\+\_\+initialize}} (const \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} num\+\_\+matrices, std\+::initializer\+\_\+list$<$ Value\+Type $>$ vals, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec)
+\begin{DoxyCompactList}\small\item\em Creates and initializes a batch diagonal matrix by making copies of the single input diagonal matrix. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Value\+Type , typename Index\+Type $>$ }\\std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{matrix\+::\+Csr}}$<$ Value\+Type, Index\+Type $>$ $>$ \mbox{\hyperlink{namespacegko_ad71dcce1a0a0d8739e895865b64917e0}{create\+\_\+block\+\_\+diagonal\+\_\+matrix}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const std\+::vector$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{matrix\+::\+Csr}}$<$ Value\+Type, Index\+Type $>$$>$$>$ \&matrices)
 \begin{DoxyCompactList}\small\item\em Generates a single large block-\/diagonal C\+SR matrix from the given C\+SR matrices. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Matrix , typename... T\+Args$>$ }\\std\+::unique\+\_\+ptr$<$ Matrix $>$ \mbox{\hyperlink{group__mat__formats_ga2f54bac1e95fb3ef03974fa9c9088491}{initialize}} (\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} stride, std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$ vals, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, T\+Args \&\&... create\+\_\+args)
@@ -1223,12 +1238,12 @@ The pointee (i.\+e. {\ttfamily $\ast$p}) needs to have a clone method that takes
 \begin{DoxyNote}{Note}
 The difference between this function and directly calling Lin\+Op\+::clone() is that this one preserves the static type of the object. 
 \end{DoxyNote}
-\mbox{\Hypertarget{namespacegko_ab0fb2f831ecd3f5549a59e4845bd7110}\label{namespacegko_ab0fb2f831ecd3f5549a59e4845bd7110}} 
+\mbox{\Hypertarget{namespacegko_ad79fd5c1fb85403796c40c0a916a15f2}\label{namespacegko_ad79fd5c1fb85403796c40c0a916a15f2}} 
 \index{gko@{gko}!conj@{conj}}
 \index{conj@{conj}!gko@{gko}}
 \doxysubsubsection{\texorpdfstring{conj()}{conj()}}
 {\footnotesize\ttfamily template$<$typename T $>$ \\
-std\+::enable\+\_\+if\+\_\+t$<$!\mbox{\hyperlink{namespacegko_aeede19206954d5c8ebd04c95cf63bb88}{is\+\_\+complex\+\_\+s}}$<$T$>$\+::value, T$>$ gko\+::conj (\begin{DoxyParamCaption}\item[{const T \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+constexpr auto gko\+::conj (\begin{DoxyParamCaption}\item[{const T \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
 
 
 
@@ -1500,12 +1515,12 @@ Effectively calls {\ttfamily std\+::move(p)}.
 \begin{DoxyNote}{Note}
 The original pointer {\ttfamily p} becomes invalid after this call. 
 \end{DoxyNote}
-\mbox{\Hypertarget{namespacegko_a0ac423659071783d3b7f8a66ea480f49}\label{namespacegko_a0ac423659071783d3b7f8a66ea480f49}} 
+\mbox{\Hypertarget{namespacegko_a795f649e3744fbfe128aec0b0f928aaa}\label{namespacegko_a795f649e3744fbfe128aec0b0f928aaa}} 
 \index{gko@{gko}!imag@{imag}}
 \index{imag@{imag}!gko@{gko}}
 \doxysubsubsection{\texorpdfstring{imag()}{imag()}}
 {\footnotesize\ttfamily template$<$typename T $>$ \\
-constexpr std\+::enable\+\_\+if\+\_\+t$<$!\mbox{\hyperlink{namespacegko_aeede19206954d5c8ebd04c95cf63bb88}{is\+\_\+complex\+\_\+s}}$<$T$>$\+::value, T$>$ gko\+::imag (\begin{DoxyParamCaption}\item[{const T \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+constexpr auto gko\+::imag (\begin{DoxyParamCaption}\item[{const T \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
 
 
 
@@ -1670,6 +1685,62 @@ Checks if any component of a complex value is NaN.
 \begin{DoxyReturn}{Returns}
 {\ttfamily true} if any component of the given value is NaN. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{namespacegko_aef9b29733e6eb45475a2b84f79a6d012}\label{namespacegko_aef9b29733e6eb45475a2b84f79a6d012}} 
+\index{gko@{gko}!is\_nonzero@{is\_nonzero}}
+\index{is\_nonzero@{is\_nonzero}!gko@{gko}}
+\doxysubsubsection{\texorpdfstring{is\_nonzero()}{is\_nonzero()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+constexpr bool gko\+::is\+\_\+nonzero (\begin{DoxyParamCaption}\item[{T}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Returns true if and only if the given value is not zero. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & the type of the value\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & the given value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true iff the given value is not zero, i.\+e. {\ttfamily value != zero$<$T$>$()} 
+\end{DoxyReturn}
+
+
+Referenced by gko\+::matrix\+\_\+data$<$ Value\+Type, Index\+Type $>$\+::diag().
+
+\mbox{\Hypertarget{namespacegko_a785976e6dbc9d8511325617ca46040bf}\label{namespacegko_a785976e6dbc9d8511325617ca46040bf}} 
+\index{gko@{gko}!is\_zero@{is\_zero}}
+\index{is\_zero@{is\_zero}!gko@{gko}}
+\doxysubsubsection{\texorpdfstring{is\_zero()}{is\_zero()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+constexpr bool gko\+::is\+\_\+zero (\begin{DoxyParamCaption}\item[{T}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Returns true if and only if the given value is zero. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & the type of the value\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & the given value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true iff the given value is zero, i.\+e. {\ttfamily value == zero$<$T$>$()} 
+\end{DoxyReturn}
+
+
+Referenced by gko\+::matrix\+\_\+data$<$ Value\+Type, Index\+Type $>$\+::remove\+\_\+zeros().
+
 \mbox{\Hypertarget{namespacegko_a014ec51e675c425bb83908361f630450}\label{namespacegko_a014ec51e675c425bb83908361f630450}} 
 \index{gko@{gko}!lend@{lend}}
 \index{lend@{lend}!gko@{gko}}
@@ -1772,7 +1843,7 @@ This is a helper function which avoids the need to explicitly specify the type o
 \end{DoxyParams}
 
 
-Referenced by gko\+::matrix\+::\+Batch\+Dense$<$ value\+\_\+type $>$\+::add\+\_\+scaled(), gko\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::add\+\_\+scaled(), gko\+::\+Lin\+Op\+::apply(), gko\+::\+Batch\+Lin\+Op\+::apply(), gko\+::matrix\+::\+Coo$<$ Value\+Type, Index\+Type $>$\+::apply2(), gko\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::compute\+\_\+conj\+\_\+dot(), gko\+::matrix\+::\+Batch\+Dense$<$ value\+\_\+type $>$\+::compute\+\_\+dot(), gko\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::compute\+\_\+dot(), gko\+::matrix\+::\+Batch\+Dense$<$ value\+\_\+type $>$\+::compute\+\_\+norm2(), gko\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::inv\+\_\+scale(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::inv\+\_\+scale(), gko\+::matrix\+::\+Batch\+Dense$<$ value\+\_\+type $>$\+::scale(), gko\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::scale(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::scale(), and gko\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::sub\+\_\+scaled().
+Referenced by gko\+::matrix\+::\+Batch\+Dense$<$ Value\+Type $>$\+::add\+\_\+scaled(), gko\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::add\+\_\+scaled(), gko\+::\+Scaled\+Identity\+Addable\+::add\+\_\+scaled\+\_\+identity(), gko\+::\+Batch\+Scaled\+Identity\+Addable\+::add\+\_\+scaled\+\_\+identity(), gko\+::\+Lin\+Op\+::apply(), gko\+::\+Batch\+Lin\+Op\+::apply(), gko\+::matrix\+::\+Coo$<$ Value\+Type, Index\+Type $>$\+::apply2(), gko\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::compute\+\_\+conj\+\_\+dot(), gko\+::matrix\+::\+Batch\+Dense$<$ Value\+Type $>$\+::compute\+\_\+dot(), gko\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::compute\+\_\+dot(), gko\+::matrix\+::\+Batch\+Dense$<$ Value\+Type $>$\+::compute\+\_\+norm2(), gko\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::inv\+\_\+scale(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::inv\+\_\+scale(), gko\+::matrix\+::\+Batch\+Dense$<$ Value\+Type $>$\+::scale(), gko\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::scale(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::scale(), and gko\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::sub\+\_\+scaled().
 
 \mbox{\Hypertarget{namespacegko_a6470e8e212add7923569e6b885a74610}\label{namespacegko_a6470e8e212add7923569e6b885a74610}} 
 \index{gko@{gko}!make\_temporary\_conversion@{make\_temporary\_conversion}}
@@ -2355,6 +2426,148 @@ References read\+\_\+raw().
 
 Referenced by gko\+::\+Readable\+From\+Matrix\+Data$<$ Value\+Type, int32 $>$\+::read(), and gko\+::\+Batch\+Readable\+From\+Matrix\+Data$<$ Value\+Type, int32 $>$\+::read().
 
+\mbox{\Hypertarget{namespacegko_ad10dc71f76a4125568cb0ab5add863cd}\label{namespacegko_ad10dc71f76a4125568cb0ab5add863cd}} 
+\index{gko@{gko}!read\_binary@{read\_binary}}
+\index{read\_binary@{read\_binary}!gko@{gko}}
+\doxysubsubsection{\texorpdfstring{read\_binary()}{read\_binary()}}
+{\footnotesize\ttfamily template$<$typename Matrix\+Type , typename Stream\+Type , typename... Matrix\+Args$>$ \\
+std\+::unique\+\_\+ptr$<$Matrix\+Type$>$ gko\+::read\+\_\+binary (\begin{DoxyParamCaption}\item[{Stream\+Type \&\&}]{is,  }\item[{Matrix\+Args \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reads a matrix stored in binary format from an input stream. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Matrix\+Type} & a \mbox{\hyperlink{classgko_1_1ReadableFromMatrixData}{Readable\+From\+Matrix\+Data}} \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} type used to store the matrix once it\textquotesingle{}s been read from disk. \\
+\hline
+{\em Stream\+Type} & type of stream used to write the data to \\
+\hline
+{\em Matrix\+Args} & additional argument types passed to Matrix\+Type constructor\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em is} & input stream from which to read the data \\
+\hline
+{\em args} & additional arguments passed to Matrix\+Type constructor\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Matrix\+Type \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} filled with data from filename 
+\end{DoxyReturn}
+
+
+References read\+\_\+binary\+\_\+raw().
+
+\mbox{\Hypertarget{namespacegko_a4c57f7b636344e8b4d17d42d2f17358f}\label{namespacegko_a4c57f7b636344e8b4d17d42d2f17358f}} 
+\index{gko@{gko}!read\_binary\_raw@{read\_binary\_raw}}
+\index{read\_binary\_raw@{read\_binary\_raw}!gko@{gko}}
+\doxysubsubsection{\texorpdfstring{read\_binary\_raw()}{read\_binary\_raw()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+\mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}}$<$Value\+Type, Index\+Type$>$ gko\+::read\+\_\+binary\+\_\+raw (\begin{DoxyParamCaption}\item[{std\+::istream \&}]{is }\end{DoxyParamCaption})}
+
+
+
+Reads a matrix stored in Ginkgo\textquotesingle{}s binary matrix format from an input stream. 
+
+Note that this format depends on the processor\textquotesingle{}s endianness, so files from a big endian processor can\textquotesingle{}t be read from a little endian processor and vice-\/versa.
+
+The binary format has the following structure (in system endianness)\+:
+\begin{DoxyEnumerate}
+\item A 32 byte header consisting of 4 uint64\+\_\+t values\+: magic = G\+I\+N\+K\+G\+O\+\_\+\+\_\+\+: The highest two bytes stand for value and index type. value type\+: S (float), D (double), C (complex$<$float$>$), Z(complex$<$double$>$) index type\+: I (int32), L (int64) num\+\_\+rows\+: Number of rows num\+\_\+cols\+: Number of columns num\+\_\+entries\+: Number of (row, column, value) tuples to follow
+\item Following are num\+\_\+entries blocks of size sizeof(\+Index\+Type) $\ast$ 2 + sizeof(\+Value\+Type). Each consists of a row index stored as Index\+Type, followed by a column index stored as Index\+Type and a value stored as Value\+Type.
+\end{DoxyEnumerate}
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Value\+Type} & type of matrix values \\
+\hline
+{\em Index\+Type} & type of matrix indexes\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em is} & input stream from which to read the data\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} structure containing the matrix. The nonzero elements are sorted in lexicographic order of their (row, column) indexes.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+This is an advanced routine that will return the raw matrix data structure. Consider using \mbox{\hyperlink{namespacegko_ad10dc71f76a4125568cb0ab5add863cd}{gko\+::read\+\_\+binary}} instead. 
+\end{DoxyNote}
+
+
+Referenced by read\+\_\+binary().
+
+\mbox{\Hypertarget{namespacegko_ac71759a8a78d3c4946a11ce4b378a88e}\label{namespacegko_ac71759a8a78d3c4946a11ce4b378a88e}} 
+\index{gko@{gko}!read\_generic@{read\_generic}}
+\index{read\_generic@{read\_generic}!gko@{gko}}
+\doxysubsubsection{\texorpdfstring{read\_generic()}{read\_generic()}}
+{\footnotesize\ttfamily template$<$typename Matrix\+Type , typename Stream\+Type , typename... Matrix\+Args$>$ \\
+std\+::unique\+\_\+ptr$<$Matrix\+Type$>$ gko\+::read\+\_\+generic (\begin{DoxyParamCaption}\item[{Stream\+Type \&\&}]{is,  }\item[{Matrix\+Args \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reads a matrix stored either in binary or matrix market format from an input stream. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Matrix\+Type} & a \mbox{\hyperlink{classgko_1_1ReadableFromMatrixData}{Readable\+From\+Matrix\+Data}} \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} type used to store the matrix once it\textquotesingle{}s been read from disk. \\
+\hline
+{\em Stream\+Type} & type of stream used to write the data to \\
+\hline
+{\em Matrix\+Args} & additional argument types passed to Matrix\+Type constructor\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em is} & input stream from which to read the data \\
+\hline
+{\em args} & additional arguments passed to Matrix\+Type constructor\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Matrix\+Type \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} filled with data from filename 
+\end{DoxyReturn}
+
+
+References read\+\_\+generic\+\_\+raw().
+
+\mbox{\Hypertarget{namespacegko_a3b610840dd471007b09be2fc1fe4b1e7}\label{namespacegko_a3b610840dd471007b09be2fc1fe4b1e7}} 
+\index{gko@{gko}!read\_generic\_raw@{read\_generic\_raw}}
+\index{read\_generic\_raw@{read\_generic\_raw}!gko@{gko}}
+\doxysubsubsection{\texorpdfstring{read\_generic\_raw()}{read\_generic\_raw()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+\mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}}$<$Value\+Type, Index\+Type$>$ gko\+::read\+\_\+generic\+\_\+raw (\begin{DoxyParamCaption}\item[{std\+::istream \&}]{is }\end{DoxyParamCaption})}
+
+
+
+Reads a matrix stored in either binary or matrix market format from an input stream. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Value\+Type} & type of matrix values \\
+\hline
+{\em Index\+Type} & type of matrix indexes\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em is} & input stream from which to read the data\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} structure containing the matrix. The nonzero elements are sorted in lexicographic order of their (row, column) indexes.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+This is an advanced routine that will return the raw matrix data structure. Consider using \mbox{\hyperlink{namespacegko_ac71759a8a78d3c4946a11ce4b378a88e}{gko\+::read\+\_\+generic}} instead. 
+\end{DoxyNote}
+
+
+Referenced by read\+\_\+generic().
+
 \mbox{\Hypertarget{namespacegko_a0b476e0e3df616b08efe85000bff8da0}\label{namespacegko_a0b476e0e3df616b08efe85000bff8da0}} 
 \index{gko@{gko}!read\_raw@{read\_raw}}
 \index{read\_raw@{read\_raw}!gko@{gko}}
@@ -2379,7 +2592,7 @@ Reads a matrix stored in matrix market format from an input stream.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-A \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} structure containing the matrix. The nonzero elements are sorted in lexicographic order of their (row, colum) indexes.
+A \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} structure containing the matrix. The nonzero elements are sorted in lexicographic order of their (row, column) indexes.
 \end{DoxyReturn}
 \begin{DoxyNote}{Note}
 This is an advanced routine that will return the raw matrix data structure. Consider using \mbox{\hyperlink{namespacegko_a92cf0178c1c55419d32d2bb527e57e5b}{gko\+::read}} instead. 
@@ -2388,12 +2601,12 @@ This is an advanced routine that will return the raw matrix data structure. Cons
 
 Referenced by read().
 
-\mbox{\Hypertarget{namespacegko_a85e29870bacc4e660be5acbbf742305e}\label{namespacegko_a85e29870bacc4e660be5acbbf742305e}} 
+\mbox{\Hypertarget{namespacegko_af21648097306adbabc6234b4609ce297}\label{namespacegko_af21648097306adbabc6234b4609ce297}} 
 \index{gko@{gko}!real@{real}}
 \index{real@{real}!gko@{gko}}
 \doxysubsubsection{\texorpdfstring{real()}{real()}}
 {\footnotesize\ttfamily template$<$typename T $>$ \\
-constexpr std\+::enable\+\_\+if\+\_\+t$<$!\mbox{\hyperlink{namespacegko_aeede19206954d5c8ebd04c95cf63bb88}{is\+\_\+complex\+\_\+s}}$<$T$>$\+::value, T$>$ gko\+::real (\begin{DoxyParamCaption}\item[{const T \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+constexpr auto gko\+::real (\begin{DoxyParamCaption}\item[{const T \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
 
 
 
@@ -2574,7 +2787,7 @@ Referenced by gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type, Index\+Type $>$\
 \index{squared\_norm@{squared\_norm}!gko@{gko}}
 \doxysubsubsection{\texorpdfstring{squared\_norm()}{squared\_norm()}}
 {\footnotesize\ttfamily template$<$typename T $>$ \\
-constexpr auto gko\+::squared\+\_\+norm (\begin{DoxyParamCaption}\item[{const T \&}]{x }\end{DoxyParamCaption}) -\/$>$ decltype(\mbox{\hyperlink{namespacegko_a85e29870bacc4e660be5acbbf742305e}{real}}(\mbox{\hyperlink{namespacegko_ab0fb2f831ecd3f5549a59e4845bd7110}{conj}}(x) $\ast$ x))
+constexpr auto gko\+::squared\+\_\+norm (\begin{DoxyParamCaption}\item[{const T \&}]{x }\end{DoxyParamCaption}) -\/$>$ decltype(\mbox{\hyperlink{namespacegko_af21648097306adbabc6234b4609ce297}{real}}(\mbox{\hyperlink{namespacegko_ad79fd5c1fb85403796c40c0a916a15f2}{conj}}(x) $\ast$ x))
 \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
 
 
@@ -2687,11 +2900,11 @@ void gko\+::write (\begin{DoxyParamCaption}\item[{Stream\+Type \&\&}]{os,  }\ite
 
 
 
-Reads a matrix stored in matrix market format from an input stream. 
+Writes a matrix into an output stream in matrix market format. 
 
 
 \begin{DoxyTemplParams}{Template Parameters}
-{\em Matrix\+Type} & a \mbox{\hyperlink{classgko_1_1ReadableFromMatrixData}{Readable\+From\+Matrix\+Data}} \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} type used to store the matrix once it\textquotesingle{}s been read from disk. \\
+{\em Matrix\+Type} & a \mbox{\hyperlink{classgko_1_1WritableToMatrixData}{Writable\+To\+Matrix\+Data}} object providing data to be written. \\
 \hline
 {\em Stream\+Type} & type of stream used to write the data to\\
 \hline
@@ -2708,6 +2921,71 @@ Reads a matrix stored in matrix market format from an input stream.
 
 
 References write\+\_\+raw().
+
+\mbox{\Hypertarget{namespacegko_a1280f63daa434fc2afe2cf7974608d81}\label{namespacegko_a1280f63daa434fc2afe2cf7974608d81}} 
+\index{gko@{gko}!write\_binary@{write\_binary}}
+\index{write\_binary@{write\_binary}!gko@{gko}}
+\doxysubsubsection{\texorpdfstring{write\_binary()}{write\_binary()}}
+{\footnotesize\ttfamily template$<$typename Matrix\+Type , typename Stream\+Type $>$ \\
+void gko\+::write\+\_\+binary (\begin{DoxyParamCaption}\item[{Stream\+Type \&\&}]{os,  }\item[{Matrix\+Type $\ast$}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Writes a matrix into an output stream in binary format. 
+
+Note that this format depends on the processor\textquotesingle{}s endianness, so files from a big endian processor can\textquotesingle{}t be read from a little endian processor and vice-\/versa.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Matrix\+Type} & a \mbox{\hyperlink{classgko_1_1WritableToMatrixData}{Writable\+To\+Matrix\+Data}} object providing data to be written. \\
+\hline
+{\em Stream\+Type} & type of stream used to write the data to\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em os} & output stream where the data is to be written \\
+\hline
+{\em matrix} & the matrix to write \\
+\hline
+\end{DoxyParams}
+
+
+References write\+\_\+binary\+\_\+raw().
+
+\mbox{\Hypertarget{namespacegko_a3b27a0c0282115116c160884dc0a9468}\label{namespacegko_a3b27a0c0282115116c160884dc0a9468}} 
+\index{gko@{gko}!write\_binary\_raw@{write\_binary\_raw}}
+\index{write\_binary\_raw@{write\_binary\_raw}!gko@{gko}}
+\doxysubsubsection{\texorpdfstring{write\_binary\_raw()}{write\_binary\_raw()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type , typename Index\+Type $>$ \\
+void gko\+::write\+\_\+binary\+\_\+raw (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{const \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$ \&}]{data }\end{DoxyParamCaption})}
+
+
+
+Writes a \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} structure to a stream in binary format. 
+
+Note that this format depends on the processor\textquotesingle{}s endianness, so files from a big endian processor can\textquotesingle{}t be read from a little endian processor and vice-\/versa.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Value\+Type} & type of matrix values \\
+\hline
+{\em Index\+Type} & type of matrix indexes\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em os} & output stream where the data is to be written \\
+\hline
+{\em data} & the matrix data to write\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This is an advanced routine that writes the raw matrix data structure. If you are trying to write an existing matrix, consider using \mbox{\hyperlink{namespacegko_a1280f63daa434fc2afe2cf7974608d81}{gko\+::write\+\_\+binary}} instead. 
+\end{DoxyNote}
+
+
+Referenced by write\+\_\+binary().
 
 \mbox{\Hypertarget{namespacegko_ab31feb99c64fc6df58ac09abd4af69b6}\label{namespacegko_ab31feb99c64fc6df58ac09abd4af69b6}} 
 \index{gko@{gko}!write\_raw@{write\_raw}}

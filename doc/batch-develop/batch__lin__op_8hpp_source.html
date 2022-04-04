@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/460710379 branch based on develop. Ginkgo version 1.5.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/508661960 branch based on develop. Ginkgo version 1.5.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -311,9 +311,9 @@ $(function() {
 <div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;                                         <span class="keyword">const</span> BatchLinOp* x)<span class="keyword"> const</span></div>
 <div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;<span class="keyword">    </span>{</div>
 <div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;        this-&gt;validate_application_parameters(b, x);</div>
-<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;        GKO_ASSERT_BATCH_EQUAL_DIMENSIONS(</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;        GKO_ASSERT_BATCH_EQUAL_ROWS(</div>
 <div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;            alpha, batch_dim&lt;2&gt;(b-&gt;get_num_batch_entries(), dim&lt;2&gt;(1, 1)));</div>
-<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;        GKO_ASSERT_BATCH_EQUAL_DIMENSIONS(</div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;        GKO_ASSERT_BATCH_EQUAL_ROWS(</div>
 <div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;            beta, batch_dim&lt;2&gt;(b-&gt;get_num_batch_entries(), dim&lt;2&gt;(1, 1)));</div>
 <div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;    }</div>
 <div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160; </div>
@@ -430,143 +430,122 @@ $(function() {
 <div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;};</div>
 <div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160; </div>
 <div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160; </div>
-<div class="line"><a name="l00659"></a><span class="lineno"><a class="line" href="namespacegko_1_1matrix.html">  659</a></span>&#160;<span class="keyword">namespace </span>matrix {</div>
-<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160; </div>
-<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160; </div>
-<div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType&gt;</div>
-<div class="line"><a name="l00663"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1BatchDense.html">  663</a></span>&#160;<span class="keyword">class </span><a class="code" href="classgko_1_1matrix_1_1BatchDense.html">BatchDense</a>;</div>
-<div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160; </div>
-<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160; </div>
-<div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160;}</div>
-<div class="line"><a name="l00667"></a><span class="lineno">  667</span>&#160; </div>
-<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160; </div>
-<div class="line"><a name="l00674"></a><span class="lineno"><a class="line" href="classgko_1_1EnableBatchScaling.html">  674</a></span>&#160;<span class="keyword">class </span><a class="code" href="classgko_1_1EnableBatchScaling.html">EnableBatchScaling</a> : <span class="keyword">public</span> <a class="code" href="classgko_1_1BatchScalable.html">BatchScalable</a> {</div>
-<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;    <span class="keyword">const</span> <a class="code" href="classgko_1_1BatchLinOp.html">BatchLinOp</a>* get_left_scaling_vector()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> left_scale_; }</div>
-<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160; </div>
-<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160;    <span class="keyword">const</span> <a class="code" href="classgko_1_1BatchLinOp.html">BatchLinOp</a>* get_right_scaling_vector()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> right_scale_; }</div>
-<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160; </div>
-<div class="line"><a name="l00689"></a><span class="lineno"><a class="line" href="classgko_1_1EnableBatchScaling.html#a62eae037f27041948b5f24a1a96ac64f">  689</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1EnableBatchScaling.html#a62eae037f27041948b5f24a1a96ac64f">batch_scale</a>(<span class="keyword">const</span> <a class="code" href="classgko_1_1BatchLinOp.html">BatchLinOp</a>* <span class="keyword">const</span> left_scale,</div>
-<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;                     <span class="keyword">const</span> <a class="code" href="classgko_1_1BatchLinOp.html">BatchLinOp</a>* <span class="keyword">const</span> right_scale)<span class="keyword"> override</span></div>
-<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;        <span class="keywordflow">if</span> (!left_scale &amp;&amp; !right_scale) {</div>
-<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;            <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;        }</div>
-<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160; </div>
-<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;        <span class="comment">/* TODO: Somehow restrict BatchScalable and EnableBatchScaling to</span></div>
-<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;<span class="comment">         * BatchLinOp so that the following dynamic_cast is not needed.</span></div>
-<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;<span class="comment">         */</span></div>
-<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160;        <span class="keywordflow">if</span> (<span class="keyword">auto</span> blp = dynamic_cast&lt;BatchLinOp*&gt;(<span class="keyword">this</span>)) {</div>
-<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;            GKO_ASSERT_BATCH_SCALABLE_TWO_SIDED(blp, left_scale, right_scale);</div>
-<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160;            GKO_NOT_SUPPORTED(<span class="keyword">this</span>);</div>
-<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;        }</div>
-<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160; </div>
-<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;        left_scale_ = left_scale;</div>
-<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;        right_scale_ = right_scale;</div>
-<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160; </div>
-<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;        this-&gt;batch_scale_impl(left_scale, right_scale);</div>
-<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;    }</div>
-<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160; </div>
-<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> batch_scale_impl(<span class="keyword">const</span> <a class="code" href="classgko_1_1BatchLinOp.html">BatchLinOp</a>* left_scale,</div>
-<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;                                  <span class="keyword">const</span> <a class="code" href="classgko_1_1BatchLinOp.html">BatchLinOp</a>* right_scale)</div>
-<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;    {}</div>
-<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160; </div>
-<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;    <span class="keyword">const</span> BatchLinOp* left_scale_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160;    <span class="keyword">const</span> BatchLinOp* right_scale_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;};</div>
-<div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160; </div>
-<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160; </div>
-<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType&gt;</div>
-<div class="line"><a name="l00731"></a><span class="lineno"><a class="line" href="classgko_1_1EnableBatchScaledSolver.html">  731</a></span>&#160;<span class="keyword">class </span><a class="code" href="classgko_1_1EnableBatchScaledSolver.html">EnableBatchScaledSolver</a> : <span class="keyword">public</span> <a class="code" href="classgko_1_1EnableBatchScaling.html">EnableBatchScaling</a> {</div>
-<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;    <span class="keyword">using</span> value_type = ValueType;</div>
-<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160; </div>
-<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160;    <span class="keyword">const</span> <a class="code" href="classgko_1_1matrix_1_1BatchDense.html">matrix::BatchDense&lt;value_type&gt;</a>* get_left_scaling_vector()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;        <span class="keywordflow">return</span> left_scale_;</div>
-<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;    }</div>
-<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160; </div>
-<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;    <span class="keyword">const</span> <a class="code" href="classgko_1_1matrix_1_1BatchDense.html">matrix::BatchDense&lt;value_type&gt;</a>* get_right_scaling_vector()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;        <span class="keywordflow">return</span> right_scale_;</div>
-<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160;    }</div>
-<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160; </div>
-<div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;    <span class="keywordtype">void</span> batch_scale_impl(<span class="keyword">const</span> <a class="code" href="classgko_1_1BatchLinOp.html">BatchLinOp</a>* <span class="keyword">const</span> left_scale_op,</div>
-<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;                          <span class="keyword">const</span> <a class="code" href="classgko_1_1BatchLinOp.html">BatchLinOp</a>* <span class="keyword">const</span> right_scale_op)<span class="keyword"> override</span></div>
-<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;        left_scale_ =</div>
-<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160;            <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="classgko_1_1matrix_1_1BatchDense.html">matrix::BatchDense&lt;ValueType&gt;</a>*<span class="keyword">&gt;</span>(left_scale_op);</div>
-<div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160;        right_scale_ =</div>
-<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160;            <span class="keyword">static_cast&lt;</span><span class="keyword">const </span><a class="code" href="classgko_1_1matrix_1_1BatchDense.html">matrix::BatchDense&lt;ValueType&gt;</a>*<span class="keyword">&gt;</span>(right_scale_op);</div>
-<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160;    }</div>
-<div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160; </div>
-<div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160;    <span class="keyword">const</span> <a class="code" href="classgko_1_1matrix_1_1BatchDense.html">matrix::BatchDense&lt;value_type&gt;</a>* left_scale_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160;    <span class="keyword">const</span> <a class="code" href="classgko_1_1matrix_1_1BatchDense.html">matrix::BatchDense&lt;value_type&gt;</a>* right_scale_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160;};</div>
-<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160; </div>
-<div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160; </div>
-<div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType, <span class="keyword">typename</span> IndexType&gt;</div>
-<div class="line"><a name="l00778"></a><span class="lineno"><a class="line" href="classgko_1_1BatchReadableFromMatrixData.html">  778</a></span>&#160;<span class="keyword">class </span><a class="code" href="classgko_1_1BatchReadableFromMatrixData.html">BatchReadableFromMatrixData</a> {</div>
-<div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00780"></a><span class="lineno">  780</span>&#160;    <span class="keyword">using</span> value_type = ValueType;</div>
-<div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160;    <span class="keyword">using</span> index_type = IndexType;</div>
-<div class="line"><a name="l00782"></a><span class="lineno">  782</span>&#160; </div>
-<div class="line"><a name="l00783"></a><span class="lineno">  783</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classgko_1_1BatchReadableFromMatrixData.html">BatchReadableFromMatrixData</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00671"></a><span class="lineno"><a class="line" href="classgko_1_1EnableBatchScaling.html">  671</a></span>&#160;<span class="keyword">class </span><a class="code" href="classgko_1_1EnableBatchScaling.html">EnableBatchScaling</a> : <span class="keyword">public</span> <a class="code" href="classgko_1_1BatchScalable.html">BatchScalable</a> {</div>
+<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;    <span class="keyword">const</span> <a class="code" href="classgko_1_1BatchLinOp.html">BatchLinOp</a>* get_left_scaling_op()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> left_scale_; }</div>
+<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160; </div>
+<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;    <span class="keyword">const</span> <a class="code" href="classgko_1_1BatchLinOp.html">BatchLinOp</a>* get_right_scaling_op()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> right_scale_; }</div>
+<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160; </div>
+<div class="line"><a name="l00686"></a><span class="lineno"><a class="line" href="classgko_1_1EnableBatchScaling.html#a62eae037f27041948b5f24a1a96ac64f">  686</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1EnableBatchScaling.html#a62eae037f27041948b5f24a1a96ac64f">batch_scale</a>(<span class="keyword">const</span> <a class="code" href="classgko_1_1BatchLinOp.html">BatchLinOp</a>* <span class="keyword">const</span> left_scale,</div>
+<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;                     <span class="keyword">const</span> <a class="code" href="classgko_1_1BatchLinOp.html">BatchLinOp</a>* <span class="keyword">const</span> right_scale)<span class="keyword"> override</span></div>
+<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;        <span class="keywordflow">if</span> (!left_scale &amp;&amp; !right_scale) {</div>
+<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;            <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;        }</div>
+<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160; </div>
+<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;        <span class="comment">/* TODO: Somehow restrict BatchScalable and EnableBatchScaling to</span></div>
+<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;<span class="comment">         * BatchLinOp so that the following dynamic_cast is not needed.</span></div>
+<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;<span class="comment">         */</span></div>
+<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;        <span class="keywordflow">if</span> (<span class="keyword">auto</span> blp = dynamic_cast&lt;BatchLinOp*&gt;(<span class="keyword">this</span>)) {</div>
+<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;            GKO_ASSERT_BATCH_CONFORMANT(left_scale, blp);</div>
+<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;            GKO_ASSERT_BATCH_REVERSE_CONFORMANT(right_scale, blp);</div>
+<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;            GKO_NOT_SUPPORTED(<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;        }</div>
+<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160; </div>
+<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;        left_scale_ = left_scale;</div>
+<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;        right_scale_ = right_scale;</div>
+<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160; </div>
+<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;        this-&gt;batch_scale_impl(left_scale, right_scale);</div>
+<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;    }</div>
+<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160; </div>
+<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> batch_scale_impl(<span class="keyword">const</span> <a class="code" href="classgko_1_1BatchLinOp.html">BatchLinOp</a>* left_scale,</div>
+<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;                                  <span class="keyword">const</span> <a class="code" href="classgko_1_1BatchLinOp.html">BatchLinOp</a>* right_scale)</div>
+<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;    {}</div>
+<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160; </div>
+<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;    <span class="keyword">const</span> BatchLinOp* left_scale_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;    <span class="keyword">const</span> BatchLinOp* right_scale_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;};</div>
+<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160; </div>
+<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160; </div>
+<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType, <span class="keyword">typename</span> IndexType&gt;</div>
+<div class="line"><a name="l00726"></a><span class="lineno"><a class="line" href="classgko_1_1BatchReadableFromMatrixData.html">  726</a></span>&#160;<span class="keyword">class </span><a class="code" href="classgko_1_1BatchReadableFromMatrixData.html">BatchReadableFromMatrixData</a> {</div>
+<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;    <span class="keyword">using</span> value_type = ValueType;</div>
+<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160;    <span class="keyword">using</span> index_type = IndexType;</div>
+<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160; </div>
+<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classgko_1_1BatchReadableFromMatrixData.html">BatchReadableFromMatrixData</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160; </div>
+<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="namespacegko.html#a92cf0178c1c55419d32d2bb527e57e5b">read</a>(</div>
+<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;        <span class="keyword">const</span> std::vector&lt;<a class="code" href="structgko_1_1matrix__data.html">matrix_data&lt;ValueType, IndexType&gt;</a>&gt;&amp; data) = 0;</div>
+<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160; </div>
+<div class="line"><a name="l00746"></a><span class="lineno"><a class="line" href="classgko_1_1BatchReadableFromMatrixData.html#a8e1c60ceae8f9a89f5c2307b4826308b">  746</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1BatchReadableFromMatrixData.html#a8e1c60ceae8f9a89f5c2307b4826308b">read</a>(<span class="keyword">const</span> std::vector&lt;<a class="code" href="classgko_1_1matrix__assembly__data.html">matrix_assembly_data&lt;ValueType, IndexType&gt;</a>&gt;&amp;</div>
+<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160;                  assembly_data)</div>
+<div class="line"><a name="l00748"></a><span class="lineno">  748</span>&#160;    {</div>
+<div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160;        <span class="keyword">auto</span> mat_data = std::vector&lt;matrix_data&lt;ValueType, IndexType&gt;&gt;(</div>
+<div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160;            assembly_data.size());</div>
+<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;        <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> ind = 0;</div>
+<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; i : assembly_data) {</div>
+<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;            mat_data[ind] = i.get_ordered_data();</div>
+<div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;            ++ind;</div>
+<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;        }</div>
+<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;        this-&gt;<a class="code" href="namespacegko.html#a92cf0178c1c55419d32d2bb527e57e5b">read</a>(mat_data);</div>
+<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;    }</div>
+<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;};</div>
+<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160; </div>
+<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160; </div>
+<div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType, <span class="keyword">typename</span> IndexType&gt;</div>
+<div class="line"><a name="l00768"></a><span class="lineno"><a class="line" href="classgko_1_1BatchWritableToMatrixData.html">  768</a></span>&#160;<span class="keyword">class </span><a class="code" href="classgko_1_1BatchWritableToMatrixData.html">BatchWritableToMatrixData</a> {</div>
+<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160;    <span class="keyword">using</span> value_type = ValueType;</div>
+<div class="line"><a name="l00771"></a><span class="lineno">  771</span>&#160;    <span class="keyword">using</span> index_type = IndexType;</div>
+<div class="line"><a name="l00772"></a><span class="lineno">  772</span>&#160; </div>
+<div class="line"><a name="l00773"></a><span class="lineno">  773</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classgko_1_1BatchWritableToMatrixData.html">BatchWritableToMatrixData</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00774"></a><span class="lineno">  774</span>&#160; </div>
+<div class="line"><a name="l00780"></a><span class="lineno">  780</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classgko_1_1BatchWritableToMatrixData.html#a5179b9dc0eee58721971b48bc2236961">write</a>(</div>
+<div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160;        std::vector&lt;<a class="code" href="structgko_1_1matrix__data.html">matrix_data&lt;ValueType, IndexType&gt;</a>&gt;&amp; data) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00782"></a><span class="lineno">  782</span>&#160;};</div>
+<div class="line"><a name="l00783"></a><span class="lineno">  783</span>&#160; </div>
 <div class="line"><a name="l00784"></a><span class="lineno">  784</span>&#160; </div>
-<div class="line"><a name="l00790"></a><span class="lineno">  790</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="namespacegko.html#a92cf0178c1c55419d32d2bb527e57e5b">read</a>(</div>
-<div class="line"><a name="l00791"></a><span class="lineno">  791</span>&#160;        <span class="keyword">const</span> std::vector&lt;<a class="code" href="structgko_1_1matrix__data.html">matrix_data&lt;ValueType, IndexType&gt;</a>&gt;&amp; data) = 0;</div>
-<div class="line"><a name="l00792"></a><span class="lineno">  792</span>&#160; </div>
-<div class="line"><a name="l00798"></a><span class="lineno"><a class="line" href="classgko_1_1BatchReadableFromMatrixData.html#a8e1c60ceae8f9a89f5c2307b4826308b">  798</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1BatchReadableFromMatrixData.html#a8e1c60ceae8f9a89f5c2307b4826308b">read</a>(<span class="keyword">const</span> std::vector&lt;<a class="code" href="classgko_1_1matrix__assembly__data.html">matrix_assembly_data&lt;ValueType, IndexType&gt;</a>&gt;&amp;</div>
-<div class="line"><a name="l00799"></a><span class="lineno">  799</span>&#160;                  assembly_data)</div>
+<div class="line"><a name="l00790"></a><span class="lineno"><a class="line" href="classgko_1_1BatchScaledIdentityAddable.html">  790</a></span>&#160;<span class="keyword">class </span><a class="code" href="classgko_1_1BatchScaledIdentityAddable.html">BatchScaledIdentityAddable</a> {</div>
+<div class="line"><a name="l00791"></a><span class="lineno">  791</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00799"></a><span class="lineno"><a class="line" href="classgko_1_1BatchScaledIdentityAddable.html#acf6a635ede86370e7cd8ecc49130d8df">  799</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classgko_1_1BatchScaledIdentityAddable.html#acf6a635ede86370e7cd8ecc49130d8df">add_scaled_identity</a>(<span class="keyword">const</span> <a class="code" href="classgko_1_1BatchLinOp.html">BatchLinOp</a>* a, <span class="keyword">const</span> <a class="code" href="classgko_1_1BatchLinOp.html">BatchLinOp</a>* b)</div>
 <div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160;    {</div>
-<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160;        <span class="keyword">auto</span> mat_data = std::vector&lt;matrix_data&lt;ValueType, IndexType&gt;&gt;(</div>
-<div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;            assembly_data.size());</div>
-<div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160;        <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> ind = 0;</div>
-<div class="line"><a name="l00804"></a><span class="lineno">  804</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; i : assembly_data) {</div>
-<div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160;            mat_data[ind] = i.get_ordered_data();</div>
-<div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160;            ++ind;</div>
-<div class="line"><a name="l00807"></a><span class="lineno">  807</span>&#160;        }</div>
-<div class="line"><a name="l00808"></a><span class="lineno">  808</span>&#160;        this-&gt;<a class="code" href="namespacegko.html#a92cf0178c1c55419d32d2bb527e57e5b">read</a>(mat_data);</div>
-<div class="line"><a name="l00809"></a><span class="lineno">  809</span>&#160;    }</div>
-<div class="line"><a name="l00810"></a><span class="lineno">  810</span>&#160;};</div>
-<div class="line"><a name="l00811"></a><span class="lineno">  811</span>&#160; </div>
+<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160;        GKO_ASSERT_IS_BATCH_SCALAR(a);</div>
+<div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;        GKO_ASSERT_IS_BATCH_SCALAR(b);</div>
+<div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160;        <span class="keyword">auto</span> ae = <a class="code" href="namespacegko.html#a2166ec09e3e8a0ef437aee9c2b97f422">make_temporary_clone</a>(as&lt;BatchLinOp&gt;(<span class="keyword">this</span>)-&gt;get_executor(), a);</div>
+<div class="line"><a name="l00804"></a><span class="lineno">  804</span>&#160;        <span class="keyword">auto</span> be = <a class="code" href="namespacegko.html#a2166ec09e3e8a0ef437aee9c2b97f422">make_temporary_clone</a>(as&lt;BatchLinOp&gt;(<span class="keyword">this</span>)-&gt;get_executor(), b);</div>
+<div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160;        add_scaled_identity_impl(ae.get(), be.get());</div>
+<div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160;    }</div>
+<div class="line"><a name="l00807"></a><span class="lineno">  807</span>&#160; </div>
+<div class="line"><a name="l00808"></a><span class="lineno">  808</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00809"></a><span class="lineno">  809</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> add_scaled_identity_impl(<span class="keyword">const</span> <a class="code" href="classgko_1_1BatchLinOp.html">BatchLinOp</a>* a,</div>
+<div class="line"><a name="l00810"></a><span class="lineno">  810</span>&#160;                                          <span class="keyword">const</span> <a class="code" href="classgko_1_1BatchLinOp.html">BatchLinOp</a>* b) = 0;</div>
+<div class="line"><a name="l00811"></a><span class="lineno">  811</span>&#160;};</div>
 <div class="line"><a name="l00812"></a><span class="lineno">  812</span>&#160; </div>
-<div class="line"><a name="l00819"></a><span class="lineno">  819</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType, <span class="keyword">typename</span> IndexType&gt;</div>
-<div class="line"><a name="l00820"></a><span class="lineno"><a class="line" href="classgko_1_1BatchWritableToMatrixData.html">  820</a></span>&#160;<span class="keyword">class </span><a class="code" href="classgko_1_1BatchWritableToMatrixData.html">BatchWritableToMatrixData</a> {</div>
-<div class="line"><a name="l00821"></a><span class="lineno">  821</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00822"></a><span class="lineno">  822</span>&#160;    <span class="keyword">using</span> value_type = ValueType;</div>
-<div class="line"><a name="l00823"></a><span class="lineno">  823</span>&#160;    <span class="keyword">using</span> index_type = IndexType;</div>
-<div class="line"><a name="l00824"></a><span class="lineno">  824</span>&#160; </div>
-<div class="line"><a name="l00825"></a><span class="lineno">  825</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classgko_1_1BatchWritableToMatrixData.html">BatchWritableToMatrixData</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00826"></a><span class="lineno">  826</span>&#160; </div>
-<div class="line"><a name="l00832"></a><span class="lineno">  832</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classgko_1_1BatchWritableToMatrixData.html#a5179b9dc0eee58721971b48bc2236961">write</a>(</div>
-<div class="line"><a name="l00833"></a><span class="lineno">  833</span>&#160;        std::vector&lt;<a class="code" href="structgko_1_1matrix__data.html">matrix_data&lt;ValueType, IndexType&gt;</a>&gt;&amp; data) <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00834"></a><span class="lineno">  834</span>&#160;};</div>
-<div class="line"><a name="l00835"></a><span class="lineno">  835</span>&#160; </div>
-<div class="line"><a name="l00836"></a><span class="lineno">  836</span>&#160; </div>
-<div class="line"><a name="l00837"></a><span class="lineno">  837</span>&#160;}  <span class="comment">// namespace gko</span></div>
-<div class="line"><a name="l00838"></a><span class="lineno">  838</span>&#160; </div>
-<div class="line"><a name="l00839"></a><span class="lineno">  839</span>&#160; </div>
-<div class="line"><a name="l00840"></a><span class="lineno">  840</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_BASE_BATCH_LIN_OP_HPP_</span></div>
+<div class="line"><a name="l00813"></a><span class="lineno">  813</span>&#160; </div>
+<div class="line"><a name="l00814"></a><span class="lineno">  814</span>&#160;}  <span class="comment">// namespace gko</span></div>
+<div class="line"><a name="l00815"></a><span class="lineno">  815</span>&#160; </div>
+<div class="line"><a name="l00816"></a><span class="lineno">  816</span>&#160; </div>
+<div class="line"><a name="l00817"></a><span class="lineno">  817</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_BASE_BATCH_LIN_OP_HPP_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassgko_1_1BatchLinOp_html_acd7ed7a1396437e59d03d3105907c5ed"><div class="ttname"><a href="classgko_1_1BatchLinOp.html#acd7ed7a1396437e59d03d3105907c5ed">gko::BatchLinOp::get_num_batch_entries</a></div><div class="ttdeci">size_type get_num_batch_entries() const noexcept</div><div class="ttdoc">Returns the number of batches in the batch operator.</div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:304</div></div>
-<div class="ttc" id="anamespacegko_html_a92cf0178c1c55419d32d2bb527e57e5b"><div class="ttname"><a href="namespacegko.html#a92cf0178c1c55419d32d2bb527e57e5b">gko::read</a></div><div class="ttdeci">std::unique_ptr&lt; MatrixType &gt; read(StreamType &amp;&amp;is, MatrixArgs &amp;&amp;... args)</div><div class="ttdoc">Reads a matrix stored in matrix market format from an input stream.</div><div class="ttdef"><b>Definition:</b> mtx_io.hpp:113</div></div>
+<div class="ttc" id="anamespacegko_html_a92cf0178c1c55419d32d2bb527e57e5b"><div class="ttname"><a href="namespacegko.html#a92cf0178c1c55419d32d2bb527e57e5b">gko::read</a></div><div class="ttdeci">std::unique_ptr&lt; MatrixType &gt; read(StreamType &amp;&amp;is, MatrixArgs &amp;&amp;... args)</div><div class="ttdoc">Reads a matrix stored in matrix market format from an input stream.</div><div class="ttdef"><b>Definition:</b> mtx_io.hpp:188</div></div>
 <div class="ttc" id="aclassgko_1_1BatchTransposable_html"><div class="ttname"><a href="classgko_1_1BatchTransposable.html">gko::BatchTransposable</a></div><div class="ttdoc">Batch Linear operators which support transposition of the distinct batch entries should implement the...</div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:616</div></div>
 <div class="ttc" id="aclassgko_1_1BatchLinOp_html_a9f140874ac52a723f93bd23da59c4ef0"><div class="ttname"><a href="classgko_1_1BatchLinOp.html#a9f140874ac52a723f93bd23da59c4ef0">gko::BatchLinOp::apply</a></div><div class="ttdeci">const BatchLinOp * apply(const BatchLinOp *alpha, const BatchLinOp *b, const BatchLinOp *beta, BatchLinOp *x) const</div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:283</div></div>
 <div class="ttc" id="aclassgko_1_1BatchWritableToMatrixData_html_a5179b9dc0eee58721971b48bc2236961"><div class="ttname"><a href="classgko_1_1BatchWritableToMatrixData.html#a5179b9dc0eee58721971b48bc2236961">gko::BatchWritableToMatrixData::write</a></div><div class="ttdeci">virtual void write(std::vector&lt; matrix_data&lt; ValueType, IndexType &gt;&gt; &amp;data) const =0</div><div class="ttdoc">Writes a matrix to a matrix_data structure.</div></div>
 <div class="ttc" id="aclassgko_1_1BatchLinOp_html"><div class="ttname"><a href="classgko_1_1BatchLinOp.html">gko::BatchLinOp</a></div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:212</div></div>
+<div class="ttc" id="aclassgko_1_1BatchScaledIdentityAddable_html_acf6a635ede86370e7cd8ecc49130d8df"><div class="ttname"><a href="classgko_1_1BatchScaledIdentityAddable.html#acf6a635ede86370e7cd8ecc49130d8df">gko::BatchScaledIdentityAddable::add_scaled_identity</a></div><div class="ttdeci">virtual void add_scaled_identity(const BatchLinOp *a, const BatchLinOp *b)</div><div class="ttdoc">Scales this and adds another scalar times the identity to it.</div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:799</div></div>
 <div class="ttc" id="astructgko_1_1batch__dim_html_acaf6e1dbb2bf718c2b3a8685944ebd0b"><div class="ttname"><a href="structgko_1_1batch__dim.html#acaf6e1dbb2bf718c2b3a8685944ebd0b">gko::batch_dim::get_num_batch_entries</a></div><div class="ttdeci">size_type get_num_batch_entries() const</div><div class="ttdoc">Get the number of batch entries stored.</div><div class="ttdef"><b>Definition:</b> dim.hpp:272</div></div>
 <div class="ttc" id="anamespacegko_html_a9b6a9d7018703d6d1f2140054e2afe4a"><div class="ttname"><a href="namespacegko.html#a9b6a9d7018703d6d1f2140054e2afe4a">gko::transpose</a></div><div class="ttdeci">constexpr dim&lt; 2, DimensionType &gt; transpose(const dim&lt; 2, DimensionType &gt; &amp;dimensions) noexcept</div><div class="ttdoc">Returns a dim&lt;2&gt; object with its dimensions swapped.</div><div class="ttdef"><b>Definition:</b> dim.hpp:415</div></div>
 <div class="ttc" id="aclassgko_1_1AbstractFactory_html"><div class="ttname"><a href="classgko_1_1AbstractFactory.html">gko::AbstractFactory</a></div><div class="ttdoc">The AbstractFactory is a generic interface template that enables easy implementation of the abstract ...</div><div class="ttdef"><b>Definition:</b> abstract_factory.hpp:70</div></div>
 <div class="ttc" id="aclassgko_1_1BatchScalable_html"><div class="ttname"><a href="classgko_1_1BatchScalable.html">gko::BatchScalable</a></div><div class="ttdoc">A batch made up of entities that can scaled from the left and right by scaling vectors.</div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:642</div></div>
 <div class="ttc" id="aclassgko_1_1EnableAbstractPolymorphicObject_html"><div class="ttname"><a href="classgko_1_1EnableAbstractPolymorphicObject.html">gko::EnableAbstractPolymorphicObject</a></div><div class="ttdoc">This mixin inherits from (a subclass of) PolymorphicObject and provides a base implementation of a ne...</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:295</div></div>
-<div class="ttc" id="aclassgko_1_1BatchReadableFromMatrixData_html"><div class="ttname"><a href="classgko_1_1BatchReadableFromMatrixData.html">gko::BatchReadableFromMatrixData</a></div><div class="ttdoc">A BatchLinOp implementing this interface can read its data from a matrix_data structure.</div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:778</div></div>
+<div class="ttc" id="aclassgko_1_1BatchReadableFromMatrixData_html"><div class="ttname"><a href="classgko_1_1BatchReadableFromMatrixData.html">gko::BatchReadableFromMatrixData</a></div><div class="ttdoc">A BatchLinOp implementing this interface can read its data from a matrix_data structure.</div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:726</div></div>
 <div class="ttc" id="anamespacegko_html_a6e5c95df0ae4e47aab2f604a22d98ee7"><div class="ttname"><a href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">gko::size_type</a></div><div class="ttdeci">std::size_t size_type</div><div class="ttdoc">Integral type used for allocation quantities.</div><div class="ttdef"><b>Definition:</b> types.hpp:105</div></div>
 <div class="ttc" id="aclassgko_1_1AbstractFactory_html_a159c45f1db78b6b928d69cb9adf5c9ee"><div class="ttname"><a href="classgko_1_1AbstractFactory.html#a159c45f1db78b6b928d69cb9adf5c9ee">gko::AbstractFactory::generate</a></div><div class="ttdeci">std::unique_ptr&lt; AbstractProductType &gt; generate(Args &amp;&amp;... args) const</div><div class="ttdoc">Creates a new product from the given components.</div><div class="ttdef"><b>Definition:</b> abstract_factory.hpp:92</div></div>
-<div class="ttc" id="aclassgko_1_1BatchReadableFromMatrixData_html_a8e1c60ceae8f9a89f5c2307b4826308b"><div class="ttname"><a href="classgko_1_1BatchReadableFromMatrixData.html#a8e1c60ceae8f9a89f5c2307b4826308b">gko::BatchReadableFromMatrixData::read</a></div><div class="ttdeci">void read(const std::vector&lt; matrix_assembly_data&lt; ValueType, IndexType &gt;&gt; &amp;assembly_data)</div><div class="ttdoc">Reads a matrix from a std::vector of matrix_assembly_data objects.</div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:798</div></div>
+<div class="ttc" id="aclassgko_1_1BatchReadableFromMatrixData_html_a8e1c60ceae8f9a89f5c2307b4826308b"><div class="ttname"><a href="classgko_1_1BatchReadableFromMatrixData.html#a8e1c60ceae8f9a89f5c2307b4826308b">gko::BatchReadableFromMatrixData::read</a></div><div class="ttdeci">void read(const std::vector&lt; matrix_assembly_data&lt; ValueType, IndexType &gt;&gt; &amp;assembly_data)</div><div class="ttdoc">Reads a matrix from a std::vector of matrix_assembly_data objects.</div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:746</div></div>
 <div class="ttc" id="aclassgko_1_1EnablePolymorphicAssignment_html"><div class="ttname"><a href="classgko_1_1EnablePolymorphicAssignment.html">gko::EnablePolymorphicAssignment&lt; ConcreteBatchLinOp &gt;</a></div></div>
 <div class="ttc" id="aclassgko_1_1BatchLinOp_html_aa4f3a56335bb677c161c31128e0155e5"><div class="ttname"><a href="classgko_1_1BatchLinOp.html#aa4f3a56335bb677c161c31128e0155e5">gko::BatchLinOp::apply_uses_initial_guess</a></div><div class="ttdeci">virtual bool apply_uses_initial_guess() const</div><div class="ttdoc">Returns true if the batch operator uses the data given in x as an initial guess.</div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:330</div></div>
 <div class="ttc" id="aclassgko_1_1BatchLinOp_html_aeaf630de43cfd9e623e69299def5ee69"><div class="ttname"><a href="classgko_1_1BatchLinOp.html#aeaf630de43cfd9e623e69299def5ee69">gko::BatchLinOp::apply</a></div><div class="ttdeci">BatchLinOp * apply(const BatchLinOp *b, BatchLinOp *x)</div><div class="ttdoc">Applies a batch linear operator to a batch vector (or a sequence of batch of vectors).</div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:226</div></div>
@@ -574,7 +553,7 @@ $(function() {
 <div class="ttc" id="aclassgko_1_1batch__stride_html_a35daf7372f671b95fe31ee2c02296199"><div class="ttname"><a href="classgko_1_1batch__stride.html#a35daf7372f671b95fe31ee2c02296199">gko::batch_stride::stores_equal_strides</a></div><div class="ttdeci">bool stores_equal_strides() const</div><div class="ttdoc">Checks if the batch_stride object stores equal sizes.</div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:65</div></div>
 <div class="ttc" id="aclassgko_1_1batch__stride_html_a2e84de6933ebb1eadbb9bbdd14607ffb"><div class="ttname"><a href="classgko_1_1batch__stride.html#a2e84de6933ebb1eadbb9bbdd14607ffb">gko::batch_stride::batch_stride</a></div><div class="ttdeci">batch_stride(const std::vector&lt; size_type &gt; &amp;batch_strides)</div><div class="ttdoc">Creates a batch_stride object which stores possibly non-uniform batch strides.</div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:149</div></div>
 <div class="ttc" id="aclassgko_1_1batch__stride_html_aaabe5c59de8e10c489375290f4d6821f"><div class="ttname"><a href="classgko_1_1batch__stride.html#aaabe5c59de8e10c489375290f4d6821f">gko::batch_stride::operator==</a></div><div class="ttdeci">friend bool operator==(const batch_stride &amp;x, const batch_stride &amp;y)</div><div class="ttdoc">Checks if two batch_stride objects are equal.</div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:113</div></div>
-<div class="ttc" id="aclassgko_1_1EnableBatchScaling_html"><div class="ttname"><a href="classgko_1_1EnableBatchScaling.html">gko::EnableBatchScaling</a></div><div class="ttdoc">Default batch scalable interface with some type-checking.</div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:674</div></div>
+<div class="ttc" id="aclassgko_1_1EnableBatchScaling_html"><div class="ttname"><a href="classgko_1_1EnableBatchScaling.html">gko::EnableBatchScaling</a></div><div class="ttdoc">Default batch scalable interface with some type-checking.</div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:671</div></div>
 <div class="ttc" id="astructgko_1_1dim_html"><div class="ttname"><a href="structgko_1_1dim.html">gko::dim&lt; 2 &gt;</a></div></div>
 <div class="ttc" id="astructgko_1_1matrix__data_html"><div class="ttname"><a href="structgko_1_1matrix__data.html">gko::matrix_data</a></div><div class="ttdoc">This structure is used as an intermediate data type to store a sparse matrix.</div><div class="ttdef"><b>Definition:</b> matrix_data.hpp:155</div></div>
 <div class="ttc" id="aclassgko_1_1BatchLinOpFactory_html"><div class="ttname"><a href="classgko_1_1BatchLinOpFactory.html">gko::BatchLinOpFactory</a></div><div class="ttdoc">A BatchLinOpFactory represents a higher order mapping which transforms one batch linear operator into...</div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:471</div></div>
@@ -584,17 +563,16 @@ $(function() {
 <div class="ttc" id="aclassgko_1_1BatchLinOp_html_a7b13163ef18d4a429a52e2d6dc5fb5f4"><div class="ttname"><a href="classgko_1_1BatchLinOp.html#a7b13163ef18d4a429a52e2d6dc5fb5f4">gko::BatchLinOp::get_size</a></div><div class="ttdeci">const batch_dim&lt; 2 &gt; &amp; get_size() const noexcept</div><div class="ttdoc">Returns the size of the batch operator.</div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:321</div></div>
 <div class="ttc" id="aclassgko_1_1batch__stride_html_a597624a643a6aea2523203d92c4ec470"><div class="ttname"><a href="classgko_1_1batch__stride.html#a597624a643a6aea2523203d92c4ec470">gko::batch_stride::batch_stride</a></div><div class="ttdeci">batch_stride(const size_type num_batch_entries=0, const size_type &amp;common_stride=0)</div><div class="ttdoc">Creates a batch_stride object which stores uniform batch strides.</div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:132</div></div>
 <div class="ttc" id="aclassgko_1_1batch__stride_html_af581db4d374fdc93cafc47ee3494a0c6"><div class="ttname"><a href="classgko_1_1batch__stride.html#af581db4d374fdc93cafc47ee3494a0c6">gko::batch_stride::at</a></div><div class="ttdeci">const size_type &amp; at(const size_type batch_entry=0) const</div><div class="ttdoc">Get the batch size of a particular entry in the batch.</div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:95</div></div>
-<div class="ttc" id="aclassgko_1_1matrix_1_1BatchDense_html"><div class="ttname"><a href="classgko_1_1matrix_1_1BatchDense.html">gko::matrix::BatchDense</a></div><div class="ttdoc">BatchDense is a batch matrix format which explicitly stores all values of the matrix in each of the b...</div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:663</div></div>
-<div class="ttc" id="aclassgko_1_1EnableBatchScaledSolver_html"><div class="ttname"><a href="classgko_1_1EnableBatchScaledSolver.html">gko::EnableBatchScaledSolver</a></div><div class="ttdoc">Provides basic functionality for solvers which need to be composed with batch scaling.</div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:731</div></div>
-<div class="ttc" id="aclassgko_1_1EnableBatchScaling_html_a62eae037f27041948b5f24a1a96ac64f"><div class="ttname"><a href="classgko_1_1EnableBatchScaling.html#a62eae037f27041948b5f24a1a96ac64f">gko::EnableBatchScaling::batch_scale</a></div><div class="ttdeci">void batch_scale(const BatchLinOp *const left_scale, const BatchLinOp *const right_scale) override</div><div class="ttdoc">Scales each matrix in a batch from the left and right.</div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:689</div></div>
+<div class="ttc" id="aclassgko_1_1EnableBatchScaling_html_a62eae037f27041948b5f24a1a96ac64f"><div class="ttname"><a href="classgko_1_1EnableBatchScaling.html#a62eae037f27041948b5f24a1a96ac64f">gko::EnableBatchScaling::batch_scale</a></div><div class="ttdeci">void batch_scale(const BatchLinOp *const left_scale, const BatchLinOp *const right_scale) override</div><div class="ttdoc">Scales each matrix in a batch from the left and right.</div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:686</div></div>
 <div class="ttc" id="aclassgko_1_1EnableBatchLinOp_html"><div class="ttname"><a href="classgko_1_1EnableBatchLinOp.html">gko::EnableBatchLinOp</a></div><div class="ttdoc">The EnableBatchLinOp mixin can be used to provide sensible default implementations of the majority of...</div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:522</div></div>
 <div class="ttc" id="aclassgko_1_1batch__stride_html_aa0a0b2b541b25b210f59ec2a42796b67"><div class="ttname"><a href="classgko_1_1batch__stride.html#aa0a0b2b541b25b210f59ec2a42796b67">gko::batch_stride::get_num_batch_entries</a></div><div class="ttdeci">size_type get_num_batch_entries() const</div><div class="ttdoc">Get the number of batche entries stored.</div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:72</div></div>
 <div class="ttc" id="aclassgko_1_1matrix__assembly__data_html"><div class="ttname"><a href="classgko_1_1matrix__assembly__data.html">gko::matrix_assembly_data</a></div><div class="ttdoc">This structure is used as an intermediate type to assemble a sparse matrix.</div><div class="ttdef"><b>Definition:</b> matrix_assembly_data.hpp:86</div></div>
 <div class="ttc" id="anamespacegko_html_a2166ec09e3e8a0ef437aee9c2b97f422"><div class="ttname"><a href="namespacegko.html#a2166ec09e3e8a0ef437aee9c2b97f422">gko::make_temporary_clone</a></div><div class="ttdeci">detail::temporary_clone&lt; T &gt; make_temporary_clone(std::shared_ptr&lt; const Executor &gt; exec, T *ptr)</div><div class="ttdoc">Creates a temporary_clone.</div><div class="ttdef"><b>Definition:</b> temporary_clone.hpp:202</div></div>
 <div class="ttc" id="aclassgko_1_1BatchLinOp_html_a91188ae4b1672e83097c94aad1c27875"><div class="ttname"><a href="classgko_1_1BatchLinOp.html#a91188ae4b1672e83097c94aad1c27875">gko::BatchLinOp::set_size</a></div><div class="ttdeci">void set_size(const batch_dim&lt; 2 &gt; &amp;size)</div><div class="ttdoc">Sets the size of the batch operator.</div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:314</div></div>
 <div class="ttc" id="aclassgko_1_1batch__stride_html_a27c3d222e25c52becbcede64d69aaf66"><div class="ttname"><a href="classgko_1_1batch__stride.html#a27c3d222e25c52becbcede64d69aaf66">gko::batch_stride::get_batch_strides</a></div><div class="ttdeci">std::vector&lt; size_type &gt; get_batch_strides() const</div><div class="ttdoc">Get the batch strides as a std::vector.</div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:79</div></div>
-<div class="ttc" id="aclassgko_1_1BatchWritableToMatrixData_html"><div class="ttname"><a href="classgko_1_1BatchWritableToMatrixData.html">gko::BatchWritableToMatrixData</a></div><div class="ttdoc">A BatchLinOp implementing this interface can write its data to a std::vector of matrix_data objects.</div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:820</div></div>
+<div class="ttc" id="aclassgko_1_1BatchWritableToMatrixData_html"><div class="ttname"><a href="classgko_1_1BatchWritableToMatrixData.html">gko::BatchWritableToMatrixData</a></div><div class="ttdoc">A BatchLinOp implementing this interface can write its data to a std::vector of matrix_data objects.</div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:768</div></div>
 <div class="ttc" id="aclassgko_1_1PolymorphicObject_html_ab40586bff071b7f11c2cf6b5cbf598eb"><div class="ttname"><a href="classgko_1_1PolymorphicObject.html#ab40586bff071b7f11c2cf6b5cbf598eb">gko::PolymorphicObject::get_executor</a></div><div class="ttdeci">std::shared_ptr&lt; const Executor &gt; get_executor() const noexcept</div><div class="ttdoc">Returns the Executor of the object.</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:205</div></div>
+<div class="ttc" id="aclassgko_1_1BatchScaledIdentityAddable_html"><div class="ttname"><a href="classgko_1_1BatchScaledIdentityAddable.html">gko::BatchScaledIdentityAddable</a></div><div class="ttdoc">Adds the operation M &lt;- a I + b M for batch matrix M, batch identity operator I and batch scalars a a...</div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:790</div></div>
 <div class="ttc" id="aclassgko_1_1BatchLinOp_html_aa3ad24f140c6fa4519c97b60a4ccc82a"><div class="ttname"><a href="classgko_1_1BatchLinOp.html#aa3ad24f140c6fa4519c97b60a4ccc82a">gko::BatchLinOp::apply</a></div><div class="ttdeci">const BatchLinOp * apply(const BatchLinOp *b, BatchLinOp *x) const</div><div class="ttdoc">Applies a batch linear operator to a batch vector (or a sequence of batch of vectors).</div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:241</div></div>
 <div class="ttc" id="aclassgko_1_1EnablePolymorphicObject_html"><div class="ttname"><a href="classgko_1_1EnablePolymorphicObject.html">gko::EnablePolymorphicObject&lt; ConcreteBatchLinOp, PolymorphicBase &gt;</a></div></div>
 <!-- start footer part -->

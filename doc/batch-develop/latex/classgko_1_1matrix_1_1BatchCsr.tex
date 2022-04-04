@@ -92,6 +92,11 @@ const index\+\_\+type $\ast$ \mbox{\hyperlink{classgko_1_1matrix_1_1BatchCsr_a6d
 \begin{DoxyCompactList}\small\item\em Returns the row pointers of the matrix. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{classgko_1_1matrix_1_1BatchCsr_ae684cc35d2de36845936a277112bb8cc}{get\+\_\+num\+\_\+stored\+\_\+elements}} () const noexcept
 \begin{DoxyCompactList}\small\item\em Returns the number of elements explicitly stored in the matrix, cumulative over all the batches. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::unique\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1BatchCsr}{Batch\+Csr}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1BatchCsr_adea4dc9962444d140c493b9246514189}{create\+\_\+const}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const \mbox{\hyperlink{structgko_1_1batch__dim}{batch\+\_\+dim}}$<$ 2 $>$ \&size, gko\+::detail\+::\+Const\+Array\+View$<$ Value\+Type $>$ \&\&values, gko\+::detail\+::\+Const\+Array\+View$<$ Index\+Type $>$ \&\&col\+\_\+idxs, gko\+::detail\+::\+Const\+Array\+View$<$ Index\+Type $>$ \&\&row\+\_\+ptrs)
+\begin{DoxyCompactList}\small\item\em Creates a constant \mbox{\hyperlink{classgko_1_1matrix_1_1BatchCsr}{Batch\+Csr}} matrix by wrapping a set of constant arrays. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
@@ -107,7 +112,6 @@ class {\bfseries Batch\+Csr$<$ to\+\_\+complex$<$ Value\+Type $>$, Index\+Type $
 \mbox{\Hypertarget{classgko_1_1matrix_1_1BatchCsr_af23aeb3fbdfb1774205e77e91c441168}\label{classgko_1_1matrix_1_1BatchCsr_af23aeb3fbdfb1774205e77e91c441168}} 
 class {\bfseries Batch\+Csr$<$ next\+\_\+precision$<$ Value\+Type $>$, Index\+Type $>$}
 \end{DoxyCompactItemize}
-\doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
@@ -149,6 +153,33 @@ a pointer to the new conjugate transposed object
 
 Implements \mbox{\hyperlink{classgko_1_1BatchTransposable_a53d1cf352635aa1bfbe0ae90a4c961ce}{gko\+::\+Batch\+Transposable}}.
 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1BatchCsr_adea4dc9962444d140c493b9246514189}\label{classgko_1_1matrix_1_1BatchCsr_adea4dc9962444d140c493b9246514189}} 
+\index{gko::matrix::BatchCsr$<$ ValueType, IndexType $>$@{gko::matrix::BatchCsr$<$ ValueType, IndexType $>$}!create\_const@{create\_const}}
+\index{create\_const@{create\_const}!gko::matrix::BatchCsr$<$ ValueType, IndexType $>$@{gko::matrix::BatchCsr$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{create\_const()}{create\_const()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+static std\+::unique\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1matrix_1_1BatchCsr}{Batch\+Csr}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1BatchCsr}{gko\+::matrix\+::\+Batch\+Csr}}$<$ Value\+Type, Index\+Type $>$\+::create\+\_\+const (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const \mbox{\hyperlink{structgko_1_1batch__dim}{batch\+\_\+dim}}$<$ 2 $>$ \&}]{size,  }\item[{gko\+::detail\+::\+Const\+Array\+View$<$ Value\+Type $>$ \&\&}]{values,  }\item[{gko\+::detail\+::\+Const\+Array\+View$<$ Index\+Type $>$ \&\&}]{col\+\_\+idxs,  }\item[{gko\+::detail\+::\+Const\+Array\+View$<$ Index\+Type $>$ \&\&}]{row\+\_\+ptrs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Creates a constant \mbox{\hyperlink{classgko_1_1matrix_1_1BatchCsr}{Batch\+Csr}} matrix by wrapping a set of constant arrays. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & the executor to create the matrix on \\
+\hline
+{\em size} & the dimensions of the matrix \\
+\hline
+{\em values} & the value array of the matrix \\
+\hline
+{\em col\+\_\+idxs} & the column index array of the matrix \\
+\hline
+{\em row\+\_\+ptrs} & the row pointer array of the matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A smart pointer to the constant matrix wrapping the input arrays (if they reside on the same executor as the matrix) or a copy of these arrays on the correct executor. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1BatchCsr_a9769c54fb29ea44b8a8effd0b83ac95d}\label{classgko_1_1matrix_1_1BatchCsr_a9769c54fb29ea44b8a8effd0b83ac95d}} 
 \index{gko::matrix::BatchCsr$<$ ValueType, IndexType $>$@{gko::matrix::BatchCsr$<$ ValueType, IndexType $>$}!get\_col\_idxs@{get\_col\_idxs}}
 \index{get\_col\_idxs@{get\_col\_idxs}!gko::matrix::BatchCsr$<$ ValueType, IndexType $>$@{gko::matrix::BatchCsr$<$ ValueType, IndexType $>$}}

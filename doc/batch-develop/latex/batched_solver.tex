@@ -85,7 +85,7 @@ Row pointers for one matrix
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{index\_type* row\_ptrs;}
+\DoxyCodeLine{\textcolor{keyword}{const} index\_type* row\_ptrs;}
 \end{DoxyCode}
 
 
@@ -93,7 +93,7 @@ Column indices of non-\/zeros for one matrix
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{index\_type* col\_idxs;}
+\DoxyCodeLine{\textcolor{keyword}{const} index\_type* col\_idxs;}
 \end{DoxyCode}
 
 
@@ -101,7 +101,7 @@ Nonzero values for all matrices in the batch, concatenated
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{value\_type* all\_values;}
+\DoxyCodeLine{\textcolor{keyword}{const} value\_type* all\_values;}
 \end{DoxyCode}
 
 
@@ -109,7 +109,7 @@ R\+HS vectors for all systems in the batch, concatenated
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{    value\_type* all\_rhs;}
+\DoxyCodeLine{    \textcolor{keyword}{const} value\_type* all\_rhs;}
 \DoxyCodeLine{\};}
 \end{DoxyCode}
 
@@ -228,14 +228,15 @@ We can either work on the existing memory allocated in the application, or we ca
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{auto} vals\_view = \mbox{\hyperlink{classgko_1_1Array_ae8e2b4841e60741227daf3367de6ecde}{gko::Array<value\_type>::view}}(}
+\DoxyCodeLine{\textcolor{keyword}{auto} vals\_view = \mbox{\hyperlink{classgko_1_1Array_aeb8bbb4b363042f909941dd3a1966b70}{gko::Array<value\_type>::const\_view}}(}
 \DoxyCodeLine{    exec, num\_systems * appl\_sys.nnz, appl\_sys.all\_values);}
-\DoxyCodeLine{\textcolor{keyword}{auto} rowptrs\_view =}
-\DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1Array_ae8e2b4841e60741227daf3367de6ecde}{gko::Array<index\_type>::view}}(exec, num\_rows + 1, appl\_sys.row\_ptrs);}
-\DoxyCodeLine{\textcolor{keyword}{auto} colidxs\_view =}
-\DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1Array_ae8e2b4841e60741227daf3367de6ecde}{gko::Array<index\_type>::view}}(exec, appl\_sys.nnz, appl\_sys.col\_idxs);}
-\DoxyCodeLine{\textcolor{keyword}{auto} A = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(mtx\_type::create(exec, batch\_mat\_size, vals\_view,}
-\DoxyCodeLine{                                     colidxs\_view, rowptrs\_view));}
+\DoxyCodeLine{\textcolor{keyword}{auto} rowptrs\_view = \mbox{\hyperlink{classgko_1_1Array_aeb8bbb4b363042f909941dd3a1966b70}{gko::Array<index\_type>::const\_view}}(exec, num\_rows + 1,}
+\DoxyCodeLine{                                                       appl\_sys.row\_ptrs);}
+\DoxyCodeLine{\textcolor{keyword}{auto} colidxs\_view = \mbox{\hyperlink{classgko_1_1Array_aeb8bbb4b363042f909941dd3a1966b70}{gko::Array<index\_type>::const\_view}}(exec, appl\_sys.nnz,}
+\DoxyCodeLine{                                                       appl\_sys.col\_idxs);}
+\DoxyCodeLine{\textcolor{keyword}{auto} A = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(mtx\_type::create\_const(}
+\DoxyCodeLine{    exec, batch\_mat\_size, std::move(vals\_view), std::move(colidxs\_view),}
+\DoxyCodeLine{    std::move(rowptrs\_view)));}
 \end{DoxyCode}
 
 
@@ -254,9 +255,10 @@ Create R\+HS, again reusing application allocation
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{auto} b\_view = \mbox{\hyperlink{classgko_1_1Array_ae8e2b4841e60741227daf3367de6ecde}{gko::Array<value\_type>::view}}(exec, num\_systems * num\_rows,}
-\DoxyCodeLine{                                           appl\_sys.all\_rhs);}
-\DoxyCodeLine{\textcolor{keyword}{auto} b = vec\_type::create(exec, batch\_vec\_size, b\_view, batch\_vec\_stride);}
+\DoxyCodeLine{\textcolor{keyword}{auto} b\_view = \mbox{\hyperlink{classgko_1_1Array_aeb8bbb4b363042f909941dd3a1966b70}{gko::Array<value\_type>::const\_view}}(}
+\DoxyCodeLine{    exec, num\_systems * num\_rows, appl\_sys.all\_rhs);}
+\DoxyCodeLine{\textcolor{keyword}{auto} b = vec\_type::create\_const(exec, batch\_vec\_size, std::move(b\_view),}
+\DoxyCodeLine{                                batch\_vec\_stride);}
 \end{DoxyCode}
 
 
@@ -494,10 +496,17 @@ Ginkgo objects are cleaned up automatically; but the \char`\"{}application\char`
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keywordtype}{void} appl\_clean\_up(ApplSysData\& appl\_data, std::shared\_ptr<gko::Executor> exec)}
 \DoxyCodeLine{\{}
-\DoxyCodeLine{    exec-\/>free(appl\_data.row\_ptrs);}
-\DoxyCodeLine{    exec-\/>free(appl\_data.col\_idxs);}
-\DoxyCodeLine{    exec-\/>free(appl\_data.all\_values);}
-\DoxyCodeLine{    exec-\/>free(appl\_data.all\_rhs);}
+\end{DoxyCode}
+
+
+In general, the application would control non-\/const pointers; the const casts below would not be needed.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    exec-\/>free(const\_cast<index\_type*>(appl\_data.row\_ptrs));}
+\DoxyCodeLine{    exec-\/>free(const\_cast<index\_type*>(appl\_data.col\_idxs));}
+\DoxyCodeLine{    exec-\/>free(const\_cast<value\_type*>(appl\_data.all\_values));}
+\DoxyCodeLine{    exec-\/>free(const\_cast<value\_type*>(appl\_data.all\_rhs));}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
  \label{_Results}%
@@ -577,10 +586,10 @@ The following is the expected result on the reference executor\+:
 \DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\_type}} nsystems;}
 \DoxyCodeLine{    \textcolor{keywordtype}{int} nrows;}
 \DoxyCodeLine{    \textcolor{keywordtype}{int} nnz;}
-\DoxyCodeLine{    index\_type* row\_ptrs;}
-\DoxyCodeLine{    index\_type* col\_idxs;}
-\DoxyCodeLine{    value\_type* all\_values;}
-\DoxyCodeLine{    value\_type* all\_rhs;}
+\DoxyCodeLine{    \textcolor{keyword}{const} index\_type* row\_ptrs;}
+\DoxyCodeLine{    \textcolor{keyword}{const} index\_type* col\_idxs;}
+\DoxyCodeLine{    \textcolor{keyword}{const} value\_type* all\_values;}
+\DoxyCodeLine{    \textcolor{keyword}{const} value\_type* all\_rhs;}
 \DoxyCodeLine{\};}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -629,18 +638,20 @@ The following is the expected result on the reference executor\+:
 \DoxyCodeLine{        \mbox{\hyperlink{structgko_1_1batch__dim}{gko::batch\_dim<>}}(num\_systems, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}(num\_rows, num\_rows));}
 \DoxyCodeLine{    \textcolor{keyword}{auto} batch\_vec\_size =}
 \DoxyCodeLine{        \mbox{\hyperlink{structgko_1_1batch__dim}{gko::batch\_dim<>}}(num\_systems, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}(num\_rows, 1));}
-\DoxyCodeLine{    \textcolor{keyword}{auto} vals\_view = \mbox{\hyperlink{classgko_1_1Array_ae8e2b4841e60741227daf3367de6ecde}{gko::Array<value\_type>::view}}(}
+\DoxyCodeLine{    \textcolor{keyword}{auto} vals\_view = \mbox{\hyperlink{classgko_1_1Array_aeb8bbb4b363042f909941dd3a1966b70}{gko::Array<value\_type>::const\_view}}(}
 \DoxyCodeLine{        exec, num\_systems * appl\_sys.nnz, appl\_sys.all\_values);}
-\DoxyCodeLine{    \textcolor{keyword}{auto} rowptrs\_view =}
-\DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1Array_ae8e2b4841e60741227daf3367de6ecde}{gko::Array<index\_type>::view}}(exec, num\_rows + 1, appl\_sys.row\_ptrs);}
-\DoxyCodeLine{    \textcolor{keyword}{auto} colidxs\_view =}
-\DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1Array_ae8e2b4841e60741227daf3367de6ecde}{gko::Array<index\_type>::view}}(exec, appl\_sys.nnz, appl\_sys.col\_idxs);}
-\DoxyCodeLine{    \textcolor{keyword}{auto} A = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(mtx\_type::create(exec, batch\_mat\_size, vals\_view,}
-\DoxyCodeLine{                                         colidxs\_view, rowptrs\_view));}
+\DoxyCodeLine{    \textcolor{keyword}{auto} rowptrs\_view = \mbox{\hyperlink{classgko_1_1Array_aeb8bbb4b363042f909941dd3a1966b70}{gko::Array<index\_type>::const\_view}}(exec, num\_rows + 1,}
+\DoxyCodeLine{                                                           appl\_sys.row\_ptrs);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} colidxs\_view = \mbox{\hyperlink{classgko_1_1Array_aeb8bbb4b363042f909941dd3a1966b70}{gko::Array<index\_type>::const\_view}}(exec, appl\_sys.nnz,}
+\DoxyCodeLine{                                                           appl\_sys.col\_idxs);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} A = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(mtx\_type::create\_const(}
+\DoxyCodeLine{        exec, batch\_mat\_size, std::move(vals\_view), std::move(colidxs\_view),}
+\DoxyCodeLine{        std::move(rowptrs\_view)));}
 \DoxyCodeLine{    \textcolor{keyword}{auto} batch\_vec\_stride = \mbox{\hyperlink{classgko_1_1batch__stride}{gko::batch\_stride}}(num\_systems, 1);}
-\DoxyCodeLine{    \textcolor{keyword}{auto} b\_view = \mbox{\hyperlink{classgko_1_1Array_ae8e2b4841e60741227daf3367de6ecde}{gko::Array<value\_type>::view}}(exec, num\_systems * num\_rows,}
-\DoxyCodeLine{                                               appl\_sys.all\_rhs);}
-\DoxyCodeLine{    \textcolor{keyword}{auto} b = vec\_type::create(exec, batch\_vec\_size, b\_view, batch\_vec\_stride);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} b\_view = \mbox{\hyperlink{classgko_1_1Array_aeb8bbb4b363042f909941dd3a1966b70}{gko::Array<value\_type>::const\_view}}(}
+\DoxyCodeLine{        exec, num\_systems * num\_rows, appl\_sys.all\_rhs);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} b = vec\_type::create\_const(exec, batch\_vec\_size, std::move(b\_view),}
+\DoxyCodeLine{                                    batch\_vec\_stride);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} x = vec\_type::create(exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} host\_x =}
 \DoxyCodeLine{        vec\_type::create(exec-\/>get\_master(), batch\_vec\_size, batch\_vec\_stride);}
@@ -775,10 +786,10 @@ The following is the expected result on the reference executor\+:
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keywordtype}{void} appl\_clean\_up(ApplSysData\& appl\_data, std::shared\_ptr<gko::Executor> exec)}
 \DoxyCodeLine{\{}
-\DoxyCodeLine{    exec-\/>free(appl\_data.row\_ptrs);}
-\DoxyCodeLine{    exec-\/>free(appl\_data.col\_idxs);}
-\DoxyCodeLine{    exec-\/>free(appl\_data.all\_values);}
-\DoxyCodeLine{    exec-\/>free(appl\_data.all\_rhs);}
+\DoxyCodeLine{    exec-\/>free(const\_cast<index\_type*>(appl\_data.row\_ptrs));}
+\DoxyCodeLine{    exec-\/>free(const\_cast<index\_type*>(appl\_data.col\_idxs));}
+\DoxyCodeLine{    exec-\/>free(const\_cast<value\_type*>(appl\_data.all\_values));}
+\DoxyCodeLine{    exec-\/>free(const\_cast<value\_type*>(appl\_data.all\_rhs));}
 \DoxyCodeLine{\}}
 \end{DoxyCodeInclude}
  

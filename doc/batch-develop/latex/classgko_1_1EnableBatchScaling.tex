@@ -22,11 +22,11 @@ Collaboration diagram for gko\+::Enable\+Batch\+Scaling\+:
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classgko_1_1EnableBatchScaling_a61daafe625c8ad9abe486bf9ae9108e1}\label{classgko_1_1EnableBatchScaling_a61daafe625c8ad9abe486bf9ae9108e1}} 
-const \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} $\ast$ {\bfseries get\+\_\+left\+\_\+scaling\+\_\+vector} () const
+\mbox{\Hypertarget{classgko_1_1EnableBatchScaling_a46626ee21e35fae3810db3b6994dc7a2}\label{classgko_1_1EnableBatchScaling_a46626ee21e35fae3810db3b6994dc7a2}} 
+const \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} $\ast$ {\bfseries get\+\_\+left\+\_\+scaling\+\_\+op} () const
 \item 
-\mbox{\Hypertarget{classgko_1_1EnableBatchScaling_af3636e4e60da9e42d8a3847c85a728e4}\label{classgko_1_1EnableBatchScaling_af3636e4e60da9e42d8a3847c85a728e4}} 
-const \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} $\ast$ {\bfseries get\+\_\+right\+\_\+scaling\+\_\+vector} () const
+\mbox{\Hypertarget{classgko_1_1EnableBatchScaling_a9a0ae1e96f361738e2c0288a64d429e1}\label{classgko_1_1EnableBatchScaling_a9a0ae1e96f361738e2c0288a64d429e1}} 
+const \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} $\ast$ {\bfseries get\+\_\+right\+\_\+scaling\+\_\+op} () const
 \item 
 void \mbox{\hyperlink{classgko_1_1EnableBatchScaling_a62eae037f27041948b5f24a1a96ac64f}{batch\+\_\+scale}} (const \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} $\ast$const left\+\_\+scale, const \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} $\ast$const right\+\_\+scale) override
 \begin{DoxyCompactList}\small\item\em Scales each matrix in a batch from the left and right. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -34,6 +34,8 @@ void \mbox{\hyperlink{classgko_1_1EnableBatchScaling_a62eae037f27041948b5f24a1a9
 
 \doxysubsection{Detailed Description}
 Default batch scalable interface with some type-\/checking. 
+
+Provides basic functionality for solvers which need to be composed with batch scaling. If A is a matrix, S is a batch-\/scaling operation and F is a solver-\/type such that F(\+A) is a solver, then if the class for F inherits from this \mbox{\hyperlink{classgko_1_1EnableBatchScaling}{Enable\+Batch\+Scaling}} class, it represents a new solver F(\+S(\+A)) (F composed with S applied to A).
 
 \begin{DoxySeeAlso}{See also}
 \mbox{\hyperlink{classgko_1_1BatchScalable}{Batch\+Scalable}} 

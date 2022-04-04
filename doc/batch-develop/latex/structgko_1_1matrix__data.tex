@@ -50,8 +50,10 @@ using {\bfseries nonzero\+\_\+type} = \mbox{\hyperlink{structgko_1_1matrix__data
 void \mbox{\hyperlink{structgko_1_1matrix__data_ac83a3b5d892fbd132fd9a7f50b0f83b8}{ensure\+\_\+row\+\_\+major\+\_\+order}} ()
 \begin{DoxyCompactList}\small\item\em Sorts the nonzero vector so the values follow row-\/major order. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{structgko_1_1matrix__data_a7b360eaf4c11e846c561f2910e2d425f}\label{structgko_1_1matrix__data_a7b360eaf4c11e846c561f2910e2d425f}} 
-void {\bfseries remove\+\_\+zeros} ()
-\end{DoxyCompactItemize}
+void \mbox{\hyperlink{structgko_1_1matrix__data_a7b360eaf4c11e846c561f2910e2d425f}{remove\+\_\+zeros}} ()
+\begin{DoxyCompactList}\small\item\em Remove entries with value zero from the matrix data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{structgko_1_1matrix__data_aafdce2b510afe4e0aa0645a734f240a3}{sum\+\_\+duplicates}} ()
+\begin{DoxyCompactList}\small\item\em Sum up all values that refer to the same matrix entry. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -394,7 +396,7 @@ the diagonal matrix
 \end{DoxyReturn}
 
 
-References gko\+::matrix\+\_\+data$<$ Value\+Type, Index\+Type $>$\+::nonzeros.
+References gko\+::is\+\_\+nonzero(), and gko\+::matrix\+\_\+data$<$ Value\+Type, Index\+Type $>$\+::nonzeros.
 
 
 
@@ -454,6 +456,21 @@ the block-\/diagonal matrix with diagonal blocks set to the blocks passed in blo
 
 References gko\+::matrix\+\_\+data$<$ Value\+Type, Index\+Type $>$\+::diag().
 
+\mbox{\Hypertarget{structgko_1_1matrix__data_aafdce2b510afe4e0aa0645a734f240a3}\label{structgko_1_1matrix__data_aafdce2b510afe4e0aa0645a734f240a3}} 
+\index{gko::matrix\_data$<$ ValueType, IndexType $>$@{gko::matrix\_data$<$ ValueType, IndexType $>$}!sum\_duplicates@{sum\_duplicates}}
+\index{sum\_duplicates@{sum\_duplicates}!gko::matrix\_data$<$ ValueType, IndexType $>$@{gko::matrix\_data$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{sum\_duplicates()}{sum\_duplicates()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+void \mbox{\hyperlink{structgko_1_1matrix__data}{gko\+::matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$\+::sum\+\_\+duplicates (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sum up all values that refer to the same matrix entry. 
+
+The result is sorted in row-\/major order. 
+
+References gko\+::matrix\+\_\+data$<$ Value\+Type, Index\+Type $>$\+::ensure\+\_\+row\+\_\+major\+\_\+order(), and gko\+::matrix\+\_\+data$<$ Value\+Type, Index\+Type $>$\+::nonzeros.
+
 
 
 \doxysubsection{Member Data Documentation}
@@ -470,7 +487,7 @@ A vector of tuples storing the non-\/zeros of the matrix.
 
 The first two elements of the tuple are the row index and the column index of a matrix element, and its third element is the value at that position. 
 
-Referenced by gko\+::matrix\+\_\+data$<$ Value\+Type, Index\+Type $>$\+::diag(), and gko\+::matrix\+\_\+data$<$ Value\+Type, Index\+Type $>$\+::ensure\+\_\+row\+\_\+major\+\_\+order().
+Referenced by gko\+::matrix\+\_\+data$<$ Value\+Type, Index\+Type $>$\+::diag(), gko\+::matrix\+\_\+data$<$ Value\+Type, Index\+Type $>$\+::ensure\+\_\+row\+\_\+major\+\_\+order(), gko\+::matrix\+\_\+data$<$ Value\+Type, Index\+Type $>$\+::remove\+\_\+zeros(), and gko\+::matrix\+\_\+data$<$ Value\+Type, Index\+Type $>$\+::sum\+\_\+duplicates().
 
 
 

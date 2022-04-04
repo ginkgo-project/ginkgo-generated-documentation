@@ -100,7 +100,9 @@ index\+\_\+type \mbox{\hyperlink{classgko_1_1matrix_1_1BatchEll_acc8eaa0e7d5f324
 \item 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1BatchEll_a23eb38108f9f7fb282f8acb04b11da64}\label{classgko_1_1matrix_1_1BatchEll_a23eb38108f9f7fb282f8acb04b11da64}} 
 static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1BatchEll}{Batch\+Ell}} $>$ {\bfseries create\+\_\+from\+\_\+batch\+\_\+csc} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} num\+\_\+batch\+\_\+entries, const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \&size, const \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} num\+\_\+elems\+\_\+per\+\_\+row, const \mbox{\hyperlink{classgko_1_1Array}{gko\+::\+Array}}$<$ Value\+Type $>$ \&values, const \mbox{\hyperlink{classgko_1_1Array}{gko\+::\+Array}}$<$ Index\+Type $>$ \&row\+\_\+idxs, const \mbox{\hyperlink{classgko_1_1Array}{gko\+::\+Array}}$<$ Index\+Type $>$ \&col\+\_\+ptrs)
-\end{DoxyCompactItemize}
+\item 
+static std\+::unique\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1BatchEll}{Batch\+Ell}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1BatchEll_af1fe755a6305def910944a5b49be7ec9}{create\+\_\+const}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const \mbox{\hyperlink{structgko_1_1batch__dim}{batch\+\_\+dim}}$<$ 2 $>$ \&size, const \mbox{\hyperlink{classgko_1_1batch__stride}{batch\+\_\+stride}} \&num\+\_\+stored\+\_\+elems\+\_\+per\+\_\+row, const \mbox{\hyperlink{classgko_1_1batch__stride}{batch\+\_\+stride}} \&stride, gko\+::detail\+::\+Const\+Array\+View$<$ Value\+Type $>$ \&\&values, gko\+::detail\+::\+Const\+Array\+View$<$ Index\+Type $>$ \&\&col\+\_\+idxs)
+\begin{DoxyCompactList}\small\item\em Creates an immutable \mbox{\hyperlink{classgko_1_1matrix_1_1BatchEll}{Batch\+Ell}} matrix from a set of constant arrays. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
@@ -207,6 +209,35 @@ a pointer to the new conjugate transposed object
 
 Implements \mbox{\hyperlink{classgko_1_1BatchTransposable_a53d1cf352635aa1bfbe0ae90a4c961ce}{gko\+::\+Batch\+Transposable}}.
 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1BatchEll_af1fe755a6305def910944a5b49be7ec9}\label{classgko_1_1matrix_1_1BatchEll_af1fe755a6305def910944a5b49be7ec9}} 
+\index{gko::matrix::BatchEll$<$ ValueType, IndexType $>$@{gko::matrix::BatchEll$<$ ValueType, IndexType $>$}!create\_const@{create\_const}}
+\index{create\_const@{create\_const}!gko::matrix::BatchEll$<$ ValueType, IndexType $>$@{gko::matrix::BatchEll$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{create\_const()}{create\_const()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+static std\+::unique\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1matrix_1_1BatchEll}{Batch\+Ell}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1BatchEll}{gko\+::matrix\+::\+Batch\+Ell}}$<$ Value\+Type, Index\+Type $>$\+::create\+\_\+const (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const \mbox{\hyperlink{structgko_1_1batch__dim}{batch\+\_\+dim}}$<$ 2 $>$ \&}]{size,  }\item[{const \mbox{\hyperlink{classgko_1_1batch__stride}{batch\+\_\+stride}} \&}]{num\+\_\+stored\+\_\+elems\+\_\+per\+\_\+row,  }\item[{const \mbox{\hyperlink{classgko_1_1batch__stride}{batch\+\_\+stride}} \&}]{stride,  }\item[{gko\+::detail\+::\+Const\+Array\+View$<$ Value\+Type $>$ \&\&}]{values,  }\item[{gko\+::detail\+::\+Const\+Array\+View$<$ Index\+Type $>$ \&\&}]{col\+\_\+idxs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Creates an immutable \mbox{\hyperlink{classgko_1_1matrix_1_1BatchEll}{Batch\+Ell}} matrix from a set of constant arrays. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & the executor to create the matrix on \\
+\hline
+{\em size} & the dimensions of the matrix \\
+\hline
+{\em values} & the value array of the matrix \\
+\hline
+{\em col\+\_\+idxs} & the column index array of the matrix \\
+\hline
+{\em num\+\_\+stored\+\_\+elems\+\_\+per\+\_\+row} & the number of stored nonzeros per row \\
+\hline
+{\em stride} & the column-\/stride of the value and column index array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A smart pointer to the constant matrix wrapping the input arrays (if they reside on the same executor as the matrix) or a copy of the arrays on the correct executor. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1BatchEll_a77f3bbccacb537e04961e5581e7cf456}\label{classgko_1_1matrix_1_1BatchEll_a77f3bbccacb537e04961e5581e7cf456}} 
 \index{gko::matrix::BatchEll$<$ ValueType, IndexType $>$@{gko::matrix::BatchEll$<$ ValueType, IndexType $>$}!get\_col\_idxs@{get\_col\_idxs}}
 \index{get\_col\_idxs@{get\_col\_idxs}!gko::matrix::BatchEll$<$ ValueType, IndexType $>$@{gko::matrix::BatchEll$<$ ValueType, IndexType $>$}}

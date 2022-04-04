@@ -12,6 +12,8 @@ class \mbox{\hyperlink{classgko_1_1matrix_1_1BatchCsr}{Batch\+Csr}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1matrix_1_1BatchCsr}{Batch\+Csr}} is a matrix format which stores only the nonzero coefficients by compressing each row of the matrix (compressed sparse row format). \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{Batch\+Dense}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{Batch\+Dense}} is a batch matrix format which explicitly stores all values of the matrix in each of the batches. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDiagonal}{Batch\+Diagonal}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDiagonal}{Batch\+Diagonal}} is a batch matrix format which explicitly stores all values of the matrix in each of the batches. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1matrix_1_1BatchEll}{Batch\+Ell}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1matrix_1_1BatchEll}{Batch\+Ell}} is a matrix format which stores only the nonzero coefficients by compressing each row of the matrix (compressed sparse row format). \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1matrix_1_1Coo}{Coo}}
@@ -46,6 +48,8 @@ class \mbox{\hyperlink{classgko_1_1matrix_1_1IdentityFactory}{Identity\+Factory}
 \begin{DoxyCompactList}\small\item\em This factory is a utility which can be used to generate \mbox{\hyperlink{classgko_1_1matrix_1_1Identity}{Identity}} operators. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1matrix_1_1Permutation}{Permutation}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1matrix_1_1Permutation}{Permutation}} is a matrix \char`\"{}format\char`\"{} which stores the row and column permutation arrays which can be used for re-\/ordering the rows and columns a matrix. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1matrix_1_1RowGatherer}{Row\+Gatherer}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1matrix_1_1RowGatherer}{Row\+Gatherer}} is a matrix \char`\"{}format\char`\"{} which stores the gather indices arrays which can be used to gather rows to another matrix. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1matrix_1_1Sellp}{Sellp}}
 \begin{DoxyCompactList}\small\item\em S\+E\+L\+L-\/P is a matrix format similar to E\+LL format. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1matrix_1_1SparsityCsr}{Sparsity\+Csr}}
@@ -59,6 +63,11 @@ typedef \mbox{\hyperlink{classgko_1_1batch__stride}{batch\+\_\+stride}} {\bfseri
 \mbox{\Hypertarget{namespacegko_1_1matrix_a79b62751b1fed1d4106f75ed1af21494}\label{namespacegko_1_1matrix_a79b62751b1fed1d4106f75ed1af21494}} 
 using {\bfseries mask\+\_\+type} = \mbox{\hyperlink{namespacegko_ad54a79afecd57aabbb04b1dc611ae55e}{gko\+::uint64}}
 \end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Value\+Type $>$ }\\void \mbox{\hyperlink{namespacegko_1_1matrix_ad70a4b12172ba814830d04732dfd5351}{two\+\_\+sided\+\_\+batch\+\_\+system\+\_\+transform}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDiagonal}{Batch\+Diagonal}}$<$ Value\+Type $>$ $\ast$left, const \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDiagonal}{Batch\+Diagonal}}$<$ Value\+Type $>$ $\ast$right, \mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} $\ast$mtx, \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{Batch\+Dense}}$<$ Value\+Type $>$ $\ast$rhs)
+\begin{DoxyCompactList}\small\item\em Transforms the input matrix A and vector b according to S\+\_\+\+L$\ast$\+A$\ast$\+S\+\_\+R and S\+\_\+\+L$\ast$b where \textquotesingle{}$\ast$\textquotesingle{} denotes matrix multiplication, and S\+\_\+L and S\+\_\+R are the left and right transormation matrices. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -72,3 +81,29 @@ constexpr int {\bfseries default\+\_\+stride\+\_\+factor} = 1
 
 \doxysubsection{Detailed Description}
 The matrix namespace. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacegko_1_1matrix_ad70a4b12172ba814830d04732dfd5351}\label{namespacegko_1_1matrix_ad70a4b12172ba814830d04732dfd5351}} 
+\index{gko::matrix@{gko::matrix}!two\_sided\_batch\_system\_transform@{two\_sided\_batch\_system\_transform}}
+\index{two\_sided\_batch\_system\_transform@{two\_sided\_batch\_system\_transform}!gko::matrix@{gko::matrix}}
+\doxysubsubsection{\texorpdfstring{two\_sided\_batch\_system\_transform()}{two\_sided\_batch\_system\_transform()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type $>$ \\
+void gko\+::matrix\+::two\+\_\+sided\+\_\+batch\+\_\+system\+\_\+transform (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDiagonal}{Batch\+Diagonal}}$<$ Value\+Type $>$ $\ast$}]{left,  }\item[{const \mbox{\hyperlink{classgko_1_1matrix_1_1BatchDiagonal}{Batch\+Diagonal}}$<$ Value\+Type $>$ $\ast$}]{right,  }\item[{\mbox{\hyperlink{classgko_1_1BatchLinOp}{Batch\+Lin\+Op}} $\ast$}]{mtx,  }\item[{\mbox{\hyperlink{classgko_1_1matrix_1_1BatchDense}{Batch\+Dense}}$<$ Value\+Type $>$ $\ast$}]{rhs }\end{DoxyParamCaption})}
+
+
+
+Transforms the input matrix A and vector b according to S\+\_\+\+L$\ast$\+A$\ast$\+S\+\_\+R and S\+\_\+\+L$\ast$b where \textquotesingle{}$\ast$\textquotesingle{} denotes matrix multiplication, and S\+\_\+L and S\+\_\+R are the left and right transormation matrices. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & Exector to run the operation on. \\
+\hline
+{\em left} & Left transformation matrix. \\
+\hline
+{\em right} & Right transformation matrix. \\
+\hline
+{\em mtx} & System matrix to be transformed. \\
+\hline
+{\em rhs} & Right-\/hand side of the sytem to be transformed. \\
+\hline
+\end{DoxyParams}

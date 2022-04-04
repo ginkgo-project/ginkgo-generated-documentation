@@ -292,7 +292,7 @@ fill the b vector with some random data
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{std::ranlux48 rand\_engine(32);}
+\DoxyCodeLine{std::default\_random\_engine rand\_engine(32);}
 \DoxyCodeLine{\textcolor{keyword}{auto} dist = std::uniform\_real\_distribution<RealValueType>(0.0, 1.0);}
 \DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < host\_b-\/>get\_size()[0]; i++) \{}
 \DoxyCodeLine{    host\_b-\/>at(i, 0) = get\_rand\_value<HighPrecision>(dist, rand\_engine);}
@@ -580,7 +580,7 @@ The following is the expected result (omp)\+:
 \DoxyCodeLine{    \textcolor{keyword}{auto} b\_dim = \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}\{A\_dim[1], 1\};}
 \DoxyCodeLine{    \textcolor{keyword}{auto} x\_dim = \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}\{A\_dim[0], b\_dim[1]\};}
 \DoxyCodeLine{    \textcolor{keyword}{auto} host\_b = hp\_vec::create(exec-\/>get\_master(), b\_dim);}
-\DoxyCodeLine{    std::ranlux48 rand\_engine(32);}
+\DoxyCodeLine{    std::default\_random\_engine rand\_engine(32);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} dist = std::uniform\_real\_distribution<RealValueType>(0.0, 1.0);}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < host\_b-\/>get\_size()[0]; i++) \{}
 \DoxyCodeLine{        host\_b-\/>at(i, 0) = get\_rand\_value<HighPrecision>(dist, rand\_engine);}
