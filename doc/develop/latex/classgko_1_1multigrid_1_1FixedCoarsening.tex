@@ -1,0 +1,101 @@
+\hypertarget{classgko_1_1multigrid_1_1FixedCoarsening}{}\doxysection{gko\+::multigrid\+::Fixed\+Coarsening$<$ Value\+Type, Index\+Type $>$ Class Template Reference}
+\label{classgko_1_1multigrid_1_1FixedCoarsening}\index{gko::multigrid::FixedCoarsening$<$ ValueType, IndexType $>$@{gko::multigrid::FixedCoarsening$<$ ValueType, IndexType $>$}}
+
+
+\mbox{\hyperlink{classgko_1_1multigrid_1_1FixedCoarsening}{Fixed\+Coarsening}} is a very simple coarse grid generation algorithm.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/multigrid/fixed\+\_\+coarsening.\+hpp$>$}
+
+
+
+Collaboration diagram for gko\+::multigrid\+::Fixed\+Coarsening$<$ Value\+Type, Index\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1multigrid_1_1FixedCoarsening__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classgko_1_1multigrid_1_1FixedCoarsening_1_1Factory}{Factory}}
+\item 
+struct \mbox{\hyperlink{structgko_1_1multigrid_1_1FixedCoarsening_1_1parameters__type}{parameters\+\_\+type}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1multigrid_1_1FixedCoarsening_ab13af52f5102cc298322a7797620cb07}\label{classgko_1_1multigrid_1_1FixedCoarsening_ab13af52f5102cc298322a7797620cb07}} 
+using {\bfseries value\+\_\+type} = Value\+Type
+\item 
+\mbox{\Hypertarget{classgko_1_1multigrid_1_1FixedCoarsening_a303b38702045873249cb1c87fe97e715}\label{classgko_1_1multigrid_1_1FixedCoarsening_a303b38702045873249cb1c87fe97e715}} 
+using {\bfseries index\+\_\+type} = Index\+Type
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1multigrid_1_1FixedCoarsening_a159b260e91e3834f6034feadcc0725b3}{get\+\_\+system\+\_\+matrix}} () const
+\begin{DoxyCompactList}\small\item\em Returns the system operator (matrix) of the linear system. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1multigrid_1_1FixedCoarsening_aaa40cc3dc7bb8632ae6b282ce9a96025}\label{classgko_1_1multigrid_1_1FixedCoarsening_aaa40cc3dc7bb8632ae6b282ce9a96025}} 
+const \mbox{\hyperlink{structgko_1_1multigrid_1_1FixedCoarsening_1_1parameters__type}{parameters\+\_\+type}} \& {\bfseries get\+\_\+parameters} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1multigrid_1_1FixedCoarsening_af8ff30f286c25768d1f2f4dec740328a}\label{classgko_1_1multigrid_1_1FixedCoarsening_af8ff30f286c25768d1f2f4dec740328a}} 
+static auto {\bfseries build} () -\/$>$ decltype(\mbox{\hyperlink{classgko_1_1multigrid_1_1FixedCoarsening_1_1Factory}{Factory}} \+::create())
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1multigrid_1_1FixedCoarsening_ab746d60625ad079f71dcd758ff87498c}\label{classgko_1_1multigrid_1_1FixedCoarsening_ab746d60625ad079f71dcd758ff87498c}} 
+class {\bfseries Enable\+Lin\+Op$<$ Fixed\+Coarsening $>$}
+\item 
+\mbox{\Hypertarget{classgko_1_1multigrid_1_1FixedCoarsening_ab3c3c4668894bcab31e3201732cd9489}\label{classgko_1_1multigrid_1_1FixedCoarsening_ab3c3c4668894bcab31e3201732cd9489}} 
+class {\bfseries Enable\+Polymorphic\+Object$<$ Fixed\+Coarsening, Lin\+Op $>$}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$\newline
+class gko\+::multigrid\+::\+Fixed\+Coarsening$<$ Value\+Type, Index\+Type $>$}
+
+\mbox{\hyperlink{classgko_1_1multigrid_1_1FixedCoarsening}{Fixed\+Coarsening}} is a very simple coarse grid generation algorithm. 
+
+It selects the coarse matrix from the fine matrix by with user-\/specified indices.
+
+The user needs to specify the indices (with global numbering) of the fine matrix, they wish to be in the coarse matrix. The restriction and prolongation matrices will map to and from the coarse space without any interpolation or weighting.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Value\+Type} & precision of matrix elements \\
+\hline
+{\em Index\+Type} & precision of matrix indexes \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1multigrid_1_1FixedCoarsening_a159b260e91e3834f6034feadcc0725b3}\label{classgko_1_1multigrid_1_1FixedCoarsening_a159b260e91e3834f6034feadcc0725b3}} 
+\index{gko::multigrid::FixedCoarsening$<$ ValueType, IndexType $>$@{gko::multigrid::FixedCoarsening$<$ ValueType, IndexType $>$}!get\_system\_matrix@{get\_system\_matrix}}
+\index{get\_system\_matrix@{get\_system\_matrix}!gko::multigrid::FixedCoarsening$<$ ValueType, IndexType $>$@{gko::multigrid::FixedCoarsening$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_system\_matrix()}{get\_system\_matrix()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1multigrid_1_1FixedCoarsening}{gko\+::multigrid\+::\+Fixed\+Coarsening}}$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+system\+\_\+matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the system operator (matrix) of the linear system. 
+
+\begin{DoxyReturn}{Returns}
+the system operator (matrix) 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/multigrid/fixed\+\_\+coarsening.\+hpp\end{DoxyCompactItemize}
