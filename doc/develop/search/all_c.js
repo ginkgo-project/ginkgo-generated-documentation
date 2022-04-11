@@ -36,9 +36,10 @@ var searchData=
   ['mmul_5foperation_788',['mmul_operation',['../structgko_1_1accessor_1_1mmul__operation.html',1,'gko::accessor']]],
   ['mod_789',['mod',['../structgko_1_1accessor_1_1mod.html',1,'gko::accessor']]],
   ['mode_790',['mode',['../group__stop.html#ga5fe97c4263e876f68b5d4a21f0e615b9',1,'gko::stop']]],
-  ['move_5fto_791',['move_to',['../classgko_1_1ConvertibleTo.html#ab9047c7c49e0f83c79b54c0034d6197b',1,'gko::ConvertibleTo::move_to()'],['../classgko_1_1EnablePolymorphicAssignment.html#a0a4cf244139e7761d6a91c61e029810e',1,'gko::EnablePolymorphicAssignment::move_to()'],['../classgko_1_1preconditioner_1_1Jacobi.html#a6d5e28b3033772bfc6c96fbe3caca003',1,'gko::preconditioner::Jacobi::move_to()']]],
-  ['mpierror_792',['MpiError',['../classgko_1_1MpiError.html',1,'gko::MpiError'],['../classgko_1_1MpiError.html#a594fdc81da9e7051bae255853b682a9c',1,'gko::MpiError::MpiError()']]],
-  ['mul_793',['mul',['../structgko_1_1accessor_1_1mul.html',1,'gko::accessor']]],
-  ['multigrid_794',['Multigrid',['../classgko_1_1solver_1_1Multigrid.html',1,'gko::solver']]],
-  ['multigridlevel_795',['MultigridLevel',['../classgko_1_1multigrid_1_1MultigridLevel.html',1,'gko::multigrid']]]
+  ['move_5ffrom_791',['move_from',['../classgko_1_1PolymorphicObject.html#ad3ae1d315fe4a8faf93f4b16a36ec3ce',1,'gko::PolymorphicObject::move_from(PolymorphicObject *other)'],['../classgko_1_1PolymorphicObject.html#a9f619404f7167ae4e3d616b2eee85326',1,'gko::PolymorphicObject::move_from(std::unique_ptr&lt; PolymorphicObject &gt; other)']]],
+  ['move_5fto_792',['move_to',['../classgko_1_1ConvertibleTo.html#ab9047c7c49e0f83c79b54c0034d6197b',1,'gko::ConvertibleTo::move_to()'],['../classgko_1_1EnablePolymorphicAssignment.html#a0a4cf244139e7761d6a91c61e029810e',1,'gko::EnablePolymorphicAssignment::move_to()'],['../classgko_1_1preconditioner_1_1Jacobi.html#a6d5e28b3033772bfc6c96fbe3caca003',1,'gko::preconditioner::Jacobi::move_to()']]],
+  ['mpierror_793',['MpiError',['../classgko_1_1MpiError.html',1,'gko::MpiError'],['../classgko_1_1MpiError.html#a594fdc81da9e7051bae255853b682a9c',1,'gko::MpiError::MpiError()']]],
+  ['mul_794',['mul',['../structgko_1_1accessor_1_1mul.html',1,'gko::accessor']]],
+  ['multigrid_795',['Multigrid',['../classgko_1_1solver_1_1Multigrid.html',1,'gko::solver']]],
+  ['multigridlevel_796',['MultigridLevel',['../classgko_1_1multigrid_1_1MultigridLevel.html',1,'gko::multigrid']]]
 ];
