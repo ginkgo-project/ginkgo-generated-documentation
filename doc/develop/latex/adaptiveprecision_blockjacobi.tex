@@ -131,11 +131,11 @@ copy b again
 \begin{DoxyCode}{0}
 \DoxyCodeLine{b-\/>copy\_from(host\_x.get());}
 \DoxyCodeLine{\textcolor{keyword}{const} RealValueType reduction\_factor = 1e-\/7;}
-\DoxyCodeLine{\textcolor{keyword}{auto} iter\_stop =}
-\DoxyCodeLine{    gko::stop::Iteration::build().with\_max\_iters(10000u).on(exec);}
-\DoxyCodeLine{\textcolor{keyword}{auto} tol\_stop = \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                    .with\_reduction\_factor(reduction\_factor)}
-\DoxyCodeLine{                    .on(exec);}
+\DoxyCodeLine{\textcolor{keyword}{auto} iter\_stop = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(}
+\DoxyCodeLine{    gko::stop::Iteration::build().with\_max\_iters(10000u).on(exec));}
+\DoxyCodeLine{\textcolor{keyword}{auto} tol\_stop = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(\mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                               .with\_reduction\_factor(reduction\_factor)}
+\DoxyCodeLine{                               .on(exec));}
 \DoxyCodeLine{}
 \DoxyCodeLine{std::shared\_ptr<const gko::log::Convergence<ValueType>> logger =}
 \DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1log_1_1Convergence_ad46f4f47f7392125e921d483a556017d}{gko::log::Convergence<ValueType>::create}}(exec);}
@@ -150,7 +150,7 @@ Create solver factory
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{auto} solver\_gen =}
 \DoxyCodeLine{    cg::build()}
-\DoxyCodeLine{        .with\_criteria(\mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(iter\_stop), \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(tol\_stop))}
+\DoxyCodeLine{        .with\_criteria(iter\_stop, tol\_stop)}
 \end{DoxyCode}
 
 
@@ -350,11 +350,11 @@ This is the expected output\+:
 \DoxyCodeLine{}
 \DoxyCodeLine{    b-\/>copy\_from(host\_x.get());}
 \DoxyCodeLine{    \textcolor{keyword}{const} RealValueType reduction\_factor = 1e-\/7;}
-\DoxyCodeLine{    \textcolor{keyword}{auto} iter\_stop =}
-\DoxyCodeLine{        gko::stop::Iteration::build().with\_max\_iters(10000u).on(exec);}
-\DoxyCodeLine{    \textcolor{keyword}{auto} tol\_stop = \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                        .with\_reduction\_factor(reduction\_factor)}
-\DoxyCodeLine{                        .on(exec);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} iter\_stop = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(}
+\DoxyCodeLine{        gko::stop::Iteration::build().with\_max\_iters(10000u).on(exec));}
+\DoxyCodeLine{    \textcolor{keyword}{auto} tol\_stop = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(\mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                                   .with\_reduction\_factor(reduction\_factor)}
+\DoxyCodeLine{                                   .on(exec));}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::shared\_ptr<const gko::log::Convergence<ValueType>> logger =}
 \DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1log_1_1Convergence_ad46f4f47f7392125e921d483a556017d}{gko::log::Convergence<ValueType>::create}}(exec);}
@@ -363,7 +363,7 @@ This is the expected output\+:
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} solver\_gen =}
 \DoxyCodeLine{        cg::build()}
-\DoxyCodeLine{            .with\_criteria(\mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(iter\_stop), \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(tol\_stop))}
+\DoxyCodeLine{            .with\_criteria(iter\_stop, tol\_stop)}
 \DoxyCodeLine{            .with\_preconditioner(bj::build()}
 \DoxyCodeLine{                                     .with\_max\_block\_size(16u)}
 \DoxyCodeLine{                                     .with\_storage\_optimization(}

@@ -145,10 +145,11 @@ Prepare the stopping criteria
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} tolerance = 1e-\/12;}
 \DoxyCodeLine{\textcolor{keyword}{auto} iter\_stop =}
-\DoxyCodeLine{    gko::stop::Iteration::build().with\_max\_iters(100u).on(exec);}
-\DoxyCodeLine{\textcolor{keyword}{auto} tol\_stop = \mbox{\hyperlink{classgko_1_1stop_1_1AbsoluteResidualNorm}{gko::stop::AbsoluteResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                    .with\_tolerance(tolerance)}
-\DoxyCodeLine{                    .on(exec);}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(gko::stop::Iteration::build().with\_max\_iters(100u).on(exec));}
+\DoxyCodeLine{\textcolor{keyword}{auto} tol\_stop =}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(\mbox{\hyperlink{classgko_1_1stop_1_1AbsoluteResidualNorm}{gko::stop::AbsoluteResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                   .with\_tolerance(tolerance)}
+\DoxyCodeLine{                   .on(exec));}
 \DoxyCodeLine{}
 \DoxyCodeLine{std::shared\_ptr<const gko::log::Convergence<ValueType>> logger =}
 \DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1log_1_1Convergence_ad46f4f47f7392125e921d483a556017d}{gko::log::Convergence<ValueType>::create}}(exec);}
@@ -182,8 +183,10 @@ Create Restrict\+Prolong factory
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{auto} mg\_level\_gen = amgx\_pgm::build().with\_deterministic(\textcolor{keyword}{true}).on(exec);}
-\DoxyCodeLine{\textcolor{keyword}{auto} mg\_level\_gen2 = amgx\_pgm2::build().with\_deterministic(\textcolor{keyword}{true}).on(exec);}
+\DoxyCodeLine{\textcolor{keyword}{auto} mg\_level\_gen =}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(amgx\_pgm::build().with\_deterministic(\textcolor{keyword}{true}).on(exec));}
+\DoxyCodeLine{\textcolor{keyword}{auto} mg\_level\_gen2 =}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(amgx\_pgm2::build().with\_deterministic(\textcolor{keyword}{true}).on(exec));}
 \end{DoxyCode}
 
 
@@ -203,18 +206,16 @@ Create multigrid factory
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{auto} multigrid\_gen =}
-\DoxyCodeLine{    mg::build()}
-\DoxyCodeLine{        .with\_max\_levels(2u)}
-\DoxyCodeLine{        .with\_min\_coarse\_rows(5u)}
-\DoxyCodeLine{        .with\_pre\_smoother(\mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(smoother\_gen),}
-\DoxyCodeLine{                           \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(smoother\_gen2))}
-\DoxyCodeLine{        .with\_post\_uses\_pre(\textcolor{keyword}{true})}
-\DoxyCodeLine{        .with\_mg\_level(\mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(mg\_level\_gen), \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(mg\_level\_gen2))}
-\DoxyCodeLine{        .with\_coarsest\_solver(}
-\DoxyCodeLine{            \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(bj2::build().with\_max\_block\_size(1u).on(exec)))}
-\DoxyCodeLine{        .with\_criteria(\mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(iter\_stop), \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(tol\_stop))}
-\DoxyCodeLine{        .on(exec);}
+\DoxyCodeLine{\textcolor{keyword}{auto} multigrid\_gen = mg::build()}
+\DoxyCodeLine{                         .with\_max\_levels(2u)}
+\DoxyCodeLine{                         .with\_min\_coarse\_rows(5u)}
+\DoxyCodeLine{                         .with\_pre\_smoother(smoother\_gen, smoother\_gen2)}
+\DoxyCodeLine{                         .with\_post\_uses\_pre(\textcolor{keyword}{true})}
+\DoxyCodeLine{                         .with\_mg\_level(mg\_level\_gen, mg\_level\_gen2)}
+\DoxyCodeLine{                         .with\_coarsest\_solver(\mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(}
+\DoxyCodeLine{                             bj2::build().with\_max\_block\_size(1u).on(exec)))}
+\DoxyCodeLine{                         .with\_criteria(iter\_stop, tol\_stop)}
+\DoxyCodeLine{                         .on(exec);}
 \DoxyCodeLine{}
 \DoxyCodeLine{std::chrono::nanoseconds gen\_time(0);}
 \DoxyCodeLine{\textcolor{keyword}{auto} gen\_tic = std::chrono::steady\_clock::now();}
@@ -430,10 +431,11 @@ This is the expected output\+:
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} tolerance = 1e-\/12;}
 \DoxyCodeLine{    \textcolor{keyword}{auto} iter\_stop =}
-\DoxyCodeLine{        gko::stop::Iteration::build().with\_max\_iters(100u).on(exec);}
-\DoxyCodeLine{    \textcolor{keyword}{auto} tol\_stop = \mbox{\hyperlink{classgko_1_1stop_1_1AbsoluteResidualNorm}{gko::stop::AbsoluteResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                        .with\_tolerance(tolerance)}
-\DoxyCodeLine{                        .on(exec);}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(gko::stop::Iteration::build().with\_max\_iters(100u).on(exec));}
+\DoxyCodeLine{    \textcolor{keyword}{auto} tol\_stop =}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(\mbox{\hyperlink{classgko_1_1stop_1_1AbsoluteResidualNorm}{gko::stop::AbsoluteResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                       .with\_tolerance(tolerance)}
+\DoxyCodeLine{                       .on(exec));}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::shared\_ptr<const gko::log::Convergence<ValueType>> logger =}
 \DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1log_1_1Convergence_ad46f4f47f7392125e921d483a556017d}{gko::log::Convergence<ValueType>::create}}(exec);}
@@ -454,25 +456,25 @@ This is the expected output\+:
 \DoxyCodeLine{            .with\_criteria(}
 \DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(2u).on(exec))}
 \DoxyCodeLine{            .on(exec));}
-\DoxyCodeLine{    \textcolor{keyword}{auto} mg\_level\_gen = amgx\_pgm::build().with\_deterministic(\textcolor{keyword}{true}).on(exec);}
-\DoxyCodeLine{    \textcolor{keyword}{auto} mg\_level\_gen2 = amgx\_pgm2::build().with\_deterministic(\textcolor{keyword}{true}).on(exec);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} mg\_level\_gen =}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(amgx\_pgm::build().with\_deterministic(\textcolor{keyword}{true}).on(exec));}
+\DoxyCodeLine{    \textcolor{keyword}{auto} mg\_level\_gen2 =}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(amgx\_pgm2::build().with\_deterministic(\textcolor{keyword}{true}).on(exec));}
 \DoxyCodeLine{    \textcolor{keyword}{auto} coarsest\_solver\_gen =}
 \DoxyCodeLine{        cg::build()}
 \DoxyCodeLine{            .with\_criteria(}
 \DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(4u).on(exec))}
 \DoxyCodeLine{            .on(exec);}
-\DoxyCodeLine{    \textcolor{keyword}{auto} multigrid\_gen =}
-\DoxyCodeLine{        mg::build()}
-\DoxyCodeLine{            .with\_max\_levels(2u)}
-\DoxyCodeLine{            .with\_min\_coarse\_rows(5u)}
-\DoxyCodeLine{            .with\_pre\_smoother(\mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(smoother\_gen),}
-\DoxyCodeLine{                               \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(smoother\_gen2))}
-\DoxyCodeLine{            .with\_post\_uses\_pre(\textcolor{keyword}{true})}
-\DoxyCodeLine{            .with\_mg\_level(\mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(mg\_level\_gen), \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(mg\_level\_gen2))}
-\DoxyCodeLine{            .with\_coarsest\_solver(}
-\DoxyCodeLine{                \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(bj2::build().with\_max\_block\_size(1u).on(exec)))}
-\DoxyCodeLine{            .with\_criteria(\mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(iter\_stop), \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(tol\_stop))}
-\DoxyCodeLine{            .on(exec);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} multigrid\_gen = mg::build()}
+\DoxyCodeLine{                             .with\_max\_levels(2u)}
+\DoxyCodeLine{                             .with\_min\_coarse\_rows(5u)}
+\DoxyCodeLine{                             .with\_pre\_smoother(smoother\_gen, smoother\_gen2)}
+\DoxyCodeLine{                             .with\_post\_uses\_pre(\textcolor{keyword}{true})}
+\DoxyCodeLine{                             .with\_mg\_level(mg\_level\_gen, mg\_level\_gen2)}
+\DoxyCodeLine{                             .with\_coarsest\_solver(\mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(}
+\DoxyCodeLine{                                 bj2::build().with\_max\_block\_size(1u).on(exec)))}
+\DoxyCodeLine{                             .with\_criteria(iter\_stop, tol\_stop)}
+\DoxyCodeLine{                             .on(exec);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::chrono::nanoseconds gen\_time(0);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} gen\_tic = std::chrono::steady\_clock::now();}

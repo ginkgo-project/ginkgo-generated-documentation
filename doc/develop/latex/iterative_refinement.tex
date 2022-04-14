@@ -133,11 +133,12 @@ copy b again
 \DoxyCodeLine{b-\/>copy\_from(host\_x.get());}
 \DoxyCodeLine{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} max\_iters = 10000u;}
 \DoxyCodeLine{RealValueType outer\_reduction\_factor\{1e-\/12\};}
-\DoxyCodeLine{\textcolor{keyword}{auto} iter\_stop =}
-\DoxyCodeLine{    gko::stop::Iteration::build().with\_max\_iters(max\_iters).on(exec);}
-\DoxyCodeLine{\textcolor{keyword}{auto} tol\_stop = \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                    .with\_reduction\_factor(outer\_reduction\_factor)}
-\DoxyCodeLine{                    .on(exec);}
+\DoxyCodeLine{\textcolor{keyword}{auto} iter\_stop = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(}
+\DoxyCodeLine{    gko::stop::Iteration::build().with\_max\_iters(max\_iters).on(exec));}
+\DoxyCodeLine{\textcolor{keyword}{auto} tol\_stop =}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(\mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                   .with\_reduction\_factor(outer\_reduction\_factor)}
+\DoxyCodeLine{                   .on(exec));}
 \DoxyCodeLine{}
 \DoxyCodeLine{std::shared\_ptr<const gko::log::Convergence<ValueType>> logger =}
 \DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1log_1_1Convergence_ad46f4f47f7392125e921d483a556017d}{gko::log::Convergence<ValueType>::create}}(exec);}
@@ -160,7 +161,7 @@ Create solver factory
 \DoxyCodeLine{                        .with\_reduction\_factor(inner\_reduction\_factor)}
 \DoxyCodeLine{                        .on(exec))}
 \DoxyCodeLine{                .on(exec))}
-\DoxyCodeLine{        .with\_criteria(\mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(iter\_stop), \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(tol\_stop))}
+\DoxyCodeLine{        .with\_criteria(iter\_stop, tol\_stop)}
 \DoxyCodeLine{        .on(exec);}
 \end{DoxyCode}
 
@@ -342,11 +343,12 @@ This is the expected output\+:
 \DoxyCodeLine{    b-\/>copy\_from(host\_x.get());}
 \DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} max\_iters = 10000u;}
 \DoxyCodeLine{    RealValueType outer\_reduction\_factor\{1e-\/12\};}
-\DoxyCodeLine{    \textcolor{keyword}{auto} iter\_stop =}
-\DoxyCodeLine{        gko::stop::Iteration::build().with\_max\_iters(max\_iters).on(exec);}
-\DoxyCodeLine{    \textcolor{keyword}{auto} tol\_stop = \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                        .with\_reduction\_factor(outer\_reduction\_factor)}
-\DoxyCodeLine{                        .on(exec);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} iter\_stop = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(}
+\DoxyCodeLine{        gko::stop::Iteration::build().with\_max\_iters(max\_iters).on(exec));}
+\DoxyCodeLine{    \textcolor{keyword}{auto} tol\_stop =}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(\mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                       .with\_reduction\_factor(outer\_reduction\_factor)}
+\DoxyCodeLine{                       .on(exec));}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::shared\_ptr<const gko::log::Convergence<ValueType>> logger =}
 \DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1log_1_1Convergence_ad46f4f47f7392125e921d483a556017d}{gko::log::Convergence<ValueType>::create}}(exec);}
@@ -363,7 +365,7 @@ This is the expected output\+:
 \DoxyCodeLine{                            .with\_reduction\_factor(inner\_reduction\_factor)}
 \DoxyCodeLine{                            .on(exec))}
 \DoxyCodeLine{                    .on(exec))}
-\DoxyCodeLine{            .with\_criteria(\mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(iter\_stop), \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(tol\_stop))}
+\DoxyCodeLine{            .with\_criteria(iter\_stop, tol\_stop)}
 \DoxyCodeLine{            .on(exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} solver = solver\_gen-\/>generate(A);}
 \DoxyCodeLine{}
