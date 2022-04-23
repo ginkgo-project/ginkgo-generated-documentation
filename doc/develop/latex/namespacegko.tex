@@ -298,6 +298,8 @@ enum \mbox{\hyperlink{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68}{layout\+\_
 \begin{DoxyCompactList}\small\item\em Reduce (sum) the values in the array. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Value\+Type $>$ }\\\mbox{\hyperlink{classgko_1_1Array}{Array}}$<$ Value\+Type $>$ \mbox{\hyperlink{namespacegko_a55f15cbab9cd48c00c00f22a65e8dd43}{make\+\_\+array\+\_\+view}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} size, Value\+Type $\ast$data)
 \begin{DoxyCompactList}\small\item\em Helper function to create an array view deducing the value type. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Value\+Type $>$ }\\detail\+::\+Const\+Array\+View$<$ Value\+Type $>$ \mbox{\hyperlink{namespacegko_aa86c99c6cd9d7048c242a89dfcefb043}{make\+\_\+const\+\_\+array\+\_\+view}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} size, const Value\+Type $\ast$data)
+\begin{DoxyCompactList}\small\item\em Helper function to create a const array view deducing the value type. \end{DoxyCompactList}\item 
 {\footnotesize template$<$size\+\_\+type Dimensionality, typename Dimension\+Type $>$ }\\constexpr bool \mbox{\hyperlink{namespacegko_a74c3716da36cbedc000aa24006b0bd46}{operator!=}} (const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ Dimensionality, Dimension\+Type $>$ \&x, const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ Dimensionality, Dimension\+Type $>$ \&y)
 \begin{DoxyCompactList}\small\item\em Checks if two dim objects are different. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Dimension\+Type $>$ }\\constexpr \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2, Dimension\+Type $>$ \mbox{\hyperlink{namespacegko_a9b6a9d7018703d6d1f2140054e2afe4a}{transpose}} (const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2, Dimension\+Type $>$ \&dimensions) noexcept
@@ -1723,6 +1725,38 @@ Helper function to create an array view deducing the value type.
 
 
 References gko\+::\+Array$<$ Value\+Type $>$\+::view().
+
+\mbox{\Hypertarget{namespacegko_aa86c99c6cd9d7048c242a89dfcefb043}\label{namespacegko_aa86c99c6cd9d7048c242a89dfcefb043}} 
+\index{gko@{gko}!make\_const\_array\_view@{make\_const\_array\_view}}
+\index{make\_const\_array\_view@{make\_const\_array\_view}!gko@{gko}}
+\doxysubsubsection{\texorpdfstring{make\_const\_array\_view()}{make\_const\_array\_view()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type $>$ \\
+detail\+::\+Const\+Array\+View$<$Value\+Type$>$ gko\+::make\+\_\+const\+\_\+array\+\_\+view (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{size,  }\item[{const Value\+Type $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+Helper function to create a const array view deducing the value type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & the executor on which the array resides \\
+\hline
+{\em size} & the number of elements for the array \\
+\hline
+{\em data} & the pointer to the array we create a view on.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Value\+Type} & the type of the array elements\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily \mbox{\hyperlink{classgko_1_1Array}{Array}}$<$Value\+Type$>$\+::const\+\_\+view(exec, size, data)} 
+\end{DoxyReturn}
+
+
+References gko\+::\+Array$<$ Value\+Type $>$\+::const\+\_\+view().
 
 \mbox{\Hypertarget{namespacegko_a2166ec09e3e8a0ef437aee9c2b97f422}\label{namespacegko_a2166ec09e3e8a0ef437aee9c2b97f422}} 
 \index{gko@{gko}!make\_temporary\_clone@{make\_temporary\_clone}}
