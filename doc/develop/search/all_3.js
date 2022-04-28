@@ -3,7 +3,7 @@ var searchData=
   ['data_209',['data',['../classgko_1_1accessor_1_1row__major.html#aa83eec10535e8ac7f79c6a04c0c05b4c',1,'gko::accessor::row_major']]],
   ['data_5ftype_210',['data_type',['../classgko_1_1accessor_1_1row__major.html#af6e81060211b143c595ee4f77537dbc2',1,'gko::accessor::row_major']]],
   ['default_5fconverter_211',['default_converter',['../structgko_1_1default__converter.html',1,'gko']]],
-  ['default_5fdeleter_212',['default_deleter',['../classgko_1_1Array.html#a39498b9cc303f4fa5685b2f98bb8ff4e',1,'gko::Array']]],
+  ['default_5fdeleter_212',['default_deleter',['../classgko_1_1array.html#a7987c3c644cf27ae9d5dd926e5891f17',1,'gko::array']]],
   ['default_5fprecision_213',['default_precision',['../namespacegko.html#a1d44e117d2f74b34bdc83ac5c0c6b605',1,'gko']]],
   ['dense_214',['Dense',['../classgko_1_1matrix_1_1Dense.html',1,'gko::matrix']]],
   ['deterministic_215',['deterministic',['../structgko_1_1multigrid_1_1AmgxPgm_1_1parameters__type.html#ab2ab44e115df987f8b368cd1fe28db4b',1,'gko::multigrid::AmgxPgm::parameters_type::deterministic()'],['../structgko_1_1solver_1_1Idr_1_1parameters__type.html#a79841ca6357faf532aeb2f8cd513d92b',1,'gko::solver::Idr::parameters_type::deterministic()']]],

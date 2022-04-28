@@ -5,7 +5,7 @@ var searchData=
   ['set_5fcomplex_5fsubpsace_1927',['set_complex_subpsace',['../classgko_1_1solver_1_1Idr.html#a1e08efc79a76f2e2501b841a9c8f8e2b',1,'gko::solver::Idr']]],
   ['set_5fcycle_1928',['set_cycle',['../classgko_1_1solver_1_1Multigrid.html#a4a7d27445ab1f3228c827e9ee2c94c19',1,'gko::solver::Multigrid']]],
   ['set_5fdeterministic_1929',['set_deterministic',['../classgko_1_1solver_1_1Idr.html#a72f7124b7acc0bb5a54a7c31e93abffb',1,'gko::solver::Idr']]],
-  ['set_5fexecutor_1930',['set_executor',['../classgko_1_1Array.html#a44dd24e909f518f08320c3065e087d85',1,'gko::Array']]],
+  ['set_5fexecutor_1930',['set_executor',['../classgko_1_1array.html#aba67dcaa3c627446ca187c7a35536cd3',1,'gko::array']]],
   ['set_5fkappa_1931',['set_kappa',['../classgko_1_1solver_1_1Idr.html#a1552bbc46e5961608fe41521b6b846dc',1,'gko::solver::Idr']]],
   ['set_5fkrylov_5fdim_1932',['set_krylov_dim',['../classgko_1_1solver_1_1CbGmres.html#a3540b93ed61652d2ead150e117a80bc3',1,'gko::solver::CbGmres::set_krylov_dim()'],['../classgko_1_1solver_1_1Gmres.html#adf13991ee95a65952105d2be6659c7d3',1,'gko::solver::Gmres::set_krylov_dim()']]],
   ['set_5fpermute_5fmask_1933',['set_permute_mask',['../classgko_1_1matrix_1_1Permutation.html#ad1fbbe30f0c282aa02558163a6820434',1,'gko::matrix::Permutation']]],

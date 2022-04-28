@@ -35,7 +35,7 @@ var searchData=
   ['time_5flimit_1005',['time_limit',['../structgko_1_1stop_1_1Time_1_1parameters__type.html#aee1d09b9ec4e73561e46e94888cf885a',1,'gko::stop::Time::parameters_type']]],
   ['to_5fadjacency_5fmatrix_1006',['to_adjacency_matrix',['../classgko_1_1matrix_1_1SparsityCsr.html#ab1cffb4bccd21f2b198ef59f85807751',1,'gko::matrix::SparsityCsr']]],
   ['to_5fcomplex_1007',['to_complex',['../namespacegko.html#acc281c8ff5bfa4fd6f25afcce466b1af',1,'gko']]],
-  ['to_5fglobal_5findices_1008',['to_global_indices',['../classgko_1_1index__set.html#adf7d86ca27c94be27dd78b7169586de1',1,'gko::index_set']]],
+  ['to_5fglobal_5findices_1008',['to_global_indices',['../classgko_1_1index__set.html#a5a7cabebd27f616df5e06a26072a48d0',1,'gko::index_set']]],
   ['to_5freal_1009',['to_real',['../namespacegko.html#ace1eb45b2e5273be609ca5746089d18d',1,'gko']]],
   ['tolerance_1010',['tolerance',['../structgko_1_1stop_1_1RelativeResidualNorm_1_1parameters__type.html#a5bc4bf49a0b2dca7de35d3ba618ecbc9',1,'gko::stop::RelativeResidualNorm::parameters_type::tolerance()'],['../structgko_1_1stop_1_1AbsoluteResidualNorm_1_1parameters__type.html#a0f8a19b8757e2246e60cd37ae3110f70',1,'gko::stop::AbsoluteResidualNorm::parameters_type::tolerance()']]],
   ['transposable_1011',['Transposable',['../classgko_1_1Transposable.html',1,'gko']]],

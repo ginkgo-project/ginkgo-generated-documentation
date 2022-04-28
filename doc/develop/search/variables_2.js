@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['coarse_5frows_1978',['coarse_rows',['../structgko_1_1multigrid_1_1FixedCoarsening_1_1parameters__type.html#aea1caef17e6142961b6bdfa5237a0d22',1,'gko::multigrid::FixedCoarsening::parameters_type']]],
+  ['coarse_5frows_1978',['coarse_rows',['../structgko_1_1multigrid_1_1FixedCoarsening_1_1parameters__type.html#a234d3b5e05d5368255c632eb924dcd89',1,'gko::multigrid::FixedCoarsening::parameters_type']]],
   ['coarsest_5fsolver_1979',['coarsest_solver',['../structgko_1_1solver_1_1Multigrid_1_1parameters__type.html#a0ba9248107e2b06f82f38c772f3ff121',1,'gko::solver::Multigrid::parameters_type']]],
   ['complex_5fsubspace_1980',['complex_subspace',['../structgko_1_1solver_1_1Idr_1_1parameters__type.html#a6fbc7890c7a7ef7a9457c587f254d66a',1,'gko::solver::Idr::parameters_type']]],
   ['construct_5finverse_5fpermutation_1981',['construct_inverse_permutation',['../structgko_1_1reorder_1_1Rcm_1_1parameters__type.html#a4c30f0388851e1dc03a7bf0d243fae24',1,'gko::reorder::Rcm::parameters_type']]],
