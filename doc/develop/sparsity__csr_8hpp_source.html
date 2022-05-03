@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/526055843 branch based on develop. Ginkgo version 1.5.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/529356338 branch based on develop. Ginkgo version 1.5.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -142,8 +142,8 @@ $(function() {
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;      <span class="keyword">public</span> ReadableFromMatrixData&lt;ValueType, IndexType&gt;,</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;      <span class="keyword">public</span> WritableToMatrixData&lt;ValueType, IndexType&gt;,</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;      <span class="keyword">public</span> Transposable {</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>EnableCreateMethod&lt;SparsityCsr&gt;;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>EnablePolymorphicObject&lt;SparsityCsr, LinOp&gt;;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>EnableCreateMethod&lt;<a class="code" href="classgko_1_1matrix_1_1SparsityCsr.html#a67adb9f857dce1577325a1cf8fd67a92">SparsityCsr</a>&gt;;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>EnablePolymorphicObject&lt;<a class="code" href="classgko_1_1matrix_1_1SparsityCsr.html#a67adb9f857dce1577325a1cf8fd67a92">SparsityCsr</a>, <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>&gt;;</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>Csr&lt;ValueType, IndexType&gt;;</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>Dense&lt;ValueType&gt;;</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>Fbcsr&lt;ValueType, IndexType&gt;;</div>
@@ -230,54 +230,62 @@ $(function() {
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;            gko::detail::array_const_cast(std::move(row_ptrs)), value});</div>
 <div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    }</div>
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160; </div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    <a class="code" href="classgko_1_1matrix_1_1SparsityCsr.html">SparsityCsr</a>(std::shared_ptr&lt;const Executor&gt; exec,</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                <span class="keyword">const</span> <a class="code" href="structgko_1_1dim.html">dim&lt;2&gt;</a>&amp; size = <a class="code" href="structgko_1_1dim.html">dim&lt;2&gt;</a>{}, <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> num_nonzeros = {})</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;        : EnableLinOp&lt;SparsityCsr&gt;(exec, size),</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;          col_idxs_(exec, num_nonzeros),</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;          row_ptrs_(exec, size[0] + 1),</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;          value_(exec, {one&lt;ValueType&gt;()})</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    {</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;        row_ptrs_.<a class="code" href="classgko_1_1array.html#a81458893928d0be780235bea675ced6a">fill</a>(0);</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    }</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> ColIdxsArray, <span class="keyword">typename</span> RowPtrsArray&gt;</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    SparsityCsr(std::shared_ptr&lt;const Executor&gt; exec, <span class="keyword">const</span> dim&lt;2&gt;&amp; size,</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;                ColIdxsArray&amp;&amp; col_idxs, RowPtrsArray&amp;&amp; row_ptrs,</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;                value_type value = one&lt;ValueType&gt;())</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        : EnableLinOp&lt;SparsityCsr&gt;(exec, size),</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;          col_idxs_{exec, std::forward&lt;ColIdxsArray&gt;(col_idxs)},</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;          row_ptrs_{exec, std::forward&lt;RowPtrsArray&gt;(row_ptrs)},</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;          value_{exec, {value}}</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    {</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;        GKO_ASSERT_EQ(this-&gt;<a class="code" href="classgko_1_1LinOp.html#a31b3c003388eb0b95393154f68c2b98d">get_size</a>()[0] + 1, row_ptrs_.<a class="code" href="classgko_1_1array.html#a9c6a40a8a007af8c6e541fbc030d6291">get_num_elems</a>());</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    }</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; </div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    SparsityCsr(std::shared_ptr&lt;const Executor&gt; exec,</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;                std::shared_ptr&lt;const LinOp&gt; matrix)</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;        : EnableLinOp&lt;SparsityCsr&gt;(exec, matrix-&gt;<a class="code" href="classgko_1_1LinOp.html#a31b3c003388eb0b95393154f68c2b98d">get_size</a>())</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    {</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        <span class="keyword">auto</span> tmp_ = copy_and_convert_to&lt;SparsityCsr&gt;(exec, matrix);</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        this-&gt;copy_from(std::move(tmp_.get()));</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;    }</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160; </div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    <span class="keywordtype">void</span> apply_impl(<span class="keyword">const</span> LinOp* b, LinOp* x) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160; </div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    <span class="keywordtype">void</span> apply_impl(<span class="keyword">const</span> LinOp* alpha, <span class="keyword">const</span> LinOp* b, <span class="keyword">const</span> LinOp* beta,</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;                    LinOp* x) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160; </div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    array&lt;index_type&gt; col_idxs_;</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    array&lt;index_type&gt; row_ptrs_;</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    array&lt;value_type&gt; value_;</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;};</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    <a class="code" href="classgko_1_1matrix_1_1SparsityCsr.html">SparsityCsr</a>&amp; <a class="code" href="classgko_1_1matrix_1_1SparsityCsr.html#a3840a883143894d9ccc4e53001851eb6">operator=</a>(<span class="keyword">const</span> <a class="code" href="classgko_1_1matrix_1_1SparsityCsr.html">SparsityCsr</a>&amp;);</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160; </div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    <a class="code" href="classgko_1_1matrix_1_1SparsityCsr.html">SparsityCsr</a>&amp; <a class="code" href="classgko_1_1matrix_1_1SparsityCsr.html#a3840a883143894d9ccc4e53001851eb6">operator=</a>(<a class="code" href="classgko_1_1matrix_1_1SparsityCsr.html">SparsityCsr</a>&amp;&amp;);</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160; </div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    <a class="code" href="classgko_1_1matrix_1_1SparsityCsr.html#a67adb9f857dce1577325a1cf8fd67a92">SparsityCsr</a>(<span class="keyword">const</span> <a class="code" href="classgko_1_1matrix_1_1SparsityCsr.html">SparsityCsr</a>&amp;);</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160; </div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    <a class="code" href="classgko_1_1matrix_1_1SparsityCsr.html#a67adb9f857dce1577325a1cf8fd67a92">SparsityCsr</a>(<a class="code" href="classgko_1_1matrix_1_1SparsityCsr.html">SparsityCsr</a>&amp;&amp;);</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160; </div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    <a class="code" href="classgko_1_1matrix_1_1SparsityCsr.html#a67adb9f857dce1577325a1cf8fd67a92">SparsityCsr</a>(std::shared_ptr&lt;const Executor&gt; exec,</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;                <span class="keyword">const</span> <a class="code" href="structgko_1_1dim.html">dim&lt;2&gt;</a>&amp; size = <a class="code" href="structgko_1_1dim.html">dim&lt;2&gt;</a>{}, <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> num_nonzeros = {})</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;        : EnableLinOp&lt;SparsityCsr&gt;(exec, size),</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;          col_idxs_(exec, num_nonzeros),</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;          row_ptrs_(exec, size[0] + 1),</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;          value_(exec, {one&lt;ValueType&gt;()})</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    {</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;        row_ptrs_.<a class="code" href="classgko_1_1array.html#a81458893928d0be780235bea675ced6a">fill</a>(0);</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    }</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160; </div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> ColIdxsArray, <span class="keyword">typename</span> RowPtrsArray&gt;</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    <a class="code" href="classgko_1_1matrix_1_1SparsityCsr.html#a67adb9f857dce1577325a1cf8fd67a92">SparsityCsr</a>(std::shared_ptr&lt;const Executor&gt; exec, <span class="keyword">const</span> dim&lt;2&gt;&amp; size,</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;                ColIdxsArray&amp;&amp; col_idxs, RowPtrsArray&amp;&amp; row_ptrs,</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;                value_type value = one&lt;ValueType&gt;())</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;        : EnableLinOp&lt;<a class="code" href="classgko_1_1matrix_1_1SparsityCsr.html#a67adb9f857dce1577325a1cf8fd67a92">SparsityCsr</a>&gt;(exec, size),</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;          col_idxs_{exec, std::forward&lt;ColIdxsArray&gt;(col_idxs)},</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;          row_ptrs_{exec, std::forward&lt;RowPtrsArray&gt;(row_ptrs)},</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;          value_{exec, {value}}</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    {</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;        GKO_ASSERT_EQ(this-&gt;<a class="code" href="classgko_1_1LinOp.html#a31b3c003388eb0b95393154f68c2b98d">get_size</a>()[0] + 1, row_ptrs_.<a class="code" href="classgko_1_1array.html#a9c6a40a8a007af8c6e541fbc030d6291">get_num_elems</a>());</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    }</div>
 <div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160; </div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160; </div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;}  <span class="comment">// namespace matrix</span></div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;}  <span class="comment">// namespace gko</span></div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160; </div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160; </div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_MATRIX_SPARSITY_CSR_HPP_</span></div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    <a class="code" href="classgko_1_1matrix_1_1SparsityCsr.html#a67adb9f857dce1577325a1cf8fd67a92">SparsityCsr</a>(std::shared_ptr&lt;const Executor&gt; exec,</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;                std::shared_ptr&lt;const LinOp&gt; matrix)</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;        : EnableLinOp&lt;<a class="code" href="classgko_1_1matrix_1_1SparsityCsr.html#a67adb9f857dce1577325a1cf8fd67a92">SparsityCsr</a>&gt;(exec, matrix-&gt;<a class="code" href="classgko_1_1LinOp.html#a31b3c003388eb0b95393154f68c2b98d">get_size</a>())</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    {</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;        <span class="keyword">auto</span> tmp_ = copy_and_convert_to&lt;SparsityCsr&gt;(exec, matrix);</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        this-&gt;copy_from(std::move(tmp_.get()));</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    }</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160; </div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    <span class="keywordtype">void</span> apply_impl(<span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>* b, <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>* x) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160; </div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;    <span class="keywordtype">void</span> apply_impl(<span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>* alpha, <span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>* b, <span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>* beta,</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;                    <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>* x) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160; </div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    array&lt;index_type&gt; col_idxs_;</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;    array&lt;index_type&gt; row_ptrs_;</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;    array&lt;value_type&gt; value_;</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;};</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160; </div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160; </div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;}  <span class="comment">// namespace matrix</span></div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;}  <span class="comment">// namespace gko</span></div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160; </div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160; </div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_MATRIX_SPARSITY_CSR_HPP_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassgko_1_1EnablePolymorphicAssignment_html_a0a4cf244139e7761d6a91c61e029810e"><div class="ttname"><a href="classgko_1_1EnablePolymorphicAssignment.html#a0a4cf244139e7761d6a91c61e029810e">gko::EnablePolymorphicAssignment&lt; ConcreteLinOp &gt;::move_to</a></div><div class="ttdeci">void move_to(result_type *result) override</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:712</div></div>
 <div class="ttc" id="aclassgko_1_1EnablePolymorphicAssignment_html_a6b7e6872e96084636f8ab5091063ada8"><div class="ttname"><a href="classgko_1_1EnablePolymorphicAssignment.html#a6b7e6872e96084636f8ab5091063ada8">gko::EnablePolymorphicAssignment&lt; ConcreteLinOp &gt;::convert_to</a></div><div class="ttdeci">void convert_to(result_type *result) const override</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:710</div></div>
@@ -298,13 +306,16 @@ $(function() {
 <div class="ttc" id="aclassgko_1_1matrix_1_1SparsityCsr_html_ada754f69e64b81679d1b65df27810d07"><div class="ttname"><a href="classgko_1_1matrix_1_1SparsityCsr.html#ada754f69e64b81679d1b65df27810d07">gko::matrix::SparsityCsr::sort_by_column_index</a></div><div class="ttdeci">void sort_by_column_index()</div><div class="ttdoc">Sorts each row by column index.</div></div>
 <div class="ttc" id="aclassgko_1_1array_html_a9e144bc31d986eebf64326f0aad1a875"><div class="ttname"><a href="classgko_1_1array.html#a9e144bc31d986eebf64326f0aad1a875">gko::array::get_data</a></div><div class="ttdeci">value_type * get_data() noexcept</div><div class="ttdoc">Returns a pointer to the block of memory used to store the elements of the array.</div><div class="ttdef"><b>Definition:</b> array.hpp:646</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1SparsityCsr_html_a095d103ff0b7dbbeac529b16a2a0a855"><div class="ttname"><a href="classgko_1_1matrix_1_1SparsityCsr.html#a095d103ff0b7dbbeac529b16a2a0a855">gko::matrix::SparsityCsr::create_const</a></div><div class="ttdeci">static std::unique_ptr&lt; const SparsityCsr &gt; create_const(std::shared_ptr&lt; const Executor &gt; exec, const dim&lt; 2 &gt; &amp;size, gko::detail::const_array_view&lt; IndexType &gt; &amp;&amp;col_idxs, gko::detail::const_array_view&lt; IndexType &gt; &amp;&amp;row_ptrs, ValueType value=one&lt; ValueType &gt;())</div><div class="ttdoc">Creates a constant (immutable) SparsityCsr matrix from constant arrays.</div><div class="ttdef"><b>Definition:</b> sparsity_csr.hpp:229</div></div>
+<div class="ttc" id="aclassgko_1_1matrix_1_1SparsityCsr_html_a67adb9f857dce1577325a1cf8fd67a92"><div class="ttname"><a href="classgko_1_1matrix_1_1SparsityCsr.html#a67adb9f857dce1577325a1cf8fd67a92">gko::matrix::SparsityCsr::SparsityCsr</a></div><div class="ttdeci">SparsityCsr(const SparsityCsr &amp;)</div><div class="ttdoc">Copy-constructs a SparsityCsr matrix.</div></div>
 <div class="ttc" id="aclassgko_1_1array_html_a4bbd9f9a19077bd7cfff8659992e430e"><div class="ttname"><a href="classgko_1_1array.html#a4bbd9f9a19077bd7cfff8659992e430e">gko::array::get_const_data</a></div><div class="ttdeci">const value_type * get_const_data() const noexcept</div><div class="ttdoc">Returns a constant pointer to the block of memory used to store the elements of the array.</div><div class="ttdef"><b>Definition:</b> array.hpp:655</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1SparsityCsr_html_abb602ed95865506ae965458e4ffe8e37"><div class="ttname"><a href="classgko_1_1matrix_1_1SparsityCsr.html#abb602ed95865506ae965458e4ffe8e37">gko::matrix::SparsityCsr::get_row_ptrs</a></div><div class="ttdeci">index_type * get_row_ptrs() noexcept</div><div class="ttdoc">Returns the row pointers of the matrix.</div><div class="ttdef"><b>Definition:</b> sparsity_csr.hpp:172</div></div>
+<div class="ttc" id="aclassgko_1_1matrix_1_1SparsityCsr_html_a3840a883143894d9ccc4e53001851eb6"><div class="ttname"><a href="classgko_1_1matrix_1_1SparsityCsr.html#a3840a883143894d9ccc4e53001851eb6">gko::matrix::SparsityCsr::operator=</a></div><div class="ttdeci">SparsityCsr &amp; operator=(const SparsityCsr &amp;)</div><div class="ttdoc">Copy-assigns a SparsityCsr matrix.</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1SparsityCsr_html_a13a497b072cea219330031033372192c"><div class="ttname"><a href="classgko_1_1matrix_1_1SparsityCsr.html#a13a497b072cea219330031033372192c">gko::matrix::SparsityCsr::conj_transpose</a></div><div class="ttdeci">std::unique_ptr&lt; LinOp &gt; conj_transpose() const override</div><div class="ttdoc">Returns a LinOp representing the conjugate transpose of the Transposable object.</div></div>
 <div class="ttc" id="aclassgko_1_1LinOp_html_a31b3c003388eb0b95393154f68c2b98d"><div class="ttname"><a href="classgko_1_1LinOp.html#a31b3c003388eb0b95393154f68c2b98d">gko::LinOp::get_size</a></div><div class="ttdeci">const dim&lt; 2 &gt; &amp; get_size() const noexcept</div><div class="ttdoc">Returns the size of the operator.</div><div class="ttdef"><b>Definition:</b> lin_op.hpp:233</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1SparsityCsr_html_a4528b463ee2b0d271accd6f44711768a"><div class="ttname"><a href="classgko_1_1matrix_1_1SparsityCsr.html#a4528b463ee2b0d271accd6f44711768a">gko::matrix::SparsityCsr::get_const_value</a></div><div class="ttdeci">const value_type * get_const_value() const noexcept</div><div class="ttdoc">Returns the value stored in the matrix.</div><div class="ttdef"><b>Definition:</b> sparsity_csr.hpp:200</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1SparsityCsr_html_ab1cffb4bccd21f2b198ef59f85807751"><div class="ttname"><a href="classgko_1_1matrix_1_1SparsityCsr.html#ab1cffb4bccd21f2b198ef59f85807751">gko::matrix::SparsityCsr::to_adjacency_matrix</a></div><div class="ttdeci">std::unique_ptr&lt; SparsityCsr &gt; to_adjacency_matrix() const</div><div class="ttdoc">Transforms the sparsity matrix to an adjacency matrix.</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1SparsityCsr_html_a4ff464adcbe3a38144947f06f2ea60b6"><div class="ttname"><a href="classgko_1_1matrix_1_1SparsityCsr.html#a4ff464adcbe3a38144947f06f2ea60b6">gko::matrix::SparsityCsr::write</a></div><div class="ttdeci">void write(mat_data &amp;data) const override</div><div class="ttdoc">Writes a matrix to a matrix_data structure.</div></div>
+<div class="ttc" id="aclassgko_1_1LinOp_html_a1f2a4cc7323e0b9816428e3545fc6ed7"><div class="ttname"><a href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">gko::LinOp::LinOp</a></div><div class="ttdeci">LinOp(const LinOp &amp;)=default</div><div class="ttdoc">Copy-constructs a LinOp.</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

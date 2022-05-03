@@ -38,7 +38,15 @@ const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1Combination_a61f427d17d4b8ddae97b1f7de8d5eb3e}{transpose}} () const override
 \begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1Combination_acc7a84511ba0e200ef728a3585183dfd}{conj\+\_\+transpose}} () const override
-\begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the conjugate transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the conjugate transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1Combination}{Combination}} \& \mbox{\hyperlink{classgko_1_1Combination_aafd0717d24ec1fecbf13d0c3339f5f55}{operator=}} (const \mbox{\hyperlink{classgko_1_1Combination}{Combination}} \&)
+\begin{DoxyCompactList}\small\item\em Copy-\/assigns a \mbox{\hyperlink{classgko_1_1Combination}{Combination}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1Combination}{Combination}} \& \mbox{\hyperlink{classgko_1_1Combination_af19ab28c5fd0c9dfd34067d18ce0bf88}{operator=}} (\mbox{\hyperlink{classgko_1_1Combination}{Combination}} \&\&)
+\begin{DoxyCompactList}\small\item\em Move-\/assigns a \mbox{\hyperlink{classgko_1_1Combination}{Combination}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1Combination_ab7e353cbd03d724b65e63262852ea960}{Combination}} (const \mbox{\hyperlink{classgko_1_1Combination}{Combination}} \&)
+\begin{DoxyCompactList}\small\item\em Copy-\/constructs a \mbox{\hyperlink{classgko_1_1Combination}{Combination}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1Combination_a48d42f2a23c7fa6d55805edac9e29ce8}{Combination}} (\mbox{\hyperlink{classgko_1_1Combination}{Combination}} \&\&)
+\begin{DoxyCompactList}\small\item\em Move-\/constructs a \mbox{\hyperlink{classgko_1_1Combination}{Combination}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
@@ -62,12 +70,39 @@ The \mbox{\hyperlink{classgko_1_1Combination}{Combination}} class can be used to
 \item ck $\ast$ opk.
 \end{DoxyItemize}
 
+\mbox{\hyperlink{classgko_1_1Combination}{Combination}} ensures that all Lin\+Ops passed to its constructor use the same executor, and if not, copies the operators to the executor of the first operator.
+
 
 \begin{DoxyTemplParams}{Template Parameters}
 {\em Value\+Type} & precision of input and result vectors \\
 \hline
 \end{DoxyTemplParams}
 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classgko_1_1Combination_ab7e353cbd03d724b65e63262852ea960}\label{classgko_1_1Combination_ab7e353cbd03d724b65e63262852ea960}} 
+\index{gko::Combination$<$ ValueType $>$@{gko::Combination$<$ ValueType $>$}!Combination@{Combination}}
+\index{Combination@{Combination}!gko::Combination$<$ ValueType $>$@{gko::Combination$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{Combination()}{Combination()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+\mbox{\hyperlink{classgko_1_1Combination}{gko\+::\+Combination}}$<$ Value\+Type $>$\+::\mbox{\hyperlink{classgko_1_1Combination}{Combination}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Combination}{Combination}}$<$ Value\+Type $>$ \&}]{ }\end{DoxyParamCaption})}
+
+
+
+Copy-\/constructs a \mbox{\hyperlink{classgko_1_1Combination}{Combination}}. 
+
+This inherits the executor of the input \mbox{\hyperlink{classgko_1_1Combination}{Combination}} and all of its operators with shared ownership. \mbox{\Hypertarget{classgko_1_1Combination_a48d42f2a23c7fa6d55805edac9e29ce8}\label{classgko_1_1Combination_a48d42f2a23c7fa6d55805edac9e29ce8}} 
+\index{gko::Combination$<$ ValueType $>$@{gko::Combination$<$ ValueType $>$}!Combination@{Combination}}
+\index{Combination@{Combination}!gko::Combination$<$ ValueType $>$@{gko::Combination$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{Combination()}{Combination()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+\mbox{\hyperlink{classgko_1_1Combination}{gko\+::\+Combination}}$<$ Value\+Type $>$\+::\mbox{\hyperlink{classgko_1_1Combination}{Combination}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1Combination}{Combination}}$<$ Value\+Type $>$ \&\&}]{ }\end{DoxyParamCaption})}
+
+
+
+Move-\/constructs a \mbox{\hyperlink{classgko_1_1Combination}{Combination}}. 
+
+This inherits the executor of the input \mbox{\hyperlink{classgko_1_1Combination}{Combination}} and all of its operators. The moved-\/from object is empty (0x0 \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} without operators) afterwards. 
 
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{classgko_1_1Combination_acc7a84511ba0e200ef728a3585183dfd}\label{classgko_1_1Combination_acc7a84511ba0e200ef728a3585183dfd}} 
@@ -116,7 +151,29 @@ Returns a list of operators of the combination.
 \begin{DoxyReturn}{Returns}
 a list of operators 
 \end{DoxyReturn}
-\mbox{\Hypertarget{classgko_1_1Combination_a61f427d17d4b8ddae97b1f7de8d5eb3e}\label{classgko_1_1Combination_a61f427d17d4b8ddae97b1f7de8d5eb3e}} 
+\mbox{\Hypertarget{classgko_1_1Combination_af19ab28c5fd0c9dfd34067d18ce0bf88}\label{classgko_1_1Combination_af19ab28c5fd0c9dfd34067d18ce0bf88}} 
+\index{gko::Combination$<$ ValueType $>$@{gko::Combination$<$ ValueType $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!gko::Combination$<$ ValueType $>$@{gko::Combination$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+\mbox{\hyperlink{classgko_1_1Combination}{Combination}}\& \mbox{\hyperlink{classgko_1_1Combination}{gko\+::\+Combination}}$<$ Value\+Type $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1Combination}{Combination}}$<$ Value\+Type $>$ \&\&}]{ }\end{DoxyParamCaption})}
+
+
+
+Move-\/assigns a \mbox{\hyperlink{classgko_1_1Combination}{Combination}}. 
+
+The executor is not modified, and the wrapped Lin\+Ops are only being cloned if they are on a different executor, otherwise they share ownership. The moved-\/from object is empty (0x0 \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} without operators) afterwards. \mbox{\Hypertarget{classgko_1_1Combination_aafd0717d24ec1fecbf13d0c3339f5f55}\label{classgko_1_1Combination_aafd0717d24ec1fecbf13d0c3339f5f55}} 
+\index{gko::Combination$<$ ValueType $>$@{gko::Combination$<$ ValueType $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!gko::Combination$<$ ValueType $>$@{gko::Combination$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+\mbox{\hyperlink{classgko_1_1Combination}{Combination}}\& \mbox{\hyperlink{classgko_1_1Combination}{gko\+::\+Combination}}$<$ Value\+Type $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Combination}{Combination}}$<$ Value\+Type $>$ \&}]{ }\end{DoxyParamCaption})}
+
+
+
+Copy-\/assigns a \mbox{\hyperlink{classgko_1_1Combination}{Combination}}. 
+
+The executor is not modified, and the wrapped Lin\+Ops are only being cloned if they are on a different executor. \mbox{\Hypertarget{classgko_1_1Combination_a61f427d17d4b8ddae97b1f7de8d5eb3e}\label{classgko_1_1Combination_a61f427d17d4b8ddae97b1f7de8d5eb3e}} 
 \index{gko::Combination$<$ ValueType $>$@{gko::Combination$<$ ValueType $>$}!transpose@{transpose}}
 \index{transpose@{transpose}!gko::Combination$<$ ValueType $>$@{gko::Combination$<$ ValueType $>$}}
 \doxysubsubsection{\texorpdfstring{transpose()}{transpose()}}
