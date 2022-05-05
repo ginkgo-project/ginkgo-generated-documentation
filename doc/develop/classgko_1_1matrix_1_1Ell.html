@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/529961572 branch based on develop. Ginkgo version 1.5.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/531654193 branch based on develop. Ginkgo version 1.5.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -469,6 +469,7 @@ class gko::matrix::Ell&lt; ValueType, IndexType &gt;</h3>
 
 <p>ELL is a matrix format where stride with explicit zeros is used such that all rows have the same number of stored elements. </p>
 <p>The number of elements stored in each row is the largest number of nonzero elements in any of the rows (obtainable through <a class="el" href="classgko_1_1matrix_1_1Ell.html#a08f9b04b356e58ab57d03ce335ff11ce" title="Returns the number of stored elements per row.">get_num_stored_elements_per_row()</a> method). This removes the need of a row pointer like in the CSR format, and allows for SIMD processing of the distinct rows. For efficient processing, the nonzero elements and the corresponding column indices are stored in column-major fashion. The columns are padded to the length by user-defined stride parameter whose default value is the number of rows of the matrix.</p>
+<p>This implementation uses the column index value <a class="el" href="namespacegko.html#afec01a3afbf68d99fc0f886c51bdc713" title="Value for an invalid signed index type.">invalid_index&lt;IndexType&gt;()</a> to mark padding entries that are not part of the sparsity pattern.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">ValueType</td><td>precision of matrix elements </td></tr>
