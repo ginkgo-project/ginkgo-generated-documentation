@@ -126,7 +126,6 @@ Let\textquotesingle{}s declare a logger which prints to std\+::cout instead of p
 \begin{DoxyCode}{0}
 \DoxyCodeLine{std::shared\_ptr<gko::log::Stream<ValueType>> stream\_logger =}
 \DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1log_1_1Stream_a71f96d3f1cd7c03875476cd8db98145b}{gko::log::Stream<ValueType>::create}}(}
-\DoxyCodeLine{        exec,}
 \DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1log_1_1Logger_a02534863a2d2f92dfeb2c39038365532}{gko::log::Logger::all\_events\_mask}} \string^}
 \DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1log_1_1Logger_ad6fb77d4d5610bc7299087f7149a7f16}{gko::log::Logger::linop\_factory\_events\_mask}} \string^}
 \DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1log_1_1Logger_a5fb997f1c06c0602103d8dab616a96bc}{gko::log::Logger::polymorphic\_object\_events\_mask}},}
@@ -177,7 +176,7 @@ First we add facilities to only print to a file. It\textquotesingle{}s possible 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{std::ofstream filestream(\textcolor{stringliteral}{"my\_file.txt"});}
 \DoxyCodeLine{solver-\/>add\_logger(\mbox{\hyperlink{classgko_1_1log_1_1Stream}{gko::log::Stream<ValueType>::create}}(}
-\DoxyCodeLine{    exec, \mbox{\hyperlink{classgko_1_1log_1_1Logger_a02534863a2d2f92dfeb2c39038365532}{gko::log::Logger::all\_events\_mask}}, filestream));}
+\DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1log_1_1Logger_a02534863a2d2f92dfeb2c39038365532}{gko::log::Logger::all\_events\_mask}}, filestream));}
 \DoxyCodeLine{solver-\/>add\_logger(stream\_logger);}
 \end{DoxyCode}
 
@@ -187,8 +186,8 @@ Add another logger which puts all the data in an object, we can later retrieve t
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{std::shared\_ptr<gko::log::Record> record\_logger = \mbox{\hyperlink{classgko_1_1log_1_1Record_ab3863ff409b8ceaefa2f226a4e26debc}{gko::log::Record::create}}(}
-\DoxyCodeLine{    exec, \mbox{\hyperlink{classgko_1_1log_1_1Logger_af263708ebb15007bc0086e7c438c190c}{gko::log::Logger::executor\_events\_mask}} |}
-\DoxyCodeLine{              gko::log::Logger::criterion\_check\_completed\_mask);}
+\DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1log_1_1Logger_af263708ebb15007bc0086e7c438c190c}{gko::log::Logger::executor\_events\_mask}} |}
+\DoxyCodeLine{    gko::log::Logger::criterion\_check\_completed\_mask);}
 \DoxyCodeLine{exec-\/>add\_logger(record\_logger);}
 \DoxyCodeLine{residual\_criterion-\/>add\_logger(record\_logger);}
 \end{DoxyCode}
@@ -1121,7 +1120,6 @@ This is the expected output\+:
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::shared\_ptr<gko::log::Stream<ValueType>> stream\_logger =}
 \DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1log_1_1Stream_a71f96d3f1cd7c03875476cd8db98145b}{gko::log::Stream<ValueType>::create}}(}
-\DoxyCodeLine{            exec,}
 \DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1log_1_1Logger_a02534863a2d2f92dfeb2c39038365532}{gko::log::Logger::all\_events\_mask}} \string^}
 \DoxyCodeLine{                \mbox{\hyperlink{classgko_1_1log_1_1Logger_ad6fb77d4d5610bc7299087f7149a7f16}{gko::log::Logger::linop\_factory\_events\_mask}} \string^}
 \DoxyCodeLine{                \mbox{\hyperlink{classgko_1_1log_1_1Logger_a5fb997f1c06c0602103d8dab616a96bc}{gko::log::Logger::polymorphic\_object\_events\_mask}},}
@@ -1149,12 +1147,12 @@ This is the expected output\+:
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::ofstream filestream(\textcolor{stringliteral}{"my\_file.txt"});}
 \DoxyCodeLine{    solver-\/>add\_logger(\mbox{\hyperlink{classgko_1_1log_1_1Stream}{gko::log::Stream<ValueType>::create}}(}
-\DoxyCodeLine{        exec, \mbox{\hyperlink{classgko_1_1log_1_1Logger_a02534863a2d2f92dfeb2c39038365532}{gko::log::Logger::all\_events\_mask}}, filestream));}
+\DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1log_1_1Logger_a02534863a2d2f92dfeb2c39038365532}{gko::log::Logger::all\_events\_mask}}, filestream));}
 \DoxyCodeLine{    solver-\/>add\_logger(stream\_logger);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::shared\_ptr<gko::log::Record> record\_logger = \mbox{\hyperlink{classgko_1_1log_1_1Record_ab3863ff409b8ceaefa2f226a4e26debc}{gko::log::Record::create}}(}
-\DoxyCodeLine{        exec, \mbox{\hyperlink{classgko_1_1log_1_1Logger_af263708ebb15007bc0086e7c438c190c}{gko::log::Logger::executor\_events\_mask}} |}
-\DoxyCodeLine{                  gko::log::Logger::criterion\_check\_completed\_mask);}
+\DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1log_1_1Logger_af263708ebb15007bc0086e7c438c190c}{gko::log::Logger::executor\_events\_mask}} |}
+\DoxyCodeLine{        gko::log::Logger::criterion\_check\_completed\_mask);}
 \DoxyCodeLine{    exec-\/>add\_logger(record\_logger);}
 \DoxyCodeLine{    residual\_criterion-\/>add\_logger(record\_logger);}
 \DoxyCodeLine{}

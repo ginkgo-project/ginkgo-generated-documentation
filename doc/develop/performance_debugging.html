@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/547116244 branch based on develop. Ginkgo version 1.5.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/568686368 branch based on develop. Ginkgo version 1.5.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -234,10 +234,6 @@ $(function() {
 <div class="line">        }</div>
 <div class="line">    }</div>
 <div class="line"> </div>
-<div class="line">    OperationLogger(std::shared_ptr&lt;const gko::Executor&gt; exec)</div>
-<div class="line">        : <a class="code" href="namespacegko.html">gko</a>::log::Logger(exec)</div>
-<div class="line">    {}</div>
-<div class="line"> </div>
 <div class="line"><span class="keyword">private</span>:</div>
 </div><!-- fragment --><p>Helper which synchronizes and starts the time before every operation.</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> start_operation(<span class="keyword">const</span> <a class="code" href="classgko_1_1Executor.html">gko::Executor</a>* exec,</div>
@@ -291,10 +287,6 @@ $(function() {
 <div class="line">        ostream &lt;&lt; <span class="stringliteral">&quot;Storage: &quot;</span> &lt;&lt; total &lt;&lt; std::endl;</div>
 <div class="line">    }</div>
 <div class="line"> </div>
-<div class="line">    StorageLogger(std::shared_ptr&lt;const gko::Executor&gt; exec)</div>
-<div class="line">        : <a class="code" href="namespacegko.html">gko</a>::log::Logger(exec)</div>
-<div class="line">    {}</div>
-<div class="line"> </div>
 <div class="line"><span class="keyword">private</span>:</div>
 <div class="line">    <span class="keyword">mutable</span> std::unordered_map&lt;gko::uintptr, gko::size_type&gt; storage;</div>
 <div class="line">};</div>
@@ -322,9 +314,8 @@ $(function() {
 <div class="line">        }</div>
 <div class="line">    }</div>
 <div class="line"> </div>
-<div class="line">    ResidualLogger(std::shared_ptr&lt;const gko::Executor&gt; exec,</div>
-<div class="line">                   <span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html">gko::LinOp</a>* matrix, <span class="keyword">const</span> vec&lt;ValueType&gt;* b)</div>
-<div class="line">        : <a class="code" href="namespacegko.html">gko</a>::log::Logger(exec, <a class="code" href="namespacegko.html">gko</a>::log::Logger::iteration_complete_mask),</div>
+<div class="line">    ResidualLogger(<span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html">gko::LinOp</a>* matrix, <span class="keyword">const</span> vec&lt;ValueType&gt;* b)</div>
+<div class="line">        : <a class="code" href="namespacegko.html">gko</a>::log::Logger(<a class="code" href="namespacegko.html">gko</a>::log::Logger::iteration_complete_mask),</div>
 <div class="line">          matrix{matrix},</div>
 <div class="line">          b{b}</div>
 <div class="line">    {}</div>
@@ -438,7 +429,7 @@ $(function() {
 <div class="line">    input_mtx = std::string(argv[2]);</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>Read data: A is read from disk Create a StorageLogger to track the size of A</p>
-<div class="fragment"><div class="line"><span class="keyword">auto</span> storage_logger = std::make_shared&lt;loggers::StorageLogger&gt;(exec);</div>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> storage_logger = std::make_shared&lt;loggers::StorageLogger&gt;();</div>
 </div><!-- fragment --><p>Add the logger to the executor</p>
 <div class="fragment"><div class="line">exec-&gt;add_logger(storage_logger);</div>
 </div><!-- fragment --><p>Read the matrix A from file</p>
@@ -507,7 +498,7 @@ $(function() {
 </div><!-- fragment --><p>Log the internal operations using the OperationLogger without timing</p>
 <div class="fragment"><div class="line">{</div>
 </div><!-- fragment --><p>Create an OperationLogger to analyze the generate step</p>
-<div class="fragment"><div class="line"><span class="keyword">auto</span> gen_logger = std::make_shared&lt;loggers::OperationLogger&gt;(exec);</div>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> gen_logger = std::make_shared&lt;loggers::OperationLogger&gt;();</div>
 </div><!-- fragment --><p>Add the generate logger to the executor</p>
 <div class="fragment"><div class="line">exec-&gt;add_logger(gen_logger);</div>
 </div><!-- fragment --><p>Generate a solver</p>
@@ -518,11 +509,11 @@ $(function() {
 <div class="fragment"><div class="line">output_file &lt;&lt; <span class="stringliteral">&quot;Generate operations times (ns):&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line">gen_logger-&gt;write_data(output_file);</div>
 </div><!-- fragment --><p>Create an OperationLogger to analyze the apply step</p>
-<div class="fragment"><div class="line"><span class="keyword">auto</span> apply_logger = std::make_shared&lt;loggers::OperationLogger&gt;(exec);</div>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> apply_logger = std::make_shared&lt;loggers::OperationLogger&gt;();</div>
 <div class="line">exec-&gt;add_logger(apply_logger);</div>
 </div><!-- fragment --><p>Create a ResidualLogger to log the recurent residual</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> res_logger = std::make_shared&lt;loggers::ResidualLogger&lt;ValueType&gt;&gt;(</div>
-<div class="line">    exec, <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(A), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b));</div>
+<div class="line">    <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(A), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b));</div>
 <div class="line">generated_solver-&gt;add_logger(res_logger);</div>
 </div><!-- fragment --><p>Solve the system</p>
 <div class="fragment"><div class="line">generated_solver-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(x));</div>
@@ -795,10 +786,6 @@ $(function() {
 <div class="line">        }</div>
 <div class="line">    }</div>
 <div class="line"> </div>
-<div class="line">    OperationLogger(std::shared_ptr&lt;const gko::Executor&gt; exec)</div>
-<div class="line">        : <a class="code" href="namespacegko.html">gko</a>::log::Logger(exec)</div>
-<div class="line">    {}</div>
-<div class="line"> </div>
 <div class="line"><span class="keyword">private</span>:</div>
 <div class="line">    <span class="keywordtype">void</span> start_operation(<span class="keyword">const</span> <a class="code" href="classgko_1_1Executor.html">gko::Executor</a>* exec,</div>
 <div class="line">                         <span class="keyword">const</span> std::string&amp; name)<span class="keyword"> const</span></div>
@@ -849,10 +836,6 @@ $(function() {
 <div class="line">        ostream &lt;&lt; <span class="stringliteral">&quot;Storage: &quot;</span> &lt;&lt; total &lt;&lt; std::endl;</div>
 <div class="line">    }</div>
 <div class="line"> </div>
-<div class="line">    StorageLogger(std::shared_ptr&lt;const gko::Executor&gt; exec)</div>
-<div class="line">        : <a class="code" href="namespacegko.html">gko</a>::log::Logger(exec)</div>
-<div class="line">    {}</div>
-<div class="line"> </div>
 <div class="line"><span class="keyword">private</span>:</div>
 <div class="line">    <span class="keyword">mutable</span> std::unordered_map&lt;gko::uintptr, gko::size_type&gt; storage;</div>
 <div class="line">};</div>
@@ -880,9 +863,8 @@ $(function() {
 <div class="line">        }</div>
 <div class="line">    }</div>
 <div class="line"> </div>
-<div class="line">    ResidualLogger(std::shared_ptr&lt;const gko::Executor&gt; exec,</div>
-<div class="line">                   <span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html">gko::LinOp</a>* matrix, <span class="keyword">const</span> vec&lt;ValueType&gt;* b)</div>
-<div class="line">        : <a class="code" href="namespacegko.html">gko</a>::log::Logger(exec, <a class="code" href="namespacegko.html">gko</a>::log::Logger::iteration_complete_mask),</div>
+<div class="line">    ResidualLogger(<span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html">gko::LinOp</a>* matrix, <span class="keyword">const</span> vec&lt;ValueType&gt;* b)</div>
+<div class="line">        : <a class="code" href="namespacegko.html">gko</a>::log::Logger(<a class="code" href="namespacegko.html">gko</a>::log::Logger::iteration_complete_mask),</div>
 <div class="line">          matrix{matrix},</div>
 <div class="line">          b{b}</div>
 <div class="line">    {}</div>
@@ -992,7 +974,7 @@ $(function() {
 <div class="line">        input_mtx = std::string(argv[2]);</div>
 <div class="line">    }</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">auto</span> storage_logger = std::make_shared&lt;loggers::StorageLogger&gt;(exec);</div>
+<div class="line">    <span class="keyword">auto</span> storage_logger = std::make_shared&lt;loggers::StorageLogger&gt;();</div>
 <div class="line">    exec-&gt;add_logger(storage_logger);</div>
 <div class="line">    <span class="keyword">auto</span> A = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a>(gko::read&lt;mtx&gt;(std::ifstream(input_mtx), exec));</div>
 <div class="line">    exec-&gt;remove_logger(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(storage_logger));</div>
@@ -1049,17 +1031,17 @@ $(function() {
 <div class="line">    }</div>
 <div class="line"> </div>
 <div class="line">    {</div>
-<div class="line">        <span class="keyword">auto</span> gen_logger = std::make_shared&lt;loggers::OperationLogger&gt;(exec);</div>
+<div class="line">        <span class="keyword">auto</span> gen_logger = std::make_shared&lt;loggers::OperationLogger&gt;();</div>
 <div class="line">        exec-&gt;add_logger(gen_logger);</div>
 <div class="line">        <span class="keyword">auto</span> generated_solver = solver_factory-&gt;generate(A);</div>
 <div class="line">        exec-&gt;remove_logger(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(gen_logger));</div>
 <div class="line">        output_file &lt;&lt; <span class="stringliteral">&quot;Generate operations times (ns):&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line">        gen_logger-&gt;write_data(output_file);</div>
 <div class="line"> </div>
-<div class="line">        <span class="keyword">auto</span> apply_logger = std::make_shared&lt;loggers::OperationLogger&gt;(exec);</div>
+<div class="line">        <span class="keyword">auto</span> apply_logger = std::make_shared&lt;loggers::OperationLogger&gt;();</div>
 <div class="line">        exec-&gt;add_logger(apply_logger);</div>
 <div class="line">        <span class="keyword">auto</span> res_logger = std::make_shared&lt;loggers::ResidualLogger&lt;ValueType&gt;&gt;(</div>
-<div class="line">            exec, <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(A), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b));</div>
+<div class="line">            <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(A), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b));</div>
 <div class="line">        generated_solver-&gt;add_logger(res_logger);</div>
 <div class="line">        generated_solver-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(x));</div>
 <div class="line">        exec-&gt;remove_logger(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(apply_logger));</div>

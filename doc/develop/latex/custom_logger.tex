@@ -409,9 +409,8 @@ Construct the logger and store the system matrix and b vectors
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{    ResidualLogger(std::shared\_ptr<const gko::Executor> exec,}
-\DoxyCodeLine{                   \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* matrix, \textcolor{keyword}{const} gko\_dense* b)}
-\DoxyCodeLine{        : \mbox{\hyperlink{namespacegko}{gko}}::log::Logger(exec, \mbox{\hyperlink{namespacegko}{gko}}::log::Logger::iteration\_complete\_mask),}
+\DoxyCodeLine{    ResidualLogger(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* matrix, \textcolor{keyword}{const} gko\_dense* b)}
+\DoxyCodeLine{        : \mbox{\hyperlink{namespacegko}{gko}}::log::Logger(\mbox{\hyperlink{namespacegko}{gko}}::log::Logger::iteration\_complete\_mask),}
 \DoxyCodeLine{          matrix\{matrix\},}
 \DoxyCodeLine{          b\{b\}}
 \DoxyCodeLine{    \{\}}
@@ -597,8 +596,8 @@ Instantiate a Residual\+Logger logger.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{auto} logger = std::make\_shared<ResidualLogger<ValueType>>(}
-\DoxyCodeLine{    exec, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(A), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b));}
+\DoxyCodeLine{\textcolor{keyword}{auto} logger =}
+\DoxyCodeLine{    std::make\_shared<ResidualLogger<ValueType>>(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(A), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b));}
 \end{DoxyCode}
 
 
@@ -868,9 +867,8 @@ The following is the expected result\+:
 \DoxyCodeLine{        iterations.push\_back(iteration);}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    ResidualLogger(std::shared\_ptr<const gko::Executor> exec,}
-\DoxyCodeLine{                   \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* matrix, \textcolor{keyword}{const} gko\_dense* b)}
-\DoxyCodeLine{        : \mbox{\hyperlink{namespacegko}{gko}}::log::Logger(exec, \mbox{\hyperlink{namespacegko}{gko}}::log::Logger::iteration\_complete\_mask),}
+\DoxyCodeLine{    ResidualLogger(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* matrix, \textcolor{keyword}{const} gko\_dense* b)}
+\DoxyCodeLine{        : \mbox{\hyperlink{namespacegko}{gko}}::log::Logger(\mbox{\hyperlink{namespacegko}{gko}}::log::Logger::iteration\_complete\_mask),}
 \DoxyCodeLine{          matrix\{matrix\},}
 \DoxyCodeLine{          b\{b\}}
 \DoxyCodeLine{    \{\}}
@@ -939,8 +937,8 @@ The following is the expected result\+:
 \DoxyCodeLine{                    .on(exec))}
 \DoxyCodeLine{            .on(exec);}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{auto} logger = std::make\_shared<ResidualLogger<ValueType>>(}
-\DoxyCodeLine{        exec, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(A), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b));}
+\DoxyCodeLine{    \textcolor{keyword}{auto} logger =}
+\DoxyCodeLine{        std::make\_shared<ResidualLogger<ValueType>>(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(A), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b));}
 \DoxyCodeLine{}
 \DoxyCodeLine{    solver\_gen-\/>add\_logger(logger);}
 \DoxyCodeLine{}

@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/547116244 branch based on develop. Ginkgo version 1.5.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/568686368 branch based on develop. Ginkgo version 1.5.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -250,9 +250,8 @@ $(function() {
 <div class="fragment"><div class="line">    iterations.push_back(iteration);</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>Construct the logger and store the system matrix and b vectors</p>
-<div class="fragment"><div class="line">    ResidualLogger(std::shared_ptr&lt;const gko::Executor&gt; exec,</div>
-<div class="line">                   <span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html">gko::LinOp</a>* matrix, <span class="keyword">const</span> gko_dense* b)</div>
-<div class="line">        : <a class="code" href="namespacegko.html">gko</a>::log::Logger(exec, <a class="code" href="namespacegko.html">gko</a>::log::Logger::iteration_complete_mask),</div>
+<div class="fragment"><div class="line">    ResidualLogger(<span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html">gko::LinOp</a>* matrix, <span class="keyword">const</span> gko_dense* b)</div>
+<div class="line">        : <a class="code" href="namespacegko.html">gko</a>::log::Logger(<a class="code" href="namespacegko.html">gko</a>::log::Logger::iteration_complete_mask),</div>
 <div class="line">          matrix{matrix},</div>
 <div class="line">          b{b}</div>
 <div class="line">    {}</div>
@@ -334,8 +333,8 @@ $(function() {
 <div class="line">                .on(exec))</div>
 <div class="line">        .on(exec);</div>
 </div><!-- fragment --><p>Instantiate a ResidualLogger logger.</p>
-<div class="fragment"><div class="line"><span class="keyword">auto</span> logger = std::make_shared&lt;ResidualLogger&lt;ValueType&gt;&gt;(</div>
-<div class="line">    exec, <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(A), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b));</div>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> logger =</div>
+<div class="line">    std::make_shared&lt;ResidualLogger&lt;ValueType&gt;&gt;(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(A), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b));</div>
 </div><!-- fragment --><p>Add the previously created logger to the solver factory. The logger will be automatically propagated to all solvers created from this factory.</p>
 <div class="fragment"><div class="line">solver_gen-&gt;add_logger(logger);</div>
 </div><!-- fragment --><p>Generate the solver from the matrix. The solver factory built in the previous step takes a "matrix"(a <a class="el" href="classgko_1_1LinOp.html">gko::LinOp</a> to be more general) as an input. In this case we provide it with a full matrix that we previously read, but as the solver only effectively uses the apply() method within the provided "matrix" object, you can effectively create a <a class="el" href="classgko_1_1LinOp.html">gko::LinOp</a> class with your own apply implementation to accomplish more tasks. We will see an example of how this can be done in the custom-matrix-format example</p>
@@ -554,9 +553,8 @@ $(function() {
 <div class="line">        iterations.push_back(iteration);</div>
 <div class="line">    }</div>
 <div class="line"> </div>
-<div class="line">    ResidualLogger(std::shared_ptr&lt;const gko::Executor&gt; exec,</div>
-<div class="line">                   <span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html">gko::LinOp</a>* matrix, <span class="keyword">const</span> gko_dense* b)</div>
-<div class="line">        : <a class="code" href="namespacegko.html">gko</a>::log::Logger(exec, <a class="code" href="namespacegko.html">gko</a>::log::Logger::iteration_complete_mask),</div>
+<div class="line">    ResidualLogger(<span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html">gko::LinOp</a>* matrix, <span class="keyword">const</span> gko_dense* b)</div>
+<div class="line">        : <a class="code" href="namespacegko.html">gko</a>::log::Logger(<a class="code" href="namespacegko.html">gko</a>::log::Logger::iteration_complete_mask),</div>
 <div class="line">          matrix{matrix},</div>
 <div class="line">          b{b}</div>
 <div class="line">    {}</div>
@@ -625,8 +623,8 @@ $(function() {
 <div class="line">                    .on(exec))</div>
 <div class="line">            .on(exec);</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">auto</span> logger = std::make_shared&lt;ResidualLogger&lt;ValueType&gt;&gt;(</div>
-<div class="line">        exec, <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(A), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b));</div>
+<div class="line">    <span class="keyword">auto</span> logger =</div>
+<div class="line">        std::make_shared&lt;ResidualLogger&lt;ValueType&gt;&gt;(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(A), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b));</div>
 <div class="line"> </div>
 <div class="line">    solver_gen-&gt;add_logger(logger);</div>
 <div class="line"> </div>
