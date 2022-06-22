@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['machinetopology_797',['MachineTopology',['../classgko_1_1MachineTopology.html',1,'gko']]],
+  ['machine_5ftopology_797',['machine_topology',['../classgko_1_1machine__topology.html',1,'gko']]],
   ['major_798',['major',['../structgko_1_1version.html#a019ce1d31714612e0c77c8ef5eb4cfde',1,'gko::version']]],
   ['make_5farray_5fview_799',['make_array_view',['../namespacegko.html#ab6c63e16608df2b83cf706b490bcef72',1,'gko']]],
   ['make_5fcomplex_800',['make_complex',['../classgko_1_1matrix_1_1Dense.html#a01b9a6f6f3b72f1d2b6044afb0f78791',1,'gko::matrix::Dense::make_complex() const'],['../classgko_1_1matrix_1_1Dense.html#ac39e8e17c7e102ad491328959ca8f8d3',1,'gko::matrix::Dense::make_complex(complex_type *result) const']]],

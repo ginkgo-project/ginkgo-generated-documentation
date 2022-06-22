@@ -4,7 +4,7 @@ var searchData=
   ['identity_1515',['Identity',['../classgko_1_1matrix_1_1Identity.html',1,'gko::matrix']]],
   ['identityfactory_1516',['IdentityFactory',['../classgko_1_1matrix_1_1IdentityFactory.html',1,'gko::matrix']]],
   ['idr_1517',['Idr',['../classgko_1_1solver_1_1Idr.html',1,'gko::solver']]],
-  ['ilu_1518',['Ilu',['../classgko_1_1factorization_1_1Ilu.html',1,'gko::factorization::Ilu&lt; ValueType, IndexType &gt;'],['../classgko_1_1preconditioner_1_1Ilu.html',1,'gko::preconditioner::Ilu&lt; LSolverType, USolverType, ReverseApply, IndexType &gt;']]],
+  ['ilu_1518',['Ilu',['../classgko_1_1preconditioner_1_1Ilu.html',1,'gko::preconditioner::Ilu&lt; LSolverType, USolverType, ReverseApply, IndexType &gt;'],['../classgko_1_1factorization_1_1Ilu.html',1,'gko::factorization::Ilu&lt; ValueType, IndexType &gt;']]],
   ['imag_5foperaton_1519',['imag_operaton',['../structgko_1_1accessor_1_1imag__operaton.html',1,'gko::accessor']]],
   ['imbalance_5fbounded_5flimit_1520',['imbalance_bounded_limit',['../classgko_1_1matrix_1_1Hybrid_1_1imbalance__bounded__limit.html',1,'gko::matrix::Hybrid']]],
   ['imbalance_5flimit_1521',['imbalance_limit',['../classgko_1_1matrix_1_1Hybrid_1_1imbalance__limit.html',1,'gko::matrix::Hybrid']]],

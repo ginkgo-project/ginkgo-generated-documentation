@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['machinetopology_1546',['MachineTopology',['../classgko_1_1MachineTopology.html',1,'gko']]],
+  ['machine_5ftopology_1546',['machine_topology',['../classgko_1_1machine__topology.html',1,'gko']]],
   ['matrix_5fassembly_5fdata_1547',['matrix_assembly_data',['../classgko_1_1matrix__assembly__data.html',1,'gko']]],
   ['matrix_5fdata_1548',['matrix_data',['../structgko_1_1matrix__data.html',1,'gko']]],
   ['matrix_5fdata_5fentry_1549',['matrix_data_entry',['../structgko_1_1matrix__data__entry.html',1,'gko']]],
