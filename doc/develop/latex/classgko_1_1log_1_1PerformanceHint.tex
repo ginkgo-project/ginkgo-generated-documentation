@@ -1,0 +1,153 @@
+\hypertarget{classgko_1_1log_1_1PerformanceHint}{}\doxysection{gko\+::log\+::Performance\+Hint Class Reference}
+\label{classgko_1_1log_1_1PerformanceHint}\index{gko::log::PerformanceHint@{gko::log::PerformanceHint}}
+
+
+\mbox{\hyperlink{classgko_1_1log_1_1PerformanceHint}{Performance\+Hint}} is a \mbox{\hyperlink{classgko_1_1log_1_1Logger}{Logger}} which analyzes the performance of the application and outputs hints for unnecessary copies and allocations.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/log/performance\+\_\+hint.\+hpp$>$}
+
+
+
+Collaboration diagram for gko\+::log\+::Performance\+Hint\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=224pt]{classgko_1_1log_1_1PerformanceHint__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classgko_1_1log_1_1PerformanceHint_aa3bd3b91c24a67ea52350f1ebcfe43ff}{on\+\_\+allocation\+\_\+completed}} (const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $\ast$exec, const \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \&num\+\_\+bytes, const uintptr \&location) const override
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1Executor}{Executor}}\textquotesingle{}s allocation completed event. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1log_1_1PerformanceHint_a620e8a379028087ef250cc6f9cb87e74}{on\+\_\+free\+\_\+completed}} (const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $\ast$exec, const uintptr \&location) const override
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1Executor}{Executor}}\textquotesingle{}s free completed event. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1log_1_1PerformanceHint_ac903d32fd9cc4cb6fa8265f9cf57c78a}{on\+\_\+copy\+\_\+completed}} (const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $\ast$from, const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $\ast$to, const uintptr \&location\+\_\+from, const uintptr \&location\+\_\+to, const \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \&num\+\_\+bytes) const override
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1Executor}{Executor}}\textquotesingle{}s copy completed event. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1log_1_1PerformanceHint_a5570eaac4f55d6a84293f4611c790f2c}\label{classgko_1_1log_1_1PerformanceHint_a5570eaac4f55d6a84293f4611c790f2c}} 
+void \mbox{\hyperlink{classgko_1_1log_1_1PerformanceHint_a5570eaac4f55d6a84293f4611c790f2c}{print\+\_\+status}} () const
+\begin{DoxyCompactList}\small\item\em Writes out the cross-\/executor writes and allocations that have been stored so far. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1log_1_1PerformanceHint}{Performance\+Hint}} $>$ \mbox{\hyperlink{classgko_1_1log_1_1PerformanceHint_aafdf5c073e6b057d8eb73b896fe43acf}{create}} (std\+::ostream \&os=std\+::cerr, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} allocation\+\_\+size\+\_\+limit=16, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} copy\+\_\+size\+\_\+limit=16, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} histogram\+\_\+max\+\_\+size=1024)
+\begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{classgko_1_1log_1_1PerformanceHint}{Performance\+Hint}} logger. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{classgko_1_1log_1_1PerformanceHint}{Performance\+Hint}} is a \mbox{\hyperlink{classgko_1_1log_1_1Logger}{Logger}} which analyzes the performance of the application and outputs hints for unnecessary copies and allocations. 
+
+The specific patterns it checks for are\+:
+\begin{DoxyItemize}
+\item repeated cross-\/executor copies from or to the same pointer
+\item repeated allocation/free pairs of the same size 
+\end{DoxyItemize}
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1log_1_1PerformanceHint_aafdf5c073e6b057d8eb73b896fe43acf}\label{classgko_1_1log_1_1PerformanceHint_aafdf5c073e6b057d8eb73b896fe43acf}} 
+\index{gko::log::PerformanceHint@{gko::log::PerformanceHint}!create@{create}}
+\index{create@{create}!gko::log::PerformanceHint@{gko::log::PerformanceHint}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}}
+{\footnotesize\ttfamily static std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1log_1_1PerformanceHint}{Performance\+Hint}}$>$ gko\+::log\+::\+Performance\+Hint\+::create (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os = {\ttfamily std\+:\+:cerr},  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{allocation\+\_\+size\+\_\+limit = {\ttfamily 16},  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{copy\+\_\+size\+\_\+limit = {\ttfamily 16},  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{histogram\+\_\+max\+\_\+size = {\ttfamily 1024} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Creates a \mbox{\hyperlink{classgko_1_1log_1_1PerformanceHint}{Performance\+Hint}} logger. 
+
+This dynamically allocates the memory, constructs the object and returns an std\+::unique\+\_\+ptr to this object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & the stream used for this logger \\
+\hline
+{\em allocation\+\_\+size\+\_\+limit} & ignore allocations below this limit (bytes) \\
+\hline
+{\em copy\+\_\+size\+\_\+limit} & ignore copies below this limit (bytes) \\
+\hline
+{\em histogram\+\_\+max\+\_\+size} & how many allocation sizes and/or pointers to keep track of at most?\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+an std\+::unique\+\_\+ptr to the the constructed object 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1log_1_1PerformanceHint_aa3bd3b91c24a67ea52350f1ebcfe43ff}\label{classgko_1_1log_1_1PerformanceHint_aa3bd3b91c24a67ea52350f1ebcfe43ff}} 
+\index{gko::log::PerformanceHint@{gko::log::PerformanceHint}!on\_allocation\_completed@{on\_allocation\_completed}}
+\index{on\_allocation\_completed@{on\_allocation\_completed}!gko::log::PerformanceHint@{gko::log::PerformanceHint}}
+\doxysubsubsection{\texorpdfstring{on\_allocation\_completed()}{on\_allocation\_completed()}}
+{\footnotesize\ttfamily void gko\+::log\+::\+Performance\+Hint\+::on\+\_\+allocation\+\_\+completed (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $\ast$}]{exec,  }\item[{const \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \&}]{num\+\_\+bytes,  }\item[{const uintptr \&}]{location }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+\mbox{\hyperlink{classgko_1_1Executor}{Executor}}\textquotesingle{}s allocation completed event. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & the executor used \\
+\hline
+{\em num\+\_\+bytes} & the number of bytes allocated \\
+\hline
+{\em location} & the address at which the data was allocated \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classgko_1_1log_1_1Logger}{gko\+::log\+::\+Logger}}.
+
+\mbox{\Hypertarget{classgko_1_1log_1_1PerformanceHint_ac903d32fd9cc4cb6fa8265f9cf57c78a}\label{classgko_1_1log_1_1PerformanceHint_ac903d32fd9cc4cb6fa8265f9cf57c78a}} 
+\index{gko::log::PerformanceHint@{gko::log::PerformanceHint}!on\_copy\_completed@{on\_copy\_completed}}
+\index{on\_copy\_completed@{on\_copy\_completed}!gko::log::PerformanceHint@{gko::log::PerformanceHint}}
+\doxysubsubsection{\texorpdfstring{on\_copy\_completed()}{on\_copy\_completed()}}
+{\footnotesize\ttfamily void gko\+::log\+::\+Performance\+Hint\+::on\+\_\+copy\+\_\+completed (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $\ast$}]{exec\+\_\+from,  }\item[{const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $\ast$}]{exec\+\_\+to,  }\item[{const uintptr \&}]{loc\+\_\+from,  }\item[{const uintptr \&}]{loc\+\_\+to,  }\item[{const \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \&}]{num\+\_\+bytes }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+\mbox{\hyperlink{classgko_1_1Executor}{Executor}}\textquotesingle{}s copy completed event. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec\+\_\+from} & the executor copied from \\
+\hline
+{\em exec\+\_\+to} & the executor copied to \\
+\hline
+{\em loc\+\_\+from} & the address at which the data was copied from \\
+\hline
+{\em loc\+\_\+to} & the address at which the data was copied to \\
+\hline
+{\em num\+\_\+bytes} & the number of bytes copied \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classgko_1_1log_1_1Logger}{gko\+::log\+::\+Logger}}.
+
+\mbox{\Hypertarget{classgko_1_1log_1_1PerformanceHint_a620e8a379028087ef250cc6f9cb87e74}\label{classgko_1_1log_1_1PerformanceHint_a620e8a379028087ef250cc6f9cb87e74}} 
+\index{gko::log::PerformanceHint@{gko::log::PerformanceHint}!on\_free\_completed@{on\_free\_completed}}
+\index{on\_free\_completed@{on\_free\_completed}!gko::log::PerformanceHint@{gko::log::PerformanceHint}}
+\doxysubsubsection{\texorpdfstring{on\_free\_completed()}{on\_free\_completed()}}
+{\footnotesize\ttfamily void gko\+::log\+::\+Performance\+Hint\+::on\+\_\+free\+\_\+completed (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $\ast$}]{exec,  }\item[{const uintptr \&}]{location }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+\mbox{\hyperlink{classgko_1_1Executor}{Executor}}\textquotesingle{}s free completed event. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & the executor used \\
+\hline
+{\em location} & the address at which the data was freed \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classgko_1_1log_1_1Logger}{gko\+::log\+::\+Logger}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/log/performance\+\_\+hint.\+hpp\end{DoxyCompactItemize}

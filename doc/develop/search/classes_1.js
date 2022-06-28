@@ -1,13 +1,13 @@
 var searchData=
 [
-  ['baddimension_1125',['BadDimension',['../classgko_1_1BadDimension.html',1,'gko']]],
-  ['bicg_1126',['Bicg',['../classgko_1_1solver_1_1Bicg.html',1,'gko::solver']]],
-  ['bicgstab_1127',['Bicgstab',['../classgko_1_1solver_1_1Bicgstab.html',1,'gko::solver']]],
-  ['bitwise_5fand_1128',['bitwise_and',['../structgko_1_1accessor_1_1bitwise__and.html',1,'gko::accessor']]],
-  ['bitwise_5fnot_1129',['bitwise_not',['../structgko_1_1accessor_1_1bitwise__not.html',1,'gko::accessor']]],
-  ['bitwise_5for_1130',['bitwise_or',['../structgko_1_1accessor_1_1bitwise__or.html',1,'gko::accessor']]],
-  ['bitwise_5fxor_1131',['bitwise_xor',['../structgko_1_1accessor_1_1bitwise__xor.html',1,'gko::accessor']]],
-  ['block_5finterleaved_5fstorage_5fscheme_1132',['block_interleaved_storage_scheme',['../structgko_1_1preconditioner_1_1block__interleaved__storage__scheme.html',1,'gko::preconditioner']]],
-  ['block_5finterleaved_5fstorage_5fscheme_3c_20index_5ftype_20_3e_1133',['block_interleaved_storage_scheme&lt; index_type &gt;',['../structgko_1_1preconditioner_1_1block__interleaved__storage__scheme.html',1,'gko::preconditioner']]],
-  ['blocksizeerror_1134',['BlockSizeError',['../classgko_1_1BlockSizeError.html',1,'gko']]]
+  ['baddimension_1127',['BadDimension',['../classgko_1_1BadDimension.html',1,'gko']]],
+  ['bicg_1128',['Bicg',['../classgko_1_1solver_1_1Bicg.html',1,'gko::solver']]],
+  ['bicgstab_1129',['Bicgstab',['../classgko_1_1solver_1_1Bicgstab.html',1,'gko::solver']]],
+  ['bitwise_5fand_1130',['bitwise_and',['../structgko_1_1accessor_1_1bitwise__and.html',1,'gko::accessor']]],
+  ['bitwise_5fnot_1131',['bitwise_not',['../structgko_1_1accessor_1_1bitwise__not.html',1,'gko::accessor']]],
+  ['bitwise_5for_1132',['bitwise_or',['../structgko_1_1accessor_1_1bitwise__or.html',1,'gko::accessor']]],
+  ['bitwise_5fxor_1133',['bitwise_xor',['../structgko_1_1accessor_1_1bitwise__xor.html',1,'gko::accessor']]],
+  ['block_5finterleaved_5fstorage_5fscheme_1134',['block_interleaved_storage_scheme',['../structgko_1_1preconditioner_1_1block__interleaved__storage__scheme.html',1,'gko::preconditioner']]],
+  ['block_5finterleaved_5fstorage_5fscheme_3c_20index_5ftype_20_3e_1135',['block_interleaved_storage_scheme&lt; index_type &gt;',['../structgko_1_1preconditioner_1_1block__interleaved__storage__scheme.html',1,'gko::preconditioner']]],
+  ['blocksizeerror_1136',['BlockSizeError',['../classgko_1_1BlockSizeError.html',1,'gko']]]
 ];
