@@ -201,21 +201,7 @@ Solve system
 \end{DoxyCode}
 
 
-Finally, get some data from {\ttfamily record\+\_\+logger} and print the last memory location copied
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{auto}\& last\_copy = record\_logger-\/>get().copy\_completed.back();}
-\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"Last memory copied was of size "} << std::hex}
-\DoxyCodeLine{          << std::get<0>(*last\_copy).num\_bytes << \textcolor{stringliteral}{" FROM executor "}}
-\DoxyCodeLine{          << std::get<0>(*last\_copy).exec << \textcolor{stringliteral}{" pointer "}}
-\DoxyCodeLine{          << std::get<0>(*last\_copy).location << \textcolor{stringliteral}{" TO executor "}}
-\DoxyCodeLine{          << std::get<1>(*last\_copy).exec << \textcolor{stringliteral}{" pointer "}}
-\DoxyCodeLine{          << std::get<1>(*last\_copy).location << std::dec << std::endl;}
-\end{DoxyCode}
-
-
-Also print the residual of the last criterion check event (where convergence happened)
+Print the residual of the last criterion check event (where convergence happened)
 
 
 \begin{DoxyCode}{0}
@@ -1158,13 +1144,6 @@ This is the expected output\+:
 \DoxyCodeLine{}
 \DoxyCodeLine{    solver-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(b), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x));}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{auto}\& last\_copy = record\_logger-\/>get().copy\_completed.back();}
-\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Last memory copied was of size "} << std::hex}
-\DoxyCodeLine{              << std::get<0>(*last\_copy).num\_bytes << \textcolor{stringliteral}{" FROM executor "}}
-\DoxyCodeLine{              << std::get<0>(*last\_copy).exec << \textcolor{stringliteral}{" pointer "}}
-\DoxyCodeLine{              << std::get<0>(*last\_copy).location << \textcolor{stringliteral}{" TO executor "}}
-\DoxyCodeLine{              << std::get<1>(*last\_copy).exec << \textcolor{stringliteral}{" pointer "}}
-\DoxyCodeLine{              << std::get<1>(*last\_copy).location << std::dec << std::endl;}
 \DoxyCodeLine{    \textcolor{keyword}{auto} residual =}
 \DoxyCodeLine{        record\_logger-\/>get().criterion\_check\_completed.back()-\/>residual.get();}
 \DoxyCodeLine{    \textcolor{keyword}{auto} residual\_d = gko::as<vec>(residual);}
