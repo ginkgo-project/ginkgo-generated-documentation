@@ -1,18 +1,18 @@
 var searchData=
 [
-  ['left_5fshift_1533',['left_shift',['../structgko_1_1accessor_1_1left__shift.html',1,'gko::accessor']]],
-  ['less_1534',['less',['../structgko_1_1accessor_1_1less.html',1,'gko::accessor']]],
-  ['less_5for_5fequal_1535',['less_or_equal',['../structgko_1_1accessor_1_1less__or__equal.html',1,'gko::accessor']]],
-  ['linop_1536',['LinOp',['../classgko_1_1LinOp.html',1,'gko']]],
-  ['linop_5fdata_1537',['linop_data',['../structgko_1_1log_1_1linop__data.html',1,'gko::log']]],
-  ['linop_5ffactory_5fdata_1538',['linop_factory_data',['../structgko_1_1log_1_1linop__factory__data.html',1,'gko::log']]],
-  ['linopfactory_1539',['LinOpFactory',['../classgko_1_1LinOpFactory.html',1,'gko']]],
-  ['load_5fbalance_1540',['load_balance',['../classgko_1_1matrix_1_1Csr_1_1load__balance.html',1,'gko::matrix::Csr']]],
-  ['loggable_1541',['Loggable',['../classgko_1_1log_1_1Loggable.html',1,'gko::log']]],
-  ['logged_5fdata_1542',['logged_data',['../structgko_1_1log_1_1Record_1_1logged__data.html',1,'gko::log::Record']]],
-  ['logger_1543',['Logger',['../classgko_1_1log_1_1Logger.html',1,'gko::log']]],
-  ['logical_5fand_1544',['logical_and',['../structgko_1_1accessor_1_1logical__and.html',1,'gko::accessor']]],
-  ['logical_5fnot_1545',['logical_not',['../structgko_1_1accessor_1_1logical__not.html',1,'gko::accessor']]],
-  ['logical_5for_1546',['logical_or',['../structgko_1_1accessor_1_1logical__or.html',1,'gko::accessor']]],
-  ['lowertrs_1547',['LowerTrs',['../classgko_1_1solver_1_1LowerTrs.html',1,'gko::solver']]]
+  ['left_5fshift_1546',['left_shift',['../structgko_1_1accessor_1_1left__shift.html',1,'gko::accessor']]],
+  ['less_1547',['less',['../structgko_1_1accessor_1_1less.html',1,'gko::accessor']]],
+  ['less_5for_5fequal_1548',['less_or_equal',['../structgko_1_1accessor_1_1less__or__equal.html',1,'gko::accessor']]],
+  ['linop_1549',['LinOp',['../classgko_1_1LinOp.html',1,'gko']]],
+  ['linop_5fdata_1550',['linop_data',['../structgko_1_1log_1_1linop__data.html',1,'gko::log']]],
+  ['linop_5ffactory_5fdata_1551',['linop_factory_data',['../structgko_1_1log_1_1linop__factory__data.html',1,'gko::log']]],
+  ['linopfactory_1552',['LinOpFactory',['../classgko_1_1LinOpFactory.html',1,'gko']]],
+  ['load_5fbalance_1553',['load_balance',['../classgko_1_1matrix_1_1Csr_1_1load__balance.html',1,'gko::matrix::Csr']]],
+  ['loggable_1554',['Loggable',['../classgko_1_1log_1_1Loggable.html',1,'gko::log']]],
+  ['logged_5fdata_1555',['logged_data',['../structgko_1_1log_1_1Record_1_1logged__data.html',1,'gko::log::Record']]],
+  ['logger_1556',['Logger',['../classgko_1_1log_1_1Logger.html',1,'gko::log']]],
+  ['logical_5fand_1557',['logical_and',['../structgko_1_1accessor_1_1logical__and.html',1,'gko::accessor']]],
+  ['logical_5fnot_1558',['logical_not',['../structgko_1_1accessor_1_1logical__not.html',1,'gko::accessor']]],
+  ['logical_5for_1559',['logical_or',['../structgko_1_1accessor_1_1logical__or.html',1,'gko::accessor']]],
+  ['lowertrs_1560',['LowerTrs',['../classgko_1_1solver_1_1LowerTrs.html',1,'gko::solver']]]
 ];
