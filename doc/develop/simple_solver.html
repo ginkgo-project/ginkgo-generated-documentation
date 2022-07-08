@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/581570220 branch based on develop. Ginkgo version 1.5.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/583090051 branch based on develop. Ginkgo version 1.5.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -134,8 +134,8 @@ $(function() {
 <div class="fragment"><div class="line"><span class="keyword">using</span> cg = <a class="code" href="classgko_1_1solver_1_1Cg.html">gko::solver::Cg&lt;ValueType&gt;</a>;</div>
 </div><!-- fragment --><p>Print the ginkgo version information.</p>
 <div class="fragment"><div class="line">std::cout &lt;&lt; <a class="code" href="classgko_1_1version__info.html#a6daeb8a087cfb57fa055526fc133d8eb">gko::version_info::get</a>() &lt;&lt; std::endl;</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordflow">if</span> (argc == 2 &amp;&amp; (std::string(argv[1]) == <span class="stringliteral">&quot;--help&quot;</span>)) {</div>
+</div><!-- fragment --><p>Print help on how to execute this example.</p>
+<div class="fragment"><div class="line"><span class="keywordflow">if</span> (argc == 2 &amp;&amp; (std::string(argv[1]) == <span class="stringliteral">&quot;--help&quot;</span>)) {</div>
 <div class="line">    std::cerr &lt;&lt; <span class="stringliteral">&quot;Usage: &quot;</span> &lt;&lt; argv[0] &lt;&lt; <span class="stringliteral">&quot; [executor] &quot;</span> &lt;&lt; std::endl;</div>
 <div class="line">    std::exit(-1);</div>
 <div class="line">}</div>
@@ -165,7 +165,7 @@ $(function() {
 <div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keyword">auto</span> exec = exec_map.at(executor_string)();  <span class="comment">// throws if not valid</span></div>
 </div><!-- fragment --><p><a class="anchor" id="Readingyourdataandtransfertotheproperdevice"></a> </p><h3>Reading your data and transfer to the proper device.</h3>
 <p>Read the matrix, right hand side and the initial solution using the read function. </p><dl class="section note"><dt>Note</dt><dd>Ginkgo uses C++ smart pointers to automatically manage memory. To this end, we use our own object ownership transfer functions that under the hood call the required smart pointer functions to manage object ownership. The <a class="el" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58" title="Marks the object pointed to by p as shared.">gko::share</a> , <a class="el" href="namespacegko.html#acbd3fd6d07e498892881e8e2ab0b4167" title="Marks that the object pointed to by p can be given to the callee.">gko::give</a> and <a class="el" href="namespacegko.html#a014ec51e675c425bb83908361f630450" title="Returns a non-owning (plain) pointer to the object pointed to by p.">gko::lend</a> are the functions that you would need to use.</dd></dl>
-<div class="fragment"><div class="line"><span class="keyword">auto</span> A = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">share</a>(gko::read&lt;mtx&gt;(std::ifstream(<span class="stringliteral">&quot;data/A.mtx&quot;</span>), exec));</div>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> A = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a>(gko::read&lt;mtx&gt;(std::ifstream(<span class="stringliteral">&quot;data/A.mtx&quot;</span>), exec));</div>
 <div class="line"><span class="keyword">auto</span> b = gko::read&lt;vec&gt;(std::ifstream(<span class="stringliteral">&quot;data/b.mtx&quot;</span>), exec);</div>
 <div class="line"><span class="keyword">auto</span> x = gko::read&lt;vec&gt;(std::ifstream(<span class="stringliteral">&quot;data/x0.mtx&quot;</span>), exec);</div>
 </div><!-- fragment --><p><a class="anchor" id="Creatingthesolver"></a> </p><h3>Creating the solver</h3>
@@ -307,7 +307,7 @@ $(function() {
 <div class="line"> </div>
 <div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> exec = exec_map.at(executor_string)();  <span class="comment">// throws if not valid</span></div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">auto</span> A = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">share</a>(gko::read&lt;mtx&gt;(std::ifstream(<span class="stringliteral">&quot;data/A.mtx&quot;</span>), exec));</div>
+<div class="line">    <span class="keyword">auto</span> A = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a>(gko::read&lt;mtx&gt;(std::ifstream(<span class="stringliteral">&quot;data/A.mtx&quot;</span>), exec));</div>
 <div class="line">    <span class="keyword">auto</span> b = gko::read&lt;vec&gt;(std::ifstream(<span class="stringliteral">&quot;data/b.mtx&quot;</span>), exec);</div>
 <div class="line">    <span class="keyword">auto</span> x = gko::read&lt;vec&gt;(std::ifstream(<span class="stringliteral">&quot;data/x0.mtx&quot;</span>), exec);</div>
 <div class="line"> </div>

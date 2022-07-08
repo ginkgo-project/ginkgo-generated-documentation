@@ -162,9 +162,16 @@ Get number of discretization points
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} executor\_string = argc >= 2 ? argv[1] : \textcolor{stringliteral}{"reference"};}
 \DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} discretization\_points =}
 \DoxyCodeLine{    argc >= 3 ? std::atoi(argv[2]) : 100;}
+\end{DoxyCode}
+
+
+Get the executor string
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} executor\_string = argc >= 2 ? argv[1] : \textcolor{stringliteral}{"reference"};}
 \end{DoxyCode}
 
 
@@ -210,7 +217,7 @@ executor used by the application
 \end{DoxyCode}
 
 
-problem\+:
+Set up the problem\+: define the exact solution, the right hand side and the Dirichlet boundary condition.
 
 
 \begin{DoxyCode}{0}
@@ -413,9 +420,10 @@ This is the expected output\+:
 \DoxyCodeLine{        std::exit(-\/1);}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} executor\_string = argc >= 2 ? argv[1] : \textcolor{stringliteral}{"reference"};}
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} discretization\_points =}
 \DoxyCodeLine{        argc >= 3 ? std::atoi(argv[2]) : 100;}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} executor\_string = argc >= 2 ? argv[1] : \textcolor{stringliteral}{"reference"};}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::map<std::string, std::function<std::shared\_ptr<gko::Executor>()>>}
 \DoxyCodeLine{        exec\_map\{}
