@@ -18,6 +18,9 @@ Collaboration diagram for gko\+::solver\+::Upper\+Trs$<$ Value\+Type, Index\+Typ
 \item 
 \mbox{\Hypertarget{structgko_1_1solver_1_1UpperTrs_1_1parameters__type_a707ee677939ba60f3564e56f02f265a5}\label{structgko_1_1solver_1_1UpperTrs_1_1parameters__type_a707ee677939ba60f3564e56f02f265a5}} 
 {\footnotesize template$<$typename... Args$>$ }\\auto {\bfseries with\+\_\+unit\+\_\+diagonal} (Args \&\&... \+\_\+value) const -\/$>$ const std\+::decay\+\_\+t$<$ decltype($\ast$this)$>$ \&
+\item 
+\mbox{\Hypertarget{structgko_1_1solver_1_1UpperTrs_1_1parameters__type_a26012706e7e1b9638ada71469577fdac}\label{structgko_1_1solver_1_1UpperTrs_1_1parameters__type_a26012706e7e1b9638ada71469577fdac}} 
+{\footnotesize template$<$typename... Args$>$ }\\auto {\bfseries with\+\_\+algorithm} (Args \&\&... \+\_\+value) const -\/$>$ const std\+::decay\+\_\+t$<$ decltype($\ast$this)$>$ \&
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -26,12 +29,25 @@ Collaboration diagram for gko\+::solver\+::Upper\+Trs$<$ Value\+Type, Index\+Typ
 \begin{DoxyCompactList}\small\item\em Number of right hand sides. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{structgko_1_1solver_1_1UpperTrs_1_1parameters__type_a94cbdba6732b08966b948a7bdb368b50}\label{structgko_1_1solver_1_1UpperTrs_1_1parameters__type_a94cbdba6732b08966b948a7bdb368b50}} 
 bool \mbox{\hyperlink{structgko_1_1solver_1_1UpperTrs_1_1parameters__type_a94cbdba6732b08966b948a7bdb368b50}{unit\+\_\+diagonal}} \{ false \}
-\begin{DoxyCompactList}\small\item\em Should the solver use the values on the diagonal of the system matrix (false) or should it assume they are 1.\+0 (true)? \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Should the solver use the values on the diagonal of the system matrix (false) or should it assume they are 1.\+0 (true)? \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacegko_1_1solver_a68b5a3da69a6acb5f0bb656a96e4eb0a}{trisolve\+\_\+algorithm}} \mbox{\hyperlink{structgko_1_1solver_1_1UpperTrs_1_1parameters__type_ada5bbbcba5a02aa7eb0090b57e4ee5d2}{algorithm}} \{ trisolve\+\_\+algorithm\+::sparselib \}
+\begin{DoxyCompactList}\small\item\em Select the implementation which is supposed to be used for the triangular solver. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{structgko_1_1solver_1_1UpperTrs_1_1parameters__type_a17d51d403340309c592e593020c3c007}\label{structgko_1_1solver_1_1UpperTrs_1_1parameters__type_a17d51d403340309c592e593020c3c007}} 
+\mbox{\Hypertarget{structgko_1_1solver_1_1UpperTrs_1_1parameters__type_ada5bbbcba5a02aa7eb0090b57e4ee5d2}\label{structgko_1_1solver_1_1UpperTrs_1_1parameters__type_ada5bbbcba5a02aa7eb0090b57e4ee5d2}} 
+\index{gko::solver::UpperTrs$<$ ValueType, IndexType $>$::parameters\_type@{gko::solver::UpperTrs$<$ ValueType, IndexType $>$::parameters\_type}!algorithm@{algorithm}}
+\index{algorithm@{algorithm}!gko::solver::UpperTrs$<$ ValueType, IndexType $>$::parameters\_type@{gko::solver::UpperTrs$<$ ValueType, IndexType $>$::parameters\_type}}
+\doxysubsubsection{\texorpdfstring{algorithm}{algorithm}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+\mbox{\hyperlink{namespacegko_1_1solver_a68b5a3da69a6acb5f0bb656a96e4eb0a}{trisolve\+\_\+algorithm}} \mbox{\hyperlink{classgko_1_1solver_1_1UpperTrs}{gko\+::solver\+::\+Upper\+Trs}}$<$ Value\+Type, Index\+Type $>$\+::parameters\+\_\+type\+::algorithm \{ trisolve\+\_\+algorithm\+::sparselib \}\hspace{0.3cm}{\ttfamily [mutable]}}
+
+
+
+Select the implementation which is supposed to be used for the triangular solver. 
+
+This only matters for the Cuda executor where the choice is between the Ginkgo (syncfree) and the cu\+S\+P\+A\+R\+SE (sparselib) implementation. Default is sparselib. \mbox{\Hypertarget{structgko_1_1solver_1_1UpperTrs_1_1parameters__type_a17d51d403340309c592e593020c3c007}\label{structgko_1_1solver_1_1UpperTrs_1_1parameters__type_a17d51d403340309c592e593020c3c007}} 
 \index{gko::solver::UpperTrs$<$ ValueType, IndexType $>$::parameters\_type@{gko::solver::UpperTrs$<$ ValueType, IndexType $>$::parameters\_type}!num\_rhs@{num\_rhs}}
 \index{num\_rhs@{num\_rhs}!gko::solver::UpperTrs$<$ ValueType, IndexType $>$::parameters\_type@{gko::solver::UpperTrs$<$ ValueType, IndexType $>$::parameters\_type}}
 \doxysubsubsection{\texorpdfstring{num\_rhs}{num\_rhs}}
@@ -49,4 +65,4 @@ This value is currently a dummy value which is not used by the analysis step. It
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-ginkgo/core/solver/upper\+\_\+trs.\+hpp\end{DoxyCompactItemize}
+ginkgo/core/solver/triangular.\+hpp\end{DoxyCompactItemize}
