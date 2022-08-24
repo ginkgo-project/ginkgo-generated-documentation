@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/620901373 branch based on develop. Ginkgo version 1.5.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/621691178 branch based on develop. Ginkgo version 1.5.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -314,131 +314,156 @@ $(function() {
 <div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;};</div>
 <div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160; </div>
 <div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType = default_precision&gt;</div>
-<div class="line"><a name="l00335"></a><span class="lineno"><a class="line" href="classgko_1_1stop_1_1ResidualNormReduction.html">  335</a></span>&#160;<span class="keyword">class </span><a class="code" href="classgko_1_1stop_1_1ResidualNormReduction.html">ResidualNormReduction</a> : <span class="keyword">public</span> <a class="code" href="classgko_1_1stop_1_1ResidualNormBase.html">ResidualNormBase</a>&lt;ValueType&gt; {</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    <span class="keyword">using</span> <a class="code" href="classgko_1_1matrix_1_1Dense.html">ComplexVector</a> = <a class="code" href="classgko_1_1matrix_1_1Dense.html">matrix::Dense&lt;to_complex&lt;ValueType&gt;</a>&gt;;</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    <span class="keyword">using</span> <a class="code" href="classgko_1_1matrix_1_1Dense.html">NormVector</a> = <a class="code" href="classgko_1_1matrix_1_1Dense.html">matrix::Dense&lt;remove_complex&lt;ValueType&gt;</a>&gt;;</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;    <span class="keyword">using</span> <a class="code" href="classgko_1_1matrix_1_1Dense.html">Vector</a> = <a class="code" href="classgko_1_1matrix_1_1Dense.html">matrix::Dense&lt;ValueType&gt;</a>;</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160; </div>
-<div class="line"><a name="l00341"></a><span class="lineno"><a class="line" href="structgko_1_1stop_1_1ResidualNormReduction_1_1parameters__type.html">  341</a></span>&#160;    <a class="code" href="group__LinOp.html#ga1fc8e9d8be0c9ad2d72bc1ddfc6d8358">GKO_CREATE_FACTORY_PARAMETERS</a>(parameters, <a class="code" href="classgko_1_1stop_1_1ResidualNormReduction_1_1Factory.html">Factory</a>)</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;    {</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;        <a class="code" href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">remove_complex&lt;ValueType&gt;</a> <a class="code" href="group__LinOp.html#ga49d4c09c39f06b22bebbbfd1d8bfe450">GKO_FACTORY_PARAMETER_SCALAR</a>(</div>
-<div class="line"><a name="l00347"></a><span class="lineno"><a class="line" href="structgko_1_1stop_1_1ResidualNormReduction_1_1parameters__type.html#a488ffd39d7ea7fc9093a0e7604be2746">  347</a></span>&#160;            reduction_factor, <span class="keyword">static_cast&lt;</span><a class="code" href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">remove_complex&lt;ValueType&gt;</a><span class="keyword">&gt;</span>(1e-15));</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;    };</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;    GKO_ENABLE_CRITERION_FACTORY(<a class="code" href="classgko_1_1stop_1_1ResidualNormReduction.html">ResidualNormReduction&lt;ValueType&gt;</a>, parameters,</div>
-<div class="line"><a name="l00350"></a><span class="lineno"><a class="line" href="classgko_1_1stop_1_1ResidualNormReduction_1_1Factory.html">  350</a></span>&#160;                                 <a class="code" href="classgko_1_1stop_1_1ResidualNormReduction_1_1Factory.html">Factory</a>);</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;    <a class="code" href="group__LinOp.html#ga521f65604cc4cf427dcb2ecfa49b757c">GKO_ENABLE_BUILD_METHOD</a>(<a class="code" href="classgko_1_1stop_1_1ResidualNormReduction_1_1Factory.html">Factory</a>);</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160; </div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classgko_1_1stop_1_1ResidualNormReduction.html">ResidualNormReduction</a>(std::shared_ptr&lt;const gko::Executor&gt; exec)</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;        : <a class="code" href="classgko_1_1stop_1_1ResidualNormBase.html">ResidualNormBase</a>&lt;ValueType&gt;(exec)</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;    {}</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160; </div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classgko_1_1stop_1_1ResidualNormReduction.html">ResidualNormReduction</a>(<span class="keyword">const</span> <a class="code" href="classgko_1_1stop_1_1ResidualNormReduction_1_1Factory.html">Factory</a>* factory,</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;                                   <span class="keyword">const</span> <a class="code" href="structgko_1_1stop_1_1CriterionArgs.html">CriterionArgs</a>&amp; args)</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;        : <a class="code" href="classgko_1_1stop_1_1ResidualNormBase.html">ResidualNormBase</a>&lt;ValueType&gt;(</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;              factory-&gt;get_executor(), args,</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;              factory-&gt;get_parameters().reduction_factor,</div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;              <a class="code" href="group__stop.html#ga5fe97c4263e876f68b5d4a21f0e615b9">mode</a>::initial_resnorm),</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;          parameters_{factory-&gt;<a class="code" href="classgko_1_1EnableDefaultFactory.html#ae32f2b3100640293f3a46e1280965162">get_parameters</a>()}</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    {}</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;};</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160; </div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160; </div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType = default_precision&gt;</div>
-<div class="line"><a name="l00388"></a><span class="lineno"><a class="line" href="classgko_1_1stop_1_1RelativeResidualNorm.html">  388</a></span>&#160;<span class="keyword">class </span><a class="code" href="classgko_1_1stop_1_1RelativeResidualNorm.html">RelativeResidualNorm</a> : <span class="keyword">public</span> <a class="code" href="classgko_1_1stop_1_1ResidualNormBase.html">ResidualNormBase</a>&lt;ValueType&gt; {</div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;    <span class="keyword">using</span> <a class="code" href="classgko_1_1matrix_1_1Dense.html">ComplexVector</a> = <a class="code" href="classgko_1_1matrix_1_1Dense.html">matrix::Dense&lt;to_complex&lt;ValueType&gt;</a>&gt;;</div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;    <span class="keyword">using</span> <a class="code" href="classgko_1_1matrix_1_1Dense.html">NormVector</a> = <a class="code" href="classgko_1_1matrix_1_1Dense.html">matrix::Dense&lt;remove_complex&lt;ValueType&gt;</a>&gt;;</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;    <span class="keyword">using</span> <a class="code" href="classgko_1_1matrix_1_1Dense.html">Vector</a> = <a class="code" href="classgko_1_1matrix_1_1Dense.html">matrix::Dense&lt;ValueType&gt;</a>;</div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160; </div>
-<div class="line"><a name="l00394"></a><span class="lineno"><a class="line" href="structgko_1_1stop_1_1RelativeResidualNorm_1_1parameters__type.html">  394</a></span>&#160;    <a class="code" href="group__LinOp.html#ga1fc8e9d8be0c9ad2d72bc1ddfc6d8358">GKO_CREATE_FACTORY_PARAMETERS</a>(parameters, <a class="code" href="classgko_1_1stop_1_1RelativeResidualNorm_1_1Factory.html">Factory</a>)</div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;    {</div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;        <a class="code" href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">remove_complex&lt;ValueType&gt;</a> <a class="code" href="group__LinOp.html#ga49d4c09c39f06b22bebbbfd1d8bfe450">GKO_FACTORY_PARAMETER_SCALAR</a>(</div>
-<div class="line"><a name="l00400"></a><span class="lineno"><a class="line" href="structgko_1_1stop_1_1RelativeResidualNorm_1_1parameters__type.html#a5bc4bf49a0b2dca7de35d3ba618ecbc9">  400</a></span>&#160;            tolerance, <span class="keyword">static_cast&lt;</span><a class="code" href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">remove_complex&lt;ValueType&gt;</a><span class="keyword">&gt;</span>(1e-15));</div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;    };</div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;    GKO_ENABLE_CRITERION_FACTORY(<a class="code" href="classgko_1_1stop_1_1RelativeResidualNorm.html">RelativeResidualNorm&lt;ValueType&gt;</a>, parameters,</div>
-<div class="line"><a name="l00403"></a><span class="lineno"><a class="line" href="classgko_1_1stop_1_1RelativeResidualNorm_1_1Factory.html">  403</a></span>&#160;                                 <a class="code" href="classgko_1_1stop_1_1RelativeResidualNorm_1_1Factory.html">Factory</a>);</div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;    <a class="code" href="group__LinOp.html#ga521f65604cc4cf427dcb2ecfa49b757c">GKO_ENABLE_BUILD_METHOD</a>(<a class="code" href="classgko_1_1stop_1_1RelativeResidualNorm_1_1Factory.html">Factory</a>);</div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160; </div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classgko_1_1stop_1_1RelativeResidualNorm.html">RelativeResidualNorm</a>(std::shared_ptr&lt;const gko::Executor&gt; exec)</div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;        : <a class="code" href="classgko_1_1stop_1_1ResidualNormBase.html">ResidualNormBase</a>&lt;ValueType&gt;(exec)</div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;    {}</div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160; </div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classgko_1_1stop_1_1RelativeResidualNorm.html">RelativeResidualNorm</a>(<span class="keyword">const</span> <a class="code" href="classgko_1_1stop_1_1RelativeResidualNorm_1_1Factory.html">Factory</a>* factory,</div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;                                  <span class="keyword">const</span> <a class="code" href="structgko_1_1stop_1_1CriterionArgs.html">CriterionArgs</a>&amp; args)</div>
-<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;        : <a class="code" href="classgko_1_1stop_1_1ResidualNormBase.html">ResidualNormBase</a>&lt;ValueType&gt;(factory-&gt;get_executor(), args,</div>
-<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;                                      factory-&gt;get_parameters().tolerance,</div>
-<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;                                      <a class="code" href="group__stop.html#ga5fe97c4263e876f68b5d4a21f0e615b9">mode</a>::rhs_norm),</div>
-<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;          parameters_{factory-&gt;<a class="code" href="classgko_1_1EnableDefaultFactory.html#ae32f2b3100640293f3a46e1280965162">get_parameters</a>()}</div>
-<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;    {}</div>
-<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;};</div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160; </div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160; </div>
-<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType = default_precision&gt;</div>
-<div class="line"><a name="l00439"></a><span class="lineno"><a class="line" href="classgko_1_1stop_1_1AbsoluteResidualNorm.html">  439</a></span>&#160;<span class="keyword">class </span><a class="code" href="classgko_1_1stop_1_1AbsoluteResidualNorm.html">AbsoluteResidualNorm</a> : <span class="keyword">public</span> <a class="code" href="classgko_1_1stop_1_1ResidualNormBase.html">ResidualNormBase</a>&lt;ValueType&gt; {</div>
-<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;    <span class="keyword">using</span> <a class="code" href="classgko_1_1matrix_1_1Dense.html">NormVector</a> = <a class="code" href="classgko_1_1matrix_1_1Dense.html">matrix::Dense&lt;remove_complex&lt;ValueType&gt;</a>&gt;;</div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;    <span class="keyword">using</span> <a class="code" href="classgko_1_1matrix_1_1Dense.html">Vector</a> = <a class="code" href="classgko_1_1matrix_1_1Dense.html">matrix::Dense&lt;ValueType&gt;</a>;</div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160; </div>
-<div class="line"><a name="l00444"></a><span class="lineno"><a class="line" href="structgko_1_1stop_1_1AbsoluteResidualNorm_1_1parameters__type.html">  444</a></span>&#160;    <a class="code" href="group__LinOp.html#ga1fc8e9d8be0c9ad2d72bc1ddfc6d8358">GKO_CREATE_FACTORY_PARAMETERS</a>(parameters, <a class="code" href="classgko_1_1stop_1_1AbsoluteResidualNorm_1_1Factory.html">Factory</a>)</div>
-<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;    {</div>
-<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;        <a class="code" href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">remove_complex&lt;ValueType&gt;</a> <a class="code" href="group__LinOp.html#ga49d4c09c39f06b22bebbbfd1d8bfe450">GKO_FACTORY_PARAMETER_SCALAR</a>(</div>
-<div class="line"><a name="l00450"></a><span class="lineno"><a class="line" href="structgko_1_1stop_1_1AbsoluteResidualNorm_1_1parameters__type.html#a0f8a19b8757e2246e60cd37ae3110f70">  450</a></span>&#160;            tolerance, <span class="keyword">static_cast&lt;</span><a class="code" href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">remove_complex&lt;ValueType&gt;</a><span class="keyword">&gt;</span>(1e-15));</div>
-<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;    };</div>
-<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;    GKO_ENABLE_CRITERION_FACTORY(<a class="code" href="classgko_1_1stop_1_1AbsoluteResidualNorm.html">AbsoluteResidualNorm&lt;ValueType&gt;</a>, parameters,</div>
-<div class="line"><a name="l00453"></a><span class="lineno"><a class="line" href="classgko_1_1stop_1_1AbsoluteResidualNorm_1_1Factory.html">  453</a></span>&#160;                                 <a class="code" href="classgko_1_1stop_1_1AbsoluteResidualNorm_1_1Factory.html">Factory</a>);</div>
-<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;    <a class="code" href="group__LinOp.html#ga521f65604cc4cf427dcb2ecfa49b757c">GKO_ENABLE_BUILD_METHOD</a>(<a class="code" href="classgko_1_1stop_1_1AbsoluteResidualNorm_1_1Factory.html">Factory</a>);</div>
-<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160; </div>
-<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classgko_1_1stop_1_1AbsoluteResidualNorm.html">AbsoluteResidualNorm</a>(std::shared_ptr&lt;const gko::Executor&gt; exec)</div>
-<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;        : <a class="code" href="classgko_1_1stop_1_1ResidualNormBase.html">ResidualNormBase</a>&lt;ValueType&gt;(exec)</div>
-<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;    {}</div>
-<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160; </div>
-<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classgko_1_1stop_1_1AbsoluteResidualNorm.html">AbsoluteResidualNorm</a>(<span class="keyword">const</span> <a class="code" href="classgko_1_1stop_1_1AbsoluteResidualNorm_1_1Factory.html">Factory</a>* factory,</div>
-<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;                                  <span class="keyword">const</span> <a class="code" href="structgko_1_1stop_1_1CriterionArgs.html">CriterionArgs</a>&amp; args)</div>
-<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;        : <a class="code" href="classgko_1_1stop_1_1ResidualNormBase.html">ResidualNormBase</a>&lt;ValueType&gt;(factory-&gt;get_executor(), args,</div>
-<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;                                      factory-&gt;get_parameters().tolerance,</div>
-<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;                                      <a class="code" href="group__stop.html#ga5fe97c4263e876f68b5d4a21f0e615b9">mode</a>::absolute),</div>
-<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;          parameters_{factory-&gt;<a class="code" href="classgko_1_1EnableDefaultFactory.html#ae32f2b3100640293f3a46e1280965162">get_parameters</a>()}</div>
-<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;    {}</div>
-<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;};</div>
-<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160; </div>
-<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160; </div>
-<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;}  <span class="comment">// namespace stop</span></div>
-<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;}  <span class="comment">// namespace gko</span></div>
-<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160; </div>
-<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160; </div>
-<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_STOP_RESIDUAL_NORM_HPP_</span></div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="comment">// The following classes are deprecated, but they internally reference</span></div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="comment">// themselves. To reduce unnecessary warnings, we disable deprecation warnings</span></div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="comment">// for the definition of these classes.</span></div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="preprocessor">#if defined(__GNUC__) || defined(__clang__)</span></div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="preprocessor">#pragma GCC diagnostic push</span></div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="preprocessor">#pragma GCC diagnostic ignored &quot;-Wdeprecated-declarations&quot;</span></div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="preprocessor">#elif defined(_MSC_BUILD) || defined(__INTEL_LLVM_COMPILER)</span></div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="preprocessor">#pragma warning(push)</span></div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="preprocessor">#pragma warning(disable : 4996)</span></div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160; </div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160; </div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType = default_precision&gt;</div>
+<div class="line"><a name="l00347"></a><span class="lineno"><a class="line" href="classgko_1_1stop_1_1ResidualNormReduction.html">  347</a></span>&#160;<span class="keyword">class </span>[[deprecated(</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;    &quot;Please use the class <a class="code" href="classgko_1_1stop_1_1ResidualNorm.html">ResidualNorm</a> with the factory parameter baseline = <span class="stringliteral">&quot;</span></div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;<span class="stringliteral">    &quot;</span>mode::initial_resnorm<span class="stringliteral">&quot;)]] ResidualNormReduction</span></div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<span class="stringliteral">    : public ResidualNormBase&lt;ValueType&gt;</span></div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;<span class="stringliteral">{</span></div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;<span class="stringliteral">public:</span></div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;<span class="stringliteral">    using ComplexVector = matrix::Dense&lt;to_complex&lt;ValueType&gt;&gt;;</span></div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;<span class="stringliteral">    using NormVector = matrix::Dense&lt;remove_complex&lt;ValueType&gt;&gt;;</span></div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;<span class="stringliteral">    using Vector = matrix::Dense&lt;ValueType&gt;;</span></div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00357"></a><span class="lineno"><a class="line" href="structgko_1_1stop_1_1ResidualNormReduction_1_1parameters__type.html">  357</a></span>&#160;<span class="stringliteral">    GKO_CREATE_FACTORY_PARAMETERS(parameters, Factory)</span></div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;<span class="stringliteral">    {</span></div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;<span class="stringliteral">        remove_complex&lt;ValueType&gt; GKO_FACTORY_PARAMETER_SCALAR(</span></div>
+<div class="line"><a name="l00363"></a><span class="lineno"><a class="line" href="structgko_1_1stop_1_1ResidualNormReduction_1_1parameters__type.html#a488ffd39d7ea7fc9093a0e7604be2746">  363</a></span>&#160;<span class="stringliteral">            reduction_factor, static_cast&lt;remove_complex&lt;ValueType&gt;&gt;(1e-15));</span></div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;<span class="stringliteral">    };</span></div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;<span class="stringliteral">    GKO_ENABLE_CRITERION_FACTORY(ResidualNormReduction&lt;ValueType&gt;, parameters,</span></div>
+<div class="line"><a name="l00366"></a><span class="lineno"><a class="line" href="classgko_1_1stop_1_1ResidualNormReduction_1_1Factory.html">  366</a></span>&#160;<span class="stringliteral">                                 Factory);</span></div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;<span class="stringliteral">    GKO_ENABLE_BUILD_METHOD(Factory);</span></div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;<span class="stringliteral">protected:</span></div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;<span class="stringliteral">    explicit ResidualNormReduction(std::shared_ptr&lt;const gko::Executor&gt; exec)</span></div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;<span class="stringliteral">        : ResidualNormBase&lt;ValueType&gt;(exec)</span></div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;<span class="stringliteral">    {}</span></div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;<span class="stringliteral">    explicit ResidualNormReduction(const Factory* factory,</span></div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;<span class="stringliteral">                                   const CriterionArgs&amp; args)</span></div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;<span class="stringliteral">        : ResidualNormBase&lt;ValueType&gt;(</span></div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;<span class="stringliteral">              factory-&gt;get_executor(), args,</span></div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;<span class="stringliteral">              factory-&gt;get_parameters().reduction_factor,</span></div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;<span class="stringliteral">              mode::initial_resnorm),</span></div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;<span class="stringliteral">          parameters_{factory-&gt;get_parameters()}</span></div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;<span class="stringliteral">    {}</span></div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;<span class="stringliteral">};</span></div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;<span class="stringliteral">template &lt;typename ValueType = default_precision&gt;</span></div>
+<div class="line"><a name="l00404"></a><span class="lineno"><a class="line" href="classgko_1_1stop_1_1RelativeResidualNorm.html">  404</a></span>&#160;<span class="stringliteral">class [[deprecated(</span></div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;<span class="stringliteral">    &quot;</span>Please use the <span class="keyword">class </span><a class="code" href="classgko_1_1stop_1_1ResidualNorm.html">ResidualNorm</a> with the factory parameter baseline = <span class="stringliteral">&quot;</span></div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;<span class="stringliteral">    &quot;</span>mode::rhs_norm<span class="stringliteral">&quot;)]] RelativeResidualNorm</span></div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;<span class="stringliteral">    : public ResidualNormBase&lt;ValueType&gt;</span></div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;<span class="stringliteral">{</span></div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;<span class="stringliteral">public:</span></div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;<span class="stringliteral">    using ComplexVector = matrix::Dense&lt;to_complex&lt;ValueType&gt;&gt;;</span></div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;<span class="stringliteral">    using NormVector = matrix::Dense&lt;remove_complex&lt;ValueType&gt;&gt;;</span></div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;<span class="stringliteral">    using Vector = matrix::Dense&lt;ValueType&gt;;</span></div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00414"></a><span class="lineno"><a class="line" href="structgko_1_1stop_1_1RelativeResidualNorm_1_1parameters__type.html">  414</a></span>&#160;<span class="stringliteral">    GKO_CREATE_FACTORY_PARAMETERS(parameters, Factory)</span></div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;<span class="stringliteral">    {</span></div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;<span class="stringliteral">        remove_complex&lt;ValueType&gt; GKO_FACTORY_PARAMETER_SCALAR(</span></div>
+<div class="line"><a name="l00420"></a><span class="lineno"><a class="line" href="structgko_1_1stop_1_1RelativeResidualNorm_1_1parameters__type.html#a5bc4bf49a0b2dca7de35d3ba618ecbc9">  420</a></span>&#160;<span class="stringliteral">            tolerance, static_cast&lt;remove_complex&lt;ValueType&gt;&gt;(1e-15));</span></div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;<span class="stringliteral">    };</span></div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;<span class="stringliteral">    GKO_ENABLE_CRITERION_FACTORY(RelativeResidualNorm&lt;ValueType&gt;, parameters,</span></div>
+<div class="line"><a name="l00423"></a><span class="lineno"><a class="line" href="classgko_1_1stop_1_1RelativeResidualNorm_1_1Factory.html">  423</a></span>&#160;<span class="stringliteral">                                 Factory);</span></div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;<span class="stringliteral">    GKO_ENABLE_BUILD_METHOD(Factory);</span></div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;<span class="stringliteral">protected:</span></div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;<span class="stringliteral">    explicit RelativeResidualNorm(std::shared_ptr&lt;const gko::Executor&gt; exec)</span></div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;<span class="stringliteral">        : ResidualNormBase&lt;ValueType&gt;(exec)</span></div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;<span class="stringliteral">    {}</span></div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;<span class="stringliteral">    explicit RelativeResidualNorm(const Factory* factory,</span></div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;<span class="stringliteral">                                  const CriterionArgs&amp; args)</span></div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;<span class="stringliteral">        : ResidualNormBase&lt;ValueType&gt;(factory-&gt;get_executor(), args,</span></div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;<span class="stringliteral">                                      factory-&gt;get_parameters().tolerance,</span></div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;<span class="stringliteral">                                      mode::rhs_norm),</span></div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;<span class="stringliteral">          parameters_{factory-&gt;get_parameters()}</span></div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;<span class="stringliteral">    {}</span></div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;<span class="stringliteral">};</span></div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;<span class="stringliteral">template &lt;typename ValueType = default_precision&gt;</span></div>
+<div class="line"><a name="l00459"></a><span class="lineno"><a class="line" href="classgko_1_1stop_1_1AbsoluteResidualNorm.html">  459</a></span>&#160;<span class="stringliteral">class [[deprecated(</span></div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;<span class="stringliteral">    &quot;</span>Please use the <span class="keyword">class </span><a class="code" href="classgko_1_1stop_1_1ResidualNorm.html">ResidualNorm</a> with the factory parameter baseline = <span class="stringliteral">&quot;</span></div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;<span class="stringliteral">    &quot;</span>mode::absolute<span class="stringliteral">&quot;)]] AbsoluteResidualNorm</span></div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;<span class="stringliteral">    : public ResidualNormBase&lt;ValueType&gt;</span></div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;<span class="stringliteral">{</span></div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;<span class="stringliteral">public:</span></div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;<span class="stringliteral">    using NormVector = matrix::Dense&lt;remove_complex&lt;ValueType&gt;&gt;;</span></div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;<span class="stringliteral">    using Vector = matrix::Dense&lt;ValueType&gt;;</span></div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00468"></a><span class="lineno"><a class="line" href="structgko_1_1stop_1_1AbsoluteResidualNorm_1_1parameters__type.html">  468</a></span>&#160;<span class="stringliteral">    GKO_CREATE_FACTORY_PARAMETERS(parameters, Factory)</span></div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;<span class="stringliteral">    {</span></div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;<span class="stringliteral">        remove_complex&lt;ValueType&gt; GKO_FACTORY_PARAMETER_SCALAR(</span></div>
+<div class="line"><a name="l00474"></a><span class="lineno"><a class="line" href="structgko_1_1stop_1_1AbsoluteResidualNorm_1_1parameters__type.html#a0f8a19b8757e2246e60cd37ae3110f70">  474</a></span>&#160;<span class="stringliteral">            tolerance, static_cast&lt;remove_complex&lt;ValueType&gt;&gt;(1e-15));</span></div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160;<span class="stringliteral">    };</span></div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;<span class="stringliteral">    GKO_ENABLE_CRITERION_FACTORY(AbsoluteResidualNorm&lt;ValueType&gt;, parameters,</span></div>
+<div class="line"><a name="l00477"></a><span class="lineno"><a class="line" href="classgko_1_1stop_1_1AbsoluteResidualNorm_1_1Factory.html">  477</a></span>&#160;<span class="stringliteral">                                 Factory);</span></div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;<span class="stringliteral">    GKO_ENABLE_BUILD_METHOD(Factory);</span></div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;<span class="stringliteral">protected:</span></div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;<span class="stringliteral">    explicit AbsoluteResidualNorm(std::shared_ptr&lt;const gko::Executor&gt; exec)</span></div>
+<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;<span class="stringliteral">        : ResidualNormBase&lt;ValueType&gt;(exec)</span></div>
+<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;<span class="stringliteral">    {}</span></div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;<span class="stringliteral">    explicit AbsoluteResidualNorm(const Factory* factory,</span></div>
+<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;<span class="stringliteral">                                  const CriterionArgs&amp; args)</span></div>
+<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;<span class="stringliteral">        : ResidualNormBase&lt;ValueType&gt;(factory-&gt;get_executor(), args,</span></div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;<span class="stringliteral">                                      factory-&gt;get_parameters().tolerance,</span></div>
+<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;<span class="stringliteral">                                      mode::absolute),</span></div>
+<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;<span class="stringliteral">          parameters_{factory-&gt;get_parameters()}</span></div>
+<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;<span class="stringliteral">    {}</span></div>
+<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;<span class="stringliteral">};</span></div>
+<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;<span class="stringliteral">#if defined(__GNUC__) || defined(__clang__)</span></div>
+<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;<span class="stringliteral">#pragma GCC diagnostic pop</span></div>
+<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;<span class="stringliteral">#elif defined(_MSC_BUILD) || defined(__INTEL_LLVM_COMPILER)</span></div>
+<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;<span class="stringliteral">#pragma warning(pop)</span></div>
+<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;<span class="stringliteral">#endif</span></div>
+<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;<span class="stringliteral">}  // namespace stop</span></div>
+<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;<span class="stringliteral">}  // namespace gko</span></div>
+<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;<span class="stringliteral">#endif  // GKO_PUBLIC_CORE_STOP_RESIDUAL_NORM_HPP_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="astructgko_1_1stop_1_1CriterionArgs_html"><div class="ttname"><a href="structgko_1_1stop_1_1CriterionArgs.html">gko::stop::CriterionArgs</a></div><div class="ttdoc">This struct is used to pass parameters to the EnableDefaultCriterionFactoryCriterionFactory::generate...</div><div class="ttdef"><b>Definition:</b> criterion.hpp:220</div></div>
 <div class="ttc" id="anamespacegko_html_a3950fc3732811a8563484e5098c31531"><div class="ttname"><a href="namespacegko.html#a3950fc3732811a8563484e5098c31531">gko::uint8</a></div><div class="ttdeci">std::uint8_t uint8</div><div class="ttdoc">8-bit unsigned integral type.</div><div class="ttdef"><b>Definition:</b> types.hpp:134</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Dense_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Dense.html">gko::matrix::Dense</a></div><div class="ttdoc">Dense is a matrix format which explicitly stores all values of the matrix.</div><div class="ttdef"><b>Definition:</b> mtx_io.hpp:252</div></div>
-<div class="ttc" id="aclassgko_1_1stop_1_1ResidualNormReduction_html"><div class="ttname"><a href="classgko_1_1stop_1_1ResidualNormReduction.html">gko::stop::ResidualNormReduction</a></div><div class="ttdoc">The ResidualNormReduction class is a stopping criterion which stops the iteration process when the re...</div><div class="ttdef"><b>Definition:</b> residual_norm.hpp:335</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Dense_html_a4c2089b9e1f7a99a32488a4964e832db"><div class="ttname"><a href="classgko_1_1matrix_1_1Dense.html#a4c2089b9e1f7a99a32488a4964e832db">gko::matrix::Dense::create_with_config_of</a></div><div class="ttdeci">static std::unique_ptr&lt; Dense &gt; create_with_config_of(const Dense *other)</div><div class="ttdoc">Creates a Dense matrix with the same size and stride as another Dense matrix.</div><div class="ttdef"><b>Definition:</b> dense.hpp:166</div></div>
 <div class="ttc" id="aclassgko_1_1EnableDefaultFactory_html_ae32f2b3100640293f3a46e1280965162"><div class="ttname"><a href="classgko_1_1EnableDefaultFactory.html#ae32f2b3100640293f3a46e1280965162">gko::EnableDefaultFactory::get_parameters</a></div><div class="ttdeci">const parameters_type &amp; get_parameters() const noexcept</div><div class="ttdoc">Returns the parameters of the factory.</div><div class="ttdef"><b>Definition:</b> abstract_factory.hpp:176</div></div>
 <div class="ttc" id="agroup__LinOp_html_ga49d4c09c39f06b22bebbbfd1d8bfe450"><div class="ttname"><a href="group__LinOp.html#ga49d4c09c39f06b22bebbbfd1d8bfe450">GKO_FACTORY_PARAMETER_SCALAR</a></div><div class="ttdeci">#define GKO_FACTORY_PARAMETER_SCALAR(_name, _default)</div><div class="ttdoc">Creates a scalar factory parameter in the factory parameters structure.</div><div class="ttdef"><b>Definition:</b> lin_op.hpp:1132</div></div>
-<div class="ttc" id="aclassgko_1_1stop_1_1RelativeResidualNorm_1_1Factory_html"><div class="ttname"><a href="classgko_1_1stop_1_1RelativeResidualNorm_1_1Factory.html">gko::stop::RelativeResidualNorm::Factory</a></div><div class="ttdef"><b>Definition:</b> residual_norm.hpp:403</div></div>
 <div class="ttc" id="anamespacegko_html"><div class="ttname"><a href="namespacegko.html">gko</a></div><div class="ttdoc">The Ginkgo namespace.</div><div class="ttdef"><b>Definition:</b> abstract_factory.hpp:45</div></div>
 <div class="ttc" id="aclassgko_1_1array_html"><div class="ttname"><a href="classgko_1_1array.html">gko::array</a></div><div class="ttdoc">An array is a container which encapsulates fixed-sized arrays, stored on the Executor tied to the arr...</div><div class="ttdef"><b>Definition:</b> array.hpp:55</div></div>
 <div class="ttc" id="aclassgko_1_1stop_1_1ResidualNorm_html"><div class="ttname"><a href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm</a></div><div class="ttdoc">The ResidualNorm class is a stopping criterion which stops the iteration process when the actual resi...</div><div class="ttdef"><b>Definition:</b> residual_norm.hpp:213</div></div>
 <div class="ttc" id="astructgko_1_1dim_html"><div class="ttname"><a href="structgko_1_1dim.html">gko::dim&lt; 2 &gt;</a></div></div>
 <div class="ttc" id="aclassgko_1_1stop_1_1ImplicitResidualNorm_1_1Factory_html"><div class="ttname"><a href="classgko_1_1stop_1_1ImplicitResidualNorm_1_1Factory.html">gko::stop::ImplicitResidualNorm::Factory</a></div><div class="ttdef"><b>Definition:</b> residual_norm.hpp:290</div></div>
 <div class="ttc" id="anamespacegko_html_a3ce296f73db0ff398bdea6009a3a5c58"><div class="ttname"><a href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a></div><div class="ttdeci">detail::shared_type&lt; OwningPointer &gt; share(OwningPointer &amp;&amp;p)</div><div class="ttdoc">Marks the object pointed to by p as shared.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:211</div></div>
-<div class="ttc" id="aclassgko_1_1stop_1_1ResidualNormReduction_1_1Factory_html"><div class="ttname"><a href="classgko_1_1stop_1_1ResidualNormReduction_1_1Factory.html">gko::stop::ResidualNormReduction::Factory</a></div><div class="ttdef"><b>Definition:</b> residual_norm.hpp:350</div></div>
 <div class="ttc" id="aclassgko_1_1stop_1_1Criterion_html"><div class="ttname"><a href="classgko_1_1stop_1_1Criterion.html">gko::stop::Criterion</a></div><div class="ttdoc">The Criterion class is a base class for all stopping criteria.</div><div class="ttdef"><b>Definition:</b> criterion.hpp:64</div></div>
 <div class="ttc" id="agroup__stop_html_ga5fe97c4263e876f68b5d4a21f0e615b9"><div class="ttname"><a href="group__stop.html#ga5fe97c4263e876f68b5d4a21f0e615b9">gko::stop::mode</a></div><div class="ttdeci">mode</div><div class="ttdoc">The mode for the residual norm criterion.</div><div class="ttdef"><b>Definition:</b> residual_norm.hpp:65</div></div>
 <div class="ttc" id="aclassgko_1_1stop_1_1ResidualNorm_1_1Factory_html"><div class="ttname"><a href="classgko_1_1stop_1_1ResidualNorm_1_1Factory.html">gko::stop::ResidualNorm::Factory</a></div><div class="ttdef"><b>Definition:</b> residual_norm.hpp:233</div></div>
 <div class="ttc" id="aclassgko_1_1stop_1_1Criterion_1_1Updater_html"><div class="ttname"><a href="classgko_1_1stop_1_1Criterion_1_1Updater.html">gko::stop::Criterion::Updater</a></div><div class="ttdoc">The Updater class serves for convenient argument passing to the Criterion's check function.</div><div class="ttdef"><b>Definition:</b> criterion.hpp:81</div></div>
-<div class="ttc" id="aclassgko_1_1stop_1_1AbsoluteResidualNorm_1_1Factory_html"><div class="ttname"><a href="classgko_1_1stop_1_1AbsoluteResidualNorm_1_1Factory.html">gko::stop::AbsoluteResidualNorm::Factory</a></div><div class="ttdef"><b>Definition:</b> residual_norm.hpp:453</div></div>
-<div class="ttc" id="aclassgko_1_1stop_1_1RelativeResidualNorm_html"><div class="ttname"><a href="classgko_1_1stop_1_1RelativeResidualNorm.html">gko::stop::RelativeResidualNorm</a></div><div class="ttdoc">The RelativeResidualNorm class is a stopping criterion which stops the iteration process when the res...</div><div class="ttdef"><b>Definition:</b> residual_norm.hpp:388</div></div>
 <div class="ttc" id="agroup__LinOp_html_ga521f65604cc4cf427dcb2ecfa49b757c"><div class="ttname"><a href="group__LinOp.html#ga521f65604cc4cf427dcb2ecfa49b757c">GKO_ENABLE_BUILD_METHOD</a></div><div class="ttdeci">#define GKO_ENABLE_BUILD_METHOD(_factory_name)</div><div class="ttdoc">Defines a build method for the factory, simplifying its construction by removing the repetitive typin...</div><div class="ttdef"><b>Definition:</b> lin_op.hpp:1081</div></div>
 <div class="ttc" id="agroup__LinOp_html_ga1fc8e9d8be0c9ad2d72bc1ddfc6d8358"><div class="ttname"><a href="group__LinOp.html#ga1fc8e9d8be0c9ad2d72bc1ddfc6d8358">GKO_CREATE_FACTORY_PARAMETERS</a></div><div class="ttdeci">#define GKO_CREATE_FACTORY_PARAMETERS(_parameters_name, _factory_name)</div><div class="ttdoc">This Macro will generate a new type containing the parameters for the factory _factory_name.</div><div class="ttdef"><b>Definition:</b> lin_op.hpp:951</div></div>
 <div class="ttc" id="aclassgko_1_1stop_1_1ImplicitResidualNorm_html"><div class="ttname"><a href="classgko_1_1stop_1_1ImplicitResidualNorm.html">gko::stop::ImplicitResidualNorm</a></div><div class="ttdoc">The ImplicitResidualNorm class is a stopping criterion which stops the iteration process when the imp...</div><div class="ttdef"><b>Definition:</b> residual_norm.hpp:269</div></div>
 <div class="ttc" id="aclassgko_1_1stop_1_1ResidualNormBase_html"><div class="ttname"><a href="classgko_1_1stop_1_1ResidualNormBase.html">gko::stop::ResidualNormBase</a></div><div class="ttdoc">The ResidualNormBase class provides a framework for stopping criteria related to the residual norm.</div><div class="ttdef"><b>Definition:</b> residual_norm.hpp:78</div></div>
-<div class="ttc" id="aclassgko_1_1stop_1_1AbsoluteResidualNorm_html"><div class="ttname"><a href="classgko_1_1stop_1_1AbsoluteResidualNorm.html">gko::stop::AbsoluteResidualNorm</a></div><div class="ttdoc">The AbsoluteResidualNorm class is a stopping criterion which stops the iteration process when the res...</div><div class="ttdef"><b>Definition:</b> residual_norm.hpp:439</div></div>
 <div class="ttc" id="aclassgko_1_1LinOp_html_a31b3c003388eb0b95393154f68c2b98d"><div class="ttname"><a href="classgko_1_1LinOp.html#a31b3c003388eb0b95393154f68c2b98d">gko::LinOp::get_size</a></div><div class="ttdeci">const dim&lt; 2 &gt; &amp; get_size() const noexcept</div><div class="ttdoc">Returns the size of the operator.</div><div class="ttdef"><b>Definition:</b> lin_op.hpp:233</div></div>
 <div class="ttc" id="anamespacegko_html_afd46d554050c4ae90e84ea4fcd9a41f3"><div class="ttname"><a href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">gko::remove_complex</a></div><div class="ttdeci">typename detail::remove_complex_s&lt; T &gt;::type remove_complex</div><div class="ttdoc">Obtain the type which removed the complex of complex/scalar type or the template parameter of class b...</div><div class="ttdef"><b>Definition:</b> math.hpp:359</div></div>
 <div class="ttc" id="anamespacegko_html_a0059e27f8f4bc348ff65c1e60caf47c8"><div class="ttname"><a href="namespacegko.html#a0059e27f8f4bc348ff65c1e60caf47c8">gko::one</a></div><div class="ttdeci">constexpr T one()</div><div class="ttdoc">Returns the multiplicative identity for T.</div><div class="ttdef"><b>Definition:</b> math.hpp:798</div></div>

@@ -146,10 +146,10 @@ Prepare the stopping criteria
 \DoxyCodeLine{\textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} tolerance = 1e-\/12;}
 \DoxyCodeLine{\textcolor{keyword}{auto} iter\_stop =}
 \DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(gko::stop::Iteration::build().with\_max\_iters(100u).on(exec));}
-\DoxyCodeLine{\textcolor{keyword}{auto} tol\_stop =}
-\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(\mbox{\hyperlink{classgko_1_1stop_1_1AbsoluteResidualNorm}{gko::stop::AbsoluteResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                   .with\_tolerance(tolerance)}
-\DoxyCodeLine{                   .on(exec));}
+\DoxyCodeLine{\textcolor{keyword}{auto} tol\_stop = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(\mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                               .with\_baseline(gko::stop::mode::absolute)}
+\DoxyCodeLine{                               .with\_reduction\_factor(tolerance)}
+\DoxyCodeLine{                               .on(exec));}
 \DoxyCodeLine{}
 \DoxyCodeLine{std::shared\_ptr<const gko::log::Convergence<ValueType>> logger =}
 \DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1log_1_1Convergence_abf224a82334775c991f83cfb5e35e18c}{gko::log::Convergence<ValueType>::create}}();}
@@ -432,10 +432,10 @@ This is the expected output\+:
 \DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} tolerance = 1e-\/12;}
 \DoxyCodeLine{    \textcolor{keyword}{auto} iter\_stop =}
 \DoxyCodeLine{        \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(gko::stop::Iteration::build().with\_max\_iters(100u).on(exec));}
-\DoxyCodeLine{    \textcolor{keyword}{auto} tol\_stop =}
-\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(\mbox{\hyperlink{classgko_1_1stop_1_1AbsoluteResidualNorm}{gko::stop::AbsoluteResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                       .with\_tolerance(tolerance)}
-\DoxyCodeLine{                       .on(exec));}
+\DoxyCodeLine{    \textcolor{keyword}{auto} tol\_stop = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(\mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                                   .with\_baseline(gko::stop::mode::absolute)}
+\DoxyCodeLine{                                   .with\_reduction\_factor(tolerance)}
+\DoxyCodeLine{                                   .on(exec));}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::shared\_ptr<const gko::log::Convergence<ValueType>> logger =}
 \DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1log_1_1Convergence_abf224a82334775c991f83cfb5e35e18c}{gko::log::Convergence<ValueType>::create}}();}

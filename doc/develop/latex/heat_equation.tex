@@ -319,8 +319,9 @@ build CG solver on stencil with incomplete Cholesky preconditioner stopping at 1
 \DoxyCodeLine{\textcolor{keyword}{auto} solver =}
 \DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{gko::solver::Cg<>::build}}()}
 \DoxyCodeLine{        .with\_preconditioner(\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{gko::preconditioner::Ic<>::build}}().on(exec))}
-\DoxyCodeLine{        .with\_criteria(\mbox{\hyperlink{classgko_1_1stop_1_1RelativeResidualNorm}{gko::stop::RelativeResidualNorm<>::build}}()}
-\DoxyCodeLine{                           .with\_tolerance(1e-\/10)}
+\DoxyCodeLine{        .with\_criteria(\mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<>::build}}()}
+\DoxyCodeLine{                           .with\_baseline(gko::stop::mode::rhs\_norm)}
+\DoxyCodeLine{                           .with\_reduction\_factor(1e-\/10)}
 \DoxyCodeLine{                           .on(exec))}
 \DoxyCodeLine{        .on(exec)}
 \DoxyCodeLine{        -\/>generate(stencil\_matrix);}
@@ -561,8 +562,9 @@ The program will generate a video file named heat.\+mp4 and output the timestamp
 \DoxyCodeLine{    \textcolor{keyword}{auto} solver =}
 \DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{gko::solver::Cg<>::build}}()}
 \DoxyCodeLine{            .with\_preconditioner(\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{gko::preconditioner::Ic<>::build}}().on(exec))}
-\DoxyCodeLine{            .with\_criteria(\mbox{\hyperlink{classgko_1_1stop_1_1RelativeResidualNorm}{gko::stop::RelativeResidualNorm<>::build}}()}
-\DoxyCodeLine{                               .with\_tolerance(1e-\/10)}
+\DoxyCodeLine{            .with\_criteria(\mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<>::build}}()}
+\DoxyCodeLine{                               .with\_baseline(gko::stop::mode::rhs\_norm)}
+\DoxyCodeLine{                               .with\_reduction\_factor(1e-\/10)}
 \DoxyCodeLine{                               .on(exec))}
 \DoxyCodeLine{            .on(exec)}
 \DoxyCodeLine{            -\/>generate(stencil\_matrix);}
