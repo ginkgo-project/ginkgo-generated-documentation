@@ -338,6 +338,10 @@ static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{D
 \begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} matrix with the same type and executor as another \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} matrix but a different size. \end{DoxyCompactList}\item 
 static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a3a68e08c6bc2f26e192c949a79a48053}{create\+\_\+with\+\_\+type\+\_\+of}} (const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} $\ast$other, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \&size, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} stride)
 \item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a37e735b174cd2211920a40df128357a7}{create\+\_\+view\+\_\+of}} (\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} $\ast$other)
+\begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} matrix, where the underlying array is a view of another \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} matrix\textquotesingle{} array. \end{DoxyCompactList}\item 
+static std\+::unique\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a6ce80720088f8f10d7141c307eb8b1e7}{create\+\_\+const\+\_\+view\+\_\+of}} (const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} $\ast$other)
+\begin{DoxyCompactList}\small\item\em Creates a immutable \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} matrix, where the underlying array is a view of another \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} matrix\textquotesingle{} array. \end{DoxyCompactList}\item 
 static std\+::unique\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a9333baaf6de36a426500a596da111171}{create\+\_\+const}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \&size, gko\+::detail\+::const\+\_\+array\+\_\+view$<$ Value\+Type $>$ \&\&values, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} stride)
 \begin{DoxyCompactList}\small\item\em Creates a constant (immutable) \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} matrix from a constant array. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Friends}
@@ -890,6 +894,29 @@ Creates a constant (immutable) \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Den
 \begin{DoxyReturn}{Returns}
 A smart pointer to the constant matrix wrapping the input array (if it resides on the same executor as the matrix) or a copy of the array on the correct executor. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a6ce80720088f8f10d7141c307eb8b1e7}\label{classgko_1_1matrix_1_1Dense_a6ce80720088f8f10d7141c307eb8b1e7}} 
+\index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!create\_const\_view\_of@{create\_const\_view\_of}}
+\index{create\_const\_view\_of@{create\_const\_view\_of}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{create\_const\_view\_of()}{create\_const\_view\_of()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+static std\+::unique\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::create\+\_\+const\+\_\+view\+\_\+of (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ Value\+Type $>$ $\ast$}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Creates a immutable \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} matrix, where the underlying array is a view of another \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} matrix\textquotesingle{} array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other matrix on which to create the view \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A immutable \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} matrix that is a view of other 
+\end{DoxyReturn}
+
+
+Referenced by gko\+::make\+\_\+const\+\_\+dense\+\_\+view().
+
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_af57c2f04c8703f9ce98c474c5c8d5b11}\label{classgko_1_1matrix_1_1Dense_af57c2f04c8703f9ce98c474c5c8d5b11}} 
 \index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!create\_real\_view@{create\_real\_view}}
 \index{create\_real\_view@{create\_real\_view}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
@@ -959,6 +986,29 @@ Warning\+: defining stride for this create\+\_\+submatrix method might cause wro
 
 
 Referenced by gko\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::create\+\_\+submatrix().
+
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a37e735b174cd2211920a40df128357a7}\label{classgko_1_1matrix_1_1Dense_a37e735b174cd2211920a40df128357a7}} 
+\index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!create\_view\_of@{create\_view\_of}}
+\index{create\_view\_of@{create\_view\_of}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{create\_view\_of()}{create\_view\_of()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+static std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::create\+\_\+view\+\_\+of (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ Value\+Type $>$ $\ast$}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Creates a \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} matrix, where the underlying array is a view of another \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} matrix\textquotesingle{} array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other matrix on which to create the view\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} matrix that is a view of other 
+\end{DoxyReturn}
+
+
+Referenced by gko\+::make\+\_\+dense\+\_\+view().
 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a4c2089b9e1f7a99a32488a4964e832db}\label{classgko_1_1matrix_1_1Dense_a4c2089b9e1f7a99a32488a4964e832db}} 
 \index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!create\_with\_config\_of@{create\_with\_config\_of}}
