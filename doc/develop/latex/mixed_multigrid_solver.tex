@@ -44,8 +44,8 @@ Some shortcuts
 \DoxyCodeLine{\textcolor{keyword}{using} mg = \mbox{\hyperlink{classgko_1_1solver_1_1Multigrid}{gko::solver::Multigrid}};}
 \DoxyCodeLine{\textcolor{keyword}{using} bj = \mbox{\hyperlink{classgko_1_1preconditioner_1_1Jacobi}{gko::preconditioner::Jacobi<ValueType, IndexType>}};}
 \DoxyCodeLine{\textcolor{keyword}{using} bj2 = \mbox{\hyperlink{classgko_1_1preconditioner_1_1Jacobi}{gko::preconditioner::Jacobi<ValueType2, IndexType>}};}
-\DoxyCodeLine{\textcolor{keyword}{using} amgx\_pgm = \mbox{\hyperlink{classgko_1_1multigrid_1_1AmgxPgm}{gko::multigrid::AmgxPgm<ValueType, IndexType>}};}
-\DoxyCodeLine{\textcolor{keyword}{using} amgx\_pgm2 = \mbox{\hyperlink{classgko_1_1multigrid_1_1AmgxPgm}{gko::multigrid::AmgxPgm<ValueType2, IndexType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} pgm = \mbox{\hyperlink{classgko_1_1multigrid_1_1Pgm}{gko::multigrid::Pgm<ValueType, IndexType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} pgm2 = \mbox{\hyperlink{classgko_1_1multigrid_1_1Pgm}{gko::multigrid::Pgm<ValueType2, IndexType>}};}
 \end{DoxyCode}
 
 
@@ -184,9 +184,9 @@ Create Restrict\+Prolong factory
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{auto} mg\_level\_gen =}
-\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(amgx\_pgm::build().with\_deterministic(\textcolor{keyword}{true}).on(exec));}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(pgm::build().with\_deterministic(\textcolor{keyword}{true}).on(exec));}
 \DoxyCodeLine{\textcolor{keyword}{auto} mg\_level\_gen2 =}
-\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(amgx\_pgm2::build().with\_deterministic(\textcolor{keyword}{true}).on(exec));}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(pgm2::build().with\_deterministic(\textcolor{keyword}{true}).on(exec));}
 \end{DoxyCode}
 
 
@@ -270,8 +270,8 @@ Check the Multigrid\+Level and smoother. throw error if there is mismatch
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{auto} level0 = gko::as<amgx\_pgm>(mg\_level\_list.at(0));}
-\DoxyCodeLine{\textcolor{keyword}{auto} level1 = gko::as<amgx\_pgm2>(mg\_level\_list.at(1));}
+\DoxyCodeLine{\textcolor{keyword}{auto} level0 = gko::as<pgm>(mg\_level\_list.at(0));}
+\DoxyCodeLine{\textcolor{keyword}{auto} level1 = gko::as<pgm2>(mg\_level\_list.at(1));}
 \DoxyCodeLine{\textcolor{keyword}{auto} smoother0 = gko::as<ir>(smoother\_list.at(0));}
 \DoxyCodeLine{\textcolor{keyword}{auto} smoother1 = gko::as<ir2>(smoother\_list.at(1));}
 \end{DoxyCode}
@@ -380,8 +380,8 @@ This is the expected output\+:
 \DoxyCodeLine{    \textcolor{keyword}{using} mg = \mbox{\hyperlink{classgko_1_1solver_1_1Multigrid}{gko::solver::Multigrid}};}
 \DoxyCodeLine{    \textcolor{keyword}{using} bj = \mbox{\hyperlink{classgko_1_1preconditioner_1_1Jacobi}{gko::preconditioner::Jacobi<ValueType, IndexType>}};}
 \DoxyCodeLine{    \textcolor{keyword}{using} bj2 = \mbox{\hyperlink{classgko_1_1preconditioner_1_1Jacobi}{gko::preconditioner::Jacobi<ValueType2, IndexType>}};}
-\DoxyCodeLine{    \textcolor{keyword}{using} amgx\_pgm = \mbox{\hyperlink{classgko_1_1multigrid_1_1AmgxPgm}{gko::multigrid::AmgxPgm<ValueType, IndexType>}};}
-\DoxyCodeLine{    \textcolor{keyword}{using} amgx\_pgm2 = \mbox{\hyperlink{classgko_1_1multigrid_1_1AmgxPgm}{gko::multigrid::AmgxPgm<ValueType2, IndexType>}};}
+\DoxyCodeLine{    \textcolor{keyword}{using} pgm = \mbox{\hyperlink{classgko_1_1multigrid_1_1Pgm}{gko::multigrid::Pgm<ValueType, IndexType>}};}
+\DoxyCodeLine{    \textcolor{keyword}{using} pgm2 = \mbox{\hyperlink{classgko_1_1multigrid_1_1Pgm}{gko::multigrid::Pgm<ValueType2, IndexType>}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::cout << \mbox{\hyperlink{classgko_1_1version__info_a6daeb8a087cfb57fa055526fc133d8eb}{gko::version\_info::get}}() << std::endl;}
 \DoxyCodeLine{}
@@ -457,9 +457,9 @@ This is the expected output\+:
 \DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(2u).on(exec))}
 \DoxyCodeLine{            .on(exec));}
 \DoxyCodeLine{    \textcolor{keyword}{auto} mg\_level\_gen =}
-\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(amgx\_pgm::build().with\_deterministic(\textcolor{keyword}{true}).on(exec));}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(pgm::build().with\_deterministic(\textcolor{keyword}{true}).on(exec));}
 \DoxyCodeLine{    \textcolor{keyword}{auto} mg\_level\_gen2 =}
-\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(amgx\_pgm2::build().with\_deterministic(\textcolor{keyword}{true}).on(exec));}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(pgm2::build().with\_deterministic(\textcolor{keyword}{true}).on(exec));}
 \DoxyCodeLine{    \textcolor{keyword}{auto} coarsest\_solver\_gen =}
 \DoxyCodeLine{        cg::build()}
 \DoxyCodeLine{            .with\_criteria(}
@@ -504,8 +504,8 @@ This is the expected output\+:
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} mg\_level\_list = solver-\/>get\_mg\_level\_list();}
 \DoxyCodeLine{    \textcolor{keyword}{auto} smoother\_list = solver-\/>get\_pre\_smoother\_list();}
-\DoxyCodeLine{    \textcolor{keyword}{auto} level0 = gko::as<amgx\_pgm>(mg\_level\_list.at(0));}
-\DoxyCodeLine{    \textcolor{keyword}{auto} level1 = gko::as<amgx\_pgm2>(mg\_level\_list.at(1));}
+\DoxyCodeLine{    \textcolor{keyword}{auto} level0 = gko::as<pgm>(mg\_level\_list.at(0));}
+\DoxyCodeLine{    \textcolor{keyword}{auto} level1 = gko::as<pgm2>(mg\_level\_list.at(1));}
 \DoxyCodeLine{    \textcolor{keyword}{auto} smoother0 = gko::as<ir>(smoother\_list.at(0));}
 \DoxyCodeLine{    \textcolor{keyword}{auto} smoother1 = gko::as<ir2>(smoother\_list.at(1));}
 \DoxyCodeLine{}
