@@ -167,6 +167,12 @@ class \mbox{\hyperlink{classgko_1_1Permutable}{Permutable}}
 \begin{DoxyCompactList}\small\item\em Linear operators which support permutation should implement the \mbox{\hyperlink{classgko_1_1Permutable}{Permutable}} interface. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1Perturbation}{Perturbation}}
 \begin{DoxyCompactList}\small\item\em The \mbox{\hyperlink{classgko_1_1Perturbation}{Perturbation}} class can be used to construct a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} to represent the operation {\ttfamily (identity + scalar $\ast$ basis $\ast$ projector)}. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structgko_1_1polymorphic__object__traits}{polymorphic\+\_\+object\+\_\+traits}}
+\item 
+struct \mbox{\hyperlink{structgko_1_1polymorphic__object__traits_3_01experimental_1_1distributed_1_1Matrix_3_01ValueTyped8cf9daf5d2c603bc4c14309ffe1c9fb}{polymorphic\+\_\+object\+\_\+traits$<$ experimental\+::distributed\+::\+Matrix$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$ $>$}}
+\item 
+struct \mbox{\hyperlink{structgko_1_1polymorphic__object__traits_3_01experimental_1_1distributed_1_1Vector_3_01ValueType_01_4_01_4}{polymorphic\+\_\+object\+\_\+traits$<$ experimental\+::distributed\+::\+Vector$<$ Value\+Type $>$ $>$}}
+\item 
 class \mbox{\hyperlink{classgko_1_1PolymorphicObject}{Polymorphic\+Object}}
 \begin{DoxyCompactList}\small\item\em A \mbox{\hyperlink{classgko_1_1PolymorphicObject}{Polymorphic\+Object}} is the abstract base for all \char`\"{}heavy\char`\"{} objects in Ginkgo that behave polymorphically. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1precision__reduction}{precision\+\_\+reduction}}
@@ -181,6 +187,8 @@ class \mbox{\hyperlink{classgko_1_1ReferenceExecutor}{Reference\+Executor}}
 \begin{DoxyCompactList}\small\item\em This is a specialization of the \mbox{\hyperlink{classgko_1_1OmpExecutor}{Omp\+Executor}}, which runs the reference implementations of the kernels used for debugging purposes. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1ScaledIdentityAddable}{Scaled\+Identity\+Addable}}
 \begin{DoxyCompactList}\small\item\em Adds the operation M $<$-\/ a I + b M for matrix M, identity operator I and scalars a and b, where M is the calling object. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1scoped__device__id__guard}{scoped\+\_\+device\+\_\+id\+\_\+guard}}
+\begin{DoxyCompactList}\small\item\em This move-\/only class uses R\+A\+II to set the device id within a scoped block, if necessary. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structgko_1_1span}{span}}
 \begin{DoxyCompactList}\small\item\em A span is a lightweight structure used to create sub-\/ranges from other ranges. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1stopping__status}{stopping\+\_\+status}}
@@ -266,8 +274,8 @@ using \mbox{\hyperlink{namespacegko_a318c831e3fe269ba04c6ed8bf5a71073}{uint32}} 
 using \mbox{\hyperlink{namespacegko_ad54a79afecd57aabbb04b1dc611ae55e}{uint64}} = std\+::uint64\+\_\+t
 \begin{DoxyCompactList}\small\item\em 64-\/bit unsigned integral type. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{namespacegko_a0913bfb81622f6bdde52884015c2a4ed}\label{namespacegko_a0913bfb81622f6bdde52884015c2a4ed}} 
-using {\bfseries uintptr} = std\+::uintptr\+\_\+t
-\item 
+using \mbox{\hyperlink{namespacegko_a0913bfb81622f6bdde52884015c2a4ed}{uintptr}} = std\+::uintptr\+\_\+t
+\begin{DoxyCompactList}\small\item\em Unsigned integer type capable of holding a pointer to void. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{namespacegko_a86477c0acba18c50cac69112d791dfa6}\label{namespacegko_a86477c0acba18c50cac69112d791dfa6}} 
 using \mbox{\hyperlink{namespacegko_a86477c0acba18c50cac69112d791dfa6}{float16}} = half
 \begin{DoxyCompactList}\small\item\em Half precision floating point type. \end{DoxyCompactList}\item 
@@ -776,17 +784,19 @@ std\+::ostream \& \mbox{\hyperlink{namespacegko_ae0ef652f487afe43aebcf778038ff78
 \begin{DoxyCompactList}\small\item\em Prints version information to a stream. \end{DoxyCompactList}\item 
 std\+::ostream \& \mbox{\hyperlink{namespacegko_ad9e3ba96a10fe47a03ceef39b45bd43c}{operator$<$$<$}} (std\+::ostream \&os, const \mbox{\hyperlink{classgko_1_1version__info}{version\+\_\+info}} \&ver\+\_\+info)
 \begin{DoxyCompactList}\small\item\em Prints library version information in human-\/readable format to a stream. \end{DoxyCompactList}\item 
+{\footnotesize template$<$template$<$ typename, typename $>$ class Matrix\+Type, typename... Args$>$ }\\auto \mbox{\hyperlink{namespacegko_a537803d962d07cf43e1e0cbc9f6a3f8b}{with\+\_\+matrix\+\_\+type}} (Args \&\&... create\+\_\+args)
+\begin{DoxyCompactList}\small\item\em This function returns a type that delays a call to Matrix\+Type\+::create. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Value\+Type $>$ }\\std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{matrix\+::\+Dense}}$<$ Value\+Type $>$ $>$ \mbox{\hyperlink{namespacegko_af1b90fccc0dbebcad123cc74d2abd73a}{make\+\_\+dense\+\_\+view}} (\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{matrix\+::\+Dense}}$<$ Value\+Type $>$ $\ast$vector)
 \begin{DoxyCompactList}\small\item\em Creates a view of a given Dense vector. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Value\+Type $>$ }\\std\+::unique\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{matrix\+::\+Dense}}$<$ Value\+Type $>$ $>$ \mbox{\hyperlink{namespacegko_a8430581df497444dd83e9f8c3a9b9c65}{make\+\_\+const\+\_\+dense\+\_\+view}} (const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{matrix\+::\+Dense}}$<$ Value\+Type $>$ $\ast$vector)
 \begin{DoxyCompactList}\small\item\em Creates a view of a given Dense vector. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename Matrix , typename... T\+Args$>$ }\\std\+::unique\+\_\+ptr$<$ Matrix $>$ \mbox{\hyperlink{group__mat__formats_ga2f54bac1e95fb3ef03974fa9c9088491}{initialize}} (\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} stride, std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$ vals, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, T\+Args \&\&... create\+\_\+args)
+{\footnotesize template$<$typename Matrix , typename... T\+Args$>$ }\\std\+::unique\+\_\+ptr$<$ Matrix $>$ \mbox{\hyperlink{group__LinOp_ga2f54bac1e95fb3ef03974fa9c9088491}{initialize}} (\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} stride, std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$ vals, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, T\+Args \&\&... create\+\_\+args)
 \begin{DoxyCompactList}\small\item\em Creates and initializes a column-\/vector. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename Matrix , typename... T\+Args$>$ }\\std\+::unique\+\_\+ptr$<$ Matrix $>$ \mbox{\hyperlink{group__mat__formats_gaac5f7b4ff3b43dbc6918c687dd7d2d2e}{initialize}} (std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$ vals, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, T\+Args \&\&... create\+\_\+args)
+{\footnotesize template$<$typename Matrix , typename... T\+Args$>$ }\\std\+::unique\+\_\+ptr$<$ Matrix $>$ \mbox{\hyperlink{group__LinOp_gaac5f7b4ff3b43dbc6918c687dd7d2d2e}{initialize}} (std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$ vals, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, T\+Args \&\&... create\+\_\+args)
 \begin{DoxyCompactList}\small\item\em Creates and initializes a column-\/vector. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename Matrix , typename... T\+Args$>$ }\\std\+::unique\+\_\+ptr$<$ Matrix $>$ \mbox{\hyperlink{group__mat__formats_gaaf2520e5921e1bea00853c290f4fc28f}{initialize}} (\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} stride, std\+::initializer\+\_\+list$<$ std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$$>$ vals, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, T\+Args \&\&... create\+\_\+args)
+{\footnotesize template$<$typename Matrix , typename... T\+Args$>$ }\\std\+::unique\+\_\+ptr$<$ Matrix $>$ \mbox{\hyperlink{group__LinOp_gaaf2520e5921e1bea00853c290f4fc28f}{initialize}} (\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} stride, std\+::initializer\+\_\+list$<$ std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$$>$ vals, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, T\+Args \&\&... create\+\_\+args)
 \begin{DoxyCompactList}\small\item\em Creates and initializes a matrix. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename Matrix , typename... T\+Args$>$ }\\std\+::unique\+\_\+ptr$<$ Matrix $>$ \mbox{\hyperlink{group__mat__formats_gabe4ff67be5b3aae4e981b33ea9883385}{initialize}} (std\+::initializer\+\_\+list$<$ std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$$>$ vals, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, T\+Args \&\&... create\+\_\+args)
+{\footnotesize template$<$typename Matrix , typename... T\+Args$>$ }\\std\+::unique\+\_\+ptr$<$ Matrix $>$ \mbox{\hyperlink{group__LinOp_gabe4ff67be5b3aae4e981b33ea9883385}{initialize}} (std\+::initializer\+\_\+list$<$ std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$$>$ vals, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, T\+Args \&\&... create\+\_\+args)
 \begin{DoxyCompactList}\small\item\em Creates and initializes a matrix. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{namespacegko_acf34f605deac3e475189bb5b8a0fa71a}{operator==}} (const \mbox{\hyperlink{classgko_1_1stopping__status}{stopping\+\_\+status}} \&x, const \mbox{\hyperlink{classgko_1_1stopping__status}{stopping\+\_\+status}} \&y) noexcept
 \begin{DoxyCompactList}\small\item\em Checks if two stopping statuses are equivalent. \end{DoxyCompactList}\item 
@@ -2840,6 +2850,50 @@ an nth root of unity.
 
 References one().
 
+\mbox{\Hypertarget{namespacegko_a537803d962d07cf43e1e0cbc9f6a3f8b}\label{namespacegko_a537803d962d07cf43e1e0cbc9f6a3f8b}} 
+\index{gko@{gko}!with\_matrix\_type@{with\_matrix\_type}}
+\index{with\_matrix\_type@{with\_matrix\_type}!gko@{gko}}
+\doxysubsubsection{\texorpdfstring{with\_matrix\_type()}{with\_matrix\_type()}}
+{\footnotesize\ttfamily template$<$template$<$ typename, typename $>$ class Matrix\+Type, typename... Args$>$ \\
+auto gko\+::with\+\_\+matrix\+\_\+type (\begin{DoxyParamCaption}\item[{Args \&\&...}]{create\+\_\+args }\end{DoxyParamCaption})}
+
+
+
+This function returns a type that delays a call to Matrix\+Type\+::create. 
+
+It can be used to set the used value and index type, as well as the executor at a later stage.
+
+For example, the following code creates first a temporary object, which is then used later to construct an operator of the previously defined base type\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} type = gko::with\_matrix\_type<gko::matrix::Csr>();}
+\DoxyCodeLine{...}
+\DoxyCodeLine{std::unique\_ptr<LinOp> concrete\_op}
+\DoxyCodeLine{\textcolor{keywordflow}{if}(flag1)\{}
+\DoxyCodeLine{  concrete\_op = type.template create<double, int>(exec);}
+\DoxyCodeLine{\} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{  concrete\_op = type.template create<float, int>(exec);}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+\begin{DoxyNote}{Note}
+This is mainly a helper function to specify the local matrix type for a \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{gko\+::experimental\+::distributed\+::\+Matrix}} more easily.
+\end{DoxyNote}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Matrix\+Type} & A template type that accepts two types, the first one will be set to the value type, the second one to the index type. \\
+\hline
+{\em Args} & Types of the arguments passed to Matrix\+Type\+::create.\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em create\+\_\+args} & arguments that will be forwarded to Matrix\+Type\+::create\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A type with a function {\ttfamily create$<$value\+\_\+type, index\+\_\+type$>$(executor)}. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{namespacegko_aa24837da3770b3dddf981d9bfe0d3b52}\label{namespacegko_aa24837da3770b3dddf981d9bfe0d3b52}} 
 \index{gko@{gko}!write@{write}}
 \index{write@{write}!gko@{gko}}

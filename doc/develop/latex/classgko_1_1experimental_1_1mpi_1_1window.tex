@@ -1,0 +1,616 @@
+\hypertarget{classgko_1_1experimental_1_1mpi_1_1window}{}\doxysection{gko\+::experimental\+::mpi\+::window$<$ Value\+Type $>$ Class Template Reference}
+\label{classgko_1_1experimental_1_1mpi_1_1window}\index{gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}}
+
+
+This class wraps the M\+P\+I\+\_\+\+Window class with R\+A\+II functionality.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/base/mpi.\+hpp$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1window_a979711ce7fb3e661658656c49ffc9d31}\label{classgko_1_1experimental_1_1mpi_1_1window_a979711ce7fb3e661658656c49ffc9d31}} 
+enum \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window_a979711ce7fb3e661658656c49ffc9d31}{create\+\_\+type}} \{ {\bfseries allocate} = 1, 
+{\bfseries create} = 2, 
+{\bfseries dynamic\+\_\+create} = 3
+ \}
+\begin{DoxyCompactList}\small\item\em The create type for the window object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1window_a35fce5e05e221ce18372e1f2609f9953}\label{classgko_1_1experimental_1_1mpi_1_1window_a35fce5e05e221ce18372e1f2609f9953}} 
+enum \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window_a35fce5e05e221ce18372e1f2609f9953}{lock\+\_\+type}} \{ {\bfseries shared} = 1, 
+{\bfseries exclusive} = 2
+ \}
+\begin{DoxyCompactList}\small\item\em The lock type for passive target synchronization of the windows. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window_a0d8b46cb4e781ef71bccbbfb4a9407fe}{window}} ()
+\begin{DoxyCompactList}\small\item\em The default constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1window_a2cda6b61797c629a43fa4bf4c5fe3271}\label{classgko_1_1experimental_1_1mpi_1_1window_a2cda6b61797c629a43fa4bf4c5fe3271}} 
+{\bfseries window} (const \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window}{window}} \&other)=delete
+\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1window_a285344da81ed689e4e91996281ba0f26}\label{classgko_1_1experimental_1_1mpi_1_1window_a285344da81ed689e4e91996281ba0f26}} 
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window}{window}} \& {\bfseries operator=} (const \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window}{window}} \&other)=delete
+\item 
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window_ae4fca6434fa04ac9b8e9071bfc8cfe70}{window}} (\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window}{window}} \&\&other)
+\begin{DoxyCompactList}\small\item\em The move constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window}{window}} \& \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window_a0552218118e1e4d69393a7b2065c9a46}{operator=}} (\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window}{window}} \&\&other)
+\begin{DoxyCompactList}\small\item\em The move assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window_aa4604e5b67e90562628e9c3811383195}{window}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, Value\+Type $\ast$base, int num\+\_\+elems, const \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}} \&comm, const int disp\+\_\+unit=sizeof(Value\+Type), M\+P\+I\+\_\+\+Info input\+\_\+info=M\+P\+I\+\_\+\+I\+N\+F\+O\+\_\+\+N\+U\+LL, \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window_a979711ce7fb3e661658656c49ffc9d31}{create\+\_\+type}} c\+\_\+type=create\+\_\+type\+::create)
+\begin{DoxyCompactList}\small\item\em Create a window object with a given data pointer and type. \end{DoxyCompactList}\item 
+M\+P\+I\+\_\+\+Win \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window_aefdede74f361e099145647ac6b8e8de6}{get\+\_\+window}} () const
+\begin{DoxyCompactList}\small\item\em Get the underlying window object of M\+P\+I\+\_\+\+Win type. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window_acc88daf0073f710d33a3cb0351d38dcf}{fence}} (int assert=0)
+\begin{DoxyCompactList}\small\item\em The active target synchronization using M\+P\+I\+\_\+\+Win\+\_\+fence for the window object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window_aed5078f56eb599e9b1ff104fcc33a272}{lock}} (int rank, \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window_a35fce5e05e221ce18372e1f2609f9953}{lock\+\_\+type}} lock\+\_\+t=lock\+\_\+type\+::shared, int assert=0)
+\begin{DoxyCompactList}\small\item\em Create an epoch using M\+P\+I\+\_\+\+Win\+\_\+lock for the window object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window_affaf124a741991f95911f7827b966d4b}{unlock}} (int rank)
+\begin{DoxyCompactList}\small\item\em Close the epoch using M\+P\+I\+\_\+\+Win\+\_\+unlock for the window object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window_a297311f049fc1e7d1ac41696108860d0}{lock\+\_\+all}} (int assert=0)
+\begin{DoxyCompactList}\small\item\em Create the epoch on all ranks using M\+P\+I\+\_\+\+Win\+\_\+lock\+\_\+all for the window object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1window_ae2b9d49b294cdb5b7d28091b8a17833e}\label{classgko_1_1experimental_1_1mpi_1_1window_ae2b9d49b294cdb5b7d28091b8a17833e}} 
+void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window_ae2b9d49b294cdb5b7d28091b8a17833e}{unlock\+\_\+all}} ()
+\begin{DoxyCompactList}\small\item\em Close the epoch on all ranks using M\+P\+I\+\_\+\+Win\+\_\+unlock\+\_\+all for the window object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window_a0bf6a899a25d23f9da9d575ac47fd645}{flush}} (int rank)
+\begin{DoxyCompactList}\small\item\em Flush the existing R\+D\+MA operations on the target rank for the calling process for the window object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window_ad7e3f181256230b9a2d830e48e5453a9}{flush\+\_\+local}} (int rank)
+\begin{DoxyCompactList}\small\item\em Flush the existing R\+D\+MA operations on the calling rank from the target rank for the window object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1window_a21bbcb67b685191b0bfae99c8a668a2b}\label{classgko_1_1experimental_1_1mpi_1_1window_a21bbcb67b685191b0bfae99c8a668a2b}} 
+void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window_a21bbcb67b685191b0bfae99c8a668a2b}{flush\+\_\+all}} ()
+\begin{DoxyCompactList}\small\item\em Flush all the existing R\+D\+MA operations for the calling process for the window object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1window_a56b6be56d93a1827430c8b585d3f87c4}\label{classgko_1_1experimental_1_1mpi_1_1window_a56b6be56d93a1827430c8b585d3f87c4}} 
+void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window_a56b6be56d93a1827430c8b585d3f87c4}{flush\+\_\+all\+\_\+local}} ()
+\begin{DoxyCompactList}\small\item\em Flush all the local existing R\+D\+MA operations on the calling rank for the window object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1window_aad12af465964264c3a00fbf2f33f4a37}\label{classgko_1_1experimental_1_1mpi_1_1window_aad12af465964264c3a00fbf2f33f4a37}} 
+void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window_aad12af465964264c3a00fbf2f33f4a37}{sync}} ()
+\begin{DoxyCompactList}\small\item\em Synchronize the public and private buffers for the window object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1window_a1f4a86eb7b1289e7580a92191f4ed2fe}\label{classgko_1_1experimental_1_1mpi_1_1window_a1f4a86eb7b1289e7580a92191f4ed2fe}} 
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window_a1f4a86eb7b1289e7580a92191f4ed2fe}{$\sim$window}} ()
+\begin{DoxyCompactList}\small\item\em The deleter which calls M\+P\+I\+\_\+\+Win\+\_\+free when the window leaves its scope. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Put\+Type $>$ }\\void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window_a151c85c9dbd58b15377edcf0702efe5d}{put}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const Put\+Type $\ast$origin\+\_\+buffer, const int origin\+\_\+count, const int target\+\_\+rank, const unsigned int target\+\_\+disp, const int target\+\_\+count) const
+\begin{DoxyCompactList}\small\item\em Put data into the target window. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Put\+Type $>$ }\\\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window_a08ddae163fc1c34b9456bab96a5f1107}{r\+\_\+put}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const Put\+Type $\ast$origin\+\_\+buffer, const int origin\+\_\+count, const int target\+\_\+rank, const unsigned int target\+\_\+disp, const int target\+\_\+count) const
+\begin{DoxyCompactList}\small\item\em Put data into the target window. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Put\+Type $>$ }\\void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window_aa8f681ccf38e74fad75017aa0bf50f81}{accumulate}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const Put\+Type $\ast$origin\+\_\+buffer, const int origin\+\_\+count, const int target\+\_\+rank, const unsigned int target\+\_\+disp, const int target\+\_\+count, M\+P\+I\+\_\+\+Op operation) const
+\begin{DoxyCompactList}\small\item\em Accumulate data into the target window. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Put\+Type $>$ }\\\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window_a4fc76b03f10fe40c84c4b5d123f453b9}{r\+\_\+accumulate}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const Put\+Type $\ast$origin\+\_\+buffer, const int origin\+\_\+count, const int target\+\_\+rank, const unsigned int target\+\_\+disp, const int target\+\_\+count, M\+P\+I\+\_\+\+Op operation) const
+\begin{DoxyCompactList}\small\item\em (Non-\/blocking) Accumulate data into the target window. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Get\+Type $>$ }\\void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window_a020a03ef7d6329e75732fe5bfa6f9d75}{get}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, Get\+Type $\ast$origin\+\_\+buffer, const int origin\+\_\+count, const int target\+\_\+rank, const unsigned int target\+\_\+disp, const int target\+\_\+count) const
+\begin{DoxyCompactList}\small\item\em Get data from the target window. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Get\+Type $>$ }\\\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window_af611adbe29e925ef5448ead49bde179e}{r\+\_\+get}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, Get\+Type $\ast$origin\+\_\+buffer, const int origin\+\_\+count, const int target\+\_\+rank, const unsigned int target\+\_\+disp, const int target\+\_\+count) const
+\begin{DoxyCompactList}\small\item\em Get data (with handle) from the target window. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Get\+Type $>$ }\\void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window_a0f103e5469537256f4dac5bf0e9c18ac}{get\+\_\+accumulate}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, Get\+Type $\ast$origin\+\_\+buffer, const int origin\+\_\+count, Get\+Type $\ast$result\+\_\+buffer, const int result\+\_\+count, const int target\+\_\+rank, const unsigned int target\+\_\+disp, const int target\+\_\+count, M\+P\+I\+\_\+\+Op operation) const
+\begin{DoxyCompactList}\small\item\em Get Accumulate data from the target window. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Get\+Type $>$ }\\\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window_a69842676f3a38849160857138ce0b745}{r\+\_\+get\+\_\+accumulate}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, Get\+Type $\ast$origin\+\_\+buffer, const int origin\+\_\+count, Get\+Type $\ast$result\+\_\+buffer, const int result\+\_\+count, const int target\+\_\+rank, const unsigned int target\+\_\+disp, const int target\+\_\+count, M\+P\+I\+\_\+\+Op operation) const
+\begin{DoxyCompactList}\small\item\em (Non-\/blocking) Get Accumulate data (with handle) from the target window. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Get\+Type $>$ }\\void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window_a6a63489f00fe21d3007a49b32f0618dd}{fetch\+\_\+and\+\_\+op}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, Get\+Type $\ast$origin\+\_\+buffer, Get\+Type $\ast$result\+\_\+buffer, const int target\+\_\+rank, const unsigned int target\+\_\+disp, M\+P\+I\+\_\+\+Op operation) const
+\begin{DoxyCompactList}\small\item\em Fetch and operate on data from the target window (An optimized version of Get\+\_\+accumulate). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Value\+Type$>$\newline
+class gko\+::experimental\+::mpi\+::window$<$ Value\+Type $>$}
+
+This class wraps the M\+P\+I\+\_\+\+Window class with R\+A\+II functionality. 
+
+Different create and lock type methods are setup with enums.
+
+M\+P\+I\+\_\+\+Window is primarily used for one sided communication and this class provides functionalities to fence, lock, unlock and flush the communication buffers. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1window_a0d8b46cb4e781ef71bccbbfb4a9407fe}\label{classgko_1_1experimental_1_1mpi_1_1window_a0d8b46cb4e781ef71bccbbfb4a9407fe}} 
+\index{gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}!window@{window}}
+\index{window@{window}!gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{window()}{window()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type $>$ \\
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window}{gko\+::experimental\+::mpi\+::window}}$<$ Value\+Type $>$\+::\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window}{window}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The default constructor. 
+
+It creates a null window of M\+P\+I\+\_\+\+W\+I\+N\+\_\+\+N\+U\+LL type. \mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1window_ae4fca6434fa04ac9b8e9071bfc8cfe70}\label{classgko_1_1experimental_1_1mpi_1_1window_ae4fca6434fa04ac9b8e9071bfc8cfe70}} 
+\index{gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}!window@{window}}
+\index{window@{window}!gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{window()}{window()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type $>$ \\
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window}{gko\+::experimental\+::mpi\+::window}}$<$ Value\+Type $>$\+::\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window}{window}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window}{window}}$<$ Value\+Type $>$ \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The move constructor. 
+
+Move the other object and replace it with M\+P\+I\+\_\+\+W\+I\+N\+\_\+\+N\+U\+LL
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & the window object to be moved. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1window_aa4604e5b67e90562628e9c3811383195}\label{classgko_1_1experimental_1_1mpi_1_1window_aa4604e5b67e90562628e9c3811383195}} 
+\index{gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}!window@{window}}
+\index{window@{window}!gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{window()}{window()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type $>$ \\
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window}{gko\+::experimental\+::mpi\+::window}}$<$ Value\+Type $>$\+::\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window}{window}} (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{Value\+Type $\ast$}]{base,  }\item[{int}]{num\+\_\+elems,  }\item[{const \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}} \&}]{comm,  }\item[{const int}]{disp\+\_\+unit = {\ttfamily sizeof(ValueType)},  }\item[{M\+P\+I\+\_\+\+Info}]{input\+\_\+info = {\ttfamily MPI\+\_\+INFO\+\_\+NULL},  }\item[{\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window_a979711ce7fb3e661658656c49ffc9d31}{create\+\_\+type}}}]{c\+\_\+type = {\ttfamily create\+\_\+type\+:\+:create} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Create a window object with a given data pointer and type. 
+
+A collective operation.
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the base pointer is located. \\
+\hline
+{\em base} & the base pointer for the window object. \\
+\hline
+{\em num\+\_\+elems} & the num\+\_\+elems of type Value\+Type the window points to. \\
+\hline
+{\em comm} & the communicator whose ranks will have windows created. \\
+\hline
+{\em disp\+\_\+unit} & the displacement from base for the window object. \\
+\hline
+{\em input\+\_\+info} & the M\+P\+I\+\_\+\+Info object used to set certain properties. \\
+\hline
+{\em c\+\_\+type} & the type of creation method to use to create the window. \\
+\hline
+\end{DoxyParams}
+
+
+References gko\+::experimental\+::mpi\+::communicator\+::get().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1window_aa8f681ccf38e74fad75017aa0bf50f81}\label{classgko_1_1experimental_1_1mpi_1_1window_aa8f681ccf38e74fad75017aa0bf50f81}} 
+\index{gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}!accumulate@{accumulate}}
+\index{accumulate@{accumulate}!gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{accumulate()}{accumulate()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type $>$ \\
+template$<$typename Put\+Type $>$ \\
+void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window}{gko\+::experimental\+::mpi\+::window}}$<$ Value\+Type $>$\+::accumulate (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const Put\+Type $\ast$}]{origin\+\_\+buffer,  }\item[{const int}]{origin\+\_\+count,  }\item[{const int}]{target\+\_\+rank,  }\item[{const unsigned int}]{target\+\_\+disp,  }\item[{const int}]{target\+\_\+count,  }\item[{M\+P\+I\+\_\+\+Op}]{operation }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Accumulate data into the target window. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffer is located. \\
+\hline
+{\em origin\+\_\+buffer} & the buffer to send \\
+\hline
+{\em origin\+\_\+count} & the number of elements to put \\
+\hline
+{\em target\+\_\+rank} & the rank to put the data to \\
+\hline
+{\em target\+\_\+disp} & the displacement at the target window \\
+\hline
+{\em target\+\_\+count} & the request handle for the send call \\
+\hline
+{\em operation} & the reduce operation. See @\+M\+P\+I\+\_\+\+Op \\
+\hline
+\end{DoxyParams}
+
+
+References gko\+::experimental\+::mpi\+::window$<$ Value\+Type $>$\+::get\+\_\+window().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1window_acc88daf0073f710d33a3cb0351d38dcf}\label{classgko_1_1experimental_1_1mpi_1_1window_acc88daf0073f710d33a3cb0351d38dcf}} 
+\index{gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}!fence@{fence}}
+\index{fence@{fence}!gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{fence()}{fence()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type $>$ \\
+void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window}{gko\+::experimental\+::mpi\+::window}}$<$ Value\+Type $>$\+::fence (\begin{DoxyParamCaption}\item[{int}]{assert = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The active target synchronization using M\+P\+I\+\_\+\+Win\+\_\+fence for the window object. 
+
+This is called on all associated ranks.
+
+
+\begin{DoxyParams}{Parameters}
+{\em assert} & the optimization level. 0 is always valid. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1window_a6a63489f00fe21d3007a49b32f0618dd}\label{classgko_1_1experimental_1_1mpi_1_1window_a6a63489f00fe21d3007a49b32f0618dd}} 
+\index{gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}!fetch\_and\_op@{fetch\_and\_op}}
+\index{fetch\_and\_op@{fetch\_and\_op}!gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{fetch\_and\_op()}{fetch\_and\_op()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type $>$ \\
+template$<$typename Get\+Type $>$ \\
+void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window}{gko\+::experimental\+::mpi\+::window}}$<$ Value\+Type $>$\+::fetch\+\_\+and\+\_\+op (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{Get\+Type $\ast$}]{origin\+\_\+buffer,  }\item[{Get\+Type $\ast$}]{result\+\_\+buffer,  }\item[{const int}]{target\+\_\+rank,  }\item[{const unsigned int}]{target\+\_\+disp,  }\item[{M\+P\+I\+\_\+\+Op}]{operation }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Fetch and operate on data from the target window (An optimized version of Get\+\_\+accumulate). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffer is located. \\
+\hline
+{\em origin\+\_\+buffer} & the buffer to send \\
+\hline
+{\em target\+\_\+rank} & the rank to get the data from \\
+\hline
+{\em target\+\_\+disp} & the displacement at the target window \\
+\hline
+{\em operation} & the reduce operation. See @\+M\+P\+I\+\_\+\+Op \\
+\hline
+\end{DoxyParams}
+
+
+References gko\+::experimental\+::mpi\+::window$<$ Value\+Type $>$\+::get\+\_\+window().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1window_a0bf6a899a25d23f9da9d575ac47fd645}\label{classgko_1_1experimental_1_1mpi_1_1window_a0bf6a899a25d23f9da9d575ac47fd645}} 
+\index{gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}!flush@{flush}}
+\index{flush@{flush}!gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{flush()}{flush()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type $>$ \\
+void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window}{gko\+::experimental\+::mpi\+::window}}$<$ Value\+Type $>$\+::flush (\begin{DoxyParamCaption}\item[{int}]{rank }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Flush the existing R\+D\+MA operations on the target rank for the calling process for the window object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rank} & the target rank. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1window_ad7e3f181256230b9a2d830e48e5453a9}\label{classgko_1_1experimental_1_1mpi_1_1window_ad7e3f181256230b9a2d830e48e5453a9}} 
+\index{gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}!flush\_local@{flush\_local}}
+\index{flush\_local@{flush\_local}!gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{flush\_local()}{flush\_local()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type $>$ \\
+void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window}{gko\+::experimental\+::mpi\+::window}}$<$ Value\+Type $>$\+::flush\+\_\+local (\begin{DoxyParamCaption}\item[{int}]{rank }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Flush the existing R\+D\+MA operations on the calling rank from the target rank for the window object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rank} & the target rank. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1window_a020a03ef7d6329e75732fe5bfa6f9d75}\label{classgko_1_1experimental_1_1mpi_1_1window_a020a03ef7d6329e75732fe5bfa6f9d75}} 
+\index{gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}!get@{get}}
+\index{get@{get}!gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type $>$ \\
+template$<$typename Get\+Type $>$ \\
+void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window}{gko\+::experimental\+::mpi\+::window}}$<$ Value\+Type $>$\+::get (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{Get\+Type $\ast$}]{origin\+\_\+buffer,  }\item[{const int}]{origin\+\_\+count,  }\item[{const int}]{target\+\_\+rank,  }\item[{const unsigned int}]{target\+\_\+disp,  }\item[{const int}]{target\+\_\+count }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get data from the target window. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffer is located. \\
+\hline
+{\em origin\+\_\+buffer} & the buffer to send \\
+\hline
+{\em origin\+\_\+count} & the number of elements to get \\
+\hline
+{\em target\+\_\+rank} & the rank to get the data from \\
+\hline
+{\em target\+\_\+disp} & the displacement at the target window \\
+\hline
+{\em target\+\_\+count} & the request handle for the send call \\
+\hline
+\end{DoxyParams}
+
+
+References gko\+::experimental\+::mpi\+::window$<$ Value\+Type $>$\+::get\+\_\+window().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1window_a0f103e5469537256f4dac5bf0e9c18ac}\label{classgko_1_1experimental_1_1mpi_1_1window_a0f103e5469537256f4dac5bf0e9c18ac}} 
+\index{gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}!get\_accumulate@{get\_accumulate}}
+\index{get\_accumulate@{get\_accumulate}!gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_accumulate()}{get\_accumulate()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type $>$ \\
+template$<$typename Get\+Type $>$ \\
+void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window}{gko\+::experimental\+::mpi\+::window}}$<$ Value\+Type $>$\+::get\+\_\+accumulate (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{Get\+Type $\ast$}]{origin\+\_\+buffer,  }\item[{const int}]{origin\+\_\+count,  }\item[{Get\+Type $\ast$}]{result\+\_\+buffer,  }\item[{const int}]{result\+\_\+count,  }\item[{const int}]{target\+\_\+rank,  }\item[{const unsigned int}]{target\+\_\+disp,  }\item[{const int}]{target\+\_\+count,  }\item[{M\+P\+I\+\_\+\+Op}]{operation }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get Accumulate data from the target window. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffers are located. \\
+\hline
+{\em origin\+\_\+buffer} & the buffer to send \\
+\hline
+{\em origin\+\_\+count} & the number of elements to get \\
+\hline
+{\em result\+\_\+buffer} & the buffer to receive the target data \\
+\hline
+{\em result\+\_\+count} & the number of elements to get \\
+\hline
+{\em target\+\_\+rank} & the rank to get the data from \\
+\hline
+{\em target\+\_\+disp} & the displacement at the target window \\
+\hline
+{\em target\+\_\+count} & the request handle for the send call \\
+\hline
+{\em operation} & the reduce operation. See @\+M\+P\+I\+\_\+\+Op \\
+\hline
+\end{DoxyParams}
+
+
+References gko\+::experimental\+::mpi\+::window$<$ Value\+Type $>$\+::get\+\_\+window().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1window_aefdede74f361e099145647ac6b8e8de6}\label{classgko_1_1experimental_1_1mpi_1_1window_aefdede74f361e099145647ac6b8e8de6}} 
+\index{gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}!get\_window@{get\_window}}
+\index{get\_window@{get\_window}!gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_window()}{get\_window()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type $>$ \\
+M\+P\+I\+\_\+\+Win \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window}{gko\+::experimental\+::mpi\+::window}}$<$ Value\+Type $>$\+::get\+\_\+window (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the underlying window object of M\+P\+I\+\_\+\+Win type. 
+
+\begin{DoxyReturn}{Returns}
+the underlying window object. 
+\end{DoxyReturn}
+
+
+Referenced by gko\+::experimental\+::mpi\+::window$<$ Value\+Type $>$\+::accumulate(), gko\+::experimental\+::mpi\+::window$<$ Value\+Type $>$\+::fetch\+\_\+and\+\_\+op(), gko\+::experimental\+::mpi\+::window$<$ Value\+Type $>$\+::get(), gko\+::experimental\+::mpi\+::window$<$ Value\+Type $>$\+::get\+\_\+accumulate(), gko\+::experimental\+::mpi\+::window$<$ Value\+Type $>$\+::put(), gko\+::experimental\+::mpi\+::window$<$ Value\+Type $>$\+::r\+\_\+accumulate(), gko\+::experimental\+::mpi\+::window$<$ Value\+Type $>$\+::r\+\_\+get(), gko\+::experimental\+::mpi\+::window$<$ Value\+Type $>$\+::r\+\_\+get\+\_\+accumulate(), and gko\+::experimental\+::mpi\+::window$<$ Value\+Type $>$\+::r\+\_\+put().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1window_aed5078f56eb599e9b1ff104fcc33a272}\label{classgko_1_1experimental_1_1mpi_1_1window_aed5078f56eb599e9b1ff104fcc33a272}} 
+\index{gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}!lock@{lock}}
+\index{lock@{lock}!gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{lock()}{lock()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type $>$ \\
+void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window}{gko\+::experimental\+::mpi\+::window}}$<$ Value\+Type $>$\+::lock (\begin{DoxyParamCaption}\item[{int}]{rank,  }\item[{\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window_a35fce5e05e221ce18372e1f2609f9953}{lock\+\_\+type}}}]{lock\+\_\+t = {\ttfamily lock\+\_\+type\+:\+:shared},  }\item[{int}]{assert = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Create an epoch using M\+P\+I\+\_\+\+Win\+\_\+lock for the window object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rank} & the target rank. \\
+\hline
+{\em lock\+\_\+t} & the type of the lock\+: shared or exclusive \\
+\hline
+{\em assert} & the optimization level. 0 is always valid. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1window_a297311f049fc1e7d1ac41696108860d0}\label{classgko_1_1experimental_1_1mpi_1_1window_a297311f049fc1e7d1ac41696108860d0}} 
+\index{gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}!lock\_all@{lock\_all}}
+\index{lock\_all@{lock\_all}!gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{lock\_all()}{lock\_all()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type $>$ \\
+void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window}{gko\+::experimental\+::mpi\+::window}}$<$ Value\+Type $>$\+::lock\+\_\+all (\begin{DoxyParamCaption}\item[{int}]{assert = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Create the epoch on all ranks using M\+P\+I\+\_\+\+Win\+\_\+lock\+\_\+all for the window object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em assert} & the optimization level. 0 is always valid. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1window_a0552218118e1e4d69393a7b2065c9a46}\label{classgko_1_1experimental_1_1mpi_1_1window_a0552218118e1e4d69393a7b2065c9a46}} 
+\index{gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type $>$ \\
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window}{window}}\& \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window}{gko\+::experimental\+::mpi\+::window}}$<$ Value\+Type $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window}{window}}$<$ Value\+Type $>$ \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The move assignment operator. 
+
+Move the other object and replace it with M\+P\+I\+\_\+\+W\+I\+N\+\_\+\+N\+U\+LL
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & the window object to be moved. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1window_a151c85c9dbd58b15377edcf0702efe5d}\label{classgko_1_1experimental_1_1mpi_1_1window_a151c85c9dbd58b15377edcf0702efe5d}} 
+\index{gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}!put@{put}}
+\index{put@{put}!gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{put()}{put()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type $>$ \\
+template$<$typename Put\+Type $>$ \\
+void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window}{gko\+::experimental\+::mpi\+::window}}$<$ Value\+Type $>$\+::put (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const Put\+Type $\ast$}]{origin\+\_\+buffer,  }\item[{const int}]{origin\+\_\+count,  }\item[{const int}]{target\+\_\+rank,  }\item[{const unsigned int}]{target\+\_\+disp,  }\item[{const int}]{target\+\_\+count }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Put data into the target window. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffer is located. \\
+\hline
+{\em origin\+\_\+buffer} & the buffer to send \\
+\hline
+{\em origin\+\_\+count} & the number of elements to put \\
+\hline
+{\em target\+\_\+rank} & the rank to put the data to \\
+\hline
+{\em target\+\_\+disp} & the displacement at the target window \\
+\hline
+{\em target\+\_\+count} & the request handle for the send call \\
+\hline
+\end{DoxyParams}
+
+
+References gko\+::experimental\+::mpi\+::window$<$ Value\+Type $>$\+::get\+\_\+window().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1window_a4fc76b03f10fe40c84c4b5d123f453b9}\label{classgko_1_1experimental_1_1mpi_1_1window_a4fc76b03f10fe40c84c4b5d123f453b9}} 
+\index{gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}!r\_accumulate@{r\_accumulate}}
+\index{r\_accumulate@{r\_accumulate}!gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{r\_accumulate()}{r\_accumulate()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type $>$ \\
+template$<$typename Put\+Type $>$ \\
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window}{gko\+::experimental\+::mpi\+::window}}$<$ Value\+Type $>$\+::r\+\_\+accumulate (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const Put\+Type $\ast$}]{origin\+\_\+buffer,  }\item[{const int}]{origin\+\_\+count,  }\item[{const int}]{target\+\_\+rank,  }\item[{const unsigned int}]{target\+\_\+disp,  }\item[{const int}]{target\+\_\+count,  }\item[{M\+P\+I\+\_\+\+Op}]{operation }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+(Non-\/blocking) Accumulate data into the target window. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffer is located. \\
+\hline
+{\em origin\+\_\+buffer} & the buffer to send \\
+\hline
+{\em origin\+\_\+count} & the number of elements to put \\
+\hline
+{\em target\+\_\+rank} & the rank to put the data to \\
+\hline
+{\em target\+\_\+disp} & the displacement at the target window \\
+\hline
+{\em target\+\_\+count} & the request handle for the send call \\
+\hline
+{\em operation} & the reduce operation. See @\+M\+P\+I\+\_\+\+Op\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the request handle for the send call 
+\end{DoxyReturn}
+
+
+References gko\+::experimental\+::mpi\+::request\+::get(), and gko\+::experimental\+::mpi\+::window$<$ Value\+Type $>$\+::get\+\_\+window().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1window_af611adbe29e925ef5448ead49bde179e}\label{classgko_1_1experimental_1_1mpi_1_1window_af611adbe29e925ef5448ead49bde179e}} 
+\index{gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}!r\_get@{r\_get}}
+\index{r\_get@{r\_get}!gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{r\_get()}{r\_get()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type $>$ \\
+template$<$typename Get\+Type $>$ \\
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window}{gko\+::experimental\+::mpi\+::window}}$<$ Value\+Type $>$\+::r\+\_\+get (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{Get\+Type $\ast$}]{origin\+\_\+buffer,  }\item[{const int}]{origin\+\_\+count,  }\item[{const int}]{target\+\_\+rank,  }\item[{const unsigned int}]{target\+\_\+disp,  }\item[{const int}]{target\+\_\+count }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get data (with handle) from the target window. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffer is located. \\
+\hline
+{\em origin\+\_\+buffer} & the buffer to send \\
+\hline
+{\em origin\+\_\+count} & the number of elements to get \\
+\hline
+{\em target\+\_\+rank} & the rank to get the data from \\
+\hline
+{\em target\+\_\+disp} & the displacement at the target window \\
+\hline
+{\em target\+\_\+count} & the request handle for the send call\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the request handle for the send call 
+\end{DoxyReturn}
+
+
+References gko\+::experimental\+::mpi\+::request\+::get(), and gko\+::experimental\+::mpi\+::window$<$ Value\+Type $>$\+::get\+\_\+window().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1window_a69842676f3a38849160857138ce0b745}\label{classgko_1_1experimental_1_1mpi_1_1window_a69842676f3a38849160857138ce0b745}} 
+\index{gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}!r\_get\_accumulate@{r\_get\_accumulate}}
+\index{r\_get\_accumulate@{r\_get\_accumulate}!gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{r\_get\_accumulate()}{r\_get\_accumulate()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type $>$ \\
+template$<$typename Get\+Type $>$ \\
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window}{gko\+::experimental\+::mpi\+::window}}$<$ Value\+Type $>$\+::r\+\_\+get\+\_\+accumulate (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{Get\+Type $\ast$}]{origin\+\_\+buffer,  }\item[{const int}]{origin\+\_\+count,  }\item[{Get\+Type $\ast$}]{result\+\_\+buffer,  }\item[{const int}]{result\+\_\+count,  }\item[{const int}]{target\+\_\+rank,  }\item[{const unsigned int}]{target\+\_\+disp,  }\item[{const int}]{target\+\_\+count,  }\item[{M\+P\+I\+\_\+\+Op}]{operation }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+(Non-\/blocking) Get Accumulate data (with handle) from the target window. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffers are located. \\
+\hline
+{\em origin\+\_\+buffer} & the buffer to send \\
+\hline
+{\em origin\+\_\+count} & the number of elements to get \\
+\hline
+{\em result\+\_\+buffer} & the buffer to receive the target data \\
+\hline
+{\em result\+\_\+count} & the number of elements to get \\
+\hline
+{\em target\+\_\+rank} & the rank to get the data from \\
+\hline
+{\em target\+\_\+disp} & the displacement at the target window \\
+\hline
+{\em target\+\_\+count} & the request handle for the send call \\
+\hline
+{\em operation} & the reduce operation. See @\+M\+P\+I\+\_\+\+Op\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the request handle for the send call 
+\end{DoxyReturn}
+
+
+References gko\+::experimental\+::mpi\+::request\+::get(), and gko\+::experimental\+::mpi\+::window$<$ Value\+Type $>$\+::get\+\_\+window().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1window_a08ddae163fc1c34b9456bab96a5f1107}\label{classgko_1_1experimental_1_1mpi_1_1window_a08ddae163fc1c34b9456bab96a5f1107}} 
+\index{gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}!r\_put@{r\_put}}
+\index{r\_put@{r\_put}!gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{r\_put()}{r\_put()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type $>$ \\
+template$<$typename Put\+Type $>$ \\
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window}{gko\+::experimental\+::mpi\+::window}}$<$ Value\+Type $>$\+::r\+\_\+put (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const Put\+Type $\ast$}]{origin\+\_\+buffer,  }\item[{const int}]{origin\+\_\+count,  }\item[{const int}]{target\+\_\+rank,  }\item[{const unsigned int}]{target\+\_\+disp,  }\item[{const int}]{target\+\_\+count }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Put data into the target window. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffer is located. \\
+\hline
+{\em origin\+\_\+buffer} & the buffer to send \\
+\hline
+{\em origin\+\_\+count} & the number of elements to put \\
+\hline
+{\em target\+\_\+rank} & the rank to put the data to \\
+\hline
+{\em target\+\_\+disp} & the displacement at the target window \\
+\hline
+{\em target\+\_\+count} & the request handle for the send call\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the request handle for the send call 
+\end{DoxyReturn}
+
+
+References gko\+::experimental\+::mpi\+::request\+::get(), and gko\+::experimental\+::mpi\+::window$<$ Value\+Type $>$\+::get\+\_\+window().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1window_affaf124a741991f95911f7827b966d4b}\label{classgko_1_1experimental_1_1mpi_1_1window_affaf124a741991f95911f7827b966d4b}} 
+\index{gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}!unlock@{unlock}}
+\index{unlock@{unlock}!gko::experimental::mpi::window$<$ ValueType $>$@{gko::experimental::mpi::window$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{unlock()}{unlock()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type $>$ \\
+void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1window}{gko\+::experimental\+::mpi\+::window}}$<$ Value\+Type $>$\+::unlock (\begin{DoxyParamCaption}\item[{int}]{rank }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Close the epoch using M\+P\+I\+\_\+\+Win\+\_\+unlock for the window object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rank} & the target rank. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/base/mpi.\+hpp\end{DoxyCompactItemize}

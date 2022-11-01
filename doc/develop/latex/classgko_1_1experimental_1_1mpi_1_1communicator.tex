@@ -1,0 +1,1466 @@
+\hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator}{}\doxysection{gko\+::experimental\+::mpi\+::communicator Class Reference}
+\label{classgko_1_1experimental_1_1mpi_1_1communicator}\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+
+
+A thin wrapper of M\+P\+I\+\_\+\+Comm that supports most M\+PI calls.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/base/mpi.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a02027c8c5e0d58f7d6df1706110f5bbe}{communicator}} (const M\+P\+I\+\_\+\+Comm \&comm)
+\begin{DoxyCompactList}\small\item\em Non-\/owning constructor for an existing communicator of type M\+P\+I\+\_\+\+Comm. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_aa425d5f68991e101f146e1a909ff7a2e}{communicator}} (const M\+P\+I\+\_\+\+Comm \&comm, int color, int key)
+\begin{DoxyCompactList}\small\item\em Create a communicator object from an existing M\+P\+I\+\_\+\+Comm object using color and key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_af94280388fb46d5e330a0c40d615a543}{communicator}} (const \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}} \&comm, int color, int key)
+\begin{DoxyCompactList}\small\item\em Create a communicator object from an existing M\+P\+I\+\_\+\+Comm object using color and key. \end{DoxyCompactList}\item 
+const M\+P\+I\+\_\+\+Comm \& \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a53f1690ba9030e25604bbedae083d623}{get}} () const
+\begin{DoxyCompactList}\small\item\em Return the underlying M\+P\+I\+\_\+\+Comm object. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a5f62780446fdfe15346b5248d8c3e41d}{size}} () const
+\begin{DoxyCompactList}\small\item\em Return the size of the communicator (number of ranks). \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a58c4515edcb0dee79b2be1eb40333a61}{rank}} () const
+\begin{DoxyCompactList}\small\item\em Return the rank of the calling process in the communicator. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a8dc8a949e3bc0e5e00ad0af13ca62104}{node\+\_\+local\+\_\+rank}} () const
+\begin{DoxyCompactList}\small\item\em Return the node local rank of the calling process in the communicator. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_ab769309228bcbff10cdf798d07c68bdd}{operator==}} (const \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}} \&rhs) const
+\begin{DoxyCompactList}\small\item\em Compare two communicator objects for equality. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a54576f5130895a18bc40305e28a0f41e}{operator!=}} (const \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}} \&rhs) const
+\begin{DoxyCompactList}\small\item\em Compare two communicator objects for non-\/equality. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a5644abcc067c0959c49a0cc14dcc96a7}{synchronize}} () const
+\begin{DoxyCompactList}\small\item\em This function is used to synchronize the ranks in the communicator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Send\+Type $>$ }\\void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a62d7d3e3cdd2625840b8505d2b266b26}{send}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const Send\+Type $\ast$send\+\_\+buffer, const int send\+\_\+count, const int destination\+\_\+rank, const int send\+\_\+tag) const
+\begin{DoxyCompactList}\small\item\em Send (Blocking) data from calling process to destination rank. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Send\+Type $>$ }\\\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_af6265023d1c4f4965b71c309198f608b}{i\+\_\+send}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const Send\+Type $\ast$send\+\_\+buffer, const int send\+\_\+count, const int destination\+\_\+rank, const int send\+\_\+tag) const
+\begin{DoxyCompactList}\small\item\em Send (Non-\/blocking, Immediate return) data from calling process to destination rank. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Recv\+Type $>$ }\\\mbox{\hyperlink{structgko_1_1experimental_1_1mpi_1_1status}{status}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a0065a579782ab27c80247bc309639393}{recv}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, Recv\+Type $\ast$recv\+\_\+buffer, const int recv\+\_\+count, const int source\+\_\+rank, const int recv\+\_\+tag) const
+\begin{DoxyCompactList}\small\item\em Receive data from source rank. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Recv\+Type $>$ }\\\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a2ea79fc26a548eb7d42b8e54d877c3aa}{i\+\_\+recv}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, Recv\+Type $\ast$recv\+\_\+buffer, const int recv\+\_\+count, const int source\+\_\+rank, const int recv\+\_\+tag) const
+\begin{DoxyCompactList}\small\item\em Receive (Non-\/blocking, Immediate return) data from source rank. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Broadcast\+Type $>$ }\\void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a95ea693d1ddc249215968d378e80dcc7}{broadcast}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, Broadcast\+Type $\ast$buffer, int count, int root\+\_\+rank) const
+\begin{DoxyCompactList}\small\item\em Broadcast data from calling process to all ranks in the communicator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Broadcast\+Type $>$ }\\\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a0edf57701938af05bb356f1228798ad8}{i\+\_\+broadcast}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, Broadcast\+Type $\ast$buffer, int count, int root\+\_\+rank) const
+\begin{DoxyCompactList}\small\item\em (Non-\/blocking) Broadcast data from calling process to all ranks in the communicator \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Reduce\+Type $>$ }\\void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_ade217a21b11ab3b3392ae73ef9b6d942}{reduce}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const Reduce\+Type $\ast$send\+\_\+buffer, Reduce\+Type $\ast$recv\+\_\+buffer, int count, M\+P\+I\+\_\+\+Op operation, int root\+\_\+rank) const
+\begin{DoxyCompactList}\small\item\em Reduce data into root from all calling processes on the same communicator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Reduce\+Type $>$ }\\\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a5d4ff6a0c4d5af67292a22561d7f58e5}{i\+\_\+reduce}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const Reduce\+Type $\ast$send\+\_\+buffer, Reduce\+Type $\ast$recv\+\_\+buffer, int count, M\+P\+I\+\_\+\+Op operation, int root\+\_\+rank) const
+\begin{DoxyCompactList}\small\item\em (Non-\/blocking) Reduce data into root from all calling processes on the same communicator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Reduce\+Type $>$ }\\void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_aa98aaa161d489569ee95da8e2c33c3a1}{all\+\_\+reduce}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, Reduce\+Type $\ast$recv\+\_\+buffer, int count, M\+P\+I\+\_\+\+Op operation) const
+\begin{DoxyCompactList}\small\item\em (In-\/place) Reduce data from all calling processes from all calling processes on same communicator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Reduce\+Type $>$ }\\\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a7d28b094fb7f08bc9c52fffd0180abc0}{i\+\_\+all\+\_\+reduce}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, Reduce\+Type $\ast$recv\+\_\+buffer, int count, M\+P\+I\+\_\+\+Op operation) const
+\begin{DoxyCompactList}\small\item\em (In-\/place, non-\/blocking) Reduce data from all calling processes from all calling processes on same communicator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Reduce\+Type $>$ }\\void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_abcd71bfcf4fbc916529ce7c2c85857d9}{all\+\_\+reduce}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const Reduce\+Type $\ast$send\+\_\+buffer, Reduce\+Type $\ast$recv\+\_\+buffer, int count, M\+P\+I\+\_\+\+Op operation) const
+\begin{DoxyCompactList}\small\item\em Reduce data from all calling processes from all calling processes on same communicator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Reduce\+Type $>$ }\\\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_acefa109840bc98d51a826dbd40d235db}{i\+\_\+all\+\_\+reduce}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const Reduce\+Type $\ast$send\+\_\+buffer, Reduce\+Type $\ast$recv\+\_\+buffer, int count, M\+P\+I\+\_\+\+Op operation) const
+\begin{DoxyCompactList}\small\item\em Reduce data from all calling processes from all calling processes on same communicator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Send\+Type , typename Recv\+Type $>$ }\\void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a0f3b6b2a414c8fda967dc08dd1ec5927}{gather}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const Send\+Type $\ast$send\+\_\+buffer, const int send\+\_\+count, Recv\+Type $\ast$recv\+\_\+buffer, const int recv\+\_\+count, int root\+\_\+rank) const
+\begin{DoxyCompactList}\small\item\em Gather data onto the root rank from all ranks in the communicator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Send\+Type , typename Recv\+Type $>$ }\\\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a74aeeeb289a7509c1669b156fbf3637a}{i\+\_\+gather}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const Send\+Type $\ast$send\+\_\+buffer, const int send\+\_\+count, Recv\+Type $\ast$recv\+\_\+buffer, const int recv\+\_\+count, int root\+\_\+rank) const
+\begin{DoxyCompactList}\small\item\em (Non-\/blocking) Gather data onto the root rank from all ranks in the communicator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Send\+Type , typename Recv\+Type $>$ }\\void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_af3c29e0893c9ab432c7cc58b6f36dce2}{gather\+\_\+v}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const Send\+Type $\ast$send\+\_\+buffer, const int send\+\_\+count, Recv\+Type $\ast$recv\+\_\+buffer, const int $\ast$recv\+\_\+counts, const int $\ast$displacements, int root\+\_\+rank) const
+\begin{DoxyCompactList}\small\item\em Gather data onto the root rank from all ranks in the communicator with offsets. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Send\+Type , typename Recv\+Type $>$ }\\\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_acc0eaaa2c5ae836eb28903e17add1a8a}{i\+\_\+gather\+\_\+v}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const Send\+Type $\ast$send\+\_\+buffer, const int send\+\_\+count, Recv\+Type $\ast$recv\+\_\+buffer, const int $\ast$recv\+\_\+counts, const int $\ast$displacements, int root\+\_\+rank) const
+\begin{DoxyCompactList}\small\item\em (Non-\/blocking) Gather data onto the root rank from all ranks in the communicator with offsets. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Send\+Type , typename Recv\+Type $>$ }\\void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_aaeec2373a2100e3e0e2f22256f810737}{all\+\_\+gather}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const Send\+Type $\ast$send\+\_\+buffer, const int send\+\_\+count, Recv\+Type $\ast$recv\+\_\+buffer, const int recv\+\_\+count) const
+\begin{DoxyCompactList}\small\item\em Gather data onto all ranks from all ranks in the communicator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Send\+Type , typename Recv\+Type $>$ }\\\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_ab72560fb614cb0d16cd5c52048e98360}{i\+\_\+all\+\_\+gather}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const Send\+Type $\ast$send\+\_\+buffer, const int send\+\_\+count, Recv\+Type $\ast$recv\+\_\+buffer, const int recv\+\_\+count) const
+\begin{DoxyCompactList}\small\item\em (Non-\/blocking) Gather data onto all ranks from all ranks in the communicator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Send\+Type , typename Recv\+Type $>$ }\\void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a549c09b09f1be70198cf5ee0338e5385}{scatter}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const Send\+Type $\ast$send\+\_\+buffer, const int send\+\_\+count, Recv\+Type $\ast$recv\+\_\+buffer, const int recv\+\_\+count, int root\+\_\+rank) const
+\begin{DoxyCompactList}\small\item\em Scatter data from root rank to all ranks in the communicator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Send\+Type , typename Recv\+Type $>$ }\\\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_af0b769c1f173f9808503fd76ea980c73}{i\+\_\+scatter}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const Send\+Type $\ast$send\+\_\+buffer, const int send\+\_\+count, Recv\+Type $\ast$recv\+\_\+buffer, const int recv\+\_\+count, int root\+\_\+rank) const
+\begin{DoxyCompactList}\small\item\em (Non-\/blocking) Scatter data from root rank to all ranks in the communicator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Send\+Type , typename Recv\+Type $>$ }\\void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a0b81f45ab0d8424c0c2d0ef63099a712}{scatter\+\_\+v}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const Send\+Type $\ast$send\+\_\+buffer, const int $\ast$send\+\_\+counts, const int $\ast$displacements, Recv\+Type $\ast$recv\+\_\+buffer, const int recv\+\_\+count, int root\+\_\+rank) const
+\begin{DoxyCompactList}\small\item\em Scatter data from root rank to all ranks in the communicator with offsets. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Send\+Type , typename Recv\+Type $>$ }\\\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a340726b3a0f1f3ec176ea68dbb4b30fa}{i\+\_\+scatter\+\_\+v}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const Send\+Type $\ast$send\+\_\+buffer, const int $\ast$send\+\_\+counts, const int $\ast$displacements, Recv\+Type $\ast$recv\+\_\+buffer, const int recv\+\_\+count, int root\+\_\+rank) const
+\begin{DoxyCompactList}\small\item\em (Non-\/blocking) Scatter data from root rank to all ranks in the communicator with offsets. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Recv\+Type $>$ }\\void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a7a85018805835dcabae0134a5b62b383}{all\+\_\+to\+\_\+all}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, Recv\+Type $\ast$recv\+\_\+buffer, const int recv\+\_\+count) const
+\begin{DoxyCompactList}\small\item\em (In-\/place) Communicate data from all ranks to all other ranks in place (M\+P\+I\+\_\+\+Alltoall). \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Recv\+Type $>$ }\\\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a7e1b0265baa6fd66a820451f8469d360}{i\+\_\+all\+\_\+to\+\_\+all}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, Recv\+Type $\ast$recv\+\_\+buffer, const int recv\+\_\+count) const
+\begin{DoxyCompactList}\small\item\em (In-\/place, Non-\/blocking) Communicate data from all ranks to all other ranks in place (M\+P\+I\+\_\+\+Ialltoall). \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Send\+Type , typename Recv\+Type $>$ }\\void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a3426126179bbe79a8cf232450ac3eb69}{all\+\_\+to\+\_\+all}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const Send\+Type $\ast$send\+\_\+buffer, const int send\+\_\+count, Recv\+Type $\ast$recv\+\_\+buffer, const int recv\+\_\+count) const
+\begin{DoxyCompactList}\small\item\em Communicate data from all ranks to all other ranks (M\+P\+I\+\_\+\+Alltoall). \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Send\+Type , typename Recv\+Type $>$ }\\\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a3dd5f4399b6f740663abfd606a24bf08}{i\+\_\+all\+\_\+to\+\_\+all}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const Send\+Type $\ast$send\+\_\+buffer, const int send\+\_\+count, Recv\+Type $\ast$recv\+\_\+buffer, const int recv\+\_\+count) const
+\begin{DoxyCompactList}\small\item\em (Non-\/blocking) Communicate data from all ranks to all other ranks (M\+P\+I\+\_\+\+Ialltoall). \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Send\+Type , typename Recv\+Type $>$ }\\void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a7a8dd09064ac399c87ca0cc5083f0053}{all\+\_\+to\+\_\+all\+\_\+v}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const Send\+Type $\ast$send\+\_\+buffer, const int $\ast$send\+\_\+counts, const int $\ast$send\+\_\+offsets, Recv\+Type $\ast$recv\+\_\+buffer, const int $\ast$recv\+\_\+counts, const int $\ast$recv\+\_\+offsets) const
+\begin{DoxyCompactList}\small\item\em Communicate data from all ranks to all other ranks with offsets (M\+P\+I\+\_\+\+Alltoallv). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a895acb8b91819bc3837ce2517db29911}{all\+\_\+to\+\_\+all\+\_\+v}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const void $\ast$send\+\_\+buffer, const int $\ast$send\+\_\+counts, const int $\ast$send\+\_\+offsets, M\+P\+I\+\_\+\+Datatype send\+\_\+type, void $\ast$recv\+\_\+buffer, const int $\ast$recv\+\_\+counts, const int $\ast$recv\+\_\+offsets, M\+P\+I\+\_\+\+Datatype recv\+\_\+type) const
+\begin{DoxyCompactList}\small\item\em Communicate data from all ranks to all other ranks with offsets (M\+P\+I\+\_\+\+Alltoallv). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a4096892bc72d3302bf6fcb3e8362744c}{i\+\_\+all\+\_\+to\+\_\+all\+\_\+v}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const void $\ast$send\+\_\+buffer, const int $\ast$send\+\_\+counts, const int $\ast$send\+\_\+offsets, M\+P\+I\+\_\+\+Datatype send\+\_\+type, void $\ast$recv\+\_\+buffer, const int $\ast$recv\+\_\+counts, const int $\ast$recv\+\_\+offsets, M\+P\+I\+\_\+\+Datatype recv\+\_\+type) const
+\begin{DoxyCompactList}\small\item\em Communicate data from all ranks to all other ranks with offsets (M\+P\+I\+\_\+\+Ialltoallv). \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Send\+Type , typename Recv\+Type $>$ }\\\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a6480de7acdb9c7e000970e0ec2324201}{i\+\_\+all\+\_\+to\+\_\+all\+\_\+v}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const Send\+Type $\ast$send\+\_\+buffer, const int $\ast$send\+\_\+counts, const int $\ast$send\+\_\+offsets, Recv\+Type $\ast$recv\+\_\+buffer, const int $\ast$recv\+\_\+counts, const int $\ast$recv\+\_\+offsets) const
+\begin{DoxyCompactList}\small\item\em Communicate data from all ranks to all other ranks with offsets (M\+P\+I\+\_\+\+Ialltoallv). \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Scan\+Type $>$ }\\void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_af21d97797e9e468c84d80d6f4bdf6b49}{scan}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const Scan\+Type $\ast$send\+\_\+buffer, Scan\+Type $\ast$recv\+\_\+buffer, int count, M\+P\+I\+\_\+\+Op operation) const
+\begin{DoxyCompactList}\small\item\em Does a scan operation with the given operator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Scan\+Type $>$ }\\\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_ad7b0f3302cff2314ade8d3fd9468eb0c}{i\+\_\+scan}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const Scan\+Type $\ast$send\+\_\+buffer, Scan\+Type $\ast$recv\+\_\+buffer, int count, M\+P\+I\+\_\+\+Op operation) const
+\begin{DoxyCompactList}\small\item\em Does a scan operation with the given operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A thin wrapper of M\+P\+I\+\_\+\+Comm that supports most M\+PI calls. 
+
+A wrapper class that takes in the given M\+PI communicator. If a bare M\+P\+I\+\_\+\+Comm is provided, the wrapper takes no ownership of the M\+P\+I\+\_\+\+Comm. Thus the M\+P\+I\+\_\+\+Comm must remain valid throughout the lifetime of the communicator. If the communicator was created through splitting, the wrapper takes ownership of the M\+P\+I\+\_\+\+Comm. In this case, as the class or object goes out of scope, the underlying M\+P\+I\+\_\+\+Comm is freed.
+
+\begin{DoxyNote}{Note}
+All M\+PI calls that work on a buffer take in an \mbox{\hyperlink{classgko_1_1Executor}{Executor}} as an additional argument. This argument specifies the memory space the buffer lives in. 
+\end{DoxyNote}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a02027c8c5e0d58f7d6df1706110f5bbe}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a02027c8c5e0d58f7d6df1706110f5bbe}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!communicator@{communicator}}
+\index{communicator@{communicator}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{communicator()}{communicator()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily gko\+::experimental\+::mpi\+::communicator\+::communicator (\begin{DoxyParamCaption}\item[{const M\+P\+I\+\_\+\+Comm \&}]{comm }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Non-\/owning constructor for an existing communicator of type M\+P\+I\+\_\+\+Comm. 
+
+The M\+P\+I\+\_\+\+Comm object will not be deleted after the communicator object has been freed and an explicit M\+P\+I\+\_\+\+Comm\+\_\+free needs to be called on the original M\+P\+I\+\_\+\+Comm object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm} & The input M\+P\+I\+\_\+\+Comm object. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_aa425d5f68991e101f146e1a909ff7a2e}\label{classgko_1_1experimental_1_1mpi_1_1communicator_aa425d5f68991e101f146e1a909ff7a2e}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!communicator@{communicator}}
+\index{communicator@{communicator}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{communicator()}{communicator()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily gko\+::experimental\+::mpi\+::communicator\+::communicator (\begin{DoxyParamCaption}\item[{const M\+P\+I\+\_\+\+Comm \&}]{comm,  }\item[{int}]{color,  }\item[{int}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Create a communicator object from an existing M\+P\+I\+\_\+\+Comm object using color and key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm} & The input M\+P\+I\+\_\+\+Comm object. \\
+\hline
+{\em color} & The color to split the original comm object \\
+\hline
+{\em key} & The key to split the comm object \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_af94280388fb46d5e330a0c40d615a543}\label{classgko_1_1experimental_1_1mpi_1_1communicator_af94280388fb46d5e330a0c40d615a543}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!communicator@{communicator}}
+\index{communicator@{communicator}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{communicator()}{communicator()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily gko\+::experimental\+::mpi\+::communicator\+::communicator (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}} \&}]{comm,  }\item[{int}]{color,  }\item[{int}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Create a communicator object from an existing M\+P\+I\+\_\+\+Comm object using color and key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm} & The input communicator object. \\
+\hline
+{\em color} & The color to split the original comm object \\
+\hline
+{\em key} & The key to split the comm object \\
+\hline
+\end{DoxyParams}
+
+
+References get().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_aaeec2373a2100e3e0e2f22256f810737}\label{classgko_1_1experimental_1_1mpi_1_1communicator_aaeec2373a2100e3e0e2f22256f810737}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!all\_gather@{all\_gather}}
+\index{all\_gather@{all\_gather}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{all\_gather()}{all\_gather()}}
+{\footnotesize\ttfamily template$<$typename Send\+Type , typename Recv\+Type $>$ \\
+void gko\+::experimental\+::mpi\+::communicator\+::all\+\_\+gather (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const Send\+Type $\ast$}]{send\+\_\+buffer,  }\item[{const int}]{send\+\_\+count,  }\item[{Recv\+Type $\ast$}]{recv\+\_\+buffer,  }\item[{const int}]{recv\+\_\+count }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gather data onto all ranks from all ranks in the communicator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffers are located. \\
+\hline
+{\em send\+\_\+buffer} & the buffer to gather from \\
+\hline
+{\em send\+\_\+count} & the number of elements to send \\
+\hline
+{\em recv\+\_\+buffer} & the buffer to gather into \\
+\hline
+{\em recv\+\_\+count} & the number of elements to receive\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Send\+Type} & the type of the data to send. Has to be a type which has a specialization of \mbox{\hyperlink{structgko_1_1experimental_1_1mpi_1_1type__impl}{type\+\_\+impl}} that defines its M\+P\+I\+\_\+\+Datatype. \\
+\hline
+{\em Recv\+Type} & the type of the data to receive. The same restrictions as for Send\+Type apply. \\
+\hline
+\end{DoxyTemplParams}
+
+
+References get().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_abcd71bfcf4fbc916529ce7c2c85857d9}\label{classgko_1_1experimental_1_1mpi_1_1communicator_abcd71bfcf4fbc916529ce7c2c85857d9}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!all\_reduce@{all\_reduce}}
+\index{all\_reduce@{all\_reduce}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{all\_reduce()}{all\_reduce()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Reduce\+Type $>$ \\
+void gko\+::experimental\+::mpi\+::communicator\+::all\+\_\+reduce (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const Reduce\+Type $\ast$}]{send\+\_\+buffer,  }\item[{Reduce\+Type $\ast$}]{recv\+\_\+buffer,  }\item[{int}]{count,  }\item[{M\+P\+I\+\_\+\+Op}]{operation }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reduce data from all calling processes from all calling processes on same communicator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffers are located. \\
+\hline
+{\em send\+\_\+buffer} & the data to reduce \\
+\hline
+{\em recv\+\_\+buffer} & the reduced result \\
+\hline
+{\em count} & the number of elements to reduce \\
+\hline
+{\em operation} & the reduce operation. See @\+M\+P\+I\+\_\+\+Op\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Reduce\+Type} & the type of the data to send. Has to be a type which has a specialization of \mbox{\hyperlink{structgko_1_1experimental_1_1mpi_1_1type__impl}{type\+\_\+impl}} that defines its M\+P\+I\+\_\+\+Datatype. \\
+\hline
+\end{DoxyTemplParams}
+
+
+References get().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_aa98aaa161d489569ee95da8e2c33c3a1}\label{classgko_1_1experimental_1_1mpi_1_1communicator_aa98aaa161d489569ee95da8e2c33c3a1}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!all\_reduce@{all\_reduce}}
+\index{all\_reduce@{all\_reduce}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{all\_reduce()}{all\_reduce()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Reduce\+Type $>$ \\
+void gko\+::experimental\+::mpi\+::communicator\+::all\+\_\+reduce (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{Reduce\+Type $\ast$}]{recv\+\_\+buffer,  }\item[{int}]{count,  }\item[{M\+P\+I\+\_\+\+Op}]{operation }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+(In-\/place) Reduce data from all calling processes from all calling processes on same communicator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffer is located. \\
+\hline
+{\em recv\+\_\+buffer} & the data to reduce and the reduced result \\
+\hline
+{\em count} & the number of elements to reduce \\
+\hline
+{\em operation} & the M\+P\+I\+\_\+\+Op type reduce operation.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Reduce\+Type} & the type of the data to send. Has to be a type which has a specialization of \mbox{\hyperlink{structgko_1_1experimental_1_1mpi_1_1type__impl}{type\+\_\+impl}} that defines its M\+P\+I\+\_\+\+Datatype. \\
+\hline
+\end{DoxyTemplParams}
+
+
+References get().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a3426126179bbe79a8cf232450ac3eb69}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a3426126179bbe79a8cf232450ac3eb69}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!all\_to\_all@{all\_to\_all}}
+\index{all\_to\_all@{all\_to\_all}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{all\_to\_all()}{all\_to\_all()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Send\+Type , typename Recv\+Type $>$ \\
+void gko\+::experimental\+::mpi\+::communicator\+::all\+\_\+to\+\_\+all (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const Send\+Type $\ast$}]{send\+\_\+buffer,  }\item[{const int}]{send\+\_\+count,  }\item[{Recv\+Type $\ast$}]{recv\+\_\+buffer,  }\item[{const int}]{recv\+\_\+count }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Communicate data from all ranks to all other ranks (M\+P\+I\+\_\+\+Alltoall). 
+
+See M\+PI documentation for more details.
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffers are located. \\
+\hline
+{\em send\+\_\+buffer} & the buffer to send \\
+\hline
+{\em send\+\_\+count} & the number of elements to send \\
+\hline
+{\em recv\+\_\+buffer} & the buffer to receive \\
+\hline
+{\em recv\+\_\+count} & the number of elements to receive\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Send\+Type} & the type of the data to send. Has to be a type which has a specialization of \mbox{\hyperlink{structgko_1_1experimental_1_1mpi_1_1type__impl}{type\+\_\+impl}} that defines its M\+P\+I\+\_\+\+Datatype. \\
+\hline
+{\em Recv\+Type} & the type of the data to receive. The same restrictions as for Send\+Type apply. \\
+\hline
+\end{DoxyTemplParams}
+
+
+References get().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a7a85018805835dcabae0134a5b62b383}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a7a85018805835dcabae0134a5b62b383}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!all\_to\_all@{all\_to\_all}}
+\index{all\_to\_all@{all\_to\_all}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{all\_to\_all()}{all\_to\_all()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Recv\+Type $>$ \\
+void gko\+::experimental\+::mpi\+::communicator\+::all\+\_\+to\+\_\+all (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{Recv\+Type $\ast$}]{recv\+\_\+buffer,  }\item[{const int}]{recv\+\_\+count }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+(In-\/place) Communicate data from all ranks to all other ranks in place (M\+P\+I\+\_\+\+Alltoall). 
+
+See M\+PI documentation for more details.
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffer is located. \\
+\hline
+{\em buffer} & the buffer to send and the buffer receive \\
+\hline
+{\em recv\+\_\+count} & the number of elements to receive \\
+\hline
+{\em comm} & the communicator\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Recv\+Type} & the type of the data to send. Has to be a type which has a specialization of \mbox{\hyperlink{structgko_1_1experimental_1_1mpi_1_1type__impl}{type\+\_\+impl}} that defines its M\+P\+I\+\_\+\+Datatype.\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyNote}{Note}
+This overload uses M\+P\+I\+\_\+\+I\+N\+\_\+\+P\+L\+A\+CE and the source and destination buffers are the same. 
+\end{DoxyNote}
+
+
+References get().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a7a8dd09064ac399c87ca0cc5083f0053}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a7a8dd09064ac399c87ca0cc5083f0053}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!all\_to\_all\_v@{all\_to\_all\_v}}
+\index{all\_to\_all\_v@{all\_to\_all\_v}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{all\_to\_all\_v()}{all\_to\_all\_v()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Send\+Type , typename Recv\+Type $>$ \\
+void gko\+::experimental\+::mpi\+::communicator\+::all\+\_\+to\+\_\+all\+\_\+v (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const Send\+Type $\ast$}]{send\+\_\+buffer,  }\item[{const int $\ast$}]{send\+\_\+counts,  }\item[{const int $\ast$}]{send\+\_\+offsets,  }\item[{Recv\+Type $\ast$}]{recv\+\_\+buffer,  }\item[{const int $\ast$}]{recv\+\_\+counts,  }\item[{const int $\ast$}]{recv\+\_\+offsets }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Communicate data from all ranks to all other ranks with offsets (M\+P\+I\+\_\+\+Alltoallv). 
+
+See M\+PI documentation for more details.
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffers are located. \\
+\hline
+{\em send\+\_\+buffer} & the buffer to send \\
+\hline
+{\em send\+\_\+count} & the number of elements to send \\
+\hline
+{\em send\+\_\+offsets} & the offsets for the send buffer \\
+\hline
+{\em recv\+\_\+buffer} & the buffer to gather into \\
+\hline
+{\em recv\+\_\+count} & the number of elements to receive \\
+\hline
+{\em recv\+\_\+offsets} & the offsets for the recv buffer \\
+\hline
+{\em comm} & the communicator\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Send\+Type} & the type of the data to send. Has to be a type which has a specialization of \mbox{\hyperlink{structgko_1_1experimental_1_1mpi_1_1type__impl}{type\+\_\+impl}} that defines its M\+P\+I\+\_\+\+Datatype. \\
+\hline
+{\em Recv\+Type} & the type of the data to receive. The same restrictions as for Send\+Type apply. \\
+\hline
+\end{DoxyTemplParams}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a895acb8b91819bc3837ce2517db29911}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a895acb8b91819bc3837ce2517db29911}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!all\_to\_all\_v@{all\_to\_all\_v}}
+\index{all\_to\_all\_v@{all\_to\_all\_v}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{all\_to\_all\_v()}{all\_to\_all\_v()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void gko\+::experimental\+::mpi\+::communicator\+::all\+\_\+to\+\_\+all\+\_\+v (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const void $\ast$}]{send\+\_\+buffer,  }\item[{const int $\ast$}]{send\+\_\+counts,  }\item[{const int $\ast$}]{send\+\_\+offsets,  }\item[{M\+P\+I\+\_\+\+Datatype}]{send\+\_\+type,  }\item[{void $\ast$}]{recv\+\_\+buffer,  }\item[{const int $\ast$}]{recv\+\_\+counts,  }\item[{const int $\ast$}]{recv\+\_\+offsets,  }\item[{M\+P\+I\+\_\+\+Datatype}]{recv\+\_\+type }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Communicate data from all ranks to all other ranks with offsets (M\+P\+I\+\_\+\+Alltoallv). 
+
+See M\+PI documentation for more details.
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffers are located. \\
+\hline
+{\em send\+\_\+buffer} & the buffer to send \\
+\hline
+{\em send\+\_\+count} & the number of elements to send \\
+\hline
+{\em send\+\_\+offsets} & the offsets for the send buffer \\
+\hline
+{\em send\+\_\+type} & the M\+P\+I\+\_\+\+Datatype for the send buffer \\
+\hline
+{\em recv\+\_\+buffer} & the buffer to gather into \\
+\hline
+{\em recv\+\_\+count} & the number of elements to receive \\
+\hline
+{\em recv\+\_\+offsets} & the offsets for the recv buffer \\
+\hline
+{\em recv\+\_\+type} & the M\+P\+I\+\_\+\+Datatype for the recv buffer \\
+\hline
+{\em comm} & the communicator \\
+\hline
+\end{DoxyParams}
+
+
+References get().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a95ea693d1ddc249215968d378e80dcc7}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a95ea693d1ddc249215968d378e80dcc7}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!broadcast@{broadcast}}
+\index{broadcast@{broadcast}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{broadcast()}{broadcast()}}
+{\footnotesize\ttfamily template$<$typename Broadcast\+Type $>$ \\
+void gko\+::experimental\+::mpi\+::communicator\+::broadcast (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{Broadcast\+Type $\ast$}]{buffer,  }\item[{int}]{count,  }\item[{int}]{root\+\_\+rank }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Broadcast data from calling process to all ranks in the communicator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffer is located. \\
+\hline
+{\em buffer} & the buffer to broadcsat \\
+\hline
+{\em count} & the number of elements to broadcast \\
+\hline
+{\em root\+\_\+rank} & the rank to broadcast from\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Broadcast\+Type} & the type of the data to broadcast. Has to be a type which has a specialization of \mbox{\hyperlink{structgko_1_1experimental_1_1mpi_1_1type__impl}{type\+\_\+impl}} that defines its M\+P\+I\+\_\+\+Datatype. \\
+\hline
+\end{DoxyTemplParams}
+
+
+References get().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a0f3b6b2a414c8fda967dc08dd1ec5927}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a0f3b6b2a414c8fda967dc08dd1ec5927}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!gather@{gather}}
+\index{gather@{gather}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{gather()}{gather()}}
+{\footnotesize\ttfamily template$<$typename Send\+Type , typename Recv\+Type $>$ \\
+void gko\+::experimental\+::mpi\+::communicator\+::gather (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const Send\+Type $\ast$}]{send\+\_\+buffer,  }\item[{const int}]{send\+\_\+count,  }\item[{Recv\+Type $\ast$}]{recv\+\_\+buffer,  }\item[{const int}]{recv\+\_\+count,  }\item[{int}]{root\+\_\+rank }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gather data onto the root rank from all ranks in the communicator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffers are located. \\
+\hline
+{\em send\+\_\+buffer} & the buffer to gather from \\
+\hline
+{\em send\+\_\+count} & the number of elements to send \\
+\hline
+{\em recv\+\_\+buffer} & the buffer to gather into \\
+\hline
+{\em recv\+\_\+count} & the number of elements to receive \\
+\hline
+{\em root\+\_\+rank} & the rank to gather into\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Send\+Type} & the type of the data to send. Has to be a type which has a specialization of \mbox{\hyperlink{structgko_1_1experimental_1_1mpi_1_1type__impl}{type\+\_\+impl}} that defines its M\+P\+I\+\_\+\+Datatype. \\
+\hline
+{\em Recv\+Type} & the type of the data to receive. The same restrictions as for Send\+Type apply. \\
+\hline
+\end{DoxyTemplParams}
+
+
+References get().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_af3c29e0893c9ab432c7cc58b6f36dce2}\label{classgko_1_1experimental_1_1mpi_1_1communicator_af3c29e0893c9ab432c7cc58b6f36dce2}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!gather\_v@{gather\_v}}
+\index{gather\_v@{gather\_v}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{gather\_v()}{gather\_v()}}
+{\footnotesize\ttfamily template$<$typename Send\+Type , typename Recv\+Type $>$ \\
+void gko\+::experimental\+::mpi\+::communicator\+::gather\+\_\+v (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const Send\+Type $\ast$}]{send\+\_\+buffer,  }\item[{const int}]{send\+\_\+count,  }\item[{Recv\+Type $\ast$}]{recv\+\_\+buffer,  }\item[{const int $\ast$}]{recv\+\_\+counts,  }\item[{const int $\ast$}]{displacements,  }\item[{int}]{root\+\_\+rank }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gather data onto the root rank from all ranks in the communicator with offsets. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffers are located. \\
+\hline
+{\em send\+\_\+buffer} & the buffer to gather from \\
+\hline
+{\em send\+\_\+count} & the number of elements to send \\
+\hline
+{\em recv\+\_\+buffer} & the buffer to gather into \\
+\hline
+{\em recv\+\_\+count} & the number of elements to receive \\
+\hline
+{\em displacements} & the offsets for the buffer \\
+\hline
+{\em root\+\_\+rank} & the rank to gather into\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Send\+Type} & the type of the data to send. Has to be a type which has a specialization of \mbox{\hyperlink{structgko_1_1experimental_1_1mpi_1_1type__impl}{type\+\_\+impl}} that defines its M\+P\+I\+\_\+\+Datatype. \\
+\hline
+{\em Recv\+Type} & the type of the data to receive. The same restrictions as for Send\+Type apply. \\
+\hline
+\end{DoxyTemplParams}
+
+
+References get().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a53f1690ba9030e25604bbedae083d623}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a53f1690ba9030e25604bbedae083d623}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!get@{get}}
+\index{get@{get}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily const M\+P\+I\+\_\+\+Comm\& gko\+::experimental\+::mpi\+::communicator\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the underlying M\+P\+I\+\_\+\+Comm object. 
+
+\begin{DoxyReturn}{Returns}
+the M\+P\+I\+\_\+\+Comm object 
+\end{DoxyReturn}
+
+
+Referenced by all\+\_\+gather(), all\+\_\+reduce(), all\+\_\+to\+\_\+all(), all\+\_\+to\+\_\+all\+\_\+v(), broadcast(), communicator(), gather(), gather\+\_\+v(), i\+\_\+all\+\_\+gather(), i\+\_\+all\+\_\+reduce(), i\+\_\+all\+\_\+to\+\_\+all(), i\+\_\+all\+\_\+to\+\_\+all\+\_\+v(), i\+\_\+broadcast(), i\+\_\+gather(), i\+\_\+gather\+\_\+v(), i\+\_\+recv(), i\+\_\+reduce(), i\+\_\+scan(), i\+\_\+scatter(), i\+\_\+scatter\+\_\+v(), i\+\_\+send(), operator==(), recv(), reduce(), scan(), scatter(), scatter\+\_\+v(), send(), synchronize(), and gko\+::experimental\+::mpi\+::window$<$ Value\+Type $>$\+::window().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_ab72560fb614cb0d16cd5c52048e98360}\label{classgko_1_1experimental_1_1mpi_1_1communicator_ab72560fb614cb0d16cd5c52048e98360}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!i\_all\_gather@{i\_all\_gather}}
+\index{i\_all\_gather@{i\_all\_gather}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{i\_all\_gather()}{i\_all\_gather()}}
+{\footnotesize\ttfamily template$<$typename Send\+Type , typename Recv\+Type $>$ \\
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} gko\+::experimental\+::mpi\+::communicator\+::i\+\_\+all\+\_\+gather (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const Send\+Type $\ast$}]{send\+\_\+buffer,  }\item[{const int}]{send\+\_\+count,  }\item[{Recv\+Type $\ast$}]{recv\+\_\+buffer,  }\item[{const int}]{recv\+\_\+count }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+(Non-\/blocking) Gather data onto all ranks from all ranks in the communicator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffers are located. \\
+\hline
+{\em send\+\_\+buffer} & the buffer to gather from \\
+\hline
+{\em send\+\_\+count} & the number of elements to send \\
+\hline
+{\em recv\+\_\+buffer} & the buffer to gather into \\
+\hline
+{\em recv\+\_\+count} & the number of elements to receive\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Send\+Type} & the type of the data to send. Has to be a type which has a specialization of \mbox{\hyperlink{structgko_1_1experimental_1_1mpi_1_1type__impl}{type\+\_\+impl}} that defines its M\+P\+I\+\_\+\+Datatype. \\
+\hline
+{\em Recv\+Type} & the type of the data to receive. The same restrictions as for Send\+Type apply.\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+the request handle for the call 
+\end{DoxyReturn}
+
+
+References gko\+::experimental\+::mpi\+::request\+::get(), and get().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_acefa109840bc98d51a826dbd40d235db}\label{classgko_1_1experimental_1_1mpi_1_1communicator_acefa109840bc98d51a826dbd40d235db}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!i\_all\_reduce@{i\_all\_reduce}}
+\index{i\_all\_reduce@{i\_all\_reduce}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{i\_all\_reduce()}{i\_all\_reduce()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Reduce\+Type $>$ \\
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} gko\+::experimental\+::mpi\+::communicator\+::i\+\_\+all\+\_\+reduce (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const Reduce\+Type $\ast$}]{send\+\_\+buffer,  }\item[{Reduce\+Type $\ast$}]{recv\+\_\+buffer,  }\item[{int}]{count,  }\item[{M\+P\+I\+\_\+\+Op}]{operation }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reduce data from all calling processes from all calling processes on same communicator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffers are located. \\
+\hline
+{\em send\+\_\+buffer} & the data to reduce \\
+\hline
+{\em recv\+\_\+buffer} & the reduced result \\
+\hline
+{\em count} & the number of elements to reduce \\
+\hline
+{\em operation} & the reduce operation. See @\+M\+P\+I\+\_\+\+Op\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Reduce\+Type} & the type of the data to reduce. Has to be a type which has a specialization of \mbox{\hyperlink{structgko_1_1experimental_1_1mpi_1_1type__impl}{type\+\_\+impl}} that defines its M\+P\+I\+\_\+\+Datatype.\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+the request handle for the call 
+\end{DoxyReturn}
+
+
+References gko\+::experimental\+::mpi\+::request\+::get(), and get().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a7d28b094fb7f08bc9c52fffd0180abc0}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a7d28b094fb7f08bc9c52fffd0180abc0}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!i\_all\_reduce@{i\_all\_reduce}}
+\index{i\_all\_reduce@{i\_all\_reduce}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{i\_all\_reduce()}{i\_all\_reduce()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Reduce\+Type $>$ \\
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} gko\+::experimental\+::mpi\+::communicator\+::i\+\_\+all\+\_\+reduce (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{Reduce\+Type $\ast$}]{recv\+\_\+buffer,  }\item[{int}]{count,  }\item[{M\+P\+I\+\_\+\+Op}]{operation }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+(In-\/place, non-\/blocking) Reduce data from all calling processes from all calling processes on same communicator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffer is located. \\
+\hline
+{\em recv\+\_\+buffer} & the data to reduce and the reduced result \\
+\hline
+{\em count} & the number of elements to reduce \\
+\hline
+{\em operation} & the reduce operation. See @\+M\+P\+I\+\_\+\+Op\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Reduce\+Type} & the type of the data to reduce. Has to be a type which has a specialization of \mbox{\hyperlink{structgko_1_1experimental_1_1mpi_1_1type__impl}{type\+\_\+impl}} that defines its M\+P\+I\+\_\+\+Datatype.\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+the request handle for the call 
+\end{DoxyReturn}
+
+
+References gko\+::experimental\+::mpi\+::request\+::get(), and get().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a3dd5f4399b6f740663abfd606a24bf08}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a3dd5f4399b6f740663abfd606a24bf08}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!i\_all\_to\_all@{i\_all\_to\_all}}
+\index{i\_all\_to\_all@{i\_all\_to\_all}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{i\_all\_to\_all()}{i\_all\_to\_all()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Send\+Type , typename Recv\+Type $>$ \\
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} gko\+::experimental\+::mpi\+::communicator\+::i\+\_\+all\+\_\+to\+\_\+all (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const Send\+Type $\ast$}]{send\+\_\+buffer,  }\item[{const int}]{send\+\_\+count,  }\item[{Recv\+Type $\ast$}]{recv\+\_\+buffer,  }\item[{const int}]{recv\+\_\+count }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+(Non-\/blocking) Communicate data from all ranks to all other ranks (M\+P\+I\+\_\+\+Ialltoall). 
+
+See M\+PI documentation for more details.
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffers are located. \\
+\hline
+{\em send\+\_\+buffer} & the buffer to send \\
+\hline
+{\em send\+\_\+count} & the number of elements to send \\
+\hline
+{\em recv\+\_\+buffer} & the buffer to receive \\
+\hline
+{\em recv\+\_\+count} & the number of elements to receive\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Send\+Type} & the type of the data to send. Has to be a type which has a specialization of \mbox{\hyperlink{structgko_1_1experimental_1_1mpi_1_1type__impl}{type\+\_\+impl}} that defines its M\+P\+I\+\_\+\+Datatype. \\
+\hline
+{\em Recv\+Type} & the type of the data to receive. The same restrictions as for Send\+Type apply.\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+the request handle for the call 
+\end{DoxyReturn}
+
+
+References gko\+::experimental\+::mpi\+::request\+::get(), and get().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a7e1b0265baa6fd66a820451f8469d360}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a7e1b0265baa6fd66a820451f8469d360}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!i\_all\_to\_all@{i\_all\_to\_all}}
+\index{i\_all\_to\_all@{i\_all\_to\_all}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{i\_all\_to\_all()}{i\_all\_to\_all()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Recv\+Type $>$ \\
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} gko\+::experimental\+::mpi\+::communicator\+::i\+\_\+all\+\_\+to\+\_\+all (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{Recv\+Type $\ast$}]{recv\+\_\+buffer,  }\item[{const int}]{recv\+\_\+count }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+(In-\/place, Non-\/blocking) Communicate data from all ranks to all other ranks in place (M\+P\+I\+\_\+\+Ialltoall). 
+
+See M\+PI documentation for more details.
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffer is located. \\
+\hline
+{\em buffer} & the buffer to send and the buffer receive \\
+\hline
+{\em recv\+\_\+count} & the number of elements to receive \\
+\hline
+{\em comm} & the communicator\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Recv\+Type} & the type of the data to receive. Has to be a type which has a specialization of \mbox{\hyperlink{structgko_1_1experimental_1_1mpi_1_1type__impl}{type\+\_\+impl}} that defines its M\+P\+I\+\_\+\+Datatype.\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+the request handle for the call
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+This overload uses M\+P\+I\+\_\+\+I\+N\+\_\+\+P\+L\+A\+CE and the source and destination buffers are the same. 
+\end{DoxyNote}
+
+
+References gko\+::experimental\+::mpi\+::request\+::get(), and get().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a6480de7acdb9c7e000970e0ec2324201}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a6480de7acdb9c7e000970e0ec2324201}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!i\_all\_to\_all\_v@{i\_all\_to\_all\_v}}
+\index{i\_all\_to\_all\_v@{i\_all\_to\_all\_v}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{i\_all\_to\_all\_v()}{i\_all\_to\_all\_v()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Send\+Type , typename Recv\+Type $>$ \\
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} gko\+::experimental\+::mpi\+::communicator\+::i\+\_\+all\+\_\+to\+\_\+all\+\_\+v (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const Send\+Type $\ast$}]{send\+\_\+buffer,  }\item[{const int $\ast$}]{send\+\_\+counts,  }\item[{const int $\ast$}]{send\+\_\+offsets,  }\item[{Recv\+Type $\ast$}]{recv\+\_\+buffer,  }\item[{const int $\ast$}]{recv\+\_\+counts,  }\item[{const int $\ast$}]{recv\+\_\+offsets }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Communicate data from all ranks to all other ranks with offsets (M\+P\+I\+\_\+\+Ialltoallv). 
+
+See M\+PI documentation for more details.
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffers are located. \\
+\hline
+{\em send\+\_\+buffer} & the buffer to send \\
+\hline
+{\em send\+\_\+count} & the number of elements to send \\
+\hline
+{\em send\+\_\+offsets} & the offsets for the send buffer \\
+\hline
+{\em recv\+\_\+buffer} & the buffer to gather into \\
+\hline
+{\em recv\+\_\+count} & the number of elements to receive \\
+\hline
+{\em recv\+\_\+offsets} & the offsets for the recv buffer\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Send\+Type} & the type of the data to send. Has to be a type which has a specialization of \mbox{\hyperlink{structgko_1_1experimental_1_1mpi_1_1type__impl}{type\+\_\+impl}} that defines its M\+P\+I\+\_\+\+Datatype. \\
+\hline
+{\em Recv\+Type} & the type of the data to receive. The same restrictions as for Send\+Type apply.\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+the request handle for the call 
+\end{DoxyReturn}
+
+
+References i\+\_\+all\+\_\+to\+\_\+all\+\_\+v().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a4096892bc72d3302bf6fcb3e8362744c}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a4096892bc72d3302bf6fcb3e8362744c}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!i\_all\_to\_all\_v@{i\_all\_to\_all\_v}}
+\index{i\_all\_to\_all\_v@{i\_all\_to\_all\_v}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{i\_all\_to\_all\_v()}{i\_all\_to\_all\_v()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} gko\+::experimental\+::mpi\+::communicator\+::i\+\_\+all\+\_\+to\+\_\+all\+\_\+v (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const void $\ast$}]{send\+\_\+buffer,  }\item[{const int $\ast$}]{send\+\_\+counts,  }\item[{const int $\ast$}]{send\+\_\+offsets,  }\item[{M\+P\+I\+\_\+\+Datatype}]{send\+\_\+type,  }\item[{void $\ast$}]{recv\+\_\+buffer,  }\item[{const int $\ast$}]{recv\+\_\+counts,  }\item[{const int $\ast$}]{recv\+\_\+offsets,  }\item[{M\+P\+I\+\_\+\+Datatype}]{recv\+\_\+type }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Communicate data from all ranks to all other ranks with offsets (M\+P\+I\+\_\+\+Ialltoallv). 
+
+See M\+PI documentation for more details.
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffers are located. \\
+\hline
+{\em send\+\_\+buffer} & the buffer to send \\
+\hline
+{\em send\+\_\+count} & the number of elements to send \\
+\hline
+{\em send\+\_\+offsets} & the offsets for the send buffer \\
+\hline
+{\em send\+\_\+type} & the M\+P\+I\+\_\+\+Datatype for the send buffer \\
+\hline
+{\em recv\+\_\+buffer} & the buffer to gather into \\
+\hline
+{\em recv\+\_\+count} & the number of elements to receive \\
+\hline
+{\em recv\+\_\+offsets} & the offsets for the recv buffer \\
+\hline
+{\em recv\+\_\+type} & the M\+P\+I\+\_\+\+Datatype for the recv buffer\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the request handle for the call
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+This overload allows specifying the M\+P\+I\+\_\+\+Datatype for both the send and received data. 
+\end{DoxyNote}
+
+
+References gko\+::experimental\+::mpi\+::request\+::get(), and get().
+
+
+
+Referenced by i\+\_\+all\+\_\+to\+\_\+all\+\_\+v().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a0edf57701938af05bb356f1228798ad8}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a0edf57701938af05bb356f1228798ad8}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!i\_broadcast@{i\_broadcast}}
+\index{i\_broadcast@{i\_broadcast}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{i\_broadcast()}{i\_broadcast()}}
+{\footnotesize\ttfamily template$<$typename Broadcast\+Type $>$ \\
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} gko\+::experimental\+::mpi\+::communicator\+::i\+\_\+broadcast (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{Broadcast\+Type $\ast$}]{buffer,  }\item[{int}]{count,  }\item[{int}]{root\+\_\+rank }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+(Non-\/blocking) Broadcast data from calling process to all ranks in the communicator 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffer is located. \\
+\hline
+{\em buffer} & the buffer to broadcsat \\
+\hline
+{\em count} & the number of elements to broadcast \\
+\hline
+{\em root\+\_\+rank} & the rank to broadcast from\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Broadcast\+Type} & the type of the data to broadcast. Has to be a type which has a specialization of \mbox{\hyperlink{structgko_1_1experimental_1_1mpi_1_1type__impl}{type\+\_\+impl}} that defines its M\+P\+I\+\_\+\+Datatype.\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+the request handle for the call 
+\end{DoxyReturn}
+
+
+References gko\+::experimental\+::mpi\+::request\+::get(), and get().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a74aeeeb289a7509c1669b156fbf3637a}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a74aeeeb289a7509c1669b156fbf3637a}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!i\_gather@{i\_gather}}
+\index{i\_gather@{i\_gather}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{i\_gather()}{i\_gather()}}
+{\footnotesize\ttfamily template$<$typename Send\+Type , typename Recv\+Type $>$ \\
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} gko\+::experimental\+::mpi\+::communicator\+::i\+\_\+gather (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const Send\+Type $\ast$}]{send\+\_\+buffer,  }\item[{const int}]{send\+\_\+count,  }\item[{Recv\+Type $\ast$}]{recv\+\_\+buffer,  }\item[{const int}]{recv\+\_\+count,  }\item[{int}]{root\+\_\+rank }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+(Non-\/blocking) Gather data onto the root rank from all ranks in the communicator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffers are located. \\
+\hline
+{\em send\+\_\+buffer} & the buffer to gather from \\
+\hline
+{\em send\+\_\+count} & the number of elements to send \\
+\hline
+{\em recv\+\_\+buffer} & the buffer to gather into \\
+\hline
+{\em recv\+\_\+count} & the number of elements to receive \\
+\hline
+{\em root\+\_\+rank} & the rank to gather into\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Send\+Type} & the type of the data to send. Has to be a type which has a specialization of \mbox{\hyperlink{structgko_1_1experimental_1_1mpi_1_1type__impl}{type\+\_\+impl}} that defines its M\+P\+I\+\_\+\+Datatype. \\
+\hline
+{\em Recv\+Type} & the type of the data to receive. The same restrictions as for Send\+Type apply.\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+the request handle for the call 
+\end{DoxyReturn}
+
+
+References gko\+::experimental\+::mpi\+::request\+::get(), and get().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_acc0eaaa2c5ae836eb28903e17add1a8a}\label{classgko_1_1experimental_1_1mpi_1_1communicator_acc0eaaa2c5ae836eb28903e17add1a8a}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!i\_gather\_v@{i\_gather\_v}}
+\index{i\_gather\_v@{i\_gather\_v}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{i\_gather\_v()}{i\_gather\_v()}}
+{\footnotesize\ttfamily template$<$typename Send\+Type , typename Recv\+Type $>$ \\
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} gko\+::experimental\+::mpi\+::communicator\+::i\+\_\+gather\+\_\+v (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const Send\+Type $\ast$}]{send\+\_\+buffer,  }\item[{const int}]{send\+\_\+count,  }\item[{Recv\+Type $\ast$}]{recv\+\_\+buffer,  }\item[{const int $\ast$}]{recv\+\_\+counts,  }\item[{const int $\ast$}]{displacements,  }\item[{int}]{root\+\_\+rank }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+(Non-\/blocking) Gather data onto the root rank from all ranks in the communicator with offsets. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffers are located. \\
+\hline
+{\em send\+\_\+buffer} & the buffer to gather from \\
+\hline
+{\em send\+\_\+count} & the number of elements to send \\
+\hline
+{\em recv\+\_\+buffer} & the buffer to gather into \\
+\hline
+{\em recv\+\_\+count} & the number of elements to receive \\
+\hline
+{\em displacements} & the offsets for the buffer \\
+\hline
+{\em root\+\_\+rank} & the rank to gather into\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Send\+Type} & the type of the data to send. Has to be a type which has a specialization of \mbox{\hyperlink{structgko_1_1experimental_1_1mpi_1_1type__impl}{type\+\_\+impl}} that defines its M\+P\+I\+\_\+\+Datatype. \\
+\hline
+{\em Recv\+Type} & the type of the data to receive. The same restrictions as for Send\+Type apply.\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+the request handle for the call 
+\end{DoxyReturn}
+
+
+References gko\+::experimental\+::mpi\+::request\+::get(), and get().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a2ea79fc26a548eb7d42b8e54d877c3aa}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a2ea79fc26a548eb7d42b8e54d877c3aa}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!i\_recv@{i\_recv}}
+\index{i\_recv@{i\_recv}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{i\_recv()}{i\_recv()}}
+{\footnotesize\ttfamily template$<$typename Recv\+Type $>$ \\
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} gko\+::experimental\+::mpi\+::communicator\+::i\+\_\+recv (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{Recv\+Type $\ast$}]{recv\+\_\+buffer,  }\item[{const int}]{recv\+\_\+count,  }\item[{const int}]{source\+\_\+rank,  }\item[{const int}]{recv\+\_\+tag }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Receive (Non-\/blocking, Immediate return) data from source rank. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffer is located. \\
+\hline
+{\em recv\+\_\+buffer} & the buffer to send \\
+\hline
+{\em recv\+\_\+count} & the number of elements to receive \\
+\hline
+{\em source\+\_\+rank} & the rank to receive the data from \\
+\hline
+{\em recv\+\_\+tag} & the tag for the recv call\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Recv\+Type} & the type of the data to receive. Has to be a type which has a specialization of \mbox{\hyperlink{structgko_1_1experimental_1_1mpi_1_1type__impl}{type\+\_\+impl}} that defines its M\+P\+I\+\_\+\+Datatype.\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+the request handle for the recv call 
+\end{DoxyReturn}
+
+
+References gko\+::experimental\+::mpi\+::request\+::get(), and get().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a5d4ff6a0c4d5af67292a22561d7f58e5}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a5d4ff6a0c4d5af67292a22561d7f58e5}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!i\_reduce@{i\_reduce}}
+\index{i\_reduce@{i\_reduce}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{i\_reduce()}{i\_reduce()}}
+{\footnotesize\ttfamily template$<$typename Reduce\+Type $>$ \\
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} gko\+::experimental\+::mpi\+::communicator\+::i\+\_\+reduce (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const Reduce\+Type $\ast$}]{send\+\_\+buffer,  }\item[{Reduce\+Type $\ast$}]{recv\+\_\+buffer,  }\item[{int}]{count,  }\item[{M\+P\+I\+\_\+\+Op}]{operation,  }\item[{int}]{root\+\_\+rank }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+(Non-\/blocking) Reduce data into root from all calling processes on the same communicator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffer is located. \\
+\hline
+{\em send\+\_\+buffer} & the buffer to reduce \\
+\hline
+{\em recv\+\_\+buffer} & the reduced result \\
+\hline
+{\em count} & the number of elements to reduce \\
+\hline
+{\em operation} & the M\+P\+I\+\_\+\+Op type reduce operation.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Reduce\+Type} & the type of the data to reduce. Has to be a type which has a specialization of \mbox{\hyperlink{structgko_1_1experimental_1_1mpi_1_1type__impl}{type\+\_\+impl}} that defines its M\+P\+I\+\_\+\+Datatype.\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+the request handle for the call 
+\end{DoxyReturn}
+
+
+References gko\+::experimental\+::mpi\+::request\+::get(), and get().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_ad7b0f3302cff2314ade8d3fd9468eb0c}\label{classgko_1_1experimental_1_1mpi_1_1communicator_ad7b0f3302cff2314ade8d3fd9468eb0c}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!i\_scan@{i\_scan}}
+\index{i\_scan@{i\_scan}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{i\_scan()}{i\_scan()}}
+{\footnotesize\ttfamily template$<$typename Scan\+Type $>$ \\
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} gko\+::experimental\+::mpi\+::communicator\+::i\+\_\+scan (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const Scan\+Type $\ast$}]{send\+\_\+buffer,  }\item[{Scan\+Type $\ast$}]{recv\+\_\+buffer,  }\item[{int}]{count,  }\item[{M\+P\+I\+\_\+\+Op}]{operation }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Does a scan operation with the given operator. 
+
+(M\+P\+I\+\_\+\+Iscan). See M\+PI documentation for more details.
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffers are located. \\
+\hline
+{\em send\+\_\+buffer} & the buffer to scan from \\
+\hline
+{\em recv\+\_\+buffer} & the result buffer \\
+\hline
+{\em recv\+\_\+count} & the number of elements to scan \\
+\hline
+{\em operation} & the operation type to be used for the scan. See @\+M\+P\+I\+\_\+\+Op\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Scan\+Type} & the type of the data to scan. Has to be a type which has a specialization of \mbox{\hyperlink{structgko_1_1experimental_1_1mpi_1_1type__impl}{type\+\_\+impl}} that defines its M\+P\+I\+\_\+\+Datatype.\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+the request handle for the call 
+\end{DoxyReturn}
+
+
+References gko\+::experimental\+::mpi\+::request\+::get(), and get().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_af0b769c1f173f9808503fd76ea980c73}\label{classgko_1_1experimental_1_1mpi_1_1communicator_af0b769c1f173f9808503fd76ea980c73}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!i\_scatter@{i\_scatter}}
+\index{i\_scatter@{i\_scatter}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{i\_scatter()}{i\_scatter()}}
+{\footnotesize\ttfamily template$<$typename Send\+Type , typename Recv\+Type $>$ \\
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} gko\+::experimental\+::mpi\+::communicator\+::i\+\_\+scatter (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const Send\+Type $\ast$}]{send\+\_\+buffer,  }\item[{const int}]{send\+\_\+count,  }\item[{Recv\+Type $\ast$}]{recv\+\_\+buffer,  }\item[{const int}]{recv\+\_\+count,  }\item[{int}]{root\+\_\+rank }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+(Non-\/blocking) Scatter data from root rank to all ranks in the communicator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffers are located. \\
+\hline
+{\em send\+\_\+buffer} & the buffer to gather from \\
+\hline
+{\em send\+\_\+count} & the number of elements to send \\
+\hline
+{\em recv\+\_\+buffer} & the buffer to gather into \\
+\hline
+{\em recv\+\_\+count} & the number of elements to receive\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Send\+Type} & the type of the data to send. Has to be a type which has a specialization of \mbox{\hyperlink{structgko_1_1experimental_1_1mpi_1_1type__impl}{type\+\_\+impl}} that defines its M\+P\+I\+\_\+\+Datatype. \\
+\hline
+{\em Recv\+Type} & the type of the data to receive. The same restrictions as for Send\+Type apply.\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+the request handle for the call 
+\end{DoxyReturn}
+
+
+References gko\+::experimental\+::mpi\+::request\+::get(), and get().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a340726b3a0f1f3ec176ea68dbb4b30fa}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a340726b3a0f1f3ec176ea68dbb4b30fa}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!i\_scatter\_v@{i\_scatter\_v}}
+\index{i\_scatter\_v@{i\_scatter\_v}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{i\_scatter\_v()}{i\_scatter\_v()}}
+{\footnotesize\ttfamily template$<$typename Send\+Type , typename Recv\+Type $>$ \\
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} gko\+::experimental\+::mpi\+::communicator\+::i\+\_\+scatter\+\_\+v (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const Send\+Type $\ast$}]{send\+\_\+buffer,  }\item[{const int $\ast$}]{send\+\_\+counts,  }\item[{const int $\ast$}]{displacements,  }\item[{Recv\+Type $\ast$}]{recv\+\_\+buffer,  }\item[{const int}]{recv\+\_\+count,  }\item[{int}]{root\+\_\+rank }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+(Non-\/blocking) Scatter data from root rank to all ranks in the communicator with offsets. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffers are located. \\
+\hline
+{\em send\+\_\+buffer} & the buffer to gather from \\
+\hline
+{\em send\+\_\+count} & the number of elements to send \\
+\hline
+{\em recv\+\_\+buffer} & the buffer to gather into \\
+\hline
+{\em recv\+\_\+count} & the number of elements to receive \\
+\hline
+{\em displacements} & the offsets for the buffer \\
+\hline
+{\em comm} & the communicator\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Send\+Type} & the type of the data to send. Has to be a type which has a specialization of \mbox{\hyperlink{structgko_1_1experimental_1_1mpi_1_1type__impl}{type\+\_\+impl}} that defines its M\+P\+I\+\_\+\+Datatype. \\
+\hline
+{\em Recv\+Type} & the type of the data to receive. The same restrictions as for Send\+Type apply.\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+the request handle for the call 
+\end{DoxyReturn}
+
+
+References gko\+::experimental\+::mpi\+::request\+::get(), and get().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_af6265023d1c4f4965b71c309198f608b}\label{classgko_1_1experimental_1_1mpi_1_1communicator_af6265023d1c4f4965b71c309198f608b}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!i\_send@{i\_send}}
+\index{i\_send@{i\_send}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{i\_send()}{i\_send()}}
+{\footnotesize\ttfamily template$<$typename Send\+Type $>$ \\
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} gko\+::experimental\+::mpi\+::communicator\+::i\+\_\+send (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const Send\+Type $\ast$}]{send\+\_\+buffer,  }\item[{const int}]{send\+\_\+count,  }\item[{const int}]{destination\+\_\+rank,  }\item[{const int}]{send\+\_\+tag }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Send (Non-\/blocking, Immediate return) data from calling process to destination rank. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffer is located. \\
+\hline
+{\em send\+\_\+buffer} & the buffer to send \\
+\hline
+{\em send\+\_\+count} & the number of elements to send \\
+\hline
+{\em destination\+\_\+rank} & the rank to send the data to \\
+\hline
+{\em send\+\_\+tag} & the tag for the send call\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Send\+Type} & the type of the data to send. Has to be a type which has a specialization of \mbox{\hyperlink{structgko_1_1experimental_1_1mpi_1_1type__impl}{type\+\_\+impl}} that defines its M\+P\+I\+\_\+\+Datatype.\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+the request handle for the send call 
+\end{DoxyReturn}
+
+
+References gko\+::experimental\+::mpi\+::request\+::get(), and get().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a8dc8a949e3bc0e5e00ad0af13ca62104}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a8dc8a949e3bc0e5e00ad0af13ca62104}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!node\_local\_rank@{node\_local\_rank}}
+\index{node\_local\_rank@{node\_local\_rank}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{node\_local\_rank()}{node\_local\_rank()}}
+{\footnotesize\ttfamily int gko\+::experimental\+::mpi\+::communicator\+::node\+\_\+local\+\_\+rank (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the node local rank of the calling process in the communicator. 
+
+\begin{DoxyReturn}{Returns}
+the node local rank 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a54576f5130895a18bc40305e28a0f41e}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a54576f5130895a18bc40305e28a0f41e}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily bool gko\+::experimental\+::mpi\+::communicator\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}} \&}]{rhs }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compare two communicator objects for non-\/equality. 
+
+\begin{DoxyReturn}{Returns}
+if the two comm objects are not equal 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_ab769309228bcbff10cdf798d07c68bdd}\label{classgko_1_1experimental_1_1mpi_1_1communicator_ab769309228bcbff10cdf798d07c68bdd}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!operator==@{operator==}}
+\index{operator==@{operator==}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool gko\+::experimental\+::mpi\+::communicator\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}} \&}]{rhs }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compare two communicator objects for equality. 
+
+\begin{DoxyReturn}{Returns}
+if the two comm objects are equal 
+\end{DoxyReturn}
+
+
+References get().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a58c4515edcb0dee79b2be1eb40333a61}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a58c4515edcb0dee79b2be1eb40333a61}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!rank@{rank}}
+\index{rank@{rank}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{rank()}{rank()}}
+{\footnotesize\ttfamily int gko\+::experimental\+::mpi\+::communicator\+::rank (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the rank of the calling process in the communicator. 
+
+\begin{DoxyReturn}{Returns}
+the rank 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a0065a579782ab27c80247bc309639393}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a0065a579782ab27c80247bc309639393}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!recv@{recv}}
+\index{recv@{recv}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{recv()}{recv()}}
+{\footnotesize\ttfamily template$<$typename Recv\+Type $>$ \\
+\mbox{\hyperlink{structgko_1_1experimental_1_1mpi_1_1status}{status}} gko\+::experimental\+::mpi\+::communicator\+::recv (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{Recv\+Type $\ast$}]{recv\+\_\+buffer,  }\item[{const int}]{recv\+\_\+count,  }\item[{const int}]{source\+\_\+rank,  }\item[{const int}]{recv\+\_\+tag }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Receive data from source rank. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffer is located. \\
+\hline
+{\em recv\+\_\+buffer} & the buffer to receive \\
+\hline
+{\em recv\+\_\+count} & the number of elements to receive \\
+\hline
+{\em source\+\_\+rank} & the rank to receive the data from \\
+\hline
+{\em recv\+\_\+tag} & the tag for the recv call\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Recv\+Type} & the type of the data to receive. Has to be a type which has a specialization of \mbox{\hyperlink{structgko_1_1experimental_1_1mpi_1_1type__impl}{type\+\_\+impl}} that defines its M\+P\+I\+\_\+\+Datatype.\\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+the status of completion of this call 
+\end{DoxyReturn}
+
+
+References gko\+::experimental\+::mpi\+::status\+::get(), and get().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_ade217a21b11ab3b3392ae73ef9b6d942}\label{classgko_1_1experimental_1_1mpi_1_1communicator_ade217a21b11ab3b3392ae73ef9b6d942}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!reduce@{reduce}}
+\index{reduce@{reduce}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{reduce()}{reduce()}}
+{\footnotesize\ttfamily template$<$typename Reduce\+Type $>$ \\
+void gko\+::experimental\+::mpi\+::communicator\+::reduce (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const Reduce\+Type $\ast$}]{send\+\_\+buffer,  }\item[{Reduce\+Type $\ast$}]{recv\+\_\+buffer,  }\item[{int}]{count,  }\item[{M\+P\+I\+\_\+\+Op}]{operation,  }\item[{int}]{root\+\_\+rank }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reduce data into root from all calling processes on the same communicator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffer is located. \\
+\hline
+{\em send\+\_\+buffer} & the buffer to reduce \\
+\hline
+{\em recv\+\_\+buffer} & the reduced result \\
+\hline
+{\em count} & the number of elements to reduce \\
+\hline
+{\em operation} & the M\+P\+I\+\_\+\+Op type reduce operation.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Reduce\+Type} & the type of the data to reduce. Has to be a type which has a specialization of \mbox{\hyperlink{structgko_1_1experimental_1_1mpi_1_1type__impl}{type\+\_\+impl}} that defines its M\+P\+I\+\_\+\+Datatype. \\
+\hline
+\end{DoxyTemplParams}
+
+
+References get().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_af21d97797e9e468c84d80d6f4bdf6b49}\label{classgko_1_1experimental_1_1mpi_1_1communicator_af21d97797e9e468c84d80d6f4bdf6b49}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!scan@{scan}}
+\index{scan@{scan}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{scan()}{scan()}}
+{\footnotesize\ttfamily template$<$typename Scan\+Type $>$ \\
+void gko\+::experimental\+::mpi\+::communicator\+::scan (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const Scan\+Type $\ast$}]{send\+\_\+buffer,  }\item[{Scan\+Type $\ast$}]{recv\+\_\+buffer,  }\item[{int}]{count,  }\item[{M\+P\+I\+\_\+\+Op}]{operation }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Does a scan operation with the given operator. 
+
+(M\+P\+I\+\_\+\+Scan). See M\+PI documentation for more details.
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffers are located. \\
+\hline
+{\em send\+\_\+buffer} & the buffer to scan from \\
+\hline
+{\em recv\+\_\+buffer} & the result buffer \\
+\hline
+{\em recv\+\_\+count} & the number of elements to scan \\
+\hline
+{\em operation} & the operation type to be used for the scan. See @\+M\+P\+I\+\_\+\+Op\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Scan\+Type} & the type of the data to scan. Has to be a type which has a specialization of \mbox{\hyperlink{structgko_1_1experimental_1_1mpi_1_1type__impl}{type\+\_\+impl}} that defines its M\+P\+I\+\_\+\+Datatype. \\
+\hline
+\end{DoxyTemplParams}
+
+
+References get().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a549c09b09f1be70198cf5ee0338e5385}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a549c09b09f1be70198cf5ee0338e5385}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!scatter@{scatter}}
+\index{scatter@{scatter}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{scatter()}{scatter()}}
+{\footnotesize\ttfamily template$<$typename Send\+Type , typename Recv\+Type $>$ \\
+void gko\+::experimental\+::mpi\+::communicator\+::scatter (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const Send\+Type $\ast$}]{send\+\_\+buffer,  }\item[{const int}]{send\+\_\+count,  }\item[{Recv\+Type $\ast$}]{recv\+\_\+buffer,  }\item[{const int}]{recv\+\_\+count,  }\item[{int}]{root\+\_\+rank }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Scatter data from root rank to all ranks in the communicator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffers are located. \\
+\hline
+{\em send\+\_\+buffer} & the buffer to gather from \\
+\hline
+{\em send\+\_\+count} & the number of elements to send \\
+\hline
+{\em recv\+\_\+buffer} & the buffer to gather into \\
+\hline
+{\em recv\+\_\+count} & the number of elements to receive\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Send\+Type} & the type of the data to send. Has to be a type which has a specialization of \mbox{\hyperlink{structgko_1_1experimental_1_1mpi_1_1type__impl}{type\+\_\+impl}} that defines its M\+P\+I\+\_\+\+Datatype. \\
+\hline
+{\em Recv\+Type} & the type of the data to receive. The same restrictions as for Send\+Type apply. \\
+\hline
+\end{DoxyTemplParams}
+
+
+References get().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a0b81f45ab0d8424c0c2d0ef63099a712}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a0b81f45ab0d8424c0c2d0ef63099a712}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!scatter\_v@{scatter\_v}}
+\index{scatter\_v@{scatter\_v}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{scatter\_v()}{scatter\_v()}}
+{\footnotesize\ttfamily template$<$typename Send\+Type , typename Recv\+Type $>$ \\
+void gko\+::experimental\+::mpi\+::communicator\+::scatter\+\_\+v (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const Send\+Type $\ast$}]{send\+\_\+buffer,  }\item[{const int $\ast$}]{send\+\_\+counts,  }\item[{const int $\ast$}]{displacements,  }\item[{Recv\+Type $\ast$}]{recv\+\_\+buffer,  }\item[{const int}]{recv\+\_\+count,  }\item[{int}]{root\+\_\+rank }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Scatter data from root rank to all ranks in the communicator with offsets. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffers are located. \\
+\hline
+{\em send\+\_\+buffer} & the buffer to gather from \\
+\hline
+{\em send\+\_\+count} & the number of elements to send \\
+\hline
+{\em recv\+\_\+buffer} & the buffer to gather into \\
+\hline
+{\em recv\+\_\+count} & the number of elements to receive \\
+\hline
+{\em displacements} & the offsets for the buffer \\
+\hline
+{\em comm} & the communicator\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Send\+Type} & the type of the data to send. Has to be a type which has a specialization of \mbox{\hyperlink{structgko_1_1experimental_1_1mpi_1_1type__impl}{type\+\_\+impl}} that defines its M\+P\+I\+\_\+\+Datatype. \\
+\hline
+{\em Recv\+Type} & the type of the data to receive. The same restrictions as for Send\+Type apply. \\
+\hline
+\end{DoxyTemplParams}
+
+
+References get().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a62d7d3e3cdd2625840b8505d2b266b26}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a62d7d3e3cdd2625840b8505d2b266b26}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!send@{send}}
+\index{send@{send}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{send()}{send()}}
+{\footnotesize\ttfamily template$<$typename Send\+Type $>$ \\
+void gko\+::experimental\+::mpi\+::communicator\+::send (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const Send\+Type $\ast$}]{send\+\_\+buffer,  }\item[{const int}]{send\+\_\+count,  }\item[{const int}]{destination\+\_\+rank,  }\item[{const int}]{send\+\_\+tag }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Send (Blocking) data from calling process to destination rank. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & The executor, on which the message buffer is located. \\
+\hline
+{\em send\+\_\+buffer} & the buffer to send \\
+\hline
+{\em send\+\_\+count} & the number of elements to send \\
+\hline
+{\em destination\+\_\+rank} & the rank to send the data to \\
+\hline
+{\em send\+\_\+tag} & the tag for the send call\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Send\+Type} & the type of the data to send. Has to be a type which has a specialization of \mbox{\hyperlink{structgko_1_1experimental_1_1mpi_1_1type__impl}{type\+\_\+impl}} that defines its M\+P\+I\+\_\+\+Datatype. \\
+\hline
+\end{DoxyTemplParams}
+
+
+References get().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a5f62780446fdfe15346b5248d8c3e41d}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a5f62780446fdfe15346b5248d8c3e41d}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!size@{size}}
+\index{size@{size}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily int gko\+::experimental\+::mpi\+::communicator\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the size of the communicator (number of ranks). 
+
+\begin{DoxyReturn}{Returns}
+the size 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a5644abcc067c0959c49a0cc14dcc96a7}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a5644abcc067c0959c49a0cc14dcc96a7}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!synchronize@{synchronize}}
+\index{synchronize@{synchronize}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{synchronize()}{synchronize()}}
+{\footnotesize\ttfamily void gko\+::experimental\+::mpi\+::communicator\+::synchronize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+This function is used to synchronize the ranks in the communicator. 
+
+Calls M\+P\+I\+\_\+\+Barrier 
+
+References get().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/base/mpi.\+hpp\end{DoxyCompactItemize}

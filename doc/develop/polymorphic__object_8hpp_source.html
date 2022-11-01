@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/681052872 branch based on develop. Ginkgo version 1.5.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/682561766 branch based on develop. Ginkgo version 1.5.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -396,97 +396,120 @@ $(function() {
 <div class="line"><a name="l00609"></a><span class="lineno">  609</span>&#160;}</div>
 <div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160; </div>
 <div class="line"><a name="l00611"></a><span class="lineno">  611</span>&#160; </div>
-<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ConcreteObject, <span class="keyword">typename</span> PolymorphicBase = PolymorphicObject&gt;</div>
-<div class="line"><a name="l00647"></a><span class="lineno"><a class="line" href="classgko_1_1EnablePolymorphicObject.html">  647</a></span>&#160;<span class="keyword">class </span><a class="code" href="classgko_1_1EnablePolymorphicObject.html">EnablePolymorphicObject</a></div>
-<div class="line"><a name="l00648"></a><span class="lineno">  648</span>&#160;    : <span class="keyword">public</span> <a class="code" href="classgko_1_1EnableAbstractPolymorphicObject.html">EnableAbstractPolymorphicObject</a>&lt;ConcreteObject, PolymorphicBase&gt; {</div>
-<div class="line"><a name="l00649"></a><span class="lineno">  649</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00650"></a><span class="lineno">  650</span>&#160;    <span class="keyword">using</span> <a class="code" href="classgko_1_1EnableAbstractPolymorphicObject.html">EnableAbstractPolymorphicObject</a>&lt;</div>
-<div class="line"><a name="l00651"></a><span class="lineno">  651</span>&#160;        ConcreteObject, PolymorphicBase&gt;<a class="code" href="classgko_1_1EnableAbstractPolymorphicObject.html">::EnableAbstractPolymorphicObject</a>;</div>
-<div class="line"><a name="l00652"></a><span class="lineno">  652</span>&#160; </div>
-<div class="line"><a name="l00653"></a><span class="lineno">  653</span>&#160;    std::unique_ptr&lt;PolymorphicObject&gt; create_default_impl(</div>
-<div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;        std::shared_ptr&lt;const Executor&gt; exec)<span class="keyword"> const override</span></div>
-<div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00656"></a><span class="lineno">  656</span>&#160;        <span class="keywordflow">return</span> std::unique_ptr&lt;ConcreteObject&gt;{<span class="keyword">new</span> ConcreteObject(exec)};</div>
-<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;    }</div>
-<div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160; </div>
-<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;    <a class="code" href="classgko_1_1PolymorphicObject.html">PolymorphicObject</a>* copy_from_impl(<span class="keyword">const</span> <a class="code" href="classgko_1_1PolymorphicObject.html">PolymorphicObject</a>* other)<span class="keyword"> override</span></div>
-<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160;        as&lt;ConvertibleTo&lt;ConcreteObject&gt;&gt;(other)-&gt;convert_to(<span class="keyword">self</span>());</div>
-<div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">this</span>;</div>
-<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160;    }</div>
-<div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160; </div>
-<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160;    <a class="code" href="classgko_1_1PolymorphicObject.html">PolymorphicObject</a>* copy_from_impl(</div>
-<div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160;        std::unique_ptr&lt;PolymorphicObject&gt; other)<span class="keyword"> override</span></div>
-<div class="line"><a name="l00667"></a><span class="lineno">  667</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;        as&lt;ConvertibleTo&lt;ConcreteObject&gt;&gt;(other.get())-&gt;move_to(<span class="keyword">self</span>());</div>
-<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">this</span>;</div>
-<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160;    }</div>
-<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160; </div>
-<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;    <a class="code" href="classgko_1_1PolymorphicObject.html">PolymorphicObject</a>* move_from_impl(<a class="code" href="classgko_1_1PolymorphicObject.html">PolymorphicObject</a>* other)<span class="keyword"> override</span></div>
-<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;        as&lt;ConvertibleTo&lt;ConcreteObject&gt;&gt;(other)-&gt;move_to(<span class="keyword">self</span>());</div>
-<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">this</span>;</div>
-<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;    }</div>
-<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160; </div>
-<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160;    <a class="code" href="classgko_1_1PolymorphicObject.html">PolymorphicObject</a>* move_from_impl(</div>
-<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;        std::unique_ptr&lt;PolymorphicObject&gt; other)<span class="keyword"> override</span></div>
-<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;        as&lt;ConvertibleTo&lt;ConcreteObject&gt;&gt;(other.get())-&gt;move_to(<span class="keyword">self</span>());</div>
-<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">this</span>;</div>
-<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;    }</div>
-<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160; </div>
-<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;    <a class="code" href="classgko_1_1PolymorphicObject.html">PolymorphicObject</a>* clear_impl()<span class="keyword"> override</span></div>
-<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;        *<span class="keyword">self</span>() = ConcreteObject{this-&gt;get_executor()};</div>
-<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">this</span>;</div>
-<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;    }</div>
-<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160; </div>
-<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;    GKO_ENABLE_SELF(ConcreteObject);</div>
-<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;};</div>
-<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160; </div>
+<div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ConcreteObject&gt;</div>
+<div class="line"><a name="l00613"></a><span class="lineno"><a class="line" href="structgko_1_1polymorphic__object__traits.html">  613</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structgko_1_1polymorphic__object__traits.html">polymorphic_object_traits</a> {</div>
+<div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;PolymorphicObject&gt; create_default_impl(</div>
+<div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160;        <span class="keyword">const</span> ConcreteObject* <span class="keyword">self</span>, std::shared_ptr&lt;const Executor&gt; exec)</div>
+<div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160;    {</div>
+<div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160;        <span class="keywordflow">return</span> std::unique_ptr&lt;ConcreteObject&gt;{<span class="keyword">new</span> ConcreteObject(exec)};</div>
+<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160;    }</div>
+<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160; </div>
+<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> OtherType&gt;</div>
+<div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;ConcreteObject&gt; create_conversion_target_impl(</div>
+<div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160;        <span class="keyword">const</span> OtherType* <span class="keyword">self</span>, std::shared_ptr&lt;const Executor&gt; exec)</div>
+<div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160;    {</div>
+<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160;        <span class="keywordflow">return</span> std::unique_ptr&lt;ConcreteObject&gt;{<span class="keyword">new</span> ConcreteObject(exec)};</div>
+<div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160;    }</div>
+<div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160; </div>
+<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160;    <span class="keyword">static</span> <a class="code" href="classgko_1_1PolymorphicObject.html">PolymorphicObject</a>* clear_impl(ConcreteObject* <span class="keyword">self</span>)</div>
+<div class="line"><a name="l00628"></a><span class="lineno">  628</span>&#160;    {</div>
+<div class="line"><a name="l00629"></a><span class="lineno">  629</span>&#160;        *<span class="keyword">self</span> = ConcreteObject{<span class="keyword">self</span>-&gt;<a class="code" href="classgko_1_1PolymorphicObject.html#ab40586bff071b7f11c2cf6b5cbf598eb">get_executor</a>()};</div>
+<div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">self</span>;</div>
+<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160;    }</div>
+<div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160;};</div>
+<div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160; </div>
+<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160; </div>
+<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ConcreteObject, <span class="keyword">typename</span> PolymorphicBase = PolymorphicObject&gt;</div>
+<div class="line"><a name="l00670"></a><span class="lineno"><a class="line" href="classgko_1_1EnablePolymorphicObject.html">  670</a></span>&#160;<span class="keyword">class </span><a class="code" href="classgko_1_1EnablePolymorphicObject.html">EnablePolymorphicObject</a></div>
+<div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160;    : <span class="keyword">public</span> <a class="code" href="classgko_1_1EnableAbstractPolymorphicObject.html">EnableAbstractPolymorphicObject</a>&lt;ConcreteObject, PolymorphicBase&gt; {</div>
+<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;    <span class="keyword">using</span> <a class="code" href="classgko_1_1EnableAbstractPolymorphicObject.html">EnableAbstractPolymorphicObject</a>&lt;</div>
+<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;        ConcreteObject, PolymorphicBase&gt;<a class="code" href="classgko_1_1EnableAbstractPolymorphicObject.html">::EnableAbstractPolymorphicObject</a>;</div>
+<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160; </div>
+<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;    std::unique_ptr&lt;PolymorphicObject&gt; create_default_impl(</div>
+<div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160;        std::shared_ptr&lt;const Executor&gt; exec)<span class="keyword"> const override</span></div>
+<div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="structgko_1_1polymorphic__object__traits.html">polymorphic_object_traits&lt;ConcreteObject&gt;::create_default_impl</a>(</div>
+<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;            <span class="keyword">self</span>(), std::move(exec));</div>
+<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;    }</div>
+<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160; </div>
+<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;    <a class="code" href="classgko_1_1PolymorphicObject.html">PolymorphicObject</a>* copy_from_impl(<span class="keyword">const</span> <a class="code" href="classgko_1_1PolymorphicObject.html">PolymorphicObject</a>* other)<span class="keyword"> override</span></div>
+<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;        as&lt;ConvertibleTo&lt;ConcreteObject&gt;&gt;(other)-&gt;convert_to(<span class="keyword">self</span>());</div>
+<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">this</span>;</div>
+<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;    }</div>
+<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160; </div>
+<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;    <a class="code" href="classgko_1_1PolymorphicObject.html">PolymorphicObject</a>* copy_from_impl(</div>
+<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;        std::unique_ptr&lt;PolymorphicObject&gt; other)<span class="keyword"> override</span></div>
+<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;        as&lt;ConvertibleTo&lt;ConcreteObject&gt;&gt;(other.get())-&gt;move_to(<span class="keyword">self</span>());</div>
+<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">this</span>;</div>
+<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;    }</div>
 <div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160; </div>
-<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ConcreteType, <span class="keyword">typename</span> ResultType = ConcreteType&gt;</div>
-<div class="line"><a name="l00709"></a><span class="lineno"><a class="line" href="classgko_1_1EnablePolymorphicAssignment.html">  709</a></span>&#160;<span class="keyword">class </span><a class="code" href="classgko_1_1EnablePolymorphicAssignment.html">EnablePolymorphicAssignment</a> : <span class="keyword">public</span> <a class="code" href="classgko_1_1ConvertibleTo.html">ConvertibleTo</a>&lt;ResultType&gt; {</div>
-<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;    <span class="keyword">using</span> result_type = ResultType;</div>
-<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160; </div>
-<div class="line"><a name="l00713"></a><span class="lineno"><a class="line" href="classgko_1_1EnablePolymorphicAssignment.html#a6b7e6872e96084636f8ab5091063ada8">  713</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1EnablePolymorphicAssignment.html#a6b7e6872e96084636f8ab5091063ada8">convert_to</a>(<a class="code" href="classgko_1_1Perturbation.html">result_type</a>* result)<span class="keyword"> const override </span>{ *result = *<span class="keyword">self</span>(); }</div>
-<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160; </div>
-<div class="line"><a name="l00715"></a><span class="lineno"><a class="line" href="classgko_1_1EnablePolymorphicAssignment.html#a0a4cf244139e7761d6a91c61e029810e">  715</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1EnablePolymorphicAssignment.html#a0a4cf244139e7761d6a91c61e029810e">move_to</a>(<a class="code" href="classgko_1_1Perturbation.html">result_type</a>* result)<span class="keyword"> override </span>{ *result = std::move(*<span class="keyword">self</span>()); }</div>
-<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160; </div>
-<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;    GKO_ENABLE_SELF(ConcreteType);</div>
-<div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160;};</div>
-<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160; </div>
-<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160; </div>
-<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ConcreteType&gt;</div>
-<div class="line"><a name="l00731"></a><span class="lineno"><a class="line" href="classgko_1_1EnableCreateMethod.html">  731</a></span>&#160;<span class="keyword">class </span><a class="code" href="classgko_1_1EnableCreateMethod.html">EnableCreateMethod</a> {</div>
-<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Args&gt;</div>
-<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;ConcreteType&gt; create(Args&amp;&amp;... args)</div>
-<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160;    {</div>
-<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;        <span class="keywordflow">return</span> std::unique_ptr&lt;ConcreteType&gt;(</div>
-<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;            <span class="keyword">new</span> ConcreteType(std::forward&lt;Args&gt;(args)...));</div>
-<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;    }</div>
-<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;};</div>
-<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160; </div>
-<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160; </div>
-<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;}  <span class="comment">// namespace gko</span></div>
+<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;    <a class="code" href="classgko_1_1PolymorphicObject.html">PolymorphicObject</a>* move_from_impl(<a class="code" href="classgko_1_1PolymorphicObject.html">PolymorphicObject</a>* other)<span class="keyword"> override</span></div>
+<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;        as&lt;ConvertibleTo&lt;ConcreteObject&gt;&gt;(other)-&gt;move_to(<span class="keyword">self</span>());</div>
+<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">this</span>;</div>
+<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;    }</div>
+<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160; </div>
+<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160;    <a class="code" href="classgko_1_1PolymorphicObject.html">PolymorphicObject</a>* move_from_impl(</div>
+<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;        std::unique_ptr&lt;PolymorphicObject&gt; other)<span class="keyword"> override</span></div>
+<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;        as&lt;ConvertibleTo&lt;ConcreteObject&gt;&gt;(other.get())-&gt;move_to(<span class="keyword">self</span>());</div>
+<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">this</span>;</div>
+<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;    }</div>
+<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160; </div>
+<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;    <a class="code" href="classgko_1_1PolymorphicObject.html">PolymorphicObject</a>* clear_impl()<span class="keyword"> override</span></div>
+<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="structgko_1_1polymorphic__object__traits.html">polymorphic_object_traits&lt;ConcreteObject&gt;::clear_impl</a>(<span class="keyword">self</span>());</div>
+<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;    }</div>
+<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160; </div>
+<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;    GKO_ENABLE_SELF(ConcreteObject);</div>
+<div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;};</div>
+<div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160; </div>
+<div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160; </div>
+<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ConcreteType, <span class="keyword">typename</span> ResultType = ConcreteType&gt;</div>
+<div class="line"><a name="l00732"></a><span class="lineno"><a class="line" href="classgko_1_1EnablePolymorphicAssignment.html">  732</a></span>&#160;<span class="keyword">class </span><a class="code" href="classgko_1_1EnablePolymorphicAssignment.html">EnablePolymorphicAssignment</a> : <span class="keyword">public</span> <a class="code" href="classgko_1_1ConvertibleTo.html">ConvertibleTo</a>&lt;ResultType&gt; {</div>
+<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;    <span class="keyword">using</span> result_type = ResultType;</div>
+<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160; </div>
+<div class="line"><a name="l00736"></a><span class="lineno"><a class="line" href="classgko_1_1EnablePolymorphicAssignment.html#a6b7e6872e96084636f8ab5091063ada8">  736</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1EnablePolymorphicAssignment.html#a6b7e6872e96084636f8ab5091063ada8">convert_to</a>(<a class="code" href="classgko_1_1Perturbation.html">result_type</a>* result)<span class="keyword"> const override </span>{ *result = *<span class="keyword">self</span>(); }</div>
+<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160; </div>
+<div class="line"><a name="l00738"></a><span class="lineno"><a class="line" href="classgko_1_1EnablePolymorphicAssignment.html#a0a4cf244139e7761d6a91c61e029810e">  738</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1EnablePolymorphicAssignment.html#a0a4cf244139e7761d6a91c61e029810e">move_to</a>(<a class="code" href="classgko_1_1Perturbation.html">result_type</a>* result)<span class="keyword"> override </span>{ *result = std::move(*<span class="keyword">self</span>()); }</div>
+<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160; </div>
+<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;    GKO_ENABLE_SELF(ConcreteType);</div>
+<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;};</div>
 <div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160; </div>
 <div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160; </div>
-<div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_BASE_POLYMORPHIC_OBJECT_HPP_</span></div>
+<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ConcreteType&gt;</div>
+<div class="line"><a name="l00754"></a><span class="lineno"><a class="line" href="classgko_1_1EnableCreateMethod.html">  754</a></span>&#160;<span class="keyword">class </span><a class="code" href="classgko_1_1EnableCreateMethod.html">EnableCreateMethod</a> {</div>
+<div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;ConcreteType&gt; create(Args&amp;&amp;... args)</div>
+<div class="line"><a name="l00758"></a><span class="lineno">  758</span>&#160;    {</div>
+<div class="line"><a name="l00759"></a><span class="lineno">  759</span>&#160;        <span class="keywordflow">return</span> std::unique_ptr&lt;ConcreteType&gt;(</div>
+<div class="line"><a name="l00760"></a><span class="lineno">  760</span>&#160;            <span class="keyword">new</span> ConcreteType(std::forward&lt;Args&gt;(args)...));</div>
+<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160;    }</div>
+<div class="line"><a name="l00762"></a><span class="lineno">  762</span>&#160;};</div>
+<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160; </div>
+<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160; </div>
+<div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160;}  <span class="comment">// namespace gko</span></div>
+<div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160; </div>
+<div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160; </div>
+<div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_BASE_POLYMORPHIC_OBJECT_HPP_</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassgko_1_1EnablePolymorphicAssignment_html_a0a4cf244139e7761d6a91c61e029810e"><div class="ttname"><a href="classgko_1_1EnablePolymorphicAssignment.html#a0a4cf244139e7761d6a91c61e029810e">gko::EnablePolymorphicAssignment::move_to</a></div><div class="ttdeci">void move_to(result_type *result) override</div><div class="ttdoc">Converts the implementer to an object of type result_type by moving data from this object.</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:715</div></div>
-<div class="ttc" id="aclassgko_1_1EnablePolymorphicAssignment_html_a6b7e6872e96084636f8ab5091063ada8"><div class="ttname"><a href="classgko_1_1EnablePolymorphicAssignment.html#a6b7e6872e96084636f8ab5091063ada8">gko::EnablePolymorphicAssignment::convert_to</a></div><div class="ttdeci">void convert_to(result_type *result) const override</div><div class="ttdoc">Converts the implementer to an object of type result_type.</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:713</div></div>
+<div class="ttc" id="aclassgko_1_1EnablePolymorphicAssignment_html_a0a4cf244139e7761d6a91c61e029810e"><div class="ttname"><a href="classgko_1_1EnablePolymorphicAssignment.html#a0a4cf244139e7761d6a91c61e029810e">gko::EnablePolymorphicAssignment::move_to</a></div><div class="ttdeci">void move_to(result_type *result) override</div><div class="ttdoc">Converts the implementer to an object of type result_type by moving data from this object.</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:738</div></div>
+<div class="ttc" id="aclassgko_1_1EnablePolymorphicAssignment_html_a6b7e6872e96084636f8ab5091063ada8"><div class="ttname"><a href="classgko_1_1EnablePolymorphicAssignment.html#a6b7e6872e96084636f8ab5091063ada8">gko::EnablePolymorphicAssignment::convert_to</a></div><div class="ttdeci">void convert_to(result_type *result) const override</div><div class="ttdoc">Converts the implementer to an object of type result_type.</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:736</div></div>
 <div class="ttc" id="aclassgko_1_1Perturbation_html"><div class="ttname"><a href="classgko_1_1Perturbation.html">gko::Perturbation</a></div><div class="ttdoc">The Perturbation class can be used to construct a LinOp to represent the operation (identity + scalar...</div><div class="ttdef"><b>Definition:</b> perturbation.hpp:67</div></div>
-<div class="ttc" id="aclassgko_1_1EnableCreateMethod_html"><div class="ttname"><a href="classgko_1_1EnableCreateMethod.html">gko::EnableCreateMethod</a></div><div class="ttdoc">This mixin implements a static create() method on ConcreteType that dynamically allocates the memory,...</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:731</div></div>
+<div class="ttc" id="aclassgko_1_1EnableCreateMethod_html"><div class="ttname"><a href="classgko_1_1EnableCreateMethod.html">gko::EnableCreateMethod</a></div><div class="ttdoc">This mixin implements a static create() method on ConcreteType that dynamically allocates the memory,...</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:754</div></div>
 <div class="ttc" id="aclassgko_1_1PolymorphicObject_html"><div class="ttname"><a href="classgko_1_1PolymorphicObject.html">gko::PolymorphicObject</a></div><div class="ttdoc">A PolymorphicObject is the abstract base for all &quot;heavy&quot; objects in Ginkgo that behave polymorphicall...</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:71</div></div>
 <div class="ttc" id="aclassgko_1_1EnableAbstractPolymorphicObject_html"><div class="ttname"><a href="classgko_1_1EnableAbstractPolymorphicObject.html">gko::EnableAbstractPolymorphicObject</a></div><div class="ttdoc">This mixin inherits from (a subclass of) PolymorphicObject and provides a base implementation of a ne...</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:358</div></div>
 <div class="ttc" id="aclassgko_1_1PolymorphicObject_html_ae6ba40d3fb5e1e73cd92f4830a34c999"><div class="ttname"><a href="classgko_1_1PolymorphicObject.html#ae6ba40d3fb5e1e73cd92f4830a34c999">gko::PolymorphicObject::copy_from</a></div><div class="ttdeci">PolymorphicObject * copy_from(std::unique_ptr&lt; PolymorphicObject &gt; other)</div><div class="ttdoc">Moves another object into this object.</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:179</div></div>
 <div class="ttc" id="aclassgko_1_1PolymorphicObject_html_a298c488bcb1906877a3584d88713ba81"><div class="ttname"><a href="classgko_1_1PolymorphicObject.html#a298c488bcb1906877a3584d88713ba81">gko::PolymorphicObject::clone</a></div><div class="ttdeci">std::unique_ptr&lt; PolymorphicObject &gt; clone() const</div><div class="ttdoc">Creates a clone of the object.</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:142</div></div>
 <div class="ttc" id="anamespacegko_html_abb378b82b7b7c6347ebdfb4c2ddc9366"><div class="ttname"><a href="namespacegko.html#abb378b82b7b7c6347ebdfb4c2ddc9366">gko::copy_and_convert_to</a></div><div class="ttdeci">std::unique_ptr&lt; R, std::function&lt; void(R *)&gt; &gt; copy_and_convert_to(std::shared_ptr&lt; const Executor &gt; exec, T *obj)</div><div class="ttdoc">Converts the object to R and places it on Executor exec.</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:551</div></div>
-<div class="ttc" id="aclassgko_1_1EnablePolymorphicAssignment_html"><div class="ttname"><a href="classgko_1_1EnablePolymorphicAssignment.html">gko::EnablePolymorphicAssignment</a></div><div class="ttdoc">This mixin is used to enable a default PolymorphicObject::copy_from() implementation for objects that...</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:709</div></div>
+<div class="ttc" id="aclassgko_1_1EnablePolymorphicAssignment_html"><div class="ttname"><a href="classgko_1_1EnablePolymorphicAssignment.html">gko::EnablePolymorphicAssignment</a></div><div class="ttdoc">This mixin is used to enable a default PolymorphicObject::copy_from() implementation for objects that...</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:732</div></div>
 <div class="ttc" id="aclassgko_1_1PolymorphicObject_html_a4f39c32375e3887fd4d7a9f02af42ca7"><div class="ttname"><a href="classgko_1_1PolymorphicObject.html#a4f39c32375e3887fd4d7a9f02af42ca7">gko::PolymorphicObject::create_default</a></div><div class="ttdeci">std::unique_ptr&lt; PolymorphicObject &gt; create_default() const</div><div class="ttdoc">Creates a new &quot;default&quot; object of the same dynamic type as this object.</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:111</div></div>
 <div class="ttc" id="anamespacegko_html_a1beb80750459e4201aa9d882d2d074c3"><div class="ttname"><a href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a></div><div class="ttdeci">detail::cloned_type&lt; Pointer &gt; clone(const Pointer &amp;p)</div><div class="ttdoc">Creates a unique clone of the object pointed to by p.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:160</div></div>
 <div class="ttc" id="anamespacegko_html"><div class="ttname"><a href="namespacegko.html">gko</a></div><div class="ttdoc">The Ginkgo namespace.</div><div class="ttdef"><b>Definition:</b> abstract_factory.hpp:45</div></div>
@@ -496,11 +519,12 @@ $(function() {
 <div class="ttc" id="aclassgko_1_1PolymorphicObject_html_a8bb6f9995e8166099ca3ecab51d98df5"><div class="ttname"><a href="classgko_1_1PolymorphicObject.html#a8bb6f9995e8166099ca3ecab51d98df5">gko::PolymorphicObject::clear</a></div><div class="ttdeci">PolymorphicObject * clear()</div><div class="ttdoc">Transforms the object into its default state.</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:240</div></div>
 <div class="ttc" id="aclassgko_1_1PolymorphicObject_html_a5e6f713938293cfbe788d00480eb4d81"><div class="ttname"><a href="classgko_1_1PolymorphicObject.html#a5e6f713938293cfbe788d00480eb4d81">gko::PolymorphicObject::copy_from</a></div><div class="ttdeci">PolymorphicObject * copy_from(const PolymorphicObject *other)</div><div class="ttdoc">Copies another object into this object.</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:158</div></div>
 <div class="ttc" id="aclassgko_1_1PolymorphicObject_html_aca2ad91eee15e667cc0e7d1444a6de47"><div class="ttname"><a href="classgko_1_1PolymorphicObject.html#aca2ad91eee15e667cc0e7d1444a6de47">gko::PolymorphicObject::create_default</a></div><div class="ttdeci">std::unique_ptr&lt; PolymorphicObject &gt; create_default(std::shared_ptr&lt; const Executor &gt; exec) const</div><div class="ttdoc">Creates a new &quot;default&quot; object of the same dynamic type as this object.</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:92</div></div>
+<div class="ttc" id="astructgko_1_1polymorphic__object__traits_html"><div class="ttname"><a href="structgko_1_1polymorphic__object__traits.html">gko::polymorphic_object_traits</a></div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:613</div></div>
 <div class="ttc" id="aclassgko_1_1PolymorphicObject_html_ad3ae1d315fe4a8faf93f4b16a36ec3ce"><div class="ttname"><a href="classgko_1_1PolymorphicObject.html#ad3ae1d315fe4a8faf93f4b16a36ec3ce">gko::PolymorphicObject::move_from</a></div><div class="ttdeci">PolymorphicObject * move_from(PolymorphicObject *other)</div><div class="ttdoc">Moves another object into this object.</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:200</div></div>
 <div class="ttc" id="aclassgko_1_1ConvertibleTo_html"><div class="ttname"><a href="classgko_1_1ConvertibleTo.html">gko::ConvertibleTo</a></div><div class="ttdoc">ConvertibleTo interface is used to mark that the implementer can be converted to the object of Result...</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:467</div></div>
 <div class="ttc" id="aclassgko_1_1PolymorphicObject_html_a9f619404f7167ae4e3d616b2eee85326"><div class="ttname"><a href="classgko_1_1PolymorphicObject.html#a9f619404f7167ae4e3d616b2eee85326">gko::PolymorphicObject::move_from</a></div><div class="ttdeci">PolymorphicObject * move_from(std::unique_ptr&lt; PolymorphicObject &gt; other)</div><div class="ttdoc">Moves another object into this object.</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:221</div></div>
 <div class="ttc" id="aclassgko_1_1PolymorphicObject_html_ab40586bff071b7f11c2cf6b5cbf598eb"><div class="ttname"><a href="classgko_1_1PolymorphicObject.html#ab40586bff071b7f11c2cf6b5cbf598eb">gko::PolymorphicObject::get_executor</a></div><div class="ttdeci">std::shared_ptr&lt; const Executor &gt; get_executor() const noexcept</div><div class="ttdoc">Returns the Executor of the object.</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:247</div></div>
-<div class="ttc" id="aclassgko_1_1EnablePolymorphicObject_html"><div class="ttname"><a href="classgko_1_1EnablePolymorphicObject.html">gko::EnablePolymorphicObject</a></div><div class="ttdoc">This mixin inherits from (a subclass of) PolymorphicObject and provides a base implementation of a ne...</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:647</div></div>
+<div class="ttc" id="aclassgko_1_1EnablePolymorphicObject_html"><div class="ttname"><a href="classgko_1_1EnablePolymorphicObject.html">gko::EnablePolymorphicObject</a></div><div class="ttdoc">This mixin inherits from (a subclass of) PolymorphicObject and provides a base implementation of a ne...</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:670</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

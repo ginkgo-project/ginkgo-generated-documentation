@@ -166,6 +166,7 @@ var menudata={children:[
 {text:"u",url:"functions_vars.html#index_u"},
 {text:"z",url:"functions_vars.html#index_z"}]},
 {text:"Typedefs",url:"functions_type.html"},
+{text:"Enumerations",url:"functions_enum.html"},
 {text:"Related Functions",url:"functions_rela.html"}]}]},
 {text:"Related Pages",url:"pages.html"},
 {text:"Files",url:"files.html",children:[
