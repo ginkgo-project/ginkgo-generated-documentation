@@ -172,7 +172,7 @@ Custom selector size\+\_\+type (size\+\_\+type level, const Lin\+Op$\ast$ fine\+
 
 For each level, this function is used to select the smoothers and multigrid level generation from the respective lists. For example, 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{[](\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\_type}} level, \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp_a1f2a4cc7323e0b9816428e3545fc6ed7}{LinOp}}* fine\_matrix) \{}
+\DoxyCodeLine{[](\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\_type}} level, \textcolor{keyword}{const} LinOp* fine\_matrix) \{}
 \DoxyCodeLine{    \textcolor{keywordflow}{if} (level < 3) \{}
 \DoxyCodeLine{        \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\_type}}\{0\};}
 \DoxyCodeLine{    \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (matrix-\/>get\_size()[0] > 1024) \{}
@@ -261,7 +261,7 @@ Custom coarsest\+\_\+solver selector size\+\_\+type (size\+\_\+type level, const
 
 It can be used to choose the sparse iterative solver if the coarsest matrix is still large but the dense solver if the matrix is small enough. For example, 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{[](\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\_type}} level, \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp_a1f2a4cc7323e0b9816428e3545fc6ed7}{LinOp}}* coarsest\_matrix) \{}
+\DoxyCodeLine{[](\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\_type}} level, \textcolor{keyword}{const} LinOp* coarsest\_matrix) \{}
 \DoxyCodeLine{    \textcolor{keywordflow}{if} (coarsest\_matrix-\/>get\_size()[0] > 1024) \{}
 \DoxyCodeLine{        \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\_type}}\{0\};}
 \DoxyCodeLine{    \} \textcolor{keywordflow}{else} \{}

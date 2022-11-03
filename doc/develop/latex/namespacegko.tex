@@ -167,12 +167,6 @@ class \mbox{\hyperlink{classgko_1_1Permutable}{Permutable}}
 \begin{DoxyCompactList}\small\item\em Linear operators which support permutation should implement the \mbox{\hyperlink{classgko_1_1Permutable}{Permutable}} interface. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1Perturbation}{Perturbation}}
 \begin{DoxyCompactList}\small\item\em The \mbox{\hyperlink{classgko_1_1Perturbation}{Perturbation}} class can be used to construct a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} to represent the operation {\ttfamily (identity + scalar $\ast$ basis $\ast$ projector)}. \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{structgko_1_1polymorphic__object__traits}{polymorphic\+\_\+object\+\_\+traits}}
-\item 
-struct \mbox{\hyperlink{structgko_1_1polymorphic__object__traits_3_01experimental_1_1distributed_1_1Matrix_3_01ValueTyped8cf9daf5d2c603bc4c14309ffe1c9fb}{polymorphic\+\_\+object\+\_\+traits$<$ experimental\+::distributed\+::\+Matrix$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$ $>$}}
-\item 
-struct \mbox{\hyperlink{structgko_1_1polymorphic__object__traits_3_01experimental_1_1distributed_1_1Vector_3_01ValueType_01_4_01_4}{polymorphic\+\_\+object\+\_\+traits$<$ experimental\+::distributed\+::\+Vector$<$ Value\+Type $>$ $>$}}
-\item 
 class \mbox{\hyperlink{classgko_1_1PolymorphicObject}{Polymorphic\+Object}}
 \begin{DoxyCompactList}\small\item\em A \mbox{\hyperlink{classgko_1_1PolymorphicObject}{Polymorphic\+Object}} is the abstract base for all \char`\"{}heavy\char`\"{} objects in Ginkgo that behave polymorphically. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1precision__reduction}{precision\+\_\+reduction}}
@@ -235,6 +229,8 @@ using {\bfseries Machine\+Topology} = \mbox{\hyperlink{classgko_1_1machine__topo
 \mbox{\Hypertarget{namespacegko_a6362f751c7753cf4fa0a4771d56e8ede}\label{namespacegko_a6362f751c7753cf4fa0a4771d56e8ede}} 
 {\footnotesize template$<$typename T $>$ }\\using \mbox{\hyperlink{namespacegko_a6362f751c7753cf4fa0a4771d56e8ede}{next\+\_\+precision}} = typename detail\+::next\+\_\+precision\+\_\+impl$<$ T $>$\+::type
 \begin{DoxyCompactList}\small\item\em Obtains the next type in the singly-\/linked precision list. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\using \mbox{\hyperlink{namespacegko_a71559818fee20b97bc6ea6712ec75034}{previous\+\_\+precision}} = \mbox{\hyperlink{namespacegko_a6362f751c7753cf4fa0a4771d56e8ede}{next\+\_\+precision}}$<$ T $>$
+\begin{DoxyCompactList}\small\item\em Obtains the previous type in the singly-\/linked precision list. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{namespacegko_ab5d71c1f4bd1b654df1e561ea7a811f2}\label{namespacegko_ab5d71c1f4bd1b654df1e561ea7a811f2}} 
 {\footnotesize template$<$typename T $>$ }\\using \mbox{\hyperlink{namespacegko_ab5d71c1f4bd1b654df1e561ea7a811f2}{reduce\+\_\+precision}} = typename detail\+::reduce\+\_\+precision\+\_\+impl$<$ T $>$\+::type
 \begin{DoxyCompactList}\small\item\em Obtains the next type in the hierarchy with lower precision than T. \end{DoxyCompactList}\item 
@@ -867,6 +863,20 @@ If {\ttfamily value} is {\ttfamily true}, T is a complex type, if it is {\ttfami
 {\em T} & type to check \\
 \hline
 \end{DoxyTemplParams}
+\mbox{\Hypertarget{namespacegko_a71559818fee20b97bc6ea6712ec75034}\label{namespacegko_a71559818fee20b97bc6ea6712ec75034}} 
+\index{gko@{gko}!previous\_precision@{previous\_precision}}
+\index{previous\_precision@{previous\_precision}!gko@{gko}}
+\doxysubsubsection{\texorpdfstring{previous\_precision}{previous\_precision}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+using \mbox{\hyperlink{namespacegko_a71559818fee20b97bc6ea6712ec75034}{gko\+::previous\+\_\+precision}} = typedef \mbox{\hyperlink{namespacegko_a6362f751c7753cf4fa0a4771d56e8ede}{next\+\_\+precision}}$<$T$>$}
+
+
+
+Obtains the previous type in the singly-\/linked precision list. 
+
+\begin{DoxyNote}{Note}
+Currently our lists contains only two elements, so this is the same as next\+\_\+precision. 
+\end{DoxyNote}
 \mbox{\Hypertarget{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}\label{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}} 
 \index{gko@{gko}!remove\_complex@{remove\_complex}}
 \index{remove\_complex@{remove\_complex}!gko@{gko}}
