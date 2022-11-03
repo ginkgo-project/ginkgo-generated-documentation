@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['linear_20operators_2581',['Linear Operators',['../group__LinOp.html',1,'']]],
-  ['logging_2582',['Logging',['../group__log.html',1,'']]]
+  ['linear_20operators_2596',['Linear Operators',['../group__LinOp.html',1,'']]],
+  ['logging_2597',['Logging',['../group__log.html',1,'']]]
 ];

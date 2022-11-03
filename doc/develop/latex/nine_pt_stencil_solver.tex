@@ -147,7 +147,7 @@ Generates the R\+HS vector given {\ttfamily f} and the boundary conditions.
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (IndexType j = 0; j < dp; ++j) \{}
 \DoxyCodeLine{            \textcolor{keyword}{const} \textcolor{keyword}{auto} xi = ValueType(j + 1) * h;}
 \DoxyCodeLine{            \textcolor{keyword}{const} \textcolor{keyword}{auto} index = i * dp + j;}
-\DoxyCodeLine{            rhs[index] = -\/f(xi, yi) * h * h;}
+\DoxyCodeLine{            \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[index] = -\/f(xi, yi) * h * h;}
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{    \}}
 \end{DoxyCode}
@@ -162,26 +162,26 @@ Iterating over the edges to add boundary values and adding the overlapping 3x1 t
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} index\_top = i;}
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} index\_bot = i + dp * (dp -\/ 1);}
 \DoxyCodeLine{}
-\DoxyCodeLine{    rhs[index\_top] -\/= u(xi -\/ h, 0.0) * coefs[0];}
-\DoxyCodeLine{    rhs[index\_top] -\/= u(xi, 0.0) * coefs[1];}
-\DoxyCodeLine{    rhs[index\_top] -\/= u(xi + h, 0.0) * coefs[2];}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[index\_top] -\/= u(xi -\/ h, 0.0) * coefs[0];}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[index\_top] -\/= u(xi, 0.0) * coefs[1];}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[index\_top] -\/= u(xi + h, 0.0) * coefs[2];}
 \DoxyCodeLine{}
-\DoxyCodeLine{    rhs[index\_bot] -\/= u(xi -\/ h, 1.0) * coefs[6];}
-\DoxyCodeLine{    rhs[index\_bot] -\/= u(xi, 1.0) * coefs[7];}
-\DoxyCodeLine{    rhs[index\_bot] -\/= u(xi + h, 1.0) * coefs[8];}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[index\_bot] -\/= u(xi -\/ h, 1.0) * coefs[6];}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[index\_bot] -\/= u(xi, 1.0) * coefs[7];}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[index\_bot] -\/= u(xi + h, 1.0) * coefs[8];}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < dp; ++i) \{}
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} yi = ValueType(i + 1) * h;}
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} index\_left = i * dp;}
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} index\_right = i * dp + (dp -\/ 1);}
 \DoxyCodeLine{}
-\DoxyCodeLine{    rhs[index\_left] -\/= u(0.0, yi -\/ h) * coefs[0];}
-\DoxyCodeLine{    rhs[index\_left] -\/= u(0.0, yi) * coefs[3];}
-\DoxyCodeLine{    rhs[index\_left] -\/= u(0.0, yi + h) * coefs[6];}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[index\_left] -\/= u(0.0, yi -\/ h) * coefs[0];}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[index\_left] -\/= u(0.0, yi) * coefs[3];}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[index\_left] -\/= u(0.0, yi + h) * coefs[6];}
 \DoxyCodeLine{}
-\DoxyCodeLine{    rhs[index\_right] -\/= u(1.0, yi -\/ h) * coefs[2];}
-\DoxyCodeLine{    rhs[index\_right] -\/= u(1.0, yi) * coefs[5];}
-\DoxyCodeLine{    rhs[index\_right] -\/= u(1.0, yi + h) * coefs[8];}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[index\_right] -\/= u(1.0, yi -\/ h) * coefs[2];}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[index\_right] -\/= u(1.0, yi) * coefs[5];}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[index\_right] -\/= u(1.0, yi + h) * coefs[8];}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
 
@@ -190,10 +190,10 @@ remove the double corner values
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{    rhs[0] += u(0.0, 0.0) * coefs[0];}
-\DoxyCodeLine{    rhs[(dp -\/ 1)] += u(1.0, 0.0) * coefs[2];}
-\DoxyCodeLine{    rhs[(dp -\/ 1) * dp] += u(0.0, 1.0) * coefs[6];}
-\DoxyCodeLine{    rhs[dp * dp -\/ 1] += u(1.0, 1.0) * coefs[8];}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[0] += u(0.0, 0.0) * coefs[0];}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[(dp -\/ 1)] += u(1.0, 0.0) * coefs[2];}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[(dp -\/ 1) * dp] += u(0.0, 1.0) * coefs[6];}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[dp * dp -\/ 1] += u(1.0, 1.0) * coefs[8];}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
 
@@ -444,7 +444,7 @@ right hand side
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{std::vector<ValueType> rhs(dp\_2);}
+\DoxyCodeLine{std::vector<ValueType> \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}(dp\_2);}
 \end{DoxyCode}
 
 
@@ -463,13 +463,13 @@ looking for solution u = x$^\wedge$3\+: f = 6x, u(0) = 0, u(1) = 1
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{generate\_rhs(dp, f, correct\_u, rhs.data(), coefs.data());}
+\DoxyCodeLine{generate\_rhs(dp, f, correct\_u, \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}.data(), coefs.data());}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} reduction\_factor = 1e-\/7;}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{auto} start\_time = std::chrono::steady\_clock::now();}
 \DoxyCodeLine{solve\_system(executor\_string, dp, row\_ptrs.data(), col\_idxs.data(),}
-\DoxyCodeLine{             values.data(), rhs.data(), u.data(), reduction\_factor);}
+\DoxyCodeLine{             values.data(), \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}.data(), u.data(), reduction\_factor);}
 \DoxyCodeLine{\textcolor{keyword}{auto} stop\_time = std::chrono::steady\_clock::now();}
 \DoxyCodeLine{\textcolor{keyword}{auto} runtime\_duration =}
 \DoxyCodeLine{    static\_cast<double>(}
@@ -641,7 +641,7 @@ The expected output should be
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (IndexType j = 0; j < dp; ++j) \{}
 \DoxyCodeLine{            \textcolor{keyword}{const} \textcolor{keyword}{auto} xi = ValueType(j + 1) * h;}
 \DoxyCodeLine{            \textcolor{keyword}{const} \textcolor{keyword}{auto} index = i * dp + j;}
-\DoxyCodeLine{            rhs[index] = -\/f(xi, yi) * h * h;}
+\DoxyCodeLine{            \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[index] = -\/f(xi, yi) * h * h;}
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
@@ -650,32 +650,32 @@ The expected output should be
 \DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keyword}{auto} index\_top = i;}
 \DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keyword}{auto} index\_bot = i + dp * (dp -\/ 1);}
 \DoxyCodeLine{}
-\DoxyCodeLine{        rhs[index\_top] -\/= u(xi -\/ h, 0.0) * coefs[0];}
-\DoxyCodeLine{        rhs[index\_top] -\/= u(xi, 0.0) * coefs[1];}
-\DoxyCodeLine{        rhs[index\_top] -\/= u(xi + h, 0.0) * coefs[2];}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[index\_top] -\/= u(xi -\/ h, 0.0) * coefs[0];}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[index\_top] -\/= u(xi, 0.0) * coefs[1];}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[index\_top] -\/= u(xi + h, 0.0) * coefs[2];}
 \DoxyCodeLine{}
-\DoxyCodeLine{        rhs[index\_bot] -\/= u(xi -\/ h, 1.0) * coefs[6];}
-\DoxyCodeLine{        rhs[index\_bot] -\/= u(xi, 1.0) * coefs[7];}
-\DoxyCodeLine{        rhs[index\_bot] -\/= u(xi + h, 1.0) * coefs[8];}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[index\_bot] -\/= u(xi -\/ h, 1.0) * coefs[6];}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[index\_bot] -\/= u(xi, 1.0) * coefs[7];}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[index\_bot] -\/= u(xi + h, 1.0) * coefs[8];}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < dp; ++i) \{}
 \DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keyword}{auto} yi = ValueType(i + 1) * h;}
 \DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keyword}{auto} index\_left = i * dp;}
 \DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keyword}{auto} index\_right = i * dp + (dp -\/ 1);}
 \DoxyCodeLine{}
-\DoxyCodeLine{        rhs[index\_left] -\/= u(0.0, yi -\/ h) * coefs[0];}
-\DoxyCodeLine{        rhs[index\_left] -\/= u(0.0, yi) * coefs[3];}
-\DoxyCodeLine{        rhs[index\_left] -\/= u(0.0, yi + h) * coefs[6];}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[index\_left] -\/= u(0.0, yi -\/ h) * coefs[0];}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[index\_left] -\/= u(0.0, yi) * coefs[3];}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[index\_left] -\/= u(0.0, yi + h) * coefs[6];}
 \DoxyCodeLine{}
-\DoxyCodeLine{        rhs[index\_right] -\/= u(1.0, yi -\/ h) * coefs[2];}
-\DoxyCodeLine{        rhs[index\_right] -\/= u(1.0, yi) * coefs[5];}
-\DoxyCodeLine{        rhs[index\_right] -\/= u(1.0, yi + h) * coefs[8];}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[index\_right] -\/= u(1.0, yi -\/ h) * coefs[2];}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[index\_right] -\/= u(1.0, yi) * coefs[5];}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[index\_right] -\/= u(1.0, yi + h) * coefs[8];}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    rhs[0] += u(0.0, 0.0) * coefs[0];}
-\DoxyCodeLine{    rhs[(dp -\/ 1)] += u(1.0, 0.0) * coefs[2];}
-\DoxyCodeLine{    rhs[(dp -\/ 1) * dp] += u(0.0, 1.0) * coefs[6];}
-\DoxyCodeLine{    rhs[dp * dp -\/ 1] += u(1.0, 1.0) * coefs[8];}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[0] += u(0.0, 0.0) * coefs[0];}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[(dp -\/ 1)] += u(1.0, 0.0) * coefs[2];}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[(dp -\/ 1) * dp] += u(0.0, 1.0) * coefs[6];}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}[dp * dp -\/ 1] += u(1.0, 1.0) * coefs[8];}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -817,18 +817,18 @@ The expected output should be
 \DoxyCodeLine{    std::vector<IndexType> row\_ptrs(dp\_2 + 1);}
 \DoxyCodeLine{    std::vector<IndexType> col\_idxs((3 * dp -\/ 2) * (3 * dp -\/ 2));}
 \DoxyCodeLine{    std::vector<ValueType> values((3 * dp -\/ 2) * (3 * dp -\/ 2));}
-\DoxyCodeLine{    std::vector<ValueType> rhs(dp\_2);}
+\DoxyCodeLine{    std::vector<ValueType> \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}(dp\_2);}
 \DoxyCodeLine{    std::vector<ValueType> u(dp\_2, 0.0);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    generate\_stencil\_matrix(dp, row\_ptrs.data(), col\_idxs.data(), values.data(),}
 \DoxyCodeLine{                            coefs.data());}
-\DoxyCodeLine{    generate\_rhs(dp, f, correct\_u, rhs.data(), coefs.data());}
+\DoxyCodeLine{    generate\_rhs(dp, f, correct\_u, \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}.data(), coefs.data());}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} reduction\_factor = 1e-\/7;}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} start\_time = std::chrono::steady\_clock::now();}
 \DoxyCodeLine{    solve\_system(executor\_string, dp, row\_ptrs.data(), col\_idxs.data(),}
-\DoxyCodeLine{                 values.data(), rhs.data(), u.data(), reduction\_factor);}
+\DoxyCodeLine{                 values.data(), \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}.data(), u.data(), reduction\_factor);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} stop\_time = std::chrono::steady\_clock::now();}
 \DoxyCodeLine{    \textcolor{keyword}{auto} runtime\_duration =}
 \DoxyCodeLine{        static\_cast<double>(}

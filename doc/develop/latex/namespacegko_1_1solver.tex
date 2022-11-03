@@ -13,6 +13,8 @@ The ginkgo Solve namespace.
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
+class \mbox{\hyperlink{classgko_1_1solver_1_1ApplyWithInitialGuess}{Apply\+With\+Initial\+Guess}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1solver_1_1ApplyWithInitialGuess}{Apply\+With\+Initial\+Guess}} provides a way to give the input guess for apply function. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1solver_1_1Bicg}{Bicg}}
 \begin{DoxyCompactList}\small\item\em B\+I\+CG or the Biconjugate gradient method is a Krylov subspace solver. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1solver_1_1Bicgstab}{Bicgstab}}
@@ -23,8 +25,10 @@ class \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{Cg}}
 \begin{DoxyCompactList}\small\item\em CG or the conjugate gradient method is an iterative type Krylov subspace method which is suitable for symmetric positive definite methods. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1solver_1_1Cgs}{Cgs}}
 \begin{DoxyCompactList}\small\item\em C\+GS or the conjugate gradient square method is an iterative type Krylov subspace method which is suitable for general systems. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1solver_1_1EnableApplyWithInitialGuess}{Enable\+Apply\+With\+Initial\+Guess}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1solver_1_1EnableApplyWithInitialGuess}{Enable\+Apply\+With\+Initial\+Guess}} providing default operation for \mbox{\hyperlink{classgko_1_1solver_1_1ApplyWithInitialGuess}{Apply\+With\+Initial\+Guess}} with correct validation and log. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1solver_1_1EnableIterativeBase}{Enable\+Iterative\+Base}}
-\begin{DoxyCompactList}\small\item\em A \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} deriving from this C\+R\+TP class stores a stopping criterion factory. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em A \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} deriving from this C\+R\+TP class stores a stopping criterion factory and allows applying with a guess. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1solver_1_1EnablePreconditionable}{Enable\+Preconditionable}}
 \begin{DoxyCompactList}\small\item\em Mixin providing default operation for \mbox{\hyperlink{classgko_1_1Preconditionable}{Preconditionable}} with correct value semantics. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1solver_1_1EnablePreconditionedIterativeSolver}{Enable\+Preconditioned\+Iterative\+Solver}}
@@ -84,6 +88,11 @@ struct \mbox{\hyperlink{structgko_1_1solver_1_1workspace__traits_3_01UpperTrs_3_
 \doxysubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
+enum \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8a}{initial\+\_\+guess\+\_\+mode}} \{ \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aad02c4c4cde7ae76252540d116a40f23a}{initial\+\_\+guess\+\_\+mode\+::zero}}, 
+\mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{initial\+\_\+guess\+\_\+mode\+::rhs}}, 
+\mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa1f5f6080965ed6d0a90e6b9ec599e441}{initial\+\_\+guess\+\_\+mode\+::provided}}
+ \}
+\begin{DoxyCompactList}\small\item\em Give a initial guess mode about the input of the apply method. \end{DoxyCompactList}\item 
 enum \mbox{\hyperlink{namespacegko_1_1solver_a68b5a3da69a6acb5f0bb656a96e4eb0a}{trisolve\+\_\+algorithm}} \{ {\bfseries sparselib}, 
 {\bfseries syncfree}
  \}
@@ -109,6 +118,30 @@ The ginkgo Solve namespace.
 The ginkgo Solver namespace. 
 
 \doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8a}\label{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8a}} 
+\index{gko::solver@{gko::solver}!initial\_guess\_mode@{initial\_guess\_mode}}
+\index{initial\_guess\_mode@{initial\_guess\_mode}!gko::solver@{gko::solver}}
+\doxysubsubsection{\texorpdfstring{initial\_guess\_mode}{initial\_guess\_mode}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8a}{gko\+::solver\+::initial\+\_\+guess\+\_\+mode}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Give a initial guess mode about the input of the apply method. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{zero@{zero}!gko::solver@{gko::solver}}\index{gko::solver@{gko::solver}!zero@{zero}}}\mbox{\Hypertarget{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aad02c4c4cde7ae76252540d116a40f23a}\label{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aad02c4c4cde7ae76252540d116a40f23a}} 
+zero&the input is zero \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{rhs@{rhs}!gko::solver@{gko::solver}}\index{gko::solver@{gko::solver}!rhs@{rhs}}}\mbox{\Hypertarget{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}\label{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}} 
+rhs&the input is right hand side \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{provided@{provided}!gko::solver@{gko::solver}}\index{gko::solver@{gko::solver}!provided@{provided}}}\mbox{\Hypertarget{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa1f5f6080965ed6d0a90e6b9ec599e441}\label{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa1f5f6080965ed6d0a90e6b9ec599e441}} 
+provided&the input is provided \\
+\hline
+
+\end{DoxyEnumFields}
 \mbox{\Hypertarget{namespacegko_1_1solver_a68b5a3da69a6acb5f0bb656a96e4eb0a}\label{namespacegko_1_1solver_a68b5a3da69a6acb5f0bb656a96e4eb0a}} 
 \index{gko::solver@{gko::solver}!trisolve\_algorithm@{trisolve\_algorithm}}
 \index{trisolve\_algorithm@{trisolve\_algorithm}!gko::solver@{gko::solver}}
