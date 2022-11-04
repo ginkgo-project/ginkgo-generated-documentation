@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['zero_1274',['zero',['../namespacegko.html#a70dbe01ff95c7b953d3d737424c6feb5',1,'gko::zero()'],['../namespacegko.html#a9f1cd7be946b9a2c15b01b744cf3e732',1,'gko::zero(const T &amp;)'],['../namespacegko_1_1solver.html#a82d21321745fbd3dc65c276d5838bb8aad02c4c4cde7ae76252540d116a40f23a',1,'gko::solver::zero()']]],
-  ['zero_5fguess_1275',['zero_guess',['../structgko_1_1solver_1_1Multigrid_1_1parameters__type.html#a61dde1863588f6ef08de13ee0acf06eb',1,'gko::solver::Multigrid::parameters_type']]],
-  ['zero_5foperation_1276',['zero_operation',['../structgko_1_1accessor_1_1zero__operation.html',1,'gko::accessor']]]
+  ['zero_1307',['zero',['../namespacegko.html#a70dbe01ff95c7b953d3d737424c6feb5',1,'gko::zero()'],['../namespacegko.html#a9f1cd7be946b9a2c15b01b744cf3e732',1,'gko::zero(const T &amp;)'],['../namespacegko_1_1solver.html#a82d21321745fbd3dc65c276d5838bb8aad02c4c4cde7ae76252540d116a40f23a',1,'gko::solver::zero()']]],
+  ['zero_5fguess_1308',['zero_guess',['../structgko_1_1solver_1_1Multigrid_1_1parameters__type.html#a61dde1863588f6ef08de13ee0acf06eb',1,'gko::solver::Multigrid::parameters_type']]],
+  ['zero_5foperation_1309',['zero_operation',['../structgko_1_1accessor_1_1zero__operation.html',1,'gko::accessor']]]
 ];
