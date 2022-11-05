@@ -10,6 +10,6 @@ var searchData=
   ['notsupported_988',['NotSupported',['../classgko_1_1NotSupported.html',1,'gko::NotSupported'],['../classgko_1_1NotSupported.html#ae4d84be2a2a769e0877c4aeb75e44794',1,'gko::NotSupported::NotSupported()']]],
   ['null_5fdeleter_989',['null_deleter',['../classgko_1_1null__deleter.html',1,'gko']]],
   ['null_5fdeleter_3c_20t_5b_5d_3e_990',['null_deleter&lt; T[]&gt;',['../classgko_1_1null__deleter_3_01T_0f_0e_4.html',1,'gko']]],
-  ['num_5frhs_991',['num_rhs',['../structgko_1_1solver_1_1LowerTrs_1_1parameters__type.html#a2221c5c06cfb041ad41e5a5bdf9968f2',1,'gko::solver::LowerTrs::parameters_type::num_rhs()'],['../structgko_1_1solver_1_1UpperTrs_1_1parameters__type.html#a17d51d403340309c592e593020c3c007',1,'gko::solver::UpperTrs::parameters_type::num_rhs()']]],
+  ['num_5frhs_991',['num_rhs',['../structgko_1_1experimental_1_1solver_1_1Direct_1_1parameters__type.html#afe20b9ec2cab681fb4cbd6f230f76837',1,'gko::experimental::solver::Direct::parameters_type::num_rhs()'],['../structgko_1_1solver_1_1LowerTrs_1_1parameters__type.html#a2221c5c06cfb041ad41e5a5bdf9968f2',1,'gko::solver::LowerTrs::parameters_type::num_rhs()'],['../structgko_1_1solver_1_1UpperTrs_1_1parameters__type.html#a17d51d403340309c592e593020c3c007',1,'gko::solver::UpperTrs::parameters_type::num_rhs()']]],
   ['nvidia_5fdevice_992',['nvidia_device',['../classgko_1_1nvidia__device.html',1,'gko']]]
 ];
