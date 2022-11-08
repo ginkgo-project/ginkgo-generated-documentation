@@ -4,7 +4,7 @@ var searchData=
   ['data_5ftype_244',['data_type',['../classgko_1_1accessor_1_1row__major.html#af6e81060211b143c595ee4f77537dbc2',1,'gko::accessor::row_major']]],
   ['default_5fconverter_245',['default_converter',['../structgko_1_1default__converter.html',1,'gko']]],
   ['default_5fdeleter_246',['default_deleter',['../classgko_1_1array.html#a7987c3c644cf27ae9d5dd926e5891f17',1,'gko::array']]],
-  ['default_5finitial_5fguess_247',['default_initial_guess',['../structgko_1_1solver_1_1Ir_1_1parameters__type.html#a2e781c6001020deca1547e734e1bf16f',1,'gko::solver::Ir::parameters_type']]],
+  ['default_5finitial_5fguess_247',['default_initial_guess',['../structgko_1_1solver_1_1Ir_1_1parameters__type.html#a2e781c6001020deca1547e734e1bf16f',1,'gko::solver::Ir::parameters_type::default_initial_guess()'],['../structgko_1_1solver_1_1Multigrid_1_1parameters__type.html#a6f9a8a0ea54a9865cb0d2f62e0d8fc8e',1,'gko::solver::Multigrid::parameters_type::default_initial_guess()']]],
   ['default_5fprecision_248',['default_precision',['../namespacegko.html#a1d44e117d2f74b34bdc83ac5c0c6b605',1,'gko']]],
   ['dense_249',['Dense',['../classgko_1_1matrix_1_1Dense.html',1,'gko::matrix::Dense&lt; ValueType &gt;'],['../classgko_1_1matrix_1_1Dense.html#a433fbe9fcfc30a0fc96cd95ace38b903',1,'gko::matrix::Dense::Dense(const Dense &amp;)'],['../classgko_1_1matrix_1_1Dense.html#ad989b179ced5ceeb6020b228719cc6c3',1,'gko::matrix::Dense::Dense(Dense &amp;&amp;)']]],
   ['dense_3c_20value_5ftype_20_3e_250',['Dense&lt; value_type &gt;',['../classgko_1_1matrix_1_1Dense.html',1,'gko::matrix']]],

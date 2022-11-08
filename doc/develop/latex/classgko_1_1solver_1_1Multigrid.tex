@@ -41,12 +41,6 @@ struct \mbox{\hyperlink{structgko_1_1solver_1_1Multigrid_1_1parameters__type}{pa
 \item 
 bool \mbox{\hyperlink{classgko_1_1solver_1_1Multigrid_a708c25e7a2bcffb7ef0d98092d9d49e2}{apply\+\_\+uses\+\_\+initial\+\_\+guess}} () const override
 \begin{DoxyCompactList}\small\item\em Return true as iterative solvers use the data in x as an initial guess or false if multigrid always set the input as zero. \end{DoxyCompactList}\item 
-std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{namespacegko_1_1stop_ab12a51109c50b35ec36dc5a393d6a9a0}{stop\+::\+Criterion\+Factory}} $>$ \mbox{\hyperlink{classgko_1_1solver_1_1Multigrid_a0399141ee2ad346943d54cd52eafe316}{get\+\_\+stop\+\_\+criterion\+\_\+factory}} () const
-\begin{DoxyCompactList}\small\item\em Gets the stopping criterion factory of the solver. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classgko_1_1solver_1_1Multigrid_a2c6a2bb18239b7c43b0cd85f65fb7f58}{set\+\_\+stop\+\_\+criterion\+\_\+factory}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{namespacegko_1_1stop_ab12a51109c50b35ec36dc5a393d6a9a0}{stop\+::\+Criterion\+Factory}} $>$ other)
-\begin{DoxyCompactList}\small\item\em Sets the stopping criterion of the solver. \end{DoxyCompactList}\item 
-std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1solver_1_1Multigrid_a7204d9474dec9c5682a0668ef01a9364}{get\+\_\+system\+\_\+matrix}} () const
-\begin{DoxyCompactList}\small\item\em Gets the system operator of the linear system. \end{DoxyCompactList}\item 
 std\+::vector$<$ std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1multigrid_1_1MultigridLevel}{gko\+::multigrid\+::\+Multigrid\+Level}} $>$ $>$ \mbox{\hyperlink{classgko_1_1solver_1_1Multigrid_ac7ede33fa00bbade9b990a73e7476fd8}{get\+\_\+mg\+\_\+level\+\_\+list}} () const
 \begin{DoxyCompactList}\small\item\em Gets the list of Multigrid\+Level operators. \end{DoxyCompactList}\item 
 std\+::vector$<$ std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ $>$ \mbox{\hyperlink{classgko_1_1solver_1_1Multigrid_a8cdc865fc9c4f6f649f7835d421eb954}{get\+\_\+pre\+\_\+smoother\+\_\+list}} () const
@@ -78,6 +72,9 @@ class {\bfseries Enable\+Lin\+Op$<$ Multigrid $>$}
 \item 
 \mbox{\Hypertarget{classgko_1_1solver_1_1Multigrid_a23097148bc6f8304f03c34825db59cc7}\label{classgko_1_1solver_1_1Multigrid_a23097148bc6f8304f03c34825db59cc7}} 
 class {\bfseries Enable\+Polymorphic\+Object$<$ Multigrid, Lin\+Op $>$}
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1Multigrid_a358febcb7c1294f54d48870347482776}\label{classgko_1_1solver_1_1Multigrid_a358febcb7c1294f54d48870347482776}} 
+class {\bfseries Enable\+Apply\+With\+Initial\+Guess$<$ Multigrid $>$}
 \end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -115,7 +112,7 @@ bool it is related to parameters variable zero\+\_\+guess
 \end{DoxyReturn}
 
 
-References gko\+::solver\+::\+Multigrid\+::parameters\+\_\+type\+::zero\+\_\+guess.
+References gko\+::solver\+::provided.
 
 \mbox{\Hypertarget{classgko_1_1solver_1_1Multigrid_a4b2522b2f72e6366af9044934d33e5e8}\label{classgko_1_1solver_1_1Multigrid_a4b2522b2f72e6366af9044934d33e5e8}} 
 \index{gko::solver::Multigrid@{gko::solver::Multigrid}!get\_coarsest\_solver@{get\_coarsest\_solver}}
@@ -199,32 +196,6 @@ Gets the list of pre-\/smoother operators.
 \begin{DoxyReturn}{Returns}
 the list of pre-\/smoother operators 
 \end{DoxyReturn}
-\mbox{\Hypertarget{classgko_1_1solver_1_1Multigrid_a0399141ee2ad346943d54cd52eafe316}\label{classgko_1_1solver_1_1Multigrid_a0399141ee2ad346943d54cd52eafe316}} 
-\index{gko::solver::Multigrid@{gko::solver::Multigrid}!get\_stop\_criterion\_factory@{get\_stop\_criterion\_factory}}
-\index{get\_stop\_criterion\_factory@{get\_stop\_criterion\_factory}!gko::solver::Multigrid@{gko::solver::Multigrid}}
-\doxysubsubsection{\texorpdfstring{get\_stop\_criterion\_factory()}{get\_stop\_criterion\_factory()}}
-{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{namespacegko_1_1stop_ab12a51109c50b35ec36dc5a393d6a9a0}{stop\+::\+Criterion\+Factory}}$>$ gko\+::solver\+::\+Multigrid\+::get\+\_\+stop\+\_\+criterion\+\_\+factory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Gets the stopping criterion factory of the solver. 
-
-\begin{DoxyReturn}{Returns}
-the stopping criterion factory 
-\end{DoxyReturn}
-\mbox{\Hypertarget{classgko_1_1solver_1_1Multigrid_a7204d9474dec9c5682a0668ef01a9364}\label{classgko_1_1solver_1_1Multigrid_a7204d9474dec9c5682a0668ef01a9364}} 
-\index{gko::solver::Multigrid@{gko::solver::Multigrid}!get\_system\_matrix@{get\_system\_matrix}}
-\index{get\_system\_matrix@{get\_system\_matrix}!gko::solver::Multigrid@{gko::solver::Multigrid}}
-\doxysubsubsection{\texorpdfstring{get\_system\_matrix()}{get\_system\_matrix()}}
-{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ gko\+::solver\+::\+Multigrid\+::get\+\_\+system\+\_\+matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Gets the system operator of the linear system. 
-
-\begin{DoxyReturn}{Returns}
-the system operator 
-\end{DoxyReturn}
 \mbox{\Hypertarget{classgko_1_1solver_1_1Multigrid_a4a7d27445ab1f3228c827e9ee2c94c19}\label{classgko_1_1solver_1_1Multigrid_a4a7d27445ab1f3228c827e9ee2c94c19}} 
 \index{gko::solver::Multigrid@{gko::solver::Multigrid}!set\_cycle@{set\_cycle}}
 \index{set\_cycle@{set\_cycle}!gko::solver::Multigrid@{gko::solver::Multigrid}}
@@ -244,21 +215,6 @@ Set the cycle of multigrid.
 
 References gko\+::solver\+::\+Multigrid\+::parameters\+\_\+type\+::cycle.
 
-\mbox{\Hypertarget{classgko_1_1solver_1_1Multigrid_a2c6a2bb18239b7c43b0cd85f65fb7f58}\label{classgko_1_1solver_1_1Multigrid_a2c6a2bb18239b7c43b0cd85f65fb7f58}} 
-\index{gko::solver::Multigrid@{gko::solver::Multigrid}!set\_stop\_criterion\_factory@{set\_stop\_criterion\_factory}}
-\index{set\_stop\_criterion\_factory@{set\_stop\_criterion\_factory}!gko::solver::Multigrid@{gko::solver::Multigrid}}
-\doxysubsubsection{\texorpdfstring{set\_stop\_criterion\_factory()}{set\_stop\_criterion\_factory()}}
-{\footnotesize\ttfamily void gko\+::solver\+::\+Multigrid\+::set\+\_\+stop\+\_\+criterion\+\_\+factory (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{namespacegko_1_1stop_ab12a51109c50b35ec36dc5a393d6a9a0}{stop\+::\+Criterion\+Factory}} $>$}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Sets the stopping criterion of the solver. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em other} & the new stopping criterion factory \\
-\hline
-\end{DoxyParams}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
