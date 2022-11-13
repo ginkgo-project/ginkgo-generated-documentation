@@ -35,8 +35,8 @@ Helper function which measures the time of {\ttfamily solver-\/$>$apply(b, x)} i
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keywordtype}{double} measure\_solve\_time\_in\_s(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}} *exec, \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *solver,}
-\DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *b, \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *x)}
+\DoxyCodeLine{\textcolor{keywordtype}{double} measure\_solve\_time\_in\_s(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}}* exec, \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* solver,}
+\DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* b, \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* x)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    constexpr \textcolor{keywordtype}{int} repeats\{5\};}
 \DoxyCodeLine{    \textcolor{keywordtype}{double} duration\{0\};}
@@ -68,7 +68,7 @@ Make sure all previous executor operations have finished before starting the tim
 \begin{DoxyCode}{0}
 \DoxyCodeLine{exec-\/>\mbox{\hyperlink{classgko_1_1Executor_a24eeee7648c0f0fd07c9866d07154875}{synchronize}}();}
 \DoxyCodeLine{\textcolor{keyword}{auto} tic = std::chrono::steady\_clock::now();}
-\DoxyCodeLine{solver-\/>\mbox{\hyperlink{classgko_1_1LinOp_a0449b2fc705d2f970855af23b5e2788e}{apply}}(b, \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(x\_copy));}
+\DoxyCodeLine{solver-\/>\mbox{\hyperlink{classgko_1_1LinOp_a0449b2fc705d2f970855af23b5e2788e}{apply}}(b, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x\_copy));}
 \end{DoxyCode}
 
 
@@ -87,12 +87,12 @@ Copy the solution back to x, so the caller has the result
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{    x-\/>copy\_from(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(x\_copy));}
+\DoxyCodeLine{    x-\/>copy\_from(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x\_copy));}
 \DoxyCodeLine{    \textcolor{keywordflow}{return} duration / static\_cast<double>(repeats);}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[])}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
 \end{DoxyCode}
 
@@ -158,7 +158,7 @@ Map which generates the appropriate executor
 \DoxyCodeLine{         \}\},}
 \DoxyCodeLine{        \{\textcolor{stringliteral}{"dpcpp"},}
 \DoxyCodeLine{         [] \{}
-\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1DpcppExecutor_ac46044fcb00b2d224b45d93eaf8c579d}{gko::DpcppExecutor::create}}(0,}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1DpcppExecutor_ae9b875dfe3af7f3f3f24071bfb2f895e}{gko::DpcppExecutor::create}}(0,}
 \DoxyCodeLine{                                               \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}());}
 \DoxyCodeLine{         \}\},}
 \DoxyCodeLine{        \{\textcolor{stringliteral}{"reference"}, [] \{ \textcolor{keywordflow}{return} gko::ReferenceExecutor::create(); \}\}\};}
@@ -192,8 +192,8 @@ Create a uniform right-\/hand side with a norm2 of 1 on the host (norm2(b) == 1)
 \DoxyCodeLine{        ValueType\{1\} / std::sqrt(static\_cast<ValueType>(A\_size[0]));}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{\textcolor{keyword}{auto} b\_norm = gko::initialize<real\_vec>(\{0.0\}, exec);}
-\DoxyCodeLine{b\_host-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(b\_norm));}
-\DoxyCodeLine{\textcolor{keyword}{auto} b = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{clone}}(exec, \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(b\_host));}
+\DoxyCodeLine{b\_host-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(b\_norm));}
+\DoxyCodeLine{\textcolor{keyword}{auto} b = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{clone}}(exec, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(b\_host));}
 \end{DoxyCode}
 
 
@@ -201,7 +201,7 @@ As an initial guess, use the right-\/hand side
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{auto} x\_keep = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{clone}}(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(b));}
+\DoxyCodeLine{\textcolor{keyword}{auto} x\_keep = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{clone}}(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(b));}
 \DoxyCodeLine{\textcolor{keyword}{auto} x\_reduce = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{clone}}(x\_keep);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{const} RealValueType reduction\_factor\{1e-\/6\};}
@@ -216,8 +216,9 @@ Generate two solver factories\+: {\ttfamily \+\_\+keep} uses the same precision 
 \DoxyCodeLine{    cb\_gmres::build()}
 \DoxyCodeLine{        .with\_criteria(}
 \DoxyCodeLine{            gko::stop::Iteration::build().with\_max\_iters(1000u).on(exec),}
-\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1stop_1_1RelativeResidualNorm}{gko::stop::RelativeResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                .with\_tolerance(reduction\_factor)}
+\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                .with\_baseline(gko::stop::mode::rhs\_norm)}
+\DoxyCodeLine{                .with\_reduction\_factor(reduction\_factor)}
 \DoxyCodeLine{                .on(exec))}
 \DoxyCodeLine{        .with\_krylov\_dim(100u)}
 \DoxyCodeLine{        .with\_storage\_precision(}
@@ -228,8 +229,9 @@ Generate two solver factories\+: {\ttfamily \+\_\+keep} uses the same precision 
 \DoxyCodeLine{    cb\_gmres::build()}
 \DoxyCodeLine{        .with\_criteria(}
 \DoxyCodeLine{            gko::stop::Iteration::build().with\_max\_iters(1000u).on(exec),}
-\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1stop_1_1RelativeResidualNorm}{gko::stop::RelativeResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                .with\_tolerance(reduction\_factor)}
+\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                .with\_baseline(gko::stop::mode::rhs\_norm)}
+\DoxyCodeLine{                .with\_reduction\_factor(reduction\_factor)}
 \DoxyCodeLine{                .on(exec))}
 \DoxyCodeLine{        .with\_krylov\_dim(100u)}
 \DoxyCodeLine{        .with\_storage\_precision(}
@@ -251,10 +253,10 @@ Solve both system and measure the time for each.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{auto} time\_keep = measure\_solve\_time\_in\_s(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(exec), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(solver\_keep),}
-\DoxyCodeLine{                                         \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(b), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(x\_keep));}
-\DoxyCodeLine{\textcolor{keyword}{auto} time\_reduce = measure\_solve\_time\_in\_s(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(exec), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(solver\_reduce),}
-\DoxyCodeLine{                                           \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(b), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(x\_reduce));}
+\DoxyCodeLine{\textcolor{keyword}{auto} time\_keep = measure\_solve\_time\_in\_s(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(exec), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(solver\_keep),}
+\DoxyCodeLine{                                         \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(b), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x\_keep));}
+\DoxyCodeLine{\textcolor{keyword}{auto} time\_reduce = measure\_solve\_time\_in\_s(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(exec), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(solver\_reduce),}
+\DoxyCodeLine{                                           \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(b), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x\_reduce));}
 \end{DoxyCode}
 
 
@@ -284,7 +286,7 @@ To measure if your solution has actually converged, the error of the solution is
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{auto} res\_norm\_keep = gko::initialize<real\_vec>(\{0.0\}, exec);}
 \DoxyCodeLine{\textcolor{keyword}{auto} res\_norm\_reduce = gko::initialize<real\_vec>(\{0.0\}, exec);}
-\DoxyCodeLine{\textcolor{keyword}{auto} tmp = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(b));}
+\DoxyCodeLine{\textcolor{keyword}{auto} tmp = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b));}
 \end{DoxyCode}
 
 
@@ -292,18 +294,18 @@ tmp = Ax -\/ tmp
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{    A-\/>apply(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(one), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(x\_keep), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(tmp));}
-\DoxyCodeLine{    tmp-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(res\_norm\_keep));}
+\DoxyCodeLine{    A-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x\_keep), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(tmp));}
+\DoxyCodeLine{    tmp-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(res\_norm\_keep));}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"\(\backslash\)nResidual norm without compression:\(\backslash\)n"};}
-\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a859dc47a462721d83728d91ab7fa2148}{write}}(std::cout, \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(res\_norm\_keep));}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_aa24837da3770b3dddf981d9bfe0d3b52}{write}}(std::cout, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(res\_norm\_keep));}
 \DoxyCodeLine{}
-\DoxyCodeLine{    tmp-\/>copy\_from(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(b));}
-\DoxyCodeLine{    A-\/>apply(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(one), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(x\_reduce), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(tmp));}
-\DoxyCodeLine{    tmp-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(res\_norm\_reduce));}
+\DoxyCodeLine{    tmp-\/>copy\_from(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(b));}
+\DoxyCodeLine{    A-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x\_reduce), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(tmp));}
+\DoxyCodeLine{    tmp-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(res\_norm\_reduce));}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"\(\backslash\)nResidual norm with compression:\(\backslash\)n"};}
-\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a859dc47a462721d83728d91ab7fa2148}{write}}(std::cout, \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(res\_norm\_reduce));}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_aa24837da3770b3dddf981d9bfe0d3b52}{write}}(std::cout, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(res\_norm\_reduce));}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
  \label{_Results}%
@@ -317,12 +319,12 @@ The following is the expected result\+:
 \DoxyCodeLine{Solve time with compression:    1.589936e-\/04 s}
 \DoxyCodeLine{}
 \DoxyCodeLine{Residual norm without compression:}
-\DoxyCodeLine{\%\%MatrixMarket matrix \mbox{\hyperlink{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68af1f713c9e000f5d3f280adbd124df4f5}{array}} \mbox{\hyperlink{namespacegko_a85e29870bacc4e660be5acbbf742305e}{real}} general}
+\DoxyCodeLine{\%\%MatrixMarket matrix \mbox{\hyperlink{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68af1f713c9e000f5d3f280adbd124df4f5}{array}} \mbox{\hyperlink{namespacegko_af21648097306adbabc6234b4609ce297}{real}} general}
 \DoxyCodeLine{1 1}
 \DoxyCodeLine{2.430544e-\/07}
 \DoxyCodeLine{}
 \DoxyCodeLine{Residual norm with compression:}
-\DoxyCodeLine{\%\%MatrixMarket matrix \mbox{\hyperlink{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68af1f713c9e000f5d3f280adbd124df4f5}{array}} \mbox{\hyperlink{namespacegko_a85e29870bacc4e660be5acbbf742305e}{real}} general}
+\DoxyCodeLine{\%\%MatrixMarket matrix \mbox{\hyperlink{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68af1f713c9e000f5d3f280adbd124df4f5}{array}} \mbox{\hyperlink{namespacegko_af21648097306adbabc6234b4609ce297}{real}} general}
 \DoxyCodeLine{1 1}
 \DoxyCodeLine{3.437257e-\/07}
 \end{DoxyCode}
@@ -337,7 +339,7 @@ The following is the expected result\+:
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{/*******************************<GINKGO LICENSE>******************************}}
-\DoxyCodeLine{\textcolor{comment}{Copyright (c) 2017-\/2021, the Ginkgo authors}}
+\DoxyCodeLine{\textcolor{comment}{Copyright (c) 2017-\/2022, the Ginkgo authors}}
 \DoxyCodeLine{\textcolor{comment}{All rights reserved.}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{Redistribution and use in source and binary forms, with or without}}
@@ -378,8 +380,8 @@ The following is the expected result\+:
 \DoxyCodeLine{\textcolor{preprocessor}{\#include <string>}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordtype}{double} measure\_solve\_time\_in\_s(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}} *exec, \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *solver,}
-\DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *b, \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}} *x)}
+\DoxyCodeLine{\textcolor{keywordtype}{double} measure\_solve\_time\_in\_s(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Executor}{gko::Executor}}* exec, \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* solver,}
+\DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* b, \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* x)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    constexpr \textcolor{keywordtype}{int} repeats\{5\};}
 \DoxyCodeLine{    \textcolor{keywordtype}{double} duration\{0\};}
@@ -390,17 +392,17 @@ The following is the expected result\+:
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{        exec-\/>\mbox{\hyperlink{classgko_1_1Executor_a24eeee7648c0f0fd07c9866d07154875}{synchronize}}();}
 \DoxyCodeLine{        \textcolor{keyword}{auto} tic = std::chrono::steady\_clock::now();}
-\DoxyCodeLine{        solver-\/>\mbox{\hyperlink{classgko_1_1LinOp_a0449b2fc705d2f970855af23b5e2788e}{apply}}(b, \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(x\_copy));}
+\DoxyCodeLine{        solver-\/>\mbox{\hyperlink{classgko_1_1LinOp_a0449b2fc705d2f970855af23b5e2788e}{apply}}(b, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x\_copy));}
 \DoxyCodeLine{        exec-\/>\mbox{\hyperlink{classgko_1_1Executor_a24eeee7648c0f0fd07c9866d07154875}{synchronize}}();}
 \DoxyCodeLine{        \textcolor{keyword}{auto} tac = std::chrono::steady\_clock::now();}
 \DoxyCodeLine{        duration += std::chrono::duration<double>(tac -\/ tic).count();}
 \DoxyCodeLine{    \}}
-\DoxyCodeLine{    x-\/>copy\_from(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(x\_copy));}
+\DoxyCodeLine{    x-\/>copy\_from(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x\_copy));}
 \DoxyCodeLine{    \textcolor{keywordflow}{return} duration / static\_cast<double>(repeats);}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[])}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{using} ValueType = double;}
 \DoxyCodeLine{    \textcolor{keyword}{using} RealValueType = \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}};}
@@ -433,7 +435,7 @@ The following is the expected result\+:
 \DoxyCodeLine{             \}\},}
 \DoxyCodeLine{            \{\textcolor{stringliteral}{"dpcpp"},}
 \DoxyCodeLine{             [] \{}
-\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1DpcppExecutor_ac46044fcb00b2d224b45d93eaf8c579d}{gko::DpcppExecutor::create}}(0,}
+\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1DpcppExecutor_ae9b875dfe3af7f3f3f24071bfb2f895e}{gko::DpcppExecutor::create}}(0,}
 \DoxyCodeLine{                                                   \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}());}
 \DoxyCodeLine{             \}\},}
 \DoxyCodeLine{            \{\textcolor{stringliteral}{"reference"}, [] \{ \textcolor{keywordflow}{return} gko::ReferenceExecutor::create(); \}\}\};}
@@ -448,10 +450,10 @@ The following is the expected result\+:
 \DoxyCodeLine{            ValueType\{1\} / std::sqrt(static\_cast<ValueType>(A\_size[0]));}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{    \textcolor{keyword}{auto} b\_norm = gko::initialize<real\_vec>(\{0.0\}, exec);}
-\DoxyCodeLine{    b\_host-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(b\_norm));}
-\DoxyCodeLine{    \textcolor{keyword}{auto} b = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{clone}}(exec, \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(b\_host));}
+\DoxyCodeLine{    b\_host-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(b\_norm));}
+\DoxyCodeLine{    \textcolor{keyword}{auto} b = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{clone}}(exec, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(b\_host));}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{auto} x\_keep = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{clone}}(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(b));}
+\DoxyCodeLine{    \textcolor{keyword}{auto} x\_keep = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{clone}}(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(b));}
 \DoxyCodeLine{    \textcolor{keyword}{auto} x\_reduce = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{clone}}(x\_keep);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{const} RealValueType reduction\_factor\{1e-\/6\};}
@@ -460,8 +462,9 @@ The following is the expected result\+:
 \DoxyCodeLine{        cb\_gmres::build()}
 \DoxyCodeLine{            .with\_criteria(}
 \DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(1000u).on(exec),}
-\DoxyCodeLine{                \mbox{\hyperlink{classgko_1_1stop_1_1RelativeResidualNorm}{gko::stop::RelativeResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                    .with\_tolerance(reduction\_factor)}
+\DoxyCodeLine{                \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                    .with\_baseline(gko::stop::mode::rhs\_norm)}
+\DoxyCodeLine{                    .with\_reduction\_factor(reduction\_factor)}
 \DoxyCodeLine{                    .on(exec))}
 \DoxyCodeLine{            .with\_krylov\_dim(100u)}
 \DoxyCodeLine{            .with\_storage\_precision(}
@@ -472,8 +475,9 @@ The following is the expected result\+:
 \DoxyCodeLine{        cb\_gmres::build()}
 \DoxyCodeLine{            .with\_criteria(}
 \DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(1000u).on(exec),}
-\DoxyCodeLine{                \mbox{\hyperlink{classgko_1_1stop_1_1RelativeResidualNorm}{gko::stop::RelativeResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                    .with\_tolerance(reduction\_factor)}
+\DoxyCodeLine{                \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                    .with\_baseline(gko::stop::mode::rhs\_norm)}
+\DoxyCodeLine{                    .with\_reduction\_factor(reduction\_factor)}
 \DoxyCodeLine{                    .on(exec))}
 \DoxyCodeLine{            .with\_krylov\_dim(100u)}
 \DoxyCodeLine{            .with\_storage\_precision(}
@@ -482,10 +486,10 @@ The following is the expected result\+:
 \DoxyCodeLine{    \textcolor{keyword}{auto} solver\_keep = solver\_gen\_keep-\/>generate(A);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} solver\_reduce = solver\_gen\_reduce-\/>generate(A);}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{auto} time\_keep = measure\_solve\_time\_in\_s(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(exec), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(solver\_keep),}
-\DoxyCodeLine{                                             \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(b), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(x\_keep));}
-\DoxyCodeLine{    \textcolor{keyword}{auto} time\_reduce = measure\_solve\_time\_in\_s(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(exec), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(solver\_reduce),}
-\DoxyCodeLine{                                               \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(b), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(x\_reduce));}
+\DoxyCodeLine{    \textcolor{keyword}{auto} time\_keep = measure\_solve\_time\_in\_s(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(exec), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(solver\_keep),}
+\DoxyCodeLine{                                             \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(b), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x\_keep));}
+\DoxyCodeLine{    \textcolor{keyword}{auto} time\_reduce = measure\_solve\_time\_in\_s(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(exec), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(solver\_reduce),}
+\DoxyCodeLine{                                               \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(b), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x\_reduce));}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::cout << std::scientific;}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Solve time without compression: "} << time\_keep << \textcolor{stringliteral}{" s\(\backslash\)n"}}
@@ -496,20 +500,20 @@ The following is the expected result\+:
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} res\_norm\_keep = gko::initialize<real\_vec>(\{0.0\}, exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} res\_norm\_reduce = gko::initialize<real\_vec>(\{0.0\}, exec);}
-\DoxyCodeLine{    \textcolor{keyword}{auto} tmp = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(b));}
+\DoxyCodeLine{    \textcolor{keyword}{auto} tmp = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b));}
 \DoxyCodeLine{}
-\DoxyCodeLine{    A-\/>apply(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(one), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(x\_keep), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(tmp));}
-\DoxyCodeLine{    tmp-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(res\_norm\_keep));}
+\DoxyCodeLine{    A-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x\_keep), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(tmp));}
+\DoxyCodeLine{    tmp-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(res\_norm\_keep));}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"\(\backslash\)nResidual norm without compression:\(\backslash\)n"};}
-\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a859dc47a462721d83728d91ab7fa2148}{write}}(std::cout, \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(res\_norm\_keep));}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_aa24837da3770b3dddf981d9bfe0d3b52}{write}}(std::cout, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(res\_norm\_keep));}
 \DoxyCodeLine{}
-\DoxyCodeLine{    tmp-\/>copy\_from(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(b));}
-\DoxyCodeLine{    A-\/>apply(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(one), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(x\_reduce), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(tmp));}
-\DoxyCodeLine{    tmp-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(res\_norm\_reduce));}
+\DoxyCodeLine{    tmp-\/>copy\_from(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(b));}
+\DoxyCodeLine{    A-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x\_reduce), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(tmp));}
+\DoxyCodeLine{    tmp-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(res\_norm\_reduce));}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"\(\backslash\)nResidual norm with compression:\(\backslash\)n"};}
-\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a859dc47a462721d83728d91ab7fa2148}{write}}(std::cout, \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(res\_norm\_reduce));}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_aa24837da3770b3dddf981d9bfe0d3b52}{write}}(std::cout, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(res\_norm\_reduce));}
 \DoxyCodeLine{\}}
 \end{DoxyCodeInclude}
  

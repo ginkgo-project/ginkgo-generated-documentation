@@ -11,6 +11,16 @@ C\+OO stores a matrix in the coordinate matrix format.
 
 
 
+Inheritance diagram for gko\+::matrix\+::Coo$<$ Value\+Type, Index\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1matrix_1_1Coo__inherit__graph}
+\end{center}
+\end{figure}
+
+
 Collaboration diagram for gko\+::matrix\+::Coo$<$ Value\+Type, Index\+Type $>$\+:
 \nopagebreak
 \begin{figure}[H]
@@ -30,6 +40,9 @@ using {\bfseries index\+\_\+type} = Index\+Type
 \item 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Coo_a52198fe6654bd0a2bec566a65bdc60ac}\label{classgko_1_1matrix_1_1Coo_a52198fe6654bd0a2bec566a65bdc60ac}} 
 using {\bfseries mat\+\_\+data} = \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$
+\item 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Coo_ad98ea3bcdb801644d1bac04c61a9815c}\label{classgko_1_1matrix_1_1Coo_ad98ea3bcdb801644d1bac04c61a9815c}} 
+using {\bfseries device\+\_\+mat\+\_\+data} = \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$
 \item 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Coo_a70b752b84bc080854fb6e93b52e7735f}\label{classgko_1_1matrix_1_1Coo_a70b752b84bc080854fb6e93b52e7735f}} 
 using {\bfseries absolute\+\_\+type} = \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{remove\+\_\+complex}}$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Coo}{Coo}} $>$
@@ -57,6 +70,10 @@ void {\bfseries move\+\_\+to} (\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Den
 \item 
 void \mbox{\hyperlink{classgko_1_1matrix_1_1Coo_ac0d4aeb19d9f55b62bea18bad1a408f5}{read}} (const \mbox{\hyperlink{structgko_1_1matrix__data}{mat\+\_\+data}} \&data) override
 \begin{DoxyCompactList}\small\item\em Reads a matrix from a \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} structure. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Coo_a38b27526371688471f94bfb9cac56c97}{read}} (const \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+mat\+\_\+data}} \&data) override
+\begin{DoxyCompactList}\small\item\em Reads a matrix from a \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} structure. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Coo_a464f133eebf917eb59241497f1ea5109}{read}} (\mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+mat\+\_\+data}} \&\&data) override
+\begin{DoxyCompactList}\small\item\em Reads a matrix from a \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} structure. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classgko_1_1matrix_1_1Coo_ae193466ca1a4a3c7d1383ddc5a2701ab}{write}} (\mbox{\hyperlink{structgko_1_1matrix__data}{mat\+\_\+data}} \&data) const override
 \begin{DoxyCompactList}\small\item\em Writes a matrix to a \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} structure. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal}{Diagonal}}$<$ Value\+Type $>$ $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Coo_a718eae56f6939543529ad5522d2d14e5}{extract\+\_\+diagonal}} () const override
@@ -88,6 +105,11 @@ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$ \mbox{\hyperlink{clas
 \begin{DoxyCompactList}\small\item\em Performs the operation x = alpha $\ast$ \mbox{\hyperlink{classgko_1_1matrix_1_1Coo}{Coo}} $\ast$ b + x. \end{DoxyCompactList}\item 
 const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$ \mbox{\hyperlink{classgko_1_1matrix_1_1Coo_a05062dbf88132edf3a13d23783a8b07d}{apply2}} (const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$alpha, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$b, \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$x) const
 \begin{DoxyCompactList}\small\item\em Performs the operation x = alpha $\ast$ \mbox{\hyperlink{classgko_1_1matrix_1_1Coo}{Coo}} $\ast$ b + x. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::unique\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Coo}{Coo}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Coo_aa4d09ff11549bb29625c73c0dcd782a9}{create\+\_\+const}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \&size, gko\+::detail\+::const\+\_\+array\+\_\+view$<$ Value\+Type $>$ \&\&values, gko\+::detail\+::const\+\_\+array\+\_\+view$<$ Index\+Type $>$ \&\&col\+\_\+idxs, gko\+::detail\+::const\+\_\+array\+\_\+view$<$ Index\+Type $>$ \&\&row\+\_\+idxs)
+\begin{DoxyCompactList}\small\item\em Creates a constant (immutable) \mbox{\hyperlink{classgko_1_1matrix_1_1Coo}{Coo}} matrix from a set of constant arrays. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
@@ -109,10 +131,12 @@ class {\bfseries Coo\+Builder$<$ Value\+Type, Index\+Type $>$}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Coo_ac0722b28c665c408a55adff82cce5a4b}\label{classgko_1_1matrix_1_1Coo_ac0722b28c665c408a55adff82cce5a4b}} 
 class {\bfseries Coo$<$ to\+\_\+complex$<$ Value\+Type $>$, Index\+Type $>$}
 \item 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Coo_a86254b0ae570c27f5ba169d64b74e94b}\label{classgko_1_1matrix_1_1Coo_a86254b0ae570c27f5ba169d64b74e94b}} 
+class {\bfseries Hybrid$<$ Value\+Type, Index\+Type $>$}
+\item 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Coo_a12deb8a1b944cf409ac6e85151db2c25}\label{classgko_1_1matrix_1_1Coo_a12deb8a1b944cf409ac6e85151db2c25}} 
 class {\bfseries Coo$<$ next\+\_\+precision$<$ Value\+Type $>$, Index\+Type $>$}
 \end{DoxyCompactItemize}
-\doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
@@ -247,6 +271,33 @@ a pointer to the new absolute object
 
 Implements \mbox{\hyperlink{classgko_1_1EnableAbsoluteComputation_ac30ab2b34bfa3e28e3324cb46f5f030a}{gko\+::\+Enable\+Absolute\+Computation$<$ remove\+\_\+complex$<$ Coo$<$ Value\+Type, Index\+Type $>$ $>$ $>$}}.
 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Coo_aa4d09ff11549bb29625c73c0dcd782a9}\label{classgko_1_1matrix_1_1Coo_aa4d09ff11549bb29625c73c0dcd782a9}} 
+\index{gko::matrix::Coo$<$ ValueType, IndexType $>$@{gko::matrix::Coo$<$ ValueType, IndexType $>$}!create\_const@{create\_const}}
+\index{create\_const@{create\_const}!gko::matrix::Coo$<$ ValueType, IndexType $>$@{gko::matrix::Coo$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{create\_const()}{create\_const()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+static std\+::unique\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1matrix_1_1Coo}{Coo}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Coo}{gko\+::matrix\+::\+Coo}}$<$ Value\+Type, Index\+Type $>$\+::create\+\_\+const (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \&}]{size,  }\item[{gko\+::detail\+::const\+\_\+array\+\_\+view$<$ Value\+Type $>$ \&\&}]{values,  }\item[{gko\+::detail\+::const\+\_\+array\+\_\+view$<$ Index\+Type $>$ \&\&}]{col\+\_\+idxs,  }\item[{gko\+::detail\+::const\+\_\+array\+\_\+view$<$ Index\+Type $>$ \&\&}]{row\+\_\+idxs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Creates a constant (immutable) \mbox{\hyperlink{classgko_1_1matrix_1_1Coo}{Coo}} matrix from a set of constant arrays. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & the executor to create the matrix on \\
+\hline
+{\em size} & the dimensions of the matrix \\
+\hline
+{\em values} & the value array of the matrix \\
+\hline
+{\em col\+\_\+idxs} & the column index array of the matrix \\
+\hline
+{\em row\+\_\+ptrs} & the row index array of the matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A smart pointer to the constant matrix wrapping the input arrays (if they reside on the same executor as the matrix) or a copy of these arrays on the correct executor. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Coo_a718eae56f6939543529ad5522d2d14e5}\label{classgko_1_1matrix_1_1Coo_a718eae56f6939543529ad5522d2d14e5}} 
 \index{gko::matrix::Coo$<$ ValueType, IndexType $>$@{gko::matrix::Coo$<$ ValueType, IndexType $>$}!extract\_diagonal@{extract\_diagonal}}
 \index{extract\_diagonal@{extract\_diagonal}!gko::matrix::Coo$<$ ValueType, IndexType $>$@{gko::matrix::Coo$<$ ValueType, IndexType $>$}}
@@ -283,7 +334,7 @@ the column indexes of the matrix.
 \end{DoxyReturn}
 
 
-References gko\+::\+Array$<$ Value\+Type $>$\+::get\+\_\+data().
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+data().
 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Coo_ae4afdbf2dc5a5a42a197f3a479febc75}\label{classgko_1_1matrix_1_1Coo_ae4afdbf2dc5a5a42a197f3a479febc75}} 
 \index{gko::matrix::Coo$<$ ValueType, IndexType $>$@{gko::matrix::Coo$<$ ValueType, IndexType $>$}!get\_const\_col\_idxs@{get\_const\_col\_idxs}}
@@ -304,7 +355,7 @@ This is the constant version of the function, which can be significantly more me
 \end{DoxyNote}
 
 
-References gko\+::\+Array$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+data().
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+data().
 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Coo_a0fe0f33bf492bf2f9134927c7ee90e81}\label{classgko_1_1matrix_1_1Coo_a0fe0f33bf492bf2f9134927c7ee90e81}} 
 \index{gko::matrix::Coo$<$ ValueType, IndexType $>$@{gko::matrix::Coo$<$ ValueType, IndexType $>$}!get\_const\_row\_idxs@{get\_const\_row\_idxs}}
@@ -322,7 +373,7 @@ This is the constant version of the function, which can be significantly more me
 \end{DoxyNote}
 
 
-References gko\+::\+Array$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+data().
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+data().
 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Coo_af0f6fe19d81bc4207aad66376f9c87c5}\label{classgko_1_1matrix_1_1Coo_af0f6fe19d81bc4207aad66376f9c87c5}} 
 \index{gko::matrix::Coo$<$ ValueType, IndexType $>$@{gko::matrix::Coo$<$ ValueType, IndexType $>$}!get\_const\_values@{get\_const\_values}}
@@ -343,7 +394,7 @@ This is the constant version of the function, which can be significantly more me
 \end{DoxyNote}
 
 
-References gko\+::\+Array$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+data().
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+data().
 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Coo_aece531e069f8490fd8d2b3ab58f72d09}\label{classgko_1_1matrix_1_1Coo_aece531e069f8490fd8d2b3ab58f72d09}} 
 \index{gko::matrix::Coo$<$ ValueType, IndexType $>$@{gko::matrix::Coo$<$ ValueType, IndexType $>$}!get\_num\_stored\_elements@{get\_num\_stored\_elements}}
@@ -361,7 +412,7 @@ the number of elements explicitly stored in the matrix
 \end{DoxyReturn}
 
 
-References gko\+::\+Array$<$ Value\+Type $>$\+::get\+\_\+num\+\_\+elems().
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+num\+\_\+elems().
 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Coo_a57aa0f7b701020c4322a3aed63d8a25d}\label{classgko_1_1matrix_1_1Coo_a57aa0f7b701020c4322a3aed63d8a25d}} 
 \index{gko::matrix::Coo$<$ ValueType, IndexType $>$@{gko::matrix::Coo$<$ ValueType, IndexType $>$}!get\_row\_idxs@{get\_row\_idxs}}
@@ -379,7 +430,7 @@ the row indexes of the matrix.
 \end{DoxyReturn}
 
 
-References gko\+::\+Array$<$ Value\+Type $>$\+::get\+\_\+data().
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+data().
 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Coo_a1ce59517b8d6a8eeaacfed2b19d4057a}\label{classgko_1_1matrix_1_1Coo_a1ce59517b8d6a8eeaacfed2b19d4057a}} 
 \index{gko::matrix::Coo$<$ ValueType, IndexType $>$@{gko::matrix::Coo$<$ ValueType, IndexType $>$}!get\_values@{get\_values}}
@@ -397,12 +448,32 @@ the values of the matrix.
 \end{DoxyReturn}
 
 
-References gko\+::\+Array$<$ Value\+Type $>$\+::get\+\_\+data().
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+data().
+
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Coo_a38b27526371688471f94bfb9cac56c97}\label{classgko_1_1matrix_1_1Coo_a38b27526371688471f94bfb9cac56c97}} 
+\index{gko::matrix::Coo$<$ ValueType, IndexType $>$@{gko::matrix::Coo$<$ ValueType, IndexType $>$}!read@{read}}
+\index{read@{read}!gko::matrix::Coo$<$ ValueType, IndexType $>$@{gko::matrix::Coo$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{read()}{read()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Coo}{gko\+::matrix\+::\+Coo}}$<$ Value\+Type, Index\+Type $>$\+::read (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+mat\+\_\+data}} \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reads a matrix from a \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} structure. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & the \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} structure. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classgko_1_1ReadableFromMatrixData_a02785ab361765a981b9e1677704fffdb}{gko\+::\+Readable\+From\+Matrix\+Data$<$ Value\+Type, Index\+Type $>$}}.
 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Coo_ac0d4aeb19d9f55b62bea18bad1a408f5}\label{classgko_1_1matrix_1_1Coo_ac0d4aeb19d9f55b62bea18bad1a408f5}} 
 \index{gko::matrix::Coo$<$ ValueType, IndexType $>$@{gko::matrix::Coo$<$ ValueType, IndexType $>$}!read@{read}}
 \index{read@{read}!gko::matrix::Coo$<$ ValueType, IndexType $>$@{gko::matrix::Coo$<$ ValueType, IndexType $>$}}
-\doxysubsubsection{\texorpdfstring{read()}{read()}}
+\doxysubsubsection{\texorpdfstring{read()}{read()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
 void \mbox{\hyperlink{classgko_1_1matrix_1_1Coo}{gko\+::matrix\+::\+Coo}}$<$ Value\+Type, Index\+Type $>$\+::read (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structgko_1_1matrix__data}{mat\+\_\+data}} \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
@@ -418,6 +489,28 @@ Reads a matrix from a \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+da
 
 
 Implements \mbox{\hyperlink{classgko_1_1ReadableFromMatrixData_add5c12e23b3ac3c8fbd607fa5a9656bb}{gko\+::\+Readable\+From\+Matrix\+Data$<$ Value\+Type, Index\+Type $>$}}.
+
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Coo_a464f133eebf917eb59241497f1ea5109}\label{classgko_1_1matrix_1_1Coo_a464f133eebf917eb59241497f1ea5109}} 
+\index{gko::matrix::Coo$<$ ValueType, IndexType $>$@{gko::matrix::Coo$<$ ValueType, IndexType $>$}!read@{read}}
+\index{read@{read}!gko::matrix::Coo$<$ ValueType, IndexType $>$@{gko::matrix::Coo$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{read()}{read()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Coo}{gko\+::matrix\+::\+Coo}}$<$ Value\+Type, Index\+Type $>$\+::read (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+mat\+\_\+data}} \&\&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reads a matrix from a \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} structure. 
+
+The structure may be emptied by this function.
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & the \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} structure. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classgko_1_1ReadableFromMatrixData_a0fcdcdbef5e8d673bf19f5d5ab7afb45}{gko\+::\+Readable\+From\+Matrix\+Data$<$ Value\+Type, Index\+Type $>$}}.
 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Coo_ae193466ca1a4a3c7d1383ddc5a2701ab}\label{classgko_1_1matrix_1_1Coo_ae193466ca1a4a3c7d1383ddc5a2701ab}} 
 \index{gko::matrix::Coo$<$ ValueType, IndexType $>$@{gko::matrix::Coo$<$ ValueType, IndexType $>$}!write@{write}}

@@ -112,8 +112,8 @@ If you read the page mentioned above, you will find that in order to parallelize
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{struct }AssemblyScratchData \{}
-\DoxyCodeLine{    AssemblyScratchData(\textcolor{keyword}{const} FiniteElement<dim> \&fe);}
-\DoxyCodeLine{    AssemblyScratchData(\textcolor{keyword}{const} AssemblyScratchData \&scratch\_data);}
+\DoxyCodeLine{    AssemblyScratchData(\textcolor{keyword}{const} FiniteElement<dim>\& fe);}
+\DoxyCodeLine{    AssemblyScratchData(\textcolor{keyword}{const} AssemblyScratchData\& scratch\_data);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    FEValues<dim> fe\_values;}
 \DoxyCodeLine{    FEFaceValues<dim> fe\_face\_values;}
@@ -127,9 +127,9 @@ If you read the page mentioned above, you will find that in order to parallelize
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keywordtype}{void} assemble\_system();}
 \DoxyCodeLine{\textcolor{keywordtype}{void} local\_assemble\_system(}
-\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{typename} DoFHandler<dim>::active\_cell\_iterator \&cell,}
-\DoxyCodeLine{    AssemblyScratchData \&scratch, AssemblyCopyData \&copy\_data);}
-\DoxyCodeLine{\textcolor{keywordtype}{void} copy\_local\_to\_global(\textcolor{keyword}{const} AssemblyCopyData \&copy\_data);}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{typename} DoFHandler<dim>::active\_cell\_iterator\& cell,}
+\DoxyCodeLine{    AssemblyScratchData\& scratch, AssemblyCopyData\& copy\_data);}
+\DoxyCodeLine{\textcolor{keywordtype}{void} copy\_local\_to\_global(\textcolor{keyword}{const} AssemblyCopyData\& copy\_data);}
 \end{DoxyCode}
 
 
@@ -171,10 +171,10 @@ The interface of the {\ttfamily Tensor\+Function} class is relatively close to t
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{    AdvectionField() : TensorFunction<1, dim>() \{\}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{virtual} Tensor<1, dim> value(\textcolor{keyword}{const} Point<dim> \&p) \textcolor{keyword}{const};}
+\DoxyCodeLine{    \textcolor{keyword}{virtual} Tensor<1, dim> value(\textcolor{keyword}{const} Point<dim>\& p) \textcolor{keyword}{const};}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} value\_list(\textcolor{keyword}{const} std::vector<Point<dim>> \&points,}
-\DoxyCodeLine{                            std::vector<Tensor<1, dim>> \&values) \textcolor{keyword}{const};}
+\DoxyCodeLine{    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} value\_list(\textcolor{keyword}{const} std::vector<Point<dim>>\& points,}
+\DoxyCodeLine{                            std::vector<Tensor<1, dim>>\& values) \textcolor{keyword}{const};}
 \end{DoxyCode}
 
 
@@ -203,7 +203,7 @@ The following two functions implement the interface described above. The first s
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
-\DoxyCodeLine{Tensor<1, dim> AdvectionField<dim>::value(\textcolor{keyword}{const} Point<dim> \&p)\textcolor{keyword}{ const}}
+\DoxyCodeLine{Tensor<1, dim> AdvectionField<dim>::value(\textcolor{keyword}{const} Point<dim>\& p)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{}\{}
 \DoxyCodeLine{    Point<dim> value;}
 \DoxyCodeLine{    value[0] = 2;}
@@ -215,8 +215,8 @@ The following two functions implement the interface described above. The first s
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
-\DoxyCodeLine{\textcolor{keywordtype}{void} AdvectionField<dim>::value\_list(\textcolor{keyword}{const} std::vector<Point<dim>> \&points,}
-\DoxyCodeLine{                                     std::vector<Tensor<1, dim>> \&values)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\textcolor{keywordtype}{void} AdvectionField<dim>::value\_list(\textcolor{keyword}{const} std::vector<Point<dim>>\& points,}
+\DoxyCodeLine{                                     std::vector<Tensor<1, dim>>\& values)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{}\{}
 \DoxyCodeLine{    Assert(values.size() == points.size(),}
 \DoxyCodeLine{           ExcDimensionMismatch(values.size(), points.size()));}
@@ -236,11 +236,11 @@ Besides the advection field, we need two functions describing the source terms (
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{    RightHandSide() : Function<dim>() \{\}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{virtual} \textcolor{keywordtype}{double} value(\textcolor{keyword}{const} Point<dim> \&p,}
+\DoxyCodeLine{    \textcolor{keyword}{virtual} \textcolor{keywordtype}{double} value(\textcolor{keyword}{const} Point<dim>\& p,}
 \DoxyCodeLine{                         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} component = 0) \textcolor{keyword}{const};}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} value\_list(\textcolor{keyword}{const} std::vector<Point<dim>> \&points,}
-\DoxyCodeLine{                            std::vector<double> \&values,}
+\DoxyCodeLine{    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} value\_list(\textcolor{keyword}{const} std::vector<Point<dim>>\& points,}
+\DoxyCodeLine{                            std::vector<double>\& values,}
 \DoxyCodeLine{                            \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} component = 0) \textcolor{keyword}{const};}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
@@ -264,7 +264,7 @@ The only new thing here is that we check for the value of the {\ttfamily compone
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
-\DoxyCodeLine{\textcolor{keywordtype}{double} RightHandSide<dim>::value(\textcolor{keyword}{const} Point<dim> \&p,}
+\DoxyCodeLine{\textcolor{keywordtype}{double} RightHandSide<dim>::value(\textcolor{keyword}{const} Point<dim>\& p,}
 \DoxyCodeLine{                                 \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} component)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{}\{}
 \DoxyCodeLine{    (void)component;}
@@ -277,8 +277,8 @@ The only new thing here is that we check for the value of the {\ttfamily compone
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
-\DoxyCodeLine{\textcolor{keywordtype}{void} RightHandSide<dim>::value\_list(\textcolor{keyword}{const} std::vector<Point<dim>> \&points,}
-\DoxyCodeLine{                                    std::vector<double> \&values,}
+\DoxyCodeLine{\textcolor{keywordtype}{void} RightHandSide<dim>::value\_list(\textcolor{keyword}{const} std::vector<Point<dim>>\& points,}
+\DoxyCodeLine{                                    std::vector<double>\& values,}
 \DoxyCodeLine{                                    \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} component)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{}\{}
 \DoxyCodeLine{    Assert(values.size() == points.size(),}
@@ -299,17 +299,17 @@ Finally for the boundary values, which is just another class derived from the {\
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{    BoundaryValues() : Function<dim>() \{\}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{virtual} \textcolor{keywordtype}{double} value(\textcolor{keyword}{const} Point<dim> \&p,}
+\DoxyCodeLine{    \textcolor{keyword}{virtual} \textcolor{keywordtype}{double} value(\textcolor{keyword}{const} Point<dim>\& p,}
 \DoxyCodeLine{                         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} component = 0) \textcolor{keyword}{const};}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} value\_list(\textcolor{keyword}{const} std::vector<Point<dim>> \&points,}
-\DoxyCodeLine{                            std::vector<double> \&values,}
+\DoxyCodeLine{    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} value\_list(\textcolor{keyword}{const} std::vector<Point<dim>>\& points,}
+\DoxyCodeLine{                            std::vector<double>\& values,}
 \DoxyCodeLine{                            \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} component = 0) \textcolor{keyword}{const};}
 \DoxyCodeLine{\};}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
-\DoxyCodeLine{\textcolor{keywordtype}{double} BoundaryValues<dim>::value(\textcolor{keyword}{const} Point<dim> \&p,}
+\DoxyCodeLine{\textcolor{keywordtype}{double} BoundaryValues<dim>::value(\textcolor{keyword}{const} Point<dim>\& p,}
 \DoxyCodeLine{                                  \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} component)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{}\{}
 \DoxyCodeLine{    (void)component;}
@@ -323,8 +323,8 @@ Finally for the boundary values, which is just another class derived from the {\
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
-\DoxyCodeLine{\textcolor{keywordtype}{void} BoundaryValues<dim>::value\_list(\textcolor{keyword}{const} std::vector<Point<dim>> \&points,}
-\DoxyCodeLine{                                     std::vector<double> \&values,}
+\DoxyCodeLine{\textcolor{keywordtype}{void} BoundaryValues<dim>::value\_list(\textcolor{keyword}{const} std::vector<Point<dim>>\& points,}
+\DoxyCodeLine{                                     std::vector<double>\& values,}
 \DoxyCodeLine{                                     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} component)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{}\{}
 \DoxyCodeLine{    Assert(values.size() == points.size(),}
@@ -356,9 +356,9 @@ Before jumping into the fray with the implementation, let us also comment on the
 \DoxyCodeLine{\textcolor{keyword}{class }GradientEstimation \{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{    \textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
-\DoxyCodeLine{    \textcolor{keyword}{static} \textcolor{keywordtype}{void} estimate(\textcolor{keyword}{const} DoFHandler<dim> \&dof,}
-\DoxyCodeLine{                         \textcolor{keyword}{const} Vector<double> \&solution,}
-\DoxyCodeLine{                         Vector<float> \&error\_per\_cell);}
+\DoxyCodeLine{    \textcolor{keyword}{static} \textcolor{keywordtype}{void} estimate(\textcolor{keyword}{const} DoFHandler<dim>\& dof,}
+\DoxyCodeLine{                         \textcolor{keyword}{const} Vector<double>\& solution,}
+\DoxyCodeLine{                         Vector<float>\& error\_per\_cell);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    DeclException2(ExcInvalidVectorLength, \textcolor{keywordtype}{int}, \textcolor{keywordtype}{int},}
 \DoxyCodeLine{                   << \textcolor{stringliteral}{"Vector has length "} << arg1 << \textcolor{stringliteral}{", but should have "}}
@@ -368,23 +368,23 @@ Before jumping into the fray with the implementation, let us also comment on the
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{    \textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
 \DoxyCodeLine{    \textcolor{keyword}{struct }EstimateScratchData \{}
-\DoxyCodeLine{        EstimateScratchData(\textcolor{keyword}{const} FiniteElement<dim> \&fe,}
-\DoxyCodeLine{                            \textcolor{keyword}{const} Vector<double> \&solution,}
-\DoxyCodeLine{                            Vector<float> \&error\_per\_cell);}
-\DoxyCodeLine{        EstimateScratchData(\textcolor{keyword}{const} EstimateScratchData \&data);}
+\DoxyCodeLine{        EstimateScratchData(\textcolor{keyword}{const} FiniteElement<dim>\& fe,}
+\DoxyCodeLine{                            \textcolor{keyword}{const} Vector<double>\& solution,}
+\DoxyCodeLine{                            Vector<float>\& error\_per\_cell);}
+\DoxyCodeLine{        EstimateScratchData(\textcolor{keyword}{const} EstimateScratchData\& data);}
 \DoxyCodeLine{}
 \DoxyCodeLine{        FEValues<dim> fe\_midpoint\_value;}
-\DoxyCodeLine{        \textcolor{keyword}{const} Vector<double> \&solution;}
-\DoxyCodeLine{        Vector<float> \&error\_per\_cell;}
+\DoxyCodeLine{        \textcolor{keyword}{const} Vector<double>\& solution;}
+\DoxyCodeLine{        Vector<float>\& error\_per\_cell;}
 \DoxyCodeLine{    \};}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{struct }EstimateCopyData \{\};}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
 \DoxyCodeLine{    \textcolor{keyword}{static} \textcolor{keywordtype}{void} estimate\_cell(}
-\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keyword}{typename} DoFHandler<dim>::active\_cell\_iterator \&cell,}
-\DoxyCodeLine{        EstimateScratchData<dim> \&scratch\_data,}
-\DoxyCodeLine{        \textcolor{keyword}{const} EstimateCopyData \&copy\_data);}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keyword}{typename} DoFHandler<dim>::active\_cell\_iterator\& cell,}
+\DoxyCodeLine{        EstimateScratchData<dim>\& scratch\_data,}
+\DoxyCodeLine{        \textcolor{keyword}{const} EstimateCopyData\& copy\_data);}
 \DoxyCodeLine{\};}
 \end{DoxyCode}
 
@@ -462,7 +462,7 @@ As already mentioned above, we need to have scratch objects for the parallel com
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
 \DoxyCodeLine{AdvectionProblem<dim>::AssemblyScratchData::AssemblyScratchData(}
-\DoxyCodeLine{    \textcolor{keyword}{const} FiniteElement<dim> \&fe)}
+\DoxyCodeLine{    \textcolor{keyword}{const} FiniteElement<dim>\& fe)}
 \DoxyCodeLine{    : fe\_values(fe, QGauss<dim>(2),}
 \DoxyCodeLine{                update\_values | update\_gradients | update\_quadrature\_points |}
 \DoxyCodeLine{                    update\_JxW\_values),}
@@ -474,7 +474,7 @@ As already mentioned above, we need to have scratch objects for the parallel com
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
 \DoxyCodeLine{AdvectionProblem<dim>::AssemblyScratchData::AssemblyScratchData(}
-\DoxyCodeLine{    \textcolor{keyword}{const} AssemblyScratchData \&scratch\_data)}
+\DoxyCodeLine{    \textcolor{keyword}{const} AssemblyScratchData\& scratch\_data)}
 \DoxyCodeLine{    : fe\_values(scratch\_data.fe\_values.get\_fe(),}
 \DoxyCodeLine{                scratch\_data.fe\_values.get\_quadrature(),}
 \DoxyCodeLine{                update\_values | update\_gradients | update\_quadrature\_points |}
@@ -497,8 +497,8 @@ This begs the question of whether there are other objects we create in this func
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} AdvectionProblem<dim>::local\_assemble\_system(}
-\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{typename} DoFHandler<dim>::active\_cell\_iterator \&cell,}
-\DoxyCodeLine{    AssemblyScratchData \&scratch\_data, AssemblyCopyData \&copy\_data)}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{typename} DoFHandler<dim>::active\_cell\_iterator\& cell,}
+\DoxyCodeLine{    AssemblyScratchData\& scratch\_data, AssemblyCopyData\& copy\_data)}
 \DoxyCodeLine{\{}
 \end{DoxyCode}
 
@@ -691,7 +691,7 @@ The second function we needed to write was the one that copies the local contrib
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} AdvectionProblem<dim>::copy\_local\_to\_global(}
-\DoxyCodeLine{    \textcolor{keyword}{const} AssemblyCopyData \&copy\_data)}
+\DoxyCodeLine{    \textcolor{keyword}{const} AssemblyCopyData\& copy\_data)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} i = 0; i < copy\_data.local\_dof\_indices.size(); ++i) \{}
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} j = 0; j < copy\_data.local\_dof\_indices.size(); ++j)}
@@ -728,8 +728,8 @@ Make a copy of the rhs to use with Ginkgo.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{std::vector<double> rhs(num\_rows);}
-\DoxyCodeLine{std::copy(system\_rhs.begin(), system\_rhs.begin() + num\_rows, rhs.begin());}
+\DoxyCodeLine{std::vector<double> \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}(num\_rows);}
+\DoxyCodeLine{std::copy(system\_rhs.begin(), system\_rhs.begin() + num\_rows, \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}.begin());}
 \end{DoxyCode}
 
 
@@ -741,7 +741,7 @@ Ginkgo setup Some shortcuts\+: A vector is a Dense matrix with co-\/dimension 1.
 \DoxyCodeLine{\textcolor{keyword}{using} mtx = \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<>}};}
 \DoxyCodeLine{\textcolor{keyword}{using} bicgstab = \mbox{\hyperlink{classgko_1_1solver_1_1Bicgstab}{gko::solver::Bicgstab<>}};}
 \DoxyCodeLine{\textcolor{keyword}{using} bj = \mbox{\hyperlink{classgko_1_1preconditioner_1_1Jacobi}{gko::preconditioner::Jacobi<>}};}
-\DoxyCodeLine{\textcolor{keyword}{using} val\_array = \mbox{\hyperlink{classgko_1_1Array}{gko::Array<double>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} val\_array = \mbox{\hyperlink{classgko_1_1array}{gko::array<double>}};}
 \end{DoxyCode}
 
 
@@ -758,13 +758,13 @@ Setup Ginkgo\textquotesingle{}s data structures
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{auto} b = vec::create(exec, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}(num\_rows, 1),}
-\DoxyCodeLine{                     val\_array::view(exec, num\_rows, rhs.data()), 1);}
+\DoxyCodeLine{                     val\_array::view(exec, num\_rows, \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}.data()), 1);}
 \DoxyCodeLine{\textcolor{keyword}{auto} x = vec::create(exec, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}(num\_rows, 1));}
 \DoxyCodeLine{\textcolor{keyword}{auto} A = mtx::create(exec, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}(num\_rows),}
 \DoxyCodeLine{                     system\_matrix.n\_nonzero\_elements());}
-\DoxyCodeLine{mtx::value\_type *values = A-\/>get\_values();}
-\DoxyCodeLine{mtx::index\_type *row\_ptr = A-\/>get\_row\_ptrs();}
-\DoxyCodeLine{mtx::index\_type *col\_idx = A-\/>get\_col\_idxs();}
+\DoxyCodeLine{mtx::value\_type* values = A-\/>get\_values();}
+\DoxyCodeLine{mtx::index\_type* row\_ptr = A-\/>get\_row\_ptrs();}
+\DoxyCodeLine{mtx::index\_type* col\_idx = A-\/>get\_col\_idxs();}
 \end{DoxyCode}
 
 
@@ -826,7 +826,7 @@ Solve system
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{solver-\/>\mbox{\hyperlink{classgko_1_1LinOp_a0449b2fc705d2f970855af23b5e2788e}{apply}}(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(b), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(x));}
+\DoxyCodeLine{solver-\/>\mbox{\hyperlink{classgko_1_1LinOp_a0449b2fc705d2f970855af23b5e2788e}{apply}}(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(x));}
 \end{DoxyCode}
 
 
@@ -850,7 +850,7 @@ Copy the solution vector back to deal.\+ii\textquotesingle{}s data structures.
 \end{DoxyCode}
 
 
-Give the solution back to deall.\+ii
+Distribute the possible hanging nodes constraints
 
 
 \begin{DoxyCode}{0}
@@ -912,8 +912,8 @@ Writing output to disk is done in the same way as in the previous examples. Inde
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} AdvectionProblem<dim>::run()}
 \DoxyCodeLine{\{}
-\DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} cycle = 0; cycle < 6; ++cycle) \{}
-\DoxyCodeLine{        std::cout << \textcolor{stringliteral}{"Cycle "} << cycle << \textcolor{charliteral}{':'} << std::endl;}
+\DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} cycle = 0; \mbox{\hyperlink{namespacegko_1_1solver_1_1multigrid_a4f89fc8a003f879d4ff2f482c2fbab68}{cycle}} < 6; ++\mbox{\hyperlink{namespacegko_1_1solver_1_1multigrid_a4f89fc8a003f879d4ff2f482c2fbab68}{cycle}}) \{}
+\DoxyCodeLine{        std::cout << \textcolor{stringliteral}{"Cycle "} << \mbox{\hyperlink{namespacegko_1_1solver_1_1multigrid_a4f89fc8a003f879d4ff2f482c2fbab68}{cycle}} << \textcolor{charliteral}{':'} << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{        \textcolor{keywordflow}{if} (cycle == 0) \{}
 \DoxyCodeLine{            GridGenerator::hyper\_cube(triangulation, -\/1, 1);}
@@ -948,8 +948,8 @@ Now for the implementation of the {\ttfamily Gradient\+Estimation} class. Let us
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
 \DoxyCodeLine{GradientEstimation::EstimateScratchData<dim>::EstimateScratchData(}
-\DoxyCodeLine{    \textcolor{keyword}{const} FiniteElement<dim> \&fe, \textcolor{keyword}{const} Vector<double> \&solution,}
-\DoxyCodeLine{    Vector<float> \&error\_per\_cell)}
+\DoxyCodeLine{    \textcolor{keyword}{const} FiniteElement<dim>\& fe, \textcolor{keyword}{const} Vector<double>\& solution,}
+\DoxyCodeLine{    Vector<float>\& error\_per\_cell)}
 \DoxyCodeLine{    : fe\_midpoint\_value(fe, QMidpoint<dim>(),}
 \DoxyCodeLine{                        update\_values | update\_quadrature\_points),}
 \DoxyCodeLine{      solution(solution),}
@@ -959,7 +959,7 @@ Now for the implementation of the {\ttfamily Gradient\+Estimation} class. Let us
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
 \DoxyCodeLine{GradientEstimation::EstimateScratchData<dim>::EstimateScratchData(}
-\DoxyCodeLine{    \textcolor{keyword}{const} EstimateScratchData \&scratch\_data)}
+\DoxyCodeLine{    \textcolor{keyword}{const} EstimateScratchData\& scratch\_data)}
 \DoxyCodeLine{    : fe\_midpoint\_value(scratch\_data.fe\_midpoint\_value.get\_fe(),}
 \DoxyCodeLine{                        scratch\_data.fe\_midpoint\_value.get\_quadrature(),}
 \DoxyCodeLine{                        update\_values | update\_quadrature\_points),}
@@ -976,9 +976,9 @@ Before starting with the work, we check that the vector into which the results a
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
-\DoxyCodeLine{\textcolor{keywordtype}{void} GradientEstimation::estimate(\textcolor{keyword}{const} DoFHandler<dim> \&dof\_handler,}
-\DoxyCodeLine{                                  \textcolor{keyword}{const} Vector<double> \&solution,}
-\DoxyCodeLine{                                  Vector<float> \&error\_per\_cell)}
+\DoxyCodeLine{\textcolor{keywordtype}{void} GradientEstimation::estimate(\textcolor{keyword}{const} DoFHandler<dim>\& dof\_handler,}
+\DoxyCodeLine{                                  \textcolor{keyword}{const} Vector<double>\& solution,}
+\DoxyCodeLine{                                  Vector<float>\& error\_per\_cell)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    Assert(error\_per\_cell.size() ==}
 \DoxyCodeLine{               dof\_handler.get\_triangulation().n\_active\_cells(),}
@@ -988,7 +988,7 @@ Before starting with the work, we check that the vector into which the results a
 \DoxyCodeLine{}
 \DoxyCodeLine{    WorkStream::run(dof\_handler.begin\_active(), dof\_handler.end(),}
 \DoxyCodeLine{                    \&GradientEstimation::template estimate\_cell<dim>,}
-\DoxyCodeLine{                    std::function<void(const EstimateCopyData \&)>(),}
+\DoxyCodeLine{                    std::function<void(const EstimateCopyData\&)>(),}
 \DoxyCodeLine{                    EstimateScratchData<dim>(dof\_handler.get\_fe(), solution,}
 \DoxyCodeLine{                                             error\_per\_cell),}
 \DoxyCodeLine{                    EstimateCopyData());}
@@ -1016,8 +1016,8 @@ Now for the details\+:
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} GradientEstimation::estimate\_cell(}
-\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{typename} DoFHandler<dim>::active\_cell\_iterator \&cell,}
-\DoxyCodeLine{    EstimateScratchData<dim> \&scratch\_data, \textcolor{keyword}{const} EstimateCopyData \&)}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{typename} DoFHandler<dim>::active\_cell\_iterator\& cell,}
+\DoxyCodeLine{    EstimateScratchData<dim>\& scratch\_data, \textcolor{keyword}{const} EstimateCopyData\&)}
 \DoxyCodeLine{\{}
 \end{DoxyCode}
 
@@ -1270,7 +1270,7 @@ The {\ttfamily main} function is similar to the previous examples. The main diff
 \DoxyCodeLine{}
 \DoxyCodeLine{        Step9::AdvectionProblem<2> advection\_problem\_2d;}
 \DoxyCodeLine{        advection\_problem\_2d.run();}
-\DoxyCodeLine{    \} \textcolor{keywordflow}{catch} (std::exception \&exc) \{}
+\DoxyCodeLine{    \} \textcolor{keywordflow}{catch} (std::exception\& exc) \{}
 \DoxyCodeLine{        std::cerr << std::endl}
 \DoxyCodeLine{                  << std::endl}
 \DoxyCodeLine{                  << \textcolor{stringliteral}{"-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/"}}
@@ -1390,8 +1390,8 @@ The {\ttfamily main} function is similar to the previous examples. The main diff
 \DoxyCodeLine{    \textcolor{keywordtype}{void} setup\_system();}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{struct }AssemblyScratchData \{}
-\DoxyCodeLine{        AssemblyScratchData(\textcolor{keyword}{const} FiniteElement<dim> \&fe);}
-\DoxyCodeLine{        AssemblyScratchData(\textcolor{keyword}{const} AssemblyScratchData \&scratch\_data);}
+\DoxyCodeLine{        AssemblyScratchData(\textcolor{keyword}{const} FiniteElement<dim>\& fe);}
+\DoxyCodeLine{        AssemblyScratchData(\textcolor{keyword}{const} AssemblyScratchData\& scratch\_data);}
 \DoxyCodeLine{}
 \DoxyCodeLine{        FEValues<dim> fe\_values;}
 \DoxyCodeLine{        FEFaceValues<dim> fe\_face\_values;}
@@ -1405,9 +1405,9 @@ The {\ttfamily main} function is similar to the previous examples. The main diff
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keywordtype}{void} assemble\_system();}
 \DoxyCodeLine{    \textcolor{keywordtype}{void} local\_assemble\_system(}
-\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keyword}{typename} DoFHandler<dim>::active\_cell\_iterator \&cell,}
-\DoxyCodeLine{        AssemblyScratchData \&scratch, AssemblyCopyData \&copy\_data);}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} copy\_local\_to\_global(\textcolor{keyword}{const} AssemblyCopyData \&copy\_data);}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keyword}{typename} DoFHandler<dim>::active\_cell\_iterator\& cell,}
+\DoxyCodeLine{        AssemblyScratchData\& scratch, AssemblyCopyData\& copy\_data);}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} copy\_local\_to\_global(\textcolor{keyword}{const} AssemblyCopyData\& copy\_data);}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keywordtype}{void} solve();}
@@ -1435,10 +1435,10 @@ The {\ttfamily main} function is similar to the previous examples. The main diff
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{    AdvectionField() : TensorFunction<1, dim>() \{\}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{virtual} Tensor<1, dim> value(\textcolor{keyword}{const} Point<dim> \&p) \textcolor{keyword}{const};}
+\DoxyCodeLine{    \textcolor{keyword}{virtual} Tensor<1, dim> value(\textcolor{keyword}{const} Point<dim>\& p) \textcolor{keyword}{const};}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} value\_list(\textcolor{keyword}{const} std::vector<Point<dim>> \&points,}
-\DoxyCodeLine{                            std::vector<Tensor<1, dim>> \&values) \textcolor{keyword}{const};}
+\DoxyCodeLine{    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} value\_list(\textcolor{keyword}{const} std::vector<Point<dim>>\& points,}
+\DoxyCodeLine{                            std::vector<Tensor<1, dim>>\& values) \textcolor{keyword}{const};}
 \DoxyCodeLine{}
 \DoxyCodeLine{    DeclException2(ExcDimensionMismatch, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int},}
 \DoxyCodeLine{                   << \textcolor{stringliteral}{"The vector has size "} << arg1 << \textcolor{stringliteral}{" but should have "}}
@@ -1447,7 +1447,7 @@ The {\ttfamily main} function is similar to the previous examples. The main diff
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
-\DoxyCodeLine{Tensor<1, dim> AdvectionField<dim>::value(\textcolor{keyword}{const} Point<dim> \&p)\textcolor{keyword}{ const}}
+\DoxyCodeLine{Tensor<1, dim> AdvectionField<dim>::value(\textcolor{keyword}{const} Point<dim>\& p)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{}\{}
 \DoxyCodeLine{    Point<dim> value;}
 \DoxyCodeLine{    value[0] = 2;}
@@ -1459,8 +1459,8 @@ The {\ttfamily main} function is similar to the previous examples. The main diff
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
-\DoxyCodeLine{\textcolor{keywordtype}{void} AdvectionField<dim>::value\_list(\textcolor{keyword}{const} std::vector<Point<dim>> \&points,}
-\DoxyCodeLine{                                     std::vector<Tensor<1, dim>> \&values)\textcolor{keyword}{ const}}
+\DoxyCodeLine{\textcolor{keywordtype}{void} AdvectionField<dim>::value\_list(\textcolor{keyword}{const} std::vector<Point<dim>>\& points,}
+\DoxyCodeLine{                                     std::vector<Tensor<1, dim>>\& values)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{}\{}
 \DoxyCodeLine{    Assert(values.size() == points.size(),}
 \DoxyCodeLine{           ExcDimensionMismatch(values.size(), points.size()));}
@@ -1475,11 +1475,11 @@ The {\ttfamily main} function is similar to the previous examples. The main diff
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{    RightHandSide() : Function<dim>() \{\}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{virtual} \textcolor{keywordtype}{double} value(\textcolor{keyword}{const} Point<dim> \&p,}
+\DoxyCodeLine{    \textcolor{keyword}{virtual} \textcolor{keywordtype}{double} value(\textcolor{keyword}{const} Point<dim>\& p,}
 \DoxyCodeLine{                         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} component = 0) \textcolor{keyword}{const};}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} value\_list(\textcolor{keyword}{const} std::vector<Point<dim>> \&points,}
-\DoxyCodeLine{                            std::vector<double> \&values,}
+\DoxyCodeLine{    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} value\_list(\textcolor{keyword}{const} std::vector<Point<dim>>\& points,}
+\DoxyCodeLine{                            std::vector<double>\& values,}
 \DoxyCodeLine{                            \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} component = 0) \textcolor{keyword}{const};}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
@@ -1498,7 +1498,7 @@ The {\ttfamily main} function is similar to the previous examples. The main diff
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
-\DoxyCodeLine{\textcolor{keywordtype}{double} RightHandSide<dim>::value(\textcolor{keyword}{const} Point<dim> \&p,}
+\DoxyCodeLine{\textcolor{keywordtype}{double} RightHandSide<dim>::value(\textcolor{keyword}{const} Point<dim>\& p,}
 \DoxyCodeLine{                                 \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} component)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{}\{}
 \DoxyCodeLine{    (void)component;}
@@ -1511,8 +1511,8 @@ The {\ttfamily main} function is similar to the previous examples. The main diff
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
-\DoxyCodeLine{\textcolor{keywordtype}{void} RightHandSide<dim>::value\_list(\textcolor{keyword}{const} std::vector<Point<dim>> \&points,}
-\DoxyCodeLine{                                    std::vector<double> \&values,}
+\DoxyCodeLine{\textcolor{keywordtype}{void} RightHandSide<dim>::value\_list(\textcolor{keyword}{const} std::vector<Point<dim>>\& points,}
+\DoxyCodeLine{                                    std::vector<double>\& values,}
 \DoxyCodeLine{                                    \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} component)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{}\{}
 \DoxyCodeLine{    Assert(values.size() == points.size(),}
@@ -1528,17 +1528,17 @@ The {\ttfamily main} function is similar to the previous examples. The main diff
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{    BoundaryValues() : Function<dim>() \{\}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{virtual} \textcolor{keywordtype}{double} value(\textcolor{keyword}{const} Point<dim> \&p,}
+\DoxyCodeLine{    \textcolor{keyword}{virtual} \textcolor{keywordtype}{double} value(\textcolor{keyword}{const} Point<dim>\& p,}
 \DoxyCodeLine{                         \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} component = 0) \textcolor{keyword}{const};}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} value\_list(\textcolor{keyword}{const} std::vector<Point<dim>> \&points,}
-\DoxyCodeLine{                            std::vector<double> \&values,}
+\DoxyCodeLine{    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} value\_list(\textcolor{keyword}{const} std::vector<Point<dim>>\& points,}
+\DoxyCodeLine{                            std::vector<double>\& values,}
 \DoxyCodeLine{                            \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} component = 0) \textcolor{keyword}{const};}
 \DoxyCodeLine{\};}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
-\DoxyCodeLine{\textcolor{keywordtype}{double} BoundaryValues<dim>::value(\textcolor{keyword}{const} Point<dim> \&p,}
+\DoxyCodeLine{\textcolor{keywordtype}{double} BoundaryValues<dim>::value(\textcolor{keyword}{const} Point<dim>\& p,}
 \DoxyCodeLine{                                  \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} component)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{}\{}
 \DoxyCodeLine{    (void)component;}
@@ -1552,8 +1552,8 @@ The {\ttfamily main} function is similar to the previous examples. The main diff
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
-\DoxyCodeLine{\textcolor{keywordtype}{void} BoundaryValues<dim>::value\_list(\textcolor{keyword}{const} std::vector<Point<dim>> \&points,}
-\DoxyCodeLine{                                     std::vector<double> \&values,}
+\DoxyCodeLine{\textcolor{keywordtype}{void} BoundaryValues<dim>::value\_list(\textcolor{keyword}{const} std::vector<Point<dim>>\& points,}
+\DoxyCodeLine{                                     std::vector<double>\& values,}
 \DoxyCodeLine{                                     \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} component)\textcolor{keyword}{ const}}
 \DoxyCodeLine{\textcolor{keyword}{}\{}
 \DoxyCodeLine{    Assert(values.size() == points.size(),}
@@ -1568,9 +1568,9 @@ The {\ttfamily main} function is similar to the previous examples. The main diff
 \DoxyCodeLine{\textcolor{keyword}{class }GradientEstimation \{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{    \textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
-\DoxyCodeLine{    \textcolor{keyword}{static} \textcolor{keywordtype}{void} estimate(\textcolor{keyword}{const} DoFHandler<dim> \&dof,}
-\DoxyCodeLine{                         \textcolor{keyword}{const} Vector<double> \&solution,}
-\DoxyCodeLine{                         Vector<float> \&error\_per\_cell);}
+\DoxyCodeLine{    \textcolor{keyword}{static} \textcolor{keywordtype}{void} estimate(\textcolor{keyword}{const} DoFHandler<dim>\& dof,}
+\DoxyCodeLine{                         \textcolor{keyword}{const} Vector<double>\& solution,}
+\DoxyCodeLine{                         Vector<float>\& error\_per\_cell);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    DeclException2(ExcInvalidVectorLength, \textcolor{keywordtype}{int}, \textcolor{keywordtype}{int},}
 \DoxyCodeLine{                   << \textcolor{stringliteral}{"Vector has length "} << arg1 << \textcolor{stringliteral}{", but should have "}}
@@ -1580,23 +1580,23 @@ The {\ttfamily main} function is similar to the previous examples. The main diff
 \DoxyCodeLine{\textcolor{keyword}{private}:}
 \DoxyCodeLine{    \textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
 \DoxyCodeLine{    \textcolor{keyword}{struct }EstimateScratchData \{}
-\DoxyCodeLine{        EstimateScratchData(\textcolor{keyword}{const} FiniteElement<dim> \&fe,}
-\DoxyCodeLine{                            \textcolor{keyword}{const} Vector<double> \&solution,}
-\DoxyCodeLine{                            Vector<float> \&error\_per\_cell);}
-\DoxyCodeLine{        EstimateScratchData(\textcolor{keyword}{const} EstimateScratchData \&data);}
+\DoxyCodeLine{        EstimateScratchData(\textcolor{keyword}{const} FiniteElement<dim>\& fe,}
+\DoxyCodeLine{                            \textcolor{keyword}{const} Vector<double>\& solution,}
+\DoxyCodeLine{                            Vector<float>\& error\_per\_cell);}
+\DoxyCodeLine{        EstimateScratchData(\textcolor{keyword}{const} EstimateScratchData\& data);}
 \DoxyCodeLine{}
 \DoxyCodeLine{        FEValues<dim> fe\_midpoint\_value;}
-\DoxyCodeLine{        \textcolor{keyword}{const} Vector<double> \&solution;}
-\DoxyCodeLine{        Vector<float> \&error\_per\_cell;}
+\DoxyCodeLine{        \textcolor{keyword}{const} Vector<double>\& solution;}
+\DoxyCodeLine{        Vector<float>\& error\_per\_cell;}
 \DoxyCodeLine{    \};}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{struct }EstimateCopyData \{\};}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
 \DoxyCodeLine{    \textcolor{keyword}{static} \textcolor{keywordtype}{void} estimate\_cell(}
-\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keyword}{typename} DoFHandler<dim>::active\_cell\_iterator \&cell,}
-\DoxyCodeLine{        EstimateScratchData<dim> \&scratch\_data,}
-\DoxyCodeLine{        \textcolor{keyword}{const} EstimateCopyData \&copy\_data);}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keyword}{typename} DoFHandler<dim>::active\_cell\_iterator\& cell,}
+\DoxyCodeLine{        EstimateScratchData<dim>\& scratch\_data,}
+\DoxyCodeLine{        \textcolor{keyword}{const} EstimateCopyData\& copy\_data);}
 \DoxyCodeLine{\};}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -1651,7 +1651,7 @@ The {\ttfamily main} function is similar to the previous examples. The main diff
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
 \DoxyCodeLine{AdvectionProblem<dim>::AssemblyScratchData::AssemblyScratchData(}
-\DoxyCodeLine{    \textcolor{keyword}{const} FiniteElement<dim> \&fe)}
+\DoxyCodeLine{    \textcolor{keyword}{const} FiniteElement<dim>\& fe)}
 \DoxyCodeLine{    : fe\_values(fe, QGauss<dim>(2),}
 \DoxyCodeLine{                update\_values | update\_gradients | update\_quadrature\_points |}
 \DoxyCodeLine{                    update\_JxW\_values),}
@@ -1663,7 +1663,7 @@ The {\ttfamily main} function is similar to the previous examples. The main diff
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
 \DoxyCodeLine{AdvectionProblem<dim>::AssemblyScratchData::AssemblyScratchData(}
-\DoxyCodeLine{    \textcolor{keyword}{const} AssemblyScratchData \&scratch\_data)}
+\DoxyCodeLine{    \textcolor{keyword}{const} AssemblyScratchData\& scratch\_data)}
 \DoxyCodeLine{    : fe\_values(scratch\_data.fe\_values.get\_fe(),}
 \DoxyCodeLine{                scratch\_data.fe\_values.get\_quadrature(),}
 \DoxyCodeLine{                update\_values | update\_gradients | update\_quadrature\_points |}
@@ -1677,8 +1677,8 @@ The {\ttfamily main} function is similar to the previous examples. The main diff
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} AdvectionProblem<dim>::local\_assemble\_system(}
-\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{typename} DoFHandler<dim>::active\_cell\_iterator \&cell,}
-\DoxyCodeLine{    AssemblyScratchData \&scratch\_data, AssemblyCopyData \&copy\_data)}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{typename} DoFHandler<dim>::active\_cell\_iterator\& cell,}
+\DoxyCodeLine{    AssemblyScratchData\& scratch\_data, AssemblyCopyData\& copy\_data)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{const} AdvectionField<dim> advection\_field;}
 \DoxyCodeLine{    \textcolor{keyword}{const} RightHandSide<dim> right\_hand\_side;}
@@ -1775,7 +1775,7 @@ The {\ttfamily main} function is similar to the previous examples. The main diff
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} AdvectionProblem<dim>::copy\_local\_to\_global(}
-\DoxyCodeLine{    \textcolor{keyword}{const} AssemblyCopyData \&copy\_data)}
+\DoxyCodeLine{    \textcolor{keyword}{const} AssemblyCopyData\& copy\_data)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} i = 0; i < copy\_data.local\_dof\_indices.size(); ++i) \{}
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} j = 0; j < copy\_data.local\_dof\_indices.size(); ++j)}
@@ -1793,25 +1793,25 @@ The {\ttfamily main} function is similar to the previous examples. The main diff
 \DoxyCodeLine{    Assert(system\_matrix.m() == system\_matrix.n(), ExcNotQuadratic());}
 \DoxyCodeLine{    \textcolor{keyword}{auto} num\_rows = system\_matrix.m();}
 \DoxyCodeLine{}
-\DoxyCodeLine{    std::vector<double> rhs(num\_rows);}
-\DoxyCodeLine{    std::copy(system\_rhs.begin(), system\_rhs.begin() + num\_rows, rhs.begin());}
+\DoxyCodeLine{    std::vector<double> \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}(num\_rows);}
+\DoxyCodeLine{    std::copy(system\_rhs.begin(), system\_rhs.begin() + num\_rows, \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}.begin());}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{using} vec = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<>}};}
 \DoxyCodeLine{    \textcolor{keyword}{using} mtx = \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<>}};}
 \DoxyCodeLine{    \textcolor{keyword}{using} bicgstab = \mbox{\hyperlink{classgko_1_1solver_1_1Bicgstab}{gko::solver::Bicgstab<>}};}
 \DoxyCodeLine{    \textcolor{keyword}{using} bj = \mbox{\hyperlink{classgko_1_1preconditioner_1_1Jacobi}{gko::preconditioner::Jacobi<>}};}
-\DoxyCodeLine{    \textcolor{keyword}{using} val\_array = \mbox{\hyperlink{classgko_1_1Array}{gko::Array<double>}};}
+\DoxyCodeLine{    \textcolor{keyword}{using} val\_array = \mbox{\hyperlink{classgko_1_1array}{gko::array<double>}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::shared\_ptr<gko::Executor> exec = gko::ReferenceExecutor::create();}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} b = vec::create(exec, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}(num\_rows, 1),}
-\DoxyCodeLine{                         val\_array::view(exec, num\_rows, rhs.data()), 1);}
+\DoxyCodeLine{                         val\_array::view(exec, num\_rows, \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}.data()), 1);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} x = vec::create(exec, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}(num\_rows, 1));}
 \DoxyCodeLine{    \textcolor{keyword}{auto} A = mtx::create(exec, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}(num\_rows),}
 \DoxyCodeLine{                         system\_matrix.n\_nonzero\_elements());}
-\DoxyCodeLine{    mtx::value\_type *values = A-\/>get\_values();}
-\DoxyCodeLine{    mtx::index\_type *row\_ptr = A-\/>get\_row\_ptrs();}
-\DoxyCodeLine{    mtx::index\_type *col\_idx = A-\/>get\_col\_idxs();}
+\DoxyCodeLine{    mtx::value\_type* values = A-\/>get\_values();}
+\DoxyCodeLine{    mtx::index\_type* row\_ptr = A-\/>get\_row\_ptrs();}
+\DoxyCodeLine{    mtx::index\_type* col\_idx = A-\/>get\_col\_idxs();}
 \DoxyCodeLine{}
 \DoxyCodeLine{    row\_ptr[0] = 0;}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} row = 1; row <= num\_rows; ++row) \{}
@@ -1842,7 +1842,7 @@ The {\ttfamily main} function is similar to the previous examples. The main diff
 \DoxyCodeLine{            .on(exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} solver = solver\_gen-\/>generate(\mbox{\hyperlink{namespacegko_acbd3fd6d07e498892881e8e2ab0b4167}{gko::give}}(A));}
 \DoxyCodeLine{}
-\DoxyCodeLine{    solver-\/>\mbox{\hyperlink{classgko_1_1LinOp_a0449b2fc705d2f970855af23b5e2788e}{apply}}(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(b), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(x));}
+\DoxyCodeLine{    solver-\/>\mbox{\hyperlink{classgko_1_1LinOp_a0449b2fc705d2f970855af23b5e2788e}{apply}}(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(x));}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::copy(x-\/>get\_values(), x-\/>get\_values() + num\_rows, solution.begin());}
 \DoxyCodeLine{}
@@ -1901,8 +1901,8 @@ The {\ttfamily main} function is similar to the previous examples. The main diff
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} AdvectionProblem<dim>::run()}
 \DoxyCodeLine{\{}
-\DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} cycle = 0; cycle < 6; ++cycle) \{}
-\DoxyCodeLine{        std::cout << \textcolor{stringliteral}{"Cycle "} << cycle << \textcolor{charliteral}{':'} << std::endl;}
+\DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} cycle = 0; \mbox{\hyperlink{namespacegko_1_1solver_1_1multigrid_a4f89fc8a003f879d4ff2f482c2fbab68}{cycle}} < 6; ++\mbox{\hyperlink{namespacegko_1_1solver_1_1multigrid_a4f89fc8a003f879d4ff2f482c2fbab68}{cycle}}) \{}
+\DoxyCodeLine{        std::cout << \textcolor{stringliteral}{"Cycle "} << \mbox{\hyperlink{namespacegko_1_1solver_1_1multigrid_a4f89fc8a003f879d4ff2f482c2fbab68}{cycle}} << \textcolor{charliteral}{':'} << std::endl;}
 \DoxyCodeLine{}
 \DoxyCodeLine{        \textcolor{keywordflow}{if} (cycle == 0) \{}
 \DoxyCodeLine{            GridGenerator::hyper\_cube(triangulation, -\/1, 1);}
@@ -1930,8 +1930,8 @@ The {\ttfamily main} function is similar to the previous examples. The main diff
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
 \DoxyCodeLine{GradientEstimation::EstimateScratchData<dim>::EstimateScratchData(}
-\DoxyCodeLine{    \textcolor{keyword}{const} FiniteElement<dim> \&fe, \textcolor{keyword}{const} Vector<double> \&solution,}
-\DoxyCodeLine{    Vector<float> \&error\_per\_cell)}
+\DoxyCodeLine{    \textcolor{keyword}{const} FiniteElement<dim>\& fe, \textcolor{keyword}{const} Vector<double>\& solution,}
+\DoxyCodeLine{    Vector<float>\& error\_per\_cell)}
 \DoxyCodeLine{    : fe\_midpoint\_value(fe, QMidpoint<dim>(),}
 \DoxyCodeLine{                        update\_values | update\_quadrature\_points),}
 \DoxyCodeLine{      solution(solution),}
@@ -1941,7 +1941,7 @@ The {\ttfamily main} function is similar to the previous examples. The main diff
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
 \DoxyCodeLine{GradientEstimation::EstimateScratchData<dim>::EstimateScratchData(}
-\DoxyCodeLine{    \textcolor{keyword}{const} EstimateScratchData \&scratch\_data)}
+\DoxyCodeLine{    \textcolor{keyword}{const} EstimateScratchData\& scratch\_data)}
 \DoxyCodeLine{    : fe\_midpoint\_value(scratch\_data.fe\_midpoint\_value.get\_fe(),}
 \DoxyCodeLine{                        scratch\_data.fe\_midpoint\_value.get\_quadrature(),}
 \DoxyCodeLine{                        update\_values | update\_quadrature\_points),}
@@ -1951,9 +1951,9 @@ The {\ttfamily main} function is similar to the previous examples. The main diff
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
-\DoxyCodeLine{\textcolor{keywordtype}{void} GradientEstimation::estimate(\textcolor{keyword}{const} DoFHandler<dim> \&dof\_handler,}
-\DoxyCodeLine{                                  \textcolor{keyword}{const} Vector<double> \&solution,}
-\DoxyCodeLine{                                  Vector<float> \&error\_per\_cell)}
+\DoxyCodeLine{\textcolor{keywordtype}{void} GradientEstimation::estimate(\textcolor{keyword}{const} DoFHandler<dim>\& dof\_handler,}
+\DoxyCodeLine{                                  \textcolor{keyword}{const} Vector<double>\& solution,}
+\DoxyCodeLine{                                  Vector<float>\& error\_per\_cell)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    Assert(error\_per\_cell.size() ==}
 \DoxyCodeLine{               dof\_handler.get\_triangulation().n\_active\_cells(),}
@@ -1963,7 +1963,7 @@ The {\ttfamily main} function is similar to the previous examples. The main diff
 \DoxyCodeLine{}
 \DoxyCodeLine{    WorkStream::run(dof\_handler.begin\_active(), dof\_handler.end(),}
 \DoxyCodeLine{                    \&GradientEstimation::template estimate\_cell<dim>,}
-\DoxyCodeLine{                    std::function<void(const EstimateCopyData \&)>(),}
+\DoxyCodeLine{                    std::function<void(const EstimateCopyData\&)>(),}
 \DoxyCodeLine{                    EstimateScratchData<dim>(dof\_handler.get\_fe(), solution,}
 \DoxyCodeLine{                                             error\_per\_cell),}
 \DoxyCodeLine{                    EstimateCopyData());}
@@ -1972,8 +1972,8 @@ The {\ttfamily main} function is similar to the previous examples. The main diff
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} GradientEstimation::estimate\_cell(}
-\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{typename} DoFHandler<dim>::active\_cell\_iterator \&cell,}
-\DoxyCodeLine{    EstimateScratchData<dim> \&scratch\_data, \textcolor{keyword}{const} EstimateCopyData \&)}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{typename} DoFHandler<dim>::active\_cell\_iterator\& cell,}
+\DoxyCodeLine{    EstimateScratchData<dim>\& scratch\_data, \textcolor{keyword}{const} EstimateCopyData\&)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    Tensor<2, dim> Y;}
 \DoxyCodeLine{}
@@ -2076,7 +2076,7 @@ The {\ttfamily main} function is similar to the previous examples. The main diff
 \DoxyCodeLine{}
 \DoxyCodeLine{        Step9::AdvectionProblem<2> advection\_problem\_2d;}
 \DoxyCodeLine{        advection\_problem\_2d.run();}
-\DoxyCodeLine{    \} \textcolor{keywordflow}{catch} (std::exception \&exc) \{}
+\DoxyCodeLine{    \} \textcolor{keywordflow}{catch} (std::exception\& exc) \{}
 \DoxyCodeLine{        std::cerr << std::endl}
 \DoxyCodeLine{                  << std::endl}
 \DoxyCodeLine{                  << \textcolor{stringliteral}{"-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/"}}

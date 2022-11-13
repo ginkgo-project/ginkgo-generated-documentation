@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from tags/v1.4.0 branch based on master. Ginkgo version 1.4.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/693265515 branch based on master. Ginkgo version 1.5.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -152,8 +152,8 @@ $(function() {
 <p>The strategy for parallelization we choose here is one of the possibilities mentioned in detail in the threads module in the documentation. Specifically, we will use the WorkStream approach discussed there. Since there is so much documentation in this module, we will not repeat the rationale for the design choices here (for example, if you read through the module mentioned above, you will understand what the purpose of the <code>AssemblyScratchData</code> and <code>AssemblyCopyData</code> structures is). Rather, we will only discuss the specific implementation.</p>
 <p>If you read the page mentioned above, you will find that in order to parallelize assembly, we need two data structures &ndash; one that corresponds to data that we need during local integration ("scratch data", i.e., things we only need as temporary storage), and one that carries information from the local integration to the function that then adds the local contributions to the corresponding elements of the global matrix. The former of these typically contains the FEValues and FEFaceValues objects, whereas the latter has the local matrix, local right hand side, and information about which degrees of freedom live on the cell for which we are assembling a local contribution. With this information, the following should be relatively self-explanatory:</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>AssemblyScratchData {</div>
-<div class="line">    AssemblyScratchData(<span class="keyword">const</span> FiniteElement&lt;dim&gt; &amp;fe);</div>
-<div class="line">    AssemblyScratchData(<span class="keyword">const</span> AssemblyScratchData &amp;scratch_data);</div>
+<div class="line">    AssemblyScratchData(<span class="keyword">const</span> FiniteElement&lt;dim&gt;&amp; fe);</div>
+<div class="line">    AssemblyScratchData(<span class="keyword">const</span> AssemblyScratchData&amp; scratch_data);</div>
 <div class="line"> </div>
 <div class="line">    FEValues&lt;dim&gt; fe_values;</div>
 <div class="line">    FEFaceValues&lt;dim&gt; fe_face_values;</div>
@@ -167,9 +167,9 @@ $(function() {
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> assemble_system();</div>
 <div class="line"><span class="keywordtype">void</span> local_assemble_system(</div>
-<div class="line">    <span class="keyword">const</span> <span class="keyword">typename</span> DoFHandler&lt;dim&gt;::active_cell_iterator &amp;cell,</div>
-<div class="line">    AssemblyScratchData &amp;scratch, AssemblyCopyData &amp;copy_data);</div>
-<div class="line"><span class="keywordtype">void</span> copy_local_to_global(<span class="keyword">const</span> AssemblyCopyData &amp;copy_data);</div>
+<div class="line">    <span class="keyword">const</span> <span class="keyword">typename</span> DoFHandler&lt;dim&gt;::active_cell_iterator&amp; cell,</div>
+<div class="line">    AssemblyScratchData&amp; scratch, AssemblyCopyData&amp; copy_data);</div>
+<div class="line"><span class="keywordtype">void</span> copy_local_to_global(<span class="keyword">const</span> AssemblyCopyData&amp; copy_data);</div>
 </div><!-- fragment --><p>The following functions again are as in previous examples, as are the subsequent variables.</p>
 <div class="fragment"><div class="line">    <span class="keywordtype">void</span> solve();</div>
 <div class="line">    <span class="keywordtype">void</span> refine_grid();</div>
@@ -196,10 +196,10 @@ $(function() {
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">    AdvectionField() : TensorFunction&lt;1, dim&gt;() {}</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">virtual</span> Tensor&lt;1, dim&gt; value(<span class="keyword">const</span> Point&lt;dim&gt; &amp;p) <span class="keyword">const</span>;</div>
+<div class="line">    <span class="keyword">virtual</span> Tensor&lt;1, dim&gt; value(<span class="keyword">const</span> Point&lt;dim&gt;&amp; p) <span class="keyword">const</span>;</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span> value_list(<span class="keyword">const</span> std::vector&lt;Point&lt;dim&gt;&gt; &amp;points,</div>
-<div class="line">                            std::vector&lt;Tensor&lt;1, dim&gt;&gt; &amp;values) <span class="keyword">const</span>;</div>
+<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span> value_list(<span class="keyword">const</span> std::vector&lt;Point&lt;dim&gt;&gt;&amp; points,</div>
+<div class="line">                            std::vector&lt;Tensor&lt;1, dim&gt;&gt;&amp; values) <span class="keyword">const</span>;</div>
 </div><!-- fragment --><p>In previous examples, we have used assertions that throw exceptions in several places. However, we have never seen how such exceptions are declared. This can be done as follows:</p>
 <div class="fragment"><div class="line">DeclException2(ExcDimensionMismatch, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>,</div>
 <div class="line">               &lt;&lt; <span class="stringliteral">&quot;The vector has size &quot;</span> &lt;&lt; arg1 &lt;&lt; <span class="stringliteral">&quot; but should have &quot;</span></div>
@@ -209,7 +209,7 @@ $(function() {
 <div class="fragment"><div class="line">};</div>
 </div><!-- fragment --><p>The following two functions implement the interface described above. The first simply implements the function as described in the introduction, while the second uses the same trick to avoid calling a virtual function as has already been introduced in the previous example program. Note the check for the right sizes of the arguments in the second function, which should always be present in such functions; it is our experience that many if not most programming errors result from incorrectly initialized arrays, incompatible parameters to functions and the like; using assertion as in this case can eliminate many of these problems.</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
-<div class="line">Tensor&lt;1, dim&gt; AdvectionField&lt;dim&gt;::value(<span class="keyword">const</span> Point&lt;dim&gt; &amp;p)<span class="keyword"> const</span></div>
+<div class="line">Tensor&lt;1, dim&gt; AdvectionField&lt;dim&gt;::value(<span class="keyword">const</span> Point&lt;dim&gt;&amp; p)<span class="keyword"> const</span></div>
 <div class="line"><span class="keyword"></span>{</div>
 <div class="line">    Point&lt;dim&gt; value;</div>
 <div class="line">    value[0] = 2;</div>
@@ -221,8 +221,8 @@ $(function() {
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
-<div class="line"><span class="keywordtype">void</span> AdvectionField&lt;dim&gt;::value_list(<span class="keyword">const</span> std::vector&lt;Point&lt;dim&gt;&gt; &amp;points,</div>
-<div class="line">                                     std::vector&lt;Tensor&lt;1, dim&gt;&gt; &amp;values)<span class="keyword"> const</span></div>
+<div class="line"><span class="keywordtype">void</span> AdvectionField&lt;dim&gt;::value_list(<span class="keyword">const</span> std::vector&lt;Point&lt;dim&gt;&gt;&amp; points,</div>
+<div class="line">                                     std::vector&lt;Tensor&lt;1, dim&gt;&gt;&amp; values)<span class="keyword"> const</span></div>
 <div class="line"><span class="keyword"></span>{</div>
 <div class="line">    Assert(values.size() == points.size(),</div>
 <div class="line">           ExcDimensionMismatch(values.size(), points.size()));</div>
@@ -236,11 +236,11 @@ $(function() {
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">    RightHandSide() : Function&lt;dim&gt;() {}</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">double</span> value(<span class="keyword">const</span> Point&lt;dim&gt; &amp;p,</div>
+<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">double</span> value(<span class="keyword">const</span> Point&lt;dim&gt;&amp; p,</div>
 <div class="line">                         <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component = 0) <span class="keyword">const</span>;</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span> value_list(<span class="keyword">const</span> std::vector&lt;Point&lt;dim&gt;&gt; &amp;points,</div>
-<div class="line">                            std::vector&lt;double&gt; &amp;values,</div>
+<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span> value_list(<span class="keyword">const</span> std::vector&lt;Point&lt;dim&gt;&gt;&amp; points,</div>
+<div class="line">                            std::vector&lt;double&gt;&amp; values,</div>
 <div class="line">                            <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component = 0) <span class="keyword">const</span>;</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">private</span>:</div>
@@ -258,7 +258,7 @@ $(function() {
 <div class="line"><span class="keyword">const</span> Point&lt;3&gt; RightHandSide&lt;3&gt;::center_point = Point&lt;3&gt;(-0.75, -0.75, -0.75);</div>
 </div><!-- fragment --><p>The only new thing here is that we check for the value of the <code>component</code> parameter. As this is a scalar function, it is obvious that it only makes sense if the desired component has the index zero, so we assert that this is indeed the case. <code>ExcIndexRange</code> is a global predefined exception (probably the one most often used, we therefore made it global instead of local to some class), that takes three parameters: the index that is outside the allowed range, the first element of the valid range and the one past the last (i.e. again the half-open interval so often used in the C++ standard library):</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
-<div class="line"><span class="keywordtype">double</span> RightHandSide&lt;dim&gt;::value(<span class="keyword">const</span> Point&lt;dim&gt; &amp;p,</div>
+<div class="line"><span class="keywordtype">double</span> RightHandSide&lt;dim&gt;::value(<span class="keyword">const</span> Point&lt;dim&gt;&amp; p,</div>
 <div class="line">                                 <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component)<span class="keyword"> const</span></div>
 <div class="line"><span class="keyword"></span>{</div>
 <div class="line">    (void)component;</div>
@@ -271,8 +271,8 @@ $(function() {
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
-<div class="line"><span class="keywordtype">void</span> RightHandSide&lt;dim&gt;::value_list(<span class="keyword">const</span> std::vector&lt;Point&lt;dim&gt;&gt; &amp;points,</div>
-<div class="line">                                    std::vector&lt;double&gt; &amp;values,</div>
+<div class="line"><span class="keywordtype">void</span> RightHandSide&lt;dim&gt;::value_list(<span class="keyword">const</span> std::vector&lt;Point&lt;dim&gt;&gt;&amp; points,</div>
+<div class="line">                                    std::vector&lt;double&gt;&amp; values,</div>
 <div class="line">                                    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component)<span class="keyword"> const</span></div>
 <div class="line"><span class="keyword"></span>{</div>
 <div class="line">    Assert(values.size() == points.size(),</div>
@@ -287,17 +287,17 @@ $(function() {
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">    BoundaryValues() : Function&lt;dim&gt;() {}</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">double</span> value(<span class="keyword">const</span> Point&lt;dim&gt; &amp;p,</div>
+<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">double</span> value(<span class="keyword">const</span> Point&lt;dim&gt;&amp; p,</div>
 <div class="line">                         <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component = 0) <span class="keyword">const</span>;</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span> value_list(<span class="keyword">const</span> std::vector&lt;Point&lt;dim&gt;&gt; &amp;points,</div>
-<div class="line">                            std::vector&lt;double&gt; &amp;values,</div>
+<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span> value_list(<span class="keyword">const</span> std::vector&lt;Point&lt;dim&gt;&gt;&amp; points,</div>
+<div class="line">                            std::vector&lt;double&gt;&amp; values,</div>
 <div class="line">                            <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component = 0) <span class="keyword">const</span>;</div>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
-<div class="line"><span class="keywordtype">double</span> BoundaryValues&lt;dim&gt;::value(<span class="keyword">const</span> Point&lt;dim&gt; &amp;p,</div>
+<div class="line"><span class="keywordtype">double</span> BoundaryValues&lt;dim&gt;::value(<span class="keyword">const</span> Point&lt;dim&gt;&amp; p,</div>
 <div class="line">                                  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component)<span class="keyword"> const</span></div>
 <div class="line"><span class="keyword"></span>{</div>
 <div class="line">    (void)component;</div>
@@ -311,8 +311,8 @@ $(function() {
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
-<div class="line"><span class="keywordtype">void</span> BoundaryValues&lt;dim&gt;::value_list(<span class="keyword">const</span> std::vector&lt;Point&lt;dim&gt;&gt; &amp;points,</div>
-<div class="line">                                     std::vector&lt;double&gt; &amp;values,</div>
+<div class="line"><span class="keywordtype">void</span> BoundaryValues&lt;dim&gt;::value_list(<span class="keyword">const</span> std::vector&lt;Point&lt;dim&gt;&gt;&amp; points,</div>
+<div class="line">                                     std::vector&lt;double&gt;&amp; values,</div>
 <div class="line">                                     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component)<span class="keyword"> const</span></div>
 <div class="line"><span class="keyword"></span>{</div>
 <div class="line">    Assert(values.size() == points.size(),</div>
@@ -331,9 +331,9 @@ $(function() {
 <div class="fragment"><div class="line"><span class="keyword">class </span>GradientEstimation {</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">    <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
-<div class="line">    <span class="keyword">static</span> <span class="keywordtype">void</span> estimate(<span class="keyword">const</span> DoFHandler&lt;dim&gt; &amp;dof,</div>
-<div class="line">                         <span class="keyword">const</span> Vector&lt;double&gt; &amp;solution,</div>
-<div class="line">                         Vector&lt;float&gt; &amp;error_per_cell);</div>
+<div class="line">    <span class="keyword">static</span> <span class="keywordtype">void</span> estimate(<span class="keyword">const</span> DoFHandler&lt;dim&gt;&amp; dof,</div>
+<div class="line">                         <span class="keyword">const</span> Vector&lt;double&gt;&amp; solution,</div>
+<div class="line">                         Vector&lt;float&gt;&amp; error_per_cell);</div>
 <div class="line"> </div>
 <div class="line">    DeclException2(ExcInvalidVectorLength, <span class="keywordtype">int</span>, <span class="keywordtype">int</span>,</div>
 <div class="line">                   &lt;&lt; <span class="stringliteral">&quot;Vector has length &quot;</span> &lt;&lt; arg1 &lt;&lt; <span class="stringliteral">&quot;, but should have &quot;</span></div>
@@ -343,23 +343,23 @@ $(function() {
 <div class="line"><span class="keyword">private</span>:</div>
 <div class="line">    <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">    <span class="keyword">struct </span>EstimateScratchData {</div>
-<div class="line">        EstimateScratchData(<span class="keyword">const</span> FiniteElement&lt;dim&gt; &amp;fe,</div>
-<div class="line">                            <span class="keyword">const</span> Vector&lt;double&gt; &amp;solution,</div>
-<div class="line">                            Vector&lt;float&gt; &amp;error_per_cell);</div>
-<div class="line">        EstimateScratchData(<span class="keyword">const</span> EstimateScratchData &amp;data);</div>
+<div class="line">        EstimateScratchData(<span class="keyword">const</span> FiniteElement&lt;dim&gt;&amp; fe,</div>
+<div class="line">                            <span class="keyword">const</span> Vector&lt;double&gt;&amp; solution,</div>
+<div class="line">                            Vector&lt;float&gt;&amp; error_per_cell);</div>
+<div class="line">        EstimateScratchData(<span class="keyword">const</span> EstimateScratchData&amp; data);</div>
 <div class="line"> </div>
 <div class="line">        FEValues&lt;dim&gt; fe_midpoint_value;</div>
-<div class="line">        <span class="keyword">const</span> Vector&lt;double&gt; &amp;solution;</div>
-<div class="line">        Vector&lt;float&gt; &amp;error_per_cell;</div>
+<div class="line">        <span class="keyword">const</span> Vector&lt;double&gt;&amp; solution;</div>
+<div class="line">        Vector&lt;float&gt;&amp; error_per_cell;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">struct </span>EstimateCopyData {};</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">    <span class="keyword">static</span> <span class="keywordtype">void</span> estimate_cell(</div>
-<div class="line">        <span class="keyword">const</span> <span class="keyword">typename</span> DoFHandler&lt;dim&gt;::active_cell_iterator &amp;cell,</div>
-<div class="line">        EstimateScratchData&lt;dim&gt; &amp;scratch_data,</div>
-<div class="line">        <span class="keyword">const</span> EstimateCopyData &amp;copy_data);</div>
+<div class="line">        <span class="keyword">const</span> <span class="keyword">typename</span> DoFHandler&lt;dim&gt;::active_cell_iterator&amp; cell,</div>
+<div class="line">        EstimateScratchData&lt;dim&gt;&amp; scratch_data,</div>
+<div class="line">        <span class="keyword">const</span> EstimateCopyData&amp; copy_data);</div>
 <div class="line">};</div>
 </div><!-- fragment --><p><a class="anchor" id="AdvectionProblemclassimplementation"></a> </p><h3>AdvectionProblem class implementation</h3>
 <p>Now for the implementation of the main class. Constructor, destructor and the function <code>setup_system</code> follow the same pattern that was used previously, so we need not comment on these three function:</p>
@@ -410,7 +410,7 @@ $(function() {
 </div><!-- fragment --><p>As already mentioned above, we need to have scratch objects for the parallel computation of local contributions. These objects contain FEValues and FEFaceValues objects, and so we will need to have constructors and copy constructors that allow us to create them. In initializing them, note first that we use bilinear elements, soGauss formulae with two points in each space direction are sufficient. For the cell terms we need the values and gradients of the shape functions, the quadrature points in order to determine the source density and the advection field at a given point, and the weights of the quadrature points times the determinant of the Jacobian at these points. In contrast, for the boundary integrals, we don't need the gradients, but rather the normal vectors to the cells. This determines which update flags we will have to pass to the constructors of the members of the class:</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">AdvectionProblem&lt;dim&gt;::AssemblyScratchData::AssemblyScratchData(</div>
-<div class="line">    <span class="keyword">const</span> FiniteElement&lt;dim&gt; &amp;fe)</div>
+<div class="line">    <span class="keyword">const</span> FiniteElement&lt;dim&gt;&amp; fe)</div>
 <div class="line">    : fe_values(fe, QGauss&lt;dim&gt;(2),</div>
 <div class="line">                update_values | update_gradients | update_quadrature_points |</div>
 <div class="line">                    update_JxW_values),</div>
@@ -422,7 +422,7 @@ $(function() {
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">AdvectionProblem&lt;dim&gt;::AssemblyScratchData::AssemblyScratchData(</div>
-<div class="line">    <span class="keyword">const</span> AssemblyScratchData &amp;scratch_data)</div>
+<div class="line">    <span class="keyword">const</span> AssemblyScratchData&amp; scratch_data)</div>
 <div class="line">    : fe_values(scratch_data.fe_values.get_fe(),</div>
 <div class="line">                scratch_data.fe_values.get_quadrature(),</div>
 <div class="line">                update_values | update_gradients | update_quadrature_points |</div>
@@ -437,8 +437,8 @@ $(function() {
 <p>This begs the question of whether there are other objects we create in this function whose creation is expensive compared to its use. Indeed, at the top of the function, we declare all sorts of objects. The <code>AdvectionField</code>, <code>RightHandSide</code> and <code>BoundaryValues</code> do not cost much to create, so there is no harm here. However, allocating memory in creating the <code>rhs_values</code> and similar variables below typically costs a significant amount of time, compared to just accessing the (temporary) values we store in them. Consequently, these would be candidates for moving into the <code>AssemblyScratchData</code> class. We will leave this as an exercise.</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> AdvectionProblem&lt;dim&gt;::local_assemble_system(</div>
-<div class="line">    <span class="keyword">const</span> <span class="keyword">typename</span> DoFHandler&lt;dim&gt;::active_cell_iterator &amp;cell,</div>
-<div class="line">    AssemblyScratchData &amp;scratch_data, AssemblyCopyData &amp;copy_data)</div>
+<div class="line">    <span class="keyword">const</span> <span class="keyword">typename</span> DoFHandler&lt;dim&gt;::active_cell_iterator&amp; cell,</div>
+<div class="line">    AssemblyScratchData&amp; scratch_data, AssemblyCopyData&amp; copy_data)</div>
 <div class="line">{</div>
 </div><!-- fragment --><p>First of all, we will need some objects that describe boundary values, right hand side function and the advection field. As we will only perform actions on these objects that do not change them, we declare them as constant, which can enable the compiler in some cases to perform additional optimizations.</p>
 <div class="fragment"><div class="line"><span class="keyword">const</span> AdvectionField&lt;dim&gt; advection_field;</div>
@@ -535,7 +535,7 @@ $(function() {
 </div><!-- fragment --><p>The second function we needed to write was the one that copies the local contributions the previous function has computed and put into the copy data object, into the global matrix and right hand side vector objects. This is essentially what we always had as the last block of code when assembling something on every cell. The following should therefore be pretty obvious:</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> AdvectionProblem&lt;dim&gt;::copy_local_to_global(</div>
-<div class="line">    <span class="keyword">const</span> AssemblyCopyData &amp;copy_data)</div>
+<div class="line">    <span class="keyword">const</span> AssemblyCopyData&amp; copy_data)</div>
 <div class="line">{</div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; copy_data.local_dof_indices.size(); ++i) {</div>
 <div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; copy_data.local_dof_indices.size(); ++j)</div>
@@ -554,25 +554,25 @@ $(function() {
 <div class="fragment"><div class="line">Assert(system_matrix.m() == system_matrix.n(), ExcNotQuadratic());</div>
 <div class="line"><span class="keyword">auto</span> num_rows = system_matrix.m();</div>
 </div><!-- fragment --><p>Make a copy of the rhs to use with Ginkgo.</p>
-<div class="fragment"><div class="line">std::vector&lt;double&gt; rhs(num_rows);</div>
-<div class="line">std::copy(system_rhs.begin(), system_rhs.begin() + num_rows, rhs.begin());</div>
+<div class="fragment"><div class="line">std::vector&lt;double&gt; <a class="code" href="namespacegko_1_1solver.html#a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e">rhs</a>(num_rows);</div>
+<div class="line">std::copy(system_rhs.begin(), system_rhs.begin() + num_rows, <a class="code" href="namespacegko_1_1solver.html#a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e">rhs</a>.begin());</div>
 </div><!-- fragment --><p>Ginkgo setup Some shortcuts: A vector is a Dense matrix with co-dimension 1. The matrix is setup in CSR. But various formats can be used. Look at Ginkgo's documentation.</p>
 <div class="fragment"><div class="line"><span class="keyword">using</span> vec = <a class="code" href="classgko_1_1matrix_1_1Dense.html">gko::matrix::Dense&lt;&gt;</a>;</div>
 <div class="line"><span class="keyword">using</span> mtx = <a class="code" href="classgko_1_1matrix_1_1Csr.html">gko::matrix::Csr&lt;&gt;</a>;</div>
 <div class="line"><span class="keyword">using</span> bicgstab = <a class="code" href="classgko_1_1solver_1_1Bicgstab.html">gko::solver::Bicgstab&lt;&gt;</a>;</div>
 <div class="line"><span class="keyword">using</span> bj = <a class="code" href="classgko_1_1preconditioner_1_1Jacobi.html">gko::preconditioner::Jacobi&lt;&gt;</a>;</div>
-<div class="line"><span class="keyword">using</span> val_array = <a class="code" href="classgko_1_1Array.html">gko::Array&lt;double&gt;</a>;</div>
+<div class="line"><span class="keyword">using</span> val_array = <a class="code" href="classgko_1_1array.html">gko::array&lt;double&gt;</a>;</div>
 </div><!-- fragment --><p>Where the code is to be executed. Can be changed to <code>omp</code> or <code>cuda</code> to run on multiple threads or on gpu's</p>
 <div class="fragment"><div class="line">std::shared_ptr&lt;gko::Executor&gt; exec = gko::ReferenceExecutor::create();</div>
 </div><!-- fragment --><p>Setup Ginkgo's data structures</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> b = vec::create(exec, <a class="code" href="structgko_1_1dim.html">gko::dim&lt;2&gt;</a>(num_rows, 1),</div>
-<div class="line">                     val_array::view(exec, num_rows, rhs.data()), 1);</div>
+<div class="line">                     val_array::view(exec, num_rows, <a class="code" href="namespacegko_1_1solver.html#a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e">rhs</a>.data()), 1);</div>
 <div class="line"><span class="keyword">auto</span> x = vec::create(exec, <a class="code" href="structgko_1_1dim.html">gko::dim&lt;2&gt;</a>(num_rows, 1));</div>
 <div class="line"><span class="keyword">auto</span> A = mtx::create(exec, <a class="code" href="structgko_1_1dim.html">gko::dim&lt;2&gt;</a>(num_rows),</div>
 <div class="line">                     system_matrix.n_nonzero_elements());</div>
-<div class="line">mtx::value_type *values = A-&gt;get_values();</div>
-<div class="line">mtx::index_type *row_ptr = A-&gt;get_row_ptrs();</div>
-<div class="line">mtx::index_type *col_idx = A-&gt;get_col_idxs();</div>
+<div class="line">mtx::value_type* values = A-&gt;get_values();</div>
+<div class="line">mtx::index_type* row_ptr = A-&gt;get_row_ptrs();</div>
+<div class="line">mtx::index_type* col_idx = A-&gt;get_col_idxs();</div>
 </div><!-- fragment --><p>Convert to standard CSR format As deal.ii does not expose its system matrix pointers, we construct them individually.</p>
 <div class="fragment"><div class="line">row_ptr[0] = 0;</div>
 <div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span> row = 1; row &lt;= num_rows; ++row) {</div>
@@ -604,7 +604,7 @@ $(function() {
 <div class="line">        .on(exec);</div>
 <div class="line"><span class="keyword">auto</span> solver = solver_gen-&gt;generate(<a class="code" href="namespacegko.html#acbd3fd6d07e498892881e8e2ab0b4167">gko::give</a>(A));</div>
 </div><!-- fragment --><p>Solve system</p>
-<div class="fragment"><div class="line">solver-&gt;<a class="code" href="classgko_1_1LinOp.html#a0449b2fc705d2f970855af23b5e2788e">apply</a>(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">gko::lend</a>(b), <a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">gko::lend</a>(x));</div>
+<div class="fragment"><div class="line">solver-&gt;<a class="code" href="classgko_1_1LinOp.html#a0449b2fc705d2f970855af23b5e2788e">apply</a>(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(x));</div>
 </div><!-- fragment --><p>Copy the solution vector back to deal.ii's data structures.</p>
 <div class="fragment"><div class="line">std::copy(x-&gt;get_values(), x-&gt;get_values() + num_rows, solution.begin());</div>
 <div class="line"> </div>
@@ -619,7 +619,7 @@ $(function() {
 <div class="line"> bicgstab.solve (system_matrix, solution, system_rhs,</div>
 <div class="line">                 preconditioner);</div>
 <div class="line">******************************************************* /</div>
-</div><!-- fragment --><p>Give the solution back to deall.ii</p>
+</div><!-- fragment --><p>Distribute the possible hanging nodes constraints</p>
 <div class="fragment"><div class="line">    hanging_node_constraints.distribute(solution);</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>The following function refines the grid according to the quantity described in the introduction. The respective computations are made in the class <code>GradientEstimation</code>. The only difference to previous examples is that we refine a little more aggressively (0.5 instead of 0.3 of the number of cells).</p>
@@ -660,8 +660,8 @@ $(function() {
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> AdvectionProblem&lt;dim&gt;::run()</div>
 <div class="line">{</div>
-<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> cycle = 0; cycle &lt; 6; ++cycle) {</div>
-<div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;Cycle &quot;</span> &lt;&lt; cycle &lt;&lt; <span class="charliteral">&#39;:&#39;</span> &lt;&lt; std::endl;</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> cycle = 0; <a class="code" href="namespacegko_1_1solver_1_1multigrid.html#a4f89fc8a003f879d4ff2f482c2fbab68">cycle</a> &lt; 6; ++<a class="code" href="namespacegko_1_1solver_1_1multigrid.html#a4f89fc8a003f879d4ff2f482c2fbab68">cycle</a>) {</div>
+<div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;Cycle &quot;</span> &lt;&lt; <a class="code" href="namespacegko_1_1solver_1_1multigrid.html#a4f89fc8a003f879d4ff2f482c2fbab68">cycle</a> &lt;&lt; <span class="charliteral">&#39;:&#39;</span> &lt;&lt; std::endl;</div>
 <div class="line"> </div>
 <div class="line">        <span class="keywordflow">if</span> (cycle == 0) {</div>
 <div class="line">            GridGenerator::hyper_cube(triangulation, -1, 1);</div>
@@ -688,8 +688,8 @@ $(function() {
 <p>Now for the implementation of the <code>GradientEstimation</code> class. Let us start by defining constructors for the <code>EstimateScratchData</code> class used by the <code>estimate_cell()</code> function:</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">GradientEstimation::EstimateScratchData&lt;dim&gt;::EstimateScratchData(</div>
-<div class="line">    <span class="keyword">const</span> FiniteElement&lt;dim&gt; &amp;fe, <span class="keyword">const</span> Vector&lt;double&gt; &amp;solution,</div>
-<div class="line">    Vector&lt;float&gt; &amp;error_per_cell)</div>
+<div class="line">    <span class="keyword">const</span> FiniteElement&lt;dim&gt;&amp; fe, <span class="keyword">const</span> Vector&lt;double&gt;&amp; solution,</div>
+<div class="line">    Vector&lt;float&gt;&amp; error_per_cell)</div>
 <div class="line">    : fe_midpoint_value(fe, QMidpoint&lt;dim&gt;(),</div>
 <div class="line">                        update_values | update_quadrature_points),</div>
 <div class="line">      solution(solution),</div>
@@ -699,7 +699,7 @@ $(function() {
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">GradientEstimation::EstimateScratchData&lt;dim&gt;::EstimateScratchData(</div>
-<div class="line">    <span class="keyword">const</span> EstimateScratchData &amp;scratch_data)</div>
+<div class="line">    <span class="keyword">const</span> EstimateScratchData&amp; scratch_data)</div>
 <div class="line">    : fe_midpoint_value(scratch_data.fe_midpoint_value.get_fe(),</div>
 <div class="line">                        scratch_data.fe_midpoint_value.get_quadrature(),</div>
 <div class="line">                        update_values | update_quadrature_points),</div>
@@ -709,9 +709,9 @@ $(function() {
 </div><!-- fragment --><p>Next for the implementation of the <code>GradientEstimation</code> class. The first function does not much except for delegating work to the other function, but there is a bit of setup at the top.</p>
 <p>Before starting with the work, we check that the vector into which the results are written has the right size. Programming mistakes in which one forgets to size arguments correctly at the calling site are quite common. Because the resulting damage from not catching such errors is often subtle (e.g., corruption of data somewhere in memory, or non-reproducible results), it is well worth the effort to check for such things.</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
-<div class="line"><span class="keywordtype">void</span> GradientEstimation::estimate(<span class="keyword">const</span> DoFHandler&lt;dim&gt; &amp;dof_handler,</div>
-<div class="line">                                  <span class="keyword">const</span> Vector&lt;double&gt; &amp;solution,</div>
-<div class="line">                                  Vector&lt;float&gt; &amp;error_per_cell)</div>
+<div class="line"><span class="keywordtype">void</span> GradientEstimation::estimate(<span class="keyword">const</span> DoFHandler&lt;dim&gt;&amp; dof_handler,</div>
+<div class="line">                                  <span class="keyword">const</span> Vector&lt;double&gt;&amp; solution,</div>
+<div class="line">                                  Vector&lt;float&gt;&amp; error_per_cell)</div>
 <div class="line">{</div>
 <div class="line">    Assert(error_per_cell.size() ==</div>
 <div class="line">               dof_handler.get_triangulation().n_active_cells(),</div>
@@ -721,7 +721,7 @@ $(function() {
 <div class="line"> </div>
 <div class="line">    WorkStream::run(dof_handler.begin_active(), dof_handler.end(),</div>
 <div class="line">                    &amp;GradientEstimation::template estimate_cell&lt;dim&gt;,</div>
-<div class="line">                    std::function&lt;void(const EstimateCopyData &amp;)&gt;(),</div>
+<div class="line">                    std::function&lt;void(const EstimateCopyData&amp;)&gt;(),</div>
 <div class="line">                    EstimateScratchData&lt;dim&gt;(dof_handler.get_fe(), solution,</div>
 <div class="line">                                             error_per_cell),</div>
 <div class="line">                    EstimateCopyData());</div>
@@ -738,8 +738,8 @@ $(function() {
 <p>Now for the details:</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> GradientEstimation::estimate_cell(</div>
-<div class="line">    <span class="keyword">const</span> <span class="keyword">typename</span> DoFHandler&lt;dim&gt;::active_cell_iterator &amp;cell,</div>
-<div class="line">    EstimateScratchData&lt;dim&gt; &amp;scratch_data, <span class="keyword">const</span> EstimateCopyData &amp;)</div>
+<div class="line">    <span class="keyword">const</span> <span class="keyword">typename</span> DoFHandler&lt;dim&gt;::active_cell_iterator&amp; cell,</div>
+<div class="line">    EstimateScratchData&lt;dim&gt;&amp; scratch_data, <span class="keyword">const</span> EstimateCopyData&amp;)</div>
 <div class="line">{</div>
 </div><!-- fragment --><p>We need space for the tensor <code>Y</code>, which is the sum of outer products of the y-vectors.</p>
 <div class="fragment"><div class="line">Tensor&lt;2, dim&gt; Y;</div>
@@ -848,7 +848,7 @@ $(function() {
 <div class="line"> </div>
 <div class="line">        Step9::AdvectionProblem&lt;2&gt; advection_problem_2d;</div>
 <div class="line">        advection_problem_2d.run();</div>
-<div class="line">    } <span class="keywordflow">catch</span> (std::exception &amp;exc) {</div>
+<div class="line">    } <span class="keywordflow">catch</span> (std::exception&amp; exc) {</div>
 <div class="line">        std::cerr &lt;&lt; std::endl</div>
 <div class="line">                  &lt;&lt; std::endl</div>
 <div class="line">                  &lt;&lt; <span class="stringliteral">&quot;----------------------------------------------------&quot;</span></div>
@@ -959,8 +959,8 @@ $(function() {
 <div class="line">    <span class="keywordtype">void</span> setup_system();</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">struct </span>AssemblyScratchData {</div>
-<div class="line">        AssemblyScratchData(<span class="keyword">const</span> FiniteElement&lt;dim&gt; &amp;fe);</div>
-<div class="line">        AssemblyScratchData(<span class="keyword">const</span> AssemblyScratchData &amp;scratch_data);</div>
+<div class="line">        AssemblyScratchData(<span class="keyword">const</span> FiniteElement&lt;dim&gt;&amp; fe);</div>
+<div class="line">        AssemblyScratchData(<span class="keyword">const</span> AssemblyScratchData&amp; scratch_data);</div>
 <div class="line"> </div>
 <div class="line">        FEValues&lt;dim&gt; fe_values;</div>
 <div class="line">        FEFaceValues&lt;dim&gt; fe_face_values;</div>
@@ -974,9 +974,9 @@ $(function() {
 <div class="line"> </div>
 <div class="line">    <span class="keywordtype">void</span> assemble_system();</div>
 <div class="line">    <span class="keywordtype">void</span> local_assemble_system(</div>
-<div class="line">        <span class="keyword">const</span> <span class="keyword">typename</span> DoFHandler&lt;dim&gt;::active_cell_iterator &amp;cell,</div>
-<div class="line">        AssemblyScratchData &amp;scratch, AssemblyCopyData &amp;copy_data);</div>
-<div class="line">    <span class="keywordtype">void</span> copy_local_to_global(<span class="keyword">const</span> AssemblyCopyData &amp;copy_data);</div>
+<div class="line">        <span class="keyword">const</span> <span class="keyword">typename</span> DoFHandler&lt;dim&gt;::active_cell_iterator&amp; cell,</div>
+<div class="line">        AssemblyScratchData&amp; scratch, AssemblyCopyData&amp; copy_data);</div>
+<div class="line">    <span class="keywordtype">void</span> copy_local_to_global(<span class="keyword">const</span> AssemblyCopyData&amp; copy_data);</div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordtype">void</span> solve();</div>
@@ -1004,10 +1004,10 @@ $(function() {
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">    AdvectionField() : TensorFunction&lt;1, dim&gt;() {}</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">virtual</span> Tensor&lt;1, dim&gt; value(<span class="keyword">const</span> Point&lt;dim&gt; &amp;p) <span class="keyword">const</span>;</div>
+<div class="line">    <span class="keyword">virtual</span> Tensor&lt;1, dim&gt; value(<span class="keyword">const</span> Point&lt;dim&gt;&amp; p) <span class="keyword">const</span>;</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span> value_list(<span class="keyword">const</span> std::vector&lt;Point&lt;dim&gt;&gt; &amp;points,</div>
-<div class="line">                            std::vector&lt;Tensor&lt;1, dim&gt;&gt; &amp;values) <span class="keyword">const</span>;</div>
+<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span> value_list(<span class="keyword">const</span> std::vector&lt;Point&lt;dim&gt;&gt;&amp; points,</div>
+<div class="line">                            std::vector&lt;Tensor&lt;1, dim&gt;&gt;&amp; values) <span class="keyword">const</span>;</div>
 <div class="line"> </div>
 <div class="line">    DeclException2(ExcDimensionMismatch, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>,</div>
 <div class="line">                   &lt;&lt; <span class="stringliteral">&quot;The vector has size &quot;</span> &lt;&lt; arg1 &lt;&lt; <span class="stringliteral">&quot; but should have &quot;</span></div>
@@ -1016,7 +1016,7 @@ $(function() {
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
-<div class="line">Tensor&lt;1, dim&gt; AdvectionField&lt;dim&gt;::value(<span class="keyword">const</span> Point&lt;dim&gt; &amp;p)<span class="keyword"> const</span></div>
+<div class="line">Tensor&lt;1, dim&gt; AdvectionField&lt;dim&gt;::value(<span class="keyword">const</span> Point&lt;dim&gt;&amp; p)<span class="keyword"> const</span></div>
 <div class="line"><span class="keyword"></span>{</div>
 <div class="line">    Point&lt;dim&gt; value;</div>
 <div class="line">    value[0] = 2;</div>
@@ -1028,8 +1028,8 @@ $(function() {
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
-<div class="line"><span class="keywordtype">void</span> AdvectionField&lt;dim&gt;::value_list(<span class="keyword">const</span> std::vector&lt;Point&lt;dim&gt;&gt; &amp;points,</div>
-<div class="line">                                     std::vector&lt;Tensor&lt;1, dim&gt;&gt; &amp;values)<span class="keyword"> const</span></div>
+<div class="line"><span class="keywordtype">void</span> AdvectionField&lt;dim&gt;::value_list(<span class="keyword">const</span> std::vector&lt;Point&lt;dim&gt;&gt;&amp; points,</div>
+<div class="line">                                     std::vector&lt;Tensor&lt;1, dim&gt;&gt;&amp; values)<span class="keyword"> const</span></div>
 <div class="line"><span class="keyword"></span>{</div>
 <div class="line">    Assert(values.size() == points.size(),</div>
 <div class="line">           ExcDimensionMismatch(values.size(), points.size()));</div>
@@ -1044,11 +1044,11 @@ $(function() {
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">    RightHandSide() : Function&lt;dim&gt;() {}</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">double</span> value(<span class="keyword">const</span> Point&lt;dim&gt; &amp;p,</div>
+<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">double</span> value(<span class="keyword">const</span> Point&lt;dim&gt;&amp; p,</div>
 <div class="line">                         <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component = 0) <span class="keyword">const</span>;</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span> value_list(<span class="keyword">const</span> std::vector&lt;Point&lt;dim&gt;&gt; &amp;points,</div>
-<div class="line">                            std::vector&lt;double&gt; &amp;values,</div>
+<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span> value_list(<span class="keyword">const</span> std::vector&lt;Point&lt;dim&gt;&gt;&amp; points,</div>
+<div class="line">                            std::vector&lt;double&gt;&amp; values,</div>
 <div class="line">                            <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component = 0) <span class="keyword">const</span>;</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">private</span>:</div>
@@ -1067,7 +1067,7 @@ $(function() {
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
-<div class="line"><span class="keywordtype">double</span> RightHandSide&lt;dim&gt;::value(<span class="keyword">const</span> Point&lt;dim&gt; &amp;p,</div>
+<div class="line"><span class="keywordtype">double</span> RightHandSide&lt;dim&gt;::value(<span class="keyword">const</span> Point&lt;dim&gt;&amp; p,</div>
 <div class="line">                                 <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component)<span class="keyword"> const</span></div>
 <div class="line"><span class="keyword"></span>{</div>
 <div class="line">    (void)component;</div>
@@ -1080,8 +1080,8 @@ $(function() {
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
-<div class="line"><span class="keywordtype">void</span> RightHandSide&lt;dim&gt;::value_list(<span class="keyword">const</span> std::vector&lt;Point&lt;dim&gt;&gt; &amp;points,</div>
-<div class="line">                                    std::vector&lt;double&gt; &amp;values,</div>
+<div class="line"><span class="keywordtype">void</span> RightHandSide&lt;dim&gt;::value_list(<span class="keyword">const</span> std::vector&lt;Point&lt;dim&gt;&gt;&amp; points,</div>
+<div class="line">                                    std::vector&lt;double&gt;&amp; values,</div>
 <div class="line">                                    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component)<span class="keyword"> const</span></div>
 <div class="line"><span class="keyword"></span>{</div>
 <div class="line">    Assert(values.size() == points.size(),</div>
@@ -1097,17 +1097,17 @@ $(function() {
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">    BoundaryValues() : Function&lt;dim&gt;() {}</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">double</span> value(<span class="keyword">const</span> Point&lt;dim&gt; &amp;p,</div>
+<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">double</span> value(<span class="keyword">const</span> Point&lt;dim&gt;&amp; p,</div>
 <div class="line">                         <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component = 0) <span class="keyword">const</span>;</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span> value_list(<span class="keyword">const</span> std::vector&lt;Point&lt;dim&gt;&gt; &amp;points,</div>
-<div class="line">                            std::vector&lt;double&gt; &amp;values,</div>
+<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span> value_list(<span class="keyword">const</span> std::vector&lt;Point&lt;dim&gt;&gt;&amp; points,</div>
+<div class="line">                            std::vector&lt;double&gt;&amp; values,</div>
 <div class="line">                            <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component = 0) <span class="keyword">const</span>;</div>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
-<div class="line"><span class="keywordtype">double</span> BoundaryValues&lt;dim&gt;::value(<span class="keyword">const</span> Point&lt;dim&gt; &amp;p,</div>
+<div class="line"><span class="keywordtype">double</span> BoundaryValues&lt;dim&gt;::value(<span class="keyword">const</span> Point&lt;dim&gt;&amp; p,</div>
 <div class="line">                                  <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component)<span class="keyword"> const</span></div>
 <div class="line"><span class="keyword"></span>{</div>
 <div class="line">    (void)component;</div>
@@ -1121,8 +1121,8 @@ $(function() {
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
-<div class="line"><span class="keywordtype">void</span> BoundaryValues&lt;dim&gt;::value_list(<span class="keyword">const</span> std::vector&lt;Point&lt;dim&gt;&gt; &amp;points,</div>
-<div class="line">                                     std::vector&lt;double&gt; &amp;values,</div>
+<div class="line"><span class="keywordtype">void</span> BoundaryValues&lt;dim&gt;::value_list(<span class="keyword">const</span> std::vector&lt;Point&lt;dim&gt;&gt;&amp; points,</div>
+<div class="line">                                     std::vector&lt;double&gt;&amp; values,</div>
 <div class="line">                                     <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> component)<span class="keyword"> const</span></div>
 <div class="line"><span class="keyword"></span>{</div>
 <div class="line">    Assert(values.size() == points.size(),</div>
@@ -1137,9 +1137,9 @@ $(function() {
 <div class="line"><span class="keyword">class </span>GradientEstimation {</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">    <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
-<div class="line">    <span class="keyword">static</span> <span class="keywordtype">void</span> estimate(<span class="keyword">const</span> DoFHandler&lt;dim&gt; &amp;dof,</div>
-<div class="line">                         <span class="keyword">const</span> Vector&lt;double&gt; &amp;solution,</div>
-<div class="line">                         Vector&lt;float&gt; &amp;error_per_cell);</div>
+<div class="line">    <span class="keyword">static</span> <span class="keywordtype">void</span> estimate(<span class="keyword">const</span> DoFHandler&lt;dim&gt;&amp; dof,</div>
+<div class="line">                         <span class="keyword">const</span> Vector&lt;double&gt;&amp; solution,</div>
+<div class="line">                         Vector&lt;float&gt;&amp; error_per_cell);</div>
 <div class="line"> </div>
 <div class="line">    DeclException2(ExcInvalidVectorLength, <span class="keywordtype">int</span>, <span class="keywordtype">int</span>,</div>
 <div class="line">                   &lt;&lt; <span class="stringliteral">&quot;Vector has length &quot;</span> &lt;&lt; arg1 &lt;&lt; <span class="stringliteral">&quot;, but should have &quot;</span></div>
@@ -1149,23 +1149,23 @@ $(function() {
 <div class="line"><span class="keyword">private</span>:</div>
 <div class="line">    <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">    <span class="keyword">struct </span>EstimateScratchData {</div>
-<div class="line">        EstimateScratchData(<span class="keyword">const</span> FiniteElement&lt;dim&gt; &amp;fe,</div>
-<div class="line">                            <span class="keyword">const</span> Vector&lt;double&gt; &amp;solution,</div>
-<div class="line">                            Vector&lt;float&gt; &amp;error_per_cell);</div>
-<div class="line">        EstimateScratchData(<span class="keyword">const</span> EstimateScratchData &amp;data);</div>
+<div class="line">        EstimateScratchData(<span class="keyword">const</span> FiniteElement&lt;dim&gt;&amp; fe,</div>
+<div class="line">                            <span class="keyword">const</span> Vector&lt;double&gt;&amp; solution,</div>
+<div class="line">                            Vector&lt;float&gt;&amp; error_per_cell);</div>
+<div class="line">        EstimateScratchData(<span class="keyword">const</span> EstimateScratchData&amp; data);</div>
 <div class="line"> </div>
 <div class="line">        FEValues&lt;dim&gt; fe_midpoint_value;</div>
-<div class="line">        <span class="keyword">const</span> Vector&lt;double&gt; &amp;solution;</div>
-<div class="line">        Vector&lt;float&gt; &amp;error_per_cell;</div>
+<div class="line">        <span class="keyword">const</span> Vector&lt;double&gt;&amp; solution;</div>
+<div class="line">        Vector&lt;float&gt;&amp; error_per_cell;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">struct </span>EstimateCopyData {};</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">    <span class="keyword">static</span> <span class="keywordtype">void</span> estimate_cell(</div>
-<div class="line">        <span class="keyword">const</span> <span class="keyword">typename</span> DoFHandler&lt;dim&gt;::active_cell_iterator &amp;cell,</div>
-<div class="line">        EstimateScratchData&lt;dim&gt; &amp;scratch_data,</div>
-<div class="line">        <span class="keyword">const</span> EstimateCopyData &amp;copy_data);</div>
+<div class="line">        <span class="keyword">const</span> <span class="keyword">typename</span> DoFHandler&lt;dim&gt;::active_cell_iterator&amp; cell,</div>
+<div class="line">        EstimateScratchData&lt;dim&gt;&amp; scratch_data,</div>
+<div class="line">        <span class="keyword">const</span> EstimateCopyData&amp; copy_data);</div>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line"> </div>
@@ -1220,7 +1220,7 @@ $(function() {
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">AdvectionProblem&lt;dim&gt;::AssemblyScratchData::AssemblyScratchData(</div>
-<div class="line">    <span class="keyword">const</span> FiniteElement&lt;dim&gt; &amp;fe)</div>
+<div class="line">    <span class="keyword">const</span> FiniteElement&lt;dim&gt;&amp; fe)</div>
 <div class="line">    : fe_values(fe, QGauss&lt;dim&gt;(2),</div>
 <div class="line">                update_values | update_gradients | update_quadrature_points |</div>
 <div class="line">                    update_JxW_values),</div>
@@ -1232,7 +1232,7 @@ $(function() {
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">AdvectionProblem&lt;dim&gt;::AssemblyScratchData::AssemblyScratchData(</div>
-<div class="line">    <span class="keyword">const</span> AssemblyScratchData &amp;scratch_data)</div>
+<div class="line">    <span class="keyword">const</span> AssemblyScratchData&amp; scratch_data)</div>
 <div class="line">    : fe_values(scratch_data.fe_values.get_fe(),</div>
 <div class="line">                scratch_data.fe_values.get_quadrature(),</div>
 <div class="line">                update_values | update_gradients | update_quadrature_points |</div>
@@ -1246,8 +1246,8 @@ $(function() {
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> AdvectionProblem&lt;dim&gt;::local_assemble_system(</div>
-<div class="line">    <span class="keyword">const</span> <span class="keyword">typename</span> DoFHandler&lt;dim&gt;::active_cell_iterator &amp;cell,</div>
-<div class="line">    AssemblyScratchData &amp;scratch_data, AssemblyCopyData &amp;copy_data)</div>
+<div class="line">    <span class="keyword">const</span> <span class="keyword">typename</span> DoFHandler&lt;dim&gt;::active_cell_iterator&amp; cell,</div>
+<div class="line">    AssemblyScratchData&amp; scratch_data, AssemblyCopyData&amp; copy_data)</div>
 <div class="line">{</div>
 <div class="line">    <span class="keyword">const</span> AdvectionField&lt;dim&gt; advection_field;</div>
 <div class="line">    <span class="keyword">const</span> RightHandSide&lt;dim&gt; right_hand_side;</div>
@@ -1344,7 +1344,7 @@ $(function() {
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> AdvectionProblem&lt;dim&gt;::copy_local_to_global(</div>
-<div class="line">    <span class="keyword">const</span> AssemblyCopyData &amp;copy_data)</div>
+<div class="line">    <span class="keyword">const</span> AssemblyCopyData&amp; copy_data)</div>
 <div class="line">{</div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; copy_data.local_dof_indices.size(); ++i) {</div>
 <div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> j = 0; j &lt; copy_data.local_dof_indices.size(); ++j)</div>
@@ -1362,25 +1362,25 @@ $(function() {
 <div class="line">    Assert(system_matrix.m() == system_matrix.n(), ExcNotQuadratic());</div>
 <div class="line">    <span class="keyword">auto</span> num_rows = system_matrix.m();</div>
 <div class="line"> </div>
-<div class="line">    std::vector&lt;double&gt; rhs(num_rows);</div>
-<div class="line">    std::copy(system_rhs.begin(), system_rhs.begin() + num_rows, rhs.begin());</div>
+<div class="line">    std::vector&lt;double&gt; <a class="code" href="namespacegko_1_1solver.html#a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e">rhs</a>(num_rows);</div>
+<div class="line">    std::copy(system_rhs.begin(), system_rhs.begin() + num_rows, <a class="code" href="namespacegko_1_1solver.html#a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e">rhs</a>.begin());</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">using</span> vec = <a class="code" href="classgko_1_1matrix_1_1Dense.html">gko::matrix::Dense&lt;&gt;</a>;</div>
 <div class="line">    <span class="keyword">using</span> mtx = <a class="code" href="classgko_1_1matrix_1_1Csr.html">gko::matrix::Csr&lt;&gt;</a>;</div>
 <div class="line">    <span class="keyword">using</span> bicgstab = <a class="code" href="classgko_1_1solver_1_1Bicgstab.html">gko::solver::Bicgstab&lt;&gt;</a>;</div>
 <div class="line">    <span class="keyword">using</span> bj = <a class="code" href="classgko_1_1preconditioner_1_1Jacobi.html">gko::preconditioner::Jacobi&lt;&gt;</a>;</div>
-<div class="line">    <span class="keyword">using</span> val_array = <a class="code" href="classgko_1_1Array.html">gko::Array&lt;double&gt;</a>;</div>
+<div class="line">    <span class="keyword">using</span> val_array = <a class="code" href="classgko_1_1array.html">gko::array&lt;double&gt;</a>;</div>
 <div class="line"> </div>
 <div class="line">    std::shared_ptr&lt;gko::Executor&gt; exec = gko::ReferenceExecutor::create();</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">auto</span> b = vec::create(exec, <a class="code" href="structgko_1_1dim.html">gko::dim&lt;2&gt;</a>(num_rows, 1),</div>
-<div class="line">                         val_array::view(exec, num_rows, rhs.data()), 1);</div>
+<div class="line">                         val_array::view(exec, num_rows, <a class="code" href="namespacegko_1_1solver.html#a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e">rhs</a>.data()), 1);</div>
 <div class="line">    <span class="keyword">auto</span> x = vec::create(exec, <a class="code" href="structgko_1_1dim.html">gko::dim&lt;2&gt;</a>(num_rows, 1));</div>
 <div class="line">    <span class="keyword">auto</span> A = mtx::create(exec, <a class="code" href="structgko_1_1dim.html">gko::dim&lt;2&gt;</a>(num_rows),</div>
 <div class="line">                         system_matrix.n_nonzero_elements());</div>
-<div class="line">    mtx::value_type *values = A-&gt;get_values();</div>
-<div class="line">    mtx::index_type *row_ptr = A-&gt;get_row_ptrs();</div>
-<div class="line">    mtx::index_type *col_idx = A-&gt;get_col_idxs();</div>
+<div class="line">    mtx::value_type* values = A-&gt;get_values();</div>
+<div class="line">    mtx::index_type* row_ptr = A-&gt;get_row_ptrs();</div>
+<div class="line">    mtx::index_type* col_idx = A-&gt;get_col_idxs();</div>
 <div class="line"> </div>
 <div class="line">    row_ptr[0] = 0;</div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keyword">auto</span> row = 1; row &lt;= num_rows; ++row) {</div>
@@ -1411,7 +1411,7 @@ $(function() {
 <div class="line">            .on(exec);</div>
 <div class="line">    <span class="keyword">auto</span> solver = solver_gen-&gt;generate(<a class="code" href="namespacegko.html#acbd3fd6d07e498892881e8e2ab0b4167">gko::give</a>(A));</div>
 <div class="line"> </div>
-<div class="line">    solver-&gt;<a class="code" href="classgko_1_1LinOp.html#a0449b2fc705d2f970855af23b5e2788e">apply</a>(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">gko::lend</a>(b), <a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">gko::lend</a>(x));</div>
+<div class="line">    solver-&gt;<a class="code" href="classgko_1_1LinOp.html#a0449b2fc705d2f970855af23b5e2788e">apply</a>(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(x));</div>
 <div class="line"> </div>
 <div class="line">    std::copy(x-&gt;get_values(), x-&gt;get_values() + num_rows, solution.begin());</div>
 <div class="line"> </div>
@@ -1470,8 +1470,8 @@ $(function() {
 <div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> AdvectionProblem&lt;dim&gt;::run()</div>
 <div class="line">{</div>
-<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> cycle = 0; cycle &lt; 6; ++cycle) {</div>
-<div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;Cycle &quot;</span> &lt;&lt; cycle &lt;&lt; <span class="charliteral">&#39;:&#39;</span> &lt;&lt; std::endl;</div>
+<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> cycle = 0; <a class="code" href="namespacegko_1_1solver_1_1multigrid.html#a4f89fc8a003f879d4ff2f482c2fbab68">cycle</a> &lt; 6; ++<a class="code" href="namespacegko_1_1solver_1_1multigrid.html#a4f89fc8a003f879d4ff2f482c2fbab68">cycle</a>) {</div>
+<div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;Cycle &quot;</span> &lt;&lt; <a class="code" href="namespacegko_1_1solver_1_1multigrid.html#a4f89fc8a003f879d4ff2f482c2fbab68">cycle</a> &lt;&lt; <span class="charliteral">&#39;:&#39;</span> &lt;&lt; std::endl;</div>
 <div class="line"> </div>
 <div class="line">        <span class="keywordflow">if</span> (cycle == 0) {</div>
 <div class="line">            GridGenerator::hyper_cube(triangulation, -1, 1);</div>
@@ -1499,8 +1499,8 @@ $(function() {
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">GradientEstimation::EstimateScratchData&lt;dim&gt;::EstimateScratchData(</div>
-<div class="line">    <span class="keyword">const</span> FiniteElement&lt;dim&gt; &amp;fe, <span class="keyword">const</span> Vector&lt;double&gt; &amp;solution,</div>
-<div class="line">    Vector&lt;float&gt; &amp;error_per_cell)</div>
+<div class="line">    <span class="keyword">const</span> FiniteElement&lt;dim&gt;&amp; fe, <span class="keyword">const</span> Vector&lt;double&gt;&amp; solution,</div>
+<div class="line">    Vector&lt;float&gt;&amp; error_per_cell)</div>
 <div class="line">    : fe_midpoint_value(fe, QMidpoint&lt;dim&gt;(),</div>
 <div class="line">                        update_values | update_quadrature_points),</div>
 <div class="line">      solution(solution),</div>
@@ -1510,7 +1510,7 @@ $(function() {
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">GradientEstimation::EstimateScratchData&lt;dim&gt;::EstimateScratchData(</div>
-<div class="line">    <span class="keyword">const</span> EstimateScratchData &amp;scratch_data)</div>
+<div class="line">    <span class="keyword">const</span> EstimateScratchData&amp; scratch_data)</div>
 <div class="line">    : fe_midpoint_value(scratch_data.fe_midpoint_value.get_fe(),</div>
 <div class="line">                        scratch_data.fe_midpoint_value.get_quadrature(),</div>
 <div class="line">                        update_values | update_quadrature_points),</div>
@@ -1520,9 +1520,9 @@ $(function() {
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
-<div class="line"><span class="keywordtype">void</span> GradientEstimation::estimate(<span class="keyword">const</span> DoFHandler&lt;dim&gt; &amp;dof_handler,</div>
-<div class="line">                                  <span class="keyword">const</span> Vector&lt;double&gt; &amp;solution,</div>
-<div class="line">                                  Vector&lt;float&gt; &amp;error_per_cell)</div>
+<div class="line"><span class="keywordtype">void</span> GradientEstimation::estimate(<span class="keyword">const</span> DoFHandler&lt;dim&gt;&amp; dof_handler,</div>
+<div class="line">                                  <span class="keyword">const</span> Vector&lt;double&gt;&amp; solution,</div>
+<div class="line">                                  Vector&lt;float&gt;&amp; error_per_cell)</div>
 <div class="line">{</div>
 <div class="line">    Assert(error_per_cell.size() ==</div>
 <div class="line">               dof_handler.get_triangulation().n_active_cells(),</div>
@@ -1532,7 +1532,7 @@ $(function() {
 <div class="line"> </div>
 <div class="line">    WorkStream::run(dof_handler.begin_active(), dof_handler.end(),</div>
 <div class="line">                    &amp;GradientEstimation::template estimate_cell&lt;dim&gt;,</div>
-<div class="line">                    std::function&lt;void(const EstimateCopyData &amp;)&gt;(),</div>
+<div class="line">                    std::function&lt;void(const EstimateCopyData&amp;)&gt;(),</div>
 <div class="line">                    EstimateScratchData&lt;dim&gt;(dof_handler.get_fe(), solution,</div>
 <div class="line">                                             error_per_cell),</div>
 <div class="line">                    EstimateCopyData());</div>
@@ -1541,8 +1541,8 @@ $(function() {
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> GradientEstimation::estimate_cell(</div>
-<div class="line">    <span class="keyword">const</span> <span class="keyword">typename</span> DoFHandler&lt;dim&gt;::active_cell_iterator &amp;cell,</div>
-<div class="line">    EstimateScratchData&lt;dim&gt; &amp;scratch_data, <span class="keyword">const</span> EstimateCopyData &amp;)</div>
+<div class="line">    <span class="keyword">const</span> <span class="keyword">typename</span> DoFHandler&lt;dim&gt;::active_cell_iterator&amp; cell,</div>
+<div class="line">    EstimateScratchData&lt;dim&gt;&amp; scratch_data, <span class="keyword">const</span> EstimateCopyData&amp;)</div>
 <div class="line">{</div>
 <div class="line">    Tensor&lt;2, dim&gt; Y;</div>
 <div class="line"> </div>
@@ -1645,7 +1645,7 @@ $(function() {
 <div class="line"> </div>
 <div class="line">        Step9::AdvectionProblem&lt;2&gt; advection_problem_2d;</div>
 <div class="line">        advection_problem_2d.run();</div>
-<div class="line">    } <span class="keywordflow">catch</span> (std::exception &amp;exc) {</div>
+<div class="line">    } <span class="keywordflow">catch</span> (std::exception&amp; exc) {</div>
 <div class="line">        std::cerr &lt;&lt; std::endl</div>
 <div class="line">                  &lt;&lt; std::endl</div>
 <div class="line">                  &lt;&lt; <span class="stringliteral">&quot;----------------------------------------------------&quot;</span></div>
@@ -1672,16 +1672,18 @@ $(function() {
 <div class="line">}</div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->
-<div class="ttc" id="aclassgko_1_1matrix_1_1Csr_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Csr.html">gko::matrix::Csr</a></div><div class="ttdoc">CSR is a matrix format which stores only the nonzero coefficients by compressing each row of the matr...</div><div class="ttdef"><b>Definition:</b> coo.hpp:51</div></div>
-<div class="ttc" id="anamespacegko_html_acbd3fd6d07e498892881e8e2ab0b4167"><div class="ttname"><a href="namespacegko.html#acbd3fd6d07e498892881e8e2ab0b4167">gko::give</a></div><div class="ttdeci">std::remove_reference&lt; OwningPointer &gt;::type &amp;&amp; give(OwningPointer &amp;&amp;p)</div><div class="ttdoc">Marks that the object pointed to by p can be given to the callee.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:231</div></div>
-<div class="ttc" id="aclassgko_1_1matrix_1_1Dense_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Dense.html">gko::matrix::Dense</a></div><div class="ttdoc">Dense is a matrix format which explicitly stores all values of the matrix.</div><div class="ttdef"><b>Definition:</b> coo.hpp:55</div></div>
-<div class="ttc" id="aclassgko_1_1solver_1_1Bicgstab_html"><div class="ttname"><a href="classgko_1_1solver_1_1Bicgstab.html">gko::solver::Bicgstab</a></div><div class="ttdoc">BiCGSTAB or the Bi-Conjugate Gradient-Stabilized is a Krylov subspace solver.</div><div class="ttdef"><b>Definition:</b> bicgstab.hpp:77</div></div>
+<div class="ttc" id="aclassgko_1_1matrix_1_1Csr_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Csr.html">gko::matrix::Csr</a></div><div class="ttdoc">CSR is a matrix format which stores only the nonzero coefficients by compressing each row of the matr...</div><div class="ttdef"><b>Definition:</b> matrix.hpp:54</div></div>
+<div class="ttc" id="anamespacegko_html_acbd3fd6d07e498892881e8e2ab0b4167"><div class="ttname"><a href="namespacegko.html#acbd3fd6d07e498892881e8e2ab0b4167">gko::give</a></div><div class="ttdeci">std::remove_reference&lt; OwningPointer &gt;::type &amp;&amp; give(OwningPointer &amp;&amp;p)</div><div class="ttdoc">Marks that the object pointed to by p can be given to the callee.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:234</div></div>
+<div class="ttc" id="aclassgko_1_1matrix_1_1Dense_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Dense.html">gko::matrix::Dense</a></div><div class="ttdoc">Dense is a matrix format which explicitly stores all values of the matrix.</div><div class="ttdef"><b>Definition:</b> dense_cache.hpp:48</div></div>
+<div class="ttc" id="aclassgko_1_1solver_1_1Bicgstab_html"><div class="ttname"><a href="classgko_1_1solver_1_1Bicgstab.html">gko::solver::Bicgstab</a></div><div class="ttdoc">BiCGSTAB or the Bi-Conjugate Gradient-Stabilized is a Krylov subspace solver.</div><div class="ttdef"><b>Definition:</b> bicgstab.hpp:78</div></div>
 <div class="ttc" id="aclassgko_1_1preconditioner_1_1Jacobi_html"><div class="ttname"><a href="classgko_1_1preconditioner_1_1Jacobi.html">gko::preconditioner::Jacobi</a></div><div class="ttdoc">A block-Jacobi preconditioner is a block-diagonal linear operator, obtained by inverting the diagonal...</div><div class="ttdef"><b>Definition:</b> jacobi.hpp:213</div></div>
-<div class="ttc" id="aclassgko_1_1stop_1_1ResidualNorm_html"><div class="ttname"><a href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm</a></div><div class="ttdoc">The ResidualNorm class is a stopping criterion which stops the iteration process when the actual resi...</div><div class="ttdef"><b>Definition:</b> residual_norm.hpp:214</div></div>
-<div class="ttc" id="anamespacegko_html_a4edc2273b5627ec552ea423b60493be3"><div class="ttname"><a href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">gko::lend</a></div><div class="ttdeci">std::enable_if&lt; detail::have_ownership_s&lt; Pointer &gt;::value, detail::pointee&lt; Pointer &gt; * &gt;::type lend(const Pointer &amp;p)</div><div class="ttdoc">Returns a non-owning (plain) pointer to the object pointed to by p.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:253</div></div>
+<div class="ttc" id="aclassgko_1_1array_html"><div class="ttname"><a href="classgko_1_1array.html">gko::array</a></div><div class="ttdoc">An array is a container which encapsulates fixed-sized arrays, stored on the Executor tied to the arr...</div><div class="ttdef"><b>Definition:</b> array.hpp:55</div></div>
+<div class="ttc" id="aclassgko_1_1stop_1_1ResidualNorm_html"><div class="ttname"><a href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm</a></div><div class="ttdoc">The ResidualNorm class is a stopping criterion which stops the iteration process when the actual resi...</div><div class="ttdef"><b>Definition:</b> residual_norm.hpp:137</div></div>
 <div class="ttc" id="astructgko_1_1dim_html"><div class="ttname"><a href="structgko_1_1dim.html">gko::dim&lt; 2 &gt;</a></div></div>
-<div class="ttc" id="aclassgko_1_1Array_html"><div class="ttname"><a href="classgko_1_1Array.html">gko::Array</a></div><div class="ttdoc">An Array is a container which encapsulates fixed-sized arrays, stored on the Executor tied to the Arr...</div><div class="ttdef"><b>Definition:</b> array.hpp:84</div></div>
-<div class="ttc" id="aclassgko_1_1LinOp_html_a0449b2fc705d2f970855af23b5e2788e"><div class="ttname"><a href="classgko_1_1LinOp.html#a0449b2fc705d2f970855af23b5e2788e">gko::LinOp::apply</a></div><div class="ttdeci">LinOp * apply(const LinOp *b, LinOp *x)</div><div class="ttdoc">Applies a linear operator to a vector (or a sequence of vectors).</div><div class="ttdef"><b>Definition:</b> lin_op.hpp:157</div></div>
+<div class="ttc" id="anamespacegko_html_a014ec51e675c425bb83908361f630450"><div class="ttname"><a href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a></div><div class="ttdeci">std::enable_if&lt; detail::have_ownership_s&lt; Pointer &gt;::value, detail::pointee&lt; Pointer &gt; * &gt;::type lend(const Pointer &amp;p)</div><div class="ttdoc">Returns a non-owning (plain) pointer to the object pointed to by p.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:256</div></div>
+<div class="ttc" id="anamespacegko_1_1solver_html_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e"><div class="ttname"><a href="namespacegko_1_1solver.html#a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e">gko::solver::initial_guess_mode::rhs</a></div><div class="ttdoc">the input is right hand side</div></div>
+<div class="ttc" id="anamespacegko_1_1solver_1_1multigrid_html_a4f89fc8a003f879d4ff2f482c2fbab68"><div class="ttname"><a href="namespacegko_1_1solver_1_1multigrid.html#a4f89fc8a003f879d4ff2f482c2fbab68">gko::solver::multigrid::cycle</a></div><div class="ttdeci">cycle</div><div class="ttdoc">cycle defines which kind of multigrid cycle can be used.</div><div class="ttdef"><b>Definition:</b> multigrid.hpp:79</div></div>
+<div class="ttc" id="aclassgko_1_1LinOp_html_a0449b2fc705d2f970855af23b5e2788e"><div class="ttname"><a href="classgko_1_1LinOp.html#a0449b2fc705d2f970855af23b5e2788e">gko::LinOp::apply</a></div><div class="ttdeci">LinOp * apply(const LinOp *b, LinOp *x)</div><div class="ttdoc">Applies a linear operator to a vector (or a sequence of vectors).</div><div class="ttdef"><b>Definition:</b> lin_op.hpp:158</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

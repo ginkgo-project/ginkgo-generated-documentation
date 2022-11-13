@@ -11,6 +11,16 @@ The \mbox{\hyperlink{classgko_1_1Composition}{Composition}} class can be used to
 
 
 
+Inheritance diagram for gko\+::Composition$<$ Value\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1Composition__inherit__graph}
+\end{center}
+\end{figure}
+
+
 Collaboration diagram for gko\+::Composition$<$ Value\+Type $>$\+:
 \nopagebreak
 \begin{figure}[H]
@@ -36,7 +46,15 @@ const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1Composition_a67a4c73162eb35f2a12e8d638787d60a}{transpose}} () const override
 \begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1Composition_ae78b03ae3a621f11f9c410cbe1c9964e}{conj\+\_\+transpose}} () const override
-\begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the conjugate transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the conjugate transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1Composition}{Composition}} \& \mbox{\hyperlink{classgko_1_1Composition_a8c6cd84c18c47ed77465aad3ab01f969}{operator=}} (const \mbox{\hyperlink{classgko_1_1Composition}{Composition}} \&)
+\begin{DoxyCompactList}\small\item\em Copy-\/assigns a \mbox{\hyperlink{classgko_1_1Composition}{Composition}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1Composition}{Composition}} \& \mbox{\hyperlink{classgko_1_1Composition_ab396a165fd7dfce59148aec66db3b3f9}{operator=}} (\mbox{\hyperlink{classgko_1_1Composition}{Composition}} \&\&)
+\begin{DoxyCompactList}\small\item\em Move-\/assigns a \mbox{\hyperlink{classgko_1_1Composition}{Composition}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1Composition_aad32bb5f4c1e90100eafa20be5c6f297}{Composition}} (const \mbox{\hyperlink{classgko_1_1Composition}{Composition}} \&)
+\begin{DoxyCompactList}\small\item\em Copy-\/constructs a \mbox{\hyperlink{classgko_1_1Composition}{Composition}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1Composition_a48b33990c9e3d5a060990b832e5d7787}{Composition}} (\mbox{\hyperlink{classgko_1_1Composition}{Composition}} \&\&)
+\begin{DoxyCompactList}\small\item\em Move-\/constructs a \mbox{\hyperlink{classgko_1_1Composition}{Composition}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
@@ -66,12 +84,39 @@ All Lin\+Ops of the \mbox{\hyperlink{classgko_1_1Composition}{Composition}} must
 \item zero if {\ttfamily op\+\_\+k} is rectangular as an initial guess.
 \end{DoxyItemize}
 
+\mbox{\hyperlink{classgko_1_1Composition}{Composition}} ensures that all Lin\+Ops passed to its constructor use the same executor, and if not, copies the operators to the executor of the first operator.
+
 
 \begin{DoxyTemplParams}{Template Parameters}
 {\em Value\+Type} & precision of input and result vectors \\
 \hline
 \end{DoxyTemplParams}
 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classgko_1_1Composition_aad32bb5f4c1e90100eafa20be5c6f297}\label{classgko_1_1Composition_aad32bb5f4c1e90100eafa20be5c6f297}} 
+\index{gko::Composition$<$ ValueType $>$@{gko::Composition$<$ ValueType $>$}!Composition@{Composition}}
+\index{Composition@{Composition}!gko::Composition$<$ ValueType $>$@{gko::Composition$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{Composition()}{Composition()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+\mbox{\hyperlink{classgko_1_1Composition}{gko\+::\+Composition}}$<$ Value\+Type $>$\+::\mbox{\hyperlink{classgko_1_1Composition}{Composition}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Composition}{Composition}}$<$ Value\+Type $>$ \&}]{ }\end{DoxyParamCaption})}
+
+
+
+Copy-\/constructs a \mbox{\hyperlink{classgko_1_1Composition}{Composition}}. 
+
+This inherits the executor of the input \mbox{\hyperlink{classgko_1_1Composition}{Composition}} and all of its operators with shared ownership. \mbox{\Hypertarget{classgko_1_1Composition_a48b33990c9e3d5a060990b832e5d7787}\label{classgko_1_1Composition_a48b33990c9e3d5a060990b832e5d7787}} 
+\index{gko::Composition$<$ ValueType $>$@{gko::Composition$<$ ValueType $>$}!Composition@{Composition}}
+\index{Composition@{Composition}!gko::Composition$<$ ValueType $>$@{gko::Composition$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{Composition()}{Composition()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+\mbox{\hyperlink{classgko_1_1Composition}{gko\+::\+Composition}}$<$ Value\+Type $>$\+::\mbox{\hyperlink{classgko_1_1Composition}{Composition}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1Composition}{Composition}}$<$ Value\+Type $>$ \&\&}]{ }\end{DoxyParamCaption})}
+
+
+
+Move-\/constructs a \mbox{\hyperlink{classgko_1_1Composition}{Composition}}. 
+
+This inherits the executor of the input \mbox{\hyperlink{classgko_1_1Composition}{Composition}} and all of its operators. The moved-\/from object is empty (0x0 \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} without operators) afterwards. 
 
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{classgko_1_1Composition_ae78b03ae3a621f11f9c410cbe1c9964e}\label{classgko_1_1Composition_ae78b03ae3a621f11f9c410cbe1c9964e}} 
@@ -106,7 +151,29 @@ Returns a list of operators of the composition.
 \begin{DoxyReturn}{Returns}
 a list of operators 
 \end{DoxyReturn}
-\mbox{\Hypertarget{classgko_1_1Composition_a67a4c73162eb35f2a12e8d638787d60a}\label{classgko_1_1Composition_a67a4c73162eb35f2a12e8d638787d60a}} 
+\mbox{\Hypertarget{classgko_1_1Composition_ab396a165fd7dfce59148aec66db3b3f9}\label{classgko_1_1Composition_ab396a165fd7dfce59148aec66db3b3f9}} 
+\index{gko::Composition$<$ ValueType $>$@{gko::Composition$<$ ValueType $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!gko::Composition$<$ ValueType $>$@{gko::Composition$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+\mbox{\hyperlink{classgko_1_1Composition}{Composition}}\& \mbox{\hyperlink{classgko_1_1Composition}{gko\+::\+Composition}}$<$ Value\+Type $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1Composition}{Composition}}$<$ Value\+Type $>$ \&\&}]{ }\end{DoxyParamCaption})}
+
+
+
+Move-\/assigns a \mbox{\hyperlink{classgko_1_1Composition}{Composition}}. 
+
+The executor is not modified, and the wrapped Lin\+Ops are only being cloned if they are on a different executor, otherwise they share ownership. The moved-\/from object is empty (0x0 \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} without operators) afterwards. \mbox{\Hypertarget{classgko_1_1Composition_a8c6cd84c18c47ed77465aad3ab01f969}\label{classgko_1_1Composition_a8c6cd84c18c47ed77465aad3ab01f969}} 
+\index{gko::Composition$<$ ValueType $>$@{gko::Composition$<$ ValueType $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!gko::Composition$<$ ValueType $>$@{gko::Composition$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+\mbox{\hyperlink{classgko_1_1Composition}{Composition}}\& \mbox{\hyperlink{classgko_1_1Composition}{gko\+::\+Composition}}$<$ Value\+Type $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Composition}{Composition}}$<$ Value\+Type $>$ \&}]{ }\end{DoxyParamCaption})}
+
+
+
+Copy-\/assigns a \mbox{\hyperlink{classgko_1_1Composition}{Composition}}. 
+
+The executor is not modified, and the wrapped Lin\+Ops are only being cloned if they are on a different executor. \mbox{\Hypertarget{classgko_1_1Composition_a67a4c73162eb35f2a12e8d638787d60a}\label{classgko_1_1Composition_a67a4c73162eb35f2a12e8d638787d60a}} 
 \index{gko::Composition$<$ ValueType $>$@{gko::Composition$<$ ValueType $>$}!transpose@{transpose}}
 \index{transpose@{transpose}!gko::Composition$<$ ValueType $>$@{gko::Composition$<$ ValueType $>$}}
 \doxysubsubsection{\texorpdfstring{transpose()}{transpose()}}

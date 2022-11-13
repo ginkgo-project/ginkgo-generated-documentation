@@ -43,7 +43,7 @@ The intention of this example is to provide a mini-\/app showing matrix assembly
 \DoxyCodeLine{}
 \DoxyCodeLine{The partial differential equation (PDE) is solved with a finite difference}
 \DoxyCodeLine{spatial discretization on an equidistant grid: For `n` grid points,}
-\DoxyCodeLine{and grid distance h = 1/n we \mbox{\hyperlink{namespacegko_a859dc47a462721d83728d91ab7fa2148}{write}}}
+\DoxyCodeLine{and grid distance h = 1/n we \mbox{\hyperlink{namespacegko_aa24837da3770b3dddf981d9bfe0d3b52}{write}}}
 \DoxyCodeLine{}
 \DoxyCodeLine{    u\_\{i,j\}\textcolor{stringliteral}{' = \(\backslash\)alpha (u\_\{i-\/1,j\} + u\_\{i+1,j\} + u\_\{i,j-\/1\} + u\_\{i,j+1\}}}
 \DoxyCodeLine{\textcolor{stringliteral}{                   -\/ 4 u\_\{i,j\}) / h\string^2}}
@@ -83,7 +83,7 @@ This function implements a simple Ginkgo-\/themed clamped color mapping for valu
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keywordtype}{void} set\_val(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *data, \textcolor{keywordtype}{double} value)}
+\DoxyCodeLine{\textcolor{keywordtype}{void} set\_val(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}* data, \textcolor{keywordtype}{double} value)}
 \DoxyCodeLine{\{}
 \end{DoxyCode}
 
@@ -132,8 +132,8 @@ Write the current frame to video output using the above color mapping
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keywordtype}{void} output\_timestep(std::pair<cv::VideoWriter, cv::Mat> \&output, \textcolor{keywordtype}{int} n,}
-\DoxyCodeLine{                     \textcolor{keyword}{const} \textcolor{keywordtype}{double} *data)}
+\DoxyCodeLine{\textcolor{keywordtype}{void} output\_timestep(std::pair<cv::VideoWriter, cv::Mat>\& output, \textcolor{keywordtype}{int} n,}
+\DoxyCodeLine{                     \textcolor{keyword}{const} \textcolor{keywordtype}{double}* data)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < n; i++) \{}
 \DoxyCodeLine{        \textcolor{keyword}{auto} row = output.second.ptr(i);}
@@ -145,7 +145,7 @@ Write the current frame to video output using the above color mapping
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[])}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{using} mtx = \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<>}};}
 \DoxyCodeLine{    \textcolor{keyword}{using} vec = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<>}};}
@@ -237,8 +237,8 @@ load heat source and initial state vectors
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{std::ifstream source\_stream(\textcolor{stringliteral}{"data/source.mtx"});}
-\DoxyCodeLine{std::ifstream initial\_stream(\textcolor{stringliteral}{"data/initial.mtx"});}
+\DoxyCodeLine{std::ifstream initial\_stream(\textcolor{stringliteral}{"data/gko\_logo\_2d.mtx"});}
+\DoxyCodeLine{std::ifstream source\_stream(\textcolor{stringliteral}{"data/gko\_text\_2d.mtx"});}
 \DoxyCodeLine{\textcolor{keyword}{auto} source = gko::read<vec>(source\_stream, exec);}
 \DoxyCodeLine{\textcolor{keyword}{auto} in\_vector = gko::read<vec>(initial\_stream, exec);}
 \end{DoxyCode}
@@ -319,8 +319,9 @@ build CG solver on stencil with incomplete Cholesky preconditioner stopping at 1
 \DoxyCodeLine{\textcolor{keyword}{auto} solver =}
 \DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{gko::solver::Cg<>::build}}()}
 \DoxyCodeLine{        .with\_preconditioner(\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{gko::preconditioner::Ic<>::build}}().on(exec))}
-\DoxyCodeLine{        .with\_criteria(\mbox{\hyperlink{classgko_1_1stop_1_1RelativeResidualNorm}{gko::stop::RelativeResidualNorm<>::build}}()}
-\DoxyCodeLine{                           .with\_tolerance(1e-\/10)}
+\DoxyCodeLine{        .with\_criteria(\mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<>::build}}()}
+\DoxyCodeLine{                           .with\_baseline(gko::stop::mode::rhs\_norm)}
+\DoxyCodeLine{                           .with\_reduction\_factor(1e-\/10)}
 \DoxyCodeLine{                           .on(exec))}
 \DoxyCodeLine{        .on(exec)}
 \DoxyCodeLine{        -\/>generate(stencil\_matrix);}
@@ -362,7 +363,7 @@ add heat source contribution
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{in\_vector-\/>add\_scaled(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(tau\_source\_scalar), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(source));}
+\DoxyCodeLine{in\_vector-\/>add\_scaled(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(tau\_source\_scalar), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(source));}
 \end{DoxyCode}
 
 
@@ -370,7 +371,7 @@ execute Euler step
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{solver-\/>\mbox{\hyperlink{classgko_1_1LinOp_a0449b2fc705d2f970855af23b5e2788e}{apply}}(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(in\_vector), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(out\_vector));}
+\DoxyCodeLine{solver-\/>\mbox{\hyperlink{classgko_1_1LinOp_a0449b2fc705d2f970855af23b5e2788e}{apply}}(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(in\_vector), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(out\_vector));}
 \end{DoxyCode}
 
 
@@ -396,7 +397,7 @@ The program will generate a video file named heat.\+mp4 and output the timestamp
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{/*******************************<GINKGO LICENSE>******************************}}
-\DoxyCodeLine{\textcolor{comment}{Copyright (c) 2017-\/2021, the Ginkgo authors}}
+\DoxyCodeLine{\textcolor{comment}{Copyright (c) 2017-\/2022, the Ginkgo authors}}
 \DoxyCodeLine{\textcolor{comment}{All rights reserved.}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{Redistribution and use in source and binary forms, with or without}}
@@ -473,7 +474,7 @@ The program will generate a video file named heat.\+mp4 and output the timestamp
 \DoxyCodeLine{\textcolor{preprocessor}{\#include <opencv2/videoio.hpp>}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordtype}{void} set\_val(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *data, \textcolor{keywordtype}{double} value)}
+\DoxyCodeLine{\textcolor{keywordtype}{void} set\_val(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}* data, \textcolor{keywordtype}{double} value)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keywordtype}{double} col\_r[] = \{255, 221, 129, 201, 249, 255\};}
 \DoxyCodeLine{    \textcolor{keywordtype}{double} col\_g[] = \{255, 220, 130, 161, 158, 204\};}
@@ -498,8 +499,8 @@ The program will generate a video file named heat.\+mp4 and output the timestamp
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordtype}{void} output\_timestep(std::pair<cv::VideoWriter, cv::Mat> \&output, \textcolor{keywordtype}{int} n,}
-\DoxyCodeLine{                     \textcolor{keyword}{const} \textcolor{keywordtype}{double} *data)}
+\DoxyCodeLine{\textcolor{keywordtype}{void} output\_timestep(std::pair<cv::VideoWriter, cv::Mat>\& output, \textcolor{keywordtype}{int} n,}
+\DoxyCodeLine{                     \textcolor{keyword}{const} \textcolor{keywordtype}{double}* data)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < n; i++) \{}
 \DoxyCodeLine{        \textcolor{keyword}{auto} row = output.second.ptr(i);}
@@ -511,7 +512,7 @@ The program will generate a video file named heat.\+mp4 and output the timestamp
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[])}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{using} mtx = \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<>}};}
 \DoxyCodeLine{    \textcolor{keyword}{using} vec = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<>}};}
@@ -528,8 +529,8 @@ The program will generate a video file named heat.\+mp4 and output the timestamp
 \DoxyCodeLine{    \textcolor{keyword}{auto} tau = 1.0 / steps\_per\_sec;}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} exec = \mbox{\hyperlink{classgko_1_1CudaExecutor_a5dcec3ca1c458382e01191b727959a81}{gko::CudaExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}());}
-\DoxyCodeLine{    std::ifstream source\_stream(\textcolor{stringliteral}{"data/source.mtx"});}
-\DoxyCodeLine{    std::ifstream initial\_stream(\textcolor{stringliteral}{"data/initial.mtx"});}
+\DoxyCodeLine{    std::ifstream initial\_stream(\textcolor{stringliteral}{"data/gko\_logo\_2d.mtx"});}
+\DoxyCodeLine{    std::ifstream source\_stream(\textcolor{stringliteral}{"data/gko\_text\_2d.mtx"});}
 \DoxyCodeLine{    \textcolor{keyword}{auto} source = gko::read<vec>(source\_stream, exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} in\_vector = gko::read<vec>(initial\_stream, exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} out\_vector = in\_vector-\/>clone();}
@@ -561,8 +562,9 @@ The program will generate a video file named heat.\+mp4 and output the timestamp
 \DoxyCodeLine{    \textcolor{keyword}{auto} solver =}
 \DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{gko::solver::Cg<>::build}}()}
 \DoxyCodeLine{            .with\_preconditioner(\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{gko::preconditioner::Ic<>::build}}().on(exec))}
-\DoxyCodeLine{            .with\_criteria(\mbox{\hyperlink{classgko_1_1stop_1_1RelativeResidualNorm}{gko::stop::RelativeResidualNorm<>::build}}()}
-\DoxyCodeLine{                               .with\_tolerance(1e-\/10)}
+\DoxyCodeLine{            .with\_criteria(\mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<>::build}}()}
+\DoxyCodeLine{                               .with\_baseline(gko::stop::mode::rhs\_norm)}
+\DoxyCodeLine{                               .with\_reduction\_factor(1e-\/10)}
 \DoxyCodeLine{                               .on(exec))}
 \DoxyCodeLine{            .on(exec)}
 \DoxyCodeLine{            -\/>generate(stencil\_matrix);}
@@ -576,8 +578,8 @@ The program will generate a video file named heat.\+mp4 and output the timestamp
 \DoxyCodeLine{                \mbox{\hyperlink{namespacegko_a2166ec09e3e8a0ef437aee9c2b97f422}{gko::make\_temporary\_clone}}(exec-\/>get\_master(), in\_vector.get())}
 \DoxyCodeLine{                    -\/>get\_const\_values());}
 \DoxyCodeLine{        \}}
-\DoxyCodeLine{        in\_vector-\/>add\_scaled(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(tau\_source\_scalar), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(source));}
-\DoxyCodeLine{        solver-\/>\mbox{\hyperlink{classgko_1_1LinOp_a0449b2fc705d2f970855af23b5e2788e}{apply}}(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(in\_vector), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{gko::lend}}(out\_vector));}
+\DoxyCodeLine{        in\_vector-\/>add\_scaled(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(tau\_source\_scalar), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(source));}
+\DoxyCodeLine{        solver-\/>\mbox{\hyperlink{classgko_1_1LinOp_a0449b2fc705d2f970855af23b5e2788e}{apply}}(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(in\_vector), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(out\_vector));}
 \DoxyCodeLine{        std::swap(in\_vector, out\_vector);}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{\}}

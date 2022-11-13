@@ -11,6 +11,16 @@ Fixed-\/block compressed sparse row storage matrix format.
 
 
 
+Inheritance diagram for gko\+::matrix\+::Fbcsr$<$ Value\+Type, Index\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1matrix_1_1Fbcsr__inherit__graph}
+\end{center}
+\end{figure}
+
+
 Collaboration diagram for gko\+::matrix\+::Fbcsr$<$ Value\+Type, Index\+Type $>$\+:
 \nopagebreak
 \begin{figure}[H]
@@ -33,6 +43,9 @@ using {\bfseries transposed\+\_\+type} = \mbox{\hyperlink{classgko_1_1matrix_1_1
 \item 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_a0a494d31a4b1e7e2fb0d57bce35a0d76}\label{classgko_1_1matrix_1_1Fbcsr_a0a494d31a4b1e7e2fb0d57bce35a0d76}} 
 using {\bfseries mat\+\_\+data} = \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$
+\item 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_a531f1ead8c96bd745cc7abe4c1dec594}\label{classgko_1_1matrix_1_1Fbcsr_a531f1ead8c96bd745cc7abe4c1dec594}} 
+using {\bfseries device\+\_\+mat\+\_\+data} = \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$
 \item 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_a2e87bdbb1a9fb92c930725f6c621ce14}\label{classgko_1_1matrix_1_1Fbcsr_a2e87bdbb1a9fb92c930725f6c621ce14}} 
 using {\bfseries absolute\+\_\+type} = \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{remove\+\_\+complex}}$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}} $>$
@@ -64,6 +77,10 @@ void {\bfseries move\+\_\+to} (\mbox{\hyperlink{classgko_1_1matrix_1_1SparsityCs
 \item 
 void \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr_add32b80fe8abb9dde0c1c6eaaff9df07}{read}} (const \mbox{\hyperlink{structgko_1_1matrix__data}{mat\+\_\+data}} \&data) override
 \begin{DoxyCompactList}\small\item\em Reads a \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} into \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}} format. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr_a1ed4ee50808fbd111b31d2fc7197621c}{read}} (const \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+mat\+\_\+data}} \&data) override
+\begin{DoxyCompactList}\small\item\em Reads a matrix from a \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} structure. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr_a04ac9799295d2b8e2c4c8236d2696013}{read}} (\mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+mat\+\_\+data}} \&\&data) override
+\begin{DoxyCompactList}\small\item\em Reads a matrix from a \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} structure. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr_a7386af3c2a81e148e87930a9f2fe0392}{write}} (\mbox{\hyperlink{structgko_1_1matrix__data}{mat\+\_\+data}} \&data) const override
 \begin{DoxyCompactList}\small\item\em Writes a matrix to a \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} structure. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr_a52f321cef9d2bc6d44e8b7cdc8b09440}{transpose}} () const override
@@ -100,12 +117,23 @@ const index\+\_\+type $\ast$ \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr_a58545
 \item 
 int \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr_a59511a9d356956f89cf54c6de0650925}{get\+\_\+block\+\_\+size}} () const noexcept
 \item 
-void \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr_a3c23a78ca8906fbe96c1d2c948df1642}{set\+\_\+block\+\_\+size}} (const int block\+\_\+size) noexcept
-\begin{DoxyCompactList}\small\item\em Set the fixed block size for this matrix. \end{DoxyCompactList}\item 
 index\+\_\+type \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr_a35b1732314c6b648ff2293f574cd35c8}{get\+\_\+num\+\_\+block\+\_\+rows}} () const noexcept
 \item 
 index\+\_\+type \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr_af29a823fd47588118ae75ab4bb36753b}{get\+\_\+num\+\_\+block\+\_\+cols}} () const noexcept
-\end{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}} \& \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr_a771c0c38b47f3a9abbf41dd7a0256a71}{operator=}} (const \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}} \&)
+\begin{DoxyCompactList}\small\item\em Copy-\/assigns an \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}} matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}} \& \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr_a9a664816678d647939ee2a9369f67bfa}{operator=}} (\mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}} \&\&)
+\begin{DoxyCompactList}\small\item\em Move-\/assigns an \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}} matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr_a70062defa68148bc8458df69c49cd0f8}{Fbcsr}} (const \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}} \&)
+\begin{DoxyCompactList}\small\item\em Copy-\/constructs an \mbox{\hyperlink{classgko_1_1matrix_1_1Ell}{Ell}} matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr_a9f34a44ae1f29860863ed2ae22326602}{Fbcsr}} (\mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}} \&\&)
+\begin{DoxyCompactList}\small\item\em Move-\/constructs an \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}} matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::unique\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr_ae27b2db23ff1ea37dd50c0ee52649848}{create\+\_\+const}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \&size, int blocksize, gko\+::detail\+::const\+\_\+array\+\_\+view$<$ Value\+Type $>$ \&\&values, gko\+::detail\+::const\+\_\+array\+\_\+view$<$ Index\+Type $>$ \&\&col\+\_\+idxs, gko\+::detail\+::const\+\_\+array\+\_\+view$<$ Index\+Type $>$ \&\&row\+\_\+ptrs)
+\begin{DoxyCompactList}\small\item\em Creates a constant (immutable) \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}} matrix from a constant array. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
@@ -114,6 +142,9 @@ class {\bfseries Enable\+Create\+Method$<$ Fbcsr $>$}
 \item 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_aef5d3013d13c6d9a1b47b24d81715f63}\label{classgko_1_1matrix_1_1Fbcsr_aef5d3013d13c6d9a1b47b24d81715f63}} 
 class {\bfseries Enable\+Polymorphic\+Object$<$ Fbcsr, Lin\+Op $>$}
+\item 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_a3962faf971a3df6ff4c9226c61fb24cc}\label{classgko_1_1matrix_1_1Fbcsr_a3962faf971a3df6ff4c9226c61fb24cc}} 
+class {\bfseries Csr$<$ Value\+Type, Index\+Type $>$}
 \item 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_a22a84c8f67f946aa60a2fa8bf5835a32}\label{classgko_1_1matrix_1_1Fbcsr_a22a84c8f67f946aa60a2fa8bf5835a32}} 
 class {\bfseries Dense$<$ Value\+Type $>$}
@@ -130,7 +161,6 @@ class {\bfseries Fbcsr$<$ to\+\_\+complex$<$ Value\+Type $>$, Index\+Type $>$}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_a2cb06a9ea5724c567084f743e410a456}\label{classgko_1_1matrix_1_1Fbcsr_a2cb06a9ea5724c567084f743e410a456}} 
 class {\bfseries Fbcsr$<$ next\+\_\+precision$<$ Value\+Type $>$, Index\+Type $>$}
 \end{DoxyCompactItemize}
-\doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Detailed Description}
@@ -172,12 +202,37 @@ The \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}} \mbox{\hyperlink{class
 \end{DoxyTemplParams}
 
 
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_a70062defa68148bc8458df69c49cd0f8}\label{classgko_1_1matrix_1_1Fbcsr_a70062defa68148bc8458df69c49cd0f8}} 
+\index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!Fbcsr@{Fbcsr}}
+\index{Fbcsr@{Fbcsr}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{Fbcsr()}{Fbcsr()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+\mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::\mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}}$<$ Value\+Type, Index\+Type $>$ \&}]{ }\end{DoxyParamCaption})}
+
+
+
+Copy-\/constructs an \mbox{\hyperlink{classgko_1_1matrix_1_1Ell}{Ell}} matrix. 
+
+Inherits executor and data. \mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_a9f34a44ae1f29860863ed2ae22326602}\label{classgko_1_1matrix_1_1Fbcsr_a9f34a44ae1f29860863ed2ae22326602}} 
+\index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!Fbcsr@{Fbcsr}}
+\index{Fbcsr@{Fbcsr}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{Fbcsr()}{Fbcsr()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+\mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::\mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}}$<$ Value\+Type, Index\+Type $>$ \&\&}]{ }\end{DoxyParamCaption})}
+
+
+
+Move-\/constructs an \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}} matrix. 
+
+Inherits executor and data. The moved-\/from object is empty (0x0 with no nonzeros, but valid row pointers). 
+
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_a869c20e101a02e08a839f2756d62e149}\label{classgko_1_1matrix_1_1Fbcsr_a869c20e101a02e08a839f2756d62e149}} 
 \index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!compute\_absolute@{compute\_absolute}}
 \index{compute\_absolute@{compute\_absolute}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
 \doxysubsubsection{\texorpdfstring{compute\_absolute()}{compute\_absolute()}}
-{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
 std\+::unique\+\_\+ptr$<$absolute\+\_\+type$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::compute\+\_\+absolute (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
@@ -195,7 +250,7 @@ Implements \mbox{\hyperlink{classgko_1_1EnableAbsoluteComputation_ac30ab2b34bfa3
 \index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!conj\_transpose@{conj\_transpose}}
 \index{conj\_transpose@{conj\_transpose}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
 \doxysubsubsection{\texorpdfstring{conj\_transpose()}{conj\_transpose()}}
-{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
 std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::conj\+\_\+transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
@@ -213,7 +268,7 @@ Implements \mbox{\hyperlink{classgko_1_1Transposable_ab41b669288740cf2a6f7bf76e8
 \index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!convert\_to@{convert\_to}}
 \index{convert\_to@{convert\_to}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
 \doxysubsubsection{\texorpdfstring{convert\_to()}{convert\_to()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
 void \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::convert\+\_\+to (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}}$<$ Value\+Type, Index\+Type $>$ $\ast$}]{result }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}}
 
 
@@ -227,7 +282,7 @@ Any explicit zeros in the original matrix are retained in the converted result.
 \index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!convert\_to@{convert\_to}}
 \index{convert\_to@{convert\_to}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
 \doxysubsubsection{\texorpdfstring{convert\_to()}{convert\_to()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
 void \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::convert\+\_\+to (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1matrix_1_1SparsityCsr}{Sparsity\+Csr}}$<$ Value\+Type, Index\+Type $>$ $\ast$}]{result }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}}
 
 
@@ -237,11 +292,40 @@ Get the block sparsity pattern in C\+S\+R-\/like format.
 \begin{DoxyNote}{Note}
 The actual non-\/zero values are never copied; the result always has a value array of size 1 with the value 1. 
 \end{DoxyNote}
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_ae27b2db23ff1ea37dd50c0ee52649848}\label{classgko_1_1matrix_1_1Fbcsr_ae27b2db23ff1ea37dd50c0ee52649848}} 
+\index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!create\_const@{create\_const}}
+\index{create\_const@{create\_const}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{create\_const()}{create\_const()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+static std\+::unique\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::create\+\_\+const (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \&}]{size,  }\item[{int}]{blocksize,  }\item[{gko\+::detail\+::const\+\_\+array\+\_\+view$<$ Value\+Type $>$ \&\&}]{values,  }\item[{gko\+::detail\+::const\+\_\+array\+\_\+view$<$ Index\+Type $>$ \&\&}]{col\+\_\+idxs,  }\item[{gko\+::detail\+::const\+\_\+array\+\_\+view$<$ Index\+Type $>$ \&\&}]{row\+\_\+ptrs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Creates a constant (immutable) \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}} matrix from a constant array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & the executor to create the matrix on \\
+\hline
+{\em size} & the dimensions of the matrix \\
+\hline
+{\em blocksize} & the block size of the matrix \\
+\hline
+{\em values} & the value array of the matrix \\
+\hline
+{\em col\+\_\+idxs} & the block column index array of the matrix \\
+\hline
+{\em row\+\_\+ptrs} & the block row pointer array of the matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A smart pointer to the constant matrix wrapping the input arrays (if they reside on the same executor as the matrix) or a copy of the arrays on the correct executor. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_ad6c0c036b0d2c2bed257af959e03b75b}\label{classgko_1_1matrix_1_1Fbcsr_ad6c0c036b0d2c2bed257af959e03b75b}} 
 \index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!extract\_diagonal@{extract\_diagonal}}
 \index{extract\_diagonal@{extract\_diagonal}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
 \doxysubsubsection{\texorpdfstring{extract\_diagonal()}{extract\_diagonal()}}
-{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
 std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal}{Diagonal}}$<$Value\+Type$>$ $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::extract\+\_\+diagonal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
@@ -261,7 +345,7 @@ Implements \mbox{\hyperlink{classgko_1_1DiagonalExtractable_a3a748eb3a1ced4e679b
 \index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!get\_block\_size@{get\_block\_size}}
 \index{get\_block\_size@{get\_block\_size}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
 \doxysubsubsection{\texorpdfstring{get\_block\_size()}{get\_block\_size()}}
-{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
 int \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+block\+\_\+size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
 
 \begin{DoxyReturn}{Returns}
@@ -271,7 +355,7 @@ The fixed block size for this matrix
 \index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!get\_col\_idxs@{get\_col\_idxs}}
 \index{get\_col\_idxs@{get\_col\_idxs}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
 \doxysubsubsection{\texorpdfstring{get\_col\_idxs()}{get\_col\_idxs()}}
-{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
 index\+\_\+type$\ast$ \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+col\+\_\+idxs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
 
 \begin{DoxyReturn}{Returns}
@@ -279,13 +363,13 @@ The column indexes of the matrix.
 \end{DoxyReturn}
 
 
-References gko\+::\+Array$<$ Value\+Type $>$\+::get\+\_\+data().
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+data().
 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_a04161ad12ebd514ccbecb92adea89dbb}\label{classgko_1_1matrix_1_1Fbcsr_a04161ad12ebd514ccbecb92adea89dbb}} 
 \index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!get\_const\_col\_idxs@{get\_const\_col\_idxs}}
 \index{get\_const\_col\_idxs@{get\_const\_col\_idxs}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
 \doxysubsubsection{\texorpdfstring{get\_const\_col\_idxs()}{get\_const\_col\_idxs()}}
-{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
 const index\+\_\+type$\ast$ \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+col\+\_\+idxs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
 
 
@@ -300,13 +384,13 @@ This is the constant version of the function, which can be significantly more me
 \end{DoxyNote}
 
 
-References gko\+::\+Array$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+data().
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+data().
 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_a585456a9b69b5e66eb78aacc29445509}\label{classgko_1_1matrix_1_1Fbcsr_a585456a9b69b5e66eb78aacc29445509}} 
 \index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!get\_const\_row\_ptrs@{get\_const\_row\_ptrs}}
 \index{get\_const\_row\_ptrs@{get\_const\_row\_ptrs}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
 \doxysubsubsection{\texorpdfstring{get\_const\_row\_ptrs()}{get\_const\_row\_ptrs()}}
-{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
 const index\+\_\+type$\ast$ \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+row\+\_\+ptrs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
 
 
@@ -321,13 +405,13 @@ This is the constant version of the function, which can be significantly more me
 \end{DoxyNote}
 
 
-References gko\+::\+Array$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+data().
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+data().
 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_a58ce599ddacd69551d66240e87044472}\label{classgko_1_1matrix_1_1Fbcsr_a58ce599ddacd69551d66240e87044472}} 
 \index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!get\_const\_values@{get\_const\_values}}
 \index{get\_const\_values@{get\_const\_values}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
 \doxysubsubsection{\texorpdfstring{get\_const\_values()}{get\_const\_values()}}
-{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
 const value\+\_\+type$\ast$ \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
 
 
@@ -342,23 +426,27 @@ This is the constant version of the function, which can be significantly more me
 \end{DoxyNote}
 
 
-References gko\+::\+Array$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+data().
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+data().
 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_af29a823fd47588118ae75ab4bb36753b}\label{classgko_1_1matrix_1_1Fbcsr_af29a823fd47588118ae75ab4bb36753b}} 
 \index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!get\_num\_block\_cols@{get\_num\_block\_cols}}
 \index{get\_num\_block\_cols@{get\_num\_block\_cols}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
 \doxysubsubsection{\texorpdfstring{get\_num\_block\_cols()}{get\_num\_block\_cols()}}
-{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
 index\+\_\+type \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+num\+\_\+block\+\_\+cols (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
 
 \begin{DoxyReturn}{Returns}
 The number of block-\/columns in the matrix 
 \end{DoxyReturn}
+
+
+References gko\+::\+Lin\+Op\+::get\+\_\+size().
+
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_a35b1732314c6b648ff2293f574cd35c8}\label{classgko_1_1matrix_1_1Fbcsr_a35b1732314c6b648ff2293f574cd35c8}} 
 \index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!get\_num\_block\_rows@{get\_num\_block\_rows}}
 \index{get\_num\_block\_rows@{get\_num\_block\_rows}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
 \doxysubsubsection{\texorpdfstring{get\_num\_block\_rows()}{get\_num\_block\_rows()}}
-{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
 index\+\_\+type \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+num\+\_\+block\+\_\+rows (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
 
 \begin{DoxyReturn}{Returns}
@@ -366,13 +454,13 @@ The number of block-\/rows in the matrix
 \end{DoxyReturn}
 
 
-References gko\+::\+Array$<$ Value\+Type $>$\+::get\+\_\+num\+\_\+elems().
+References gko\+::\+Lin\+Op\+::get\+\_\+size().
 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_a079ec6400ad8ebf4ff93087e8c7823e4}\label{classgko_1_1matrix_1_1Fbcsr_a079ec6400ad8ebf4ff93087e8c7823e4}} 
 \index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!get\_num\_stored\_blocks@{get\_num\_stored\_blocks}}
 \index{get\_num\_stored\_blocks@{get\_num\_stored\_blocks}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
 \doxysubsubsection{\texorpdfstring{get\_num\_stored\_blocks()}{get\_num\_stored\_blocks()}}
-{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
 \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+num\+\_\+stored\+\_\+blocks (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
 
 \begin{DoxyReturn}{Returns}
@@ -380,13 +468,13 @@ The number of non-\/zero blocks explicitly stored in the matrix
 \end{DoxyReturn}
 
 
-References gko\+::\+Array$<$ Value\+Type $>$\+::get\+\_\+num\+\_\+elems().
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+num\+\_\+elems().
 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_a2409efcc99603ab55623f854991ea169}\label{classgko_1_1matrix_1_1Fbcsr_a2409efcc99603ab55623f854991ea169}} 
 \index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!get\_num\_stored\_elements@{get\_num\_stored\_elements}}
 \index{get\_num\_stored\_elements@{get\_num\_stored\_elements}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
 \doxysubsubsection{\texorpdfstring{get\_num\_stored\_elements()}{get\_num\_stored\_elements()}}
-{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
 \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+num\+\_\+stored\+\_\+elements (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
 
 \begin{DoxyReturn}{Returns}
@@ -394,13 +482,13 @@ The number of elements explicitly stored in the matrix
 \end{DoxyReturn}
 
 
-References gko\+::\+Array$<$ Value\+Type $>$\+::get\+\_\+num\+\_\+elems().
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+num\+\_\+elems().
 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_a6ba527b33d23fea9a69ae0fe92135ca9}\label{classgko_1_1matrix_1_1Fbcsr_a6ba527b33d23fea9a69ae0fe92135ca9}} 
 \index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!get\_row\_ptrs@{get\_row\_ptrs}}
 \index{get\_row\_ptrs@{get\_row\_ptrs}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
 \doxysubsubsection{\texorpdfstring{get\_row\_ptrs()}{get\_row\_ptrs()}}
-{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
 index\+\_\+type$\ast$ \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+row\+\_\+ptrs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
 
 \begin{DoxyReturn}{Returns}
@@ -408,13 +496,13 @@ The row pointers of the matrix.
 \end{DoxyReturn}
 
 
-References gko\+::\+Array$<$ Value\+Type $>$\+::get\+\_\+data().
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+data().
 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_acadf2f225ee3eed3dc4348fbdb72efb6}\label{classgko_1_1matrix_1_1Fbcsr_acadf2f225ee3eed3dc4348fbdb72efb6}} 
 \index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!get\_values@{get\_values}}
 \index{get\_values@{get\_values}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
 \doxysubsubsection{\texorpdfstring{get\_values()}{get\_values()}}
-{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
 value\+\_\+type$\ast$ \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
 
 \begin{DoxyReturn}{Returns}
@@ -422,13 +510,13 @@ The values of the matrix.
 \end{DoxyReturn}
 
 
-References gko\+::\+Array$<$ Value\+Type $>$\+::get\+\_\+data().
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+data().
 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_aecdf3fe50a7c9a318dd74dd3decff851}\label{classgko_1_1matrix_1_1Fbcsr_aecdf3fe50a7c9a318dd74dd3decff851}} 
 \index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!is\_sorted\_by\_column\_index@{is\_sorted\_by\_column\_index}}
 \index{is\_sorted\_by\_column\_index@{is\_sorted\_by\_column\_index}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
 \doxysubsubsection{\texorpdfstring{is\_sorted\_by\_column\_index()}{is\_sorted\_by\_column\_index()}}
-{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
 bool \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::is\+\_\+sorted\+\_\+by\+\_\+column\+\_\+index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
 
 
@@ -438,11 +526,53 @@ Tests if all row entry pairs (value, col\+\_\+idx) are sorted by column index.
 \begin{DoxyReturn}{Returns}
 True if all row entry pairs (value, col\+\_\+idx) are sorted by column index 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_a771c0c38b47f3a9abbf41dd7a0256a71}\label{classgko_1_1matrix_1_1Fbcsr_a771c0c38b47f3a9abbf41dd7a0256a71}} 
+\index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+\mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}}\& \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}}$<$ Value\+Type, Index\+Type $>$ \&}]{ }\end{DoxyParamCaption})}
+
+
+
+Copy-\/assigns an \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}} matrix. 
+
+Preserves the executor, copies data and block size from the input. \mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_a9a664816678d647939ee2a9369f67bfa}\label{classgko_1_1matrix_1_1Fbcsr_a9a664816678d647939ee2a9369f67bfa}} 
+\index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+\mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}}\& \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}}$<$ Value\+Type, Index\+Type $>$ \&\&}]{ }\end{DoxyParamCaption})}
+
+
+
+Move-\/assigns an \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}} matrix. 
+
+Preserves the executor, moves the data over preserving size and stride. Leaves the moved-\/from object in an empty state (0x0 with no nonzeros, but valid row pointers). \mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_a1ed4ee50808fbd111b31d2fc7197621c}\label{classgko_1_1matrix_1_1Fbcsr_a1ed4ee50808fbd111b31d2fc7197621c}} 
+\index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!read@{read}}
+\index{read@{read}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{read()}{read()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::read (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+mat\+\_\+data}} \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reads a matrix from a \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} structure. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & the \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} structure. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classgko_1_1ReadableFromMatrixData_a02785ab361765a981b9e1677704fffdb}{gko\+::\+Readable\+From\+Matrix\+Data$<$ Value\+Type, Index\+Type $>$}}.
+
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_add32b80fe8abb9dde0c1c6eaaff9df07}\label{classgko_1_1matrix_1_1Fbcsr_add32b80fe8abb9dde0c1c6eaaff9df07}} 
 \index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!read@{read}}
 \index{read@{read}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
-\doxysubsubsection{\texorpdfstring{read()}{read()}}
-{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+\doxysubsubsection{\texorpdfstring{read()}{read()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
 void \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::read (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structgko_1_1matrix__data}{mat\+\_\+data}} \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
@@ -450,7 +580,7 @@ void \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$
 Reads a \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} into \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}} format. 
 
 Requires the block size to be set beforehand \begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr_a3c23a78ca8906fbe96c1d2c948df1642}{set\+\_\+block\+\_\+size}}.
+set\+\_\+block\+\_\+size.
 \end{DoxySeeAlso}
 \begin{DoxyWarning}{Warning}
 Unlike \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_ac4db41146ed3c3a8653b03d6b2c6c675}{Csr\+::read}}, here explicit non-\/zeros are N\+OT dropped. 
@@ -459,27 +589,33 @@ Unlike \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_ac4db41146ed3c3a8653b03d6b2c6c
 
 Implements \mbox{\hyperlink{classgko_1_1ReadableFromMatrixData_add5c12e23b3ac3c8fbd607fa5a9656bb}{gko\+::\+Readable\+From\+Matrix\+Data$<$ Value\+Type, Index\+Type $>$}}.
 
-\mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_a3c23a78ca8906fbe96c1d2c948df1642}\label{classgko_1_1matrix_1_1Fbcsr_a3c23a78ca8906fbe96c1d2c948df1642}} 
-\index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!set\_block\_size@{set\_block\_size}}
-\index{set\_block\_size@{set\_block\_size}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
-\doxysubsubsection{\texorpdfstring{set\_block\_size()}{set\_block\_size()}}
-{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
-void \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::set\+\_\+block\+\_\+size (\begin{DoxyParamCaption}\item[{const int}]{block\+\_\+size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_a04ac9799295d2b8e2c4c8236d2696013}\label{classgko_1_1matrix_1_1Fbcsr_a04ac9799295d2b8e2c4c8236d2696013}} 
+\index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!read@{read}}
+\index{read@{read}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{read()}{read()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::read (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+mat\+\_\+data}} \&\&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
-Set the fixed block size for this matrix. 
+Reads a matrix from a \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} structure. 
+
+The structure may be emptied by this function.
 
 
 \begin{DoxyParams}{Parameters}
-{\em block\+\_\+size} & The block size \\
+{\em data} & the \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} structure. \\
 \hline
 \end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classgko_1_1ReadableFromMatrixData_a0fcdcdbef5e8d673bf19f5d5ab7afb45}{gko\+::\+Readable\+From\+Matrix\+Data$<$ Value\+Type, Index\+Type $>$}}.
+
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_a52f321cef9d2bc6d44e8b7cdc8b09440}\label{classgko_1_1matrix_1_1Fbcsr_a52f321cef9d2bc6d44e8b7cdc8b09440}} 
 \index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!transpose@{transpose}}
 \index{transpose@{transpose}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
 \doxysubsubsection{\texorpdfstring{transpose()}{transpose()}}
-{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
 std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
@@ -497,7 +633,7 @@ Implements \mbox{\hyperlink{classgko_1_1Transposable_a5c6b778b71b47d53e0bda6ccf8
 \index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!write@{write}}
 \index{write@{write}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
 \doxysubsubsection{\texorpdfstring{write()}{write()}}
-{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
 void \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::write (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgko_1_1matrix__data}{mat\+\_\+data}} \&}]{data }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
@@ -515,6 +651,7 @@ Implements \mbox{\hyperlink{classgko_1_1WritableToMatrixData_a96036c3a4bf4c67fa9
 
 
 
-The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
+ginkgo/core/matrix/csr.\+hpp\item 
 ginkgo/core/matrix/fbcsr.\+hpp\end{DoxyCompactItemize}

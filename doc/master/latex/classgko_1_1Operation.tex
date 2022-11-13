@@ -9,6 +9,16 @@ Operations can be used to define functionalities whose implementations differ am
 
 {\ttfamily \#include $<$ginkgo/core/base/executor.\+hpp$>$}
 
+
+
+Inheritance diagram for gko\+::Operation\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=254pt]{classgko_1_1Operation__inherit__graph}
+\end{center}
+\end{figure}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -94,7 +104,7 @@ Now it is possible to write the following code\+:
 \DoxyCodeLine{std::cout << *omp << std::endl}
 \DoxyCodeLine{          << *\mbox{\hyperlink{classgko_1_1CudaExecutor_a5dcec3ca1c458382e01191b727959a81}{gko::CudaExecutor::create}}(0, omp) << std::endl}
 \DoxyCodeLine{          << *\mbox{\hyperlink{classgko_1_1HipExecutor_ad3a72bc42254fb8730bc2090147447d9}{gko::HipExecutor::create}}(0, omp) << std::endl}
-\DoxyCodeLine{          << *\mbox{\hyperlink{classgko_1_1DpcppExecutor_ac46044fcb00b2d224b45d93eaf8c579d}{gko::DpcppExecutor::create}}(0, omp) << std::endl}
+\DoxyCodeLine{          << *\mbox{\hyperlink{classgko_1_1DpcppExecutor_ae9b875dfe3af7f3f3f24071bfb2f895e}{gko::DpcppExecutor::create}}(0, omp) << std::endl}
 \DoxyCodeLine{          << *gko::ReferenceExecutor::create() << std::endl;}
 \end{DoxyCode}
 
@@ -111,7 +121,7 @@ which produces the expected output\+:
 \end{DoxyCode}
 
 
-One might feel that this code is too complicated for such a simple task. Luckily, there is an overload of the \mbox{\hyperlink{classgko_1_1Executor_a1de8e2668b76e66690acf5eef9e8324d}{Executor\+::run()}} method, which is designed to facilitate writing simple operations like this one. The method takes three closures as input\+: one which is run for O\+MP, one for C\+U\+DA executors, one for H\+IP executors, and the last one for D\+P\+C++ executors. Using this method, there is no need to implement an \mbox{\hyperlink{classgko_1_1Operation}{Operation}} subclass\+:
+One might feel that this code is too complicated for such a simple task. Luckily, there is an overload of the \mbox{\hyperlink{classgko_1_1Executor_a1de8e2668b76e66690acf5eef9e8324d}{Executor\+::run()}} method, which is designed to facilitate writing simple operations like this one. The method takes four closures as input\+: one which is run for O\+MP, one for C\+U\+DA executors, one for H\+IP executors, and the last one for D\+P\+C++ executors. Using this method, there is no need to implement an \mbox{\hyperlink{classgko_1_1Operation}{Operation}} subclass\+:
 
 
 \begin{DoxyCode}{0}

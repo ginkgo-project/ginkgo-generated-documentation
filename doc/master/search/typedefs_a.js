@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['uint16_1835',['uint16',['../namespacegko.html#afdb8517627d37e0c4ff4f39a5303a795',1,'gko']]],
-  ['uint32_1836',['uint32',['../namespacegko.html#a318c831e3fe269ba04c6ed8bf5a71073',1,'gko']]],
-  ['uint64_1837',['uint64',['../namespacegko.html#ad54a79afecd57aabbb04b1dc611ae55e',1,'gko']]],
-  ['uint8_1838',['uint8',['../namespacegko.html#a3950fc3732811a8563484e5098c31531',1,'gko']]]
+  ['size_5ftype_2632',['size_type',['../namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7',1,'gko']]],
+  ['storage_5ftype_2633',['storage_type',['../classgko_1_1precision__reduction.html#a2a1a94a27fa69b4cc321136b56e7b7d9',1,'gko::precision_reduction']]]
 ];

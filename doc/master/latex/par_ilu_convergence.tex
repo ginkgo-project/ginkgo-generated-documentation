@@ -38,7 +38,7 @@ This example can be used to inspect the convergence behavior of parallel incompl
 \DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_ad3a72bc42254fb8730bc2090147447d9}{gko::HipExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}());}
 \DoxyCodeLine{         \}\},}
 \DoxyCodeLine{        \{\textcolor{stringliteral}{"dpcpp"}, [] \{}
-\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1DpcppExecutor_ac46044fcb00b2d224b45d93eaf8c579d}{gko::DpcppExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}());}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1DpcppExecutor_ae9b875dfe3af7f3f3f24071bfb2f895e}{gko::DpcppExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}());}
 \DoxyCodeLine{         \}\}\};}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -48,7 +48,7 @@ This example can be used to inspect the convergence behavior of parallel incompl
 \DoxyCodeLine{    decltype(fun()) result;}
 \DoxyCodeLine{    try \{}
 \DoxyCodeLine{        result = fun();}
-\DoxyCodeLine{    \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Error}{gko::Error}} \&err) \{}
+\DoxyCodeLine{    \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Error}{gko::Error}}\& err) \{}
 \DoxyCodeLine{        std::cerr << \textcolor{stringliteral}{"Error: "} << err.\mbox{\hyperlink{classgko_1_1Error_a38cf4e9e4463088091a344f218c2dd8f}{what}}() << \textcolor{charliteral}{'\(\backslash\)n'};}
 \DoxyCodeLine{        std::exit(-\/1);}
 \DoxyCodeLine{    \}}
@@ -58,8 +58,8 @@ This example can be used to inspect the convergence behavior of parallel incompl
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType, \textcolor{keyword}{typename} IndexType>}
 \DoxyCodeLine{\textcolor{keywordtype}{double} compute\_ilu\_residual\_norm(}
-\DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<ValueType, IndexType>}} *residual,}
-\DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<ValueType, IndexType>}} *mtx)}
+\DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<ValueType, IndexType>}}* residual,}
+\DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<ValueType, IndexType>}}* mtx)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \mbox{\hyperlink{structgko_1_1matrix__data}{gko::matrix\_data<ValueType, IndexType>}} residual\_data;}
 \DoxyCodeLine{    \mbox{\hyperlink{structgko_1_1matrix__data}{gko::matrix\_data<ValueType, IndexType>}} mtx\_data;}
@@ -81,7 +81,7 @@ This example can be used to inspect the convergence behavior of parallel incompl
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[])}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{using} ValueType = double;}
 \DoxyCodeLine{    \textcolor{keyword}{using} IndexType = int;}
@@ -192,14 +192,14 @@ load matrix file into Csr format
 \DoxyCodeLine{            exec-\/>synchronize();}
 \DoxyCodeLine{            \textcolor{keyword}{auto} toc = std::chrono::high\_resolution\_clock::now();}
 \DoxyCodeLine{            \textcolor{keyword}{auto} residual = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(exec, mtx);}
-\DoxyCodeLine{            result-\/>get\_operators()[0]-\/>apply(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(one),}
-\DoxyCodeLine{                                              \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(result-\/>get\_operators()[1]),}
-\DoxyCodeLine{                                              \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(minus\_one), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(residual));}
+\DoxyCodeLine{            result-\/>get\_operators()[0]-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(one),}
+\DoxyCodeLine{                                              \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(result-\/>get\_operators()[1]),}
+\DoxyCodeLine{                                              \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(minus\_one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(residual));}
 \DoxyCodeLine{            times.push\_back(}
 \DoxyCodeLine{                std::chrono::duration\_cast<std::chrono::nanoseconds>(toc -\/ tic)}
 \DoxyCodeLine{                    .count());}
 \DoxyCodeLine{            residuals.push\_back(}
-\DoxyCodeLine{                compute\_ilu\_residual\_norm(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(residual), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(mtx)));}
+\DoxyCodeLine{                compute\_ilu\_residual\_norm(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(residual), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(mtx)));}
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} el : times) \{}
 \DoxyCodeLine{            std::cout << el << \textcolor{charliteral}{';'};}
@@ -249,7 +249,7 @@ When specifying an executor\+:
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{/*******************************<GINKGO LICENSE>******************************}}
-\DoxyCodeLine{\textcolor{comment}{Copyright (c) 2017-\/2021, the Ginkgo authors}}
+\DoxyCodeLine{\textcolor{comment}{Copyright (c) 2017-\/2022, the Ginkgo authors}}
 \DoxyCodeLine{\textcolor{comment}{All rights reserved.}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{Redistribution and use in source and binary forms, with or without}}
@@ -305,7 +305,7 @@ When specifying an executor\+:
 \DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_ad3a72bc42254fb8730bc2090147447d9}{gko::HipExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}());}
 \DoxyCodeLine{         \}\},}
 \DoxyCodeLine{        \{\textcolor{stringliteral}{"dpcpp"}, [] \{}
-\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1DpcppExecutor_ac46044fcb00b2d224b45d93eaf8c579d}{gko::DpcppExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}());}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1DpcppExecutor_ae9b875dfe3af7f3f3f24071bfb2f895e}{gko::DpcppExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}());}
 \DoxyCodeLine{         \}\}\};}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -315,7 +315,7 @@ When specifying an executor\+:
 \DoxyCodeLine{    decltype(fun()) result;}
 \DoxyCodeLine{    try \{}
 \DoxyCodeLine{        result = fun();}
-\DoxyCodeLine{    \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Error}{gko::Error}} \&err) \{}
+\DoxyCodeLine{    \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1Error}{gko::Error}}\& err) \{}
 \DoxyCodeLine{        std::cerr << \textcolor{stringliteral}{"Error: "} << err.\mbox{\hyperlink{classgko_1_1Error_a38cf4e9e4463088091a344f218c2dd8f}{what}}() << \textcolor{charliteral}{'\(\backslash\)n'};}
 \DoxyCodeLine{        std::exit(-\/1);}
 \DoxyCodeLine{    \}}
@@ -325,8 +325,8 @@ When specifying an executor\+:
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType, \textcolor{keyword}{typename} IndexType>}
 \DoxyCodeLine{\textcolor{keywordtype}{double} compute\_ilu\_residual\_norm(}
-\DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<ValueType, IndexType>}} *residual,}
-\DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<ValueType, IndexType>}} *mtx)}
+\DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<ValueType, IndexType>}}* residual,}
+\DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<ValueType, IndexType>}}* mtx)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \mbox{\hyperlink{structgko_1_1matrix__data}{gko::matrix\_data<ValueType, IndexType>}} residual\_data;}
 \DoxyCodeLine{    \mbox{\hyperlink{structgko_1_1matrix__data}{gko::matrix\_data<ValueType, IndexType>}} mtx\_data;}
@@ -348,7 +348,7 @@ When specifying an executor\+:
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[])}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{using} ValueType = double;}
 \DoxyCodeLine{    \textcolor{keyword}{using} IndexType = int;}
@@ -435,14 +435,14 @@ When specifying an executor\+:
 \DoxyCodeLine{            exec-\/>synchronize();}
 \DoxyCodeLine{            \textcolor{keyword}{auto} toc = std::chrono::high\_resolution\_clock::now();}
 \DoxyCodeLine{            \textcolor{keyword}{auto} residual = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(exec, mtx);}
-\DoxyCodeLine{            result-\/>get\_operators()[0]-\/>apply(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(one),}
-\DoxyCodeLine{                                              \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(result-\/>get\_operators()[1]),}
-\DoxyCodeLine{                                              \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(minus\_one), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(residual));}
+\DoxyCodeLine{            result-\/>get\_operators()[0]-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(one),}
+\DoxyCodeLine{                                              \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(result-\/>get\_operators()[1]),}
+\DoxyCodeLine{                                              \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(minus\_one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(residual));}
 \DoxyCodeLine{            times.push\_back(}
 \DoxyCodeLine{                std::chrono::duration\_cast<std::chrono::nanoseconds>(toc -\/ tic)}
 \DoxyCodeLine{                    .count());}
 \DoxyCodeLine{            residuals.push\_back(}
-\DoxyCodeLine{                compute\_ilu\_residual\_norm(\mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(residual), \mbox{\hyperlink{namespacegko_a4edc2273b5627ec552ea423b60493be3}{lend}}(mtx)));}
+\DoxyCodeLine{                compute\_ilu\_residual\_norm(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(residual), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(mtx)));}
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} el : times) \{}
 \DoxyCodeLine{            std::cout << el << \textcolor{charliteral}{';'};}

@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from tags/v1.4.0 branch based on master. Ginkgo version 1.4.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/693265515 branch based on master. Ginkgo version 1.5.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -144,6 +144,7 @@ Changing the paths to search for HIP and other packages</h3>
 <li>CMake <code>-DHIP_PATH=</code> or environment <code>export HIP_PATH=</code>: sets the <code>HIP</code> installation path. The default value is <code>${ROCM_PATH}/hip</code>.</li>
 <li>CMake <code>-DHIPBLAS_PATH=</code> or environment <code>export HIPBLAS_PATH=</code>: sets the <code>hipBLAS</code> installation path. The default value is <code>${ROCM_PATH}/hipblas</code>.</li>
 <li>CMake <code>-DHIPSPARSE_PATH=</code> or environment <code>export HIPSPARSE_PATH=</code>: sets the <code>hipSPARSE</code> installation path. The default value is <code>${ROCM_PATH}/hipsparse</code>.</li>
+<li>CMake <code>-DHIPFFT_PATH=</code> or environment <code>export HIPFFT_PATH=</code>: sets the <code>hipFFT</code> installation path. The default value is <code>${ROCM_PATH}/hipfft</code>.</li>
 <li>CMake <code>-DROCRAND_PATH=</code> or environment <code>export ROCRAND_PATH=</code>: sets the <code>rocRAND</code> installation path. The default value is <code>${ROCM_PATH}/rocrand</code>.</li>
 <li>CMake <code>-DHIPRAND_PATH=</code> or environment <code>export HIPRAND_PATH=</code>: sets the <code>hipRAND</code> installation path. The default value is <code>${ROCM_PATH}/hiprand</code>.</li>
 <li>environment <code>export CUDA_PATH=</code>: where <code>hipcc</code> can find <code>CUDA</code> if it is not in the default <code>/usr/local/cuda</code> path.</li>
@@ -166,6 +167,9 @@ Third party libraries and packages</h2>
 <li>GINKGO_BUILD_BENCHMARKS=ON: For argument management we use <a href="https://github.com/gflags/gflags">gflags</a> and for JSON parsing we use <a href="https://github.com/Tencent/rapidjson">RapidJSON</a>;</li>
 <li>GINKGO_DEVEL_TOOLS=ON: <a href="https://github.com/gflegar/git-cmake-format">git-cmake-format</a> is our CMake helper for code formatting.</li>
 <li>GINKGO_BUILD_HWLOC=ON: <a href="https://www.open-mpi.org/projects/hwloc">hwloc</a> to detect and control cores and devices.</li>
+<li>GINKGO_BUILD_HWLOC=ON and GINKGO_BUILD_TESTS=ON: <a href="https://www.man7.org/linux/man-pages/man3/numa.3.html">libnuma</a> is required when testing the functions provided through MachineTopology.</li>
+<li>GINKGO_BUILD_EXAMPLES=ON: <a href="https://opencv.org/">OpenCV</a> is required for some examples, they are disabled when OpenCV is not available.</li>
+<li>GINKGO_BUILD_DOC=ON: <a href="https://www.doxygen.nl/">doxygen</a> is required to build the documentation and additionally <a href="https://graphviz.org/">graphviz</a> is required to build the class hierarchy graphs.</li>
 </ul>
 <p>Ginkgo attempts to use pre-installed versions of these package if they match version requirements using <code>find_package</code>. Otherwise, the configuration step will download the files for each of the packages <code>GTest</code>, <code>gflags</code>, <code>RapidJSON</code> and <code>hwloc</code> and build them internally.</p>
 <p>Note that, if the external packages were not installed to the default location, the CMake option <code>-DCMAKE_PREFIX_PATH=&lt;path-list&gt;</code> needs to be set to the semicolon (<code>;</code>) separated list of install paths of these external packages. For more Information, see the <a href="https://cmake.org/cmake/help/v3.9/variable/CMAKE_PREFIX_PATH.html">CMake documentation for CMAKE_PREFIX_PATH</a> for details.</p>
@@ -175,7 +179,7 @@ Installing Ginkgo</h2>
 <p>To install Ginkgo into the specified folder, execute the following command in the build folder</p>
 <div class="fragment"><div class="line">make install</div>
 </div><!-- fragment --><p>If the installation prefix (see <code>CMAKE_INSTALL_PREFIX</code>) is not writable for your user, e.g. when installing Ginkgo system-wide, it might be necessary to prefix the call with <code>sudo</code>.</p>
-<p>After the installation, CMake can find ginkgo with <code>find_package(Ginkgo)</code>. An example can be found in the <a href="test_install/CMakeLists.txt"><code>test_install</code></a>. </p>
+<p>After the installation, CMake can find ginkgo with <code>find_package(Ginkgo)</code>. An example can be found in the <a href="test/test_install/CMakeLists.txt"><code>test_install</code></a>. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- start footer part -->

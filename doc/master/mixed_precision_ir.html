@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from tags/v1.4.0 branch based on master. Ginkgo version 1.4.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/693265515 branch based on master. Ginkgo version 1.5.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -102,7 +102,7 @@ $(function() {
 <div class="line"><span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"> </div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> *argv[])</div>
+<div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
 <div class="line">{</div>
 </div><!-- fragment --><p>Some shortcuts</p>
 <div class="fragment"><div class="line"><span class="keyword">using</span> ValueType = double;</div>
@@ -145,8 +145,8 @@ $(function() {
 <div class="line">         }},</div>
 <div class="line">        {<span class="stringliteral">&quot;dpcpp&quot;</span>,</div>
 <div class="line">         [] {</div>
-<div class="line">             <span class="keywordflow">return</span> <a class="code" href="classgko_1_1DpcppExecutor.html#ac46044fcb00b2d224b45d93eaf8c579d">gko::DpcppExecutor::create</a>(0,</div>
-<div class="line">                                               <a class="code" href="classgko_1_1OmpExecutor.html#a33ca05fdd0fc928ee262fc9425304874">gko::OmpExecutor::create</a>());</div>
+<div class="line">             <span class="keywordflow">return</span> <a class="code" href="classgko_1_1DpcppExecutor.html#ae9b875dfe3af7f3f3f24071bfb2f895e">gko::DpcppExecutor::create</a>(</div>
+<div class="line">                 0, gko::ReferenceExecutor::create());</div>
 <div class="line">         }},</div>
 <div class="line">        {<span class="stringliteral">&quot;reference&quot;</span>, [] { <span class="keywordflow">return</span> gko::ReferenceExecutor::create(); }}};</div>
 </div><!-- fragment --><p>executor where Ginkgo will perform the computation</p>
@@ -159,22 +159,20 @@ $(function() {
 <div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0; i &lt; size; i++) {</div>
 <div class="line">    host_x-&gt;at(i, 0) = 1.;</div>
 <div class="line">}</div>
-<div class="line"><span class="keyword">auto</span> x = vec::create(exec);</div>
-<div class="line"><span class="keyword">auto</span> b = vec::create(exec);</div>
-<div class="line">x-&gt;copy_from(host_x.get());</div>
-<div class="line">b-&gt;copy_from(host_x.get());</div>
+<div class="line"><span class="keyword">auto</span> x = <a class="code" href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a>(exec, host_x);</div>
+<div class="line"><span class="keyword">auto</span> b = <a class="code" href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a>(exec, host_x);</div>
 </div><!-- fragment --><p>Calculate initial residual by overwriting b</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> <a class="code" href="namespacegko.html#a0059e27f8f4bc348ff65c1e60caf47c8">one</a> = gko::initialize&lt;vec&gt;({1.0}, exec);</div>
 <div class="line"><span class="keyword">auto</span> neg_one = gko::initialize&lt;vec&gt;({-1.0}, exec);</div>
 <div class="line"><span class="keyword">auto</span> initres_vec = gko::initialize&lt;real_vec&gt;({0.0}, exec);</div>
-<div class="line">A-&gt;apply(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(one), <a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(x), <a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(neg_one), <a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(b));</div>
-<div class="line">b-&gt;compute_norm2(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(initres_vec));</div>
+<div class="line">A-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(x), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(neg_one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(b));</div>
+<div class="line">b-&gt;compute_norm2(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(initres_vec));</div>
 </div><!-- fragment --><p>Build lower-precision system matrix and residual</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> solver_A = solver_mtx::create(exec);</div>
 <div class="line"><span class="keyword">auto</span> inner_residual = solver_vec::create(exec);</div>
 <div class="line"><span class="keyword">auto</span> outer_residual = vec::create(exec);</div>
-<div class="line">A-&gt;convert_to(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(solver_A));</div>
-<div class="line">b-&gt;convert_to(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(outer_residual));</div>
+<div class="line">A-&gt;convert_to(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(solver_A));</div>
+<div class="line">b-&gt;convert_to(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(outer_residual));</div>
 </div><!-- fragment --><p>restore b</p>
 <div class="fragment"><div class="line">b-&gt;copy_from(host_x.get());</div>
 </div><!-- fragment --><p>Create inner solver</p>
@@ -200,35 +198,35 @@ $(function() {
 <div class="line"><span class="keywordflow">while</span> (<span class="keyword">true</span>) {</div>
 <div class="line">    ++iter;</div>
 </div><!-- fragment --><p>convert residual to inner precision</p>
-<div class="fragment"><div class="line">outer_residual-&gt;convert_to(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(inner_residual));</div>
-<div class="line">outer_residual-&gt;compute_norm2(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(res_vec));</div>
+<div class="fragment"><div class="line">outer_residual-&gt;convert_to(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(inner_residual));</div>
+<div class="line">outer_residual-&gt;compute_norm2(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(res_vec));</div>
 <div class="line"><span class="keyword">auto</span> res = exec-&gt;copy_val_to_host(res_vec-&gt;get_const_values());</div>
 </div><!-- fragment --><p>break if we exceed the number of iterations or have converged</p>
 <div class="fragment"><div class="line"><span class="keywordflow">if</span> (iter &gt; max_outer_iters || res / initres &lt; outer_reduction_factor) {</div>
 <div class="line">    <span class="keywordflow">break</span>;</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>Use the inner solver to solve A * inner_solution = inner_residual with residual as initial guess.</p>
-<div class="fragment"><div class="line">inner_solution-&gt;copy_from(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(inner_residual));</div>
-<div class="line">inner_solver-&gt;apply(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(inner_residual), <a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(inner_solution));</div>
+<div class="fragment"><div class="line">inner_solution-&gt;copy_from(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(inner_residual));</div>
+<div class="line">inner_solver-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(inner_residual), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(inner_solution));</div>
 </div><!-- fragment --><p>convert inner solution to outer precision</p>
-<div class="fragment"><div class="line">inner_solution-&gt;convert_to(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(outer_delta));</div>
+<div class="fragment"><div class="line">inner_solution-&gt;convert_to(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(outer_delta));</div>
 </div><!-- fragment --><p>x = x + inner_solution</p>
-<div class="fragment"><div class="line">x-&gt;add_scaled(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(one), <a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(outer_delta));</div>
+<div class="fragment"><div class="line">x-&gt;add_scaled(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(outer_delta));</div>
 </div><!-- fragment --><p>residual = b - A * x</p>
-<div class="fragment"><div class="line">    outer_residual-&gt;copy_from(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(b));</div>
-<div class="line">    A-&gt;apply(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(neg_one), <a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(x), <a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(one), <a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(outer_residual));</div>
+<div class="fragment"><div class="line">    outer_residual-&gt;copy_from(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(b));</div>
+<div class="line">    A-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(neg_one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(x), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(outer_residual));</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">auto</span> toc = std::chrono::steady_clock::now();</div>
 <div class="line">time += std::chrono::duration_cast&lt;std::chrono::nanoseconds&gt;(toc - tic);</div>
 </div><!-- fragment --><p>Calculate residual</p>
-<div class="fragment"><div class="line">A-&gt;apply(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(one), <a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(x), <a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(neg_one), <a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(b));</div>
-<div class="line">b-&gt;compute_norm2(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(res_vec));</div>
+<div class="fragment"><div class="line">A-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(x), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(neg_one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(b));</div>
+<div class="line">b-&gt;compute_norm2(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(res_vec));</div>
 <div class="line"> </div>
 <div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;Initial residual norm sqrt(r^T r):\n&quot;</span>;</div>
-<div class="line"><a class="code" href="namespacegko.html#a859dc47a462721d83728d91ab7fa2148">write</a>(std::cout, <a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(initres_vec));</div>
+<div class="line"><a class="code" href="namespacegko.html#aa24837da3770b3dddf981d9bfe0d3b52">write</a>(std::cout, <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(initres_vec));</div>
 <div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;Final residual norm sqrt(r^T r):\n&quot;</span>;</div>
-<div class="line"><a class="code" href="namespacegko.html#a859dc47a462721d83728d91ab7fa2148">write</a>(std::cout, <a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(res_vec));</div>
+<div class="line"><a class="code" href="namespacegko.html#aa24837da3770b3dddf981d9bfe0d3b52">write</a>(std::cout, <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(res_vec));</div>
 </div><!-- fragment --><p>Print solver statistics</p>
 <div class="fragment"><div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;MPIR iteration count:     &quot;</span> &lt;&lt; iter &lt;&lt; std::endl;</div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;MPIR execution time [ms]: &quot;</span></div>
@@ -237,11 +235,11 @@ $(function() {
 </div><!-- fragment --><p> <a class="anchor" id="Results"></a></p><h1>Results</h1>
 <p>This is the expected output:</p>
 <div class="fragment"><div class="line">Initial residual norm sqrt(r^T r):</div>
-<div class="line">%%MatrixMarket matrix <a class="code" href="namespacegko.html#ae749a5ea11a93c1bcc9158d9a6e9fb68af1f713c9e000f5d3f280adbd124df4f5">array</a> <a class="code" href="namespacegko.html#a85e29870bacc4e660be5acbbf742305e">real</a> general</div>
+<div class="line">%%MatrixMarket matrix <a class="code" href="namespacegko.html#ae749a5ea11a93c1bcc9158d9a6e9fb68af1f713c9e000f5d3f280adbd124df4f5">array</a> <a class="code" href="namespacegko.html#af21648097306adbabc6234b4609ce297">real</a> general</div>
 <div class="line">1 1</div>
 <div class="line">194.679</div>
 <div class="line">Final residual norm sqrt(r^T r):</div>
-<div class="line">%%MatrixMarket matrix <a class="code" href="namespacegko.html#ae749a5ea11a93c1bcc9158d9a6e9fb68af1f713c9e000f5d3f280adbd124df4f5">array</a> <a class="code" href="namespacegko.html#a85e29870bacc4e660be5acbbf742305e">real</a> general</div>
+<div class="line">%%MatrixMarket matrix <a class="code" href="namespacegko.html#ae749a5ea11a93c1bcc9158d9a6e9fb68af1f713c9e000f5d3f280adbd124df4f5">array</a> <a class="code" href="namespacegko.html#af21648097306adbabc6234b4609ce297">real</a> general</div>
 <div class="line">1 1</div>
 <div class="line">1.22728e-10</div>
 <div class="line">MPIR iteration count:     25</div>
@@ -249,7 +247,7 @@ $(function() {
 </div><!-- fragment --><p><a class="anchor" id="Commentsaboutprogramminganddebugging"></a></p><h3>Comments about programming and debugging </h3>
 <p><a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
 <div class="fragment"><div class="line"><span class="comment">/*******************************&lt;GINKGO LICENSE&gt;******************************</span></div>
-<div class="line"><span class="comment">Copyright (c) 2017-2021, the Ginkgo authors</span></div>
+<div class="line"><span class="comment">Copyright (c) 2017-2022, the Ginkgo authors</span></div>
 <div class="line"><span class="comment">All rights reserved.</span></div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">Redistribution and use in source and binary forms, with or without</span></div>
@@ -291,7 +289,7 @@ $(function() {
 <div class="line"><span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"> </div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> *argv[])</div>
+<div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
 <div class="line">{</div>
 <div class="line">    <span class="keyword">using</span> ValueType = double;</div>
 <div class="line">    <span class="keyword">using</span> RealValueType = <a class="code" href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">gko::remove_complex&lt;ValueType&gt;</a>;</div>
@@ -333,8 +331,8 @@ $(function() {
 <div class="line">             }},</div>
 <div class="line">            {<span class="stringliteral">&quot;dpcpp&quot;</span>,</div>
 <div class="line">             [] {</div>
-<div class="line">                 <span class="keywordflow">return</span> <a class="code" href="classgko_1_1DpcppExecutor.html#ac46044fcb00b2d224b45d93eaf8c579d">gko::DpcppExecutor::create</a>(0,</div>
-<div class="line">                                                   <a class="code" href="classgko_1_1OmpExecutor.html#a33ca05fdd0fc928ee262fc9425304874">gko::OmpExecutor::create</a>());</div>
+<div class="line">                 <span class="keywordflow">return</span> <a class="code" href="classgko_1_1DpcppExecutor.html#ae9b875dfe3af7f3f3f24071bfb2f895e">gko::DpcppExecutor::create</a>(</div>
+<div class="line">                     0, gko::ReferenceExecutor::create());</div>
 <div class="line">             }},</div>
 <div class="line">            {<span class="stringliteral">&quot;reference&quot;</span>, [] { <span class="keywordflow">return</span> gko::ReferenceExecutor::create(); }}};</div>
 <div class="line"> </div>
@@ -346,22 +344,20 @@ $(function() {
 <div class="line">    <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0; i &lt; size; i++) {</div>
 <div class="line">        host_x-&gt;at(i, 0) = 1.;</div>
 <div class="line">    }</div>
-<div class="line">    <span class="keyword">auto</span> x = vec::create(exec);</div>
-<div class="line">    <span class="keyword">auto</span> b = vec::create(exec);</div>
-<div class="line">    x-&gt;copy_from(host_x.get());</div>
-<div class="line">    b-&gt;copy_from(host_x.get());</div>
+<div class="line">    <span class="keyword">auto</span> x = <a class="code" href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a>(exec, host_x);</div>
+<div class="line">    <span class="keyword">auto</span> b = <a class="code" href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a>(exec, host_x);</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">auto</span> <a class="code" href="namespacegko.html#a0059e27f8f4bc348ff65c1e60caf47c8">one</a> = gko::initialize&lt;vec&gt;({1.0}, exec);</div>
 <div class="line">    <span class="keyword">auto</span> neg_one = gko::initialize&lt;vec&gt;({-1.0}, exec);</div>
 <div class="line">    <span class="keyword">auto</span> initres_vec = gko::initialize&lt;real_vec&gt;({0.0}, exec);</div>
-<div class="line">    A-&gt;apply(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(one), <a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(x), <a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(neg_one), <a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(b));</div>
-<div class="line">    b-&gt;compute_norm2(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(initres_vec));</div>
+<div class="line">    A-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(x), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(neg_one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(b));</div>
+<div class="line">    b-&gt;compute_norm2(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(initres_vec));</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">auto</span> solver_A = solver_mtx::create(exec);</div>
 <div class="line">    <span class="keyword">auto</span> inner_residual = solver_vec::create(exec);</div>
 <div class="line">    <span class="keyword">auto</span> outer_residual = vec::create(exec);</div>
-<div class="line">    A-&gt;convert_to(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(solver_A));</div>
-<div class="line">    b-&gt;convert_to(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(outer_residual));</div>
+<div class="line">    A-&gt;convert_to(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(solver_A));</div>
+<div class="line">    b-&gt;convert_to(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(outer_residual));</div>
 <div class="line"> </div>
 <div class="line">    b-&gt;copy_from(host_x.get());</div>
 <div class="line"> </div>
@@ -387,35 +383,35 @@ $(function() {
 <div class="line">    <span class="keywordflow">while</span> (<span class="keyword">true</span>) {</div>
 <div class="line">        ++iter;</div>
 <div class="line"> </div>
-<div class="line">        outer_residual-&gt;convert_to(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(inner_residual));</div>
-<div class="line">        outer_residual-&gt;compute_norm2(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(res_vec));</div>
+<div class="line">        outer_residual-&gt;convert_to(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(inner_residual));</div>
+<div class="line">        outer_residual-&gt;compute_norm2(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(res_vec));</div>
 <div class="line">        <span class="keyword">auto</span> res = exec-&gt;copy_val_to_host(res_vec-&gt;get_const_values());</div>
 <div class="line"> </div>
 <div class="line">        <span class="keywordflow">if</span> (iter &gt; max_outer_iters || res / initres &lt; outer_reduction_factor) {</div>
 <div class="line">            <span class="keywordflow">break</span>;</div>
 <div class="line">        }</div>
 <div class="line"> </div>
-<div class="line">        inner_solution-&gt;copy_from(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(inner_residual));</div>
-<div class="line">        inner_solver-&gt;apply(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(inner_residual), <a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(inner_solution));</div>
+<div class="line">        inner_solution-&gt;copy_from(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(inner_residual));</div>
+<div class="line">        inner_solver-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(inner_residual), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(inner_solution));</div>
 <div class="line"> </div>
-<div class="line">        inner_solution-&gt;convert_to(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(outer_delta));</div>
+<div class="line">        inner_solution-&gt;convert_to(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(outer_delta));</div>
 <div class="line"> </div>
-<div class="line">        x-&gt;add_scaled(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(one), <a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(outer_delta));</div>
+<div class="line">        x-&gt;add_scaled(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(outer_delta));</div>
 <div class="line"> </div>
-<div class="line">        outer_residual-&gt;copy_from(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(b));</div>
-<div class="line">        A-&gt;apply(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(neg_one), <a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(x), <a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(one), <a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(outer_residual));</div>
+<div class="line">        outer_residual-&gt;copy_from(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(b));</div>
+<div class="line">        A-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(neg_one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(x), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(outer_residual));</div>
 <div class="line">    }</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">auto</span> toc = std::chrono::steady_clock::now();</div>
 <div class="line">    time += std::chrono::duration_cast&lt;std::chrono::nanoseconds&gt;(toc - tic);</div>
 <div class="line"> </div>
-<div class="line">    A-&gt;apply(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(one), <a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(x), <a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(neg_one), <a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(b));</div>
-<div class="line">    b-&gt;compute_norm2(<a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(res_vec));</div>
+<div class="line">    A-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(x), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(neg_one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(b));</div>
+<div class="line">    b-&gt;compute_norm2(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(res_vec));</div>
 <div class="line"> </div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Initial residual norm sqrt(r^T r):\n&quot;</span>;</div>
-<div class="line">    <a class="code" href="namespacegko.html#a859dc47a462721d83728d91ab7fa2148">write</a>(std::cout, <a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(initres_vec));</div>
+<div class="line">    <a class="code" href="namespacegko.html#aa24837da3770b3dddf981d9bfe0d3b52">write</a>(std::cout, <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(initres_vec));</div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Final residual norm sqrt(r^T r):\n&quot;</span>;</div>
-<div class="line">    <a class="code" href="namespacegko.html#a859dc47a462721d83728d91ab7fa2148">write</a>(std::cout, <a class="code" href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">lend</a>(res_vec));</div>
+<div class="line">    <a class="code" href="namespacegko.html#aa24837da3770b3dddf981d9bfe0d3b52">write</a>(std::cout, <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(res_vec));</div>
 <div class="line"> </div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;MPIR iteration count:     &quot;</span> &lt;&lt; iter &lt;&lt; std::endl;</div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;MPIR execution time [ms]: &quot;</span></div>
@@ -423,25 +419,26 @@ $(function() {
 <div class="line">}</div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->
-<div class="ttc" id="aclassgko_1_1matrix_1_1Csr_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Csr.html">gko::matrix::Csr</a></div><div class="ttdoc">CSR is a matrix format which stores only the nonzero coefficients by compressing each row of the matr...</div><div class="ttdef"><b>Definition:</b> coo.hpp:51</div></div>
-<div class="ttc" id="anamespacegko_html_a85e29870bacc4e660be5acbbf742305e"><div class="ttname"><a href="namespacegko.html#a85e29870bacc4e660be5acbbf742305e">gko::real</a></div><div class="ttdeci">constexpr std::enable_if_t&lt;!is_complex_s&lt; T &gt;::value, T &gt; real(const T &amp;x)</div><div class="ttdoc">Returns the real part of the object.</div><div class="ttdef"><b>Definition:</b> math.hpp:831</div></div>
+<div class="ttc" id="aclassgko_1_1matrix_1_1Csr_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Csr.html">gko::matrix::Csr</a></div><div class="ttdoc">CSR is a matrix format which stores only the nonzero coefficients by compressing each row of the matr...</div><div class="ttdef"><b>Definition:</b> matrix.hpp:54</div></div>
 <div class="ttc" id="anamespacegko_html_ae749a5ea11a93c1bcc9158d9a6e9fb68af1f713c9e000f5d3f280adbd124df4f5"><div class="ttname"><a href="namespacegko.html#ae749a5ea11a93c1bcc9158d9a6e9fb68af1f713c9e000f5d3f280adbd124df4f5">gko::layout_type::array</a></div><div class="ttdoc">The matrix should be written as dense matrix in column-major order.</div></div>
-<div class="ttc" id="anamespacegko_html_acbd3fd6d07e498892881e8e2ab0b4167"><div class="ttname"><a href="namespacegko.html#acbd3fd6d07e498892881e8e2ab0b4167">gko::give</a></div><div class="ttdeci">std::remove_reference&lt; OwningPointer &gt;::type &amp;&amp; give(OwningPointer &amp;&amp;p)</div><div class="ttdoc">Marks that the object pointed to by p can be given to the callee.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:231</div></div>
-<div class="ttc" id="aclassgko_1_1matrix_1_1Dense_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Dense.html">gko::matrix::Dense</a></div><div class="ttdoc">Dense is a matrix format which explicitly stores all values of the matrix.</div><div class="ttdef"><b>Definition:</b> coo.hpp:55</div></div>
-<div class="ttc" id="aclassgko_1_1OmpExecutor_html_a33ca05fdd0fc928ee262fc9425304874"><div class="ttname"><a href="classgko_1_1OmpExecutor.html#a33ca05fdd0fc928ee262fc9425304874">gko::OmpExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; OmpExecutor &gt; create()</div><div class="ttdoc">Creates a new OmpExecutor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1163</div></div>
+<div class="ttc" id="anamespacegko_html_acbd3fd6d07e498892881e8e2ab0b4167"><div class="ttname"><a href="namespacegko.html#acbd3fd6d07e498892881e8e2ab0b4167">gko::give</a></div><div class="ttdeci">std::remove_reference&lt; OwningPointer &gt;::type &amp;&amp; give(OwningPointer &amp;&amp;p)</div><div class="ttdoc">Marks that the object pointed to by p can be given to the callee.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:234</div></div>
+<div class="ttc" id="aclassgko_1_1matrix_1_1Dense_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Dense.html">gko::matrix::Dense</a></div><div class="ttdoc">Dense is a matrix format which explicitly stores all values of the matrix.</div><div class="ttdef"><b>Definition:</b> dense_cache.hpp:48</div></div>
+<div class="ttc" id="aclassgko_1_1OmpExecutor_html_a33ca05fdd0fc928ee262fc9425304874"><div class="ttname"><a href="classgko_1_1OmpExecutor.html#a33ca05fdd0fc928ee262fc9425304874">gko::OmpExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; OmpExecutor &gt; create()</div><div class="ttdoc">Creates a new OmpExecutor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1257</div></div>
 <div class="ttc" id="anamespacegko_html_a6e5c95df0ae4e47aab2f604a22d98ee7"><div class="ttname"><a href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">gko::size_type</a></div><div class="ttdeci">std::size_t size_type</div><div class="ttdoc">Integral type used for allocation quantities.</div><div class="ttdef"><b>Definition:</b> types.hpp:105</div></div>
-<div class="ttc" id="anamespacegko_html_a859dc47a462721d83728d91ab7fa2148"><div class="ttname"><a href="namespacegko.html#a859dc47a462721d83728d91ab7fa2148">gko::write</a></div><div class="ttdeci">void write(StreamType &amp;&amp;os, MatrixType *matrix, layout_type layout=layout_type::array)</div><div class="ttdoc">Reads a matrix stored in matrix market format from an input stream.</div><div class="ttdef"><b>Definition:</b> mtx_io.hpp:134</div></div>
+<div class="ttc" id="anamespacegko_html_a1beb80750459e4201aa9d882d2d074c3"><div class="ttname"><a href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a></div><div class="ttdeci">detail::cloned_type&lt; Pointer &gt; clone(const Pointer &amp;p)</div><div class="ttdoc">Creates a unique clone of the object pointed to by p.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:160</div></div>
 <div class="ttc" id="aclassgko_1_1version__info_html_a6daeb8a087cfb57fa055526fc133d8eb"><div class="ttname"><a href="classgko_1_1version__info.html#a6daeb8a087cfb57fa055526fc133d8eb">gko::version_info::get</a></div><div class="ttdeci">static const version_info &amp; get()</div><div class="ttdoc">Returns an instance of version_info.</div><div class="ttdef"><b>Definition:</b> version.hpp:168</div></div>
-<div class="ttc" id="aclassgko_1_1stop_1_1ResidualNorm_html"><div class="ttname"><a href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm</a></div><div class="ttdoc">The ResidualNorm class is a stopping criterion which stops the iteration process when the actual resi...</div><div class="ttdef"><b>Definition:</b> residual_norm.hpp:214</div></div>
-<div class="ttc" id="anamespacegko_html_a4edc2273b5627ec552ea423b60493be3"><div class="ttname"><a href="namespacegko.html#a4edc2273b5627ec552ea423b60493be3">gko::lend</a></div><div class="ttdeci">std::enable_if&lt; detail::have_ownership_s&lt; Pointer &gt;::value, detail::pointee&lt; Pointer &gt; * &gt;::type lend(const Pointer &amp;p)</div><div class="ttdoc">Returns a non-owning (plain) pointer to the object pointed to by p.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:253</div></div>
+<div class="ttc" id="aclassgko_1_1stop_1_1ResidualNorm_html"><div class="ttname"><a href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm</a></div><div class="ttdoc">The ResidualNorm class is a stopping criterion which stops the iteration process when the actual resi...</div><div class="ttdef"><b>Definition:</b> residual_norm.hpp:137</div></div>
 <div class="ttc" id="astructgko_1_1dim_html"><div class="ttname"><a href="structgko_1_1dim.html">gko::dim&lt; 2 &gt;</a></div></div>
-<div class="ttc" id="aclassgko_1_1solver_1_1Cg_html"><div class="ttname"><a href="classgko_1_1solver_1_1Cg.html">gko::solver::Cg</a></div><div class="ttdoc">CG or the conjugate gradient method is an iterative type Krylov subspace method which is suitable for...</div><div class="ttdef"><b>Definition:</b> cg.hpp:73</div></div>
+<div class="ttc" id="aclassgko_1_1solver_1_1Cg_html"><div class="ttname"><a href="classgko_1_1solver_1_1Cg.html">gko::solver::Cg</a></div><div class="ttdoc">CG or the conjugate gradient method is an iterative type Krylov subspace method which is suitable for...</div><div class="ttdef"><b>Definition:</b> cg.hpp:74</div></div>
 <div class="ttc" id="aclassgko_1_1CudaExecutor_html_a5dcec3ca1c458382e01191b727959a81"><div class="ttname"><a href="classgko_1_1CudaExecutor.html#a5dcec3ca1c458382e01191b727959a81">gko::CudaExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; CudaExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, bool device_reset=false, allocation_mode alloc_mode=default_cuda_alloc_mode)</div><div class="ttdoc">Creates a new CudaExecutor.</div></div>
-<div class="ttc" id="aclassgko_1_1DpcppExecutor_html_ac46044fcb00b2d224b45d93eaf8c579d"><div class="ttname"><a href="classgko_1_1DpcppExecutor.html#ac46044fcb00b2d224b45d93eaf8c579d">gko::DpcppExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; DpcppExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, std::string device_type=&quot;all&quot;)</div><div class="ttdoc">Creates a new DpcppExecutor.</div></div>
-<div class="ttc" id="anamespacegko_html_a3ce296f73db0ff398bdea6009a3a5c58"><div class="ttname"><a href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a></div><div class="ttdeci">detail::shared_type&lt; OwningPointer &gt; share(OwningPointer &amp;&amp;p)</div><div class="ttdoc">Marks the object pointed to by p as shared.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:210</div></div>
+<div class="ttc" id="anamespacegko_html_aa24837da3770b3dddf981d9bfe0d3b52"><div class="ttname"><a href="namespacegko.html#aa24837da3770b3dddf981d9bfe0d3b52">gko::write</a></div><div class="ttdeci">void write(StreamType &amp;&amp;os, MatrixType *matrix, layout_type layout=detail::mtx_io_traits&lt; std::remove_const_t&lt; MatrixType &gt;&gt;::default_layout)</div><div class="ttdoc">Writes a matrix into an output stream in matrix market format.</div><div class="ttdef"><b>Definition:</b> mtx_io.hpp:324</div></div>
+<div class="ttc" id="anamespacegko_html_a3ce296f73db0ff398bdea6009a3a5c58"><div class="ttname"><a href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a></div><div class="ttdeci">detail::shared_type&lt; OwningPointer &gt; share(OwningPointer &amp;&amp;p)</div><div class="ttdoc">Marks the object pointed to by p as shared.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:211</div></div>
+<div class="ttc" id="anamespacegko_html_a014ec51e675c425bb83908361f630450"><div class="ttname"><a href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a></div><div class="ttdeci">std::enable_if&lt; detail::have_ownership_s&lt; Pointer &gt;::value, detail::pointee&lt; Pointer &gt; * &gt;::type lend(const Pointer &amp;p)</div><div class="ttdoc">Returns a non-owning (plain) pointer to the object pointed to by p.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:256</div></div>
 <div class="ttc" id="aclassgko_1_1HipExecutor_html_ad3a72bc42254fb8730bc2090147447d9"><div class="ttname"><a href="classgko_1_1HipExecutor.html#ad3a72bc42254fb8730bc2090147447d9">gko::HipExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; HipExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, bool device_reset=false, allocation_mode alloc_mode=default_hip_alloc_mode)</div><div class="ttdoc">Creates a new HipExecutor.</div></div>
-<div class="ttc" id="anamespacegko_html_afd46d554050c4ae90e84ea4fcd9a41f3"><div class="ttname"><a href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">gko::remove_complex</a></div><div class="ttdeci">typename detail::remove_complex_s&lt; T &gt;::type remove_complex</div><div class="ttdoc">Obtain the type which removed the complex of complex/scalar type or the template parameter of class b...</div><div class="ttdef"><b>Definition:</b> math.hpp:358</div></div>
-<div class="ttc" id="anamespacegko_html_a0059e27f8f4bc348ff65c1e60caf47c8"><div class="ttname"><a href="namespacegko.html#a0059e27f8f4bc348ff65c1e60caf47c8">gko::one</a></div><div class="ttdeci">constexpr T one()</div><div class="ttdoc">Returns the multiplicative identity for T.</div><div class="ttdef"><b>Definition:</b> math.hpp:756</div></div>
+<div class="ttc" id="anamespacegko_html_afd46d554050c4ae90e84ea4fcd9a41f3"><div class="ttname"><a href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">gko::remove_complex</a></div><div class="ttdeci">typename detail::remove_complex_s&lt; T &gt;::type remove_complex</div><div class="ttdoc">Obtain the type which removed the complex of complex/scalar type or the template parameter of class b...</div><div class="ttdef"><b>Definition:</b> math.hpp:359</div></div>
+<div class="ttc" id="aclassgko_1_1DpcppExecutor_html_ae9b875dfe3af7f3f3f24071bfb2f895e"><div class="ttname"><a href="classgko_1_1DpcppExecutor.html#ae9b875dfe3af7f3f3f24071bfb2f895e">gko::DpcppExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; DpcppExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, std::string device_type=&quot;all&quot;, dpcpp_queue_property property=dpcpp_queue_property::in_order)</div><div class="ttdoc">Creates a new DpcppExecutor.</div></div>
+<div class="ttc" id="anamespacegko_html_af21648097306adbabc6234b4609ce297"><div class="ttname"><a href="namespacegko.html#af21648097306adbabc6234b4609ce297">gko::real</a></div><div class="ttdeci">constexpr auto real(const T &amp;x)</div><div class="ttdoc">Returns the real part of the object.</div><div class="ttdef"><b>Definition:</b> math.hpp:1046</div></div>
+<div class="ttc" id="anamespacegko_html_a0059e27f8f4bc348ff65c1e60caf47c8"><div class="ttname"><a href="namespacegko.html#a0059e27f8f4bc348ff65c1e60caf47c8">gko::one</a></div><div class="ttdeci">constexpr T one()</div><div class="ttdoc">Returns the multiplicative identity for T.</div><div class="ttdef"><b>Definition:</b> math.hpp:808</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

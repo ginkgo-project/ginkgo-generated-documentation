@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['size_5ftype_1829',['size_type',['../namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7',1,'gko']]],
-  ['storage_5ftype_1830',['storage_type',['../classgko_1_1precision__reduction.html#a2a1a94a27fa69b4cc321136b56e7b7d9',1,'gko::precision_reduction']]]
+  ['previous_5fprecision_2628',['previous_precision',['../namespacegko.html#a71559818fee20b97bc6ea6712ec75034',1,'gko']]]
 ];
