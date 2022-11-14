@@ -1,0 +1,445 @@
+\hypertarget{classgko_1_1device__matrix__data}{}\doxysection{gko\+::device\+\_\+matrix\+\_\+data$<$ Value\+Type, Index\+Type $>$ Class Template Reference}
+\label{classgko_1_1device__matrix__data}\index{gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}}
+
+
+This type is a device-\/side equivalent to \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}}.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/base/device\+\_\+matrix\+\_\+data.\+hpp$>$}
+
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structgko_1_1device__matrix__data_1_1arrays}{arrays}}
+\begin{DoxyCompactList}\small\item\em Stores the internal arrays of a \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1device__matrix__data_abb83698becb99faf52fc26319b52f1d9}\label{classgko_1_1device__matrix__data_abb83698becb99faf52fc26319b52f1d9}} 
+using {\bfseries value\+\_\+type} = Value\+Type
+\item 
+\mbox{\Hypertarget{classgko_1_1device__matrix__data_a903c240354e4e2dda41839583e64fe62}\label{classgko_1_1device__matrix__data_a903c240354e4e2dda41839583e64fe62}} 
+using {\bfseries index\+\_\+type} = Index\+Type
+\item 
+\mbox{\Hypertarget{classgko_1_1device__matrix__data_add68441417718ce6caaf4d1f9ff7af96}\label{classgko_1_1device__matrix__data_add68441417718ce6caaf4d1f9ff7af96}} 
+using {\bfseries nonzero\+\_\+type} = \mbox{\hyperlink{structgko_1_1matrix__data__entry}{matrix\+\_\+data\+\_\+entry}}$<$ value\+\_\+type, index\+\_\+type $>$
+\item 
+\mbox{\Hypertarget{classgko_1_1device__matrix__data_a409c28e18a9275ba4902bc7791634a2a}\label{classgko_1_1device__matrix__data_a409c28e18a9275ba4902bc7791634a2a}} 
+using {\bfseries host\+\_\+type} = \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}}$<$ value\+\_\+type, index\+\_\+type $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgko_1_1device__matrix__data_a3653ff48a4c4206892c87ecb0fd23203}{device\+\_\+matrix\+\_\+data}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ size=\{\}, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} num\+\_\+entries=0)
+\begin{DoxyCompactList}\small\item\em Initializes a new \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1device__matrix__data_ab2ea8a6610e43c02cf0f3080805faa0d}{device\+\_\+matrix\+\_\+data}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} \&data)
+\begin{DoxyCompactList}\small\item\em Initializes a \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} object by copying an existing object on another executor. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Value\+Array , typename Row\+Index\+Array , typename Col\+Index\+Array $>$ }\\\mbox{\hyperlink{classgko_1_1device__matrix__data_a1084cf17a3cb3ccf9039a41576f55497}{device\+\_\+matrix\+\_\+data}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ size, Row\+Index\+Array \&\&row\+\_\+idxs, Col\+Index\+Array \&\&col\+\_\+idxs, Value\+Array \&\&values)
+\begin{DoxyCompactList}\small\item\em Initializes a new \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} object from existing data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structgko_1_1matrix__data}{host\+\_\+type}} \mbox{\hyperlink{classgko_1_1device__matrix__data_ad76d20b33f8744baa54594a62d5a458c}{copy\+\_\+to\+\_\+host}} () const
+\begin{DoxyCompactList}\small\item\em Copies the \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} entries to the host to return a regular \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} object with the same dimensions and entries. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1device__matrix__data_a78a09fe708c05b511d9b7d5db8d3e9aa}\label{classgko_1_1device__matrix__data_a78a09fe708c05b511d9b7d5db8d3e9aa}} 
+void \mbox{\hyperlink{classgko_1_1device__matrix__data_a78a09fe708c05b511d9b7d5db8d3e9aa}{sort\+\_\+row\+\_\+major}} ()
+\begin{DoxyCompactList}\small\item\em Sorts the matrix entries in row-\/major order This means that they will be sorted by row index first, and then by column index inside each row. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1device__matrix__data_ad4fb4fc719d1127c009c9908c9ad7927}{remove\+\_\+zeros}} ()
+\begin{DoxyCompactList}\small\item\em Removes all zero entries from the storage. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1device__matrix__data_a8b58afc780989cfcba739829572fe7ab}{sum\+\_\+duplicates}} ()
+\begin{DoxyCompactList}\small\item\em Sums up all duplicate entries pointing to the same non-\/zero location. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ \mbox{\hyperlink{classgko_1_1device__matrix__data_ae857ccd7c5fdf388d01914112e3be524}{get\+\_\+executor}} () const
+\begin{DoxyCompactList}\small\item\em Returns the executor used to store the \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} entries. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \mbox{\hyperlink{classgko_1_1device__matrix__data_a227a9e5ad03e0b7a47c8d468cbf3c0cb}{get\+\_\+size}} () const
+\begin{DoxyCompactList}\small\item\em Returns the dimensions of the matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{classgko_1_1device__matrix__data_a5bacac26357200725ba02a2b5715d612}{get\+\_\+num\+\_\+elems}} () const
+\begin{DoxyCompactList}\small\item\em Returns the number of stored elements of the matrix. \end{DoxyCompactList}\item 
+index\+\_\+type $\ast$ \mbox{\hyperlink{classgko_1_1device__matrix__data_a54b935cacae7778b5f2b66ee9bebbd96}{get\+\_\+row\+\_\+idxs}} ()
+\begin{DoxyCompactList}\small\item\em Returns a pointer to the row index array. \end{DoxyCompactList}\item 
+const index\+\_\+type $\ast$ \mbox{\hyperlink{classgko_1_1device__matrix__data_a9eb6f039e2b821e2b2eb5ec55cc2bb38}{get\+\_\+const\+\_\+row\+\_\+idxs}} () const
+\begin{DoxyCompactList}\small\item\em Returns a pointer to the constant row index array. \end{DoxyCompactList}\item 
+index\+\_\+type $\ast$ \mbox{\hyperlink{classgko_1_1device__matrix__data_acebe5851ece9a6446c8c57de928ce0c0}{get\+\_\+col\+\_\+idxs}} ()
+\begin{DoxyCompactList}\small\item\em Returns a pointer to the column index array. \end{DoxyCompactList}\item 
+const index\+\_\+type $\ast$ \mbox{\hyperlink{classgko_1_1device__matrix__data_a05243ddd159b29d1b662b32a5c1936a8}{get\+\_\+const\+\_\+col\+\_\+idxs}} () const
+\begin{DoxyCompactList}\small\item\em Returns a pointer to the constant column index array. \end{DoxyCompactList}\item 
+value\+\_\+type $\ast$ \mbox{\hyperlink{classgko_1_1device__matrix__data_afe25c38c2d1546e7cf44c44a81503753}{get\+\_\+values}} ()
+\begin{DoxyCompactList}\small\item\em Returns a pointer to the value array. \end{DoxyCompactList}\item 
+const value\+\_\+type $\ast$ \mbox{\hyperlink{classgko_1_1device__matrix__data_a32b65bddd3e375627380620a80ca02b3}{get\+\_\+const\+\_\+values}} () const
+\begin{DoxyCompactList}\small\item\em Returns a pointer to the constant value array. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1device__matrix__data_a449321da72bedffd451f53ba1f0c4df0}{resize\+\_\+and\+\_\+reset}} (\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} new\+\_\+num\+\_\+entries)
+\begin{DoxyCompactList}\small\item\em Resizes the internal storage to the given number of stored matrix entries. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1device__matrix__data_a51ba3d8b6aa53d6dda7041ed519c29f0}{resize\+\_\+and\+\_\+reset}} (\mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ new\+\_\+size, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} new\+\_\+num\+\_\+entries)
+\begin{DoxyCompactList}\small\item\em Resizes the matrix and internal storage to the given dimensions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structgko_1_1device__matrix__data_1_1arrays}{arrays}} \mbox{\hyperlink{classgko_1_1device__matrix__data_a9d1846d039164943d54080b237c2aa47}{empty\+\_\+out}} ()
+\begin{DoxyCompactList}\small\item\em Moves out the internal arrays of the \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} object and resets it to an empty 0x0 matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} \mbox{\hyperlink{classgko_1_1device__matrix__data_a1642ea80e5bef6b868a2f90e47e5ad98}{create\+\_\+from\+\_\+host}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const \mbox{\hyperlink{structgko_1_1matrix__data}{host\+\_\+type}} \&data)
+\begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} object from the given host data on the given executor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Value\+Type, typename Index\+Type$>$\newline
+class gko\+::device\+\_\+matrix\+\_\+data$<$ Value\+Type, Index\+Type $>$}
+
+This type is a device-\/side equivalent to \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}}. 
+
+It stores the data necessary to initialize any matrix format in Ginkgo in individual value, column and row index arrays together with associated matrix dimensions. \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} uses array-\/of-\/\+Structs storage (AoS), while \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} uses Struct-\/of-\/\+Arrays (SoA).
+
+\begin{DoxyNote}{Note}
+To be used with a Ginkgo matrix type, the entry array must be sorted in row-\/major order, i.\+e. by row index, then by column index within rows. This can be achieved by calling the sort\+\_\+row\+\_\+major function. 
+
+The data must not contain any duplicate (row, column) pairs.
+\end{DoxyNote}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Value\+Type} & the type used to store matrix values \\
+\hline
+{\em Index\+Type} & the type used to store matrix row and column indices \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classgko_1_1device__matrix__data_a3653ff48a4c4206892c87ecb0fd23203}\label{classgko_1_1device__matrix__data_a3653ff48a4c4206892c87ecb0fd23203}} 
+\index{gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}!device\_matrix\_data@{device\_matrix\_data}}
+\index{device\_matrix\_data@{device\_matrix\_data}!gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{device\_matrix\_data()}{device\_matrix\_data()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type, typename Index\+Type$>$ \\
+\mbox{\hyperlink{classgko_1_1device__matrix__data}{gko\+::device\+\_\+matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$\+::\mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{\mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$}]{size = {\ttfamily \{\}},  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{num\+\_\+entries = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Initializes a new \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} object. 
+
+It uses the given executor to allocate storage for the given number of entries and matrix dimensions.
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & the executor to be used to store the matrix entries \\
+\hline
+{\em size} & the matrix dimensions \\
+\hline
+{\em num\+\_\+entries} & the number of entries to be stored \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1device__matrix__data_ab2ea8a6610e43c02cf0f3080805faa0d}\label{classgko_1_1device__matrix__data_ab2ea8a6610e43c02cf0f3080805faa0d}} 
+\index{gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}!device\_matrix\_data@{device\_matrix\_data}}
+\index{device\_matrix\_data@{device\_matrix\_data}!gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{device\_matrix\_data()}{device\_matrix\_data()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type, typename Index\+Type$>$ \\
+\mbox{\hyperlink{classgko_1_1device__matrix__data}{gko\+::device\+\_\+matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$\+::\mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$ \&}]{data }\end{DoxyParamCaption})}
+
+
+
+Initializes a \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} object by copying an existing object on another executor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & the executor to be used to store the matrix entries \\
+\hline
+{\em data} & the device\+\_\+matrix data object to copy, potentially stored on another executor. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1device__matrix__data_a1084cf17a3cb3ccf9039a41576f55497}\label{classgko_1_1device__matrix__data_a1084cf17a3cb3ccf9039a41576f55497}} 
+\index{gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}!device\_matrix\_data@{device\_matrix\_data}}
+\index{device\_matrix\_data@{device\_matrix\_data}!gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{device\_matrix\_data()}{device\_matrix\_data()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type, typename Index\+Type$>$ \\
+template$<$typename Value\+Array , typename Row\+Index\+Array , typename Col\+Index\+Array $>$ \\
+\mbox{\hyperlink{classgko_1_1device__matrix__data}{gko\+::device\+\_\+matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$\+::\mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{\mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$}]{size,  }\item[{Row\+Index\+Array \&\&}]{row\+\_\+idxs,  }\item[{Col\+Index\+Array \&\&}]{col\+\_\+idxs,  }\item[{Value\+Array \&\&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initializes a new \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} object from existing data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & the matrix dimensions \\
+\hline
+{\em values} & the array containing the matrix values \\
+\hline
+{\em col\+\_\+idxs} & the array containing the matrix column indices \\
+\hline
+{\em row\+\_\+idxs} & the array containing the matrix row indices \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1device__matrix__data_ad76d20b33f8744baa54594a62d5a458c}\label{classgko_1_1device__matrix__data_ad76d20b33f8744baa54594a62d5a458c}} 
+\index{gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}!copy\_to\_host@{copy\_to\_host}}
+\index{copy\_to\_host@{copy\_to\_host}!gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{copy\_to\_host()}{copy\_to\_host()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type, typename Index\+Type$>$ \\
+\mbox{\hyperlink{structgko_1_1matrix__data}{host\+\_\+type}} \mbox{\hyperlink{classgko_1_1device__matrix__data}{gko\+::device\+\_\+matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$\+::copy\+\_\+to\+\_\+host (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Copies the \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} entries to the host to return a regular \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} object with the same dimensions and entries. 
+
+\begin{DoxyReturn}{Returns}
+a \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} object with the same dimensions and entries. 
+\end{DoxyReturn}
+
+
+Referenced by gko\+::\+Readable\+From\+Matrix\+Data$<$ Value\+Type, int32 $>$\+::read().
+
+\mbox{\Hypertarget{classgko_1_1device__matrix__data_a1642ea80e5bef6b868a2f90e47e5ad98}\label{classgko_1_1device__matrix__data_a1642ea80e5bef6b868a2f90e47e5ad98}} 
+\index{gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}!create\_from\_host@{create\_from\_host}}
+\index{create\_from\_host@{create\_from\_host}!gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{create\_from\_host()}{create\_from\_host()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type, typename Index\+Type$>$ \\
+static \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} \mbox{\hyperlink{classgko_1_1device__matrix__data}{gko\+::device\+\_\+matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$\+::create\+\_\+from\+\_\+host (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const \mbox{\hyperlink{structgko_1_1matrix__data}{host\+\_\+type}} \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} object from the given host data on the given executor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & the executor to create the \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} on. \\
+\hline
+{\em data} & the data to be wrapped or copied into a \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} object with the same size and entries as {\ttfamily data} copied to the device executor. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1device__matrix__data_a9d1846d039164943d54080b237c2aa47}\label{classgko_1_1device__matrix__data_a9d1846d039164943d54080b237c2aa47}} 
+\index{gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}!empty\_out@{empty\_out}}
+\index{empty\_out@{empty\_out}!gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{empty\_out()}{empty\_out()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type, typename Index\+Type$>$ \\
+\mbox{\hyperlink{structgko_1_1device__matrix__data_1_1arrays}{arrays}} \mbox{\hyperlink{classgko_1_1device__matrix__data}{gko\+::device\+\_\+matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$\+::empty\+\_\+out (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Moves out the internal arrays of the \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} object and resets it to an empty 0x0 matrix. 
+
+\begin{DoxyReturn}{Returns}
+a struct containing the internal arrays. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1device__matrix__data_acebe5851ece9a6446c8c57de928ce0c0}\label{classgko_1_1device__matrix__data_acebe5851ece9a6446c8c57de928ce0c0}} 
+\index{gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}!get\_col\_idxs@{get\_col\_idxs}}
+\index{get\_col\_idxs@{get\_col\_idxs}!gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_col\_idxs()}{get\_col\_idxs()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type, typename Index\+Type$>$ \\
+index\+\_\+type$\ast$ \mbox{\hyperlink{classgko_1_1device__matrix__data}{gko\+::device\+\_\+matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+col\+\_\+idxs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a pointer to the column index array. 
+
+\begin{DoxyReturn}{Returns}
+a pointer to the column index array 
+\end{DoxyReturn}
+
+
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+data().
+
+\mbox{\Hypertarget{classgko_1_1device__matrix__data_a05243ddd159b29d1b662b32a5c1936a8}\label{classgko_1_1device__matrix__data_a05243ddd159b29d1b662b32a5c1936a8}} 
+\index{gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}!get\_const\_col\_idxs@{get\_const\_col\_idxs}}
+\index{get\_const\_col\_idxs@{get\_const\_col\_idxs}!gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_const\_col\_idxs()}{get\_const\_col\_idxs()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type, typename Index\+Type$>$ \\
+const index\+\_\+type$\ast$ \mbox{\hyperlink{classgko_1_1device__matrix__data}{gko\+::device\+\_\+matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+col\+\_\+idxs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a pointer to the constant column index array. 
+
+\begin{DoxyReturn}{Returns}
+a pointer to the constant column index array 
+\end{DoxyReturn}
+
+
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+data().
+
+\mbox{\Hypertarget{classgko_1_1device__matrix__data_a9eb6f039e2b821e2b2eb5ec55cc2bb38}\label{classgko_1_1device__matrix__data_a9eb6f039e2b821e2b2eb5ec55cc2bb38}} 
+\index{gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}!get\_const\_row\_idxs@{get\_const\_row\_idxs}}
+\index{get\_const\_row\_idxs@{get\_const\_row\_idxs}!gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_const\_row\_idxs()}{get\_const\_row\_idxs()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type, typename Index\+Type$>$ \\
+const index\+\_\+type$\ast$ \mbox{\hyperlink{classgko_1_1device__matrix__data}{gko\+::device\+\_\+matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+row\+\_\+idxs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a pointer to the constant row index array. 
+
+\begin{DoxyReturn}{Returns}
+a pointer to the constant row index array 
+\end{DoxyReturn}
+
+
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+data().
+
+\mbox{\Hypertarget{classgko_1_1device__matrix__data_a32b65bddd3e375627380620a80ca02b3}\label{classgko_1_1device__matrix__data_a32b65bddd3e375627380620a80ca02b3}} 
+\index{gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}!get\_const\_values@{get\_const\_values}}
+\index{get\_const\_values@{get\_const\_values}!gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_const\_values()}{get\_const\_values()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type, typename Index\+Type$>$ \\
+const value\+\_\+type$\ast$ \mbox{\hyperlink{classgko_1_1device__matrix__data}{gko\+::device\+\_\+matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a pointer to the constant value array. 
+
+\begin{DoxyReturn}{Returns}
+a pointer to the constant value array 
+\end{DoxyReturn}
+
+
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+data().
+
+\mbox{\Hypertarget{classgko_1_1device__matrix__data_ae857ccd7c5fdf388d01914112e3be524}\label{classgko_1_1device__matrix__data_ae857ccd7c5fdf388d01914112e3be524}} 
+\index{gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}!get\_executor@{get\_executor}}
+\index{get\_executor@{get\_executor}!gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_executor()}{get\_executor()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type, typename Index\+Type$>$ \\
+std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1Executor}{Executor}}$>$ \mbox{\hyperlink{classgko_1_1device__matrix__data}{gko\+::device\+\_\+matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+executor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the executor used to store the \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} entries. 
+
+\begin{DoxyReturn}{Returns}
+the executor used to store the \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} entries. 
+\end{DoxyReturn}
+
+
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+executor().
+
+\mbox{\Hypertarget{classgko_1_1device__matrix__data_a5bacac26357200725ba02a2b5715d612}\label{classgko_1_1device__matrix__data_a5bacac26357200725ba02a2b5715d612}} 
+\index{gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}!get\_num\_elems@{get\_num\_elems}}
+\index{get\_num\_elems@{get\_num\_elems}!gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_num\_elems()}{get\_num\_elems()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type, typename Index\+Type$>$ \\
+\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{classgko_1_1device__matrix__data}{gko\+::device\+\_\+matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+num\+\_\+elems (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the number of stored elements of the matrix. 
+
+\begin{DoxyReturn}{Returns}
+the number of stored elements of the matrix. 
+\end{DoxyReturn}
+
+
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+num\+\_\+elems().
+
+\mbox{\Hypertarget{classgko_1_1device__matrix__data_a54b935cacae7778b5f2b66ee9bebbd96}\label{classgko_1_1device__matrix__data_a54b935cacae7778b5f2b66ee9bebbd96}} 
+\index{gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}!get\_row\_idxs@{get\_row\_idxs}}
+\index{get\_row\_idxs@{get\_row\_idxs}!gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_row\_idxs()}{get\_row\_idxs()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type, typename Index\+Type$>$ \\
+index\+\_\+type$\ast$ \mbox{\hyperlink{classgko_1_1device__matrix__data}{gko\+::device\+\_\+matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+row\+\_\+idxs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a pointer to the row index array. 
+
+\begin{DoxyReturn}{Returns}
+a pointer to the row index array 
+\end{DoxyReturn}
+
+
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+data().
+
+\mbox{\Hypertarget{classgko_1_1device__matrix__data_a227a9e5ad03e0b7a47c8d468cbf3c0cb}\label{classgko_1_1device__matrix__data_a227a9e5ad03e0b7a47c8d468cbf3c0cb}} 
+\index{gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}!get\_size@{get\_size}}
+\index{get\_size@{get\_size}!gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_size()}{get\_size()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type, typename Index\+Type$>$ \\
+\mbox{\hyperlink{structgko_1_1dim}{dim}}$<$2$>$ \mbox{\hyperlink{classgko_1_1device__matrix__data}{gko\+::device\+\_\+matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the dimensions of the matrix. 
+
+\begin{DoxyReturn}{Returns}
+the dimensions of the matrix. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1device__matrix__data_afe25c38c2d1546e7cf44c44a81503753}\label{classgko_1_1device__matrix__data_afe25c38c2d1546e7cf44c44a81503753}} 
+\index{gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}!get\_values@{get\_values}}
+\index{get\_values@{get\_values}!gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_values()}{get\_values()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type, typename Index\+Type$>$ \\
+value\+\_\+type$\ast$ \mbox{\hyperlink{classgko_1_1device__matrix__data}{gko\+::device\+\_\+matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a pointer to the value array. 
+
+\begin{DoxyReturn}{Returns}
+a pointer to the value array 
+\end{DoxyReturn}
+
+
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+data().
+
+\mbox{\Hypertarget{classgko_1_1device__matrix__data_ad4fb4fc719d1127c009c9908c9ad7927}\label{classgko_1_1device__matrix__data_ad4fb4fc719d1127c009c9908c9ad7927}} 
+\index{gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}!remove\_zeros@{remove\_zeros}}
+\index{remove\_zeros@{remove\_zeros}!gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{remove\_zeros()}{remove\_zeros()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type, typename Index\+Type$>$ \\
+void \mbox{\hyperlink{classgko_1_1device__matrix__data}{gko\+::device\+\_\+matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$\+::remove\+\_\+zeros (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Removes all zero entries from the storage. 
+
+This does not modify the storage if there are no zero entries, and keeps the relative order of nonzero entries otherwise. \mbox{\Hypertarget{classgko_1_1device__matrix__data_a51ba3d8b6aa53d6dda7041ed519c29f0}\label{classgko_1_1device__matrix__data_a51ba3d8b6aa53d6dda7041ed519c29f0}} 
+\index{gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}!resize\_and\_reset@{resize\_and\_reset}}
+\index{resize\_and\_reset@{resize\_and\_reset}!gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{resize\_and\_reset()}{resize\_and\_reset()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type, typename Index\+Type$>$ \\
+void \mbox{\hyperlink{classgko_1_1device__matrix__data}{gko\+::device\+\_\+matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$\+::resize\+\_\+and\+\_\+reset (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$}]{new\+\_\+size,  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{new\+\_\+num\+\_\+entries }\end{DoxyParamCaption})}
+
+
+
+Resizes the matrix and internal storage to the given dimensions. 
+
+The resulting storage should be assumed uninitialized.
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+size} & the new matrix dimensions. \\
+\hline
+{\em new\+\_\+num\+\_\+entries} & the new number of stored matrix entries. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1device__matrix__data_a449321da72bedffd451f53ba1f0c4df0}\label{classgko_1_1device__matrix__data_a449321da72bedffd451f53ba1f0c4df0}} 
+\index{gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}!resize\_and\_reset@{resize\_and\_reset}}
+\index{resize\_and\_reset@{resize\_and\_reset}!gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{resize\_and\_reset()}{resize\_and\_reset()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type, typename Index\+Type$>$ \\
+void \mbox{\hyperlink{classgko_1_1device__matrix__data}{gko\+::device\+\_\+matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$\+::resize\+\_\+and\+\_\+reset (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{new\+\_\+num\+\_\+entries }\end{DoxyParamCaption})}
+
+
+
+Resizes the internal storage to the given number of stored matrix entries. 
+
+The resulting storage should be assumed uninitialized.
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+num\+\_\+entries} & the new number of stored matrix entries. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1device__matrix__data_a8b58afc780989cfcba739829572fe7ab}\label{classgko_1_1device__matrix__data_a8b58afc780989cfcba739829572fe7ab}} 
+\index{gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}!sum\_duplicates@{sum\_duplicates}}
+\index{sum\_duplicates@{sum\_duplicates}!gko::device\_matrix\_data$<$ ValueType, IndexType $>$@{gko::device\_matrix\_data$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{sum\_duplicates()}{sum\_duplicates()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type, typename Index\+Type$>$ \\
+void \mbox{\hyperlink{classgko_1_1device__matrix__data}{gko\+::device\+\_\+matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$\+::sum\+\_\+duplicates (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Sums up all duplicate entries pointing to the same non-\/zero location. 
+
+The output will be sorted in row-\/major order, and it will only reallocate if duplicates exist. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/base/device\+\_\+matrix\+\_\+data.\+hpp\end{DoxyCompactItemize}

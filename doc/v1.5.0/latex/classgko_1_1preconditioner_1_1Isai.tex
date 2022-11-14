@@ -1,0 +1,249 @@
+\hypertarget{classgko_1_1preconditioner_1_1Isai}{}\doxysection{gko\+::preconditioner\+::Isai$<$ Isai\+Type, Value\+Type, Index\+Type $>$ Class Template Reference}
+\label{classgko_1_1preconditioner_1_1Isai}\index{gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$@{gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$}}
+
+
+The Incomplete Sparse Approximate Inverse (I\+S\+AI) Preconditioner generates an approximate inverse matrix for a given square matrix A, lower triangular matrix L, upper triangular matrix U or symmetric positive (spd) matrix B.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/preconditioner/isai.\+hpp$>$}
+
+
+
+Inheritance diagram for gko\+::preconditioner\+::Isai$<$ Isai\+Type, Value\+Type, Index\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1preconditioner_1_1Isai__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for gko\+::preconditioner\+::Isai$<$ Isai\+Type, Value\+Type, Index\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1preconditioner_1_1Isai__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai_1_1Factory}{Factory}}
+\item 
+struct \mbox{\hyperlink{structgko_1_1preconditioner_1_1Isai_1_1parameters__type}{parameters\+\_\+type}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Isai_aa5bce0c26092b07cbc641964802e1e53}\label{classgko_1_1preconditioner_1_1Isai_aa5bce0c26092b07cbc641964802e1e53}} 
+using {\bfseries value\+\_\+type} = Value\+Type
+\item 
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Isai_a82646f5ae5f773e2d32cd225c2c438f7}\label{classgko_1_1preconditioner_1_1Isai_a82646f5ae5f773e2d32cd225c2c438f7}} 
+using {\bfseries index\+\_\+type} = Index\+Type
+\item 
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Isai_a0b54c3890ec913e059784f3d2a4e0846}\label{classgko_1_1preconditioner_1_1Isai_a0b54c3890ec913e059784f3d2a4e0846}} 
+using {\bfseries transposed\+\_\+type} = \mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{Isai}}$<$ Isai\+Type==isai\+\_\+type\+::general ? isai\+\_\+type\+::general \+:Isai\+Type==isai\+\_\+type\+::spd ? isai\+\_\+type\+::spd \+:Isai\+Type==isai\+\_\+type\+::lower ? isai\+\_\+type\+::upper \+:isai\+\_\+type\+::lower, Value\+Type, Index\+Type $>$
+\item 
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Isai_a1cfc503777429d8f5451b0aff6c603a2}\label{classgko_1_1preconditioner_1_1Isai_a1cfc503777429d8f5451b0aff6c603a2}} 
+using {\bfseries Comp} = \mbox{\hyperlink{classgko_1_1Composition}{Composition}}$<$ Value\+Type $>$
+\item 
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Isai_ab2ac0f513b91c51504f9477c37c8014a}\label{classgko_1_1preconditioner_1_1Isai_ab2ac0f513b91c51504f9477c37c8014a}} 
+using {\bfseries Csr} = \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{matrix\+::\+Csr}}$<$ Value\+Type, Index\+Type $>$
+\item 
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Isai_adfef6ea3615a85d440f9d11ab2c15f1a}\label{classgko_1_1preconditioner_1_1Isai_adfef6ea3615a85d440f9d11ab2c15f1a}} 
+using {\bfseries Dense} = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{matrix\+::\+Dense}}$<$ Value\+Type $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ const typename std\+::conditional$<$ Isai\+Type==isai\+\_\+type\+::spd, \mbox{\hyperlink{classgko_1_1Composition}{Comp}}, \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}} $>$\+::type $>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai_a76b0195c7742295144b38edcc6bd4a0b}{get\+\_\+approximate\+\_\+inverse}} () const
+\begin{DoxyCompactList}\small\item\em Returns the approximate inverse of the given matrix (either a C\+SR matrix for Isai\+Type general, upper or lower or a composition of two C\+SR matrices for Isai\+Type spd). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{Isai}} \& \mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai_a8377eb402ab8a0ebfd43cb4db9e16ffb}{operator=}} (const \mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{Isai}} \&other)
+\begin{DoxyCompactList}\small\item\em Copy-\/assigns an I\+S\+AI preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{Isai}} \& \mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai_a3c0de666c56be8c2014a5cb80613b3fd}{operator=}} (\mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{Isai}} \&\&other)
+\begin{DoxyCompactList}\small\item\em Move-\/assigns an I\+S\+AI preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai_a186ec25bbcd1d1a0c3fee46c820cd992}{Isai}} (const \mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{Isai}} \&other)
+\begin{DoxyCompactList}\small\item\em Copy-\/constructs an I\+S\+AI preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai_a91b1b4324e40bf472573e770bc1b86bc}{Isai}} (\mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{Isai}} \&\&other)
+\begin{DoxyCompactList}\small\item\em Move-\/constructs an I\+S\+AI preconditioner. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Isai_ab59a756bf9f6985f5feef19d1b65e937}\label{classgko_1_1preconditioner_1_1Isai_ab59a756bf9f6985f5feef19d1b65e937}} 
+const \mbox{\hyperlink{structgko_1_1preconditioner_1_1Isai_1_1parameters__type}{parameters\+\_\+type}} \& {\bfseries get\+\_\+parameters} () const
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai_a7351a67bd35b6b3ed0f3485f0eb07dee}{transpose}} () const override
+\begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai_a394fa1926aaed174c575180d7700d316}{conj\+\_\+transpose}} () const override
+\begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the conjugate transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Isai_a2a26699e2849bfb90bcb88ddbc1f950b}\label{classgko_1_1preconditioner_1_1Isai_a2a26699e2849bfb90bcb88ddbc1f950b}} 
+static auto {\bfseries build} () -\/$>$ decltype(\mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai_1_1Factory}{Factory}} \+::create())
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Isai_ad69915b0e7a089559dbb18c3778c9c57}\label{classgko_1_1preconditioner_1_1Isai_ad69915b0e7a089559dbb18c3778c9c57}} 
+static constexpr \mbox{\hyperlink{namespacegko_1_1preconditioner_a918dfc2ae55135bbd6e1e01d0c6031ab}{isai\+\_\+type}} {\bfseries type} \{Isai\+Type\}
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Isai_add7868273a6cf48f4b10dc679fdda59a}\label{classgko_1_1preconditioner_1_1Isai_add7868273a6cf48f4b10dc679fdda59a}} 
+class {\bfseries Enable\+Lin\+Op$<$ Isai $>$}
+\item 
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Isai_ae31a8c0f0aa79a6d6ae8e3266ed60171}\label{classgko_1_1preconditioner_1_1Isai_ae31a8c0f0aa79a6d6ae8e3266ed60171}} 
+class {\bfseries Enable\+Polymorphic\+Object$<$ Isai, Lin\+Op $>$}
+\item 
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Isai_a83141faba9d3493cbcd3aae5db1938db}\label{classgko_1_1preconditioner_1_1Isai_a83141faba9d3493cbcd3aae5db1938db}} 
+class {\bfseries Isai$<$ isai\+\_\+type\+::general, Value\+Type, Index\+Type $>$}
+\item 
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Isai_a86df81671457d662ff89c3cb68981754}\label{classgko_1_1preconditioner_1_1Isai_a86df81671457d662ff89c3cb68981754}} 
+class {\bfseries Isai$<$ isai\+\_\+type\+::lower, Value\+Type, Index\+Type $>$}
+\item 
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Isai_aaaf3d4c12c491227cdcf64b1b9af8f01}\label{classgko_1_1preconditioner_1_1Isai_aaaf3d4c12c491227cdcf64b1b9af8f01}} 
+class {\bfseries Isai$<$ isai\+\_\+type\+::upper, Value\+Type, Index\+Type $>$}
+\item 
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Isai_ac658f5d16a9476f3bb3bd1e857d0a2ba}\label{classgko_1_1preconditioner_1_1Isai_ac658f5d16a9476f3bb3bd1e857d0a2ba}} 
+class {\bfseries Isai$<$ isai\+\_\+type\+::spd, Value\+Type, Index\+Type $>$}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$isai\+\_\+type Isai\+Type, typename Value\+Type, typename Index\+Type$>$\newline
+class gko\+::preconditioner\+::\+Isai$<$ Isai\+Type, Value\+Type, Index\+Type $>$}
+
+The Incomplete Sparse Approximate Inverse (I\+S\+AI) Preconditioner generates an approximate inverse matrix for a given square matrix A, lower triangular matrix L, upper triangular matrix U or symmetric positive (spd) matrix B. 
+
+Using the preconditioner computes $aiA * x$, $aiU * x$, $aiL * x$ or $aiC^T * aiC * x$ (depending on the type of the \mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{Isai}}) for a given vector x (may have multiple right hand sides). aiA, aiU and aiL are the approximate inverses for A, U and L respectively. aiC is an approximation to C, the exact Cholesky factor of B (This is commonly referred to as a Factorized Sparse Approximate Inverse, short F\+S\+P\+AI).
+
+The sparsity pattern used for the approximate inverse of A, L and U is the same as the sparsity pattern of the respective matrix. For B, the sparsity pattern used for the approximate inverse is the same as the sparsity pattern of the lower triangular half of B.
+
+Note that, except for the spd case, for a matrix A generally I\+S\+A\+I(\+A)$^\wedge$T != I\+S\+A\+I(\+A$^\wedge$\+T).
+
+For more details on the algorithm, see the paper \href{https://doi.org/10.1016/j.parco.2017.10.003}{\texttt{ Incomplete Sparse Approximate Inverses for Parallel Preconditioning}}, which is the basis for this work.
+
+\begin{DoxyNote}{Note}
+G\+PU implementations can only handle the vector unit width {\ttfamily width} (warp size for C\+U\+DA) as number of elements per row in the sparse matrix. If there are more than {\ttfamily width} elements per row, the remaining elements will be ignored.
+\end{DoxyNote}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Isai\+Type} & determines if the I\+S\+AI is generated for a general square matrix, a lower triangular matrix, an upper triangular matrix or an spd matrix \\
+\hline
+{\em Value\+Type} & precision of matrix elements \\
+\hline
+{\em Index\+Type} & precision of matrix indexes \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Isai_a186ec25bbcd1d1a0c3fee46c820cd992}\label{classgko_1_1preconditioner_1_1Isai_a186ec25bbcd1d1a0c3fee46c820cd992}} 
+\index{gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$@{gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$}!Isai@{Isai}}
+\index{Isai@{Isai}!gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$@{gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{Isai()}{Isai()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$isai\+\_\+type Isai\+Type, typename Value\+Type , typename Index\+Type $>$ \\
+\mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{gko\+::preconditioner\+::\+Isai}}$<$ Isai\+Type, Value\+Type, Index\+Type $>$\+::\mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{Isai}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{Isai}}$<$ Isai\+Type, Value\+Type, Index\+Type $>$ \&}]{other }\end{DoxyParamCaption})}
+
+
+
+Copy-\/constructs an I\+S\+AI preconditioner. 
+
+Inherits the executor, shallow-\/copies the matrix and parameters. \mbox{\Hypertarget{classgko_1_1preconditioner_1_1Isai_a91b1b4324e40bf472573e770bc1b86bc}\label{classgko_1_1preconditioner_1_1Isai_a91b1b4324e40bf472573e770bc1b86bc}} 
+\index{gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$@{gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$}!Isai@{Isai}}
+\index{Isai@{Isai}!gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$@{gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{Isai()}{Isai()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$isai\+\_\+type Isai\+Type, typename Value\+Type , typename Index\+Type $>$ \\
+\mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{gko\+::preconditioner\+::\+Isai}}$<$ Isai\+Type, Value\+Type, Index\+Type $>$\+::\mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{Isai}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{Isai}}$<$ Isai\+Type, Value\+Type, Index\+Type $>$ \&\&}]{other }\end{DoxyParamCaption})}
+
+
+
+Move-\/constructs an I\+S\+AI preconditioner. 
+
+Inherits the executor, moves the matrix and parameters. The moved-\/from object is empty (0x0 with nullptr matrix and default parameters) 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Isai_a394fa1926aaed174c575180d7700d316}\label{classgko_1_1preconditioner_1_1Isai_a394fa1926aaed174c575180d7700d316}} 
+\index{gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$@{gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$}!conj\_transpose@{conj\_transpose}}
+\index{conj\_transpose@{conj\_transpose}!gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$@{gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{conj\_transpose()}{conj\_transpose()}}
+{\footnotesize\ttfamily template$<$isai\+\_\+type Isai\+Type, typename Value\+Type , typename Index\+Type $>$ \\
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{gko\+::preconditioner\+::\+Isai}}$<$ Isai\+Type, Value\+Type, Index\+Type $>$\+::conj\+\_\+transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the conjugate transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. 
+
+\begin{DoxyReturn}{Returns}
+a pointer to the new conjugate transposed object 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classgko_1_1Transposable_ab41b669288740cf2a6f7bf76e875b077}{gko\+::\+Transposable}}.
+
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Isai_a76b0195c7742295144b38edcc6bd4a0b}\label{classgko_1_1preconditioner_1_1Isai_a76b0195c7742295144b38edcc6bd4a0b}} 
+\index{gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$@{gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$}!get\_approximate\_inverse@{get\_approximate\_inverse}}
+\index{get\_approximate\_inverse@{get\_approximate\_inverse}!gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$@{gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_approximate\_inverse()}{get\_approximate\_inverse()}}
+{\footnotesize\ttfamily template$<$isai\+\_\+type Isai\+Type, typename Value\+Type , typename Index\+Type $>$ \\
+std\+::shared\+\_\+ptr$<$const typename std\+::conditional$<$Isai\+Type == isai\+\_\+type\+::spd, \mbox{\hyperlink{classgko_1_1Composition}{Comp}}, \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}}$>$\+::type$>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{gko\+::preconditioner\+::\+Isai}}$<$ Isai\+Type, Value\+Type, Index\+Type $>$\+::get\+\_\+approximate\+\_\+inverse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the approximate inverse of the given matrix (either a C\+SR matrix for Isai\+Type general, upper or lower or a composition of two C\+SR matrices for Isai\+Type spd). 
+
+\begin{DoxyReturn}{Returns}
+the generated approximate inverse 
+\end{DoxyReturn}
+
+
+References gko\+::as().
+
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Isai_a8377eb402ab8a0ebfd43cb4db9e16ffb}\label{classgko_1_1preconditioner_1_1Isai_a8377eb402ab8a0ebfd43cb4db9e16ffb}} 
+\index{gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$@{gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$@{gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$isai\+\_\+type Isai\+Type, typename Value\+Type , typename Index\+Type $>$ \\
+\mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{Isai}}\& \mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{gko\+::preconditioner\+::\+Isai}}$<$ Isai\+Type, Value\+Type, Index\+Type $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{Isai}}$<$ Isai\+Type, Value\+Type, Index\+Type $>$ \&}]{other }\end{DoxyParamCaption})}
+
+
+
+Copy-\/assigns an I\+S\+AI preconditioner. 
+
+Preserves the executor, shallow-\/copies the matrix and parameters. Creates a clone of the matrix if it is on the wrong executor. \mbox{\Hypertarget{classgko_1_1preconditioner_1_1Isai_a3c0de666c56be8c2014a5cb80613b3fd}\label{classgko_1_1preconditioner_1_1Isai_a3c0de666c56be8c2014a5cb80613b3fd}} 
+\index{gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$@{gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$@{gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$isai\+\_\+type Isai\+Type, typename Value\+Type , typename Index\+Type $>$ \\
+\mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{Isai}}\& \mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{gko\+::preconditioner\+::\+Isai}}$<$ Isai\+Type, Value\+Type, Index\+Type $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{Isai}}$<$ Isai\+Type, Value\+Type, Index\+Type $>$ \&\&}]{other }\end{DoxyParamCaption})}
+
+
+
+Move-\/assigns an I\+S\+AI preconditioner. 
+
+Preserves the executor, moves the matrix and parameters. Creates a clone of the matrix if it is on the wrong executor. The moved-\/from object is empty (0x0 with nullptr matrix and default parameters) \mbox{\Hypertarget{classgko_1_1preconditioner_1_1Isai_a7351a67bd35b6b3ed0f3485f0eb07dee}\label{classgko_1_1preconditioner_1_1Isai_a7351a67bd35b6b3ed0f3485f0eb07dee}} 
+\index{gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$@{gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$}!transpose@{transpose}}
+\index{transpose@{transpose}!gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$@{gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{transpose()}{transpose()}}
+{\footnotesize\ttfamily template$<$isai\+\_\+type Isai\+Type, typename Value\+Type , typename Index\+Type $>$ \\
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{gko\+::preconditioner\+::\+Isai}}$<$ Isai\+Type, Value\+Type, Index\+Type $>$\+::transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. 
+
+\begin{DoxyReturn}{Returns}
+a pointer to the new transposed object 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classgko_1_1Transposable_a5c6b778b71b47d53e0bda6ccf894d318}{gko\+::\+Transposable}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/preconditioner/isai.\+hpp\end{DoxyCompactItemize}
