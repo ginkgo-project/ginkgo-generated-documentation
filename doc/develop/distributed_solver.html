@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/717364631 branch based on develop. Ginkgo version 1.5.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/718306479 branch based on develop. Ginkgo version 1.5.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -95,7 +95,7 @@ $(function() {
   <li> <a href="#PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
  <a class="anchor" id="Intro"></a> <a class="anchor" id="Introduction"></a></p><h1>Introduction</h1>
-<p>This distributed solver example should help you understand the basics of using Ginkgo in a distributed setting. The example will solve a simple 1D Laplace equation where the system can be distributed row-wise to multiple processes. To run the solver with multiple processes, use <code>mpirun -n NUM_PROCS ./distributed-solver [executor] [num_grid_points]</code>.</p>
+<p>This distributed solver example should help you understand the basics of using Ginkgo in a distributed setting. The example will solve a simple 1D Laplace equation where the system can be distributed row-wise to multiple processes. To run the solver with multiple processes, use <code>mpirun -n NUM_PROCS ./distributed-solver [executor] [num_grid_points] [num_iterations]</code>.</p>
 <p>If you are using GPU devices, please make sure that you run this example with at most as many processes as you have GPU devices available. <a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
 <p><a class="anchor" id="Includefiles"></a> </p><h3>Include files</h3>
 <p>This is the main ginkgo header file.</p>
@@ -143,7 +143,8 @@ $(function() {
 <div class="line"><span class="keywordflow">if</span> (argc == 2 &amp;&amp; (std::string(argv[1]) == <span class="stringliteral">&quot;--help&quot;</span>)) {</div>
 <div class="line">    <span class="keywordflow">if</span> (rank == 0) {</div>
 <div class="line">        std::cerr &lt;&lt; <span class="stringliteral">&quot;Usage: &quot;</span> &lt;&lt; argv[0]</div>
-<div class="line">                  &lt;&lt; <span class="stringliteral">&quot; [executor] [num_grid_points] &quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">                  &lt;&lt; <span class="stringliteral">&quot; [executor] [num_grid_points] [num_iterations] &quot;</span></div>
+<div class="line">                  &lt;&lt; std::endl;</div>
 <div class="line">    }</div>
 <div class="line">    std::exit(-1);</div>
 <div class="line">}</div>
@@ -156,6 +157,8 @@ $(function() {
 <div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keyword">auto</span> executor_string = argc &gt;= 2 ? argv[1] : <span class="stringliteral">&quot;reference&quot;</span>;</div>
 <div class="line"><span class="keyword">const</span> <span class="keyword">auto</span> grid_dim =</div>
 <div class="line">    static_cast&lt;gko::size_type&gt;(argc &gt;= 3 ? std::atoi(argv[2]) : 100);</div>
+<div class="line"><span class="keyword">const</span> <span class="keyword">auto</span> num_iters =</div>
+<div class="line">    static_cast&lt;gko::size_type&gt;(argc &gt;= 4 ? std::atoi(argv[3]) : 1000);</div>
 </div><!-- fragment --><p>Pick the requested executor.</p>
 <div class="fragment"><div class="line">std::map&lt;std::string, std::function&lt;std::shared_ptr&lt;gko::Executor&gt;()&gt;&gt;</div>
 <div class="line">    exec_map{</div>
@@ -247,7 +250,8 @@ $(function() {
 <div class="fragment"><div class="line"><span class="keyword">auto</span> Ainv =</div>
 <div class="line">    solver::build()</div>
 <div class="line">        .with_criteria(</div>
-<div class="line">            gko::stop::Iteration::build().with_max_iters(100u).on(exec),</div>
+<div class="line">            gko::stop::Iteration::build().with_max_iters(num_iters).on(</div>
+<div class="line">                exec),</div>
 <div class="line">            <a class="code" href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm&lt;ValueType&gt;::build</a>()</div>
 <div class="line">                .with_baseline(gko::stop::mode::absolute)</div>
 <div class="line">                .with_reduction_factor(1e-4)</div>
@@ -366,7 +370,8 @@ $(function() {
 <div class="line">    <span class="keywordflow">if</span> (argc == 2 &amp;&amp; (std::string(argv[1]) == <span class="stringliteral">&quot;--help&quot;</span>)) {</div>
 <div class="line">        <span class="keywordflow">if</span> (rank == 0) {</div>
 <div class="line">            std::cerr &lt;&lt; <span class="stringliteral">&quot;Usage: &quot;</span> &lt;&lt; argv[0]</div>
-<div class="line">                      &lt;&lt; <span class="stringliteral">&quot; [executor] [num_grid_points] &quot;</span> &lt;&lt; std::endl;</div>
+<div class="line">                      &lt;&lt; <span class="stringliteral">&quot; [executor] [num_grid_points] [num_iterations] &quot;</span></div>
+<div class="line">                      &lt;&lt; std::endl;</div>
 <div class="line">        }</div>
 <div class="line">        std::exit(-1);</div>
 <div class="line">    }</div>
@@ -376,6 +381,8 @@ $(function() {
 <div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> executor_string = argc &gt;= 2 ? argv[1] : <span class="stringliteral">&quot;reference&quot;</span>;</div>
 <div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> grid_dim =</div>
 <div class="line">        static_cast&lt;gko::size_type&gt;(argc &gt;= 3 ? std::atoi(argv[2]) : 100);</div>
+<div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> num_iters =</div>
+<div class="line">        static_cast&lt;gko::size_type&gt;(argc &gt;= 4 ? std::atoi(argv[3]) : 1000);</div>
 <div class="line"> </div>
 <div class="line">    std::map&lt;std::string, std::function&lt;std::shared_ptr&lt;gko::Executor&gt;()&gt;&gt;</div>
 <div class="line">        exec_map{</div>
@@ -464,7 +471,8 @@ $(function() {
 <div class="line">    <span class="keyword">auto</span> Ainv =</div>
 <div class="line">        solver::build()</div>
 <div class="line">            .with_criteria(</div>
-<div class="line">                gko::stop::Iteration::build().with_max_iters(100u).on(exec),</div>
+<div class="line">                gko::stop::Iteration::build().with_max_iters(num_iters).on(</div>
+<div class="line">                    exec),</div>
 <div class="line">                <a class="code" href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm&lt;ValueType&gt;::build</a>()</div>
 <div class="line">                    .with_baseline(gko::stop::mode::absolute)</div>
 <div class="line">                    .with_reduction_factor(1e-4)</div>

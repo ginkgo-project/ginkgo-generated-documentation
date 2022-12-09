@@ -6,7 +6,7 @@ This example depends on simple-\/solver, three-\/pt-\/stencil-\/solver.
  \label{_Introduction}%
 \doxysection*{Introduction}
 
-This distributed solver example should help you understand the basics of using Ginkgo in a distributed setting. The example will solve a simple 1D Laplace equation where the system can be distributed row-\/wise to multiple processes. To run the solver with multiple processes, use {\ttfamily mpirun -\/n N\+U\+M\+\_\+\+P\+R\+O\+CS ./distributed-\/solver \mbox{[}executor\mbox{]} \mbox{[}num\+\_\+grid\+\_\+points\mbox{]}}.
+This distributed solver example should help you understand the basics of using Ginkgo in a distributed setting. The example will solve a simple 1D Laplace equation where the system can be distributed row-\/wise to multiple processes. To run the solver with multiple processes, use {\ttfamily mpirun -\/n N\+U\+M\+\_\+\+P\+R\+O\+CS ./distributed-\/solver \mbox{[}executor\mbox{]} \mbox{[}num\+\_\+grid\+\_\+points\mbox{]} \mbox{[}num\+\_\+iterations\mbox{]}}.
 
 If you are using G\+PU devices, please make sure that you run this example with at most as many processes as you have G\+PU devices available. \label{_CommProg}%
  \doxysection*{The commented program}
@@ -144,7 +144,8 @@ Print the ginkgo version information and help message.
 \DoxyCodeLine{\textcolor{keywordflow}{if} (argc == 2 \&\& (std::string(argv[1]) == \textcolor{stringliteral}{"-\/-\/help"})) \{}
 \DoxyCodeLine{    \textcolor{keywordflow}{if} (rank == 0) \{}
 \DoxyCodeLine{        std::cerr << \textcolor{stringliteral}{"Usage: "} << argv[0]}
-\DoxyCodeLine{                  << \textcolor{stringliteral}{" [executor] [num\_grid\_points] "} << std::endl;}
+\DoxyCodeLine{                  << \textcolor{stringliteral}{" [executor] [num\_grid\_points] [num\_iterations] "}}
+\DoxyCodeLine{                  << std::endl;}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{    std::exit(-\/1);}
 \DoxyCodeLine{\}}
@@ -164,6 +165,8 @@ User input settings\+:
 \DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} executor\_string = argc >= 2 ? argv[1] : \textcolor{stringliteral}{"reference"};}
 \DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} grid\_dim =}
 \DoxyCodeLine{    static\_cast<gko::size\_type>(argc >= 3 ? std::atoi(argv[2]) : 100);}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} num\_iters =}
+\DoxyCodeLine{    static\_cast<gko::size\_type>(argc >= 4 ? std::atoi(argv[3]) : 1000);}
 \end{DoxyCode}
 
 
@@ -307,7 +310,8 @@ Generate the solver, this is the same as in the non-\/distributed case.
 \DoxyCodeLine{\textcolor{keyword}{auto} Ainv =}
 \DoxyCodeLine{    solver::build()}
 \DoxyCodeLine{        .with\_criteria(}
-\DoxyCodeLine{            gko::stop::Iteration::build().with\_max\_iters(100u).on(exec),}
+\DoxyCodeLine{            gko::stop::Iteration::build().with\_max\_iters(num\_iters).on(}
+\DoxyCodeLine{                exec),}
 \DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
 \DoxyCodeLine{                .with\_baseline(gko::stop::mode::absolute)}
 \DoxyCodeLine{                .with\_reduction\_factor(1e-\/4)}
@@ -489,7 +493,8 @@ The timings may vary depending on the machine. \label{_PlainProg}%
 \DoxyCodeLine{    \textcolor{keywordflow}{if} (argc == 2 \&\& (std::string(argv[1]) == \textcolor{stringliteral}{"-\/-\/help"})) \{}
 \DoxyCodeLine{        \textcolor{keywordflow}{if} (rank == 0) \{}
 \DoxyCodeLine{            std::cerr << \textcolor{stringliteral}{"Usage: "} << argv[0]}
-\DoxyCodeLine{                      << \textcolor{stringliteral}{" [executor] [num\_grid\_points] "} << std::endl;}
+\DoxyCodeLine{                      << \textcolor{stringliteral}{" [executor] [num\_grid\_points] [num\_iterations] "}}
+\DoxyCodeLine{                      << std::endl;}
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{        std::exit(-\/1);}
 \DoxyCodeLine{    \}}
@@ -499,6 +504,8 @@ The timings may vary depending on the machine. \label{_PlainProg}%
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} executor\_string = argc >= 2 ? argv[1] : \textcolor{stringliteral}{"reference"};}
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} grid\_dim =}
 \DoxyCodeLine{        static\_cast<gko::size\_type>(argc >= 3 ? std::atoi(argv[2]) : 100);}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} num\_iters =}
+\DoxyCodeLine{        static\_cast<gko::size\_type>(argc >= 4 ? std::atoi(argv[3]) : 1000);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::map<std::string, std::function<std::shared\_ptr<gko::Executor>()>>}
 \DoxyCodeLine{        exec\_map\{}
@@ -587,7 +594,8 @@ The timings may vary depending on the machine. \label{_PlainProg}%
 \DoxyCodeLine{    \textcolor{keyword}{auto} Ainv =}
 \DoxyCodeLine{        solver::build()}
 \DoxyCodeLine{            .with\_criteria(}
-\DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(100u).on(exec),}
+\DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(num\_iters).on(}
+\DoxyCodeLine{                    exec),}
 \DoxyCodeLine{                \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
 \DoxyCodeLine{                    .with\_baseline(gko::stop::mode::absolute)}
 \DoxyCodeLine{                    .with\_reduction\_factor(1e-\/4)}
