@@ -49,7 +49,9 @@ class \mbox{\hyperlink{classgko_1_1DpcppExecutor}{gko\+::\+Dpcpp\+Executor}}
 \begin{DoxyCompactItemize}
 \item 
 \#define \mbox{\hyperlink{group__Executor_ga7f2c119ff9f4f51c7f8e2d5dbbbbd044}{G\+K\+O\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+O\+P\+E\+R\+A\+T\+I\+ON}}(\+\_\+name,  \+\_\+kernel)
-\begin{DoxyCompactList}\small\item\em Binds a set of device-\/specific kernels to an Operation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Binds a set of device-\/specific kernels to an Operation. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__Executor_gae20be793db14dfd6249a315281201550}{G\+K\+O\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+H\+O\+S\+T\+\_\+\+O\+P\+E\+R\+A\+T\+I\+ON}}(\+\_\+name,  \+\_\+kernel)
+\begin{DoxyCompactList}\small\item\em Binds a host-\/side kernel (independent of executor type) to an Operation. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -68,7 +70,61 @@ The first step in using the Ginkgo library consists of creating an executor. Exe
 \end{DoxyItemize}
 
 \doxysubsection{Macro Definition Documentation}
-\mbox{\Hypertarget{group__Executor_ga7f2c119ff9f4f51c7f8e2d5dbbbbd044}\label{group__Executor_ga7f2c119ff9f4f51c7f8e2d5dbbbbd044}} 
+\mbox{\Hypertarget{group__Executor_gae20be793db14dfd6249a315281201550}\label{group__Executor_gae20be793db14dfd6249a315281201550}} 
+\index{Executors@{Executors}!GKO\_REGISTER\_HOST\_OPERATION@{GKO\_REGISTER\_HOST\_OPERATION}}
+\index{GKO\_REGISTER\_HOST\_OPERATION@{GKO\_REGISTER\_HOST\_OPERATION}!Executors@{Executors}}
+\doxysubsubsection{\texorpdfstring{GKO\_REGISTER\_HOST\_OPERATION}{GKO\_REGISTER\_HOST\_OPERATION}}
+{\footnotesize\ttfamily \#define G\+K\+O\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+H\+O\+S\+T\+\_\+\+O\+P\+E\+R\+A\+T\+I\+ON(\begin{DoxyParamCaption}\item[{}]{\+\_\+name,  }\item[{}]{\+\_\+kernel }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename}... Args>                                              \(\backslash\)}
+\DoxyCodeLine{    auto make\_\#\#\_name(Args\&\&... args)                                        \(\backslash\)}
+\DoxyCodeLine{    \{                                                                        \(\backslash\)}
+\DoxyCodeLine{        return ::gko::detail::make\_register\_operation(                       \(\backslash\)}
+\DoxyCodeLine{            \#\_name, \textcolor{keyword}{sizeof}...(Args),                                         \(\backslash\)}
+\DoxyCodeLine{            [\&args...](\textcolor{keyword}{auto}) \{ \_kernel(std::forward<Args>(args)...); \});     \(\backslash\)}
+\DoxyCodeLine{    \}                                                                        \(\backslash\)}
+\DoxyCodeLine{    static\_assert(\textcolor{keyword}{true},                                                      \(\backslash\)}
+\DoxyCodeLine{                  \textcolor{stringliteral}{"This assert is used to counter the false positive extra "} \(\backslash\)}
+\DoxyCodeLine{                  \textcolor{stringliteral}{"semi-\/colon warnings"})}
+
+\end{DoxyCode}
+
+
+Binds a host-\/side kernel (independent of executor type) to an Operation. 
+
+It also defines a helper function which creates the associated operation. Any input arguments passed to the helper function are forwarded to the kernel when the operation is executed. The kernel name is searched for in the namespace where this macro is called. Host operations are used to make computations that are not part of the device kernels visible to profiling loggers and benchmarks.
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+name} & operation name \\
+\hline
+{\em \+\_\+kernel} & kernel which will be bound to the operation\\
+\hline
+\end{DoxyParams}
+\hypertarget{group__Executor_autotoc_md73}{}\doxysubsubsection{Example}\label{group__Executor_autotoc_md73}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ \{c++\}}
+\DoxyCodeLine{\textcolor{keywordtype}{void} host\_kernel(\textcolor{keywordtype}{int}) \{}
+\DoxyCodeLine{    \textcolor{comment}{// do some expensive computations}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Bind the kernels to the operation}}
+\DoxyCodeLine{\mbox{\hyperlink{group__Executor_gae20be793db14dfd6249a315281201550}{GKO\_REGISTER\_HOST\_OPERATION}}(my\_op, host\_kernel);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main() \{}
+\DoxyCodeLine{    \textcolor{comment}{// create executor}}
+\DoxyCodeLine{    \textcolor{keyword}{auto} ref = ReferenceExecutor::create();}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{comment}{// create the operation}}
+\DoxyCodeLine{    \textcolor{keyword}{auto} op = make\_my\_op(5); \textcolor{comment}{// x = 5}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    ref-\/>run(op);  \textcolor{comment}{// run host kernel}}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+ \mbox{\Hypertarget{group__Executor_ga7f2c119ff9f4f51c7f8e2d5dbbbbd044}\label{group__Executor_ga7f2c119ff9f4f51c7f8e2d5dbbbbd044}} 
 \index{Executors@{Executors}!GKO\_REGISTER\_OPERATION@{GKO\_REGISTER\_OPERATION}}
 \index{GKO\_REGISTER\_OPERATION@{GKO\_REGISTER\_OPERATION}!Executors@{Executors}}
 \doxysubsubsection{\texorpdfstring{GKO\_REGISTER\_OPERATION}{GKO\_REGISTER\_OPERATION}}
