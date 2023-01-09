@@ -7,7 +7,7 @@ var searchData=
   ['fbcsr_586',['Fbcsr',['../classgko_1_1matrix_1_1Fbcsr.html',1,'gko::matrix::Fbcsr&lt; ValueType, IndexType &gt;'],['../classgko_1_1matrix_1_1Fbcsr.html#a70062defa68148bc8458df69c49cd0f8',1,'gko::matrix::Fbcsr::Fbcsr(const Fbcsr &amp;)'],['../classgko_1_1matrix_1_1Fbcsr.html#a9f34a44ae1f29860863ed2ae22326602',1,'gko::matrix::Fbcsr::Fbcsr(Fbcsr &amp;&amp;)']]],
   ['fbcsrbuilder_587',['FbcsrBuilder',['../classgko_1_1matrix_1_1FbcsrBuilder.html',1,'gko::matrix']]],
   ['fcg_588',['Fcg',['../classgko_1_1solver_1_1Fcg.html',1,'gko::solver']]],
-  ['fence_589',['fence',['../classgko_1_1experimental_1_1mpi_1_1window.html#acc88daf0073f710d33a3cb0351d38dcf',1,'gko::experimental::mpi::window']]],
+  ['fence_589',['fence',['../classgko_1_1experimental_1_1mpi_1_1window.html#a8a1150c9844fbff78f31ea32af6cf002',1,'gko::experimental::mpi::window']]],
   ['fetch_5fand_5fop_590',['fetch_and_op',['../classgko_1_1experimental_1_1mpi_1_1window.html#a6a63489f00fe21d3007a49b32f0618dd',1,'gko::experimental::mpi::window']]],
   ['fft_591',['Fft',['../classgko_1_1matrix_1_1Fft.html',1,'gko::matrix']]],
   ['fft2_592',['Fft2',['../classgko_1_1matrix_1_1Fft2.html',1,'gko::matrix']]],
@@ -19,10 +19,10 @@ var searchData=
   ['float16_598',['float16',['../namespacegko.html#a86477c0acba18c50cac69112d791dfa6',1,'gko']]],
   ['float32_599',['float32',['../namespacegko.html#a0b5dbd886493d4ccaba6a7a1ba74896c',1,'gko']]],
   ['float64_600',['float64',['../namespacegko.html#a75c7a433d814b8b37d0bc2a9c57fbe65',1,'gko']]],
-  ['flush_601',['flush',['../classgko_1_1experimental_1_1mpi_1_1window.html#a0bf6a899a25d23f9da9d575ac47fd645',1,'gko::experimental::mpi::window']]],
-  ['flush_5fall_602',['flush_all',['../classgko_1_1experimental_1_1mpi_1_1window.html#a21bbcb67b685191b0bfae99c8a668a2b',1,'gko::experimental::mpi::window']]],
-  ['flush_5fall_5flocal_603',['flush_all_local',['../classgko_1_1experimental_1_1mpi_1_1window.html#a56b6be56d93a1827430c8b585d3f87c4',1,'gko::experimental::mpi::window']]],
-  ['flush_5flocal_604',['flush_local',['../classgko_1_1experimental_1_1mpi_1_1window.html#ad7e3f181256230b9a2d830e48e5453a9',1,'gko::experimental::mpi::window']]],
+  ['flush_601',['flush',['../classgko_1_1experimental_1_1mpi_1_1window.html#a8a7e4f90d1d0c933106ba31a4ddf06a9',1,'gko::experimental::mpi::window']]],
+  ['flush_5fall_602',['flush_all',['../classgko_1_1experimental_1_1mpi_1_1window.html#afac84b451109b1bfc77456a541bab07a',1,'gko::experimental::mpi::window']]],
+  ['flush_5fall_5flocal_603',['flush_all_local',['../classgko_1_1experimental_1_1mpi_1_1window.html#ad6fcfdb4026058ef960b412cb7844016',1,'gko::experimental::mpi::window']]],
+  ['flush_5flocal_604',['flush_local',['../classgko_1_1experimental_1_1mpi_1_1window.html#ae960cc6dc72e33ec6df62e3901e53d48',1,'gko::experimental::mpi::window']]],
   ['free_605',['free',['../classgko_1_1Executor.html#a0befe43d21c93e199d1620eaae4ccc0c',1,'gko::Executor']]],
   ['full_5fprecision_606',['full_precision',['../namespacegko.html#ae3257beda99ac9180b501912be5caa5f',1,'gko']]]
 ];

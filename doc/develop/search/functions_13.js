@@ -1,8 +1,8 @@
 var searchData=
 [
   ['unit_5froot_2480',['unit_root',['../namespacegko.html#ab92d450201f5b215901c0f8c3e2e376c',1,'gko']]],
-  ['unlock_2481',['unlock',['../classgko_1_1experimental_1_1mpi_1_1window.html#affaf124a741991f95911f7827b966d4b',1,'gko::experimental::mpi::window']]],
-  ['unlock_5fall_2482',['unlock_all',['../classgko_1_1experimental_1_1mpi_1_1window.html#ae2b9d49b294cdb5b7d28091b8a17833e',1,'gko::experimental::mpi::window']]],
+  ['unlock_2481',['unlock',['../classgko_1_1experimental_1_1mpi_1_1window.html#a8007809ea63aa789c2e3eae7b512e683',1,'gko::experimental::mpi::window']]],
+  ['unlock_5fall_2482',['unlock_all',['../classgko_1_1experimental_1_1mpi_1_1window.html#a8d34b976309b2958d973d1d68acf627d',1,'gko::experimental::mpi::window']]],
   ['unpack_2483',['unpack',['../classgko_1_1experimental_1_1factorization_1_1Factorization.html#a2d9dc69553e37f79e79c547881887aa5',1,'gko::experimental::factorization::Factorization']]],
   ['unsupportedmatrixproperty_2484',['UnsupportedMatrixProperty',['../classgko_1_1UnsupportedMatrixProperty.html#a38d858283d1e7e4a852c93baf79e7217',1,'gko::UnsupportedMatrixProperty']]],
   ['update_2485',['update',['../classgko_1_1stop_1_1Criterion.html#a47e22c46eaa742d709dcbf0d26d93e6c',1,'gko::stop::Criterion']]],
