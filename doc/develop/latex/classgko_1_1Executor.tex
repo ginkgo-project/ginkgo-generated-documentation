@@ -35,14 +35,14 @@ Collaboration diagram for gko\+::Executor\+:
 \mbox{\Hypertarget{classgko_1_1Executor_a4d564aa4d197e1cd8a563b611d3ea8dc}\label{classgko_1_1Executor_a4d564aa4d197e1cd8a563b611d3ea8dc}} 
 {\bfseries Executor} (\mbox{\hyperlink{classgko_1_1Executor}{Executor}} \&)=delete
 \item 
-\mbox{\Hypertarget{classgko_1_1Executor_a00faff4350dd1227d6239e7820e1005c}\label{classgko_1_1Executor_a00faff4350dd1227d6239e7820e1005c}} 
-{\bfseries Executor} (\mbox{\hyperlink{classgko_1_1Executor}{Executor}} \&\&)=default
+\mbox{\Hypertarget{classgko_1_1Executor_ad9770f8bb4b67e9d9e7eb32a62253061}\label{classgko_1_1Executor_ad9770f8bb4b67e9d9e7eb32a62253061}} 
+{\bfseries Executor} (\mbox{\hyperlink{classgko_1_1Executor}{Executor}} \&\&)=delete
 \item 
 \mbox{\Hypertarget{classgko_1_1Executor_a4560be68217900e62c7ee257daff3d5d}\label{classgko_1_1Executor_a4560be68217900e62c7ee257daff3d5d}} 
 \mbox{\hyperlink{classgko_1_1Executor}{Executor}} \& {\bfseries operator=} (\mbox{\hyperlink{classgko_1_1Executor}{Executor}} \&)=delete
 \item 
-\mbox{\Hypertarget{classgko_1_1Executor_a76b9c265cee1598df90f2189feb8dc53}\label{classgko_1_1Executor_a76b9c265cee1598df90f2189feb8dc53}} 
-\mbox{\hyperlink{classgko_1_1Executor}{Executor}} \& {\bfseries operator=} (\mbox{\hyperlink{classgko_1_1Executor}{Executor}} \&\&)=default
+\mbox{\Hypertarget{classgko_1_1Executor_a8493acf76ff3ff50d01937972ff8e5b9}\label{classgko_1_1Executor_a8493acf76ff3ff50d01937972ff8e5b9}} 
+\mbox{\hyperlink{classgko_1_1Executor}{Executor}} \& {\bfseries operator=} (\mbox{\hyperlink{classgko_1_1Executor}{Executor}} \&\&)=delete
 \item 
 virtual void \mbox{\hyperlink{classgko_1_1Executor_a1de8e2668b76e66690acf5eef9e8324d}{run}} (const \mbox{\hyperlink{classgko_1_1Operation}{Operation}} \&op) const =0
 \begin{DoxyCompactList}\small\item\em Runs the specified \mbox{\hyperlink{classgko_1_1Operation}{Operation}} using this \mbox{\hyperlink{classgko_1_1Executor}{Executor}}. \end{DoxyCompactList}\item 
@@ -65,6 +65,14 @@ virtual std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{E
 \mbox{\Hypertarget{classgko_1_1Executor_a24eeee7648c0f0fd07c9866d07154875}\label{classgko_1_1Executor_a24eeee7648c0f0fd07c9866d07154875}} 
 virtual void \mbox{\hyperlink{classgko_1_1Executor_a24eeee7648c0f0fd07c9866d07154875}{synchronize}} () const =0
 \begin{DoxyCompactList}\small\item\em Synchronize the operations launched on the executor with its master. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1Executor_a520dad04b7e74f285ab0956873a5413d}{add\+\_\+logger}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1log_1_1Logger}{log\+::\+Logger}} $>$ logger) override
+\item 
+void \mbox{\hyperlink{classgko_1_1Executor_af04cdc1a9af6c8efc34ddebb9e7aaf00}{remove\+\_\+logger}} (const \mbox{\hyperlink{classgko_1_1log_1_1Logger}{log\+::\+Logger}} $\ast$logger) override
+\item 
+void \mbox{\hyperlink{classgko_1_1Executor_a52f19be85fe9cc899d1185c32abaa8c9}{set\+\_\+log\+\_\+propagation\+\_\+mode}} (\mbox{\hyperlink{namespacegko_a7e071f8b9269bbbce87635ad655bebe4}{log\+\_\+propagate\+\_\+mode}} mode)
+\begin{DoxyCompactList}\small\item\em Sets the logger event propagation mode for the executor. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classgko_1_1Executor_a3d59329aa9e2db037f2ebb6748bf4a5b}{should\+\_\+propagate\+\_\+log}} () const
+\begin{DoxyCompactList}\small\item\em Returns true iff events occurring at an object created on this executor should be logged at propagating loggers attached to this executor, and there is at least one such propagating logger. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classgko_1_1Executor_a452d0a9f4ea10ea3c3ba5c820e1e8d10}{memory\+\_\+accessible}} (const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ \&other) const
 \begin{DoxyCompactList}\small\item\em Verifies whether the executors share the same memory. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classgko_1_1Executor_aa669b06a924ce594bfc44cbbbfd633b4}\label{classgko_1_1Executor_aa669b06a924ce594bfc44cbbbfd633b4}} 
@@ -141,6 +149,26 @@ Finally, if all the processing of the matrix is supposed to be done on the G\+PU
  Notice that even though reading the matrix directly from a file to the accelerator is not supported, the library is designed to abstract away the intermediate step of reading the matrix to the C\+PU memory. This is a general design approach taken by the library\+: in case an operation is not supported by the device, the data will be copied to the C\+PU, the operation performed there, and finally the results copied back to the device. This approach makes using the library more concise, as explicit copies are not required by the user. Nevertheless, this feature should be taken into account when considering performance implications of using such operations. 
 
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1Executor_a520dad04b7e74f285ab0956873a5413d}\label{classgko_1_1Executor_a520dad04b7e74f285ab0956873a5413d}} 
+\index{gko::Executor@{gko::Executor}!add\_logger@{add\_logger}}
+\index{add\_logger@{add\_logger}!gko::Executor@{gko::Executor}}
+\doxysubsubsection{\texorpdfstring{add\_logger()}{add\_logger()}}
+{\footnotesize\ttfamily void gko\+::\+Executor\+::add\+\_\+logger (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1log_1_1Logger}{log\+::\+Logger}} $>$}]{logger }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+
+
+\begin{DoxyNote}{Note}
+This specialization keeps track of whether any propagating loggers were attached to the executor. 
+\end{DoxyNote}
+\begin{DoxySeeAlso}{See also}
+Logger\+::needs\+\_\+propagation() 
+\end{DoxySeeAlso}
+
+
+Implements \mbox{\hyperlink{classgko_1_1log_1_1Loggable_aa2bb887b5ef7e75fa1a30ee1896ed932}{gko\+::log\+::\+Loggable}}.
+
 \mbox{\Hypertarget{classgko_1_1Executor_a5a216c2b1f7ceb8a0190c08941c1c687}\label{classgko_1_1Executor_a5a216c2b1f7ceb8a0190c08941c1c687}} 
 \index{gko::Executor@{gko::Executor}!alloc@{alloc}}
 \index{alloc@{alloc}!gko::Executor@{gko::Executor}}
@@ -335,6 +363,30 @@ Verifies whether the executors share the same memory.
 \begin{DoxyReturn}{Returns}
 whether the executors this and other share the same memory. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1Executor_af04cdc1a9af6c8efc34ddebb9e7aaf00}\label{classgko_1_1Executor_af04cdc1a9af6c8efc34ddebb9e7aaf00}} 
+\index{gko::Executor@{gko::Executor}!remove\_logger@{remove\_logger}}
+\index{remove\_logger@{remove\_logger}!gko::Executor@{gko::Executor}}
+\doxysubsubsection{\texorpdfstring{remove\_logger()}{remove\_logger()}}
+{\footnotesize\ttfamily void gko\+::\+Executor\+::remove\+\_\+logger (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1log_1_1Logger}{log\+::\+Logger}} $\ast$}]{logger }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+
+
+\begin{DoxyNote}{Note}
+This specialization keeps track of whether any propagating loggers were attached to the executor. 
+\end{DoxyNote}
+\begin{DoxySeeAlso}{See also}
+Logger\+::needs\+\_\+propagation() 
+\end{DoxySeeAlso}
+
+
+Implements \mbox{\hyperlink{classgko_1_1log_1_1Loggable_a5de4092a74cf04f30f13636d49aaec8b}{gko\+::log\+::\+Loggable}}.
+
+
+
+References gko\+::log\+::\+Logger\+::needs\+\_\+propagation().
+
 \mbox{\Hypertarget{classgko_1_1Executor_a294787f033b02fd013af087d02a4ae1b}\label{classgko_1_1Executor_a294787f033b02fd013af087d02a4ae1b}} 
 \index{gko::Executor@{gko::Executor}!run@{run}}
 \index{run@{run}!gko::Executor@{gko::Executor}}
@@ -394,6 +446,38 @@ Implemented in \mbox{\hyperlink{classgko_1_1ReferenceExecutor_a82b41b42dbd26e8ac
 
 
 Referenced by run().
+
+\mbox{\Hypertarget{classgko_1_1Executor_a52f19be85fe9cc899d1185c32abaa8c9}\label{classgko_1_1Executor_a52f19be85fe9cc899d1185c32abaa8c9}} 
+\index{gko::Executor@{gko::Executor}!set\_log\_propagation\_mode@{set\_log\_propagation\_mode}}
+\index{set\_log\_propagation\_mode@{set\_log\_propagation\_mode}!gko::Executor@{gko::Executor}}
+\doxysubsubsection{\texorpdfstring{set\_log\_propagation\_mode()}{set\_log\_propagation\_mode()}}
+{\footnotesize\ttfamily void gko\+::\+Executor\+::set\+\_\+log\+\_\+propagation\+\_\+mode (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegko_a7e071f8b9269bbbce87635ad655bebe4}{log\+\_\+propagate\+\_\+mode}}}]{mode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the logger event propagation mode for the executor. 
+
+This controls whether events that happen at objects created on this executor will also be logged at propagating loggers attached to the executor. \begin{DoxySeeAlso}{See also}
+Logger\+::needs\+\_\+propagation() 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classgko_1_1Executor_a3d59329aa9e2db037f2ebb6748bf4a5b}\label{classgko_1_1Executor_a3d59329aa9e2db037f2ebb6748bf4a5b}} 
+\index{gko::Executor@{gko::Executor}!should\_propagate\_log@{should\_propagate\_log}}
+\index{should\_propagate\_log@{should\_propagate\_log}!gko::Executor@{gko::Executor}}
+\doxysubsubsection{\texorpdfstring{should\_propagate\_log()}{should\_propagate\_log()}}
+{\footnotesize\ttfamily bool gko\+::\+Executor\+::should\+\_\+propagate\+\_\+log (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns true iff events occurring at an object created on this executor should be logged at propagating loggers attached to this executor, and there is at least one such propagating logger. 
+
+\begin{DoxySeeAlso}{See also}
+Logger\+::needs\+\_\+propagation() 
+
+\mbox{\hyperlink{classgko_1_1Executor_a52f19be85fe9cc899d1185c32abaa8c9}{Executor\+::set\+\_\+log\+\_\+propagation\+\_\+mode(log\+\_\+propagate\+\_\+mode)}} 
+\end{DoxySeeAlso}
+
+
+References gko\+::automatic.
 
 
 

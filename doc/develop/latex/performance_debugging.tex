@@ -520,7 +520,7 @@ Add the logger to the executor
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{exec-\/>add\_logger(storage\_logger);}
+\DoxyCodeLine{exec-\/>\mbox{\hyperlink{classgko_1_1Executor_a520dad04b7e74f285ab0956873a5413d}{add\_logger}}(storage\_logger);}
 \end{DoxyCode}
 
 
@@ -536,7 +536,7 @@ Remove the storage logger
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{exec-\/>remove\_logger(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(storage\_logger));}
+\DoxyCodeLine{exec-\/>\mbox{\hyperlink{classgko_1_1Executor_af04cdc1a9af6c8efc34ddebb9e7aaf00}{remove\_logger}}(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(storage\_logger));}
 \end{DoxyCode}
 
 
@@ -721,7 +721,7 @@ Add the generate logger to the executor
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{exec-\/>add\_logger(gen\_logger);}
+\DoxyCodeLine{exec-\/>\mbox{\hyperlink{classgko_1_1Executor_a520dad04b7e74f285ab0956873a5413d}{add\_logger}}(gen\_logger);}
 \end{DoxyCode}
 
 
@@ -737,7 +737,7 @@ Remove the generate logger from the executor
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{exec-\/>remove\_logger(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(gen\_logger));}
+\DoxyCodeLine{exec-\/>\mbox{\hyperlink{classgko_1_1Executor_af04cdc1a9af6c8efc34ddebb9e7aaf00}{remove\_logger}}(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(gen\_logger));}
 \end{DoxyCode}
 
 
@@ -755,7 +755,7 @@ Create an Operation\+Logger to analyze the apply step
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{auto} apply\_logger = std::make\_shared<loggers::OperationLogger>();}
-\DoxyCodeLine{exec-\/>add\_logger(apply\_logger);}
+\DoxyCodeLine{exec-\/>\mbox{\hyperlink{classgko_1_1Executor_a520dad04b7e74f285ab0956873a5413d}{add\_logger}}(apply\_logger);}
 \end{DoxyCode}
 
 
@@ -774,7 +774,7 @@ Solve the system
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{generated\_solver-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(x));}
-\DoxyCodeLine{exec-\/>remove\_logger(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(apply\_logger));}
+\DoxyCodeLine{exec-\/>\mbox{\hyperlink{classgko_1_1Executor_af04cdc1a9af6c8efc34ddebb9e7aaf00}{remove\_logger}}(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(apply\_logger));}
 \end{DoxyCode}
 
 
@@ -1270,9 +1270,9 @@ Here is a sample output in the file log.\+txt\+:
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} storage\_logger = std::make\_shared<loggers::StorageLogger>();}
-\DoxyCodeLine{    exec-\/>add\_logger(storage\_logger);}
+\DoxyCodeLine{    exec-\/>\mbox{\hyperlink{classgko_1_1Executor_a520dad04b7e74f285ab0956873a5413d}{add\_logger}}(storage\_logger);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} A = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(gko::read<mtx>(std::ifstream(input\_mtx), exec));}
-\DoxyCodeLine{    exec-\/>remove\_logger(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(storage\_logger));}
+\DoxyCodeLine{    exec-\/>\mbox{\hyperlink{classgko_1_1Executor_af04cdc1a9af6c8efc34ddebb9e7aaf00}{remove\_logger}}(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(storage\_logger));}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} max\_iters = A-\/>get\_size()[0];}
 \DoxyCodeLine{    \textcolor{keyword}{auto} b = utils::create\_vector<ValueType>(exec, A-\/>get\_size()[0], 1.0);}
@@ -1327,19 +1327,19 @@ Here is a sample output in the file log.\+txt\+:
 \DoxyCodeLine{}
 \DoxyCodeLine{    \{}
 \DoxyCodeLine{        \textcolor{keyword}{auto} gen\_logger = std::make\_shared<loggers::OperationLogger>();}
-\DoxyCodeLine{        exec-\/>add\_logger(gen\_logger);}
+\DoxyCodeLine{        exec-\/>\mbox{\hyperlink{classgko_1_1Executor_a520dad04b7e74f285ab0956873a5413d}{add\_logger}}(gen\_logger);}
 \DoxyCodeLine{        \textcolor{keyword}{auto} generated\_solver = solver\_factory-\/>generate(A);}
-\DoxyCodeLine{        exec-\/>remove\_logger(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(gen\_logger));}
+\DoxyCodeLine{        exec-\/>\mbox{\hyperlink{classgko_1_1Executor_af04cdc1a9af6c8efc34ddebb9e7aaf00}{remove\_logger}}(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(gen\_logger));}
 \DoxyCodeLine{        output\_file << \textcolor{stringliteral}{"Generate operations times (ns):"} << std::endl;}
 \DoxyCodeLine{        gen\_logger-\/>write\_data(output\_file);}
 \DoxyCodeLine{}
 \DoxyCodeLine{        \textcolor{keyword}{auto} apply\_logger = std::make\_shared<loggers::OperationLogger>();}
-\DoxyCodeLine{        exec-\/>add\_logger(apply\_logger);}
+\DoxyCodeLine{        exec-\/>\mbox{\hyperlink{classgko_1_1Executor_a520dad04b7e74f285ab0956873a5413d}{add\_logger}}(apply\_logger);}
 \DoxyCodeLine{        \textcolor{keyword}{auto} res\_logger = std::make\_shared<loggers::ResidualLogger<ValueType>>(}
 \DoxyCodeLine{            \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(A), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b));}
 \DoxyCodeLine{        generated\_solver-\/>add\_logger(res\_logger);}
 \DoxyCodeLine{        generated\_solver-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(x));}
-\DoxyCodeLine{        exec-\/>remove\_logger(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(apply\_logger));}
+\DoxyCodeLine{        exec-\/>\mbox{\hyperlink{classgko_1_1Executor_af04cdc1a9af6c8efc34ddebb9e7aaf00}{remove\_logger}}(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(apply\_logger));}
 \DoxyCodeLine{        output\_file << \textcolor{stringliteral}{"Apply operations times (ns):"} << std::endl;}
 \DoxyCodeLine{        apply\_logger-\/>write\_data(output\_file);}
 \DoxyCodeLine{        res\_logger-\/>write\_data(output\_file);}

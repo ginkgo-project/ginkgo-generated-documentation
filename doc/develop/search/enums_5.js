@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['thread_5ftype_2658',['thread_type',['../namespacegko_1_1experimental_1_1mpi.html#ab7c53f651b07ca2e9cd171981268aefb',1,'gko::experimental::mpi']]],
-  ['trisolve_5falgorithm_2659',['trisolve_algorithm',['../namespacegko_1_1solver.html#a68b5a3da69a6acb5f0bb656a96e4eb0a',1,'gko::solver']]]
+  ['profile_5fevent_5fcategory_2691',['profile_event_category',['../namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27',1,'gko::log']]]
 ];
