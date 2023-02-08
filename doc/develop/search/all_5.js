@@ -16,13 +16,14 @@ var searchData=
   ['fill_5fin_5flimit_602',['fill_in_limit',['../structgko_1_1factorization_1_1ParIct_1_1parameters__type.html#a9c1f1299d890eb206bcaf0df6e58ada8',1,'gko::factorization::ParIct::parameters_type::fill_in_limit()'],['../structgko_1_1factorization_1_1ParIlut_1_1parameters__type.html#a03e53ddc63f7e4d2a957d171a4c1f717',1,'gko::factorization::ParIlut::parameters_type::fill_in_limit()']]],
   ['finalize_603',['finalize',['../classgko_1_1stopping__status.html#a56d82a88a20cc1954981e75a66e996bc',1,'gko::stopping_status']]],
   ['fixedcoarsening_604',['FixedCoarsening',['../classgko_1_1multigrid_1_1FixedCoarsening.html',1,'gko::multigrid']]],
-  ['float16_605',['float16',['../namespacegko.html#a86477c0acba18c50cac69112d791dfa6',1,'gko']]],
-  ['float32_606',['float32',['../namespacegko.html#a0b5dbd886493d4ccaba6a7a1ba74896c',1,'gko']]],
-  ['float64_607',['float64',['../namespacegko.html#a75c7a433d814b8b37d0bc2a9c57fbe65',1,'gko']]],
-  ['flush_608',['flush',['../classgko_1_1experimental_1_1mpi_1_1window.html#a8a7e4f90d1d0c933106ba31a4ddf06a9',1,'gko::experimental::mpi::window']]],
-  ['flush_5fall_609',['flush_all',['../classgko_1_1experimental_1_1mpi_1_1window.html#afac84b451109b1bfc77456a541bab07a',1,'gko::experimental::mpi::window']]],
-  ['flush_5fall_5flocal_610',['flush_all_local',['../classgko_1_1experimental_1_1mpi_1_1window.html#ad6fcfdb4026058ef960b412cb7844016',1,'gko::experimental::mpi::window']]],
-  ['flush_5flocal_611',['flush_local',['../classgko_1_1experimental_1_1mpi_1_1window.html#ae960cc6dc72e33ec6df62e3901e53d48',1,'gko::experimental::mpi::window']]],
-  ['free_612',['free',['../classgko_1_1Executor.html#a0befe43d21c93e199d1620eaae4ccc0c',1,'gko::Executor']]],
-  ['full_5fprecision_613',['full_precision',['../namespacegko.html#ae3257beda99ac9180b501912be5caa5f',1,'gko']]]
+  ['flexible_605',['flexible',['../structgko_1_1solver_1_1Gmres_1_1parameters__type.html#af01b2386b094ff18cae1565511abea21',1,'gko::solver::Gmres::parameters_type']]],
+  ['float16_606',['float16',['../namespacegko.html#a86477c0acba18c50cac69112d791dfa6',1,'gko']]],
+  ['float32_607',['float32',['../namespacegko.html#a0b5dbd886493d4ccaba6a7a1ba74896c',1,'gko']]],
+  ['float64_608',['float64',['../namespacegko.html#a75c7a433d814b8b37d0bc2a9c57fbe65',1,'gko']]],
+  ['flush_609',['flush',['../classgko_1_1experimental_1_1mpi_1_1window.html#a8a7e4f90d1d0c933106ba31a4ddf06a9',1,'gko::experimental::mpi::window']]],
+  ['flush_5fall_610',['flush_all',['../classgko_1_1experimental_1_1mpi_1_1window.html#afac84b451109b1bfc77456a541bab07a',1,'gko::experimental::mpi::window']]],
+  ['flush_5fall_5flocal_611',['flush_all_local',['../classgko_1_1experimental_1_1mpi_1_1window.html#ad6fcfdb4026058ef960b412cb7844016',1,'gko::experimental::mpi::window']]],
+  ['flush_5flocal_612',['flush_local',['../classgko_1_1experimental_1_1mpi_1_1window.html#ae960cc6dc72e33ec6df62e3901e53d48',1,'gko::experimental::mpi::window']]],
+  ['free_613',['free',['../classgko_1_1Executor.html#a0befe43d21c93e199d1620eaae4ccc0c',1,'gko::Executor']]],
+  ['full_5fprecision_614',['full_precision',['../namespacegko.html#ae3257beda99ac9180b501912be5caa5f',1,'gko']]]
 ];
