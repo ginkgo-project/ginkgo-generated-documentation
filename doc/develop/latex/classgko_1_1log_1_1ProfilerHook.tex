@@ -29,6 +29,19 @@ Collaboration diagram for gko\+::log\+::Profiler\+Hook\+:
 \includegraphics[width=202pt]{classgko_1_1log_1_1ProfilerHook__coll__graph}
 \end{center}
 \end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structgko_1_1log_1_1ProfilerHook_1_1nested__summary__entry}{nested\+\_\+summary\+\_\+entry}}
+\item 
+class \mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook_1_1NestedSummaryWriter}{Nested\+Summary\+Writer}}
+\begin{DoxyCompactList}\small\item\em Recieves the results from \mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook_a614c2b0377f09631d086c53beba76125}{Profiler\+Hook\+::create\+\_\+nested\+\_\+summary()}}. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structgko_1_1log_1_1ProfilerHook_1_1summary__entry}{summary\+\_\+entry}}
+\item 
+class \mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook_1_1SummaryWriter}{Summary\+Writer}}
+\begin{DoxyCompactList}\small\item\em Recieves the results from \mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook_aaa1a3b7f8971f0d94375459aa2fe97be}{Profiler\+Hook\+::create\+\_\+summary()}}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook_1_1TableSummaryWriter}{Table\+Summary\+Writer}}
+\begin{DoxyCompactList}\small\item\em Writes the results from \mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook_aaa1a3b7f8971f0d94375459aa2fe97be}{Profiler\+Hook\+::create\+\_\+summary()}} and \mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook_a614c2b0377f09631d086c53beba76125}{Profiler\+Hook\+::create\+\_\+nested\+\_\+summary()}} to a A\+S\+C\+II table in Markdown format. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
@@ -83,11 +96,13 @@ void \mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook_a566b03924ff4c0f828c2321f4
 \mbox{\Hypertarget{classgko_1_1log_1_1ProfilerHook_ace6118e4363415cca4a63cee91186ece}\label{classgko_1_1log_1_1ProfilerHook_ace6118e4363415cca4a63cee91186ece}} 
 bool \mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook_ace6118e4363415cca4a63cee91186ece}{needs\+\_\+propagation}} () const override
 \begin{DoxyCompactList}\small\item\em Returns true if this logger, when attached to an \mbox{\hyperlink{classgko_1_1Executor}{Executor}}, needs to be forwarded all events from objects on this executor. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook_a8a234236e2986282c3fb1d3b8d0db086}{set\+\_\+object\+\_\+name}} (const \mbox{\hyperlink{classgko_1_1PolymorphicObject}{Polymorphic\+Object}} $\ast$obj, std\+::string name)
+void \mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook_a1f901332281289fa4915e073dffb12c3}{set\+\_\+object\+\_\+name}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1PolymorphicObject}{Polymorphic\+Object}} $>$ obj, std\+::string name)
 \begin{DoxyCompactList}\small\item\em Sets the name for an object to be profiled. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classgko_1_1log_1_1ProfilerHook_a9429ec9658274a71a5c632fb973c22e1}\label{classgko_1_1log_1_1ProfilerHook_a9429ec9658274a71a5c632fb973c22e1}} 
 void \mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook_a9429ec9658274a71a5c632fb973c22e1}{set\+\_\+synchronization}} (bool synchronize)
-\begin{DoxyCompactList}\small\item\em Should the events call executor-\/$>$synchronize on operations and copy/allocation? This leads to a certain overhead, but makes the execution timeline of kernels synchronous. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Should the events call executor-\/$>$synchronize on operations and copy/allocation? This leads to a certain overhead, but makes the execution timeline of kernels synchronous. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1log_1_1profiling__scope__guard}{profiling\+\_\+scope\+\_\+guard}} \mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook_a4d0e1e93d993f5074d60276359faadd8}{user\+\_\+range}} (const char $\ast$name) const
+\begin{DoxyCompactList}\small\item\em Creates a scope guard for a user-\/defined range to be included in the profile. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -104,6 +119,10 @@ static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1log_1_1ProfilerHoo
 \mbox{\Hypertarget{classgko_1_1log_1_1ProfilerHook_a8810fd3244da5717d0016bd28878e39c}\label{classgko_1_1log_1_1ProfilerHook_a8810fd3244da5717d0016bd28878e39c}} 
 static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook}{Profiler\+Hook}} $>$ \mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook_a8810fd3244da5717d0016bd28878e39c}{create\+\_\+for\+\_\+executor}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec)
 \begin{DoxyCompactList}\small\item\em Creates a logger annotating Ginkgo events with the most suitable backend for the given executor\+: N\+V\+TX for N\+Sight Systems in C\+U\+DA, R\+O\+C\+TX for rocprof in H\+IP, T\+AU for everything else. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook}{Profiler\+Hook}} $>$ \mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook_aaa1a3b7f8971f0d94375459aa2fe97be}{create\+\_\+summary}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook_1_1SummaryWriter}{Summary\+Writer}} $>$ writer=std\+::make\+\_\+unique$<$ \mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook_1_1TableSummaryWriter}{Table\+Summary\+Writer}} $>$(), bool debug\+\_\+check\+\_\+nesting=false)
+\begin{DoxyCompactList}\small\item\em Creates a logger measuring the runtime of Ginkgo events and printing a summary when it is destroyed. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook}{Profiler\+Hook}} $>$ \mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook_a614c2b0377f09631d086c53beba76125}{create\+\_\+nested\+\_\+summary}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook_1_1NestedSummaryWriter}{Nested\+Summary\+Writer}} $>$ writer=std\+::make\+\_\+unique$<$ \mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook_1_1TableSummaryWriter}{Table\+Summary\+Writer}} $>$(), bool debug\+\_\+check\+\_\+nesting=false)
+\begin{DoxyCompactList}\small\item\em Creates a logger measuring the runtime of Ginkgo events in a nested fashion and printing a summary when it is destroyed. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classgko_1_1log_1_1ProfilerHook_ab586566b57f0a370dfcd85074ba776b0}\label{classgko_1_1log_1_1ProfilerHook_ab586566b57f0a370dfcd85074ba776b0}} 
 static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook}{Profiler\+Hook}} $>$ \mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook_ab586566b57f0a370dfcd85074ba776b0}{create\+\_\+custom}} (hook\+\_\+function begin, hook\+\_\+function end)
 \begin{DoxyCompactList}\small\item\em Creates a logger annotating Ginkgo events with a custom set of functions for range begin and end. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -123,6 +142,26 @@ It currently supports T\+AU, V\+Tune, N\+Sight\+Systems (N\+V\+TX) and roc\+P\+R
 The \mbox{\hyperlink{classgko_1_1log_1_1Logger}{Logger}} should be attached to the \mbox{\hyperlink{classgko_1_1Executor}{Executor}} that is being used to run the application for a full, program-\/wide annotation, or to individual objects to only highlight events caused directly by them (not operations and memory allocations though) 
 
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1log_1_1ProfilerHook_a614c2b0377f09631d086c53beba76125}\label{classgko_1_1log_1_1ProfilerHook_a614c2b0377f09631d086c53beba76125}} 
+\index{gko::log::ProfilerHook@{gko::log::ProfilerHook}!create\_nested\_summary@{create\_nested\_summary}}
+\index{create\_nested\_summary@{create\_nested\_summary}!gko::log::ProfilerHook@{gko::log::ProfilerHook}}
+\doxysubsubsection{\texorpdfstring{create\_nested\_summary()}{create\_nested\_summary()}}
+{\footnotesize\ttfamily static std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook}{Profiler\+Hook}}$>$ gko\+::log\+::\+Profiler\+Hook\+::create\+\_\+nested\+\_\+summary (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook_1_1NestedSummaryWriter}{Nested\+Summary\+Writer}} $>$}]{writer = {\ttfamily std\+:\+:make\+\_\+unique$<$~\mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook_1_1TableSummaryWriter}{Table\+Summary\+Writer}}~$>$()},  }\item[{bool}]{debug\+\_\+check\+\_\+nesting = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a logger measuring the runtime of Ginkgo events in a nested fashion and printing a summary when it is destroyed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The \mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook_1_1NestedSummaryWriter}{Nested\+Summary\+Writer}} to receive the performance results. \\
+\hline
+{\em debug\+\_\+check\+\_\+nesting} & Enable this flag if the output looks like it might contain incorrect nesting. This increases the overhead slightly, but recognizes mismatching push/pop pairs on the range stack.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+For this logger to provide reliable G\+PU timings, enable synchronization via {\ttfamily set\+\_\+synchronization(true)}. 
+\end{DoxyNote}
 \mbox{\Hypertarget{classgko_1_1log_1_1ProfilerHook_a4aa1a5eaa172c96f064ed96d9e04814b}\label{classgko_1_1log_1_1ProfilerHook_a4aa1a5eaa172c96f064ed96d9e04814b}} 
 \index{gko::log::ProfilerHook@{gko::log::ProfilerHook}!create\_nvtx@{create\_nvtx}}
 \index{create\_nvtx@{create\_nvtx}!gko::log::ProfilerHook@{gko::log::ProfilerHook}}
@@ -138,6 +177,26 @@ Creates a logger annotating Ginkgo events with N\+V\+TX ranges for C\+U\+DA.
 {\em color\+\_\+argb} & The color of the N\+V\+TX ranges in the N\+Sight Systems output. It has to be a 32 bit packed A\+R\+GB value. \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1log_1_1ProfilerHook_aaa1a3b7f8971f0d94375459aa2fe97be}\label{classgko_1_1log_1_1ProfilerHook_aaa1a3b7f8971f0d94375459aa2fe97be}} 
+\index{gko::log::ProfilerHook@{gko::log::ProfilerHook}!create\_summary@{create\_summary}}
+\index{create\_summary@{create\_summary}!gko::log::ProfilerHook@{gko::log::ProfilerHook}}
+\doxysubsubsection{\texorpdfstring{create\_summary()}{create\_summary()}}
+{\footnotesize\ttfamily static std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook}{Profiler\+Hook}}$>$ gko\+::log\+::\+Profiler\+Hook\+::create\+\_\+summary (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook_1_1SummaryWriter}{Summary\+Writer}} $>$}]{writer = {\ttfamily std\+:\+:make\+\_\+unique$<$~\mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook_1_1TableSummaryWriter}{Table\+Summary\+Writer}}~$>$()},  }\item[{bool}]{debug\+\_\+check\+\_\+nesting = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a logger measuring the runtime of Ginkgo events and printing a summary when it is destroyed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The \mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook_1_1SummaryWriter}{Summary\+Writer}} to receive the performance results. \\
+\hline
+{\em debug\+\_\+check\+\_\+nesting} & Enable this flag if the output looks like it might contain incorrect nesting. This increases the overhead slightly, but recognizes mismatching push/pop pairs on the range stack.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+For this logger to provide reliable G\+PU timings, enable synchronization via {\ttfamily set\+\_\+synchronization(true)}. 
+\end{DoxyNote}
 \mbox{\Hypertarget{classgko_1_1log_1_1ProfilerHook_af9c9ad8784dd663a7ab3b77c5fb6222b}\label{classgko_1_1log_1_1ProfilerHook_af9c9ad8784dd663a7ab3b77c5fb6222b}} 
 \index{gko::log::ProfilerHook@{gko::log::ProfilerHook}!create\_tau@{create\_tau}}
 \index{create\_tau@{create\_tau}!gko::log::ProfilerHook@{gko::log::ProfilerHook}}
@@ -688,11 +747,11 @@ Reimplemented from \mbox{\hyperlink{classgko_1_1log_1_1Logger}{gko\+::log\+::\+L
 
 Reimplemented from \mbox{\hyperlink{classgko_1_1log_1_1Logger}{gko\+::log\+::\+Logger}}.
 
-\mbox{\Hypertarget{classgko_1_1log_1_1ProfilerHook_a8a234236e2986282c3fb1d3b8d0db086}\label{classgko_1_1log_1_1ProfilerHook_a8a234236e2986282c3fb1d3b8d0db086}} 
+\mbox{\Hypertarget{classgko_1_1log_1_1ProfilerHook_a1f901332281289fa4915e073dffb12c3}\label{classgko_1_1log_1_1ProfilerHook_a1f901332281289fa4915e073dffb12c3}} 
 \index{gko::log::ProfilerHook@{gko::log::ProfilerHook}!set\_object\_name@{set\_object\_name}}
 \index{set\_object\_name@{set\_object\_name}!gko::log::ProfilerHook@{gko::log::ProfilerHook}}
 \doxysubsubsection{\texorpdfstring{set\_object\_name()}{set\_object\_name()}}
-{\footnotesize\ttfamily void gko\+::log\+::\+Profiler\+Hook\+::set\+\_\+object\+\_\+name (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1PolymorphicObject}{Polymorphic\+Object}} $\ast$}]{obj,  }\item[{std\+::string}]{name }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void gko\+::log\+::\+Profiler\+Hook\+::set\+\_\+object\+\_\+name (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1PolymorphicObject}{Polymorphic\+Object}} $>$}]{obj,  }\item[{std\+::string}]{name }\end{DoxyParamCaption})}
 
 
 
@@ -707,6 +766,24 @@ Every instance of that object in the profile will be replaced by the name instea
 {\em name} & its name \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1log_1_1ProfilerHook_a4d0e1e93d993f5074d60276359faadd8}\label{classgko_1_1log_1_1ProfilerHook_a4d0e1e93d993f5074d60276359faadd8}} 
+\index{gko::log::ProfilerHook@{gko::log::ProfilerHook}!user\_range@{user\_range}}
+\index{user\_range@{user\_range}!gko::log::ProfilerHook@{gko::log::ProfilerHook}}
+\doxysubsubsection{\texorpdfstring{user\_range()}{user\_range()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classgko_1_1log_1_1profiling__scope__guard}{profiling\+\_\+scope\+\_\+guard}} gko\+::log\+::\+Profiler\+Hook\+::user\+\_\+range (\begin{DoxyParamCaption}\item[{const char $\ast$}]{name }\end{DoxyParamCaption}) const}
+
+
+
+Creates a scope guard for a user-\/defined range to be included in the profile. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & the name of the range\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the scope guard. It will begin a range immediately and end it at the end of its scope. 
+\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
