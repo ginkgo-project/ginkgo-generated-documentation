@@ -48,7 +48,7 @@ This example shows how to explicitly generate and store preconditioners for a gi
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    std::ofstream stream\{name\};}
 \DoxyCodeLine{    std::cerr << \textcolor{stringliteral}{"Writing "} << name << std::endl;}
-\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_aa24837da3770b3dddf981d9bfe0d3b52}{gko::write}}(stream, mtx, \mbox{\hyperlink{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68af5d7aa3ba4929cc12dc51a92c59fabd3}{gko::layout\_type::coordinate}});}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{gko::write}}(stream, mtx, \mbox{\hyperlink{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68af5d7aa3ba4929cc12dc51a92c59fabd3}{gko::layout\_type::coordinate}});}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -176,9 +176,9 @@ ilu\+: no parameters
 \DoxyCodeLine{    \textcolor{keyword}{auto} ilu = gko::as<gko::Composition<>>(try\_generate([\&] \{}
 \DoxyCodeLine{        \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1factorization_1_1Ilu}{gko::factorization::Ilu<>::build}}().on(exec)-\/>generate(mtx);}
 \DoxyCodeLine{    \}));}
-\DoxyCodeLine{    output(\mbox{\hyperlink{namespacegko_a73ce7e87aec389b5210630bb617b4baa}{gko::as}}<\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<>}}>(ilu-\/>get\_operators()[0].get()),}
+\DoxyCodeLine{    output(\mbox{\hyperlink{namespacegko_a618c9b64c35b0452240e9e57a9673b94}{gko::as}}<\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<>}}>(ilu-\/>get\_operators()[0].get()),}
 \DoxyCodeLine{           matrix + \textcolor{stringliteral}{".ilu-\/l"});}
-\DoxyCodeLine{    output(\mbox{\hyperlink{namespacegko_a73ce7e87aec389b5210630bb617b4baa}{gko::as}}<\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<>}}>(ilu-\/>get\_operators()[1].get()),}
+\DoxyCodeLine{    output(\mbox{\hyperlink{namespacegko_a618c9b64c35b0452240e9e57a9673b94}{gko::as}}<\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<>}}>(ilu-\/>get\_operators()[1].get()),}
 \DoxyCodeLine{           matrix + \textcolor{stringliteral}{".ilu-\/u"});}
 \DoxyCodeLine{\} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (precond == \textcolor{stringliteral}{"parilu"}) \{}
 \end{DoxyCode}
@@ -194,9 +194,9 @@ parilu\+: iterations
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{    \textcolor{keyword}{auto} ilu = gko::as<gko::Composition<>>(}
 \DoxyCodeLine{        try\_generate([\&] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}}-\/>generate(mtx); \}));}
-\DoxyCodeLine{    output(\mbox{\hyperlink{namespacegko_a73ce7e87aec389b5210630bb617b4baa}{gko::as}}<\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<>}}>(ilu-\/>get\_operators()[0].get()),}
+\DoxyCodeLine{    output(\mbox{\hyperlink{namespacegko_a618c9b64c35b0452240e9e57a9673b94}{gko::as}}<\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<>}}>(ilu-\/>get\_operators()[0].get()),}
 \DoxyCodeLine{           matrix + \textcolor{stringliteral}{".parilu"} + output\_suffix + \textcolor{stringliteral}{"-\/l"});}
-\DoxyCodeLine{    output(\mbox{\hyperlink{namespacegko_a73ce7e87aec389b5210630bb617b4baa}{gko::as}}<\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<>}}>(ilu-\/>get\_operators()[1].get()),}
+\DoxyCodeLine{    output(\mbox{\hyperlink{namespacegko_a618c9b64c35b0452240e9e57a9673b94}{gko::as}}<\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<>}}>(ilu-\/>get\_operators()[1].get()),}
 \DoxyCodeLine{           matrix + \textcolor{stringliteral}{".parilu"} + output\_suffix + \textcolor{stringliteral}{"-\/u"});}
 \DoxyCodeLine{\} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (precond == \textcolor{stringliteral}{"parilut"}) \{}
 \end{DoxyCode}
@@ -215,9 +215,9 @@ parilut\+: iterations, fill-\/in limit
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{    \textcolor{keyword}{auto} ilut = gko::as<gko::Composition<>>(}
 \DoxyCodeLine{        try\_generate([\&] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}}-\/>generate(mtx); \}));}
-\DoxyCodeLine{    output(\mbox{\hyperlink{namespacegko_a73ce7e87aec389b5210630bb617b4baa}{gko::as}}<\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<>}}>(ilut-\/>get\_operators()[0].get()),}
+\DoxyCodeLine{    output(\mbox{\hyperlink{namespacegko_a618c9b64c35b0452240e9e57a9673b94}{gko::as}}<\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<>}}>(ilut-\/>get\_operators()[0].get()),}
 \DoxyCodeLine{           matrix + \textcolor{stringliteral}{".parilut"} + output\_suffix + \textcolor{stringliteral}{"-\/l"});}
-\DoxyCodeLine{    output(\mbox{\hyperlink{namespacegko_a73ce7e87aec389b5210630bb617b4baa}{gko::as}}<\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<>}}>(ilut-\/>get\_operators()[1].get()),}
+\DoxyCodeLine{    output(\mbox{\hyperlink{namespacegko_a618c9b64c35b0452240e9e57a9673b94}{gko::as}}<\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<>}}>(ilut-\/>get\_operators()[1].get()),}
 \DoxyCodeLine{           matrix + \textcolor{stringliteral}{".parilut"} + output\_suffix + \textcolor{stringliteral}{"-\/u"});}
 \DoxyCodeLine{\} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (precond == \textcolor{stringliteral}{"ilu-\/isai"}) \{}
 \end{DoxyCode}
@@ -422,7 +422,7 @@ When specifying an executor\+:
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    std::ofstream stream\{name\};}
 \DoxyCodeLine{    std::cerr << \textcolor{stringliteral}{"Writing "} << name << std::endl;}
-\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_aa24837da3770b3dddf981d9bfe0d3b52}{gko::write}}(stream, mtx, \mbox{\hyperlink{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68af5d7aa3ba4929cc12dc51a92c59fabd3}{gko::layout\_type::coordinate}});}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{gko::write}}(stream, mtx, \mbox{\hyperlink{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68af5d7aa3ba4929cc12dc51a92c59fabd3}{gko::layout\_type::coordinate}});}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -499,9 +499,9 @@ When specifying an executor\+:
 \DoxyCodeLine{        \textcolor{keyword}{auto} ilu = gko::as<gko::Composition<>>(try\_generate([\&] \{}
 \DoxyCodeLine{            \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1factorization_1_1Ilu}{gko::factorization::Ilu<>::build}}().on(exec)-\/>generate(mtx);}
 \DoxyCodeLine{        \}));}
-\DoxyCodeLine{        output(\mbox{\hyperlink{namespacegko_a73ce7e87aec389b5210630bb617b4baa}{gko::as}}<\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<>}}>(ilu-\/>get\_operators()[0].get()),}
+\DoxyCodeLine{        output(\mbox{\hyperlink{namespacegko_a618c9b64c35b0452240e9e57a9673b94}{gko::as}}<\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<>}}>(ilu-\/>get\_operators()[0].get()),}
 \DoxyCodeLine{               matrix + \textcolor{stringliteral}{".ilu-\/l"});}
-\DoxyCodeLine{        output(\mbox{\hyperlink{namespacegko_a73ce7e87aec389b5210630bb617b4baa}{gko::as}}<\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<>}}>(ilu-\/>get\_operators()[1].get()),}
+\DoxyCodeLine{        output(\mbox{\hyperlink{namespacegko_a618c9b64c35b0452240e9e57a9673b94}{gko::as}}<\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<>}}>(ilu-\/>get\_operators()[1].get()),}
 \DoxyCodeLine{               matrix + \textcolor{stringliteral}{".ilu-\/u"});}
 \DoxyCodeLine{    \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (precond == \textcolor{stringliteral}{"parilu"}) \{}
 \DoxyCodeLine{        \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}} = \mbox{\hyperlink{classgko_1_1factorization_1_1ParIlu}{gko::factorization::ParIlu<>::build}}().on(exec);}
@@ -510,9 +510,9 @@ When specifying an executor\+:
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{        \textcolor{keyword}{auto} ilu = gko::as<gko::Composition<>>(}
 \DoxyCodeLine{            try\_generate([\&] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}}-\/>generate(mtx); \}));}
-\DoxyCodeLine{        output(\mbox{\hyperlink{namespacegko_a73ce7e87aec389b5210630bb617b4baa}{gko::as}}<\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<>}}>(ilu-\/>get\_operators()[0].get()),}
+\DoxyCodeLine{        output(\mbox{\hyperlink{namespacegko_a618c9b64c35b0452240e9e57a9673b94}{gko::as}}<\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<>}}>(ilu-\/>get\_operators()[0].get()),}
 \DoxyCodeLine{               matrix + \textcolor{stringliteral}{".parilu"} + output\_suffix + \textcolor{stringliteral}{"-\/l"});}
-\DoxyCodeLine{        output(\mbox{\hyperlink{namespacegko_a73ce7e87aec389b5210630bb617b4baa}{gko::as}}<\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<>}}>(ilu-\/>get\_operators()[1].get()),}
+\DoxyCodeLine{        output(\mbox{\hyperlink{namespacegko_a618c9b64c35b0452240e9e57a9673b94}{gko::as}}<\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<>}}>(ilu-\/>get\_operators()[1].get()),}
 \DoxyCodeLine{               matrix + \textcolor{stringliteral}{".parilu"} + output\_suffix + \textcolor{stringliteral}{"-\/u"});}
 \DoxyCodeLine{    \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (precond == \textcolor{stringliteral}{"parilut"}) \{}
 \DoxyCodeLine{        \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}} = \mbox{\hyperlink{classgko_1_1factorization_1_1ParIlut}{gko::factorization::ParIlut<>::build}}().on(exec);}
@@ -524,9 +524,9 @@ When specifying an executor\+:
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{        \textcolor{keyword}{auto} ilut = gko::as<gko::Composition<>>(}
 \DoxyCodeLine{            try\_generate([\&] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}}-\/>generate(mtx); \}));}
-\DoxyCodeLine{        output(\mbox{\hyperlink{namespacegko_a73ce7e87aec389b5210630bb617b4baa}{gko::as}}<\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<>}}>(ilut-\/>get\_operators()[0].get()),}
+\DoxyCodeLine{        output(\mbox{\hyperlink{namespacegko_a618c9b64c35b0452240e9e57a9673b94}{gko::as}}<\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<>}}>(ilut-\/>get\_operators()[0].get()),}
 \DoxyCodeLine{               matrix + \textcolor{stringliteral}{".parilut"} + output\_suffix + \textcolor{stringliteral}{"-\/l"});}
-\DoxyCodeLine{        output(\mbox{\hyperlink{namespacegko_a73ce7e87aec389b5210630bb617b4baa}{gko::as}}<\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<>}}>(ilut-\/>get\_operators()[1].get()),}
+\DoxyCodeLine{        output(\mbox{\hyperlink{namespacegko_a618c9b64c35b0452240e9e57a9673b94}{gko::as}}<\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<>}}>(ilut-\/>get\_operators()[1].get()),}
 \DoxyCodeLine{               matrix + \textcolor{stringliteral}{".parilut"} + output\_suffix + \textcolor{stringliteral}{"-\/u"});}
 \DoxyCodeLine{    \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (precond == \textcolor{stringliteral}{"ilu-\/isai"}) \{}
 \DoxyCodeLine{        \textcolor{keyword}{auto} fact\_factory =}

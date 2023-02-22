@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['allocation_5fmode_2697',['allocation_mode',['../namespacegko.html#afbed8e2cbd3ee4ca962e12f688858bdb',1,'gko']]]
+  ['allocation_5fmode_2703',['allocation_mode',['../namespacegko.html#afbed8e2cbd3ee4ca962e12f688858bdb',1,'gko']]]
 ];

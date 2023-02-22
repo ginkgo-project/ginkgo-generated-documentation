@@ -107,6 +107,8 @@ class \mbox{\hyperlink{classgko_1_1EnablePolymorphicAssignment}{Enable\+Polymorp
 \begin{DoxyCompactList}\small\item\em This mixin is used to enable a default \mbox{\hyperlink{classgko_1_1PolymorphicObject_a5e6f713938293cfbe788d00480eb4d81}{Polymorphic\+Object\+::copy\+\_\+from()}} implementation for objects that have implemented conversions between them. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1EnablePolymorphicObject}{Enable\+Polymorphic\+Object}}
 \begin{DoxyCompactList}\small\item\em This mixin inherits from (a subclass of) \mbox{\hyperlink{classgko_1_1PolymorphicObject}{Polymorphic\+Object}} and provides a base implementation of a new concrete polymorphic object. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structgko_1_1err}{err}}
+\item 
 class \mbox{\hyperlink{classgko_1_1Error}{Error}}
 \begin{DoxyCompactList}\small\item\em The \mbox{\hyperlink{classgko_1_1Error}{Error}} class is used to report exceptional behaviour in library functions. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1Executor}{Executor}}
@@ -173,6 +175,8 @@ class \mbox{\hyperlink{classgko_1_1precision__reduction}{precision\+\_\+reductio
 \begin{DoxyCompactList}\small\item\em This class is used to encode storage precisions of low precision algorithms. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1Preconditionable}{Preconditionable}}
 \begin{DoxyCompactList}\small\item\em A \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} implementing this interface can be preconditioned. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}
+\begin{DoxyCompactList}\small\item\em This class is used for function parameters in the place of raw pointers. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1range}{range}}
 \begin{DoxyCompactList}\small\item\em A range is a multidimensional view of the memory. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1ReadableFromMatrixData}{Readable\+From\+Matrix\+Data}}
@@ -395,9 +399,9 @@ constexpr \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64
 \begin{DoxyCompactList}\small\item\em Reads a matrix stored in binary format from an input stream. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Matrix\+Type , typename Stream\+Type , typename... Matrix\+Args$>$ }\\std\+::unique\+\_\+ptr$<$ Matrix\+Type $>$ \mbox{\hyperlink{namespacegko_ac71759a8a78d3c4946a11ce4b378a88e}{read\+\_\+generic}} (Stream\+Type \&\&is, Matrix\+Args \&\&... args)
 \begin{DoxyCompactList}\small\item\em Reads a matrix stored either in binary or matrix market format from an input stream. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename Matrix\+Type , typename Stream\+Type $>$ }\\void \mbox{\hyperlink{namespacegko_aa24837da3770b3dddf981d9bfe0d3b52}{write}} (Stream\+Type \&\&os, Matrix\+Type $\ast$matrix, \mbox{\hyperlink{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68}{layout\+\_\+type}} layout=detail\+::mtx\+\_\+io\+\_\+traits$<$ std\+::remove\+\_\+const\+\_\+t$<$ Matrix\+Type $>$$>$\+::default\+\_\+layout)
+{\footnotesize template$<$typename Matrix\+Ptr\+Type , typename Stream\+Type $>$ }\\void \mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{write}} (Stream\+Type \&\&os, Matrix\+Ptr\+Type \&\&matrix, \mbox{\hyperlink{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68}{layout\+\_\+type}} layout=detail\+::mtx\+\_\+io\+\_\+traits$<$ std\+::remove\+\_\+cv\+\_\+t$<$ detail\+::pointee$<$ Matrix\+Ptr\+Type $>$$>$$>$\+::default\+\_\+layout)
 \begin{DoxyCompactList}\small\item\em Writes a matrix into an output stream in matrix market format. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename Matrix\+Type , typename Stream\+Type $>$ }\\void \mbox{\hyperlink{namespacegko_a1280f63daa434fc2afe2cf7974608d81}{write\+\_\+binary}} (Stream\+Type \&\&os, Matrix\+Type $\ast$matrix)
+{\footnotesize template$<$typename Matrix\+Ptr\+Type , typename Stream\+Type $>$ }\\void \mbox{\hyperlink{namespacegko_aba9ca89ef08421197d3dbf84b0ad884c}{write\+\_\+binary}} (Stream\+Type \&\&os, Matrix\+Ptr\+Type \&\&matrix)
 \begin{DoxyCompactList}\small\item\em Writes a matrix into an output stream in binary format. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename R , typename T $>$ }\\std\+::unique\+\_\+ptr$<$ R, std\+::function$<$ void(R $\ast$)$>$ $>$ \mbox{\hyperlink{namespacegko_abb378b82b7b7c6347ebdfb4c2ddc9366}{copy\+\_\+and\+\_\+convert\+\_\+to}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, T $\ast$obj)
 \begin{DoxyCompactList}\small\item\em Converts the object to R and places it on \mbox{\hyperlink{classgko_1_1Executor}{Executor}} exec. \end{DoxyCompactList}\item 
@@ -407,9 +411,7 @@ constexpr \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64
 \begin{DoxyCompactList}\small\item\em Converts the object to R and places it on \mbox{\hyperlink{classgko_1_1Executor}{Executor}} exec. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename R , typename T $>$ }\\std\+::shared\+\_\+ptr$<$ const R $>$ \mbox{\hyperlink{namespacegko_a0f28847393e540a33fdda8cd80584789}{copy\+\_\+and\+\_\+convert\+\_\+to}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, std\+::shared\+\_\+ptr$<$ const T $>$ obj)
 \item 
-{\footnotesize template$<$typename Value\+Type $>$ }\\detail\+::temporary\+\_\+conversion$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{matrix\+::\+Dense}}$<$ Value\+Type $>$ $>$ \mbox{\hyperlink{namespacegko_a6861874b1a8e349961c487c92c497658}{make\+\_\+temporary\+\_\+conversion}} (\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$matrix)
-\begin{DoxyCompactList}\small\item\em Convert the given \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} from matrix\+::\+Dense$<$...$>$ to matrix\+::\+Dense$<$\+Value\+Type$>$. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename Value\+Type $>$ }\\detail\+::temporary\+\_\+conversion$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{matrix\+::\+Dense}}$<$ Value\+Type $>$ $>$ \mbox{\hyperlink{namespacegko_a6470e8e212add7923569e6b885a74610}{make\+\_\+temporary\+\_\+conversion}} (const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$matrix)
+{\footnotesize template$<$typename Value\+Type , typename Ptr $>$ }\\detail\+::temporary\+\_\+conversion$<$ std\+::conditional\+\_\+t$<$ std\+::is\+\_\+const$<$ detail\+::pointee$<$ Ptr $>$ $>$\+::value, const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{matrix\+::\+Dense}}$<$ Value\+Type $>$, \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{matrix\+::\+Dense}}$<$ Value\+Type $>$ $>$ $>$ \mbox{\hyperlink{namespacegko_ad1f2b88f3b91582e67c7c6d8730300a2}{make\+\_\+temporary\+\_\+conversion}} (Ptr \&\&matrix)
 \begin{DoxyCompactList}\small\item\em Convert the given \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} from matrix\+::\+Dense$<$...$>$ to matrix\+::\+Dense$<$\+Value\+Type$>$. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Value\+Type , typename Function , typename... Args$>$ }\\void \mbox{\hyperlink{namespacegko_a3c46f1caf8135f7492aa83d9ac3bc83e}{precision\+\_\+dispatch}} (Function fn, Args $\ast$... linops)
 \begin{DoxyCompactList}\small\item\em Calls the given function with each given argument \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} temporarily converted into matrix\+::\+Dense$<$\+Value\+Type$>$ as parameters. \end{DoxyCompactList}\item 
@@ -729,9 +731,9 @@ constexpr bool {\bfseries operator!=} (const \mbox{\hyperlink{structgko_1_1span}
 \mbox{\Hypertarget{namespacegko_a2193d82004fe19f7fa1d9441e7e179c1}\label{namespacegko_a2193d82004fe19f7fa1d9441e7e179c1}} 
 {\footnotesize template$<$typename First\+Operand , typename Second\+Accessor $>$ }\\constexpr \mbox{\hyperlink{classgko_1_1range}{range}}$<$ \mbox{\hyperlink{structgko_1_1accessor_1_1mmul__operation}{accessor\+::mmul\+\_\+operation}}$<$ \+::gko\+::detail\+::operation\+\_\+kind\+::scalar\+\_\+by\+\_\+range, First\+Operand, Second\+Accessor $>$ $>$ {\bfseries mmul} (const First\+Operand \&first, const \mbox{\hyperlink{classgko_1_1range}{range}}$<$ Second\+Accessor $>$ \&second)
 \item 
-{\footnotesize template$<$typename T $>$ }\\detail\+::temporary\+\_\+clone$<$ T $>$ \mbox{\hyperlink{namespacegko_a2166ec09e3e8a0ef437aee9c2b97f422}{make\+\_\+temporary\+\_\+clone}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, T $\ast$ptr)
+{\footnotesize template$<$typename Ptr $>$ }\\detail\+::temporary\+\_\+clone$<$ detail\+::pointee$<$ Ptr $>$ $>$ \mbox{\hyperlink{namespacegko_a7e65327b79b773f00f5bf4a480dd2066}{make\+\_\+temporary\+\_\+clone}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, Ptr \&\&ptr)
 \begin{DoxyCompactList}\small\item\em Creates a temporary\+\_\+clone. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename T $>$ }\\detail\+::temporary\+\_\+clone$<$ T $>$ \mbox{\hyperlink{namespacegko_a0132e53621ce6f4222a2684ea6d6f021}{make\+\_\+temporary\+\_\+output\+\_\+clone}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, T $\ast$ptr)
+{\footnotesize template$<$typename Ptr $>$ }\\detail\+::temporary\+\_\+clone$<$ detail\+::pointee$<$ Ptr $>$ $>$ \mbox{\hyperlink{namespacegko_a5bb0c29332dae13bf6aa8771583d7b06}{make\+\_\+temporary\+\_\+output\+\_\+clone}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, Ptr \&\&ptr)
 \begin{DoxyCompactList}\small\item\em Creates a uninitialized temporary\+\_\+clone that will be copied back to the input afterwards. \end{DoxyCompactList}\item 
 constexpr bool \mbox{\hyperlink{namespacegko_a4dbafa6e062c2036991ec8c3f6b201cf}{operator==}} (\mbox{\hyperlink{classgko_1_1precision__reduction}{precision\+\_\+reduction}} x, \mbox{\hyperlink{classgko_1_1precision__reduction}{precision\+\_\+reduction}} y) noexcept
 \begin{DoxyCompactList}\small\item\em Checks if two \mbox{\hyperlink{classgko_1_1precision__reduction}{precision\+\_\+reduction}} encodings are equal. \end{DoxyCompactList}\item 
@@ -752,15 +754,19 @@ constexpr bool \mbox{\hyperlink{namespacegko_a61d408b4cd77aae6cac7a40c8307fddb}{
 \begin{DoxyCompactList}\small\item\em Returns a non-\/owning (plain) pointer to the object pointed to by {\ttfamily p}. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Pointer $>$ }\\std\+::enable\+\_\+if$<$!detail\+::have\+\_\+ownership\+\_\+s$<$ Pointer $>$\+::value, detail\+::pointee$<$ Pointer $>$ $\ast$ $>$\+::type \mbox{\hyperlink{namespacegko_ade3cb20c98b2bb170d222e976bdf7cb9}{lend}} (const Pointer \&p)
 \begin{DoxyCompactList}\small\item\em Returns a non-\/owning (plain) pointer to the object pointed to by {\ttfamily p}. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename T , typename U $>$ }\\std\+::decay$<$ T $>$\+::type $\ast$ \mbox{\hyperlink{namespacegko_a73ce7e87aec389b5210630bb617b4baa}{as}} (U $\ast$obj)
+{\footnotesize template$<$typename T , typename U $>$ }\\std\+::decay\+\_\+t$<$ T $>$ $\ast$ \mbox{\hyperlink{namespacegko_a618c9b64c35b0452240e9e57a9673b94}{as}} (U $\ast$obj)
 \begin{DoxyCompactList}\small\item\em Performs polymorphic type conversion. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename T , typename U $>$ }\\const std\+::decay$<$ T $>$\+::type $\ast$ \mbox{\hyperlink{namespacegko_a289e84ef5dea2f579dd12f27140a1470}{as}} (const U $\ast$obj)
+{\footnotesize template$<$typename T , typename U $>$ }\\const std\+::decay\+\_\+t$<$ T $>$ $\ast$ \mbox{\hyperlink{namespacegko_a4d897000d495cf29c651aeaa38e47cee}{as}} (const U $\ast$obj)
 \begin{DoxyCompactList}\small\item\em Performs polymorphic type conversion. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename T , typename U $>$ }\\std\+::unique\+\_\+ptr$<$ typename std\+::decay$<$ T $>$\+::type $>$ \mbox{\hyperlink{namespacegko_a1f1d94c42e7fd9103e256100d004f28a}{as}} (std\+::unique\+\_\+ptr$<$ U $>$ \&\&obj)
+{\footnotesize template$<$typename T , typename U $>$ }\\std\+::decay\+\_\+t$<$ T $>$ $\ast$ \mbox{\hyperlink{namespacegko_a29059386e37fb89179375e4bab40ac78}{as}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ U $>$ obj)
+\begin{DoxyCompactList}\small\item\em Performs polymorphic type conversion on a \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T , typename U $>$ }\\const std\+::decay\+\_\+t$<$ T $>$ $\ast$ \mbox{\hyperlink{namespacegko_a94fdce000ceaec793222a8025fd7ef47}{as}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const U $>$ obj)
+\begin{DoxyCompactList}\small\item\em Performs polymorphic type conversion. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T , typename U $>$ }\\std\+::unique\+\_\+ptr$<$ std\+::decay\+\_\+t$<$ T $>$ $>$ \mbox{\hyperlink{namespacegko_a2aea17363a50cd489610bbb3d61d7644}{as}} (std\+::unique\+\_\+ptr$<$ U $>$ \&\&obj)
 \begin{DoxyCompactList}\small\item\em Performs polymorphic type conversion of a unique\+\_\+ptr. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename T , typename U $>$ }\\std\+::shared\+\_\+ptr$<$ typename std\+::decay$<$ T $>$\+::type $>$ \mbox{\hyperlink{namespacegko_a67f747ca6333526fbca64180417dc28a}{as}} (std\+::shared\+\_\+ptr$<$ U $>$ obj)
+{\footnotesize template$<$typename T , typename U $>$ }\\std\+::shared\+\_\+ptr$<$ std\+::decay\+\_\+t$<$ T $>$ $>$ \mbox{\hyperlink{namespacegko_a74e17532a5d986888535ea77bb11667e}{as}} (std\+::shared\+\_\+ptr$<$ U $>$ obj)
 \begin{DoxyCompactList}\small\item\em Performs polymorphic type conversion of a shared\+\_\+ptr. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename T , typename U $>$ }\\std\+::shared\+\_\+ptr$<$ const typename std\+::decay$<$ T $>$\+::type $>$ \mbox{\hyperlink{namespacegko_a78a5f4822744132cfc4a21439f19a67a}{as}} (std\+::shared\+\_\+ptr$<$ const U $>$ obj)
+{\footnotesize template$<$typename T , typename U $>$ }\\std\+::shared\+\_\+ptr$<$ const std\+::decay\+\_\+t$<$ T $>$ $>$ \mbox{\hyperlink{namespacegko_a2159fc51b298ac27dedf221d98e0ac6b}{as}} (std\+::shared\+\_\+ptr$<$ const U $>$ obj)
 \begin{DoxyCompactList}\small\item\em Performs polymorphic type conversion of a shared\+\_\+ptr. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{namespacegko_aeeaafa7179e5dbc1f1c02197598664fb}\label{namespacegko_aeeaafa7179e5dbc1f1c02197598664fb}} 
 bool {\bfseries operator==} (const \mbox{\hyperlink{structgko_1_1version}{version}} \&first, const \mbox{\hyperlink{structgko_1_1version}{version}} \&second)
@@ -786,9 +792,9 @@ std\+::ostream \& \mbox{\hyperlink{namespacegko_ad9e3ba96a10fe47a03ceef39b45bd43
 \begin{DoxyCompactList}\small\item\em Prints library version information in human-\/readable format to a stream. \end{DoxyCompactList}\item 
 {\footnotesize template$<$template$<$ typename, typename $>$ class Matrix\+Type, typename... Args$>$ }\\auto \mbox{\hyperlink{namespacegko_a537803d962d07cf43e1e0cbc9f6a3f8b}{with\+\_\+matrix\+\_\+type}} (Args \&\&... create\+\_\+args)
 \begin{DoxyCompactList}\small\item\em This function returns a type that delays a call to Matrix\+Type\+::create. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename Value\+Type $>$ }\\std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{matrix\+::\+Dense}}$<$ Value\+Type $>$ $>$ \mbox{\hyperlink{namespacegko_af1b90fccc0dbebcad123cc74d2abd73a}{make\+\_\+dense\+\_\+view}} (\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{matrix\+::\+Dense}}$<$ Value\+Type $>$ $\ast$vector)
+{\footnotesize template$<$typename Vec\+Ptr $>$ }\\std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{matrix\+::\+Dense}}$<$ typename detail\+::pointee$<$ Vec\+Ptr $>$\+::value\+\_\+type $>$ $>$ \mbox{\hyperlink{namespacegko_a2153742f2b9f614372cd24ea7b75534f}{make\+\_\+dense\+\_\+view}} (Vec\+Ptr \&\&vector)
 \begin{DoxyCompactList}\small\item\em Creates a view of a given Dense vector. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename Value\+Type $>$ }\\std\+::unique\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{matrix\+::\+Dense}}$<$ Value\+Type $>$ $>$ \mbox{\hyperlink{namespacegko_a8430581df497444dd83e9f8c3a9b9c65}{make\+\_\+const\+\_\+dense\+\_\+view}} (const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{matrix\+::\+Dense}}$<$ Value\+Type $>$ $\ast$vector)
+{\footnotesize template$<$typename Vec\+Ptr $>$ }\\std\+::unique\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{matrix\+::\+Dense}}$<$ typename detail\+::pointee$<$ Vec\+Ptr $>$\+::value\+\_\+type $>$ $>$ \mbox{\hyperlink{namespacegko_a441d49085ddb5215309d1e1fc64460b5}{make\+\_\+const\+\_\+dense\+\_\+view}} (Vec\+Ptr \&\&vector)
 \begin{DoxyCompactList}\small\item\em Creates a view of a given Dense vector. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Matrix , typename... T\+Args$>$ }\\std\+::unique\+\_\+ptr$<$ Matrix $>$ \mbox{\hyperlink{group__LinOp_ga2f54bac1e95fb3ef03974fa9c9088491}{initialize}} (\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} stride, std\+::initializer\+\_\+list$<$ typename Matrix\+::value\+\_\+type $>$ vals, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, T\+Args \&\&... create\+\_\+args)
 \begin{DoxyCompactList}\small\item\em Creates and initializes a column-\/vector. \end{DoxyCompactList}\item 
@@ -1023,12 +1029,12 @@ x $>$= \mbox{\hyperlink{namespacegko_a70dbe01ff95c7b953d3d737424c6feb5}{zero$<$\
 
 Referenced by is\+\_\+finite().
 
-\mbox{\Hypertarget{namespacegko_a289e84ef5dea2f579dd12f27140a1470}\label{namespacegko_a289e84ef5dea2f579dd12f27140a1470}} 
+\mbox{\Hypertarget{namespacegko_a4d897000d495cf29c651aeaa38e47cee}\label{namespacegko_a4d897000d495cf29c651aeaa38e47cee}} 
 \index{gko@{gko}!as@{as}}
 \index{as@{as}!gko@{gko}}
-\doxysubsubsection{\texorpdfstring{as()}{as()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+\doxysubsubsection{\texorpdfstring{as()}{as()}\hspace{0.1cm}{\footnotesize\ttfamily [1/7]}}
 {\footnotesize\ttfamily template$<$typename T , typename U $>$ \\
-const std\+::decay$<$T$>$\+::type$\ast$ gko\+::as (\begin{DoxyParamCaption}\item[{const U $\ast$}]{obj }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+const std\+::decay\+\_\+t$<$T$>$$\ast$ gko\+::as (\begin{DoxyParamCaption}\item[{const U $\ast$}]{obj }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1051,12 +1057,74 @@ This is the constant version of the function.
 \begin{DoxyReturn}{Returns}
 If successful, returns a pointer to the subtype, otherwise throws \mbox{\hyperlink{classgko_1_1NotSupported}{Not\+Supported}}. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{namespacegko_a78a5f4822744132cfc4a21439f19a67a}\label{namespacegko_a78a5f4822744132cfc4a21439f19a67a}} 
+\mbox{\Hypertarget{namespacegko_a94fdce000ceaec793222a8025fd7ef47}\label{namespacegko_a94fdce000ceaec793222a8025fd7ef47}} 
 \index{gko@{gko}!as@{as}}
 \index{as@{as}!gko@{gko}}
-\doxysubsubsection{\texorpdfstring{as()}{as()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+\doxysubsubsection{\texorpdfstring{as()}{as()}\hspace{0.1cm}{\footnotesize\ttfamily [2/7]}}
 {\footnotesize\ttfamily template$<$typename T , typename U $>$ \\
-std\+::shared\+\_\+ptr$<$const typename std\+::decay$<$T$>$\+::type$>$ gko\+::as (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const U $>$}]{obj }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+const std\+::decay\+\_\+t$<$T$>$$\ast$ gko\+::as (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const U $>$}]{obj }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Performs polymorphic type conversion. 
+
+This is the constant version of the function.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & requested result type \\
+\hline
+{\em U} & static type of the passed object\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em obj} & the object which should be converted\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If successful, returns a pointer to the subtype, otherwise throws \mbox{\hyperlink{classgko_1_1NotSupported}{Not\+Supported}}. 
+\end{DoxyReturn}
+
+
+References gko\+::ptr\+\_\+param$<$ T $>$\+::get().
+
+\mbox{\Hypertarget{namespacegko_a29059386e37fb89179375e4bab40ac78}\label{namespacegko_a29059386e37fb89179375e4bab40ac78}} 
+\index{gko@{gko}!as@{as}}
+\index{as@{as}!gko@{gko}}
+\doxysubsubsection{\texorpdfstring{as()}{as()}\hspace{0.1cm}{\footnotesize\ttfamily [3/7]}}
+{\footnotesize\ttfamily template$<$typename T , typename U $>$ \\
+std\+::decay\+\_\+t$<$T$>$$\ast$ gko\+::as (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ U $>$}]{obj }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Performs polymorphic type conversion on a \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & requested result type \\
+\hline
+{\em U} & static type of the passed object\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em obj} & the object which should be converted\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If successful, returns a pointer to the subtype, otherwise throws \mbox{\hyperlink{classgko_1_1NotSupported}{Not\+Supported}}. 
+\end{DoxyReturn}
+
+
+References gko\+::ptr\+\_\+param$<$ T $>$\+::get().
+
+\mbox{\Hypertarget{namespacegko_a2159fc51b298ac27dedf221d98e0ac6b}\label{namespacegko_a2159fc51b298ac27dedf221d98e0ac6b}} 
+\index{gko@{gko}!as@{as}}
+\index{as@{as}!gko@{gko}}
+\doxysubsubsection{\texorpdfstring{as()}{as()}\hspace{0.1cm}{\footnotesize\ttfamily [4/7]}}
+{\footnotesize\ttfamily template$<$typename T , typename U $>$ \\
+std\+::shared\+\_\+ptr$<$const std\+::decay\+\_\+t$<$T$>$ $>$ gko\+::as (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const U $>$}]{obj }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1079,12 +1147,12 @@ This is the constant version of the function.
 \begin{DoxyReturn}{Returns}
 If successful, returns a shared\+\_\+ptr to the subtype, otherwise throws \mbox{\hyperlink{classgko_1_1NotSupported}{Not\+Supported}}. This pointer shares ownership with the input pointer. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{namespacegko_a67f747ca6333526fbca64180417dc28a}\label{namespacegko_a67f747ca6333526fbca64180417dc28a}} 
+\mbox{\Hypertarget{namespacegko_a74e17532a5d986888535ea77bb11667e}\label{namespacegko_a74e17532a5d986888535ea77bb11667e}} 
 \index{gko@{gko}!as@{as}}
 \index{as@{as}!gko@{gko}}
-\doxysubsubsection{\texorpdfstring{as()}{as()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+\doxysubsubsection{\texorpdfstring{as()}{as()}\hspace{0.1cm}{\footnotesize\ttfamily [5/7]}}
 {\footnotesize\ttfamily template$<$typename T , typename U $>$ \\
-std\+::shared\+\_\+ptr$<$typename std\+::decay$<$T$>$\+::type$>$ gko\+::as (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ U $>$}]{obj }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+std\+::shared\+\_\+ptr$<$std\+::decay\+\_\+t$<$T$>$ $>$ gko\+::as (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ U $>$}]{obj }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1105,12 +1173,12 @@ Performs polymorphic type conversion of a shared\+\_\+ptr.
 \begin{DoxyReturn}{Returns}
 If successful, returns a shared\+\_\+ptr to the subtype, otherwise throws \mbox{\hyperlink{classgko_1_1NotSupported}{Not\+Supported}}. This pointer shares ownership with the input pointer. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{namespacegko_a1f1d94c42e7fd9103e256100d004f28a}\label{namespacegko_a1f1d94c42e7fd9103e256100d004f28a}} 
+\mbox{\Hypertarget{namespacegko_a2aea17363a50cd489610bbb3d61d7644}\label{namespacegko_a2aea17363a50cd489610bbb3d61d7644}} 
 \index{gko@{gko}!as@{as}}
 \index{as@{as}!gko@{gko}}
-\doxysubsubsection{\texorpdfstring{as()}{as()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+\doxysubsubsection{\texorpdfstring{as()}{as()}\hspace{0.1cm}{\footnotesize\ttfamily [6/7]}}
 {\footnotesize\ttfamily template$<$typename T , typename U $>$ \\
-std\+::unique\+\_\+ptr$<$typename std\+::decay$<$T$>$\+::type$>$ gko\+::as (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ U $>$ \&\&}]{obj }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+std\+::unique\+\_\+ptr$<$std\+::decay\+\_\+t$<$T$>$ $>$ gko\+::as (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ U $>$ \&\&}]{obj }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1131,12 +1199,12 @@ Performs polymorphic type conversion of a unique\+\_\+ptr.
 \begin{DoxyReturn}{Returns}
 If successful, returns a unique\+\_\+ptr to the subtype, otherwise throws \mbox{\hyperlink{classgko_1_1NotSupported}{Not\+Supported}}. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{namespacegko_a73ce7e87aec389b5210630bb617b4baa}\label{namespacegko_a73ce7e87aec389b5210630bb617b4baa}} 
+\mbox{\Hypertarget{namespacegko_a618c9b64c35b0452240e9e57a9673b94}\label{namespacegko_a618c9b64c35b0452240e9e57a9673b94}} 
 \index{gko@{gko}!as@{as}}
 \index{as@{as}!gko@{gko}}
-\doxysubsubsection{\texorpdfstring{as()}{as()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+\doxysubsubsection{\texorpdfstring{as()}{as()}\hspace{0.1cm}{\footnotesize\ttfamily [7/7]}}
 {\footnotesize\ttfamily template$<$typename T , typename U $>$ \\
-std\+::decay$<$T$>$\+::type$\ast$ gko\+::as (\begin{DoxyParamCaption}\item[{U $\ast$}]{obj }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+std\+::decay\+\_\+t$<$T$>$$\ast$ gko\+::as (\begin{DoxyParamCaption}\item[{U $\ast$}]{obj }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -1824,12 +1892,12 @@ References make\+\_\+const\+\_\+array\+\_\+view().
 
 Referenced by make\+\_\+const\+\_\+array\+\_\+view().
 
-\mbox{\Hypertarget{namespacegko_a8430581df497444dd83e9f8c3a9b9c65}\label{namespacegko_a8430581df497444dd83e9f8c3a9b9c65}} 
+\mbox{\Hypertarget{namespacegko_a441d49085ddb5215309d1e1fc64460b5}\label{namespacegko_a441d49085ddb5215309d1e1fc64460b5}} 
 \index{gko@{gko}!make\_const\_dense\_view@{make\_const\_dense\_view}}
 \index{make\_const\_dense\_view@{make\_const\_dense\_view}!gko@{gko}}
 \doxysubsubsection{\texorpdfstring{make\_const\_dense\_view()}{make\_const\_dense\_view()}}
-{\footnotesize\ttfamily template$<$typename Value\+Type $>$ \\
-std\+::unique\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{matrix\+::\+Dense}}$<$Value\+Type$>$ $>$ gko\+::make\+\_\+const\+\_\+dense\+\_\+view (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{matrix\+::\+Dense}}$<$ Value\+Type $>$ $\ast$}]{vector }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$typename Vec\+Ptr $>$ \\
+std\+::unique\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{matrix\+::\+Dense}}$<$typename detail\+::pointee$<$Vec\+Ptr$>$\+::value\+\_\+type$>$ $>$ gko\+::make\+\_\+const\+\_\+dense\+\_\+view (\begin{DoxyParamCaption}\item[{Vec\+Ptr \&\&}]{vector }\end{DoxyParamCaption})}
 
 
 
@@ -1837,7 +1905,7 @@ Creates a view of a given Dense vector.
 
 
 \begin{DoxyTemplParams}{Template Parameters}
-{\em Value\+Type} & the underlying value type of the vector\\
+{\em Vec\+Ptr} & a (smart or raw) pointer to the vector.\\
 \hline
 \end{DoxyTemplParams}
 
@@ -1849,12 +1917,12 @@ Creates a view of a given Dense vector.
 
 References gko\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::create\+\_\+const\+\_\+view\+\_\+of().
 
-\mbox{\Hypertarget{namespacegko_af1b90fccc0dbebcad123cc74d2abd73a}\label{namespacegko_af1b90fccc0dbebcad123cc74d2abd73a}} 
+\mbox{\Hypertarget{namespacegko_a2153742f2b9f614372cd24ea7b75534f}\label{namespacegko_a2153742f2b9f614372cd24ea7b75534f}} 
 \index{gko@{gko}!make\_dense\_view@{make\_dense\_view}}
 \index{make\_dense\_view@{make\_dense\_view}!gko@{gko}}
 \doxysubsubsection{\texorpdfstring{make\_dense\_view()}{make\_dense\_view()}}
-{\footnotesize\ttfamily template$<$typename Value\+Type $>$ \\
-std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{matrix\+::\+Dense}}$<$Value\+Type$>$ $>$ gko\+::make\+\_\+dense\+\_\+view (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{matrix\+::\+Dense}}$<$ Value\+Type $>$ $\ast$}]{vector }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$typename Vec\+Ptr $>$ \\
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{matrix\+::\+Dense}}$<$typename detail\+::pointee$<$Vec\+Ptr$>$\+::value\+\_\+type$>$ $>$ gko\+::make\+\_\+dense\+\_\+view (\begin{DoxyParamCaption}\item[{Vec\+Ptr \&\&}]{vector }\end{DoxyParamCaption})}
 
 
 
@@ -1862,7 +1930,7 @@ Creates a view of a given Dense vector.
 
 
 \begin{DoxyTemplParams}{Template Parameters}
-{\em Value\+Type} & the underlying value type of the vector\\
+{\em Vec\+Ptr} & a (smart or raw) pointer to the vector.\\
 \hline
 \end{DoxyTemplParams}
 
@@ -1874,12 +1942,12 @@ Creates a view of a given Dense vector.
 
 References gko\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::create\+\_\+view\+\_\+of().
 
-\mbox{\Hypertarget{namespacegko_a2166ec09e3e8a0ef437aee9c2b97f422}\label{namespacegko_a2166ec09e3e8a0ef437aee9c2b97f422}} 
+\mbox{\Hypertarget{namespacegko_a7e65327b79b773f00f5bf4a480dd2066}\label{namespacegko_a7e65327b79b773f00f5bf4a480dd2066}} 
 \index{gko@{gko}!make\_temporary\_clone@{make\_temporary\_clone}}
 \index{make\_temporary\_clone@{make\_temporary\_clone}!gko@{gko}}
 \doxysubsubsection{\texorpdfstring{make\_temporary\_clone()}{make\_temporary\_clone()}}
-{\footnotesize\ttfamily template$<$typename T $>$ \\
-detail\+::temporary\+\_\+clone$<$T$>$ gko\+::make\+\_\+temporary\+\_\+clone (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{T $\ast$}]{ptr }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$typename Ptr $>$ \\
+detail\+::temporary\+\_\+clone$<$detail\+::pointee$<$Ptr$>$ $>$ gko\+::make\+\_\+temporary\+\_\+clone (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{Ptr \&\&}]{ptr }\end{DoxyParamCaption})}
 
 
 
@@ -1891,19 +1959,24 @@ This is a helper function which avoids the need to explicitly specify the type o
 \begin{DoxyParams}{Parameters}
 {\em exec} & the executor where the clone will be created \\
 \hline
-{\em ptr} & a pointer to the object of which the clone will be created \\
+{\em ptr} & a pointer to the object of which the clone will be created\\
 \hline
 \end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Ptr} & the (raw or smart) pointer type to be temporarily cloned \\
+\hline
+\end{DoxyTemplParams}
 
 
 Referenced by gko\+::\+Scaled\+Identity\+Addable\+::add\+\_\+scaled\+\_\+identity(), gko\+::\+Lin\+Op\+::apply(), gko\+::matrix\+::\+Coo$<$ Value\+Type, Index\+Type $>$\+::apply2(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::inv\+\_\+scale(), and gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::scale().
 
-\mbox{\Hypertarget{namespacegko_a6470e8e212add7923569e6b885a74610}\label{namespacegko_a6470e8e212add7923569e6b885a74610}} 
+\mbox{\Hypertarget{namespacegko_ad1f2b88f3b91582e67c7c6d8730300a2}\label{namespacegko_ad1f2b88f3b91582e67c7c6d8730300a2}} 
 \index{gko@{gko}!make\_temporary\_conversion@{make\_temporary\_conversion}}
 \index{make\_temporary\_conversion@{make\_temporary\_conversion}!gko@{gko}}
-\doxysubsubsection{\texorpdfstring{make\_temporary\_conversion()}{make\_temporary\_conversion()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$typename Value\+Type $>$ \\
-detail\+::temporary\+\_\+conversion$<$const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{matrix\+::\+Dense}}$<$Value\+Type$>$ $>$ gko\+::make\+\_\+temporary\+\_\+conversion (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{matrix }\end{DoxyParamCaption})}
+\doxysubsubsection{\texorpdfstring{make\_temporary\_conversion()}{make\_temporary\_conversion()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type , typename Ptr $>$ \\
+detail\+::temporary\+\_\+conversion$<$std\+::conditional\+\_\+t$<$ std\+::is\+\_\+const$<$detail\+::pointee$<$Ptr$>$ $>$\+::value, const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{matrix\+::\+Dense}}$<$Value\+Type$>$, \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{matrix\+::\+Dense}}$<$Value\+Type$>$ $>$ $>$ gko\+::make\+\_\+temporary\+\_\+conversion (\begin{DoxyParamCaption}\item[{Ptr \&\&}]{matrix }\end{DoxyParamCaption})}
 
 
 
@@ -1929,43 +2002,12 @@ a detail\+::temporary\+\_\+conversion pointing to the (potentially converted) ob
 {\em Value\+Type} & the value type into whose associated \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{matrix\+::\+Dense}} type to convert the input \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}. \\
 \hline
 \end{DoxyTemplParams}
-\mbox{\Hypertarget{namespacegko_a6861874b1a8e349961c487c92c497658}\label{namespacegko_a6861874b1a8e349961c487c92c497658}} 
-\index{gko@{gko}!make\_temporary\_conversion@{make\_temporary\_conversion}}
-\index{make\_temporary\_conversion@{make\_temporary\_conversion}!gko@{gko}}
-\doxysubsubsection{\texorpdfstring{make\_temporary\_conversion()}{make\_temporary\_conversion()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$typename Value\+Type $>$ \\
-detail\+::temporary\+\_\+conversion$<$\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{matrix\+::\+Dense}}$<$Value\+Type$>$ $>$ gko\+::make\+\_\+temporary\+\_\+conversion (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{matrix }\end{DoxyParamCaption})}
-
-
-
-Convert the given \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} from matrix\+::\+Dense$<$...$>$ to matrix\+::\+Dense$<$\+Value\+Type$>$. 
-
-The conversion tries to convert the input \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} to all Dense types with value type recursively reachable by next\+\_\+precision$<$...$>$ starting from the Value\+Type template parameter. This means that all real-\/to-\/real and complex-\/to-\/complex conversions for default precisions are being considered. If the input matrix is non-\/const, the contents of the modified converted object will be converted back to the input matrix when the returned object is destroyed. This may lead to a loss of precision!
-
-
-\begin{DoxyParams}{Parameters}
-{\em matrix} & the input matrix which is supposed to be converted. It is wrapped unchanged if it is already of type matrix\+::\+Dense$<$\+Value\+Type$>$, otherwise it will be converted to this type if possible.\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-a detail\+::temporary\+\_\+conversion pointing to the (potentially converted) object.
-\end{DoxyReturn}
-
-\begin{DoxyExceptions}{Exceptions}
-{\em \mbox{\hyperlink{classgko_1_1NotSupported}{Not\+Supported}}} & if the input matrix cannot be converted to matrix\+::\+Dense$<$\+Value\+Type$>$\\
-\hline
-\end{DoxyExceptions}
-
-\begin{DoxyTemplParams}{Template Parameters}
-{\em Value\+Type} & the value type into whose associated \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{matrix\+::\+Dense}} type to convert the input \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}. \\
-\hline
-\end{DoxyTemplParams}
-\mbox{\Hypertarget{namespacegko_a0132e53621ce6f4222a2684ea6d6f021}\label{namespacegko_a0132e53621ce6f4222a2684ea6d6f021}} 
+\mbox{\Hypertarget{namespacegko_a5bb0c29332dae13bf6aa8771583d7b06}\label{namespacegko_a5bb0c29332dae13bf6aa8771583d7b06}} 
 \index{gko@{gko}!make\_temporary\_output\_clone@{make\_temporary\_output\_clone}}
 \index{make\_temporary\_output\_clone@{make\_temporary\_output\_clone}!gko@{gko}}
 \doxysubsubsection{\texorpdfstring{make\_temporary\_output\_clone()}{make\_temporary\_output\_clone()}}
-{\footnotesize\ttfamily template$<$typename T $>$ \\
-detail\+::temporary\+\_\+clone$<$T$>$ gko\+::make\+\_\+temporary\+\_\+output\+\_\+clone (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{T $\ast$}]{ptr }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily template$<$typename Ptr $>$ \\
+detail\+::temporary\+\_\+clone$<$detail\+::pointee$<$Ptr$>$ $>$ gko\+::make\+\_\+temporary\+\_\+output\+\_\+clone (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{Ptr \&\&}]{ptr }\end{DoxyParamCaption})}
 
 
 
@@ -1979,9 +2021,14 @@ This is a helper function which avoids the need to explicitly specify the type o
 \begin{DoxyParams}{Parameters}
 {\em exec} & the executor where the uninitialized clone will be created \\
 \hline
-{\em ptr} & a pointer to the object of which the clone will be created \\
+{\em ptr} & a pointer to the object of which the clone will be created\\
 \hline
 \end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Ptr} & the (raw or smart) pointer type to be temporarily cloned \\
+\hline
+\end{DoxyTemplParams}
 \mbox{\Hypertarget{namespacegko_af1812df45c6ec07780d579a12b64c753}\label{namespacegko_af1812df45c6ec07780d579a12b64c753}} 
 \index{gko@{gko}!max@{max}}
 \index{max@{max}!gko@{gko}}
@@ -2928,12 +2975,12 @@ This is mainly a helper function to specify the local matrix type for a \mbox{\h
 \begin{DoxyReturn}{Returns}
 A type with a function {\ttfamily create$<$value\+\_\+type, index\+\_\+type$>$(executor)}. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{namespacegko_aa24837da3770b3dddf981d9bfe0d3b52}\label{namespacegko_aa24837da3770b3dddf981d9bfe0d3b52}} 
+\mbox{\Hypertarget{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}\label{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}} 
 \index{gko@{gko}!write@{write}}
 \index{write@{write}!gko@{gko}}
 \doxysubsubsection{\texorpdfstring{write()}{write()}}
-{\footnotesize\ttfamily template$<$typename Matrix\+Type , typename Stream\+Type $>$ \\
-void gko\+::write (\begin{DoxyParamCaption}\item[{Stream\+Type \&\&}]{os,  }\item[{Matrix\+Type $\ast$}]{matrix,  }\item[{\mbox{\hyperlink{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68}{layout\+\_\+type}}}]{layout = {\ttfamily detail\+:\+:mtx\+\_\+io\+\_\+traits$<$std\+:\+:remove\+\_\+const\+\_\+t$<$MatrixType$>$$>$\+:\+:default\+\_\+layout} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$typename Matrix\+Ptr\+Type , typename Stream\+Type $>$ \\
+void gko\+::write (\begin{DoxyParamCaption}\item[{Stream\+Type \&\&}]{os,  }\item[{Matrix\+Ptr\+Type \&\&}]{matrix,  }\item[{\mbox{\hyperlink{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68}{layout\+\_\+type}}}]{layout = {\ttfamily detail\+:\+:mtx\+\_\+io\+\_\+traits$<$~std\+:\+:remove\+\_\+cv\+\_\+t$<$detail\+:\+:pointee$<$MatrixPtrType$>$$>$$>$\+:\+:default\+\_\+layout} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -2941,7 +2988,7 @@ Writes a matrix into an output stream in matrix market format.
 
 
 \begin{DoxyTemplParams}{Template Parameters}
-{\em Matrix\+Type} & a \mbox{\hyperlink{classgko_1_1WritableToMatrixData}{Writable\+To\+Matrix\+Data}} object providing data to be written. \\
+{\em Matrix\+Ptr\+Type} & a (smart or raw) pointer to a \mbox{\hyperlink{classgko_1_1WritableToMatrixData}{Writable\+To\+Matrix\+Data}} object providing data to be written. \\
 \hline
 {\em Stream\+Type} & type of stream used to write the data to\\
 \hline
@@ -2959,12 +3006,12 @@ Writes a matrix into an output stream in matrix market format.
 
 References write\+\_\+raw().
 
-\mbox{\Hypertarget{namespacegko_a1280f63daa434fc2afe2cf7974608d81}\label{namespacegko_a1280f63daa434fc2afe2cf7974608d81}} 
+\mbox{\Hypertarget{namespacegko_aba9ca89ef08421197d3dbf84b0ad884c}\label{namespacegko_aba9ca89ef08421197d3dbf84b0ad884c}} 
 \index{gko@{gko}!write\_binary@{write\_binary}}
 \index{write\_binary@{write\_binary}!gko@{gko}}
 \doxysubsubsection{\texorpdfstring{write\_binary()}{write\_binary()}}
-{\footnotesize\ttfamily template$<$typename Matrix\+Type , typename Stream\+Type $>$ \\
-void gko\+::write\+\_\+binary (\begin{DoxyParamCaption}\item[{Stream\+Type \&\&}]{os,  }\item[{Matrix\+Type $\ast$}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$typename Matrix\+Ptr\+Type , typename Stream\+Type $>$ \\
+void gko\+::write\+\_\+binary (\begin{DoxyParamCaption}\item[{Stream\+Type \&\&}]{os,  }\item[{Matrix\+Ptr\+Type \&\&}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -2974,7 +3021,7 @@ Note that this format depends on the processor\textquotesingle{}s endianness, so
 
 
 \begin{DoxyTemplParams}{Template Parameters}
-{\em Matrix\+Type} & a \mbox{\hyperlink{classgko_1_1WritableToMatrixData}{Writable\+To\+Matrix\+Data}} object providing data to be written. \\
+{\em Matrix\+Ptr\+Type} & a (smart or raw) pointer to a \mbox{\hyperlink{classgko_1_1WritableToMatrixData}{Writable\+To\+Matrix\+Data}} object providing data to be written. \\
 \hline
 {\em Stream\+Type} & type of stream used to write the data to\\
 \hline
@@ -3018,7 +3065,7 @@ Note that this format depends on the processor\textquotesingle{}s endianness, so
 \hline
 \end{DoxyParams}
 \begin{DoxyNote}{Note}
-This is an advanced routine that writes the raw matrix data structure. If you are trying to write an existing matrix, consider using \mbox{\hyperlink{namespacegko_a1280f63daa434fc2afe2cf7974608d81}{gko\+::write\+\_\+binary}} instead. 
+This is an advanced routine that writes the raw matrix data structure. If you are trying to write an existing matrix, consider using \mbox{\hyperlink{namespacegko_aba9ca89ef08421197d3dbf84b0ad884c}{gko\+::write\+\_\+binary}} instead. 
 \end{DoxyNote}
 
 
@@ -3052,7 +3099,7 @@ Writes a \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} structur
 \hline
 \end{DoxyParams}
 \begin{DoxyNote}{Note}
-This is an advanced routine that writes the raw matrix data structure. If you are trying to write an existing matrix, consider using \mbox{\hyperlink{namespacegko_aa24837da3770b3dddf981d9bfe0d3b52}{gko\+::write}} instead. 
+This is an advanced routine that writes the raw matrix data structure. If you are trying to write an existing matrix, consider using \mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{gko\+::write}} instead. 
 \end{DoxyNote}
 
 

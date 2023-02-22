@@ -187,7 +187,7 @@ A common interface often allows for writing more generic code. If a user\textquo
 For example, a matrix free implementation would require the user to provide an apply implementation and instead of passing the generated matrix to the solver, they would have to provide their apply implementation for all the executors needed and no other code needs to be changed. See \mbox{\hyperlink{custom_matrix_format}{The custom-\/matrix-\/format program}} example for more details.\hypertarget{group__LinOp_linop_concept}{}\doxysubsection{Linear operator as a concept}\label{group__LinOp_linop_concept}
 The linear operator (\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}) is a base class for all linear algebra objects in Ginkgo. The main benefit of having a single base class for the entire collection of linear algebra objects (as opposed to having separate hierarchies for matrices, solvers and preconditioners) is the generality it provides.
 
-First, since all subclasses provide a common interface, the library users are exposed to a smaller set of routines. For example, a matrix-\/vector product, a preconditioner application, or even a system solve are just different terms given to the operation of applying a certain linear operator to a vector. As such, Ginkgo uses the same routine name, \mbox{\hyperlink{classgko_1_1LinOp_a0449b2fc705d2f970855af23b5e2788e}{Lin\+Op\+::apply()}} for each of these operations, where the actual operation performed depends on the type of linear operator involved in the operation.
+First, since all subclasses provide a common interface, the library users are exposed to a smaller set of routines. For example, a matrix-\/vector product, a preconditioner application, or even a system solve are just different terms given to the operation of applying a certain linear operator to a vector. As such, Ginkgo uses the same routine name, \mbox{\hyperlink{classgko_1_1LinOp_aff0379dbd0d86bd9ce2db03ac05f789f}{Lin\+Op\+::apply()}} for each of these operations, where the actual operation performed depends on the type of linear operator involved in the operation.
 
 Second, a common interface often allows for writing more generic code. If a user\textquotesingle{}s routine requires only operations provided by the \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} interface, the same code can be used for any kind of linear operators, independent of whether these are matrices, solvers or preconditioners. This feature is also extensively used in Ginkgo itself. For example, a preconditioner used inside a Krylov solver is a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}. This allows the user to supply a wide variety of preconditioners\+: either the ones which were designed to be used in this scenario (like I\+LU or block-\/\+Jacobi), a user-\/supplied matrix which is known to be a good preconditioner for the specific problem, or even another solver (e.\+g., if constructing a flexible G\+M\+R\+ES solver).
 
@@ -213,16 +213,16 @@ Finally, direct manipulation of \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} ob
 \DoxyCodeLine{    \textcolor{keyword}{auto} tmp = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(x0);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_a0059e27f8f4bc348ff65c1e60caf47c8}{one}} = Dense<>::create(L-\/>get\_executor(), \{1.0,\});}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < iters; ++i) \{}
-\DoxyCodeLine{        L-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(tmp), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(x));}
-\DoxyCodeLine{        x-\/>add\_scaled(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(\mbox{\hyperlink{namespacegko_a0059e27f8f4bc348ff65c1e60caf47c8}{one}}), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b));}
-\DoxyCodeLine{        tmp-\/>copy\_from(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(x));}
+\DoxyCodeLine{        L-\/>apply(tmp, x);}
+\DoxyCodeLine{        x-\/>add\_scaled(\mbox{\hyperlink{namespacegko_a0059e27f8f4bc348ff65c1e60caf47c8}{one}}, b);}
+\DoxyCodeLine{        tmp-\/>copy\_from(x);}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{    \textcolor{keywordflow}{return} x;}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
 
 
-Here, if $L$ is a matrix, \mbox{\hyperlink{classgko_1_1LinOp_a0449b2fc705d2f970855af23b5e2788e}{Lin\+Op\+::apply()}} refers to the matrix vector product, and {\ttfamily L-\/$>$apply(a, b)} computes $b = L \cdot a$. {\ttfamily x-\/$>$add\+\_\+scaled(one.\+get(), b.\+get())} is the {\ttfamily axpy} vector update $x:=x+b$.
+Here, if $L$ is a matrix, \mbox{\hyperlink{classgko_1_1LinOp_aff0379dbd0d86bd9ce2db03ac05f789f}{Lin\+Op\+::apply()}} refers to the matrix vector product, and {\ttfamily L-\/$>$apply(a, b)} computes $b = L \cdot a$. {\ttfamily x-\/$>$add\+\_\+scaled(one.\+get(), b.\+get())} is the {\ttfamily axpy} vector update $x:=x+b$.
 
 The interesting part of this example is the apply() routine at line 4 of the function body. Since this routine is part of the \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} base class, the fixed-\/point iteration routine can calculate a fixed point not only for matrices, but for any type of linear operator.
 
@@ -301,7 +301,7 @@ A minimal example of a linear operator is the following\+:
 
 \`{}\`{}\`{}c++ struct My\+Lin\+Op \+: public Enable\+Lin\+Op$<$\+My\+Lin\+Op$>$ \{ \mbox{\hyperlink{group__LinOp_ga8e0af90ec2414b768266f77cedffc309}{G\+K\+O\+\_\+\+E\+N\+A\+B\+L\+E\+\_\+\+L\+I\+N\+\_\+\+O\+P\+\_\+\+F\+A\+C\+T\+O\+R\+Y(\+My\+Lin\+Op, my\+\_\+parameters, Factory)}} \{ // a factory parameter named \char`\"{}my\+\_\+value\char`\"{}, of type int and default // value of 5 int \mbox{\hyperlink{group__LinOp_ga49d4c09c39f06b22bebbbfd1d8bfe450}{G\+K\+O\+\_\+\+F\+A\+C\+T\+O\+R\+Y\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+S\+C\+A\+L\+A\+R(my\+\_\+value, 5)}}; // a factory parameter named {\ttfamily my\+\_\+pair} of type {\ttfamily std\+::pair$<$int,int$>$} // and default value \{5, 5\} std\+::pair$<$int, int$>$ \mbox{\hyperlink{group__LinOp_gaa292314d27ec1fb7ad54debaa3606ea8}{G\+K\+O\+\_\+\+F\+A\+C\+T\+O\+R\+Y\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+V\+E\+C\+T\+O\+R(my\+\_\+pair, 5, 5)}}; \}; // constructor needed by Enable\+Lin\+Op explicit My\+Lin\+Op(std\+::shared\+\_\+ptr$<$const Executor$>$ exec) \{ \+: Enable\+Lin\+Op$<$\+My\+Lin\+Op$>$(exec) \{\} // constructor needed by the factory explicit My\+Lin\+Op(const Factory $\ast$factory, std\+::shared\+\_\+ptr$<$const Lin\+Op$>$ matrix) \+: Enable\+Lin\+Op$<$\+My\+Lin\+Op$>$(factory-\/$>$get\+\_\+executor()), matrix-\/$>$get\+\_\+size()), // store factory\textquotesingle{}s parameters locally my\+\_\+parameters\+\_\+\{factory-\/$>$get\+\_\+parameters()\}, \{ int value = my\+\_\+parameters\+\_\+.\+my\+\_\+value; // do something with value \} 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{MyLinOp can then be created \mbox{\hyperlink{namespacegko_a73ce7e87aec389b5210630bb617b4baa}{as}} follows:}
+\DoxyCodeLine{MyLinOp can then be created \mbox{\hyperlink{namespacegko_a618c9b64c35b0452240e9e57a9673b94}{as}} follows:}
 \DoxyCodeLine{}
 \DoxyCodeLine{```c++}
 \DoxyCodeLine{\textcolor{keyword}{auto} exec = gko::ReferenceExecutor::create();}
