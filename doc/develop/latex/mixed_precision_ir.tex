@@ -128,8 +128,8 @@ Calculate initial residual by overwriting b
 \DoxyCodeLine{\textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_a0059e27f8f4bc348ff65c1e60caf47c8}{one}} = gko::initialize<vec>(\{1.0\}, exec);}
 \DoxyCodeLine{\textcolor{keyword}{auto} neg\_one = gko::initialize<vec>(\{-\/1.0\}, exec);}
 \DoxyCodeLine{\textcolor{keyword}{auto} initres\_vec = gko::initialize<real\_vec>(\{0.0\}, exec);}
-\DoxyCodeLine{A-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(b));}
-\DoxyCodeLine{b-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(initres\_vec));}
+\DoxyCodeLine{A-\/>apply(one, x, neg\_one, b);}
+\DoxyCodeLine{b-\/>compute\_norm2(initres\_vec);}
 \end{DoxyCode}
 
 
@@ -140,8 +140,8 @@ Build lower-\/precision system matrix and residual
 \DoxyCodeLine{\textcolor{keyword}{auto} solver\_A = solver\_mtx::create(exec);}
 \DoxyCodeLine{\textcolor{keyword}{auto} inner\_residual = solver\_vec::create(exec);}
 \DoxyCodeLine{\textcolor{keyword}{auto} outer\_residual = vec::create(exec);}
-\DoxyCodeLine{A-\/>convert\_to(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(solver\_A));}
-\DoxyCodeLine{b-\/>convert\_to(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(outer\_residual));}
+\DoxyCodeLine{A-\/>convert\_to(solver\_A);}
+\DoxyCodeLine{b-\/>convert\_to(outer\_residual);}
 \end{DoxyCode}
 
 
@@ -149,7 +149,7 @@ restore b
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{b-\/>copy\_from(host\_x.get());}
+\DoxyCodeLine{b-\/>copy\_from(host\_x);}
 \end{DoxyCode}
 
 
@@ -191,8 +191,8 @@ convert residual to inner precision
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{outer\_residual-\/>convert\_to(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(inner\_residual));}
-\DoxyCodeLine{outer\_residual-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(res\_vec));}
+\DoxyCodeLine{outer\_residual-\/>convert\_to(inner\_residual);}
+\DoxyCodeLine{outer\_residual-\/>compute\_norm2(res\_vec);}
 \DoxyCodeLine{\textcolor{keyword}{auto} res = exec-\/>copy\_val\_to\_host(res\_vec-\/>get\_const\_values());}
 \end{DoxyCode}
 
@@ -211,8 +211,8 @@ Use the inner solver to solve A $\ast$ inner\+\_\+solution = inner\+\_\+residual
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{inner\_solution-\/>copy\_from(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(inner\_residual));}
-\DoxyCodeLine{inner\_solver-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(inner\_residual), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(inner\_solution));}
+\DoxyCodeLine{inner\_solution-\/>copy\_from(inner\_residual);}
+\DoxyCodeLine{inner\_solver-\/>apply(inner\_residual, inner\_solution);}
 \end{DoxyCode}
 
 
@@ -220,7 +220,7 @@ convert inner solution to outer precision
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{inner\_solution-\/>convert\_to(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(outer\_delta));}
+\DoxyCodeLine{inner\_solution-\/>convert\_to(outer\_delta);}
 \end{DoxyCode}
 
 
@@ -228,7 +228,7 @@ x = x + inner\+\_\+solution
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{x-\/>add\_scaled(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(outer\_delta));}
+\DoxyCodeLine{x-\/>add\_scaled(one, outer\_delta);}
 \end{DoxyCode}
 
 
@@ -236,8 +236,8 @@ residual = b -\/ A $\ast$ x
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{    outer\_residual-\/>copy\_from(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(b));}
-\DoxyCodeLine{    A-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(outer\_residual));}
+\DoxyCodeLine{    outer\_residual-\/>copy\_from(b);}
+\DoxyCodeLine{    A-\/>apply(neg\_one, x, one, outer\_residual);}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{auto} toc = std::chrono::steady\_clock::now();}
@@ -249,13 +249,13 @@ Calculate residual
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{A-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(b));}
-\DoxyCodeLine{b-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(res\_vec));}
+\DoxyCodeLine{A-\/>apply(one, x, neg\_one, b);}
+\DoxyCodeLine{b-\/>compute\_norm2(res\_vec);}
 \DoxyCodeLine{}
 \DoxyCodeLine{std::cout << \textcolor{stringliteral}{"Initial residual norm sqrt(r\string^T r):\(\backslash\)n"};}
-\DoxyCodeLine{\mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{write}}(std::cout, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(initres\_vec));}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{write}}(std::cout, initres\_vec);}
 \DoxyCodeLine{std::cout << \textcolor{stringliteral}{"Final residual norm sqrt(r\string^T r):\(\backslash\)n"};}
-\DoxyCodeLine{\mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{write}}(std::cout, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(res\_vec));}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{write}}(std::cout, res\_vec);}
 \end{DoxyCode}
 
 
@@ -400,16 +400,16 @@ This is the expected output\+:
 \DoxyCodeLine{    \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_a0059e27f8f4bc348ff65c1e60caf47c8}{one}} = gko::initialize<vec>(\{1.0\}, exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} neg\_one = gko::initialize<vec>(\{-\/1.0\}, exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} initres\_vec = gko::initialize<real\_vec>(\{0.0\}, exec);}
-\DoxyCodeLine{    A-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(b));}
-\DoxyCodeLine{    b-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(initres\_vec));}
+\DoxyCodeLine{    A-\/>apply(one, x, neg\_one, b);}
+\DoxyCodeLine{    b-\/>compute\_norm2(initres\_vec);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} solver\_A = solver\_mtx::create(exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} inner\_residual = solver\_vec::create(exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} outer\_residual = vec::create(exec);}
-\DoxyCodeLine{    A-\/>convert\_to(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(solver\_A));}
-\DoxyCodeLine{    b-\/>convert\_to(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(outer\_residual));}
+\DoxyCodeLine{    A-\/>convert\_to(solver\_A);}
+\DoxyCodeLine{    b-\/>convert\_to(outer\_residual);}
 \DoxyCodeLine{}
-\DoxyCodeLine{    b-\/>copy\_from(host\_x.get());}
+\DoxyCodeLine{    b-\/>copy\_from(host\_x);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} inner\_solver =}
 \DoxyCodeLine{        cg::build()}
@@ -433,35 +433,35 @@ This is the expected output\+:
 \DoxyCodeLine{    \textcolor{keywordflow}{while} (\textcolor{keyword}{true}) \{}
 \DoxyCodeLine{        ++iter;}
 \DoxyCodeLine{}
-\DoxyCodeLine{        outer\_residual-\/>convert\_to(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(inner\_residual));}
-\DoxyCodeLine{        outer\_residual-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(res\_vec));}
+\DoxyCodeLine{        outer\_residual-\/>convert\_to(inner\_residual);}
+\DoxyCodeLine{        outer\_residual-\/>compute\_norm2(res\_vec);}
 \DoxyCodeLine{        \textcolor{keyword}{auto} res = exec-\/>copy\_val\_to\_host(res\_vec-\/>get\_const\_values());}
 \DoxyCodeLine{}
 \DoxyCodeLine{        \textcolor{keywordflow}{if} (iter > max\_outer\_iters || res / initres < outer\_reduction\_factor) \{}
 \DoxyCodeLine{            \textcolor{keywordflow}{break};}
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{        inner\_solution-\/>copy\_from(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(inner\_residual));}
-\DoxyCodeLine{        inner\_solver-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(inner\_residual), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(inner\_solution));}
+\DoxyCodeLine{        inner\_solution-\/>copy\_from(inner\_residual);}
+\DoxyCodeLine{        inner\_solver-\/>apply(inner\_residual, inner\_solution);}
 \DoxyCodeLine{}
-\DoxyCodeLine{        inner\_solution-\/>convert\_to(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(outer\_delta));}
+\DoxyCodeLine{        inner\_solution-\/>convert\_to(outer\_delta);}
 \DoxyCodeLine{}
-\DoxyCodeLine{        x-\/>add\_scaled(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(outer\_delta));}
+\DoxyCodeLine{        x-\/>add\_scaled(one, outer\_delta);}
 \DoxyCodeLine{}
-\DoxyCodeLine{        outer\_residual-\/>copy\_from(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(b));}
-\DoxyCodeLine{        A-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(outer\_residual));}
+\DoxyCodeLine{        outer\_residual-\/>copy\_from(b);}
+\DoxyCodeLine{        A-\/>apply(neg\_one, x, one, outer\_residual);}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} toc = std::chrono::steady\_clock::now();}
 \DoxyCodeLine{    time += std::chrono::duration\_cast<std::chrono::nanoseconds>(toc -\/ tic);}
 \DoxyCodeLine{}
-\DoxyCodeLine{    A-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(b));}
-\DoxyCodeLine{    b-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(res\_vec));}
+\DoxyCodeLine{    A-\/>apply(one, x, neg\_one, b);}
+\DoxyCodeLine{    b-\/>compute\_norm2(res\_vec);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Initial residual norm sqrt(r\string^T r):\(\backslash\)n"};}
-\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{write}}(std::cout, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(initres\_vec));}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{write}}(std::cout, initres\_vec);}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Final residual norm sqrt(r\string^T r):\(\backslash\)n"};}
-\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{write}}(std::cout, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(res\_vec));}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{write}}(std::cout, res\_vec);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"MPIR iteration count:     "} << iter << std::endl;}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"MPIR execution time [ms]: "}}

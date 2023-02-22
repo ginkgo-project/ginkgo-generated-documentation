@@ -203,12 +203,12 @@ start with guess \mbox{[}1, 1, ..., 1\mbox{]}
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{solver-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(y));}
-\DoxyCodeLine{system\_matrix-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(y), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x));}
-\DoxyCodeLine{x-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(norm));}
+\DoxyCodeLine{solver-\/>apply(x, y);}
+\DoxyCodeLine{system\_matrix-\/>apply(one, y, neg\_one, x);}
+\DoxyCodeLine{x-\/>compute\_norm2(norm);}
 \DoxyCodeLine{std::cout << \textcolor{stringliteral}{"\(\backslash\)"system\_residual\(\backslash\)": "}}
 \DoxyCodeLine{          << \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{clone}}(this\_exec, norm)-\/>get\_values()[0] << \textcolor{stringliteral}{", "};}
-\DoxyCodeLine{x-\/>copy\_from(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(y));}
+\DoxyCodeLine{x-\/>copy\_from(y);}
 \end{DoxyCode}
 
 
@@ -216,10 +216,10 @@ x = y / $\vert$$\vert$ y $\vert$$\vert$
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{x-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(norm));}
+\DoxyCodeLine{x-\/>compute\_norm2(norm);}
 \DoxyCodeLine{inv\_norm-\/>get\_values()[0] =}
 \DoxyCodeLine{    real\_precision\{1.0\} / \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{clone}}(this\_exec, norm)-\/>get\_values()[0];}
-\DoxyCodeLine{x-\/>scale(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(\mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{clone}}(exec, inv\_norm)));}
+\DoxyCodeLine{x-\/>scale(\mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{clone}}(exec, inv\_norm));}
 \end{DoxyCode}
 
 
@@ -227,8 +227,8 @@ g = x$^\wedge$$\ast$ A x
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{A-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(tmp));}
-\DoxyCodeLine{x-\/>compute\_dot(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(tmp), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(g));}
+\DoxyCodeLine{A-\/>apply(x, tmp);}
+\DoxyCodeLine{x-\/>compute\_dot(tmp, g);}
 \DoxyCodeLine{\textcolor{keyword}{auto} g\_val = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{clone}}(this\_exec, g)-\/>get\_values()[0];}
 \DoxyCodeLine{std::cout << \textcolor{stringliteral}{"\(\backslash\)"eigenvalue\(\backslash\)": "} << g\_val << \textcolor{stringliteral}{", "};}
 \end{DoxyCode}
@@ -239,8 +239,8 @@ $\vert$$\vert$\+Ax -\/ gx$\vert$$\vert$ $<$ tol $\ast$ g
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{        \textcolor{keyword}{auto} v = gko::initialize<vec>(\{-\/g\_val\}, exec);}
-\DoxyCodeLine{        tmp-\/>add\_scaled(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(v), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x));}
-\DoxyCodeLine{        tmp-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(norm));}
+\DoxyCodeLine{        tmp-\/>add\_scaled(v, x);}
+\DoxyCodeLine{        tmp-\/>compute\_norm2(norm);}
 \DoxyCodeLine{        \textcolor{keyword}{auto} res\_val = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{clone}}(exec-\/>get\_master(), norm)-\/>get\_values()[0];}
 \DoxyCodeLine{        std::cout << \textcolor{stringliteral}{"\(\backslash\)"residual\(\backslash\)": "} << res\_val / g\_val << \textcolor{stringliteral}{" \},"} << std::endl;}
 \DoxyCodeLine{        \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegko_adeb470aaf293d7c5548392b2f451e8e4}{abs}}(res\_val) < residual\_goal * \mbox{\hyperlink{namespacegko_adeb470aaf293d7c5548392b2f451e8e4}{abs}}(g\_val)) \{}
@@ -422,23 +422,23 @@ This is the expected output\+:
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} i = 0u; i < max\_iterations; ++i) \{}
 \DoxyCodeLine{        std::cout << \textcolor{stringliteral}{"\{ "};}
-\DoxyCodeLine{        solver-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(y));}
-\DoxyCodeLine{        system\_matrix-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(y), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x));}
-\DoxyCodeLine{        x-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(norm));}
+\DoxyCodeLine{        solver-\/>apply(x, y);}
+\DoxyCodeLine{        system\_matrix-\/>apply(one, y, neg\_one, x);}
+\DoxyCodeLine{        x-\/>compute\_norm2(norm);}
 \DoxyCodeLine{        std::cout << \textcolor{stringliteral}{"\(\backslash\)"system\_residual\(\backslash\)": "}}
 \DoxyCodeLine{                  << \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{clone}}(this\_exec, norm)-\/>get\_values()[0] << \textcolor{stringliteral}{", "};}
-\DoxyCodeLine{        x-\/>copy\_from(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(y));}
-\DoxyCodeLine{        x-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(norm));}
+\DoxyCodeLine{        x-\/>copy\_from(y);}
+\DoxyCodeLine{        x-\/>compute\_norm2(norm);}
 \DoxyCodeLine{        inv\_norm-\/>get\_values()[0] =}
 \DoxyCodeLine{            real\_precision\{1.0\} / \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{clone}}(this\_exec, norm)-\/>get\_values()[0];}
-\DoxyCodeLine{        x-\/>scale(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(\mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{clone}}(exec, inv\_norm)));}
-\DoxyCodeLine{        A-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(tmp));}
-\DoxyCodeLine{        x-\/>compute\_dot(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(tmp), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(g));}
+\DoxyCodeLine{        x-\/>scale(\mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{clone}}(exec, inv\_norm));}
+\DoxyCodeLine{        A-\/>apply(x, tmp);}
+\DoxyCodeLine{        x-\/>compute\_dot(tmp, g);}
 \DoxyCodeLine{        \textcolor{keyword}{auto} g\_val = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{clone}}(this\_exec, g)-\/>get\_values()[0];}
 \DoxyCodeLine{        std::cout << \textcolor{stringliteral}{"\(\backslash\)"eigenvalue\(\backslash\)": "} << g\_val << \textcolor{stringliteral}{", "};}
 \DoxyCodeLine{        \textcolor{keyword}{auto} v = gko::initialize<vec>(\{-\/g\_val\}, exec);}
-\DoxyCodeLine{        tmp-\/>add\_scaled(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(v), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x));}
-\DoxyCodeLine{        tmp-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(norm));}
+\DoxyCodeLine{        tmp-\/>add\_scaled(v, x);}
+\DoxyCodeLine{        tmp-\/>compute\_norm2(norm);}
 \DoxyCodeLine{        \textcolor{keyword}{auto} res\_val = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{clone}}(exec-\/>get\_master(), norm)-\/>get\_values()[0];}
 \DoxyCodeLine{        std::cout << \textcolor{stringliteral}{"\(\backslash\)"residual\(\backslash\)": "} << res\_val / g\_val << \textcolor{stringliteral}{" \},"} << std::endl;}
 \DoxyCodeLine{        \textcolor{keywordflow}{if} (\mbox{\hyperlink{namespacegko_adeb470aaf293d7c5548392b2f451e8e4}{abs}}(res\_val) < residual\_goal * \mbox{\hyperlink{namespacegko_adeb470aaf293d7c5548392b2f451e8e4}{abs}}(g\_val)) \{}

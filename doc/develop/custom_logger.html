@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/785315273 branch based on develop. Ginkgo version 1.5.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/786074545 branch based on develop. Ginkgo version 1.5.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -146,9 +146,9 @@ $(function() {
 <div class="line">    gko::initialize&lt;gko::matrix::Dense&lt;gko::remove_complex&lt;ValueType&gt;&gt;&gt;(</div>
 <div class="line">        {0.0}, exec);</div>
 </div><!-- fragment --><p>Use the dense <code>compute_norm2</code> function to compute the norm.</p>
-<div class="fragment"><div class="line">b-&gt;<a class="code" href="classgko_1_1matrix_1_1Dense.html#aed62418c4ecb58c4855b0bea1b7a680d">compute_norm2</a>(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b_norm));</div>
+<div class="fragment"><div class="line">b-&gt;<a class="code" href="classgko_1_1matrix_1_1Dense.html#aed62418c4ecb58c4855b0bea1b7a680d">compute_norm2</a>(b_norm);</div>
 </div><!-- fragment --><p>Use the other utility function to return the norm contained in <code>b_norm</code></p>
-<div class="fragment"><div class="line">    <span class="keywordflow">return</span> get_first_element(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b_norm));</div>
+<div class="fragment"><div class="line">    <span class="keywordflow">return</span> get_first_element(b_norm.get());</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>Custom logger class which intercepts the residual norm scalar and solution vector in order to print a table of real vs recurrent (internal to the solvers) residual norms.</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType&gt;</div>
@@ -207,12 +207,12 @@ $(function() {
 <div class="fragment"><div class="line"><span class="keywordflow">if</span> (residual_norm) {</div>
 <div class="line">    <span class="keyword">auto</span> dense_norm = gko::as&lt;gko_real_dense&gt;(residual_norm);</div>
 </div><!-- fragment --><p>Add the norm to the <code>recurrent_norms</code> vector</p>
-<div class="fragment"><div class="line">recurrent_norms.push_back(get_first_element(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(dense_norm)));</div>
+<div class="fragment"><div class="line">recurrent_norms.push_back(get_first_element(dense_norm));</div>
 </div><!-- fragment --><p>Otherwise, use the recurrent residual vector</p>
 <div class="fragment"><div class="line">} <span class="keywordflow">else</span> {</div>
 <div class="line">    <span class="keyword">auto</span> dense_residual = gko::as&lt;gko_dense&gt;(residual);</div>
 </div><!-- fragment --><p>Compute the residual vector's norm</p>
-<div class="fragment"><div class="line"><span class="keyword">auto</span> norm = compute_norm(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(dense_residual));</div>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> norm = compute_norm(dense_residual);</div>
 </div><!-- fragment --><p>Add the computed norm to the <code>recurrent_norms</code> vector</p>
 <div class="fragment"><div class="line">    recurrent_norms.push_back(norm);</div>
 <div class="line">}</div>
@@ -227,10 +227,9 @@ $(function() {
 </div><!-- fragment --><p>Instantiate a temporary result variable</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> res = <a class="code" href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a>(b);</div>
 </div><!-- fragment --><p>Compute the real residual vector by calling apply on the system matrix</p>
-<div class="fragment"><div class="line">matrix-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(solution),</div>
-<div class="line">              <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(neg_one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(res));</div>
+<div class="fragment"><div class="line">matrix-&gt;apply(one, solution, neg_one, res);</div>
 </div><!-- fragment --><p>Compute the norm of the residual vector and add it to the <code>real_norms</code> vector</p>
-<div class="fragment"><div class="line">    real_norms.push_back(compute_norm(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(res)));</div>
+<div class="fragment"><div class="line">    real_norms.push_back(compute_norm(res.get()));</div>
 <div class="line">} <span class="keywordflow">else</span> {</div>
 </div><!-- fragment --><p>Add to the <code>real_norms</code> vector the value -1.0 if it could not be computed</p>
 <div class="fragment"><div class="line">    real_norms.push_back(-1.0);</div>
@@ -240,8 +239,7 @@ $(function() {
 <div class="line">    <span class="keyword">auto</span> dense_norm =</div>
 <div class="line">        gko::as&lt;gko_real_dense&gt;(implicit_sq_residual_norm);</div>
 </div><!-- fragment --><p>Add the norm to the <code>implicit_norms</code> vector</p>
-<div class="fragment"><div class="line">    implicit_norms.push_back(</div>
-<div class="line">        std::sqrt(get_first_element(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(dense_norm))));</div>
+<div class="fragment"><div class="line">    implicit_norms.push_back(std::sqrt(get_first_element(dense_norm)));</div>
 <div class="line">} <span class="keywordflow">else</span> {</div>
 </div><!-- fragment --><p>Add to the <code>implicit_norms</code> vector the value -1.0 if it could not be computed</p>
 <div class="fragment"><div class="line">    implicit_norms.push_back(-1.0);</div>
@@ -317,7 +315,7 @@ $(function() {
 </div><!-- fragment --><p>executor where Ginkgo will perform the computation</p>
 <div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keyword">auto</span> exec = exec_map.at(executor_string)();  <span class="comment">// throws if not valid</span></div>
 </div><!-- fragment --><p><a class="anchor" id="Readingyourdataandtransfertotheproperdevice"></a> </p><h3>Reading your data and transfer to the proper device.</h3>
-<p>Read the matrix, right hand side and the initial solution using the read function. </p><dl class="section note"><dt>Note</dt><dd>Ginkgo uses C++ smart pointers to automatically manage memory. To this end, we use our own object ownership transfer functions that under the hood call the required smart pointer functions to manage object ownership. The <a class="el" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58" title="Marks the object pointed to by p as shared.">gko::share</a> , <a class="el" href="namespacegko.html#acbd3fd6d07e498892881e8e2ab0b4167" title="Marks that the object pointed to by p can be given to the callee.">gko::give</a> and <a class="el" href="namespacegko.html#a014ec51e675c425bb83908361f630450" title="Returns a non-owning (plain) pointer to the object pointed to by p.">gko::lend</a> are the functions that you would need to use.</dd></dl>
+<p>Read the matrix, right hand side and the initial solution using the read function. </p><dl class="section note"><dt>Note</dt><dd>Ginkgo uses C++ smart pointers to automatically manage memory. To this end, we use our own object ownership transfer functions that under the hood call the required smart pointer functions to manage object ownership. <a class="el" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58" title="Marks the object pointed to by p as shared.">gko::share</a> and <a class="el" href="namespacegko.html#acbd3fd6d07e498892881e8e2ab0b4167" title="Marks that the object pointed to by p can be given to the callee.">gko::give</a> are the functions that you would need to use.</dd></dl>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> A = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">share</a>(gko::read&lt;mtx&gt;(std::ifstream(<span class="stringliteral">&quot;data/A.mtx&quot;</span>), exec));</div>
 <div class="line"><span class="keyword">auto</span> b = gko::read&lt;vec&gt;(std::ifstream(<span class="stringliteral">&quot;data/b.mtx&quot;</span>), exec);</div>
 <div class="line"><span class="keyword">auto</span> x = gko::read&lt;vec&gt;(std::ifstream(<span class="stringliteral">&quot;data/x0.mtx&quot;</span>), exec);</div>
@@ -333,28 +331,27 @@ $(function() {
 <div class="line">                .on(exec))</div>
 <div class="line">        .on(exec);</div>
 </div><!-- fragment --><p>Instantiate a ResidualLogger logger.</p>
-<div class="fragment"><div class="line"><span class="keyword">auto</span> logger =</div>
-<div class="line">    std::make_shared&lt;ResidualLogger&lt;ValueType&gt;&gt;(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(A), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b));</div>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> logger = std::make_shared&lt;ResidualLogger&lt;ValueType&gt;&gt;(A.get(), b.get());</div>
 </div><!-- fragment --><p>Add the previously created logger to the solver factory. The logger will be automatically propagated to all solvers created from this factory.</p>
 <div class="fragment"><div class="line">solver_gen-&gt;add_logger(logger);</div>
 </div><!-- fragment --><p>Generate the solver from the matrix. The solver factory built in the previous step takes a "matrix"(a <a class="el" href="classgko_1_1LinOp.html">gko::LinOp</a> to be more general) as an input. In this case we provide it with a full matrix that we previously read, but as the solver only effectively uses the apply() method within the provided "matrix" object, you can effectively create a <a class="el" href="classgko_1_1LinOp.html">gko::LinOp</a> class with your own apply implementation to accomplish more tasks. We will see an example of how this can be done in the custom-matrix-format example</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> solver = solver_gen-&gt;generate(A);</div>
 </div><!-- fragment --><p>Finally, solve the system. The solver, being a <a class="el" href="classgko_1_1LinOp.html">gko::LinOp</a>, can be applied to a right hand side, b to obtain the solution, x.</p>
-<div class="fragment"><div class="line">solver-&gt;<a class="code" href="classgko_1_1LinOp.html#aff0379dbd0d86bd9ce2db03ac05f789f">apply</a>(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(x));</div>
+<div class="fragment"><div class="line">solver-&gt;<a class="code" href="classgko_1_1LinOp.html#aff0379dbd0d86bd9ce2db03ac05f789f">apply</a>(b, x);</div>
 </div><!-- fragment --><p>Print the solution to the command line.</p>
 <div class="fragment"><div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;Solution (x):\n&quot;</span>;</div>
-<div class="line"><a class="code" href="namespacegko.html#a8c8403e4cdb91e225515ed7d7f6c4463">write</a>(std::cout, <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(x));</div>
+<div class="line"><a class="code" href="namespacegko.html#a8c8403e4cdb91e225515ed7d7f6c4463">write</a>(std::cout, x);</div>
 </div><!-- fragment --><p>Print the table of the residuals obtained from the logger</p>
 <div class="fragment"><div class="line">logger-&gt;write();</div>
 </div><!-- fragment --><p>To measure if your solution has actually converged, you can measure the error of the solution. one, neg_one are objects that represent the numbers which allow for a uniform interface when computing on any device. To compute the residual, all you need to do is call the apply method, which in this case is an spmv and equivalent to the LAPACK z_spmv routine. Finally, you compute the euclidean 2-norm with the compute_norm2 function.</p>
 <div class="fragment"><div class="line">    <span class="keyword">auto</span> <a class="code" href="namespacegko.html#a0059e27f8f4bc348ff65c1e60caf47c8">one</a> = gko::initialize&lt;vec&gt;({1.0}, exec);</div>
 <div class="line">    <span class="keyword">auto</span> neg_one = gko::initialize&lt;vec&gt;({-1.0}, exec);</div>
 <div class="line">    <span class="keyword">auto</span> res = gko::initialize&lt;real_vec&gt;({0.0}, exec);</div>
-<div class="line">    A-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(x), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(neg_one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b));</div>
-<div class="line">    b-&gt;<a class="code" href="classgko_1_1matrix_1_1Dense.html#aed62418c4ecb58c4855b0bea1b7a680d">compute_norm2</a>(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(res));</div>
+<div class="line">    A-&gt;apply(one, x, neg_one, b);</div>
+<div class="line">    b-&gt;<a class="code" href="classgko_1_1matrix_1_1Dense.html#aed62418c4ecb58c4855b0bea1b7a680d">compute_norm2</a>(res);</div>
 <div class="line"> </div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Residual norm sqrt(r^T r):\n&quot;</span>;</div>
-<div class="line">    <a class="code" href="namespacegko.html#a8c8403e4cdb91e225515ed7d7f6c4463">write</a>(std::cout, <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(res));</div>
+<div class="line">    <a class="code" href="namespacegko.html#a8c8403e4cdb91e225515ed7d7f6c4463">write</a>(std::cout, res);</div>
 <div class="line">}</div>
 </div><!-- fragment --><p> <a class="anchor" id="Results"></a></p><h1>Results</h1>
 <p>The following is the expected result:</p>
@@ -469,8 +466,8 @@ $(function() {
 <div class="line">    <span class="keyword">auto</span> b_norm =</div>
 <div class="line">        gko::initialize&lt;gko::matrix::Dense&lt;gko::remove_complex&lt;ValueType&gt;&gt;&gt;(</div>
 <div class="line">            {0.0}, exec);</div>
-<div class="line">    b-&gt;<a class="code" href="classgko_1_1matrix_1_1Dense.html#aed62418c4ecb58c4855b0bea1b7a680d">compute_norm2</a>(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b_norm));</div>
-<div class="line">    <span class="keywordflow">return</span> get_first_element(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b_norm));</div>
+<div class="line">    b-&gt;<a class="code" href="classgko_1_1matrix_1_1Dense.html#aed62418c4ecb58c4855b0bea1b7a680d">compute_norm2</a>(b_norm);</div>
+<div class="line">    <span class="keywordflow">return</span> get_first_element(b_norm.get());</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType&gt;</div>
@@ -521,10 +518,10 @@ $(function() {
 <div class="line"><span class="keyword">    </span>{</div>
 <div class="line">        <span class="keywordflow">if</span> (residual_norm) {</div>
 <div class="line">            <span class="keyword">auto</span> dense_norm = gko::as&lt;gko_real_dense&gt;(residual_norm);</div>
-<div class="line">            recurrent_norms.push_back(get_first_element(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(dense_norm)));</div>
+<div class="line">            recurrent_norms.push_back(get_first_element(dense_norm));</div>
 <div class="line">        } <span class="keywordflow">else</span> {</div>
 <div class="line">            <span class="keyword">auto</span> dense_residual = gko::as&lt;gko_dense&gt;(residual);</div>
-<div class="line">            <span class="keyword">auto</span> norm = compute_norm(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(dense_residual));</div>
+<div class="line">            <span class="keyword">auto</span> norm = compute_norm(dense_residual);</div>
 <div class="line">            recurrent_norms.push_back(norm);</div>
 <div class="line">        }</div>
 <div class="line"> </div>
@@ -533,10 +530,9 @@ $(function() {
 <div class="line">            <span class="keyword">auto</span> <a class="code" href="namespacegko.html#a0059e27f8f4bc348ff65c1e60caf47c8">one</a> = gko::initialize&lt;gko_dense&gt;({1.0}, exec);</div>
 <div class="line">            <span class="keyword">auto</span> neg_one = gko::initialize&lt;gko_dense&gt;({-1.0}, exec);</div>
 <div class="line">            <span class="keyword">auto</span> res = <a class="code" href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a>(b);</div>
-<div class="line">            matrix-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(solution),</div>
-<div class="line">                          <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(neg_one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(res));</div>
+<div class="line">            matrix-&gt;apply(one, solution, neg_one, res);</div>
 <div class="line"> </div>
-<div class="line">            real_norms.push_back(compute_norm(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(res)));</div>
+<div class="line">            real_norms.push_back(compute_norm(res.get()));</div>
 <div class="line">        } <span class="keywordflow">else</span> {</div>
 <div class="line">            real_norms.push_back(-1.0);</div>
 <div class="line">        }</div>
@@ -544,8 +540,7 @@ $(function() {
 <div class="line">        <span class="keywordflow">if</span> (implicit_sq_residual_norm) {</div>
 <div class="line">            <span class="keyword">auto</span> dense_norm =</div>
 <div class="line">                gko::as&lt;gko_real_dense&gt;(implicit_sq_residual_norm);</div>
-<div class="line">            implicit_norms.push_back(</div>
-<div class="line">                std::sqrt(get_first_element(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(dense_norm))));</div>
+<div class="line">            implicit_norms.push_back(std::sqrt(get_first_element(dense_norm)));</div>
 <div class="line">        } <span class="keywordflow">else</span> {</div>
 <div class="line">            implicit_norms.push_back(-1.0);</div>
 <div class="line">        }</div>
@@ -623,29 +618,28 @@ $(function() {
 <div class="line">                    .on(exec))</div>
 <div class="line">            .on(exec);</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">auto</span> logger =</div>
-<div class="line">        std::make_shared&lt;ResidualLogger&lt;ValueType&gt;&gt;(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(A), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b));</div>
+<div class="line">    <span class="keyword">auto</span> logger = std::make_shared&lt;ResidualLogger&lt;ValueType&gt;&gt;(A.get(), b.get());</div>
 <div class="line"> </div>
 <div class="line">    solver_gen-&gt;add_logger(logger);</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">auto</span> solver = solver_gen-&gt;generate(A);</div>
 <div class="line"> </div>
 <div class="line"> </div>
-<div class="line">    solver-&gt;<a class="code" href="classgko_1_1LinOp.html#aff0379dbd0d86bd9ce2db03ac05f789f">apply</a>(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(x));</div>
+<div class="line">    solver-&gt;<a class="code" href="classgko_1_1LinOp.html#aff0379dbd0d86bd9ce2db03ac05f789f">apply</a>(b, x);</div>
 <div class="line"> </div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Solution (x):\n&quot;</span>;</div>
-<div class="line">    <a class="code" href="namespacegko.html#a8c8403e4cdb91e225515ed7d7f6c4463">write</a>(std::cout, <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(x));</div>
+<div class="line">    <a class="code" href="namespacegko.html#a8c8403e4cdb91e225515ed7d7f6c4463">write</a>(std::cout, x);</div>
 <div class="line"> </div>
 <div class="line">    logger-&gt;write();</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">auto</span> <a class="code" href="namespacegko.html#a0059e27f8f4bc348ff65c1e60caf47c8">one</a> = gko::initialize&lt;vec&gt;({1.0}, exec);</div>
 <div class="line">    <span class="keyword">auto</span> neg_one = gko::initialize&lt;vec&gt;({-1.0}, exec);</div>
 <div class="line">    <span class="keyword">auto</span> res = gko::initialize&lt;real_vec&gt;({0.0}, exec);</div>
-<div class="line">    A-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(x), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(neg_one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b));</div>
-<div class="line">    b-&gt;<a class="code" href="classgko_1_1matrix_1_1Dense.html#aed62418c4ecb58c4855b0bea1b7a680d">compute_norm2</a>(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(res));</div>
+<div class="line">    A-&gt;apply(one, x, neg_one, b);</div>
+<div class="line">    b-&gt;<a class="code" href="classgko_1_1matrix_1_1Dense.html#aed62418c4ecb58c4855b0bea1b7a680d">compute_norm2</a>(res);</div>
 <div class="line"> </div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Residual norm sqrt(r^T r):\n&quot;</span>;</div>
-<div class="line">    <a class="code" href="namespacegko.html#a8c8403e4cdb91e225515ed7d7f6c4463">write</a>(std::cout, <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(res));</div>
+<div class="line">    <a class="code" href="namespacegko.html#a8c8403e4cdb91e225515ed7d7f6c4463">write</a>(std::cout, res);</div>
 <div class="line">}</div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->
@@ -666,7 +660,6 @@ $(function() {
 <div class="ttc" id="aclassgko_1_1CudaExecutor_html_a5dcec3ca1c458382e01191b727959a81"><div class="ttname"><a href="classgko_1_1CudaExecutor.html#a5dcec3ca1c458382e01191b727959a81">gko::CudaExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; CudaExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, bool device_reset=false, allocation_mode alloc_mode=default_cuda_alloc_mode)</div><div class="ttdoc">Creates a new CudaExecutor.</div></div>
 <div class="ttc" id="aclassgko_1_1log_1_1Logger_html"><div class="ttname"><a href="classgko_1_1log_1_1Logger.html">gko::log::Logger</a></div><div class="ttdef"><b>Definition:</b> logger.hpp:90</div></div>
 <div class="ttc" id="anamespacegko_html_a3ce296f73db0ff398bdea6009a3a5c58"><div class="ttname"><a href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a></div><div class="ttdeci">detail::shared_type&lt; OwningPointer &gt; share(OwningPointer &amp;&amp;p)</div><div class="ttdoc">Marks the object pointed to by p as shared.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:254</div></div>
-<div class="ttc" id="anamespacegko_html_a014ec51e675c425bb83908361f630450"><div class="ttname"><a href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a></div><div class="ttdeci">std::enable_if&lt; detail::have_ownership_s&lt; Pointer &gt;::value, detail::pointee&lt; Pointer &gt; * &gt;::type lend(const Pointer &amp;p)</div><div class="ttdoc">Returns a non-owning (plain) pointer to the object pointed to by p.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:300</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Dense_html_ab83c739c1b11abaecc3bfd89506f6c9c"><div class="ttname"><a href="classgko_1_1matrix_1_1Dense.html#ab83c739c1b11abaecc3bfd89506f6c9c">gko::matrix::Dense::get_const_values</a></div><div class="ttdeci">const value_type * get_const_values() const noexcept</div><div class="ttdoc">Returns a pointer to the array of values of the matrix.</div><div class="ttdef"><b>Definition:</b> dense.hpp:688</div></div>
 <div class="ttc" id="aclassgko_1_1HipExecutor_html_ad3a72bc42254fb8730bc2090147447d9"><div class="ttname"><a href="classgko_1_1HipExecutor.html#ad3a72bc42254fb8730bc2090147447d9">gko::HipExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; HipExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, bool device_reset=false, allocation_mode alloc_mode=default_hip_alloc_mode)</div><div class="ttdoc">Creates a new HipExecutor.</div></div>
 <div class="ttc" id="aclassgko_1_1PolymorphicObject_html_ab40586bff071b7f11c2cf6b5cbf598eb"><div class="ttname"><a href="classgko_1_1PolymorphicObject.html#ab40586bff071b7f11c2cf6b5cbf598eb">gko::PolymorphicObject::get_executor</a></div><div class="ttdeci">std::shared_ptr&lt; const Executor &gt; get_executor() const noexcept</div><div class="ttdoc">Returns the Executor of the object.</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:263</div></div>

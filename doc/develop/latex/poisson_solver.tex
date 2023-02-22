@@ -234,12 +234,12 @@ initialize matrix and vectors
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{auto} matrix = mtx::create(app\_exec, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}(discretization\_points),}
 \DoxyCodeLine{                          3 * discretization\_points -\/ 2);}
-\DoxyCodeLine{generate\_stencil\_matrix(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(matrix));}
+\DoxyCodeLine{generate\_stencil\_matrix(matrix.get());}
 \DoxyCodeLine{\textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}} = vec::create(app\_exec, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}(discretization\_points, 1));}
-\DoxyCodeLine{generate\_rhs(f, u0, u1, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(rhs));}
+\DoxyCodeLine{generate\_rhs(f, u0, u1, \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}.get());}
 \DoxyCodeLine{\textcolor{keyword}{auto} u = vec::create(app\_exec, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}(discretization\_points, 1));}
-\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < u-\/>\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\_size}}()[0]; ++i) \{}
-\DoxyCodeLine{    u-\/>\mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a3bc458e02fab8e4c9f60f70bd4d5a4f9}{get\_values}}()[i] = 0.0;}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < u-\/>get\_size()[0]; ++i) \{}
+\DoxyCodeLine{    u-\/>get\_values()[i] = 0.0;}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} reduction\_factor = 1e-\/7;}
@@ -260,16 +260,16 @@ Generate solver and solve the system
 \DoxyCodeLine{    .with\_preconditioner(bj::build().on(exec))}
 \DoxyCodeLine{    .on(exec)}
 \DoxyCodeLine{    -\/>generate(\mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{clone}}(exec, matrix))  \textcolor{comment}{// copy the matrix to the executor}}
-\DoxyCodeLine{    -\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(rhs), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(u));}
+\DoxyCodeLine{    -\/>apply(rhs, u);}
 \end{DoxyCode}
 
 
-Uncomment to print the solution print\+\_\+solution$<$\+Value\+Type$>$(u0, u1, lend(u));
+Uncomment to print the solution print\+\_\+solution$<$\+Value\+Type$>$(u0, u1, u.\+get());
 
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Solve complete.\(\backslash\)nThe average relative error is "}}
-\DoxyCodeLine{              << calculate\_error(discretization\_points, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(u), correct\_u) /}
+\DoxyCodeLine{              << calculate\_error(discretization\_points, u.get(), correct\_u) /}
 \DoxyCodeLine{                     \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}}\textcolor{keyword}{>}(}
 \DoxyCodeLine{                         discretization\_points)}
 \DoxyCodeLine{              << std::endl;}
@@ -455,12 +455,12 @@ This is the expected output\+:
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} matrix = mtx::create(app\_exec, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}(discretization\_points),}
 \DoxyCodeLine{                              3 * discretization\_points -\/ 2);}
-\DoxyCodeLine{    generate\_stencil\_matrix(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(matrix));}
+\DoxyCodeLine{    generate\_stencil\_matrix(matrix.get());}
 \DoxyCodeLine{    \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}} = vec::create(app\_exec, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}(discretization\_points, 1));}
-\DoxyCodeLine{    generate\_rhs(f, u0, u1, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(rhs));}
+\DoxyCodeLine{    generate\_rhs(f, u0, u1, \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}.get());}
 \DoxyCodeLine{    \textcolor{keyword}{auto} u = vec::create(app\_exec, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}(discretization\_points, 1));}
-\DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < u-\/>\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\_size}}()[0]; ++i) \{}
-\DoxyCodeLine{        u-\/>\mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a3bc458e02fab8e4c9f60f70bd4d5a4f9}{get\_values}}()[i] = 0.0;}
+\DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < u-\/>get\_size()[0]; ++i) \{}
+\DoxyCodeLine{        u-\/>get\_values()[i] = 0.0;}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} reduction\_factor = 1e-\/7;}
@@ -474,10 +474,10 @@ This is the expected output\+:
 \DoxyCodeLine{        .with\_preconditioner(bj::build().on(exec))}
 \DoxyCodeLine{        .on(exec)}
 \DoxyCodeLine{        -\/>generate(\mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{clone}}(exec, matrix))  \textcolor{comment}{// copy the matrix to the executor}}
-\DoxyCodeLine{        -\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(rhs), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(u));}
+\DoxyCodeLine{        -\/>apply(rhs, u);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Solve complete.\(\backslash\)nThe average relative error is "}}
-\DoxyCodeLine{              << calculate\_error(discretization\_points, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(u), correct\_u) /}
+\DoxyCodeLine{              << calculate\_error(discretization\_points, u.get(), correct\_u) /}
 \DoxyCodeLine{                     \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}}\textcolor{keyword}{>}(}
 \DoxyCodeLine{                         discretization\_points)}
 \DoxyCodeLine{              << std::endl;}

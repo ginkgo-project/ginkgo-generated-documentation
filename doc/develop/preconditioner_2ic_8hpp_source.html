@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/785315273 branch based on develop. Ginkgo version 1.5.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/786074545 branch based on develop. Ginkgo version 1.5.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -244,11 +244,11 @@ $(function() {
 <div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;        precision_dispatch_real_complex&lt;value_type&gt;(</div>
 <div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;            [&amp;](<span class="keyword">auto</span> dense_b, <span class="keyword">auto</span> dense_x) {</div>
 <div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;                this-&gt;set_cache_to(dense_b);</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;                l_solver_-&gt;apply(dense_b, cache_.intermediate.get());</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;                l_solver_-&gt;apply(dense_b, cache_.intermediate);</div>
 <div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;                <span class="keywordflow">if</span> (lh_solver_-&gt;apply_uses_initial_guess()) {</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;                    dense_x-&gt;copy_from(cache_.intermediate.get());</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;                    dense_x-&gt;copy_from(cache_.intermediate);</div>
 <div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;                }</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;                lh_solver_-&gt;apply(cache_.intermediate.get(), dense_x);</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;                lh_solver_-&gt;apply(cache_.intermediate, dense_x);</div>
 <div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;            },</div>
 <div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;            b, x);</div>
 <div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    }</div>
@@ -259,9 +259,9 @@ $(function() {
 <div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        precision_dispatch_real_complex&lt;value_type&gt;(</div>
 <div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;            [&amp;](<span class="keyword">auto</span> dense_alpha, <span class="keyword">auto</span> dense_b, <span class="keyword">auto</span> dense_beta, <span class="keyword">auto</span> dense_x) {</div>
 <div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;                this-&gt;set_cache_to(dense_b);</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;                l_solver_-&gt;apply(dense_b, cache_.intermediate.get());</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;                lh_solver_-&gt;apply(dense_alpha, cache_.intermediate.get(),</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;                                  dense_beta, dense_x);</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;                l_solver_-&gt;apply(dense_b, cache_.intermediate);</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;                lh_solver_-&gt;apply(dense_alpha, cache_.intermediate, dense_beta,</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;                                  dense_x);</div>
 <div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;            },</div>
 <div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;            alpha, b, beta, x);</div>
 <div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    }</div>

@@ -262,9 +262,9 @@ Read the matrix data, currently this is only supported on C\+PU executors. This 
 \DoxyCodeLine{\textcolor{keyword}{auto} A\_host = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(dist\_mtx::create(exec-\/>get\_master(), comm));}
 \DoxyCodeLine{\textcolor{keyword}{auto} x\_host = dist\_vec::create(exec-\/>get\_master(), comm);}
 \DoxyCodeLine{\textcolor{keyword}{auto} b\_host = dist\_vec::create(exec-\/>get\_master(), comm);}
-\DoxyCodeLine{A\_host-\/>read\_distributed(A\_data, partition.get());}
-\DoxyCodeLine{b\_host-\/>read\_distributed(b\_data, partition.get());}
-\DoxyCodeLine{x\_host-\/>read\_distributed(x\_data, partition.get());}
+\DoxyCodeLine{A\_host-\/>read\_distributed(A\_data, partition);}
+\DoxyCodeLine{b\_host-\/>read\_distributed(b\_data, partition);}
+\DoxyCodeLine{x\_host-\/>read\_distributed(x\_data, partition);}
 \end{DoxyCode}
 
 
@@ -275,9 +275,9 @@ After reading, the matrix and vector can be moved to the chosen executor, since 
 \DoxyCodeLine{\textcolor{keyword}{auto} A = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(dist\_mtx::create(exec, comm));}
 \DoxyCodeLine{\textcolor{keyword}{auto} x = dist\_vec::create(exec, comm);}
 \DoxyCodeLine{\textcolor{keyword}{auto} b = dist\_vec::create(exec, comm);}
-\DoxyCodeLine{A-\/>copy\_from(A\_host.get());}
-\DoxyCodeLine{b-\/>copy\_from(b\_host.get());}
-\DoxyCodeLine{x-\/>copy\_from(x\_host.get());}
+\DoxyCodeLine{A-\/>copy\_from(A\_host);}
+\DoxyCodeLine{b-\/>copy\_from(b\_host);}
+\DoxyCodeLine{x-\/>copy\_from(x\_host);}
 \end{DoxyCode}
 
 
@@ -350,7 +350,7 @@ Apply the distributed solver, this is the same as in the non-\/distributed case.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{Ainv-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(x));}
+\DoxyCodeLine{Ainv-\/>apply(b, x);}
 \end{DoxyCode}
 
 
@@ -367,13 +367,12 @@ Compute the residual, this is done in the same way as in the non-\/distributed c
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{x\_host-\/>copy\_from(x.get());}
+\DoxyCodeLine{x\_host-\/>copy\_from(x);}
 \DoxyCodeLine{\textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_a0059e27f8f4bc348ff65c1e60caf47c8}{one}} = gko::initialize<vec>(\{1.0\}, exec);}
 \DoxyCodeLine{\textcolor{keyword}{auto} minus\_one = gko::initialize<vec>(\{-\/1.0\}, exec);}
-\DoxyCodeLine{A\_host-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(minus\_one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(x\_host), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(one),}
-\DoxyCodeLine{              \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b\_host));}
+\DoxyCodeLine{A\_host-\/>apply(minus\_one, x\_host, one, b\_host);}
 \DoxyCodeLine{\textcolor{keyword}{auto} res\_norm = gko::initialize<vec>(\{0.0\}, exec-\/>get\_master());}
-\DoxyCodeLine{b\_host-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(res\_norm));}
+\DoxyCodeLine{b\_host-\/>compute\_norm2(res\_norm);}
 \end{DoxyCode}
 
 
@@ -593,15 +592,15 @@ The timings may vary depending on the machine. \label{_PlainProg}%
 \DoxyCodeLine{    \textcolor{keyword}{auto} A\_host = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(dist\_mtx::create(exec-\/>get\_master(), comm));}
 \DoxyCodeLine{    \textcolor{keyword}{auto} x\_host = dist\_vec::create(exec-\/>get\_master(), comm);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} b\_host = dist\_vec::create(exec-\/>get\_master(), comm);}
-\DoxyCodeLine{    A\_host-\/>read\_distributed(A\_data, partition.get());}
-\DoxyCodeLine{    b\_host-\/>read\_distributed(b\_data, partition.get());}
-\DoxyCodeLine{    x\_host-\/>read\_distributed(x\_data, partition.get());}
+\DoxyCodeLine{    A\_host-\/>read\_distributed(A\_data, partition);}
+\DoxyCodeLine{    b\_host-\/>read\_distributed(b\_data, partition);}
+\DoxyCodeLine{    x\_host-\/>read\_distributed(x\_data, partition);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} A = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(dist\_mtx::create(exec, comm));}
 \DoxyCodeLine{    \textcolor{keyword}{auto} x = dist\_vec::create(exec, comm);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} b = dist\_vec::create(exec, comm);}
-\DoxyCodeLine{    A-\/>copy\_from(A\_host.get());}
-\DoxyCodeLine{    b-\/>copy\_from(b\_host.get());}
-\DoxyCodeLine{    x-\/>copy\_from(x\_host.get());}
+\DoxyCodeLine{    A-\/>copy\_from(A\_host);}
+\DoxyCodeLine{    b-\/>copy\_from(b\_host);}
+\DoxyCodeLine{    x-\/>copy\_from(x\_host);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    comm.synchronize();}
 \DoxyCodeLine{    ValueType t\_read\_setup\_end = \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a508f97387781bb32dd2c7616dee1a786}{gko::experimental::mpi::get\_walltime}}();}
@@ -634,18 +633,17 @@ The timings may vary depending on the machine. \label{_PlainProg}%
 \DoxyCodeLine{    comm.synchronize();}
 \DoxyCodeLine{    ValueType t\_solver\_generate\_end = \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a508f97387781bb32dd2c7616dee1a786}{gko::experimental::mpi::get\_walltime}}();}
 \DoxyCodeLine{}
-\DoxyCodeLine{    Ainv-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(x));}
+\DoxyCodeLine{    Ainv-\/>apply(b, x);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    comm.synchronize();}
 \DoxyCodeLine{    ValueType t\_solver\_apply\_end = \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a508f97387781bb32dd2c7616dee1a786}{gko::experimental::mpi::get\_walltime}}();}
 \DoxyCodeLine{}
-\DoxyCodeLine{    x\_host-\/>copy\_from(x.get());}
+\DoxyCodeLine{    x\_host-\/>copy\_from(x);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_a0059e27f8f4bc348ff65c1e60caf47c8}{one}} = gko::initialize<vec>(\{1.0\}, exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} minus\_one = gko::initialize<vec>(\{-\/1.0\}, exec);}
-\DoxyCodeLine{    A\_host-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(minus\_one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(x\_host), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(one),}
-\DoxyCodeLine{                  \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b\_host));}
+\DoxyCodeLine{    A\_host-\/>apply(minus\_one, x\_host, one, b\_host);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} res\_norm = gko::initialize<vec>(\{0.0\}, exec-\/>get\_master());}
-\DoxyCodeLine{    b\_host-\/>compute\_norm2(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(res\_norm));}
+\DoxyCodeLine{    b\_host-\/>compute\_norm2(res\_norm);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    comm.synchronize();}
 \DoxyCodeLine{    ValueType t\_end = \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a508f97387781bb32dd2c7616dee1a786}{gko::experimental::mpi::get\_walltime}}();}

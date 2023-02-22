@@ -143,7 +143,7 @@ Use the dense {\ttfamily compute\+\_\+norm2} function to compute the norm.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{b-\/>\mbox{\hyperlink{classgko_1_1matrix_1_1Dense_aed62418c4ecb58c4855b0bea1b7a680d}{compute\_norm2}}(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b\_norm));}
+\DoxyCodeLine{b-\/>\mbox{\hyperlink{classgko_1_1matrix_1_1Dense_aed62418c4ecb58c4855b0bea1b7a680d}{compute\_norm2}}(b\_norm);}
 \end{DoxyCode}
 
 
@@ -151,7 +151,7 @@ Use the other utility function to return the norm contained in {\ttfamily b\+\_\
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{    \textcolor{keywordflow}{return} get\_first\_element(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b\_norm));}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} get\_first\_element(b\_norm.get());}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
 
@@ -276,7 +276,7 @@ Add the norm to the {\ttfamily recurrent\+\_\+norms} vector
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{recurrent\_norms.push\_back(get\_first\_element(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(dense\_norm)));}
+\DoxyCodeLine{recurrent\_norms.push\_back(get\_first\_element(dense\_norm));}
 \end{DoxyCode}
 
 
@@ -293,7 +293,7 @@ Compute the residual vector\textquotesingle{}s norm
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{auto} norm = compute\_norm(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(dense\_residual));}
+\DoxyCodeLine{\textcolor{keyword}{auto} norm = compute\_norm(dense\_residual);}
 \end{DoxyCode}
 
 
@@ -350,8 +350,7 @@ Compute the real residual vector by calling apply on the system matrix
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{matrix-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(solution),}
-\DoxyCodeLine{              \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(res));}
+\DoxyCodeLine{matrix-\/>apply(one, solution, neg\_one, res);}
 \end{DoxyCode}
 
 
@@ -359,7 +358,7 @@ Compute the norm of the residual vector and add it to the {\ttfamily real\+\_\+n
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{    real\_norms.push\_back(compute\_norm(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(res)));}
+\DoxyCodeLine{    real\_norms.push\_back(compute\_norm(res.get()));}
 \DoxyCodeLine{\} \textcolor{keywordflow}{else} \{}
 \end{DoxyCode}
 
@@ -381,8 +380,7 @@ Add the norm to the {\ttfamily implicit\+\_\+norms} vector
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{    implicit\_norms.push\_back(}
-\DoxyCodeLine{        std::sqrt(get\_first\_element(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(dense\_norm))));}
+\DoxyCodeLine{    implicit\_norms.push\_back(std::sqrt(get\_first\_element(dense\_norm)));}
 \DoxyCodeLine{\} \textcolor{keywordflow}{else} \{}
 \end{DoxyCode}
 
@@ -563,7 +561,7 @@ executor where Ginkgo will perform the computation
  \doxysubsubsection*{Reading your data and transfer to the proper device.}
 
 Read the matrix, right hand side and the initial solution using the read function. \begin{DoxyNote}{Note}
-Ginkgo uses C++ smart pointers to automatically manage memory. To this end, we use our own object ownership transfer functions that under the hood call the required smart pointer functions to manage object ownership. The \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko\+::share}} , \mbox{\hyperlink{namespacegko_acbd3fd6d07e498892881e8e2ab0b4167}{gko\+::give}} and \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko\+::lend}} are the functions that you would need to use.
+Ginkgo uses C++ smart pointers to automatically manage memory. To this end, we use our own object ownership transfer functions that under the hood call the required smart pointer functions to manage object ownership. \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko\+::share}} and \mbox{\hyperlink{namespacegko_acbd3fd6d07e498892881e8e2ab0b4167}{gko\+::give}} are the functions that you would need to use.
 \end{DoxyNote}
 
 \begin{DoxyCode}{0}
@@ -596,8 +594,7 @@ Instantiate a Residual\+Logger logger.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{auto} logger =}
-\DoxyCodeLine{    std::make\_shared<ResidualLogger<ValueType>>(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(A), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b));}
+\DoxyCodeLine{\textcolor{keyword}{auto} logger = std::make\_shared<ResidualLogger<ValueType>>(A.get(), b.get());}
 \end{DoxyCode}
 
 
@@ -621,7 +618,7 @@ Finally, solve the system. The solver, being a \mbox{\hyperlink{classgko_1_1LinO
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{solver-\/>\mbox{\hyperlink{classgko_1_1LinOp_aff0379dbd0d86bd9ce2db03ac05f789f}{apply}}(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(x));}
+\DoxyCodeLine{solver-\/>\mbox{\hyperlink{classgko_1_1LinOp_aff0379dbd0d86bd9ce2db03ac05f789f}{apply}}(b, x);}
 \end{DoxyCode}
 
 
@@ -630,7 +627,7 @@ Print the solution to the command line.
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{std::cout << \textcolor{stringliteral}{"Solution (x):\(\backslash\)n"};}
-\DoxyCodeLine{\mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{write}}(std::cout, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(x));}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{write}}(std::cout, x);}
 \end{DoxyCode}
 
 
@@ -649,11 +646,11 @@ To measure if your solution has actually converged, you can measure the error of
 \DoxyCodeLine{    \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_a0059e27f8f4bc348ff65c1e60caf47c8}{one}} = gko::initialize<vec>(\{1.0\}, exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} neg\_one = gko::initialize<vec>(\{-\/1.0\}, exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} res = gko::initialize<real\_vec>(\{0.0\}, exec);}
-\DoxyCodeLine{    A-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(x), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b));}
-\DoxyCodeLine{    b-\/>\mbox{\hyperlink{classgko_1_1matrix_1_1Dense_aed62418c4ecb58c4855b0bea1b7a680d}{compute\_norm2}}(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(res));}
+\DoxyCodeLine{    A-\/>apply(one, x, neg\_one, b);}
+\DoxyCodeLine{    b-\/>\mbox{\hyperlink{classgko_1_1matrix_1_1Dense_aed62418c4ecb58c4855b0bea1b7a680d}{compute\_norm2}}(res);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Residual norm sqrt(r\string^T r):\(\backslash\)n"};}
-\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{write}}(std::cout, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(res));}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{write}}(std::cout, res);}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
  \label{_Results}%
@@ -783,8 +780,8 @@ The following is the expected result\+:
 \DoxyCodeLine{    \textcolor{keyword}{auto} b\_norm =}
 \DoxyCodeLine{        gko::initialize<gko::matrix::Dense<gko::remove\_complex<ValueType>>>(}
 \DoxyCodeLine{            \{0.0\}, exec);}
-\DoxyCodeLine{    b-\/>\mbox{\hyperlink{classgko_1_1matrix_1_1Dense_aed62418c4ecb58c4855b0bea1b7a680d}{compute\_norm2}}(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b\_norm));}
-\DoxyCodeLine{    \textcolor{keywordflow}{return} get\_first\_element(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b\_norm));}
+\DoxyCodeLine{    b-\/>\mbox{\hyperlink{classgko_1_1matrix_1_1Dense_aed62418c4ecb58c4855b0bea1b7a680d}{compute\_norm2}}(b\_norm);}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} get\_first\_element(b\_norm.get());}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType>}
@@ -835,10 +832,10 @@ The following is the expected result\+:
 \DoxyCodeLine{\textcolor{keyword}{    }\{}
 \DoxyCodeLine{        \textcolor{keywordflow}{if} (residual\_norm) \{}
 \DoxyCodeLine{            \textcolor{keyword}{auto} dense\_norm = gko::as<gko\_real\_dense>(residual\_norm);}
-\DoxyCodeLine{            recurrent\_norms.push\_back(get\_first\_element(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(dense\_norm)));}
+\DoxyCodeLine{            recurrent\_norms.push\_back(get\_first\_element(dense\_norm));}
 \DoxyCodeLine{        \} \textcolor{keywordflow}{else} \{}
 \DoxyCodeLine{            \textcolor{keyword}{auto} dense\_residual = gko::as<gko\_dense>(residual);}
-\DoxyCodeLine{            \textcolor{keyword}{auto} norm = compute\_norm(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(dense\_residual));}
+\DoxyCodeLine{            \textcolor{keyword}{auto} norm = compute\_norm(dense\_residual);}
 \DoxyCodeLine{            recurrent\_norms.push\_back(norm);}
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{}
@@ -847,10 +844,9 @@ The following is the expected result\+:
 \DoxyCodeLine{            \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_a0059e27f8f4bc348ff65c1e60caf47c8}{one}} = gko::initialize<gko\_dense>(\{1.0\}, exec);}
 \DoxyCodeLine{            \textcolor{keyword}{auto} neg\_one = gko::initialize<gko\_dense>(\{-\/1.0\}, exec);}
 \DoxyCodeLine{            \textcolor{keyword}{auto} res = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(b);}
-\DoxyCodeLine{            matrix-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(solution),}
-\DoxyCodeLine{                          \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(res));}
+\DoxyCodeLine{            matrix-\/>apply(one, solution, neg\_one, res);}
 \DoxyCodeLine{}
-\DoxyCodeLine{            real\_norms.push\_back(compute\_norm(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(res)));}
+\DoxyCodeLine{            real\_norms.push\_back(compute\_norm(res.get()));}
 \DoxyCodeLine{        \} \textcolor{keywordflow}{else} \{}
 \DoxyCodeLine{            real\_norms.push\_back(-\/1.0);}
 \DoxyCodeLine{        \}}
@@ -858,8 +854,7 @@ The following is the expected result\+:
 \DoxyCodeLine{        \textcolor{keywordflow}{if} (implicit\_sq\_residual\_norm) \{}
 \DoxyCodeLine{            \textcolor{keyword}{auto} dense\_norm =}
 \DoxyCodeLine{                gko::as<gko\_real\_dense>(implicit\_sq\_residual\_norm);}
-\DoxyCodeLine{            implicit\_norms.push\_back(}
-\DoxyCodeLine{                std::sqrt(get\_first\_element(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(dense\_norm))));}
+\DoxyCodeLine{            implicit\_norms.push\_back(std::sqrt(get\_first\_element(dense\_norm)));}
 \DoxyCodeLine{        \} \textcolor{keywordflow}{else} \{}
 \DoxyCodeLine{            implicit\_norms.push\_back(-\/1.0);}
 \DoxyCodeLine{        \}}
@@ -937,29 +932,28 @@ The following is the expected result\+:
 \DoxyCodeLine{                    .on(exec))}
 \DoxyCodeLine{            .on(exec);}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{auto} logger =}
-\DoxyCodeLine{        std::make\_shared<ResidualLogger<ValueType>>(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(A), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b));}
+\DoxyCodeLine{    \textcolor{keyword}{auto} logger = std::make\_shared<ResidualLogger<ValueType>>(A.get(), b.get());}
 \DoxyCodeLine{}
 \DoxyCodeLine{    solver\_gen-\/>add\_logger(logger);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} solver = solver\_gen-\/>generate(A);}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
-\DoxyCodeLine{    solver-\/>\mbox{\hyperlink{classgko_1_1LinOp_aff0379dbd0d86bd9ce2db03ac05f789f}{apply}}(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(x));}
+\DoxyCodeLine{    solver-\/>\mbox{\hyperlink{classgko_1_1LinOp_aff0379dbd0d86bd9ce2db03ac05f789f}{apply}}(b, x);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Solution (x):\(\backslash\)n"};}
-\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{write}}(std::cout, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(x));}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{write}}(std::cout, x);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    logger-\/>write();}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_a0059e27f8f4bc348ff65c1e60caf47c8}{one}} = gko::initialize<vec>(\{1.0\}, exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} neg\_one = gko::initialize<vec>(\{-\/1.0\}, exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} res = gko::initialize<real\_vec>(\{0.0\}, exec);}
-\DoxyCodeLine{    A-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(x), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(neg\_one), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(b));}
-\DoxyCodeLine{    b-\/>\mbox{\hyperlink{classgko_1_1matrix_1_1Dense_aed62418c4ecb58c4855b0bea1b7a680d}{compute\_norm2}}(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(res));}
+\DoxyCodeLine{    A-\/>apply(one, x, neg\_one, b);}
+\DoxyCodeLine{    b-\/>\mbox{\hyperlink{classgko_1_1matrix_1_1Dense_aed62418c4ecb58c4855b0bea1b7a680d}{compute\_norm2}}(res);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Residual norm sqrt(r\string^T r):\(\backslash\)n"};}
-\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{write}}(std::cout, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{gko::lend}}(res));}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{write}}(std::cout, res);}
 \DoxyCodeLine{\}}
 \end{DoxyCodeInclude}
  

@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/785315273 branch based on develop. Ginkgo version 1.5.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/786074545 branch based on develop. Ginkgo version 1.5.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -255,17 +255,17 @@ $(function() {
 <div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;            [&amp;](<span class="keyword">auto</span> dense_b, <span class="keyword">auto</span> dense_x) {</div>
 <div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;                this-&gt;set_cache_to(dense_b);</div>
 <div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;                <span class="keywordflow">if</span> (!ReverseApply) {</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;                    l_solver_-&gt;apply(dense_b, cache_.intermediate.get());</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;                    l_solver_-&gt;apply(dense_b, cache_.intermediate);</div>
 <div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;                    <span class="keywordflow">if</span> (u_solver_-&gt;apply_uses_initial_guess()) {</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;                        dense_x-&gt;copy_from(cache_.intermediate.get());</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;                        dense_x-&gt;copy_from(cache_.intermediate);</div>
 <div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;                    }</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;                    u_solver_-&gt;apply(cache_.intermediate.get(), dense_x);</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;                    u_solver_-&gt;apply(cache_.intermediate, dense_x);</div>
 <div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;                } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;                    u_solver_-&gt;apply(dense_b, cache_.intermediate.get());</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;                    u_solver_-&gt;apply(dense_b, cache_.intermediate);</div>
 <div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;                    <span class="keywordflow">if</span> (l_solver_-&gt;apply_uses_initial_guess()) {</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;                        dense_x-&gt;copy_from(cache_.intermediate.get());</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;                        dense_x-&gt;copy_from(cache_.intermediate);</div>
 <div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;                    }</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;                    l_solver_-&gt;apply(cache_.intermediate.get(), dense_x);</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;                    l_solver_-&gt;apply(cache_.intermediate, dense_x);</div>
 <div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;                }</div>
 <div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;            },</div>
 <div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;            b, x);</div>
@@ -278,12 +278,12 @@ $(function() {
 <div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;            [&amp;](<span class="keyword">auto</span> dense_alpha, <span class="keyword">auto</span> dense_b, <span class="keyword">auto</span> dense_beta, <span class="keyword">auto</span> dense_x) {</div>
 <div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;                this-&gt;set_cache_to(dense_b);</div>
 <div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;                <span class="keywordflow">if</span> (!ReverseApply) {</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;                    l_solver_-&gt;apply(dense_b, cache_.intermediate.get());</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;                    u_solver_-&gt;apply(dense_alpha, cache_.intermediate.get(),</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;                    l_solver_-&gt;apply(dense_b, cache_.intermediate);</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;                    u_solver_-&gt;apply(dense_alpha, cache_.intermediate,</div>
 <div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;                                     dense_beta, dense_x);</div>
 <div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;                } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;                    u_solver_-&gt;apply(dense_b, cache_.intermediate.get());</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;                    l_solver_-&gt;apply(dense_alpha, cache_.intermediate.get(),</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;                    u_solver_-&gt;apply(dense_b, cache_.intermediate);</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;                    l_solver_-&gt;apply(dense_alpha, cache_.intermediate,</div>
 <div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;                                     dense_beta, dense_x);</div>
 <div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;                }</div>
 <div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;            },</div>

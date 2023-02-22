@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/785315273 branch based on develop. Ginkgo version 1.5.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/786074545 branch based on develop. Ginkgo version 1.5.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -144,8 +144,8 @@ $(function() {
 <div class="line">{</div>
 <div class="line">    <span class="keyword">auto</span> exec = b-&gt;get_executor();</div>
 <div class="line">    <span class="keyword">auto</span> b_norm = gko::initialize&lt;real_vec&lt;ValueType&gt;&gt;({0.0}, exec);</div>
-<div class="line">    b-&gt;compute_norm2(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b_norm));</div>
-<div class="line">    <span class="keywordflow">return</span> get_first_element(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b_norm));</div>
+<div class="line">    b-&gt;compute_norm2(b_norm);</div>
+<div class="line">    <span class="keywordflow">return</span> get_first_element(b_norm.get());</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"> </div>
@@ -158,9 +158,8 @@ $(function() {
 <div class="line">    <span class="keyword">auto</span> <a class="code" href="namespacegko.html#a0059e27f8f4bc348ff65c1e60caf47c8">one</a> = gko::initialize&lt;vec&lt;ValueType&gt;&gt;({1.0}, exec);</div>
 <div class="line">    <span class="keyword">auto</span> neg_one = gko::initialize&lt;vec&lt;ValueType&gt;&gt;({-1.0}, exec);</div>
 <div class="line">    <span class="keyword">auto</span> res = <a class="code" href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a>(b);</div>
-<div class="line">    system_matrix-&gt;<a class="code" href="classgko_1_1LinOp.html#aff0379dbd0d86bd9ce2db03ac05f789f">apply</a>(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(x), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(neg_one),</div>
-<div class="line">                         <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(res));</div>
-<div class="line">    <span class="keywordflow">return</span> compute_norm(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(res));</div>
+<div class="line">    system_matrix-&gt;<a class="code" href="classgko_1_1LinOp.html#aff0379dbd0d86bd9ce2db03ac05f789f">apply</a>(one, x, neg_one, res);</div>
+<div class="line">    <span class="keywordflow">return</span> compute_norm(res.get());</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"> </div>
@@ -435,7 +434,7 @@ $(function() {
 </div><!-- fragment --><p>Read the matrix A from file</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> A = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a>(gko::read&lt;mtx&gt;(std::ifstream(input_mtx), exec));</div>
 </div><!-- fragment --><p>Remove the storage logger</p>
-<div class="fragment"><div class="line">exec-&gt;<a class="code" href="classgko_1_1Executor.html#af04cdc1a9af6c8efc34ddebb9e7aaf00">remove_logger</a>(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(storage_logger));</div>
+<div class="fragment"><div class="line">exec-&gt;<a class="code" href="classgko_1_1Executor.html#af04cdc1a9af6c8efc34ddebb9e7aaf00">remove_logger</a>(storage_logger);</div>
 </div><!-- fragment --><p>Pick a maximum iteration count</p>
 <div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keyword">auto</span> max_iters = A-&gt;get_size()[0];</div>
 </div><!-- fragment --><p>Generate b and x vectors</p>
@@ -459,7 +458,7 @@ $(function() {
 </div><!-- fragment --><p>Clone x to not overwrite the original one</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> x_clone = <a class="code" href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a>(x);</div>
 </div><!-- fragment --><p>Generate and call apply on a solver</p>
-<div class="fragment"><div class="line">    solver_factory-&gt;generate(A)-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(x_clone));</div>
+<div class="fragment"><div class="line">    solver_factory-&gt;generate(A)-&gt;apply(b, x_clone);</div>
 <div class="line">    exec-&gt;<a class="code" href="classgko_1_1Executor.html#a24eeee7648c0f0fd07c9866d07154875">synchronize</a>();</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>Do a timed run</p>
@@ -484,15 +483,15 @@ $(function() {
 </div><!-- fragment --><p>Similarly time the apply</p>
 <div class="fragment"><div class="line">exec-&gt;<a class="code" href="classgko_1_1Executor.html#a24eeee7648c0f0fd07c9866d07154875">synchronize</a>();</div>
 <div class="line"><span class="keyword">auto</span> a_tic = std::chrono::steady_clock::now();</div>
-<div class="line">generated_solver-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(x_clone));</div>
+<div class="line">generated_solver-&gt;apply(b, x_clone);</div>
 <div class="line">exec-&gt;<a class="code" href="classgko_1_1Executor.html#a24eeee7648c0f0fd07c9866d07154875">synchronize</a>();</div>
 <div class="line"><span class="keyword">auto</span> a_tac = std::chrono::steady_clock::now();</div>
 <div class="line"><span class="keyword">auto</span> apply_time =</div>
 <div class="line">    std::chrono::duration_cast&lt;std::chrono::nanoseconds&gt;(a_tac - a_tic);</div>
 <div class="line">output_file &lt;&lt; <span class="stringliteral">&quot;Apply time (ns): &quot;</span> &lt;&lt; apply_time.count() &lt;&lt; std::endl;</div>
 </div><!-- fragment --><p>Compute the residual norm</p>
-<div class="fragment"><div class="line">    <span class="keyword">auto</span> residual = utils::compute_residual_norm(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(A), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b),</div>
-<div class="line">                                                 <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(x_clone));</div>
+<div class="fragment"><div class="line">    <span class="keyword">auto</span> residual =</div>
+<div class="line">        utils::compute_residual_norm(A.get(), b.get(), x_clone.get());</div>
 <div class="line">    output_file &lt;&lt; <span class="stringliteral">&quot;Residual_norm: &quot;</span> &lt;&lt; residual &lt;&lt; std::endl;</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>Log the internal operations using the OperationLogger without timing</p>
@@ -504,7 +503,7 @@ $(function() {
 </div><!-- fragment --><p>Generate a solver</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> generated_solver = solver_factory-&gt;generate(A);</div>
 </div><!-- fragment --><p>Remove the generate logger from the executor</p>
-<div class="fragment"><div class="line">exec-&gt;<a class="code" href="classgko_1_1Executor.html#af04cdc1a9af6c8efc34ddebb9e7aaf00">remove_logger</a>(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(gen_logger));</div>
+<div class="fragment"><div class="line">exec-&gt;<a class="code" href="classgko_1_1Executor.html#af04cdc1a9af6c8efc34ddebb9e7aaf00">remove_logger</a>(gen_logger);</div>
 </div><!-- fragment --><p>Write the data to the output file</p>
 <div class="fragment"><div class="line">output_file &lt;&lt; <span class="stringliteral">&quot;Generate operations times (ns):&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line">gen_logger-&gt;write_data(output_file);</div>
@@ -513,11 +512,11 @@ $(function() {
 <div class="line">exec-&gt;<a class="code" href="classgko_1_1Executor.html#a520dad04b7e74f285ab0956873a5413d">add_logger</a>(apply_logger);</div>
 </div><!-- fragment --><p>Create a ResidualLogger to log the recurent residual</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> res_logger = std::make_shared&lt;loggers::ResidualLogger&lt;ValueType&gt;&gt;(</div>
-<div class="line">    <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(A), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b));</div>
+<div class="line">    A.get(), b.get());</div>
 <div class="line">generated_solver-&gt;add_logger(res_logger);</div>
 </div><!-- fragment --><p>Solve the system</p>
-<div class="fragment"><div class="line">generated_solver-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(x));</div>
-<div class="line">exec-&gt;<a class="code" href="classgko_1_1Executor.html#af04cdc1a9af6c8efc34ddebb9e7aaf00">remove_logger</a>(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(apply_logger));</div>
+<div class="fragment"><div class="line">generated_solver-&gt;apply(b, x);</div>
+<div class="line">exec-&gt;<a class="code" href="classgko_1_1Executor.html#af04cdc1a9af6c8efc34ddebb9e7aaf00">remove_logger</a>(apply_logger);</div>
 </div><!-- fragment --><p>Write the data to the output file</p>
 <div class="fragment"><div class="line">    output_file &lt;&lt; <span class="stringliteral">&quot;Apply operations times (ns):&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line">    apply_logger-&gt;write_data(output_file);</div>
@@ -525,7 +524,7 @@ $(function() {
 <div class="line">}</div>
 </div><!-- fragment --><p>Print solution</p>
 <div class="fragment"><div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;Solution, first ten entries: \n&quot;</span>;</div>
-<div class="line">print_vector(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(x));</div>
+<div class="line">print_vector(x.get());</div>
 </div><!-- fragment --><p>Print output file location</p>
 <div class="fragment"><div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;The performance and residual data can be found in &quot;</span> &lt;&lt; of_name</div>
 <div class="line">              &lt;&lt; std::endl;</div>
@@ -695,8 +694,8 @@ $(function() {
 <div class="line">{</div>
 <div class="line">    <span class="keyword">auto</span> exec = b-&gt;get_executor();</div>
 <div class="line">    <span class="keyword">auto</span> b_norm = gko::initialize&lt;real_vec&lt;ValueType&gt;&gt;({0.0}, exec);</div>
-<div class="line">    b-&gt;compute_norm2(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b_norm));</div>
-<div class="line">    <span class="keywordflow">return</span> get_first_element(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b_norm));</div>
+<div class="line">    b-&gt;compute_norm2(b_norm);</div>
+<div class="line">    <span class="keywordflow">return</span> get_first_element(b_norm.get());</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"> </div>
@@ -709,9 +708,8 @@ $(function() {
 <div class="line">    <span class="keyword">auto</span> <a class="code" href="namespacegko.html#a0059e27f8f4bc348ff65c1e60caf47c8">one</a> = gko::initialize&lt;vec&lt;ValueType&gt;&gt;({1.0}, exec);</div>
 <div class="line">    <span class="keyword">auto</span> neg_one = gko::initialize&lt;vec&lt;ValueType&gt;&gt;({-1.0}, exec);</div>
 <div class="line">    <span class="keyword">auto</span> res = <a class="code" href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a>(b);</div>
-<div class="line">    system_matrix-&gt;<a class="code" href="classgko_1_1LinOp.html#aff0379dbd0d86bd9ce2db03ac05f789f">apply</a>(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(x), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(neg_one),</div>
-<div class="line">                         <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(res));</div>
-<div class="line">    <span class="keywordflow">return</span> compute_norm(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(res));</div>
+<div class="line">    system_matrix-&gt;<a class="code" href="classgko_1_1LinOp.html#aff0379dbd0d86bd9ce2db03ac05f789f">apply</a>(one, x, neg_one, res);</div>
+<div class="line">    <span class="keywordflow">return</span> compute_norm(res.get());</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"> </div>
@@ -977,7 +975,7 @@ $(function() {
 <div class="line">    <span class="keyword">auto</span> storage_logger = std::make_shared&lt;loggers::StorageLogger&gt;();</div>
 <div class="line">    exec-&gt;<a class="code" href="classgko_1_1Executor.html#a520dad04b7e74f285ab0956873a5413d">add_logger</a>(storage_logger);</div>
 <div class="line">    <span class="keyword">auto</span> A = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a>(gko::read&lt;mtx&gt;(std::ifstream(input_mtx), exec));</div>
-<div class="line">    exec-&gt;<a class="code" href="classgko_1_1Executor.html#af04cdc1a9af6c8efc34ddebb9e7aaf00">remove_logger</a>(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(storage_logger));</div>
+<div class="line">    exec-&gt;<a class="code" href="classgko_1_1Executor.html#af04cdc1a9af6c8efc34ddebb9e7aaf00">remove_logger</a>(storage_logger);</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> max_iters = A-&gt;get_size()[0];</div>
 <div class="line">    <span class="keyword">auto</span> b = utils::create_vector&lt;ValueType&gt;(exec, A-&gt;get_size()[0], 1.0);</div>
@@ -999,7 +997,7 @@ $(function() {
 <div class="line">    {</div>
 <div class="line">        <span class="keyword">auto</span> x_clone = <a class="code" href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a>(x);</div>
 <div class="line"> </div>
-<div class="line">        solver_factory-&gt;generate(A)-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(x_clone));</div>
+<div class="line">        solver_factory-&gt;generate(A)-&gt;apply(b, x_clone);</div>
 <div class="line">        exec-&gt;<a class="code" href="classgko_1_1Executor.html#a24eeee7648c0f0fd07c9866d07154875">synchronize</a>();</div>
 <div class="line">    }</div>
 <div class="line"> </div>
@@ -1018,15 +1016,15 @@ $(function() {
 <div class="line"> </div>
 <div class="line">        exec-&gt;<a class="code" href="classgko_1_1Executor.html#a24eeee7648c0f0fd07c9866d07154875">synchronize</a>();</div>
 <div class="line">        <span class="keyword">auto</span> a_tic = std::chrono::steady_clock::now();</div>
-<div class="line">        generated_solver-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(x_clone));</div>
+<div class="line">        generated_solver-&gt;apply(b, x_clone);</div>
 <div class="line">        exec-&gt;<a class="code" href="classgko_1_1Executor.html#a24eeee7648c0f0fd07c9866d07154875">synchronize</a>();</div>
 <div class="line">        <span class="keyword">auto</span> a_tac = std::chrono::steady_clock::now();</div>
 <div class="line">        <span class="keyword">auto</span> apply_time =</div>
 <div class="line">            std::chrono::duration_cast&lt;std::chrono::nanoseconds&gt;(a_tac - a_tic);</div>
 <div class="line">        output_file &lt;&lt; <span class="stringliteral">&quot;Apply time (ns): &quot;</span> &lt;&lt; apply_time.count() &lt;&lt; std::endl;</div>
 <div class="line"> </div>
-<div class="line">        <span class="keyword">auto</span> residual = utils::compute_residual_norm(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(A), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b),</div>
-<div class="line">                                                     <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(x_clone));</div>
+<div class="line">        <span class="keyword">auto</span> residual =</div>
+<div class="line">            utils::compute_residual_norm(A.get(), b.get(), x_clone.get());</div>
 <div class="line">        output_file &lt;&lt; <span class="stringliteral">&quot;Residual_norm: &quot;</span> &lt;&lt; residual &lt;&lt; std::endl;</div>
 <div class="line">    }</div>
 <div class="line"> </div>
@@ -1034,24 +1032,24 @@ $(function() {
 <div class="line">        <span class="keyword">auto</span> gen_logger = std::make_shared&lt;loggers::OperationLogger&gt;();</div>
 <div class="line">        exec-&gt;<a class="code" href="classgko_1_1Executor.html#a520dad04b7e74f285ab0956873a5413d">add_logger</a>(gen_logger);</div>
 <div class="line">        <span class="keyword">auto</span> generated_solver = solver_factory-&gt;generate(A);</div>
-<div class="line">        exec-&gt;<a class="code" href="classgko_1_1Executor.html#af04cdc1a9af6c8efc34ddebb9e7aaf00">remove_logger</a>(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(gen_logger));</div>
+<div class="line">        exec-&gt;<a class="code" href="classgko_1_1Executor.html#af04cdc1a9af6c8efc34ddebb9e7aaf00">remove_logger</a>(gen_logger);</div>
 <div class="line">        output_file &lt;&lt; <span class="stringliteral">&quot;Generate operations times (ns):&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line">        gen_logger-&gt;write_data(output_file);</div>
 <div class="line"> </div>
 <div class="line">        <span class="keyword">auto</span> apply_logger = std::make_shared&lt;loggers::OperationLogger&gt;();</div>
 <div class="line">        exec-&gt;<a class="code" href="classgko_1_1Executor.html#a520dad04b7e74f285ab0956873a5413d">add_logger</a>(apply_logger);</div>
 <div class="line">        <span class="keyword">auto</span> res_logger = std::make_shared&lt;loggers::ResidualLogger&lt;ValueType&gt;&gt;(</div>
-<div class="line">            <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(A), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b));</div>
+<div class="line">            A.get(), b.get());</div>
 <div class="line">        generated_solver-&gt;add_logger(res_logger);</div>
-<div class="line">        generated_solver-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(b), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(x));</div>
-<div class="line">        exec-&gt;<a class="code" href="classgko_1_1Executor.html#af04cdc1a9af6c8efc34ddebb9e7aaf00">remove_logger</a>(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(apply_logger));</div>
+<div class="line">        generated_solver-&gt;apply(b, x);</div>
+<div class="line">        exec-&gt;<a class="code" href="classgko_1_1Executor.html#af04cdc1a9af6c8efc34ddebb9e7aaf00">remove_logger</a>(apply_logger);</div>
 <div class="line">        output_file &lt;&lt; <span class="stringliteral">&quot;Apply operations times (ns):&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line">        apply_logger-&gt;write_data(output_file);</div>
 <div class="line">        res_logger-&gt;write_data(output_file);</div>
 <div class="line">    }</div>
 <div class="line"> </div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Solution, first ten entries: \n&quot;</span>;</div>
-<div class="line">    print_vector(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a>(x));</div>
+<div class="line">    print_vector(x.get());</div>
 <div class="line"> </div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;The performance and residual data can be found in &quot;</span> &lt;&lt; of_name</div>
 <div class="line">              &lt;&lt; std::endl;</div>
@@ -1083,7 +1081,6 @@ $(function() {
 <div class="ttc" id="aclassgko_1_1CudaExecutor_html_a5dcec3ca1c458382e01191b727959a81"><div class="ttname"><a href="classgko_1_1CudaExecutor.html#a5dcec3ca1c458382e01191b727959a81">gko::CudaExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; CudaExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, bool device_reset=false, allocation_mode alloc_mode=default_cuda_alloc_mode)</div><div class="ttdoc">Creates a new CudaExecutor.</div></div>
 <div class="ttc" id="aclassgko_1_1log_1_1Logger_html"><div class="ttname"><a href="classgko_1_1log_1_1Logger.html">gko::log::Logger</a></div><div class="ttdef"><b>Definition:</b> logger.hpp:90</div></div>
 <div class="ttc" id="anamespacegko_html_a3ce296f73db0ff398bdea6009a3a5c58"><div class="ttname"><a href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a></div><div class="ttdeci">detail::shared_type&lt; OwningPointer &gt; share(OwningPointer &amp;&amp;p)</div><div class="ttdoc">Marks the object pointed to by p as shared.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:254</div></div>
-<div class="ttc" id="anamespacegko_html_a014ec51e675c425bb83908361f630450"><div class="ttname"><a href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a></div><div class="ttdeci">std::enable_if&lt; detail::have_ownership_s&lt; Pointer &gt;::value, detail::pointee&lt; Pointer &gt; * &gt;::type lend(const Pointer &amp;p)</div><div class="ttdoc">Returns a non-owning (plain) pointer to the object pointed to by p.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:300</div></div>
 <div class="ttc" id="aclassgko_1_1Executor_html"><div class="ttname"><a href="classgko_1_1Executor.html">gko::Executor</a></div><div class="ttdoc">The first step in using the Ginkgo library consists of creating an executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:661</div></div>
 <div class="ttc" id="aclassgko_1_1HipExecutor_html_ad3a72bc42254fb8730bc2090147447d9"><div class="ttname"><a href="classgko_1_1HipExecutor.html#ad3a72bc42254fb8730bc2090147447d9">gko::HipExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; HipExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, bool device_reset=false, allocation_mode alloc_mode=default_hip_alloc_mode)</div><div class="ttdoc">Creates a new HipExecutor.</div></div>
 <div class="ttc" id="aclassgko_1_1PolymorphicObject_html_ab40586bff071b7f11c2cf6b5cbf598eb"><div class="ttname"><a href="classgko_1_1PolymorphicObject.html#ab40586bff071b7f11c2cf6b5cbf598eb">gko::PolymorphicObject::get_executor</a></div><div class="ttdeci">std::shared_ptr&lt; const Executor &gt; get_executor() const noexcept</div><div class="ttdoc">Returns the Executor of the object.</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:263</div></div>

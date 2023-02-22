@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/785315273 branch based on develop. Ginkgo version 1.5.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/786074545 branch based on develop. Ginkgo version 1.5.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -164,7 +164,7 @@ $(function() {
 </div><!-- fragment --><p>executor where Ginkgo will perform the computation</p>
 <div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keyword">auto</span> exec = exec_map.at(executor_string)();  <span class="comment">// throws if not valid</span></div>
 </div><!-- fragment --><p><a class="anchor" id="Readingyourdataandtransfertotheproperdevice"></a> </p><h3>Reading your data and transfer to the proper device.</h3>
-<p>Read the matrix, right hand side and the initial solution using the read function. </p><dl class="section note"><dt>Note</dt><dd>Ginkgo uses C++ smart pointers to automatically manage memory. To this end, we use our own object ownership transfer functions that under the hood call the required smart pointer functions to manage object ownership. The <a class="el" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58" title="Marks the object pointed to by p as shared.">gko::share</a> , <a class="el" href="namespacegko.html#acbd3fd6d07e498892881e8e2ab0b4167" title="Marks that the object pointed to by p can be given to the callee.">gko::give</a> and <a class="el" href="namespacegko.html#a014ec51e675c425bb83908361f630450" title="Returns a non-owning (plain) pointer to the object pointed to by p.">gko::lend</a> are the functions that you would need to use.</dd></dl>
+<p>Read the matrix, right hand side and the initial solution using the read function. </p><dl class="section note"><dt>Note</dt><dd>Ginkgo uses C++ smart pointers to automatically manage memory. To this end, we use our own object ownership transfer functions that under the hood call the required smart pointer functions to manage object ownership. <a class="el" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58" title="Marks the object pointed to by p as shared.">gko::share</a> and <a class="el" href="namespacegko.html#acbd3fd6d07e498892881e8e2ab0b4167" title="Marks that the object pointed to by p can be given to the callee.">gko::give</a> are the functions that you would need to use.</dd></dl>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> A = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a>(gko::read&lt;mtx&gt;(std::ifstream(<span class="stringliteral">&quot;data/A.mtx&quot;</span>), exec));</div>
 <div class="line"><span class="keyword">auto</span> b = gko::read&lt;vec&gt;(std::ifstream(<span class="stringliteral">&quot;data/b.mtx&quot;</span>), exec);</div>
 <div class="line"><span class="keyword">auto</span> x = gko::read&lt;vec&gt;(std::ifstream(<span class="stringliteral">&quot;data/x0.mtx&quot;</span>), exec);</div>
@@ -182,19 +182,19 @@ $(function() {
 </div><!-- fragment --><p>Generate the solver from the matrix. The solver factory built in the previous step takes a "matrix"(a <a class="el" href="classgko_1_1LinOp.html">gko::LinOp</a> to be more general) as an input. In this case we provide it with a full matrix that we previously read, but as the solver only effectively uses the apply() method within the provided "matrix" object, you can effectively create a <a class="el" href="classgko_1_1LinOp.html">gko::LinOp</a> class with your own apply implementation to accomplish more tasks. We will see an example of how this can be done in the custom-matrix-format example</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> solver = solver_gen-&gt;generate(A);</div>
 </div><!-- fragment --><p>Finally, solve the system. The solver, being a <a class="el" href="classgko_1_1LinOp.html">gko::LinOp</a>, can be applied to a right hand side, b to obtain the solution, x.</p>
-<div class="fragment"><div class="line">solver-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(b), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(x));</div>
+<div class="fragment"><div class="line">solver-&gt;apply(b, x);</div>
 </div><!-- fragment --><p>Print the solution to the command line.</p>
 <div class="fragment"><div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;Solution (x):\n&quot;</span>;</div>
-<div class="line"><a class="code" href="namespacegko.html#a8c8403e4cdb91e225515ed7d7f6c4463">write</a>(std::cout, <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(x));</div>
+<div class="line"><a class="code" href="namespacegko.html#a8c8403e4cdb91e225515ed7d7f6c4463">write</a>(std::cout, x);</div>
 </div><!-- fragment --><p>To measure if your solution has actually converged, you can measure the error of the solution. one, neg_one are objects that represent the numbers which allow for a uniform interface when computing on any device. To compute the residual, all you need to do is call the apply method, which in this case is an spmv and equivalent to the LAPACK z_spmv routine. Finally, you compute the euclidean 2-norm with the compute_norm2 function.</p>
 <div class="fragment"><div class="line">    <span class="keyword">auto</span> <a class="code" href="namespacegko.html#a0059e27f8f4bc348ff65c1e60caf47c8">one</a> = gko::initialize&lt;vec&gt;({1.0}, exec);</div>
 <div class="line">    <span class="keyword">auto</span> neg_one = gko::initialize&lt;vec&gt;({-1.0}, exec);</div>
 <div class="line">    <span class="keyword">auto</span> res = gko::initialize&lt;real_vec&gt;({0.0}, exec);</div>
-<div class="line">    A-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(x), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(neg_one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(b));</div>
-<div class="line">    b-&gt;compute_norm2(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(res));</div>
+<div class="line">    A-&gt;apply(one, x, neg_one, b);</div>
+<div class="line">    b-&gt;compute_norm2(res);</div>
 <div class="line"> </div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Residual norm sqrt(r^T r):\n&quot;</span>;</div>
-<div class="line">    <a class="code" href="namespacegko.html#a8c8403e4cdb91e225515ed7d7f6c4463">write</a>(std::cout, <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(res));</div>
+<div class="line">    <a class="code" href="namespacegko.html#a8c8403e4cdb91e225515ed7d7f6c4463">write</a>(std::cout, res);</div>
 <div class="line">}</div>
 </div><!-- fragment --><p> <a class="anchor" id="Results"></a></p><h1>Results</h1>
 <p>The following is the expected result:</p>
@@ -322,19 +322,19 @@ $(function() {
 <div class="line">            .on(exec);</div>
 <div class="line">    <span class="keyword">auto</span> solver = solver_gen-&gt;generate(A);</div>
 <div class="line"> </div>
-<div class="line">    solver-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(b), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(x));</div>
+<div class="line">    solver-&gt;apply(b, x);</div>
 <div class="line"> </div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Solution (x):\n&quot;</span>;</div>
-<div class="line">    <a class="code" href="namespacegko.html#a8c8403e4cdb91e225515ed7d7f6c4463">write</a>(std::cout, <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(x));</div>
+<div class="line">    <a class="code" href="namespacegko.html#a8c8403e4cdb91e225515ed7d7f6c4463">write</a>(std::cout, x);</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">auto</span> <a class="code" href="namespacegko.html#a0059e27f8f4bc348ff65c1e60caf47c8">one</a> = gko::initialize&lt;vec&gt;({1.0}, exec);</div>
 <div class="line">    <span class="keyword">auto</span> neg_one = gko::initialize&lt;vec&gt;({-1.0}, exec);</div>
 <div class="line">    <span class="keyword">auto</span> res = gko::initialize&lt;real_vec&gt;({0.0}, exec);</div>
-<div class="line">    A-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(x), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(neg_one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(b));</div>
-<div class="line">    b-&gt;compute_norm2(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(res));</div>
+<div class="line">    A-&gt;apply(one, x, neg_one, b);</div>
+<div class="line">    b-&gt;compute_norm2(res);</div>
 <div class="line"> </div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Residual norm sqrt(r^T r):\n&quot;</span>;</div>
-<div class="line">    <a class="code" href="namespacegko.html#a8c8403e4cdb91e225515ed7d7f6c4463">write</a>(std::cout, <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(res));</div>
+<div class="line">    <a class="code" href="namespacegko.html#a8c8403e4cdb91e225515ed7d7f6c4463">write</a>(std::cout, res);</div>
 <div class="line">}</div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->
@@ -348,7 +348,6 @@ $(function() {
 <div class="ttc" id="anamespacegko_html_a8c8403e4cdb91e225515ed7d7f6c4463"><div class="ttname"><a href="namespacegko.html#a8c8403e4cdb91e225515ed7d7f6c4463">gko::write</a></div><div class="ttdeci">void write(StreamType &amp;&amp;os, MatrixPtrType &amp;&amp;matrix, layout_type layout=detail::mtx_io_traits&lt; std::remove_cv_t&lt; detail::pointee&lt; MatrixPtrType &gt;&gt;&gt;::default_layout)</div><div class="ttdoc">Writes a matrix into an output stream in matrix market format.</div><div class="ttdef"><b>Definition:</b> mtx_io.hpp:324</div></div>
 <div class="ttc" id="aclassgko_1_1CudaExecutor_html_a5dcec3ca1c458382e01191b727959a81"><div class="ttname"><a href="classgko_1_1CudaExecutor.html#a5dcec3ca1c458382e01191b727959a81">gko::CudaExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; CudaExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, bool device_reset=false, allocation_mode alloc_mode=default_cuda_alloc_mode)</div><div class="ttdoc">Creates a new CudaExecutor.</div></div>
 <div class="ttc" id="anamespacegko_html_a3ce296f73db0ff398bdea6009a3a5c58"><div class="ttname"><a href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a></div><div class="ttdeci">detail::shared_type&lt; OwningPointer &gt; share(OwningPointer &amp;&amp;p)</div><div class="ttdoc">Marks the object pointed to by p as shared.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:254</div></div>
-<div class="ttc" id="anamespacegko_html_a014ec51e675c425bb83908361f630450"><div class="ttname"><a href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a></div><div class="ttdeci">std::enable_if&lt; detail::have_ownership_s&lt; Pointer &gt;::value, detail::pointee&lt; Pointer &gt; * &gt;::type lend(const Pointer &amp;p)</div><div class="ttdoc">Returns a non-owning (plain) pointer to the object pointed to by p.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:300</div></div>
 <div class="ttc" id="aclassgko_1_1HipExecutor_html_ad3a72bc42254fb8730bc2090147447d9"><div class="ttname"><a href="classgko_1_1HipExecutor.html#ad3a72bc42254fb8730bc2090147447d9">gko::HipExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; HipExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, bool device_reset=false, allocation_mode alloc_mode=default_hip_alloc_mode)</div><div class="ttdoc">Creates a new HipExecutor.</div></div>
 <div class="ttc" id="anamespacegko_html_afd46d554050c4ae90e84ea4fcd9a41f3"><div class="ttname"><a href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">gko::remove_complex</a></div><div class="ttdeci">typename detail::remove_complex_s&lt; T &gt;::type remove_complex</div><div class="ttdoc">Obtain the type which removed the complex of complex/scalar type or the template parameter of class b...</div><div class="ttdef"><b>Definition:</b> math.hpp:359</div></div>
 <div class="ttc" id="aclassgko_1_1DpcppExecutor_html_ae9b875dfe3af7f3f3f24071bfb2f895e"><div class="ttname"><a href="classgko_1_1DpcppExecutor.html#ae9b875dfe3af7f3f3f24071bfb2f895e">gko::DpcppExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; DpcppExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, std::string device_type=&quot;all&quot;, dpcpp_queue_property property=dpcpp_queue_property::in_order)</div><div class="ttdoc">Creates a new DpcppExecutor.</div></div>
