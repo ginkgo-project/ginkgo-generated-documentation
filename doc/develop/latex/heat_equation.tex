@@ -57,12 +57,12 @@ The intention of this example is to provide a mini-\/app showing matrix assembly
 \DoxyCodeLine{\textcolor{stringliteral}{    + f\_\{i,j\}}}
 \DoxyCodeLine{\textcolor{stringliteral}{}}
 \DoxyCodeLine{\textcolor{stringliteral}{and solve the resulting linear system for  u\_\{\(\backslash\)cdot\}\string^\{k+1\} using Ginkgo'}s CG}
-\DoxyCodeLine{solver preconditioned with an incomplete Cholesky factorization \textcolor{keywordflow}{for each} time}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}} preconditioned with an incomplete Cholesky factorization \textcolor{keywordflow}{for each} time}
 \DoxyCodeLine{step, occasionally writing the resulting grid values into a video file \textcolor{keyword}{using}}
 \DoxyCodeLine{OpenCV and a custom color mapping.}
 \DoxyCodeLine{}
 \DoxyCodeLine{The intention of \textcolor{keyword}{this} example is to provide a mini-\/app showing matrix assembly,}
-\DoxyCodeLine{vector initialization, solver setup and the use of Ginkgo in a more complex}
+\DoxyCodeLine{vector initialization, \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}} setup and the use of Ginkgo in a more complex}
 \DoxyCodeLine{setting.}
 \DoxyCodeLine{*****************************<DESCRIPTION>********************************** /}
 \DoxyCodeLine{}
@@ -316,7 +316,7 @@ build CG solver on stencil with incomplete Cholesky preconditioner stopping at 1
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{auto} solver =}
+\DoxyCodeLine{\textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}} =}
 \DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{gko::solver::Cg<>::build}}()}
 \DoxyCodeLine{        .with\_preconditioner(\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{gko::preconditioner::Ic<>::build}}().on(exec))}
 \DoxyCodeLine{        .with\_criteria(\mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<>::build}}()}
@@ -371,7 +371,7 @@ execute Euler step
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{solver-\/>\mbox{\hyperlink{classgko_1_1LinOp_aff0379dbd0d86bd9ce2db03ac05f789f}{apply}}(in\_vector, out\_vector);}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}}-\/>apply(in\_vector, out\_vector);}
 \end{DoxyCode}
 
 
@@ -559,7 +559,7 @@ The program will generate a video file named heat.\+mp4 and output the timestamp
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{    stencil\_matrix-\/>read(mtx\_data);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} output = build\_output(n, fps);}
-\DoxyCodeLine{    \textcolor{keyword}{auto} solver =}
+\DoxyCodeLine{    \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}} =}
 \DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{gko::solver::Cg<>::build}}()}
 \DoxyCodeLine{            .with\_preconditioner(\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{gko::preconditioner::Ic<>::build}}().on(exec))}
 \DoxyCodeLine{            .with\_criteria(\mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<>::build}}()}
@@ -579,7 +579,7 @@ The program will generate a video file named heat.\+mp4 and output the timestamp
 \DoxyCodeLine{                    -\/>get\_const\_values());}
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{        in\_vector-\/>add\_scaled(tau\_source\_scalar, source);}
-\DoxyCodeLine{        solver-\/>\mbox{\hyperlink{classgko_1_1LinOp_aff0379dbd0d86bd9ce2db03ac05f789f}{apply}}(in\_vector, out\_vector);}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}}-\/>apply(in\_vector, out\_vector);}
 \DoxyCodeLine{        std::swap(in\_vector, out\_vector);}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{\}}

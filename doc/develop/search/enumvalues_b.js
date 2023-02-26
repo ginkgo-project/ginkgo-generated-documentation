@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['zero_2767',['zero',['../namespacegko_1_1solver.html#a82d21321745fbd3dc65c276d5838bb8aad02c4c4cde7ae76252540d116a40f23a',1,'gko::solver']]]
+  ['user_2767',['user',['../namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27aee11cbb19052e40b07aac0ca060c23ee',1,'gko::log']]]
 ];

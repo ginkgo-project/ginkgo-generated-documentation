@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/786822034 branch based on develop. Ginkgo version 1.5.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/789161241 branch based on develop. Ginkgo version 1.5.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -131,19 +131,19 @@ $(function() {
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    std::unique_ptr&lt;const LinOp&gt; residual_norm;</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    std::unique_ptr&lt;const LinOp&gt; implicit_sq_residual_norm;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <a class="code" href="structgko_1_1log_1_1iteration__complete__data.html">iteration_complete_data</a>(<span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html">LinOp</a>* solver, <span class="keyword">const</span> <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> num_iterations,</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <a class="code" href="structgko_1_1log_1_1iteration__complete__data.html">iteration_complete_data</a>(<span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html">LinOp</a>* <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a">solver</a>, <span class="keyword">const</span> <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> num_iterations,</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                            <span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html">LinOp</a>* residual = <span class="keyword">nullptr</span>,</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                            <span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html">LinOp</a>* solution = <span class="keyword">nullptr</span>,</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                            <span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html">LinOp</a>* residual_norm = <span class="keyword">nullptr</span>,</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                            <span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html">LinOp</a>* implicit_sq_residual_norm = <span class="keyword">nullptr</span>)</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        : solver{<span class="keyword">nullptr</span>},</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        : <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a">solver</a>{<span class="keyword">nullptr</span>},</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;          num_iterations{num_iterations},</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;          residual{<span class="keyword">nullptr</span>},</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;          solution{<span class="keyword">nullptr</span>},</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;          residual_norm{<span class="keyword">nullptr</span>},</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;          implicit_sq_residual_norm{<span class="keyword">nullptr</span>}</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    {</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        this-&gt;solver = solver-&gt;clone();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        this-&gt;solver = <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a">solver</a>-&gt;clone();</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordflow">if</span> (residual != <span class="keyword">nullptr</span>) {</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            this-&gt;residual = residual-&gt;clone();</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        }</div>
@@ -428,12 +428,12 @@ $(function() {
 <div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160; </div>
 <div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;    <span class="comment">/* Internal solver events */</span></div>
 <div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1log_1_1Record.html#a98999c72a91fd2fc061b03a40ea1c3fd">on_iteration_complete</a>(</div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;        <span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html">LinOp</a>* solver, <span class="keyword">const</span> <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a>&amp; num_iterations,</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;        <span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html">LinOp</a>* <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a">solver</a>, <span class="keyword">const</span> <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a>&amp; num_iterations,</div>
 <div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;        <span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html">LinOp</a>* residual, <span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html">LinOp</a>* solution = <span class="keyword">nullptr</span>,</div>
 <div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;        <span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html">LinOp</a>* residual_norm = <span class="keyword">nullptr</span>) <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160; </div>
 <div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1log_1_1Record.html#a98999c72a91fd2fc061b03a40ea1c3fd">on_iteration_complete</a>(</div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;        <span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html">LinOp</a>* solver, <span class="keyword">const</span> <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a>&amp; num_iterations,</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;        <span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html">LinOp</a>* <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a">solver</a>, <span class="keyword">const</span> <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a>&amp; num_iterations,</div>
 <div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;        <span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html">LinOp</a>* residual, <span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html">LinOp</a>* solution,</div>
 <div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;        <span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html">LinOp</a>* residual_norm,</div>
 <div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;        <span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html">LinOp</a>* implicit_sq_residual_norm) <span class="keyword">const override</span>;</div>
@@ -492,6 +492,7 @@ $(function() {
 <div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_LOG_RECORD_HPP_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="anamespacegko_html_a3950fc3732811a8563484e5098c31531"><div class="ttname"><a href="namespacegko.html#a3950fc3732811a8563484e5098c31531">gko::uint8</a></div><div class="ttdeci">std::uint8_t uint8</div><div class="ttdoc">8-bit unsigned integral type.</div><div class="ttdef"><b>Definition:</b> types.hpp:134</div></div>
+<div class="ttc" id="anamespacegko_1_1log_html_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a"><div class="ttname"><a href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a">gko::log::profile_event_category::solver</a></div><div class="ttdoc">Solver events.</div></div>
 <div class="ttc" id="aclassgko_1_1log_1_1Record_html_adf97da4b8dbc28cebb83c57a73204fe5"><div class="ttname"><a href="classgko_1_1log_1_1Record.html#adf97da4b8dbc28cebb83c57a73204fe5">gko::log::Record::on_free_completed</a></div><div class="ttdeci">void on_free_completed(const Executor *exec, const uintptr &amp;location) const override</div><div class="ttdoc">Executor's free completed event.</div></div>
 <div class="ttc" id="aclassgko_1_1log_1_1Record_html_abeb7b31817432b015fec088d32869578"><div class="ttname"><a href="classgko_1_1log_1_1Record.html#abeb7b31817432b015fec088d32869578">gko::log::Record::create</a></div><div class="ttdeci">static std::unique_ptr&lt; Record &gt; create(const mask_type &amp;enabled_events=Logger::all_events_mask, size_type max_storage=1)</div><div class="ttdoc">Creates a Record logger.</div><div class="ttdef"><b>Definition:</b> record.hpp:449</div></div>
 <div class="ttc" id="aclassgko_1_1LinOp_html"><div class="ttname"><a href="classgko_1_1LinOp.html">gko::LinOp</a></div><div class="ttdef"><b>Definition:</b> lin_op.hpp:146</div></div>
