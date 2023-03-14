@@ -148,7 +148,11 @@ static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1di
 static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{Vector}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector_aa4dae5f422965b9808689fba27ea6d73}{create\+\_\+with\+\_\+type\+\_\+of}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{Vector}} $>$ other, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec)
 \begin{DoxyCompactList}\small\item\em Creates an empty \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{Vector}} with the same type as another \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{Vector}}, but on a different executor. \end{DoxyCompactList}\item 
 static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{Vector}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector_a00e0bd7c467420fca9dced3c19f52f1b}{create\+\_\+with\+\_\+type\+\_\+of}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{Vector}} $>$ other, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \&global\+\_\+size, const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \&local\+\_\+size, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} stride)
-\begin{DoxyCompactList}\small\item\em Creates an \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{Vector}} with the same type as another \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{Vector}}, but on a different executor and with a different size. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Creates an \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{Vector}} with the same type as another \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{Vector}}, but on a different executor and with a different size. \end{DoxyCompactList}\item 
+static std\+::unique\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{Vector}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector_a7873a23454ad8f968159c32f6c9d01a1}{create\+\_\+const}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}} comm, \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ global\+\_\+size, std\+::unique\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{local\+\_\+vector\+\_\+type}} $>$ local\+\_\+vector)
+\begin{DoxyCompactList}\small\item\em Creates a constant (immutable) distributed \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{Vector}} from a constant local vector. \end{DoxyCompactList}\item 
+static std\+::unique\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{Vector}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector_ace505fabfeeeeaec3f3bb6d46f4995a5}{create\+\_\+const}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}} comm, std\+::unique\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{local\+\_\+vector\+\_\+type}} $>$ local\+\_\+vector)
+\begin{DoxyCompactList}\small\item\em Creates a constant (immutable) distributed \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{Vector}} from a constant local vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
@@ -439,6 +443,50 @@ Computes the Euclidian (L$^\wedge$2) norm of this (multi-\/)vector using a globa
 {\em result} & a Dense row matrix, used to store the norm (the number of columns in result must match the number of columns of this) \\
 \hline
 {\em tmp} & the temporary storage to use for partial sums during the reduction computation. It may be resized and/or reset to the correct executor. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Vector_a7873a23454ad8f968159c32f6c9d01a1}\label{classgko_1_1experimental_1_1distributed_1_1Vector_a7873a23454ad8f968159c32f6c9d01a1}} 
+\index{gko::experimental::distributed::Vector$<$ ValueType $>$@{gko::experimental::distributed::Vector$<$ ValueType $>$}!create\_const@{create\_const}}
+\index{create\_const@{create\_const}!gko::experimental::distributed::Vector$<$ ValueType $>$@{gko::experimental::distributed::Vector$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{create\_const()}{create\_const()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = double$>$ \\
+static std\+::unique\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{Vector}}$>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{gko\+::experimental\+::distributed\+::\+Vector}}$<$ Value\+Type $>$\+::create\+\_\+const (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}}}]{comm,  }\item[{\mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$}]{global\+\_\+size,  }\item[{std\+::unique\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{local\+\_\+vector\+\_\+type}} $>$}]{local\+\_\+vector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a constant (immutable) distributed \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{Vector}} from a constant local vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & \mbox{\hyperlink{classgko_1_1Executor}{Executor}} associated with this vector \\
+\hline
+{\em comm} & Communicator associated with this vector \\
+\hline
+{\em global\+\_\+size} & The global size of the vector \\
+\hline
+{\em local\+\_\+vector} & The underlying local vector, of which a view is created \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Vector_ace505fabfeeeeaec3f3bb6d46f4995a5}\label{classgko_1_1experimental_1_1distributed_1_1Vector_ace505fabfeeeeaec3f3bb6d46f4995a5}} 
+\index{gko::experimental::distributed::Vector$<$ ValueType $>$@{gko::experimental::distributed::Vector$<$ ValueType $>$}!create\_const@{create\_const}}
+\index{create\_const@{create\_const}!gko::experimental::distributed::Vector$<$ ValueType $>$@{gko::experimental::distributed::Vector$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{create\_const()}{create\_const()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = double$>$ \\
+static std\+::unique\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{Vector}}$>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{gko\+::experimental\+::distributed\+::\+Vector}}$<$ Value\+Type $>$\+::create\+\_\+const (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}}}]{comm,  }\item[{std\+::unique\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{local\+\_\+vector\+\_\+type}} $>$}]{local\+\_\+vector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a constant (immutable) distributed \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{Vector}} from a constant local vector. 
+
+The global size will be deduced from the local sizes, which will incur a collective communication.
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & \mbox{\hyperlink{classgko_1_1Executor}{Executor}} associated with this vector \\
+\hline
+{\em comm} & Communicator associated with this vector \\
+\hline
+{\em local\+\_\+vector} & The underlying local vector, of which a view is created \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Vector_abf044a2573c3897ce415771357967ff0}\label{classgko_1_1experimental_1_1distributed_1_1Vector_abf044a2573c3897ce415771357967ff0}} 
