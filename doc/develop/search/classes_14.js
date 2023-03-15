@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['value_5flist_2010',['value_list',['../structgko_1_1syn_1_1value__list.html',1,'gko::syn']]],
-  ['valuemismatch_2011',['ValueMismatch',['../classgko_1_1ValueMismatch.html',1,'gko']]],
-  ['vector_2012',['Vector',['../classgko_1_1experimental_1_1distributed_1_1Vector.html',1,'gko::experimental::distributed']]],
-  ['version_2013',['version',['../structgko_1_1version.html',1,'gko']]],
-  ['version_5finfo_2014',['version_info',['../classgko_1_1version__info.html',1,'gko']]]
+  ['value_5flist_2011',['value_list',['../structgko_1_1syn_1_1value__list.html',1,'gko::syn']]],
+  ['valuemismatch_2012',['ValueMismatch',['../classgko_1_1ValueMismatch.html',1,'gko']]],
+  ['vector_2013',['Vector',['../classgko_1_1experimental_1_1distributed_1_1Vector.html',1,'gko::experimental::distributed']]],
+  ['version_2014',['version',['../structgko_1_1version.html',1,'gko']]],
+  ['version_5finfo_2015',['version_info',['../classgko_1_1version__info.html',1,'gko']]]
 ];
