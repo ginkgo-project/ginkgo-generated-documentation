@@ -33,21 +33,12 @@ Some shortcuts
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{using} ValueType = double;}
-\DoxyCodeLine{\textcolor{keyword}{using} MixedType = float;}
 \DoxyCodeLine{\textcolor{keyword}{using} IndexType = int;}
 \DoxyCodeLine{\textcolor{keyword}{using} vec = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}};}
 \DoxyCodeLine{\textcolor{keyword}{using} mtx = \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<ValueType, IndexType>}};}
-\DoxyCodeLine{\textcolor{keyword}{using} fcg = \mbox{\hyperlink{classgko_1_1solver_1_1Fcg}{gko::solver::Fcg<ValueType>}};}
 \DoxyCodeLine{\textcolor{keyword}{using} cg = \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{gko::solver::Cg<ValueType>}};}
-\DoxyCodeLine{\textcolor{keyword}{using} ir = \mbox{\hyperlink{classgko_1_1solver_1_1Ir}{gko::solver::Ir<ValueType>}};}
 \DoxyCodeLine{\textcolor{keyword}{using} mg = \mbox{\hyperlink{classgko_1_1solver_1_1Multigrid}{gko::solver::Multigrid}};}
-\DoxyCodeLine{\textcolor{keyword}{using} bj = \mbox{\hyperlink{classgko_1_1preconditioner_1_1Jacobi}{gko::preconditioner::Jacobi<ValueType, IndexType>}};}
 \DoxyCodeLine{\textcolor{keyword}{using} pgm = \mbox{\hyperlink{classgko_1_1multigrid_1_1Pgm}{gko::multigrid::Pgm<ValueType, IndexType>}};}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keyword}{using} cg\_f = \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{gko::solver::Cg<MixedType>}};}
-\DoxyCodeLine{\textcolor{keyword}{using} ir\_f = \mbox{\hyperlink{classgko_1_1solver_1_1Ir}{gko::solver::Ir<MixedType>}};}
-\DoxyCodeLine{\textcolor{keyword}{using} bj\_f = \mbox{\hyperlink{classgko_1_1preconditioner_1_1Jacobi}{gko::preconditioner::Jacobi<MixedType, IndexType>}};}
-\DoxyCodeLine{\textcolor{keyword}{using} pgm\_f = \mbox{\hyperlink{classgko_1_1multigrid_1_1Pgm}{gko::multigrid::Pgm<MixedType, IndexType>}};}
 \end{DoxyCode}
 
 
@@ -92,10 +83,6 @@ executor where Ginkgo will perform the computation
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} exec = exec\_map.at(executor\_string)();  \textcolor{comment}{// throws if not valid}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{int} mixed\_int = argc >= 3 ? std::atoi(argv[2]) : 1;}
-\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{bool} use\_mixed = mixed\_int != 0;  \textcolor{comment}{// nonzero uses mixed}}
-\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"Using mixed precision? "} << use\_mixed << std::endl;}
 \end{DoxyCode}
 
 
@@ -164,115 +151,17 @@ Prepare the stopping criteria
 \end{DoxyCode}
 
 
-Create smoother factory (ir with bj)
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{auto} inner\_solver\_gen =}
-\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(bj::build().with\_max\_block\_size(1u).on(exec));}
-\DoxyCodeLine{\textcolor{keyword}{auto} inner\_solver\_gen\_f =}
-\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(bj\_f::build().with\_max\_block\_size(1u).on(exec));}
-\DoxyCodeLine{\textcolor{keyword}{auto} smoother\_gen = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(}
-\DoxyCodeLine{    ir::build()}
-\DoxyCodeLine{        .with\_solver(inner\_solver\_gen)}
-\DoxyCodeLine{        .with\_relaxation\_factor(static\_cast<ValueType>(0.9))}
-\DoxyCodeLine{        .with\_criteria(}
-\DoxyCodeLine{            gko::stop::Iteration::build().with\_max\_iters(1u).on(exec))}
-\DoxyCodeLine{        .on(exec));}
-\DoxyCodeLine{\textcolor{keyword}{auto} smoother\_gen\_f = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(}
-\DoxyCodeLine{    ir\_f::build()}
-\DoxyCodeLine{        .with\_solver(inner\_solver\_gen\_f)}
-\DoxyCodeLine{        .with\_relaxation\_factor(static\_cast<MixedType>(0.9))}
-\DoxyCodeLine{        .with\_criteria(}
-\DoxyCodeLine{            gko::stop::Iteration::build().with\_max\_iters(1u).on(exec))}
-\DoxyCodeLine{        .on(exec));}
-\end{DoxyCode}
-
-
-Create Multigrid\+Level factory
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{auto} mg\_level\_gen =}
-\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(pgm::build().with\_deterministic(\textcolor{keyword}{true}).on(exec));}
-\DoxyCodeLine{\textcolor{keyword}{auto} mg\_level\_gen\_f =}
-\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(pgm\_f::build().with\_deterministic(\textcolor{keyword}{true}).on(exec));}
-\end{DoxyCode}
-
-
-Create Coarsest\+Solver factory
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{auto} coarsest\_gen = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(}
-\DoxyCodeLine{    ir::build()}
-\DoxyCodeLine{        .with\_solver(inner\_solver\_gen)}
-\DoxyCodeLine{        .with\_relaxation\_factor(static\_cast<ValueType>(0.9))}
-\DoxyCodeLine{        .with\_criteria(}
-\DoxyCodeLine{            gko::stop::Iteration::build().with\_max\_iters(4u).on(exec))}
-\DoxyCodeLine{        .on(exec));}
-\DoxyCodeLine{\textcolor{keyword}{auto} coarsest\_gen\_f = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(}
-\DoxyCodeLine{    ir\_f::build()}
-\DoxyCodeLine{        .with\_solver(inner\_solver\_gen\_f)}
-\DoxyCodeLine{        .with\_relaxation\_factor(static\_cast<MixedType>(0.9))}
-\DoxyCodeLine{        .with\_criteria(}
-\DoxyCodeLine{            gko::stop::Iteration::build().with\_max\_iters(4u).on(exec))}
-\DoxyCodeLine{        .on(exec));}
-\end{DoxyCode}
-
-
 Create multigrid factory
 
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{std::shared\_ptr<gko::LinOpFactory> multigrid\_gen;}
-\DoxyCodeLine{\textcolor{keywordflow}{if} (use\_mixed) \{}
-\DoxyCodeLine{    multigrid\_gen =}
-\DoxyCodeLine{        mg::build()}
-\DoxyCodeLine{            .with\_max\_levels(10u)}
-\DoxyCodeLine{            .with\_min\_coarse\_rows(2u)}
-\DoxyCodeLine{            .with\_pre\_smoother(smoother\_gen, smoother\_gen\_f)}
-\DoxyCodeLine{            .with\_post\_uses\_pre(\textcolor{keyword}{true})}
-\DoxyCodeLine{            .with\_mg\_level(mg\_level\_gen, mg\_level\_gen\_f)}
-\DoxyCodeLine{            .with\_level\_selector([](\textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} level,}
-\DoxyCodeLine{                                    \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}*) -\/> \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} \{}
-\end{DoxyCode}
-
-
-The first (index 0) level will use the first mg\+\_\+level\+\_\+gen, smoother\+\_\+gen which are the factories with Value\+Type. The rest of levels ($>$= 1) will use the second (index 1) mg\+\_\+level\+\_\+gen2 and smoother\+\_\+gen2 which use the Mixed\+Type. The rest of levels will use different type than the normal multigrid.
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{                \textcolor{keywordflow}{return} level >= 1 ? 1 : 0;}
-\DoxyCodeLine{            \})}
-\DoxyCodeLine{            .with\_coarsest\_solver(coarsest\_gen\_f)}
-\DoxyCodeLine{            .with\_default\_initial\_guess(}
-\DoxyCodeLine{                \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aad02c4c4cde7ae76252540d116a40f23a}{gko::solver::initial\_guess\_mode::zero}})}
-\DoxyCodeLine{            .with\_criteria(}
-\DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(1u).on(exec))}
-\DoxyCodeLine{            .on(exec);}
-\DoxyCodeLine{\} \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{    multigrid\_gen =}
-\DoxyCodeLine{        mg::build()}
-\DoxyCodeLine{            .with\_max\_levels(10u)}
-\DoxyCodeLine{            .with\_min\_coarse\_rows(2u)}
-\DoxyCodeLine{            .with\_pre\_smoother(smoother\_gen)}
-\DoxyCodeLine{            .with\_post\_uses\_pre(\textcolor{keyword}{true})}
-\DoxyCodeLine{            .with\_mg\_level(mg\_level\_gen)}
-\DoxyCodeLine{            .with\_coarsest\_solver(coarsest\_gen)}
-\DoxyCodeLine{            .with\_default\_initial\_guess(}
-\DoxyCodeLine{                \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aad02c4c4cde7ae76252540d116a40f23a}{gko::solver::initial\_guess\_mode::zero}})}
-\DoxyCodeLine{            .with\_criteria(}
-\DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(1u).on(exec))}
-\DoxyCodeLine{            .on(exec);}
-\DoxyCodeLine{\}}
-\end{DoxyCode}
-
-
-Create solver factory
-
-
-\begin{DoxyCode}{0}
+\DoxyCodeLine{multigrid\_gen =}
+\DoxyCodeLine{    mg::build()}
+\DoxyCodeLine{        .with\_mg\_level(pgm::build().with\_deterministic(\textcolor{keyword}{true}).on(exec))}
+\DoxyCodeLine{        .with\_criteria(}
+\DoxyCodeLine{            gko::stop::Iteration::build().with\_max\_iters(1u).on(exec))}
+\DoxyCodeLine{        .on(exec);}
 \DoxyCodeLine{\textcolor{keyword}{auto} solver\_gen = cg::build()}
 \DoxyCodeLine{                      .with\_criteria(iter\_stop, tol\_stop)}
 \DoxyCodeLine{                      .with\_preconditioner(multigrid\_gen)}
@@ -415,21 +304,12 @@ This is the expected output\+:
 \DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{using} ValueType = double;}
-\DoxyCodeLine{    \textcolor{keyword}{using} MixedType = float;}
 \DoxyCodeLine{    \textcolor{keyword}{using} IndexType = int;}
 \DoxyCodeLine{    \textcolor{keyword}{using} vec = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}};}
 \DoxyCodeLine{    \textcolor{keyword}{using} mtx = \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<ValueType, IndexType>}};}
-\DoxyCodeLine{    \textcolor{keyword}{using} fcg = \mbox{\hyperlink{classgko_1_1solver_1_1Fcg}{gko::solver::Fcg<ValueType>}};}
 \DoxyCodeLine{    \textcolor{keyword}{using} cg = \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{gko::solver::Cg<ValueType>}};}
-\DoxyCodeLine{    \textcolor{keyword}{using} ir = \mbox{\hyperlink{classgko_1_1solver_1_1Ir}{gko::solver::Ir<ValueType>}};}
 \DoxyCodeLine{    \textcolor{keyword}{using} mg = \mbox{\hyperlink{classgko_1_1solver_1_1Multigrid}{gko::solver::Multigrid}};}
-\DoxyCodeLine{    \textcolor{keyword}{using} bj = \mbox{\hyperlink{classgko_1_1preconditioner_1_1Jacobi}{gko::preconditioner::Jacobi<ValueType, IndexType>}};}
 \DoxyCodeLine{    \textcolor{keyword}{using} pgm = \mbox{\hyperlink{classgko_1_1multigrid_1_1Pgm}{gko::multigrid::Pgm<ValueType, IndexType>}};}
-\DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{using} cg\_f = \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{gko::solver::Cg<MixedType>}};}
-\DoxyCodeLine{    \textcolor{keyword}{using} ir\_f = \mbox{\hyperlink{classgko_1_1solver_1_1Ir}{gko::solver::Ir<MixedType>}};}
-\DoxyCodeLine{    \textcolor{keyword}{using} bj\_f = \mbox{\hyperlink{classgko_1_1preconditioner_1_1Jacobi}{gko::preconditioner::Jacobi<MixedType, IndexType>}};}
-\DoxyCodeLine{    \textcolor{keyword}{using} pgm\_f = \mbox{\hyperlink{classgko_1_1multigrid_1_1Pgm}{gko::multigrid::Pgm<MixedType, IndexType>}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::cout << \mbox{\hyperlink{classgko_1_1version__info_a6daeb8a087cfb57fa055526fc133d8eb}{gko::version\_info::get}}() << std::endl;}
 \DoxyCodeLine{}
@@ -456,9 +336,6 @@ This is the expected output\+:
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} exec = exec\_map.at(executor\_string)();  \textcolor{comment}{// throws if not valid}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keywordtype}{int} mixed\_int = argc >= 3 ? std::atoi(argv[2]) : 1;}
-\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keywordtype}{bool} use\_mixed = mixed\_int != 0;  \textcolor{comment}{// nonzero uses mixed}}
-\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Using mixed precision? "} << use\_mixed << std::endl;}
 \DoxyCodeLine{    \textcolor{keyword}{auto} A = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{share}}(gko::read<mtx>(std::ifstream(\textcolor{stringliteral}{"data/A.mtx"}), exec));}
 \DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} size = A-\/>get\_size()[0];}
 \DoxyCodeLine{    \textcolor{keyword}{auto} host\_x = vec::create(exec-\/>get\_master(), \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}(size, 1));}
@@ -493,76 +370,13 @@ This is the expected output\+:
 \DoxyCodeLine{    iter\_stop-\/>add\_logger(logger);}
 \DoxyCodeLine{    tol\_stop-\/>add\_logger(logger);}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{auto} inner\_solver\_gen =}
-\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(bj::build().with\_max\_block\_size(1u).on(exec));}
-\DoxyCodeLine{    \textcolor{keyword}{auto} inner\_solver\_gen\_f =}
-\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(bj\_f::build().with\_max\_block\_size(1u).on(exec));}
-\DoxyCodeLine{    \textcolor{keyword}{auto} smoother\_gen = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(}
-\DoxyCodeLine{        ir::build()}
-\DoxyCodeLine{            .with\_solver(inner\_solver\_gen)}
-\DoxyCodeLine{            .with\_relaxation\_factor(static\_cast<ValueType>(0.9))}
-\DoxyCodeLine{            .with\_criteria(}
-\DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(1u).on(exec))}
-\DoxyCodeLine{            .on(exec));}
-\DoxyCodeLine{    \textcolor{keyword}{auto} smoother\_gen\_f = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(}
-\DoxyCodeLine{        ir\_f::build()}
-\DoxyCodeLine{            .with\_solver(inner\_solver\_gen\_f)}
-\DoxyCodeLine{            .with\_relaxation\_factor(static\_cast<MixedType>(0.9))}
-\DoxyCodeLine{            .with\_criteria(}
-\DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(1u).on(exec))}
-\DoxyCodeLine{            .on(exec));}
-\DoxyCodeLine{    \textcolor{keyword}{auto} mg\_level\_gen =}
-\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(pgm::build().with\_deterministic(\textcolor{keyword}{true}).on(exec));}
-\DoxyCodeLine{    \textcolor{keyword}{auto} mg\_level\_gen\_f =}
-\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(pgm\_f::build().with\_deterministic(\textcolor{keyword}{true}).on(exec));}
-\DoxyCodeLine{    \textcolor{keyword}{auto} coarsest\_gen = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(}
-\DoxyCodeLine{        ir::build()}
-\DoxyCodeLine{            .with\_solver(inner\_solver\_gen)}
-\DoxyCodeLine{            .with\_relaxation\_factor(static\_cast<ValueType>(0.9))}
-\DoxyCodeLine{            .with\_criteria(}
-\DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(4u).on(exec))}
-\DoxyCodeLine{            .on(exec));}
-\DoxyCodeLine{    \textcolor{keyword}{auto} coarsest\_gen\_f = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(}
-\DoxyCodeLine{        ir\_f::build()}
-\DoxyCodeLine{            .with\_solver(inner\_solver\_gen\_f)}
-\DoxyCodeLine{            .with\_relaxation\_factor(static\_cast<MixedType>(0.9))}
-\DoxyCodeLine{            .with\_criteria(}
-\DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(4u).on(exec))}
-\DoxyCodeLine{            .on(exec));}
 \DoxyCodeLine{    std::shared\_ptr<gko::LinOpFactory> multigrid\_gen;}
-\DoxyCodeLine{    \textcolor{keywordflow}{if} (use\_mixed) \{}
-\DoxyCodeLine{        multigrid\_gen =}
-\DoxyCodeLine{            mg::build()}
-\DoxyCodeLine{                .with\_max\_levels(10u)}
-\DoxyCodeLine{                .with\_min\_coarse\_rows(2u)}
-\DoxyCodeLine{                .with\_pre\_smoother(smoother\_gen, smoother\_gen\_f)}
-\DoxyCodeLine{                .with\_post\_uses\_pre(\textcolor{keyword}{true})}
-\DoxyCodeLine{                .with\_mg\_level(mg\_level\_gen, mg\_level\_gen\_f)}
-\DoxyCodeLine{                .with\_level\_selector([](\textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} level,}
-\DoxyCodeLine{                                        \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}*) -\/> \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} \{}
-\DoxyCodeLine{                    \textcolor{keywordflow}{return} level >= 1 ? 1 : 0;}
-\DoxyCodeLine{                \})}
-\DoxyCodeLine{                .with\_coarsest\_solver(coarsest\_gen\_f)}
-\DoxyCodeLine{                .with\_default\_initial\_guess(}
-\DoxyCodeLine{                    \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aad02c4c4cde7ae76252540d116a40f23a}{gko::solver::initial\_guess\_mode::zero}})}
-\DoxyCodeLine{                .with\_criteria(}
-\DoxyCodeLine{                    gko::stop::Iteration::build().with\_max\_iters(1u).on(exec))}
-\DoxyCodeLine{                .on(exec);}
-\DoxyCodeLine{    \} \textcolor{keywordflow}{else} \{}
-\DoxyCodeLine{        multigrid\_gen =}
-\DoxyCodeLine{            mg::build()}
-\DoxyCodeLine{                .with\_max\_levels(10u)}
-\DoxyCodeLine{                .with\_min\_coarse\_rows(2u)}
-\DoxyCodeLine{                .with\_pre\_smoother(smoother\_gen)}
-\DoxyCodeLine{                .with\_post\_uses\_pre(\textcolor{keyword}{true})}
-\DoxyCodeLine{                .with\_mg\_level(mg\_level\_gen)}
-\DoxyCodeLine{                .with\_coarsest\_solver(coarsest\_gen)}
-\DoxyCodeLine{                .with\_default\_initial\_guess(}
-\DoxyCodeLine{                    \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aad02c4c4cde7ae76252540d116a40f23a}{gko::solver::initial\_guess\_mode::zero}})}
-\DoxyCodeLine{                .with\_criteria(}
-\DoxyCodeLine{                    gko::stop::Iteration::build().with\_max\_iters(1u).on(exec))}
-\DoxyCodeLine{                .on(exec);}
-\DoxyCodeLine{    \}}
+\DoxyCodeLine{    multigrid\_gen =}
+\DoxyCodeLine{        mg::build()}
+\DoxyCodeLine{            .with\_mg\_level(pgm::build().with\_deterministic(\textcolor{keyword}{true}).on(exec))}
+\DoxyCodeLine{            .with\_criteria(}
+\DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(1u).on(exec))}
+\DoxyCodeLine{            .on(exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} solver\_gen = cg::build()}
 \DoxyCodeLine{                          .with\_criteria(iter\_stop, tol\_stop)}
 \DoxyCodeLine{                          .with\_preconditioner(multigrid\_gen)}
