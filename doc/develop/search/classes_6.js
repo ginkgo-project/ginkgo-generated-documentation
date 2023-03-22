@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['gmres_1853',['Gmres',['../classgko_1_1solver_1_1Gmres.html',1,'gko::solver']]],
-  ['greater_1854',['greater',['../structgko_1_1accessor_1_1greater.html',1,'gko::accessor']]],
-  ['greater_5for_5fequal_1855',['greater_or_equal',['../structgko_1_1accessor_1_1greater__or__equal.html',1,'gko::accessor']]]
+  ['gmres_1854',['Gmres',['../classgko_1_1solver_1_1Gmres.html',1,'gko::solver']]],
+  ['greater_1855',['greater',['../structgko_1_1accessor_1_1greater.html',1,'gko::accessor']]],
+  ['greater_5for_5fequal_1856',['greater_or_equal',['../structgko_1_1accessor_1_1greater__or__equal.html',1,'gko::accessor']]]
 ];
