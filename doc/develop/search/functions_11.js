@@ -14,7 +14,7 @@ var searchData=
   ['set_5fexecutor_2583',['set_executor',['../classgko_1_1array.html#aba67dcaa3c627446ca187c7a35536cd3',1,'gko::array']]],
   ['set_5fkappa_2584',['set_kappa',['../classgko_1_1solver_1_1Idr.html#a1552bbc46e5961608fe41521b6b846dc',1,'gko::solver::Idr']]],
   ['set_5fkrylov_5fdim_2585',['set_krylov_dim',['../classgko_1_1solver_1_1CbGmres.html#a3540b93ed61652d2ead150e117a80bc3',1,'gko::solver::CbGmres::set_krylov_dim()'],['../classgko_1_1solver_1_1Gcr.html#a8646c746e057cee2ffacea499cdc5189',1,'gko::solver::Gcr::set_krylov_dim()'],['../classgko_1_1solver_1_1Gmres.html#adf13991ee95a65952105d2be6659c7d3',1,'gko::solver::Gmres::set_krylov_dim()']]],
-  ['set_5flog_5fpropagation_5fmode_2586',['set_log_propagation_mode',['../classgko_1_1Executor.html#a52f19be85fe9cc899d1185c32abaa8c9',1,'gko::Executor']]],
+  ['set_5flog_5fpropagation_5fmode_2586',['set_log_propagation_mode',['../classgko_1_1Executor.html#a8801d54a4ac842def0b88d643b37b1db',1,'gko::Executor']]],
   ['set_5fobject_5fname_2587',['set_object_name',['../classgko_1_1log_1_1ProfilerHook.html#a1f901332281289fa4915e073dffb12c3',1,'gko::log::ProfilerHook']]],
   ['set_5fpermute_5fmask_2588',['set_permute_mask',['../classgko_1_1matrix_1_1Permutation.html#ad1fbbe30f0c282aa02558163a6820434',1,'gko::matrix::Permutation']]],
   ['set_5fpreconditioner_2589',['set_preconditioner',['../classgko_1_1Preconditionable.html#a95db3e56eb17efbcde951c5ed144582d',1,'gko::Preconditionable::set_preconditioner()'],['../classgko_1_1solver_1_1EnablePreconditionable.html#ad1f52e213256cd7c50811787dfcf4288',1,'gko::solver::EnablePreconditionable::set_preconditioner()']]],

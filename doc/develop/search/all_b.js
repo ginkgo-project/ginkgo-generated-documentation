@@ -22,7 +22,7 @@ var searchData=
   ['lock_5fall_970',['lock_all',['../classgko_1_1experimental_1_1mpi_1_1window.html#ab6fbd4976d277371670122a783bd6fbc',1,'gko::experimental::mpi::window']]],
   ['lock_5ftype_971',['lock_type',['../classgko_1_1experimental_1_1mpi_1_1window.html#a35fce5e05e221ce18372e1f2609f9953',1,'gko::experimental::mpi::window']]],
   ['logging_972',['Logging',['../group__log.html',1,'']]],
-  ['log_5fpropagate_5fmode_973',['log_propagate_mode',['../namespacegko.html#a7e071f8b9269bbbce87635ad655bebe4',1,'gko']]],
+  ['log_5fpropagation_5fmode_973',['log_propagation_mode',['../namespacegko.html#aa2543f42cbbe1a9373dc46d04c112bee',1,'gko']]],
   ['loggable_974',['Loggable',['../classgko_1_1log_1_1Loggable.html',1,'gko::log']]],
   ['logged_5fdata_975',['logged_data',['../structgko_1_1log_1_1Record_1_1logged__data.html',1,'gko::log::Record']]],
   ['logger_976',['Logger',['../classgko_1_1log_1_1Logger.html',1,'gko::log']]],

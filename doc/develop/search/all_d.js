@@ -5,7 +5,7 @@ var searchData=
   ['needs_5fpropagation_1034',['needs_propagation',['../classgko_1_1log_1_1Logger.html#a6f60c7a79a4716836d232558c58777d0',1,'gko::log::Logger::needs_propagation()'],['../classgko_1_1log_1_1ProfilerHook.html#ace6118e4363415cca4a63cee91186ece',1,'gko::log::ProfilerHook::needs_propagation()']]],
   ['nested_5fsummary_5fentry_1035',['nested_summary_entry',['../structgko_1_1log_1_1ProfilerHook_1_1nested__summary__entry.html',1,'gko::log::ProfilerHook']]],
   ['nestedsummarywriter_1036',['NestedSummaryWriter',['../classgko_1_1log_1_1ProfilerHook_1_1NestedSummaryWriter.html',1,'gko::log::ProfilerHook']]],
-  ['never_1037',['never',['../namespacegko.html#a7e071f8b9269bbbce87635ad655bebe4ac7561db7a418dd39b2201dfe110ab4a4',1,'gko']]],
+  ['never_1037',['never',['../namespacegko.html#aa2543f42cbbe1a9373dc46d04c112beeac7561db7a418dd39b2201dfe110ab4a4',1,'gko']]],
   ['next_5fprecision_1038',['next_precision',['../namespacegko.html#a6362f751c7753cf4fa0a4771d56e8ede',1,'gko']]],
   ['node_5flocal_5frank_1039',['node_local_rank',['../classgko_1_1experimental_1_1mpi_1_1communicator.html#a8dc8a949e3bc0e5e00ad0af13ca62104',1,'gko::experimental::mpi::communicator']]],
   ['nonzeros_1040',['nonzeros',['../structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0',1,'gko::matrix_data']]],
