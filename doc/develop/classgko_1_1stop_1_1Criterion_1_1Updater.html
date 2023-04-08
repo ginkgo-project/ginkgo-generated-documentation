@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/823896653 branch based on develop. Ginkgo version 1.5.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/831691843 branch based on develop. Ginkgo version 1.5.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -111,6 +111,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac70aa3f7733877da6424f29d1f932040"><td class="memItemLeft" align="right" valign="top"><a id="ac70aa3f7733877da6424f29d1f932040"></a>
 const <a class="el" href="classgko_1_1stop_1_1Criterion_1_1Updater.html">Updater</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>num_iterations</b> (<a class="el" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> const &amp;value) const</td></tr>
 <tr class="separator:ac70aa3f7733877da6424f29d1f932040"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7eefd0cc1c1d88dd3a6c190a0c70ae1b"><td class="memItemLeft" align="right" valign="top"><a id="a7eefd0cc1c1d88dd3a6c190a0c70ae1b"></a>
+const <a class="el" href="classgko_1_1stop_1_1Criterion_1_1Updater.html">Updater</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>ignore_residual_check</b> (bool const &amp;value) const</td></tr>
+<tr class="separator:a7eefd0cc1c1d88dd3a6c190a0c70ae1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd177394c778284f3eea819121a17e56"><td class="memItemLeft" align="right" valign="top"><a id="abd177394c778284f3eea819121a17e56"></a>
 const <a class="el" href="classgko_1_1stop_1_1Criterion_1_1Updater.html">Updater</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>residual</b> (<a class="el" href="classgko_1_1ptr__param.html">ptr_param</a>&lt; const <a class="el" href="classgko_1_1LinOp.html">LinOp</a> &gt; value) const</td></tr>
 <tr class="separator:abd177394c778284f3eea819121a17e56"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -129,6 +132,9 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a818e1dfb95076eef64282feb8f9a016e"><td class="memItemLeft" align="right" valign="top"><a id="a818e1dfb95076eef64282feb8f9a016e"></a>
 <a class="el" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a>&#160;</td><td class="memItemRight" valign="bottom"><b>num_iterations_</b> {}</td></tr>
 <tr class="separator:a818e1dfb95076eef64282feb8f9a016e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca312ab75ae5367be87f222a9dcf6351"><td class="memItemLeft" align="right" valign="top"><a id="aca312ab75ae5367be87f222a9dcf6351"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>ignore_residual_check_</b> {}</td></tr>
+<tr class="separator:aca312ab75ae5367be87f222a9dcf6351"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64fa344e399f7892305445feb1fcc699"><td class="memItemLeft" align="right" valign="top"><a id="a64fa344e399f7892305445feb1fcc699"></a>
 const <a class="el" href="classgko_1_1LinOp.html">LinOp</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>residual_</b> {}</td></tr>
 <tr class="separator:a64fa344e399f7892305445feb1fcc699"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -150,7 +156,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>Criterion</b></td></
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="classgko_1_1stop_1_1Criterion_1_1Updater.html" title="The Updater class serves for convenient argument passing to the Criterion&#39;s check function.">Updater</a> class serves for convenient argument passing to the <a class="el" href="classgko_1_1stop_1_1Criterion.html" title="The Criterion class is a base class for all stopping criteria.">Criterion</a>'s check function. </p>
-<p>The pattern used is a Builder, except <a class="el" href="classgko_1_1stop_1_1Criterion_1_1Updater.html" title="The Updater class serves for convenient argument passing to the Criterion&#39;s check function.">Updater</a> builds a function's arguments before calling the function itself, and does not build an object. This allows calling a <a class="el" href="classgko_1_1stop_1_1Criterion.html" title="The Criterion class is a base class for all stopping criteria.">Criterion</a>'s check in the form of: stop_criterion-&gt;<a class="el" href="classgko_1_1stop_1_1Criterion.html#a47e22c46eaa742d709dcbf0d26d93e6c" title="Returns the updater object.">update()</a> .num_iterations(num_iterations) .residual_norm(residual_norm) .implicit_sq_residual_norm(implicit_sq_residual_norm) .residual(residual) .solution(solution) .check(converged);</p>
+<p>The pattern used is a Builder, except <a class="el" href="classgko_1_1stop_1_1Criterion_1_1Updater.html" title="The Updater class serves for convenient argument passing to the Criterion&#39;s check function.">Updater</a> builds a function's arguments before calling the function itself, and does not build an object. This allows calling a <a class="el" href="classgko_1_1stop_1_1Criterion.html" title="The Criterion class is a base class for all stopping criteria.">Criterion</a>'s check in the form of: stop_criterion-&gt;<a class="el" href="classgko_1_1stop_1_1Criterion.html#a47e22c46eaa742d709dcbf0d26d93e6c" title="Returns the updater object.">update()</a> .num_iterations(num_iterations) .ignore_residual_check(ignore_residual_check) .residual_norm(residual_norm) .implicit_sq_residual_norm(implicit_sq_residual_norm) .residual(residual) .solution(solution) .check(converged);</p>
 <p>If there is a need for a new form of data to pass to the <a class="el" href="classgko_1_1stop_1_1Criterion.html" title="The Criterion class is a base class for all stopping criteria.">Criterion</a>, it should be added here. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a048d209ce640e2b71fcafa8a056a58a4"></a>
