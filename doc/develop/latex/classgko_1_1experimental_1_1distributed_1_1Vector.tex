@@ -111,6 +111,10 @@ void \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector_a72ebeb0
 \begin{DoxyCompactList}\small\item\em Computes the column-\/wise dot product of this (multi-\/)vector and {\ttfamily conj(b)} using a global reduction. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector_afb34c41d7cc90868903aed98a3ff74f9}{compute\+\_\+conj\+\_\+dot}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ b, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ result, \mbox{\hyperlink{classgko_1_1array}{array}}$<$ char $>$ \&tmp) const
 \begin{DoxyCompactList}\small\item\em Computes the column-\/wise dot product of this (multi-\/)vector and {\ttfamily conj(b)} using a global reduction. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector_a7e9df98ba640deae6e9c3a73aff8074d}{compute\+\_\+squared\+\_\+norm2}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ result) const
+\begin{DoxyCompactList}\small\item\em Computes the square of the column-\/wise Euclidian ( $L^2$) norm of this (multi-\/)vector using a global reduction. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector_a2ee403e1957707f02e1ae4bcfa818ec3}{compute\+\_\+squared\+\_\+norm2}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ result, \mbox{\hyperlink{classgko_1_1array}{array}}$<$ char $>$ \&tmp) const
+\begin{DoxyCompactList}\small\item\em Computes the square of the column-\/wise Euclidian ( $L^2$) norm of this (multi-\/)vector using a global reduction. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector_a1703cac44dc1591cafdd0a576cd55dbd}{compute\+\_\+norm2}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ result) const
 \begin{DoxyCompactList}\small\item\em Computes the Euclidian (L$^\wedge$2) norm of this (multi-\/)vector using a global reduction. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector_a5e8478fa78a9a9de4ee3a641857416c0}{compute\+\_\+norm2}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ result, \mbox{\hyperlink{classgko_1_1array}{array}}$<$ char $>$ \&tmp) const
@@ -441,6 +445,40 @@ Computes the Euclidian (L$^\wedge$2) norm of this (multi-\/)vector using a globa
 
 \begin{DoxyParams}{Parameters}
 {\em result} & a Dense row matrix, used to store the norm (the number of columns in result must match the number of columns of this) \\
+\hline
+{\em tmp} & the temporary storage to use for partial sums during the reduction computation. It may be resized and/or reset to the correct executor. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Vector_a7e9df98ba640deae6e9c3a73aff8074d}\label{classgko_1_1experimental_1_1distributed_1_1Vector_a7e9df98ba640deae6e9c3a73aff8074d}} 
+\index{gko::experimental::distributed::Vector$<$ ValueType $>$@{gko::experimental::distributed::Vector$<$ ValueType $>$}!compute\_squared\_norm2@{compute\_squared\_norm2}}
+\index{compute\_squared\_norm2@{compute\_squared\_norm2}!gko::experimental::distributed::Vector$<$ ValueType $>$@{gko::experimental::distributed::Vector$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{compute\_squared\_norm2()}{compute\_squared\_norm2()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = double$>$ \\
+void \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{gko\+::experimental\+::distributed\+::\+Vector}}$<$ Value\+Type $>$\+::compute\+\_\+squared\+\_\+norm2 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$}]{result }\end{DoxyParamCaption}) const}
+
+
+
+Computes the square of the column-\/wise Euclidian ( $L^2$) norm of this (multi-\/)vector using a global reduction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em result} & a Dense row vector, used to store the norm (the number of columns in the vector must match the number of columns of this) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Vector_a2ee403e1957707f02e1ae4bcfa818ec3}\label{classgko_1_1experimental_1_1distributed_1_1Vector_a2ee403e1957707f02e1ae4bcfa818ec3}} 
+\index{gko::experimental::distributed::Vector$<$ ValueType $>$@{gko::experimental::distributed::Vector$<$ ValueType $>$}!compute\_squared\_norm2@{compute\_squared\_norm2}}
+\index{compute\_squared\_norm2@{compute\_squared\_norm2}!gko::experimental::distributed::Vector$<$ ValueType $>$@{gko::experimental::distributed::Vector$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{compute\_squared\_norm2()}{compute\_squared\_norm2()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = double$>$ \\
+void \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{gko\+::experimental\+::distributed\+::\+Vector}}$<$ Value\+Type $>$\+::compute\+\_\+squared\+\_\+norm2 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$}]{result,  }\item[{\mbox{\hyperlink{classgko_1_1array}{array}}$<$ char $>$ \&}]{tmp }\end{DoxyParamCaption}) const}
+
+
+
+Computes the square of the column-\/wise Euclidian ( $L^2$) norm of this (multi-\/)vector using a global reduction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em result} & a Dense row vector, used to store the norm (the number of columns in the vector must match the number of columns of this) \\
 \hline
 {\em tmp} & the temporary storage to use for partial sums during the reduction computation. It may be resized and/or reset to the correct executor. \\
 \hline
