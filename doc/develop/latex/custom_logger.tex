@@ -234,31 +234,18 @@ Print a separation line
 \end{DoxyCode}
 
 
-This overload is necessary to avoid interface breaks for Ginkgo 2.\+0
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keywordtype}{void} on\_iteration\_complete(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* solver,}
-\DoxyCodeLine{                           \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}}\& iteration,}
-\DoxyCodeLine{                           \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* residual,}
-\DoxyCodeLine{                           \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* solution,}
-\DoxyCodeLine{                           \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* residual\_norm)\textcolor{keyword}{ const override}}
-\DoxyCodeLine{\textcolor{keyword}{}\{}
-\DoxyCodeLine{    this-\/>on\_iteration\_complete(solver, iteration, residual, solution,}
-\DoxyCodeLine{                                residual\_norm, \textcolor{keyword}{nullptr});}
-\DoxyCodeLine{\}}
-\end{DoxyCode}
-
-
 Customize the logging hook which is called everytime an iteration is completed
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keywordtype}{void} on\_iteration\_complete(}
-\DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}*, \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}}\& iteration,}
-\DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* residual, \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* solution,}
-\DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* residual\_norm,}
-\DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* implicit\_sq\_residual\_norm)\textcolor{keyword}{ const override}}
+\DoxyCodeLine{\textcolor{keywordtype}{void} on\_iteration\_complete(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* solver, \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* b,}
+\DoxyCodeLine{                           \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* solution,}
+\DoxyCodeLine{                           \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}}\& iteration,}
+\DoxyCodeLine{                           \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* residual,}
+\DoxyCodeLine{                           \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* residual\_norm,}
+\DoxyCodeLine{                           \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* implicit\_sq\_residual\_norm,}
+\DoxyCodeLine{                           \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1array}{gko::array<gko::stopping\_status>}}*,}
+\DoxyCodeLine{                           \textcolor{keywordtype}{bool})\textcolor{keyword}{ const override}}
 \DoxyCodeLine{\textcolor{keyword}{}\{}
 \end{DoxyCode}
 
@@ -314,6 +301,15 @@ If the solver shares the current solution vector
 \end{DoxyCode}
 
 
+Extract the matrix from the solver
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} matrix = gko::as<gko::solver::detail::SolverBaseLinOp>(solver)}
+\DoxyCodeLine{                  -\/>get\_system\_matrix();}
+\end{DoxyCode}
+
+
 Store the matrix\textquotesingle{}s executor
 
 
@@ -342,7 +338,7 @@ Instantiate a temporary result variable
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{auto} res = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(b);}
+\DoxyCodeLine{\textcolor{keyword}{auto} res = gko::as<gko\_dense>(\mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(b));}
 \end{DoxyCode}
 
 
@@ -403,33 +399,15 @@ Add the current iteration number to the {\ttfamily iterations} vector
 \end{DoxyCode}
 
 
-Construct the logger and store the system matrix and b vectors
+Construct the logger
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{    ResidualLogger(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* matrix, \textcolor{keyword}{const} gko\_dense* b)}
-\DoxyCodeLine{        : \mbox{\hyperlink{namespacegko}{gko}}::log::Logger(\mbox{\hyperlink{namespacegko}{gko}}::log::Logger::iteration\_complete\_mask),}
-\DoxyCodeLine{          matrix\{matrix\},}
-\DoxyCodeLine{          b\{b\}}
+\DoxyCodeLine{    ResidualLogger()}
+\DoxyCodeLine{        : \mbox{\hyperlink{namespacegko}{gko}}::log::Logger(\mbox{\hyperlink{namespacegko}{gko}}::log::Logger::iteration\_complete\_mask)}
 \DoxyCodeLine{    \{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
-\end{DoxyCode}
-
-
-Pointer to the system matrix
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* matrix;}
-\end{DoxyCode}
-
-
-Pointer to the right hand sides
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{const} gko\_dense* b;}
 \end{DoxyCode}
 
 
@@ -594,7 +572,7 @@ Instantiate a Residual\+Logger logger.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{auto} logger = std::make\_shared<ResidualLogger<ValueType>>(A.get(), b.get());}
+\DoxyCodeLine{\textcolor{keyword}{auto} logger = std::make\_shared<ResidualLogger<ValueType>>();}
 \end{DoxyCode}
 
 
@@ -647,7 +625,7 @@ To measure if your solution has actually converged, you can measure the error of
 \DoxyCodeLine{    \textcolor{keyword}{auto} neg\_one = gko::initialize<vec>(\{-\/1.0\}, exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} res = gko::initialize<real\_vec>(\{0.0\}, exec);}
 \DoxyCodeLine{    A-\/>apply(one, x, neg\_one, b);}
-\DoxyCodeLine{    b-\/>\mbox{\hyperlink{classgko_1_1matrix_1_1Dense_aed62418c4ecb58c4855b0bea1b7a680d}{compute\_norm2}}(res);}
+\DoxyCodeLine{    b-\/>compute\_norm2(res);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Residual norm sqrt(r\string^T r):\(\backslash\)n"};}
 \DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{write}}(std::cout, res);}
@@ -814,21 +792,15 @@ The following is the expected result\+:
 \DoxyCodeLine{    \textcolor{keyword}{using} gko\_dense = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}};}
 \DoxyCodeLine{    \textcolor{keyword}{using} gko\_real\_dense = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<RealValueType>}};}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_iteration\_complete(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* solver,}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_iteration\_complete(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* solver, \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* b,}
+\DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* solution,}
 \DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}}\& iteration,}
 \DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* residual,}
-\DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* solution,}
-\DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* residual\_norm)\textcolor{keyword}{ const override}}
-\DoxyCodeLine{\textcolor{keyword}{    }\{}
-\DoxyCodeLine{        this-\/>on\_iteration\_complete(solver, iteration, residual, solution,}
-\DoxyCodeLine{                                    residual\_norm, \textcolor{keyword}{nullptr});}
-\DoxyCodeLine{    \}}
-\DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keywordtype}{void} on\_iteration\_complete(}
-\DoxyCodeLine{        \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}*, \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}}\& iteration,}
-\DoxyCodeLine{        \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* residual, \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* solution,}
-\DoxyCodeLine{        \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* residual\_norm,}
-\DoxyCodeLine{        \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* implicit\_sq\_residual\_norm)\textcolor{keyword}{ const override}}
+\DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* residual\_norm,}
+\DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* implicit\_sq\_residual\_norm,}
+\DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1array}{gko::array<gko::stopping\_status>}}*,}
+\DoxyCodeLine{                               \textcolor{keywordtype}{bool})\textcolor{keyword}{ const override}}
 \DoxyCodeLine{\textcolor{keyword}{    }\{}
 \DoxyCodeLine{        \textcolor{keywordflow}{if} (residual\_norm) \{}
 \DoxyCodeLine{            \textcolor{keyword}{auto} dense\_norm = gko::as<gko\_real\_dense>(residual\_norm);}
@@ -840,10 +812,12 @@ The following is the expected result\+:
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{}
 \DoxyCodeLine{        \textcolor{keywordflow}{if} (solution) \{}
+\DoxyCodeLine{            \textcolor{keyword}{auto} matrix = gko::as<gko::solver::detail::SolverBaseLinOp>(solver)}
+\DoxyCodeLine{                              -\/>get\_system\_matrix();}
 \DoxyCodeLine{            \textcolor{keyword}{auto} exec = matrix-\/>get\_executor();}
 \DoxyCodeLine{            \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_a0059e27f8f4bc348ff65c1e60caf47c8}{one}} = gko::initialize<gko\_dense>(\{1.0\}, exec);}
 \DoxyCodeLine{            \textcolor{keyword}{auto} neg\_one = gko::initialize<gko\_dense>(\{-\/1.0\}, exec);}
-\DoxyCodeLine{            \textcolor{keyword}{auto} res = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(b);}
+\DoxyCodeLine{            \textcolor{keyword}{auto} res = gko::as<gko\_dense>(\mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(b));}
 \DoxyCodeLine{            matrix-\/>apply(one, solution, neg\_one, res);}
 \DoxyCodeLine{}
 \DoxyCodeLine{            real\_norms.push\_back(compute\_norm(res.get()));}
@@ -862,15 +836,11 @@ The following is the expected result\+:
 \DoxyCodeLine{        iterations.push\_back(iteration);}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    ResidualLogger(\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* matrix, \textcolor{keyword}{const} gko\_dense* b)}
-\DoxyCodeLine{        : \mbox{\hyperlink{namespacegko}{gko}}::log::Logger(\mbox{\hyperlink{namespacegko}{gko}}::log::Logger::iteration\_complete\_mask),}
-\DoxyCodeLine{          matrix\{matrix\},}
-\DoxyCodeLine{          b\{b\}}
+\DoxyCodeLine{    ResidualLogger()}
+\DoxyCodeLine{        : \mbox{\hyperlink{namespacegko}{gko}}::log::Logger(\mbox{\hyperlink{namespacegko}{gko}}::log::Logger::iteration\_complete\_mask)}
 \DoxyCodeLine{    \{\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{private}:}
-\DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* matrix;}
-\DoxyCodeLine{    \textcolor{keyword}{const} gko\_dense* b;}
 \DoxyCodeLine{    \textcolor{keyword}{mutable} std::vector<RealValueType> recurrent\_norms\{\};}
 \DoxyCodeLine{    \textcolor{keyword}{mutable} std::vector<RealValueType> real\_norms\{\};}
 \DoxyCodeLine{    \textcolor{keyword}{mutable} std::vector<RealValueType> implicit\_norms\{\};}
@@ -932,7 +902,7 @@ The following is the expected result\+:
 \DoxyCodeLine{                    .on(exec))}
 \DoxyCodeLine{            .on(exec);}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{auto} logger = std::make\_shared<ResidualLogger<ValueType>>(A.get(), b.get());}
+\DoxyCodeLine{    \textcolor{keyword}{auto} logger = std::make\_shared<ResidualLogger<ValueType>>();}
 \DoxyCodeLine{}
 \DoxyCodeLine{    solver\_gen-\/>add\_logger(logger);}
 \DoxyCodeLine{}
@@ -950,7 +920,7 @@ The following is the expected result\+:
 \DoxyCodeLine{    \textcolor{keyword}{auto} neg\_one = gko::initialize<vec>(\{-\/1.0\}, exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} res = gko::initialize<real\_vec>(\{0.0\}, exec);}
 \DoxyCodeLine{    A-\/>apply(one, x, neg\_one, b);}
-\DoxyCodeLine{    b-\/>\mbox{\hyperlink{classgko_1_1matrix_1_1Dense_aed62418c4ecb58c4855b0bea1b7a680d}{compute\_norm2}}(res);}
+\DoxyCodeLine{    b-\/>compute\_norm2(res);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Residual norm sqrt(r\string^T r):\(\backslash\)n"};}
 \DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{write}}(std::cout, res);}

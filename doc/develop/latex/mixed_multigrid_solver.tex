@@ -153,11 +153,6 @@ Prepare the stopping criteria
 \DoxyCodeLine{                               .with\_baseline(gko::stop::mode::absolute)}
 \DoxyCodeLine{                               .with\_reduction\_factor(tolerance)}
 \DoxyCodeLine{                               .on(exec));}
-\DoxyCodeLine{}
-\DoxyCodeLine{std::shared\_ptr<const gko::log::Convergence<ValueType>> logger =}
-\DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1log_1_1Convergence_abf224a82334775c991f83cfb5e35e18c}{gko::log::Convergence<ValueType>::create}}();}
-\DoxyCodeLine{iter\_stop-\/>add\_logger(logger);}
-\DoxyCodeLine{tol\_stop-\/>add\_logger(logger);}
 \end{DoxyCode}
 
 
@@ -269,6 +264,16 @@ auto solver = solver\+\_\+gen-\/$>$generate(\+A);
 \end{DoxyCode}
 
 
+Add logger
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::shared\_ptr<const gko::log::Convergence<ValueType>> logger =}
+\DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1log_1_1Convergence_aa67955ea9d1d18f15f0330d12b93d330}{gko::log::Convergence<ValueType>::create}}();}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}}-\/>add\_logger(logger);}
+\end{DoxyCode}
+
+
 Solve system
 
 
@@ -283,7 +288,7 @@ Solve system
 \end{DoxyCode}
 
 
-Calculate residual
+Calculate residual explicitly, because the residual is not available inside of the multigrid solver
 
 
 \begin{DoxyCode}{0}
@@ -460,11 +465,6 @@ This is the expected output\+:
 \DoxyCodeLine{                                   .with\_reduction\_factor(tolerance)}
 \DoxyCodeLine{                                   .on(exec));}
 \DoxyCodeLine{}
-\DoxyCodeLine{    std::shared\_ptr<const gko::log::Convergence<ValueType>> logger =}
-\DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1log_1_1Convergence_abf224a82334775c991f83cfb5e35e18c}{gko::log::Convergence<ValueType>::create}}();}
-\DoxyCodeLine{    iter\_stop-\/>add\_logger(logger);}
-\DoxyCodeLine{    tol\_stop-\/>add\_logger(logger);}
-\DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} smoother\_gen = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(}
 \DoxyCodeLine{        ir::build()}
 \DoxyCodeLine{            .with\_solver(bj::build().with\_max\_block\_size(1u).on(exec))}
@@ -532,6 +532,9 @@ This is the expected output\+:
 \DoxyCodeLine{    gen\_time +=}
 \DoxyCodeLine{        std::chrono::duration\_cast<std::chrono::nanoseconds>(gen\_toc -\/ gen\_tic);}
 \DoxyCodeLine{}
+\DoxyCodeLine{    std::shared\_ptr<const gko::log::Convergence<ValueType>> logger =}
+\DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1log_1_1Convergence_aa67955ea9d1d18f15f0330d12b93d330}{gko::log::Convergence<ValueType>::create}}();}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}}-\/>add\_logger(logger);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    exec-\/>synchronize();}
 \DoxyCodeLine{    std::chrono::nanoseconds time(0);}

@@ -181,15 +181,25 @@ First we add facilities to only print to a file. It\textquotesingle{}s possible 
 \end{DoxyCode}
 
 
+This adds a simple logger that only reports convergence state at the end of the solver. Specifically it captures the last residual norm, the final number of iterations, and the converged or not converged status.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::shared\_ptr<gko::log::Convergence<ValueType>> convergence\_logger =}
+\DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1log_1_1Convergence_aa67955ea9d1d18f15f0330d12b93d330}{gko::log::Convergence<ValueType>::create}}();}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}}-\/>add\_logger(convergence\_logger);}
+\end{DoxyCode}
+
+
 Add another logger which puts all the data in an object, we can later retrieve this object in our code. Here we only have want Executor and criterion check completed events.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{std::shared\_ptr<gko::log::Record> record\_logger = \mbox{\hyperlink{classgko_1_1log_1_1Record_ab3863ff409b8ceaefa2f226a4e26debc}{gko::log::Record::create}}(}
-\DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1log_1_1Logger_af263708ebb15007bc0086e7c438c190c}{gko::log::Logger::executor\_events\_mask}} |}
-\DoxyCodeLine{    gko::log::Logger::criterion\_check\_completed\_mask);}
+\DoxyCodeLine{std::shared\_ptr<gko::log::Record> record\_logger =}
+\DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1log_1_1Record_ab3863ff409b8ceaefa2f226a4e26debc}{gko::log::Record::create}}(\mbox{\hyperlink{classgko_1_1log_1_1Logger_af263708ebb15007bc0086e7c438c190c}{gko::log::Logger::executor\_events\_mask}} |}
+\DoxyCodeLine{                             gko::log::Logger::iteration\_complete\_mask);}
 \DoxyCodeLine{exec-\/>\mbox{\hyperlink{classgko_1_1Executor_a520dad04b7e74f285ab0956873a5413d}{add\_logger}}(record\_logger);}
-\DoxyCodeLine{residual\_criterion-\/>add\_logger(record\_logger);}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}}-\/>add\_logger(record\_logger);}
 \end{DoxyCode}
 
 
@@ -206,7 +216,7 @@ Print the residual of the last criterion check event (where convergence happened
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{auto} residual =}
-\DoxyCodeLine{    record\_logger-\/>get().criterion\_check\_completed.back()-\/>residual.get();}
+\DoxyCodeLine{    record\_logger-\/>get().iteration\_completed.back()-\/>residual.get();}
 \DoxyCodeLine{\textcolor{keyword}{auto} residual\_d = gko::as<vec>(residual);}
 \DoxyCodeLine{print\_vector(\textcolor{stringliteral}{"Residual"}, residual\_d);}
 \end{DoxyCode}
@@ -216,23 +226,14 @@ Print solution
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"Solution (x):\(\backslash\)n"};}
-\DoxyCodeLine{\mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{write}}(std::cout, x);}
-\end{DoxyCode}
-
-
-Calculate residual
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{    \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_a0059e27f8f4bc348ff65c1e60caf47c8}{one}} = gko::initialize<vec>(\{1.0\}, exec);}
-\DoxyCodeLine{    \textcolor{keyword}{auto} neg\_one = gko::initialize<vec>(\{-\/1.0\}, exec);}
-\DoxyCodeLine{    \textcolor{keyword}{auto} res = gko::initialize<real\_vec>(\{0.0\}, exec);}
-\DoxyCodeLine{    A-\/>apply(one, x, neg\_one, b);}
-\DoxyCodeLine{    b-\/>compute\_norm2(res);}
-\DoxyCodeLine{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Solution (x):\(\backslash\)n"};}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{write}}(std::cout, x);}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Residual norm sqrt(r\string^T r):\(\backslash\)n"};}
-\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{write}}(std::cout, res);}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{write}}(std::cout, gko::as<vec>(convergence\_logger-\/>get\_residual\_norm()));}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Number of iterations "}}
+\DoxyCodeLine{              << convergence\_logger-\/>get\_num\_iterations() << std::endl;}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Convergence status "} << std::boolalpha}
+\DoxyCodeLine{              << convergence\_logger-\/>has\_converged() << std::endl;}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
  \label{_Results}%
@@ -1130,36 +1131,36 @@ This is the expected output\+:
 \DoxyCodeLine{            .on(exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}} = solver\_gen-\/>generate(A);}
 \DoxyCodeLine{}
-\DoxyCodeLine{}
 \DoxyCodeLine{    std::ofstream filestream(\textcolor{stringliteral}{"my\_file.txt"});}
 \DoxyCodeLine{    \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}}-\/>add\_logger(\mbox{\hyperlink{classgko_1_1log_1_1Stream}{gko::log::Stream<ValueType>::create}}(}
 \DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1log_1_1Logger_a02534863a2d2f92dfeb2c39038365532}{gko::log::Logger::all\_events\_mask}}, filestream));}
 \DoxyCodeLine{    \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}}-\/>add\_logger(stream\_logger);}
 \DoxyCodeLine{}
-\DoxyCodeLine{    std::shared\_ptr<gko::log::Record> record\_logger = \mbox{\hyperlink{classgko_1_1log_1_1Record_ab3863ff409b8ceaefa2f226a4e26debc}{gko::log::Record::create}}(}
-\DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1log_1_1Logger_af263708ebb15007bc0086e7c438c190c}{gko::log::Logger::executor\_events\_mask}} |}
-\DoxyCodeLine{        gko::log::Logger::criterion\_check\_completed\_mask);}
+\DoxyCodeLine{    std::shared\_ptr<gko::log::Convergence<ValueType>> convergence\_logger =}
+\DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1log_1_1Convergence_aa67955ea9d1d18f15f0330d12b93d330}{gko::log::Convergence<ValueType>::create}}();}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}}-\/>add\_logger(convergence\_logger);}
+\DoxyCodeLine{}
+\DoxyCodeLine{    std::shared\_ptr<gko::log::Record> record\_logger =}
+\DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1log_1_1Record_ab3863ff409b8ceaefa2f226a4e26debc}{gko::log::Record::create}}(\mbox{\hyperlink{classgko_1_1log_1_1Logger_af263708ebb15007bc0086e7c438c190c}{gko::log::Logger::executor\_events\_mask}} |}
+\DoxyCodeLine{                                 gko::log::Logger::iteration\_complete\_mask);}
 \DoxyCodeLine{    exec-\/>\mbox{\hyperlink{classgko_1_1Executor_a520dad04b7e74f285ab0956873a5413d}{add\_logger}}(record\_logger);}
-\DoxyCodeLine{    residual\_criterion-\/>add\_logger(record\_logger);}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}}-\/>add\_logger(record\_logger);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}}-\/>apply(b, x);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} residual =}
-\DoxyCodeLine{        record\_logger-\/>get().criterion\_check\_completed.back()-\/>residual.get();}
+\DoxyCodeLine{        record\_logger-\/>get().iteration\_completed.back()-\/>residual.get();}
 \DoxyCodeLine{    \textcolor{keyword}{auto} residual\_d = gko::as<vec>(residual);}
 \DoxyCodeLine{    print\_vector(\textcolor{stringliteral}{"Residual"}, residual\_d);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Solution (x):\(\backslash\)n"};}
 \DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{write}}(std::cout, x);}
-\DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_a0059e27f8f4bc348ff65c1e60caf47c8}{one}} = gko::initialize<vec>(\{1.0\}, exec);}
-\DoxyCodeLine{    \textcolor{keyword}{auto} neg\_one = gko::initialize<vec>(\{-\/1.0\}, exec);}
-\DoxyCodeLine{    \textcolor{keyword}{auto} res = gko::initialize<real\_vec>(\{0.0\}, exec);}
-\DoxyCodeLine{    A-\/>apply(one, x, neg\_one, b);}
-\DoxyCodeLine{    b-\/>compute\_norm2(res);}
-\DoxyCodeLine{}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Residual norm sqrt(r\string^T r):\(\backslash\)n"};}
-\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{write}}(std::cout, res);}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{write}}(std::cout, gko::as<vec>(convergence\_logger-\/>get\_residual\_norm()));}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Number of iterations "}}
+\DoxyCodeLine{              << convergence\_logger-\/>get\_num\_iterations() << std::endl;}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Convergence status "} << std::boolalpha}
+\DoxyCodeLine{              << convergence\_logger-\/>has\_converged() << std::endl;}
 \DoxyCodeLine{\}}
 \end{DoxyCodeInclude}
  

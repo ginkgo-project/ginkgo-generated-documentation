@@ -309,21 +309,18 @@ Setup the stopping criterion and logger
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} reduction\_factor\{1e-\/8\};}
 \DoxyCodeLine{std::shared\_ptr<const gko::log::Convergence<ValueType>> logger =}
-\DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1log_1_1Convergence_abf224a82334775c991f83cfb5e35e18c}{gko::log::Convergence<ValueType>::create}}();}
-\DoxyCodeLine{\textcolor{keyword}{auto} iter\_stop = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(}
-\DoxyCodeLine{    gko::stop::Iteration::build().with\_max\_iters(num\_iters).on(exec));}
-\DoxyCodeLine{\textcolor{keyword}{auto} tol\_stop = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(\mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                               .with\_reduction\_factor(reduction\_factor)}
-\DoxyCodeLine{                               .on(exec));}
-\DoxyCodeLine{iter\_stop-\/>add\_logger(logger);}
-\DoxyCodeLine{tol\_stop-\/>add\_logger(logger);}
-\DoxyCodeLine{}
+\DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1log_1_1Convergence_aa67955ea9d1d18f15f0330d12b93d330}{gko::log::Convergence<ValueType>::create}}();}
 \DoxyCodeLine{\textcolor{keyword}{auto} Ainv =}
 \DoxyCodeLine{    solver::build()}
 \DoxyCodeLine{        .with\_preconditioner(schwarz::build()}
 \DoxyCodeLine{                                 .with\_local\_solver\_factory(local\_solver)}
 \DoxyCodeLine{                                 .on(exec))}
-\DoxyCodeLine{        .with\_criteria(iter\_stop, tol\_stop)}
+\DoxyCodeLine{        .with\_criteria(}
+\DoxyCodeLine{            gko::stop::Iteration::build().with\_max\_iters(num\_iters).on(}
+\DoxyCodeLine{                exec),}
+\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                .with\_reduction\_factor(reduction\_factor)}
+\DoxyCodeLine{                .on(exec))}
 \DoxyCodeLine{        .on(exec)}
 \DoxyCodeLine{        -\/>generate(A);}
 \end{DoxyCode}
@@ -359,29 +356,15 @@ Take timings.
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{comm.synchronize();}
-\DoxyCodeLine{ValueType t\_solver\_apply\_end = \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a508f97387781bb32dd2c7616dee1a786}{gko::experimental::mpi::get\_walltime}}();}
-\end{DoxyCode}
-
-
-Compute the residual, this is done in the same way as in the non-\/distributed case.
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{x\_host-\/>copy\_from(x);}
-\DoxyCodeLine{\textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_a0059e27f8f4bc348ff65c1e60caf47c8}{one}} = gko::initialize<vec>(\{1.0\}, exec);}
-\DoxyCodeLine{\textcolor{keyword}{auto} minus\_one = gko::initialize<vec>(\{-\/1.0\}, exec);}
-\DoxyCodeLine{A\_host-\/>apply(minus\_one, x\_host, one, b\_host);}
-\DoxyCodeLine{\textcolor{keyword}{auto} res\_norm = gko::initialize<vec>(\{0.0\}, exec-\/>get\_master());}
-\DoxyCodeLine{b\_host-\/>compute\_norm2(res\_norm);}
-\end{DoxyCode}
-
-
-Take timings.
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{comm.synchronize();}
 \DoxyCodeLine{ValueType t\_end = \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a508f97387781bb32dd2c7616dee1a786}{gko::experimental::mpi::get\_walltime}}();}
+\end{DoxyCode}
+
+
+Get the residual.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} res\_norm = gko::as<vec>(logger-\/>get\_residual\_norm());}
 \end{DoxyCode}
 
 
@@ -402,12 +385,12 @@ clang-\/format off
 \begin{DoxyCode}{0}
 \DoxyCodeLine{std::cout << \textcolor{stringliteral}{"\(\backslash\)nNum rows in matrix: "} << num\_rows}
 \DoxyCodeLine{          << \textcolor{stringliteral}{"\(\backslash\)nNum ranks: "} << comm.size()}
-\DoxyCodeLine{          << \textcolor{stringliteral}{"\(\backslash\)nFinal Res norm: "} << *res\_norm-\/>get\_values()}
+\DoxyCodeLine{          << \textcolor{stringliteral}{"\(\backslash\)nFinal Res norm: "} << *res\_norm-\/>get\_const\_values()}
 \DoxyCodeLine{          << \textcolor{stringliteral}{"\(\backslash\)nIteration count: "} << logger-\/>get\_num\_iterations()}
 \DoxyCodeLine{          << \textcolor{stringliteral}{"\(\backslash\)nInit time: "} << t\_init\_end -\/ t\_init}
 \DoxyCodeLine{          << \textcolor{stringliteral}{"\(\backslash\)nRead time: "} << t\_read\_setup\_end -\/ t\_init}
 \DoxyCodeLine{          << \textcolor{stringliteral}{"\(\backslash\)nSolver generate time: "} << t\_solver\_generate\_end -\/ t\_read\_setup\_end}
-\DoxyCodeLine{          << \textcolor{stringliteral}{"\(\backslash\)nSolver apply time: "} << t\_solver\_apply\_end -\/ t\_solver\_generate\_end}
+\DoxyCodeLine{          << \textcolor{stringliteral}{"\(\backslash\)nSolver apply time: "} << t\_end -\/ t\_solver\_generate\_end}
 \DoxyCodeLine{          << \textcolor{stringliteral}{"\(\backslash\)nTotal time: "} << t\_end -\/ t\_init}
 \DoxyCodeLine{          << std::endl;}
 \end{DoxyCode}
@@ -611,21 +594,18 @@ The timings may vary depending on the machine. \label{_PlainProg}%
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} reduction\_factor\{1e-\/8\};}
 \DoxyCodeLine{    std::shared\_ptr<const gko::log::Convergence<ValueType>> logger =}
-\DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1log_1_1Convergence_abf224a82334775c991f83cfb5e35e18c}{gko::log::Convergence<ValueType>::create}}();}
-\DoxyCodeLine{    \textcolor{keyword}{auto} iter\_stop = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(}
-\DoxyCodeLine{        gko::stop::Iteration::build().with\_max\_iters(num\_iters).on(exec));}
-\DoxyCodeLine{    \textcolor{keyword}{auto} tol\_stop = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(\mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                                   .with\_reduction\_factor(reduction\_factor)}
-\DoxyCodeLine{                                   .on(exec));}
-\DoxyCodeLine{    iter\_stop-\/>add\_logger(logger);}
-\DoxyCodeLine{    tol\_stop-\/>add\_logger(logger);}
-\DoxyCodeLine{}
+\DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1log_1_1Convergence_aa67955ea9d1d18f15f0330d12b93d330}{gko::log::Convergence<ValueType>::create}}();}
 \DoxyCodeLine{    \textcolor{keyword}{auto} Ainv =}
 \DoxyCodeLine{        solver::build()}
 \DoxyCodeLine{            .with\_preconditioner(schwarz::build()}
 \DoxyCodeLine{                                     .with\_local\_solver\_factory(local\_solver)}
 \DoxyCodeLine{                                     .on(exec))}
-\DoxyCodeLine{            .with\_criteria(iter\_stop, tol\_stop)}
+\DoxyCodeLine{            .with\_criteria(}
+\DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(num\_iters).on(}
+\DoxyCodeLine{                    exec),}
+\DoxyCodeLine{                \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                    .with\_reduction\_factor(reduction\_factor)}
+\DoxyCodeLine{                    .on(exec))}
 \DoxyCodeLine{            .on(exec)}
 \DoxyCodeLine{            -\/>generate(A);}
 \DoxyCodeLine{    Ainv-\/>add\_logger(logger);}
@@ -636,27 +616,19 @@ The timings may vary depending on the machine. \label{_PlainProg}%
 \DoxyCodeLine{    Ainv-\/>apply(b, x);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    comm.synchronize();}
-\DoxyCodeLine{    ValueType t\_solver\_apply\_end = \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a508f97387781bb32dd2c7616dee1a786}{gko::experimental::mpi::get\_walltime}}();}
-\DoxyCodeLine{}
-\DoxyCodeLine{    x\_host-\/>copy\_from(x);}
-\DoxyCodeLine{    \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_a0059e27f8f4bc348ff65c1e60caf47c8}{one}} = gko::initialize<vec>(\{1.0\}, exec);}
-\DoxyCodeLine{    \textcolor{keyword}{auto} minus\_one = gko::initialize<vec>(\{-\/1.0\}, exec);}
-\DoxyCodeLine{    A\_host-\/>apply(minus\_one, x\_host, one, b\_host);}
-\DoxyCodeLine{    \textcolor{keyword}{auto} res\_norm = gko::initialize<vec>(\{0.0\}, exec-\/>get\_master());}
-\DoxyCodeLine{    b\_host-\/>compute\_norm2(res\_norm);}
-\DoxyCodeLine{}
-\DoxyCodeLine{    comm.synchronize();}
 \DoxyCodeLine{    ValueType t\_end = \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a508f97387781bb32dd2c7616dee1a786}{gko::experimental::mpi::get\_walltime}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{auto} res\_norm = gko::as<vec>(logger-\/>get\_residual\_norm());}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keywordflow}{if} (comm.rank() == 0) \{}
 \DoxyCodeLine{        std::cout << \textcolor{stringliteral}{"\(\backslash\)nNum rows in matrix: "} << num\_rows}
 \DoxyCodeLine{                  << \textcolor{stringliteral}{"\(\backslash\)nNum ranks: "} << comm.size()}
-\DoxyCodeLine{                  << \textcolor{stringliteral}{"\(\backslash\)nFinal Res norm: "} << *res\_norm-\/>get\_values()}
+\DoxyCodeLine{                  << \textcolor{stringliteral}{"\(\backslash\)nFinal Res norm: "} << *res\_norm-\/>get\_const\_values()}
 \DoxyCodeLine{                  << \textcolor{stringliteral}{"\(\backslash\)nIteration count: "} << logger-\/>get\_num\_iterations()}
 \DoxyCodeLine{                  << \textcolor{stringliteral}{"\(\backslash\)nInit time: "} << t\_init\_end -\/ t\_init}
 \DoxyCodeLine{                  << \textcolor{stringliteral}{"\(\backslash\)nRead time: "} << t\_read\_setup\_end -\/ t\_init}
 \DoxyCodeLine{                  << \textcolor{stringliteral}{"\(\backslash\)nSolver generate time: "} << t\_solver\_generate\_end -\/ t\_read\_setup\_end}
-\DoxyCodeLine{                  << \textcolor{stringliteral}{"\(\backslash\)nSolver apply time: "} << t\_solver\_apply\_end -\/ t\_solver\_generate\_end}
+\DoxyCodeLine{                  << \textcolor{stringliteral}{"\(\backslash\)nSolver apply time: "} << t\_end -\/ t\_solver\_generate\_end}
 \DoxyCodeLine{                  << \textcolor{stringliteral}{"\(\backslash\)nTotal time: "} << t\_end -\/ t\_init}
 \DoxyCodeLine{                  << std::endl;}
 \DoxyCodeLine{    \}}

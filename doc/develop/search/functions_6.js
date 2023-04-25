@@ -184,7 +184,7 @@ var searchData=
   ['get_5fwalltime_2398',['get_walltime',['../namespacegko_1_1experimental_1_1mpi.html#a508f97387781bb32dd2c7616dee1a786',1,'gko::experimental::mpi']]],
   ['get_5fwarp_5fsize_2399',['get_warp_size',['../classgko_1_1CudaExecutor.html#a6a3894e9f4d98b5f7523e067c88ef521',1,'gko::CudaExecutor::get_warp_size()'],['../classgko_1_1HipExecutor.html#ae470cdfd4273b02b2563101d6146db26',1,'gko::HipExecutor::get_warp_size()']]],
   ['get_5fwindow_2400',['get_window',['../classgko_1_1experimental_1_1mpi_1_1window.html#aefdede74f361e099145647ac6b8e8de6',1,'gko::experimental::mpi::window']]],
-  ['get_5fworkspace_5fscalars_2401',['get_workspace_scalars',['../classgko_1_1solver_1_1SolverBase.html#a03e6000ed3c13f2e3ccbb5b42bab5593',1,'gko::solver::SolverBase::get_workspace_scalars()'],['../classgko_1_1solver_1_1EnableSolverBase.html#a14157542fd6609a852d20813e581a532',1,'gko::solver::EnableSolverBase::get_workspace_scalars()']]],
-  ['get_5fworkspace_5fvectors_2402',['get_workspace_vectors',['../classgko_1_1solver_1_1SolverBase.html#a00aebbe6ce072afd6f5d61c013905992',1,'gko::solver::SolverBase::get_workspace_vectors()'],['../classgko_1_1solver_1_1EnableSolverBase.html#a7541872258088c2fbff5cf6f9147329e',1,'gko::solver::EnableSolverBase::get_workspace_vectors()']]],
+  ['get_5fworkspace_5fscalars_2401',['get_workspace_scalars',['../classgko_1_1solver_1_1EnableSolverBase.html#a14157542fd6609a852d20813e581a532',1,'gko::solver::EnableSolverBase']]],
+  ['get_5fworkspace_5fvectors_2402',['get_workspace_vectors',['../classgko_1_1solver_1_1EnableSolverBase.html#a7541872258088c2fbff5cf6f9147329e',1,'gko::solver::EnableSolverBase']]],
   ['give_2403',['give',['../namespacegko.html#acbd3fd6d07e498892881e8e2ab0b4167',1,'gko']]]
 ];

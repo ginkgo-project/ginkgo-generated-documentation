@@ -130,17 +130,6 @@ copy b again
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{b-\/>copy\_from(host\_x);}
-\DoxyCodeLine{\textcolor{keyword}{const} RealValueType reduction\_factor = 1e-\/7;}
-\DoxyCodeLine{\textcolor{keyword}{auto} iter\_stop = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(}
-\DoxyCodeLine{    gko::stop::Iteration::build().with\_max\_iters(10000u).on(exec));}
-\DoxyCodeLine{\textcolor{keyword}{auto} tol\_stop = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(\mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                               .with\_reduction\_factor(reduction\_factor)}
-\DoxyCodeLine{                               .on(exec));}
-\DoxyCodeLine{}
-\DoxyCodeLine{std::shared\_ptr<const gko::log::Convergence<ValueType>> logger =}
-\DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1log_1_1Convergence_abf224a82334775c991f83cfb5e35e18c}{gko::log::Convergence<ValueType>::create}}();}
-\DoxyCodeLine{iter\_stop-\/>add\_logger(logger);}
-\DoxyCodeLine{tol\_stop-\/>add\_logger(logger);}
 \end{DoxyCode}
 
 
@@ -148,9 +137,14 @@ Create solver factory
 
 
 \begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} RealValueType reduction\_factor = 1e-\/7;}
 \DoxyCodeLine{\textcolor{keyword}{auto} solver\_gen =}
 \DoxyCodeLine{    cg::build()}
-\DoxyCodeLine{        .with\_criteria(iter\_stop, tol\_stop)}
+\DoxyCodeLine{        .with\_criteria(}
+\DoxyCodeLine{            gko::stop::Iteration::build().with\_max\_iters(10000u).on(exec),}
+\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                .with\_reduction\_factor(reduction\_factor)}
+\DoxyCodeLine{                .on(exec))}
 \end{DoxyCode}
 
 
@@ -171,6 +165,8 @@ Create solver
 
 
 \begin{DoxyCode}{0}
+\DoxyCodeLine{std::shared\_ptr<const gko::log::Convergence<ValueType>> logger =}
+\DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1log_1_1Convergence_aa67955ea9d1d18f15f0330d12b93d330}{gko::log::Convergence<ValueType>::create}}();}
 \DoxyCodeLine{solver\_gen-\/>add\_logger(logger);}
 \DoxyCodeLine{\textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}} = solver\_gen-\/>generate(A);}
 \end{DoxyCode}
@@ -189,13 +185,11 @@ Solve system
 \end{DoxyCode}
 
 
-Calculate residual
+Get residual
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{auto} res = gko::initialize<real\_vec>(\{0.0\}, exec);}
-\DoxyCodeLine{A-\/>apply(one, x, neg\_one, b);}
-\DoxyCodeLine{b-\/>compute\_norm2(res);}
+\DoxyCodeLine{\textcolor{keyword}{auto} res = gko::as<real\_vec>(logger-\/>get\_residual\_norm());}
 \DoxyCodeLine{\textcolor{keyword}{auto} impl\_res = gko::as<real\_vec>(logger-\/>get\_implicit\_sq\_resnorm());}
 \DoxyCodeLine{}
 \DoxyCodeLine{std::cout << \textcolor{stringliteral}{"Initial residual norm sqrt(r\string^T r):\(\backslash\)n"};}
@@ -349,30 +343,25 @@ This is the expected output\+:
 \DoxyCodeLine{    b-\/>compute\_norm2(initres);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    b-\/>copy\_from(host\_x);}
+\DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{const} RealValueType reduction\_factor = 1e-\/7;}
-\DoxyCodeLine{    \textcolor{keyword}{auto} iter\_stop = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(}
-\DoxyCodeLine{        gko::stop::Iteration::build().with\_max\_iters(10000u).on(exec));}
-\DoxyCodeLine{    \textcolor{keyword}{auto} tol\_stop = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(\mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                                   .with\_reduction\_factor(reduction\_factor)}
-\DoxyCodeLine{                                   .on(exec));}
-\DoxyCodeLine{}
-\DoxyCodeLine{    std::shared\_ptr<const gko::log::Convergence<ValueType>> logger =}
-\DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1log_1_1Convergence_abf224a82334775c991f83cfb5e35e18c}{gko::log::Convergence<ValueType>::create}}();}
-\DoxyCodeLine{    iter\_stop-\/>add\_logger(logger);}
-\DoxyCodeLine{    tol\_stop-\/>add\_logger(logger);}
-\DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} solver\_gen =}
 \DoxyCodeLine{        cg::build()}
-\DoxyCodeLine{            .with\_criteria(iter\_stop, tol\_stop)}
+\DoxyCodeLine{            .with\_criteria(}
+\DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(10000u).on(exec),}
+\DoxyCodeLine{                \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                    .with\_reduction\_factor(reduction\_factor)}
+\DoxyCodeLine{                    .on(exec))}
 \DoxyCodeLine{            .with\_preconditioner(bj::build()}
 \DoxyCodeLine{                                     .with\_max\_block\_size(16u)}
 \DoxyCodeLine{                                     .with\_storage\_optimization(}
 \DoxyCodeLine{                                         \mbox{\hyperlink{classgko_1_1precision__reduction_a1fde4dd48fab015698c1616408f3ef81}{gko::precision\_reduction::autodetect}}())}
 \DoxyCodeLine{                                     .on(exec))}
 \DoxyCodeLine{            .on(exec);}
+\DoxyCodeLine{    std::shared\_ptr<const gko::log::Convergence<ValueType>> logger =}
+\DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1log_1_1Convergence_aa67955ea9d1d18f15f0330d12b93d330}{gko::log::Convergence<ValueType>::create}}();}
 \DoxyCodeLine{    solver\_gen-\/>add\_logger(logger);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}} = solver\_gen-\/>generate(A);}
-\DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{    exec-\/>synchronize();}
 \DoxyCodeLine{    std::chrono::nanoseconds time(0);}
@@ -381,9 +370,7 @@ This is the expected output\+:
 \DoxyCodeLine{    \textcolor{keyword}{auto} toc = std::chrono::steady\_clock::now();}
 \DoxyCodeLine{    time += std::chrono::duration\_cast<std::chrono::nanoseconds>(toc -\/ tic);}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{auto} res = gko::initialize<real\_vec>(\{0.0\}, exec);}
-\DoxyCodeLine{    A-\/>apply(one, x, neg\_one, b);}
-\DoxyCodeLine{    b-\/>compute\_norm2(res);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} res = gko::as<real\_vec>(logger-\/>get\_residual\_norm());}
 \DoxyCodeLine{    \textcolor{keyword}{auto} impl\_res = gko::as<real\_vec>(logger-\/>get\_implicit\_sq\_resnorm());}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"Initial residual norm sqrt(r\string^T r):\(\backslash\)n"};}
