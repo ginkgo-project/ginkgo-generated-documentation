@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/863941085 branch based on develop. Ginkgo version 1.6.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/873755340 branch based on develop. Ginkgo version 1.6.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -202,23 +202,36 @@ $(function() {
 <div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    <span class="keyword">using</span> factory = Factory;</div>
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160; </div>
-<div class="line"><a name="l00247"></a><span class="lineno"><a class="line" href="classgko_1_1enable__parameters__type.html#a07bc1963e83201576761e013f22ce621">  247</a></span>&#160;    std::unique_ptr&lt;Factory&gt; <a class="code" href="classgko_1_1enable__parameters__type.html#a07bc1963e83201576761e013f22ce621">on</a>(std::shared_ptr&lt;const Executor&gt; exec)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        <span class="keywordflow">return</span> std::unique_ptr&lt;Factory&gt;(<span class="keyword">new</span> Factory(exec, *<span class="keyword">self</span>()));</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    }</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160; </div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    GKO_ENABLE_SELF(ConcreteParametersType);</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;};</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160; </div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160; </div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;}  <span class="comment">// namespace gko</span></div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160; </div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_BASE_ABSTRACT_FACTORY_HPP_</span></div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Args&gt;</div>
+<div class="line"><a name="l00245"></a><span class="lineno"><a class="line" href="classgko_1_1enable__parameters__type.html#acbe964e8be0225bf051253ae76217902">  245</a></span>&#160;    ConcreteParametersType&amp; <a class="code" href="classgko_1_1enable__parameters__type.html#acbe964e8be0225bf051253ae76217902">with_loggers</a>(Args&amp;&amp;... _value)</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    {</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        this-&gt;loggers = {std::forward&lt;Args&gt;(_value)...};</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">self</span>();</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    }</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160; </div>
+<div class="line"><a name="l00258"></a><span class="lineno"><a class="line" href="classgko_1_1enable__parameters__type.html#a07bc1963e83201576761e013f22ce621">  258</a></span>&#160;    std::unique_ptr&lt;Factory&gt; <a class="code" href="classgko_1_1enable__parameters__type.html#a07bc1963e83201576761e013f22ce621">on</a>(std::shared_ptr&lt;const Executor&gt; exec)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        <span class="keyword">auto</span> factory = std::unique_ptr&lt;Factory&gt;(<span class="keyword">new</span> Factory(exec, *<span class="keyword">self</span>()));</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; logger : loggers) {</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;            factory-&gt;add_logger(logger);</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        };</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        <span class="keywordflow">return</span> factory;</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    }</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160; </div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    GKO_ENABLE_SELF(ConcreteParametersType);</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; </div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    std::vector&lt;std::shared_ptr&lt;const log::Logger&gt;&gt; loggers{};</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;};</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160; </div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160; </div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;}  <span class="comment">// namespace gko</span></div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160; </div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160; </div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_BASE_ABSTRACT_FACTORY_HPP_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassgko_1_1AbstractFactory_html"><div class="ttname"><a href="classgko_1_1AbstractFactory.html">gko::AbstractFactory</a></div><div class="ttdoc">The AbstractFactory is a generic interface template that enables easy implementation of the abstract ...</div><div class="ttdef"><b>Definition:</b> abstract_factory.hpp:70</div></div>
-<div class="ttc" id="aclassgko_1_1enable__parameters__type_html_a07bc1963e83201576761e013f22ce621"><div class="ttname"><a href="classgko_1_1enable__parameters__type.html#a07bc1963e83201576761e013f22ce621">gko::enable_parameters_type::on</a></div><div class="ttdeci">std::unique_ptr&lt; Factory &gt; on(std::shared_ptr&lt; const Executor &gt; exec) const</div><div class="ttdoc">Creates a new factory on the specified executor.</div><div class="ttdef"><b>Definition:</b> abstract_factory.hpp:247</div></div>
+<div class="ttc" id="aclassgko_1_1enable__parameters__type_html_a07bc1963e83201576761e013f22ce621"><div class="ttname"><a href="classgko_1_1enable__parameters__type.html#a07bc1963e83201576761e013f22ce621">gko::enable_parameters_type::on</a></div><div class="ttdeci">std::unique_ptr&lt; Factory &gt; on(std::shared_ptr&lt; const Executor &gt; exec) const</div><div class="ttdoc">Creates a new factory on the specified executor.</div><div class="ttdef"><b>Definition:</b> abstract_factory.hpp:258</div></div>
 <div class="ttc" id="aclassgko_1_1AbstractFactory_html_a8bb9a83878530553e63d2f92e7b3e5c2"><div class="ttname"><a href="classgko_1_1AbstractFactory.html#a8bb9a83878530553e63d2f92e7b3e5c2">gko::AbstractFactory::generate</a></div><div class="ttdeci">std::unique_ptr&lt; abstract_product_type &gt; generate(Args &amp;&amp;... args) const</div><div class="ttdoc">Creates a new product from the given components.</div><div class="ttdef"><b>Definition:</b> abstract_factory.hpp:92</div></div>
 <div class="ttc" id="aclassgko_1_1EnableAbstractPolymorphicObject_html"><div class="ttname"><a href="classgko_1_1EnableAbstractPolymorphicObject.html">gko::EnableAbstractPolymorphicObject</a></div><div class="ttdoc">This mixin inherits from (a subclass of) PolymorphicObject and provides a base implementation of a ne...</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:374</div></div>
 <div class="ttc" id="aclassgko_1_1EnableDefaultFactory_html"><div class="ttname"><a href="classgko_1_1EnableDefaultFactory.html">gko::EnableDefaultFactory</a></div><div class="ttdoc">This mixin provides a default implementation of a concrete factory.</div><div class="ttdef"><b>Definition:</b> abstract_factory.hpp:149</div></div>
@@ -226,6 +239,7 @@ $(function() {
 <div class="ttc" id="aclassgko_1_1EnableDefaultFactory_html_ae32f2b3100640293f3a46e1280965162"><div class="ttname"><a href="classgko_1_1EnableDefaultFactory.html#ae32f2b3100640293f3a46e1280965162">gko::EnableDefaultFactory::get_parameters</a></div><div class="ttdeci">const parameters_type &amp; get_parameters() const noexcept</div><div class="ttdoc">Returns the parameters of the factory.</div><div class="ttdef"><b>Definition:</b> abstract_factory.hpp:176</div></div>
 <div class="ttc" id="aclassgko_1_1EnablePolymorphicAssignment_html"><div class="ttname"><a href="classgko_1_1EnablePolymorphicAssignment.html">gko::EnablePolymorphicAssignment</a></div><div class="ttdoc">This mixin is used to enable a default PolymorphicObject::copy_from() implementation for objects that...</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:753</div></div>
 <div class="ttc" id="anamespacegko_html"><div class="ttname"><a href="namespacegko.html">gko</a></div><div class="ttdoc">The Ginkgo namespace.</div><div class="ttdef"><b>Definition:</b> abstract_factory.hpp:45</div></div>
+<div class="ttc" id="aclassgko_1_1enable__parameters__type_html_acbe964e8be0225bf051253ae76217902"><div class="ttname"><a href="classgko_1_1enable__parameters__type.html#acbe964e8be0225bf051253ae76217902">gko::enable_parameters_type::with_loggers</a></div><div class="ttdeci">ConcreteParametersType &amp; with_loggers(Args &amp;&amp;... _value)</div><div class="ttdoc">Provides the loggers to be added to the factory and its generated objects in a fluent interface.</div><div class="ttdef"><b>Definition:</b> abstract_factory.hpp:245</div></div>
 <div class="ttc" id="aclassgko_1_1enable__parameters__type_html"><div class="ttname"><a href="classgko_1_1enable__parameters__type.html">gko::enable_parameters_type</a></div><div class="ttdoc">The enable_parameters_type mixin is used to create a base implementation of the factory parameters st...</div><div class="ttdef"><b>Definition:</b> abstract_factory.hpp:236</div></div>
 <div class="ttc" id="aclassgko_1_1EnablePolymorphicObject_html"><div class="ttname"><a href="classgko_1_1EnablePolymorphicObject.html">gko::EnablePolymorphicObject</a></div><div class="ttdoc">This mixin inherits from (a subclass of) PolymorphicObject and provides a base implementation of a ne...</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:691</div></div>
 <!-- start footer part -->
