@@ -64,6 +64,7 @@ var searchData=
   ['type_5fimpl_3c_20unsigned_20_3e_1337',['type_impl&lt; unsigned &gt;',['../structgko_1_1experimental_1_1mpi_1_1type__impl_3_01unsigned_01_4.html',1,'gko::experimental::mpi']]],
   ['type_5fimpl_3c_20unsigned_20char_20_3e_1338',['type_impl&lt; unsigned char &gt;',['../structgko_1_1experimental_1_1mpi_1_1type__impl_3_01unsigned_01char_01_4.html',1,'gko::experimental::mpi']]],
   ['type_5fimpl_3c_20unsigned_20long_20_3e_1339',['type_impl&lt; unsigned long &gt;',['../structgko_1_1experimental_1_1mpi_1_1type__impl_3_01unsigned_01long_01_4.html',1,'gko::experimental::mpi']]],
-  ['type_5fimpl_3c_20unsigned_20short_20_3e_1340',['type_impl&lt; unsigned short &gt;',['../structgko_1_1experimental_1_1mpi_1_1type__impl_3_01unsigned_01short_01_4.html',1,'gko::experimental::mpi']]],
-  ['type_5flist_1341',['type_list',['../structgko_1_1syn_1_1type__list.html',1,'gko::syn']]]
+  ['type_5fimpl_3c_20unsigned_20long_20long_20_3e_1340',['type_impl&lt; unsigned long long &gt;',['../structgko_1_1experimental_1_1mpi_1_1type__impl_3_01unsigned_01long_01long_01_4.html',1,'gko::experimental::mpi']]],
+  ['type_5fimpl_3c_20unsigned_20short_20_3e_1341',['type_impl&lt; unsigned short &gt;',['../structgko_1_1experimental_1_1mpi_1_1type__impl_3_01unsigned_01short_01_4.html',1,'gko::experimental::mpi']]],
+  ['type_5flist_1342',['type_list',['../structgko_1_1syn_1_1type__list.html',1,'gko::syn']]]
 ];
