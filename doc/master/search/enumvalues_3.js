@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['rhs_2659',['rhs',['../namespacegko_1_1solver.html#a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e',1,'gko::solver']]]
+  ['internal_2856',['internal',['../namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27ad1efad72dc5b17dc66a46767c32fff40',1,'gko::log']]]
 ];

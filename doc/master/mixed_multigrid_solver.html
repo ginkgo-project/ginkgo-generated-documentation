@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/693977618 branch based on master. Ginkgo version 1.5.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/902355976 branch based on master. Ginkgo version 1.6.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -129,12 +129,12 @@ $(function() {
 <div class="line">        {<span class="stringliteral">&quot;omp&quot;</span>, [] { <span class="keywordflow">return</span> <a class="code" href="classgko_1_1OmpExecutor.html#a33ca05fdd0fc928ee262fc9425304874">gko::OmpExecutor::create</a>(); }},</div>
 <div class="line">        {<span class="stringliteral">&quot;cuda&quot;</span>,</div>
 <div class="line">         [] {</div>
-<div class="line">             <span class="keywordflow">return</span> <a class="code" href="classgko_1_1CudaExecutor.html#a5dcec3ca1c458382e01191b727959a81">gko::CudaExecutor::create</a>(0, <a class="code" href="classgko_1_1OmpExecutor.html#a33ca05fdd0fc928ee262fc9425304874">gko::OmpExecutor::create</a>(),</div>
+<div class="line">             <span class="keywordflow">return</span> <a class="code" href="classgko_1_1CudaExecutor.html#a8e18adb154a44f90c13d61c1e100e160">gko::CudaExecutor::create</a>(0, <a class="code" href="classgko_1_1OmpExecutor.html#a33ca05fdd0fc928ee262fc9425304874">gko::OmpExecutor::create</a>(),</div>
 <div class="line">                                              <span class="keyword">true</span>);</div>
 <div class="line">         }},</div>
 <div class="line">        {<span class="stringliteral">&quot;hip&quot;</span>,</div>
 <div class="line">         [] {</div>
-<div class="line">             <span class="keywordflow">return</span> <a class="code" href="classgko_1_1HipExecutor.html#ad3a72bc42254fb8730bc2090147447d9">gko::HipExecutor::create</a>(0, <a class="code" href="classgko_1_1OmpExecutor.html#a33ca05fdd0fc928ee262fc9425304874">gko::OmpExecutor::create</a>(),</div>
+<div class="line">             <span class="keywordflow">return</span> <a class="code" href="classgko_1_1HipExecutor.html#a5ace87d0179ef0ef55b60e78e9c2f897">gko::HipExecutor::create</a>(0, <a class="code" href="classgko_1_1OmpExecutor.html#a33ca05fdd0fc928ee262fc9425304874">gko::OmpExecutor::create</a>(),</div>
 <div class="line">                                             <span class="keyword">true</span>);</div>
 <div class="line">         }},</div>
 <div class="line">        {<span class="stringliteral">&quot;dpcpp&quot;</span>,</div>
@@ -160,16 +160,16 @@ $(function() {
 <div class="line">}</div>
 <div class="line"><span class="keyword">auto</span> x = vec::create(exec);</div>
 <div class="line"><span class="keyword">auto</span> b = vec::create(exec);</div>
-<div class="line">x-&gt;copy_from(host_x.get());</div>
-<div class="line">b-&gt;copy_from(host_b.get());</div>
+<div class="line">x-&gt;copy_from(host_x);</div>
+<div class="line">b-&gt;copy_from(host_b);</div>
 </div><!-- fragment --><p>Calculate initial residual by overwriting b</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> <a class="code" href="namespacegko.html#a0059e27f8f4bc348ff65c1e60caf47c8">one</a> = gko::initialize&lt;vec&gt;({1.0}, exec);</div>
 <div class="line"><span class="keyword">auto</span> neg_one = gko::initialize&lt;vec&gt;({-1.0}, exec);</div>
 <div class="line"><span class="keyword">auto</span> initres = gko::initialize&lt;vec&gt;({0.0}, exec);</div>
-<div class="line">A-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(x), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(neg_one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(b));</div>
-<div class="line">b-&gt;compute_norm2(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(initres));</div>
+<div class="line">A-&gt;apply(one, x, neg_one, b);</div>
+<div class="line">b-&gt;compute_norm2(initres);</div>
 </div><!-- fragment --><p>copy b again</p>
-<div class="fragment"><div class="line">b-&gt;copy_from(host_b.get());</div>
+<div class="fragment"><div class="line">b-&gt;copy_from(host_b);</div>
 </div><!-- fragment --><p>Prepare the stopping criteria</p>
 <div class="fragment"><div class="line"><span class="keyword">const</span> <a class="code" href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">gko::remove_complex&lt;ValueType&gt;</a> tolerance = 1e-12;</div>
 <div class="line"><span class="keyword">auto</span> iter_stop =</div>
@@ -178,11 +178,6 @@ $(function() {
 <div class="line">                               .with_baseline(gko::stop::mode::absolute)</div>
 <div class="line">                               .with_reduction_factor(tolerance)</div>
 <div class="line">                               .on(exec));</div>
-<div class="line"> </div>
-<div class="line">std::shared_ptr&lt;const gko::log::Convergence&lt;ValueType&gt;&gt; logger =</div>
-<div class="line">    <a class="code" href="classgko_1_1log_1_1Convergence.html#abf224a82334775c991f83cfb5e35e18c">gko::log::Convergence&lt;ValueType&gt;::create</a>();</div>
-<div class="line">iter_stop-&gt;add_logger(logger);</div>
-<div class="line">tol_stop-&gt;add_logger(logger);</div>
 </div><!-- fragment --><p>Create smoother factory (ir with bj)</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> smoother_gen = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a>(</div>
 <div class="line">    ir::build()</div>
@@ -250,28 +245,32 @@ $(function() {
 <div class="line">std::chrono::nanoseconds gen_time(0);</div>
 <div class="line"><span class="keyword">auto</span> gen_tic = std::chrono::steady_clock::now();</div>
 </div><!-- fragment --><p>auto solver = solver_gen-&gt;generate(A);</p>
-<div class="fragment"><div class="line"><span class="keyword">auto</span> solver = multigrid_gen-&gt;generate(A);</div>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a">solver</a> = multigrid_gen-&gt;generate(A);</div>
 <div class="line">exec-&gt;synchronize();</div>
 <div class="line"><span class="keyword">auto</span> gen_toc = std::chrono::steady_clock::now();</div>
 <div class="line">gen_time +=</div>
 <div class="line">    std::chrono::duration_cast&lt;std::chrono::nanoseconds&gt;(gen_toc - gen_tic);</div>
+</div><!-- fragment --><p>Add logger</p>
+<div class="fragment"><div class="line">std::shared_ptr&lt;const gko::log::Convergence&lt;ValueType&gt;&gt; logger =</div>
+<div class="line">    <a class="code" href="classgko_1_1log_1_1Convergence.html#aa67955ea9d1d18f15f0330d12b93d330">gko::log::Convergence&lt;ValueType&gt;::create</a>();</div>
+<div class="line"><a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a">solver</a>-&gt;add_logger(logger);</div>
 </div><!-- fragment --><p>Solve system</p>
 <div class="fragment"><div class="line">exec-&gt;synchronize();</div>
 <div class="line">std::chrono::nanoseconds time(0);</div>
 <div class="line"><span class="keyword">auto</span> tic = std::chrono::steady_clock::now();</div>
-<div class="line">solver-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(b), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(x));</div>
+<div class="line"><a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a">solver</a>-&gt;apply(b, x);</div>
 <div class="line">exec-&gt;synchronize();</div>
 <div class="line"><span class="keyword">auto</span> toc = std::chrono::steady_clock::now();</div>
 <div class="line">time += std::chrono::duration_cast&lt;std::chrono::nanoseconds&gt;(toc - tic);</div>
-</div><!-- fragment --><p>Calculate residual</p>
+</div><!-- fragment --><p>Calculate residual explicitly, because the residual is not available inside of the multigrid solver</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> res = gko::initialize&lt;vec&gt;({0.0}, exec);</div>
-<div class="line">A-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(x), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(neg_one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(b));</div>
-<div class="line">b-&gt;compute_norm2(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(res));</div>
+<div class="line">A-&gt;apply(one, x, neg_one, b);</div>
+<div class="line">b-&gt;compute_norm2(res);</div>
 <div class="line"> </div>
 <div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;Initial residual norm sqrt(r^T r): \n&quot;</span>;</div>
-<div class="line"><a class="code" href="namespacegko.html#aa24837da3770b3dddf981d9bfe0d3b52">write</a>(std::cout, <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(initres));</div>
+<div class="line"><a class="code" href="namespacegko.html#a8c8403e4cdb91e225515ed7d7f6c4463">write</a>(std::cout, initres);</div>
 <div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;Final residual norm sqrt(r^T r): \n&quot;</span>;</div>
-<div class="line"><a class="code" href="namespacegko.html#aa24837da3770b3dddf981d9bfe0d3b52">write</a>(std::cout, <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(res));</div>
+<div class="line"><a class="code" href="namespacegko.html#a8c8403e4cdb91e225515ed7d7f6c4463">write</a>(std::cout, res);</div>
 </div><!-- fragment --><p>Print solver statistics</p>
 <div class="fragment"><div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Multigrid iteration count:     &quot;</span></div>
 <div class="line">              &lt;&lt; logger-&gt;get_num_iterations() &lt;&lt; std::endl;</div>
@@ -301,7 +300,7 @@ $(function() {
 </div><!-- fragment --><p><a class="anchor" id="Commentsaboutprogramminganddebugging"></a></p><h3>Comments about programming and debugging </h3>
 <p><a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
 <div class="fragment"><div class="line"><span class="comment">/*******************************&lt;GINKGO LICENSE&gt;******************************</span></div>
-<div class="line"><span class="comment">Copyright (c) 2017-2022, the Ginkgo authors</span></div>
+<div class="line"><span class="comment">Copyright (c) 2017-2023, the Ginkgo authors</span></div>
 <div class="line"><span class="comment">All rights reserved.</span></div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">Redistribution and use in source and binary forms, with or without</span></div>
@@ -368,12 +367,12 @@ $(function() {
 <div class="line">            {<span class="stringliteral">&quot;omp&quot;</span>, [] { <span class="keywordflow">return</span> <a class="code" href="classgko_1_1OmpExecutor.html#a33ca05fdd0fc928ee262fc9425304874">gko::OmpExecutor::create</a>(); }},</div>
 <div class="line">            {<span class="stringliteral">&quot;cuda&quot;</span>,</div>
 <div class="line">             [] {</div>
-<div class="line">                 <span class="keywordflow">return</span> <a class="code" href="classgko_1_1CudaExecutor.html#a5dcec3ca1c458382e01191b727959a81">gko::CudaExecutor::create</a>(0, <a class="code" href="classgko_1_1OmpExecutor.html#a33ca05fdd0fc928ee262fc9425304874">gko::OmpExecutor::create</a>(),</div>
+<div class="line">                 <span class="keywordflow">return</span> <a class="code" href="classgko_1_1CudaExecutor.html#a8e18adb154a44f90c13d61c1e100e160">gko::CudaExecutor::create</a>(0, <a class="code" href="classgko_1_1OmpExecutor.html#a33ca05fdd0fc928ee262fc9425304874">gko::OmpExecutor::create</a>(),</div>
 <div class="line">                                                  <span class="keyword">true</span>);</div>
 <div class="line">             }},</div>
 <div class="line">            {<span class="stringliteral">&quot;hip&quot;</span>,</div>
 <div class="line">             [] {</div>
-<div class="line">                 <span class="keywordflow">return</span> <a class="code" href="classgko_1_1HipExecutor.html#ad3a72bc42254fb8730bc2090147447d9">gko::HipExecutor::create</a>(0, <a class="code" href="classgko_1_1OmpExecutor.html#a33ca05fdd0fc928ee262fc9425304874">gko::OmpExecutor::create</a>(),</div>
+<div class="line">                 <span class="keywordflow">return</span> <a class="code" href="classgko_1_1HipExecutor.html#a5ace87d0179ef0ef55b60e78e9c2f897">gko::HipExecutor::create</a>(0, <a class="code" href="classgko_1_1OmpExecutor.html#a33ca05fdd0fc928ee262fc9425304874">gko::OmpExecutor::create</a>(),</div>
 <div class="line">                                                 <span class="keyword">true</span>);</div>
 <div class="line">             }},</div>
 <div class="line">            {<span class="stringliteral">&quot;dpcpp&quot;</span>,</div>
@@ -397,16 +396,16 @@ $(function() {
 <div class="line">    }</div>
 <div class="line">    <span class="keyword">auto</span> x = vec::create(exec);</div>
 <div class="line">    <span class="keyword">auto</span> b = vec::create(exec);</div>
-<div class="line">    x-&gt;copy_from(host_x.get());</div>
-<div class="line">    b-&gt;copy_from(host_b.get());</div>
+<div class="line">    x-&gt;copy_from(host_x);</div>
+<div class="line">    b-&gt;copy_from(host_b);</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">auto</span> <a class="code" href="namespacegko.html#a0059e27f8f4bc348ff65c1e60caf47c8">one</a> = gko::initialize&lt;vec&gt;({1.0}, exec);</div>
 <div class="line">    <span class="keyword">auto</span> neg_one = gko::initialize&lt;vec&gt;({-1.0}, exec);</div>
 <div class="line">    <span class="keyword">auto</span> initres = gko::initialize&lt;vec&gt;({0.0}, exec);</div>
-<div class="line">    A-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(x), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(neg_one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(b));</div>
-<div class="line">    b-&gt;compute_norm2(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(initres));</div>
+<div class="line">    A-&gt;apply(one, x, neg_one, b);</div>
+<div class="line">    b-&gt;compute_norm2(initres);</div>
 <div class="line"> </div>
-<div class="line">    b-&gt;copy_from(host_b.get());</div>
+<div class="line">    b-&gt;copy_from(host_b);</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">const</span> <a class="code" href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">gko::remove_complex&lt;ValueType&gt;</a> tolerance = 1e-12;</div>
 <div class="line">    <span class="keyword">auto</span> iter_stop =</div>
@@ -415,11 +414,6 @@ $(function() {
 <div class="line">                                   .with_baseline(gko::stop::mode::absolute)</div>
 <div class="line">                                   .with_reduction_factor(tolerance)</div>
 <div class="line">                                   .on(exec));</div>
-<div class="line"> </div>
-<div class="line">    std::shared_ptr&lt;const gko::log::Convergence&lt;ValueType&gt;&gt; logger =</div>
-<div class="line">        <a class="code" href="classgko_1_1log_1_1Convergence.html#abf224a82334775c991f83cfb5e35e18c">gko::log::Convergence&lt;ValueType&gt;::create</a>();</div>
-<div class="line">    iter_stop-&gt;add_logger(logger);</div>
-<div class="line">    tol_stop-&gt;add_logger(logger);</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">auto</span> smoother_gen = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a>(</div>
 <div class="line">        ir::build()</div>
@@ -482,29 +476,32 @@ $(function() {
 <div class="line">    }</div>
 <div class="line">    std::chrono::nanoseconds gen_time(0);</div>
 <div class="line">    <span class="keyword">auto</span> gen_tic = std::chrono::steady_clock::now();</div>
-<div class="line">    <span class="keyword">auto</span> solver = multigrid_gen-&gt;generate(A);</div>
+<div class="line">    <span class="keyword">auto</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a">solver</a> = multigrid_gen-&gt;generate(A);</div>
 <div class="line">    exec-&gt;synchronize();</div>
 <div class="line">    <span class="keyword">auto</span> gen_toc = std::chrono::steady_clock::now();</div>
 <div class="line">    gen_time +=</div>
 <div class="line">        std::chrono::duration_cast&lt;std::chrono::nanoseconds&gt;(gen_toc - gen_tic);</div>
 <div class="line"> </div>
+<div class="line">    std::shared_ptr&lt;const gko::log::Convergence&lt;ValueType&gt;&gt; logger =</div>
+<div class="line">        <a class="code" href="classgko_1_1log_1_1Convergence.html#aa67955ea9d1d18f15f0330d12b93d330">gko::log::Convergence&lt;ValueType&gt;::create</a>();</div>
+<div class="line">    <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a">solver</a>-&gt;add_logger(logger);</div>
 <div class="line"> </div>
 <div class="line">    exec-&gt;synchronize();</div>
 <div class="line">    std::chrono::nanoseconds time(0);</div>
 <div class="line">    <span class="keyword">auto</span> tic = std::chrono::steady_clock::now();</div>
-<div class="line">    solver-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(b), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(x));</div>
+<div class="line">    <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a">solver</a>-&gt;apply(b, x);</div>
 <div class="line">    exec-&gt;synchronize();</div>
 <div class="line">    <span class="keyword">auto</span> toc = std::chrono::steady_clock::now();</div>
 <div class="line">    time += std::chrono::duration_cast&lt;std::chrono::nanoseconds&gt;(toc - tic);</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">auto</span> res = gko::initialize&lt;vec&gt;({0.0}, exec);</div>
-<div class="line">    A-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(x), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(neg_one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(b));</div>
-<div class="line">    b-&gt;compute_norm2(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(res));</div>
+<div class="line">    A-&gt;apply(one, x, neg_one, b);</div>
+<div class="line">    b-&gt;compute_norm2(res);</div>
 <div class="line"> </div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Initial residual norm sqrt(r^T r): \n&quot;</span>;</div>
-<div class="line">    <a class="code" href="namespacegko.html#aa24837da3770b3dddf981d9bfe0d3b52">write</a>(std::cout, <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(initres));</div>
+<div class="line">    <a class="code" href="namespacegko.html#a8c8403e4cdb91e225515ed7d7f6c4463">write</a>(std::cout, initres);</div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Final residual norm sqrt(r^T r): \n&quot;</span>;</div>
-<div class="line">    <a class="code" href="namespacegko.html#aa24837da3770b3dddf981d9bfe0d3b52">write</a>(std::cout, <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(res));</div>
+<div class="line">    <a class="code" href="namespacegko.html#a8c8403e4cdb91e225515ed7d7f6c4463">write</a>(std::cout, res);</div>
 <div class="line"> </div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Multigrid iteration count:     &quot;</span></div>
 <div class="line">              &lt;&lt; logger-&gt;get_num_iterations() &lt;&lt; std::endl;</div>
@@ -520,11 +517,14 @@ $(function() {
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <div class="ttc" id="aclassgko_1_1matrix_1_1Csr_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Csr.html">gko::matrix::Csr</a></div><div class="ttdoc">CSR is a matrix format which stores only the nonzero coefficients by compressing each row of the matr...</div><div class="ttdef"><b>Definition:</b> matrix.hpp:54</div></div>
+<div class="ttc" id="anamespacegko_1_1log_html_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a"><div class="ttname"><a href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a">gko::log::profile_event_category::solver</a></div><div class="ttdoc">Solver events.</div></div>
+<div class="ttc" id="aclassgko_1_1log_1_1Convergence_html_aa67955ea9d1d18f15f0330d12b93d330"><div class="ttname"><a href="classgko_1_1log_1_1Convergence.html#aa67955ea9d1d18f15f0330d12b93d330">gko::log::Convergence::create</a></div><div class="ttdeci">static std::unique_ptr&lt; Convergence &gt; create(std::shared_ptr&lt; const Executor &gt;, const mask_type &amp;enabled_events=Logger::criterion_events_mask|Logger::iteration_complete_mask)</div><div class="ttdoc">Creates a convergence logger.</div><div class="ttdef"><b>Definition:</b> convergence.hpp:107</div></div>
 <div class="ttc" id="anamespacegko_html_ae749a5ea11a93c1bcc9158d9a6e9fb68af1f713c9e000f5d3f280adbd124df4f5"><div class="ttname"><a href="namespacegko.html#ae749a5ea11a93c1bcc9158d9a6e9fb68af1f713c9e000f5d3f280adbd124df4f5">gko::layout_type::array</a></div><div class="ttdoc">The matrix should be written as dense matrix in column-major order.</div></div>
 <div class="ttc" id="aclassgko_1_1LinOp_html"><div class="ttname"><a href="classgko_1_1LinOp.html">gko::LinOp</a></div><div class="ttdef"><b>Definition:</b> lin_op.hpp:146</div></div>
+<div class="ttc" id="aclassgko_1_1HipExecutor_html_a5ace87d0179ef0ef55b60e78e9c2f897"><div class="ttname"><a href="classgko_1_1HipExecutor.html#a5ace87d0179ef0ef55b60e78e9c2f897">gko::HipExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; HipExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, bool device_reset=false, allocation_mode alloc_mode=default_hip_alloc_mode, CUstream_st *stream=nullptr)</div><div class="ttdoc">Creates a new HipExecutor.</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Dense_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Dense.html">gko::matrix::Dense</a></div><div class="ttdoc">Dense is a matrix format which explicitly stores all values of the matrix.</div><div class="ttdef"><b>Definition:</b> dense_cache.hpp:48</div></div>
 <div class="ttc" id="aclassgko_1_1solver_1_1Ir_html"><div class="ttname"><a href="classgko_1_1solver_1_1Ir.html">gko::solver::Ir</a></div><div class="ttdoc">Iterative refinement (IR) is an iterative method that uses another coarse method to approximate the e...</div><div class="ttdef"><b>Definition:</b> ir.hpp:108</div></div>
-<div class="ttc" id="aclassgko_1_1OmpExecutor_html_a33ca05fdd0fc928ee262fc9425304874"><div class="ttname"><a href="classgko_1_1OmpExecutor.html#a33ca05fdd0fc928ee262fc9425304874">gko::OmpExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; OmpExecutor &gt; create()</div><div class="ttdoc">Creates a new OmpExecutor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1257</div></div>
+<div class="ttc" id="aclassgko_1_1OmpExecutor_html_a33ca05fdd0fc928ee262fc9425304874"><div class="ttname"><a href="classgko_1_1OmpExecutor.html#a33ca05fdd0fc928ee262fc9425304874">gko::OmpExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; OmpExecutor &gt; create()</div><div class="ttdoc">Creates a new OmpExecutor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1414</div></div>
 <div class="ttc" id="anamespacegko_html_a6e5c95df0ae4e47aab2f604a22d98ee7"><div class="ttname"><a href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">gko::size_type</a></div><div class="ttdeci">std::size_t size_type</div><div class="ttdoc">Integral type used for allocation quantities.</div><div class="ttdef"><b>Definition:</b> types.hpp:105</div></div>
 <div class="ttc" id="aclassgko_1_1solver_1_1Multigrid_html"><div class="ttname"><a href="classgko_1_1solver_1_1Multigrid.html">gko::solver::Multigrid</a></div><div class="ttdoc">Multigrid methods have a hierarchy of many levels, whose corase level is a subset of the fine level,...</div><div class="ttdef"><b>Definition:</b> multigrid.hpp:132</div></div>
 <div class="ttc" id="aclassgko_1_1solver_1_1Fcg_html"><div class="ttname"><a href="classgko_1_1solver_1_1Fcg.html">gko::solver::Fcg</a></div><div class="ttdoc">FCG or the flexible conjugate gradient method is an iterative type Krylov subspace method which is su...</div><div class="ttdef"><b>Definition:</b> fcg.hpp:79</div></div>
@@ -534,16 +534,13 @@ $(function() {
 <div class="ttc" id="aclassgko_1_1multigrid_1_1Pgm_html"><div class="ttname"><a href="classgko_1_1multigrid_1_1Pgm.html">gko::multigrid::Pgm</a></div><div class="ttdoc">Parallel graph match (Pgm) is the aggregate method introduced in the paper M.</div><div class="ttdef"><b>Definition:</b> pgm.hpp:75</div></div>
 <div class="ttc" id="astructgko_1_1dim_html"><div class="ttname"><a href="structgko_1_1dim.html">gko::dim&lt; 2 &gt;</a></div></div>
 <div class="ttc" id="aclassgko_1_1solver_1_1Cg_html"><div class="ttname"><a href="classgko_1_1solver_1_1Cg.html">gko::solver::Cg</a></div><div class="ttdoc">CG or the conjugate gradient method is an iterative type Krylov subspace method which is suitable for...</div><div class="ttdef"><b>Definition:</b> cg.hpp:74</div></div>
-<div class="ttc" id="aclassgko_1_1CudaExecutor_html_a5dcec3ca1c458382e01191b727959a81"><div class="ttname"><a href="classgko_1_1CudaExecutor.html#a5dcec3ca1c458382e01191b727959a81">gko::CudaExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; CudaExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, bool device_reset=false, allocation_mode alloc_mode=default_cuda_alloc_mode)</div><div class="ttdoc">Creates a new CudaExecutor.</div></div>
-<div class="ttc" id="anamespacegko_html_aa24837da3770b3dddf981d9bfe0d3b52"><div class="ttname"><a href="namespacegko.html#aa24837da3770b3dddf981d9bfe0d3b52">gko::write</a></div><div class="ttdeci">void write(StreamType &amp;&amp;os, MatrixType *matrix, layout_type layout=detail::mtx_io_traits&lt; std::remove_const_t&lt; MatrixType &gt;&gt;::default_layout)</div><div class="ttdoc">Writes a matrix into an output stream in matrix market format.</div><div class="ttdef"><b>Definition:</b> mtx_io.hpp:324</div></div>
-<div class="ttc" id="anamespacegko_html_a3ce296f73db0ff398bdea6009a3a5c58"><div class="ttname"><a href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a></div><div class="ttdeci">detail::shared_type&lt; OwningPointer &gt; share(OwningPointer &amp;&amp;p)</div><div class="ttdoc">Marks the object pointed to by p as shared.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:211</div></div>
-<div class="ttc" id="aclassgko_1_1log_1_1Convergence_html_abf224a82334775c991f83cfb5e35e18c"><div class="ttname"><a href="classgko_1_1log_1_1Convergence.html#abf224a82334775c991f83cfb5e35e18c">gko::log::Convergence::create</a></div><div class="ttdeci">static std::unique_ptr&lt; Convergence &gt; create(std::shared_ptr&lt; const Executor &gt;, const mask_type &amp;enabled_events=Logger::all_events_mask)</div><div class="ttdoc">Creates a convergence logger.</div><div class="ttdef"><b>Definition:</b> convergence.hpp:99</div></div>
-<div class="ttc" id="anamespacegko_html_a014ec51e675c425bb83908361f630450"><div class="ttname"><a href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a></div><div class="ttdeci">std::enable_if&lt; detail::have_ownership_s&lt; Pointer &gt;::value, detail::pointee&lt; Pointer &gt; * &gt;::type lend(const Pointer &amp;p)</div><div class="ttdoc">Returns a non-owning (plain) pointer to the object pointed to by p.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:256</div></div>
-<div class="ttc" id="aclassgko_1_1HipExecutor_html_ad3a72bc42254fb8730bc2090147447d9"><div class="ttname"><a href="classgko_1_1HipExecutor.html#ad3a72bc42254fb8730bc2090147447d9">gko::HipExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; HipExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, bool device_reset=false, allocation_mode alloc_mode=default_hip_alloc_mode)</div><div class="ttdoc">Creates a new HipExecutor.</div></div>
-<div class="ttc" id="anamespacegko_html_afd46d554050c4ae90e84ea4fcd9a41f3"><div class="ttname"><a href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">gko::remove_complex</a></div><div class="ttdeci">typename detail::remove_complex_s&lt; T &gt;::type remove_complex</div><div class="ttdoc">Obtain the type which removed the complex of complex/scalar type or the template parameter of class b...</div><div class="ttdef"><b>Definition:</b> math.hpp:359</div></div>
+<div class="ttc" id="anamespacegko_html_a8c8403e4cdb91e225515ed7d7f6c4463"><div class="ttname"><a href="namespacegko.html#a8c8403e4cdb91e225515ed7d7f6c4463">gko::write</a></div><div class="ttdeci">void write(StreamType &amp;&amp;os, MatrixPtrType &amp;&amp;matrix, layout_type layout=detail::mtx_io_traits&lt; std::remove_cv_t&lt; detail::pointee&lt; MatrixPtrType &gt;&gt;&gt;::default_layout)</div><div class="ttdoc">Writes a matrix into an output stream in matrix market format.</div><div class="ttdef"><b>Definition:</b> mtx_io.hpp:324</div></div>
+<div class="ttc" id="anamespacegko_html_a3ce296f73db0ff398bdea6009a3a5c58"><div class="ttname"><a href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a></div><div class="ttdeci">detail::shared_type&lt; OwningPointer &gt; share(OwningPointer &amp;&amp;p)</div><div class="ttdoc">Marks the object pointed to by p as shared.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:254</div></div>
+<div class="ttc" id="anamespacegko_html_afd46d554050c4ae90e84ea4fcd9a41f3"><div class="ttname"><a href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">gko::remove_complex</a></div><div class="ttdeci">typename detail::remove_complex_s&lt; T &gt;::type remove_complex</div><div class="ttdoc">Obtain the type which removed the complex of complex/scalar type or the template parameter of class b...</div><div class="ttdef"><b>Definition:</b> math.hpp:361</div></div>
 <div class="ttc" id="aclassgko_1_1DpcppExecutor_html_ae9b875dfe3af7f3f3f24071bfb2f895e"><div class="ttname"><a href="classgko_1_1DpcppExecutor.html#ae9b875dfe3af7f3f3f24071bfb2f895e">gko::DpcppExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; DpcppExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, std::string device_type=&quot;all&quot;, dpcpp_queue_property property=dpcpp_queue_property::in_order)</div><div class="ttdoc">Creates a new DpcppExecutor.</div></div>
-<div class="ttc" id="anamespacegko_html_af21648097306adbabc6234b4609ce297"><div class="ttname"><a href="namespacegko.html#af21648097306adbabc6234b4609ce297">gko::real</a></div><div class="ttdeci">constexpr auto real(const T &amp;x)</div><div class="ttdoc">Returns the real part of the object.</div><div class="ttdef"><b>Definition:</b> math.hpp:1046</div></div>
-<div class="ttc" id="anamespacegko_html_a0059e27f8f4bc348ff65c1e60caf47c8"><div class="ttname"><a href="namespacegko.html#a0059e27f8f4bc348ff65c1e60caf47c8">gko::one</a></div><div class="ttdeci">constexpr T one()</div><div class="ttdoc">Returns the multiplicative identity for T.</div><div class="ttdef"><b>Definition:</b> math.hpp:808</div></div>
+<div class="ttc" id="anamespacegko_html_af21648097306adbabc6234b4609ce297"><div class="ttname"><a href="namespacegko.html#af21648097306adbabc6234b4609ce297">gko::real</a></div><div class="ttdeci">constexpr auto real(const T &amp;x)</div><div class="ttdoc">Returns the real part of the object.</div><div class="ttdef"><b>Definition:</b> math.hpp:1048</div></div>
+<div class="ttc" id="aclassgko_1_1CudaExecutor_html_a8e18adb154a44f90c13d61c1e100e160"><div class="ttname"><a href="classgko_1_1CudaExecutor.html#a8e18adb154a44f90c13d61c1e100e160">gko::CudaExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; CudaExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, bool device_reset=false, allocation_mode alloc_mode=default_cuda_alloc_mode, CUstream_st *stream=nullptr)</div><div class="ttdoc">Creates a new CudaExecutor.</div></div>
+<div class="ttc" id="anamespacegko_html_a0059e27f8f4bc348ff65c1e60caf47c8"><div class="ttname"><a href="namespacegko.html#a0059e27f8f4bc348ff65c1e60caf47c8">gko::one</a></div><div class="ttdeci">constexpr T one()</div><div class="ttdoc">Returns the multiplicative identity for T.</div><div class="ttdef"><b>Definition:</b> math.hpp:810</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

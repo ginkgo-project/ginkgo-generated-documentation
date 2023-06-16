@@ -1,0 +1,140 @@
+\hypertarget{classgko_1_1Timer}{}\doxysection{gko\+::Timer Class Reference}
+\label{classgko_1_1Timer}\index{gko::Timer@{gko::Timer}}
+
+
+Represents a generic timer that can be used to record time points and measure time differences on host or device streams.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/base/timer.\+hpp$>$}
+
+
+
+Inheritance diagram for gko\+::Timer\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1Timer__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgko_1_1time__point}{time\+\_\+point}} \mbox{\hyperlink{classgko_1_1Timer_a36a9fae8d1f1df78829a264e0049addb}{create\+\_\+time\+\_\+point}} ()
+\begin{DoxyCompactList}\small\item\em Returns a newly created time point. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1Timer_af60e8cb620d9e87a90c6e799dc97cb76}\label{classgko_1_1Timer_af60e8cb620d9e87a90c6e799dc97cb76}} 
+virtual void \mbox{\hyperlink{classgko_1_1Timer_af60e8cb620d9e87a90c6e799dc97cb76}{record}} (\mbox{\hyperlink{classgko_1_1time__point}{time\+\_\+point}} \&time)=0
+\begin{DoxyCompactList}\small\item\em Records a time point at the current time. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1Timer_a895f02685ba5da78e8cceef4246fd399}\label{classgko_1_1Timer_a895f02685ba5da78e8cceef4246fd399}} 
+virtual void \mbox{\hyperlink{classgko_1_1Timer_a895f02685ba5da78e8cceef4246fd399}{wait}} (\mbox{\hyperlink{classgko_1_1time__point}{time\+\_\+point}} \&time)=0
+\begin{DoxyCompactList}\small\item\em Waits until all kernels in-\/process when recording the time point are finished. \end{DoxyCompactList}\item 
+std\+::chrono\+::nanoseconds \mbox{\hyperlink{classgko_1_1Timer_a096e0525fc320073239e63305b9bcea0}{difference}} (\mbox{\hyperlink{classgko_1_1time__point}{time\+\_\+point}} \&start, \mbox{\hyperlink{classgko_1_1time__point}{time\+\_\+point}} \&stop)
+\begin{DoxyCompactList}\small\item\em Computes the difference between the two time points in nanoseconds. \end{DoxyCompactList}\item 
+virtual std\+::chrono\+::nanoseconds \mbox{\hyperlink{classgko_1_1Timer_a9f6ea65e99c2e65d67803a7da3f4d8a1}{difference\+\_\+async}} (const \mbox{\hyperlink{classgko_1_1time__point}{time\+\_\+point}} \&start, const \mbox{\hyperlink{classgko_1_1time__point}{time\+\_\+point}} \&stop)=0
+\begin{DoxyCompactList}\small\item\em Computes the difference between the two time points in nanoseconds. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1Timer}{Timer}} $>$ \mbox{\hyperlink{classgko_1_1Timer_a3fff70fb7d4ac4193d348a87c9296045}{create\+\_\+for\+\_\+executor}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec)
+\begin{DoxyCompactList}\small\item\em Creates the timer type most suitable for recording accurate timings of kernels on the given executor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a generic timer that can be used to record time points and measure time differences on host or device streams. 
+
+To keep the runtime overhead of timing minimal, time points need to be allocated beforehand using \mbox{\hyperlink{classgko_1_1Timer_a36a9fae8d1f1df78829a264e0049addb}{Timer\+::create\+\_\+time\+\_\+point}}\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} begin = timer-\/>create\_time\_point();}
+\DoxyCodeLine{\textcolor{keyword}{auto} end = timer-\/>create\_time\_point();}
+\DoxyCodeLine{\textcolor{comment}{// ...}}
+\DoxyCodeLine{timer-\/>record(begin);}
+\DoxyCodeLine{run\_expensive\_operation();}
+\DoxyCodeLine{timer-\/>record(end);}
+\DoxyCodeLine{\textcolor{keyword}{auto} elapsed = timer-\/>difference(begin, end);}
+\end{DoxyCode}
+ 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1Timer_a3fff70fb7d4ac4193d348a87c9296045}\label{classgko_1_1Timer_a3fff70fb7d4ac4193d348a87c9296045}} 
+\index{gko::Timer@{gko::Timer}!create\_for\_executor@{create\_for\_executor}}
+\index{create\_for\_executor@{create\_for\_executor}!gko::Timer@{gko::Timer}}
+\doxysubsubsection{\texorpdfstring{create\_for\_executor()}{create\_for\_executor()}}
+{\footnotesize\ttfamily static std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1Timer}{Timer}}$>$ gko\+::\+Timer\+::create\+\_\+for\+\_\+executor (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates the timer type most suitable for recording accurate timings of kernels on the given executor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & the executor to create a \mbox{\hyperlink{classgko_1_1Timer}{Timer}} for\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classgko_1_1CpuTimer}{Cpu\+Timer}} for \mbox{\hyperlink{classgko_1_1ReferenceExecutor}{Reference\+Executor}} and \mbox{\hyperlink{classgko_1_1OmpExecutor}{Omp\+Executor}}, \mbox{\hyperlink{classgko_1_1CudaTimer}{Cuda\+Timer}} for \mbox{\hyperlink{classgko_1_1CudaExecutor}{Cuda\+Executor}}, \mbox{\hyperlink{classgko_1_1HipTimer}{Hip\+Timer}} for \mbox{\hyperlink{classgko_1_1HipExecutor}{Hip\+Executor}} or \mbox{\hyperlink{classgko_1_1DpcppTimer}{Dpcpp\+Timer}} for \mbox{\hyperlink{classgko_1_1DpcppExecutor}{Dpcpp\+Executor}}. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1Timer_a36a9fae8d1f1df78829a264e0049addb}\label{classgko_1_1Timer_a36a9fae8d1f1df78829a264e0049addb}} 
+\index{gko::Timer@{gko::Timer}!create\_time\_point@{create\_time\_point}}
+\index{create\_time\_point@{create\_time\_point}!gko::Timer@{gko::Timer}}
+\doxysubsubsection{\texorpdfstring{create\_time\_point()}{create\_time\_point()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classgko_1_1time__point}{time\+\_\+point}} gko\+::\+Timer\+::create\+\_\+time\+\_\+point (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns a newly created time point. 
+
+Time points may only be used with the timer they were created with. \mbox{\Hypertarget{classgko_1_1Timer_a096e0525fc320073239e63305b9bcea0}\label{classgko_1_1Timer_a096e0525fc320073239e63305b9bcea0}} 
+\index{gko::Timer@{gko::Timer}!difference@{difference}}
+\index{difference@{difference}!gko::Timer@{gko::Timer}}
+\doxysubsubsection{\texorpdfstring{difference()}{difference()}}
+{\footnotesize\ttfamily std\+::chrono\+::nanoseconds gko\+::\+Timer\+::difference (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1time__point}{time\+\_\+point}} \&}]{start,  }\item[{\mbox{\hyperlink{classgko_1_1time__point}{time\+\_\+point}} \&}]{stop }\end{DoxyParamCaption})}
+
+
+
+Computes the difference between the two time points in nanoseconds. 
+
+The function synchronizes with {\ttfamily stop} before computing the difference.
+
+
+\begin{DoxyParams}{Parameters}
+{\em start} & the first time point (earlier) \\
+\hline
+{\em end} & the second time point (later) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the difference between the time points in nanoseconds. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1Timer_a9f6ea65e99c2e65d67803a7da3f4d8a1}\label{classgko_1_1Timer_a9f6ea65e99c2e65d67803a7da3f4d8a1}} 
+\index{gko::Timer@{gko::Timer}!difference\_async@{difference\_async}}
+\index{difference\_async@{difference\_async}!gko::Timer@{gko::Timer}}
+\doxysubsubsection{\texorpdfstring{difference\_async()}{difference\_async()}}
+{\footnotesize\ttfamily virtual std\+::chrono\+::nanoseconds gko\+::\+Timer\+::difference\+\_\+async (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1time__point}{time\+\_\+point}} \&}]{start,  }\item[{const \mbox{\hyperlink{classgko_1_1time__point}{time\+\_\+point}} \&}]{stop }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Computes the difference between the two time points in nanoseconds. 
+
+This asynchronous version does not synchronize itself, so the time points need to have been synchronized with, i.\+e. {\ttfamily timer-\/$>$wait(stop)} needs to have been called. The version is intended for more advanced users who want to measure the overhead of timing functionality separately.
+
+
+\begin{DoxyParams}{Parameters}
+{\em start} & the first time point (earlier) \\
+\hline
+{\em end} & the second time point (later)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the difference between the time points in nanoseconds. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classgko_1_1DpcppTimer_ae4a46b8259af4dad4c6a6014e333ecd2}{gko\+::\+Dpcpp\+Timer}}, \mbox{\hyperlink{classgko_1_1HipTimer_a71d849b3113f8402082939806935670a}{gko\+::\+Hip\+Timer}}, \mbox{\hyperlink{classgko_1_1CudaTimer_ab338a41567ae37e0339564b3e2b5333b}{gko\+::\+Cuda\+Timer}}, and \mbox{\hyperlink{classgko_1_1CpuTimer_a1ea7361ad460b0ce9b4cd66b9de35b15}{gko\+::\+Cpu\+Timer}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/base/timer.\+hpp\end{DoxyCompactItemize}

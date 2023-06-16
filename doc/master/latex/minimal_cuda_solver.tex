@@ -12,7 +12,7 @@ The easiest way to use the example data from the data/ folder is to concatenate 
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{cat data/A.mtx data/b.mtx data/x0.mtx | ./minimal-\/cuda-\/solver}
+\DoxyCodeLine{cat data/A.mtx data/b.mtx data/x0.mtx | ./minimal-\/cuda-\/\mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}}}
 \end{DoxyCode}
 
 
@@ -36,7 +36,7 @@ Instantiate a C\+U\+DA executor
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{auto} gpu = \mbox{\hyperlink{classgko_1_1CudaExecutor_a5dcec3ca1c458382e01191b727959a81}{gko::CudaExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(), \textcolor{keyword}{true});}
+\DoxyCodeLine{\textcolor{keyword}{auto} gpu = \mbox{\hyperlink{classgko_1_1CudaExecutor_a8e18adb154a44f90c13d61c1e100e160}{gko::CudaExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(), \textcolor{keyword}{true});}
 \end{DoxyCode}
 
 
@@ -54,7 +54,7 @@ Create the solver
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{auto} solver =}
+\DoxyCodeLine{\textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}} =}
 \DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{gko::solver::Cg<>::build}}()}
 \DoxyCodeLine{        .with\_preconditioner(\mbox{\hyperlink{classgko_1_1preconditioner_1_1Jacobi}{gko::preconditioner::Jacobi<>::build}}().on(gpu))}
 \DoxyCodeLine{        .with\_criteria(}
@@ -70,7 +70,7 @@ Solve system
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{solver-\/>generate(\mbox{\hyperlink{namespacegko_acbd3fd6d07e498892881e8e2ab0b4167}{give}}(A))-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(b), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x));}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}}-\/>generate(\mbox{\hyperlink{namespacegko_acbd3fd6d07e498892881e8e2ab0b4167}{give}}(A))-\/>apply(b, x);}
 \end{DoxyCode}
 
 
@@ -78,7 +78,7 @@ Write result
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_aa24837da3770b3dddf981d9bfe0d3b52}{write}}(std::cout, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x));}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{write}}(std::cout, x);}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
  \label{_Results}%
@@ -121,7 +121,7 @@ The following is the expected result when using the data contained in the folder
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{\textcolor{comment}{/*******************************<GINKGO LICENSE>******************************}}
-\DoxyCodeLine{\textcolor{comment}{Copyright (c) 2017-\/2022, the Ginkgo authors}}
+\DoxyCodeLine{\textcolor{comment}{Copyright (c) 2017-\/2023, the Ginkgo authors}}
 \DoxyCodeLine{\textcolor{comment}{All rights reserved.}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{Redistribution and use in source and binary forms, with or without}}
@@ -157,11 +157,11 @@ The following is the expected result when using the data contained in the folder
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keywordtype}{int} main()}
 \DoxyCodeLine{\{}
-\DoxyCodeLine{    \textcolor{keyword}{auto} gpu = \mbox{\hyperlink{classgko_1_1CudaExecutor_a5dcec3ca1c458382e01191b727959a81}{gko::CudaExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(), \textcolor{keyword}{true});}
+\DoxyCodeLine{    \textcolor{keyword}{auto} gpu = \mbox{\hyperlink{classgko_1_1CudaExecutor_a8e18adb154a44f90c13d61c1e100e160}{gko::CudaExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(), \textcolor{keyword}{true});}
 \DoxyCodeLine{    \textcolor{keyword}{auto} A = gko::read<gko::matrix::Csr<>>(std::cin, gpu);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} b = gko::read<gko::matrix::Dense<>>(std::cin, gpu);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} x = gko::read<gko::matrix::Dense<>>(std::cin, gpu);}
-\DoxyCodeLine{    \textcolor{keyword}{auto} solver =}
+\DoxyCodeLine{    \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}} =}
 \DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{gko::solver::Cg<>::build}}()}
 \DoxyCodeLine{            .with\_preconditioner(\mbox{\hyperlink{classgko_1_1preconditioner_1_1Jacobi}{gko::preconditioner::Jacobi<>::build}}().on(gpu))}
 \DoxyCodeLine{            .with\_criteria(}
@@ -170,8 +170,8 @@ The following is the expected result when using the data contained in the folder
 \DoxyCodeLine{                    .with\_reduction\_factor(1e-\/15)}
 \DoxyCodeLine{                    .on(gpu))}
 \DoxyCodeLine{            .on(gpu);}
-\DoxyCodeLine{    solver-\/>generate(\mbox{\hyperlink{namespacegko_acbd3fd6d07e498892881e8e2ab0b4167}{give}}(A))-\/>apply(\mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(b), \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x));}
-\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_aa24837da3770b3dddf981d9bfe0d3b52}{write}}(std::cout, \mbox{\hyperlink{namespacegko_a014ec51e675c425bb83908361f630450}{lend}}(x));}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}}-\/>generate(\mbox{\hyperlink{namespacegko_acbd3fd6d07e498892881e8e2ab0b4167}{give}}(A))-\/>apply(b, x);}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{write}}(std::cout, x);}
 \DoxyCodeLine{\}}
 \end{DoxyCodeInclude}
  

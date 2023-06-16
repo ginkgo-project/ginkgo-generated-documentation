@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/693977618 branch based on master. Ginkgo version 1.5.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/902355976 branch based on master. Ginkgo version 1.6.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -74,7 +74,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*******************************&lt;GINKGO LICENSE&gt;******************************</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">Copyright (c) 2017-2022, the Ginkgo authors</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">Copyright (c) 2017-2023, the Ginkgo authors</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">All rights reserved.</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">Redistribution and use in source and binary forms, with or without</span></div>
@@ -190,7 +190,7 @@ $(function() {
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;            <span class="comment">// so we can convert from this type to TargetType</span></div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;            <span class="keyword">auto</span> converted = conversion_target_helper&lt;</div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                std::remove_cv_t&lt;TargetType&gt;&gt;::create_empty(cast_obj);</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;            cast_obj-&gt;convert_to(converted.get());</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;            cast_obj-&gt;convert_to(converted);</div>
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;            <span class="comment">// Make sure ConvertibleTo&lt;TargetType&gt; is available and symmetric</span></div>
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;            static_assert(</div>
 <div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;                std::is_base_of&lt;ConvertibleTo&lt;std::remove_cv_t&lt;TargetType&gt;&gt;,</div>
@@ -230,14 +230,14 @@ $(function() {
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;        std::conditional_t&lt;std::is_const&lt;T&gt;::value, <span class="keyword">const</span> LinOp, LinOp&gt;;</div>
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160; </div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span>... ConversionCandidates&gt;</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    <span class="keyword">static</span> temporary_conversion create(lin_op_type* ptr)</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    <span class="keyword">static</span> temporary_conversion create(ptr_param&lt;lin_op_type&gt; ptr)</div>
 <div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    {</div>
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        T* cast_ptr{};</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        <span class="keywordflow">if</span> ((cast_ptr = dynamic_cast&lt;T*&gt;(ptr))) {</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;        <span class="keywordflow">if</span> ((cast_ptr = dynamic_cast&lt;T*&gt;(ptr.get()))) {</div>
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;            <span class="keywordflow">return</span> handle_type{cast_ptr, null_deleter&lt;T&gt;{}};</div>
 <div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;        } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;            <span class="keywordflow">return</span> conversion_helper&lt;ConversionCandidates...&gt;::template convert&lt;</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;                T&gt;(ptr);</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;                T&gt;(ptr.get());</div>
 <div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        }</div>
 <div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    }</div>
 <div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160; </div>

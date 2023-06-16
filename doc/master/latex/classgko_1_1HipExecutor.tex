@@ -39,8 +39,6 @@ std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}
 \mbox{\Hypertarget{classgko_1_1HipExecutor_a0ea0ec8722767138953110b52d325b4a}\label{classgko_1_1HipExecutor_a0ea0ec8722767138953110b52d325b4a}} 
 void \mbox{\hyperlink{classgko_1_1HipExecutor_a0ea0ec8722767138953110b52d325b4a}{synchronize}} () const override
 \begin{DoxyCompactList}\small\item\em Synchronize the operations launched on the executor with its master. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classgko_1_1HipExecutor_a9407dcb6c1e288e5ec3f80c8d7f581a8}{run}} (const \mbox{\hyperlink{classgko_1_1Operation}{Operation}} \&op) const override
-\begin{DoxyCompactList}\small\item\em Runs the specified \mbox{\hyperlink{classgko_1_1Operation}{Operation}} using this \mbox{\hyperlink{classgko_1_1Executor}{Executor}}. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classgko_1_1HipExecutor_ac14589119a116de96dc3b5f63fe3bc54}\label{classgko_1_1HipExecutor_ac14589119a116de96dc3b5f63fe3bc54}} 
 \mbox{\hyperlink{classgko_1_1scoped__device__id__guard}{scoped\+\_\+device\+\_\+id\+\_\+guard}} {\bfseries get\+\_\+scoped\+\_\+device\+\_\+id\+\_\+guard} () const override
 \item 
@@ -72,11 +70,14 @@ hipsparse\+Context $\ast$ \mbox{\hyperlink{classgko_1_1HipExecutor_ac644de4030c9
 int \mbox{\hyperlink{classgko_1_1HipExecutor_ae39be6e255dfe5ecf6fe542da914afec}{get\+\_\+closest\+\_\+numa}} () const
 \begin{DoxyCompactList}\small\item\em Get the closest N\+U\+MA node. \end{DoxyCompactList}\item 
 std\+::vector$<$ int $>$ \mbox{\hyperlink{classgko_1_1HipExecutor_a7c6f4683d767aa1588dc69d79280bf72}{get\+\_\+closest\+\_\+pus}} () const
-\begin{DoxyCompactList}\small\item\em Get the closest P\+Us. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Get the closest P\+Us. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1HipExecutor_a7893daaa74bc41ed5784a57b19348a55}\label{classgko_1_1HipExecutor_a7893daaa74bc41ed5784a57b19348a55}} 
+C\+Ustream\+\_\+st $\ast$ {\bfseries get\+\_\+stream} () const
+\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1HipExecutor}{Hip\+Executor}} $>$ \mbox{\hyperlink{classgko_1_1HipExecutor_ad3a72bc42254fb8730bc2090147447d9}{create}} (int device\+\_\+id, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ master, bool device\+\_\+reset=false, \mbox{\hyperlink{namespacegko_afbed8e2cbd3ee4ca962e12f688858bdb}{allocation\+\_\+mode}} alloc\+\_\+mode=default\+\_\+hip\+\_\+alloc\+\_\+mode)
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1HipExecutor}{Hip\+Executor}} $>$ \mbox{\hyperlink{classgko_1_1HipExecutor_a5ace87d0179ef0ef55b60e78e9c2f897}{create}} (int device\+\_\+id, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ master, bool device\+\_\+reset=false, \mbox{\hyperlink{namespacegko_afbed8e2cbd3ee4ca962e12f688858bdb}{allocation\+\_\+mode}} alloc\+\_\+mode=default\+\_\+hip\+\_\+alloc\+\_\+mode, C\+Ustream\+\_\+st $\ast$stream=nullptr)
 \begin{DoxyCompactList}\small\item\em Creates a new \mbox{\hyperlink{classgko_1_1HipExecutor}{Hip\+Executor}}. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classgko_1_1HipExecutor_a7b34cbd84692dafa2290e6630754aa97}\label{classgko_1_1HipExecutor_a7b34cbd84692dafa2290e6630754aa97}} 
 static int \mbox{\hyperlink{classgko_1_1HipExecutor_a7b34cbd84692dafa2290e6630754aa97}{get\+\_\+num\+\_\+devices}} ()
@@ -87,11 +88,11 @@ static int \mbox{\hyperlink{classgko_1_1HipExecutor_a7b34cbd84692dafa2290e663075
 This is the \mbox{\hyperlink{classgko_1_1Executor}{Executor}} subclass which represents the H\+IP enhanced device. 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classgko_1_1HipExecutor_ad3a72bc42254fb8730bc2090147447d9}\label{classgko_1_1HipExecutor_ad3a72bc42254fb8730bc2090147447d9}} 
+\mbox{\Hypertarget{classgko_1_1HipExecutor_a5ace87d0179ef0ef55b60e78e9c2f897}\label{classgko_1_1HipExecutor_a5ace87d0179ef0ef55b60e78e9c2f897}} 
 \index{gko::HipExecutor@{gko::HipExecutor}!create@{create}}
 \index{create@{create}!gko::HipExecutor@{gko::HipExecutor}}
 \doxysubsubsection{\texorpdfstring{create()}{create()}}
-{\footnotesize\ttfamily static std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1HipExecutor}{Hip\+Executor}}$>$ gko\+::\+Hip\+Executor\+::create (\begin{DoxyParamCaption}\item[{int}]{device\+\_\+id,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{master,  }\item[{bool}]{device\+\_\+reset = {\ttfamily false},  }\item[{\mbox{\hyperlink{namespacegko_afbed8e2cbd3ee4ca962e12f688858bdb}{allocation\+\_\+mode}}}]{alloc\+\_\+mode = {\ttfamily default\+\_\+hip\+\_\+alloc\+\_\+mode} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily static std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1HipExecutor}{Hip\+Executor}}$>$ gko\+::\+Hip\+Executor\+::create (\begin{DoxyParamCaption}\item[{int}]{device\+\_\+id,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{master,  }\item[{bool}]{device\+\_\+reset = {\ttfamily false},  }\item[{\mbox{\hyperlink{namespacegko_afbed8e2cbd3ee4ca962e12f688858bdb}{allocation\+\_\+mode}}}]{alloc\+\_\+mode = {\ttfamily default\+\_\+hip\+\_\+alloc\+\_\+mode},  }\item[{C\+Ustream\+\_\+st $\ast$}]{stream = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -193,25 +194,6 @@ the master \mbox{\hyperlink{classgko_1_1OmpExecutor}{Omp\+Executor}} of this \mb
 
 
 Implements \mbox{\hyperlink{classgko_1_1Executor_acaec4f999d52fc71e5e5a3d3ad93609c}{gko\+::\+Executor}}.
-
-\mbox{\Hypertarget{classgko_1_1HipExecutor_a9407dcb6c1e288e5ec3f80c8d7f581a8}\label{classgko_1_1HipExecutor_a9407dcb6c1e288e5ec3f80c8d7f581a8}} 
-\index{gko::HipExecutor@{gko::HipExecutor}!run@{run}}
-\index{run@{run}!gko::HipExecutor@{gko::HipExecutor}}
-\doxysubsubsection{\texorpdfstring{run()}{run()}}
-{\footnotesize\ttfamily void gko\+::\+Hip\+Executor\+::run (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Operation}{Operation}} \&}]{op }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
-
-
-
-Runs the specified \mbox{\hyperlink{classgko_1_1Operation}{Operation}} using this \mbox{\hyperlink{classgko_1_1Executor}{Executor}}. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em op} & the operation to run \\
-\hline
-\end{DoxyParams}
-
-
-Implements \mbox{\hyperlink{classgko_1_1Executor_a1de8e2668b76e66690acf5eef9e8324d}{gko\+::\+Executor}}.
 
 
 

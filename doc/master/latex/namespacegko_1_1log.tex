@@ -34,10 +34,31 @@ class \mbox{\hyperlink{classgko_1_1log_1_1PerformanceHint}{Performance\+Hint}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1log_1_1PerformanceHint}{Performance\+Hint}} is a \mbox{\hyperlink{classgko_1_1log_1_1Logger}{Logger}} which analyzes the performance of the application and outputs hints for unnecessary copies and allocations. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structgko_1_1log_1_1polymorphic__object__data}{polymorphic\+\_\+object\+\_\+data}}
 \begin{DoxyCompactList}\small\item\em Struct representing \mbox{\hyperlink{classgko_1_1PolymorphicObject}{Polymorphic\+Object}} related data. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1log_1_1ProfilerHook}{Profiler\+Hook}}
+\begin{DoxyCompactList}\small\item\em This \mbox{\hyperlink{classgko_1_1log_1_1Logger}{Logger}} can be used to annotate the execution of Ginkgo functionality with profiler-\/specific ranges. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1log_1_1profiling__scope__guard}{profiling\+\_\+scope\+\_\+guard}}
+\begin{DoxyCompactList}\small\item\em Scope guard that annotates its scope with the provided profiler hooks. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1log_1_1Record}{Record}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1log_1_1Record}{Record}} is a \mbox{\hyperlink{classgko_1_1log_1_1Logger}{Logger}} which logs every event to an object. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1log_1_1Stream}{Stream}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1log_1_1Stream}{Stream}} is a \mbox{\hyperlink{classgko_1_1log_1_1Logger}{Logger}} which logs every event to a stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27}{profile\+\_\+event\+\_\+category}} \{ \newline
+\mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27acd69b4957f06cd818d7bf3d61980e291}{profile\+\_\+event\+\_\+category\+::memory}}, 
+\mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27af7235a61fdc3adc78d866fd8085d44db}{profile\+\_\+event\+\_\+category\+::operation}}, 
+\mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27aa8cfde6331bd59eb2ac96f8911c4b666}{profile\+\_\+event\+\_\+category\+::object}}, 
+\mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27aeed65d10ea0bf036636706d7c1af32e8}{profile\+\_\+event\+\_\+category\+::linop}}, 
+\newline
+\mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{profile\+\_\+event\+\_\+category\+::factory}}, 
+\mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{profile\+\_\+event\+\_\+category\+::solver}}, 
+\mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a4d4b370ab9b3dbca1ccdb1a5cca6a728}{profile\+\_\+event\+\_\+category\+::criterion}}, 
+\mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27aee11cbb19052e40b07aac0ca060c23ee}{profile\+\_\+event\+\_\+category\+::user}}, 
+\newline
+\mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27ad1efad72dc5b17dc66a46767c32fff40}{profile\+\_\+event\+\_\+category\+::internal}}
+ \}
+\begin{DoxyCompactList}\small\item\em Categorization of logger events. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -46,3 +67,53 @@ The logger namespace .
 The Logging namespace.
 
 \mbox{\hyperlink{group__log}{Logging}} 
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27}\label{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27}} 
+\index{gko::log@{gko::log}!profile\_event\_category@{profile\_event\_category}}
+\index{profile\_event\_category@{profile\_event\_category}!gko::log@{gko::log}}
+\doxysubsubsection{\texorpdfstring{profile\_event\_category}{profile\_event\_category}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27}{gko\+::log\+::profile\+\_\+event\+\_\+category}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Categorization of logger events. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{memory@{memory}!gko::log@{gko::log}}\index{gko::log@{gko::log}!memory@{memory}}}\mbox{\Hypertarget{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27acd69b4957f06cd818d7bf3d61980e291}\label{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27acd69b4957f06cd818d7bf3d61980e291}} 
+memory&Memory allocation. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{operation@{operation}!gko::log@{gko::log}}\index{gko::log@{gko::log}!operation@{operation}}}\mbox{\Hypertarget{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27af7235a61fdc3adc78d866fd8085d44db}\label{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27af7235a61fdc3adc78d866fd8085d44db}} 
+operation&Kernel execution and data movement. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{object@{object}!gko::log@{gko::log}}\index{gko::log@{gko::log}!object@{object}}}\mbox{\Hypertarget{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27aa8cfde6331bd59eb2ac96f8911c4b666}\label{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27aa8cfde6331bd59eb2ac96f8911c4b666}} 
+object&\mbox{\hyperlink{classgko_1_1PolymorphicObject}{Polymorphic\+Object}} events. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{linop@{linop}!gko::log@{gko::log}}\index{gko::log@{gko::log}!linop@{linop}}}\mbox{\Hypertarget{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27aeed65d10ea0bf036636706d7c1af32e8}\label{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27aeed65d10ea0bf036636706d7c1af32e8}} 
+linop&\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} events. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{factory@{factory}!gko::log@{gko::log}}\index{gko::log@{gko::log}!factory@{factory}}}\mbox{\Hypertarget{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}\label{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}} 
+factory&\mbox{\hyperlink{classgko_1_1LinOpFactory}{Lin\+Op\+Factory}} events. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{solver@{solver}!gko::log@{gko::log}}\index{gko::log@{gko::log}!solver@{solver}}}\mbox{\Hypertarget{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}\label{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}} 
+solver&Solver events. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{criterion@{criterion}!gko::log@{gko::log}}\index{gko::log@{gko::log}!criterion@{criterion}}}\mbox{\Hypertarget{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a4d4b370ab9b3dbca1ccdb1a5cca6a728}\label{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a4d4b370ab9b3dbca1ccdb1a5cca6a728}} 
+criterion&Stopping criterion events. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{user@{user}!gko::log@{gko::log}}\index{gko::log@{gko::log}!user@{user}}}\mbox{\Hypertarget{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27aee11cbb19052e40b07aac0ca060c23ee}\label{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27aee11cbb19052e40b07aac0ca060c23ee}} 
+user&User-\/defined events. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{internal@{internal}!gko::log@{gko::log}}\index{gko::log@{gko::log}!internal@{internal}}}\mbox{\Hypertarget{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27ad1efad72dc5b17dc66a46767c32fff40}\label{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27ad1efad72dc5b17dc66a46767c32fff40}} 
+internal&For development use. \\
+\hline
+
+\end{DoxyEnumFields}

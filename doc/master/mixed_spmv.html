@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/693977618 branch based on master. Ginkgo version 1.5.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/902355976 branch based on master. Ginkgo version 1.6.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -158,7 +158,7 @@ $(function() {
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line">/ **</div>
-<div class="line"> * timing the apply operation A-&gt;apply(b, x). It will runs 2 warmup and get</div>
+<div class="line"> * timing the apply <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27af7235a61fdc3adc78d866fd8085d44db">operation</a> A-&gt;apply(b, x). It will runs 2 warmup and get</div>
 <div class="line"> * average time among 10 times.</div>
 <div class="line"> *</div>
 <div class="line"> * @<span class="keywordflow">return</span> seconds</div>
@@ -171,7 +171,7 @@ $(function() {
 <div class="line">    <span class="keywordtype">int</span> warmup = 2;</div>
 <div class="line">    <span class="keywordtype">int</span> rep = 10;</div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; warmup; i++) {</div>
-<div class="line">        A-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(b), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(x));</div>
+<div class="line">        A-&gt;apply(b, x);</div>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordtype">double</span> total_sec = 0;</div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; rep; i++) {</div>
@@ -180,7 +180,7 @@ $(function() {
 </div><!-- fragment --><p>synchronize to make sure data is already on device</p>
 <div class="fragment"><div class="line">exec-&gt;synchronize();</div>
 <div class="line"><span class="keyword">auto</span> start = std::chrono::steady_clock::now();</div>
-<div class="line">A-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(b), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(xx));</div>
+<div class="line">A-&gt;apply(b, xx);</div>
 </div><!-- fragment --><p>synchronize to make sure the operation is done</p>
 <div class="fragment"><div class="line">exec-&gt;synchronize();</div>
 <div class="line"><span class="keyword">auto</span> stop = std::chrono::steady_clock::now();</div>
@@ -189,7 +189,7 @@ $(function() {
 <div class="line">total_sec += duration_time.count();</div>
 <div class="line"><span class="keywordflow">if</span> (i + 1 == rep) {</div>
 </div><!-- fragment --><p>copy the result back to x</p>
-<div class="fragment"><div class="line">            x-&gt;copy_from(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(xx));</div>
+<div class="fragment"><div class="line">            x-&gt;copy_from(xx);</div>
 <div class="line">        }</div>
 <div class="line">    }</div>
 <div class="line"> </div>
@@ -228,12 +228,12 @@ $(function() {
 <div class="line">        {<span class="stringliteral">&quot;omp&quot;</span>, [] { <span class="keywordflow">return</span> <a class="code" href="classgko_1_1OmpExecutor.html#a33ca05fdd0fc928ee262fc9425304874">gko::OmpExecutor::create</a>(); }},</div>
 <div class="line">        {<span class="stringliteral">&quot;cuda&quot;</span>,</div>
 <div class="line">         [] {</div>
-<div class="line">             <span class="keywordflow">return</span> <a class="code" href="classgko_1_1CudaExecutor.html#a5dcec3ca1c458382e01191b727959a81">gko::CudaExecutor::create</a>(0, <a class="code" href="classgko_1_1OmpExecutor.html#a33ca05fdd0fc928ee262fc9425304874">gko::OmpExecutor::create</a>(),</div>
+<div class="line">             <span class="keywordflow">return</span> <a class="code" href="classgko_1_1CudaExecutor.html#a8e18adb154a44f90c13d61c1e100e160">gko::CudaExecutor::create</a>(0, <a class="code" href="classgko_1_1OmpExecutor.html#a33ca05fdd0fc928ee262fc9425304874">gko::OmpExecutor::create</a>(),</div>
 <div class="line">                                              <span class="keyword">true</span>);</div>
 <div class="line">         }},</div>
 <div class="line">        {<span class="stringliteral">&quot;hip&quot;</span>,</div>
 <div class="line">         [] {</div>
-<div class="line">             <span class="keywordflow">return</span> <a class="code" href="classgko_1_1HipExecutor.html#ad3a72bc42254fb8730bc2090147447d9">gko::HipExecutor::create</a>(0, <a class="code" href="classgko_1_1OmpExecutor.html#a33ca05fdd0fc928ee262fc9425304874">gko::OmpExecutor::create</a>(),</div>
+<div class="line">             <span class="keywordflow">return</span> <a class="code" href="classgko_1_1HipExecutor.html#a5ace87d0179ef0ef55b60e78e9c2f897">gko::HipExecutor::create</a>(0, <a class="code" href="classgko_1_1OmpExecutor.html#a33ca05fdd0fc928ee262fc9425304874">gko::OmpExecutor::create</a>(),</div>
 <div class="line">                                             <span class="keyword">true</span>);</div>
 <div class="line">         }},</div>
 <div class="line">        {<span class="stringliteral">&quot;dpcpp&quot;</span>,</div>
@@ -245,7 +245,7 @@ $(function() {
 </div><!-- fragment --><p>executor where Ginkgo will perform the computation</p>
 <div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keyword">auto</span> exec = exec_map.at(executor_string)();  <span class="comment">// throws if not valid</span></div>
 </div><!-- fragment --><p><a class="anchor" id="Preparingyourdataandtransfertotheproperdevice"></a> </p><h3>Preparing your data and transfer to the proper device.</h3>
-<p>Read the matrix using the read function and set the right hand side randomly. </p><dl class="section note"><dt>Note</dt><dd>Ginkgo uses C++ smart pointers to automatically manage memory. To this end, we use our own object ownership transfer functions that under the hood call the required smart pointer functions to manage object ownership. The <a class="el" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58" title="Marks the object pointed to by p as shared.">gko::share</a> , <a class="el" href="namespacegko.html#acbd3fd6d07e498892881e8e2ab0b4167" title="Marks that the object pointed to by p can be given to the callee.">gko::give</a> and <a class="el" href="namespacegko.html#a014ec51e675c425bb83908361f630450" title="Returns a non-owning (plain) pointer to the object pointed to by p.">gko::lend</a> are the functions that you would need to use.</dd></dl>
+<p>Read the matrix using the read function and set the right hand side randomly. </p><dl class="section note"><dt>Note</dt><dd>Ginkgo uses C++ smart pointers to automatically manage memory. To this end, we use our own object ownership transfer functions that under the hood call the required smart pointer functions to manage object ownership. <a class="el" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58" title="Marks the object pointed to by p as shared.">gko::share</a> and <a class="el" href="namespacegko.html#acbd3fd6d07e498892881e8e2ab0b4167" title="Marks that the object pointed to by p can be given to the callee.">gko::give</a> are the functions that you would need to use.</dd></dl>
 <p>read the matrix into HighPrecision and LowPrecision.</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> hp_A = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">share</a>(gko::read&lt;hp_mtx&gt;(std::ifstream(<span class="stringliteral">&quot;data/A.mtx&quot;</span>), exec));</div>
 <div class="line"><span class="keyword">auto</span> lp_A = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">share</a>(gko::read&lt;lp_mtx&gt;(std::ifstream(<span class="stringliteral">&quot;data/A.mtx&quot;</span>), exec));</div>
@@ -263,7 +263,7 @@ $(function() {
 </div><!-- fragment --><p>copy the data from host to device</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> hp_b = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">share</a>(<a class="code" href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a>(exec, host_b));</div>
 <div class="line"><span class="keyword">auto</span> lp_b = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">share</a>(lp_vec::create(exec));</div>
-<div class="line">lp_b-&gt;copy_from(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(hp_b));</div>
+<div class="line">lp_b-&gt;copy_from(hp_b);</div>
 </div><!-- fragment --><p>create several result x vector in different precision</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> hp_x = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">share</a>(hp_vec::create(exec, x_dim));</div>
 <div class="line"><span class="keyword">auto</span> lp_x = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">share</a>(lp_vec::create(exec, x_dim));</div>
@@ -294,15 +294,15 @@ $(function() {
 <div class="line">    <span class="keyword">auto</span> lplp_diff = hp_x-&gt;clone();</div>
 <div class="line">    <span class="keyword">auto</span> lphp_diff = hp_x-&gt;clone();</div>
 <div class="line"> </div>
-<div class="line">    hp_x-&gt;compute_norm2(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(hp_x_norm));</div>
-<div class="line">    lp_diff-&gt;add_scaled(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(neg_one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(lp_x));</div>
-<div class="line">    lp_diff-&gt;compute_norm2(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(lp_diff_norm));</div>
-<div class="line">    hplp_diff-&gt;add_scaled(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(neg_one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(hplp_x));</div>
-<div class="line">    hplp_diff-&gt;compute_norm2(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(hplp_diff_norm));</div>
-<div class="line">    lplp_diff-&gt;add_scaled(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(neg_one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(lplp_x));</div>
-<div class="line">    lplp_diff-&gt;compute_norm2(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(lplp_diff_norm));</div>
-<div class="line">    lphp_diff-&gt;add_scaled(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(neg_one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(lphp_x));</div>
-<div class="line">    lphp_diff-&gt;compute_norm2(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(lphp_diff_norm));</div>
+<div class="line">    hp_x-&gt;compute_norm2(hp_x_norm);</div>
+<div class="line">    lp_diff-&gt;add_scaled(neg_one, lp_x);</div>
+<div class="line">    lp_diff-&gt;compute_norm2(lp_diff_norm);</div>
+<div class="line">    hplp_diff-&gt;add_scaled(neg_one, hplp_x);</div>
+<div class="line">    hplp_diff-&gt;compute_norm2(hplp_diff_norm);</div>
+<div class="line">    lplp_diff-&gt;add_scaled(neg_one, lplp_x);</div>
+<div class="line">    lplp_diff-&gt;compute_norm2(lplp_diff_norm);</div>
+<div class="line">    lphp_diff-&gt;add_scaled(neg_one, lphp_x);</div>
+<div class="line">    lphp_diff-&gt;compute_norm2(lphp_diff_norm);</div>
 <div class="line">    exec-&gt;synchronize();</div>
 <div class="line"> </div>
 <div class="line">    std::cout.precision(10);</div>
@@ -338,7 +338,7 @@ $(function() {
 </div><!-- fragment --><p><a class="anchor" id="Commentsaboutprogramminganddebugging"></a></p><h3>Comments about programming and debugging </h3>
 <p><a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
 <div class="fragment"><div class="line"><span class="comment">/*******************************&lt;GINKGO LICENSE&gt;******************************</span></div>
-<div class="line"><span class="comment">Copyright (c) 2017-2022, the Ginkgo authors</span></div>
+<div class="line"><span class="comment">Copyright (c) 2017-2023, the Ginkgo authors</span></div>
 <div class="line"><span class="comment">All rights reserved.</span></div>
 <div class="line"><span class="comment"></span> </div>
 <div class="line"><span class="comment">Redistribution and use in source and binary forms, with or without</span></div>
@@ -404,20 +404,20 @@ $(function() {
 <div class="line">    <span class="keywordtype">int</span> warmup = 2;</div>
 <div class="line">    <span class="keywordtype">int</span> rep = 10;</div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; warmup; i++) {</div>
-<div class="line">        A-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(b), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(x));</div>
+<div class="line">        A-&gt;apply(b, x);</div>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordtype">double</span> total_sec = 0;</div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; rep; i++) {</div>
 <div class="line">        <span class="keyword">auto</span> xx = x-&gt;clone();</div>
 <div class="line">        exec-&gt;synchronize();</div>
 <div class="line">        <span class="keyword">auto</span> start = std::chrono::steady_clock::now();</div>
-<div class="line">        A-&gt;apply(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(b), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(xx));</div>
+<div class="line">        A-&gt;apply(b, xx);</div>
 <div class="line">        exec-&gt;synchronize();</div>
 <div class="line">        <span class="keyword">auto</span> stop = std::chrono::steady_clock::now();</div>
 <div class="line">        std::chrono::duration&lt;double&gt; duration_time = stop - start;</div>
 <div class="line">        total_sec += duration_time.count();</div>
 <div class="line">        <span class="keywordflow">if</span> (i + 1 == rep) {</div>
-<div class="line">            x-&gt;copy_from(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(xx));</div>
+<div class="line">            x-&gt;copy_from(xx);</div>
 <div class="line">        }</div>
 <div class="line">    }</div>
 <div class="line"> </div>
@@ -453,12 +453,12 @@ $(function() {
 <div class="line">            {<span class="stringliteral">&quot;omp&quot;</span>, [] { <span class="keywordflow">return</span> <a class="code" href="classgko_1_1OmpExecutor.html#a33ca05fdd0fc928ee262fc9425304874">gko::OmpExecutor::create</a>(); }},</div>
 <div class="line">            {<span class="stringliteral">&quot;cuda&quot;</span>,</div>
 <div class="line">             [] {</div>
-<div class="line">                 <span class="keywordflow">return</span> <a class="code" href="classgko_1_1CudaExecutor.html#a5dcec3ca1c458382e01191b727959a81">gko::CudaExecutor::create</a>(0, <a class="code" href="classgko_1_1OmpExecutor.html#a33ca05fdd0fc928ee262fc9425304874">gko::OmpExecutor::create</a>(),</div>
+<div class="line">                 <span class="keywordflow">return</span> <a class="code" href="classgko_1_1CudaExecutor.html#a8e18adb154a44f90c13d61c1e100e160">gko::CudaExecutor::create</a>(0, <a class="code" href="classgko_1_1OmpExecutor.html#a33ca05fdd0fc928ee262fc9425304874">gko::OmpExecutor::create</a>(),</div>
 <div class="line">                                                  <span class="keyword">true</span>);</div>
 <div class="line">             }},</div>
 <div class="line">            {<span class="stringliteral">&quot;hip&quot;</span>,</div>
 <div class="line">             [] {</div>
-<div class="line">                 <span class="keywordflow">return</span> <a class="code" href="classgko_1_1HipExecutor.html#ad3a72bc42254fb8730bc2090147447d9">gko::HipExecutor::create</a>(0, <a class="code" href="classgko_1_1OmpExecutor.html#a33ca05fdd0fc928ee262fc9425304874">gko::OmpExecutor::create</a>(),</div>
+<div class="line">                 <span class="keywordflow">return</span> <a class="code" href="classgko_1_1HipExecutor.html#a5ace87d0179ef0ef55b60e78e9c2f897">gko::HipExecutor::create</a>(0, <a class="code" href="classgko_1_1OmpExecutor.html#a33ca05fdd0fc928ee262fc9425304874">gko::OmpExecutor::create</a>(),</div>
 <div class="line">                                                 <span class="keyword">true</span>);</div>
 <div class="line">             }},</div>
 <div class="line">            {<span class="stringliteral">&quot;dpcpp&quot;</span>,</div>
@@ -484,7 +484,7 @@ $(function() {
 <div class="line">    }</div>
 <div class="line">    <span class="keyword">auto</span> hp_b = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">share</a>(<a class="code" href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a>(exec, host_b));</div>
 <div class="line">    <span class="keyword">auto</span> lp_b = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">share</a>(lp_vec::create(exec));</div>
-<div class="line">    lp_b-&gt;copy_from(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(hp_b));</div>
+<div class="line">    lp_b-&gt;copy_from(hp_b);</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">auto</span> hp_x = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">share</a>(hp_vec::create(exec, x_dim));</div>
 <div class="line">    <span class="keyword">auto</span> lp_x = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">share</a>(lp_vec::create(exec, x_dim));</div>
@@ -511,15 +511,15 @@ $(function() {
 <div class="line">    <span class="keyword">auto</span> lplp_diff = hp_x-&gt;clone();</div>
 <div class="line">    <span class="keyword">auto</span> lphp_diff = hp_x-&gt;clone();</div>
 <div class="line"> </div>
-<div class="line">    hp_x-&gt;compute_norm2(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(hp_x_norm));</div>
-<div class="line">    lp_diff-&gt;add_scaled(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(neg_one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(lp_x));</div>
-<div class="line">    lp_diff-&gt;compute_norm2(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(lp_diff_norm));</div>
-<div class="line">    hplp_diff-&gt;add_scaled(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(neg_one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(hplp_x));</div>
-<div class="line">    hplp_diff-&gt;compute_norm2(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(hplp_diff_norm));</div>
-<div class="line">    lplp_diff-&gt;add_scaled(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(neg_one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(lplp_x));</div>
-<div class="line">    lplp_diff-&gt;compute_norm2(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(lplp_diff_norm));</div>
-<div class="line">    lphp_diff-&gt;add_scaled(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(neg_one), <a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(lphp_x));</div>
-<div class="line">    lphp_diff-&gt;compute_norm2(<a class="code" href="namespacegko.html#a014ec51e675c425bb83908361f630450">lend</a>(lphp_diff_norm));</div>
+<div class="line">    hp_x-&gt;compute_norm2(hp_x_norm);</div>
+<div class="line">    lp_diff-&gt;add_scaled(neg_one, lp_x);</div>
+<div class="line">    lp_diff-&gt;compute_norm2(lp_diff_norm);</div>
+<div class="line">    hplp_diff-&gt;add_scaled(neg_one, hplp_x);</div>
+<div class="line">    hplp_diff-&gt;compute_norm2(hplp_diff_norm);</div>
+<div class="line">    lplp_diff-&gt;add_scaled(neg_one, lplp_x);</div>
+<div class="line">    lplp_diff-&gt;compute_norm2(lplp_diff_norm);</div>
+<div class="line">    lphp_diff-&gt;add_scaled(neg_one, lphp_x);</div>
+<div class="line">    lphp_diff-&gt;compute_norm2(lphp_diff_norm);</div>
 <div class="line">    exec-&gt;synchronize();</div>
 <div class="line"> </div>
 <div class="line">    std::cout.precision(10);</div>
@@ -543,18 +543,18 @@ $(function() {
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <div class="ttc" id="anamespacegko_html_ae749a5ea11a93c1bcc9158d9a6e9fb68af1f713c9e000f5d3f280adbd124df4f5"><div class="ttname"><a href="namespacegko.html#ae749a5ea11a93c1bcc9158d9a6e9fb68af1f713c9e000f5d3f280adbd124df4f5">gko::layout_type::array</a></div><div class="ttdoc">The matrix should be written as dense matrix in column-major order.</div></div>
+<div class="ttc" id="aclassgko_1_1HipExecutor_html_a5ace87d0179ef0ef55b60e78e9c2f897"><div class="ttname"><a href="classgko_1_1HipExecutor.html#a5ace87d0179ef0ef55b60e78e9c2f897">gko::HipExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; HipExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, bool device_reset=false, allocation_mode alloc_mode=default_hip_alloc_mode, CUstream_st *stream=nullptr)</div><div class="ttdoc">Creates a new HipExecutor.</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Dense_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Dense.html">gko::matrix::Dense</a></div><div class="ttdoc">Dense is a matrix format which explicitly stores all values of the matrix.</div><div class="ttdef"><b>Definition:</b> dense_cache.hpp:48</div></div>
-<div class="ttc" id="aclassgko_1_1OmpExecutor_html_a33ca05fdd0fc928ee262fc9425304874"><div class="ttname"><a href="classgko_1_1OmpExecutor.html#a33ca05fdd0fc928ee262fc9425304874">gko::OmpExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; OmpExecutor &gt; create()</div><div class="ttdoc">Creates a new OmpExecutor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1257</div></div>
-<div class="ttc" id="anamespacegko_html_a1beb80750459e4201aa9d882d2d074c3"><div class="ttname"><a href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a></div><div class="ttdeci">detail::cloned_type&lt; Pointer &gt; clone(const Pointer &amp;p)</div><div class="ttdoc">Creates a unique clone of the object pointed to by p.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:160</div></div>
+<div class="ttc" id="aclassgko_1_1OmpExecutor_html_a33ca05fdd0fc928ee262fc9425304874"><div class="ttname"><a href="classgko_1_1OmpExecutor.html#a33ca05fdd0fc928ee262fc9425304874">gko::OmpExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; OmpExecutor &gt; create()</div><div class="ttdoc">Creates a new OmpExecutor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1414</div></div>
+<div class="ttc" id="anamespacegko_html_a1beb80750459e4201aa9d882d2d074c3"><div class="ttname"><a href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a></div><div class="ttdeci">detail::cloned_type&lt; Pointer &gt; clone(const Pointer &amp;p)</div><div class="ttdoc">Creates a unique clone of the object pointed to by p.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:203</div></div>
 <div class="ttc" id="aclassgko_1_1version__info_html_a6daeb8a087cfb57fa055526fc133d8eb"><div class="ttname"><a href="classgko_1_1version__info.html#a6daeb8a087cfb57fa055526fc133d8eb">gko::version_info::get</a></div><div class="ttdeci">static const version_info &amp; get()</div><div class="ttdoc">Returns an instance of version_info.</div><div class="ttdef"><b>Definition:</b> version.hpp:168</div></div>
 <div class="ttc" id="astructgko_1_1dim_html"><div class="ttname"><a href="structgko_1_1dim.html">gko::dim&lt; 2 &gt;</a></div></div>
-<div class="ttc" id="aclassgko_1_1CudaExecutor_html_a5dcec3ca1c458382e01191b727959a81"><div class="ttname"><a href="classgko_1_1CudaExecutor.html#a5dcec3ca1c458382e01191b727959a81">gko::CudaExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; CudaExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, bool device_reset=false, allocation_mode alloc_mode=default_cuda_alloc_mode)</div><div class="ttdoc">Creates a new CudaExecutor.</div></div>
-<div class="ttc" id="anamespacegko_html_a3ce296f73db0ff398bdea6009a3a5c58"><div class="ttname"><a href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a></div><div class="ttdeci">detail::shared_type&lt; OwningPointer &gt; share(OwningPointer &amp;&amp;p)</div><div class="ttdoc">Marks the object pointed to by p as shared.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:211</div></div>
-<div class="ttc" id="anamespacegko_html_a014ec51e675c425bb83908361f630450"><div class="ttname"><a href="namespacegko.html#a014ec51e675c425bb83908361f630450">gko::lend</a></div><div class="ttdeci">std::enable_if&lt; detail::have_ownership_s&lt; Pointer &gt;::value, detail::pointee&lt; Pointer &gt; * &gt;::type lend(const Pointer &amp;p)</div><div class="ttdoc">Returns a non-owning (plain) pointer to the object pointed to by p.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:256</div></div>
+<div class="ttc" id="anamespacegko_html_a3ce296f73db0ff398bdea6009a3a5c58"><div class="ttname"><a href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a></div><div class="ttdeci">detail::shared_type&lt; OwningPointer &gt; share(OwningPointer &amp;&amp;p)</div><div class="ttdoc">Marks the object pointed to by p as shared.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:254</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Ell_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Ell.html">gko::matrix::Ell</a></div><div class="ttdoc">ELL is a matrix format where stride with explicit zeros is used such that all rows have the same numb...</div><div class="ttdef"><b>Definition:</b> csr.hpp:57</div></div>
-<div class="ttc" id="aclassgko_1_1HipExecutor_html_ad3a72bc42254fb8730bc2090147447d9"><div class="ttname"><a href="classgko_1_1HipExecutor.html#ad3a72bc42254fb8730bc2090147447d9">gko::HipExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; HipExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, bool device_reset=false, allocation_mode alloc_mode=default_hip_alloc_mode)</div><div class="ttdoc">Creates a new HipExecutor.</div></div>
-<div class="ttc" id="anamespacegko_html_afd46d554050c4ae90e84ea4fcd9a41f3"><div class="ttname"><a href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">gko::remove_complex</a></div><div class="ttdeci">typename detail::remove_complex_s&lt; T &gt;::type remove_complex</div><div class="ttdoc">Obtain the type which removed the complex of complex/scalar type or the template parameter of class b...</div><div class="ttdef"><b>Definition:</b> math.hpp:359</div></div>
+<div class="ttc" id="anamespacegko_1_1log_html_a15f71654c6c4f4defc95f9359343fa27af7235a61fdc3adc78d866fd8085d44db"><div class="ttname"><a href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27af7235a61fdc3adc78d866fd8085d44db">gko::log::profile_event_category::operation</a></div><div class="ttdoc">Kernel execution and data movement.</div></div>
+<div class="ttc" id="anamespacegko_html_afd46d554050c4ae90e84ea4fcd9a41f3"><div class="ttname"><a href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">gko::remove_complex</a></div><div class="ttdeci">typename detail::remove_complex_s&lt; T &gt;::type remove_complex</div><div class="ttdoc">Obtain the type which removed the complex of complex/scalar type or the template parameter of class b...</div><div class="ttdef"><b>Definition:</b> math.hpp:361</div></div>
 <div class="ttc" id="aclassgko_1_1DpcppExecutor_html_ae9b875dfe3af7f3f3f24071bfb2f895e"><div class="ttname"><a href="classgko_1_1DpcppExecutor.html#ae9b875dfe3af7f3f3f24071bfb2f895e">gko::DpcppExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; DpcppExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, std::string device_type=&quot;all&quot;, dpcpp_queue_property property=dpcpp_queue_property::in_order)</div><div class="ttdoc">Creates a new DpcppExecutor.</div></div>
+<div class="ttc" id="aclassgko_1_1CudaExecutor_html_a8e18adb154a44f90c13d61c1e100e160"><div class="ttname"><a href="classgko_1_1CudaExecutor.html#a8e18adb154a44f90c13d61c1e100e160">gko::CudaExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; CudaExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, bool device_reset=false, allocation_mode alloc_mode=default_cuda_alloc_mode, CUstream_st *stream=nullptr)</div><div class="ttdoc">Creates a new CudaExecutor.</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
