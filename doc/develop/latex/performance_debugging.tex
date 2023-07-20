@@ -468,21 +468,20 @@ Figure out where to run the code
 \DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} executor\_string = argc >= 2 ? argv[1] : \textcolor{stringliteral}{"reference"};}
 \DoxyCodeLine{std::map<std::string, std::function<std::shared\_ptr<gko::Executor>()>>}
 \DoxyCodeLine{    exec\_map\{}
-\DoxyCodeLine{        \{\textcolor{stringliteral}{"omp"}, [] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(); \}\},}
+\DoxyCodeLine{        \{\textcolor{stringliteral}{"omp"}, [] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}(); \}\},}
 \DoxyCodeLine{        \{\textcolor{stringliteral}{"cuda"},}
 \DoxyCodeLine{         [] \{}
-\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a8e18adb154a44f90c13d61c1e100e160}{gko::CudaExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(),}
-\DoxyCodeLine{                                              \textcolor{keyword}{true});}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a6c423656c7c0eb53810cb77bb4a66d15}{gko::CudaExecutor::create}}(0,}
+\DoxyCodeLine{                                              \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}());}
 \DoxyCodeLine{         \}\},}
 \DoxyCodeLine{        \{\textcolor{stringliteral}{"hip"},}
 \DoxyCodeLine{         [] \{}
-\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_a5ace87d0179ef0ef55b60e78e9c2f897}{gko::HipExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(),}
-\DoxyCodeLine{                                             \textcolor{keyword}{true});}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_aa0701fe1303e03a8331da7e95008100d}{gko::HipExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}());}
 \DoxyCodeLine{         \}\},}
 \DoxyCodeLine{        \{\textcolor{stringliteral}{"dpcpp"},}
 \DoxyCodeLine{         [] \{}
 \DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1DpcppExecutor_ae9b875dfe3af7f3f3f24071bfb2f895e}{gko::DpcppExecutor::create}}(0,}
-\DoxyCodeLine{                                               \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}());}
+\DoxyCodeLine{                                               \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}());}
 \DoxyCodeLine{         \}\},}
 \DoxyCodeLine{        \{\textcolor{stringliteral}{"reference"}, [] \{ \textcolor{keywordflow}{return} gko::ReferenceExecutor::create(); \}\}\};}
 \end{DoxyCode}
@@ -1242,21 +1241,20 @@ Here is a sample output in the file log.\+txt\+:
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} executor\_string = argc >= 2 ? argv[1] : \textcolor{stringliteral}{"reference"};}
 \DoxyCodeLine{    std::map<std::string, std::function<std::shared\_ptr<gko::Executor>()>>}
 \DoxyCodeLine{        exec\_map\{}
-\DoxyCodeLine{            \{\textcolor{stringliteral}{"omp"}, [] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(); \}\},}
+\DoxyCodeLine{            \{\textcolor{stringliteral}{"omp"}, [] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}(); \}\},}
 \DoxyCodeLine{            \{\textcolor{stringliteral}{"cuda"},}
 \DoxyCodeLine{             [] \{}
-\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a8e18adb154a44f90c13d61c1e100e160}{gko::CudaExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(),}
-\DoxyCodeLine{                                                  \textcolor{keyword}{true});}
+\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a6c423656c7c0eb53810cb77bb4a66d15}{gko::CudaExecutor::create}}(0,}
+\DoxyCodeLine{                                                  \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}());}
 \DoxyCodeLine{             \}\},}
 \DoxyCodeLine{            \{\textcolor{stringliteral}{"hip"},}
 \DoxyCodeLine{             [] \{}
-\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_a5ace87d0179ef0ef55b60e78e9c2f897}{gko::HipExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(),}
-\DoxyCodeLine{                                                 \textcolor{keyword}{true});}
+\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_aa0701fe1303e03a8331da7e95008100d}{gko::HipExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}());}
 \DoxyCodeLine{             \}\},}
 \DoxyCodeLine{            \{\textcolor{stringliteral}{"dpcpp"},}
 \DoxyCodeLine{             [] \{}
 \DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1DpcppExecutor_ae9b875dfe3af7f3f3f24071bfb2f895e}{gko::DpcppExecutor::create}}(0,}
-\DoxyCodeLine{                                                   \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}());}
+\DoxyCodeLine{                                                   \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}());}
 \DoxyCodeLine{             \}\},}
 \DoxyCodeLine{            \{\textcolor{stringliteral}{"reference"}, [] \{ \textcolor{keywordflow}{return} gko::ReferenceExecutor::create(); \}\}\};}
 \DoxyCodeLine{}

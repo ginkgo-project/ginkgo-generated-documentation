@@ -1,0 +1,70 @@
+\hypertarget{classgko_1_1CudaAsyncAllocator}{}\doxysection{gko\+::Cuda\+Async\+Allocator Class Reference}
+\label{classgko_1_1CudaAsyncAllocator}\index{gko::CudaAsyncAllocator@{gko::CudaAsyncAllocator}}
+
+
+Inheritance diagram for gko\+::Cuda\+Async\+Allocator\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=218pt]{classgko_1_1CudaAsyncAllocator__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for gko\+::Cuda\+Async\+Allocator\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=218pt]{classgko_1_1CudaAsyncAllocator__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1CudaAsyncAllocator_a858112e99268494ef6d3ec86c4af7db1}\label{classgko_1_1CudaAsyncAllocator_a858112e99268494ef6d3ec86c4af7db1}} 
+void $\ast$ {\bfseries allocate} (\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} num\+\_\+bytes) override
+\item 
+\mbox{\Hypertarget{classgko_1_1CudaAsyncAllocator_ac0bd6aa56791e850ff5082e0d46af939}\label{classgko_1_1CudaAsyncAllocator_ac0bd6aa56791e850ff5082e0d46af939}} 
+void {\bfseries deallocate} (void $\ast$ptr) override
+\item 
+\mbox{\Hypertarget{classgko_1_1CudaAsyncAllocator_a3fbdcd6b399293a2009bd10f8f31badd}\label{classgko_1_1CudaAsyncAllocator_a3fbdcd6b399293a2009bd10f8f31badd}} 
+{\bfseries Cuda\+Async\+Allocator} (C\+Ustream\+\_\+st $\ast$stream)
+\item 
+bool \mbox{\hyperlink{classgko_1_1CudaAsyncAllocator_ade0fbb75c0270b9df4895123965c4a65}{check\+\_\+environment}} (int device\+\_\+id, C\+Ustream\+\_\+st $\ast$stream) const override
+\begin{DoxyCompactList}\small\item\em Checks if the allocator can be used safely with the provided device ID and stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1CudaAsyncAllocator_ade0fbb75c0270b9df4895123965c4a65}\label{classgko_1_1CudaAsyncAllocator_ade0fbb75c0270b9df4895123965c4a65}} 
+\index{gko::CudaAsyncAllocator@{gko::CudaAsyncAllocator}!check\_environment@{check\_environment}}
+\index{check\_environment@{check\_environment}!gko::CudaAsyncAllocator@{gko::CudaAsyncAllocator}}
+\doxysubsubsection{\texorpdfstring{check\_environment()}{check\_environment()}}
+{\footnotesize\ttfamily bool gko\+::\+Cuda\+Async\+Allocator\+::check\+\_\+environment (\begin{DoxyParamCaption}\item[{int}]{device\+\_\+id,  }\item[{C\+Ustream\+\_\+st $\ast$}]{stream }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Checks if the allocator can be used safely with the provided device ID and stream. 
+
+The check is necessary to ensure safe usage of stream-\/ordered allocators and unified shared memory allocators.
+
+
+\begin{DoxyParams}{Parameters}
+{\em device\+\_\+id} & the device ID the allocator will be used in. \\
+\hline
+{\em stream} & the stream the allocator will be used with.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if and only if the allocator can be used by \mbox{\hyperlink{classgko_1_1CudaExecutor}{Cuda\+Executor}} in the given environment. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classgko_1_1CudaAllocatorBase}{gko\+::\+Cuda\+Allocator\+Base}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/base/memory.\+hpp\end{DoxyCompactItemize}
