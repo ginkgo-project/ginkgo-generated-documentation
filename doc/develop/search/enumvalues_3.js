@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['internal_2884',['internal',['../namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27ad1efad72dc5b17dc66a46767c32fff40',1,'gko::log']]]
+  ['internal_2898',['internal',['../namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27ad1efad72dc5b17dc66a46767c32fff40',1,'gko::log']]]
 ];
