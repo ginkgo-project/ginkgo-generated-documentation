@@ -53,6 +53,8 @@ class \mbox{\hyperlink{classgko_1_1array}{array}}
 \begin{DoxyCompactList}\small\item\em An array is a container which encapsulates fixed-\/sized arrays, stored on the \mbox{\hyperlink{classgko_1_1Executor}{Executor}} tied to the array. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1BadDimension}{Bad\+Dimension}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1BadDimension}{Bad\+Dimension}} is thrown if an operation is being applied to a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} with bad dimensions. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structgko_1_1batch__dim}{batch\+\_\+dim}}
+\begin{DoxyCompactList}\small\item\em A type representing the dimensions of a multidimensional batch object. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1BlockSizeError}{Block\+Size\+Error}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1Error}{Error}} that denotes issues between block sizes and matrix dimensions. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1Combination}{Combination}}
@@ -366,6 +368,8 @@ enum \mbox{\hyperlink{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68}{layout\+\_
 \begin{DoxyCompactList}\small\item\em Helper function to create an array view deducing the value type. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Value\+Type $>$ }\\detail\+::const\+\_\+array\+\_\+view$<$ Value\+Type $>$ \mbox{\hyperlink{namespacegko_aaf3c05a831ad72e1383bf393ff43e013}{make\+\_\+const\+\_\+array\+\_\+view}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} size, const Value\+Type $\ast$data)
 \begin{DoxyCompactList}\small\item\em Helper function to create a const array view deducing the value type. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Dimension\+Type $>$ }\\\mbox{\hyperlink{structgko_1_1batch__dim}{batch\+\_\+dim}}$<$ 2, Dimension\+Type $>$ \mbox{\hyperlink{namespacegko_accf17977b47322fff8526d69711e9d7f}{transpose}} (const \mbox{\hyperlink{structgko_1_1batch__dim}{batch\+\_\+dim}}$<$ 2, Dimension\+Type $>$ \&input)
+\begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{structgko_1_1batch__dim}{batch\+\_\+dim}} object with its dimensions swapped for batched operators. \end{DoxyCompactList}\item 
 {\footnotesize template$<$size\+\_\+type Dimensionality, typename Dimension\+Type $>$ }\\constexpr bool \mbox{\hyperlink{namespacegko_a74c3716da36cbedc000aa24006b0bd46}{operator!=}} (const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ Dimensionality, Dimension\+Type $>$ \&x, const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ Dimensionality, Dimension\+Type $>$ \&y)
 \begin{DoxyCompactList}\small\item\em Checks if two dim objects are different. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Dimension\+Type $>$ }\\constexpr \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2, Dimension\+Type $>$ \mbox{\hyperlink{namespacegko_a9b6a9d7018703d6d1f2140054e2afe4a}{transpose}} (const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2, Dimension\+Type $>$ \&dimensions) noexcept
@@ -2922,10 +2926,42 @@ The squared norm of the object.
 
 References conj(), and real().
 
+\mbox{\Hypertarget{namespacegko_accf17977b47322fff8526d69711e9d7f}\label{namespacegko_accf17977b47322fff8526d69711e9d7f}} 
+\index{gko@{gko}!transpose@{transpose}}
+\index{transpose@{transpose}!gko@{gko}}
+\doxysubsubsection{\texorpdfstring{transpose()}{transpose()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Dimension\+Type $>$ \\
+\mbox{\hyperlink{structgko_1_1batch__dim}{batch\+\_\+dim}}$<$2, Dimension\+Type$>$ gko\+::transpose (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structgko_1_1batch__dim}{batch\+\_\+dim}}$<$ 2, Dimension\+Type $>$ \&}]{input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a \mbox{\hyperlink{structgko_1_1batch__dim}{batch\+\_\+dim}} object with its dimensions swapped for batched operators. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Dimension\+Type} & datatype used to represent each dimension\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em dimensions} & original object\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a \mbox{\hyperlink{structgko_1_1batch__dim}{batch\+\_\+dim}} object with dimensions swapped 
+\end{DoxyReturn}
+
+
+References gko\+::batch\+\_\+dim$<$ Dimensionality, Dimension\+Type $>$\+::get\+\_\+common\+\_\+size(), and gko\+::batch\+\_\+dim$<$ Dimensionality, Dimension\+Type $>$\+::get\+\_\+num\+\_\+batch\+\_\+items().
+
+
+
+Referenced by gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type, Index\+Type $>$\+::conj\+\_\+transpose(), gko\+::preconditioner\+::\+Ilu$<$ L\+Solver\+Type, U\+Solver\+Type, Reverse\+Apply, Index\+Type $>$\+::conj\+\_\+transpose(), gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type, Index\+Type $>$\+::transpose(), and gko\+::preconditioner\+::\+Ilu$<$ L\+Solver\+Type, U\+Solver\+Type, Reverse\+Apply, Index\+Type $>$\+::transpose().
+
 \mbox{\Hypertarget{namespacegko_a9b6a9d7018703d6d1f2140054e2afe4a}\label{namespacegko_a9b6a9d7018703d6d1f2140054e2afe4a}} 
 \index{gko@{gko}!transpose@{transpose}}
 \index{transpose@{transpose}!gko@{gko}}
-\doxysubsubsection{\texorpdfstring{transpose()}{transpose()}}
+\doxysubsubsection{\texorpdfstring{transpose()}{transpose()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename Dimension\+Type $>$ \\
 constexpr \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$2, Dimension\+Type$>$ gko\+::transpose (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2, Dimension\+Type $>$ \&}]{dimensions }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
 
@@ -2946,10 +2982,6 @@ Returns a \mbox{\hyperlink{structgko_1_1dim}{dim$<$2$>$}} object with its dimens
 \begin{DoxyReturn}{Returns}
 a \mbox{\hyperlink{structgko_1_1dim}{dim$<$2$>$}} object with its dimensions swapped 
 \end{DoxyReturn}
-
-
-Referenced by gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type, Index\+Type $>$\+::conj\+\_\+transpose(), gko\+::preconditioner\+::\+Ilu$<$ L\+Solver\+Type, U\+Solver\+Type, Reverse\+Apply, Index\+Type $>$\+::conj\+\_\+transpose(), gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type, Index\+Type $>$\+::transpose(), and gko\+::preconditioner\+::\+Ilu$<$ L\+Solver\+Type, U\+Solver\+Type, Reverse\+Apply, Index\+Type $>$\+::transpose().
-
 \mbox{\Hypertarget{namespacegko_ab92d450201f5b215901c0f8c3e2e376c}\label{namespacegko_ab92d450201f5b215901c0f8c3e2e376c}} 
 \index{gko@{gko}!unit\_root@{unit\_root}}
 \index{unit\_root@{unit\_root}!gko@{gko}}

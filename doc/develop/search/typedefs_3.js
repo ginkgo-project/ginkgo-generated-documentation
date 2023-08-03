@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['enabledefaultcriterionfactory_2845',['EnableDefaultCriterionFactory',['../namespacegko_1_1stop.html#ab045b6fd7571f3234d9a63a5ee5a2252',1,'gko::stop']]],
-  ['enabledefaultlinopfactory_2846',['EnableDefaultLinOpFactory',['../group__LinOp.html#ga24628d477cba68b31cea690572c51912',1,'gko']]],
-  ['enabledefaultreorderingbasefactory_2847',['EnableDefaultReorderingBaseFactory',['../namespacegko_1_1reorder.html#a457a6413f53c369d586aeeffb9bcddfd',1,'gko::reorder']]]
+  ['enabledefaultcriterionfactory_2880',['EnableDefaultCriterionFactory',['../namespacegko_1_1stop.html#ab045b6fd7571f3234d9a63a5ee5a2252',1,'gko::stop']]],
+  ['enabledefaultlinopfactory_2881',['EnableDefaultLinOpFactory',['../group__LinOp.html#ga24628d477cba68b31cea690572c51912',1,'gko']]],
+  ['enabledefaultreorderingbasefactory_2882',['EnableDefaultReorderingBaseFactory',['../namespacegko_1_1reorder.html#a457a6413f53c369d586aeeffb9bcddfd',1,'gko::reorder']]]
 ];
