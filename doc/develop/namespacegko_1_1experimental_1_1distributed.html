@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/967763801 branch based on develop. Ginkgo version 1.7.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/971249849 branch based on develop. Ginkgo version 1.7.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -135,6 +135,14 @@ Functions</h2></td></tr>
 <tr class="memitem:a76b1f78aad396f2a87ae070e0b11c1f3"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegko_1_1experimental_1_1distributed.html#a76b1f78aad396f2a87ae070e0b11c1f3">precision_dispatch_real_complex</a> (Function fn, const <a class="el" href="classgko_1_1LinOp.html">LinOp</a> *alpha, const <a class="el" href="classgko_1_1LinOp.html">LinOp</a> *in, const <a class="el" href="classgko_1_1LinOp.html">LinOp</a> *beta, <a class="el" href="classgko_1_1LinOp.html">LinOp</a> *out)</td></tr>
 <tr class="memdesc:a76b1f78aad396f2a87ae070e0b11c1f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls the given function with the given LinOps temporarily converted to experimental::distributed::Vector&lt;ValueType&gt;* as parameters.  <a href="namespacegko_1_1experimental_1_1distributed.html#a76b1f78aad396f2a87ae070e0b11c1f3">More...</a><br /></td></tr>
 <tr class="separator:a76b1f78aad396f2a87ae070e0b11c1f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ec42d4068b89c36be8098b0edeeef1e"><td class="memTemplParams" colspan="2">template&lt;typename LocalIndexType , typename GlobalIndexType &gt; </td></tr>
+<tr class="memitem:a7ec42d4068b89c36be8098b0edeeef1e"><td class="memTemplItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classgko_1_1experimental_1_1distributed_1_1Partition.html">Partition</a>&lt; LocalIndexType, GlobalIndexType &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegko_1_1experimental_1_1distributed.html#a7ec42d4068b89c36be8098b0edeeef1e">build_partition_from_local_range</a> (std::shared_ptr&lt; const <a class="el" href="classgko_1_1Executor.html">Executor</a> &gt; exec, <a class="el" href="classgko_1_1experimental_1_1mpi_1_1communicator.html">mpi::communicator</a> comm, <a class="el" href="structgko_1_1span.html">span</a> local_range)</td></tr>
+<tr class="memdesc:a7ec42d4068b89c36be8098b0edeeef1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds a partition from a local range.  <a href="namespacegko_1_1experimental_1_1distributed.html#a7ec42d4068b89c36be8098b0edeeef1e">More...</a><br /></td></tr>
+<tr class="separator:a7ec42d4068b89c36be8098b0edeeef1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77de4e471064605da5953340f66be48e"><td class="memTemplParams" colspan="2">template&lt;typename LocalIndexType , typename GlobalIndexType &gt; </td></tr>
+<tr class="memitem:a77de4e471064605da5953340f66be48e"><td class="memTemplItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classgko_1_1experimental_1_1distributed_1_1Partition.html">Partition</a>&lt; LocalIndexType, GlobalIndexType &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegko_1_1experimental_1_1distributed.html#a77de4e471064605da5953340f66be48e">build_partition_from_local_size</a> (std::shared_ptr&lt; const <a class="el" href="classgko_1_1Executor.html">Executor</a> &gt; exec, <a class="el" href="classgko_1_1experimental_1_1mpi_1_1communicator.html">mpi::communicator</a> comm, <a class="el" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> local_size)</td></tr>
+<tr class="memdesc:a77de4e471064605da5953340f66be48e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds a partition from a local size.  <a href="namespacegko_1_1experimental_1_1distributed.html#a77de4e471064605da5953340f66be48e">More...</a><br /></td></tr>
+<tr class="separator:a77de4e471064605da5953340f66be48e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The distributed namespace. </p>
@@ -157,6 +165,101 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a7ec42d4068b89c36be8098b0edeeef1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ec42d4068b89c36be8098b0edeeef1e">&#9670;&nbsp;</a></span>build_partition_from_local_range()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename LocalIndexType , typename GlobalIndexType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt;<a class="el" href="classgko_1_1experimental_1_1distributed_1_1Partition.html">Partition</a>&lt;LocalIndexType, GlobalIndexType&gt; &gt; gko::experimental::distributed::build_partition_from_local_range </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; const <a class="el" href="classgko_1_1Executor.html">Executor</a> &gt;&#160;</td>
+          <td class="paramname"><em>exec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classgko_1_1experimental_1_1mpi_1_1communicator.html">mpi::communicator</a>&#160;</td>
+          <td class="paramname"><em>comm</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structgko_1_1span.html">span</a>&#160;</td>
+          <td class="paramname"><em>local_range</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Builds a partition from a local range. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">exec</td><td>the <a class="el" href="classgko_1_1Executor.html" title="The first step in using the Ginkgo library consists of creating an executor.">Executor</a> on which the partition should be built. </td></tr>
+    <tr><td class="paramname">comm</td><td>the communicator used to determine the global partition. </td></tr>
+    <tr><td class="paramname">local_range</td><td>the start and end indices of the local range.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section warning"><dt>Warning</dt><dd>This throws, if the resulting partition would contain gaps. That means that for a partition of size <code>n</code> every local range <code>r_i = [s_i, e_i)</code> either <code>s_i != 0</code> and another local range <code>r_j = [s_j, e_j = s_i)</code> exists, or <code>e_i != n</code> and another local range <code>r_j = [s_j = e_i, e_j)</code> exists.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>a <a class="el" href="classgko_1_1experimental_1_1distributed_1_1Partition.html" title="Represents a partition of a range of indices [0, size) into a disjoint set of parts.">Partition</a> where each range has the individual local_start and local_ends. </dd></dl>
+
+</div>
+</div>
+<a id="a77de4e471064605da5953340f66be48e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77de4e471064605da5953340f66be48e">&#9670;&nbsp;</a></span>build_partition_from_local_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename LocalIndexType , typename GlobalIndexType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt;<a class="el" href="classgko_1_1experimental_1_1distributed_1_1Partition.html">Partition</a>&lt;LocalIndexType, GlobalIndexType&gt; &gt; gko::experimental::distributed::build_partition_from_local_size </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; const <a class="el" href="classgko_1_1Executor.html">Executor</a> &gt;&#160;</td>
+          <td class="paramname"><em>exec</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classgko_1_1experimental_1_1mpi_1_1communicator.html">mpi::communicator</a>&#160;</td>
+          <td class="paramname"><em>comm</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a>&#160;</td>
+          <td class="paramname"><em>local_size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Builds a partition from a local size. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">exec</td><td>the <a class="el" href="classgko_1_1Executor.html" title="The first step in using the Ginkgo library consists of creating an executor.">Executor</a> on which the partition should be built. </td></tr>
+    <tr><td class="paramname">comm</td><td>the communicator used to determine the global partition. </td></tr>
+    <tr><td class="paramname">local_range</td><td>the number of the locally owned indices</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a <a class="el" href="classgko_1_1experimental_1_1distributed_1_1Partition.html" title="Represents a partition of a range of indices [0, size) into a disjoint set of parts.">Partition</a> where each range has the specified local size. More specifically, if this is called on process i with local_size <code>s_i</code>, then the range <code>i</code> has size <code>s_i</code>, and range <code>r_i = [start, start + s_i)</code>, where <code>start = sum_j^(i-1) s_j</code>. </dd></dl>
+
+</div>
+</div>
 <a id="adb6757491deb94230274c72e012de2a1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adb6757491deb94230274c72e012de2a1">&#9670;&nbsp;</a></span>make_temporary_conversion() <span class="overload">[1/2]</span></h2>
 

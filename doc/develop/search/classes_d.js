@@ -1,12 +1,12 @@
 var searchData=
 [
-  ['nested_5fsummary_5fentry_2035',['nested_summary_entry',['../structgko_1_1log_1_1ProfilerHook_1_1nested__summary__entry.html',1,'gko::log::ProfilerHook']]],
-  ['nestedsummarywriter_2036',['NestedSummaryWriter',['../classgko_1_1log_1_1ProfilerHook_1_1NestedSummaryWriter.html',1,'gko::log::ProfilerHook']]],
-  ['not_5fequal_2037',['not_equal',['../structgko_1_1accessor_1_1not__equal.html',1,'gko::accessor']]],
-  ['notcompiled_2038',['NotCompiled',['../classgko_1_1NotCompiled.html',1,'gko']]],
-  ['notimplemented_2039',['NotImplemented',['../classgko_1_1NotImplemented.html',1,'gko']]],
-  ['notsupported_2040',['NotSupported',['../classgko_1_1NotSupported.html',1,'gko']]],
-  ['null_5fdeleter_2041',['null_deleter',['../classgko_1_1null__deleter.html',1,'gko']]],
-  ['null_5fdeleter_3c_20t_5b_5d_3e_2042',['null_deleter&lt; T[]&gt;',['../classgko_1_1null__deleter_3_01T_0f_0e_4.html',1,'gko']]],
-  ['nvidia_5fdevice_2043',['nvidia_device',['../classgko_1_1nvidia__device.html',1,'gko']]]
+  ['nested_5fsummary_5fentry_2037',['nested_summary_entry',['../structgko_1_1log_1_1ProfilerHook_1_1nested__summary__entry.html',1,'gko::log::ProfilerHook']]],
+  ['nestedsummarywriter_2038',['NestedSummaryWriter',['../classgko_1_1log_1_1ProfilerHook_1_1NestedSummaryWriter.html',1,'gko::log::ProfilerHook']]],
+  ['not_5fequal_2039',['not_equal',['../structgko_1_1accessor_1_1not__equal.html',1,'gko::accessor']]],
+  ['notcompiled_2040',['NotCompiled',['../classgko_1_1NotCompiled.html',1,'gko']]],
+  ['notimplemented_2041',['NotImplemented',['../classgko_1_1NotImplemented.html',1,'gko']]],
+  ['notsupported_2042',['NotSupported',['../classgko_1_1NotSupported.html',1,'gko']]],
+  ['null_5fdeleter_2043',['null_deleter',['../classgko_1_1null__deleter.html',1,'gko']]],
+  ['null_5fdeleter_3c_20t_5b_5d_3e_2044',['null_deleter&lt; T[]&gt;',['../classgko_1_1null__deleter_3_01T_0f_0e_4.html',1,'gko']]],
+  ['nvidia_5fdevice_2045',['nvidia_device',['../classgko_1_1nvidia__device.html',1,'gko']]]
 ];

@@ -59,16 +59,16 @@ const local\+\_\+index\+\_\+type $\ast$ \mbox{\hyperlink{classgko_1_1experimenta
 \begin{DoxyCompactList}\small\item\em Returns the part size array. \end{DoxyCompactList}\item 
 local\+\_\+index\+\_\+type \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition_a885a9f1b9d9151c62a44c1081d2d2f68}{get\+\_\+part\+\_\+size}} (\mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a5f06060f58c28612829ebc8ab5bc6511}{comm\+\_\+index\+\_\+type}} part) const
 \begin{DoxyCompactList}\small\item\em Returns the size of a part given by its part ID. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition_a88e4f435a3b3f2d21d4f733591244742}{has\+\_\+connected\+\_\+parts}} ()
+bool \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition_a5ad93372e02e79504c4d35298ba8bf04}{has\+\_\+connected\+\_\+parts}} () const
 \begin{DoxyCompactList}\small\item\em Checks if each part has no more than one contiguous range. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition_a2d978b4b7b5da5bf0a30cf04f87793a6}{has\+\_\+ordered\+\_\+parts}} ()
+bool \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition_ae19a3f932fa504c4ca122c65ac6ea1de}{has\+\_\+ordered\+\_\+parts}} () const
 \begin{DoxyCompactList}\small\item\em Checks if the ranges are ordered by their part index. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{Partition}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition_a196576140065691b5726ce1cb286302c}{build\+\_\+from\+\_\+mapping}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const \mbox{\hyperlink{classgko_1_1array}{array}}$<$ \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a5f06060f58c28612829ebc8ab5bc6511}{comm\+\_\+index\+\_\+type}} $>$ \&mapping, \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a5f06060f58c28612829ebc8ab5bc6511}{comm\+\_\+index\+\_\+type}} num\+\_\+parts)
 \begin{DoxyCompactList}\small\item\em Builds a partition from a given mapping global\+\_\+index -\/$>$ part\+\_\+id. \end{DoxyCompactList}\item 
-static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{Partition}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition_a77d286d04aa2c8443176876a7d265465}{build\+\_\+from\+\_\+contiguous}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const \mbox{\hyperlink{classgko_1_1array}{array}}$<$ global\+\_\+index\+\_\+type $>$ \&ranges)
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{Partition}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition_a0038094af15ee15834ef23e1fed54eca}{build\+\_\+from\+\_\+contiguous}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const \mbox{\hyperlink{classgko_1_1array}{array}}$<$ global\+\_\+index\+\_\+type $>$ \&ranges, const \mbox{\hyperlink{classgko_1_1array}{array}}$<$ \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a5f06060f58c28612829ebc8ab5bc6511}{comm\+\_\+index\+\_\+type}} $>$ \&part\+\_\+ids=\{\})
 \begin{DoxyCompactList}\small\item\em Builds a partition consisting of contiguous ranges, one for each part. \end{DoxyCompactList}\item 
 static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{Partition}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition_a5d0a59afdaaf896490f58e2a840d8d4d}{build\+\_\+from\+\_\+global\+\_\+size\+\_\+uniform}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a5f06060f58c28612829ebc8ab5bc6511}{comm\+\_\+index\+\_\+type}} num\+\_\+parts, global\+\_\+index\+\_\+type global\+\_\+size)
 \begin{DoxyCompactList}\small\item\em Builds a partition by evenly distributing the global range. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -109,11 +109,11 @@ For example, consider the interval \mbox{[}0, 13) that is partitioned into the f
 \begin{DoxyCode}{0}
 \DoxyCodeLine{starting\_index[0] = 0,}
 \DoxyCodeLine{starting\_index[1] = 0,}
-\DoxyCodeLine{starting\_index[2] = 3,  \textcolor{comment}{// second range of part 1}}
+\DoxyCodeLine{starting\_index[2] = 3,  \textcolor{comment}{// second range of part 0}}
 \DoxyCodeLine{starting\_index[3] = 0,}
-\DoxyCodeLine{starting\_index[4] = 5,  \textcolor{comment}{// third range of part 1}}
+\DoxyCodeLine{starting\_index[4] = 5,  \textcolor{comment}{// third range of part 0}}
 \end{DoxyCode}
- which you can use to iterate only over the the second range of part 1 (the third global range) with 
+ which you can use to iterate only over the the second range of part 0 (the third global range) with 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < r[3] -\/ r[2]; ++i)\{}
 \DoxyCodeLine{  data[starting\_index[2] + i] = val;}
@@ -131,12 +131,12 @@ For example, consider the interval \mbox{[}0, 13) that is partitioned into the f
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Partition_a77d286d04aa2c8443176876a7d265465}\label{classgko_1_1experimental_1_1distributed_1_1Partition_a77d286d04aa2c8443176876a7d265465}} 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Partition_a0038094af15ee15834ef23e1fed54eca}\label{classgko_1_1experimental_1_1distributed_1_1Partition_a0038094af15ee15834ef23e1fed54eca}} 
 \index{gko::experimental::distributed::Partition$<$ LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Partition$<$ LocalIndexType, GlobalIndexType $>$}!build\_from\_contiguous@{build\_from\_contiguous}}
 \index{build\_from\_contiguous@{build\_from\_contiguous}!gko::experimental::distributed::Partition$<$ LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Partition$<$ LocalIndexType, GlobalIndexType $>$}}
 \doxysubsubsection{\texorpdfstring{build\_from\_contiguous()}{build\_from\_contiguous()}}
 {\footnotesize\ttfamily template$<$typename Local\+Index\+Type  = int32, typename Global\+Index\+Type  = int64$>$ \\
-static std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{Partition}}$>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{gko\+::experimental\+::distributed\+::\+Partition}}$<$ Local\+Index\+Type, Global\+Index\+Type $>$\+::build\+\_\+from\+\_\+contiguous (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const \mbox{\hyperlink{classgko_1_1array}{array}}$<$ global\+\_\+index\+\_\+type $>$ \&}]{ranges }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+static std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{Partition}}$>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{gko\+::experimental\+::distributed\+::\+Partition}}$<$ Local\+Index\+Type, Global\+Index\+Type $>$\+::build\+\_\+from\+\_\+contiguous (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const \mbox{\hyperlink{classgko_1_1array}{array}}$<$ global\+\_\+index\+\_\+type $>$ \&}]{ranges,  }\item[{const \mbox{\hyperlink{classgko_1_1array}{array}}$<$ \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a5f06060f58c28612829ebc8ab5bc6511}{comm\+\_\+index\+\_\+type}} $>$ \&}]{part\+\_\+ids = {\ttfamily \{\}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -146,7 +146,9 @@ Builds a partition consisting of contiguous ranges, one for each part.
 \begin{DoxyParams}{Parameters}
 {\em exec} & the \mbox{\hyperlink{classgko_1_1Executor}{Executor}} on which the partition should be built \\
 \hline
-{\em ranges} & the boundaries of the ranges representing each part. Part i contains the indices \mbox{[}ranges\mbox{[}i\mbox{]}, ranges\mbox{[}i + 1\mbox{]}). Has to contain at least one element. The first element has to be 0.\\
+{\em ranges} & the boundaries of the ranges representing each part. Part part\+\_\+id\mbox{[}i\mbox{]} contains the indices \mbox{[}ranges\mbox{[}i\mbox{]}, ranges\mbox{[}i + 1\mbox{]}). Has to contain at least one element. The first element has to be 0. \\
+\hline
+{\em part\+\_\+ids} & the part ids of the provided ranges. If empty, then it will assume range i belongs to part i.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -371,12 +373,12 @@ Returns the total number of elements represented by this partition.
 \begin{DoxyReturn}{Returns}
 number elements. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Partition_a88e4f435a3b3f2d21d4f733591244742}\label{classgko_1_1experimental_1_1distributed_1_1Partition_a88e4f435a3b3f2d21d4f733591244742}} 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Partition_a5ad93372e02e79504c4d35298ba8bf04}\label{classgko_1_1experimental_1_1distributed_1_1Partition_a5ad93372e02e79504c4d35298ba8bf04}} 
 \index{gko::experimental::distributed::Partition$<$ LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Partition$<$ LocalIndexType, GlobalIndexType $>$}!has\_connected\_parts@{has\_connected\_parts}}
 \index{has\_connected\_parts@{has\_connected\_parts}!gko::experimental::distributed::Partition$<$ LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Partition$<$ LocalIndexType, GlobalIndexType $>$}}
 \doxysubsubsection{\texorpdfstring{has\_connected\_parts()}{has\_connected\_parts()}}
 {\footnotesize\ttfamily template$<$typename Local\+Index\+Type  = int32, typename Global\+Index\+Type  = int64$>$ \\
-bool \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{gko\+::experimental\+::distributed\+::\+Partition}}$<$ Local\+Index\+Type, Global\+Index\+Type $>$\+::has\+\_\+connected\+\_\+parts (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+bool \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{gko\+::experimental\+::distributed\+::\+Partition}}$<$ Local\+Index\+Type, Global\+Index\+Type $>$\+::has\+\_\+connected\+\_\+parts (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
 
 
 
@@ -385,12 +387,12 @@ Checks if each part has no more than one contiguous range.
 \begin{DoxyReturn}{Returns}
 true if each part has no more than one contiguous range. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Partition_a2d978b4b7b5da5bf0a30cf04f87793a6}\label{classgko_1_1experimental_1_1distributed_1_1Partition_a2d978b4b7b5da5bf0a30cf04f87793a6}} 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Partition_ae19a3f932fa504c4ca122c65ac6ea1de}\label{classgko_1_1experimental_1_1distributed_1_1Partition_ae19a3f932fa504c4ca122c65ac6ea1de}} 
 \index{gko::experimental::distributed::Partition$<$ LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Partition$<$ LocalIndexType, GlobalIndexType $>$}!has\_ordered\_parts@{has\_ordered\_parts}}
 \index{has\_ordered\_parts@{has\_ordered\_parts}!gko::experimental::distributed::Partition$<$ LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Partition$<$ LocalIndexType, GlobalIndexType $>$}}
 \doxysubsubsection{\texorpdfstring{has\_ordered\_parts()}{has\_ordered\_parts()}}
 {\footnotesize\ttfamily template$<$typename Local\+Index\+Type  = int32, typename Global\+Index\+Type  = int64$>$ \\
-bool \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{gko\+::experimental\+::distributed\+::\+Partition}}$<$ Local\+Index\+Type, Global\+Index\+Type $>$\+::has\+\_\+ordered\+\_\+parts (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+bool \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{gko\+::experimental\+::distributed\+::\+Partition}}$<$ Local\+Index\+Type, Global\+Index\+Type $>$\+::has\+\_\+ordered\+\_\+parts (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
 
 
 
