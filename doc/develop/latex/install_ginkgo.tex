@@ -18,7 +18,7 @@ Replace {\ttfamily \mbox{[}O\+P\+T\+I\+O\+NS\mbox{]}} with desired cmake options
 \item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+M\+I\+X\+E\+D\+\_\+\+P\+R\+E\+C\+I\+S\+I\+ON=\{ON, O\+FF\}} compiles true mixed-\/precision kernels instead of converting data on the fly, default is {\ttfamily O\+FF}. Enabling this flag increases the library size, but improves performance of mixed-\/precision kernels.
 \item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+B\+U\+I\+L\+D\+\_\+\+T\+E\+S\+TS=\{ON, O\+FF\}} builds Ginkgo\textquotesingle{}s tests (will download googletest), default is {\ttfamily ON}.
 \item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+F\+A\+S\+T\+\_\+\+T\+E\+S\+TS=\{ON, O\+FF\}} reduces the input sizes for a few slow tests to speed them up, default is {\ttfamily O\+FF}.
-\item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+B\+U\+I\+L\+D\+\_\+\+B\+E\+N\+C\+H\+M\+A\+R\+KS=\{ON, O\+FF\}} builds Ginkgo\textquotesingle{}s benchmarks (will download gflags and rapidjson), default is {\ttfamily ON}.
+\item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+B\+U\+I\+L\+D\+\_\+\+B\+E\+N\+C\+H\+M\+A\+R\+KS=\{ON, O\+FF\}} builds Ginkgo\textquotesingle{}s benchmarks (will download gflags and nlohmann-\/json), default is {\ttfamily ON}.
 \item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+B\+U\+I\+L\+D\+\_\+\+E\+X\+A\+M\+P\+L\+ES=\{ON, O\+FF\}} builds Ginkgo\textquotesingle{}s examples, default is {\ttfamily ON}
 \item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+B\+U\+I\+L\+D\+\_\+\+E\+X\+T\+L\+I\+B\+\_\+\+E\+X\+A\+M\+P\+LE=\{ON, O\+FF\}} builds the interfacing example with deal.\+II, default is {\ttfamily O\+FF}.
 \item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+B\+U\+I\+L\+D\+\_\+\+R\+E\+F\+E\+R\+E\+N\+CE=\{ON, O\+FF\}} build reference implementations of the kernels, useful for testing, default is {\ttfamily ON}
@@ -105,7 +105,7 @@ Ginkgo relies on third party packages in different cases. These third party pack
 
 \begin{DoxyItemize}
 \item G\+I\+N\+K\+G\+O\+\_\+\+B\+U\+I\+L\+D\+\_\+\+T\+E\+S\+TS=ON\+: Our tests are implemented with \href{https://github.com/google/googletest}{\texttt{ Google Test}};
-\item G\+I\+N\+K\+G\+O\+\_\+\+B\+U\+I\+L\+D\+\_\+\+B\+E\+N\+C\+H\+M\+A\+R\+KS=ON\+: For argument management we use \href{https://github.com/gflags/gflags}{\texttt{ gflags}} and for J\+S\+ON parsing we use \href{https://github.com/Tencent/rapidjson}{\texttt{ Rapid\+J\+S\+ON}};
+\item G\+I\+N\+K\+G\+O\+\_\+\+B\+U\+I\+L\+D\+\_\+\+B\+E\+N\+C\+H\+M\+A\+R\+KS=ON\+: For argument management we use \href{https://github.com/gflags/gflags}{\texttt{ gflags}} and for J\+S\+ON parsing we use \href{https://github.com/nlohmann/json}{\texttt{ nlohmann-\/json}};
 \item G\+I\+N\+K\+G\+O\+\_\+\+D\+E\+V\+E\+L\+\_\+\+T\+O\+O\+LS=ON\+: \href{https://github.com/gflegar/git-cmake-format}{\texttt{ git-\/cmake-\/format}} is our C\+Make helper for code formatting.
 \item G\+I\+N\+K\+G\+O\+\_\+\+B\+U\+I\+L\+D\+\_\+\+H\+W\+L\+OC=ON\+: \href{https://www.open-mpi.org/projects/hwloc}{\texttt{ hwloc}} to detect and control cores and devices.
 \item G\+I\+N\+K\+G\+O\+\_\+\+B\+U\+I\+L\+D\+\_\+\+H\+W\+L\+OC=ON and G\+I\+N\+K\+G\+O\+\_\+\+B\+U\+I\+L\+D\+\_\+\+T\+E\+S\+TS=ON\+: \href{https://www.man7.org/linux/man-pages/man3/numa.3.html}{\texttt{ libnuma}} is required when testing the functions provided through Machine\+Topology.
@@ -113,7 +113,7 @@ Ginkgo relies on third party packages in different cases. These third party pack
 \item G\+I\+N\+K\+G\+O\+\_\+\+B\+U\+I\+L\+D\+\_\+\+D\+OC=ON\+: \href{https://www.doxygen.nl/}{\texttt{ doxygen}} is required to build the documentation and additionally \href{https://graphviz.org/}{\texttt{ graphviz}} is required to build the class hierarchy graphs.
 \end{DoxyItemize}
 
-Ginkgo attempts to use pre-\/installed versions of these package if they match version requirements using {\ttfamily find\+\_\+package}. Otherwise, the configuration step will download the files for each of the packages {\ttfamily G\+Test}, {\ttfamily gflags}, {\ttfamily Rapid\+J\+S\+ON} and {\ttfamily hwloc} and build them internally.
+Ginkgo attempts to use pre-\/installed versions of these package if they match version requirements using {\ttfamily find\+\_\+package}. Otherwise, the configuration step will download the files for each of the packages {\ttfamily G\+Test}, {\ttfamily gflags}, {\ttfamily nlohmann-\/json} and {\ttfamily hwloc} and build them internally.
 
 Note that, if the external packages were not installed to the default location, the C\+Make option {\ttfamily -\/D\+C\+M\+A\+K\+E\+\_\+\+P\+R\+E\+F\+I\+X\+\_\+\+P\+A\+TH=$<$path-\/list$>$} needs to be set to the semicolon ({\ttfamily ;}) separated list of install paths of these external packages. For more Information, see the \href{https://cmake.org/cmake/help/v3.9/variable/CMAKE_PREFIX_PATH.html}{\texttt{ C\+Make documentation for C\+M\+A\+K\+E\+\_\+\+P\+R\+E\+F\+I\+X\+\_\+\+P\+A\+TH}} for details.
 
