@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1026035075 branch based on develop. Ginkgo version 1.7.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1030476392 branch based on develop. Ginkgo version 1.7.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -174,15 +174,13 @@ Triangular Solves" (Göbel, Anzt, Cojean, Flegar, Quintana-Ortí, Euro-Par 2020)
 <div class="line"><span class="keyword">auto</span> trisolve_factory =</div>
 <div class="line">    ir::build()</div>
 <div class="line">        .with_solver(bj_factory)</div>
-<div class="line">        .with_criteria(</div>
-<div class="line">            gko::stop::Iteration::build().with_max_iters(sweeps).on(exec))</div>
+<div class="line">        .with_criteria(gko::stop::Iteration::build().with_max_iters(sweeps))</div>
 <div class="line">        .on(exec);</div>
 </div><!-- fragment --><p>Generate an ILU preconditioner factory by setting lower and upper triangular solver - in this case the previously defined iterative refinement method.</p>
-<div class="fragment"><div class="line"><span class="keyword">auto</span> ilu_pre_factory =</div>
-<div class="line">    <a class="code" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu&lt;ir, ir&gt;::build</a>()</div>
-<div class="line">        .with_l_solver_factory(<a class="code" href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a>(trisolve_factory))</div>
-<div class="line">        .with_u_solver_factory(<a class="code" href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a>(trisolve_factory))</div>
-<div class="line">        .on(exec);</div>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> ilu_pre_factory = <a class="code" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu&lt;ir, ir&gt;::build</a>()</div>
+<div class="line">                           .with_l_solver(<a class="code" href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a>(trisolve_factory))</div>
+<div class="line">                           .with_u_solver(<a class="code" href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a>(trisolve_factory))</div>
+<div class="line">                           .on(exec);</div>
 </div><!-- fragment --><p>Use incomplete factors to generate ILU preconditioner</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> ilu_preconditioner = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a>(ilu_pre_factory-&gt;generate(par_ilu));</div>
 </div><!-- fragment --><p>Create stopping criteria for Gmres</p>
@@ -372,15 +370,13 @@ Triangular Solves" (Göbel, Anzt, Cojean, Flegar, Quintana-Ortí, Euro-Par 2020)
 <div class="line">    <span class="keyword">auto</span> trisolve_factory =</div>
 <div class="line">        ir::build()</div>
 <div class="line">            .with_solver(bj_factory)</div>
-<div class="line">            .with_criteria(</div>
-<div class="line">                gko::stop::Iteration::build().with_max_iters(sweeps).on(exec))</div>
+<div class="line">            .with_criteria(gko::stop::Iteration::build().with_max_iters(sweeps))</div>
 <div class="line">            .on(exec);</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">auto</span> ilu_pre_factory =</div>
-<div class="line">        <a class="code" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu&lt;ir, ir&gt;::build</a>()</div>
-<div class="line">            .with_l_solver_factory(<a class="code" href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a>(trisolve_factory))</div>
-<div class="line">            .with_u_solver_factory(<a class="code" href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a>(trisolve_factory))</div>
-<div class="line">            .on(exec);</div>
+<div class="line">    <span class="keyword">auto</span> ilu_pre_factory = <a class="code" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu&lt;ir, ir&gt;::build</a>()</div>
+<div class="line">                               .with_l_solver(<a class="code" href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a>(trisolve_factory))</div>
+<div class="line">                               .with_u_solver(<a class="code" href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a>(trisolve_factory))</div>
+<div class="line">                               .on(exec);</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">auto</span> ilu_preconditioner = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a>(ilu_pre_factory-&gt;generate(par_ilu));</div>
 <div class="line"> </div>

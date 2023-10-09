@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1026035075 branch based on develop. Ginkgo version 1.7.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1030476392 branch based on develop. Ginkgo version 1.7.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -172,11 +172,9 @@ $(function() {
 <div class="fragment"><div class="line"><span class="keyword">const</span> RealValueType reduction_factor{1e-7};</div>
 <div class="line"><span class="keyword">auto</span> solver_gen =</div>
 <div class="line">    cg::build()</div>
-<div class="line">        .with_criteria(</div>
-<div class="line">            gko::stop::Iteration::build().with_max_iters(20u).on(exec),</div>
-<div class="line">            <a class="code" href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm&lt;ValueType&gt;::build</a>()</div>
-<div class="line">                .with_reduction_factor(reduction_factor)</div>
-<div class="line">                .on(exec))</div>
+<div class="line">        .with_criteria(gko::stop::Iteration::build().with_max_iters(20u),</div>
+<div class="line">                       <a class="code" href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm&lt;ValueType&gt;::build</a>()</div>
+<div class="line">                           .with_reduction_factor(reduction_factor))</div>
 <div class="line">        .on(exec);</div>
 </div><!-- fragment --><p>Generate the solver from the matrix. The solver factory built in the previous step takes a "matrix"(a <a class="el" href="classgko_1_1LinOp.html">gko::LinOp</a> to be more general) as an input. In this case we provide it with a full matrix that we previously read, but as the solver only effectively uses the apply() method within the provided "matrix" object, you can effectively create a <a class="el" href="classgko_1_1LinOp.html">gko::LinOp</a> class with your own apply implementation to accomplish more tasks. We will see an example of how this can be done in the custom-matrix-format example</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a">solver</a> = solver_gen-&gt;generate(A);</div>
@@ -312,11 +310,9 @@ $(function() {
 <div class="line">    <span class="keyword">const</span> RealValueType reduction_factor{1e-7};</div>
 <div class="line">    <span class="keyword">auto</span> solver_gen =</div>
 <div class="line">        cg::build()</div>
-<div class="line">            .with_criteria(</div>
-<div class="line">                gko::stop::Iteration::build().with_max_iters(20u).on(exec),</div>
-<div class="line">                <a class="code" href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm&lt;ValueType&gt;::build</a>()</div>
-<div class="line">                    .with_reduction_factor(reduction_factor)</div>
-<div class="line">                    .on(exec))</div>
+<div class="line">            .with_criteria(gko::stop::Iteration::build().with_max_iters(20u),</div>
+<div class="line">                           <a class="code" href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm&lt;ValueType&gt;::build</a>()</div>
+<div class="line">                               .with_reduction_factor(reduction_factor))</div>
 <div class="line">            .on(exec);</div>
 <div class="line">    <span class="keyword">auto</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a">solver</a> = solver_gen-&gt;generate(A);</div>
 <div class="line"> </div>

@@ -150,8 +150,7 @@ Generate an iterative refinement factory to be used as a triangular solver in th
 \DoxyCodeLine{\textcolor{keyword}{auto} trisolve\_factory =}
 \DoxyCodeLine{    ir::build()}
 \DoxyCodeLine{        .with\_solver(bj\_factory)}
-\DoxyCodeLine{        .with\_criteria(}
-\DoxyCodeLine{            gko::stop::Iteration::build().with\_max\_iters(sweeps).on(exec))}
+\DoxyCodeLine{        .with\_criteria(gko::stop::Iteration::build().with\_max\_iters(sweeps))}
 \DoxyCodeLine{        .on(exec);}
 \end{DoxyCode}
 
@@ -160,11 +159,10 @@ Generate an I\+LU preconditioner factory by setting lower and upper triangular s
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{auto} ilu\_pre\_factory =}
-\DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{gko::preconditioner::Ilu<ir, ir>::build}}()}
-\DoxyCodeLine{        .with\_l\_solver\_factory(\mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(trisolve\_factory))}
-\DoxyCodeLine{        .with\_u\_solver\_factory(\mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(trisolve\_factory))}
-\DoxyCodeLine{        .on(exec);}
+\DoxyCodeLine{\textcolor{keyword}{auto} ilu\_pre\_factory = \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{gko::preconditioner::Ilu<ir, ir>::build}}()}
+\DoxyCodeLine{                           .with\_l\_solver(\mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(trisolve\_factory))}
+\DoxyCodeLine{                           .with\_u\_solver(\mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(trisolve\_factory))}
+\DoxyCodeLine{                           .on(exec);}
 \end{DoxyCode}
 
 
@@ -423,15 +421,13 @@ This is the expected output\+:
 \DoxyCodeLine{    \textcolor{keyword}{auto} trisolve\_factory =}
 \DoxyCodeLine{        ir::build()}
 \DoxyCodeLine{            .with\_solver(bj\_factory)}
-\DoxyCodeLine{            .with\_criteria(}
-\DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(sweeps).on(exec))}
+\DoxyCodeLine{            .with\_criteria(gko::stop::Iteration::build().with\_max\_iters(sweeps))}
 \DoxyCodeLine{            .on(exec);}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{auto} ilu\_pre\_factory =}
-\DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{gko::preconditioner::Ilu<ir, ir>::build}}()}
-\DoxyCodeLine{            .with\_l\_solver\_factory(\mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(trisolve\_factory))}
-\DoxyCodeLine{            .with\_u\_solver\_factory(\mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(trisolve\_factory))}
-\DoxyCodeLine{            .on(exec);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} ilu\_pre\_factory = \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{gko::preconditioner::Ilu<ir, ir>::build}}()}
+\DoxyCodeLine{                               .with\_l\_solver(\mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(trisolve\_factory))}
+\DoxyCodeLine{                               .with\_u\_solver(\mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(trisolve\_factory))}
+\DoxyCodeLine{                               .on(exec);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} ilu\_preconditioner = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(ilu\_pre\_factory-\/>generate(par\_ilu));}
 \DoxyCodeLine{}

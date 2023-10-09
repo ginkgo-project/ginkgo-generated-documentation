@@ -347,12 +347,10 @@ Generate solver
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{auto} solver\_gen =}
 \DoxyCodeLine{    cg::build()}
-\DoxyCodeLine{        .with\_criteria(}
-\DoxyCodeLine{            gko::stop::Iteration::build().with\_max\_iters(dp\_2).on(exec),}
-\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                .with\_reduction\_factor(reduction\_factor)}
-\DoxyCodeLine{                .on(exec))}
-\DoxyCodeLine{        .with\_preconditioner(bj::build().on(exec))}
+\DoxyCodeLine{        .with\_criteria(gko::stop::Iteration::build().with\_max\_iters(dp\_2),}
+\DoxyCodeLine{                       \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                           .with\_reduction\_factor(reduction\_factor))}
+\DoxyCodeLine{        .with\_preconditioner(bj::build())}
 \DoxyCodeLine{        .on(exec);}
 \DoxyCodeLine{\textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}} = solver\_gen-\/>generate(\mbox{\hyperlink{namespacegko_acbd3fd6d07e498892881e8e2ab0b4167}{gko::give}}(matrix));}
 \end{DoxyCode}
@@ -762,12 +760,10 @@ The expected output should be
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} solver\_gen =}
 \DoxyCodeLine{        cg::build()}
-\DoxyCodeLine{            .with\_criteria(}
-\DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(dp\_2).on(exec),}
-\DoxyCodeLine{                \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                    .with\_reduction\_factor(reduction\_factor)}
-\DoxyCodeLine{                    .on(exec))}
-\DoxyCodeLine{            .with\_preconditioner(bj::build().on(exec))}
+\DoxyCodeLine{            .with\_criteria(gko::stop::Iteration::build().with\_max\_iters(dp\_2),}
+\DoxyCodeLine{                           \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                               .with\_reduction\_factor(reduction\_factor))}
+\DoxyCodeLine{            .with\_preconditioner(bj::build())}
 \DoxyCodeLine{            .on(exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}} = solver\_gen-\/>generate(\mbox{\hyperlink{namespacegko_acbd3fd6d07e498892881e8e2ab0b4167}{gko::give}}(matrix));}
 \DoxyCodeLine{}

@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1026035075 branch based on develop. Ginkgo version 1.7.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1030476392 branch based on develop. Ginkgo version 1.7.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -285,9 +285,6 @@ Macros</h2></td></tr>
 <tr class="memitem:ga1fc8e9d8be0c9ad2d72bc1ddfc6d8358"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__LinOp.html#ga1fc8e9d8be0c9ad2d72bc1ddfc6d8358">GKO_CREATE_FACTORY_PARAMETERS</a>(_parameters_name,  _factory_name)</td></tr>
 <tr class="memdesc:ga1fc8e9d8be0c9ad2d72bc1ddfc6d8358"><td class="mdescLeft">&#160;</td><td class="mdescRight">This Macro will generate a new type containing the parameters for the factory <code>_factory_name</code>.  <a href="group__LinOp.html#ga1fc8e9d8be0c9ad2d72bc1ddfc6d8358">More...</a><br /></td></tr>
 <tr class="separator:ga1fc8e9d8be0c9ad2d72bc1ddfc6d8358"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8e0af90ec2414b768266f77cedffc309"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__LinOp.html#ga8e0af90ec2414b768266f77cedffc309">GKO_ENABLE_LIN_OP_FACTORY</a>(_lin_op,  _parameters_name,  _factory_name)</td></tr>
-<tr class="memdesc:ga8e0af90ec2414b768266f77cedffc309"><td class="mdescLeft">&#160;</td><td class="mdescRight">This macro will generate a default implementation of a LinOpFactory for the LinOp subclass it is defined in.  <a href="group__LinOp.html#ga8e0af90ec2414b768266f77cedffc309">More...</a><br /></td></tr>
-<tr class="separator:ga8e0af90ec2414b768266f77cedffc309"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga521f65604cc4cf427dcb2ecfa49b757c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__LinOp.html#ga521f65604cc4cf427dcb2ecfa49b757c">GKO_ENABLE_BUILD_METHOD</a>(_factory_name)</td></tr>
 <tr class="memdesc:ga521f65604cc4cf427dcb2ecfa49b757c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a build method for the factory, simplifying its construction by removing the repetitive typing of factory's name.  <a href="group__LinOp.html#ga521f65604cc4cf427dcb2ecfa49b757c">More...</a><br /></td></tr>
 <tr class="separator:ga521f65604cc4cf427dcb2ecfa49b757c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -300,6 +297,9 @@ Macros</h2></td></tr>
 <tr class="memitem:gaa292314d27ec1fb7ad54debaa3606ea8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__LinOp.html#gaa292314d27ec1fb7ad54debaa3606ea8">GKO_FACTORY_PARAMETER_VECTOR</a>(_name, ...)&#160;&#160;&#160;<a class="el" href="group__LinOp.html#gaa037309884bbd0562b897cee95dd91c8">GKO_FACTORY_PARAMETER</a>(_name, __VA_ARGS__)</td></tr>
 <tr class="memdesc:gaa292314d27ec1fb7ad54debaa3606ea8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a vector factory parameter in the factory parameters structure.  <a href="group__LinOp.html#gaa292314d27ec1fb7ad54debaa3606ea8">More...</a><br /></td></tr>
 <tr class="separator:gaa292314d27ec1fb7ad54debaa3606ea8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8e0af90ec2414b768266f77cedffc309"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__LinOp.html#ga8e0af90ec2414b768266f77cedffc309">GKO_ENABLE_LIN_OP_FACTORY</a>(_lin_op,  _parameters_name,  _factory_name)</td></tr>
+<tr class="memdesc:ga8e0af90ec2414b768266f77cedffc309"><td class="mdescLeft">&#160;</td><td class="mdescRight">This macro will generate a default implementation of a LinOpFactory for the LinOp subclass it is defined in.  <a href="group__LinOp.html#ga8e0af90ec2414b768266f77cedffc309">More...</a><br /></td></tr>
+<tr class="separator:ga8e0af90ec2414b768266f77cedffc309"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -532,8 +532,7 @@ Linear operator as a concept</h1>
 <b>Value:</b><div class="fragment"><div class="line"><span class="keyword">mutable</span> _name{__VA_ARGS__};                                              \</div>
 <div class="line">                                                                             \</div>
 <div class="line">    template &lt;<span class="keyword">typename</span>... Args&gt;                                              \</div>
-<div class="line">    auto with_##_name(Args&amp;&amp;... _value)                                      \</div>
-<div class="line">        const-&gt;const std::decay_t&lt;decltype(*<span class="keyword">this</span>)&gt;&amp;                          \</div>
+<div class="line">    auto with_##_name(Args&amp;&amp;... _value)-&gt;std::decay_t&lt;decltype(*<span class="keyword">this</span>)&gt;&amp;      \</div>
 <div class="line">    {                                                                        \</div>
 <div class="line">        using type = decltype(this-&gt;_name);                                  \</div>
 <div class="line">        this-&gt;_name = type{std::forward&lt;Args&gt;(_value)...};                   \</div>

@@ -273,13 +273,11 @@ Generate solver and solve the system
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{    cg::build()}
-\DoxyCodeLine{        .with\_criteria(gko::stop::Iteration::build()}
-\DoxyCodeLine{                           .with\_max\_iters(discretization\_points)}
-\DoxyCodeLine{                           .on(exec),}
-\DoxyCodeLine{                       \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                           .with\_reduction\_factor(reduction\_factor)}
-\DoxyCodeLine{                           .on(exec))}
-\DoxyCodeLine{        .with\_preconditioner(bj::build().on(exec))}
+\DoxyCodeLine{        .with\_criteria(}
+\DoxyCodeLine{            gko::stop::Iteration::build().with\_max\_iters(discretization\_points),}
+\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}().with\_reduction\_factor(}
+\DoxyCodeLine{                reduction\_factor))}
+\DoxyCodeLine{        .with\_preconditioner(bj::build())}
 \DoxyCodeLine{        .on(exec)}
 \DoxyCodeLine{        -\/>generate(A)}
 \DoxyCodeLine{        -\/>apply(rhs, u);}
@@ -495,13 +493,11 @@ The actual error depends on the used hardware. \label{_PlainProg}%
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{const} RealValueType reduction\_factor\{1e-\/7\};}
 \DoxyCodeLine{    cg::build()}
-\DoxyCodeLine{        .with\_criteria(gko::stop::Iteration::build()}
-\DoxyCodeLine{                           .with\_max\_iters(discretization\_points)}
-\DoxyCodeLine{                           .on(exec),}
-\DoxyCodeLine{                       \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                           .with\_reduction\_factor(reduction\_factor)}
-\DoxyCodeLine{                           .on(exec))}
-\DoxyCodeLine{        .with\_preconditioner(bj::build().on(exec))}
+\DoxyCodeLine{        .with\_criteria(}
+\DoxyCodeLine{            gko::stop::Iteration::build().with\_max\_iters(discretization\_points),}
+\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}().with\_reduction\_factor(}
+\DoxyCodeLine{                reduction\_factor))}
+\DoxyCodeLine{        .with\_preconditioner(bj::build())}
 \DoxyCodeLine{        .on(exec)}
 \DoxyCodeLine{        -\/>generate(A)}
 \DoxyCodeLine{        -\/>apply(rhs, u);}

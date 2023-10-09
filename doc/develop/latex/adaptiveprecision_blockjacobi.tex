@@ -139,11 +139,9 @@ Create solver factory
 \DoxyCodeLine{\textcolor{keyword}{const} RealValueType reduction\_factor = 1e-\/7;}
 \DoxyCodeLine{\textcolor{keyword}{auto} solver\_gen =}
 \DoxyCodeLine{    cg::build()}
-\DoxyCodeLine{        .with\_criteria(}
-\DoxyCodeLine{            gko::stop::Iteration::build().with\_max\_iters(10000u).on(exec),}
-\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                .with\_reduction\_factor(reduction\_factor)}
-\DoxyCodeLine{                .on(exec))}
+\DoxyCodeLine{        .with\_criteria(gko::stop::Iteration::build().with\_max\_iters(10000u),}
+\DoxyCodeLine{                       \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                           .with\_reduction\_factor(reduction\_factor))}
 \end{DoxyCode}
 
 
@@ -151,11 +149,9 @@ Add preconditioner, these 2 lines are the only difference from the simple solver
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{.with\_preconditioner(bj::build()}
-\DoxyCodeLine{                         .with\_max\_block\_size(16u)}
-\DoxyCodeLine{                         .with\_storage\_optimization(}
-\DoxyCodeLine{                             \mbox{\hyperlink{classgko_1_1precision__reduction_a1fde4dd48fab015698c1616408f3ef81}{gko::precision\_reduction::autodetect}}())}
-\DoxyCodeLine{                         .on(exec))}
+\DoxyCodeLine{.with\_preconditioner(}
+\DoxyCodeLine{    bj::build().with\_max\_block\_size(16u).with\_storage\_optimization(}
+\DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1precision__reduction_a1fde4dd48fab015698c1616408f3ef81}{gko::precision\_reduction::autodetect}}()))}
 \DoxyCodeLine{.on(exec);}
 \end{DoxyCode}
 
@@ -345,16 +341,12 @@ This is the expected output\+:
 \DoxyCodeLine{    \textcolor{keyword}{const} RealValueType reduction\_factor = 1e-\/7;}
 \DoxyCodeLine{    \textcolor{keyword}{auto} solver\_gen =}
 \DoxyCodeLine{        cg::build()}
-\DoxyCodeLine{            .with\_criteria(}
-\DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(10000u).on(exec),}
-\DoxyCodeLine{                \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                    .with\_reduction\_factor(reduction\_factor)}
-\DoxyCodeLine{                    .on(exec))}
-\DoxyCodeLine{            .with\_preconditioner(bj::build()}
-\DoxyCodeLine{                                     .with\_max\_block\_size(16u)}
-\DoxyCodeLine{                                     .with\_storage\_optimization(}
-\DoxyCodeLine{                                         \mbox{\hyperlink{classgko_1_1precision__reduction_a1fde4dd48fab015698c1616408f3ef81}{gko::precision\_reduction::autodetect}}())}
-\DoxyCodeLine{                                     .on(exec))}
+\DoxyCodeLine{            .with\_criteria(gko::stop::Iteration::build().with\_max\_iters(10000u),}
+\DoxyCodeLine{                           \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                               .with\_reduction\_factor(reduction\_factor))}
+\DoxyCodeLine{            .with\_preconditioner(}
+\DoxyCodeLine{                bj::build().with\_max\_block\_size(16u).with\_storage\_optimization(}
+\DoxyCodeLine{                    \mbox{\hyperlink{classgko_1_1precision__reduction_a1fde4dd48fab015698c1616408f3ef81}{gko::precision\_reduction::autodetect}}()))}
 \DoxyCodeLine{            .on(exec);}
 \DoxyCodeLine{    std::shared\_ptr<const gko::log::Convergence<ValueType>> logger =}
 \DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1log_1_1Convergence_aa67955ea9d1d18f15f0330d12b93d330}{gko::log::Convergence<ValueType>::create}}();}

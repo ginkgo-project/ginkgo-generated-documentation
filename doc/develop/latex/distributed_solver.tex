@@ -310,19 +310,15 @@ Setup the stopping criterion and logger
 \DoxyCodeLine{\textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} reduction\_factor\{1e-\/8\};}
 \DoxyCodeLine{std::shared\_ptr<const gko::log::Convergence<ValueType>> logger =}
 \DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1log_1_1Convergence_aa67955ea9d1d18f15f0330d12b93d330}{gko::log::Convergence<ValueType>::create}}();}
-\DoxyCodeLine{\textcolor{keyword}{auto} Ainv =}
-\DoxyCodeLine{    solver::build()}
-\DoxyCodeLine{        .with\_preconditioner(schwarz::build()}
-\DoxyCodeLine{                                 .with\_local\_solver\_factory(local\_solver)}
-\DoxyCodeLine{                                 .on(exec))}
-\DoxyCodeLine{        .with\_criteria(}
-\DoxyCodeLine{            gko::stop::Iteration::build().with\_max\_iters(num\_iters).on(}
-\DoxyCodeLine{                exec),}
-\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                .with\_reduction\_factor(reduction\_factor)}
-\DoxyCodeLine{                .on(exec))}
-\DoxyCodeLine{        .on(exec)}
-\DoxyCodeLine{        -\/>generate(A);}
+\DoxyCodeLine{\textcolor{keyword}{auto} Ainv = solver::build()}
+\DoxyCodeLine{                .with\_preconditioner(}
+\DoxyCodeLine{                    schwarz::build().with\_local\_solver(local\_solver))}
+\DoxyCodeLine{                .with\_criteria(}
+\DoxyCodeLine{                    gko::stop::Iteration::build().with\_max\_iters(num\_iters),}
+\DoxyCodeLine{                    \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                        .with\_reduction\_factor(reduction\_factor))}
+\DoxyCodeLine{                .on(exec)}
+\DoxyCodeLine{                -\/>generate(A);}
 \end{DoxyCode}
 
 
@@ -595,19 +591,15 @@ The timings may vary depending on the machine. \label{_PlainProg}%
 \DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} reduction\_factor\{1e-\/8\};}
 \DoxyCodeLine{    std::shared\_ptr<const gko::log::Convergence<ValueType>> logger =}
 \DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1log_1_1Convergence_aa67955ea9d1d18f15f0330d12b93d330}{gko::log::Convergence<ValueType>::create}}();}
-\DoxyCodeLine{    \textcolor{keyword}{auto} Ainv =}
-\DoxyCodeLine{        solver::build()}
-\DoxyCodeLine{            .with\_preconditioner(schwarz::build()}
-\DoxyCodeLine{                                     .with\_local\_solver\_factory(local\_solver)}
-\DoxyCodeLine{                                     .on(exec))}
-\DoxyCodeLine{            .with\_criteria(}
-\DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(num\_iters).on(}
-\DoxyCodeLine{                    exec),}
-\DoxyCodeLine{                \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                    .with\_reduction\_factor(reduction\_factor)}
-\DoxyCodeLine{                    .on(exec))}
-\DoxyCodeLine{            .on(exec)}
-\DoxyCodeLine{            -\/>generate(A);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} Ainv = solver::build()}
+\DoxyCodeLine{                    .with\_preconditioner(}
+\DoxyCodeLine{                        schwarz::build().with\_local\_solver(local\_solver))}
+\DoxyCodeLine{                    .with\_criteria(}
+\DoxyCodeLine{                        gko::stop::Iteration::build().with\_max\_iters(num\_iters),}
+\DoxyCodeLine{                        \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                            .with\_reduction\_factor(reduction\_factor))}
+\DoxyCodeLine{                    .on(exec)}
+\DoxyCodeLine{                    -\/>generate(A);}
 \DoxyCodeLine{    Ainv-\/>add\_logger(logger);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    comm.synchronize();}

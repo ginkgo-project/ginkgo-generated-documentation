@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1026035075 branch based on develop. Ginkgo version 1.7.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1030476392 branch based on develop. Ginkgo version 1.7.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -324,12 +324,10 @@ $(function() {
 </div><!-- fragment --><p>Generate solver</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> solver_gen =</div>
 <div class="line">    cg::build()</div>
-<div class="line">        .with_criteria(</div>
-<div class="line">            gko::stop::Iteration::build().with_max_iters(dp_2).on(exec),</div>
-<div class="line">            <a class="code" href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm&lt;ValueType&gt;::build</a>()</div>
-<div class="line">                .with_reduction_factor(reduction_factor)</div>
-<div class="line">                .on(exec))</div>
-<div class="line">        .with_preconditioner(bj::build().on(exec))</div>
+<div class="line">        .with_criteria(gko::stop::Iteration::build().with_max_iters(dp_2),</div>
+<div class="line">                       <a class="code" href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm&lt;ValueType&gt;::build</a>()</div>
+<div class="line">                           .with_reduction_factor(reduction_factor))</div>
+<div class="line">        .with_preconditioner(bj::build())</div>
 <div class="line">        .on(exec);</div>
 <div class="line"><span class="keyword">auto</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a">solver</a> = solver_gen-&gt;generate(<a class="code" href="namespacegko.html#acbd3fd6d07e498892881e8e2ab0b4167">gko::give</a>(matrix));</div>
 </div><!-- fragment --><p>Solve system</p>
@@ -664,12 +662,10 @@ $(function() {
 <div class="line"> </div>
 <div class="line">    <span class="keyword">auto</span> solver_gen =</div>
 <div class="line">        cg::build()</div>
-<div class="line">            .with_criteria(</div>
-<div class="line">                gko::stop::Iteration::build().with_max_iters(dp_2).on(exec),</div>
-<div class="line">                <a class="code" href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm&lt;ValueType&gt;::build</a>()</div>
-<div class="line">                    .with_reduction_factor(reduction_factor)</div>
-<div class="line">                    .on(exec))</div>
-<div class="line">            .with_preconditioner(bj::build().on(exec))</div>
+<div class="line">            .with_criteria(gko::stop::Iteration::build().with_max_iters(dp_2),</div>
+<div class="line">                           <a class="code" href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm&lt;ValueType&gt;::build</a>()</div>
+<div class="line">                               .with_reduction_factor(reduction_factor))</div>
+<div class="line">            .with_preconditioner(bj::build())</div>
 <div class="line">            .on(exec);</div>
 <div class="line">    <span class="keyword">auto</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a">solver</a> = solver_gen-&gt;generate(<a class="code" href="namespacegko.html#acbd3fd6d07e498892881e8e2ab0b4167">gko::give</a>(matrix));</div>
 <div class="line"> </div>

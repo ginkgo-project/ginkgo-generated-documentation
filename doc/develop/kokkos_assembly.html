@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1026035075 branch based on develop. Ginkgo version 1.7.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1030476392 branch based on develop. Ginkgo version 1.7.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -252,13 +252,11 @@ $(function() {
 <div class="line"><span class="keyword">const</span> RealValueType reduction_factor{1e-7};</div>
 </div><!-- fragment --><p>Generate solver and solve the system</p>
 <div class="fragment"><div class="line">    cg::build()</div>
-<div class="line">        .with_criteria(gko::stop::Iteration::build()</div>
-<div class="line">                           .with_max_iters(discretization_points)</div>
-<div class="line">                           .on(exec),</div>
-<div class="line">                       <a class="code" href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm&lt;ValueType&gt;::build</a>()</div>
-<div class="line">                           .with_reduction_factor(reduction_factor)</div>
-<div class="line">                           .on(exec))</div>
-<div class="line">        .with_preconditioner(bj::build().on(exec))</div>
+<div class="line">        .with_criteria(</div>
+<div class="line">            gko::stop::Iteration::build().with_max_iters(discretization_points),</div>
+<div class="line">            <a class="code" href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm&lt;ValueType&gt;::build</a>().with_reduction_factor(</div>
+<div class="line">                reduction_factor))</div>
+<div class="line">        .with_preconditioner(bj::build())</div>
 <div class="line">        .on(exec)</div>
 <div class="line">        -&gt;generate(A)</div>
 <div class="line">        -&gt;apply(rhs, u);</div>
@@ -462,13 +460,11 @@ $(function() {
 <div class="line"> </div>
 <div class="line">    <span class="keyword">const</span> RealValueType reduction_factor{1e-7};</div>
 <div class="line">    cg::build()</div>
-<div class="line">        .with_criteria(gko::stop::Iteration::build()</div>
-<div class="line">                           .with_max_iters(discretization_points)</div>
-<div class="line">                           .on(exec),</div>
-<div class="line">                       <a class="code" href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm&lt;ValueType&gt;::build</a>()</div>
-<div class="line">                           .with_reduction_factor(reduction_factor)</div>
-<div class="line">                           .on(exec))</div>
-<div class="line">        .with_preconditioner(bj::build().on(exec))</div>
+<div class="line">        .with_criteria(</div>
+<div class="line">            gko::stop::Iteration::build().with_max_iters(discretization_points),</div>
+<div class="line">            <a class="code" href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm&lt;ValueType&gt;::build</a>().with_reduction_factor(</div>
+<div class="line">                reduction_factor))</div>
+<div class="line">        .with_preconditioner(bj::build())</div>
 <div class="line">        .on(exec)</div>
 <div class="line">        -&gt;generate(A)</div>
 <div class="line">        -&gt;apply(rhs, u);</div>

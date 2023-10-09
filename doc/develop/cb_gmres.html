@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1026035075 branch based on develop. Ginkgo version 1.7.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1030476392 branch based on develop. Ginkgo version 1.7.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -195,12 +195,10 @@ $(function() {
 </div><!-- fragment --><p>Generate two solver factories: <code>_keep</code> uses the same precision for the krylov basis as the matrix, and <code>_reduce</code> uses one precision below it. If <code>ValueType</code> is double, then <code>_reduce</code> uses float as the krylov basis storage type</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> solver_gen_keep =</div>
 <div class="line">    cb_gmres::build()</div>
-<div class="line">        .with_criteria(</div>
-<div class="line">            gko::stop::Iteration::build().with_max_iters(1000u).on(exec),</div>
-<div class="line">            <a class="code" href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm&lt;ValueType&gt;::build</a>()</div>
-<div class="line">                .with_baseline(gko::stop::mode::rhs_norm)</div>
-<div class="line">                .with_reduction_factor(reduction_factor)</div>
-<div class="line">                .on(exec))</div>
+<div class="line">        .with_criteria(gko::stop::Iteration::build().with_max_iters(1000u),</div>
+<div class="line">                       <a class="code" href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm&lt;ValueType&gt;::build</a>()</div>
+<div class="line">                           .with_baseline(gko::stop::mode::rhs_norm)</div>
+<div class="line">                           .with_reduction_factor(reduction_factor))</div>
 <div class="line">        .with_krylov_dim(100u)</div>
 <div class="line">        .with_storage_precision(</div>
 <div class="line">            gko::solver::cb_gmres::storage_precision::keep)</div>
@@ -208,12 +206,10 @@ $(function() {
 <div class="line"> </div>
 <div class="line"><span class="keyword">auto</span> solver_gen_reduce =</div>
 <div class="line">    cb_gmres::build()</div>
-<div class="line">        .with_criteria(</div>
-<div class="line">            gko::stop::Iteration::build().with_max_iters(1000u).on(exec),</div>
-<div class="line">            <a class="code" href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm&lt;ValueType&gt;::build</a>()</div>
-<div class="line">                .with_baseline(gko::stop::mode::rhs_norm)</div>
-<div class="line">                .with_reduction_factor(reduction_factor)</div>
-<div class="line">                .on(exec))</div>
+<div class="line">        .with_criteria(gko::stop::Iteration::build().with_max_iters(1000u),</div>
+<div class="line">                       <a class="code" href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm&lt;ValueType&gt;::build</a>()</div>
+<div class="line">                           .with_baseline(gko::stop::mode::rhs_norm)</div>
+<div class="line">                           .with_reduction_factor(reduction_factor))</div>
 <div class="line">        .with_krylov_dim(100u)</div>
 <div class="line">        .with_storage_precision(</div>
 <div class="line">            gko::solver::cb_gmres::storage_precision::reduce1)</div>
@@ -390,12 +386,10 @@ $(function() {
 <div class="line"> </div>
 <div class="line">    <span class="keyword">auto</span> solver_gen_keep =</div>
 <div class="line">        cb_gmres::build()</div>
-<div class="line">            .with_criteria(</div>
-<div class="line">                gko::stop::Iteration::build().with_max_iters(1000u).on(exec),</div>
-<div class="line">                <a class="code" href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm&lt;ValueType&gt;::build</a>()</div>
-<div class="line">                    .with_baseline(gko::stop::mode::rhs_norm)</div>
-<div class="line">                    .with_reduction_factor(reduction_factor)</div>
-<div class="line">                    .on(exec))</div>
+<div class="line">            .with_criteria(gko::stop::Iteration::build().with_max_iters(1000u),</div>
+<div class="line">                           <a class="code" href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm&lt;ValueType&gt;::build</a>()</div>
+<div class="line">                               .with_baseline(gko::stop::mode::rhs_norm)</div>
+<div class="line">                               .with_reduction_factor(reduction_factor))</div>
 <div class="line">            .with_krylov_dim(100u)</div>
 <div class="line">            .with_storage_precision(</div>
 <div class="line">                gko::solver::cb_gmres::storage_precision::keep)</div>
@@ -403,12 +397,10 @@ $(function() {
 <div class="line"> </div>
 <div class="line">    <span class="keyword">auto</span> solver_gen_reduce =</div>
 <div class="line">        cb_gmres::build()</div>
-<div class="line">            .with_criteria(</div>
-<div class="line">                gko::stop::Iteration::build().with_max_iters(1000u).on(exec),</div>
-<div class="line">                <a class="code" href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm&lt;ValueType&gt;::build</a>()</div>
-<div class="line">                    .with_baseline(gko::stop::mode::rhs_norm)</div>
-<div class="line">                    .with_reduction_factor(reduction_factor)</div>
-<div class="line">                    .on(exec))</div>
+<div class="line">            .with_criteria(gko::stop::Iteration::build().with_max_iters(1000u),</div>
+<div class="line">                           <a class="code" href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm&lt;ValueType&gt;::build</a>()</div>
+<div class="line">                               .with_baseline(gko::stop::mode::rhs_norm)</div>
+<div class="line">                               .with_reduction_factor(reduction_factor))</div>
 <div class="line">            .with_krylov_dim(100u)</div>
 <div class="line">            .with_storage_precision(</div>
 <div class="line">                gko::solver::cb_gmres::storage_precision::reduce1)</div>

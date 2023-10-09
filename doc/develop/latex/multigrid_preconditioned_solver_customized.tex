@@ -163,8 +163,7 @@ Now we customize some settings of the multigrid preconditioner. First we choose 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{auto} ic\_gen = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(}
 \DoxyCodeLine{    ic::build()}
-\DoxyCodeLine{        .with\_factorization\_factory(}
-\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1factorization_1_1Ic}{gko::factorization::Ic<ValueType, int>::build}}().on(exec))}
+\DoxyCodeLine{        .with\_factorization(\mbox{\hyperlink{classgko_1_1factorization_1_1Ic}{gko::factorization::Ic<ValueType, int>::build}}())}
 \DoxyCodeLine{        .on(exec));}
 \DoxyCodeLine{\textcolor{keyword}{auto} smoother\_gen = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(}
 \DoxyCodeLine{    \mbox{\hyperlink{namespacegko_1_1solver_ac565c4b95ad0c67492073d993a9170cc}{gko::solver::build\_smoother}}(ic\_gen, 2u, static\_cast<ValueType>(0.9)));}
@@ -205,8 +204,7 @@ Here we put the customized options together and create the multigrid factory.
 \DoxyCodeLine{        .with\_mg\_level(mg\_level\_gen)}
 \DoxyCodeLine{        .with\_coarsest\_solver(coarsest\_gen)}
 \DoxyCodeLine{        .with\_default\_initial\_guess(\mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aad02c4c4cde7ae76252540d116a40f23a}{gko::solver::initial\_guess\_mode::zero}})}
-\DoxyCodeLine{        .with\_criteria(}
-\DoxyCodeLine{            gko::stop::Iteration::build().with\_max\_iters(1u).on(exec))}
+\DoxyCodeLine{        .with\_criteria(gko::stop::Iteration::build().with\_max\_iters(1u))}
 \DoxyCodeLine{        .on(exec);}
 \end{DoxyCode}
 
@@ -431,8 +429,7 @@ This is the expected output\+:
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} ic\_gen = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(}
 \DoxyCodeLine{        ic::build()}
-\DoxyCodeLine{            .with\_factorization\_factory(}
-\DoxyCodeLine{                \mbox{\hyperlink{classgko_1_1factorization_1_1Ic}{gko::factorization::Ic<ValueType, int>::build}}().on(exec))}
+\DoxyCodeLine{            .with\_factorization(\mbox{\hyperlink{classgko_1_1factorization_1_1Ic}{gko::factorization::Ic<ValueType, int>::build}}())}
 \DoxyCodeLine{            .on(exec));}
 \DoxyCodeLine{    \textcolor{keyword}{auto} smoother\_gen = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(}
 \DoxyCodeLine{        \mbox{\hyperlink{namespacegko_1_1solver_ac565c4b95ad0c67492073d993a9170cc}{gko::solver::build\_smoother}}(ic\_gen, 2u, static\_cast<ValueType>(0.9)));}
@@ -452,8 +449,7 @@ This is the expected output\+:
 \DoxyCodeLine{            .with\_mg\_level(mg\_level\_gen)}
 \DoxyCodeLine{            .with\_coarsest\_solver(coarsest\_gen)}
 \DoxyCodeLine{            .with\_default\_initial\_guess(\mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aad02c4c4cde7ae76252540d116a40f23a}{gko::solver::initial\_guess\_mode::zero}})}
-\DoxyCodeLine{            .with\_criteria(}
-\DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(1u).on(exec))}
+\DoxyCodeLine{            .with\_criteria(gko::stop::Iteration::build().with\_max\_iters(1u))}
 \DoxyCodeLine{            .on(exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} solver\_gen = cg::build()}
 \DoxyCodeLine{                          .with\_criteria(iter\_stop, tol\_stop)}

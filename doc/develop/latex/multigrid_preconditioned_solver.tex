@@ -138,19 +138,16 @@ Create multigrid factory
 \DoxyCodeLine{std::shared\_ptr<gko::LinOpFactory> multigrid\_gen;}
 \DoxyCodeLine{multigrid\_gen =}
 \DoxyCodeLine{    mg::build()}
-\DoxyCodeLine{        .with\_mg\_level(pgm::build().with\_deterministic(\textcolor{keyword}{true}).on(exec))}
-\DoxyCodeLine{        .with\_criteria(}
-\DoxyCodeLine{            gko::stop::Iteration::build().with\_max\_iters(1u).on(exec))}
+\DoxyCodeLine{        .with\_mg\_level(pgm::build().with\_deterministic(\textcolor{keyword}{true}))}
+\DoxyCodeLine{        .with\_criteria(gko::stop::Iteration::build().with\_max\_iters(1u))}
 \DoxyCodeLine{        .on(exec);}
 \DoxyCodeLine{\textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} tolerance = 1e-\/8;}
 \DoxyCodeLine{\textcolor{keyword}{auto} solver\_gen =}
 \DoxyCodeLine{    cg::build()}
-\DoxyCodeLine{        .with\_criteria(}
-\DoxyCodeLine{            gko::stop::Iteration::build().with\_max\_iters(100u).on(exec),}
-\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                .with\_baseline(gko::stop::mode::absolute)}
-\DoxyCodeLine{                .with\_reduction\_factor(tolerance)}
-\DoxyCodeLine{                .on(exec))}
+\DoxyCodeLine{        .with\_criteria(gko::stop::Iteration::build().with\_max\_iters(100u),}
+\DoxyCodeLine{                       \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                           .with\_baseline(gko::stop::mode::absolute)}
+\DoxyCodeLine{                           .with\_reduction\_factor(tolerance))}
 \DoxyCodeLine{        .with\_preconditioner(multigrid\_gen)}
 \DoxyCodeLine{        .on(exec);}
 \end{DoxyCode}
@@ -354,19 +351,16 @@ This is the expected output\+:
 \DoxyCodeLine{    std::shared\_ptr<gko::LinOpFactory> multigrid\_gen;}
 \DoxyCodeLine{    multigrid\_gen =}
 \DoxyCodeLine{        mg::build()}
-\DoxyCodeLine{            .with\_mg\_level(pgm::build().with\_deterministic(\textcolor{keyword}{true}).on(exec))}
-\DoxyCodeLine{            .with\_criteria(}
-\DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(1u).on(exec))}
+\DoxyCodeLine{            .with\_mg\_level(pgm::build().with\_deterministic(\textcolor{keyword}{true}))}
+\DoxyCodeLine{            .with\_criteria(gko::stop::Iteration::build().with\_max\_iters(1u))}
 \DoxyCodeLine{            .on(exec);}
 \DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} tolerance = 1e-\/8;}
 \DoxyCodeLine{    \textcolor{keyword}{auto} solver\_gen =}
 \DoxyCodeLine{        cg::build()}
-\DoxyCodeLine{            .with\_criteria(}
-\DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(100u).on(exec),}
-\DoxyCodeLine{                \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                    .with\_baseline(gko::stop::mode::absolute)}
-\DoxyCodeLine{                    .with\_reduction\_factor(tolerance)}
-\DoxyCodeLine{                    .on(exec))}
+\DoxyCodeLine{            .with\_criteria(gko::stop::Iteration::build().with\_max\_iters(100u),}
+\DoxyCodeLine{                           \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                               .with\_baseline(gko::stop::mode::absolute)}
+\DoxyCodeLine{                               .with\_reduction\_factor(tolerance))}
 \DoxyCodeLine{            .with\_preconditioner(multigrid\_gen)}
 \DoxyCodeLine{            .on(exec);}
 \DoxyCodeLine{    std::chrono::nanoseconds gen\_time(0);}

@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1026035075 branch based on develop. Ginkgo version 1.7.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1030476392 branch based on develop. Ginkgo version 1.7.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -250,11 +250,10 @@ $(function() {
 </div><!-- fragment --><p>build CG solver on stencil with incomplete Cholesky preconditioner stopping at 1e-10 relative accuracy</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a">solver</a> =</div>
 <div class="line">    <a class="code" href="classgko_1_1solver_1_1Cg.html">gko::solver::Cg&lt;&gt;::build</a>()</div>
-<div class="line">        .with_preconditioner(<a class="code" href="classgko_1_1preconditioner_1_1Ic.html">gko::preconditioner::Ic&lt;&gt;::build</a>().on(exec))</div>
+<div class="line">        .with_preconditioner(<a class="code" href="classgko_1_1preconditioner_1_1Ic.html">gko::preconditioner::Ic&lt;&gt;::build</a>())</div>
 <div class="line">        .with_criteria(<a class="code" href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm&lt;&gt;::build</a>()</div>
 <div class="line">                           .with_baseline(gko::stop::mode::rhs_norm)</div>
-<div class="line">                           .with_reduction_factor(1e-10)</div>
-<div class="line">                           .on(exec))</div>
+<div class="line">                           .with_reduction_factor(1e-10))</div>
 <div class="line">        .on(exec)</div>
 <div class="line">        -&gt;generate(stencil_matrix);</div>
 </div><!-- fragment --><p>time stamp of the last output frame (initialized to a sentinel value)</p>
@@ -447,11 +446,10 @@ $(function() {
 <div class="line">    <span class="keyword">auto</span> output = build_output(n, fps);</div>
 <div class="line">    <span class="keyword">auto</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a">solver</a> =</div>
 <div class="line">        <a class="code" href="classgko_1_1solver_1_1Cg.html">gko::solver::Cg&lt;&gt;::build</a>()</div>
-<div class="line">            .with_preconditioner(<a class="code" href="classgko_1_1preconditioner_1_1Ic.html">gko::preconditioner::Ic&lt;&gt;::build</a>().on(exec))</div>
+<div class="line">            .with_preconditioner(<a class="code" href="classgko_1_1preconditioner_1_1Ic.html">gko::preconditioner::Ic&lt;&gt;::build</a>())</div>
 <div class="line">            .with_criteria(<a class="code" href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm&lt;&gt;::build</a>()</div>
 <div class="line">                               .with_baseline(gko::stop::mode::rhs_norm)</div>
-<div class="line">                               .with_reduction_factor(1e-10)</div>
-<div class="line">                               .on(exec))</div>
+<div class="line">                               .with_reduction_factor(1e-10))</div>
 <div class="line">            .on(exec)</div>
 <div class="line">            -&gt;generate(stencil_matrix);</div>
 <div class="line">    <span class="keywordtype">double</span> last_t = -t0;</div>

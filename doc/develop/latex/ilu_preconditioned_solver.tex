@@ -146,11 +146,9 @@ Use preconditioner inside G\+M\+R\+ES solver factory Generating a solver factory
 \DoxyCodeLine{\textcolor{keyword}{const} RealValueType reduction\_factor\{1e-\/7\};}
 \DoxyCodeLine{\textcolor{keyword}{auto} ilu\_gmres\_factory =}
 \DoxyCodeLine{    gmres::build()}
-\DoxyCodeLine{        .with\_criteria(}
-\DoxyCodeLine{            gko::stop::Iteration::build().with\_max\_iters(1000u).on(exec),}
-\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                .with\_reduction\_factor(reduction\_factor)}
-\DoxyCodeLine{                .on(exec))}
+\DoxyCodeLine{        .with\_criteria(gko::stop::Iteration::build().with\_max\_iters(1000u),}
+\DoxyCodeLine{                       \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                           .with\_reduction\_factor(reduction\_factor))}
 \DoxyCodeLine{        .with\_generated\_preconditioner(ilu\_preconditioner)}
 \DoxyCodeLine{        .on(exec);}
 \end{DoxyCode}
@@ -341,11 +339,9 @@ This is the expected output\+:
 \DoxyCodeLine{    \textcolor{keyword}{const} RealValueType reduction\_factor\{1e-\/7\};}
 \DoxyCodeLine{    \textcolor{keyword}{auto} ilu\_gmres\_factory =}
 \DoxyCodeLine{        gmres::build()}
-\DoxyCodeLine{            .with\_criteria(}
-\DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(1000u).on(exec),}
-\DoxyCodeLine{                \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                    .with\_reduction\_factor(reduction\_factor)}
-\DoxyCodeLine{                    .on(exec))}
+\DoxyCodeLine{            .with\_criteria(gko::stop::Iteration::build().with\_max\_iters(1000u),}
+\DoxyCodeLine{                           \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                               .with\_reduction\_factor(reduction\_factor))}
 \DoxyCodeLine{            .with\_generated\_preconditioner(ilu\_preconditioner)}
 \DoxyCodeLine{            .on(exec);}
 \DoxyCodeLine{}

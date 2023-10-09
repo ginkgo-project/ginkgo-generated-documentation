@@ -142,19 +142,13 @@ Create solver factory
 \DoxyCodeLine{RealValueType inner\_reduction\_factor\{1e-\/2\};}
 \DoxyCodeLine{\textcolor{keyword}{auto} solver\_gen =}
 \DoxyCodeLine{    ir::build()}
-\DoxyCodeLine{        .with\_solver(}
-\DoxyCodeLine{            cg::build()}
-\DoxyCodeLine{                .with\_criteria(}
-\DoxyCodeLine{                    \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                        .with\_reduction\_factor(inner\_reduction\_factor)}
-\DoxyCodeLine{                        .on(exec))}
-\DoxyCodeLine{                .on(exec))}
-\DoxyCodeLine{        .with\_criteria(}
-\DoxyCodeLine{            gko::stop::Iteration::build().with\_max\_iters(max\_iters).on(}
-\DoxyCodeLine{                exec),}
+\DoxyCodeLine{        .with\_solver(cg::build().with\_criteria(}
 \DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                .with\_reduction\_factor(outer\_reduction\_factor)}
-\DoxyCodeLine{                .on(exec))}
+\DoxyCodeLine{                .with\_reduction\_factor(inner\_reduction\_factor)))}
+\DoxyCodeLine{        .with\_criteria(}
+\DoxyCodeLine{            gko::stop::Iteration::build().with\_max\_iters(max\_iters),}
+\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                .with\_reduction\_factor(outer\_reduction\_factor))}
 \DoxyCodeLine{        .on(exec);}
 \end{DoxyCode}
 
@@ -341,19 +335,13 @@ This is the expected output\+:
 \DoxyCodeLine{    RealValueType inner\_reduction\_factor\{1e-\/2\};}
 \DoxyCodeLine{    \textcolor{keyword}{auto} solver\_gen =}
 \DoxyCodeLine{        ir::build()}
-\DoxyCodeLine{            .with\_solver(}
-\DoxyCodeLine{                cg::build()}
-\DoxyCodeLine{                    .with\_criteria(}
-\DoxyCodeLine{                        \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                            .with\_reduction\_factor(inner\_reduction\_factor)}
-\DoxyCodeLine{                            .on(exec))}
-\DoxyCodeLine{                    .on(exec))}
-\DoxyCodeLine{            .with\_criteria(}
-\DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(max\_iters).on(}
-\DoxyCodeLine{                    exec),}
+\DoxyCodeLine{            .with\_solver(cg::build().with\_criteria(}
 \DoxyCodeLine{                \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                    .with\_reduction\_factor(outer\_reduction\_factor)}
-\DoxyCodeLine{                    .on(exec))}
+\DoxyCodeLine{                    .with\_reduction\_factor(inner\_reduction\_factor)))}
+\DoxyCodeLine{            .with\_criteria(}
+\DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(max\_iters),}
+\DoxyCodeLine{                \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                    .with\_reduction\_factor(outer\_reduction\_factor))}
 \DoxyCodeLine{            .on(exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}} = solver\_gen-\/>generate(A);}
 \DoxyCodeLine{}
