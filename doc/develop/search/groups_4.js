@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['hip_20executor_2995',['HIP Executor',['../group__exec__hip.html',1,'']]]
+  ['factorizations_3020',['Factorizations',['../group__factor.html',1,'']]]
 ];

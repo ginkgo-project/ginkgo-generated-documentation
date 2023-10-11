@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['cuda_20executor_2991',['CUDA Executor',['../group__exec__cuda.html',1,'']]]
+  ['batchlinop_3016',['BatchLinOp',['../group__BatchLinOp.html',1,'']]]
 ];

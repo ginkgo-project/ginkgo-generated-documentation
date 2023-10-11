@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['jacobi_20preconditioner_2996',['Jacobi Preconditioner',['../group__jacobi.html',1,'']]]
+  ['hip_20executor_3021',['HIP Executor',['../group__exec__hip.html',1,'']]]
 ];
