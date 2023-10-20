@@ -323,6 +323,10 @@ void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a671a6184e9ad871e106739c4c85fd
 \begin{DoxyCompactList}\small\item\em Computes the square of the column-\/wise Euclidean (L$^\wedge$2) norm of this matrix. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a47fe52899c71664326c586c7d77775a7}{compute\+\_\+squared\+\_\+norm2}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ result, \mbox{\hyperlink{classgko_1_1array}{array}}$<$ char $>$ \&tmp) const
 \begin{DoxyCompactList}\small\item\em Computes the square of the column-\/wise Euclidean (L$^\wedge$2) norm of this matrix. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a88e8b78f6eda353274cf18b7e72d3910}{compute\+\_\+mean}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ result) const
+\begin{DoxyCompactList}\small\item\em Computes the column-\/wise arithmetic mean of this matrix. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a7ae6af1ae08631c0c759b792698ad942}{compute\+\_\+mean}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ result, \mbox{\hyperlink{classgko_1_1array}{array}}$<$ char $>$ \&tmp) const
+\begin{DoxyCompactList}\small\item\em Computes the column-\/wise arithmetic mean of this matrix. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_ad606073cc426e9164bb2445354f22366}{create\+\_\+submatrix}} (const \mbox{\hyperlink{structgko_1_1span}{span}} \&rows, const \mbox{\hyperlink{structgko_1_1span}{span}} \&columns, const \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} stride)
 \begin{DoxyCompactList}\small\item\em Create a submatrix from the original matrix. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a621650dbf619a21aafb8cc311dd14bc9}{create\+\_\+submatrix}} (const \mbox{\hyperlink{structgko_1_1span}{span}} \&rows, const \mbox{\hyperlink{structgko_1_1span}{span}} \&columns)
@@ -762,6 +766,40 @@ Computes the column-\/wise dot product of this matrix and {\ttfamily b}.
 {\em b} & a \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} matrix of same dimension as this \\
 \hline
 {\em result} & a \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} row vector, used to store the dot product (the number of column in the vector must match the number of columns of this) \\
+\hline
+{\em tmp} & the temporary storage to use for partial sums during the reduction computation. It may be resized and/or reset to the correct executor. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a88e8b78f6eda353274cf18b7e72d3910}\label{classgko_1_1matrix_1_1Dense_a88e8b78f6eda353274cf18b7e72d3910}} 
+\index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!compute\_mean@{compute\_mean}}
+\index{compute\_mean@{compute\_mean}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{compute\_mean()}{compute\_mean()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::compute\+\_\+mean (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$}]{result }\end{DoxyParamCaption}) const}
+
+
+
+Computes the column-\/wise arithmetic mean of this matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em result} & a \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} row vector, used to store the mean (the number of columns in the vector must match the number of columns of this) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a7ae6af1ae08631c0c759b792698ad942}\label{classgko_1_1matrix_1_1Dense_a7ae6af1ae08631c0c759b792698ad942}} 
+\index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!compute\_mean@{compute\_mean}}
+\index{compute\_mean@{compute\_mean}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{compute\_mean()}{compute\_mean()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::compute\+\_\+mean (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$}]{result,  }\item[{\mbox{\hyperlink{classgko_1_1array}{array}}$<$ char $>$ \&}]{tmp }\end{DoxyParamCaption}) const}
+
+
+
+Computes the column-\/wise arithmetic mean of this matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em result} & a \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} row vector, used to store the mean (the number of columns in the vector must match the number of columns of this) \\
 \hline
 {\em tmp} & the temporary storage to use for partial sums during the reduction computation. It may be resized and/or reset to the correct executor. \\
 \hline
