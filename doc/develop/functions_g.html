@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1049546423 branch based on develop. Ginkgo version 1.7.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1057702391 branch based on develop. Ginkgo version 1.7.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -79,12 +79,14 @@ $(function() {
 , <a class="el" href="classgko_1_1experimental_1_1factorization_1_1Cholesky.html#abc6756be3fa184b06db9a59e8942bf1b">gko::experimental::factorization::Cholesky&lt; ValueType, IndexType &gt;</a>
 , <a class="el" href="classgko_1_1experimental_1_1factorization_1_1Lu.html#a44d902406780aeaabc185fedfa81dd9f">gko::experimental::factorization::Lu&lt; ValueType, IndexType &gt;</a>
 , <a class="el" href="classgko_1_1experimental_1_1reorder_1_1Amd.html#ade3dae57eb451e6b78b73bcbd64df948">gko::experimental::reorder::Amd&lt; IndexType &gt;</a>
+, <a class="el" href="classgko_1_1experimental_1_1reorder_1_1Rcm.html#a1f460f3ce320c2645c3f6909fd3ed024">gko::experimental::reorder::Rcm&lt; IndexType &gt;</a>
 </li>
 <li>generated_local_solver
 : <a class="el" href="structgko_1_1experimental_1_1distributed_1_1preconditioner_1_1Schwarz_1_1parameters__type.html#a6fb14b36a6cfc1b42e98ab01bfac9e08">gko::experimental::distributed::preconditioner::Schwarz&lt; ValueType, LocalIndexType, GlobalIndexType &gt;::parameters_type</a>
 </li>
 <li>generated_preconditioner
-: <a class="el" href="structgko_1_1solver_1_1preconditioned__iterative__solver__factory__parameters.html#a8e7ca1db4d5c5984a596bd278d3263a3">gko::solver::preconditioned_iterative_solver_factory_parameters</a>
+: <a class="el" href="structgko_1_1batch_1_1solver_1_1preconditioned__iterative__solver__factory__parameters.html#a97861e65f253bfcd712eab3916cf1656">gko::batch::solver::preconditioned_iterative_solver_factory_parameters</a>
+, <a class="el" href="structgko_1_1solver_1_1preconditioned__iterative__solver__factory__parameters.html#a8e7ca1db4d5c5984a596bd278d3263a3">gko::solver::preconditioned_iterative_solver_factory_parameters</a>
 </li>
 <li>generated_solver
 : <a class="el" href="structgko_1_1solver_1_1Ir_1_1parameters__type.html#a815bee91294da4c35a9216638743bf16">gko::solver::Ir&lt; ValueType &gt;::parameters_type</a>
@@ -215,6 +217,7 @@ $(function() {
 </li>
 <li>get_const_permutation()
 : <a class="el" href="classgko_1_1matrix_1_1Permutation.html#afade97c61c352cd4fbe25ed8a4b77a90">gko::matrix::Permutation&lt; IndexType &gt;</a>
+, <a class="el" href="classgko_1_1matrix_1_1ScaledPermutation.html#a5db7ae02bd538707eee4187578d65f2e">gko::matrix::ScaledPermutation&lt; ValueType, IndexType &gt;</a>
 </li>
 <li>get_const_row_idxs()
 : <a class="el" href="classgko_1_1device__matrix__data.html#a9eb6f039e2b821e2b2eb5ec55cc2bb38">gko::device_matrix_data&lt; ValueType, IndexType &gt;</a>
@@ -225,6 +228,9 @@ $(function() {
 : <a class="el" href="classgko_1_1matrix_1_1Csr.html#a50c9ce521649450d7ae5ff488e42c190">gko::matrix::Csr&lt; ValueType, IndexType &gt;</a>
 , <a class="el" href="classgko_1_1matrix_1_1Fbcsr.html#a585456a9b69b5e66eb78aacc29445509">gko::matrix::Fbcsr&lt; ValueType, IndexType &gt;</a>
 , <a class="el" href="classgko_1_1matrix_1_1SparsityCsr.html#a231bff77de5d41dbe9317b7d069ff853">gko::matrix::SparsityCsr&lt; ValueType, IndexType &gt;</a>
+</li>
+<li>get_const_scaling_factors()
+: <a class="el" href="classgko_1_1matrix_1_1ScaledPermutation.html#ac08ec4a370d7edd343318a911be246a6">gko::matrix::ScaledPermutation&lt; ValueType, IndexType &gt;</a>
 </li>
 <li>get_const_slice_lengths()
 : <a class="el" href="classgko_1_1matrix_1_1Sellp.html#adf13bb4a4f8660b4ae27fe2ae6a874aa">gko::matrix::Sellp&lt; ValueType, IndexType &gt;</a>
@@ -423,6 +429,9 @@ $(function() {
 , <a class="el" href="classgko_1_1HipExecutor.html#aad8e01fc70095ad5df48a02da9555400">gko::HipExecutor</a>
 , <a class="el" href="classgko_1_1OmpExecutor.html#a5b83349e601d473cf8768c0bdbcaca8c">gko::OmpExecutor</a>
 </li>
+<li>get_max_iterations()
+: <a class="el" href="classgko_1_1batch_1_1solver_1_1BatchSolver.html#a4d0421d8f569772dc0637932907dcb07">gko::batch::solver::BatchSolver</a>
+</li>
 <li>get_max_subgroup_size()
 : <a class="el" href="classgko_1_1DpcppExecutor.html#a950a8f15ace58f5f54af3a9b52a11998">gko::DpcppExecutor</a>
 </li>
@@ -492,7 +501,8 @@ $(function() {
 : <a class="el" href="classgko_1_1experimental_1_1distributed_1_1Partition.html#a016cf045cc715fec475ef845635db98c">gko::experimental::distributed::Partition&lt; LocalIndexType, GlobalIndexType &gt;</a>
 </li>
 <li>get_num_iterations()
-: <a class="el" href="classgko_1_1log_1_1Convergence.html#ae4f2ae84d87df2bffa814f51a8f09793">gko::log::Convergence&lt; ValueType &gt;</a>
+: <a class="el" href="classgko_1_1batch_1_1log_1_1BatchConvergence.html#a04ed070657e39cb1ddd806d4cd4c09d5">gko::batch::log::BatchConvergence&lt; ValueType &gt;</a>
+, <a class="el" href="classgko_1_1log_1_1Convergence.html#ae4f2ae84d87df2bffa814f51a8f09793">gko::log::Convergence&lt; ValueType &gt;</a>
 </li>
 <li>get_num_multiprocessor()
 : <a class="el" href="classgko_1_1CudaExecutor.html#a449c2bf9c51b58a04fdb8b4a73377820">gko::CudaExecutor</a>
@@ -586,13 +596,11 @@ $(function() {
 </li>
 <li>get_permutation()
 : <a class="el" href="classgko_1_1matrix_1_1Permutation.html#ad632f0f6b6305ef7a74d7abf260556cf">gko::matrix::Permutation&lt; IndexType &gt;</a>
+, <a class="el" href="classgko_1_1matrix_1_1ScaledPermutation.html#a6bc9a754260dd16796f80ea5a7507ced">gko::matrix::ScaledPermutation&lt; ValueType, IndexType &gt;</a>
 , <a class="el" href="classgko_1_1reorder_1_1Rcm.html#a6038e9e149aefdefa742b635e96c54f6">gko::reorder::Rcm&lt; ValueType, IndexType &gt;</a>
 </li>
 <li>get_permutation_size()
 : <a class="el" href="classgko_1_1matrix_1_1Permutation.html#a576d006fe37902ff0b47050ecb87b416">gko::matrix::Permutation&lt; IndexType &gt;</a>
-</li>
-<li>get_permute_mask()
-: <a class="el" href="classgko_1_1matrix_1_1Permutation.html#a29fc6728ed79dda46178790bc3b32503">gko::matrix::Permutation&lt; IndexType &gt;</a>
 </li>
 <li>get_post_smoother_list()
 : <a class="el" href="classgko_1_1solver_1_1Multigrid.html#aad5cd5f9ec685ce5e74b09346ac6b80e">gko::solver::Multigrid</a>
@@ -601,7 +609,8 @@ $(function() {
 : <a class="el" href="classgko_1_1solver_1_1Multigrid.html#a8cdc865fc9c4f6f649f7835d421eb954">gko::solver::Multigrid</a>
 </li>
 <li>get_preconditioner()
-: <a class="el" href="classgko_1_1Preconditionable.html#a0e664ac0bd76c286e4bdc630e33f2cd3">gko::Preconditionable</a>
+: <a class="el" href="classgko_1_1batch_1_1solver_1_1BatchSolver.html#ac21ee961daa07513a7d4bea027f7c204">gko::batch::solver::BatchSolver</a>
+, <a class="el" href="classgko_1_1Preconditionable.html#a0e664ac0bd76c286e4bdc630e33f2cd3">gko::Preconditionable</a>
 </li>
 <li>get_preserving()
 : <a class="el" href="classgko_1_1precision__reduction.html#ad709bd9bdd9b4ec27f75fc213aef51df">gko::precision_reduction</a>
@@ -629,14 +638,15 @@ $(function() {
 : <a class="el" href="classgko_1_1matrix_1_1Hybrid_1_1imbalance__bounded__limit.html#ae63efeeecdb8ad40616a73f9e757f2b8">gko::matrix::Hybrid&lt; ValueType, IndexType &gt;::imbalance_bounded_limit</a>
 </li>
 <li>get_real()
-: <a class="el" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a63d5979607cee954beaf75818c655638">gko::experimental::distributed::Vector&lt; ValueType &gt;</a>
-, <a class="el" href="classgko_1_1matrix_1_1Dense.html#a3e1f9cd7db8e957fb56eb807ecf6022e">gko::matrix::Dense&lt; ValueType &gt;</a>
+: <a class="el" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a7dc76840ffc5b10a41ef0d835fb5ecf3">gko::experimental::distributed::Vector&lt; ValueType &gt;</a>
+, <a class="el" href="classgko_1_1matrix_1_1Dense.html#a297df3fbaa89f711e7ba97f9ed866773">gko::matrix::Dense&lt; ValueType &gt;</a>
 </li>
 <li>get_residual()
 : <a class="el" href="classgko_1_1log_1_1Convergence.html#a6595e7edae4cb080943493252b6d77e9">gko::log::Convergence&lt; ValueType &gt;</a>
 </li>
 <li>get_residual_norm()
-: <a class="el" href="classgko_1_1log_1_1Convergence.html#a68297edb94aee77f6125c4b823f4503c">gko::log::Convergence&lt; ValueType &gt;</a>
+: <a class="el" href="classgko_1_1batch_1_1log_1_1BatchConvergence.html#a350a478bbd5014a147ecdaed006520b9">gko::batch::log::BatchConvergence&lt; ValueType &gt;</a>
+, <a class="el" href="classgko_1_1log_1_1Convergence.html#a68297edb94aee77f6125c4b823f4503c">gko::log::Convergence&lt; ValueType &gt;</a>
 </li>
 <li>get_restrict_op()
 : <a class="el" href="classgko_1_1multigrid_1_1EnableMultigridLevel.html#aa41d8008530ebe9f6ced62601a0d1983">gko::multigrid::EnableMultigridLevel&lt; ValueType &gt;</a>
@@ -654,6 +664,9 @@ $(function() {
 </li>
 <li>get_scalar()
 : <a class="el" href="classgko_1_1Perturbation.html#af3a1d57c22b34f276a9222eb248825ae">gko::Perturbation&lt; ValueType &gt;</a>
+</li>
+<li>get_scaling_factors()
+: <a class="el" href="classgko_1_1matrix_1_1ScaledPermutation.html#a0c4214fd2dff685c7076d348cea769f1">gko::matrix::ScaledPermutation&lt; ValueType, IndexType &gt;</a>
 </li>
 <li>get_size()
 : <a class="el" href="classgko_1_1batch_1_1BatchLinOp.html#aade2ae817456a066cc5d1a6f395e1534">gko::batch::BatchLinOp</a>
@@ -693,7 +706,7 @@ $(function() {
 </li>
 <li>get_strategy()
 : <a class="el" href="classgko_1_1matrix_1_1Csr.html#ada0db14e65dfe027f483dc449f704a7e">gko::matrix::Csr&lt; ValueType, IndexType &gt;</a>
-, <a class="el" href="classgko_1_1matrix_1_1Hybrid.html#a49f2e04153b44a60e4e9cb1afe1a635b">gko::matrix::Hybrid&lt; ValueType, IndexType &gt;</a>
+, <a class="el" href="classgko_1_1matrix_1_1Hybrid.html#a9a1eabe0a4ca0a6ae0b922b65c938286">gko::matrix::Hybrid&lt; ValueType, IndexType &gt;</a>
 </li>
 <li>get_stream()
 : <a class="el" href="classgko_1_1CudaExecutor.html#a95709d82526c878c8d33ffb0eece62b9">gko::CudaExecutor</a>
@@ -722,9 +735,16 @@ $(function() {
 : <a class="el" href="classgko_1_1index__set.html#a55e01b02e7ff87af6e606bf0a4634cb5">gko::index_set&lt; IndexType &gt;</a>
 </li>
 <li>get_system_matrix()
-: <a class="el" href="classgko_1_1multigrid_1_1FixedCoarsening.html#a159b260e91e3834f6034feadcc0725b3">gko::multigrid::FixedCoarsening&lt; ValueType, IndexType &gt;</a>
+: <a class="el" href="classgko_1_1batch_1_1solver_1_1BatchSolver.html#adc9b8a44dfa90b44fe82bdd6e7fda05b">gko::batch::solver::BatchSolver</a>
+, <a class="el" href="classgko_1_1multigrid_1_1FixedCoarsening.html#a159b260e91e3834f6034feadcc0725b3">gko::multigrid::FixedCoarsening&lt; ValueType, IndexType &gt;</a>
 , <a class="el" href="classgko_1_1multigrid_1_1Pgm.html#a757f8d2b7d1c6715ff9dd7f2b1b168ad">gko::multigrid::Pgm&lt; ValueType, IndexType &gt;</a>
 , <a class="el" href="classgko_1_1solver_1_1SolverBase.html#a6484004603d5b93e6d24cb386f0c4fec">gko::solver::SolverBase&lt; MatrixType &gt;</a>
+</li>
+<li>get_tolerance()
+: <a class="el" href="classgko_1_1batch_1_1solver_1_1BatchSolver.html#a419415d18e6b01226cddc621b84d5976">gko::batch::solver::BatchSolver</a>
+</li>
+<li>get_tolerance_type()
+: <a class="el" href="classgko_1_1batch_1_1solver_1_1BatchSolver.html#a79f23896ce9872932b3848524eae4ee8">gko::batch::solver::BatchSolver</a>
 </li>
 <li>get_total_cols()
 : <a class="el" href="classgko_1_1matrix_1_1Sellp.html#a3e5ca0f4968f29f97b5a42aac4d08b3d">gko::matrix::Sellp&lt; ValueType, IndexType &gt;</a>

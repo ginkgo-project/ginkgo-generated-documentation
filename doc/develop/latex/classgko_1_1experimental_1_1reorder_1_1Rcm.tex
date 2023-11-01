@@ -1,0 +1,106 @@
+\hypertarget{classgko_1_1experimental_1_1reorder_1_1Rcm}{}\doxysection{gko\+::experimental\+::reorder\+::Rcm$<$ Index\+Type $>$ Class Template Reference}
+\label{classgko_1_1experimental_1_1reorder_1_1Rcm}\index{gko::experimental::reorder::Rcm$<$ IndexType $>$@{gko::experimental::reorder::Rcm$<$ IndexType $>$}}
+
+
+\mbox{\hyperlink{classgko_1_1experimental_1_1reorder_1_1Rcm}{Rcm}} (Reverse Cuthill-\/\+Mc\+Kee) is a reordering algorithm minimizing the bandwidth of a matrix.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/reorder/rcm.\+hpp$>$}
+
+
+
+Inheritance diagram for gko\+::experimental\+::reorder\+::Rcm$<$ Index\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1experimental_1_1reorder_1_1Rcm__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for gko\+::experimental\+::reorder\+::Rcm$<$ Index\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1experimental_1_1reorder_1_1Rcm__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structgko_1_1experimental_1_1reorder_1_1Rcm_1_1parameters__type}{parameters\+\_\+type}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1reorder_1_1Rcm_aa9370e440d67dc253f038cbe6c9292bf}\label{classgko_1_1experimental_1_1reorder_1_1Rcm_aa9370e440d67dc253f038cbe6c9292bf}} 
+using {\bfseries index\+\_\+type} = Index\+Type
+\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1reorder_1_1Rcm_a11cff0debb6469b588f91b43b79ee616}\label{classgko_1_1experimental_1_1reorder_1_1Rcm_a11cff0debb6469b588f91b43b79ee616}} 
+using {\bfseries permutation\+\_\+type} = \mbox{\hyperlink{classgko_1_1matrix_1_1Permutation}{matrix\+::\+Permutation}}$<$ index\+\_\+type $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Permutation}{permutation\+\_\+type}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1reorder_1_1Rcm_a1f460f3ce320c2645c3f6909fd3ed024}{generate}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ system\+\_\+matrix) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1reorder_1_1Rcm_a6be4bed40dd659bc915f4320c6f1ab81}\label{classgko_1_1experimental_1_1reorder_1_1Rcm_a6be4bed40dd659bc915f4320c6f1ab81}} 
+static \mbox{\hyperlink{structgko_1_1experimental_1_1reorder_1_1Rcm_1_1parameters__type}{parameters\+\_\+type}} \mbox{\hyperlink{classgko_1_1experimental_1_1reorder_1_1Rcm_a6be4bed40dd659bc915f4320c6f1ab81}{build}} ()
+\begin{DoxyCompactList}\small\item\em Creates a new parameter\+\_\+type to set up the factory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1reorder_1_1Rcm_acf0591c720a92496e64eca1c2b0001c3}\label{classgko_1_1experimental_1_1reorder_1_1Rcm_acf0591c720a92496e64eca1c2b0001c3}} 
+class {\bfseries Enable\+Polymorphic\+Object$<$ Rcm$<$ Index\+Type $>$, Lin\+Op\+Factory $>$}
+\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1reorder_1_1Rcm_ad71c904182afb12b7e455a6f22f50586}\label{classgko_1_1experimental_1_1reorder_1_1Rcm_ad71c904182afb12b7e455a6f22f50586}} 
+class {\bfseries enable\+\_\+parameters\+\_\+type$<$ parameters\+\_\+type, Rcm$<$ Index\+Type $>$ $>$}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Index\+Type = int32$>$\newline
+class gko\+::experimental\+::reorder\+::\+Rcm$<$ Index\+Type $>$}
+
+\mbox{\hyperlink{classgko_1_1experimental_1_1reorder_1_1Rcm}{Rcm}} (Reverse Cuthill-\/\+Mc\+Kee) is a reordering algorithm minimizing the bandwidth of a matrix. 
+
+Such a reordering typically also significantly reduces fill-\/in, though usually not as effective as more complex algorithms, specifically A\+MD and nested dissection schemes. The advantage of this algorithm is its low runtime.
+
+The class is a \mbox{\hyperlink{classgko_1_1LinOpFactory}{Lin\+Op\+Factory}} generating a Permutation matrix out of a Csr system matrix, to be used with {\ttfamily Csr\+::permute(...)}.
+
+There are two \char`\"{}starting strategies\char`\"{} currently available\+: minimum degree and pseudo-\/peripheral. These strategies control how a starting vertex for a connected component is chosen, which is then renumbered as first vertex in the component, starting the algorithm from there. In general, the bandwidths obtained by choosing a pseudo-\/peripheral vertex are slightly smaller than those obtained from choosing a vertex of minimum degree. On the other hand, this strategy is much more expensive, relatively. The algorithm for finding a pseudo-\/peripheral vertex as described in \char`\"{}\+Computer Solution of Sparse Linear Systems\char`\"{} (George, Liu, Ng, Oak Ridge National Laboratory, 1994) is implemented here.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Index\+Type} & Type of the indices of all matrices used in this class \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1reorder_1_1Rcm_a1f460f3ce320c2645c3f6909fd3ed024}\label{classgko_1_1experimental_1_1reorder_1_1Rcm_a1f460f3ce320c2645c3f6909fd3ed024}} 
+\index{gko::experimental::reorder::Rcm$<$ IndexType $>$@{gko::experimental::reorder::Rcm$<$ IndexType $>$}!generate@{generate}}
+\index{generate@{generate}!gko::experimental::reorder::Rcm$<$ IndexType $>$@{gko::experimental::reorder::Rcm$<$ IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{generate()}{generate()}}
+{\footnotesize\ttfamily template$<$typename Index\+Type  = int32$>$ \\
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1matrix_1_1Permutation}{permutation\+\_\+type}}$>$ \mbox{\hyperlink{classgko_1_1experimental_1_1reorder_1_1Rcm}{gko\+::experimental\+::reorder\+::\+Rcm}}$<$ Index\+Type $>$\+::generate (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$}]{system\+\_\+matrix }\end{DoxyParamCaption}) const}
+
+
+
+
+
+\begin{DoxyNote}{Note}
+This function overrides the default Lin\+Op\+Factory\+::generate to return a Permutation instead of a generic \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}, which would need to be cast to Permutation again to access its indices. It is only necessary because smart pointers aren\textquotesingle{}t covariant. 
+\end{DoxyNote}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/reorder/rcm.\+hpp\end{DoxyCompactItemize}
