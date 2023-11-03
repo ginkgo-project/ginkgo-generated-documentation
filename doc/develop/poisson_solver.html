@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1057702391 branch based on develop. Ginkgo version 1.7.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1060276625 branch based on develop. Ginkgo version 1.7.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -92,12 +92,12 @@ $(function() {
 </ol> </td> </tr> </table>
  <a class="anchor" id="Intro"></a> <a class="anchor" id="Introduction"></a></p><h1>Introduction</h1>
 <p>This example solves a 1D Poisson equation:</p>
-<p><img class="formulaInl" alt="$ u : [0, 1] \rightarrow R\\ u'' = f\\ u(0) = u0\\ u(1) = u1 $" src="form_93.png"/></p>
+<p><img class="formulaInl" alt="$ u : [0, 1] \rightarrow R\\ u'' = f\\ u(0) = u0\\ u(1) = u1 $" src="form_94.png"/></p>
 <p>using a finite difference method on an equidistant grid with <code>K</code> discretization points (<code>K</code> can be controlled with a command line parameter). The discretization is done via the second order Taylor polynomial:</p>
-<p><img class="formulaInl" alt="$ u(x + h) = u(x) - u'(x)h + 1/2 u''(x)h^2 + O(h^3)\\ u(x - h) = u(x) + u'(x)h + 1/2 u''(x)h^2 + O(h^3) / +\\ ---------------------- \\ -u(x - h) + 2u(x) + -u(x + h) = -f(x)h^2 + O(h^3) $" src="form_94.png"/></p>
-<p>For an equidistant grid with K "inner" discretization points <img class="formulaInl" alt="$x1, ..., xk, $" src="form_95.png"/>and step size <img class="formulaInl" alt="$ h = 1 / (K + 1)$" src="form_96.png"/>, the formula produces a system of linear equations</p>
-<p><img class="formulaInl" alt="$ 2u_1 - u_2 = -f_1 h^2 + u0\\ -u_(k-1) + 2u_k - u_(k+1) = -f_k h^2, k = 2, ..., K - 1\\ -u_(K-1) + 2u_K = -f_K h^2 + u1\\ $" src="form_97.png"/></p>
-<p>which is then solved using Ginkgo's implementation of the CG method preconditioned with block-Jacobi. It is also possible to specify on which executor Ginkgo will solve the system via the command line. The function <img class="formulaInl" alt="$`f` $" src="form_98.png"/>is set to <img class="formulaInl" alt="$`f(x) = 6x`$" src="form_99.png"/> (making the solution <img class="formulaInl" alt="$`u(x) = x^3`$" src="form_100.png"/>), but that can be changed in the <code>main</code> function.</p>
+<p><img class="formulaInl" alt="$ u(x + h) = u(x) - u'(x)h + 1/2 u''(x)h^2 + O(h^3)\\ u(x - h) = u(x) + u'(x)h + 1/2 u''(x)h^2 + O(h^3) / +\\ ---------------------- \\ -u(x - h) + 2u(x) + -u(x + h) = -f(x)h^2 + O(h^3) $" src="form_95.png"/></p>
+<p>For an equidistant grid with K "inner" discretization points <img class="formulaInl" alt="$x1, ..., xk, $" src="form_96.png"/>and step size <img class="formulaInl" alt="$ h = 1 / (K + 1)$" src="form_97.png"/>, the formula produces a system of linear equations</p>
+<p><img class="formulaInl" alt="$ 2u_1 - u_2 = -f_1 h^2 + u0\\ -u_(k-1) + 2u_k - u_(k+1) = -f_k h^2, k = 2, ..., K - 1\\ -u_(K-1) + 2u_K = -f_K h^2 + u1\\ $" src="form_98.png"/></p>
+<p>which is then solved using Ginkgo's implementation of the CG method preconditioned with block-Jacobi. It is also possible to specify on which executor Ginkgo will solve the system via the command line. The function <img class="formulaInl" alt="$`f` $" src="form_99.png"/>is set to <img class="formulaInl" alt="$`f(x) = 6x`$" src="form_100.png"/> (making the solution <img class="formulaInl" alt="$`u(x) = x^3`$" src="form_101.png"/>), but that can be changed in the <code>main</code> function.</p>
 <p>The intention of the example is to show how Ginkgo can be used to build an application solving a real-world problem, which includes a solution of a large, sparse linear system as a component.</p>
 <p><a class="anchor" id="Abouttheexample"></a></p><h3>About the example </h3>
 <p><a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
@@ -454,7 +454,7 @@ $(function() {
 <div class="ttc" id="aclassgko_1_1HipExecutor_html_aa0701fe1303e03a8331da7e95008100d"><div class="ttname"><a href="classgko_1_1HipExecutor.html#aa0701fe1303e03a8331da7e95008100d">gko::HipExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; HipExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, bool device_reset, allocation_mode alloc_mode=default_hip_alloc_mode, CUstream_st *stream=nullptr)</div><div class="ttdoc">Creates a new HipExecutor.</div></div>
 <div class="ttc" id="aclassgko_1_1version__info_html_a6daeb8a087cfb57fa055526fc133d8eb"><div class="ttname"><a href="classgko_1_1version__info.html#a6daeb8a087cfb57fa055526fc133d8eb">gko::version_info::get</a></div><div class="ttdeci">static const version_info &amp; get()</div><div class="ttdoc">Returns an instance of version_info.</div><div class="ttdef"><b>Definition:</b> version.hpp:168</div></div>
 <div class="ttc" id="aclassgko_1_1preconditioner_1_1Jacobi_html"><div class="ttname"><a href="classgko_1_1preconditioner_1_1Jacobi.html">gko::preconditioner::Jacobi</a></div><div class="ttdoc">A block-Jacobi preconditioner is a block-diagonal linear operator, obtained by inverting the diagonal...</div><div class="ttdef"><b>Definition:</b> jacobi.hpp:213</div></div>
-<div class="ttc" id="aclassgko_1_1stop_1_1ResidualNorm_html"><div class="ttname"><a href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm</a></div><div class="ttdoc">The ResidualNorm class is a stopping criterion which stops the iteration process when the actual resi...</div><div class="ttdef"><b>Definition:</b> residual_norm.hpp:137</div></div>
+<div class="ttc" id="aclassgko_1_1stop_1_1ResidualNorm_html"><div class="ttname"><a href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm</a></div><div class="ttdoc">The ResidualNorm class is a stopping criterion which stops the iteration process when the actual resi...</div><div class="ttdef"><b>Definition:</b> residual_norm.hpp:138</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Csr_html_a068e5158cf282fa977f0a137f8cd7f03"><div class="ttname"><a href="classgko_1_1matrix_1_1Csr.html#a068e5158cf282fa977f0a137f8cd7f03">gko::matrix::Csr::get_row_ptrs</a></div><div class="ttdeci">index_type * get_row_ptrs() noexcept</div><div class="ttdoc">Returns the row pointers of the matrix.</div><div class="ttdef"><b>Definition:</b> csr.hpp:916</div></div>
 <div class="ttc" id="astructgko_1_1dim_html"><div class="ttname"><a href="structgko_1_1dim.html">gko::dim&lt; 2 &gt;</a></div></div>
 <div class="ttc" id="aclassgko_1_1solver_1_1Cg_html"><div class="ttname"><a href="classgko_1_1solver_1_1Cg.html">gko::solver::Cg</a></div><div class="ttdoc">CG or the conjugate gradient method is an iterative type Krylov subspace method which is suitable for...</div><div class="ttdef"><b>Definition:</b> cg.hpp:74</div></div>
