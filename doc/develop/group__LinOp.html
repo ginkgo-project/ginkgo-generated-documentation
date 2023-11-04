@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1060744273 branch based on develop. Ginkgo version 1.7.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1060917972 branch based on develop. Ginkgo version 1.7.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -532,14 +532,15 @@ Linear operator as a concept</h1>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line"><span class="keyword">mutable</span> _name{__VA_ARGS__};                                              \</div>
+<b>Value:</b><div class="fragment"><div class="line">_name{__VA_ARGS__};                                                      \</div>
 <div class="line">                                                                             \</div>
 <div class="line">    template &lt;<span class="keyword">typename</span>... Args&gt;                                              \</div>
-<div class="line">    auto with_##_name(Args&amp;&amp;... _value)-&gt;std::decay_t&lt;decltype(*<span class="keyword">this</span>)&gt;&amp;      \</div>
+<div class="line">    auto with_##_name(Args&amp;&amp;... _value)                                      \</div>
+<div class="line">        -&gt;std::decay_t&lt;decltype(*(this-&gt;<span class="keyword">self</span>()))&gt;&amp;                           \</div>
 <div class="line">    {                                                                        \</div>
 <div class="line">        using type = decltype(this-&gt;_name);                                  \</div>
 <div class="line">        this-&gt;_name = type{std::forward&lt;Args&gt;(_value)...};                   \</div>
-<div class="line">        return *<span class="keyword">this</span>;                                                        \</div>
+<div class="line">        return *(this-&gt;<span class="keyword">self</span>());                                              \</div>
 <div class="line">    }                                                                        \</div>
 <div class="line">    static_assert(<span class="keyword">true</span>,                                                      \</div>
 <div class="line">                  <span class="stringliteral">&quot;This assert is used to counter the false positive extra &quot;</span> \</div>

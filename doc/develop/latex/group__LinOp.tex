@@ -341,14 +341,15 @@ It is possible to combine both the \#\+G\+K\+O\+\_\+\+C\+R\+E\+A\+T\+E\+\_\+\+F\
 
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{mutable} \_name\{\_\_VA\_ARGS\_\_\};                                              \(\backslash\)}
+\DoxyCodeLine{\_name\{\_\_VA\_ARGS\_\_\};                                                      \(\backslash\)}
 \DoxyCodeLine{                                                                             \(\backslash\)}
 \DoxyCodeLine{    template <\textcolor{keyword}{typename}... Args>                                              \(\backslash\)}
-\DoxyCodeLine{    auto with\_\#\#\_name(Args\&\&... \_value)-\/>std::decay\_t<decltype(*\textcolor{keyword}{this})>\&      \(\backslash\)}
+\DoxyCodeLine{    auto with\_\#\#\_name(Args\&\&... \_value)                                      \(\backslash\)}
+\DoxyCodeLine{        -\/>std::decay\_t<decltype(*(this-\/>\textcolor{keyword}{self}()))>\&                           \(\backslash\)}
 \DoxyCodeLine{    \{                                                                        \(\backslash\)}
 \DoxyCodeLine{        using type = decltype(this-\/>\_name);                                  \(\backslash\)}
 \DoxyCodeLine{        this-\/>\_name = type\{std::forward<Args>(\_value)...\};                   \(\backslash\)}
-\DoxyCodeLine{        return *\textcolor{keyword}{this};                                                        \(\backslash\)}
+\DoxyCodeLine{        return *(this-\/>\textcolor{keyword}{self}());                                              \(\backslash\)}
 \DoxyCodeLine{    \}                                                                        \(\backslash\)}
 \DoxyCodeLine{    static\_assert(\textcolor{keyword}{true},                                                      \(\backslash\)}
 \DoxyCodeLine{                  \textcolor{stringliteral}{"This assert is used to counter the false positive extra "} \(\backslash\)}

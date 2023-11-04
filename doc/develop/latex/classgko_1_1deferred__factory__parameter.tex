@@ -29,14 +29,14 @@ Inheritance diagram for gko\+::deferred\+\_\+factory\+\_\+parameter$<$ Factory\+
 \mbox{\hyperlink{classgko_1_1deferred__factory__parameter_ad530c7aa9eee77cedf14844bff234b03}{deferred\+\_\+factory\+\_\+parameter}} (std\+::nullptr\+\_\+t)
 \begin{DoxyCompactList}\small\item\em Creates a deferred factory parameter returning a nullptr. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classgko_1_1deferred__factory__parameter_a9559142ba494fceaf016a1bdc10c98c6}\label{classgko_1_1deferred__factory__parameter_a9559142ba494fceaf016a1bdc10c98c6}} 
-{\footnotesize template$<$typename Concrete\+Factory\+Type , std\+::enable\+\_\+if\+\_\+t$<$ std\+::is\+\_\+base\+\_\+of$<$ Factory\+Type, std\+::remove\+\_\+const\+\_\+t$<$ Concrete\+Factory\+Type $>$$>$\+::value $>$ $\ast$  = nullptr$>$ }\\\mbox{\hyperlink{classgko_1_1deferred__factory__parameter_a9559142ba494fceaf016a1bdc10c98c6}{deferred\+\_\+factory\+\_\+parameter}} (std\+::shared\+\_\+ptr$<$ Concrete\+Factory\+Type $>$ factory)
+{\footnotesize template$<$typename Concrete\+Factory\+Type , std\+::enable\+\_\+if\+\_\+t$<$ detail\+::is\+\_\+pointer\+\_\+convertible$<$ Concrete\+Factory\+Type, Factory\+Type $>$\+::value $>$ $\ast$  = nullptr$>$ }\\\mbox{\hyperlink{classgko_1_1deferred__factory__parameter_a9559142ba494fceaf016a1bdc10c98c6}{deferred\+\_\+factory\+\_\+parameter}} (std\+::shared\+\_\+ptr$<$ Concrete\+Factory\+Type $>$ factory)
 \begin{DoxyCompactList}\small\item\em Creates a deferred factory parameter from a preexisting factory with shared ownership. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classgko_1_1deferred__factory__parameter_ade191bb3a9d7ffc65392b87233d63098}\label{classgko_1_1deferred__factory__parameter_ade191bb3a9d7ffc65392b87233d63098}} 
-{\footnotesize template$<$typename Concrete\+Factory\+Type , typename Deleter , std\+::enable\+\_\+if\+\_\+t$<$ std\+::is\+\_\+base\+\_\+of$<$ Factory\+Type, std\+::remove\+\_\+const\+\_\+t$<$ Concrete\+Factory\+Type $>$$>$\+::value $>$ $\ast$  = nullptr$>$ }\\\mbox{\hyperlink{classgko_1_1deferred__factory__parameter_ade191bb3a9d7ffc65392b87233d63098}{deferred\+\_\+factory\+\_\+parameter}} (std\+::unique\+\_\+ptr$<$ Concrete\+Factory\+Type, Deleter $>$ factory)
+{\footnotesize template$<$typename Concrete\+Factory\+Type , typename Deleter , std\+::enable\+\_\+if\+\_\+t$<$ detail\+::is\+\_\+pointer\+\_\+convertible$<$ Concrete\+Factory\+Type, Factory\+Type $>$\+::value $>$ $\ast$  = nullptr$>$ }\\\mbox{\hyperlink{classgko_1_1deferred__factory__parameter_ade191bb3a9d7ffc65392b87233d63098}{deferred\+\_\+factory\+\_\+parameter}} (std\+::unique\+\_\+ptr$<$ Concrete\+Factory\+Type, Deleter $>$ factory)
 \begin{DoxyCompactList}\small\item\em Creates a deferred factory parameter by taking ownership of a preexisting factory with unique ownership. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename Parameters\+Type , typename  = decltype(std\+::declval$<$\+Parameters\+Type$>$().\+on(                  std\+::shared\+\_\+ptr$<$const Executor$>$\{\}))$>$ }\\\mbox{\hyperlink{classgko_1_1deferred__factory__parameter_aea3ce9b4328ec4c250459615933eaf1a}{deferred\+\_\+factory\+\_\+parameter}} (Parameters\+Type parameters)
+{\footnotesize template$<$typename Parameters\+Type , typename U  = decltype(std\+::declval$<$\+Parameters\+Type$>$().\+on(                  std\+::shared\+\_\+ptr$<$const Executor$>$\{\})), std\+::enable\+\_\+if\+\_\+t$<$ detail\+::is\+\_\+pointer\+\_\+convertible$<$ typename U\+::element\+\_\+type, Factory\+Type $>$\+::value $>$ $\ast$  = nullptr$>$ }\\\mbox{\hyperlink{classgko_1_1deferred__factory__parameter_af89a9f8423e6727573029fa0c881b6d1}{deferred\+\_\+factory\+\_\+parameter}} (Parameters\+Type parameters)
 \begin{DoxyCompactList}\small\item\em Creates a deferred factory parameter object from a factory\+\_\+parameters-\/like object. \end{DoxyCompactList}\item 
-std\+::shared\+\_\+ptr$<$ const Factory\+Type $>$ \mbox{\hyperlink{classgko_1_1deferred__factory__parameter_a7bc854478ff45fd915eb2e3637300fe2}{on}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec) const
+std\+::shared\+\_\+ptr$<$ Factory\+Type $>$ \mbox{\hyperlink{classgko_1_1deferred__factory__parameter_a13303496365ba8dd8beb7d2f88e86a2a}{on}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec) const
 \begin{DoxyCompactList}\small\item\em Instantiates the deferred parameter into an actual factory. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classgko_1_1deferred__factory__parameter_a888d64b7a719796fe7ca15518a71b486}\label{classgko_1_1deferred__factory__parameter_a888d64b7a719796fe7ca15518a71b486}} 
 bool \mbox{\hyperlink{classgko_1_1deferred__factory__parameter_a888d64b7a719796fe7ca15518a71b486}{is\+\_\+empty}} () const
@@ -57,12 +57,12 @@ Represents a factory parameter of factory type that can either initialized by a 
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classgko_1_1deferred__factory__parameter_aea3ce9b4328ec4c250459615933eaf1a}\label{classgko_1_1deferred__factory__parameter_aea3ce9b4328ec4c250459615933eaf1a}} 
+\mbox{\Hypertarget{classgko_1_1deferred__factory__parameter_af89a9f8423e6727573029fa0c881b6d1}\label{classgko_1_1deferred__factory__parameter_af89a9f8423e6727573029fa0c881b6d1}} 
 \index{gko::deferred\_factory\_parameter$<$ FactoryType $>$@{gko::deferred\_factory\_parameter$<$ FactoryType $>$}!deferred\_factory\_parameter@{deferred\_factory\_parameter}}
 \index{deferred\_factory\_parameter@{deferred\_factory\_parameter}!gko::deferred\_factory\_parameter$<$ FactoryType $>$@{gko::deferred\_factory\_parameter$<$ FactoryType $>$}}
 \doxysubsubsection{\texorpdfstring{deferred\_factory\_parameter()}{deferred\_factory\_parameter()}}
 {\footnotesize\ttfamily template$<$typename Factory\+Type$>$ \\
-template$<$typename Parameters\+Type , typename  = decltype(std\+::declval$<$\+Parameters\+Type$>$().\+on(                  std\+::shared\+\_\+ptr$<$const Executor$>$\{\}))$>$ \\
+template$<$typename Parameters\+Type , typename U  = decltype(std\+::declval$<$\+Parameters\+Type$>$().\+on(                  std\+::shared\+\_\+ptr$<$const Executor$>$\{\})), std\+::enable\+\_\+if\+\_\+t$<$ detail\+::is\+\_\+pointer\+\_\+convertible$<$ typename U\+::element\+\_\+type, Factory\+Type $>$\+::value $>$ $\ast$  = nullptr$>$ \\
 \mbox{\hyperlink{classgko_1_1deferred__factory__parameter}{gko\+::deferred\+\_\+factory\+\_\+parameter}}$<$ Factory\+Type $>$\+::\mbox{\hyperlink{classgko_1_1deferred__factory__parameter}{deferred\+\_\+factory\+\_\+parameter}} (\begin{DoxyParamCaption}\item[{Parameters\+Type}]{parameters }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
@@ -72,12 +72,12 @@ Creates a deferred factory parameter object from a factory\+\_\+parameters-\/lik
 To instantiate the actual factory, the parameter\textquotesingle{}s {\ttfamily .on(exec)} function will be called. 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classgko_1_1deferred__factory__parameter_a7bc854478ff45fd915eb2e3637300fe2}\label{classgko_1_1deferred__factory__parameter_a7bc854478ff45fd915eb2e3637300fe2}} 
+\mbox{\Hypertarget{classgko_1_1deferred__factory__parameter_a13303496365ba8dd8beb7d2f88e86a2a}\label{classgko_1_1deferred__factory__parameter_a13303496365ba8dd8beb7d2f88e86a2a}} 
 \index{gko::deferred\_factory\_parameter$<$ FactoryType $>$@{gko::deferred\_factory\_parameter$<$ FactoryType $>$}!on@{on}}
 \index{on@{on}!gko::deferred\_factory\_parameter$<$ FactoryType $>$@{gko::deferred\_factory\_parameter$<$ FactoryType $>$}}
 \doxysubsubsection{\texorpdfstring{on()}{on()}}
 {\footnotesize\ttfamily template$<$typename Factory\+Type$>$ \\
-std\+::shared\+\_\+ptr$<$const Factory\+Type$>$ \mbox{\hyperlink{classgko_1_1deferred__factory__parameter}{gko\+::deferred\+\_\+factory\+\_\+parameter}}$<$ Factory\+Type $>$\+::on (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+std\+::shared\+\_\+ptr$<$Factory\+Type$>$ \mbox{\hyperlink{classgko_1_1deferred__factory__parameter}{gko\+::deferred\+\_\+factory\+\_\+parameter}}$<$ Factory\+Type $>$\+::on (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 

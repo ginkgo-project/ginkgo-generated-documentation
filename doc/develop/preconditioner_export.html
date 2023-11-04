@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1060744273 branch based on develop. Ginkgo version 1.7.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1060917972 branch based on develop. Ginkgo version 1.7.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -188,19 +188,21 @@ $(function() {
 </div><!-- fragment --><p>handle different preconditioners</p>
 <div class="fragment"><div class="line"><span class="keywordflow">if</span> (precond == <span class="stringliteral">&quot;jacobi&quot;</span>) {</div>
 </div><!-- fragment --><p>jacobi: max_block_size, accuracy, storage_optimization</p>
-<div class="fragment"><div class="line">    <span class="keyword">auto</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a> = <a class="code" href="classgko_1_1preconditioner_1_1Jacobi.html">gko::preconditioner::Jacobi&lt;&gt;::build</a>().on(exec);</div>
+<div class="fragment"><div class="line">    <span class="keyword">auto</span> factory_parameter = <a class="code" href="classgko_1_1preconditioner_1_1Jacobi.html">gko::preconditioner::Jacobi&lt;&gt;::build</a>();</div>
 <div class="line">    <span class="keywordflow">if</span> (argc &gt;= 5) {</div>
-<div class="line">        <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a>-&gt;get_parameters().max_block_size = std::stoi(argv[4]);</div>
+<div class="line">        factory_parameter.with_max_block_size(</div>
+<div class="line">            static_cast&lt;gko::uint32&gt;(std::stoi(argv[4])));</div>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">if</span> (argc &gt;= 6) {</div>
-<div class="line">        <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a>-&gt;get_parameters().accuracy = std::stod(argv[5]);</div>
+<div class="line">        factory_parameter.with_accuracy(std::stod(argv[5]));</div>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">if</span> (argc &gt;= 7) {</div>
-<div class="line">        <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a>-&gt;get_parameters().storage_optimization =</div>
+<div class="line">        factory_parameter.with_storage_optimization(</div>
 <div class="line">            std::string{argv[6]} == <span class="stringliteral">&quot;auto&quot;</span></div>
 <div class="line">                ? <a class="code" href="classgko_1_1precision__reduction.html#a1fde4dd48fab015698c1616408f3ef81">gko::precision_reduction::autodetect</a>()</div>
-<div class="line">                : <a class="code" href="namespacegko.html">gko</a>::precision_reduction(0, std::stoi(argv[6]));</div>
+<div class="line">                : <a class="code" href="namespacegko.html">gko</a>::precision_reduction(0, std::stoi(argv[6])));</div>
 <div class="line">    }</div>
+<div class="line">    <span class="keyword">auto</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a> = factory_parameter.on(exec);</div>
 <div class="line">    <span class="keyword">auto</span> jacobi = try_generate([&amp;] { <span class="keywordflow">return</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a>-&gt;generate(mtx); });</div>
 <div class="line">    output(jacobi, matrix + <span class="stringliteral">&quot;.jacobi&quot;</span> + output_suffix);</div>
 <div class="line">} <span class="keywordflow">else</span> <span class="keywordflow">if</span> (precond == <span class="stringliteral">&quot;ilu&quot;</span>) {</div>
@@ -214,10 +216,12 @@ $(function() {
 <div class="line">           matrix + <span class="stringliteral">&quot;.ilu-u&quot;</span>);</div>
 <div class="line">} <span class="keywordflow">else</span> <span class="keywordflow">if</span> (precond == <span class="stringliteral">&quot;parilu&quot;</span>) {</div>
 </div><!-- fragment --><p>parilu: iterations</p>
-<div class="fragment"><div class="line">    <span class="keyword">auto</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a> = <a class="code" href="classgko_1_1factorization_1_1ParIlu.html">gko::factorization::ParIlu&lt;&gt;::build</a>().on(exec);</div>
+<div class="fragment"><div class="line">    <span class="keyword">auto</span> factory_parameter = <a class="code" href="classgko_1_1factorization_1_1ParIlu.html">gko::factorization::ParIlu&lt;&gt;::build</a>();</div>
 <div class="line">    <span class="keywordflow">if</span> (argc &gt;= 5) {</div>
-<div class="line">        <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a>-&gt;get_parameters().iterations = std::stoi(argv[4]);</div>
+<div class="line">        factory_parameter.with_iterations(</div>
+<div class="line">            static_cast&lt;gko::size_type&gt;(std::stoi(argv[4])));</div>
 <div class="line">    }</div>
+<div class="line">    <span class="keyword">auto</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a> = factory_parameter.on(exec);</div>
 <div class="line">    <span class="keyword">auto</span> ilu = gko::as&lt;gko::Composition&lt;&gt;&gt;(</div>
 <div class="line">        try_generate([&amp;] { <span class="keywordflow">return</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a>-&gt;generate(mtx); }));</div>
 <div class="line">    output(<a class="code" href="namespacegko.html#a618c9b64c35b0452240e9e57a9673b94">gko::as</a>&lt;<a class="code" href="classgko_1_1matrix_1_1Csr.html">gko::matrix::Csr&lt;&gt;</a>&gt;(ilu-&gt;get_operators()[0]),</div>
@@ -226,13 +230,15 @@ $(function() {
 <div class="line">           matrix + <span class="stringliteral">&quot;.parilu&quot;</span> + output_suffix + <span class="stringliteral">&quot;-u&quot;</span>);</div>
 <div class="line">} <span class="keywordflow">else</span> <span class="keywordflow">if</span> (precond == <span class="stringliteral">&quot;parilut&quot;</span>) {</div>
 </div><!-- fragment --><p>parilut: iterations, fill-in limit</p>
-<div class="fragment"><div class="line">    <span class="keyword">auto</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a> = <a class="code" href="classgko_1_1factorization_1_1ParIlut.html">gko::factorization::ParIlut&lt;&gt;::build</a>().on(exec);</div>
+<div class="fragment"><div class="line">    <span class="keyword">auto</span> factory_parameter = <a class="code" href="classgko_1_1factorization_1_1ParIlut.html">gko::factorization::ParIlut&lt;&gt;::build</a>();</div>
 <div class="line">    <span class="keywordflow">if</span> (argc &gt;= 5) {</div>
-<div class="line">        <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a>-&gt;get_parameters().iterations = std::stoi(argv[4]);</div>
+<div class="line">        factory_parameter.with_iterations(</div>
+<div class="line">            static_cast&lt;gko::size_type&gt;(std::stoi(argv[4])));</div>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">if</span> (argc &gt;= 6) {</div>
-<div class="line">        <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a>-&gt;get_parameters().fill_in_limit = std::stod(argv[5]);</div>
+<div class="line">        factory_parameter.with_fill_in_limit(std::stod(argv[5]));</div>
 <div class="line">    }</div>
+<div class="line">    <span class="keyword">auto</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a> = factory_parameter.on(exec);</div>
 <div class="line">    <span class="keyword">auto</span> ilut = gko::as&lt;gko::Composition&lt;&gt;&gt;(</div>
 <div class="line">        try_generate([&amp;] { <span class="keywordflow">return</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a>-&gt;generate(mtx); }));</div>
 <div class="line">    output(<a class="code" href="namespacegko.html#a618c9b64c35b0452240e9e57a9673b94">gko::as</a>&lt;<a class="code" href="classgko_1_1matrix_1_1Csr.html">gko::matrix::Csr&lt;&gt;</a>&gt;(ilut-&gt;get_operators()[0]),</div>
@@ -263,15 +269,16 @@ $(function() {
 <div class="line">           matrix + <span class="stringliteral">&quot;.ilu-isai&quot;</span> + output_suffix + <span class="stringliteral">&quot;-u&quot;</span>);</div>
 <div class="line">} <span class="keywordflow">else</span> <span class="keywordflow">if</span> (precond == <span class="stringliteral">&quot;parilu-isai&quot;</span>) {</div>
 </div><!-- fragment --><p>parilu-isai: iterations, sparsity power</p>
-<div class="fragment"><div class="line">    <span class="keyword">auto</span> fact_factory =</div>
-<div class="line">        <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a>(<a class="code" href="classgko_1_1factorization_1_1ParIlu.html">gko::factorization::ParIlu&lt;&gt;::build</a>().on(exec));</div>
+<div class="fragment"><div class="line">    <span class="keyword">auto</span> fact_parameter = <a class="code" href="classgko_1_1factorization_1_1ParIlu.html">gko::factorization::ParIlu&lt;&gt;::build</a>();</div>
 <div class="line">    <span class="keywordtype">int</span> sparsity_power = 1;</div>
 <div class="line">    <span class="keywordflow">if</span> (argc &gt;= 5) {</div>
-<div class="line">        fact_factory-&gt;get_parameters().iterations = std::stoi(argv[4]);</div>
+<div class="line">        fact_parameter.with_iterations(</div>
+<div class="line">            static_cast&lt;gko::size_type&gt;(std::stoi(argv[4])));</div>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">if</span> (argc &gt;= 6) {</div>
 <div class="line">        sparsity_power = std::stoi(argv[5]);</div>
 <div class="line">    }</div>
+<div class="line">    <span class="keyword">auto</span> fact_factory = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a>(fact_parameter.on(exec));</div>
 <div class="line">    <span class="keyword">auto</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a> =</div>
 <div class="line">        <a class="code" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu&lt;gko::preconditioner::LowerIsai&lt;&gt;</a>,</div>
 <div class="line">                                 <a class="code" href="classgko_1_1preconditioner_1_1Isai.html">gko::preconditioner::UpperIsai&lt;&gt;</a>&gt;::build()</div>
@@ -288,18 +295,19 @@ $(function() {
 <div class="line">           matrix + <span class="stringliteral">&quot;.parilu-isai&quot;</span> + output_suffix + <span class="stringliteral">&quot;-u&quot;</span>);</div>
 <div class="line">} <span class="keywordflow">else</span> <span class="keywordflow">if</span> (precond == <span class="stringliteral">&quot;parilut-isai&quot;</span>) {</div>
 </div><!-- fragment --><p>parilut-isai: iterations, fill-in limit, sparsity power</p>
-<div class="fragment"><div class="line">        <span class="keyword">auto</span> fact_factory =</div>
-<div class="line">            <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a>(<a class="code" href="classgko_1_1factorization_1_1ParIlut.html">gko::factorization::ParIlut&lt;&gt;::build</a>().on(exec));</div>
+<div class="fragment"><div class="line">        <span class="keyword">auto</span> fact_parameter = <a class="code" href="classgko_1_1factorization_1_1ParIlut.html">gko::factorization::ParIlut&lt;&gt;::build</a>();</div>
 <div class="line">        <span class="keywordtype">int</span> sparsity_power = 1;</div>
 <div class="line">        <span class="keywordflow">if</span> (argc &gt;= 5) {</div>
-<div class="line">            fact_factory-&gt;get_parameters().iterations = std::stoi(argv[4]);</div>
+<div class="line">            fact_parameter.with_iterations(</div>
+<div class="line">                static_cast&lt;gko::size_type&gt;(std::stoi(argv[4])));</div>
 <div class="line">        }</div>
 <div class="line">        <span class="keywordflow">if</span> (argc &gt;= 6) {</div>
-<div class="line">            fact_factory-&gt;get_parameters().fill_in_limit = std::stod(argv[5]);</div>
+<div class="line">            fact_parameter.with_fill_in_limit(std::stod(argv[5]));</div>
 <div class="line">        }</div>
 <div class="line">        <span class="keywordflow">if</span> (argc &gt;= 7) {</div>
 <div class="line">            sparsity_power = std::stoi(argv[6]);</div>
 <div class="line">        }</div>
+<div class="line">        <span class="keyword">auto</span> fact_factory = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a>(fact_parameter.on(exec));</div>
 <div class="line">        <span class="keyword">auto</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a> =</div>
 <div class="line">            <a class="code" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu&lt;gko::preconditioner::LowerIsai&lt;&gt;</a>,</div>
 <div class="line">                                     <a class="code" href="classgko_1_1preconditioner_1_1Isai.html">gko::preconditioner::UpperIsai&lt;&gt;</a>&gt;::build()</div>
@@ -456,19 +464,21 @@ $(function() {
 <div class="line">    }</div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">if</span> (precond == <span class="stringliteral">&quot;jacobi&quot;</span>) {</div>
-<div class="line">        <span class="keyword">auto</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a> = <a class="code" href="classgko_1_1preconditioner_1_1Jacobi.html">gko::preconditioner::Jacobi&lt;&gt;::build</a>().on(exec);</div>
+<div class="line">        <span class="keyword">auto</span> factory_parameter = <a class="code" href="classgko_1_1preconditioner_1_1Jacobi.html">gko::preconditioner::Jacobi&lt;&gt;::build</a>();</div>
 <div class="line">        <span class="keywordflow">if</span> (argc &gt;= 5) {</div>
-<div class="line">            <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a>-&gt;get_parameters().max_block_size = std::stoi(argv[4]);</div>
+<div class="line">            factory_parameter.with_max_block_size(</div>
+<div class="line">                static_cast&lt;gko::uint32&gt;(std::stoi(argv[4])));</div>
 <div class="line">        }</div>
 <div class="line">        <span class="keywordflow">if</span> (argc &gt;= 6) {</div>
-<div class="line">            <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a>-&gt;get_parameters().accuracy = std::stod(argv[5]);</div>
+<div class="line">            factory_parameter.with_accuracy(std::stod(argv[5]));</div>
 <div class="line">        }</div>
 <div class="line">        <span class="keywordflow">if</span> (argc &gt;= 7) {</div>
-<div class="line">            <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a>-&gt;get_parameters().storage_optimization =</div>
+<div class="line">            factory_parameter.with_storage_optimization(</div>
 <div class="line">                std::string{argv[6]} == <span class="stringliteral">&quot;auto&quot;</span></div>
 <div class="line">                    ? <a class="code" href="classgko_1_1precision__reduction.html#a1fde4dd48fab015698c1616408f3ef81">gko::precision_reduction::autodetect</a>()</div>
-<div class="line">                    : <a class="code" href="namespacegko.html">gko</a>::precision_reduction(0, std::stoi(argv[6]));</div>
+<div class="line">                    : <a class="code" href="namespacegko.html">gko</a>::precision_reduction(0, std::stoi(argv[6])));</div>
 <div class="line">        }</div>
+<div class="line">        <span class="keyword">auto</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a> = factory_parameter.on(exec);</div>
 <div class="line">        <span class="keyword">auto</span> jacobi = try_generate([&amp;] { <span class="keywordflow">return</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a>-&gt;generate(mtx); });</div>
 <div class="line">        output(jacobi, matrix + <span class="stringliteral">&quot;.jacobi&quot;</span> + output_suffix);</div>
 <div class="line">    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (precond == <span class="stringliteral">&quot;ilu&quot;</span>) {</div>
@@ -480,10 +490,12 @@ $(function() {
 <div class="line">        output(<a class="code" href="namespacegko.html#a618c9b64c35b0452240e9e57a9673b94">gko::as</a>&lt;<a class="code" href="classgko_1_1matrix_1_1Csr.html">gko::matrix::Csr&lt;&gt;</a>&gt;(ilu-&gt;get_operators()[1]),</div>
 <div class="line">               matrix + <span class="stringliteral">&quot;.ilu-u&quot;</span>);</div>
 <div class="line">    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (precond == <span class="stringliteral">&quot;parilu&quot;</span>) {</div>
-<div class="line">        <span class="keyword">auto</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a> = <a class="code" href="classgko_1_1factorization_1_1ParIlu.html">gko::factorization::ParIlu&lt;&gt;::build</a>().on(exec);</div>
+<div class="line">        <span class="keyword">auto</span> factory_parameter = <a class="code" href="classgko_1_1factorization_1_1ParIlu.html">gko::factorization::ParIlu&lt;&gt;::build</a>();</div>
 <div class="line">        <span class="keywordflow">if</span> (argc &gt;= 5) {</div>
-<div class="line">            <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a>-&gt;get_parameters().iterations = std::stoi(argv[4]);</div>
+<div class="line">            factory_parameter.with_iterations(</div>
+<div class="line">                static_cast&lt;gko::size_type&gt;(std::stoi(argv[4])));</div>
 <div class="line">        }</div>
+<div class="line">        <span class="keyword">auto</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a> = factory_parameter.on(exec);</div>
 <div class="line">        <span class="keyword">auto</span> ilu = gko::as&lt;gko::Composition&lt;&gt;&gt;(</div>
 <div class="line">            try_generate([&amp;] { <span class="keywordflow">return</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a>-&gt;generate(mtx); }));</div>
 <div class="line">        output(<a class="code" href="namespacegko.html#a618c9b64c35b0452240e9e57a9673b94">gko::as</a>&lt;<a class="code" href="classgko_1_1matrix_1_1Csr.html">gko::matrix::Csr&lt;&gt;</a>&gt;(ilu-&gt;get_operators()[0]),</div>
@@ -491,13 +503,15 @@ $(function() {
 <div class="line">        output(<a class="code" href="namespacegko.html#a618c9b64c35b0452240e9e57a9673b94">gko::as</a>&lt;<a class="code" href="classgko_1_1matrix_1_1Csr.html">gko::matrix::Csr&lt;&gt;</a>&gt;(ilu-&gt;get_operators()[1]),</div>
 <div class="line">               matrix + <span class="stringliteral">&quot;.parilu&quot;</span> + output_suffix + <span class="stringliteral">&quot;-u&quot;</span>);</div>
 <div class="line">    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (precond == <span class="stringliteral">&quot;parilut&quot;</span>) {</div>
-<div class="line">        <span class="keyword">auto</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a> = <a class="code" href="classgko_1_1factorization_1_1ParIlut.html">gko::factorization::ParIlut&lt;&gt;::build</a>().on(exec);</div>
+<div class="line">        <span class="keyword">auto</span> factory_parameter = <a class="code" href="classgko_1_1factorization_1_1ParIlut.html">gko::factorization::ParIlut&lt;&gt;::build</a>();</div>
 <div class="line">        <span class="keywordflow">if</span> (argc &gt;= 5) {</div>
-<div class="line">            <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a>-&gt;get_parameters().iterations = std::stoi(argv[4]);</div>
+<div class="line">            factory_parameter.with_iterations(</div>
+<div class="line">                static_cast&lt;gko::size_type&gt;(std::stoi(argv[4])));</div>
 <div class="line">        }</div>
 <div class="line">        <span class="keywordflow">if</span> (argc &gt;= 6) {</div>
-<div class="line">            <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a>-&gt;get_parameters().fill_in_limit = std::stod(argv[5]);</div>
+<div class="line">            factory_parameter.with_fill_in_limit(std::stod(argv[5]));</div>
 <div class="line">        }</div>
+<div class="line">        <span class="keyword">auto</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a> = factory_parameter.on(exec);</div>
 <div class="line">        <span class="keyword">auto</span> ilut = gko::as&lt;gko::Composition&lt;&gt;&gt;(</div>
 <div class="line">            try_generate([&amp;] { <span class="keywordflow">return</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a>-&gt;generate(mtx); }));</div>
 <div class="line">        output(<a class="code" href="namespacegko.html#a618c9b64c35b0452240e9e57a9673b94">gko::as</a>&lt;<a class="code" href="classgko_1_1matrix_1_1Csr.html">gko::matrix::Csr&lt;&gt;</a>&gt;(ilut-&gt;get_operators()[0]),</div>
@@ -526,15 +540,16 @@ $(function() {
 <div class="line">        output(ilu_isai-&gt;get_u_solver()-&gt;get_approximate_inverse(),</div>
 <div class="line">               matrix + <span class="stringliteral">&quot;.ilu-isai&quot;</span> + output_suffix + <span class="stringliteral">&quot;-u&quot;</span>);</div>
 <div class="line">    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (precond == <span class="stringliteral">&quot;parilu-isai&quot;</span>) {</div>
-<div class="line">        <span class="keyword">auto</span> fact_factory =</div>
-<div class="line">            <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a>(<a class="code" href="classgko_1_1factorization_1_1ParIlu.html">gko::factorization::ParIlu&lt;&gt;::build</a>().on(exec));</div>
+<div class="line">        <span class="keyword">auto</span> fact_parameter = <a class="code" href="classgko_1_1factorization_1_1ParIlu.html">gko::factorization::ParIlu&lt;&gt;::build</a>();</div>
 <div class="line">        <span class="keywordtype">int</span> sparsity_power = 1;</div>
 <div class="line">        <span class="keywordflow">if</span> (argc &gt;= 5) {</div>
-<div class="line">            fact_factory-&gt;get_parameters().iterations = std::stoi(argv[4]);</div>
+<div class="line">            fact_parameter.with_iterations(</div>
+<div class="line">                static_cast&lt;gko::size_type&gt;(std::stoi(argv[4])));</div>
 <div class="line">        }</div>
 <div class="line">        <span class="keywordflow">if</span> (argc &gt;= 6) {</div>
 <div class="line">            sparsity_power = std::stoi(argv[5]);</div>
 <div class="line">        }</div>
+<div class="line">        <span class="keyword">auto</span> fact_factory = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a>(fact_parameter.on(exec));</div>
 <div class="line">        <span class="keyword">auto</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a> =</div>
 <div class="line">            <a class="code" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu&lt;gko::preconditioner::LowerIsai&lt;&gt;</a>,</div>
 <div class="line">                                     <a class="code" href="classgko_1_1preconditioner_1_1Isai.html">gko::preconditioner::UpperIsai&lt;&gt;</a>&gt;::build()</div>
@@ -550,18 +565,19 @@ $(function() {
 <div class="line">        output(ilu_isai-&gt;get_u_solver()-&gt;get_approximate_inverse(),</div>
 <div class="line">               matrix + <span class="stringliteral">&quot;.parilu-isai&quot;</span> + output_suffix + <span class="stringliteral">&quot;-u&quot;</span>);</div>
 <div class="line">    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (precond == <span class="stringliteral">&quot;parilut-isai&quot;</span>) {</div>
-<div class="line">        <span class="keyword">auto</span> fact_factory =</div>
-<div class="line">            <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a>(<a class="code" href="classgko_1_1factorization_1_1ParIlut.html">gko::factorization::ParIlut&lt;&gt;::build</a>().on(exec));</div>
+<div class="line">        <span class="keyword">auto</span> fact_parameter = <a class="code" href="classgko_1_1factorization_1_1ParIlut.html">gko::factorization::ParIlut&lt;&gt;::build</a>();</div>
 <div class="line">        <span class="keywordtype">int</span> sparsity_power = 1;</div>
 <div class="line">        <span class="keywordflow">if</span> (argc &gt;= 5) {</div>
-<div class="line">            fact_factory-&gt;get_parameters().iterations = std::stoi(argv[4]);</div>
+<div class="line">            fact_parameter.with_iterations(</div>
+<div class="line">                static_cast&lt;gko::size_type&gt;(std::stoi(argv[4])));</div>
 <div class="line">        }</div>
 <div class="line">        <span class="keywordflow">if</span> (argc &gt;= 6) {</div>
-<div class="line">            fact_factory-&gt;get_parameters().fill_in_limit = std::stod(argv[5]);</div>
+<div class="line">            fact_parameter.with_fill_in_limit(std::stod(argv[5]));</div>
 <div class="line">        }</div>
 <div class="line">        <span class="keywordflow">if</span> (argc &gt;= 7) {</div>
 <div class="line">            sparsity_power = std::stoi(argv[6]);</div>
 <div class="line">        }</div>
+<div class="line">        <span class="keyword">auto</span> fact_factory = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a>(fact_parameter.on(exec));</div>
 <div class="line">        <span class="keyword">auto</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a> =</div>
 <div class="line">            <a class="code" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu&lt;gko::preconditioner::LowerIsai&lt;&gt;</a>,</div>
 <div class="line">                                     <a class="code" href="classgko_1_1preconditioner_1_1Isai.html">gko::preconditioner::UpperIsai&lt;&gt;</a>&gt;::build()</div>
@@ -602,7 +618,7 @@ $(function() {
 <div class="ttc" id="aclassgko_1_1DpcppExecutor_html_ae9b875dfe3af7f3f3f24071bfb2f895e"><div class="ttname"><a href="classgko_1_1DpcppExecutor.html#ae9b875dfe3af7f3f3f24071bfb2f895e">gko::DpcppExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; DpcppExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, std::string device_type=&quot;all&quot;, dpcpp_queue_property property=dpcpp_queue_property::in_order)</div><div class="ttdoc">Creates a new DpcppExecutor.</div></div>
 <div class="ttc" id="aclassgko_1_1Error_html"><div class="ttname"><a href="classgko_1_1Error.html">gko::Error</a></div><div class="ttdoc">The Error class is used to report exceptional behaviour in library functions.</div><div class="ttdef"><b>Definition:</b> exception.hpp:86</div></div>
 <div class="ttc" id="aclassgko_1_1factorization_1_1Ilu_html"><div class="ttname"><a href="classgko_1_1factorization_1_1Ilu.html">gko::factorization::Ilu</a></div><div class="ttdoc">Represents an incomplete LU factorization – ILU(0) – of a sparse matrix.</div><div class="ttdef"><b>Definition:</b> ilu.hpp:71</div></div>
-<div class="ttc" id="aclassgko_1_1preconditioner_1_1Ilu_html"><div class="ttname"><a href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu</a></div><div class="ttdoc">The Incomplete LU (ILU) preconditioner solves the equation  for a given lower triangular matrix L,...</div><div class="ttdef"><b>Definition:</b> ilu.hpp:114</div></div>
+<div class="ttc" id="aclassgko_1_1preconditioner_1_1Ilu_html"><div class="ttname"><a href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu</a></div><div class="ttdoc">The Incomplete LU (ILU) preconditioner solves the equation  for a given lower triangular matrix L,...</div><div class="ttdef"><b>Definition:</b> ilu.hpp:113</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
