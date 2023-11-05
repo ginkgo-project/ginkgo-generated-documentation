@@ -32,10 +32,12 @@ Collaboration diagram for gko\+::batch\+::solver\+::enable\+\_\+preconditioned\+
 \mbox{\Hypertarget{structgko_1_1batch_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters_a6a60380b43348f39c6b2661d3ff07b6e}\label{structgko_1_1batch_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters_a6a60380b43348f39c6b2661d3ff07b6e}} 
 {\footnotesize template$<$typename... Args$>$ }\\auto {\bfseries with\+\_\+tolerance\+\_\+type} (Args \&\&... \+\_\+value) -\/$>$ std\+::decay\+\_\+t$<$ decltype($\ast$(this-\/$>$self()))$>$ \&
 \item 
-Parameters \& \mbox{\hyperlink{structgko_1_1batch_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters_aab8ef80674e56b9cbc90b49b7fd1151f}{with\+\_\+preconditioner}} (\mbox{\hyperlink{classgko_1_1deferred__factory__parameter}{deferred\+\_\+factory\+\_\+parameter}}$<$ \mbox{\hyperlink{classgko_1_1batch_1_1BatchLinOpFactory}{Batch\+Lin\+Op\+Factory}} $>$ \mbox{\hyperlink{structgko_1_1batch_1_1solver_1_1preconditioned__iterative__solver__factory__parameters_a9b251fba81fce0dbb20edace9e6d7550}{preconditioner}})
-\begin{DoxyCompactList}\small\item\em Provides a preconditioner factory to be used by the iterative solver in a fluent interface. \end{DoxyCompactList}\item 
-Parameters \& \mbox{\hyperlink{structgko_1_1batch_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters_a9c013a93d2eafb5a62bca082496695df}{with\+\_\+generated\+\_\+preconditioner}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1BatchLinOp}{Batch\+Lin\+Op}} $>$ \mbox{\hyperlink{structgko_1_1batch_1_1solver_1_1preconditioned__iterative__solver__factory__parameters_a97861e65f253bfcd712eab3916cf1656}{generated\+\_\+preconditioner}})
-\begin{DoxyCompactList}\small\item\em Provides a concrete preconditioner to be used by the iterative solver in a fluent interface. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\mbox{\Hypertarget{structgko_1_1batch_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters_a21e83ede2c24b8a7b8ec3b66d9224101}\label{structgko_1_1batch_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters_a21e83ede2c24b8a7b8ec3b66d9224101}} 
+auto {\bfseries with\+\_\+preconditioner} (\+::\mbox{\hyperlink{classgko_1_1deferred__factory__parameter}{gko\+::deferred\+\_\+factory\+\_\+parameter}}$<$ preconditioner\+\_\+type $>$ factory) -\/$>$ std\+::decay\+\_\+t$<$ decltype($\ast$(this-\/$>$self()))$>$ \&
+\item 
+\mbox{\Hypertarget{structgko_1_1batch_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters_a7ed325b7ec972b5e59697b7337d72d60}\label{structgko_1_1batch_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters_a7ed325b7ec972b5e59697b7337d72d60}} 
+{\footnotesize template$<$typename... Args$>$ }\\auto {\bfseries with\+\_\+generated\+\_\+preconditioner} (Args \&\&... \+\_\+value) -\/$>$ std\+::decay\+\_\+t$<$ decltype($\ast$(this-\/$>$self()))$>$ \&
+\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -45,43 +47,27 @@ double \mbox{\hyperlink{structgko_1_1batch_1_1solver_1_1enable__preconditioned__
 \begin{DoxyCompactList}\small\item\em Default residual tolerance. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{structgko_1_1batch_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters_a69d47d944c4173d4a067613a30338c0e}\label{structgko_1_1batch_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters_a69d47d944c4173d4a067613a30338c0e}} 
 \+::gko\+::batch\+::stop\+::tolerance\+\_\+type \mbox{\hyperlink{structgko_1_1batch_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters_a69d47d944c4173d4a067613a30338c0e}{tolerance\+\_\+type}} \{ \+::gko\+::batch\+::stop\+::tolerance\+\_\+type\+::absolute \}
-\begin{DoxyCompactList}\small\item\em To specify which type of tolerance check is to be considered, absolute or relative (to the rhs l2 norm) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em To specify which type of tolerance check is to be considered, absolute or relative (to the rhs l2 norm) \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1BatchLinOpFactory}{Batch\+Lin\+Op\+Factory}} $>$ \mbox{\hyperlink{structgko_1_1batch_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters_a62d982e1f1bad507ea74ba0be81d859b}{preconditioner}} \{\}
+\begin{DoxyCompactList}\small\item\em The preconditioner to be used by the iterative solver. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1BatchLinOp}{Batch\+Lin\+Op}} $>$ \mbox{\hyperlink{structgko_1_1batch_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters_ab9b3bdf2d54eecbfb9c322e3e4289295}{generated\+\_\+preconditioner}} \{ nullptr \}
+\begin{DoxyCompactList}\small\item\em Already generated preconditioner. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
-\doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{structgko_1_1batch_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters_a9c013a93d2eafb5a62bca082496695df}\label{structgko_1_1batch_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters_a9c013a93d2eafb5a62bca082496695df}} 
-\index{gko::batch::solver::enable\_preconditioned\_iterative\_solver\_factory\_parameters$<$ Parameters, Factory $>$@{gko::batch::solver::enable\_preconditioned\_iterative\_solver\_factory\_parameters$<$ Parameters, Factory $>$}!with\_generated\_preconditioner@{with\_generated\_preconditioner}}
-\index{with\_generated\_preconditioner@{with\_generated\_preconditioner}!gko::batch::solver::enable\_preconditioned\_iterative\_solver\_factory\_parameters$<$ Parameters, Factory $>$@{gko::batch::solver::enable\_preconditioned\_iterative\_solver\_factory\_parameters$<$ Parameters, Factory $>$}}
-\doxysubsubsection{\texorpdfstring{with\_generated\_preconditioner()}{with\_generated\_preconditioner()}}
-{\footnotesize\ttfamily template$<$typename Parameters, typename Factory$>$ \\
-Parameters\& \mbox{\hyperlink{structgko_1_1batch_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters}{gko\+::batch\+::solver\+::enable\+\_\+preconditioned\+\_\+iterative\+\_\+solver\+\_\+factory\+\_\+parameters}}$<$ Parameters, Factory $>$\+::with\+\_\+generated\+\_\+preconditioner (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1BatchLinOp}{Batch\+Lin\+Op}} $>$}]{generated\+\_\+preconditioner }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Provides a concrete preconditioner to be used by the iterative solver in a fluent interface. 
-
-\begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{structgko_1_1batch_1_1solver_1_1preconditioned__iterative__solver__factory__parameters_a9b251fba81fce0dbb20edace9e6d7550}{preconditioned\+\_\+iterative\+\_\+solver\+\_\+factory\+\_\+parameters\+::preconditioner}} 
-\end{DoxySeeAlso}
-\mbox{\Hypertarget{structgko_1_1batch_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters_aab8ef80674e56b9cbc90b49b7fd1151f}\label{structgko_1_1batch_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters_aab8ef80674e56b9cbc90b49b7fd1151f}} 
-\index{gko::batch::solver::enable\_preconditioned\_iterative\_solver\_factory\_parameters$<$ Parameters, Factory $>$@{gko::batch::solver::enable\_preconditioned\_iterative\_solver\_factory\_parameters$<$ Parameters, Factory $>$}!with\_preconditioner@{with\_preconditioner}}
-\index{with\_preconditioner@{with\_preconditioner}!gko::batch::solver::enable\_preconditioned\_iterative\_solver\_factory\_parameters$<$ Parameters, Factory $>$@{gko::batch::solver::enable\_preconditioned\_iterative\_solver\_factory\_parameters$<$ Parameters, Factory $>$}}
-\doxysubsubsection{\texorpdfstring{with\_preconditioner()}{with\_preconditioner()}}
-{\footnotesize\ttfamily template$<$typename Parameters, typename Factory$>$ \\
-Parameters\& \mbox{\hyperlink{structgko_1_1batch_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters}{gko\+::batch\+::solver\+::enable\+\_\+preconditioned\+\_\+iterative\+\_\+solver\+\_\+factory\+\_\+parameters}}$<$ Parameters, Factory $>$\+::with\+\_\+preconditioner (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1deferred__factory__parameter}{deferred\+\_\+factory\+\_\+parameter}}$<$ \mbox{\hyperlink{classgko_1_1batch_1_1BatchLinOpFactory}{Batch\+Lin\+Op\+Factory}} $>$}]{preconditioner }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Provides a preconditioner factory to be used by the iterative solver in a fluent interface. 
-
-\begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{structgko_1_1batch_1_1solver_1_1preconditioned__iterative__solver__factory__parameters_a9b251fba81fce0dbb20edace9e6d7550}{preconditioned\+\_\+iterative\+\_\+solver\+\_\+factory\+\_\+parameters\+::preconditioner}} 
-\end{DoxySeeAlso}
-
-
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{structgko_1_1batch_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters_a27570adff31e3558786aced9c2a0042c}\label{structgko_1_1batch_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters_a27570adff31e3558786aced9c2a0042c}} 
+\mbox{\Hypertarget{structgko_1_1batch_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters_ab9b3bdf2d54eecbfb9c322e3e4289295}\label{structgko_1_1batch_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters_ab9b3bdf2d54eecbfb9c322e3e4289295}} 
+\index{gko::batch::solver::enable\_preconditioned\_iterative\_solver\_factory\_parameters$<$ Parameters, Factory $>$@{gko::batch::solver::enable\_preconditioned\_iterative\_solver\_factory\_parameters$<$ Parameters, Factory $>$}!generated\_preconditioner@{generated\_preconditioner}}
+\index{generated\_preconditioner@{generated\_preconditioner}!gko::batch::solver::enable\_preconditioned\_iterative\_solver\_factory\_parameters$<$ Parameters, Factory $>$@{gko::batch::solver::enable\_preconditioned\_iterative\_solver\_factory\_parameters$<$ Parameters, Factory $>$}}
+\doxysubsubsection{\texorpdfstring{generated\_preconditioner}{generated\_preconditioner}}
+{\footnotesize\ttfamily template$<$typename Parameters, typename Factory$>$ \\
+std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1batch_1_1BatchLinOp}{Batch\+Lin\+Op}}$>$ \mbox{\hyperlink{structgko_1_1batch_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters}{gko\+::batch\+::solver\+::enable\+\_\+preconditioned\+\_\+iterative\+\_\+solver\+\_\+factory\+\_\+parameters}}$<$ Parameters, Factory $>$\+::generated\+\_\+preconditioner \{ nullptr \}}
+
+
+
+Already generated preconditioner. 
+
+If one is provided, the factory {\ttfamily preconditioner} will be ignored. \mbox{\Hypertarget{structgko_1_1batch_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters_a27570adff31e3558786aced9c2a0042c}\label{structgko_1_1batch_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters_a27570adff31e3558786aced9c2a0042c}} 
 \index{gko::batch::solver::enable\_preconditioned\_iterative\_solver\_factory\_parameters$<$ Parameters, Factory $>$@{gko::batch::solver::enable\_preconditioned\_iterative\_solver\_factory\_parameters$<$ Parameters, Factory $>$}!max\_iterations@{max\_iterations}}
 \index{max\_iterations@{max\_iterations}!gko::batch::solver::enable\_preconditioned\_iterative\_solver\_factory\_parameters$<$ Parameters, Factory $>$@{gko::batch::solver::enable\_preconditioned\_iterative\_solver\_factory\_parameters$<$ Parameters, Factory $>$}}
 \doxysubsubsection{\texorpdfstring{max\_iterations}{max\_iterations}}
@@ -92,7 +78,18 @@ int \mbox{\hyperlink{structgko_1_1batch_1_1solver_1_1enable__preconditioned__ite
 
 Default maximum number iterations allowed. 
 
-Generated solvers are initialized with this value for their maximum iterations. \mbox{\Hypertarget{structgko_1_1batch_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters_a2de5472d843daeead2e2be40963d1e51}\label{structgko_1_1batch_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters_a2de5472d843daeead2e2be40963d1e51}} 
+Generated solvers are initialized with this value for their maximum iterations. \mbox{\Hypertarget{structgko_1_1batch_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters_a62d982e1f1bad507ea74ba0be81d859b}\label{structgko_1_1batch_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters_a62d982e1f1bad507ea74ba0be81d859b}} 
+\index{gko::batch::solver::enable\_preconditioned\_iterative\_solver\_factory\_parameters$<$ Parameters, Factory $>$@{gko::batch::solver::enable\_preconditioned\_iterative\_solver\_factory\_parameters$<$ Parameters, Factory $>$}!preconditioner@{preconditioner}}
+\index{preconditioner@{preconditioner}!gko::batch::solver::enable\_preconditioned\_iterative\_solver\_factory\_parameters$<$ Parameters, Factory $>$@{gko::batch::solver::enable\_preconditioned\_iterative\_solver\_factory\_parameters$<$ Parameters, Factory $>$}}
+\doxysubsubsection{\texorpdfstring{preconditioner}{preconditioner}}
+{\footnotesize\ttfamily template$<$typename Parameters, typename Factory$>$ \\
+std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1batch_1_1BatchLinOpFactory}{Batch\+Lin\+Op\+Factory}}$>$ \mbox{\hyperlink{structgko_1_1batch_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters}{gko\+::batch\+::solver\+::enable\+\_\+preconditioned\+\_\+iterative\+\_\+solver\+\_\+factory\+\_\+parameters}}$<$ Parameters, Factory $>$\+::preconditioner \{\}}
+
+
+
+The preconditioner to be used by the iterative solver. 
+
+By default, no preconditioner is used. \mbox{\Hypertarget{structgko_1_1batch_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters_a2de5472d843daeead2e2be40963d1e51}\label{structgko_1_1batch_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters_a2de5472d843daeead2e2be40963d1e51}} 
 \index{gko::batch::solver::enable\_preconditioned\_iterative\_solver\_factory\_parameters$<$ Parameters, Factory $>$@{gko::batch::solver::enable\_preconditioned\_iterative\_solver\_factory\_parameters$<$ Parameters, Factory $>$}!tolerance@{tolerance}}
 \index{tolerance@{tolerance}!gko::batch::solver::enable\_preconditioned\_iterative\_solver\_factory\_parameters$<$ Parameters, Factory $>$@{gko::batch::solver::enable\_preconditioned\_iterative\_solver\_factory\_parameters$<$ Parameters, Factory $>$}}
 \doxysubsubsection{\texorpdfstring{tolerance}{tolerance}}
