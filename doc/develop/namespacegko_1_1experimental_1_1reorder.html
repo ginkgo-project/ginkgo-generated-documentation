@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1061755910 branch based on develop. Ginkgo version 1.7.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1062899265 branch based on develop. Ginkgo version 1.7.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -71,7 +71,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#typedef-members">Typedefs</a>  </div>
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle">
 <div class="title">gko::experimental::reorder Namespace Reference</div>  </div>
 </div><!--header-->
@@ -85,6 +86,9 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1experimental_1_1reorder_1_1Amd.html">Amd</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes a Approximate Minimum Degree (AMD) reordering of an input matrix.  <a href="classgko_1_1experimental_1_1reorder_1_1Amd.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1experimental_1_1reorder_1_1Mc64.html">Mc64</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">MC64 is an algorithm for permuting large entries to the diagonal of a sparse matrix.  <a href="classgko_1_1experimental_1_1reorder_1_1Mc64.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1experimental_1_1reorder_1_1Rcm.html">Rcm</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classgko_1_1experimental_1_1reorder_1_1Rcm.html" title="Rcm (Reverse Cuthill-McKee) is a reordering algorithm minimizing the bandwidth of a matrix.">Rcm</a> (Reverse Cuthill-McKee) is a reordering algorithm minimizing the bandwidth of a matrix.  <a href="classgko_1_1experimental_1_1reorder_1_1Rcm.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -97,10 +101,44 @@ Typedefs</h2></td></tr>
 <tr class="memitem:a50a361408e311fae41a023a92a98c1ad"><td class="memItemLeft" align="right" valign="top"><a id="a50a361408e311fae41a023a92a98c1ad"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>rcm_starting_strategy</b> = gko::reorder::starting_strategy</td></tr>
 <tr class="separator:a50a361408e311fae41a023a92a98c1ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:abb527d05639fb24776a2ee02b66dc174"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegko_1_1experimental_1_1reorder.html#abb527d05639fb24776a2ee02b66dc174">mc64_strategy</a> { <b>max_diagonal_product</b>, 
+<b>max_diagonal_sum</b>
+ }</td></tr>
+<tr class="memdesc:abb527d05639fb24776a2ee02b66dc174"><td class="mdescLeft">&#160;</td><td class="mdescRight">Strategy defining the goal of the MC64 reordering.  <a href="namespacegko_1_1experimental_1_1reorder.html#abb527d05639fb24776a2ee02b66dc174">More...</a><br /></td></tr>
+<tr class="separator:abb527d05639fb24776a2ee02b66dc174"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The Reorder namespace. </p>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="abb527d05639fb24776a2ee02b66dc174"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb527d05639fb24776a2ee02b66dc174">&#9670;&nbsp;</a></span>mc64_strategy</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespacegko_1_1experimental_1_1reorder.html#abb527d05639fb24776a2ee02b66dc174">gko::experimental::reorder::mc64_strategy</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Strategy defining the goal of the MC64 reordering. </p>
+<p>max_diagonal_product aims at maximizing the product of absolute diagonal entries. max_diag_sum aims at maximizing the sum of absolute values for the diagonal entries. </p>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
