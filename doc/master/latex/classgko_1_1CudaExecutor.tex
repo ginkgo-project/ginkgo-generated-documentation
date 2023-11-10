@@ -59,10 +59,10 @@ int \mbox{\hyperlink{classgko_1_1CudaExecutor_a6a3894e9f4d98b5f7523e067c88ef521}
 \begin{DoxyCompactList}\small\item\em Get the warp size of this executor. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classgko_1_1CudaExecutor_a3868f53f82b6398acb1ba1f9647a6e46}\label{classgko_1_1CudaExecutor_a3868f53f82b6398acb1ba1f9647a6e46}} 
 int \mbox{\hyperlink{classgko_1_1CudaExecutor_a3868f53f82b6398acb1ba1f9647a6e46}{get\+\_\+major\+\_\+version}} () const noexcept
-\begin{DoxyCompactList}\small\item\em Get the major verion of compute capability. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Get the major version of compute capability. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classgko_1_1CudaExecutor_aa7d7a5cd7aeb38b8ab8fe3e4d1538481}\label{classgko_1_1CudaExecutor_aa7d7a5cd7aeb38b8ab8fe3e4d1538481}} 
 int \mbox{\hyperlink{classgko_1_1CudaExecutor_aa7d7a5cd7aeb38b8ab8fe3e4d1538481}{get\+\_\+minor\+\_\+version}} () const noexcept
-\begin{DoxyCompactList}\small\item\em Get the minor verion of compute capability. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Get the minor version of compute capability. \end{DoxyCompactList}\item 
 cublas\+Context $\ast$ \mbox{\hyperlink{classgko_1_1CudaExecutor_a5b5f8febb914c9984bc77b15e7bb7601}{get\+\_\+cublas\+\_\+handle}} () const
 \begin{DoxyCompactList}\small\item\em Get the cublas handle for this executor. \end{DoxyCompactList}\item 
 cusparse\+Context $\ast$ \mbox{\hyperlink{classgko_1_1CudaExecutor_ade84197157cc2695e5c94310692ab323}{get\+\_\+cusparse\+\_\+handle}} () const
@@ -76,8 +76,10 @@ C\+Ustream\+\_\+st $\ast$ \mbox{\hyperlink{classgko_1_1CudaExecutor_a95709d82526
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1CudaExecutor}{Cuda\+Executor}} $>$ \mbox{\hyperlink{classgko_1_1CudaExecutor_a8e18adb154a44f90c13d61c1e100e160}{create}} (int device\+\_\+id, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ master, bool device\+\_\+reset=false, \mbox{\hyperlink{namespacegko_afbed8e2cbd3ee4ca962e12f688858bdb}{allocation\+\_\+mode}} alloc\+\_\+mode=default\+\_\+cuda\+\_\+alloc\+\_\+mode, C\+Ustream\+\_\+st $\ast$stream=nullptr)
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1CudaExecutor}{Cuda\+Executor}} $>$ \mbox{\hyperlink{classgko_1_1CudaExecutor_a6c423656c7c0eb53810cb77bb4a66d15}{create}} (int device\+\_\+id, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ master, bool device\+\_\+reset, \mbox{\hyperlink{namespacegko_afbed8e2cbd3ee4ca962e12f688858bdb}{allocation\+\_\+mode}} alloc\+\_\+mode=default\+\_\+cuda\+\_\+alloc\+\_\+mode, C\+Ustream\+\_\+st $\ast$stream=nullptr)
 \begin{DoxyCompactList}\small\item\em Creates a new \mbox{\hyperlink{classgko_1_1CudaExecutor}{Cuda\+Executor}}. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1CudaExecutor}{Cuda\+Executor}} $>$ \mbox{\hyperlink{classgko_1_1CudaExecutor_a65f3ee556dae324cd659b3b0bd6211e3}{create}} (int device\+\_\+id, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ master, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1CudaAllocatorBase}{Cuda\+Allocator\+Base}} $>$ \mbox{\hyperlink{classgko_1_1Executor_a5a216c2b1f7ceb8a0190c08941c1c687}{alloc}}=std\+::make\+\_\+shared$<$ \mbox{\hyperlink{classgko_1_1CudaAllocator}{Cuda\+Allocator}} $>$(), C\+Ustream\+\_\+st $\ast$stream=nullptr)
+\begin{DoxyCompactList}\small\item\em Creates a new \mbox{\hyperlink{classgko_1_1CudaExecutor}{Cuda\+Executor}} with a custom allocator and device stream. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classgko_1_1CudaExecutor_aef0258494d14de0e56149b920c5173e5}\label{classgko_1_1CudaExecutor_aef0258494d14de0e56149b920c5173e5}} 
 static int \mbox{\hyperlink{classgko_1_1CudaExecutor_aef0258494d14de0e56149b920c5173e5}{get\+\_\+num\+\_\+devices}} ()
 \begin{DoxyCompactList}\small\item\em Get the number of devices present on the system. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -87,11 +89,11 @@ static int \mbox{\hyperlink{classgko_1_1CudaExecutor_aef0258494d14de0e56149b920c
 This is the \mbox{\hyperlink{classgko_1_1Executor}{Executor}} subclass which represents the C\+U\+DA device. 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classgko_1_1CudaExecutor_a8e18adb154a44f90c13d61c1e100e160}\label{classgko_1_1CudaExecutor_a8e18adb154a44f90c13d61c1e100e160}} 
+\mbox{\Hypertarget{classgko_1_1CudaExecutor_a6c423656c7c0eb53810cb77bb4a66d15}\label{classgko_1_1CudaExecutor_a6c423656c7c0eb53810cb77bb4a66d15}} 
 \index{gko::CudaExecutor@{gko::CudaExecutor}!create@{create}}
 \index{create@{create}!gko::CudaExecutor@{gko::CudaExecutor}}
-\doxysubsubsection{\texorpdfstring{create()}{create()}}
-{\footnotesize\ttfamily static std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1CudaExecutor}{Cuda\+Executor}}$>$ gko\+::\+Cuda\+Executor\+::create (\begin{DoxyParamCaption}\item[{int}]{device\+\_\+id,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{master,  }\item[{bool}]{device\+\_\+reset = {\ttfamily false},  }\item[{\mbox{\hyperlink{namespacegko_afbed8e2cbd3ee4ca962e12f688858bdb}{allocation\+\_\+mode}}}]{alloc\+\_\+mode = {\ttfamily default\+\_\+cuda\+\_\+alloc\+\_\+mode},  }\item[{C\+Ustream\+\_\+st $\ast$}]{stream = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily static std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1CudaExecutor}{Cuda\+Executor}}$>$ gko\+::\+Cuda\+Executor\+::create (\begin{DoxyParamCaption}\item[{int}]{device\+\_\+id,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{master,  }\item[{bool}]{device\+\_\+reset,  }\item[{\mbox{\hyperlink{namespacegko_afbed8e2cbd3ee4ca962e12f688858bdb}{allocation\+\_\+mode}}}]{alloc\+\_\+mode = {\ttfamily default\+\_\+cuda\+\_\+alloc\+\_\+mode},  }\item[{C\+Ustream\+\_\+st $\ast$}]{stream = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -103,9 +105,32 @@ Creates a new \mbox{\hyperlink{classgko_1_1CudaExecutor}{Cuda\+Executor}}.
 \hline
 {\em master} & an executor on the host that is used to invoke the device kernels \\
 \hline
-{\em device\+\_\+reset} & whether to reset the device after the object exits the scope. \\
+{\em device\+\_\+reset} & this option no longer has any effect. \\
 \hline
 {\em alloc\+\_\+mode} & the allocation mode that the executor should operate on. See @allocation\+\_\+mode for more details \\
+\hline
+{\em stream} & the stream to execute operations on. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1CudaExecutor_a65f3ee556dae324cd659b3b0bd6211e3}\label{classgko_1_1CudaExecutor_a65f3ee556dae324cd659b3b0bd6211e3}} 
+\index{gko::CudaExecutor@{gko::CudaExecutor}!create@{create}}
+\index{create@{create}!gko::CudaExecutor@{gko::CudaExecutor}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily static std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1CudaExecutor}{Cuda\+Executor}}$>$ gko\+::\+Cuda\+Executor\+::create (\begin{DoxyParamCaption}\item[{int}]{device\+\_\+id,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{master,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1CudaAllocatorBase}{Cuda\+Allocator\+Base}} $>$}]{alloc = {\ttfamily std\+:\+:make\+\_\+shared$<$~\mbox{\hyperlink{classgko_1_1CudaAllocator}{Cuda\+Allocator}}~$>$()},  }\item[{C\+Ustream\+\_\+st $\ast$}]{stream = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a new \mbox{\hyperlink{classgko_1_1CudaExecutor}{Cuda\+Executor}} with a custom allocator and device stream. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em device\+\_\+id} & the C\+U\+DA device id of this device \\
+\hline
+{\em master} & an executor on the host that is used to invoke the device kernels. \\
+\hline
+{\em alloc} & the allocator to use for device memory allocations. \\
+\hline
+{\em stream} & the stream to execute operations on. \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classgko_1_1CudaExecutor_a23a13ee1b82ea850660da25376d6cf4e}\label{classgko_1_1CudaExecutor_a23a13ee1b82ea850660da25376d6cf4e}} 

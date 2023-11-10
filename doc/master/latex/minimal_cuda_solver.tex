@@ -36,7 +36,7 @@ Instantiate a C\+U\+DA executor
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{auto} gpu = \mbox{\hyperlink{classgko_1_1CudaExecutor_a8e18adb154a44f90c13d61c1e100e160}{gko::CudaExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(), \textcolor{keyword}{true});}
+\DoxyCodeLine{\textcolor{keyword}{auto} gpu = \mbox{\hyperlink{classgko_1_1CudaExecutor_a6c423656c7c0eb53810cb77bb4a66d15}{gko::CudaExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}());}
 \end{DoxyCode}
 
 
@@ -56,12 +56,10 @@ Create the solver
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}} =}
 \DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{gko::solver::Cg<>::build}}()}
-\DoxyCodeLine{        .with\_preconditioner(\mbox{\hyperlink{classgko_1_1preconditioner_1_1Jacobi}{gko::preconditioner::Jacobi<>::build}}().on(gpu))}
+\DoxyCodeLine{        .with\_preconditioner(\mbox{\hyperlink{classgko_1_1preconditioner_1_1Jacobi}{gko::preconditioner::Jacobi<>::build}}())}
 \DoxyCodeLine{        .with\_criteria(}
-\DoxyCodeLine{            gko::stop::Iteration::build().with\_max\_iters(20u).on(gpu),}
-\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<>::build}}()}
-\DoxyCodeLine{                .with\_reduction\_factor(1e-\/15)}
-\DoxyCodeLine{                .on(gpu))}
+\DoxyCodeLine{            gko::stop::Iteration::build().with\_max\_iters(20u),}
+\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<>::build}}().with\_reduction\_factor(1e-\/15))}
 \DoxyCodeLine{        .on(gpu);}
 \end{DoxyCode}
 
@@ -157,18 +155,16 @@ The following is the expected result when using the data contained in the folder
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keywordtype}{int} main()}
 \DoxyCodeLine{\{}
-\DoxyCodeLine{    \textcolor{keyword}{auto} gpu = \mbox{\hyperlink{classgko_1_1CudaExecutor_a8e18adb154a44f90c13d61c1e100e160}{gko::CudaExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(), \textcolor{keyword}{true});}
+\DoxyCodeLine{    \textcolor{keyword}{auto} gpu = \mbox{\hyperlink{classgko_1_1CudaExecutor_a6c423656c7c0eb53810cb77bb4a66d15}{gko::CudaExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}());}
 \DoxyCodeLine{    \textcolor{keyword}{auto} A = gko::read<gko::matrix::Csr<>>(std::cin, gpu);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} b = gko::read<gko::matrix::Dense<>>(std::cin, gpu);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} x = gko::read<gko::matrix::Dense<>>(std::cin, gpu);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}} =}
 \DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{gko::solver::Cg<>::build}}()}
-\DoxyCodeLine{            .with\_preconditioner(\mbox{\hyperlink{classgko_1_1preconditioner_1_1Jacobi}{gko::preconditioner::Jacobi<>::build}}().on(gpu))}
+\DoxyCodeLine{            .with\_preconditioner(\mbox{\hyperlink{classgko_1_1preconditioner_1_1Jacobi}{gko::preconditioner::Jacobi<>::build}}())}
 \DoxyCodeLine{            .with\_criteria(}
-\DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(20u).on(gpu),}
-\DoxyCodeLine{                \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<>::build}}()}
-\DoxyCodeLine{                    .with\_reduction\_factor(1e-\/15)}
-\DoxyCodeLine{                    .on(gpu))}
+\DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(20u),}
+\DoxyCodeLine{                \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<>::build}}().with\_reduction\_factor(1e-\/15))}
 \DoxyCodeLine{            .on(gpu);}
 \DoxyCodeLine{    \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}}-\/>generate(\mbox{\hyperlink{namespacegko_acbd3fd6d07e498892881e8e2ab0b4167}{give}}(A))-\/>apply(b, x);}
 \DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{write}}(std::cout, x);}

@@ -61,10 +61,10 @@ Since this is an M\+PI program, we need to initialize and finalize M\+PI at the 
 \end{DoxyCode}
 
 
-\label{_TypeDefinitiions}%
- \doxysubsubsection*{Type Definitiions}
+\label{_TypeDefinitions}%
+ \doxysubsubsection*{Type Definitions}
 
-Define the needed types. In a parallel program we need to differentiate beweeen global and local indices, thus we have two index types.
+Define the needed types. In a parallel program we need to differentiate between global and local indices, thus we have two index types.
 
 
 \begin{DoxyCode}{0}
@@ -171,21 +171,20 @@ User input settings\+:
 \DoxyCodeLine{    executor\_factory\_mpi\{}
 \DoxyCodeLine{        \{\textcolor{stringliteral}{"reference"},}
 \DoxyCodeLine{         [](MPI\_Comm) \{ \textcolor{keywordflow}{return} gko::ReferenceExecutor::create(); \}\},}
-\DoxyCodeLine{        \{\textcolor{stringliteral}{"omp"}, [](MPI\_Comm) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(); \}\},}
+\DoxyCodeLine{        \{\textcolor{stringliteral}{"omp"}, [](MPI\_Comm) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}(); \}\},}
 \DoxyCodeLine{        \{\textcolor{stringliteral}{"cuda"},}
 \DoxyCodeLine{         [](MPI\_Comm comm) \{}
 \DoxyCodeLine{             \textcolor{keywordtype}{int} device\_id = \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a0ec0c93a068b2c19da8cb5e874bf9f6c}{gko::experimental::mpi::map\_rank\_to\_device\_id}}(}
 \DoxyCodeLine{                 comm, \mbox{\hyperlink{classgko_1_1CudaExecutor_aef0258494d14de0e56149b920c5173e5}{gko::CudaExecutor::get\_num\_devices}}());}
-\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a8e18adb154a44f90c13d61c1e100e160}{gko::CudaExecutor::create}}(}
-\DoxyCodeLine{                 device\_id, gko::ReferenceExecutor::create(), \textcolor{keyword}{false},}
-\DoxyCodeLine{                 gko::allocation\_mode::device);}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a6c423656c7c0eb53810cb77bb4a66d15}{gko::CudaExecutor::create}}(}
+\DoxyCodeLine{                 device\_id, gko::ReferenceExecutor::create());}
 \DoxyCodeLine{         \}\},}
 \DoxyCodeLine{        \{\textcolor{stringliteral}{"hip"},}
 \DoxyCodeLine{         [](MPI\_Comm comm) \{}
 \DoxyCodeLine{             \textcolor{keywordtype}{int} device\_id = \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a0ec0c93a068b2c19da8cb5e874bf9f6c}{gko::experimental::mpi::map\_rank\_to\_device\_id}}(}
 \DoxyCodeLine{                 comm, \mbox{\hyperlink{classgko_1_1HipExecutor_a7b34cbd84692dafa2290e6630754aa97}{gko::HipExecutor::get\_num\_devices}}());}
-\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_a5ace87d0179ef0ef55b60e78e9c2f897}{gko::HipExecutor::create}}(}
-\DoxyCodeLine{                 device\_id, gko::ReferenceExecutor::create(), \textcolor{keyword}{true});}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_aa0701fe1303e03a8331da7e95008100d}{gko::HipExecutor::create}}(}
+\DoxyCodeLine{                 device\_id, gko::ReferenceExecutor::create());}
 \DoxyCodeLine{         \}\},}
 \DoxyCodeLine{        \{\textcolor{stringliteral}{"dpcpp"}, [](MPI\_Comm comm) \{}
 \DoxyCodeLine{             \textcolor{keywordtype}{int} device\_id = 0;}
@@ -310,19 +309,15 @@ Setup the stopping criterion and logger
 \DoxyCodeLine{\textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} reduction\_factor\{1e-\/8\};}
 \DoxyCodeLine{std::shared\_ptr<const gko::log::Convergence<ValueType>> logger =}
 \DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1log_1_1Convergence_aa67955ea9d1d18f15f0330d12b93d330}{gko::log::Convergence<ValueType>::create}}();}
-\DoxyCodeLine{\textcolor{keyword}{auto} Ainv =}
-\DoxyCodeLine{    solver::build()}
-\DoxyCodeLine{        .with\_preconditioner(schwarz::build()}
-\DoxyCodeLine{                                 .with\_local\_solver\_factory(local\_solver)}
-\DoxyCodeLine{                                 .on(exec))}
-\DoxyCodeLine{        .with\_criteria(}
-\DoxyCodeLine{            gko::stop::Iteration::build().with\_max\_iters(num\_iters).on(}
-\DoxyCodeLine{                exec),}
-\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                .with\_reduction\_factor(reduction\_factor)}
-\DoxyCodeLine{                .on(exec))}
-\DoxyCodeLine{        .on(exec)}
-\DoxyCodeLine{        -\/>generate(A);}
+\DoxyCodeLine{\textcolor{keyword}{auto} Ainv = solver::build()}
+\DoxyCodeLine{                .with\_preconditioner(}
+\DoxyCodeLine{                    schwarz::build().with\_local\_solver(local\_solver))}
+\DoxyCodeLine{                .with\_criteria(}
+\DoxyCodeLine{                    gko::stop::Iteration::build().with\_max\_iters(num\_iters),}
+\DoxyCodeLine{                    \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                        .with\_reduction\_factor(reduction\_factor))}
+\DoxyCodeLine{                .on(exec)}
+\DoxyCodeLine{                -\/>generate(A);}
 \end{DoxyCode}
 
 
@@ -410,7 +405,7 @@ This is the expected output for {\ttfamily mpirun -\/n 4 ./distributed-\/solver}
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{Num rows in matrix: 100}
+\DoxyCodeLine{Num \mbox{\hyperlink{namespacegko_1_1matrix_ade1f3cdbf05032c2d681fa151de02972adf347a373b8f92aa0ae3dd920a5ec2f6}{rows}} in matrix: 100}
 \DoxyCodeLine{Num ranks: 4}
 \DoxyCodeLine{Final Res norm: 5.58392e-\/12}
 \DoxyCodeLine{Iteration count: 7}
@@ -511,21 +506,20 @@ The timings may vary depending on the machine. \label{_PlainProg}%
 \DoxyCodeLine{        executor\_factory\_mpi\{}
 \DoxyCodeLine{            \{\textcolor{stringliteral}{"reference"},}
 \DoxyCodeLine{             [](MPI\_Comm) \{ \textcolor{keywordflow}{return} gko::ReferenceExecutor::create(); \}\},}
-\DoxyCodeLine{            \{\textcolor{stringliteral}{"omp"}, [](MPI\_Comm) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(); \}\},}
+\DoxyCodeLine{            \{\textcolor{stringliteral}{"omp"}, [](MPI\_Comm) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}(); \}\},}
 \DoxyCodeLine{            \{\textcolor{stringliteral}{"cuda"},}
 \DoxyCodeLine{             [](MPI\_Comm comm) \{}
 \DoxyCodeLine{                 \textcolor{keywordtype}{int} device\_id = \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a0ec0c93a068b2c19da8cb5e874bf9f6c}{gko::experimental::mpi::map\_rank\_to\_device\_id}}(}
 \DoxyCodeLine{                     comm, \mbox{\hyperlink{classgko_1_1CudaExecutor_aef0258494d14de0e56149b920c5173e5}{gko::CudaExecutor::get\_num\_devices}}());}
-\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a8e18adb154a44f90c13d61c1e100e160}{gko::CudaExecutor::create}}(}
-\DoxyCodeLine{                     device\_id, gko::ReferenceExecutor::create(), \textcolor{keyword}{false},}
-\DoxyCodeLine{                     gko::allocation\_mode::device);}
+\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a6c423656c7c0eb53810cb77bb4a66d15}{gko::CudaExecutor::create}}(}
+\DoxyCodeLine{                     device\_id, gko::ReferenceExecutor::create());}
 \DoxyCodeLine{             \}\},}
 \DoxyCodeLine{            \{\textcolor{stringliteral}{"hip"},}
 \DoxyCodeLine{             [](MPI\_Comm comm) \{}
 \DoxyCodeLine{                 \textcolor{keywordtype}{int} device\_id = \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a0ec0c93a068b2c19da8cb5e874bf9f6c}{gko::experimental::mpi::map\_rank\_to\_device\_id}}(}
 \DoxyCodeLine{                     comm, \mbox{\hyperlink{classgko_1_1HipExecutor_a7b34cbd84692dafa2290e6630754aa97}{gko::HipExecutor::get\_num\_devices}}());}
-\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_a5ace87d0179ef0ef55b60e78e9c2f897}{gko::HipExecutor::create}}(}
-\DoxyCodeLine{                     device\_id, gko::ReferenceExecutor::create(), \textcolor{keyword}{true});}
+\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_aa0701fe1303e03a8331da7e95008100d}{gko::HipExecutor::create}}(}
+\DoxyCodeLine{                     device\_id, gko::ReferenceExecutor::create());}
 \DoxyCodeLine{             \}\},}
 \DoxyCodeLine{            \{\textcolor{stringliteral}{"dpcpp"}, [](MPI\_Comm comm) \{}
 \DoxyCodeLine{                 \textcolor{keywordtype}{int} device\_id = 0;}
@@ -595,19 +589,15 @@ The timings may vary depending on the machine. \label{_PlainProg}%
 \DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} reduction\_factor\{1e-\/8\};}
 \DoxyCodeLine{    std::shared\_ptr<const gko::log::Convergence<ValueType>> logger =}
 \DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1log_1_1Convergence_aa67955ea9d1d18f15f0330d12b93d330}{gko::log::Convergence<ValueType>::create}}();}
-\DoxyCodeLine{    \textcolor{keyword}{auto} Ainv =}
-\DoxyCodeLine{        solver::build()}
-\DoxyCodeLine{            .with\_preconditioner(schwarz::build()}
-\DoxyCodeLine{                                     .with\_local\_solver\_factory(local\_solver)}
-\DoxyCodeLine{                                     .on(exec))}
-\DoxyCodeLine{            .with\_criteria(}
-\DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(num\_iters).on(}
-\DoxyCodeLine{                    exec),}
-\DoxyCodeLine{                \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                    .with\_reduction\_factor(reduction\_factor)}
-\DoxyCodeLine{                    .on(exec))}
-\DoxyCodeLine{            .on(exec)}
-\DoxyCodeLine{            -\/>generate(A);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} Ainv = solver::build()}
+\DoxyCodeLine{                    .with\_preconditioner(}
+\DoxyCodeLine{                        schwarz::build().with\_local\_solver(local\_solver))}
+\DoxyCodeLine{                    .with\_criteria(}
+\DoxyCodeLine{                        gko::stop::Iteration::build().with\_max\_iters(num\_iters),}
+\DoxyCodeLine{                        \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                            .with\_reduction\_factor(reduction\_factor))}
+\DoxyCodeLine{                    .on(exec)}
+\DoxyCodeLine{                    -\/>generate(A);}
 \DoxyCodeLine{    Ainv-\/>add\_logger(logger);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    comm.synchronize();}

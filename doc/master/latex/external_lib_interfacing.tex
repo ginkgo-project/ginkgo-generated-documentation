@@ -812,11 +812,9 @@ Ginkgo solve The stopping criteria is set at maximum iterations of 1000 and a re
 \DoxyCodeLine{\textcolor{keyword}{auto} solver\_gen =}
 \DoxyCodeLine{    bicgstab::build()}
 \DoxyCodeLine{        .with\_criteria(}
-\DoxyCodeLine{            gko::stop::Iteration::build().with\_max\_iters(1000).on(exec),}
-\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<>::build}}()}
-\DoxyCodeLine{                .with\_reduction\_factor(1e-\/12)}
-\DoxyCodeLine{                .on(exec))}
-\DoxyCodeLine{        .with\_preconditioner(bj::build().on(exec))}
+\DoxyCodeLine{            gko::stop::Iteration::build().with\_max\_iters(1000),}
+\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<>::build}}().with\_reduction\_factor(1e-\/12))}
+\DoxyCodeLine{        .with\_preconditioner(bj::build())}
 \DoxyCodeLine{        .on(exec);}
 \DoxyCodeLine{\textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}} = solver\_gen-\/>generate(\mbox{\hyperlink{namespacegko_acbd3fd6d07e498892881e8e2ab0b4167}{gko::give}}(A));}
 \end{DoxyCode}
@@ -1259,7 +1257,7 @@ The last part of this function is the one where we write into the element of the
 \label{_Mainfunction}%
  \doxysubsubsection*{Main function}
 
-The {\ttfamily main} function is similar to the previous examples. The main difference is that we use Multithread\+Info to set the maximum number of threads (see Parallel computing with multiple processors accessing shared memory" documentation module for more explanation). The number of threads used is the minimum of the environment variable D\+E\+A\+L\+\_\+\+I\+I\+\_\+\+N\+U\+M\+\_\+\+T\+H\+R\+E\+A\+DS and the parameter of {\ttfamily set\+\_\+thread\+\_\+limit}. If no value is given to {\ttfamily set\+\_\+thread\+\_\+limit}, the default value from the Intel Threading Building Blocks (T\+BB) library is used. If the call to {\ttfamily set\+\_\+thread\+\_\+limit} is omitted, the number of threads will be chosen by T\+BB indepently of D\+E\+A\+L\+\_\+\+I\+I\+\_\+\+N\+U\+M\+\_\+\+T\+H\+R\+E\+A\+DS.
+The {\ttfamily main} function is similar to the previous examples. The main difference is that we use Multithread\+Info to set the maximum number of threads (see Parallel computing with multiple processors accessing shared memory" documentation module for more explanation). The number of threads used is the minimum of the environment variable D\+E\+A\+L\+\_\+\+I\+I\+\_\+\+N\+U\+M\+\_\+\+T\+H\+R\+E\+A\+DS and the parameter of {\ttfamily set\+\_\+thread\+\_\+limit}. If no value is given to {\ttfamily set\+\_\+thread\+\_\+limit}, the default value from the Intel Threading Building Blocks (T\+BB) library is used. If the call to {\ttfamily set\+\_\+thread\+\_\+limit} is omitted, the number of threads will be chosen by T\+BB independently of D\+E\+A\+L\+\_\+\+I\+I\+\_\+\+N\+U\+M\+\_\+\+T\+H\+R\+E\+A\+DS.
 
 
 \begin{DoxyCode}{0}
@@ -1834,11 +1832,9 @@ The {\ttfamily main} function is similar to the previous examples. The main diff
 \DoxyCodeLine{    \textcolor{keyword}{auto} solver\_gen =}
 \DoxyCodeLine{        bicgstab::build()}
 \DoxyCodeLine{            .with\_criteria(}
-\DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(1000).on(exec),}
-\DoxyCodeLine{                \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<>::build}}()}
-\DoxyCodeLine{                    .with\_reduction\_factor(1e-\/12)}
-\DoxyCodeLine{                    .on(exec))}
-\DoxyCodeLine{            .with\_preconditioner(bj::build().on(exec))}
+\DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(1000),}
+\DoxyCodeLine{                \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<>::build}}().with\_reduction\_factor(1e-\/12))}
+\DoxyCodeLine{            .with\_preconditioner(bj::build())}
 \DoxyCodeLine{            .on(exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}} = solver\_gen-\/>generate(\mbox{\hyperlink{namespacegko_acbd3fd6d07e498892881e8e2ab0b4167}{gko::give}}(A));}
 \DoxyCodeLine{}

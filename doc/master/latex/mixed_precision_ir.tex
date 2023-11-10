@@ -71,16 +71,15 @@ Figure out where to run the code
 \DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} executor\_string = argc >= 2 ? argv[1] : \textcolor{stringliteral}{"reference"};}
 \DoxyCodeLine{std::map<std::string, std::function<std::shared\_ptr<gko::Executor>()>>}
 \DoxyCodeLine{    exec\_map\{}
-\DoxyCodeLine{        \{\textcolor{stringliteral}{"omp"}, [] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(); \}\},}
+\DoxyCodeLine{        \{\textcolor{stringliteral}{"omp"}, [] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}(); \}\},}
 \DoxyCodeLine{        \{\textcolor{stringliteral}{"cuda"},}
 \DoxyCodeLine{         [] \{}
-\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a8e18adb154a44f90c13d61c1e100e160}{gko::CudaExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(),}
-\DoxyCodeLine{                                              \textcolor{keyword}{true});}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a6c423656c7c0eb53810cb77bb4a66d15}{gko::CudaExecutor::create}}(0,}
+\DoxyCodeLine{                                              \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}());}
 \DoxyCodeLine{         \}\},}
 \DoxyCodeLine{        \{\textcolor{stringliteral}{"hip"},}
 \DoxyCodeLine{         [] \{}
-\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_a5ace87d0179ef0ef55b60e78e9c2f897}{gko::HipExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(),}
-\DoxyCodeLine{                                             \textcolor{keyword}{true});}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_aa0701fe1303e03a8331da7e95008100d}{gko::HipExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}());}
 \DoxyCodeLine{         \}\},}
 \DoxyCodeLine{        \{\textcolor{stringliteral}{"dpcpp"},}
 \DoxyCodeLine{         [] \{}
@@ -159,12 +158,10 @@ Create inner solver
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{auto} inner\_solver =}
 \DoxyCodeLine{    cg::build()}
-\DoxyCodeLine{        .with\_criteria(\mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<SolverType>::build}}()}
-\DoxyCodeLine{                           .with\_reduction\_factor(inner\_reduction\_factor)}
-\DoxyCodeLine{                           .on(exec),}
-\DoxyCodeLine{                       gko::stop::Iteration::build()}
-\DoxyCodeLine{                           .with\_max\_iters(max\_inner\_iters)}
-\DoxyCodeLine{                           .on(exec))}
+\DoxyCodeLine{        .with\_criteria(}
+\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<SolverType>::build}}()}
+\DoxyCodeLine{                .with\_reduction\_factor(inner\_reduction\_factor),}
+\DoxyCodeLine{            gko::stop::Iteration::build().with\_max\_iters(max\_inner\_iters))}
 \DoxyCodeLine{        .on(exec)}
 \DoxyCodeLine{        -\/>generate(\mbox{\hyperlink{namespacegko_acbd3fd6d07e498892881e8e2ab0b4167}{give}}(solver\_A));}
 \end{DoxyCode}
@@ -368,16 +365,15 @@ This is the expected output\+:
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} executor\_string = argc >= 2 ? argv[1] : \textcolor{stringliteral}{"reference"};}
 \DoxyCodeLine{    std::map<std::string, std::function<std::shared\_ptr<gko::Executor>()>>}
 \DoxyCodeLine{        exec\_map\{}
-\DoxyCodeLine{            \{\textcolor{stringliteral}{"omp"}, [] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(); \}\},}
+\DoxyCodeLine{            \{\textcolor{stringliteral}{"omp"}, [] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}(); \}\},}
 \DoxyCodeLine{            \{\textcolor{stringliteral}{"cuda"},}
 \DoxyCodeLine{             [] \{}
-\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a8e18adb154a44f90c13d61c1e100e160}{gko::CudaExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(),}
-\DoxyCodeLine{                                                  \textcolor{keyword}{true});}
+\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a6c423656c7c0eb53810cb77bb4a66d15}{gko::CudaExecutor::create}}(0,}
+\DoxyCodeLine{                                                  \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}());}
 \DoxyCodeLine{             \}\},}
 \DoxyCodeLine{            \{\textcolor{stringliteral}{"hip"},}
 \DoxyCodeLine{             [] \{}
-\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_a5ace87d0179ef0ef55b60e78e9c2f897}{gko::HipExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(),}
-\DoxyCodeLine{                                                 \textcolor{keyword}{true});}
+\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_aa0701fe1303e03a8331da7e95008100d}{gko::HipExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}());}
 \DoxyCodeLine{             \}\},}
 \DoxyCodeLine{            \{\textcolor{stringliteral}{"dpcpp"},}
 \DoxyCodeLine{             [] \{}
@@ -413,12 +409,10 @@ This is the expected output\+:
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} inner\_solver =}
 \DoxyCodeLine{        cg::build()}
-\DoxyCodeLine{            .with\_criteria(\mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<SolverType>::build}}()}
-\DoxyCodeLine{                               .with\_reduction\_factor(inner\_reduction\_factor)}
-\DoxyCodeLine{                               .on(exec),}
-\DoxyCodeLine{                           gko::stop::Iteration::build()}
-\DoxyCodeLine{                               .with\_max\_iters(max\_inner\_iters)}
-\DoxyCodeLine{                               .on(exec))}
+\DoxyCodeLine{            .with\_criteria(}
+\DoxyCodeLine{                \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<SolverType>::build}}()}
+\DoxyCodeLine{                    .with\_reduction\_factor(inner\_reduction\_factor),}
+\DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(max\_inner\_iters))}
 \DoxyCodeLine{            .on(exec)}
 \DoxyCodeLine{            -\/>generate(\mbox{\hyperlink{namespacegko_acbd3fd6d07e498892881e8e2ab0b4167}{give}}(solver\_A));}
 \DoxyCodeLine{}

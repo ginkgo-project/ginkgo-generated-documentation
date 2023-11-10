@@ -92,9 +92,11 @@ class \mbox{\hyperlink{classgko_1_1matrix_1_1Identity}{gko\+::matrix\+::\+Identi
 class \mbox{\hyperlink{classgko_1_1matrix_1_1IdentityFactory}{gko\+::matrix\+::\+Identity\+Factory$<$ Value\+Type $>$}}
 \begin{DoxyCompactList}\small\item\em This factory is a utility which can be used to generate \mbox{\hyperlink{classgko_1_1matrix_1_1Identity}{Identity}} operators. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1matrix_1_1Permutation}{gko\+::matrix\+::\+Permutation$<$ Index\+Type $>$}}
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1matrix_1_1Permutation}{Permutation}} is a matrix \char`\"{}format\char`\"{} which stores the row and column permutation arrays which can be used for re-\/ordering the rows and columns a matrix. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1matrix_1_1Permutation}{Permutation}} is a matrix format that represents a permutation matrix, i.\+e. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1matrix_1_1RowGatherer}{gko\+::matrix\+::\+Row\+Gatherer$<$ Index\+Type $>$}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1matrix_1_1RowGatherer}{Row\+Gatherer}} is a matrix \char`\"{}format\char`\"{} which stores the gather indices arrays which can be used to gather rows to another matrix. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1matrix_1_1ScaledPermutation}{gko\+::matrix\+::\+Scaled\+Permutation$<$ Value\+Type, Index\+Type $>$}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1matrix_1_1ScaledPermutation}{Scaled\+Permutation}} is a matrix combining a permutation with scaling factors. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1matrix_1_1Sellp}{gko\+::matrix\+::\+Sellp$<$ Value\+Type, Index\+Type $>$}}
 \begin{DoxyCompactList}\small\item\em S\+E\+L\+L-\/P is a matrix format similar to E\+LL format. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1matrix_1_1SparsityCsr}{gko\+::matrix\+::\+Sparsity\+Csr$<$ Value\+Type, Index\+Type $>$}}
@@ -150,8 +152,6 @@ class \mbox{\hyperlink{classgko_1_1solver_1_1UpperTrs}{gko\+::solver\+::\+Upper\
 \item 
 \#define \mbox{\hyperlink{group__LinOp_ga1fc8e9d8be0c9ad2d72bc1ddfc6d8358}{G\+K\+O\+\_\+\+C\+R\+E\+A\+T\+E\+\_\+\+F\+A\+C\+T\+O\+R\+Y\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+RS}}(\+\_\+parameters\+\_\+name,  \+\_\+factory\+\_\+name)
 \begin{DoxyCompactList}\small\item\em This Macro will generate a new type containing the parameters for the factory {\ttfamily \+\_\+factory\+\_\+name}. \end{DoxyCompactList}\item 
-\#define \mbox{\hyperlink{group__LinOp_ga8e0af90ec2414b768266f77cedffc309}{G\+K\+O\+\_\+\+E\+N\+A\+B\+L\+E\+\_\+\+L\+I\+N\+\_\+\+O\+P\+\_\+\+F\+A\+C\+T\+O\+RY}}(\+\_\+lin\+\_\+op,  \+\_\+parameters\+\_\+name,  \+\_\+factory\+\_\+name)
-\begin{DoxyCompactList}\small\item\em This macro will generate a default implementation of a Lin\+Op\+Factory for the Lin\+Op subclass it is defined in. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{group__LinOp_ga521f65604cc4cf427dcb2ecfa49b757c}{G\+K\+O\+\_\+\+E\+N\+A\+B\+L\+E\+\_\+\+B\+U\+I\+L\+D\+\_\+\+M\+E\+T\+H\+OD}}(\+\_\+factory\+\_\+name)
 \begin{DoxyCompactList}\small\item\em Defines a build method for the factory, simplifying its construction by removing the repetitive typing of factory\textquotesingle{}s name. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{group__LinOp_gaa037309884bbd0562b897cee95dd91c8}{G\+K\+O\+\_\+\+F\+A\+C\+T\+O\+R\+Y\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}}(\+\_\+name, ...)
@@ -159,7 +159,9 @@ class \mbox{\hyperlink{classgko_1_1solver_1_1UpperTrs}{gko\+::solver\+::\+Upper\
 \#define \mbox{\hyperlink{group__LinOp_ga49d4c09c39f06b22bebbbfd1d8bfe450}{G\+K\+O\+\_\+\+F\+A\+C\+T\+O\+R\+Y\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+S\+C\+A\+L\+AR}}(\+\_\+name,  \+\_\+default)~\mbox{\hyperlink{group__LinOp_gaa037309884bbd0562b897cee95dd91c8}{G\+K\+O\+\_\+\+F\+A\+C\+T\+O\+R\+Y\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}}(\+\_\+name, \+\_\+default)
 \begin{DoxyCompactList}\small\item\em Creates a scalar factory parameter in the factory parameters structure. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{group__LinOp_gaa292314d27ec1fb7ad54debaa3606ea8}{G\+K\+O\+\_\+\+F\+A\+C\+T\+O\+R\+Y\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+V\+E\+C\+T\+OR}}(\+\_\+name, ...)~\mbox{\hyperlink{group__LinOp_gaa037309884bbd0562b897cee95dd91c8}{G\+K\+O\+\_\+\+F\+A\+C\+T\+O\+R\+Y\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}}(\+\_\+name, \+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+)
-\begin{DoxyCompactList}\small\item\em Creates a vector factory parameter in the factory parameters structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Creates a vector factory parameter in the factory parameters structure. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__LinOp_ga8e0af90ec2414b768266f77cedffc309}{G\+K\+O\+\_\+\+E\+N\+A\+B\+L\+E\+\_\+\+L\+I\+N\+\_\+\+O\+P\+\_\+\+F\+A\+C\+T\+O\+RY}}(\+\_\+lin\+\_\+op,  \+\_\+parameters\+\_\+name,  \+\_\+factory\+\_\+name)
+\begin{DoxyCompactList}\small\item\em This macro will generate a default implementation of a Lin\+Op\+Factory for the Lin\+Op subclass it is defined in. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
@@ -339,15 +341,15 @@ It is possible to combine both the \#\+G\+K\+O\+\_\+\+C\+R\+E\+A\+T\+E\+\_\+\+F\
 
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{mutable} \_name\{\_\_VA\_ARGS\_\_\};                                              \(\backslash\)}
+\DoxyCodeLine{\_name\{\_\_VA\_ARGS\_\_\};                                                      \(\backslash\)}
 \DoxyCodeLine{                                                                             \(\backslash\)}
 \DoxyCodeLine{    template <\textcolor{keyword}{typename}... Args>                                              \(\backslash\)}
 \DoxyCodeLine{    auto with\_\#\#\_name(Args\&\&... \_value)                                      \(\backslash\)}
-\DoxyCodeLine{        const-\/>const std::decay\_t<decltype(*\textcolor{keyword}{this})>\&                          \(\backslash\)}
+\DoxyCodeLine{        -\/>std::decay\_t<decltype(*(this-\/>\textcolor{keyword}{self}()))>\&                           \(\backslash\)}
 \DoxyCodeLine{    \{                                                                        \(\backslash\)}
 \DoxyCodeLine{        using type = decltype(this-\/>\_name);                                  \(\backslash\)}
 \DoxyCodeLine{        this-\/>\_name = type\{std::forward<Args>(\_value)...\};                   \(\backslash\)}
-\DoxyCodeLine{        return *\textcolor{keyword}{this};                                                        \(\backslash\)}
+\DoxyCodeLine{        return *(this-\/>\textcolor{keyword}{self}());                                              \(\backslash\)}
 \DoxyCodeLine{    \}                                                                        \(\backslash\)}
 \DoxyCodeLine{    static\_assert(\textcolor{keyword}{true},                                                      \(\backslash\)}
 \DoxyCodeLine{                  \textcolor{stringliteral}{"This assert is used to counter the false positive extra "} \(\backslash\)}
@@ -428,7 +430,7 @@ This is an alias for the \mbox{\hyperlink{classgko_1_1EnableDefaultFactory}{Enab
 
 
 \begin{DoxyTemplParams}{Template Parameters}
-{\em Concrete\+Factory} & the concrete factory which is being implemented \mbox{[}C\+R\+TP parmeter\mbox{]} \\
+{\em Concrete\+Factory} & the concrete factory which is being implemented \mbox{[}C\+R\+TP parameter\mbox{]} \\
 \hline
 {\em Concrete\+Lin\+Op} & the concrete \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} type which this factory produces, needs to have a constructor which takes a const Concrete\+Factory $\ast$, and an std\+::shared\+\_\+ptr$<$const Lin\+Op$>$ as parameters. \\
 \hline

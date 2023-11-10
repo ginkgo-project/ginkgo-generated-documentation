@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['dpc_2b_2b_20executor_2872',['DPC++ Executor',['../group__exec__dpcpp.html',1,'']]]
+  ['cuda_20executor_3157',['CUDA Executor',['../group__exec__cuda.html',1,'']]]
 ];

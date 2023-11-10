@@ -60,16 +60,15 @@ Figure out where to run the code
 \begin{DoxyCode}{0}
 \DoxyCodeLine{std::map<std::string, std::function<std::shared\_ptr<gko::Executor>()>>}
 \DoxyCodeLine{    exec\_map\{}
-\DoxyCodeLine{        \{\textcolor{stringliteral}{"omp"}, [] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(); \}\},}
+\DoxyCodeLine{        \{\textcolor{stringliteral}{"omp"}, [] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}(); \}\},}
 \DoxyCodeLine{        \{\textcolor{stringliteral}{"cuda"},}
 \DoxyCodeLine{         [] \{}
-\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a8e18adb154a44f90c13d61c1e100e160}{gko::CudaExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(),}
-\DoxyCodeLine{                                              \textcolor{keyword}{true});}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a6c423656c7c0eb53810cb77bb4a66d15}{gko::CudaExecutor::create}}(0,}
+\DoxyCodeLine{                                              \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}());}
 \DoxyCodeLine{         \}\},}
 \DoxyCodeLine{        \{\textcolor{stringliteral}{"hip"},}
 \DoxyCodeLine{         [] \{}
-\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_a5ace87d0179ef0ef55b60e78e9c2f897}{gko::HipExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(),}
-\DoxyCodeLine{                                             \textcolor{keyword}{true});}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_aa0701fe1303e03a8331da7e95008100d}{gko::HipExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}());}
 \DoxyCodeLine{         \}\},}
 \DoxyCodeLine{        \{\textcolor{stringliteral}{"dpcpp"},}
 \DoxyCodeLine{         [] \{}
@@ -164,8 +163,7 @@ Now we customize some settings of the multigrid preconditioner. First we choose 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{auto} ic\_gen = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(}
 \DoxyCodeLine{    ic::build()}
-\DoxyCodeLine{        .with\_factorization\_factory(}
-\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1factorization_1_1Ic}{gko::factorization::Ic<ValueType, int>::build}}().on(exec))}
+\DoxyCodeLine{        .with\_factorization(\mbox{\hyperlink{classgko_1_1factorization_1_1Ic}{gko::factorization::Ic<ValueType, int>::build}}())}
 \DoxyCodeLine{        .on(exec));}
 \DoxyCodeLine{\textcolor{keyword}{auto} smoother\_gen = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(}
 \DoxyCodeLine{    \mbox{\hyperlink{namespacegko_1_1solver_ac565c4b95ad0c67492073d993a9170cc}{gko::solver::build\_smoother}}(ic\_gen, 2u, static\_cast<ValueType>(0.9)));}
@@ -206,8 +204,7 @@ Here we put the customized options together and create the multigrid factory.
 \DoxyCodeLine{        .with\_mg\_level(mg\_level\_gen)}
 \DoxyCodeLine{        .with\_coarsest\_solver(coarsest\_gen)}
 \DoxyCodeLine{        .with\_default\_initial\_guess(\mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aad02c4c4cde7ae76252540d116a40f23a}{gko::solver::initial\_guess\_mode::zero}})}
-\DoxyCodeLine{        .with\_criteria(}
-\DoxyCodeLine{            gko::stop::Iteration::build().with\_max\_iters(1u).on(exec))}
+\DoxyCodeLine{        .with\_criteria(gko::stop::Iteration::build().with\_max\_iters(1u))}
 \DoxyCodeLine{        .on(exec);}
 \end{DoxyCode}
 
@@ -276,7 +273,7 @@ Print solver statistics
 \DoxyCodeLine{              << static\_cast<double>(gen\_time.count()) / 1000000.0 << std::endl;}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"CG execution time [ms]: "}}
 \DoxyCodeLine{              << static\_cast<double>(time.count()) / 1000000.0 << std::endl;}
-\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"CG execution time per iteraion[ms]: "}}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"CG execution time per iteration[ms]: "}}
 \DoxyCodeLine{              << static\_cast<double>(time.count()) / 1000000.0 /}
 \DoxyCodeLine{                     logger-\/>get\_num\_iterations()}
 \DoxyCodeLine{              << std::endl;}
@@ -300,7 +297,7 @@ This is the expected output\+:
 \DoxyCodeLine{CG iteration count:     12}
 \DoxyCodeLine{CG generation time [ms]: 1.41642}
 \DoxyCodeLine{CG execution time [ms]: 6.59244}
-\DoxyCodeLine{CG execution time per iteraion[ms]: 0.54937}
+\DoxyCodeLine{CG execution time per iteration[ms]: 0.54937}
 \end{DoxyCode}
 
 
@@ -372,16 +369,15 @@ This is the expected output\+:
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} executor\_string = argc >= 2 ? argv[1] : \textcolor{stringliteral}{"reference"};}
 \DoxyCodeLine{    std::map<std::string, std::function<std::shared\_ptr<gko::Executor>()>>}
 \DoxyCodeLine{        exec\_map\{}
-\DoxyCodeLine{            \{\textcolor{stringliteral}{"omp"}, [] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(); \}\},}
+\DoxyCodeLine{            \{\textcolor{stringliteral}{"omp"}, [] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}(); \}\},}
 \DoxyCodeLine{            \{\textcolor{stringliteral}{"cuda"},}
 \DoxyCodeLine{             [] \{}
-\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a8e18adb154a44f90c13d61c1e100e160}{gko::CudaExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(),}
-\DoxyCodeLine{                                                  \textcolor{keyword}{true});}
+\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a6c423656c7c0eb53810cb77bb4a66d15}{gko::CudaExecutor::create}}(0,}
+\DoxyCodeLine{                                                  \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}());}
 \DoxyCodeLine{             \}\},}
 \DoxyCodeLine{            \{\textcolor{stringliteral}{"hip"},}
 \DoxyCodeLine{             [] \{}
-\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_a5ace87d0179ef0ef55b60e78e9c2f897}{gko::HipExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(),}
-\DoxyCodeLine{                                                 \textcolor{keyword}{true});}
+\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_aa0701fe1303e03a8331da7e95008100d}{gko::HipExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}());}
 \DoxyCodeLine{             \}\},}
 \DoxyCodeLine{            \{\textcolor{stringliteral}{"dpcpp"},}
 \DoxyCodeLine{             [] \{}
@@ -433,8 +429,7 @@ This is the expected output\+:
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} ic\_gen = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(}
 \DoxyCodeLine{        ic::build()}
-\DoxyCodeLine{            .with\_factorization\_factory(}
-\DoxyCodeLine{                \mbox{\hyperlink{classgko_1_1factorization_1_1Ic}{gko::factorization::Ic<ValueType, int>::build}}().on(exec))}
+\DoxyCodeLine{            .with\_factorization(\mbox{\hyperlink{classgko_1_1factorization_1_1Ic}{gko::factorization::Ic<ValueType, int>::build}}())}
 \DoxyCodeLine{            .on(exec));}
 \DoxyCodeLine{    \textcolor{keyword}{auto} smoother\_gen = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(}
 \DoxyCodeLine{        \mbox{\hyperlink{namespacegko_1_1solver_ac565c4b95ad0c67492073d993a9170cc}{gko::solver::build\_smoother}}(ic\_gen, 2u, static\_cast<ValueType>(0.9)));}
@@ -454,8 +449,7 @@ This is the expected output\+:
 \DoxyCodeLine{            .with\_mg\_level(mg\_level\_gen)}
 \DoxyCodeLine{            .with\_coarsest\_solver(coarsest\_gen)}
 \DoxyCodeLine{            .with\_default\_initial\_guess(\mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aad02c4c4cde7ae76252540d116a40f23a}{gko::solver::initial\_guess\_mode::zero}})}
-\DoxyCodeLine{            .with\_criteria(}
-\DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(1u).on(exec))}
+\DoxyCodeLine{            .with\_criteria(gko::stop::Iteration::build().with\_max\_iters(1u))}
 \DoxyCodeLine{            .on(exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} solver\_gen = cg::build()}
 \DoxyCodeLine{                          .with\_criteria(iter\_stop, tol\_stop)}
@@ -492,7 +486,7 @@ This is the expected output\+:
 \DoxyCodeLine{              << static\_cast<double>(gen\_time.count()) / 1000000.0 << std::endl;}
 \DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"CG execution time [ms]: "}}
 \DoxyCodeLine{              << static\_cast<double>(time.count()) / 1000000.0 << std::endl;}
-\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"CG execution time per iteraion[ms]: "}}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"CG execution time per iteration[ms]: "}}
 \DoxyCodeLine{              << static\_cast<double>(time.count()) / 1000000.0 /}
 \DoxyCodeLine{                     logger-\/>get\_num\_iterations()}
 \DoxyCodeLine{              << std::endl;}

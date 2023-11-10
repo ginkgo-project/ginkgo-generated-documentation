@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/902355976 branch based on master. Ginkgo version 1.6.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1068515030 branch based on master. Ginkgo version 1.7.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -596,11 +596,9 @@ $(function() {
 <div class="fragment"><div class="line"><span class="keyword">auto</span> solver_gen =</div>
 <div class="line">    bicgstab::build()</div>
 <div class="line">        .with_criteria(</div>
-<div class="line">            gko::stop::Iteration::build().with_max_iters(1000).on(exec),</div>
-<div class="line">            <a class="code" href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm&lt;&gt;::build</a>()</div>
-<div class="line">                .with_reduction_factor(1e-12)</div>
-<div class="line">                .on(exec))</div>
-<div class="line">        .with_preconditioner(bj::build().on(exec))</div>
+<div class="line">            gko::stop::Iteration::build().with_max_iters(1000),</div>
+<div class="line">            <a class="code" href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm&lt;&gt;::build</a>().with_reduction_factor(1e-12))</div>
+<div class="line">        .with_preconditioner(bj::build())</div>
 <div class="line">        .on(exec);</div>
 <div class="line"><span class="keyword">auto</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a">solver</a> = solver_gen-&gt;generate(<a class="code" href="namespacegko.html#acbd3fd6d07e498892881e8e2ab0b4167">gko::give</a>(A));</div>
 </div><!-- fragment --><p>Solve system</p>
@@ -840,7 +838,7 @@ $(function() {
 <div class="line">}</div>
 <div class="line">}  <span class="comment">// namespace Step9</span></div>
 </div><!-- fragment --><p><a class="anchor" id="Mainfunction"></a> </p><h3>Main function</h3>
-<p>The <code>main</code> function is similar to the previous examples. The main difference is that we use MultithreadInfo to set the maximum number of threads (see Parallel computing with multiple processors accessing shared memory" documentation module for more explanation). The number of threads used is the minimum of the environment variable DEAL_II_NUM_THREADS and the parameter of <code>set_thread_limit</code>. If no value is given to <code>set_thread_limit</code>, the default value from the Intel Threading Building Blocks (TBB) library is used. If the call to <code>set_thread_limit</code> is omitted, the number of threads will be chosen by TBB indepently of DEAL_II_NUM_THREADS.</p>
+<p>The <code>main</code> function is similar to the previous examples. The main difference is that we use MultithreadInfo to set the maximum number of threads (see Parallel computing with multiple processors accessing shared memory" documentation module for more explanation). The number of threads used is the minimum of the environment variable DEAL_II_NUM_THREADS and the parameter of <code>set_thread_limit</code>. If no value is given to <code>set_thread_limit</code>, the default value from the Intel Threading Building Blocks (TBB) library is used. If the call to <code>set_thread_limit</code> is omitted, the number of threads will be chosen by TBB independently of DEAL_II_NUM_THREADS.</p>
 <div class="fragment"><div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
 <div class="line">    <span class="keywordflow">try</span> {</div>
@@ -1403,11 +1401,9 @@ $(function() {
 <div class="line">    <span class="keyword">auto</span> solver_gen =</div>
 <div class="line">        bicgstab::build()</div>
 <div class="line">            .with_criteria(</div>
-<div class="line">                gko::stop::Iteration::build().with_max_iters(1000).on(exec),</div>
-<div class="line">                <a class="code" href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm&lt;&gt;::build</a>()</div>
-<div class="line">                    .with_reduction_factor(1e-12)</div>
-<div class="line">                    .on(exec))</div>
-<div class="line">            .with_preconditioner(bj::build().on(exec))</div>
+<div class="line">                gko::stop::Iteration::build().with_max_iters(1000),</div>
+<div class="line">                <a class="code" href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm&lt;&gt;::build</a>().with_reduction_factor(1e-12))</div>
+<div class="line">            .with_preconditioner(bj::build())</div>
 <div class="line">            .on(exec);</div>
 <div class="line">    <span class="keyword">auto</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a">solver</a> = solver_gen-&gt;generate(<a class="code" href="namespacegko.html#acbd3fd6d07e498892881e8e2ab0b4167">gko::give</a>(A));</div>
 <div class="line"> </div>
@@ -1679,10 +1675,10 @@ $(function() {
 <div class="ttc" id="aclassgko_1_1solver_1_1Bicgstab_html"><div class="ttname"><a href="classgko_1_1solver_1_1Bicgstab.html">gko::solver::Bicgstab</a></div><div class="ttdoc">BiCGSTAB or the Bi-Conjugate Gradient-Stabilized is a Krylov subspace solver.</div><div class="ttdef"><b>Definition:</b> bicgstab.hpp:78</div></div>
 <div class="ttc" id="aclassgko_1_1preconditioner_1_1Jacobi_html"><div class="ttname"><a href="classgko_1_1preconditioner_1_1Jacobi.html">gko::preconditioner::Jacobi</a></div><div class="ttdoc">A block-Jacobi preconditioner is a block-diagonal linear operator, obtained by inverting the diagonal...</div><div class="ttdef"><b>Definition:</b> jacobi.hpp:213</div></div>
 <div class="ttc" id="aclassgko_1_1array_html"><div class="ttname"><a href="classgko_1_1array.html">gko::array</a></div><div class="ttdoc">An array is a container which encapsulates fixed-sized arrays, stored on the Executor tied to the arr...</div><div class="ttdef"><b>Definition:</b> array.hpp:55</div></div>
-<div class="ttc" id="aclassgko_1_1stop_1_1ResidualNorm_html"><div class="ttname"><a href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm</a></div><div class="ttdoc">The ResidualNorm class is a stopping criterion which stops the iteration process when the actual resi...</div><div class="ttdef"><b>Definition:</b> residual_norm.hpp:137</div></div>
+<div class="ttc" id="aclassgko_1_1stop_1_1ResidualNorm_html"><div class="ttname"><a href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm</a></div><div class="ttdoc">The ResidualNorm class is a stopping criterion which stops the iteration process when the actual resi...</div><div class="ttdef"><b>Definition:</b> residual_norm.hpp:138</div></div>
 <div class="ttc" id="astructgko_1_1dim_html"><div class="ttname"><a href="structgko_1_1dim.html">gko::dim&lt; 2 &gt;</a></div></div>
 <div class="ttc" id="anamespacegko_1_1solver_html_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e"><div class="ttname"><a href="namespacegko_1_1solver.html#a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e">gko::solver::initial_guess_mode::rhs</a></div><div class="ttdoc">the input is right hand side</div></div>
-<div class="ttc" id="anamespacegko_1_1solver_1_1multigrid_html_a4f89fc8a003f879d4ff2f482c2fbab68"><div class="ttname"><a href="namespacegko_1_1solver_1_1multigrid.html#a4f89fc8a003f879d4ff2f482c2fbab68">gko::solver::multigrid::cycle</a></div><div class="ttdeci">cycle</div><div class="ttdoc">cycle defines which kind of multigrid cycle can be used.</div><div class="ttdef"><b>Definition:</b> multigrid.hpp:79</div></div>
+<div class="ttc" id="anamespacegko_1_1solver_1_1multigrid_html_a4f89fc8a003f879d4ff2f482c2fbab68"><div class="ttname"><a href="namespacegko_1_1solver_1_1multigrid.html#a4f89fc8a003f879d4ff2f482c2fbab68">gko::solver::multigrid::cycle</a></div><div class="ttdeci">cycle</div><div class="ttdoc">cycle defines which kind of multigrid cycle can be used.</div><div class="ttdef"><b>Definition:</b> multigrid.hpp:80</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

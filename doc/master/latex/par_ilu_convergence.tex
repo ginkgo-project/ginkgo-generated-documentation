@@ -28,17 +28,17 @@ This example can be used to inspect the convergence behavior of parallel incompl
 \DoxyCodeLine{\textcolor{keyword}{const} std::map<std::string, std::function<std::shared\_ptr<gko::Executor>()>>}
 \DoxyCodeLine{    executors\{}
 \DoxyCodeLine{        \{\textcolor{stringliteral}{"reference"}, [] \{ \textcolor{keywordflow}{return} gko::ReferenceExecutor::create(); \}\},}
-\DoxyCodeLine{        \{\textcolor{stringliteral}{"omp"}, [] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(); \}\},}
+\DoxyCodeLine{        \{\textcolor{stringliteral}{"omp"}, [] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}(); \}\},}
 \DoxyCodeLine{        \{\textcolor{stringliteral}{"cuda"},}
 \DoxyCodeLine{         [] \{}
-\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a8e18adb154a44f90c13d61c1e100e160}{gko::CudaExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}());}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a6c423656c7c0eb53810cb77bb4a66d15}{gko::CudaExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}());}
 \DoxyCodeLine{         \}\},}
 \DoxyCodeLine{        \{\textcolor{stringliteral}{"hip"},}
 \DoxyCodeLine{         [] \{}
-\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_a5ace87d0179ef0ef55b60e78e9c2f897}{gko::HipExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}());}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_aa0701fe1303e03a8331da7e95008100d}{gko::HipExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}());}
 \DoxyCodeLine{         \}\},}
 \DoxyCodeLine{        \{\textcolor{stringliteral}{"dpcpp"}, [] \{}
-\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1DpcppExecutor_ae9b875dfe3af7f3f3f24071bfb2f895e}{gko::DpcppExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}());}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1DpcppExecutor_ae9b875dfe3af7f3f3f24071bfb2f895e}{gko::DpcppExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}());}
 \DoxyCodeLine{         \}\}\};}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -136,52 +136,36 @@ load matrix file into Csr format
 \DoxyCodeLine{                                                                 exec);}
 \DoxyCodeLine{    \}));}
 \DoxyCodeLine{}
-\DoxyCodeLine{    std::shared\_ptr<gko::LinOpFactory> \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}};}
-\DoxyCodeLine{    std::function<void(\textcolor{keywordtype}{int})> set\_iterations;}
-\DoxyCodeLine{    \textcolor{keywordflow}{if} (precond == \textcolor{stringliteral}{"parilu"}) \{}
-\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}} =}
-\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1factorization_1_1ParIlu}{gko::factorization::ParIlu<ValueType, IndexType>::build}}().on(exec);}
-\DoxyCodeLine{        set\_iterations = [\&](\textcolor{keywordtype}{int} it) \{}
-\DoxyCodeLine{            gko::as<gko::factorization::ParIlu<ValueType, IndexType>::Factory>(}
-\DoxyCodeLine{                \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}})}
-\DoxyCodeLine{                -\/>get\_parameters()}
-\DoxyCodeLine{                .iterations = it;}
-\DoxyCodeLine{        \};}
-\DoxyCodeLine{    \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (precond == \textcolor{stringliteral}{"paric"}) \{}
-\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}} =}
-\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1factorization_1_1ParIc}{gko::factorization::ParIc<ValueType, IndexType>::build}}().on(exec);}
-\DoxyCodeLine{        set\_iterations = [\&](\textcolor{keywordtype}{int} it) \{}
-\DoxyCodeLine{            gko::as<gko::factorization::ParIc<ValueType, IndexType>::Factory>(}
-\DoxyCodeLine{                \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}})}
-\DoxyCodeLine{                -\/>get\_parameters()}
-\DoxyCodeLine{                .iterations = it;}
-\DoxyCodeLine{        \};}
-\DoxyCodeLine{    \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (precond == \textcolor{stringliteral}{"parilut"}) \{}
-\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}} = \mbox{\hyperlink{classgko_1_1factorization_1_1ParIlut}{gko::factorization::ParIlut<ValueType, IndexType>::build}}()}
-\DoxyCodeLine{                      .with\_fill\_in\_limit(limit)}
-\DoxyCodeLine{                      .on(exec);}
-\DoxyCodeLine{        set\_iterations = [\&](\textcolor{keywordtype}{int} it) \{}
-\DoxyCodeLine{            gko::as<gko::factorization::ParIlut<ValueType, IndexType>::Factory>(}
-\DoxyCodeLine{                \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}})}
-\DoxyCodeLine{                -\/>get\_parameters()}
-\DoxyCodeLine{                .iterations = it;}
-\DoxyCodeLine{        \};}
-\DoxyCodeLine{    \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (precond == \textcolor{stringliteral}{"parict"}) \{}
-\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}} = \mbox{\hyperlink{classgko_1_1factorization_1_1ParIct}{gko::factorization::ParIct<ValueType, IndexType>::build}}()}
-\DoxyCodeLine{                      .with\_fill\_in\_limit(limit)}
-\DoxyCodeLine{                      .on(exec);}
-\DoxyCodeLine{        set\_iterations = [\&](\textcolor{keywordtype}{int} it) \{}
-\DoxyCodeLine{            gko::as<gko::factorization::ParIct<ValueType, IndexType>::Factory>(}
-\DoxyCodeLine{                \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}})}
-\DoxyCodeLine{                -\/>get\_parameters()}
-\DoxyCodeLine{                .iterations = it;}
-\DoxyCodeLine{        \};}
-\DoxyCodeLine{    \}}
+\DoxyCodeLine{    \textcolor{keyword}{auto} factory\_generator =}
+\DoxyCodeLine{        [\&](\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} iteration) -\/> std::shared\_ptr<gko::LinOpFactory> \{}
+\DoxyCodeLine{        \textcolor{keywordflow}{if} (precond == \textcolor{stringliteral}{"parilu"}) \{}
+\DoxyCodeLine{            \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1factorization_1_1ParIlu}{gko::factorization::ParIlu<ValueType, IndexType>::build}}()}
+\DoxyCodeLine{                .with\_iterations(iteration)}
+\DoxyCodeLine{                .on(exec);}
+\DoxyCodeLine{        \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (precond == \textcolor{stringliteral}{"paric"}) \{}
+\DoxyCodeLine{            \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1factorization_1_1ParIc}{gko::factorization::ParIc<ValueType, IndexType>::build}}()}
+\DoxyCodeLine{                .with\_iterations(iteration)}
+\DoxyCodeLine{                .on(exec);}
+\DoxyCodeLine{        \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (precond == \textcolor{stringliteral}{"parilut"}) \{}
+\DoxyCodeLine{            \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1factorization_1_1ParIlut}{gko::factorization::ParIlut<ValueType, IndexType>::build}}()}
+\DoxyCodeLine{                .with\_fill\_in\_limit(limit)}
+\DoxyCodeLine{                .with\_iterations(iteration)}
+\DoxyCodeLine{                .on(exec);}
+\DoxyCodeLine{        \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (precond == \textcolor{stringliteral}{"parict"}) \{}
+\DoxyCodeLine{            \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1factorization_1_1ParIct}{gko::factorization::ParIct<ValueType, IndexType>::build}}()}
+\DoxyCodeLine{                .with\_fill\_in\_limit(limit)}
+\DoxyCodeLine{                .with\_iterations(iteration)}
+\DoxyCodeLine{                .on(exec);}
+\DoxyCodeLine{        \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{            GKO\_NOT\_IMPLEMENTED;}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{    \};}
+\DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_a0059e27f8f4bc348ff65c1e60caf47c8}{one}} = gko::initialize<gko::matrix::Dense<ValueType>>(\{1.0\}, exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} minus\_one =}
 \DoxyCodeLine{        gko::initialize<gko::matrix::Dense<ValueType>>(\{-\/1.0\}, exec);}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} it = 1; it <= max\_iterations; ++it) \{}
-\DoxyCodeLine{        set\_iterations(it);}
+\DoxyCodeLine{        \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}} = factory\_generator(it);}
 \DoxyCodeLine{        std::cout << it << \textcolor{charliteral}{';'};}
 \DoxyCodeLine{        std::vector<long> times;}
 \DoxyCodeLine{        std::vector<double> residuals;}
@@ -294,17 +278,17 @@ When specifying an executor\+:
 \DoxyCodeLine{\textcolor{keyword}{const} std::map<std::string, std::function<std::shared\_ptr<gko::Executor>()>>}
 \DoxyCodeLine{    executors\{}
 \DoxyCodeLine{        \{\textcolor{stringliteral}{"reference"}, [] \{ \textcolor{keywordflow}{return} gko::ReferenceExecutor::create(); \}\},}
-\DoxyCodeLine{        \{\textcolor{stringliteral}{"omp"}, [] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}(); \}\},}
+\DoxyCodeLine{        \{\textcolor{stringliteral}{"omp"}, [] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}(); \}\},}
 \DoxyCodeLine{        \{\textcolor{stringliteral}{"cuda"},}
 \DoxyCodeLine{         [] \{}
-\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a8e18adb154a44f90c13d61c1e100e160}{gko::CudaExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}());}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a6c423656c7c0eb53810cb77bb4a66d15}{gko::CudaExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}());}
 \DoxyCodeLine{         \}\},}
 \DoxyCodeLine{        \{\textcolor{stringliteral}{"hip"},}
 \DoxyCodeLine{         [] \{}
-\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_a5ace87d0179ef0ef55b60e78e9c2f897}{gko::HipExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}());}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_aa0701fe1303e03a8331da7e95008100d}{gko::HipExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}());}
 \DoxyCodeLine{         \}\},}
 \DoxyCodeLine{        \{\textcolor{stringliteral}{"dpcpp"}, [] \{}
-\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1DpcppExecutor_ae9b875dfe3af7f3f3f24071bfb2f895e}{gko::DpcppExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a33ca05fdd0fc928ee262fc9425304874}{gko::OmpExecutor::create}}());}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1DpcppExecutor_ae9b875dfe3af7f3f3f24071bfb2f895e}{gko::DpcppExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}());}
 \DoxyCodeLine{         \}\}\};}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
@@ -378,52 +362,36 @@ When specifying an executor\+:
 \DoxyCodeLine{                                                                 exec);}
 \DoxyCodeLine{    \}));}
 \DoxyCodeLine{}
-\DoxyCodeLine{    std::shared\_ptr<gko::LinOpFactory> \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}};}
-\DoxyCodeLine{    std::function<void(\textcolor{keywordtype}{int})> set\_iterations;}
-\DoxyCodeLine{    \textcolor{keywordflow}{if} (precond == \textcolor{stringliteral}{"parilu"}) \{}
-\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}} =}
-\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1factorization_1_1ParIlu}{gko::factorization::ParIlu<ValueType, IndexType>::build}}().on(exec);}
-\DoxyCodeLine{        set\_iterations = [\&](\textcolor{keywordtype}{int} it) \{}
-\DoxyCodeLine{            gko::as<gko::factorization::ParIlu<ValueType, IndexType>::Factory>(}
-\DoxyCodeLine{                \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}})}
-\DoxyCodeLine{                -\/>get\_parameters()}
-\DoxyCodeLine{                .iterations = it;}
-\DoxyCodeLine{        \};}
-\DoxyCodeLine{    \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (precond == \textcolor{stringliteral}{"paric"}) \{}
-\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}} =}
-\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1factorization_1_1ParIc}{gko::factorization::ParIc<ValueType, IndexType>::build}}().on(exec);}
-\DoxyCodeLine{        set\_iterations = [\&](\textcolor{keywordtype}{int} it) \{}
-\DoxyCodeLine{            gko::as<gko::factorization::ParIc<ValueType, IndexType>::Factory>(}
-\DoxyCodeLine{                \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}})}
-\DoxyCodeLine{                -\/>get\_parameters()}
-\DoxyCodeLine{                .iterations = it;}
-\DoxyCodeLine{        \};}
-\DoxyCodeLine{    \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (precond == \textcolor{stringliteral}{"parilut"}) \{}
-\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}} = \mbox{\hyperlink{classgko_1_1factorization_1_1ParIlut}{gko::factorization::ParIlut<ValueType, IndexType>::build}}()}
-\DoxyCodeLine{                      .with\_fill\_in\_limit(limit)}
-\DoxyCodeLine{                      .on(exec);}
-\DoxyCodeLine{        set\_iterations = [\&](\textcolor{keywordtype}{int} it) \{}
-\DoxyCodeLine{            gko::as<gko::factorization::ParIlut<ValueType, IndexType>::Factory>(}
-\DoxyCodeLine{                \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}})}
-\DoxyCodeLine{                -\/>get\_parameters()}
-\DoxyCodeLine{                .iterations = it;}
-\DoxyCodeLine{        \};}
-\DoxyCodeLine{    \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (precond == \textcolor{stringliteral}{"parict"}) \{}
-\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}} = \mbox{\hyperlink{classgko_1_1factorization_1_1ParIct}{gko::factorization::ParIct<ValueType, IndexType>::build}}()}
-\DoxyCodeLine{                      .with\_fill\_in\_limit(limit)}
-\DoxyCodeLine{                      .on(exec);}
-\DoxyCodeLine{        set\_iterations = [\&](\textcolor{keywordtype}{int} it) \{}
-\DoxyCodeLine{            gko::as<gko::factorization::ParIct<ValueType, IndexType>::Factory>(}
-\DoxyCodeLine{                \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}})}
-\DoxyCodeLine{                -\/>get\_parameters()}
-\DoxyCodeLine{                .iterations = it;}
-\DoxyCodeLine{        \};}
-\DoxyCodeLine{    \}}
+\DoxyCodeLine{    \textcolor{keyword}{auto} factory\_generator =}
+\DoxyCodeLine{        [\&](\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} iteration) -\/> std::shared\_ptr<gko::LinOpFactory> \{}
+\DoxyCodeLine{        \textcolor{keywordflow}{if} (precond == \textcolor{stringliteral}{"parilu"}) \{}
+\DoxyCodeLine{            \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1factorization_1_1ParIlu}{gko::factorization::ParIlu<ValueType, IndexType>::build}}()}
+\DoxyCodeLine{                .with\_iterations(iteration)}
+\DoxyCodeLine{                .on(exec);}
+\DoxyCodeLine{        \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (precond == \textcolor{stringliteral}{"paric"}) \{}
+\DoxyCodeLine{            \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1factorization_1_1ParIc}{gko::factorization::ParIc<ValueType, IndexType>::build}}()}
+\DoxyCodeLine{                .with\_iterations(iteration)}
+\DoxyCodeLine{                .on(exec);}
+\DoxyCodeLine{        \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (precond == \textcolor{stringliteral}{"parilut"}) \{}
+\DoxyCodeLine{            \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1factorization_1_1ParIlut}{gko::factorization::ParIlut<ValueType, IndexType>::build}}()}
+\DoxyCodeLine{                .with\_fill\_in\_limit(limit)}
+\DoxyCodeLine{                .with\_iterations(iteration)}
+\DoxyCodeLine{                .on(exec);}
+\DoxyCodeLine{        \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (precond == \textcolor{stringliteral}{"parict"}) \{}
+\DoxyCodeLine{            \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1factorization_1_1ParIct}{gko::factorization::ParIct<ValueType, IndexType>::build}}()}
+\DoxyCodeLine{                .with\_fill\_in\_limit(limit)}
+\DoxyCodeLine{                .with\_iterations(iteration)}
+\DoxyCodeLine{                .on(exec);}
+\DoxyCodeLine{        \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{            GKO\_NOT\_IMPLEMENTED;}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{    \};}
+\DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_a0059e27f8f4bc348ff65c1e60caf47c8}{one}} = gko::initialize<gko::matrix::Dense<ValueType>>(\{1.0\}, exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} minus\_one =}
 \DoxyCodeLine{        gko::initialize<gko::matrix::Dense<ValueType>>(\{-\/1.0\}, exec);}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} it = 1; it <= max\_iterations; ++it) \{}
-\DoxyCodeLine{        set\_iterations(it);}
+\DoxyCodeLine{        \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}} = factory\_generator(it);}
 \DoxyCodeLine{        std::cout << it << \textcolor{charliteral}{';'};}
 \DoxyCodeLine{        std::vector<long> times;}
 \DoxyCodeLine{        std::vector<double> residuals;}
