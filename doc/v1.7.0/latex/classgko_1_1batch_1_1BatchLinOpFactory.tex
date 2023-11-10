@@ -1,0 +1,64 @@
+\hypertarget{classgko_1_1batch_1_1BatchLinOpFactory}{}\doxysection{gko\+::batch\+::Batch\+Lin\+Op\+Factory Class Reference}
+\label{classgko_1_1batch_1_1BatchLinOpFactory}\index{gko::batch::BatchLinOpFactory@{gko::batch::BatchLinOpFactory}}
+
+
+A \mbox{\hyperlink{classgko_1_1batch_1_1BatchLinOpFactory}{Batch\+Lin\+Op\+Factory}} represents a higher order mapping which transforms one batch linear operator into another.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/base/batch\+\_\+lin\+\_\+op.\+hpp$>$}
+
+
+
+Inheritance diagram for gko\+::batch\+::Batch\+Lin\+Op\+Factory\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1batch_1_1BatchLinOpFactory__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for gko\+::batch\+::Batch\+Lin\+Op\+Factory\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1batch_1_1BatchLinOpFactory__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1batch_1_1BatchLinOpFactory_a2e9e12e488ff20d376e5b05a007e04a7}\label{classgko_1_1batch_1_1BatchLinOpFactory_a2e9e12e488ff20d376e5b05a007e04a7}} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1batch_1_1BatchLinOp}{Batch\+Lin\+Op}} $>$ {\bfseries generate} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1BatchLinOp}{Batch\+Lin\+Op}} $>$ input) const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A \mbox{\hyperlink{classgko_1_1batch_1_1BatchLinOpFactory}{Batch\+Lin\+Op\+Factory}} represents a higher order mapping which transforms one batch linear operator into another. 
+
+In a similar fashion to Lin\+Ops, Batch\+Lin\+Ops are also \char`\"{}generated\char`\"{} from the \mbox{\hyperlink{classgko_1_1batch_1_1BatchLinOpFactory}{Batch\+Lin\+Op\+Factory}}. A function of this class is to provide a generate method, which internally cals the generate\+\_\+impl(), which the concrete Batch\+Lin\+Ops have to implement.\hypertarget{classgko_1_1batch_1_1BatchLinOpFactory_autotoc_md72}{}\doxysubsubsection{Example\+: using Batch\+C\+G in Ginkgo}\label{classgko_1_1batch_1_1BatchLinOpFactory_autotoc_md72}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ \{c++\}}
+\DoxyCodeLine{\textcolor{comment}{// Suppose A is a batch matrix, batch\_b, a batch rhs vector, and batch\_x, an}}
+\DoxyCodeLine{\textcolor{comment}{// initial guess}}
+\DoxyCodeLine{\textcolor{comment}{// Create a BatchCG which runs for at most 1000 iterations, and stops after}}
+\DoxyCodeLine{\textcolor{comment}{// reducing the residual norm by 6 orders of magnitude}}
+\DoxyCodeLine{\textcolor{keyword}{auto} batch\_cg\_factory = solver::BatchCg<>::build()}
+\DoxyCodeLine{    .with\_max\_iters(1000)}
+\DoxyCodeLine{    .with\_rel\_residual\_goal(1e-\/6)}
+\DoxyCodeLine{    .on(cuda);}
+\DoxyCodeLine{\textcolor{comment}{// create a batch linear operator which represents the solver}}
+\DoxyCodeLine{\textcolor{keyword}{auto} batch\_cg = batch\_cg\_factory-\/>generate(A);}
+\DoxyCodeLine{\textcolor{comment}{// solve the system}}
+\DoxyCodeLine{batch\_cg-\/>apply(batch\_b, batch\_x);}
+\end{DoxyCode}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/base/batch\+\_\+lin\+\_\+op.\+hpp\end{DoxyCompactItemize}

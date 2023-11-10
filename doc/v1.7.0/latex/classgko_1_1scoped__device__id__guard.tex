@@ -1,0 +1,154 @@
+\hypertarget{classgko_1_1scoped__device__id__guard}{}\doxysection{gko\+::scoped\+\_\+device\+\_\+id\+\_\+guard Class Reference}
+\label{classgko_1_1scoped__device__id__guard}\index{gko::scoped\_device\_id\_guard@{gko::scoped\_device\_id\_guard}}
+
+
+This move-\/only class uses R\+A\+II to set the device id within a scoped block, if necessary.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/base/scoped\+\_\+device\+\_\+id\+\_\+guard.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgko_1_1scoped__device__id__guard_acc33bf23522f0697b0728c467683a77f}{scoped\+\_\+device\+\_\+id\+\_\+guard}} (const \mbox{\hyperlink{classgko_1_1ReferenceExecutor}{Reference\+Executor}} $\ast$exec, int device\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Create a scoped device id from an Reference. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1scoped__device__id__guard_a793cf06e7d67c04e586a0416c6623623}{scoped\+\_\+device\+\_\+id\+\_\+guard}} (const \mbox{\hyperlink{classgko_1_1OmpExecutor}{Omp\+Executor}} $\ast$exec, int device\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Create a scoped device id from an \mbox{\hyperlink{classgko_1_1OmpExecutor}{Omp\+Executor}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1scoped__device__id__guard_aa1ec4e747e4b094bb72f63c6c2d71f24}{scoped\+\_\+device\+\_\+id\+\_\+guard}} (const \mbox{\hyperlink{classgko_1_1CudaExecutor}{Cuda\+Executor}} $\ast$exec, int device\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Create a scoped device id from an \mbox{\hyperlink{classgko_1_1CudaExecutor}{Cuda\+Executor}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1scoped__device__id__guard_a97bba4ea5903f97038952382e9dcd702}{scoped\+\_\+device\+\_\+id\+\_\+guard}} (const \mbox{\hyperlink{classgko_1_1HipExecutor}{Hip\+Executor}} $\ast$exec, int device\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Create a scoped device id from an \mbox{\hyperlink{classgko_1_1HipExecutor}{Hip\+Executor}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1scoped__device__id__guard_a3cc19e477c4992b07b22491841bfd9e0}{scoped\+\_\+device\+\_\+id\+\_\+guard}} (const \mbox{\hyperlink{classgko_1_1DpcppExecutor}{Dpcpp\+Executor}} $\ast$exec, int device\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Create a scoped device id from an \mbox{\hyperlink{classgko_1_1DpcppExecutor}{Dpcpp\+Executor}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1scoped__device__id__guard_ae28c802d71f258d484e466aa9f403a43}\label{classgko_1_1scoped__device__id__guard_ae28c802d71f258d484e466aa9f403a43}} 
+{\bfseries scoped\+\_\+device\+\_\+id\+\_\+guard} (const \mbox{\hyperlink{classgko_1_1scoped__device__id__guard}{scoped\+\_\+device\+\_\+id\+\_\+guard}} \&)=delete
+\item 
+\mbox{\Hypertarget{classgko_1_1scoped__device__id__guard_ad29ea9125866e0b6dcc9ebbd5485820d}\label{classgko_1_1scoped__device__id__guard_ad29ea9125866e0b6dcc9ebbd5485820d}} 
+{\bfseries scoped\+\_\+device\+\_\+id\+\_\+guard} (\mbox{\hyperlink{classgko_1_1scoped__device__id__guard}{scoped\+\_\+device\+\_\+id\+\_\+guard}} \&\&)=default
+\item 
+\mbox{\Hypertarget{classgko_1_1scoped__device__id__guard_a189e18a3cd01610b4dfd7bf065a039e5}\label{classgko_1_1scoped__device__id__guard_a189e18a3cd01610b4dfd7bf065a039e5}} 
+\mbox{\hyperlink{classgko_1_1scoped__device__id__guard}{scoped\+\_\+device\+\_\+id\+\_\+guard}} \& {\bfseries operator=} (const \mbox{\hyperlink{classgko_1_1scoped__device__id__guard}{scoped\+\_\+device\+\_\+id\+\_\+guard}} \&)=delete
+\item 
+\mbox{\Hypertarget{classgko_1_1scoped__device__id__guard_aef3f6878c8d0662e7b7c16411118bbd8}\label{classgko_1_1scoped__device__id__guard_aef3f6878c8d0662e7b7c16411118bbd8}} 
+\mbox{\hyperlink{classgko_1_1scoped__device__id__guard}{scoped\+\_\+device\+\_\+id\+\_\+guard}} \& {\bfseries operator=} (\mbox{\hyperlink{classgko_1_1scoped__device__id__guard}{scoped\+\_\+device\+\_\+id\+\_\+guard}} \&\&)=default
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This move-\/only class uses R\+A\+II to set the device id within a scoped block, if necessary. 
+
+The class behaves similar to std\+::scoped\+\_\+lock. The scoped guard will make sure that the device code is run on the correct device within one scoped block, when run with multiple devices. Depending on the executor it will record the current device id and set the device id to the one being passed in. After the scope has been exited, the destructor sets the device\+\_\+id back to the one before entering the scope. The \mbox{\hyperlink{classgko_1_1OmpExecutor}{Omp\+Executor}} and \mbox{\hyperlink{classgko_1_1DpcppExecutor}{Dpcpp\+Executor}} don\textquotesingle{}t require setting an device id, so in those cases, the class is a no-\/op.
+
+The device id scope has to be constructed from a executor with concrete type (not plain \mbox{\hyperlink{classgko_1_1Executor}{Executor}}) and a device id. Only the type of the executor object is relevant, so the pointer will not be accessed, and may even be a nullptr. From the executor type the correct derived class of detail\+::generic\+\_\+scoped\+\_\+device\+\_\+id\+\_\+guard is picked. The following illustrates the usage of this class\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  \mbox{\hyperlink{classgko_1_1scoped__device__id__guard_acc33bf23522f0697b0728c467683a77f}{scoped\_device\_id\_guard}} g\{static\_cast<CudaExecutor>(\textcolor{keyword}{nullptr}), 1\};}
+\DoxyCodeLine{  \textcolor{comment}{// now the device id is set to 1}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{comment}{// now the device id is reverted again}}
+\end{DoxyCode}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classgko_1_1scoped__device__id__guard_acc33bf23522f0697b0728c467683a77f}\label{classgko_1_1scoped__device__id__guard_acc33bf23522f0697b0728c467683a77f}} 
+\index{gko::scoped\_device\_id\_guard@{gko::scoped\_device\_id\_guard}!scoped\_device\_id\_guard@{scoped\_device\_id\_guard}}
+\index{scoped\_device\_id\_guard@{scoped\_device\_id\_guard}!gko::scoped\_device\_id\_guard@{gko::scoped\_device\_id\_guard}}
+\doxysubsubsection{\texorpdfstring{scoped\_device\_id\_guard()}{scoped\_device\_id\_guard()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily gko\+::scoped\+\_\+device\+\_\+id\+\_\+guard\+::scoped\+\_\+device\+\_\+id\+\_\+guard (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1ReferenceExecutor}{Reference\+Executor}} $\ast$}]{exec,  }\item[{int}]{device\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Create a scoped device id from an Reference. 
+
+The resulting object will be a noop.
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & Not used. \\
+\hline
+{\em device\+\_\+id} & Not used. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1scoped__device__id__guard_a793cf06e7d67c04e586a0416c6623623}\label{classgko_1_1scoped__device__id__guard_a793cf06e7d67c04e586a0416c6623623}} 
+\index{gko::scoped\_device\_id\_guard@{gko::scoped\_device\_id\_guard}!scoped\_device\_id\_guard@{scoped\_device\_id\_guard}}
+\index{scoped\_device\_id\_guard@{scoped\_device\_id\_guard}!gko::scoped\_device\_id\_guard@{gko::scoped\_device\_id\_guard}}
+\doxysubsubsection{\texorpdfstring{scoped\_device\_id\_guard()}{scoped\_device\_id\_guard()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily gko\+::scoped\+\_\+device\+\_\+id\+\_\+guard\+::scoped\+\_\+device\+\_\+id\+\_\+guard (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1OmpExecutor}{Omp\+Executor}} $\ast$}]{exec,  }\item[{int}]{device\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Create a scoped device id from an \mbox{\hyperlink{classgko_1_1OmpExecutor}{Omp\+Executor}}. 
+
+The resulting object will be a noop.
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & Not used. \\
+\hline
+{\em device\+\_\+id} & Not used. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1scoped__device__id__guard_aa1ec4e747e4b094bb72f63c6c2d71f24}\label{classgko_1_1scoped__device__id__guard_aa1ec4e747e4b094bb72f63c6c2d71f24}} 
+\index{gko::scoped\_device\_id\_guard@{gko::scoped\_device\_id\_guard}!scoped\_device\_id\_guard@{scoped\_device\_id\_guard}}
+\index{scoped\_device\_id\_guard@{scoped\_device\_id\_guard}!gko::scoped\_device\_id\_guard@{gko::scoped\_device\_id\_guard}}
+\doxysubsubsection{\texorpdfstring{scoped\_device\_id\_guard()}{scoped\_device\_id\_guard()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily gko\+::scoped\+\_\+device\+\_\+id\+\_\+guard\+::scoped\+\_\+device\+\_\+id\+\_\+guard (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1CudaExecutor}{Cuda\+Executor}} $\ast$}]{exec,  }\item[{int}]{device\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Create a scoped device id from an \mbox{\hyperlink{classgko_1_1CudaExecutor}{Cuda\+Executor}}. 
+
+The resulting object will set the cuda device id accordingly.
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & Not used. \\
+\hline
+{\em device\+\_\+id} & The device id to use within the scope. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1scoped__device__id__guard_a97bba4ea5903f97038952382e9dcd702}\label{classgko_1_1scoped__device__id__guard_a97bba4ea5903f97038952382e9dcd702}} 
+\index{gko::scoped\_device\_id\_guard@{gko::scoped\_device\_id\_guard}!scoped\_device\_id\_guard@{scoped\_device\_id\_guard}}
+\index{scoped\_device\_id\_guard@{scoped\_device\_id\_guard}!gko::scoped\_device\_id\_guard@{gko::scoped\_device\_id\_guard}}
+\doxysubsubsection{\texorpdfstring{scoped\_device\_id\_guard()}{scoped\_device\_id\_guard()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily gko\+::scoped\+\_\+device\+\_\+id\+\_\+guard\+::scoped\+\_\+device\+\_\+id\+\_\+guard (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1HipExecutor}{Hip\+Executor}} $\ast$}]{exec,  }\item[{int}]{device\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Create a scoped device id from an \mbox{\hyperlink{classgko_1_1HipExecutor}{Hip\+Executor}}. 
+
+The resulting object will set the hip device id accordingly.
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & Not used. \\
+\hline
+{\em device\+\_\+id} & The device id to use within the scope. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1scoped__device__id__guard_a3cc19e477c4992b07b22491841bfd9e0}\label{classgko_1_1scoped__device__id__guard_a3cc19e477c4992b07b22491841bfd9e0}} 
+\index{gko::scoped\_device\_id\_guard@{gko::scoped\_device\_id\_guard}!scoped\_device\_id\_guard@{scoped\_device\_id\_guard}}
+\index{scoped\_device\_id\_guard@{scoped\_device\_id\_guard}!gko::scoped\_device\_id\_guard@{gko::scoped\_device\_id\_guard}}
+\doxysubsubsection{\texorpdfstring{scoped\_device\_id\_guard()}{scoped\_device\_id\_guard()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily gko\+::scoped\+\_\+device\+\_\+id\+\_\+guard\+::scoped\+\_\+device\+\_\+id\+\_\+guard (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1DpcppExecutor}{Dpcpp\+Executor}} $\ast$}]{exec,  }\item[{int}]{device\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Create a scoped device id from an \mbox{\hyperlink{classgko_1_1DpcppExecutor}{Dpcpp\+Executor}}. 
+
+The resulting object will be a noop.
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & Not used. \\
+\hline
+{\em device\+\_\+id} & Not used. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/base/scoped\+\_\+device\+\_\+id\+\_\+guard.\+hpp\end{DoxyCompactItemize}

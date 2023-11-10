@@ -1,0 +1,627 @@
+The distributed solver example..
+
+This example depends on simple-\/solver, three-\/pt-\/stencil-\/solver.
+
+ \label{_Intro}%
+ \label{_Introduction}%
+\doxysection*{Introduction}
+
+This distributed solver example should help you understand the basics of using Ginkgo in a distributed setting. The example will solve a simple 1D Laplace equation where the system can be distributed row-\/wise to multiple processes. To run the solver with multiple processes, use {\ttfamily mpirun -\/n N\+U\+M\+\_\+\+P\+R\+O\+CS ./distributed-\/solver \mbox{[}executor\mbox{]} \mbox{[}num\+\_\+grid\+\_\+points\mbox{]} \mbox{[}num\+\_\+iterations\mbox{]}}.
+
+If you are using G\+PU devices, please make sure that you run this example with at most as many processes as you have G\+PU devices available. \label{_CommProg}%
+ \doxysection*{The commented program}
+
+\label{_Includefiles}%
+ \doxysubsubsection*{Include files}
+
+This is the main ginkgo header file.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
+\end{DoxyCode}
+
+
+Add the C++ iostream header to output information to the console.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
+\end{DoxyCode}
+
+
+Add the S\+TL map header for the executor selection
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <map>}}
+\end{DoxyCode}
+
+
+Add the string manipulation header to handle strings.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
+\DoxyCodeLine{\{}
+\end{DoxyCode}
+
+
+\label{_InitializetheMPIenvironment}%
+ \doxysubsubsection*{Initialize the M\+PI environment}
+
+Since this is an M\+PI program, we need to initialize and finalize M\+PI at the begin and end respectively of our program. This can be easily done with the following helper construct that uses R\+A\+II to automate the initialization and finalization.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1environment}{gko::experimental::mpi::environment}} env(argc, argv);}
+\end{DoxyCode}
+
+
+\label{_TypeDefinitions}%
+ \doxysubsubsection*{Type Definitions}
+
+Define the needed types. In a parallel program we need to differentiate between global and local indices, thus we have two index types.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using} GlobalIndexType = \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{gko::int64}};}
+\DoxyCodeLine{\textcolor{keyword}{using} LocalIndexType = \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{gko::int32}};}
+\end{DoxyCode}
+
+
+The underlying value type.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using} ValueType = double;}
+\end{DoxyCode}
+
+
+As vector type we use the following, which implements a subset of \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using} dist\_vec = \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{gko::experimental::distributed::Vector<ValueType>}};}
+\end{DoxyCode}
+
+
+As matrix type we simply use the following type, which can read distributed data and be applied to a distributed vector.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using} dist\_mtx =}
+\DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{gko::experimental::distributed::Matrix}}<ValueType, LocalIndexType,}
+\DoxyCodeLine{                                           GlobalIndexType>;}
+\end{DoxyCode}
+
+
+We still need a localized vector type to be used as scalars in the advanced apply operations.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using} vec = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}};}
+\end{DoxyCode}
+
+
+The partition type describes how the rows of the matrices are distributed.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using} part\_type =}
+\DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{gko::experimental::distributed::Partition}}<LocalIndexType,}
+\DoxyCodeLine{                                              GlobalIndexType>;}
+\end{DoxyCode}
+
+
+We can use here the same solver type as you would use in a non-\/distributed program. Please note that not all solvers support distributed systems at the moment.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}} = \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{gko::solver::Cg<ValueType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} schwarz = \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1preconditioner_1_1Schwarz}{gko::experimental::distributed::preconditioner::Schwarz}}<}
+\DoxyCodeLine{    ValueType, LocalIndexType, GlobalIndexType>;}
+\DoxyCodeLine{\textcolor{keyword}{using} bj = \mbox{\hyperlink{classgko_1_1preconditioner_1_1Jacobi}{gko::preconditioner::Jacobi<ValueType, LocalIndexType>}};}
+\end{DoxyCode}
+
+
+Create an M\+PI communicator get the rank of the calling process.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} comm = \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{gko::experimental::mpi::communicator}}(MPI\_COMM\_WORLD);}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} rank = comm.rank();}
+\end{DoxyCode}
+
+
+\label{_UserInputHandling}%
+ \doxysubsubsection*{User Input Handling}
+
+User input settings\+:
+\begin{DoxyItemize}
+\item The executor, defaults to reference.
+\item The number of grid points, defaults to 100.
+\item The number of iterations, defaults to 1000.
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (argc == 2 \&\& (std::string(argv[1]) == \textcolor{stringliteral}{"-\/-\/help"})) \{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (rank == 0) \{}
+\DoxyCodeLine{        std::cerr << \textcolor{stringliteral}{"Usage: "} << argv[0]}
+\DoxyCodeLine{                  << \textcolor{stringliteral}{" [executor] [num\_grid\_points] [num\_iterations] "}}
+\DoxyCodeLine{                  << std::endl;}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    std::exit(-\/1);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{ValueType t\_init = \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a508f97387781bb32dd2c7616dee1a786}{gko::experimental::mpi::get\_walltime}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} executor\_string = argc >= 2 ? argv[1] : \textcolor{stringliteral}{"reference"};}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} grid\_dim =}
+\DoxyCodeLine{    static\_cast<gko::size\_type>(argc >= 3 ? std::atoi(argv[2]) : 100);}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} num\_iters =}
+\DoxyCodeLine{    static\_cast<gko::size\_type>(argc >= 4 ? std::atoi(argv[3]) : 1000);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{const} std::map<std::string,}
+\DoxyCodeLine{               std::function<std::shared\_ptr<gko::Executor>(MPI\_Comm)>>}
+\DoxyCodeLine{    executor\_factory\_mpi\{}
+\DoxyCodeLine{        \{\textcolor{stringliteral}{"reference"},}
+\DoxyCodeLine{         [](MPI\_Comm) \{ \textcolor{keywordflow}{return} gko::ReferenceExecutor::create(); \}\},}
+\DoxyCodeLine{        \{\textcolor{stringliteral}{"omp"}, [](MPI\_Comm) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}(); \}\},}
+\DoxyCodeLine{        \{\textcolor{stringliteral}{"cuda"},}
+\DoxyCodeLine{         [](MPI\_Comm comm) \{}
+\DoxyCodeLine{             \textcolor{keywordtype}{int} device\_id = \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a0ec0c93a068b2c19da8cb5e874bf9f6c}{gko::experimental::mpi::map\_rank\_to\_device\_id}}(}
+\DoxyCodeLine{                 comm, \mbox{\hyperlink{classgko_1_1CudaExecutor_aef0258494d14de0e56149b920c5173e5}{gko::CudaExecutor::get\_num\_devices}}());}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a6c423656c7c0eb53810cb77bb4a66d15}{gko::CudaExecutor::create}}(}
+\DoxyCodeLine{                 device\_id, gko::ReferenceExecutor::create());}
+\DoxyCodeLine{         \}\},}
+\DoxyCodeLine{        \{\textcolor{stringliteral}{"hip"},}
+\DoxyCodeLine{         [](MPI\_Comm comm) \{}
+\DoxyCodeLine{             \textcolor{keywordtype}{int} device\_id = \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a0ec0c93a068b2c19da8cb5e874bf9f6c}{gko::experimental::mpi::map\_rank\_to\_device\_id}}(}
+\DoxyCodeLine{                 comm, \mbox{\hyperlink{classgko_1_1HipExecutor_a7b34cbd84692dafa2290e6630754aa97}{gko::HipExecutor::get\_num\_devices}}());}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_aa0701fe1303e03a8331da7e95008100d}{gko::HipExecutor::create}}(}
+\DoxyCodeLine{                 device\_id, gko::ReferenceExecutor::create());}
+\DoxyCodeLine{         \}\},}
+\DoxyCodeLine{        \{\textcolor{stringliteral}{"dpcpp"}, [](MPI\_Comm comm) \{}
+\DoxyCodeLine{             \textcolor{keywordtype}{int} device\_id = 0;}
+\DoxyCodeLine{             \textcolor{keywordflow}{if} (\mbox{\hyperlink{classgko_1_1DpcppExecutor_adf306338233c8e8aca0dec96aefe5d93}{gko::DpcppExecutor::get\_num\_devices}}(\textcolor{stringliteral}{"gpu"})) \{}
+\DoxyCodeLine{                 device\_id = \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a0ec0c93a068b2c19da8cb5e874bf9f6c}{gko::experimental::mpi::map\_rank\_to\_device\_id}}(}
+\DoxyCodeLine{                     comm, \mbox{\hyperlink{classgko_1_1DpcppExecutor_adf306338233c8e8aca0dec96aefe5d93}{gko::DpcppExecutor::get\_num\_devices}}(\textcolor{stringliteral}{"gpu"}));}
+\DoxyCodeLine{             \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\mbox{\hyperlink{classgko_1_1DpcppExecutor_adf306338233c8e8aca0dec96aefe5d93}{gko::DpcppExecutor::get\_num\_devices}}(\textcolor{stringliteral}{"cpu"})) \{}
+\DoxyCodeLine{                 device\_id = \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a0ec0c93a068b2c19da8cb5e874bf9f6c}{gko::experimental::mpi::map\_rank\_to\_device\_id}}(}
+\DoxyCodeLine{                     comm, \mbox{\hyperlink{classgko_1_1DpcppExecutor_adf306338233c8e8aca0dec96aefe5d93}{gko::DpcppExecutor::get\_num\_devices}}(\textcolor{stringliteral}{"cpu"}));}
+\DoxyCodeLine{             \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{                 \textcolor{keywordflow}{throw} std::runtime\_error(\textcolor{stringliteral}{"No suitable DPC++ devices"});}
+\DoxyCodeLine{             \}}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1DpcppExecutor_ae9b875dfe3af7f3f3f24071bfb2f895e}{gko::DpcppExecutor::create}}(}
+\DoxyCodeLine{                 device\_id, gko::ReferenceExecutor::create());}
+\DoxyCodeLine{         \}\}\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{auto} exec = executor\_factory\_mpi.at(executor\_string)(MPI\_COMM\_WORLD);}
+\end{DoxyCode}
+
+
+\label{_CreatingtheDistributedMatrixandVectors}%
+ \doxysubsubsection*{Creating the Distributed Matrix and Vectors}
+
+As a first step, we create a partition of the rows. The partition consists of ranges of consecutive rows which are assigned a part-\/id. These part-\/ids will be used for the distributed data structures to determine which rows will be stored locally. In this example each rank has (nearly) the same number of rows, so we can use the following specialized constructor. See gko\+::distributed\+::\+Partition for other modes of creating a partition.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} num\_rows = grid\_dim;}
+\DoxyCodeLine{\textcolor{keyword}{auto} partition = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(part\_type::build\_from\_global\_size\_uniform(}
+\DoxyCodeLine{    exec-\/>get\_master(), comm.size(),}
+\DoxyCodeLine{    static\_cast<GlobalIndexType>(num\_rows)));}
+\end{DoxyCode}
+
+
+Assemble the matrix using a 3-\/pt stencil and fill the right-\/hand-\/side with a sine value. The distributed matrix supports only constructing an empty matrix of zero size and filling in the values with \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_acb4a34395b0ee89e077f4cab66116b90}{gko\+::experimental\+::distributed\+::\+Matrix\+::read\+\_\+distributed}}. Only the data that belongs to the rows by this rank will be assembled.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{structgko_1_1matrix__data}{gko::matrix\_data<ValueType, GlobalIndexType>}} A\_data;}
+\DoxyCodeLine{\mbox{\hyperlink{structgko_1_1matrix__data}{gko::matrix\_data<ValueType, GlobalIndexType>}} b\_data;}
+\DoxyCodeLine{\mbox{\hyperlink{structgko_1_1matrix__data}{gko::matrix\_data<ValueType, GlobalIndexType>}} x\_data;}
+\DoxyCodeLine{A\_data.\mbox{\hyperlink{structgko_1_1matrix__data_a30716bd9e39a7beed52fc56d737fc07b}{size}} = \{num\_rows, num\_rows\};}
+\DoxyCodeLine{b\_data.\mbox{\hyperlink{structgko_1_1matrix__data_a30716bd9e39a7beed52fc56d737fc07b}{size}} = \{num\_rows, 1\};}
+\DoxyCodeLine{x\_data.\mbox{\hyperlink{structgko_1_1matrix__data_a30716bd9e39a7beed52fc56d737fc07b}{size}} = \{num\_rows, 1\};}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} range\_start = partition-\/>get\_range\_bounds()[rank];}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} range\_end = partition-\/>get\_range\_bounds()[rank + 1];}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = range\_start; i < range\_end; i++) \{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (i > 0) \{}
+\DoxyCodeLine{        A\_data.\mbox{\hyperlink{structgko_1_1matrix__data_a4f6be92270fa96bccdc502c83d248dc0}{nonzeros}}.emplace\_back(i, i -\/ 1, -\/1);}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    A\_data.\mbox{\hyperlink{structgko_1_1matrix__data_a4f6be92270fa96bccdc502c83d248dc0}{nonzeros}}.emplace\_back(i, i, 2);}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (i < grid\_dim -\/ 1) \{}
+\DoxyCodeLine{        A\_data.\mbox{\hyperlink{structgko_1_1matrix__data_a4f6be92270fa96bccdc502c83d248dc0}{nonzeros}}.emplace\_back(i, i + 1, -\/1);}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    b\_data.\mbox{\hyperlink{structgko_1_1matrix__data_a4f6be92270fa96bccdc502c83d248dc0}{nonzeros}}.emplace\_back(i, 0, std::sin(i * 0.01));}
+\DoxyCodeLine{    x\_data.\mbox{\hyperlink{structgko_1_1matrix__data_a4f6be92270fa96bccdc502c83d248dc0}{nonzeros}}.emplace\_back(i, 0, gko::zero<ValueType>());}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+Take timings.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{comm.synchronize();}
+\DoxyCodeLine{ValueType t\_init\_end = \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a508f97387781bb32dd2c7616dee1a786}{gko::experimental::mpi::get\_walltime}}();}
+\end{DoxyCode}
+
+
+Read the matrix data, currently this is only supported on C\+PU executors. This will also set up the communication pattern needed for the distributed matrix-\/vector multiplication.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} A\_host = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(dist\_mtx::create(exec-\/>get\_master(), comm));}
+\DoxyCodeLine{\textcolor{keyword}{auto} x\_host = dist\_vec::create(exec-\/>get\_master(), comm);}
+\DoxyCodeLine{\textcolor{keyword}{auto} b\_host = dist\_vec::create(exec-\/>get\_master(), comm);}
+\DoxyCodeLine{A\_host-\/>read\_distributed(A\_data, partition);}
+\DoxyCodeLine{b\_host-\/>read\_distributed(b\_data, partition);}
+\DoxyCodeLine{x\_host-\/>read\_distributed(x\_data, partition);}
+\end{DoxyCode}
+
+
+After reading, the matrix and vector can be moved to the chosen executor, since the distributed matrix supports Sp\+MV also on devices.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} A = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(dist\_mtx::create(exec, comm));}
+\DoxyCodeLine{\textcolor{keyword}{auto} x = dist\_vec::create(exec, comm);}
+\DoxyCodeLine{\textcolor{keyword}{auto} b = dist\_vec::create(exec, comm);}
+\DoxyCodeLine{A-\/>copy\_from(A\_host);}
+\DoxyCodeLine{b-\/>copy\_from(b\_host);}
+\DoxyCodeLine{x-\/>copy\_from(x\_host);}
+\end{DoxyCode}
+
+
+Take timings.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{comm.synchronize();}
+\DoxyCodeLine{ValueType t\_read\_setup\_end = \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a508f97387781bb32dd2c7616dee1a786}{gko::experimental::mpi::get\_walltime}}();}
+\end{DoxyCode}
+
+
+\label{_SolvetheDistributedSystem}%
+ \doxysubsubsection*{Solve the Distributed System}
+
+Generate the solver, this is the same as in the non-\/distributed case. with a local block diagonal preconditioner.
+
+Setup the local block diagonal solver factory.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} local\_solver = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(bj::build().on(exec));}
+\end{DoxyCode}
+
+
+Setup the stopping criterion and logger
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} reduction\_factor\{1e-\/8\};}
+\DoxyCodeLine{std::shared\_ptr<const gko::log::Convergence<ValueType>> logger =}
+\DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1log_1_1Convergence_aa67955ea9d1d18f15f0330d12b93d330}{gko::log::Convergence<ValueType>::create}}();}
+\DoxyCodeLine{\textcolor{keyword}{auto} Ainv = solver::build()}
+\DoxyCodeLine{                .with\_preconditioner(}
+\DoxyCodeLine{                    schwarz::build().with\_local\_solver(local\_solver))}
+\DoxyCodeLine{                .with\_criteria(}
+\DoxyCodeLine{                    gko::stop::Iteration::build().with\_max\_iters(num\_iters),}
+\DoxyCodeLine{                    \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                        .with\_reduction\_factor(reduction\_factor))}
+\DoxyCodeLine{                .on(exec)}
+\DoxyCodeLine{                -\/>generate(A);}
+\end{DoxyCode}
+
+
+Add logger to the generated solver to log the iteration count and residual norm
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Ainv-\/>add\_logger(logger);}
+\end{DoxyCode}
+
+
+Take timings.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{comm.synchronize();}
+\DoxyCodeLine{ValueType t\_solver\_generate\_end = \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a508f97387781bb32dd2c7616dee1a786}{gko::experimental::mpi::get\_walltime}}();}
+\end{DoxyCode}
+
+
+Apply the distributed solver, this is the same as in the non-\/distributed case.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Ainv-\/>apply(b, x);}
+\end{DoxyCode}
+
+
+Take timings.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{comm.synchronize();}
+\DoxyCodeLine{ValueType t\_end = \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a508f97387781bb32dd2c7616dee1a786}{gko::experimental::mpi::get\_walltime}}();}
+\end{DoxyCode}
+
+
+Get the residual.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} res\_norm = gko::as<vec>(logger-\/>get\_residual\_norm());}
+\end{DoxyCode}
+
+
+\label{_PrintingResults}%
+ \doxysubsubsection*{Printing Results}
+
+Print the achieved residual norm and timings on rank 0.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (comm.rank() == 0) \{}
+\end{DoxyCode}
+
+
+clang-\/format off
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"\(\backslash\)nNum rows in matrix: "} << num\_rows}
+\DoxyCodeLine{          << \textcolor{stringliteral}{"\(\backslash\)nNum ranks: "} << comm.size()}
+\DoxyCodeLine{          << \textcolor{stringliteral}{"\(\backslash\)nFinal Res norm: "} << *res\_norm-\/>get\_const\_values()}
+\DoxyCodeLine{          << \textcolor{stringliteral}{"\(\backslash\)nIteration count: "} << logger-\/>get\_num\_iterations()}
+\DoxyCodeLine{          << \textcolor{stringliteral}{"\(\backslash\)nInit time: "} << t\_init\_end -\/ t\_init}
+\DoxyCodeLine{          << \textcolor{stringliteral}{"\(\backslash\)nRead time: "} << t\_read\_setup\_end -\/ t\_init}
+\DoxyCodeLine{          << \textcolor{stringliteral}{"\(\backslash\)nSolver generate time: "} << t\_solver\_generate\_end -\/ t\_read\_setup\_end}
+\DoxyCodeLine{          << \textcolor{stringliteral}{"\(\backslash\)nSolver apply time: "} << t\_end -\/ t\_solver\_generate\_end}
+\DoxyCodeLine{          << \textcolor{stringliteral}{"\(\backslash\)nTotal time: "} << t\_end -\/ t\_init}
+\DoxyCodeLine{          << std::endl;}
+\end{DoxyCode}
+
+
+clang-\/format on
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+ \label{_Results}%
+\doxysection*{Results}
+
+This is the expected output for {\ttfamily mpirun -\/n 4 ./distributed-\/solver}\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Num \mbox{\hyperlink{namespacegko_1_1matrix_ade1f3cdbf05032c2d681fa151de02972adf347a373b8f92aa0ae3dd920a5ec2f6}{rows}} in matrix: 100}
+\DoxyCodeLine{Num ranks: 4}
+\DoxyCodeLine{Final Res norm: 5.58392e-\/12}
+\DoxyCodeLine{Iteration count: 7}
+\DoxyCodeLine{Init time: 0.0663887}
+\DoxyCodeLine{Read time: 0.0729806}
+\DoxyCodeLine{Solver generate time: 7.6348e-\/05}
+\DoxyCodeLine{Solver apply time: 0.0680783}
+\DoxyCodeLine{Total time: 0.141351}
+\end{DoxyCode}
+
+
+The timings may vary depending on the machine. \label{_PlainProg}%
+ \doxysection*{The plain program}
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{/*******************************<GINKGO LICENSE>******************************}}
+\DoxyCodeLine{\textcolor{comment}{Copyright (c) 2017-\/2023, the Ginkgo authors}}
+\DoxyCodeLine{\textcolor{comment}{All rights reserved.}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{Redistribution and use in source and binary forms, with or without}}
+\DoxyCodeLine{\textcolor{comment}{modification, are permitted provided that the following conditions}}
+\DoxyCodeLine{\textcolor{comment}{are met:}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{1. Redistributions of source code must retain the above copyright}}
+\DoxyCodeLine{\textcolor{comment}{notice, this list of conditions and the following disclaimer.}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{2. Redistributions in binary form must reproduce the above copyright}}
+\DoxyCodeLine{\textcolor{comment}{notice, this list of conditions and the following disclaimer in the}}
+\DoxyCodeLine{\textcolor{comment}{documentation and/or other materials provided with the distribution.}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{3. Neither the name of the copyright holder nor the names of its}}
+\DoxyCodeLine{\textcolor{comment}{contributors may be used to endorse or promote products derived from}}
+\DoxyCodeLine{\textcolor{comment}{this software without specific prior written permission.}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS}}
+\DoxyCodeLine{\textcolor{comment}{IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED}}
+\DoxyCodeLine{\textcolor{comment}{TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A}}
+\DoxyCodeLine{\textcolor{comment}{PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT}}
+\DoxyCodeLine{\textcolor{comment}{HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,}}
+\DoxyCodeLine{\textcolor{comment}{SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT}}
+\DoxyCodeLine{\textcolor{comment}{LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,}}
+\DoxyCodeLine{\textcolor{comment}{DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY}}
+\DoxyCodeLine{\textcolor{comment}{THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT}}
+\DoxyCodeLine{\textcolor{comment}{(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE}}
+\DoxyCodeLine{\textcolor{comment}{OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.}}
+\DoxyCodeLine{\textcolor{comment}{******************************<GINKGO LICENSE>*******************************/}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1environment}{gko::experimental::mpi::environment}} env(argc, argv);}
+\DoxyCodeLine{    \textcolor{keyword}{using} GlobalIndexType = \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{gko::int64}};}
+\DoxyCodeLine{    \textcolor{keyword}{using} LocalIndexType = \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{gko::int32}};}
+\DoxyCodeLine{    \textcolor{keyword}{using} ValueType = double;}
+\DoxyCodeLine{    \textcolor{keyword}{using} dist\_vec = \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{gko::experimental::distributed::Vector<ValueType>}};}
+\DoxyCodeLine{    \textcolor{keyword}{using} dist\_mtx =}
+\DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{gko::experimental::distributed::Matrix}}<ValueType, LocalIndexType,}
+\DoxyCodeLine{                                               GlobalIndexType>;}
+\DoxyCodeLine{    \textcolor{keyword}{using} vec = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}};}
+\DoxyCodeLine{    \textcolor{keyword}{using} part\_type =}
+\DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{gko::experimental::distributed::Partition}}<LocalIndexType,}
+\DoxyCodeLine{                                                  GlobalIndexType>;}
+\DoxyCodeLine{    \textcolor{keyword}{using} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}} = \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{gko::solver::Cg<ValueType>}};}
+\DoxyCodeLine{    \textcolor{keyword}{using} schwarz = \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1preconditioner_1_1Schwarz}{gko::experimental::distributed::preconditioner::Schwarz}}<}
+\DoxyCodeLine{        ValueType, LocalIndexType, GlobalIndexType>;}
+\DoxyCodeLine{    \textcolor{keyword}{using} bj = \mbox{\hyperlink{classgko_1_1preconditioner_1_1Jacobi}{gko::preconditioner::Jacobi<ValueType, LocalIndexType>}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} comm = \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{gko::experimental::mpi::communicator}}(MPI\_COMM\_WORLD);}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} rank = comm.rank();}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (argc == 2 \&\& (std::string(argv[1]) == \textcolor{stringliteral}{"-\/-\/help"})) \{}
+\DoxyCodeLine{        \textcolor{keywordflow}{if} (rank == 0) \{}
+\DoxyCodeLine{            std::cerr << \textcolor{stringliteral}{"Usage: "} << argv[0]}
+\DoxyCodeLine{                      << \textcolor{stringliteral}{" [executor] [num\_grid\_points] [num\_iterations] "}}
+\DoxyCodeLine{                      << std::endl;}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{        std::exit(-\/1);}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    ValueType t\_init = \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a508f97387781bb32dd2c7616dee1a786}{gko::experimental::mpi::get\_walltime}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} executor\_string = argc >= 2 ? argv[1] : \textcolor{stringliteral}{"reference"};}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} grid\_dim =}
+\DoxyCodeLine{        static\_cast<gko::size\_type>(argc >= 3 ? std::atoi(argv[2]) : 100);}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} num\_iters =}
+\DoxyCodeLine{        static\_cast<gko::size\_type>(argc >= 4 ? std::atoi(argv[3]) : 1000);}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{const} std::map<std::string,}
+\DoxyCodeLine{                   std::function<std::shared\_ptr<gko::Executor>(MPI\_Comm)>>}
+\DoxyCodeLine{        executor\_factory\_mpi\{}
+\DoxyCodeLine{            \{\textcolor{stringliteral}{"reference"},}
+\DoxyCodeLine{             [](MPI\_Comm) \{ \textcolor{keywordflow}{return} gko::ReferenceExecutor::create(); \}\},}
+\DoxyCodeLine{            \{\textcolor{stringliteral}{"omp"}, [](MPI\_Comm) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}(); \}\},}
+\DoxyCodeLine{            \{\textcolor{stringliteral}{"cuda"},}
+\DoxyCodeLine{             [](MPI\_Comm comm) \{}
+\DoxyCodeLine{                 \textcolor{keywordtype}{int} device\_id = \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a0ec0c93a068b2c19da8cb5e874bf9f6c}{gko::experimental::mpi::map\_rank\_to\_device\_id}}(}
+\DoxyCodeLine{                     comm, \mbox{\hyperlink{classgko_1_1CudaExecutor_aef0258494d14de0e56149b920c5173e5}{gko::CudaExecutor::get\_num\_devices}}());}
+\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a6c423656c7c0eb53810cb77bb4a66d15}{gko::CudaExecutor::create}}(}
+\DoxyCodeLine{                     device\_id, gko::ReferenceExecutor::create());}
+\DoxyCodeLine{             \}\},}
+\DoxyCodeLine{            \{\textcolor{stringliteral}{"hip"},}
+\DoxyCodeLine{             [](MPI\_Comm comm) \{}
+\DoxyCodeLine{                 \textcolor{keywordtype}{int} device\_id = \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a0ec0c93a068b2c19da8cb5e874bf9f6c}{gko::experimental::mpi::map\_rank\_to\_device\_id}}(}
+\DoxyCodeLine{                     comm, \mbox{\hyperlink{classgko_1_1HipExecutor_a7b34cbd84692dafa2290e6630754aa97}{gko::HipExecutor::get\_num\_devices}}());}
+\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_aa0701fe1303e03a8331da7e95008100d}{gko::HipExecutor::create}}(}
+\DoxyCodeLine{                     device\_id, gko::ReferenceExecutor::create());}
+\DoxyCodeLine{             \}\},}
+\DoxyCodeLine{            \{\textcolor{stringliteral}{"dpcpp"}, [](MPI\_Comm comm) \{}
+\DoxyCodeLine{                 \textcolor{keywordtype}{int} device\_id = 0;}
+\DoxyCodeLine{                 \textcolor{keywordflow}{if} (\mbox{\hyperlink{classgko_1_1DpcppExecutor_adf306338233c8e8aca0dec96aefe5d93}{gko::DpcppExecutor::get\_num\_devices}}(\textcolor{stringliteral}{"gpu"})) \{}
+\DoxyCodeLine{                     device\_id = \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a0ec0c93a068b2c19da8cb5e874bf9f6c}{gko::experimental::mpi::map\_rank\_to\_device\_id}}(}
+\DoxyCodeLine{                         comm, \mbox{\hyperlink{classgko_1_1DpcppExecutor_adf306338233c8e8aca0dec96aefe5d93}{gko::DpcppExecutor::get\_num\_devices}}(\textcolor{stringliteral}{"gpu"}));}
+\DoxyCodeLine{                 \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\mbox{\hyperlink{classgko_1_1DpcppExecutor_adf306338233c8e8aca0dec96aefe5d93}{gko::DpcppExecutor::get\_num\_devices}}(\textcolor{stringliteral}{"cpu"})) \{}
+\DoxyCodeLine{                     device\_id = \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a0ec0c93a068b2c19da8cb5e874bf9f6c}{gko::experimental::mpi::map\_rank\_to\_device\_id}}(}
+\DoxyCodeLine{                         comm, \mbox{\hyperlink{classgko_1_1DpcppExecutor_adf306338233c8e8aca0dec96aefe5d93}{gko::DpcppExecutor::get\_num\_devices}}(\textcolor{stringliteral}{"cpu"}));}
+\DoxyCodeLine{                 \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{                     \textcolor{keywordflow}{throw} std::runtime\_error(\textcolor{stringliteral}{"No suitable DPC++ devices"});}
+\DoxyCodeLine{                 \}}
+\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1DpcppExecutor_ae9b875dfe3af7f3f3f24071bfb2f895e}{gko::DpcppExecutor::create}}(}
+\DoxyCodeLine{                     device\_id, gko::ReferenceExecutor::create());}
+\DoxyCodeLine{             \}\}\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{auto} exec = executor\_factory\_mpi.at(executor\_string)(MPI\_COMM\_WORLD);}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} num\_rows = grid\_dim;}
+\DoxyCodeLine{    \textcolor{keyword}{auto} partition = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(part\_type::build\_from\_global\_size\_uniform(}
+\DoxyCodeLine{        exec-\/>get\_master(), comm.size(),}
+\DoxyCodeLine{        static\_cast<GlobalIndexType>(num\_rows)));}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \mbox{\hyperlink{structgko_1_1matrix__data}{gko::matrix\_data<ValueType, GlobalIndexType>}} A\_data;}
+\DoxyCodeLine{    \mbox{\hyperlink{structgko_1_1matrix__data}{gko::matrix\_data<ValueType, GlobalIndexType>}} b\_data;}
+\DoxyCodeLine{    \mbox{\hyperlink{structgko_1_1matrix__data}{gko::matrix\_data<ValueType, GlobalIndexType>}} x\_data;}
+\DoxyCodeLine{    A\_data.\mbox{\hyperlink{structgko_1_1matrix__data_a30716bd9e39a7beed52fc56d737fc07b}{size}} = \{num\_rows, num\_rows\};}
+\DoxyCodeLine{    b\_data.\mbox{\hyperlink{structgko_1_1matrix__data_a30716bd9e39a7beed52fc56d737fc07b}{size}} = \{num\_rows, 1\};}
+\DoxyCodeLine{    x\_data.\mbox{\hyperlink{structgko_1_1matrix__data_a30716bd9e39a7beed52fc56d737fc07b}{size}} = \{num\_rows, 1\};}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} range\_start = partition-\/>get\_range\_bounds()[rank];}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} range\_end = partition-\/>get\_range\_bounds()[rank + 1];}
+\DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = range\_start; i < range\_end; i++) \{}
+\DoxyCodeLine{        \textcolor{keywordflow}{if} (i > 0) \{}
+\DoxyCodeLine{            A\_data.\mbox{\hyperlink{structgko_1_1matrix__data_a4f6be92270fa96bccdc502c83d248dc0}{nonzeros}}.emplace\_back(i, i -\/ 1, -\/1);}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{        A\_data.\mbox{\hyperlink{structgko_1_1matrix__data_a4f6be92270fa96bccdc502c83d248dc0}{nonzeros}}.emplace\_back(i, i, 2);}
+\DoxyCodeLine{        \textcolor{keywordflow}{if} (i < grid\_dim -\/ 1) \{}
+\DoxyCodeLine{            A\_data.\mbox{\hyperlink{structgko_1_1matrix__data_a4f6be92270fa96bccdc502c83d248dc0}{nonzeros}}.emplace\_back(i, i + 1, -\/1);}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{        b\_data.\mbox{\hyperlink{structgko_1_1matrix__data_a4f6be92270fa96bccdc502c83d248dc0}{nonzeros}}.emplace\_back(i, 0, std::sin(i * 0.01));}
+\DoxyCodeLine{        x\_data.\mbox{\hyperlink{structgko_1_1matrix__data_a4f6be92270fa96bccdc502c83d248dc0}{nonzeros}}.emplace\_back(i, 0, gko::zero<ValueType>());}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    comm.synchronize();}
+\DoxyCodeLine{    ValueType t\_init\_end = \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a508f97387781bb32dd2c7616dee1a786}{gko::experimental::mpi::get\_walltime}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{auto} A\_host = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(dist\_mtx::create(exec-\/>get\_master(), comm));}
+\DoxyCodeLine{    \textcolor{keyword}{auto} x\_host = dist\_vec::create(exec-\/>get\_master(), comm);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} b\_host = dist\_vec::create(exec-\/>get\_master(), comm);}
+\DoxyCodeLine{    A\_host-\/>read\_distributed(A\_data, partition);}
+\DoxyCodeLine{    b\_host-\/>read\_distributed(b\_data, partition);}
+\DoxyCodeLine{    x\_host-\/>read\_distributed(x\_data, partition);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} A = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(dist\_mtx::create(exec, comm));}
+\DoxyCodeLine{    \textcolor{keyword}{auto} x = dist\_vec::create(exec, comm);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} b = dist\_vec::create(exec, comm);}
+\DoxyCodeLine{    A-\/>copy\_from(A\_host);}
+\DoxyCodeLine{    b-\/>copy\_from(b\_host);}
+\DoxyCodeLine{    x-\/>copy\_from(x\_host);}
+\DoxyCodeLine{}
+\DoxyCodeLine{    comm.synchronize();}
+\DoxyCodeLine{    ValueType t\_read\_setup\_end = \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a508f97387781bb32dd2c7616dee1a786}{gko::experimental::mpi::get\_walltime}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{auto} local\_solver = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(bj::build().on(exec));}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} reduction\_factor\{1e-\/8\};}
+\DoxyCodeLine{    std::shared\_ptr<const gko::log::Convergence<ValueType>> logger =}
+\DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1log_1_1Convergence_aa67955ea9d1d18f15f0330d12b93d330}{gko::log::Convergence<ValueType>::create}}();}
+\DoxyCodeLine{    \textcolor{keyword}{auto} Ainv = solver::build()}
+\DoxyCodeLine{                    .with\_preconditioner(}
+\DoxyCodeLine{                        schwarz::build().with\_local\_solver(local\_solver))}
+\DoxyCodeLine{                    .with\_criteria(}
+\DoxyCodeLine{                        gko::stop::Iteration::build().with\_max\_iters(num\_iters),}
+\DoxyCodeLine{                        \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                            .with\_reduction\_factor(reduction\_factor))}
+\DoxyCodeLine{                    .on(exec)}
+\DoxyCodeLine{                    -\/>generate(A);}
+\DoxyCodeLine{    Ainv-\/>add\_logger(logger);}
+\DoxyCodeLine{}
+\DoxyCodeLine{    comm.synchronize();}
+\DoxyCodeLine{    ValueType t\_solver\_generate\_end = \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a508f97387781bb32dd2c7616dee1a786}{gko::experimental::mpi::get\_walltime}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{    Ainv-\/>apply(b, x);}
+\DoxyCodeLine{}
+\DoxyCodeLine{    comm.synchronize();}
+\DoxyCodeLine{    ValueType t\_end = \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a508f97387781bb32dd2c7616dee1a786}{gko::experimental::mpi::get\_walltime}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{auto} res\_norm = gko::as<vec>(logger-\/>get\_residual\_norm());}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (comm.rank() == 0) \{}
+\DoxyCodeLine{        std::cout << \textcolor{stringliteral}{"\(\backslash\)nNum rows in matrix: "} << num\_rows}
+\DoxyCodeLine{                  << \textcolor{stringliteral}{"\(\backslash\)nNum ranks: "} << comm.size()}
+\DoxyCodeLine{                  << \textcolor{stringliteral}{"\(\backslash\)nFinal Res norm: "} << *res\_norm-\/>get\_const\_values()}
+\DoxyCodeLine{                  << \textcolor{stringliteral}{"\(\backslash\)nIteration count: "} << logger-\/>get\_num\_iterations()}
+\DoxyCodeLine{                  << \textcolor{stringliteral}{"\(\backslash\)nInit time: "} << t\_init\_end -\/ t\_init}
+\DoxyCodeLine{                  << \textcolor{stringliteral}{"\(\backslash\)nRead time: "} << t\_read\_setup\_end -\/ t\_init}
+\DoxyCodeLine{                  << \textcolor{stringliteral}{"\(\backslash\)nSolver generate time: "} << t\_solver\_generate\_end -\/ t\_read\_setup\_end}
+\DoxyCodeLine{                  << \textcolor{stringliteral}{"\(\backslash\)nSolver apply time: "} << t\_end -\/ t\_solver\_generate\_end}
+\DoxyCodeLine{                  << \textcolor{stringliteral}{"\(\backslash\)nTotal time: "} << t\_end -\/ t\_init}
+\DoxyCodeLine{                  << std::endl;}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{\}}
+\end{DoxyCodeInclude}
+ 

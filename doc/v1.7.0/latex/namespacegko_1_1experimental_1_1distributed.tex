@@ -1,0 +1,252 @@
+\hypertarget{namespacegko_1_1experimental_1_1distributed}{}\doxysection{gko\+::experimental\+::distributed Namespace Reference}
+\label{namespacegko_1_1experimental_1_1distributed}\index{gko::experimental::distributed@{gko::experimental::distributed}}
+
+
+The distributed namespace.  
+
+
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_1_1preconditioner}{preconditioner}}
+\begin{DoxyCompactList}\small\item\em The Preconditioner namespace. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1DistributedBase}{Distributed\+Base}}
+\begin{DoxyCompactList}\small\item\em A base class for distributed objects. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}}
+\begin{DoxyCompactList}\small\item\em The \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}} class defines a (M\+P\+I-\/)distributed matrix. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{Partition}}
+\begin{DoxyCompactList}\small\item\em Represents a partition of a range of indices \mbox{[}0, size) into a disjoint set of parts. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{Vector}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{Vector}} is a format which explicitly stores (multiple) distributed column vectors in a dense storage format. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a5f06060f58c28612829ebc8ab5bc6511}{comm\+\_\+index\+\_\+type}} = int
+\begin{DoxyCompactList}\small\item\em Index type for enumerating processes in a distributed application. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Value\+Type $>$ }\\detail\+::temporary\+\_\+conversion$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{experimental\+::distributed\+::\+Vector}}$<$ Value\+Type $>$ $>$ \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a5352c1035799170c7b28d9b68fb062a1}{make\+\_\+temporary\+\_\+conversion}} (\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$matrix)
+\begin{DoxyCompactList}\small\item\em Convert the given \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} from experimental\+::distributed\+::\+Vector$<$...$>$ to experimental\+::distributed\+::\+Vector$<$\+Value\+Type$>$. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Value\+Type $>$ }\\detail\+::temporary\+\_\+conversion$<$ const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{experimental\+::distributed\+::\+Vector}}$<$ Value\+Type $>$ $>$ \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_adb6757491deb94230274c72e012de2a1}{make\+\_\+temporary\+\_\+conversion}} (const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$matrix)
+\begin{DoxyCompactList}\small\item\em Convert the given \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} from experimental\+::distributed\+::\+Vector$<$...$>$ to experimental\+::distributed\+::\+Vector$<$\+Value\+Type$>$. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Value\+Type , typename Function , typename... Args$>$ }\\void \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_ae834447464baacc73ee8d2bc6a0d61a0}{precision\+\_\+dispatch}} (Function fn, Args $\ast$... linops)
+\begin{DoxyCompactList}\small\item\em Calls the given function with each given argument \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} temporarily converted into experimental\+::distributed\+::\+Vector$<$\+Value\+Type$>$ as parameters. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Value\+Type , typename Function $>$ }\\void \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a6348d5cfc6451aa9f12509e5658de943}{precision\+\_\+dispatch\+\_\+real\+\_\+complex}} (Function fn, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$in, \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$out)
+\begin{DoxyCompactList}\small\item\em Calls the given function with the given Lin\+Ops temporarily converted to experimental\+::distributed\+::\+Vector$<$\+Value\+Type$>$$\ast$ as parameters. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Value\+Type , typename Function $>$ }\\void \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a87ee066b077fed30ab6e2da949faef6e}{precision\+\_\+dispatch\+\_\+real\+\_\+complex}} (Function fn, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$alpha, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$in, \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$out)
+\begin{DoxyCompactList}\small\item\em Calls the given function with the given Lin\+Ops temporarily converted to experimental\+::distributed\+::\+Vector$<$\+Value\+Type$>$$\ast$ as parameters. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Value\+Type , typename Function $>$ }\\void \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a76b1f78aad396f2a87ae070e0b11c1f3}{precision\+\_\+dispatch\+\_\+real\+\_\+complex}} (Function fn, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$alpha, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$in, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$beta, \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$out)
+\begin{DoxyCompactList}\small\item\em Calls the given function with the given Lin\+Ops temporarily converted to experimental\+::distributed\+::\+Vector$<$\+Value\+Type$>$$\ast$ as parameters. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Local\+Index\+Type , typename Global\+Index\+Type $>$ }\\std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{Partition}}$<$ Local\+Index\+Type, Global\+Index\+Type $>$ $>$ \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a7ec42d4068b89c36be8098b0edeeef1e}{build\+\_\+partition\+\_\+from\+\_\+local\+\_\+range}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}} comm, \mbox{\hyperlink{structgko_1_1span}{span}} local\+\_\+range)
+\begin{DoxyCompactList}\small\item\em Builds a partition from a local range. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Local\+Index\+Type , typename Global\+Index\+Type $>$ }\\std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{Partition}}$<$ Local\+Index\+Type, Global\+Index\+Type $>$ $>$ \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a77de4e471064605da5953340f66be48e}{build\+\_\+partition\+\_\+from\+\_\+local\+\_\+size}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}} comm, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} local\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Builds a partition from a local size. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The distributed namespace. 
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{namespacegko_1_1experimental_1_1distributed_a5f06060f58c28612829ebc8ab5bc6511}\label{namespacegko_1_1experimental_1_1distributed_a5f06060f58c28612829ebc8ab5bc6511}} 
+\index{gko::experimental::distributed@{gko::experimental::distributed}!comm\_index\_type@{comm\_index\_type}}
+\index{comm\_index\_type@{comm\_index\_type}!gko::experimental::distributed@{gko::experimental::distributed}}
+\doxysubsubsection{\texorpdfstring{comm\_index\_type}{comm\_index\_type}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a5f06060f58c28612829ebc8ab5bc6511}{gko\+::experimental\+::distributed\+::comm\+\_\+index\+\_\+type}} = typedef int}
+
+
+
+Index type for enumerating processes in a distributed application. 
+
+Conforms to the M\+PI C interface of e.\+g. M\+PI rank or size 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacegko_1_1experimental_1_1distributed_a7ec42d4068b89c36be8098b0edeeef1e}\label{namespacegko_1_1experimental_1_1distributed_a7ec42d4068b89c36be8098b0edeeef1e}} 
+\index{gko::experimental::distributed@{gko::experimental::distributed}!build\_partition\_from\_local\_range@{build\_partition\_from\_local\_range}}
+\index{build\_partition\_from\_local\_range@{build\_partition\_from\_local\_range}!gko::experimental::distributed@{gko::experimental::distributed}}
+\doxysubsubsection{\texorpdfstring{build\_partition\_from\_local\_range()}{build\_partition\_from\_local\_range()}}
+{\footnotesize\ttfamily template$<$typename Local\+Index\+Type , typename Global\+Index\+Type $>$ \\
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{Partition}}$<$Local\+Index\+Type, Global\+Index\+Type$>$ $>$ gko\+::experimental\+::distributed\+::build\+\_\+partition\+\_\+from\+\_\+local\+\_\+range (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}}}]{comm,  }\item[{\mbox{\hyperlink{structgko_1_1span}{span}}}]{local\+\_\+range }\end{DoxyParamCaption})}
+
+
+
+Builds a partition from a local range. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & the \mbox{\hyperlink{classgko_1_1Executor}{Executor}} on which the partition should be built. \\
+\hline
+{\em comm} & the communicator used to determine the global partition. \\
+\hline
+{\em local\+\_\+range} & the start and end indices of the local range.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+This throws, if the resulting partition would contain gaps. That means that for a partition of size {\ttfamily n} every local range {\ttfamily r\+\_\+i = \mbox{[}s\+\_\+i, e\+\_\+i)} either {\ttfamily s\+\_\+i != 0} and another local range {\ttfamily r\+\_\+j = \mbox{[}s\+\_\+j, e\+\_\+j = s\+\_\+i)} exists, or {\ttfamily e\+\_\+i != n} and another local range {\ttfamily r\+\_\+j = \mbox{[}s\+\_\+j = e\+\_\+i, e\+\_\+j)} exists.
+\end{DoxyWarning}
+\begin{DoxyReturn}{Returns}
+a \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{Partition}} where each range has the individual local\+\_\+start and local\+\_\+ends. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegko_1_1experimental_1_1distributed_a77de4e471064605da5953340f66be48e}\label{namespacegko_1_1experimental_1_1distributed_a77de4e471064605da5953340f66be48e}} 
+\index{gko::experimental::distributed@{gko::experimental::distributed}!build\_partition\_from\_local\_size@{build\_partition\_from\_local\_size}}
+\index{build\_partition\_from\_local\_size@{build\_partition\_from\_local\_size}!gko::experimental::distributed@{gko::experimental::distributed}}
+\doxysubsubsection{\texorpdfstring{build\_partition\_from\_local\_size()}{build\_partition\_from\_local\_size()}}
+{\footnotesize\ttfamily template$<$typename Local\+Index\+Type , typename Global\+Index\+Type $>$ \\
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{Partition}}$<$Local\+Index\+Type, Global\+Index\+Type$>$ $>$ gko\+::experimental\+::distributed\+::build\+\_\+partition\+\_\+from\+\_\+local\+\_\+size (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}}}]{comm,  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{local\+\_\+size }\end{DoxyParamCaption})}
+
+
+
+Builds a partition from a local size. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & the \mbox{\hyperlink{classgko_1_1Executor}{Executor}} on which the partition should be built. \\
+\hline
+{\em comm} & the communicator used to determine the global partition. \\
+\hline
+{\em local\+\_\+range} & the number of the locally owned indices\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{Partition}} where each range has the specified local size. More specifically, if this is called on process i with local\+\_\+size {\ttfamily s\+\_\+i}, then the range {\ttfamily i} has size {\ttfamily s\+\_\+i}, and range {\ttfamily r\+\_\+i = \mbox{[}start, start + s\+\_\+i)}, where {\ttfamily start = sum\+\_\+j$^\wedge$(i-\/1) s\+\_\+j}. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegko_1_1experimental_1_1distributed_adb6757491deb94230274c72e012de2a1}\label{namespacegko_1_1experimental_1_1distributed_adb6757491deb94230274c72e012de2a1}} 
+\index{gko::experimental::distributed@{gko::experimental::distributed}!make\_temporary\_conversion@{make\_temporary\_conversion}}
+\index{make\_temporary\_conversion@{make\_temporary\_conversion}!gko::experimental::distributed@{gko::experimental::distributed}}
+\doxysubsubsection{\texorpdfstring{make\_temporary\_conversion()}{make\_temporary\_conversion()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type $>$ \\
+detail\+::temporary\+\_\+conversion$<$const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{experimental\+::distributed\+::\+Vector}}$<$Value\+Type$>$ $>$ gko\+::experimental\+::distributed\+::make\+\_\+temporary\+\_\+conversion (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{matrix }\end{DoxyParamCaption})}
+
+
+
+Convert the given \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} from experimental\+::distributed\+::\+Vector$<$...$>$ to experimental\+::distributed\+::\+Vector$<$\+Value\+Type$>$. 
+
+The conversion tries to convert the input \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} to all Dense types with value type recursively reachable by next\+\_\+precision$<$...$>$ starting from the Value\+Type template parameter. This means that all real-\/to-\/real and complex-\/to-\/complex conversions for default precisions are being considered. If the input matrix is non-\/const, the contents of the modified converted object will be converted back to the input matrix when the returned object is destroyed. This may lead to a loss of precision!
+
+
+\begin{DoxyParams}{Parameters}
+{\em matrix} & the input matrix which is supposed to be converted. It is wrapped unchanged if it is already of type experimental\+::distributed\+::\+Vector$<$\+Value\+Type$>$, otherwise it will be converted to this type if possible.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a detail\+::temporary\+\_\+conversion pointing to the (potentially converted) object.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \mbox{\hyperlink{classgko_1_1NotSupported}{Not\+Supported}}} & if the input matrix cannot be converted to experimental\+::distributed\+::\+Vector$<$\+Value\+Type$>$\\
+\hline
+\end{DoxyExceptions}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Value\+Type} & the value type into whose associated \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{experimental\+::distributed\+::\+Vector}} type to convert the input \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}. \\
+\hline
+\end{DoxyTemplParams}
+\mbox{\Hypertarget{namespacegko_1_1experimental_1_1distributed_a5352c1035799170c7b28d9b68fb062a1}\label{namespacegko_1_1experimental_1_1distributed_a5352c1035799170c7b28d9b68fb062a1}} 
+\index{gko::experimental::distributed@{gko::experimental::distributed}!make\_temporary\_conversion@{make\_temporary\_conversion}}
+\index{make\_temporary\_conversion@{make\_temporary\_conversion}!gko::experimental::distributed@{gko::experimental::distributed}}
+\doxysubsubsection{\texorpdfstring{make\_temporary\_conversion()}{make\_temporary\_conversion()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type $>$ \\
+detail\+::temporary\+\_\+conversion$<$\mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{experimental\+::distributed\+::\+Vector}}$<$Value\+Type$>$ $>$ gko\+::experimental\+::distributed\+::make\+\_\+temporary\+\_\+conversion (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{matrix }\end{DoxyParamCaption})}
+
+
+
+Convert the given \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} from experimental\+::distributed\+::\+Vector$<$...$>$ to experimental\+::distributed\+::\+Vector$<$\+Value\+Type$>$. 
+
+The conversion tries to convert the input \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} to all Dense types with value type recursively reachable by next\+\_\+precision$<$...$>$ starting from the Value\+Type template parameter. This means that all real-\/to-\/real and complex-\/to-\/complex conversions for default precisions are being considered. If the input matrix is non-\/const, the contents of the modified converted object will be converted back to the input matrix when the returned object is destroyed. This may lead to a loss of precision!
+
+
+\begin{DoxyParams}{Parameters}
+{\em matrix} & the input matrix which is supposed to be converted. It is wrapped unchanged if it is already of type experimental\+::distributed\+::\+Vector$<$\+Value\+Type$>$, otherwise it will be converted to this type if possible.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a detail\+::temporary\+\_\+conversion pointing to the (potentially converted) object.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \mbox{\hyperlink{classgko_1_1NotSupported}{Not\+Supported}}} & if the input matrix cannot be converted to experimental\+::distributed\+::\+Vector$<$\+Value\+Type$>$\\
+\hline
+\end{DoxyExceptions}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Value\+Type} & the value type into whose associated \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{experimental\+::distributed\+::\+Vector}} type to convert the input \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}. \\
+\hline
+\end{DoxyTemplParams}
+\mbox{\Hypertarget{namespacegko_1_1experimental_1_1distributed_ae834447464baacc73ee8d2bc6a0d61a0}\label{namespacegko_1_1experimental_1_1distributed_ae834447464baacc73ee8d2bc6a0d61a0}} 
+\index{gko::experimental::distributed@{gko::experimental::distributed}!precision\_dispatch@{precision\_dispatch}}
+\index{precision\_dispatch@{precision\_dispatch}!gko::experimental::distributed@{gko::experimental::distributed}}
+\doxysubsubsection{\texorpdfstring{precision\_dispatch()}{precision\_dispatch()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type , typename Function , typename... Args$>$ \\
+void gko\+::experimental\+::distributed\+::precision\+\_\+dispatch (\begin{DoxyParamCaption}\item[{Function}]{fn,  }\item[{Args $\ast$...}]{linops }\end{DoxyParamCaption})}
+
+
+
+Calls the given function with each given argument \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} temporarily converted into experimental\+::distributed\+::\+Vector$<$\+Value\+Type$>$ as parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fn} & the given function. It will be passed one (potentially const) experimental\+::distributed\+::\+Vector$<$\+Value\+Type$>$$\ast$ parameter per parameter in the parameter pack {\ttfamily linops}. \\
+\hline
+{\em linops} & the given arguments to be converted and passed on to fn.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Value\+Type} & the value type to use for the parameters of {\ttfamily fn}. \\
+\hline
+{\em Function} & the function pointer, lambda or other functor type to call with the converted arguments. \\
+\hline
+{\em Args} & the argument type list. \\
+\hline
+\end{DoxyTemplParams}
+\mbox{\Hypertarget{namespacegko_1_1experimental_1_1distributed_a76b1f78aad396f2a87ae070e0b11c1f3}\label{namespacegko_1_1experimental_1_1distributed_a76b1f78aad396f2a87ae070e0b11c1f3}} 
+\index{gko::experimental::distributed@{gko::experimental::distributed}!precision\_dispatch\_real\_complex@{precision\_dispatch\_real\_complex}}
+\index{precision\_dispatch\_real\_complex@{precision\_dispatch\_real\_complex}!gko::experimental::distributed@{gko::experimental::distributed}}
+\doxysubsubsection{\texorpdfstring{precision\_dispatch\_real\_complex()}{precision\_dispatch\_real\_complex()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type , typename Function $>$ \\
+void gko\+::experimental\+::distributed\+::precision\+\_\+dispatch\+\_\+real\+\_\+complex (\begin{DoxyParamCaption}\item[{Function}]{fn,  }\item[{const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{alpha,  }\item[{const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{in,  }\item[{const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{beta,  }\item[{\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{out }\end{DoxyParamCaption})}
+
+
+
+Calls the given function with the given Lin\+Ops temporarily converted to experimental\+::distributed\+::\+Vector$<$\+Value\+Type$>$$\ast$ as parameters. 
+
+If Value\+Type is real and both input vectors are complex, uses experimental\+::distributed\+::\+Vector\+::get\+\_\+real\+\_\+view() to convert them into real matrices after precision conversion.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_ae834447464baacc73ee8d2bc6a0d61a0}{precision\+\_\+dispatch()}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{namespacegko_1_1experimental_1_1distributed_a87ee066b077fed30ab6e2da949faef6e}\label{namespacegko_1_1experimental_1_1distributed_a87ee066b077fed30ab6e2da949faef6e}} 
+\index{gko::experimental::distributed@{gko::experimental::distributed}!precision\_dispatch\_real\_complex@{precision\_dispatch\_real\_complex}}
+\index{precision\_dispatch\_real\_complex@{precision\_dispatch\_real\_complex}!gko::experimental::distributed@{gko::experimental::distributed}}
+\doxysubsubsection{\texorpdfstring{precision\_dispatch\_real\_complex()}{precision\_dispatch\_real\_complex()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type , typename Function $>$ \\
+void gko\+::experimental\+::distributed\+::precision\+\_\+dispatch\+\_\+real\+\_\+complex (\begin{DoxyParamCaption}\item[{Function}]{fn,  }\item[{const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{alpha,  }\item[{const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{in,  }\item[{\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{out }\end{DoxyParamCaption})}
+
+
+
+Calls the given function with the given Lin\+Ops temporarily converted to experimental\+::distributed\+::\+Vector$<$\+Value\+Type$>$$\ast$ as parameters. 
+
+If Value\+Type is real and both input vectors are complex, uses experimental\+::distributed\+::\+Vector\+::get\+\_\+real\+\_\+view() to convert them into real matrices after precision conversion.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_ae834447464baacc73ee8d2bc6a0d61a0}{precision\+\_\+dispatch()}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{namespacegko_1_1experimental_1_1distributed_a6348d5cfc6451aa9f12509e5658de943}\label{namespacegko_1_1experimental_1_1distributed_a6348d5cfc6451aa9f12509e5658de943}} 
+\index{gko::experimental::distributed@{gko::experimental::distributed}!precision\_dispatch\_real\_complex@{precision\_dispatch\_real\_complex}}
+\index{precision\_dispatch\_real\_complex@{precision\_dispatch\_real\_complex}!gko::experimental::distributed@{gko::experimental::distributed}}
+\doxysubsubsection{\texorpdfstring{precision\_dispatch\_real\_complex()}{precision\_dispatch\_real\_complex()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type , typename Function $>$ \\
+void gko\+::experimental\+::distributed\+::precision\+\_\+dispatch\+\_\+real\+\_\+complex (\begin{DoxyParamCaption}\item[{Function}]{fn,  }\item[{const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{in,  }\item[{\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{out }\end{DoxyParamCaption})}
+
+
+
+Calls the given function with the given Lin\+Ops temporarily converted to experimental\+::distributed\+::\+Vector$<$\+Value\+Type$>$$\ast$ as parameters. 
+
+If Value\+Type is real and both input vectors are complex, uses experimental\+::distributed\+::\+Vector\+::get\+\_\+real\+\_\+view() to convert them into real matrices after precision conversion.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_ae834447464baacc73ee8d2bc6a0d61a0}{precision\+\_\+dispatch()}} 
+\end{DoxySeeAlso}

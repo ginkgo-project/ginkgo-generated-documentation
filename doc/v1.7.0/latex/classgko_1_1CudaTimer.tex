@@ -1,0 +1,83 @@
+\hypertarget{classgko_1_1CudaTimer}{}\doxysection{gko\+::Cuda\+Timer Class Reference}
+\label{classgko_1_1CudaTimer}\index{gko::CudaTimer@{gko::CudaTimer}}
+
+
+A timer using events for timing on a \mbox{\hyperlink{classgko_1_1CudaExecutor}{Cuda\+Executor}}.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/base/timer.\+hpp$>$}
+
+
+
+Inheritance diagram for gko\+::Cuda\+Timer\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=174pt]{classgko_1_1CudaTimer__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for gko\+::Cuda\+Timer\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=174pt]{classgko_1_1CudaTimer__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1CudaTimer_ad3ace2bda308a6eca1455a87e27b6500}\label{classgko_1_1CudaTimer_ad3ace2bda308a6eca1455a87e27b6500}} 
+void \mbox{\hyperlink{classgko_1_1CudaTimer_ad3ace2bda308a6eca1455a87e27b6500}{record}} (\mbox{\hyperlink{classgko_1_1time__point}{time\+\_\+point}} \&time) override
+\begin{DoxyCompactList}\small\item\em Records a time point at the current time. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1CudaTimer_a9b555245710892bad0ec3c092255530a}\label{classgko_1_1CudaTimer_a9b555245710892bad0ec3c092255530a}} 
+void \mbox{\hyperlink{classgko_1_1CudaTimer_a9b555245710892bad0ec3c092255530a}{wait}} (\mbox{\hyperlink{classgko_1_1time__point}{time\+\_\+point}} \&time) override
+\begin{DoxyCompactList}\small\item\em Waits until all kernels in-\/process when recording the time point are finished. \end{DoxyCompactList}\item 
+std\+::chrono\+::nanoseconds \mbox{\hyperlink{classgko_1_1CudaTimer_ab338a41567ae37e0339564b3e2b5333b}{difference\+\_\+async}} (const \mbox{\hyperlink{classgko_1_1time__point}{time\+\_\+point}} \&start, const \mbox{\hyperlink{classgko_1_1time__point}{time\+\_\+point}} \&stop) override
+\begin{DoxyCompactList}\small\item\em Computes the difference between the two time points in nanoseconds. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1CudaTimer_a12af517e9e64d277e4deea1b9e245ebd}\label{classgko_1_1CudaTimer_a12af517e9e64d277e4deea1b9e245ebd}} 
+{\bfseries Cuda\+Timer} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1CudaExecutor}{Cuda\+Executor}} $>$ exec)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+A timer using events for timing on a \mbox{\hyperlink{classgko_1_1CudaExecutor}{Cuda\+Executor}}. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1CudaTimer_ab338a41567ae37e0339564b3e2b5333b}\label{classgko_1_1CudaTimer_ab338a41567ae37e0339564b3e2b5333b}} 
+\index{gko::CudaTimer@{gko::CudaTimer}!difference\_async@{difference\_async}}
+\index{difference\_async@{difference\_async}!gko::CudaTimer@{gko::CudaTimer}}
+\doxysubsubsection{\texorpdfstring{difference\_async()}{difference\_async()}}
+{\footnotesize\ttfamily std\+::chrono\+::nanoseconds gko\+::\+Cuda\+Timer\+::difference\+\_\+async (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1time__point}{time\+\_\+point}} \&}]{start,  }\item[{const \mbox{\hyperlink{classgko_1_1time__point}{time\+\_\+point}} \&}]{stop }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Computes the difference between the two time points in nanoseconds. 
+
+This asynchronous version does not synchronize itself, so the time points need to have been synchronized with, i.\+e. {\ttfamily timer-\/$>$wait(stop)} needs to have been called. The version is intended for more advanced users who want to measure the overhead of timing functionality separately.
+
+
+\begin{DoxyParams}{Parameters}
+{\em start} & the first time point (earlier) \\
+\hline
+{\em end} & the second time point (later)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the difference between the time points in nanoseconds. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classgko_1_1Timer_a9f6ea65e99c2e65d67803a7da3f4d8a1}{gko\+::\+Timer}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/base/timer.\+hpp\end{DoxyCompactItemize}
