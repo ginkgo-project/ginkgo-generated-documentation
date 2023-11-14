@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1068994150 branch based on develop. Ginkgo version 1.8.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1072173833 branch based on develop. Ginkgo version 1.8.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -99,28 +99,7 @@ $(function() {
 <p><a class="anchor" id="Notes"></a></p><h3>Notes </h3>
 <p>If this example is built as part of Ginkgo, it is advised to configure Ginkgo with <code>-DGINKGO_WITH_CCACHE=OFF</code> to prevent incompabilities with Kokkos' compiler wrapper for <code>nvcc</code>.</p>
 <p><a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;map&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line"><span class="preprocessor">#include &lt;omp.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;Kokkos_Core.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;ginkgo/ginkgo.hpp&gt;</span></div>
-</div><!-- fragment --><p>Creates a stencil matrix in CSR format for the given number of discretization points.</p>
-<div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType, <span class="keyword">typename</span> IndexType&gt;</div>
-<div class="line"><span class="keywordtype">void</span> generate_stencil_matrix(<a class="code" href="classgko_1_1matrix_1_1Csr.html">gko::matrix::Csr&lt;ValueType, IndexType&gt;</a>* matrix)</div>
-<div class="line">{</div>
-<div class="line">    <span class="keyword">auto</span> exec = matrix-&gt;<a class="code" href="classgko_1_1PolymorphicObject.html#ab40586bff071b7f11c2cf6b5cbf598eb">get_executor</a>();</div>
-<div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> discretization_points = matrix-&gt;<a class="code" href="classgko_1_1LinOp.html#a31b3c003388eb0b95393154f68c2b98d">get_size</a>()[0];</div>
-</div><!-- fragment --><p>Over-allocate storage for the matrix elements. Each row has 3 entries, except for the first and last one. To handle each row uniformly, we allocate space for 3x the number of rows.</p>
-<div class="fragment"><div class="line"><a class="code" href="classgko_1_1device__matrix__data.html">gko::device_matrix_data&lt;ValueType, IndexType&gt;</a> md(exec, matrix-&gt;<a class="code" href="classgko_1_1LinOp.html#a31b3c003388eb0b95393154f68c2b98d">get_size</a>(),</div>
-<div class="line">                                                 discretization_points * 3);</div>
-</div><!-- fragment --><p>Create Kokkos views on Ginkgo data.</p>
-<div class="fragment"><div class="line">Kokkos::View&lt;IndexType*&gt; v_row_idxs(md.get_row_idxs(), md.get_num_elems());</div>
-<div class="line">Kokkos::View&lt;IndexType*&gt; v_col_idxs(md.get_col_idxs(), md.get_num_elems());</div>
-<div class="line">Kokkos::View&lt;ValueType*&gt; v_values(md.get_values(), md.get_num_elems());</div>
-</div><!-- fragment --><p>Create the matrix entries. This also creates zero entries for the first and second row to handle all rows uniformly.</p>
+<p>Create the matrix entries. This also creates zero entries for the first and second row to handle all rows uniformly.</p>
 <div class="fragment"><div class="line">Kokkos::parallel_for(</div>
 <div class="line">    <span class="stringliteral">&quot;generate_stencil_matrix&quot;</span>, md.get_num_elems(), KOKKOS_LAMBDA(<span class="keywordtype">int</span> i) {</div>
 <div class="line">        <span class="keyword">const</span> ValueType coefs[] = {-1, 2, -1};</div>
@@ -273,38 +252,7 @@ $(function() {
 <div class="line">Solve complete.</div>
 <div class="line">The average relative error is 1.05488e-11</div>
 </div><!-- fragment --><p>The actual error depends on the used hardware. <a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
-<div class="fragment"><div class="line"><span class="comment">/*******************************&lt;GINKGO LICENSE&gt;******************************</span></div>
-<div class="line"><span class="comment">Copyright (c) 2017-2023, the Ginkgo authors</span></div>
-<div class="line"><span class="comment">All rights reserved.</span></div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment">Redistribution and use in source and binary forms, with or without</span></div>
-<div class="line"><span class="comment">modification, are permitted provided that the following conditions</span></div>
-<div class="line"><span class="comment">are met:</span></div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment">1. Redistributions of source code must retain the above copyright</span></div>
-<div class="line"><span class="comment">notice, this list of conditions and the following disclaimer.</span></div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment">2. Redistributions in binary form must reproduce the above copyright</span></div>
-<div class="line"><span class="comment">notice, this list of conditions and the following disclaimer in the</span></div>
-<div class="line"><span class="comment">documentation and/or other materials provided with the distribution.</span></div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment">3. Neither the name of the copyright holder nor the names of its</span></div>
-<div class="line"><span class="comment">contributors may be used to endorse or promote products derived from</span></div>
-<div class="line"><span class="comment">this software without specific prior written permission.</span></div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment">THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS</span></div>
-<div class="line"><span class="comment">IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED</span></div>
-<div class="line"><span class="comment">TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A</span></div>
-<div class="line"><span class="comment">PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT</span></div>
-<div class="line"><span class="comment">HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,</span></div>
-<div class="line"><span class="comment">SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT</span></div>
-<div class="line"><span class="comment">LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,</span></div>
-<div class="line"><span class="comment">DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY</span></div>
-<div class="line"><span class="comment">THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT</span></div>
-<div class="line"><span class="comment">(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span></div>
-<div class="line"><span class="comment">OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span></div>
-<div class="line"><span class="comment">******************************&lt;GINKGO LICENSE&gt;*******************************/</span></div>
-<div class="line"> </div>
+<div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;map&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;string&gt;</span></div>
@@ -477,23 +425,23 @@ $(function() {
 <div class="line">}</div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->
-<div class="ttc" id="aclassgko_1_1matrix_1_1Csr_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Csr.html">gko::matrix::Csr</a></div><div class="ttdoc">CSR is a matrix format which stores only the nonzero coefficients by compressing each row of the matr...</div><div class="ttdef"><b>Definition:</b> matrix.hpp:54</div></div>
-<div class="ttc" id="aclassgko_1_1matrix_1_1Dense_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Dense.html">gko::matrix::Dense</a></div><div class="ttdoc">Dense is a matrix format which explicitly stores all values of the matrix.</div><div class="ttdef"><b>Definition:</b> dense_cache.hpp:48</div></div>
+<div class="ttc" id="aclassgko_1_1matrix_1_1Csr_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Csr.html">gko::matrix::Csr</a></div><div class="ttdoc">CSR is a matrix format which stores only the nonzero coefficients by compressing each row of the matr...</div><div class="ttdef"><b>Definition:</b> matrix.hpp:26</div></div>
+<div class="ttc" id="aclassgko_1_1matrix_1_1Dense_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Dense.html">gko::matrix::Dense</a></div><div class="ttdoc">Dense is a matrix format which explicitly stores all values of the matrix.</div><div class="ttdef"><b>Definition:</b> dense_cache.hpp:20</div></div>
 <div class="ttc" id="aclassgko_1_1device__matrix__data_html_a8b58afc780989cfcba739829572fe7ab"><div class="ttname"><a href="classgko_1_1device__matrix__data.html#a8b58afc780989cfcba739829572fe7ab">gko::device_matrix_data::sum_duplicates</a></div><div class="ttdeci">void sum_duplicates()</div><div class="ttdoc">Sums up all duplicate entries pointing to the same non-zero location.</div></div>
 <div class="ttc" id="aclassgko_1_1HipExecutor_html_aa0701fe1303e03a8331da7e95008100d"><div class="ttname"><a href="classgko_1_1HipExecutor.html#aa0701fe1303e03a8331da7e95008100d">gko::HipExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; HipExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, bool device_reset, allocation_mode alloc_mode=default_hip_alloc_mode, CUstream_st *stream=nullptr)</div><div class="ttdoc">Creates a new HipExecutor.</div></div>
-<div class="ttc" id="aclassgko_1_1preconditioner_1_1Jacobi_html"><div class="ttname"><a href="classgko_1_1preconditioner_1_1Jacobi.html">gko::preconditioner::Jacobi</a></div><div class="ttdoc">A block-Jacobi preconditioner is a block-diagonal linear operator, obtained by inverting the diagonal...</div><div class="ttdef"><b>Definition:</b> jacobi.hpp:213</div></div>
-<div class="ttc" id="aclassgko_1_1stop_1_1ResidualNorm_html"><div class="ttname"><a href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm</a></div><div class="ttdoc">The ResidualNorm class is a stopping criterion which stops the iteration process when the actual resi...</div><div class="ttdef"><b>Definition:</b> residual_norm.hpp:138</div></div>
+<div class="ttc" id="aclassgko_1_1preconditioner_1_1Jacobi_html"><div class="ttname"><a href="classgko_1_1preconditioner_1_1Jacobi.html">gko::preconditioner::Jacobi</a></div><div class="ttdoc">A block-Jacobi preconditioner is a block-diagonal linear operator, obtained by inverting the diagonal...</div><div class="ttdef"><b>Definition:</b> jacobi.hpp:185</div></div>
+<div class="ttc" id="aclassgko_1_1stop_1_1ResidualNorm_html"><div class="ttname"><a href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm</a></div><div class="ttdoc">The ResidualNorm class is a stopping criterion which stops the iteration process when the actual resi...</div><div class="ttdef"><b>Definition:</b> residual_norm.hpp:110</div></div>
 <div class="ttc" id="astructgko_1_1dim_html"><div class="ttname"><a href="structgko_1_1dim.html">gko::dim&lt; 2 &gt;</a></div></div>
-<div class="ttc" id="aclassgko_1_1solver_1_1Cg_html"><div class="ttname"><a href="classgko_1_1solver_1_1Cg.html">gko::solver::Cg</a></div><div class="ttdoc">CG or the conjugate gradient method is an iterative type Krylov subspace method which is suitable for...</div><div class="ttdef"><b>Definition:</b> cg.hpp:74</div></div>
-<div class="ttc" id="anamespacegko_html_a3ce296f73db0ff398bdea6009a3a5c58"><div class="ttname"><a href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a></div><div class="ttdeci">detail::shared_type&lt; OwningPointer &gt; share(OwningPointer &amp;&amp;p)</div><div class="ttdoc">Marks the object pointed to by p as shared.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:254</div></div>
+<div class="ttc" id="aclassgko_1_1solver_1_1Cg_html"><div class="ttname"><a href="classgko_1_1solver_1_1Cg.html">gko::solver::Cg</a></div><div class="ttdoc">CG or the conjugate gradient method is an iterative type Krylov subspace method which is suitable for...</div><div class="ttdef"><b>Definition:</b> cg.hpp:46</div></div>
+<div class="ttc" id="anamespacegko_html_a3ce296f73db0ff398bdea6009a3a5c58"><div class="ttname"><a href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a></div><div class="ttdeci">detail::shared_type&lt; OwningPointer &gt; share(OwningPointer &amp;&amp;p)</div><div class="ttdoc">Marks the object pointed to by p as shared.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:226</div></div>
 <div class="ttc" id="aclassgko_1_1CudaExecutor_html_a6c423656c7c0eb53810cb77bb4a66d15"><div class="ttname"><a href="classgko_1_1CudaExecutor.html#a6c423656c7c0eb53810cb77bb4a66d15">gko::CudaExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; CudaExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, bool device_reset, allocation_mode alloc_mode=default_cuda_alloc_mode, CUstream_st *stream=nullptr)</div><div class="ttdoc">Creates a new CudaExecutor.</div></div>
 <div class="ttc" id="anamespacegko_1_1solver_html_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e"><div class="ttname"><a href="namespacegko_1_1solver.html#a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e">gko::solver::initial_guess_mode::rhs</a></div><div class="ttdoc">the input is right hand side</div></div>
-<div class="ttc" id="aclassgko_1_1OmpExecutor_html_a8930142a1913bcbcac4fb6c917f930d9"><div class="ttname"><a href="classgko_1_1OmpExecutor.html#a8930142a1913bcbcac4fb6c917f930d9">gko::OmpExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; OmpExecutor &gt; create(std::shared_ptr&lt; CpuAllocatorBase &gt; alloc=std::make_shared&lt; CpuAllocator &gt;())</div><div class="ttdoc">Creates a new OmpExecutor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1373</div></div>
-<div class="ttc" id="aclassgko_1_1matrix_1_1Dense_html_ab83c739c1b11abaecc3bfd89506f6c9c"><div class="ttname"><a href="classgko_1_1matrix_1_1Dense.html#ab83c739c1b11abaecc3bfd89506f6c9c">gko::matrix::Dense::get_const_values</a></div><div class="ttdeci">const value_type * get_const_values() const noexcept</div><div class="ttdoc">Returns a pointer to the array of values of the matrix.</div><div class="ttdef"><b>Definition:</b> dense.hpp:865</div></div>
-<div class="ttc" id="aclassgko_1_1PolymorphicObject_html_ab40586bff071b7f11c2cf6b5cbf598eb"><div class="ttname"><a href="classgko_1_1PolymorphicObject.html#ab40586bff071b7f11c2cf6b5cbf598eb">gko::PolymorphicObject::get_executor</a></div><div class="ttdeci">std::shared_ptr&lt; const Executor &gt; get_executor() const noexcept</div><div class="ttdoc">Returns the Executor of the object.</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:263</div></div>
-<div class="ttc" id="aclassgko_1_1LinOp_html_a31b3c003388eb0b95393154f68c2b98d"><div class="ttname"><a href="classgko_1_1LinOp.html#a31b3c003388eb0b95393154f68c2b98d">gko::LinOp::get_size</a></div><div class="ttdeci">const dim&lt; 2 &gt; &amp; get_size() const noexcept</div><div class="ttdoc">Returns the size of the operator.</div><div class="ttdef"><b>Definition:</b> lin_op.hpp:239</div></div>
-<div class="ttc" id="anamespacegko_html_afd46d554050c4ae90e84ea4fcd9a41f3"><div class="ttname"><a href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">gko::remove_complex</a></div><div class="ttdeci">typename detail::remove_complex_s&lt; T &gt;::type remove_complex</div><div class="ttdoc">Obtain the type which removed the complex of complex/scalar type or the template parameter of class b...</div><div class="ttdef"><b>Definition:</b> math.hpp:354</div></div>
-<div class="ttc" id="aclassgko_1_1device__matrix__data_html"><div class="ttname"><a href="classgko_1_1device__matrix__data.html">gko::device_matrix_data</a></div><div class="ttdoc">This type is a device-side equivalent to matrix_data.</div><div class="ttdef"><b>Definition:</b> device_matrix_data.hpp:63</div></div>
+<div class="ttc" id="aclassgko_1_1OmpExecutor_html_a8930142a1913bcbcac4fb6c917f930d9"><div class="ttname"><a href="classgko_1_1OmpExecutor.html#a8930142a1913bcbcac4fb6c917f930d9">gko::OmpExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; OmpExecutor &gt; create(std::shared_ptr&lt; CpuAllocatorBase &gt; alloc=std::make_shared&lt; CpuAllocator &gt;())</div><div class="ttdoc">Creates a new OmpExecutor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1345</div></div>
+<div class="ttc" id="aclassgko_1_1matrix_1_1Dense_html_ab83c739c1b11abaecc3bfd89506f6c9c"><div class="ttname"><a href="classgko_1_1matrix_1_1Dense.html#ab83c739c1b11abaecc3bfd89506f6c9c">gko::matrix::Dense::get_const_values</a></div><div class="ttdeci">const value_type * get_const_values() const noexcept</div><div class="ttdoc">Returns a pointer to the array of values of the matrix.</div><div class="ttdef"><b>Definition:</b> dense.hpp:837</div></div>
+<div class="ttc" id="aclassgko_1_1PolymorphicObject_html_ab40586bff071b7f11c2cf6b5cbf598eb"><div class="ttname"><a href="classgko_1_1PolymorphicObject.html#ab40586bff071b7f11c2cf6b5cbf598eb">gko::PolymorphicObject::get_executor</a></div><div class="ttdeci">std::shared_ptr&lt; const Executor &gt; get_executor() const noexcept</div><div class="ttdoc">Returns the Executor of the object.</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:235</div></div>
+<div class="ttc" id="aclassgko_1_1LinOp_html_a31b3c003388eb0b95393154f68c2b98d"><div class="ttname"><a href="classgko_1_1LinOp.html#a31b3c003388eb0b95393154f68c2b98d">gko::LinOp::get_size</a></div><div class="ttdeci">const dim&lt; 2 &gt; &amp; get_size() const noexcept</div><div class="ttdoc">Returns the size of the operator.</div><div class="ttdef"><b>Definition:</b> lin_op.hpp:211</div></div>
+<div class="ttc" id="anamespacegko_html_afd46d554050c4ae90e84ea4fcd9a41f3"><div class="ttname"><a href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">gko::remove_complex</a></div><div class="ttdeci">typename detail::remove_complex_s&lt; T &gt;::type remove_complex</div><div class="ttdoc">Obtain the type which removed the complex of complex/scalar type or the template parameter of class b...</div><div class="ttdef"><b>Definition:</b> math.hpp:326</div></div>
+<div class="ttc" id="aclassgko_1_1device__matrix__data_html"><div class="ttname"><a href="classgko_1_1device__matrix__data.html">gko::device_matrix_data</a></div><div class="ttdoc">This type is a device-side equivalent to matrix_data.</div><div class="ttdef"><b>Definition:</b> device_matrix_data.hpp:35</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Csr_html_ac4db41146ed3c3a8653b03d6b2c6c675"><div class="ttname"><a href="classgko_1_1matrix_1_1Csr.html#ac4db41146ed3c3a8653b03d6b2c6c675">gko::matrix::Csr::read</a></div><div class="ttdeci">void read(const mat_data &amp;data) override</div><div class="ttdoc">Reads a matrix from a matrix_data structure.</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

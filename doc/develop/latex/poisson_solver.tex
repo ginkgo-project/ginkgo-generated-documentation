@@ -30,37 +30,6 @@ The intention of the example is to show how Ginkgo can be used to build an appli
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include <map>}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include <string>}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include <vector>}}
-\end{DoxyCode}
-
-
-Creates a stencil matrix in C\+SR format for the given number of discretization points.
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType, \textcolor{keyword}{typename} IndexType>}
-\DoxyCodeLine{\textcolor{keywordtype}{void} generate\_stencil\_matrix(\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<ValueType, IndexType>}}* matrix)}
-\DoxyCodeLine{\{}
-\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} discretization\_points = matrix-\/>\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\_size}}()[0];}
-\DoxyCodeLine{    \textcolor{keyword}{auto} row\_ptrs = matrix-\/>\mbox{\hyperlink{classgko_1_1matrix_1_1Csr_a068e5158cf282fa977f0a137f8cd7f03}{get\_row\_ptrs}}();}
-\DoxyCodeLine{    \textcolor{keyword}{auto} col\_idxs = matrix-\/>\mbox{\hyperlink{classgko_1_1matrix_1_1Csr_a81c6294177a1be4873804c8a85a9fc64}{get\_col\_idxs}}();}
-\DoxyCodeLine{    \textcolor{keyword}{auto} values = matrix-\/>\mbox{\hyperlink{classgko_1_1matrix_1_1Csr_a929b0a194e6aeb1252b8e6781d162e83}{get\_values}}();}
-\DoxyCodeLine{    \textcolor{keywordtype}{int} pos = 0;}
-\DoxyCodeLine{    \textcolor{keyword}{const} ValueType coefs[] = \{-\/1, 2, -\/1\};}
-\DoxyCodeLine{    row\_ptrs[0] = pos;}
-\DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < discretization\_points; ++i) \{}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} ofs : \{-\/1, 0, 1\}) \{}
-\DoxyCodeLine{            \textcolor{keywordflow}{if} (0 <= i + ofs \&\& i + ofs < discretization\_points) \{}
-\DoxyCodeLine{                values[pos] = coefs[ofs + 1];}
-\DoxyCodeLine{                col\_idxs[pos] = i + ofs;}
-\DoxyCodeLine{                ++pos;}
-\DoxyCodeLine{            \}}
-\DoxyCodeLine{        \}}
-\DoxyCodeLine{        row\_ptrs[i + 1] = pos;}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
@@ -292,37 +261,6 @@ This is the expected output\+:
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{/*******************************<GINKGO LICENSE>******************************}}
-\DoxyCodeLine{\textcolor{comment}{Copyright (c) 2017-\/2023, the Ginkgo authors}}
-\DoxyCodeLine{\textcolor{comment}{All rights reserved.}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{Redistribution and use in source and binary forms, with or without}}
-\DoxyCodeLine{\textcolor{comment}{modification, are permitted provided that the following conditions}}
-\DoxyCodeLine{\textcolor{comment}{are met:}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{1. Redistributions of source code must retain the above copyright}}
-\DoxyCodeLine{\textcolor{comment}{notice, this list of conditions and the following disclaimer.}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{2. Redistributions in binary form must reproduce the above copyright}}
-\DoxyCodeLine{\textcolor{comment}{notice, this list of conditions and the following disclaimer in the}}
-\DoxyCodeLine{\textcolor{comment}{documentation and/or other materials provided with the distribution.}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{3. Neither the name of the copyright holder nor the names of its}}
-\DoxyCodeLine{\textcolor{comment}{contributors may be used to endorse or promote products derived from}}
-\DoxyCodeLine{\textcolor{comment}{this software without specific prior written permission.}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS}}
-\DoxyCodeLine{\textcolor{comment}{IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED}}
-\DoxyCodeLine{\textcolor{comment}{TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A}}
-\DoxyCodeLine{\textcolor{comment}{PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT}}
-\DoxyCodeLine{\textcolor{comment}{HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,}}
-\DoxyCodeLine{\textcolor{comment}{SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT}}
-\DoxyCodeLine{\textcolor{comment}{LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,}}
-\DoxyCodeLine{\textcolor{comment}{DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY}}
-\DoxyCodeLine{\textcolor{comment}{THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT}}
-\DoxyCodeLine{\textcolor{comment}{(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE}}
-\DoxyCodeLine{\textcolor{comment}{OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.}}
-\DoxyCodeLine{\textcolor{comment}{******************************<GINKGO LICENSE>*******************************/}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
 \DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}

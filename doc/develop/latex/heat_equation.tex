@@ -32,35 +32,6 @@ The intention of this example is to provide a mini-\/app showing matrix assembly
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{/ *****************************<DESCRIPTION>***********************************}
-\DoxyCodeLine{This example solves a 2D heat conduction equation}
-\DoxyCodeLine{}
-\DoxyCodeLine{    u : [0, d]\string^2 \(\backslash\)rightarrow R\(\backslash\)\(\backslash\)}
-\DoxyCodeLine{    \(\backslash\)partial\_t u = \(\backslash\)delta u + f}
-\DoxyCodeLine{}
-\DoxyCodeLine{with Dirichlet boundary conditions and given initial condition and}
-\DoxyCodeLine{constant-\/in-\/time source \textcolor{keyword}{function} f.}
-\DoxyCodeLine{}
-\DoxyCodeLine{The partial differential equation (PDE) is solved with a finite difference}
-\DoxyCodeLine{spatial discretization on an equidistant grid: For `n` grid points,}
-\DoxyCodeLine{and grid distance h = 1/n we \mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{write}}}
-\DoxyCodeLine{}
-\DoxyCodeLine{    u\_\{i,j\}\textcolor{stringliteral}{' = \(\backslash\)alpha (u\_\{i-\/1,j\} + u\_\{i+1,j\} + u\_\{i,j-\/1\} + u\_\{i,j+1\}}}
-\DoxyCodeLine{\textcolor{stringliteral}{                   -\/ 4 u\_\{i,j\}) / h\string^2}}
-\DoxyCodeLine{\textcolor{stringliteral}{               + f\_\{i,j\}}}
-\DoxyCodeLine{\textcolor{stringliteral}{}}
-\DoxyCodeLine{\textcolor{stringliteral}{We then build an implicit Euler integrator by discretizing with time step \(\backslash\)tau}}
-\DoxyCodeLine{\textcolor{stringliteral}{}}
-\DoxyCodeLine{\textcolor{stringliteral}{    (u\_\{i,j\}\string^\{k+1\} -\/ u\_\{i,j\}\string^k) / \(\backslash\)tau =}}
-\DoxyCodeLine{\textcolor{stringliteral}{    \(\backslash\)alpha (u\_\{i-\/1,j\}\string^\{k+1\} -\/ u\_\{i+1,j\}\string^\{k+1\}}}
-\DoxyCodeLine{\textcolor{stringliteral}{          + u\_\{i,j-\/1\}\string^\{k+1\} -\/ u\_\{i,j+1\}\string^\{k+1\} -\/ 4 u\_\{i,j\}\string^\{k+1\}) / h\string^2}}
-\DoxyCodeLine{\textcolor{stringliteral}{    + f\_\{i,j\}}}
-\DoxyCodeLine{\textcolor{stringliteral}{}}
-\DoxyCodeLine{\textcolor{stringliteral}{and solve the resulting linear system for  u\_\{\(\backslash\)cdot\}\string^\{k+1\} using Ginkgo'}s CG}
-\DoxyCodeLine{\mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}} preconditioned with an incomplete Cholesky factorization \textcolor{keywordflow}{for each} time}
-\DoxyCodeLine{step, occasionally writing the resulting grid values into a video file \textcolor{keyword}{using}}
-\DoxyCodeLine{OpenCV and a custom color mapping.}
-\DoxyCodeLine{}
 \DoxyCodeLine{The intention of \textcolor{keyword}{this} example is to provide a mini-\/app showing matrix assembly,}
 \DoxyCodeLine{vector initialization, \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}} setup and the use of Ginkgo in a more complex}
 \DoxyCodeLine{setting.}
@@ -395,37 +366,6 @@ The program will generate a video file named heat.\+mp4 and output the timestamp
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{/*******************************<GINKGO LICENSE>******************************}}
-\DoxyCodeLine{\textcolor{comment}{Copyright (c) 2017-\/2023, the Ginkgo authors}}
-\DoxyCodeLine{\textcolor{comment}{All rights reserved.}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{Redistribution and use in source and binary forms, with or without}}
-\DoxyCodeLine{\textcolor{comment}{modification, are permitted provided that the following conditions}}
-\DoxyCodeLine{\textcolor{comment}{are met:}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{1. Redistributions of source code must retain the above copyright}}
-\DoxyCodeLine{\textcolor{comment}{notice, this list of conditions and the following disclaimer.}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{2. Redistributions in binary form must reproduce the above copyright}}
-\DoxyCodeLine{\textcolor{comment}{notice, this list of conditions and the following disclaimer in the}}
-\DoxyCodeLine{\textcolor{comment}{documentation and/or other materials provided with the distribution.}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{3. Neither the name of the copyright holder nor the names of its}}
-\DoxyCodeLine{\textcolor{comment}{contributors may be used to endorse or promote products derived from}}
-\DoxyCodeLine{\textcolor{comment}{this software without specific prior written permission.}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS}}
-\DoxyCodeLine{\textcolor{comment}{IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED}}
-\DoxyCodeLine{\textcolor{comment}{TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A}}
-\DoxyCodeLine{\textcolor{comment}{PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT}}
-\DoxyCodeLine{\textcolor{comment}{HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,}}
-\DoxyCodeLine{\textcolor{comment}{SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT}}
-\DoxyCodeLine{\textcolor{comment}{LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,}}
-\DoxyCodeLine{\textcolor{comment}{DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY}}
-\DoxyCodeLine{\textcolor{comment}{THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT}}
-\DoxyCodeLine{\textcolor{comment}{(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE}}
-\DoxyCodeLine{\textcolor{comment}{OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.}}
-\DoxyCodeLine{\textcolor{comment}{******************************<GINKGO LICENSE>*******************************/}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{/*****************************<DESCRIPTION>***********************************}}
 \DoxyCodeLine{\textcolor{comment}{This example solves a 2D heat conduction equation}}
