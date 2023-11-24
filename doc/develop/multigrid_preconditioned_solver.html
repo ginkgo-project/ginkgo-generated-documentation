@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1083854573 branch based on develop. Ginkgo version 1.8.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1084435109 branch based on develop. Ginkgo version 1.8.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -92,23 +92,22 @@ $(function() {
  <a class="anchor" id="Multigrid Preconditioner"></a> <a class="anchor" id="Thisexampleshowshowtousethemultigridpreconditioner"></a></p><h1>This example shows how to use the multigrid preconditioner.</h1>
 <h3>In this example, we first read in a matrix from a file. The preconditioned CG solver is enhanced with a multigrid preconditioner. The example features the generating time and runtime of the CG solver.</h3>
 <p><a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
-<div class="fragment"><div class="line">exec_map{</div>
-<div class="line">    {<span class="stringliteral">&quot;omp&quot;</span>, [] { <span class="keywordflow">return</span> <a class="code" href="classgko_1_1OmpExecutor.html#a8930142a1913bcbcac4fb6c917f930d9">gko::OmpExecutor::create</a>(); }},</div>
-<div class="line">    {<span class="stringliteral">&quot;cuda&quot;</span>,</div>
-<div class="line">     [] {</div>
-<div class="line">         <span class="keywordflow">return</span> <a class="code" href="classgko_1_1CudaExecutor.html#a6c423656c7c0eb53810cb77bb4a66d15">gko::CudaExecutor::create</a>(0,</div>
-<div class="line">                                          <a class="code" href="classgko_1_1OmpExecutor.html#a8930142a1913bcbcac4fb6c917f930d9">gko::OmpExecutor::create</a>());</div>
-<div class="line">     }},</div>
-<div class="line">    {<span class="stringliteral">&quot;hip&quot;</span>,</div>
-<div class="line">     [] {</div>
-<div class="line">         <span class="keywordflow">return</span> <a class="code" href="classgko_1_1HipExecutor.html#aa0701fe1303e03a8331da7e95008100d">gko::HipExecutor::create</a>(0, <a class="code" href="classgko_1_1OmpExecutor.html#a8930142a1913bcbcac4fb6c917f930d9">gko::OmpExecutor::create</a>());</div>
-<div class="line">     }},</div>
-<div class="line">    {<span class="stringliteral">&quot;dpcpp&quot;</span>,</div>
-<div class="line">     [] {</div>
-<div class="line">         <span class="keywordflow">return</span> <a class="code" href="classgko_1_1DpcppExecutor.html#ae9b875dfe3af7f3f3f24071bfb2f895e">gko::DpcppExecutor::create</a>(</div>
-<div class="line">             0, gko::ReferenceExecutor::create());</div>
-<div class="line">     }},</div>
-<div class="line">    {<span class="stringliteral">&quot;reference&quot;</span>, [] { <span class="keywordflow">return</span> gko::ReferenceExecutor::create(); }}};</div>
+<div class="fragment"><div class="line">{<span class="stringliteral">&quot;omp&quot;</span>, [] { <span class="keywordflow">return</span> <a class="code" href="classgko_1_1OmpExecutor.html#a8930142a1913bcbcac4fb6c917f930d9">gko::OmpExecutor::create</a>(); }},</div>
+<div class="line">{<span class="stringliteral">&quot;cuda&quot;</span>,</div>
+<div class="line"> [] {</div>
+<div class="line">     <span class="keywordflow">return</span> <a class="code" href="classgko_1_1CudaExecutor.html#a6c423656c7c0eb53810cb77bb4a66d15">gko::CudaExecutor::create</a>(0,</div>
+<div class="line">                                      <a class="code" href="classgko_1_1OmpExecutor.html#a8930142a1913bcbcac4fb6c917f930d9">gko::OmpExecutor::create</a>());</div>
+<div class="line"> }},</div>
+<div class="line">{<span class="stringliteral">&quot;hip&quot;</span>,</div>
+<div class="line"> [] {</div>
+<div class="line">     <span class="keywordflow">return</span> <a class="code" href="classgko_1_1HipExecutor.html#aa0701fe1303e03a8331da7e95008100d">gko::HipExecutor::create</a>(0, <a class="code" href="classgko_1_1OmpExecutor.html#a8930142a1913bcbcac4fb6c917f930d9">gko::OmpExecutor::create</a>());</div>
+<div class="line"> }},</div>
+<div class="line">{<span class="stringliteral">&quot;dpcpp&quot;</span>,</div>
+<div class="line"> [] {</div>
+<div class="line">     <span class="keywordflow">return</span> <a class="code" href="classgko_1_1DpcppExecutor.html#ae9b875dfe3af7f3f3f24071bfb2f895e">gko::DpcppExecutor::create</a>(</div>
+<div class="line">         0, gko::ReferenceExecutor::create());</div>
+<div class="line"> }},</div>
+<div class="line">{<span class="stringliteral">&quot;reference&quot;</span>, [] { <span class="keywordflow">return</span> gko::ReferenceExecutor::create(); }}};</div>
 </div><!-- fragment --><p>executor where Ginkgo will perform the computation</p>
 <div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keyword">auto</span> exec = exec_map.at(executor_string)();  <span class="comment">// throws if not valid</span></div>
 </div><!-- fragment --><p>Read data</p>
@@ -205,7 +204,6 @@ $(function() {
 </div><!-- fragment --><p><a class="anchor" id="Commentsaboutprogramminganddebugging"></a></p><h3>Comments about programming and debugging </h3>
 <p><a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
 <div class="fragment"><div class="line"> </div>
-<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;ginkgo/ginkgo.hpp&gt;</span></div>
 <div class="line"> </div>
 <div class="line"> </div>
