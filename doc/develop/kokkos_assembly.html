@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1093532551 branch based on develop. Ginkgo version 1.8.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1094488895 branch based on develop. Ginkgo version 1.8.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -99,9 +99,15 @@ $(function() {
 <p><a class="anchor" id="Notes"></a></p><h3>Notes </h3>
 <p>If this example is built as part of Ginkgo, it is advised to configure Ginkgo with <code>-DGINKGO_WITH_CCACHE=OFF</code> to prevent incompabilities with Kokkos' compiler wrapper for <code>nvcc</code>.</p>
 <p><a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
-<p>Create the matrix entries. This also creates zero entries for the first and second row to handle all rows uniformly.</p>
+<div class="fragment"><div class="line">                                    md.get_num_stored_elements());</div>
+<div class="line">Kokkos::View&lt;IndexType*&gt; v_col_idxs(md.get_col_idxs(),</div>
+<div class="line">                                    md.get_num_stored_elements());</div>
+<div class="line">Kokkos::View&lt;ValueType*&gt; v_values(md.get_values(),</div>
+<div class="line">                                  md.get_num_stored_elements());</div>
+</div><!-- fragment --><p>Create the matrix entries. This also creates zero entries for the first and second row to handle all rows uniformly.</p>
 <div class="fragment"><div class="line">Kokkos::parallel_for(</div>
-<div class="line">    <span class="stringliteral">&quot;generate_stencil_matrix&quot;</span>, md.get_num_elems(), KOKKOS_LAMBDA(<span class="keywordtype">int</span> i) {</div>
+<div class="line">    <span class="stringliteral">&quot;generate_stencil_matrix&quot;</span>, md.get_num_stored_elements(),</div>
+<div class="line">    KOKKOS_LAMBDA(<span class="keywordtype">int</span> i) {</div>
 <div class="line">        <span class="keyword">const</span> ValueType coefs[] = {-1, 2, -1};</div>
 <div class="line">        <span class="keyword">auto</span> ofs = static_cast&lt;IndexType&gt;((i % 3) - 1);</div>
 <div class="line">        <span class="keyword">auto</span> row = static_cast&lt;IndexType&gt;(i / 3);</div>
@@ -254,13 +260,15 @@ $(function() {
 </div><!-- fragment --><p>The actual error depends on the used hardware. <a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;Kokkos_Core.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;map&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;omp.h&gt;</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;ginkgo/ginkgo.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;Kokkos_Core.hpp&gt;</span></div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType, <span class="keyword">typename</span> IndexType&gt;</div>
@@ -272,12 +280,16 @@ $(function() {
 <div class="line">    <a class="code" href="classgko_1_1device__matrix__data.html">gko::device_matrix_data&lt;ValueType, IndexType&gt;</a> md(exec, matrix-&gt;<a class="code" href="classgko_1_1LinOp.html#a31b3c003388eb0b95393154f68c2b98d">get_size</a>(),</div>
 <div class="line">                                                     discretization_points * 3);</div>
 <div class="line"> </div>
-<div class="line">    Kokkos::View&lt;IndexType*&gt; v_row_idxs(md.get_row_idxs(), md.get_num_elems());</div>
-<div class="line">    Kokkos::View&lt;IndexType*&gt; v_col_idxs(md.get_col_idxs(), md.get_num_elems());</div>
-<div class="line">    Kokkos::View&lt;ValueType*&gt; v_values(md.get_values(), md.get_num_elems());</div>
+<div class="line">    Kokkos::View&lt;IndexType*&gt; v_row_idxs(md.get_row_idxs(),</div>
+<div class="line">                                        md.get_num_stored_elements());</div>
+<div class="line">    Kokkos::View&lt;IndexType*&gt; v_col_idxs(md.get_col_idxs(),</div>
+<div class="line">                                        md.get_num_stored_elements());</div>
+<div class="line">    Kokkos::View&lt;ValueType*&gt; v_values(md.get_values(),</div>
+<div class="line">                                      md.get_num_stored_elements());</div>
 <div class="line"> </div>
 <div class="line">    Kokkos::parallel_for(</div>
-<div class="line">        <span class="stringliteral">&quot;generate_stencil_matrix&quot;</span>, md.get_num_elems(), KOKKOS_LAMBDA(<span class="keywordtype">int</span> i) {</div>
+<div class="line">        <span class="stringliteral">&quot;generate_stencil_matrix&quot;</span>, md.get_num_stored_elements(),</div>
+<div class="line">        KOKKOS_LAMBDA(<span class="keywordtype">int</span> i) {</div>
 <div class="line">            <span class="keyword">const</span> ValueType coefs[] = {-1, 2, -1};</div>
 <div class="line">            <span class="keyword">auto</span> ofs = static_cast&lt;IndexType&gt;((i % 3) - 1);</div>
 <div class="line">            <span class="keyword">auto</span> row = static_cast&lt;IndexType&gt;(i / 3);</div>

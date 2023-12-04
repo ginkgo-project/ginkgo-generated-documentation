@@ -22,12 +22,23 @@ If this example is built as part of Ginkgo, it is advised to configure Ginkgo wi
 \label{_CommProg}%
  \doxysection*{The commented program}
 
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                    md.get\_num\_stored\_elements());}
+\DoxyCodeLine{Kokkos::View<IndexType*> v\_col\_idxs(md.get\_col\_idxs(),}
+\DoxyCodeLine{                                    md.get\_num\_stored\_elements());}
+\DoxyCodeLine{Kokkos::View<ValueType*> v\_values(md.get\_values(),}
+\DoxyCodeLine{                                  md.get\_num\_stored\_elements());}
+\end{DoxyCode}
+
+
 Create the matrix entries. This also creates zero entries for the first and second row to handle all rows uniformly.
 
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Kokkos::parallel\_for(}
-\DoxyCodeLine{    \textcolor{stringliteral}{"generate\_stencil\_matrix"}, md.get\_num\_elems(), KOKKOS\_LAMBDA(\textcolor{keywordtype}{int} i) \{}
+\DoxyCodeLine{    \textcolor{stringliteral}{"generate\_stencil\_matrix"}, md.get\_num\_stored\_elements(),}
+\DoxyCodeLine{    KOKKOS\_LAMBDA(\textcolor{keywordtype}{int} i) \{}
 \DoxyCodeLine{        \textcolor{keyword}{const} ValueType coefs[] = \{-\/1, 2, -\/1\};}
 \DoxyCodeLine{        \textcolor{keyword}{auto} ofs = static\_cast<IndexType>((i \% 3) -\/ 1);}
 \DoxyCodeLine{        \textcolor{keyword}{auto} row = static\_cast<IndexType>(i / 3);}
@@ -264,13 +275,15 @@ The actual error depends on the used hardware. \label{_PlainProg}%
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <Kokkos\_Core.hpp>}}
 \DoxyCodeLine{\textcolor{preprocessor}{\#include <map>}}
 \DoxyCodeLine{\textcolor{preprocessor}{\#include <string>}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#include <omp.h>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include <Kokkos\_Core.hpp>}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType, \textcolor{keyword}{typename} IndexType>}
@@ -282,12 +295,16 @@ The actual error depends on the used hardware. \label{_PlainProg}%
 \DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1device__matrix__data}{gko::device\_matrix\_data<ValueType, IndexType>}} md(exec, matrix-\/>\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\_size}}(),}
 \DoxyCodeLine{                                                     discretization\_points * 3);}
 \DoxyCodeLine{}
-\DoxyCodeLine{    Kokkos::View<IndexType*> v\_row\_idxs(md.get\_row\_idxs(), md.get\_num\_elems());}
-\DoxyCodeLine{    Kokkos::View<IndexType*> v\_col\_idxs(md.get\_col\_idxs(), md.get\_num\_elems());}
-\DoxyCodeLine{    Kokkos::View<ValueType*> v\_values(md.get\_values(), md.get\_num\_elems());}
+\DoxyCodeLine{    Kokkos::View<IndexType*> v\_row\_idxs(md.get\_row\_idxs(),}
+\DoxyCodeLine{                                        md.get\_num\_stored\_elements());}
+\DoxyCodeLine{    Kokkos::View<IndexType*> v\_col\_idxs(md.get\_col\_idxs(),}
+\DoxyCodeLine{                                        md.get\_num\_stored\_elements());}
+\DoxyCodeLine{    Kokkos::View<ValueType*> v\_values(md.get\_values(),}
+\DoxyCodeLine{                                      md.get\_num\_stored\_elements());}
 \DoxyCodeLine{}
 \DoxyCodeLine{    Kokkos::parallel\_for(}
-\DoxyCodeLine{        \textcolor{stringliteral}{"generate\_stencil\_matrix"}, md.get\_num\_elems(), KOKKOS\_LAMBDA(\textcolor{keywordtype}{int} i) \{}
+\DoxyCodeLine{        \textcolor{stringliteral}{"generate\_stencil\_matrix"}, md.get\_num\_stored\_elements(),}
+\DoxyCodeLine{        KOKKOS\_LAMBDA(\textcolor{keywordtype}{int} i) \{}
 \DoxyCodeLine{            \textcolor{keyword}{const} ValueType coefs[] = \{-\/1, 2, -\/1\};}
 \DoxyCodeLine{            \textcolor{keyword}{auto} ofs = static\_cast<IndexType>((i \% 3) -\/ 1);}
 \DoxyCodeLine{            \textcolor{keyword}{auto} row = static\_cast<IndexType>(i / 3);}

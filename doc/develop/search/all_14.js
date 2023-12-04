@@ -8,6 +8,6 @@ var searchData=
   ['vector_1510',['Vector',['../classgko_1_1experimental_1_1distributed_1_1Vector.html',1,'gko::experimental::distributed']]],
   ['version_1511',['version',['../structgko_1_1version.html',1,'gko']]],
   ['version_5finfo_1512',['version_info',['../classgko_1_1version__info.html',1,'gko']]],
-  ['view_1513',['view',['../classgko_1_1array.html#aa7ca4bfceccaf2579311d4e195daf6ee',1,'gko::array']]],
+  ['view_1513',['view',['../classgko_1_1array.html#aac2a7c2d59045e56fb751b18712a4635',1,'gko::array']]],
   ['view_5fdeleter_1514',['view_deleter',['../classgko_1_1array.html#a377a6aaf5ee6c2747781b889eea6c226',1,'gko::array']]]
 ];
