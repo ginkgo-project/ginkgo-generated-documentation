@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['unary_5fminus_2305',['unary_minus',['../structgko_1_1accessor_1_1unary__minus.html',1,'gko::accessor']]],
-  ['unary_5fplus_2306',['unary_plus',['../structgko_1_1accessor_1_1unary__plus.html',1,'gko::accessor']]],
-  ['unsupportedmatrixproperty_2307',['UnsupportedMatrixProperty',['../classgko_1_1UnsupportedMatrixProperty.html',1,'gko']]],
-  ['updater_2308',['Updater',['../classgko_1_1stop_1_1Criterion_1_1Updater.html',1,'gko::stop::Criterion']]],
-  ['uppertrs_2309',['UpperTrs',['../classgko_1_1solver_1_1UpperTrs.html',1,'gko::solver']]],
-  ['usecomposition_2310',['UseComposition',['../classgko_1_1UseComposition.html',1,'gko']]]
+  ['unary_5fminus_2311',['unary_minus',['../structgko_1_1accessor_1_1unary__minus.html',1,'gko::accessor']]],
+  ['unary_5fplus_2312',['unary_plus',['../structgko_1_1accessor_1_1unary__plus.html',1,'gko::accessor']]],
+  ['unsupportedmatrixproperty_2313',['UnsupportedMatrixProperty',['../classgko_1_1UnsupportedMatrixProperty.html',1,'gko']]],
+  ['updater_2314',['Updater',['../classgko_1_1stop_1_1Criterion_1_1Updater.html',1,'gko::stop::Criterion']]],
+  ['uppertrs_2315',['UpperTrs',['../classgko_1_1solver_1_1UpperTrs.html',1,'gko::solver']]],
+  ['usecomposition_2316',['UseComposition',['../classgko_1_1UseComposition.html',1,'gko']]]
 ];
