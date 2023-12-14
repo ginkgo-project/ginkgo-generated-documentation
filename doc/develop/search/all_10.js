@@ -6,7 +6,7 @@ var searchData=
   ['r_5fget_1283',['r_get',['../classgko_1_1experimental_1_1mpi_1_1window.html#af611adbe29e925ef5448ead49bde179e',1,'gko::experimental::mpi::window']]],
   ['r_5fget_5faccumulate_1284',['r_get_accumulate',['../classgko_1_1experimental_1_1mpi_1_1window.html#a69842676f3a38849160857138ce0b745',1,'gko::experimental::mpi::window']]],
   ['r_5fput_1285',['r_put',['../classgko_1_1experimental_1_1mpi_1_1window.html#a08ddae163fc1c34b9456bab96a5f1107',1,'gko::experimental::mpi::window']]],
-  ['range_1286',['range',['../classgko_1_1range.html',1,'gko::range&lt; Accessor &gt;'],['../structgko_1_1syn_1_1range.html',1,'gko::syn::range&lt; Start, End, Step &gt;'],['../classgko_1_1range.html#aede7a11a0eef2b73cabe44c9c2ad8246',1,'gko::range::range()']]],
+  ['range_1286',['range',['../structgko_1_1syn_1_1range.html',1,'gko::syn::range&lt; Start, End, Step &gt;'],['../classgko_1_1range.html',1,'gko::range&lt; Accessor &gt;'],['../classgko_1_1range.html#aede7a11a0eef2b73cabe44c9c2ad8246',1,'gko::range::range()']]],
   ['rank_1287',['rank',['../classgko_1_1experimental_1_1mpi_1_1communicator.html#a58c4515edcb0dee79b2be1eb40333a61',1,'gko::experimental::mpi::communicator']]],
   ['rapply_1288',['rapply',['../classgko_1_1matrix_1_1Diagonal.html#a1b0ac09acf678b127602191f20477cdc',1,'gko::matrix::Diagonal']]],
   ['rcm_1289',['Rcm',['../classgko_1_1reorder_1_1Rcm.html',1,'gko::reorder::Rcm&lt; ValueType, IndexType &gt;'],['../classgko_1_1experimental_1_1reorder_1_1Rcm.html',1,'gko::experimental::reorder::Rcm&lt; IndexType &gt;']]],
