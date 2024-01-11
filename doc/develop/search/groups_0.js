@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['batchlinop_3163',['BatchLinOp',['../group__BatchLinOp.html',1,'']]]
+  ['batchlinop_3178',['BatchLinOp',['../group__BatchLinOp.html',1,'']]]
 ];
