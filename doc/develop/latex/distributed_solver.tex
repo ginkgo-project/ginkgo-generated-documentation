@@ -289,7 +289,8 @@ Get the residual.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{auto} res\_norm = gko::as<vec>(logger-\/>get\_residual\_norm());}
+\DoxyCodeLine{\textcolor{keyword}{auto} res\_norm = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(exec-\/>get\_master(),}
+\DoxyCodeLine{                           gko::as<vec>(logger-\/>get\_residual\_norm()));}
 \end{DoxyCode}
 
 
@@ -310,7 +311,7 @@ clang-\/format off
 \begin{DoxyCode}{0}
 \DoxyCodeLine{std::cout << \textcolor{stringliteral}{"\(\backslash\)nNum rows in matrix: "} << num\_rows}
 \DoxyCodeLine{          << \textcolor{stringliteral}{"\(\backslash\)nNum ranks: "} << comm.size()}
-\DoxyCodeLine{          << \textcolor{stringliteral}{"\(\backslash\)nFinal Res norm: "} << *res\_norm-\/>get\_const\_values()}
+\DoxyCodeLine{          << \textcolor{stringliteral}{"\(\backslash\)nFinal Res norm: "} << res\_norm-\/>at(0, 0)}
 \DoxyCodeLine{          << \textcolor{stringliteral}{"\(\backslash\)nIteration count: "} << logger-\/>get\_num\_iterations()}
 \DoxyCodeLine{          << \textcolor{stringliteral}{"\(\backslash\)nInit time: "} << t\_init\_end -\/ t\_init}
 \DoxyCodeLine{          << \textcolor{stringliteral}{"\(\backslash\)nRead time: "} << t\_read\_setup\_end -\/ t\_init}
@@ -507,12 +508,13 @@ The timings may vary depending on the machine. \label{_PlainProg}%
 \DoxyCodeLine{    comm.synchronize();}
 \DoxyCodeLine{    ValueType t\_end = \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a508f97387781bb32dd2c7616dee1a786}{gko::experimental::mpi::get\_walltime}}();}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{auto} res\_norm = gko::as<vec>(logger-\/>get\_residual\_norm());}
+\DoxyCodeLine{    \textcolor{keyword}{auto} res\_norm = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(exec-\/>get\_master(),}
+\DoxyCodeLine{                               gko::as<vec>(logger-\/>get\_residual\_norm()));}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keywordflow}{if} (comm.rank() == 0) \{}
 \DoxyCodeLine{        std::cout << \textcolor{stringliteral}{"\(\backslash\)nNum rows in matrix: "} << num\_rows}
 \DoxyCodeLine{                  << \textcolor{stringliteral}{"\(\backslash\)nNum ranks: "} << comm.size()}
-\DoxyCodeLine{                  << \textcolor{stringliteral}{"\(\backslash\)nFinal Res norm: "} << *res\_norm-\/>get\_const\_values()}
+\DoxyCodeLine{                  << \textcolor{stringliteral}{"\(\backslash\)nFinal Res norm: "} << res\_norm-\/>at(0, 0)}
 \DoxyCodeLine{                  << \textcolor{stringliteral}{"\(\backslash\)nIteration count: "} << logger-\/>get\_num\_iterations()}
 \DoxyCodeLine{                  << \textcolor{stringliteral}{"\(\backslash\)nInit time: "} << t\_init\_end -\/ t\_init}
 \DoxyCodeLine{                  << \textcolor{stringliteral}{"\(\backslash\)nRead time: "} << t\_read\_setup\_end -\/ t\_init}

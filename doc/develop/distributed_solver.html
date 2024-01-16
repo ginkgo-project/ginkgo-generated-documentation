@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1135911110 branch based on develop. Ginkgo version 1.8.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1140051672 branch based on develop. Ginkgo version 1.8.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -251,14 +251,15 @@ $(function() {
 <div class="fragment"><div class="line">comm.synchronize();</div>
 <div class="line">ValueType t_end = <a class="code" href="namespacegko_1_1experimental_1_1mpi.html#a508f97387781bb32dd2c7616dee1a786">gko::experimental::mpi::get_walltime</a>();</div>
 </div><!-- fragment --><p>Get the residual.</p>
-<div class="fragment"><div class="line"><span class="keyword">auto</span> res_norm = gko::as&lt;vec&gt;(logger-&gt;get_residual_norm());</div>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> res_norm = <a class="code" href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a>(exec-&gt;get_master(),</div>
+<div class="line">                           gko::as&lt;vec&gt;(logger-&gt;get_residual_norm()));</div>
 </div><!-- fragment --><p><a class="anchor" id="PrintingResults"></a> </p><h3>Printing Results</h3>
 <p>Print the achieved residual norm and timings on rank 0.</p>
 <div class="fragment"><div class="line"><span class="keywordflow">if</span> (comm.rank() == 0) {</div>
 </div><!-- fragment --><p>clang-format off</p>
 <div class="fragment"><div class="line">std::cout &lt;&lt; <span class="stringliteral">&quot;\nNum rows in matrix: &quot;</span> &lt;&lt; num_rows</div>
 <div class="line">          &lt;&lt; <span class="stringliteral">&quot;\nNum ranks: &quot;</span> &lt;&lt; comm.size()</div>
-<div class="line">          &lt;&lt; <span class="stringliteral">&quot;\nFinal Res norm: &quot;</span> &lt;&lt; *res_norm-&gt;get_const_values()</div>
+<div class="line">          &lt;&lt; <span class="stringliteral">&quot;\nFinal Res norm: &quot;</span> &lt;&lt; res_norm-&gt;at(0, 0)</div>
 <div class="line">          &lt;&lt; <span class="stringliteral">&quot;\nIteration count: &quot;</span> &lt;&lt; logger-&gt;get_num_iterations()</div>
 <div class="line">          &lt;&lt; <span class="stringliteral">&quot;\nInit time: &quot;</span> &lt;&lt; t_init_end - t_init</div>
 <div class="line">          &lt;&lt; <span class="stringliteral">&quot;\nRead time: &quot;</span> &lt;&lt; t_read_setup_end - t_init</div>
@@ -436,12 +437,13 @@ $(function() {
 <div class="line">    comm.synchronize();</div>
 <div class="line">    ValueType t_end = <a class="code" href="namespacegko_1_1experimental_1_1mpi.html#a508f97387781bb32dd2c7616dee1a786">gko::experimental::mpi::get_walltime</a>();</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">auto</span> res_norm = gko::as&lt;vec&gt;(logger-&gt;get_residual_norm());</div>
+<div class="line">    <span class="keyword">auto</span> res_norm = <a class="code" href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a>(exec-&gt;get_master(),</div>
+<div class="line">                               gko::as&lt;vec&gt;(logger-&gt;get_residual_norm()));</div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">if</span> (comm.rank() == 0) {</div>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;\nNum rows in matrix: &quot;</span> &lt;&lt; num_rows</div>
 <div class="line">                  &lt;&lt; <span class="stringliteral">&quot;\nNum ranks: &quot;</span> &lt;&lt; comm.size()</div>
-<div class="line">                  &lt;&lt; <span class="stringliteral">&quot;\nFinal Res norm: &quot;</span> &lt;&lt; *res_norm-&gt;get_const_values()</div>
+<div class="line">                  &lt;&lt; <span class="stringliteral">&quot;\nFinal Res norm: &quot;</span> &lt;&lt; res_norm-&gt;at(0, 0)</div>
 <div class="line">                  &lt;&lt; <span class="stringliteral">&quot;\nIteration count: &quot;</span> &lt;&lt; logger-&gt;get_num_iterations()</div>
 <div class="line">                  &lt;&lt; <span class="stringliteral">&quot;\nInit time: &quot;</span> &lt;&lt; t_init_end - t_init</div>
 <div class="line">                  &lt;&lt; <span class="stringliteral">&quot;\nRead time: &quot;</span> &lt;&lt; t_read_setup_end - t_init</div>
@@ -464,6 +466,7 @@ $(function() {
 <div class="ttc" id="aclassgko_1_1experimental_1_1distributed_1_1Vector_html"><div class="ttname"><a href="classgko_1_1experimental_1_1distributed_1_1Vector.html">gko::experimental::distributed::Vector</a></div><div class="ttdoc">Vector is a format which explicitly stores (multiple) distributed column vectors in a dense storage f...</div><div class="ttdef"><b>Definition:</b> matrix.hpp:127</div></div>
 <div class="ttc" id="aclassgko_1_1experimental_1_1mpi_1_1environment_html"><div class="ttname"><a href="classgko_1_1experimental_1_1mpi_1_1environment.html">gko::experimental::mpi::environment</a></div><div class="ttdoc">Class that sets up and finalizes the MPI environment.</div><div class="ttdef"><b>Definition:</b> mpi.hpp:199</div></div>
 <div class="ttc" id="aclassgko_1_1DpcppExecutor_html_adf306338233c8e8aca0dec96aefe5d93"><div class="ttname"><a href="classgko_1_1DpcppExecutor.html#adf306338233c8e8aca0dec96aefe5d93">gko::DpcppExecutor::get_num_devices</a></div><div class="ttdeci">static int get_num_devices(std::string device_type)</div><div class="ttdoc">Get the number of devices present on the system.</div></div>
+<div class="ttc" id="anamespacegko_html_a1beb80750459e4201aa9d882d2d074c3"><div class="ttname"><a href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a></div><div class="ttdeci">detail::cloned_type&lt; Pointer &gt; clone(const Pointer &amp;p)</div><div class="ttdoc">Creates a unique clone of the object pointed to by p.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:175</div></div>
 <div class="ttc" id="aclassgko_1_1HipExecutor_html_aa0701fe1303e03a8331da7e95008100d"><div class="ttname"><a href="classgko_1_1HipExecutor.html#aa0701fe1303e03a8331da7e95008100d">gko::HipExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; HipExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, bool device_reset, allocation_mode alloc_mode=default_hip_alloc_mode, CUstream_st *stream=nullptr)</div><div class="ttdoc">Creates a new HipExecutor.</div></div>
 <div class="ttc" id="aclassgko_1_1preconditioner_1_1Jacobi_html"><div class="ttname"><a href="classgko_1_1preconditioner_1_1Jacobi.html">gko::preconditioner::Jacobi</a></div><div class="ttdoc">A block-Jacobi preconditioner is a block-diagonal linear operator, obtained by inverting the diagonal...</div><div class="ttdef"><b>Definition:</b> jacobi.hpp:185</div></div>
 <div class="ttc" id="aclassgko_1_1stop_1_1ResidualNorm_html"><div class="ttname"><a href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm</a></div><div class="ttdoc">The ResidualNorm class is a stopping criterion which stops the iteration process when the actual resi...</div><div class="ttdef"><b>Definition:</b> residual_norm.hpp:110</div></div>
