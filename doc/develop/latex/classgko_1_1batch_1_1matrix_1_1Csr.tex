@@ -87,7 +87,9 @@ const value\+\_\+type $\ast$ \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Csr
 const \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Csr}{Csr}} $\ast$ \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Csr_a64758a5b04b98f5b8009cc4ee16f1ca2}{apply}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ value\+\_\+type $>$$>$ b, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ value\+\_\+type $>$$>$ x) const
 \item 
 const \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Csr}{Csr}} $\ast$ \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Csr_a1a033d5e4d46a1a7ed983c225485884c}{apply}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ value\+\_\+type $>$$>$ alpha, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ value\+\_\+type $>$$>$ b, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ value\+\_\+type $>$$>$ beta, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ value\+\_\+type $>$$>$ x) const
-\end{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Csr_a077d6da7d3572f0813da946555b6a64d}{scale}} (const \mbox{\hyperlink{classgko_1_1array}{array}}$<$ value\+\_\+type $>$ \&row\+\_\+scale, const \mbox{\hyperlink{classgko_1_1array}{array}}$<$ value\+\_\+type $>$ \&col\+\_\+scale)
+\begin{DoxyCompactList}\small\item\em Performs in-\/place row and column scaling for this matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -220,8 +222,6 @@ Only a single sparsity pattern (column indices and row pointers) is stored and h
 {\em exec} & the executor to create the matrix on \\
 \hline
 {\em size} & the dimensions of the matrix \\
-\hline
-{\em num\+\_\+elems\+\_\+per\+\_\+row} & the number of elements to be stored in each row \\
 \hline
 {\em values} & the value array of the matrix \\
 \hline
@@ -485,6 +485,24 @@ the pointer to the array of values
 
 References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+data(), gko\+::batch\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+num\+\_\+elements\+\_\+per\+\_\+item(), and gko\+::array$<$ Value\+Type $>$\+::get\+\_\+size().
 
+\mbox{\Hypertarget{classgko_1_1batch_1_1matrix_1_1Csr_a077d6da7d3572f0813da946555b6a64d}\label{classgko_1_1batch_1_1matrix_1_1Csr_a077d6da7d3572f0813da946555b6a64d}} 
+\index{gko::batch::matrix::Csr$<$ ValueType, IndexType $>$@{gko::batch::matrix::Csr$<$ ValueType, IndexType $>$}!scale@{scale}}
+\index{scale@{scale}!gko::batch::matrix::Csr$<$ ValueType, IndexType $>$@{gko::batch::matrix::Csr$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{scale()}{scale()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+void \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Csr}{gko\+::batch\+::matrix\+::\+Csr}}$<$ Value\+Type, Index\+Type $>$\+::scale (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1array}{array}}$<$ value\+\_\+type $>$ \&}]{row\+\_\+scale,  }\item[{const \mbox{\hyperlink{classgko_1_1array}{array}}$<$ value\+\_\+type $>$ \&}]{col\+\_\+scale }\end{DoxyParamCaption})}
+
+
+
+Performs in-\/place row and column scaling for this matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em row\+\_\+scale} & the row scalars \\
+\hline
+{\em col\+\_\+scale} & the column scalars \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

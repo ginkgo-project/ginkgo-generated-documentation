@@ -83,6 +83,8 @@ const value\+\_\+type $\ast$ \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Den
 \begin{DoxyCompactList}\small\item\em Returns a pointer to the array of values of the matrix for a specific batch item. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Dense_ad8eb22005182873bb825f480d433a155}{get\+\_\+num\+\_\+stored\+\_\+elements}} () const noexcept
 \begin{DoxyCompactList}\small\item\em Returns the number of elements explicitly stored in the batch matrix, cumulative across all the batch items. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Dense_a1711cd053116a336e16953af10fcf8c8}{get\+\_\+num\+\_\+elements\+\_\+per\+\_\+item}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns the number of stored elements in each batch item. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Dense}{Dense}} $\ast$ \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Dense_aed8b3c3bffc5d60b585101f15cdc26eb}{apply}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ value\+\_\+type $>$$>$ b, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ value\+\_\+type $>$$>$ x)
 \begin{DoxyCompactList}\small\item\em Apply the matrix to a multi-\/vector. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Dense}{Dense}} $\ast$ \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Dense_a45339c7f6fcdf4248bf79bf14c56fc88}{apply}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ value\+\_\+type $>$$>$ alpha, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ value\+\_\+type $>$$>$ b, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ value\+\_\+type $>$$>$ beta, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ value\+\_\+type $>$$>$ x)
@@ -90,7 +92,9 @@ const value\+\_\+type $\ast$ \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Den
 const \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Dense}{Dense}} $\ast$ \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Dense_a56aeb402a375ef76415ca14668261eb9}{apply}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ value\+\_\+type $>$$>$ b, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ value\+\_\+type $>$$>$ x) const
 \item 
 const \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Dense}{Dense}} $\ast$ \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Dense_a7aea55997067602a62588ed6c35b6f2c}{apply}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ value\+\_\+type $>$$>$ alpha, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ value\+\_\+type $>$$>$ b, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ value\+\_\+type $>$$>$ beta, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ value\+\_\+type $>$$>$ x) const
-\end{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Dense_a964f12513ce49375e6e35a2d70bd5dd5}{scale}} (const \mbox{\hyperlink{classgko_1_1array}{array}}$<$ value\+\_\+type $>$ \&row\+\_\+scale, const \mbox{\hyperlink{classgko_1_1array}{array}}$<$ value\+\_\+type $>$ \&col\+\_\+scale)
+\begin{DoxyCompactList}\small\item\em Performs in-\/place row and column scaling for this matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -444,6 +448,24 @@ the cumulative offset
 
 Referenced by gko\+::batch\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+values\+\_\+for\+\_\+item(), and gko\+::batch\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::get\+\_\+values\+\_\+for\+\_\+item().
 
+\mbox{\Hypertarget{classgko_1_1batch_1_1matrix_1_1Dense_a1711cd053116a336e16953af10fcf8c8}\label{classgko_1_1batch_1_1matrix_1_1Dense_a1711cd053116a336e16953af10fcf8c8}} 
+\index{gko::batch::matrix::Dense$<$ ValueType $>$@{gko::batch::matrix::Dense$<$ ValueType $>$}!get\_num\_elements\_per\_item@{get\_num\_elements\_per\_item}}
+\index{get\_num\_elements\_per\_item@{get\_num\_elements\_per\_item}!gko::batch::matrix::Dense$<$ ValueType $>$@{gko::batch::matrix::Dense$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_num\_elements\_per\_item()}{get\_num\_elements\_per\_item()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Dense}{gko\+::batch\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::get\+\_\+num\+\_\+elements\+\_\+per\+\_\+item (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns the number of stored elements in each batch item. 
+
+\begin{DoxyReturn}{Returns}
+the number of stored elements per batch item. 
+\end{DoxyReturn}
+
+
+References gko\+::batch\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::get\+\_\+num\+\_\+stored\+\_\+elements().
+
 \mbox{\Hypertarget{classgko_1_1batch_1_1matrix_1_1Dense_ad8eb22005182873bb825f480d433a155}\label{classgko_1_1batch_1_1matrix_1_1Dense_ad8eb22005182873bb825f480d433a155}} 
 \index{gko::batch::matrix::Dense$<$ ValueType $>$@{gko::batch::matrix::Dense$<$ ValueType $>$}!get\_num\_stored\_elements@{get\_num\_stored\_elements}}
 \index{get\_num\_stored\_elements@{get\_num\_stored\_elements}!gko::batch::matrix::Dense$<$ ValueType $>$@{gko::batch::matrix::Dense$<$ ValueType $>$}}
@@ -461,6 +483,10 @@ the number of elements explicitly stored in the vector, cumulative across all th
 
 
 References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+size().
+
+
+
+Referenced by gko\+::batch\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::get\+\_\+num\+\_\+elements\+\_\+per\+\_\+item().
 
 \mbox{\Hypertarget{classgko_1_1batch_1_1matrix_1_1Dense_ada52cb2757dda289a734fdcf151fead0}\label{classgko_1_1batch_1_1matrix_1_1Dense_ada52cb2757dda289a734fdcf151fead0}} 
 \index{gko::batch::matrix::Dense$<$ ValueType $>$@{gko::batch::matrix::Dense$<$ ValueType $>$}!get\_values@{get\_values}}
@@ -503,6 +529,24 @@ the pointer to the array of values
 
 References gko\+::batch\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::get\+\_\+cumulative\+\_\+offset(), and gko\+::array$<$ Value\+Type $>$\+::get\+\_\+data().
 
+\mbox{\Hypertarget{classgko_1_1batch_1_1matrix_1_1Dense_a964f12513ce49375e6e35a2d70bd5dd5}\label{classgko_1_1batch_1_1matrix_1_1Dense_a964f12513ce49375e6e35a2d70bd5dd5}} 
+\index{gko::batch::matrix::Dense$<$ ValueType $>$@{gko::batch::matrix::Dense$<$ ValueType $>$}!scale@{scale}}
+\index{scale@{scale}!gko::batch::matrix::Dense$<$ ValueType $>$@{gko::batch::matrix::Dense$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{scale()}{scale()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Dense}{gko\+::batch\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::scale (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1array}{array}}$<$ value\+\_\+type $>$ \&}]{row\+\_\+scale,  }\item[{const \mbox{\hyperlink{classgko_1_1array}{array}}$<$ value\+\_\+type $>$ \&}]{col\+\_\+scale }\end{DoxyParamCaption})}
+
+
+
+Performs in-\/place row and column scaling for this matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em row\+\_\+scale} & the row scalars \\
+\hline
+{\em col\+\_\+scale} & the column scalars \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
