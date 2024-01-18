@@ -32,5 +32,5 @@ var searchData=
   ['write_5fbinary_1554',['write_binary',['../namespacegko.html#aba9ca89ef08421197d3dbf84b0ad884c',1,'gko']]],
   ['write_5fbinary_5fraw_1555',['write_binary_raw',['../namespacegko.html#a3b27a0c0282115116c160884dc0a9468',1,'gko']]],
   ['write_5fnested_1556',['write_nested',['../classgko_1_1log_1_1ProfilerHook_1_1NestedSummaryWriter.html#a3f4bcc48ba9fedd51538adc74e00f3a8',1,'gko::log::ProfilerHook::NestedSummaryWriter::write_nested()'],['../classgko_1_1log_1_1ProfilerHook_1_1TableSummaryWriter.html#a983a06c472660155ce7edc1cdfbbceda',1,'gko::log::ProfilerHook::TableSummaryWriter::write_nested()']]],
-  ['write_5fraw_1557',['write_raw',['../namespacegko.html#ab31feb99c64fc6df58ac09abd4af69b6',1,'gko']]]
+  ['write_5fraw_1557',['write_raw',['../namespacegko.html#a2d4b63ce98a16dc2c48aacd534a7b8ba',1,'gko']]]
 ];
