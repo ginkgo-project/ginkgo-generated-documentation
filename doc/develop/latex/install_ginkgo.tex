@@ -4,9 +4,9 @@ Use the standard C\+Make build procedure\+:
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{mkdir build; cd build}
-\DoxyCodeLine{cmake -\/G "Unix Makefiles" [OPTIONS] .. \&\& make}
+\DoxyCodeLine{cmake [OPTIONS] .. \&\& cmake -\/-\/build .}
 \end{DoxyCode}
- Use {\ttfamily cmake -\/-\/build .} in some systems like Min\+GW or Microsoft Visual Studio which do not use {\ttfamily make}.
+
 
 For Microsoft Visual Studio, use {\ttfamily cmake -\/-\/build . -\/-\/config $<$build\+\_\+type$>$} to decide the build type. The possible options are {\ttfamily Debug}, {\ttfamily Release}, {\ttfamily Rel\+With\+Deb\+Info} and {\ttfamily Min\+Size\+Rel}.
 
@@ -33,7 +33,6 @@ Replace {\ttfamily \mbox{[}O\+P\+T\+I\+O\+NS\mbox{]}} with desired cmake options
 \item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+D\+O\+C\+\_\+\+G\+E\+N\+E\+R\+A\+T\+E\+\_\+\+E\+X\+A\+M\+P\+L\+ES=\{ON, O\+FF\}} generates the documentation of examples in Ginkgo. The default is {\ttfamily ON}.
 \item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+D\+O\+C\+\_\+\+G\+E\+N\+E\+R\+A\+T\+E\+\_\+\+P\+DF=\{ON, O\+FF\}} generates a P\+DF version of Ginkgo\textquotesingle{}s documentation from inline comments in the code. The default is {\ttfamily O\+FF}.
 \item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+D\+O\+C\+\_\+\+G\+E\+N\+E\+R\+A\+T\+E\+\_\+\+D\+EV=\{ON, O\+FF\}} generates the developer version of Ginkgo\textquotesingle{}s documentation. The default is {\ttfamily O\+FF}.
-\item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+E\+X\+P\+O\+R\+T\+\_\+\+B\+U\+I\+L\+D\+\_\+\+D\+IR=\{ON, O\+FF\}} adds the Ginkgo build directory to the C\+Make package registry. The default is {\ttfamily O\+FF}.
 \item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+W\+I\+T\+H\+\_\+\+C\+L\+A\+N\+G\+\_\+\+T\+I\+DY=\{ON, O\+FF\}} makes Ginkgo call {\ttfamily clang-\/tidy} to find programming issues. The path can be manually controlled with the C\+Make variable {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+C\+L\+A\+N\+G\+\_\+\+T\+I\+D\+Y\+\_\+\+P\+A\+TH=$<$path$>$}. The default is {\ttfamily O\+FF}.
 \item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+W\+I\+T\+H\+\_\+\+I\+W\+YU=\{ON, O\+FF\}} makes Ginkgo call {\ttfamily iwyu} to find include issues. The path can be manually controlled with the C\+Make variable {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+I\+W\+Y\+U\+\_\+\+P\+A\+TH=$<$path$>$}. The default is {\ttfamily O\+FF}.
 \item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+C\+H\+E\+C\+K\+\_\+\+C\+I\+R\+C\+U\+L\+A\+R\+\_\+\+D\+E\+PS=\{ON, O\+FF\}} enables compile-\/time checks for circular dependencies between different Ginkgo libraries and self-\/sufficient headers. Should only be used for development purposes. The default is {\ttfamily O\+FF}.
@@ -60,11 +59,18 @@ Replace {\ttfamily \mbox{[}O\+P\+T\+I\+O\+NS\mbox{]}} with desired cmake options
 {\ttfamily Auto} will automatically detect the present C\+U\+D\+A-\/enabled G\+PU architectures in the system. {\ttfamily Kepler}, {\ttfamily Maxwell}, {\ttfamily Pascal}, {\ttfamily Volta} and {\ttfamily Ampere} will add flags for all architectures of that particular N\+V\+I\+D\+IA G\+PU generation. {\ttfamily C\+O\+M\+P\+U\+TE} and {\ttfamily C\+O\+DE} are placeholders that should be replaced with compute and code numbers (e.\+g. for {\ttfamily compute\+\_\+70} and {\ttfamily sm\+\_\+70} {\ttfamily C\+O\+M\+P\+U\+TE} and {\ttfamily C\+O\+DE} should be replaced with {\ttfamily 70}. Default is {\ttfamily Auto}. For a more detailed explanation of this option see the \href{https://github.com/ginkgo-project/CudaArchitectureSelector/blob/master/CudaArchitectureSelector.cmake\#L58}{\texttt{ {\ttfamily A\+R\+C\+H\+I\+T\+E\+C\+T\+U\+R\+ES} specification list}} section in the documentation of the Cuda\+Architecture\+Selector C\+Make module.
 \end{DoxyItemize}
 
+Additionally, the following C\+Make options have effect on the build process\+:
+
+
+\begin{DoxyItemize}
+\item {\ttfamily -\/D\+C\+M\+A\+K\+E\+\_\+\+E\+X\+P\+O\+R\+T\+\_\+\+P\+A\+C\+K\+A\+G\+E\+\_\+\+R\+E\+G\+I\+S\+T\+RY=\{ON,O\+FF\}} if set to {\ttfamily ON} the build directory will be stored in the current user\textquotesingle{}s C\+Make package registry.
+\end{DoxyItemize}
+
 For example, to build everything (in debug mode), use\+:
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{cmake  -\/G "Unix Makefiles" -\/H. -\/BDebug -\/DCMAKE\_BUILD\_TYPE=Debug -\/DGINKGO\_DEVEL\_TOOLS=ON \(\backslash\)}
+\DoxyCodeLine{cmake .. -\/BDebug -\/DCMAKE\_BUILD\_TYPE=Debug -\/DGINKGO\_DEVEL\_TOOLS=ON \(\backslash\)}
 \DoxyCodeLine{    -\/DGINKGO\_BUILD\_TESTS=ON -\/DGINKGO\_BUILD\_REFERENCE=ON -\/DGINKGO\_BUILD\_OMP=ON \(\backslash\)}
 \DoxyCodeLine{    -\/DGINKGO\_BUILD\_CUDA=ON -\/DGINKGO\_BUILD\_HIP=ON}
 \DoxyCodeLine{cmake -\/-\/build Debug}
