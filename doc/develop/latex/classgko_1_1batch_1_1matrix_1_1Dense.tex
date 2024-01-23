@@ -94,7 +94,11 @@ const \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Dense}{Dense}} $\ast$ \mbo
 const \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Dense}{Dense}} $\ast$ \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Dense_a7aea55997067602a62588ed6c35b6f2c}{apply}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ value\+\_\+type $>$$>$ alpha, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ value\+\_\+type $>$$>$ b, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ value\+\_\+type $>$$>$ beta, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ value\+\_\+type $>$$>$ x) const
 \item 
 void \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Dense_a964f12513ce49375e6e35a2d70bd5dd5}{scale}} (const \mbox{\hyperlink{classgko_1_1array}{array}}$<$ value\+\_\+type $>$ \&row\+\_\+scale, const \mbox{\hyperlink{classgko_1_1array}{array}}$<$ value\+\_\+type $>$ \&col\+\_\+scale)
-\begin{DoxyCompactList}\small\item\em Performs in-\/place row and column scaling for this matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Performs in-\/place row and column scaling for this matrix. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Dense_a18e915bbf874e8ce4ba7d2f8a4f6e2f2}{scale\+\_\+add}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ value\+\_\+type $>$$>$ alpha, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Dense}{batch\+::matrix\+::\+Dense}}$<$ value\+\_\+type $>$$>$ b)
+\begin{DoxyCompactList}\small\item\em Performs the operation this = alpha$\ast$this + b. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Dense_a005ff69ee92f737c2a8a21137d2baf55}{add\+\_\+scaled\+\_\+identity}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ value\+\_\+type $>$$>$ alpha, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ value\+\_\+type $>$$>$ beta)
+\begin{DoxyCompactList}\small\item\em Performs the operation this = alpha$\ast$I + beta$\ast$this. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -136,6 +140,27 @@ Though the storage layout is the same as the multi-\/vector object, the class se
 
 
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1batch_1_1matrix_1_1Dense_a005ff69ee92f737c2a8a21137d2baf55}\label{classgko_1_1batch_1_1matrix_1_1Dense_a005ff69ee92f737c2a8a21137d2baf55}} 
+\index{gko::batch::matrix::Dense$<$ ValueType $>$@{gko::batch::matrix::Dense$<$ ValueType $>$}!add\_scaled\_identity@{add\_scaled\_identity}}
+\index{add\_scaled\_identity@{add\_scaled\_identity}!gko::batch::matrix::Dense$<$ ValueType $>$@{gko::batch::matrix::Dense$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{add\_scaled\_identity()}{add\_scaled\_identity()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Dense}{gko\+::batch\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::add\+\_\+scaled\+\_\+identity (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ value\+\_\+type $>$$>$}]{alpha,  }\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ value\+\_\+type $>$$>$}]{beta }\end{DoxyParamCaption})}
+
+
+
+Performs the operation this = alpha$\ast$I + beta$\ast$this. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em alpha} & the scalar for identity \\
+\hline
+{\em beta} & the scalar to multiply this matrix\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Performs the operation in-\/place for this batch matrix 
+\end{DoxyNote}
 \mbox{\Hypertarget{classgko_1_1batch_1_1matrix_1_1Dense_a45339c7f6fcdf4248bf79bf14c56fc88}\label{classgko_1_1batch_1_1matrix_1_1Dense_a45339c7f6fcdf4248bf79bf14c56fc88}} 
 \index{gko::batch::matrix::Dense$<$ ValueType $>$@{gko::batch::matrix::Dense$<$ ValueType $>$}!apply@{apply}}
 \index{apply@{apply}!gko::batch::matrix::Dense$<$ ValueType $>$@{gko::batch::matrix::Dense$<$ ValueType $>$}}
@@ -547,6 +572,27 @@ Performs in-\/place row and column scaling for this matrix.
 {\em col\+\_\+scale} & the column scalars \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1batch_1_1matrix_1_1Dense_a18e915bbf874e8ce4ba7d2f8a4f6e2f2}\label{classgko_1_1batch_1_1matrix_1_1Dense_a18e915bbf874e8ce4ba7d2f8a4f6e2f2}} 
+\index{gko::batch::matrix::Dense$<$ ValueType $>$@{gko::batch::matrix::Dense$<$ ValueType $>$}!scale\_add@{scale\_add}}
+\index{scale\_add@{scale\_add}!gko::batch::matrix::Dense$<$ ValueType $>$@{gko::batch::matrix::Dense$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{scale\_add()}{scale\_add()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Dense}{gko\+::batch\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::scale\+\_\+add (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ value\+\_\+type $>$$>$}]{alpha,  }\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Dense}{batch\+::matrix\+::\+Dense}}$<$ value\+\_\+type $>$$>$}]{b }\end{DoxyParamCaption})}
+
+
+
+Performs the operation this = alpha$\ast$this + b. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em alpha} & the scalar to multiply this matrix \\
+\hline
+{\em b} & the matrix to add\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Performs the operation in-\/place for this batch matrix 
+\end{DoxyNote}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

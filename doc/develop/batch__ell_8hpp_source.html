@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1146631842 branch based on develop. Ginkgo version 1.8.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1148172928 branch based on develop. Ginkgo version 1.8.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -216,54 +216,57 @@ $(function() {
 <div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1batch_1_1matrix_1_1Ell.html#af146bd8371b20f5c77ba09c741c19a80">scale</a>(<span class="keyword">const</span> <a class="code" href="classgko_1_1array.html">array&lt;value_type&gt;</a>&amp; row_scale,</div>
 <div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;               <span class="keyword">const</span> <a class="code" href="classgko_1_1array.html">array&lt;value_type&gt;</a>&amp; col_scale);</div>
 <div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160; </div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> compute_num_elems(<span class="keyword">const</span> <a class="code" href="structgko_1_1batch__dim.html">batch_dim&lt;2&gt;</a>&amp; size,</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;                                IndexType num_elems_per_row)</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    {</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;        <span class="keywordflow">return</span> size.<a class="code" href="structgko_1_1batch__dim.html#a380f449cd6305c8baba95569627503b2">get_num_batch_items</a>() * size.<a class="code" href="structgko_1_1batch__dim.html#aa945ce6b61c1dd08bc28fb12ab7b152d">get_common_size</a>()[0] *</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;               num_elems_per_row;</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    }</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160; </div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    Ell(std::shared_ptr&lt;const Executor&gt; exec,</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;        <span class="keyword">const</span> <a class="code" href="structgko_1_1batch__dim.html">batch_dim&lt;2&gt;</a>&amp; size = <a class="code" href="structgko_1_1batch__dim.html">batch_dim&lt;2&gt;</a>{},</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;        <span class="keyword">const</span> IndexType num_elems_per_row = 0);</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValuesArray, <span class="keyword">typename</span> IndicesArray&gt;</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    Ell(std::shared_ptr&lt;const Executor&gt; exec, <span class="keyword">const</span> <a class="code" href="structgko_1_1batch__dim.html">batch_dim&lt;2&gt;</a>&amp; size,</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;        <span class="keyword">const</span> IndexType num_elems_per_row, ValuesArray&amp;&amp; values,</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;        IndicesArray&amp;&amp; col_idxs)</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;        : EnableBatchLinOp&lt;Ell&gt;(exec, size),</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;          num_elems_per_row_{num_elems_per_row},</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;          values_{exec, std::forward&lt;ValuesArray&gt;(values)},</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;          col_idxs_{exec, std::forward&lt;IndicesArray&gt;(col_idxs)}</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;    {</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;        <span class="comment">// Ensure that the value and col_idxs arrays have the correct size</span></div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;        <span class="keyword">auto</span> num_elems = this-&gt;get_common_size()[0] * num_elems_per_row *</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;                         this-&gt;get_num_batch_items();</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;        GKO_ASSERT_EQ(num_elems, values_.<a class="code" href="classgko_1_1array.html#ad38e4c252d698a4581ffa0833ab98c3f">get_size</a>());</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;        GKO_ASSERT_EQ(this-&gt;<a class="code" href="classgko_1_1batch_1_1matrix_1_1Ell.html#a66f9fb4a46aee82750d8ef185149d207">get_num_elements_per_item</a>(), col_idxs_.<a class="code" href="classgko_1_1array.html#ad38e4c252d698a4581ffa0833ab98c3f">get_size</a>());</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;    }</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160; </div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;    <span class="keywordtype">void</span> apply_impl(<span class="keyword">const</span> MultiVector&lt;value_type&gt;* b,</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;                    MultiVector&lt;value_type&gt;* x) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160; </div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;    <span class="keywordtype">void</span> apply_impl(<span class="keyword">const</span> MultiVector&lt;value_type&gt;* alpha,</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;                    <span class="keyword">const</span> MultiVector&lt;value_type&gt;* b,</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;                    <span class="keyword">const</span> MultiVector&lt;value_type&gt;* beta,</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;                    MultiVector&lt;value_type&gt;* x) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160; </div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;    index_type num_elems_per_row_;</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;    array&lt;value_type&gt; values_;</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;    array&lt;index_type&gt; col_idxs_;</div>
-<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;};</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1batch_1_1matrix_1_1Ell.html#a252fe70b1e72f5e5d5ba8713fd040c4e">add_scaled_identity</a>(<a class="code" href="classgko_1_1ptr__param.html">ptr_param</a>&lt;<span class="keyword">const</span> <a class="code" href="classgko_1_1batch_1_1MultiVector.html">MultiVector&lt;value_type&gt;</a>&gt; alpha,</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;                             <a class="code" href="classgko_1_1ptr__param.html">ptr_param</a>&lt;<span class="keyword">const</span> <a class="code" href="classgko_1_1batch_1_1MultiVector.html">MultiVector&lt;value_type&gt;</a>&gt; beta);</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160; </div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> compute_num_elems(<span class="keyword">const</span> <a class="code" href="structgko_1_1batch__dim.html">batch_dim&lt;2&gt;</a>&amp; size,</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;                                IndexType num_elems_per_row)</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    {</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;        <span class="keywordflow">return</span> size.<a class="code" href="structgko_1_1batch__dim.html#a380f449cd6305c8baba95569627503b2">get_num_batch_items</a>() * size.<a class="code" href="structgko_1_1batch__dim.html#aa945ce6b61c1dd08bc28fb12ab7b152d">get_common_size</a>()[0] *</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;               num_elems_per_row;</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    }</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160; </div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    Ell(std::shared_ptr&lt;const Executor&gt; exec,</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;        <span class="keyword">const</span> <a class="code" href="structgko_1_1batch__dim.html">batch_dim&lt;2&gt;</a>&amp; size = <a class="code" href="structgko_1_1batch__dim.html">batch_dim&lt;2&gt;</a>{},</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;        <span class="keyword">const</span> IndexType num_elems_per_row = 0);</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160; </div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValuesArray, <span class="keyword">typename</span> IndicesArray&gt;</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;    Ell(std::shared_ptr&lt;const Executor&gt; exec, <span class="keyword">const</span> <a class="code" href="structgko_1_1batch__dim.html">batch_dim&lt;2&gt;</a>&amp; size,</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;        <span class="keyword">const</span> IndexType num_elems_per_row, ValuesArray&amp;&amp; values,</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;        IndicesArray&amp;&amp; col_idxs)</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;        : EnableBatchLinOp&lt;Ell&gt;(exec, size),</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;          num_elems_per_row_{num_elems_per_row},</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;          values_{exec, std::forward&lt;ValuesArray&gt;(values)},</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;          col_idxs_{exec, std::forward&lt;IndicesArray&gt;(col_idxs)}</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;    {</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;        <span class="comment">// Ensure that the value and col_idxs arrays have the correct size</span></div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;        <span class="keyword">auto</span> num_elems = this-&gt;get_common_size()[0] * num_elems_per_row *</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;                         this-&gt;get_num_batch_items();</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;        GKO_ASSERT_EQ(num_elems, values_.<a class="code" href="classgko_1_1array.html#ad38e4c252d698a4581ffa0833ab98c3f">get_size</a>());</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;        GKO_ASSERT_EQ(this-&gt;<a class="code" href="classgko_1_1batch_1_1matrix_1_1Ell.html#a66f9fb4a46aee82750d8ef185149d207">get_num_elements_per_item</a>(), col_idxs_.<a class="code" href="classgko_1_1array.html#ad38e4c252d698a4581ffa0833ab98c3f">get_size</a>());</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;    }</div>
 <div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160; </div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160; </div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;}  <span class="comment">// namespace matrix</span></div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;}  <span class="comment">// namespace batch</span></div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;}  <span class="comment">// namespace gko</span></div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160; </div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160; </div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_MATRIX_BATCH_ELL_HPP_</span></div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;    <span class="keywordtype">void</span> apply_impl(<span class="keyword">const</span> MultiVector&lt;value_type&gt;* b,</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;                    MultiVector&lt;value_type&gt;* x) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160; </div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    <span class="keywordtype">void</span> apply_impl(<span class="keyword">const</span> MultiVector&lt;value_type&gt;* alpha,</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;                    <span class="keyword">const</span> MultiVector&lt;value_type&gt;* b,</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;                    <span class="keyword">const</span> MultiVector&lt;value_type&gt;* beta,</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;                    MultiVector&lt;value_type&gt;* x) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160; </div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    index_type num_elems_per_row_;</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;    array&lt;value_type&gt; values_;</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;    array&lt;index_type&gt; col_idxs_;</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;};</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160; </div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160; </div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;}  <span class="comment">// namespace matrix</span></div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;}  <span class="comment">// namespace batch</span></div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;}  <span class="comment">// namespace gko</span></div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160; </div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160; </div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_MATRIX_BATCH_ELL_HPP_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassgko_1_1batch_1_1EnableBatchLinOp_html"><div class="ttname"><a href="classgko_1_1batch_1_1EnableBatchLinOp.html">gko::batch::EnableBatchLinOp</a></div><div class="ttdoc">The EnableBatchLinOp mixin can be used to provide sensible default implementations of the majority of...</div><div class="ttdef"><b>Definition:</b> batch_lin_op.hpp:251</div></div>
 <div class="ttc" id="aclassgko_1_1batch_1_1matrix_1_1Ell_html_a4b7267cec4e848aa249c920733343951"><div class="ttname"><a href="classgko_1_1batch_1_1matrix_1_1Ell.html#a4b7267cec4e848aa249c920733343951">gko::batch::matrix::Ell::get_num_stored_elements_per_row</a></div><div class="ttdeci">index_type get_num_stored_elements_per_row() const noexcept</div><div class="ttdoc">Returns the number of elements per row explicitly stored.</div><div class="ttdef"><b>Definition:</b> batch_ell.hpp:141</div></div>
@@ -285,6 +288,7 @@ $(function() {
 <div class="ttc" id="aclassgko_1_1batch_1_1matrix_1_1Ell_html_a2b0cb60b660e897f163dfe476a825c30"><div class="ttname"><a href="classgko_1_1batch_1_1matrix_1_1Ell.html#a2b0cb60b660e897f163dfe476a825c30">gko::batch::matrix::Ell::create_view_for_item</a></div><div class="ttdeci">std::unique_ptr&lt; unbatch_type &gt; create_view_for_item(size_type item_id)</div><div class="ttdoc">Creates a mutable view (of matrix::Ell type) of one item of the batch::matrix::Ell&lt;value_type&gt; object...</div></div>
 <div class="ttc" id="aclassgko_1_1array_html"><div class="ttname"><a href="classgko_1_1array.html">gko::array&lt; value_type &gt;</a></div></div>
 <div class="ttc" id="aclassgko_1_1batch_1_1matrix_1_1Ell_html_afac1406fa39e122d43b816158fe8a222"><div class="ttname"><a href="classgko_1_1batch_1_1matrix_1_1Ell.html#afac1406fa39e122d43b816158fe8a222">gko::batch::matrix::Ell::get_col_idxs</a></div><div class="ttdeci">index_type * get_col_idxs() noexcept</div><div class="ttdoc">Returns a pointer to the array of column indices of the matrix.</div><div class="ttdef"><b>Definition:</b> batch_ell.hpp:121</div></div>
+<div class="ttc" id="aclassgko_1_1batch_1_1matrix_1_1Ell_html_a252fe70b1e72f5e5d5ba8713fd040c4e"><div class="ttname"><a href="classgko_1_1batch_1_1matrix_1_1Ell.html#a252fe70b1e72f5e5d5ba8713fd040c4e">gko::batch::matrix::Ell::add_scaled_identity</a></div><div class="ttdeci">void add_scaled_identity(ptr_param&lt; const MultiVector&lt; value_type &gt;&gt; alpha, ptr_param&lt; const MultiVector&lt; value_type &gt;&gt; beta)</div><div class="ttdoc">Performs the operation this = alpha*I + beta*this.</div></div>
 <div class="ttc" id="astructgko_1_1batch__dim_html"><div class="ttname"><a href="structgko_1_1batch__dim.html">gko::batch_dim&lt; 2 &gt;</a></div></div>
 <div class="ttc" id="anamespacegko_html_a6362f751c7753cf4fa0a4771d56e8ede"><div class="ttname"><a href="namespacegko.html#a6362f751c7753cf4fa0a4771d56e8ede">gko::next_precision</a></div><div class="ttdeci">typename detail::next_precision_impl&lt; T &gt;::type next_precision</div><div class="ttdoc">Obtains the next type in the singly-linked precision list.</div><div class="ttdef"><b>Definition:</b> math.hpp:462</div></div>
 <div class="ttc" id="aclassgko_1_1ptr__param_html"><div class="ttname"><a href="classgko_1_1ptr__param.html">gko::ptr_param</a></div><div class="ttdoc">This class is used for function parameters in the place of raw pointers.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:43</div></div>
