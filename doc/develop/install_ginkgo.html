@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1175533112 branch based on develop. Ginkgo version 1.8.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1176269305 branch based on develop. Ginkgo version 1.8.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -88,7 +88,7 @@ Building</h2>
 <li><code>-DGINKGO_BUILD_OMP={ON, OFF}</code> builds optimized OpenMP versions of the kernels, default is <code>ON</code> if the selected C++ compiler supports OpenMP, <code>OFF</code> otherwise.</li>
 <li><code>-DGINKGO_BUILD_CUDA={ON, OFF}</code> builds optimized cuda versions of the kernels (requires CUDA), default is <code>ON</code> if a CUDA compiler could be detected, <code>OFF</code> otherwise.</li>
 <li><code>-DGINKGO_BUILD_DPCPP={ON, OFF}</code> is deprecated. Please use <code>GINKGO_BUILD_SYCL</code> instead.</li>
-<li><code>-DGINKGO_BUILD_SYCL={ON, OFF}</code> builds optimized SYCL versions of the kernels (requires <code>CMAKE_CXX_COMPILER</code> to be set to the <code>dpcpp</code> or <code>icpx</code> compiler). The default is <code>ON</code> if <code>CMAKE_CXX_COMPILER</code> is a SYCL compiler, <code>OFF</code> otherwise.</li>
+<li><code>-DGINKGO_BUILD_SYCL={ON, OFF}</code> builds optimized SYCL versions of the kernels (requires <code>CMAKE_CXX_COMPILER</code> to be set to the <code>dpcpp</code> or <code>icpx</code> compiler). The default is <code>ON</code> if <code>CMAKE_CXX_COMPILER</code> is a SYCL compiler, <code>OFF</code> otherwise. Due to some differences in IEEE 754 floating point numberhandling in the Intel SYCL compilers, Ginkgo tests may fail unless compiled with <code>-DCMAKE_CXX_FLAGS=-ffp-model=precise</code></li>
 <li><code>-DGINKGO_BUILD_HIP={ON, OFF}</code> builds optimized HIP versions of the kernels (requires HIP), default is <code>ON</code> if an installation of HIP could be detected, <code>OFF</code> otherwise.</li>
 <li><code>-DGINKGO_HIP_AMDGPU="gpuarch1;gpuarch2"</code> the amdgpu_target(s) variable passed to hipcc for the <code>hcc</code> HIP backend. The default is none (auto).</li>
 <li><code>-DGINKGO_BUILD_HWLOC={ON, OFF}</code> builds Ginkgo with HWLOC. Default is <code>OFF</code>.</li>
