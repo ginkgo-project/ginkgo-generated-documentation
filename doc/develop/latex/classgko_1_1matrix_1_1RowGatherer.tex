@@ -45,13 +45,14 @@ const index\+\_\+type $\ast$ \mbox{\hyperlink{classgko_1_1matrix_1_1RowGatherer_
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1RowGatherer}{Row\+Gatherer}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1RowGatherer_a2c6844bab47c1c431598a8d2498b6235}{create}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \&size=\{\})
+\begin{DoxyCompactList}\small\item\em Creates uninitialized \mbox{\hyperlink{classgko_1_1matrix_1_1RowGatherer}{Row\+Gatherer}} arrays of the specified size. \end{DoxyCompactList}\item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1RowGatherer}{Row\+Gatherer}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1RowGatherer_aa49b774b6de249bbf2f171c6c708a18b}{create}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \&size, \mbox{\hyperlink{classgko_1_1array}{array}}$<$ index\+\_\+type $>$ row\+\_\+idxs)
+\begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{classgko_1_1matrix_1_1RowGatherer}{Row\+Gatherer}} matrix from an already allocated (and initialized) row gathering array. \end{DoxyCompactList}\item 
 static std\+::unique\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1RowGatherer}{Row\+Gatherer}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1RowGatherer_a67df955e5d17a072653bb2251fc77e69}{create\+\_\+const}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \&size, gko\+::detail\+::const\+\_\+array\+\_\+view$<$ Index\+Type $>$ \&\&row\+\_\+idxs)
 \begin{DoxyCompactList}\small\item\em Creates a constant (immutable) \mbox{\hyperlink{classgko_1_1matrix_1_1RowGatherer}{Row\+Gatherer}} matrix from a constant array. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
-\item 
-\mbox{\Hypertarget{classgko_1_1matrix_1_1RowGatherer_af8020521603bf4156c0c26b72e972a7b}\label{classgko_1_1matrix_1_1RowGatherer_af8020521603bf4156c0c26b72e972a7b}} 
-class {\bfseries Enable\+Create\+Method$<$ Row\+Gatherer $>$}
 \item 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1RowGatherer_a6caede6ce5717f68eacbd9b0e29dcc32}\label{classgko_1_1matrix_1_1RowGatherer_a6caede6ce5717f68eacbd9b0e29dcc32}} 
 class {\bfseries Enable\+Polymorphic\+Object$<$ Row\+Gatherer, Lin\+Op $>$}
@@ -75,12 +76,59 @@ This format is used mainly to allow for an abstraction of the rowgatherer and pr
 
 
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1matrix_1_1RowGatherer_aa49b774b6de249bbf2f171c6c708a18b}\label{classgko_1_1matrix_1_1RowGatherer_aa49b774b6de249bbf2f171c6c708a18b}} 
+\index{gko::matrix::RowGatherer$<$ IndexType $>$@{gko::matrix::RowGatherer$<$ IndexType $>$}!create@{create}}
+\index{create@{create}!gko::matrix::RowGatherer$<$ IndexType $>$@{gko::matrix::RowGatherer$<$ IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Index\+Type  = int32$>$ \\
+static std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1matrix_1_1RowGatherer}{Row\+Gatherer}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1RowGatherer}{gko\+::matrix\+::\+Row\+Gatherer}}$<$ Index\+Type $>$\+::create (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \&}]{size,  }\item[{\mbox{\hyperlink{classgko_1_1array}{array}}$<$ index\+\_\+type $>$}]{row\+\_\+idxs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a \mbox{\hyperlink{classgko_1_1matrix_1_1RowGatherer}{Row\+Gatherer}} matrix from an already allocated (and initialized) row gathering array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & \mbox{\hyperlink{classgko_1_1Executor}{Executor}} associated to the matrix \\
+\hline
+{\em size} & size of the rowgatherer array. \\
+\hline
+{\em row\+\_\+idxs} & array of rowgatherer array\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+If {\ttfamily row\+\_\+idxs} is not an rvalue, not an array of Index\+Type, or is on the wrong executor, an internal copy will be created, and the original array data will not be used in the matrix.
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+A smart pointer to the newly created matrix. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1matrix_1_1RowGatherer_a2c6844bab47c1c431598a8d2498b6235}\label{classgko_1_1matrix_1_1RowGatherer_a2c6844bab47c1c431598a8d2498b6235}} 
+\index{gko::matrix::RowGatherer$<$ IndexType $>$@{gko::matrix::RowGatherer$<$ IndexType $>$}!create@{create}}
+\index{create@{create}!gko::matrix::RowGatherer$<$ IndexType $>$@{gko::matrix::RowGatherer$<$ IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Index\+Type  = int32$>$ \\
+static std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1matrix_1_1RowGatherer}{Row\+Gatherer}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1RowGatherer}{gko\+::matrix\+::\+Row\+Gatherer}}$<$ Index\+Type $>$\+::create (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \&}]{size = {\ttfamily \{\}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates uninitialized \mbox{\hyperlink{classgko_1_1matrix_1_1RowGatherer}{Row\+Gatherer}} arrays of the specified size. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & \mbox{\hyperlink{classgko_1_1Executor}{Executor}} associated to the matrix \\
+\hline
+{\em size} & size of the Row\+Gatherable matrix\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A smart pointer to the newly created matrix. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1RowGatherer_a67df955e5d17a072653bb2251fc77e69}\label{classgko_1_1matrix_1_1RowGatherer_a67df955e5d17a072653bb2251fc77e69}} 
 \index{gko::matrix::RowGatherer$<$ IndexType $>$@{gko::matrix::RowGatherer$<$ IndexType $>$}!create\_const@{create\_const}}
 \index{create\_const@{create\_const}!gko::matrix::RowGatherer$<$ IndexType $>$@{gko::matrix::RowGatherer$<$ IndexType $>$}}
 \doxysubsubsection{\texorpdfstring{create\_const()}{create\_const()}}
 {\footnotesize\ttfamily template$<$typename Index\+Type  = int32$>$ \\
-static std\+::unique\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1matrix_1_1RowGatherer}{Row\+Gatherer}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1RowGatherer}{gko\+::matrix\+::\+Row\+Gatherer}}$<$ Index\+Type $>$\+::create\+\_\+const (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \&}]{size,  }\item[{gko\+::detail\+::const\+\_\+array\+\_\+view$<$ Index\+Type $>$ \&\&}]{row\+\_\+idxs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+static std\+::unique\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1matrix_1_1RowGatherer}{Row\+Gatherer}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1RowGatherer}{gko\+::matrix\+::\+Row\+Gatherer}}$<$ Index\+Type $>$\+::create\+\_\+const (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \&}]{size,  }\item[{gko\+::detail\+::const\+\_\+array\+\_\+view$<$ Index\+Type $>$ \&\&}]{row\+\_\+idxs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
 

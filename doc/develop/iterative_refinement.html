@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1181737603 branch based on develop. Ginkgo version 1.8.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1182170519 branch based on develop. Ginkgo version 1.8.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -120,10 +120,10 @@ $(function() {
 <div class="fragment"><div class="line"><span class="keyword">auto</span> A = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">share</a>(gko::read&lt;mtx&gt;(std::ifstream(<span class="stringliteral">&quot;data/A.mtx&quot;</span>), exec));</div>
 </div><!-- fragment --><p>Create RHS and initial guess as 1</p>
 <div class="fragment"><div class="line"><a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">gko::size_type</a> size = A-&gt;get_size()[0];</div>
-<div class="line"><span class="keyword">auto</span> host_x = <a class="code" href="classgko_1_1matrix_1_1Dense.html">gko::matrix::Dense&lt;ValueType&gt;::create</a>(exec-&gt;get_master(),</div>
+<div class="line"><span class="keyword">auto</span> host_x = <a class="code" href="classgko_1_1matrix_1_1Dense.html#a04562b9cf07b14ec1ef4865a3fe8e7fa">gko::matrix::Dense&lt;ValueType&gt;::create</a>(exec-&gt;get_master(),</div>
 <div class="line">                                                    <a class="code" href="structgko_1_1dim.html">gko::dim&lt;2&gt;</a>(size, 1));</div>
 <div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0; i &lt; size; i++) {</div>
-<div class="line">    host_x-&gt;<a class="code" href="classgko_1_1matrix_1_1Dense.html#af0f1af68853537807ca271a296de3cd0">at</a>(i, 0) = 1.;</div>
+<div class="line">    host_x-&gt;at(i, 0) = 1.;</div>
 <div class="line">}</div>
 <div class="line"><span class="keyword">auto</span> x = <a class="code" href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a>(exec, host_x);</div>
 <div class="line"><span class="keyword">auto</span> b = <a class="code" href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a>(exec, host_x);</div>
@@ -242,10 +242,10 @@ $(function() {
 <div class="line"> </div>
 <div class="line">    <span class="keyword">auto</span> A = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">share</a>(gko::read&lt;mtx&gt;(std::ifstream(<span class="stringliteral">&quot;data/A.mtx&quot;</span>), exec));</div>
 <div class="line">    <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">gko::size_type</a> size = A-&gt;get_size()[0];</div>
-<div class="line">    <span class="keyword">auto</span> host_x = <a class="code" href="classgko_1_1matrix_1_1Dense.html">gko::matrix::Dense&lt;ValueType&gt;::create</a>(exec-&gt;get_master(),</div>
+<div class="line">    <span class="keyword">auto</span> host_x = <a class="code" href="classgko_1_1matrix_1_1Dense.html#a04562b9cf07b14ec1ef4865a3fe8e7fa">gko::matrix::Dense&lt;ValueType&gt;::create</a>(exec-&gt;get_master(),</div>
 <div class="line">                                                        <a class="code" href="structgko_1_1dim.html">gko::dim&lt;2&gt;</a>(size, 1));</div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 0; i &lt; size; i++) {</div>
-<div class="line">        host_x-&gt;<a class="code" href="classgko_1_1matrix_1_1Dense.html#af0f1af68853537807ca271a296de3cd0">at</a>(i, 0) = 1.;</div>
+<div class="line">        host_x-&gt;at(i, 0) = 1.;</div>
 <div class="line">    }</div>
 <div class="line">    <span class="keyword">auto</span> x = <a class="code" href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a>(exec, host_x);</div>
 <div class="line">    <span class="keyword">auto</span> b = <a class="code" href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a>(exec, host_x);</div>
@@ -300,12 +300,12 @@ $(function() {
 </div><!-- PageDoc -->
 <div class="ttc" id="aclassgko_1_1matrix_1_1Csr_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Csr.html">gko::matrix::Csr</a></div><div class="ttdoc">CSR is a matrix format which stores only the nonzero coefficients by compressing each row of the matr...</div><div class="ttdef"><b>Definition:</b> matrix.hpp:26</div></div>
 <div class="ttc" id="anamespacegko_1_1log_html_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a"><div class="ttname"><a href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a">gko::log::profile_event_category::solver</a></div><div class="ttdoc">Solver events.</div></div>
-<div class="ttc" id="aclassgko_1_1log_1_1Convergence_html_aa67955ea9d1d18f15f0330d12b93d330"><div class="ttname"><a href="classgko_1_1log_1_1Convergence.html#aa67955ea9d1d18f15f0330d12b93d330">gko::log::Convergence::create</a></div><div class="ttdeci">static std::unique_ptr&lt; Convergence &gt; create(std::shared_ptr&lt; const Executor &gt;, const mask_type &amp;enabled_events=Logger::criterion_events_mask|Logger::iteration_complete_mask)</div><div class="ttdoc">Creates a convergence logger.</div><div class="ttdef"><b>Definition:</b> convergence.hpp:78</div></div>
+<div class="ttc" id="aclassgko_1_1log_1_1Convergence_html_aa67955ea9d1d18f15f0330d12b93d330"><div class="ttname"><a href="classgko_1_1log_1_1Convergence.html#aa67955ea9d1d18f15f0330d12b93d330">gko::log::Convergence::create</a></div><div class="ttdeci">static std::unique_ptr&lt; Convergence &gt; create(std::shared_ptr&lt; const Executor &gt;, const mask_type &amp;enabled_events=Logger::criterion_events_mask|Logger::iteration_complete_mask)</div><div class="ttdoc">Creates a convergence logger.</div><div class="ttdef"><b>Definition:</b> convergence.hpp:74</div></div>
 <div class="ttc" id="anamespacegko_html_ae749a5ea11a93c1bcc9158d9a6e9fb68af1f713c9e000f5d3f280adbd124df4f5"><div class="ttname"><a href="namespacegko.html#ae749a5ea11a93c1bcc9158d9a6e9fb68af1f713c9e000f5d3f280adbd124df4f5">gko::layout_type::array</a></div><div class="ttdoc">The matrix should be written as dense matrix in column-major order.</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Dense_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Dense.html">gko::matrix::Dense</a></div><div class="ttdoc">Dense is a matrix format which explicitly stores all values of the matrix.</div><div class="ttdef"><b>Definition:</b> dense_cache.hpp:20</div></div>
+<div class="ttc" id="aclassgko_1_1matrix_1_1Dense_html_a04562b9cf07b14ec1ef4865a3fe8e7fa"><div class="ttname"><a href="classgko_1_1matrix_1_1Dense.html#a04562b9cf07b14ec1ef4865a3fe8e7fa">gko::matrix::Dense::create</a></div><div class="ttdeci">static std::unique_ptr&lt; Dense &gt; create(std::shared_ptr&lt; const Executor &gt; exec, const dim&lt; 2 &gt; &amp;size={}, size_type stride=0)</div><div class="ttdoc">Creates an uninitialized Dense matrix of the specified size.</div></div>
 <div class="ttc" id="aclassgko_1_1solver_1_1Ir_html"><div class="ttname"><a href="classgko_1_1solver_1_1Ir.html">gko::solver::Ir</a></div><div class="ttdoc">Iterative refinement (IR) is an iterative method that uses another coarse method to approximate the e...</div><div class="ttdef"><b>Definition:</b> ir.hpp:80</div></div>
 <div class="ttc" id="anamespacegko_html_a6e5c95df0ae4e47aab2f604a22d98ee7"><div class="ttname"><a href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">gko::size_type</a></div><div class="ttdeci">std::size_t size_type</div><div class="ttdoc">Integral type used for allocation quantities.</div><div class="ttdef"><b>Definition:</b> types.hpp:92</div></div>
-<div class="ttc" id="aclassgko_1_1matrix_1_1Dense_html_af0f1af68853537807ca271a296de3cd0"><div class="ttname"><a href="classgko_1_1matrix_1_1Dense.html#af0f1af68853537807ca271a296de3cd0">gko::matrix::Dense::at</a></div><div class="ttdeci">value_type &amp; at(size_type row, size_type col) noexcept</div><div class="ttdoc">Returns a single element of the matrix.</div><div class="ttdef"><b>Definition:</b> dense.hpp:869</div></div>
 <div class="ttc" id="anamespacegko_html_a1beb80750459e4201aa9d882d2d074c3"><div class="ttname"><a href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a></div><div class="ttdeci">detail::cloned_type&lt; Pointer &gt; clone(const Pointer &amp;p)</div><div class="ttdoc">Creates a unique clone of the object pointed to by p.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:175</div></div>
 <div class="ttc" id="aclassgko_1_1HipExecutor_html_aa0701fe1303e03a8331da7e95008100d"><div class="ttname"><a href="classgko_1_1HipExecutor.html#aa0701fe1303e03a8331da7e95008100d">gko::HipExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; HipExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, bool device_reset, allocation_mode alloc_mode=default_hip_alloc_mode, CUstream_st *stream=nullptr)</div><div class="ttdoc">Creates a new HipExecutor.</div></div>
 <div class="ttc" id="aclassgko_1_1version__info_html_a6daeb8a087cfb57fa055526fc133d8eb"><div class="ttname"><a href="classgko_1_1version__info.html#a6daeb8a087cfb57fa055526fc133d8eb">gko::version_info::get</a></div><div class="ttdeci">static const version_info &amp; get()</div><div class="ttdoc">Returns an instance of version_info.</div><div class="ttdef"><b>Definition:</b> version.hpp:140</div></div>
