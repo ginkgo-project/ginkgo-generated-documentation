@@ -24,6 +24,26 @@ If this example is built as part of Ginkgo, it is advised to configure Ginkgo wi
 
 
 \begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keyword}{auto} exec = matrix-\/>\mbox{\hyperlink{classgko_1_1PolymorphicObject_ab40586bff071b7f11c2cf6b5cbf598eb}{get\_executor}}();}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} discretization\_points = matrix-\/>\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\_size}}()[0];}
+\end{DoxyCode}
+
+
+Over-\/allocate storage for the matrix elements. Each row has 3 entries, except for the first and last one. To handle each row uniformly, we allocate space for 3x the number of rows.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classgko_1_1device__matrix__data}{gko::device\_matrix\_data<ValueType, IndexType>}} md(exec, matrix-\/>\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\_size}}(),}
+\DoxyCodeLine{                                                 discretization\_points * 3);}
+\end{DoxyCode}
+
+
+Create Kokkos views on Ginkgo data.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Kokkos::View<IndexType*> v\_row\_idxs(md.get\_row\_idxs(),}
 \DoxyCodeLine{                                    md.get\_num\_stored\_elements());}
 \DoxyCodeLine{Kokkos::View<IndexType*> v\_col\_idxs(md.get\_col\_idxs(),}
 \DoxyCodeLine{                                    md.get\_num\_stored\_elements());}
@@ -121,9 +141,8 @@ Computes the 1-\/norm of the error given the computed {\ttfamily u} and the corr
 \DoxyCodeLine{        KOKKOS\_LAMBDA(\textcolor{keywordtype}{int} i, \textcolor{keywordtype}{double}\& lsum) \{}
 \DoxyCodeLine{            \textcolor{keyword}{const} \textcolor{keyword}{auto} h = 1.0 / (discretization\_points + 1);}
 \DoxyCodeLine{            \textcolor{keyword}{const} \textcolor{keyword}{auto} xi = (i + 1) * h;}
-\DoxyCodeLine{            lsum += Kokkos::Experimental::abs(}
-\DoxyCodeLine{                (v\_u(i) -\/ correct\_u(xi)) /}
-\DoxyCodeLine{                Kokkos::Experimental::abs(correct\_u(xi)));}
+\DoxyCodeLine{            lsum += Kokkos::abs((v\_u(i) -\/ correct\_u(xi)) /}
+\DoxyCodeLine{                                Kokkos::abs(correct\_u(xi)));}
 \DoxyCodeLine{        \},}
 \DoxyCodeLine{        error);}
 \DoxyCodeLine{    \textcolor{keywordflow}{return} error;}
@@ -286,6 +305,17 @@ The actual error depends on the used hardware. \label{_PlainProg}%
 \DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#if KOKKOS\_VERSION / 10000 < 4}}
+\DoxyCodeLine{\textcolor{keyword}{namespace }Kokkos \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{using} Experimental::abs;}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType, \textcolor{keyword}{typename} IndexType>}
 \DoxyCodeLine{\textcolor{keywordtype}{void} generate\_stencil\_matrix(\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<ValueType, IndexType>}}* matrix)}
 \DoxyCodeLine{\{}
@@ -359,9 +389,8 @@ The actual error depends on the used hardware. \label{_PlainProg}%
 \DoxyCodeLine{        KOKKOS\_LAMBDA(\textcolor{keywordtype}{int} i, \textcolor{keywordtype}{double}\& lsum) \{}
 \DoxyCodeLine{            \textcolor{keyword}{const} \textcolor{keyword}{auto} h = 1.0 / (discretization\_points + 1);}
 \DoxyCodeLine{            \textcolor{keyword}{const} \textcolor{keyword}{auto} xi = (i + 1) * h;}
-\DoxyCodeLine{            lsum += Kokkos::Experimental::abs(}
-\DoxyCodeLine{                (v\_u(i) -\/ correct\_u(xi)) /}
-\DoxyCodeLine{                Kokkos::Experimental::abs(correct\_u(xi)));}
+\DoxyCodeLine{            lsum += Kokkos::abs((v\_u(i) -\/ correct\_u(xi)) /}
+\DoxyCodeLine{                                Kokkos::abs(correct\_u(xi)));}
 \DoxyCodeLine{        \},}
 \DoxyCodeLine{        error);}
 \DoxyCodeLine{    \textcolor{keywordflow}{return} error;}

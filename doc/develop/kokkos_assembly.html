@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1192880661 branch based on develop. Ginkgo version 1.8.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1245511096 branch based on develop. Ginkgo version 1.8.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -99,7 +99,15 @@ $(function() {
 <p><a class="anchor" id="Notes"></a></p><h3>Notes </h3>
 <p>If this example is built as part of Ginkgo, it is advised to configure Ginkgo with <code>-DGINKGO_WITH_CCACHE=OFF</code> to prevent incompabilities with Kokkos' compiler wrapper for <code>nvcc</code>.</p>
 <p><a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
-<div class="fragment"><div class="line">                                    md.get_num_stored_elements());</div>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    <span class="keyword">auto</span> exec = matrix-&gt;<a class="code" href="classgko_1_1PolymorphicObject.html#ab40586bff071b7f11c2cf6b5cbf598eb">get_executor</a>();</div>
+<div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> discretization_points = matrix-&gt;<a class="code" href="classgko_1_1LinOp.html#a31b3c003388eb0b95393154f68c2b98d">get_size</a>()[0];</div>
+</div><!-- fragment --><p>Over-allocate storage for the matrix elements. Each row has 3 entries, except for the first and last one. To handle each row uniformly, we allocate space for 3x the number of rows.</p>
+<div class="fragment"><div class="line"><a class="code" href="classgko_1_1device__matrix__data.html">gko::device_matrix_data&lt;ValueType, IndexType&gt;</a> md(exec, matrix-&gt;<a class="code" href="classgko_1_1LinOp.html#a31b3c003388eb0b95393154f68c2b98d">get_size</a>(),</div>
+<div class="line">                                                 discretization_points * 3);</div>
+</div><!-- fragment --><p>Create Kokkos views on Ginkgo data.</p>
+<div class="fragment"><div class="line">Kokkos::View&lt;IndexType*&gt; v_row_idxs(md.get_row_idxs(),</div>
+<div class="line">                                    md.get_num_stored_elements());</div>
 <div class="line">Kokkos::View&lt;IndexType*&gt; v_col_idxs(md.get_col_idxs(),</div>
 <div class="line">                                    md.get_num_stored_elements());</div>
 <div class="line">Kokkos::View&lt;ValueType*&gt; v_values(md.get_values(),</div>
@@ -160,9 +168,8 @@ $(function() {
 <div class="line">        KOKKOS_LAMBDA(<span class="keywordtype">int</span> i, <span class="keywordtype">double</span>&amp; lsum) {</div>
 <div class="line">            <span class="keyword">const</span> <span class="keyword">auto</span> h = 1.0 / (discretization_points + 1);</div>
 <div class="line">            <span class="keyword">const</span> <span class="keyword">auto</span> xi = (i + 1) * h;</div>
-<div class="line">            lsum += Kokkos::Experimental::abs(</div>
-<div class="line">                (v_u(i) - correct_u(xi)) /</div>
-<div class="line">                Kokkos::Experimental::abs(correct_u(xi)));</div>
+<div class="line">            lsum += Kokkos::abs((v_u(i) - correct_u(xi)) /</div>
+<div class="line">                                Kokkos::abs(correct_u(xi)));</div>
 <div class="line">        },</div>
 <div class="line">        error);</div>
 <div class="line">    <span class="keywordflow">return</span> error;</div>
@@ -271,6 +278,17 @@ $(function() {
 <div class="line"><span class="preprocessor">#include &lt;ginkgo/ginkgo.hpp&gt;</span></div>
 <div class="line"> </div>
 <div class="line"> </div>
+<div class="line"><span class="preprocessor">#if KOKKOS_VERSION / 10000 &lt; 4</span></div>
+<div class="line"><span class="keyword">namespace </span>Kokkos {</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using</span> Experimental::abs;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">}</div>
+<div class="line"><span class="preprocessor">#endif</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType, <span class="keyword">typename</span> IndexType&gt;</div>
 <div class="line"><span class="keywordtype">void</span> generate_stencil_matrix(<a class="code" href="classgko_1_1matrix_1_1Csr.html">gko::matrix::Csr&lt;ValueType, IndexType&gt;</a>* matrix)</div>
 <div class="line">{</div>
@@ -344,9 +362,8 @@ $(function() {
 <div class="line">        KOKKOS_LAMBDA(<span class="keywordtype">int</span> i, <span class="keywordtype">double</span>&amp; lsum) {</div>
 <div class="line">            <span class="keyword">const</span> <span class="keyword">auto</span> h = 1.0 / (discretization_points + 1);</div>
 <div class="line">            <span class="keyword">const</span> <span class="keyword">auto</span> xi = (i + 1) * h;</div>
-<div class="line">            lsum += Kokkos::Experimental::abs(</div>
-<div class="line">                (v_u(i) - correct_u(xi)) /</div>
-<div class="line">                Kokkos::Experimental::abs(correct_u(xi)));</div>
+<div class="line">            lsum += Kokkos::abs((v_u(i) - correct_u(xi)) /</div>
+<div class="line">                                Kokkos::abs(correct_u(xi)));</div>
 <div class="line">        },</div>
 <div class="line">        error);</div>
 <div class="line">    <span class="keywordflow">return</span> error;</div>
