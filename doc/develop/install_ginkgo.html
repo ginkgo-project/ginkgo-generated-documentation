@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1246106114 branch based on develop. Ginkgo version 1.8.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1251062527 branch based on develop. Ginkgo version 1.8.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -90,7 +90,7 @@ Building</h2>
 <li><code>-DGINKGO_BUILD_DPCPP={ON, OFF}</code> is deprecated. Please use <code>GINKGO_BUILD_SYCL</code> instead.</li>
 <li><code>-DGINKGO_BUILD_SYCL={ON, OFF}</code> builds optimized SYCL versions of the kernels (requires <code>CMAKE_CXX_COMPILER</code> to be set to the <code>dpcpp</code> or <code>icpx</code> compiler). The default is <code>ON</code> if <code>CMAKE_CXX_COMPILER</code> is a SYCL compiler, <code>OFF</code> otherwise. Due to some differences in IEEE 754 floating point numberhandling in the Intel SYCL compilers, Ginkgo tests may fail unless compiled with <code>-DCMAKE_CXX_FLAGS=-ffp-model=precise</code></li>
 <li><code>-DGINKGO_BUILD_HIP={ON, OFF}</code> builds optimized HIP versions of the kernels (requires HIP), default is <code>ON</code> if an installation of HIP could be detected, <code>OFF</code> otherwise.</li>
-<li><code>-DGINKGO_HIP_AMDGPU="gpuarch1;gpuarch2"</code> the amdgpu_target(s) variable passed to hipcc for the <code>hcc</code> HIP backend. The default is none (auto).</li>
+<li><code>-DCMAKE_HIP_ARCHITECTURES="gpuarch1;gpuarch2"</code> the AMDGPU targets to be passed to the compiler. If empty, compiler chooses based on the available GPUs.</li>
 <li><code>-DGINKGO_BUILD_HWLOC={ON, OFF}</code> builds Ginkgo with HWLOC. Default is <code>OFF</code>.</li>
 <li><code>-DGINKGO_BUILD_DOC={ON, OFF}</code> creates an HTML version of Ginkgo's documentation from inline comments in the code. The default is <code>OFF</code>.</li>
 <li><code>-DGINKGO_DOC_GENERATE_EXAMPLES={ON, OFF}</code> generates the documentation of examples in Ginkgo. The default is <code>ON</code>.</li>
@@ -154,15 +154,9 @@ Changing the paths to search for HIP and other packages</h3>
 </ul>
 <h3><a class="anchor" id="autotoc_md4"></a>
 HIP platform detection of AMD and NVIDIA</h3>
-<p>By default, Ginkgo uses the output of <code>/opt/rocm/hip/bin/hipconfig --platform</code> to select the backend. The accepted values are either <code>hcc</code> (<code>amd</code> with ROCM &gt;= 4.1) or <code>nvcc</code> (<code>nvidia</code> with ROCM &gt;= 4.1). When on an AMD or NVIDIA system, this should output the correct platform by default. When on a system without GPUs, this should output <code>hcc</code> by default. To change this value, export the environment variable <code>HIP_PLATFORM</code> like so: </p><div class="fragment"><div class="line">export HIP_PLATFORM=nvcc # or nvidia for ROCM &gt;= 4.1</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md5"></a>
-Setting platform specific compilation flags</h3>
-<p>Platform specific compilation flags can be given through the following CMake variables:</p><ul>
-<li><code>-DGINKGO_HIP_COMPILER_FLAGS=</code>: compilation flags given to all platforms.</li>
-<li><code>-DGINKGO_HIP_NVCC_COMPILER_FLAGS=</code>: compilation flags given to NVIDIA platforms.</li>
-<li><code>-DGINKGO_HIP_CLANG_COMPILER_FLAGS=</code>: compilation flags given to AMD clang compiler.</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md6"></a>
+<p>Ginkgo relies on CMake to decide which compiler to use for HIP. To choose <code>nvcc</code> instead of the default ROCm <code>clang++</code>, set the corresponding environment variable: </p><div class="fragment"><div class="line">export HIPCXX=nvcc</div>
+</div><!-- fragment --><p> Note that this option is currently not being tested in our CI pipelines.</p>
+<h2><a class="anchor" id="autotoc_md5"></a>
 Third party libraries and packages</h2>
 <p>Ginkgo relies on third party packages in different cases. These third party packages can be turned off by disabling the relevant options.</p>
 <ul>
@@ -178,7 +172,7 @@ Third party libraries and packages</h2>
 <p>Ginkgo attempts to use pre-installed versions of these package if they match version requirements using <code>find_package</code>. Otherwise, the configuration step will download the files for each of the packages <code>GTest</code>, <code>gflags</code>, <code>nlohmann-json</code> and <code>hwloc</code> and build them internally.</p>
 <p>Note that, if the external packages were not installed to the default location, the CMake option <code>-DCMAKE_PREFIX_PATH=&lt;path-list&gt;</code> needs to be set to the semicolon (<code>;</code>) separated list of install paths of these external packages. For more Information, see the <a href="https://cmake.org/cmake/help/v3.9/variable/CMAKE_PREFIX_PATH.html">CMake documentation for CMAKE_PREFIX_PATH</a> for details.</p>
 <p>For convenience, the options <code>GINKGO_INSTALL_RPATH[_.*]</code> can be used to bind the installed Ginkgo shared libraries to the path of its dependencies.</p>
-<h2><a class="anchor" id="autotoc_md7"></a>
+<h2><a class="anchor" id="autotoc_md6"></a>
 Installing Ginkgo</h2>
 <p>To install Ginkgo into the specified folder, execute the following command in the build folder</p>
 <div class="fragment"><div class="line">make install</div>

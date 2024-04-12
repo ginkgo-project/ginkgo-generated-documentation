@@ -27,7 +27,7 @@ Replace {\ttfamily \mbox{[}O\+P\+T\+I\+O\+NS\mbox{]}} with desired cmake options
 \item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+B\+U\+I\+L\+D\+\_\+\+D\+P\+C\+PP=\{ON, O\+FF\}} is deprecated. Please use {\ttfamily G\+I\+N\+K\+G\+O\+\_\+\+B\+U\+I\+L\+D\+\_\+\+S\+Y\+CL} instead.
 \item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+B\+U\+I\+L\+D\+\_\+\+S\+Y\+CL=\{ON, O\+FF\}} builds optimized S\+Y\+CL versions of the kernels (requires {\ttfamily C\+M\+A\+K\+E\+\_\+\+C\+X\+X\+\_\+\+C\+O\+M\+P\+I\+L\+ER} to be set to the {\ttfamily dpcpp} or {\ttfamily icpx} compiler). The default is {\ttfamily ON} if {\ttfamily C\+M\+A\+K\+E\+\_\+\+C\+X\+X\+\_\+\+C\+O\+M\+P\+I\+L\+ER} is a S\+Y\+CL compiler, {\ttfamily O\+FF} otherwise. Due to some differences in I\+E\+EE 754 floating point numberhandling in the Intel S\+Y\+CL compilers, Ginkgo tests may fail unless compiled with {\ttfamily -\/D\+C\+M\+A\+K\+E\+\_\+\+C\+X\+X\+\_\+\+F\+L\+A\+GS=-\/ffp-\/model=precise}
 \item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+B\+U\+I\+L\+D\+\_\+\+H\+IP=\{ON, O\+FF\}} builds optimized H\+IP versions of the kernels (requires H\+IP), default is {\ttfamily ON} if an installation of H\+IP could be detected, {\ttfamily O\+FF} otherwise.
-\item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+H\+I\+P\+\_\+\+A\+M\+D\+G\+PU=\char`\"{}gpuarch1;gpuarch2\char`\"{}} the amdgpu\+\_\+target(s) variable passed to hipcc for the {\ttfamily hcc} H\+IP backend. The default is none (auto).
+\item {\ttfamily -\/D\+C\+M\+A\+K\+E\+\_\+\+H\+I\+P\+\_\+\+A\+R\+C\+H\+I\+T\+E\+C\+T\+U\+R\+ES=\char`\"{}gpuarch1;gpuarch2\char`\"{}} the A\+M\+D\+G\+PU targets to be passed to the compiler. If empty, compiler chooses based on the available G\+P\+Us.
 \item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+B\+U\+I\+L\+D\+\_\+\+H\+W\+L\+OC=\{ON, O\+FF\}} builds Ginkgo with H\+W\+L\+OC. Default is {\ttfamily O\+FF}.
 \item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+B\+U\+I\+L\+D\+\_\+\+D\+OC=\{ON, O\+FF\}} creates an H\+T\+ML version of Ginkgo\textquotesingle{}s documentation from inline comments in the code. The default is {\ttfamily O\+FF}.
 \item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+D\+O\+C\+\_\+\+G\+E\+N\+E\+R\+A\+T\+E\+\_\+\+E\+X\+A\+M\+P\+L\+ES=\{ON, O\+FF\}} generates the documentation of examples in Ginkgo. The default is {\ttfamily ON}.
@@ -96,17 +96,11 @@ All H\+IP installation paths can be configured through the use of environment va
 \item C\+Make {\ttfamily -\/D\+H\+I\+P\+R\+A\+N\+D\+\_\+\+P\+A\+TH=} or environment {\ttfamily export H\+I\+P\+R\+A\+N\+D\+\_\+\+P\+A\+TH=}\+: sets the {\ttfamily hip\+R\+A\+ND} installation path. The default value is {\ttfamily \$\{R\+O\+C\+M\+\_\+\+P\+A\+TH\}/hiprand}.
 \item environment {\ttfamily export C\+U\+D\+A\+\_\+\+P\+A\+TH=}\+: where {\ttfamily hipcc} can find {\ttfamily C\+U\+DA} if it is not in the default {\ttfamily /usr/local/cuda} path.
 \end{DoxyItemize}\hypertarget{install_ginkgo_autotoc_md4}{}\doxysubsubsection{H\+I\+P platform detection of A\+M\+D and N\+V\+I\+D\+IA}\label{install_ginkgo_autotoc_md4}
-By default, Ginkgo uses the output of {\ttfamily /opt/rocm/hip/bin/hipconfig -\/-\/platform} to select the backend. The accepted values are either {\ttfamily hcc} ({\ttfamily amd} with R\+O\+CM $>$= 4.\+1) or {\ttfamily nvcc} ({\ttfamily nvidia} with R\+O\+CM $>$= 4.\+1). When on an A\+MD or N\+V\+I\+D\+IA system, this should output the correct platform by default. When on a system without G\+P\+Us, this should output {\ttfamily hcc} by default. To change this value, export the environment variable {\ttfamily H\+I\+P\+\_\+\+P\+L\+A\+T\+F\+O\+RM} like so\+: 
+Ginkgo relies on C\+Make to decide which compiler to use for H\+IP. To choose {\ttfamily nvcc} instead of the default R\+O\+Cm {\ttfamily clang++}, set the corresponding environment variable\+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{export HIP\_PLATFORM=nvcc \# or nvidia for ROCM >= 4.1}
+\DoxyCodeLine{export HIPCXX=nvcc}
 \end{DoxyCode}
-\hypertarget{install_ginkgo_autotoc_md5}{}\doxysubsubsection{Setting platform specific compilation flags}\label{install_ginkgo_autotoc_md5}
-Platform specific compilation flags can be given through the following C\+Make variables\+:
-\begin{DoxyItemize}
-\item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+H\+I\+P\+\_\+\+C\+O\+M\+P\+I\+L\+E\+R\+\_\+\+F\+L\+A\+GS=}\+: compilation flags given to all platforms.
-\item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+H\+I\+P\+\_\+\+N\+V\+C\+C\+\_\+\+C\+O\+M\+P\+I\+L\+E\+R\+\_\+\+F\+L\+A\+GS=}\+: compilation flags given to N\+V\+I\+D\+IA platforms.
-\item {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+H\+I\+P\+\_\+\+C\+L\+A\+N\+G\+\_\+\+C\+O\+M\+P\+I\+L\+E\+R\+\_\+\+F\+L\+A\+GS=}\+: compilation flags given to A\+MD clang compiler.
-\end{DoxyItemize}\hypertarget{install_ginkgo_autotoc_md6}{}\doxysubsection{Third party libraries and packages}\label{install_ginkgo_autotoc_md6}
+ Note that this option is currently not being tested in our CI pipelines.\hypertarget{install_ginkgo_autotoc_md5}{}\doxysubsection{Third party libraries and packages}\label{install_ginkgo_autotoc_md5}
 Ginkgo relies on third party packages in different cases. These third party packages can be turned off by disabling the relevant options.
 
 
@@ -125,7 +119,7 @@ Ginkgo attempts to use pre-\/installed versions of these package if they match v
 
 Note that, if the external packages were not installed to the default location, the C\+Make option {\ttfamily -\/D\+C\+M\+A\+K\+E\+\_\+\+P\+R\+E\+F\+I\+X\+\_\+\+P\+A\+TH=$<$path-\/list$>$} needs to be set to the semicolon ({\ttfamily ;}) separated list of install paths of these external packages. For more Information, see the \href{https://cmake.org/cmake/help/v3.9/variable/CMAKE_PREFIX_PATH.html}{\texttt{ C\+Make documentation for C\+M\+A\+K\+E\+\_\+\+P\+R\+E\+F\+I\+X\+\_\+\+P\+A\+TH}} for details.
 
-For convenience, the options {\ttfamily G\+I\+N\+K\+G\+O\+\_\+\+I\+N\+S\+T\+A\+L\+L\+\_\+\+R\+P\+A\+TH\mbox{[}\+\_\+.$\ast$\mbox{]}} can be used to bind the installed Ginkgo shared libraries to the path of its dependencies.\hypertarget{install_ginkgo_autotoc_md7}{}\doxysubsection{Installing Ginkgo}\label{install_ginkgo_autotoc_md7}
+For convenience, the options {\ttfamily G\+I\+N\+K\+G\+O\+\_\+\+I\+N\+S\+T\+A\+L\+L\+\_\+\+R\+P\+A\+TH\mbox{[}\+\_\+.$\ast$\mbox{]}} can be used to bind the installed Ginkgo shared libraries to the path of its dependencies.\hypertarget{install_ginkgo_autotoc_md6}{}\doxysubsection{Installing Ginkgo}\label{install_ginkgo_autotoc_md6}
 To install Ginkgo into the specified folder, execute the following command in the build folder
 
 
