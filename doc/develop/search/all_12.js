@@ -15,7 +15,7 @@ var searchData=
   ['the_20inverse_2diteration_20program_1431',['The inverse-iteration program',['../inverse_iteration.html',1,'']]],
   ['the_20ir_2dilu_2dpreconditioned_2dsolver_20program_1432',['The ir-ilu-preconditioned-solver program',['../ir_ilu_preconditioned_solver.html',1,'']]],
   ['the_20iterative_2drefinement_20program_1433',['The iterative-refinement program',['../iterative_refinement.html',1,'']]],
-  ['the_20kokkos_5fassembly_20program_1434',['The kokkos_assembly program',['../kokkos_assembly.html',1,'']]],
+  ['the_20kokkos_2dassembly_20program_1434',['The kokkos-assembly program',['../kokkos_assembly.html',1,'']]],
   ['the_20minimal_2dcuda_2dsolver_20program_1435',['The minimal-cuda-solver program',['../minimal_cuda_solver.html',1,'']]],
   ['the_20mixed_2dmultigrid_2dpreconditioned_2dsolver_20program_1436',['The mixed-multigrid-preconditioned-solver program',['../mixed_multigrid_preconditioned_solver.html',1,'']]],
   ['the_20mixed_2dmultigrid_2dsolver_20program_1437',['The mixed-multigrid-solver program',['../mixed_multigrid_solver.html',1,'']]],

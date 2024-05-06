@@ -1,10 +1,10 @@
 var searchData=
 [
   ['ic_2152',['Ic',['../classgko_1_1preconditioner_1_1Ic.html',1,'gko::preconditioner::Ic&lt; LSolverType, IndexType &gt;'],['../classgko_1_1factorization_1_1Ic.html',1,'gko::factorization::Ic&lt; ValueType, IndexType &gt;']]],
-  ['identity_2153',['Identity',['../classgko_1_1batch_1_1matrix_1_1Identity.html',1,'gko::batch::matrix::Identity&lt; ValueType &gt;'],['../classgko_1_1matrix_1_1Identity.html',1,'gko::matrix::Identity&lt; ValueType &gt;']]],
+  ['identity_2153',['Identity',['../classgko_1_1matrix_1_1Identity.html',1,'gko::matrix::Identity&lt; ValueType &gt;'],['../classgko_1_1batch_1_1matrix_1_1Identity.html',1,'gko::batch::matrix::Identity&lt; ValueType &gt;']]],
   ['identityfactory_2154',['IdentityFactory',['../classgko_1_1matrix_1_1IdentityFactory.html',1,'gko::matrix']]],
   ['idr_2155',['Idr',['../classgko_1_1solver_1_1Idr.html',1,'gko::solver']]],
-  ['ilu_2156',['Ilu',['../classgko_1_1preconditioner_1_1Ilu.html',1,'gko::preconditioner::Ilu&lt; LSolverType, USolverType, ReverseApply, IndexType &gt;'],['../classgko_1_1factorization_1_1Ilu.html',1,'gko::factorization::Ilu&lt; ValueType, IndexType &gt;']]],
+  ['ilu_2156',['Ilu',['../classgko_1_1factorization_1_1Ilu.html',1,'gko::factorization::Ilu&lt; ValueType, IndexType &gt;'],['../classgko_1_1preconditioner_1_1Ilu.html',1,'gko::preconditioner::Ilu&lt; LSolverType, USolverType, ReverseApply, IndexType &gt;']]],
   ['imag_5foperation_2157',['imag_operation',['../structgko_1_1accessor_1_1imag__operation.html',1,'gko::accessor']]],
   ['imag_5foperaton_2158',['imag_operaton',['../structgko_1_1accessor_1_1imag__operaton.html',1,'gko::accessor']]],
   ['imbalance_5fbounded_5flimit_2159',['imbalance_bounded_limit',['../classgko_1_1matrix_1_1Hybrid_1_1imbalance__bounded__limit.html',1,'gko::matrix::Hybrid']]],
