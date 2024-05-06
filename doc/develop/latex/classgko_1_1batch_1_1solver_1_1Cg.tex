@@ -1,0 +1,95 @@
+\hypertarget{classgko_1_1batch_1_1solver_1_1Cg}{}\doxysection{gko\+::batch\+::solver\+::Cg$<$ Value\+Type $>$ Class Template Reference}
+\label{classgko_1_1batch_1_1solver_1_1Cg}\index{gko::batch::solver::Cg$<$ ValueType $>$@{gko::batch::solver::Cg$<$ ValueType $>$}}
+
+
+\mbox{\hyperlink{classgko_1_1batch_1_1solver_1_1Cg}{Cg}} or the Conjugate Gradient is a Krylov subspace solver.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/solver/batch\+\_\+cg.\+hpp$>$}
+
+
+
+Inheritance diagram for gko\+::batch\+::solver\+::Cg$<$ Value\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1batch_1_1solver_1_1Cg__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for gko\+::batch\+::solver\+::Cg$<$ Value\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1batch_1_1solver_1_1Cg__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classgko_1_1batch_1_1solver_1_1Cg_1_1Factory}{Factory}}
+\item 
+struct \mbox{\hyperlink{structgko_1_1batch_1_1solver_1_1Cg_1_1parameters__type}{parameters\+\_\+type}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1batch_1_1solver_1_1Cg_a1bf518a951c9aeeafa7e2694c207f747}\label{classgko_1_1batch_1_1solver_1_1Cg_a1bf518a951c9aeeafa7e2694c207f747}} 
+using {\bfseries value\+\_\+type} = Value\+Type
+\item 
+\mbox{\Hypertarget{classgko_1_1batch_1_1solver_1_1Cg_a628b63c2ede91ddbdfe1f46d44108a7f}\label{classgko_1_1batch_1_1solver_1_1Cg_a628b63c2ede91ddbdfe1f46d44108a7f}} 
+using {\bfseries real\+\_\+type} = \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko\+::remove\+\_\+complex}}$<$ Value\+Type $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1batch_1_1solver_1_1Cg_a92a793cbef700779b528be705bdebfdd}\label{classgko_1_1batch_1_1solver_1_1Cg_a92a793cbef700779b528be705bdebfdd}} 
+const \mbox{\hyperlink{structgko_1_1batch_1_1solver_1_1Cg_1_1parameters__type}{parameters\+\_\+type}} \& {\bfseries get\+\_\+parameters} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1batch_1_1solver_1_1Cg_af09a8c6a91407f15a04a1e2081eeafa6}\label{classgko_1_1batch_1_1solver_1_1Cg_af09a8c6a91407f15a04a1e2081eeafa6}} 
+static auto {\bfseries build} () -\/$>$ decltype(\mbox{\hyperlink{classgko_1_1batch_1_1solver_1_1Cg_1_1Factory}{Factory}} \+::create())
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1batch_1_1solver_1_1Cg_a3ff82a06e8a08c9f08e216aca34d738a}\label{classgko_1_1batch_1_1solver_1_1Cg_a3ff82a06e8a08c9f08e216aca34d738a}} 
+class {\bfseries Enable\+Batch\+Lin\+Op$<$ Cg $>$}
+\item 
+\mbox{\Hypertarget{classgko_1_1batch_1_1solver_1_1Cg_a1ad3554f0bd7634b1dd2bee21fdf4972}\label{classgko_1_1batch_1_1solver_1_1Cg_a1ad3554f0bd7634b1dd2bee21fdf4972}} 
+class {\bfseries Enable\+Polymorphic\+Object$<$ Cg, Batch\+Lin\+Op $>$}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Value\+Type = default\+\_\+precision$>$\newline
+class gko\+::batch\+::solver\+::\+Cg$<$ Value\+Type $>$}
+
+\mbox{\hyperlink{classgko_1_1batch_1_1solver_1_1Cg}{Cg}} or the Conjugate Gradient is a Krylov subspace solver. 
+
+It is a short recurrence solver that is generally used to solve linear systems with S\+PD matrices.
+
+This solver solves a batch of linear systems using the \mbox{\hyperlink{classgko_1_1batch_1_1solver_1_1Cg}{Cg}} algorithm. Each linear system in the batch can converge independently.
+
+Unless otherwise specified via the {\ttfamily preconditioner} factory parameter, this implementation does not use any preconditioner by default. The type of tolerance (absolute or relative) and the maximum number of iterations to be used in the stopping criterion can be set via the factory parameters.
+
+\begin{DoxyNote}{Note}
+The tolerance check is against the internal residual computed within the solver process. This implicit (internal) residual can diverge from the true residual ($\vert$$\vert$b -\/ Ax$\vert$$\vert$). A posterori checks (by computing the true residual, $\vert$$\vert$b -\/ Ax$\vert$$\vert$) are recommended to ensure that the solution has converged to the desired tolerance.
+\end{DoxyNote}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Value\+Type} & precision of matrix elements \\
+\hline
+\end{DoxyTemplParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/solver/batch\+\_\+cg.\+hpp\end{DoxyCompactItemize}

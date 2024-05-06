@@ -2,7 +2,7 @@ var searchData=
 [
   ['cbgmres_99',['CbGmres',['../classgko_1_1solver_1_1CbGmres.html',1,'gko::solver']]],
   ['ceildiv_100',['ceildiv',['../namespacegko.html#a93065a86872e6511b701b73b75823483',1,'gko']]],
-  ['cg_101',['Cg',['../classgko_1_1solver_1_1Cg.html',1,'gko::solver']]],
+  ['cg_101',['Cg',['../classgko_1_1batch_1_1solver_1_1Cg.html',1,'gko::batch::solver::Cg&lt; ValueType &gt;'],['../classgko_1_1solver_1_1Cg.html',1,'gko::solver::Cg&lt; ValueType &gt;']]],
   ['cgs_102',['Cgs',['../classgko_1_1solver_1_1Cgs.html',1,'gko::solver']]],
   ['check_103',['check',['../classgko_1_1stop_1_1Criterion_1_1Updater.html#a048d209ce640e2b71fcafa8a056a58a4',1,'gko::stop::Criterion::Updater::check()'],['../classgko_1_1stop_1_1Criterion.html#ae0bb4923fab4d2a60e08c5e5fa57277c',1,'gko::stop::Criterion::check()']]],
   ['check_5fenvironment_104',['check_environment',['../classgko_1_1CudaAsyncAllocator.html#ade0fbb75c0270b9df4895123965c4a65',1,'gko::CudaAsyncAllocator']]],
