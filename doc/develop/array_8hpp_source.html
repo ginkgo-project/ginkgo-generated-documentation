@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1280444310 branch based on develop. Ginkgo version 1.8.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1284243307 branch based on develop. Ginkgo version 1.8.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -508,47 +508,38 @@ $(function() {
 <div class="line"><a name="l00839"></a><span class="lineno">  839</span>&#160; </div>
 <div class="line"><a name="l00840"></a><span class="lineno">  840</span>&#160;<span class="comment">// specialization for non-constant arrays, copying back via assignment</span></div>
 <div class="line"><a name="l00841"></a><span class="lineno">  841</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00842"></a><span class="lineno">  842</span>&#160;<span class="keyword">class </span>copy_back_deleter&lt;<a class="code" href="namespacegko.html#ae749a5ea11a93c1bcc9158d9a6e9fb68af1f713c9e000f5d3f280adbd124df4f5">array</a>&lt;T&gt;&gt; {</div>
-<div class="line"><a name="l00843"></a><span class="lineno">  843</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00844"></a><span class="lineno">  844</span>&#160;    <span class="keyword">using</span> pointer = array&lt;T&gt;*;</div>
-<div class="line"><a name="l00845"></a><span class="lineno">  845</span>&#160; </div>
-<div class="line"><a name="l00852"></a><span class="lineno">  852</span>&#160;    copy_back_deleter(pointer original) : original_{original} {}</div>
-<div class="line"><a name="l00853"></a><span class="lineno">  853</span>&#160; </div>
-<div class="line"><a name="l00859"></a><span class="lineno">  859</span>&#160;    <span class="keywordtype">void</span> operator()(pointer ptr)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00860"></a><span class="lineno">  860</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00861"></a><span class="lineno">  861</span>&#160;        *original_ = *ptr;</div>
-<div class="line"><a name="l00862"></a><span class="lineno">  862</span>&#160;        <span class="keyword">delete</span> ptr;</div>
-<div class="line"><a name="l00863"></a><span class="lineno">  863</span>&#160;    }</div>
-<div class="line"><a name="l00864"></a><span class="lineno">  864</span>&#160; </div>
-<div class="line"><a name="l00865"></a><span class="lineno">  865</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00866"></a><span class="lineno">  866</span>&#160;    pointer original_;</div>
-<div class="line"><a name="l00867"></a><span class="lineno">  867</span>&#160;};</div>
-<div class="line"><a name="l00868"></a><span class="lineno">  868</span>&#160; </div>
+<div class="line"><a name="l00842"></a><span class="lineno">  842</span>&#160;<span class="keyword">class </span>copy_back_deleter&lt;<a class="code" href="namespacegko.html#ae749a5ea11a93c1bcc9158d9a6e9fb68af1f713c9e000f5d3f280adbd124df4f5">array</a>&lt;T&gt;&gt;</div>
+<div class="line"><a name="l00843"></a><span class="lineno">  843</span>&#160;    : <span class="keyword">public</span> copy_back_deleter_from_assignment&lt;array&lt;T&gt;&gt; {</div>
+<div class="line"><a name="l00844"></a><span class="lineno">  844</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00845"></a><span class="lineno">  845</span>&#160;    <span class="keyword">using</span> copy_back_deleter_from_assignment&lt;</div>
+<div class="line"><a name="l00846"></a><span class="lineno">  846</span>&#160;        array&lt;T&gt;&gt;::copy_back_deleter_from_assignment;</div>
+<div class="line"><a name="l00847"></a><span class="lineno">  847</span>&#160;};</div>
+<div class="line"><a name="l00848"></a><span class="lineno">  848</span>&#160; </div>
+<div class="line"><a name="l00849"></a><span class="lineno">  849</span>&#160; </div>
+<div class="line"><a name="l00862"></a><span class="lineno">  862</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType&gt;</div>
+<div class="line"><a name="l00863"></a><span class="lineno">  863</span>&#160;array&lt;ValueType&gt; array_const_cast(const_array_view&lt;ValueType&gt; view)</div>
+<div class="line"><a name="l00864"></a><span class="lineno">  864</span>&#160;{</div>
+<div class="line"><a name="l00865"></a><span class="lineno">  865</span>&#160;    <span class="keywordflow">return</span> array&lt;ValueType&gt;::view(</div>
+<div class="line"><a name="l00866"></a><span class="lineno">  866</span>&#160;        view.get_executor(), view.get_size(),</div>
+<div class="line"><a name="l00867"></a><span class="lineno">  867</span>&#160;        const_cast&lt;ValueType*&gt;(view.get_const_data()));</div>
+<div class="line"><a name="l00868"></a><span class="lineno">  868</span>&#160;}</div>
 <div class="line"><a name="l00869"></a><span class="lineno">  869</span>&#160; </div>
-<div class="line"><a name="l00882"></a><span class="lineno">  882</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType&gt;</div>
-<div class="line"><a name="l00883"></a><span class="lineno">  883</span>&#160;array&lt;ValueType&gt; array_const_cast(const_array_view&lt;ValueType&gt; view)</div>
-<div class="line"><a name="l00884"></a><span class="lineno">  884</span>&#160;{</div>
-<div class="line"><a name="l00885"></a><span class="lineno">  885</span>&#160;    <span class="keywordflow">return</span> array&lt;ValueType&gt;::view(</div>
-<div class="line"><a name="l00886"></a><span class="lineno">  886</span>&#160;        view.get_executor(), view.get_size(),</div>
-<div class="line"><a name="l00887"></a><span class="lineno">  887</span>&#160;        const_cast&lt;ValueType*&gt;(view.get_const_data()));</div>
-<div class="line"><a name="l00888"></a><span class="lineno">  888</span>&#160;}</div>
-<div class="line"><a name="l00889"></a><span class="lineno">  889</span>&#160; </div>
-<div class="line"><a name="l00890"></a><span class="lineno">  890</span>&#160; </div>
-<div class="line"><a name="l00891"></a><span class="lineno">  891</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType&gt;</div>
-<div class="line"><a name="l00892"></a><span class="lineno">  892</span>&#160;array&lt;ValueType&gt; const_array_view&lt;ValueType&gt;::copy_to_array()<span class="keyword"> const</span></div>
-<div class="line"><a name="l00893"></a><span class="lineno">  893</span>&#160;<span class="keyword"></span>{</div>
-<div class="line"><a name="l00894"></a><span class="lineno">  894</span>&#160;    array&lt;ValueType&gt; result(this-&gt;get_executor(), this-&gt;get_size());</div>
-<div class="line"><a name="l00895"></a><span class="lineno">  895</span>&#160;    result.get_executor()-&gt;copy_from(this-&gt;get_executor(), this-&gt;get_size(),</div>
-<div class="line"><a name="l00896"></a><span class="lineno">  896</span>&#160;                                     this-&gt;get_const_data(), result.get_data());</div>
-<div class="line"><a name="l00897"></a><span class="lineno">  897</span>&#160;    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00898"></a><span class="lineno">  898</span>&#160;}</div>
-<div class="line"><a name="l00899"></a><span class="lineno">  899</span>&#160; </div>
-<div class="line"><a name="l00900"></a><span class="lineno">  900</span>&#160; </div>
-<div class="line"><a name="l00901"></a><span class="lineno">  901</span>&#160;}  <span class="comment">// namespace detail</span></div>
-<div class="line"><a name="l00902"></a><span class="lineno">  902</span>&#160;}  <span class="comment">// namespace gko</span></div>
-<div class="line"><a name="l00903"></a><span class="lineno">  903</span>&#160; </div>
-<div class="line"><a name="l00904"></a><span class="lineno">  904</span>&#160; </div>
-<div class="line"><a name="l00905"></a><span class="lineno">  905</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_BASE_ARRAY_HPP_</span></div>
+<div class="line"><a name="l00870"></a><span class="lineno">  870</span>&#160; </div>
+<div class="line"><a name="l00871"></a><span class="lineno">  871</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType&gt;</div>
+<div class="line"><a name="l00872"></a><span class="lineno">  872</span>&#160;array&lt;ValueType&gt; const_array_view&lt;ValueType&gt;::copy_to_array()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00873"></a><span class="lineno">  873</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00874"></a><span class="lineno">  874</span>&#160;    array&lt;ValueType&gt; result(this-&gt;get_executor(), this-&gt;get_size());</div>
+<div class="line"><a name="l00875"></a><span class="lineno">  875</span>&#160;    result.get_executor()-&gt;copy_from(this-&gt;get_executor(), this-&gt;get_size(),</div>
+<div class="line"><a name="l00876"></a><span class="lineno">  876</span>&#160;                                     this-&gt;get_const_data(), result.get_data());</div>
+<div class="line"><a name="l00877"></a><span class="lineno">  877</span>&#160;    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00878"></a><span class="lineno">  878</span>&#160;}</div>
+<div class="line"><a name="l00879"></a><span class="lineno">  879</span>&#160; </div>
+<div class="line"><a name="l00880"></a><span class="lineno">  880</span>&#160; </div>
+<div class="line"><a name="l00881"></a><span class="lineno">  881</span>&#160;}  <span class="comment">// namespace detail</span></div>
+<div class="line"><a name="l00882"></a><span class="lineno">  882</span>&#160;}  <span class="comment">// namespace gko</span></div>
+<div class="line"><a name="l00883"></a><span class="lineno">  883</span>&#160; </div>
+<div class="line"><a name="l00884"></a><span class="lineno">  884</span>&#160; </div>
+<div class="line"><a name="l00885"></a><span class="lineno">  885</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_BASE_ARRAY_HPP_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassgko_1_1array_html_af1c0803356eb19bc29414ca9e33269d7"><div class="ttname"><a href="classgko_1_1array.html#af1c0803356eb19bc29414ca9e33269d7">gko::array::array</a></div><div class="ttdeci">array(const array &amp;other)</div><div class="ttdoc">Creates a copy of another array.</div><div class="ttdef"><b>Definition:</b> array.hpp:327</div></div>
 <div class="ttc" id="aclassgko_1_1array_html_aff509e1fb1484b6f52da44baea6ae690"><div class="ttname"><a href="classgko_1_1array.html#aff509e1fb1484b6f52da44baea6ae690">gko::array::array</a></div><div class="ttdeci">array(std::shared_ptr&lt; const Executor &gt; exec, array &amp;&amp;other)</div><div class="ttdoc">Moves another array to a different executor.</div><div class="ttdef"><b>Definition:</b> array.hpp:338</div></div>
