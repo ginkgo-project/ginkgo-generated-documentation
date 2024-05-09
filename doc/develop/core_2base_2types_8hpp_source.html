@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1284594305 branch based on develop. Ginkgo version 1.8.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1284980369 branch based on develop. Ginkgo version 1.8.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -540,34 +540,37 @@ $(function() {
 <div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;<span class="preprocessor">    template _macro(gko::size_type)</span></div>
 <div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160; </div>
 <div class="line"><a name="l00757"></a><span class="lineno">  757</span>&#160; </div>
-<div class="line"><a name="l00761"></a><span class="lineno">  761</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> IndexType&gt;</div>
-<div class="line"><a name="l00762"></a><span class="lineno"><a class="line" href="namespacegko.html#afec01a3afbf68d99fc0f886c51bdc713">  762</a></span>&#160;<span class="keyword">inline</span> constexpr GKO_ATTRIBUTES IndexType <a class="code" href="namespacegko.html#afec01a3afbf68d99fc0f886c51bdc713">invalid_index</a>()</div>
-<div class="line"><a name="l00763"></a><span class="lineno">  763</span>&#160;{</div>
-<div class="line"><a name="l00764"></a><span class="lineno">  764</span>&#160;    static_assert(std::is_signed&lt;IndexType&gt;::value,</div>
-<div class="line"><a name="l00765"></a><span class="lineno">  765</span>&#160;                  <span class="stringliteral">&quot;IndexType needs to be signed&quot;</span>);</div>
-<div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160;    <span class="keywordflow">return</span> static_cast&lt;IndexType&gt;(-1);</div>
-<div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160;}</div>
+<div class="line"><a name="l00766"></a><span class="lineno">  766</span>&#160;<span class="preprocessor">#define GKO_INSTANTIATE_FOR_INT32_TYPE(_macro) template _macro(int32)</span></div>
+<div class="line"><a name="l00767"></a><span class="lineno">  767</span>&#160; </div>
 <div class="line"><a name="l00768"></a><span class="lineno">  768</span>&#160; </div>
-<div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160; </div>
-<div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160;<span class="keyword">namespace </span>experimental {</div>
-<div class="line"><a name="l00771"></a><span class="lineno">  771</span>&#160;<span class="keyword">namespace </span>distributed {</div>
-<div class="line"><a name="l00772"></a><span class="lineno">  772</span>&#160; </div>
-<div class="line"><a name="l00773"></a><span class="lineno">  773</span>&#160; </div>
-<div class="line"><a name="l00779"></a><span class="lineno"><a class="line" href="namespacegko_1_1experimental_1_1distributed.html#a5f06060f58c28612829ebc8ab5bc6511">  779</a></span>&#160;<span class="keyword">using</span> <a class="code" href="namespacegko_1_1experimental_1_1distributed.html#a5f06060f58c28612829ebc8ab5bc6511">comm_index_type</a> = int;</div>
+<div class="line"><a name="l00772"></a><span class="lineno">  772</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> IndexType&gt;</div>
+<div class="line"><a name="l00773"></a><span class="lineno"><a class="line" href="namespacegko.html#afec01a3afbf68d99fc0f886c51bdc713">  773</a></span>&#160;<span class="keyword">inline</span> constexpr GKO_ATTRIBUTES IndexType <a class="code" href="namespacegko.html#afec01a3afbf68d99fc0f886c51bdc713">invalid_index</a>()</div>
+<div class="line"><a name="l00774"></a><span class="lineno">  774</span>&#160;{</div>
+<div class="line"><a name="l00775"></a><span class="lineno">  775</span>&#160;    static_assert(std::is_signed&lt;IndexType&gt;::value,</div>
+<div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160;                  <span class="stringliteral">&quot;IndexType needs to be signed&quot;</span>);</div>
+<div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160;    <span class="keywordflow">return</span> static_cast&lt;IndexType&gt;(-1);</div>
+<div class="line"><a name="l00778"></a><span class="lineno">  778</span>&#160;}</div>
+<div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160; </div>
 <div class="line"><a name="l00780"></a><span class="lineno">  780</span>&#160; </div>
-<div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160; </div>
-<div class="line"><a name="l00791"></a><span class="lineno">  791</span>&#160;<span class="preprocessor">#define GKO_INSTANTIATE_FOR_EACH_LOCAL_GLOBAL_INDEX_TYPE(_macro) \</span></div>
-<div class="line"><a name="l00792"></a><span class="lineno">  792</span>&#160;<span class="preprocessor">    template _macro(int32, int32);                               \</span></div>
-<div class="line"><a name="l00793"></a><span class="lineno">  793</span>&#160;<span class="preprocessor">    template _macro(int32, int64);                               \</span></div>
-<div class="line"><a name="l00794"></a><span class="lineno">  794</span>&#160;<span class="preprocessor">    template _macro(int64, int64)</span></div>
-<div class="line"><a name="l00795"></a><span class="lineno">  795</span>&#160; </div>
-<div class="line"><a name="l00796"></a><span class="lineno">  796</span>&#160; </div>
-<div class="line"><a name="l00797"></a><span class="lineno">  797</span>&#160;}  <span class="comment">// namespace distributed</span></div>
-<div class="line"><a name="l00798"></a><span class="lineno">  798</span>&#160;}  <span class="comment">// namespace experimental</span></div>
-<div class="line"><a name="l00799"></a><span class="lineno">  799</span>&#160;}  <span class="comment">// namespace gko</span></div>
-<div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160; </div>
-<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160; </div>
-<div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_BASE_TYPES_HPP_</span></div>
+<div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160;<span class="keyword">namespace </span>experimental {</div>
+<div class="line"><a name="l00782"></a><span class="lineno">  782</span>&#160;<span class="keyword">namespace </span>distributed {</div>
+<div class="line"><a name="l00783"></a><span class="lineno">  783</span>&#160; </div>
+<div class="line"><a name="l00784"></a><span class="lineno">  784</span>&#160; </div>
+<div class="line"><a name="l00790"></a><span class="lineno"><a class="line" href="namespacegko_1_1experimental_1_1distributed.html#a5f06060f58c28612829ebc8ab5bc6511">  790</a></span>&#160;<span class="keyword">using</span> <a class="code" href="namespacegko_1_1experimental_1_1distributed.html#a5f06060f58c28612829ebc8ab5bc6511">comm_index_type</a> = int;</div>
+<div class="line"><a name="l00791"></a><span class="lineno">  791</span>&#160; </div>
+<div class="line"><a name="l00792"></a><span class="lineno">  792</span>&#160; </div>
+<div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;<span class="preprocessor">#define GKO_INSTANTIATE_FOR_EACH_LOCAL_GLOBAL_INDEX_TYPE(_macro) \</span></div>
+<div class="line"><a name="l00803"></a><span class="lineno">  803</span>&#160;<span class="preprocessor">    template _macro(int32, int32);                               \</span></div>
+<div class="line"><a name="l00804"></a><span class="lineno">  804</span>&#160;<span class="preprocessor">    template _macro(int32, int64);                               \</span></div>
+<div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160;<span class="preprocessor">    template _macro(int64, int64)</span></div>
+<div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160; </div>
+<div class="line"><a name="l00807"></a><span class="lineno">  807</span>&#160; </div>
+<div class="line"><a name="l00808"></a><span class="lineno">  808</span>&#160;}  <span class="comment">// namespace distributed</span></div>
+<div class="line"><a name="l00809"></a><span class="lineno">  809</span>&#160;}  <span class="comment">// namespace experimental</span></div>
+<div class="line"><a name="l00810"></a><span class="lineno">  810</span>&#160;}  <span class="comment">// namespace gko</span></div>
+<div class="line"><a name="l00811"></a><span class="lineno">  811</span>&#160; </div>
+<div class="line"><a name="l00812"></a><span class="lineno">  812</span>&#160; </div>
+<div class="line"><a name="l00813"></a><span class="lineno">  813</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_BASE_TYPES_HPP_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="anamespacegko_html_a3950fc3732811a8563484e5098c31531"><div class="ttname"><a href="namespacegko.html#a3950fc3732811a8563484e5098c31531">gko::uint8</a></div><div class="ttdeci">std::uint8_t uint8</div><div class="ttdoc">8-bit unsigned integral type.</div><div class="ttdef"><b>Definition:</b> types.hpp:121</div></div>
 <div class="ttc" id="aclassgko_1_1precision__reduction_html"><div class="ttname"><a href="classgko_1_1precision__reduction.html">gko::precision_reduction</a></div><div class="ttdoc">This class is used to encode storage precisions of low precision algorithms.</div><div class="ttdef"><b>Definition:</b> types.hpp:244</div></div>
@@ -582,7 +585,7 @@ $(function() {
 <div class="ttc" id="aclassgko_1_1precision__reduction_html_a2a1a94a27fa69b4cc321136b56e7b7d9"><div class="ttname"><a href="classgko_1_1precision__reduction.html#a2a1a94a27fa69b4cc321136b56e7b7d9">gko::precision_reduction::storage_type</a></div><div class="ttdeci">uint8 storage_type</div><div class="ttdoc">The underlying datatype used to store the encoding.</div><div class="ttdef"><b>Definition:</b> types.hpp:249</div></div>
 <div class="ttc" id="astructgko_1_1are__all__integral_html"><div class="ttname"><a href="structgko_1_1are__all__integral.html">gko::are_all_integral</a></div><div class="ttdoc">Evaluates if all template arguments Args fulfill std::is_integral.</div><div class="ttdef"><b>Definition:</b> types.hpp:195</div></div>
 <div class="ttc" id="anamespacegko_html_acae2e648052ec788bd8ba9e0192652a6"><div class="ttname"><a href="namespacegko.html#acae2e648052ec788bd8ba9e0192652a6">gko::byte_size</a></div><div class="ttdeci">constexpr size_type byte_size</div><div class="ttdoc">Number of bits in a byte.</div><div class="ttdef"><b>Definition:</b> types.hpp:183</div></div>
-<div class="ttc" id="anamespacegko_html_afec01a3afbf68d99fc0f886c51bdc713"><div class="ttname"><a href="namespacegko.html#afec01a3afbf68d99fc0f886c51bdc713">gko::invalid_index</a></div><div class="ttdeci">constexpr IndexType invalid_index()</div><div class="ttdoc">Value for an invalid signed index type.</div><div class="ttdef"><b>Definition:</b> types.hpp:762</div></div>
+<div class="ttc" id="anamespacegko_html_afec01a3afbf68d99fc0f886c51bdc713"><div class="ttname"><a href="namespacegko.html#afec01a3afbf68d99fc0f886c51bdc713">gko::invalid_index</a></div><div class="ttdeci">constexpr IndexType invalid_index()</div><div class="ttdoc">Value for an invalid signed index type.</div><div class="ttdef"><b>Definition:</b> types.hpp:773</div></div>
 <div class="ttc" id="anamespacegko_html_a75c7a433d814b8b37d0bc2a9c57fbe65"><div class="ttname"><a href="namespacegko.html#a75c7a433d814b8b37d0bc2a9c57fbe65">gko::float64</a></div><div class="ttdeci">double float64</div><div class="ttdoc">Double precision floating point type.</div><div class="ttdef"><b>Definition:</b> types.hpp:165</div></div>
 <div class="ttc" id="aclassgko_1_1precision__reduction_html_a909a01025fd490d4658abd7c5791685d"><div class="ttname"><a href="classgko_1_1precision__reduction.html#a909a01025fd490d4658abd7c5791685d">gko::precision_reduction::get_nonpreserving</a></div><div class="ttdeci">constexpr storage_type get_nonpreserving() const noexcept</div><div class="ttdoc">Returns the number of non-preserving conversions in the encoding.</div><div class="ttdef"><b>Definition:</b> types.hpp:307</div></div>
 <div class="ttc" id="anamespacegko_html"><div class="ttname"><a href="namespacegko.html">gko</a></div><div class="ttdoc">The Ginkgo namespace.</div><div class="ttdef"><b>Definition:</b> abstract_factory.hpp:20</div></div>
@@ -595,7 +598,7 @@ $(function() {
 <div class="ttc" id="anamespacegko_html_a0b5dbd886493d4ccaba6a7a1ba74896c"><div class="ttname"><a href="namespacegko.html#a0b5dbd886493d4ccaba6a7a1ba74896c">gko::float32</a></div><div class="ttdeci">float float32</div><div class="ttdoc">Single precision floating point type.</div><div class="ttdef"><b>Definition:</b> types.hpp:159</div></div>
 <div class="ttc" id="aclassgko_1_1precision__reduction_html_ae4d4355a6614ced4fc611619da7b09f2"><div class="ttname"><a href="classgko_1_1precision__reduction.html#ae4d4355a6614ced4fc611619da7b09f2">gko::precision_reduction::precision_reduction</a></div><div class="ttdeci">constexpr precision_reduction(storage_type preserving, storage_type nonpreserving) noexcept</div><div class="ttdoc">Creates a precision_reduction encoding with the specified number of conversions.</div><div class="ttdef"><b>Definition:</b> types.hpp:275</div></div>
 <div class="ttc" id="anamespacegko_html_ad54a79afecd57aabbb04b1dc611ae55e"><div class="ttname"><a href="namespacegko.html#ad54a79afecd57aabbb04b1dc611ae55e">gko::uint64</a></div><div class="ttdeci">std::uint64_t uint64</div><div class="ttdoc">64-bit unsigned integral type.</div><div class="ttdef"><b>Definition:</b> types.hpp:138</div></div>
-<div class="ttc" id="anamespacegko_1_1experimental_1_1distributed_html_a5f06060f58c28612829ebc8ab5bc6511"><div class="ttname"><a href="namespacegko_1_1experimental_1_1distributed.html#a5f06060f58c28612829ebc8ab5bc6511">gko::experimental::distributed::comm_index_type</a></div><div class="ttdeci">int comm_index_type</div><div class="ttdoc">Index type for enumerating processes in a distributed application.</div><div class="ttdef"><b>Definition:</b> types.hpp:779</div></div>
+<div class="ttc" id="anamespacegko_1_1experimental_1_1distributed_html_a5f06060f58c28612829ebc8ab5bc6511"><div class="ttname"><a href="namespacegko_1_1experimental_1_1distributed.html#a5f06060f58c28612829ebc8ab5bc6511">gko::experimental::distributed::comm_index_type</a></div><div class="ttdeci">int comm_index_type</div><div class="ttdoc">Index type for enumerating processes in a distributed application.</div><div class="ttdef"><b>Definition:</b> types.hpp:790</div></div>
 <div class="ttc" id="anamespacegko_html_a26d2e6df1a5280b092afd1e5d9fabeed"><div class="ttname"><a href="namespacegko.html#a26d2e6df1a5280b092afd1e5d9fabeed">gko::int16</a></div><div class="ttdeci">std::int16_t int16</div><div class="ttdoc">16-bit signed integral type.</div><div class="ttdef"><b>Definition:</b> types.hpp:103</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
