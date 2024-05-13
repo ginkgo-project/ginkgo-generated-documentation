@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1285786067 branch based on develop. Ginkgo version 1.8.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1289213230 branch based on develop. Ginkgo version 1.8.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -265,8 +265,8 @@ class gko::experimental::reorder::Mc64&lt; ValueType, IndexType &gt;</h3>
 <p>MC64 is an algorithm for permuting large entries to the diagonal of a sparse matrix. </p>
 <p>This approach can increase numerical stability of e.g. an LU factorization without pivoting. Under the assumption of working on a nonsingular square matrix, the algorithm computes a minimum weight perfect matching on a weighted edge bipartite graph of the matrix. It is described in detail in "On Algorithms for Permuting Large Entries to the
 Diagonal of a Sparse Matrix" (Duff, Koster, 2001, DOI: 10.1137/S0895479899358443). There are two strategies for choosing the weights supported:</p><ul>
-<li>Maximizing the product of the absolute values on the diagonal. For this strategy, the weights are computed as <img class="formulaInl" alt="$c(i, j) = \log_2(a_i) - \log_2(|a(i, j)|)$" src="form_89.png"/> if <img class="formulaInl" alt="$a(i, j) \neq 0 $" src="form_90.png"/> and <img class="formulaInl" alt="$c(i, j) = \infty$" src="form_91.png"/> otherwise. Here, a_i is the maximum absolute value in row i of the matrix A. In this case, the implementation computes a row permutation P and row and column scaling coefficients L and R such that the matrix P*L*A*R has values with unity absolute value on the diagonal and smaller or equal entries everywhere else.</li>
-<li>Maximizing the sum of the absolute values on the diagonal. For this strategy, the weights are computed as <img class="formulaInl" alt="$c(i, j) = a_i - |a(i, j)|$" src="form_92.png"/> if <img class="formulaInl" alt="$a(i, j) \neq 0$" src="form_93.png"/> and <img class="formulaInl" alt="$c(i, j) = \infty$" src="form_91.png"/> otherwise. In this case, no scaling coefficients are computed.</li>
+<li>Maximizing the product of the absolute values on the diagonal. For this strategy, the weights are computed as <img class="formulaInl" alt="$c(i, j) = \log_2(a_i) - \log_2(|a(i, j)|)$" src="form_110.png"/> if <img class="formulaInl" alt="$a(i, j) \neq 0 $" src="form_111.png"/> and <img class="formulaInl" alt="$c(i, j) = \infty$" src="form_112.png"/> otherwise. Here, a_i is the maximum absolute value in row i of the matrix A. In this case, the implementation computes a row permutation P and row and column scaling coefficients L and R such that the matrix P*L*A*R has values with unity absolute value on the diagonal and smaller or equal entries everywhere else.</li>
+<li>Maximizing the sum of the absolute values on the diagonal. For this strategy, the weights are computed as <img class="formulaInl" alt="$c(i, j) = a_i - |a(i, j)|$" src="form_113.png"/> if <img class="formulaInl" alt="$a(i, j) \neq 0$" src="form_114.png"/> and <img class="formulaInl" alt="$c(i, j) = \infty$" src="form_112.png"/> otherwise. In this case, no scaling coefficients are computed.</li>
 </ul>
 <p>This class creates a <a class="el" href="classgko_1_1Combination.html" title="The Combination class can be used to construct a linear combination of multiple linear operators c1 *...">Combination</a> of two ScaledPermutations representing the row and column permutation and scaling factors computed by this algorithm.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>

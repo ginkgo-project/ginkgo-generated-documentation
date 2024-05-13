@@ -15,6 +15,8 @@ The distributed namespace.
 \item 
 class \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1DistributedBase}{Distributed\+Base}}
 \begin{DoxyCompactList}\small\item\em A base class for distributed objects. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structgko_1_1experimental_1_1distributed_1_1index__map}{index\+\_\+map}}
+\begin{DoxyCompactList}\small\item\em This class defines mappings between global and local indices. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}}
 \begin{DoxyCompactList}\small\item\em The \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}} class defines a (M\+P\+I-\/)distributed matrix. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{Partition}}
@@ -26,6 +28,14 @@ class \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{Vector
 \item 
 using \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a5f06060f58c28612829ebc8ab5bc6511}{comm\+\_\+index\+\_\+type}} = int
 \begin{DoxyCompactList}\small\item\em Index type for enumerating processes in a distributed application. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a3d50932cfebdde844b88d2c82b96947b}{index\+\_\+space}} \{ \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a3d50932cfebdde844b88d2c82b96947baf5ddaf0ca7929578b408c909429f68f2}{index\+\_\+space\+::local}}, 
+\mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a3d50932cfebdde844b88d2c82b96947ba9182221a9ec0a65321d5a206c9c174ca}{index\+\_\+space\+::non\+\_\+local}}, 
+\mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a3d50932cfebdde844b88d2c82b96947ba507d922378ecab8e10b81dcbc2ff8bf3}{index\+\_\+space\+::combined}}
+ \}
+\begin{DoxyCompactList}\small\item\em Index space classification for the locally stored indices. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -62,6 +72,33 @@ The distributed namespace.
 Index type for enumerating processes in a distributed application. 
 
 Conforms to the M\+PI C interface of e.\+g. M\+PI rank or size 
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{namespacegko_1_1experimental_1_1distributed_a3d50932cfebdde844b88d2c82b96947b}\label{namespacegko_1_1experimental_1_1distributed_a3d50932cfebdde844b88d2c82b96947b}} 
+\index{gko::experimental::distributed@{gko::experimental::distributed}!index\_space@{index\_space}}
+\index{index\_space@{index\_space}!gko::experimental::distributed@{gko::experimental::distributed}}
+\doxysubsubsection{\texorpdfstring{index\_space}{index\_space}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a3d50932cfebdde844b88d2c82b96947b}{gko\+::experimental\+::distributed\+::index\+\_\+space}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Index space classification for the locally stored indices. 
+
+The definitions of the enum values is clarified in \mbox{\hyperlink{structgko_1_1experimental_1_1distributed_1_1index__map}{index\+\_\+map}}. \begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{local@{local}!gko::experimental::distributed@{gko::experimental::distributed}}\index{gko::experimental::distributed@{gko::experimental::distributed}!local@{local}}}\mbox{\Hypertarget{namespacegko_1_1experimental_1_1distributed_a3d50932cfebdde844b88d2c82b96947baf5ddaf0ca7929578b408c909429f68f2}\label{namespacegko_1_1experimental_1_1distributed_a3d50932cfebdde844b88d2c82b96947baf5ddaf0ca7929578b408c909429f68f2}} 
+local&indices that are locally owned \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{non\_local@{non\_local}!gko::experimental::distributed@{gko::experimental::distributed}}\index{gko::experimental::distributed@{gko::experimental::distributed}!non\_local@{non\_local}}}\mbox{\Hypertarget{namespacegko_1_1experimental_1_1distributed_a3d50932cfebdde844b88d2c82b96947ba9182221a9ec0a65321d5a206c9c174ca}\label{namespacegko_1_1experimental_1_1distributed_a3d50932cfebdde844b88d2c82b96947ba9182221a9ec0a65321d5a206c9c174ca}} 
+non\+\_\+local&indices that are owned by other processes \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{combined@{combined}!gko::experimental::distributed@{gko::experimental::distributed}}\index{gko::experimental::distributed@{gko::experimental::distributed}!combined@{combined}}}\mbox{\Hypertarget{namespacegko_1_1experimental_1_1distributed_a3d50932cfebdde844b88d2c82b96947ba507d922378ecab8e10b81dcbc2ff8bf3}\label{namespacegko_1_1experimental_1_1distributed_a3d50932cfebdde844b88d2c82b96947ba507d922378ecab8e10b81dcbc2ff8bf3}} 
+combined&both local and non\+\_\+local indices \\
+\hline
+
+\end{DoxyEnumFields}
+
 
 \doxysubsection{Function Documentation}
 \mbox{\Hypertarget{namespacegko_1_1experimental_1_1distributed_a7ec42d4068b89c36be8098b0edeeef1e}\label{namespacegko_1_1experimental_1_1distributed_a7ec42d4068b89c36be8098b0edeeef1e}} 

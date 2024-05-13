@@ -195,7 +195,7 @@ class gko\+::experimental\+::distributed\+::\+Vector$<$ Value\+Type $>$}
 \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{Vector}} is a format which explicitly stores (multiple) distributed column vectors in a dense storage format. 
 
 The (multi-\/)vector is distributed by row, which is described by a \begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{Partition}}. The local vectors are stored using the 
+\mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{Partition}}. The \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a3d50932cfebdde844b88d2c82b96947baf5ddaf0ca7929578b408c909429f68f2}{local}} vectors are stored using the 
 
 Dense format. The vector should be filled using the \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector_a5d1d813f5e44851fb7f4a080d8fa7758}{read\+\_\+distributed}} method, e.\+g. 
 \begin{DoxyCode}{0}
@@ -203,7 +203,7 @@ Dense format. The vector should be filled using the \mbox{\hyperlink{classgko_1_
 \DoxyCodeLine{\textcolor{keyword}{auto} vector = \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector_a38e53776a4d12312089c63a55b771df2}{Vector<...>::create}}(exec, comm);}
 \DoxyCodeLine{vector-\/>read\_distributed(matrix\_data, part);}
 \end{DoxyCode}
- Using this approach the size of the global vectors, \mbox{\hyperlink{namespacegko_a618c9b64c35b0452240e9e57a9673b94}{as}} well \mbox{\hyperlink{namespacegko_a618c9b64c35b0452240e9e57a9673b94}{as}} the size of the local vectors, will be automatically inferred. It is possible to \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector_a38e53776a4d12312089c63a55b771df2}{create}} a vector with specified global and local sizes and \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector_a4a172e7b6b6088918e0c7f8070d43204}{fill}} the local vectors using the \mbox{\hyperlink{namespacegko_1_1accessor}{accessor}} \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector_a2ef33f89c7a1534920127fe3fb696b11}{get\+\_\+local\+\_\+vector}}.
+ Using this approach the size of the global vectors, \mbox{\hyperlink{namespacegko_a618c9b64c35b0452240e9e57a9673b94}{as}} well \mbox{\hyperlink{namespacegko_a618c9b64c35b0452240e9e57a9673b94}{as}} the size of the \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a3d50932cfebdde844b88d2c82b96947baf5ddaf0ca7929578b408c909429f68f2}{local}} vectors, will be automatically inferred. It is possible to \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector_a38e53776a4d12312089c63a55b771df2}{create}} a vector with specified global and \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a3d50932cfebdde844b88d2c82b96947baf5ddaf0ca7929578b408c909429f68f2}{local}} sizes and \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector_a4a172e7b6b6088918e0c7f8070d43204}{fill}} the \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a3d50932cfebdde844b88d2c82b96947baf5ddaf0ca7929578b408c909429f68f2}{local}} vectors using the \mbox{\hyperlink{namespacegko_1_1accessor}{accessor}} \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector_a2ef33f89c7a1534920127fe3fb696b11}{get\+\_\+local\+\_\+vector}}.
 \end{DoxySeeAlso}
 \begin{DoxyNote}{Note}
 Operations between two vectors (axpy, dot product, etc.) are only valid if both vectors where created using the same partition.
