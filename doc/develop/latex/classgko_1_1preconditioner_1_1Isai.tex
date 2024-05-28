@@ -82,7 +82,9 @@ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbo
 \item 
 \mbox{\Hypertarget{classgko_1_1preconditioner_1_1Isai_a2a26699e2849bfb90bcb88ddbc1f950b}\label{classgko_1_1preconditioner_1_1Isai_a2a26699e2849bfb90bcb88ddbc1f950b}} 
 static auto {\bfseries build} () -\/$>$ decltype(\mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai_1_1Factory}{Factory}} \+::create())
-\end{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{structgko_1_1preconditioner_1_1Isai_1_1parameters__type}{parameters\+\_\+type}} \mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai_a56afe4405af9d8046346f3280b12c54c}{parse}} (const \mbox{\hyperlink{classgko_1_1config_1_1pnode}{config\+::pnode}} \&config, const \mbox{\hyperlink{classgko_1_1config_1_1registry}{config\+::registry}} \&context, const \mbox{\hyperlink{classgko_1_1config_1_1type__descriptor}{config\+::type\+\_\+descriptor}} \&td\+\_\+for\+\_\+child=config\+::make\+\_\+type\+\_\+descriptor$<$ Value\+Type, Index\+Type $>$())
+\begin{DoxyCompactList}\small\item\em Create the parameters from the property\+\_\+tree. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -224,7 +226,32 @@ Preserves the executor, shallow-\/copies the matrix and parameters. Creates a cl
 
 Move-\/assigns an I\+S\+AI preconditioner. 
 
-Preserves the executor, moves the matrix and parameters. Creates a clone of the matrix if it is on the wrong executor. The moved-\/from object is empty (0x0 with nullptr matrix and default parameters) \mbox{\Hypertarget{classgko_1_1preconditioner_1_1Isai_a7351a67bd35b6b3ed0f3485f0eb07dee}\label{classgko_1_1preconditioner_1_1Isai_a7351a67bd35b6b3ed0f3485f0eb07dee}} 
+Preserves the executor, moves the matrix and parameters. Creates a clone of the matrix if it is on the wrong executor. The moved-\/from object is empty (0x0 with nullptr matrix and default parameters) \mbox{\Hypertarget{classgko_1_1preconditioner_1_1Isai_a56afe4405af9d8046346f3280b12c54c}\label{classgko_1_1preconditioner_1_1Isai_a56afe4405af9d8046346f3280b12c54c}} 
+\index{gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$@{gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$}!parse@{parse}}
+\index{parse@{parse}!gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$@{gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{parse()}{parse()}}
+{\footnotesize\ttfamily template$<$isai\+\_\+type Isai\+Type, typename Value\+Type , typename Index\+Type $>$ \\
+static \mbox{\hyperlink{structgko_1_1preconditioner_1_1Isai_1_1parameters__type}{parameters\+\_\+type}} \mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{gko\+::preconditioner\+::\+Isai}}$<$ Isai\+Type, Value\+Type, Index\+Type $>$\+::parse (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1config_1_1pnode}{config\+::pnode}} \&}]{config,  }\item[{const \mbox{\hyperlink{classgko_1_1config_1_1registry}{config\+::registry}} \&}]{context,  }\item[{const \mbox{\hyperlink{classgko_1_1config_1_1type__descriptor}{config\+::type\+\_\+descriptor}} \&}]{td\+\_\+for\+\_\+child = {\ttfamily config\+:\+:make\+\_\+type\+\_\+descriptor$<$~ValueType,~IndexType~$>$()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Create the parameters from the property\+\_\+tree. 
+
+Because this is directly tied to the specific type, the value/index type settings within config are ignored and type\+\_\+descriptor is only used for children objects.
+
+
+\begin{DoxyParams}{Parameters}
+{\em config} & the property tree for setting \\
+\hline
+{\em context} & the registry \\
+\hline
+{\em td\+\_\+for\+\_\+child} & the type descriptor for children objects. The default uses the value/index type of this class.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+parameters 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Isai_a7351a67bd35b6b3ed0f3485f0eb07dee}\label{classgko_1_1preconditioner_1_1Isai_a7351a67bd35b6b3ed0f3485f0eb07dee}} 
 \index{gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$@{gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$}!transpose@{transpose}}
 \index{transpose@{transpose}!gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$@{gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$}}
 \doxysubsubsection{\texorpdfstring{transpose()}{transpose()}}

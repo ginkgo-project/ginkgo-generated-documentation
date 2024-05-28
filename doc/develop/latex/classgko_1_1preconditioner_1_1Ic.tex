@@ -81,7 +81,9 @@ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbo
 \item 
 \mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_ab78fdf7b9a8400c8081d7c13c86c6fc4}\label{classgko_1_1preconditioner_1_1Ic_ab78fdf7b9a8400c8081d7c13c86c6fc4}} 
 static auto {\bfseries build} () -\/$>$ decltype(\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic_1_1Factory}{Factory}} \+::create())
-\end{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{structgko_1_1preconditioner_1_1Ic_1_1parameters__type}{parameters\+\_\+type}} \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic_a9c9420284654e954e2aa86e6f815ccd7}{parse}} (const \mbox{\hyperlink{classgko_1_1config_1_1pnode}{config\+::pnode}} \&config, const \mbox{\hyperlink{classgko_1_1config_1_1registry}{config\+::registry}} \&context, const \mbox{\hyperlink{classgko_1_1config_1_1type__descriptor}{config\+::type\+\_\+descriptor}} \&td\+\_\+for\+\_\+child=config\+::make\+\_\+type\+\_\+descriptor$<$ value\+\_\+type, index\+\_\+type $>$())
+\begin{DoxyCompactList}\small\item\em Create the parameters from the property\+\_\+tree. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
@@ -245,6 +247,34 @@ Preserves the executor, moves the solvers and parameters. Creates a clone of the
 
 References gko\+::clone(), and gko\+::\+Polymorphic\+Object\+::get\+\_\+executor().
 
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_a9c9420284654e954e2aa86e6f815ccd7}\label{classgko_1_1preconditioner_1_1Ic_a9c9420284654e954e2aa86e6f815ccd7}} 
+\index{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$}!parse@{parse}}
+\index{parse@{parse}!gko::preconditioner::Ic$<$ LSolverType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{parse()}{parse()}}
+{\footnotesize\ttfamily template$<$typename L\+Solver\+Type  = solver\+::\+Lower\+Trs$<$$>$, typename Index\+Type  = int32$>$ \\
+static \mbox{\hyperlink{structgko_1_1preconditioner_1_1Ic_1_1parameters__type}{parameters\+\_\+type}} \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{gko\+::preconditioner\+::\+Ic}}$<$ L\+Solver\+Type, Index\+Type $>$\+::parse (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1config_1_1pnode}{config\+::pnode}} \&}]{config,  }\item[{const \mbox{\hyperlink{classgko_1_1config_1_1registry}{config\+::registry}} \&}]{context,  }\item[{const \mbox{\hyperlink{classgko_1_1config_1_1type__descriptor}{config\+::type\+\_\+descriptor}} \&}]{td\+\_\+for\+\_\+child = {\ttfamily config\+:\+:make\+\_\+type\+\_\+descriptor$<$value\+\_\+type,~index\+\_\+type$>$()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Create the parameters from the property\+\_\+tree. 
+
+Because this is directly tied to the specific type, the value/index type settings within config are ignored and type\+\_\+descriptor is only used for children objects.
+
+
+\begin{DoxyParams}{Parameters}
+{\em config} & the property tree for setting \\
+\hline
+{\em context} & the registry \\
+\hline
+{\em td\+\_\+for\+\_\+child} & the type descriptor for children objects. The default uses the value/index type of this class.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+parameters
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+only support the following for l\+\_\+solver\+: Ir, Gmres, Lower\+Trs, and Lower\+Isai 
+\end{DoxyNote}
 \mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_aa058395d245de4ffdaddd5aa5a8fb42a}\label{classgko_1_1preconditioner_1_1Ic_aa058395d245de4ffdaddd5aa5a8fb42a}} 
 \index{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$}!transpose@{transpose}}
 \index{transpose@{transpose}!gko::preconditioner::Ic$<$ LSolverType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$}}
