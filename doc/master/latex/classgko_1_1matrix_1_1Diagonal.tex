@@ -118,6 +118,12 @@ void {\bfseries write} (\mbox{\hyperlink{structgko_1_1matrix__data}{mat\+\_\+dat
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal}{Diagonal}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal_ab0f69662916bec07ba77b5779352a0f0}{create}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} size=0)
+\begin{DoxyCompactList}\small\item\em Creates an \mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal}{Diagonal}} matrix of the specified size. \end{DoxyCompactList}\item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal}{Diagonal}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal_a03bf5ff8cd51b872d6da3f0f3a1051df}{create}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} size, \mbox{\hyperlink{classgko_1_1array}{array}}$<$ value\+\_\+type $>$ values)
+\begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal}{Diagonal}} matrix from an already allocated (and initialized) array. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Input\+Value\+Type $>$ }\\static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal}{Diagonal}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal_ace012160e532e128d6eb67475c143c9b}{create}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} size, std\+::initializer\+\_\+list$<$ Input\+Value\+Type $>$ values)
+\begin{DoxyCompactList}\small\item\em create(std\+::shared\+\_\+ptr$<$const \end{DoxyCompactList}\item 
 static std\+::unique\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal}{Diagonal}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal_a7d63e33782bf1ed1843e22a329ec8f77}{create\+\_\+const}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} size, gko\+::detail\+::const\+\_\+array\+\_\+view$<$ Value\+Type $>$ \&\&values)
 \begin{DoxyCompactList}\small\item\em Creates a constant (immutable) \mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal}{Diagonal}} matrix from a constant array. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Friends}
@@ -125,9 +131,6 @@ static std\+::unique\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Di
 \item 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Diagonal_a1dea3b6b0110d43c3edad5033f3054f4}\label{classgko_1_1matrix_1_1Diagonal_a1dea3b6b0110d43c3edad5033f3054f4}} 
 class {\bfseries Enable\+Polymorphic\+Object$<$ Diagonal, Lin\+Op $>$}
-\item 
-\mbox{\Hypertarget{classgko_1_1matrix_1_1Diagonal_acba9fea73414a240b79d6773a1272ffd}\label{classgko_1_1matrix_1_1Diagonal_acba9fea73414a240b79d6773a1272ffd}} 
-class {\bfseries Enable\+Create\+Method$<$ Diagonal $>$}
 \item 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Diagonal_a4df13336280c2189acd768b2c36a893d}\label{classgko_1_1matrix_1_1Diagonal_a4df13336280c2189acd768b2c36a893d}} 
 class {\bfseries Csr$<$ Value\+Type, int32 $>$}
@@ -197,12 +200,79 @@ a pointer to the new conjugate transposed object
 
 Implements \mbox{\hyperlink{classgko_1_1Transposable_ab41b669288740cf2a6f7bf76e875b077}{gko\+::\+Transposable}}.
 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Diagonal_a03bf5ff8cd51b872d6da3f0f3a1051df}\label{classgko_1_1matrix_1_1Diagonal_a03bf5ff8cd51b872d6da3f0f3a1051df}} 
+\index{gko::matrix::Diagonal$<$ ValueType $>$@{gko::matrix::Diagonal$<$ ValueType $>$}!create@{create}}
+\index{create@{create}!gko::matrix::Diagonal$<$ ValueType $>$@{gko::matrix::Diagonal$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+static std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal}{Diagonal}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal}{gko\+::matrix\+::\+Diagonal}}$<$ Value\+Type $>$\+::create (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{size,  }\item[{\mbox{\hyperlink{classgko_1_1array}{array}}$<$ value\+\_\+type $>$}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a \mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal}{Diagonal}} matrix from an already allocated (and initialized) array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & \mbox{\hyperlink{classgko_1_1Executor}{Executor}} associated to the matrix \\
+\hline
+{\em size} & size of the matrix \\
+\hline
+{\em values} & array of matrix values\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+If {\ttfamily values} is not an rvalue, not an array of Value\+Type, or is on the wrong executor, an internal copy will be created, and the original array data will not be used in the matrix.
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+A smart pointer to the newly created matrix. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Diagonal_ace012160e532e128d6eb67475c143c9b}\label{classgko_1_1matrix_1_1Diagonal_ace012160e532e128d6eb67475c143c9b}} 
+\index{gko::matrix::Diagonal$<$ ValueType $>$@{gko::matrix::Diagonal$<$ ValueType $>$}!create@{create}}
+\index{create@{create}!gko::matrix::Diagonal$<$ ValueType $>$@{gko::matrix::Diagonal$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+template$<$typename Input\+Value\+Type $>$ \\
+static std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal}{Diagonal}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal}{gko\+::matrix\+::\+Diagonal}}$<$ Value\+Type $>$\+::create (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{size,  }\item[{std\+::initializer\+\_\+list$<$ Input\+Value\+Type $>$}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+create(std\+::shared\+\_\+ptr$<$const 
+
+create(std\+::shared\+\_\+ptr$<$const executor$>$=\char`\"{}\char`\"{}$>$, const size\+\_\+type, \mbox{\hyperlink{classgko_1_1array}{array$<$value\+\_\+type$>$}}) 
+
+References gko\+::matrix\+::\+Diagonal$<$ Value\+Type $>$\+::create().
+
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Diagonal_ab0f69662916bec07ba77b5779352a0f0}\label{classgko_1_1matrix_1_1Diagonal_ab0f69662916bec07ba77b5779352a0f0}} 
+\index{gko::matrix::Diagonal$<$ ValueType $>$@{gko::matrix::Diagonal$<$ ValueType $>$}!create@{create}}
+\index{create@{create}!gko::matrix::Diagonal$<$ ValueType $>$@{gko::matrix::Diagonal$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+static std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal}{Diagonal}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal}{gko\+::matrix\+::\+Diagonal}}$<$ Value\+Type $>$\+::create (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{size = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates an \mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal}{Diagonal}} matrix of the specified size. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & \mbox{\hyperlink{classgko_1_1Executor}{Executor}} associated to the matrix \\
+\hline
+{\em size} & size of the matrix\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A smart pointer to the newly created matrix. 
+\end{DoxyReturn}
+
+
+Referenced by gko\+::matrix\+::\+Diagonal$<$ Value\+Type $>$\+::create().
+
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Diagonal_a7d63e33782bf1ed1843e22a329ec8f77}\label{classgko_1_1matrix_1_1Diagonal_a7d63e33782bf1ed1843e22a329ec8f77}} 
 \index{gko::matrix::Diagonal$<$ ValueType $>$@{gko::matrix::Diagonal$<$ ValueType $>$}!create\_const@{create\_const}}
 \index{create\_const@{create\_const}!gko::matrix::Diagonal$<$ ValueType $>$@{gko::matrix::Diagonal$<$ ValueType $>$}}
 \doxysubsubsection{\texorpdfstring{create\_const()}{create\_const()}}
 {\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
-static std\+::unique\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal}{Diagonal}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal}{gko\+::matrix\+::\+Diagonal}}$<$ Value\+Type $>$\+::create\+\_\+const (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{size,  }\item[{gko\+::detail\+::const\+\_\+array\+\_\+view$<$ Value\+Type $>$ \&\&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+static std\+::unique\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal}{Diagonal}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal}{gko\+::matrix\+::\+Diagonal}}$<$ Value\+Type $>$\+::create\+\_\+const (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{size,  }\item[{gko\+::detail\+::const\+\_\+array\+\_\+view$<$ Value\+Type $>$ \&\&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
 

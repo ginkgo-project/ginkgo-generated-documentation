@@ -24,14 +24,63 @@ If this example is built as part of Ginkgo, it is advised to configure Ginkgo wi
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include <map>}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{     * of arrays.}
+\DoxyCodeLine{     *}
+\DoxyCodeLine{     * @tparam ValueType\_c  The value type of the matrix elements, might have}
+\DoxyCodeLine{     *                      other cv qualifiers than ValueType}
+\DoxyCodeLine{     * @tparam IndexType\_c  The index type of the matrix elements, might have}
+\DoxyCodeLine{     *                      other cv qualifiers than IndexType}
+\DoxyCodeLine{     * /}
+\DoxyCodeLine{    \textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType\_c, \textcolor{keyword}{typename} IndexType\_c>}
+\DoxyCodeLine{    \textcolor{keyword}{struct }type \{}
+\DoxyCodeLine{        \textcolor{keyword}{using} index\_array = \textcolor{keyword}{typename} index\_mapper::template type<IndexType\_c>;}
+\DoxyCodeLine{        \textcolor{keyword}{using} value\_array = \textcolor{keyword}{typename} value\_mapper::template type<ValueType\_c>;}
+\DoxyCodeLine{}
+\DoxyCodeLine{        / **}
+\DoxyCodeLine{         * Constructor based on size and raw pointers}
+\DoxyCodeLine{         *}
+\DoxyCodeLine{         * @param size  The number of stored elements}
+\DoxyCodeLine{         * @param row\_idxs  Pointer to the row indices}
+\DoxyCodeLine{         * @param col\_idxs  Pointer to the column indices}
+\DoxyCodeLine{         * @param values  Pointer to the values}
+\DoxyCodeLine{         *}
+\DoxyCodeLine{         * @\textcolor{keywordflow}{return}  An \textcolor{keywordtype}{object} which has each \mbox{\hyperlink{classgko_1_1array}{gko::array}} of the}
+\DoxyCodeLine{         *          device\_matrix\_data mapped to a Kokkos view}
+\DoxyCodeLine{         * /}
+\DoxyCodeLine{        \textcolor{keyword}{static} type map(size\_type size, IndexType\_c* row\_idxs,}
+\DoxyCodeLine{                        IndexType\_c* col\_idxs, ValueType\_c* values)}
+\DoxyCodeLine{        \{}
+\DoxyCodeLine{            \textcolor{keywordflow}{return} \{index\_mapper::map(row\_idxs, size),}
+\DoxyCodeLine{                    index\_mapper::map(col\_idxs, size),}
+\DoxyCodeLine{                    value\_mapper::map(values, size)\};}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{        index\_array row\_idxs;}
+\DoxyCodeLine{        index\_array col\_idxs;}
+\DoxyCodeLine{        value\_array values;}
+\DoxyCodeLine{    \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{static} type<ValueType, IndexType> map(}
+\DoxyCodeLine{        device\_matrix\_data<ValueType, IndexType>\& md)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        assert\_compatibility<MemorySpace>(md);}
+\DoxyCodeLine{        \textcolor{keywordflow}{return} type<ValueType, IndexType>::map(}
+\DoxyCodeLine{            md.get\_num\_stored\_elements(), md.get\_row\_idxs(), md.get\_col\_idxs(),}
+\DoxyCodeLine{            md.get\_values());}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{static} type<const ValueType, const IndexType> map(}
+\DoxyCodeLine{        \textcolor{keyword}{const} device\_matrix\_data<ValueType, IndexType>\& md)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        assert\_compatibility<MemorySpace>(md);}
+\DoxyCodeLine{        \textcolor{keywordflow}{return} type<const ValueType, const IndexType>::map(}
+\DoxyCodeLine{            md.get\_num\_stored\_elements(), md.get\_const\_row\_idxs(),}
+\DoxyCodeLine{            md.get\_const\_col\_idxs(), md.get\_const\_values());}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{\};}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include <omp.h>}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include <Kokkos\_Core.hpp>}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
+\DoxyCodeLine{\}  \textcolor{comment}{// namespace gko::ext::kokkos::detail}}
 \end{DoxyCode}
 
 
@@ -60,9 +109,7 @@ Create Kokkos views on Ginkgo data.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{Kokkos::View<IndexType*> v\_row\_idxs(md.get\_row\_idxs(), md.get\_num\_elems());}
-\DoxyCodeLine{Kokkos::View<IndexType*> v\_col\_idxs(md.get\_col\_idxs(), md.get\_num\_elems());}
-\DoxyCodeLine{Kokkos::View<ValueType*> v\_values(md.get\_values(), md.get\_num\_elems());}
+\DoxyCodeLine{\textcolor{keyword}{auto} k\_md = gko::ext::kokkos::map\_data(md);}
 \end{DoxyCode}
 
 
@@ -71,7 +118,8 @@ Create the matrix entries. This also creates zero entries for the first and seco
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{Kokkos::parallel\_for(}
-\DoxyCodeLine{    \textcolor{stringliteral}{"generate\_stencil\_matrix"}, md.get\_num\_elems(), KOKKOS\_LAMBDA(\textcolor{keywordtype}{int} i) \{}
+\DoxyCodeLine{    \textcolor{stringliteral}{"generate\_stencil\_matrix"}, md.get\_num\_stored\_elements(),}
+\DoxyCodeLine{    KOKKOS\_LAMBDA(\textcolor{keywordtype}{int} i) \{}
 \DoxyCodeLine{        \textcolor{keyword}{const} ValueType coefs[] = \{-\/1, 2, -\/1\};}
 \DoxyCodeLine{        \textcolor{keyword}{auto} ofs = static\_cast<IndexType>((i \% 3) -\/ 1);}
 \DoxyCodeLine{        \textcolor{keyword}{auto} row = static\_cast<IndexType>(i / 3);}
@@ -86,9 +134,9 @@ To prevent branching, a mask is used to set the entry to zero, if the column is 
 \DoxyCodeLine{    \textcolor{keyword}{auto} mask =}
 \DoxyCodeLine{        static\_cast<IndexType>(0 <= col \&\& col < discretization\_points);}
 \DoxyCodeLine{}
-\DoxyCodeLine{    v\_row\_idxs[i] = mask * row;}
-\DoxyCodeLine{    v\_col\_idxs[i] = mask * col;}
-\DoxyCodeLine{    v\_values[i] = mask * coefs[ofs + 1];}
+\DoxyCodeLine{    k\_md.row\_idxs[i] = mask * row;}
+\DoxyCodeLine{    k\_md.col\_idxs[i] = mask * col;}
+\DoxyCodeLine{    k\_md.values[i] = mask * coefs[ofs + 1];}
 \DoxyCodeLine{\});}
 \end{DoxyCode}
 
@@ -119,18 +167,17 @@ Generates the R\+HS vector given {\ttfamily f} and the boundary conditions.
 \DoxyCodeLine{                  \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}}* rhs)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} discretization\_points = \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}-\/>get\_size()[0];}
-\DoxyCodeLine{    \textcolor{keyword}{auto} values = \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}-\/>get\_values();}
-\DoxyCodeLine{    Kokkos::View<ValueType*> values\_view(values, discretization\_points);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} k\_rhs = gko::ext::kokkos::map\_data(rhs);}
 \DoxyCodeLine{    Kokkos::parallel\_for(}
 \DoxyCodeLine{        \textcolor{stringliteral}{"generate\_rhs"}, discretization\_points, KOKKOS\_LAMBDA(\textcolor{keywordtype}{int} i) \{}
 \DoxyCodeLine{            \textcolor{keyword}{const} ValueType h = 1.0 / (discretization\_points + 1);}
 \DoxyCodeLine{            \textcolor{keyword}{const} ValueType xi = ValueType(i + 1) * h;}
-\DoxyCodeLine{            values\_view[i] = -\/f(xi) * h * h;}
+\DoxyCodeLine{            k\_rhs(i, 0) = -\/f(xi) * h * h;}
 \DoxyCodeLine{            \textcolor{keywordflow}{if} (i == 0) \{}
-\DoxyCodeLine{                values\_view[i] += u0;}
+\DoxyCodeLine{                k\_rhs(i, 0) += u0;}
 \DoxyCodeLine{            \}}
 \DoxyCodeLine{            \textcolor{keywordflow}{if} (i == discretization\_points -\/ 1) \{}
-\DoxyCodeLine{                values\_view[i] += u1;}
+\DoxyCodeLine{                k\_rhs(i, 0) += u1;}
 \DoxyCodeLine{            \}}
 \DoxyCodeLine{        \});}
 \DoxyCodeLine{\}}
@@ -146,17 +193,15 @@ Computes the 1-\/norm of the error given the computed {\ttfamily u} and the corr
 \DoxyCodeLine{                       \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}}* u,}
 \DoxyCodeLine{                       Closure\&\& correct\_u)}
 \DoxyCodeLine{\{}
-\DoxyCodeLine{    Kokkos::View<const ValueType*> v\_u(u-\/>\mbox{\hyperlink{classgko_1_1matrix_1_1Dense_ab83c739c1b11abaecc3bfd89506f6c9c}{get\_const\_values}}(),}
-\DoxyCodeLine{                                       discretization\_points);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} k\_u = gko::ext::kokkos::map\_data(u);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} error = 0.0;}
 \DoxyCodeLine{    Kokkos::parallel\_reduce(}
 \DoxyCodeLine{        \textcolor{stringliteral}{"calculate\_error"}, discretization\_points,}
 \DoxyCodeLine{        KOKKOS\_LAMBDA(\textcolor{keywordtype}{int} i, \textcolor{keywordtype}{double}\& lsum) \{}
 \DoxyCodeLine{            \textcolor{keyword}{const} \textcolor{keyword}{auto} h = 1.0 / (discretization\_points + 1);}
 \DoxyCodeLine{            \textcolor{keyword}{const} \textcolor{keyword}{auto} xi = (i + 1) * h;}
-\DoxyCodeLine{            lsum += Kokkos::Experimental::abs(}
-\DoxyCodeLine{                (v\_u(i) -\/ correct\_u(xi)) /}
-\DoxyCodeLine{                Kokkos::Experimental::abs(correct\_u(xi)));}
+\DoxyCodeLine{            lsum += Kokkos::abs((k\_u(i, 0) -\/ correct\_u(xi)) /}
+\DoxyCodeLine{                                Kokkos::abs(correct\_u(xi)));}
 \DoxyCodeLine{        \},}
 \DoxyCodeLine{        error);}
 \DoxyCodeLine{    \textcolor{keywordflow}{return} error;}
@@ -165,7 +210,6 @@ Computes the 1-\/norm of the error given the computed {\ttfamily u} and the corr
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
-\DoxyCodeLine{    Kokkos::ScopeGuard kokkos(argc, argv);}
 \end{DoxyCode}
 
 
@@ -191,11 +235,14 @@ Print help message. For details on the kokkos-\/options see \href{https://kokkos
 \DoxyCodeLine{\textcolor{keywordflow}{if} (argc == 2 \&\& (std::string(argv[1]) == \textcolor{stringliteral}{"-\/-\/help"})) \{}
 \DoxyCodeLine{    std::cerr << \textcolor{stringliteral}{"Usage: "} << argv[0]}
 \DoxyCodeLine{              << \textcolor{stringliteral}{" [discretization\_points] [kokkos-\/options]"} << std::endl;}
-\DoxyCodeLine{    std::exit(-\/1);}
+\DoxyCodeLine{    Kokkos::ScopeGuard kokkos(argc, argv);  \textcolor{comment}{// print Kokkos help}}
+\DoxyCodeLine{    std::exit(1);}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} discretization\_points =}
-\DoxyCodeLine{    argc >= 2 ? std::atoi(argv[1]) : 100u;}
+\DoxyCodeLine{Kokkos::ScopeGuard kokkos(argc, argv);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} discretization\_points =}
+\DoxyCodeLine{    static\_cast<gko::size\_type>(argc >= 2 ? std::atoi(argv[1]) : 100u);}
 \end{DoxyCode}
 
 
@@ -203,32 +250,7 @@ chooses the executor that corresponds to the Kokkos Default\+Execution\+Space
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{    \textcolor{keyword}{auto} exec = []() -\/> std::shared\_ptr<gko::Executor> \{}
-\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef KOKKOS\_ENABLE\_SERIAL}}
-\DoxyCodeLine{        \textcolor{keywordflow}{if} (std::is\_same<Kokkos::DefaultExecutionSpace,}
-\DoxyCodeLine{                         Kokkos::Serial>::value) \{}
-\DoxyCodeLine{            \textcolor{keywordflow}{return} gko::ReferenceExecutor::create();}
-\DoxyCodeLine{        \}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef KOKKOS\_ENABLE\_OPENMP}}
-\DoxyCodeLine{        \textcolor{keywordflow}{if} (std::is\_same<Kokkos::DefaultExecutionSpace,}
-\DoxyCodeLine{                         Kokkos::OpenMP>::value) \{}
-\DoxyCodeLine{            \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}();}
-\DoxyCodeLine{        \}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef KOKKOS\_ENABLE\_CUDA}}
-\DoxyCodeLine{        \textcolor{keywordflow}{if} (std::is\_same<Kokkos::DefaultExecutionSpace, Kokkos::Cuda>::value) \{}
-\DoxyCodeLine{            \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a6c423656c7c0eb53810cb77bb4a66d15}{gko::CudaExecutor::create}}(0,}
-\DoxyCodeLine{                                             gko::ReferenceExecutor::create());}
-\DoxyCodeLine{        \}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef KOKKOS\_ENABLE\_HIP}}
-\DoxyCodeLine{        \textcolor{keywordflow}{if} (std::is\_same<Kokkos::DefaultExecutionSpace, Kokkos::HIP>::value) \{}
-\DoxyCodeLine{            \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_aa0701fe1303e03a8331da7e95008100d}{gko::HipExecutor::create}}(0,}
-\DoxyCodeLine{                                            gko::ReferenceExecutor::create());}
-\DoxyCodeLine{        \}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\textcolor{preprocessor}{    \}();}}
+\DoxyCodeLine{\textcolor{keyword}{auto} exec = gko::ext::kokkos::create\_default\_executor();}
 \end{DoxyCode}
 
 
@@ -250,9 +272,7 @@ initialize vectors
 \DoxyCodeLine{\textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}} = vec::create(exec, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}(discretization\_points, 1));}
 \DoxyCodeLine{generate\_rhs(f, u0, u1, \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}.get());}
 \DoxyCodeLine{\textcolor{keyword}{auto} u = vec::create(exec, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}(discretization\_points, 1));}
-\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < u-\/>get\_size()[0]; ++i) \{}
-\DoxyCodeLine{    u-\/>get\_values()[i] = 0.0;}
-\DoxyCodeLine{\}}
+\DoxyCodeLine{u-\/>fill(0.0);}
 \end{DoxyCode}
 
 
@@ -306,46 +326,65 @@ The actual error depends on the used hardware. \label{_PlainProg}%
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{/*******************************<GINKGO LICENSE>******************************}}
-\DoxyCodeLine{\textcolor{comment}{Copyright (c) 2017-\/2023, the Ginkgo authors}}
-\DoxyCodeLine{\textcolor{comment}{All rights reserved.}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{Redistribution and use in source and binary forms, with or without}}
-\DoxyCodeLine{\textcolor{comment}{modification, are permitted provided that the following conditions}}
-\DoxyCodeLine{\textcolor{comment}{are met:}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{1. Redistributions of source code must retain the above copyright}}
-\DoxyCodeLine{\textcolor{comment}{notice, this list of conditions and the following disclaimer.}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{2. Redistributions in binary form must reproduce the above copyright}}
-\DoxyCodeLine{\textcolor{comment}{notice, this list of conditions and the following disclaimer in the}}
-\DoxyCodeLine{\textcolor{comment}{documentation and/or other materials provided with the distribution.}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{3. Neither the name of the copyright holder nor the names of its}}
-\DoxyCodeLine{\textcolor{comment}{contributors may be used to endorse or promote products derived from}}
-\DoxyCodeLine{\textcolor{comment}{this software without specific prior written permission.}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS}}
-\DoxyCodeLine{\textcolor{comment}{IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED}}
-\DoxyCodeLine{\textcolor{comment}{TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A}}
-\DoxyCodeLine{\textcolor{comment}{PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT}}
-\DoxyCodeLine{\textcolor{comment}{HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,}}
-\DoxyCodeLine{\textcolor{comment}{SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT}}
-\DoxyCodeLine{\textcolor{comment}{LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,}}
-\DoxyCodeLine{\textcolor{comment}{DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY}}
-\DoxyCodeLine{\textcolor{comment}{THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT}}
-\DoxyCodeLine{\textcolor{comment}{(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE}}
-\DoxyCodeLine{\textcolor{comment}{OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.}}
-\DoxyCodeLine{\textcolor{comment}{******************************<GINKGO LICENSE>*******************************/}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include <map>}}
 \DoxyCodeLine{\textcolor{preprocessor}{\#include <string>}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include <omp.h>}}
 \DoxyCodeLine{\textcolor{preprocessor}{\#include <Kokkos\_Core.hpp>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/extensions/kokkos.hpp>}}
 \DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace }gko::ext::kokkos::detail \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType, \textcolor{keyword}{typename} IndexType, \textcolor{keyword}{typename} MemorySpace>}
+\DoxyCodeLine{\textcolor{keyword}{struct }mapper<device\_matrix\_data<ValueType, IndexType>, MemorySpace> \{}
+\DoxyCodeLine{    \textcolor{keyword}{using} index\_mapper = mapper<array<IndexType>, MemorySpace>;}
+\DoxyCodeLine{    \textcolor{keyword}{using} value\_mapper = mapper<array<ValueType>, MemorySpace>;}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType\_c, \textcolor{keyword}{typename} IndexType\_c>}
+\DoxyCodeLine{    \textcolor{keyword}{struct }type \{}
+\DoxyCodeLine{        \textcolor{keyword}{using} index\_array = \textcolor{keyword}{typename} index\_mapper::template type<IndexType\_c>;}
+\DoxyCodeLine{        \textcolor{keyword}{using} value\_array = \textcolor{keyword}{typename} value\_mapper::template type<ValueType\_c>;}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{keyword}{static} type map(\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\_type}} size, IndexType\_c* row\_idxs,}
+\DoxyCodeLine{                        IndexType\_c* col\_idxs, ValueType\_c* values)}
+\DoxyCodeLine{        \{}
+\DoxyCodeLine{            \textcolor{keywordflow}{return} \{index\_mapper::map(row\_idxs, size),}
+\DoxyCodeLine{                    index\_mapper::map(col\_idxs, size),}
+\DoxyCodeLine{                    value\_mapper::map(values, size)\};}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{        index\_array row\_idxs;}
+\DoxyCodeLine{        index\_array col\_idxs;}
+\DoxyCodeLine{        value\_array values;}
+\DoxyCodeLine{    \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{static} type<ValueType, IndexType> map(}
+\DoxyCodeLine{        device\_matrix\_data<ValueType, IndexType>\& md)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        assert\_compatibility<MemorySpace>(md);}
+\DoxyCodeLine{        \textcolor{keywordflow}{return} type<ValueType, IndexType>::map(}
+\DoxyCodeLine{            md.get\_num\_stored\_elements(), md.get\_row\_idxs(), md.get\_col\_idxs(),}
+\DoxyCodeLine{            md.get\_values());}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{static} type<const ValueType, const IndexType> map(}
+\DoxyCodeLine{        \textcolor{keyword}{const} device\_matrix\_data<ValueType, IndexType>\& md)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        assert\_compatibility<MemorySpace>(md);}
+\DoxyCodeLine{        \textcolor{keywordflow}{return} type<const ValueType, const IndexType>::map(}
+\DoxyCodeLine{            md.get\_num\_stored\_elements(), md.get\_const\_row\_idxs(),}
+\DoxyCodeLine{            md.get\_const\_col\_idxs(), md.get\_const\_values());}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}  \textcolor{comment}{// namespace gko::ext::kokkos::detail}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType, \textcolor{keyword}{typename} IndexType>}
@@ -357,12 +396,11 @@ The actual error depends on the used hardware. \label{_PlainProg}%
 \DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1device__matrix__data}{gko::device\_matrix\_data<ValueType, IndexType>}} md(exec, matrix-\/>\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\_size}}(),}
 \DoxyCodeLine{                                                     discretization\_points * 3);}
 \DoxyCodeLine{}
-\DoxyCodeLine{    Kokkos::View<IndexType*> v\_row\_idxs(md.get\_row\_idxs(), md.get\_num\_elems());}
-\DoxyCodeLine{    Kokkos::View<IndexType*> v\_col\_idxs(md.get\_col\_idxs(), md.get\_num\_elems());}
-\DoxyCodeLine{    Kokkos::View<ValueType*> v\_values(md.get\_values(), md.get\_num\_elems());}
+\DoxyCodeLine{    \textcolor{keyword}{auto} k\_md = gko::ext::kokkos::map\_data(md);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    Kokkos::parallel\_for(}
-\DoxyCodeLine{        \textcolor{stringliteral}{"generate\_stencil\_matrix"}, md.get\_num\_elems(), KOKKOS\_LAMBDA(\textcolor{keywordtype}{int} i) \{}
+\DoxyCodeLine{        \textcolor{stringliteral}{"generate\_stencil\_matrix"}, md.get\_num\_stored\_elements(),}
+\DoxyCodeLine{        KOKKOS\_LAMBDA(\textcolor{keywordtype}{int} i) \{}
 \DoxyCodeLine{            \textcolor{keyword}{const} ValueType coefs[] = \{-\/1, 2, -\/1\};}
 \DoxyCodeLine{            \textcolor{keyword}{auto} ofs = static\_cast<IndexType>((i \% 3) -\/ 1);}
 \DoxyCodeLine{            \textcolor{keyword}{auto} row = static\_cast<IndexType>(i / 3);}
@@ -371,12 +409,12 @@ The actual error depends on the used hardware. \label{_PlainProg}%
 \DoxyCodeLine{            \textcolor{keyword}{auto} mask =}
 \DoxyCodeLine{                static\_cast<IndexType>(0 <= col \&\& col < discretization\_points);}
 \DoxyCodeLine{}
-\DoxyCodeLine{            v\_row\_idxs[i] = mask * row;}
-\DoxyCodeLine{            v\_col\_idxs[i] = mask * col;}
-\DoxyCodeLine{            v\_values[i] = mask * coefs[ofs + 1];}
+\DoxyCodeLine{            k\_md.row\_idxs[i] = mask * row;}
+\DoxyCodeLine{            k\_md.col\_idxs[i] = mask * col;}
+\DoxyCodeLine{            k\_md.values[i] = mask * coefs[ofs + 1];}
 \DoxyCodeLine{        \});}
 \DoxyCodeLine{}
-\DoxyCodeLine{    md.\mbox{\hyperlink{classgko_1_1device__matrix__data_a8b58afc780989cfcba739829572fe7ab}{sum\_duplicates}}();}
+\DoxyCodeLine{    md.sum\_duplicates();}
 \DoxyCodeLine{}
 \DoxyCodeLine{    matrix-\/>\mbox{\hyperlink{classgko_1_1matrix_1_1Csr_ac4db41146ed3c3a8653b03d6b2c6c675}{read}}(std::move(md));}
 \DoxyCodeLine{\}}
@@ -387,18 +425,17 @@ The actual error depends on the used hardware. \label{_PlainProg}%
 \DoxyCodeLine{                  \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}}* rhs)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} discretization\_points = \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}-\/>get\_size()[0];}
-\DoxyCodeLine{    \textcolor{keyword}{auto} values = \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}-\/>get\_values();}
-\DoxyCodeLine{    Kokkos::View<ValueType*> values\_view(values, discretization\_points);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} k\_rhs = gko::ext::kokkos::map\_data(rhs);}
 \DoxyCodeLine{    Kokkos::parallel\_for(}
 \DoxyCodeLine{        \textcolor{stringliteral}{"generate\_rhs"}, discretization\_points, KOKKOS\_LAMBDA(\textcolor{keywordtype}{int} i) \{}
 \DoxyCodeLine{            \textcolor{keyword}{const} ValueType h = 1.0 / (discretization\_points + 1);}
 \DoxyCodeLine{            \textcolor{keyword}{const} ValueType xi = ValueType(i + 1) * h;}
-\DoxyCodeLine{            values\_view[i] = -\/f(xi) * h * h;}
+\DoxyCodeLine{            k\_rhs(i, 0) = -\/f(xi) * h * h;}
 \DoxyCodeLine{            \textcolor{keywordflow}{if} (i == 0) \{}
-\DoxyCodeLine{                values\_view[i] += u0;}
+\DoxyCodeLine{                k\_rhs(i, 0) += u0;}
 \DoxyCodeLine{            \}}
 \DoxyCodeLine{            \textcolor{keywordflow}{if} (i == discretization\_points -\/ 1) \{}
-\DoxyCodeLine{                values\_view[i] += u1;}
+\DoxyCodeLine{                k\_rhs(i, 0) += u1;}
 \DoxyCodeLine{            \}}
 \DoxyCodeLine{        \});}
 \DoxyCodeLine{\}}
@@ -409,17 +446,15 @@ The actual error depends on the used hardware. \label{_PlainProg}%
 \DoxyCodeLine{                       \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}}* u,}
 \DoxyCodeLine{                       Closure\&\& correct\_u)}
 \DoxyCodeLine{\{}
-\DoxyCodeLine{    Kokkos::View<const ValueType*> v\_u(u-\/>\mbox{\hyperlink{classgko_1_1matrix_1_1Dense_ab83c739c1b11abaecc3bfd89506f6c9c}{get\_const\_values}}(),}
-\DoxyCodeLine{                                       discretization\_points);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} k\_u = gko::ext::kokkos::map\_data(u);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} error = 0.0;}
 \DoxyCodeLine{    Kokkos::parallel\_reduce(}
 \DoxyCodeLine{        \textcolor{stringliteral}{"calculate\_error"}, discretization\_points,}
 \DoxyCodeLine{        KOKKOS\_LAMBDA(\textcolor{keywordtype}{int} i, \textcolor{keywordtype}{double}\& lsum) \{}
 \DoxyCodeLine{            \textcolor{keyword}{const} \textcolor{keyword}{auto} h = 1.0 / (discretization\_points + 1);}
 \DoxyCodeLine{            \textcolor{keyword}{const} \textcolor{keyword}{auto} xi = (i + 1) * h;}
-\DoxyCodeLine{            lsum += Kokkos::Experimental::abs(}
-\DoxyCodeLine{                (v\_u(i) -\/ correct\_u(xi)) /}
-\DoxyCodeLine{                Kokkos::Experimental::abs(correct\_u(xi)));}
+\DoxyCodeLine{            lsum += Kokkos::abs((k\_u(i, 0) -\/ correct\_u(xi)) /}
+\DoxyCodeLine{                                Kokkos::abs(correct\_u(xi)));}
 \DoxyCodeLine{        \},}
 \DoxyCodeLine{        error);}
 \DoxyCodeLine{    \textcolor{keywordflow}{return} error;}
@@ -428,8 +463,6 @@ The actual error depends on the used hardware. \label{_PlainProg}%
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
-\DoxyCodeLine{    Kokkos::ScopeGuard kokkos(argc, argv);}
-\DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{using} ValueType = double;}
 \DoxyCodeLine{    \textcolor{keyword}{using} RealValueType = \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}};}
 \DoxyCodeLine{    \textcolor{keyword}{using} IndexType = int;}
@@ -442,38 +475,16 @@ The actual error depends on the used hardware. \label{_PlainProg}%
 \DoxyCodeLine{    \textcolor{keywordflow}{if} (argc == 2 \&\& (std::string(argv[1]) == \textcolor{stringliteral}{"-\/-\/help"})) \{}
 \DoxyCodeLine{        std::cerr << \textcolor{stringliteral}{"Usage: "} << argv[0]}
 \DoxyCodeLine{                  << \textcolor{stringliteral}{" [discretization\_points] [kokkos-\/options]"} << std::endl;}
-\DoxyCodeLine{        std::exit(-\/1);}
+\DoxyCodeLine{        Kokkos::ScopeGuard kokkos(argc, argv);  \textcolor{comment}{// print Kokkos help}}
+\DoxyCodeLine{        std::exit(1);}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} discretization\_points =}
-\DoxyCodeLine{        argc >= 2 ? std::atoi(argv[1]) : 100u;}
+\DoxyCodeLine{    Kokkos::ScopeGuard kokkos(argc, argv);}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{auto} exec = []() -\/> std::shared\_ptr<gko::Executor> \{}
-\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef KOKKOS\_ENABLE\_SERIAL}}
-\DoxyCodeLine{        \textcolor{keywordflow}{if} (std::is\_same<Kokkos::DefaultExecutionSpace,}
-\DoxyCodeLine{                         Kokkos::Serial>::value) \{}
-\DoxyCodeLine{            \textcolor{keywordflow}{return} gko::ReferenceExecutor::create();}
-\DoxyCodeLine{        \}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef KOKKOS\_ENABLE\_OPENMP}}
-\DoxyCodeLine{        \textcolor{keywordflow}{if} (std::is\_same<Kokkos::DefaultExecutionSpace,}
-\DoxyCodeLine{                         Kokkos::OpenMP>::value) \{}
-\DoxyCodeLine{            \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}();}
-\DoxyCodeLine{        \}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef KOKKOS\_ENABLE\_CUDA}}
-\DoxyCodeLine{        \textcolor{keywordflow}{if} (std::is\_same<Kokkos::DefaultExecutionSpace, Kokkos::Cuda>::value) \{}
-\DoxyCodeLine{            \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a6c423656c7c0eb53810cb77bb4a66d15}{gko::CudaExecutor::create}}(0,}
-\DoxyCodeLine{                                             gko::ReferenceExecutor::create());}
-\DoxyCodeLine{        \}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef KOKKOS\_ENABLE\_HIP}}
-\DoxyCodeLine{        \textcolor{keywordflow}{if} (std::is\_same<Kokkos::DefaultExecutionSpace, Kokkos::HIP>::value) \{}
-\DoxyCodeLine{            \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_aa0701fe1303e03a8331da7e95008100d}{gko::HipExecutor::create}}(0,}
-\DoxyCodeLine{                                            gko::ReferenceExecutor::create());}
-\DoxyCodeLine{        \}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{    \}();}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} discretization\_points =}
+\DoxyCodeLine{        static\_cast<gko::size\_type>(argc >= 2 ? std::atoi(argv[1]) : 100u);}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{auto} exec = gko::ext::kokkos::create\_default\_executor();}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} correct\_u = [] KOKKOS\_FUNCTION(ValueType x) \{ \textcolor{keywordflow}{return} x * x * x; \};}
 \DoxyCodeLine{    \textcolor{keyword}{auto} f = [] KOKKOS\_FUNCTION(ValueType x) \{ \textcolor{keywordflow}{return} ValueType\{6\} * x; \};}
@@ -483,9 +494,7 @@ The actual error depends on the used hardware. \label{_PlainProg}%
 \DoxyCodeLine{    \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}} = vec::create(exec, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}(discretization\_points, 1));}
 \DoxyCodeLine{    generate\_rhs(f, u0, u1, \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{rhs}}.get());}
 \DoxyCodeLine{    \textcolor{keyword}{auto} u = vec::create(exec, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}(discretization\_points, 1));}
-\DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < u-\/>get\_size()[0]; ++i) \{}
-\DoxyCodeLine{        u-\/>get\_values()[i] = 0.0;}
-\DoxyCodeLine{    \}}
+\DoxyCodeLine{    u-\/>fill(0.0);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} A = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{share}}(mtx::create(}
 \DoxyCodeLine{        exec, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}\{discretization\_points, discretization\_points\}));}

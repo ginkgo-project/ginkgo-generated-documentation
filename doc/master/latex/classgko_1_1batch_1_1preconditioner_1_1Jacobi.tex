@@ -1,0 +1,246 @@
+\hypertarget{classgko_1_1batch_1_1preconditioner_1_1Jacobi}{}\doxysection{gko\+::batch\+::preconditioner\+::Jacobi$<$ Value\+Type, Index\+Type $>$ Class Template Reference}
+\label{classgko_1_1batch_1_1preconditioner_1_1Jacobi}\index{gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$@{gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$}}
+
+
+A block-\/\+Jacobi preconditioner is a block-\/diagonal linear operator, obtained by inverting the diagonal blocks (stored in a dense row major fashion) of the source operator.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/preconditioner/batch\+\_\+jacobi.\+hpp$>$}
+
+
+
+Inheritance diagram for gko\+::batch\+::preconditioner\+::Jacobi$<$ Value\+Type, Index\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1batch_1_1preconditioner_1_1Jacobi__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for gko\+::batch\+::preconditioner\+::Jacobi$<$ Value\+Type, Index\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1batch_1_1preconditioner_1_1Jacobi__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classgko_1_1batch_1_1preconditioner_1_1Jacobi_1_1Factory}{Factory}}
+\item 
+struct \mbox{\hyperlink{structgko_1_1batch_1_1preconditioner_1_1Jacobi_1_1parameters__type}{parameters\+\_\+type}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1batch_1_1preconditioner_1_1Jacobi_a3330d2501feeaf59c3cefec2fbf1d73d}\label{classgko_1_1batch_1_1preconditioner_1_1Jacobi_a3330d2501feeaf59c3cefec2fbf1d73d}} 
+using {\bfseries value\+\_\+type} = Value\+Type
+\item 
+\mbox{\Hypertarget{classgko_1_1batch_1_1preconditioner_1_1Jacobi_a27efe69c9a44bff1c1f41532760791fe}\label{classgko_1_1batch_1_1preconditioner_1_1Jacobi_a27efe69c9a44bff1c1f41532760791fe}} 
+using {\bfseries index\+\_\+type} = Index\+Type
+\item 
+\mbox{\Hypertarget{classgko_1_1batch_1_1preconditioner_1_1Jacobi_af9486bd7772da385e4cab27b2e85983d}\label{classgko_1_1batch_1_1preconditioner_1_1Jacobi_af9486bd7772da385e4cab27b2e85983d}} 
+using {\bfseries matrix\+\_\+type} = \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Csr}{batch\+::matrix\+::\+Csr}}$<$ Value\+Type, Index\+Type $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+const index\+\_\+type $\ast$ \mbox{\hyperlink{classgko_1_1batch_1_1preconditioner_1_1Jacobi_a595bf6131b63bdb0b94cd8b00452ddc5}{get\+\_\+const\+\_\+block\+\_\+pointers}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns the block pointers. \end{DoxyCompactList}\item 
+const index\+\_\+type $\ast$ \mbox{\hyperlink{classgko_1_1batch_1_1preconditioner_1_1Jacobi_a0867b0a3bc6104cbe8c0e21e76d5fa3e}{get\+\_\+const\+\_\+map\+\_\+block\+\_\+to\+\_\+row}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns the mapping between the blocks and the row id. \end{DoxyCompactList}\item 
+const index\+\_\+type $\ast$ \mbox{\hyperlink{classgko_1_1batch_1_1preconditioner_1_1Jacobi_a2a815f7ff0e4f4b7053db80a457b1b78}{get\+\_\+const\+\_\+blocks\+\_\+cumulative\+\_\+offsets}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns the cumulative blocks storage array. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacegko_a318c831e3fe269ba04c6ed8bf5a71073}{uint32}} \mbox{\hyperlink{classgko_1_1batch_1_1preconditioner_1_1Jacobi_a33328b011a3a2125774e4471da563181}{get\+\_\+max\+\_\+block\+\_\+size}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns the max block size. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{classgko_1_1batch_1_1preconditioner_1_1Jacobi_a4d5fe04bfd88e13bbfcac393595707c7}{get\+\_\+num\+\_\+blocks}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns the number of blocks in an individual batch entry. \end{DoxyCompactList}\item 
+const value\+\_\+type $\ast$ \mbox{\hyperlink{classgko_1_1batch_1_1preconditioner_1_1Jacobi_a3e017b255c359e618ae52f65840dbcc0}{get\+\_\+const\+\_\+blocks}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns the pointer to the memory used for storing the block data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{classgko_1_1batch_1_1preconditioner_1_1Jacobi_af97a949dceeedd5d38a1e6cc7fe2b327}{get\+\_\+num\+\_\+stored\+\_\+elements}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns the number of elements explicitly stored in the dense blocks. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1batch_1_1preconditioner_1_1Jacobi_abb4acb6cb68ee9eb468e67f1984c62e5}\label{classgko_1_1batch_1_1preconditioner_1_1Jacobi_abb4acb6cb68ee9eb468e67f1984c62e5}} 
+const \mbox{\hyperlink{structgko_1_1batch_1_1preconditioner_1_1Jacobi_1_1parameters__type}{parameters\+\_\+type}} \& {\bfseries get\+\_\+parameters} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1batch_1_1preconditioner_1_1Jacobi_ab55bd48dade568dacee7a5b4cbe72659}\label{classgko_1_1batch_1_1preconditioner_1_1Jacobi_ab55bd48dade568dacee7a5b4cbe72659}} 
+static auto {\bfseries build} () -\/$>$ decltype(\mbox{\hyperlink{classgko_1_1batch_1_1preconditioner_1_1Jacobi_1_1Factory}{Factory}} \+::create())
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1batch_1_1preconditioner_1_1Jacobi_a11577e208abe49ddc79377dbca0d5e5a}\label{classgko_1_1batch_1_1preconditioner_1_1Jacobi_a11577e208abe49ddc79377dbca0d5e5a}} 
+class {\bfseries Enable\+Batch\+Lin\+Op$<$ Jacobi $>$}
+\item 
+\mbox{\Hypertarget{classgko_1_1batch_1_1preconditioner_1_1Jacobi_a37a3316c7da0c32663ff102caf34765a}\label{classgko_1_1batch_1_1preconditioner_1_1Jacobi_a37a3316c7da0c32663ff102caf34765a}} 
+class {\bfseries Enable\+Polymorphic\+Object$<$ Jacobi, Batch\+Lin\+Op $>$}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$\newline
+class gko\+::batch\+::preconditioner\+::\+Jacobi$<$ Value\+Type, Index\+Type $>$}
+
+A block-\/\+Jacobi preconditioner is a block-\/diagonal linear operator, obtained by inverting the diagonal blocks (stored in a dense row major fashion) of the source operator. 
+
+With the batched preconditioners, it is required that all items in the batch have the same sparsity pattern. The detection of the blocks and the block pointers require that the sparsity pattern of all the items be the same. Other cases is undefined behaviour. The input batch matrix must be in batch\+::\+Csr matrix format or must be convertible to batch\+::\+Csr matrix format. The block detection algorithm and the conversion to dense blocks kernels require this assumption.
+
+\begin{DoxyNote}{Note}
+In a fashion similar to the non-\/batched \mbox{\hyperlink{classgko_1_1batch_1_1preconditioner_1_1Jacobi}{Jacobi}} preconditioner, the maximum possible size of the diagonal blocks is equal to the maximum warp size on the device (32 for N\+V\+I\+D\+IA G\+P\+Us, 64 for A\+MD G\+P\+Us).
+\end{DoxyNote}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Value\+Type} & value precision of matrix elements \\
+\hline
+{\em Index\+Type} & index precision of matrix elements \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1batch_1_1preconditioner_1_1Jacobi_a595bf6131b63bdb0b94cd8b00452ddc5}\label{classgko_1_1batch_1_1preconditioner_1_1Jacobi_a595bf6131b63bdb0b94cd8b00452ddc5}} 
+\index{gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$@{gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$}!get\_const\_block\_pointers@{get\_const\_block\_pointers}}
+\index{get\_const\_block\_pointers@{get\_const\_block\_pointers}!gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$@{gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_const\_block\_pointers()}{get\_const\_block\_pointers()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+const index\+\_\+type$\ast$ \mbox{\hyperlink{classgko_1_1batch_1_1preconditioner_1_1Jacobi}{gko\+::batch\+::preconditioner\+::\+Jacobi}}$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+block\+\_\+pointers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns the block pointers. 
+
+\begin{DoxyNote}{Note}
+Returns nullptr in case of a scalar jacobi preconditioner (max\+\_\+block\+\_\+size = 1). 
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+the block pointers 
+\end{DoxyReturn}
+
+
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+data().
+
+\mbox{\Hypertarget{classgko_1_1batch_1_1preconditioner_1_1Jacobi_a3e017b255c359e618ae52f65840dbcc0}\label{classgko_1_1batch_1_1preconditioner_1_1Jacobi_a3e017b255c359e618ae52f65840dbcc0}} 
+\index{gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$@{gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$}!get\_const\_blocks@{get\_const\_blocks}}
+\index{get\_const\_blocks@{get\_const\_blocks}!gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$@{gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_const\_blocks()}{get\_const\_blocks()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+const value\+\_\+type$\ast$ \mbox{\hyperlink{classgko_1_1batch_1_1preconditioner_1_1Jacobi}{gko\+::batch\+::preconditioner\+::\+Jacobi}}$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+blocks (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns the pointer to the memory used for storing the block data. 
+
+Element ({\ttfamily i}, {\ttfamily j}) of the block, which belongs to the batch entry with index = \char`\"{}batch\+\_\+id\char`\"{} and has local id = \char`\"{}block\+\_\+id\char`\"{} within its batch entry is stored at the address = \mbox{\hyperlink{classgko_1_1batch_1_1preconditioner_1_1Jacobi_a3e017b255c359e618ae52f65840dbcc0}{get\+\_\+const\+\_\+blocks()}} + detail\+::get\+\_\+global\+\_\+block\+\_\+offset(batch\+\_\+id, num\+\_\+blocks, block\+\_\+id, cumulative\+\_\+blocks\+\_\+storage) + i $\ast$ detail\+::get\+\_\+stride(block\+\_\+id, block\+\_\+pointers) + j
+
+\begin{DoxyNote}{Note}
+Returns nullptr in case of a scalar jacobi preconditioner (max\+\_\+block\+\_\+size = 1). The blocks array is empty in case of scalar jacobi preconditioner as the preconditioner is generated inside the batched solver kernel.
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+the pointer to the memory used for storing the block data 
+\end{DoxyReturn}
+
+
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+data().
+
+\mbox{\Hypertarget{classgko_1_1batch_1_1preconditioner_1_1Jacobi_a2a815f7ff0e4f4b7053db80a457b1b78}\label{classgko_1_1batch_1_1preconditioner_1_1Jacobi_a2a815f7ff0e4f4b7053db80a457b1b78}} 
+\index{gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$@{gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$}!get\_const\_blocks\_cumulative\_offsets@{get\_const\_blocks\_cumulative\_offsets}}
+\index{get\_const\_blocks\_cumulative\_offsets@{get\_const\_blocks\_cumulative\_offsets}!gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$@{gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_const\_blocks\_cumulative\_offsets()}{get\_const\_blocks\_cumulative\_offsets()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+const index\+\_\+type$\ast$ \mbox{\hyperlink{classgko_1_1batch_1_1preconditioner_1_1Jacobi}{gko\+::batch\+::preconditioner\+::\+Jacobi}}$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+blocks\+\_\+cumulative\+\_\+offsets (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns the cumulative blocks storage array. 
+
+\begin{DoxyNote}{Note}
+Returns nullptr in case of a scalar jacobi preconditioner (max\+\_\+block\+\_\+size = 1). 
+\end{DoxyNote}
+
+
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+data().
+
+\mbox{\Hypertarget{classgko_1_1batch_1_1preconditioner_1_1Jacobi_a0867b0a3bc6104cbe8c0e21e76d5fa3e}\label{classgko_1_1batch_1_1preconditioner_1_1Jacobi_a0867b0a3bc6104cbe8c0e21e76d5fa3e}} 
+\index{gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$@{gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$}!get\_const\_map\_block\_to\_row@{get\_const\_map\_block\_to\_row}}
+\index{get\_const\_map\_block\_to\_row@{get\_const\_map\_block\_to\_row}!gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$@{gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_const\_map\_block\_to\_row()}{get\_const\_map\_block\_to\_row()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+const index\+\_\+type$\ast$ \mbox{\hyperlink{classgko_1_1batch_1_1preconditioner_1_1Jacobi}{gko\+::batch\+::preconditioner\+::\+Jacobi}}$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+map\+\_\+block\+\_\+to\+\_\+row (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns the mapping between the blocks and the row id. 
+
+\begin{DoxyNote}{Note}
+Returns nullptr in case of a scalar jacobi preconditioner (max\+\_\+block\+\_\+size = 1). 
+\end{DoxyNote}
+
+
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+data().
+
+\mbox{\Hypertarget{classgko_1_1batch_1_1preconditioner_1_1Jacobi_a33328b011a3a2125774e4471da563181}\label{classgko_1_1batch_1_1preconditioner_1_1Jacobi_a33328b011a3a2125774e4471da563181}} 
+\index{gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$@{gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$}!get\_max\_block\_size@{get\_max\_block\_size}}
+\index{get\_max\_block\_size@{get\_max\_block\_size}!gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$@{gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_max\_block\_size()}{get\_max\_block\_size()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+\mbox{\hyperlink{namespacegko_a318c831e3fe269ba04c6ed8bf5a71073}{uint32}} \mbox{\hyperlink{classgko_1_1batch_1_1preconditioner_1_1Jacobi}{gko\+::batch\+::preconditioner\+::\+Jacobi}}$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+max\+\_\+block\+\_\+size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns the max block size. 
+
+\begin{DoxyReturn}{Returns}
+the max block size 
+\end{DoxyReturn}
+
+
+References gko\+::batch\+::preconditioner\+::\+Jacobi$<$ Value\+Type, Index\+Type $>$\+::parameters\+\_\+type\+::max\+\_\+block\+\_\+size.
+
+\mbox{\Hypertarget{classgko_1_1batch_1_1preconditioner_1_1Jacobi_a4d5fe04bfd88e13bbfcac393595707c7}\label{classgko_1_1batch_1_1preconditioner_1_1Jacobi_a4d5fe04bfd88e13bbfcac393595707c7}} 
+\index{gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$@{gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$}!get\_num\_blocks@{get\_num\_blocks}}
+\index{get\_num\_blocks@{get\_num\_blocks}!gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$@{gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_num\_blocks()}{get\_num\_blocks()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{classgko_1_1batch_1_1preconditioner_1_1Jacobi}{gko\+::batch\+::preconditioner\+::\+Jacobi}}$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+num\+\_\+blocks (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns the number of blocks in an individual batch entry. 
+
+\begin{DoxyReturn}{Returns}
+the number of blocks in an individual batch entry. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1batch_1_1preconditioner_1_1Jacobi_af97a949dceeedd5d38a1e6cc7fe2b327}\label{classgko_1_1batch_1_1preconditioner_1_1Jacobi_af97a949dceeedd5d38a1e6cc7fe2b327}} 
+\index{gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$@{gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$}!get\_num\_stored\_elements@{get\_num\_stored\_elements}}
+\index{get\_num\_stored\_elements@{get\_num\_stored\_elements}!gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$@{gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_num\_stored\_elements()}{get\_num\_stored\_elements()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{classgko_1_1batch_1_1preconditioner_1_1Jacobi}{gko\+::batch\+::preconditioner\+::\+Jacobi}}$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+num\+\_\+stored\+\_\+elements (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns the number of elements explicitly stored in the dense blocks. 
+
+\begin{DoxyNote}{Note}
+Returns 0 in case of scalar jacobi preconditioner as the preconditioner is generated inside the batched solver kernels, hence, blocks array storage is not required.
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+the number of elements explicitly stored in the dense blocks. 
+\end{DoxyReturn}
+
+
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+size().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/preconditioner/batch\+\_\+jacobi.\+hpp\end{DoxyCompactItemize}

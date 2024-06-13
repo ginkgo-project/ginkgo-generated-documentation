@@ -15,14 +15,20 @@ class \mbox{\hyperlink{classgko_1_1batch_1_1BatchLinOpFactory}{gko\+::batch\+::\
 \begin{DoxyCompactList}\small\item\em A \mbox{\hyperlink{classgko_1_1batch_1_1BatchLinOpFactory}{Batch\+Lin\+Op\+Factory}} represents a higher order mapping which transforms one batch linear operator into another. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1batch_1_1EnableBatchLinOp}{gko\+::batch\+::\+Enable\+Batch\+Lin\+Op$<$ Concrete\+Batch\+Lin\+Op, Polymorphic\+Base $>$}}
 \begin{DoxyCompactList}\small\item\em The \mbox{\hyperlink{classgko_1_1batch_1_1EnableBatchLinOp}{Enable\+Batch\+Lin\+Op}} mixin can be used to provide sensible default implementations of the majority of the \mbox{\hyperlink{classgko_1_1batch_1_1BatchLinOp}{Batch\+Lin\+Op}} and \mbox{\hyperlink{classgko_1_1PolymorphicObject}{Polymorphic\+Object}} interface. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Csr}{gko\+::batch\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Csr}{Csr}} is a general sparse matrix format that stores the column indices for each nonzero entry and a cumulative sum of the number of nonzeros in each row. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Dense}{gko\+::batch\+::matrix\+::\+Dense$<$ Value\+Type $>$}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Dense}{Dense}} is a batch matrix format which explicitly stores all values of the matrix in each of the batches. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Ell}{gko\+::batch\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Ell}{Ell}} is a sparse matrix format that stores the same number of nonzeros in each row, enabling coalesced accesses. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Identity}{gko\+::batch\+::matrix\+::\+Identity$<$ Value\+Type $>$}}
 \begin{DoxyCompactList}\small\item\em The batch \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Identity}{Identity}} matrix, which represents a batch of \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Identity}{Identity}} matrices. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1batch_1_1preconditioner_1_1Jacobi}{gko\+::batch\+::preconditioner\+::\+Jacobi$<$ Value\+Type, Index\+Type $>$}}
+\begin{DoxyCompactList}\small\item\em A block-\/\+Jacobi preconditioner is a block-\/diagonal linear operator, obtained by inverting the diagonal blocks (stored in a dense row major fashion) of the source operator. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1batch_1_1solver_1_1Bicgstab}{gko\+::batch\+::solver\+::\+Bicgstab$<$ Value\+Type $>$}}
-\begin{DoxyCompactList}\small\item\em Bi\+C\+G\+S\+T\+AB or the Bi-\/\+Conjugate Gradient-\/\+Stabilized is a Krylov subspace solver. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Bi\+C\+G\+S\+T\+AB or the Bi-\/\+Conjugate Gradient-\/\+Stabilized is a Krylov subspace solver. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1batch_1_1solver_1_1Cg}{gko\+::batch\+::solver\+::\+Cg$<$ Value\+Type $>$}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1batch_1_1solver_1_1Cg}{Cg}} or the Conjugate Gradient is a Krylov subspace solver. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
@@ -76,13 +82,13 @@ A minimal example of a batch linear operator is the following\+:
 \DoxyCodeLine{\textcolor{comment}{// create a factory with default `my\_value` parameter}}
 \DoxyCodeLine{\textcolor{keyword}{auto} fact = MyBatchLinOp::build().on(exec);}
 \DoxyCodeLine{\textcolor{comment}{// create a operator using the factory:}}
-\DoxyCodeLine{\textcolor{keyword}{auto} my\_op = fact-\/>generate(gko::batch::matrix::Identity::create(exec, 2));}
+\DoxyCodeLine{\textcolor{keyword}{auto} my\_op = fact-\/>generate(\mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Identity_a7d9eb204dc3971b2e62c103b05fccdb5}{gko::batch::matrix::Identity::create}}(exec, 2));}
 \DoxyCodeLine{std::cout << my\_op-\/>get\_my\_parameters().my\_value;  \textcolor{comment}{// prints 5}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{// create a factory with custom `my\_value` parameter}}
 \DoxyCodeLine{\textcolor{keyword}{auto} fact = MyLinOp::build().with\_my\_value(0).on(exec);}
 \DoxyCodeLine{\textcolor{comment}{// create a operator using the factory:}}
-\DoxyCodeLine{\textcolor{keyword}{auto} my\_op = fact-\/>generate(gko::batch::matrix::Identity::create(exec, 2));}
+\DoxyCodeLine{\textcolor{keyword}{auto} my\_op = fact-\/>generate(\mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Identity_a7d9eb204dc3971b2e62c103b05fccdb5}{gko::batch::matrix::Identity::create}}(exec, 2));}
 \DoxyCodeLine{std::cout << my\_op-\/>get\_my\_parameters().my\_value;  \textcolor{comment}{// prints 0}}
 \end{DoxyCode}
 

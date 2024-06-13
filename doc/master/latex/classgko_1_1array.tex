@@ -38,11 +38,11 @@ using \mbox{\hyperlink{classgko_1_1array_a377a6aaf5ee6c2747781b889eea6c226}{view
 \begin{DoxyCompactList}\small\item\em Creates an empty array not tied to any executor. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classgko_1_1array_a7b0b51262019434e9e4cec51ccec919c}{array}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec) noexcept
 \begin{DoxyCompactList}\small\item\em Creates an empty array tied to the specified \mbox{\hyperlink{classgko_1_1Executor}{Executor}}. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classgko_1_1array_a3f731f5cc16ab298c93cb89f33ada311}{array}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} num\+\_\+elems)
+\mbox{\hyperlink{classgko_1_1array_a9da78040715432ea1f88ec7b2078c215}{array}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} size)
 \begin{DoxyCompactList}\small\item\em Creates an array on the specified \mbox{\hyperlink{classgko_1_1Executor}{Executor}}. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename Deleter\+Type $>$ }\\\mbox{\hyperlink{classgko_1_1array_ad5544052b019f8ab83cabd1ae98017aa}{array}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} num\+\_\+elems, \mbox{\hyperlink{classgko_1_1array_a9a8aebb3d68396889cf98ca877808549}{value\+\_\+type}} $\ast$data, Deleter\+Type deleter)
+{\footnotesize template$<$typename Deleter\+Type $>$ }\\\mbox{\hyperlink{classgko_1_1array_a83e140ae0fa8e62cac38a13b0e5ed16a}{array}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} size, \mbox{\hyperlink{classgko_1_1array_a9a8aebb3d68396889cf98ca877808549}{value\+\_\+type}} $\ast$data, Deleter\+Type deleter)
 \begin{DoxyCompactList}\small\item\em Creates an array from existing memory. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classgko_1_1array_abdc35a63e0d7dc35a4a6ea0aaeaa8a19}{array}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} num\+\_\+elems, \mbox{\hyperlink{classgko_1_1array_a9a8aebb3d68396889cf98ca877808549}{value\+\_\+type}} $\ast$data)
+\mbox{\hyperlink{classgko_1_1array_aaf29a7dee071347b3c9f8b73c67473e5}{array}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} size, \mbox{\hyperlink{classgko_1_1array_a9a8aebb3d68396889cf98ca877808549}{value\+\_\+type}} $\ast$data)
 \begin{DoxyCompactList}\small\item\em Creates an array from existing memory. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Random\+Access\+Iterator $>$ }\\\mbox{\hyperlink{classgko_1_1array_af989e24d7c9a3e5b97b124a7de9f5ceb}{array}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, Random\+Access\+Iterator begin, Random\+Access\+Iterator end)
 \begin{DoxyCompactList}\small\item\em Creates an array on the specified \mbox{\hyperlink{classgko_1_1Executor}{Executor}} and initializes it with values. \end{DoxyCompactList}\item 
@@ -66,12 +66,16 @@ detail\+::const\+\_\+array\+\_\+view$<$ Value\+Type $>$ \mbox{\hyperlink{classgk
 \begin{DoxyCompactList}\small\item\em Moves data from another array or view. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Other\+Value\+Type $>$ }\\std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+same$<$ Value\+Type, Other\+Value\+Type $>$\+::value, \mbox{\hyperlink{classgko_1_1array}{array}} $>$ \& \mbox{\hyperlink{classgko_1_1array_a603f2425e548308ce82c3cd6c713f697}{operator=}} (const \mbox{\hyperlink{classgko_1_1array}{array}}$<$ Other\+Value\+Type $>$ \&other)
 \begin{DoxyCompactList}\small\item\em Copies and converts data from another array with another data type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1array}{array}} \& \mbox{\hyperlink{classgko_1_1array_a586d8eea1b54c32d3fc39dff83c42caa}{operator=}} (const detail\+::const\+\_\+array\+\_\+view$<$ Value\+Type $>$ \&other)
+\begin{DoxyCompactList}\small\item\em Copies data from a const\+\_\+array\+\_\+view. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classgko_1_1array_a38fcf9307191a64064580fba0e32ef68}{clear}} () noexcept
 \begin{DoxyCompactList}\small\item\em Deallocates all data used by the array. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classgko_1_1array_a7e4aa5d297021125793e6943928a8ae4}{resize\+\_\+and\+\_\+reset}} (\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} num\+\_\+elems)
+void \mbox{\hyperlink{classgko_1_1array_a085b8df0daa446f48d14c47d1fa49f9e}{resize\+\_\+and\+\_\+reset}} (\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} size)
 \begin{DoxyCompactList}\small\item\em Resizes the array so it is able to hold the specified number of elements. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classgko_1_1array_a81458893928d0be780235bea675ced6a}{fill}} (const \mbox{\hyperlink{classgko_1_1array_a9a8aebb3d68396889cf98ca877808549}{value\+\_\+type}} value)
 \begin{DoxyCompactList}\small\item\em Fill the array with the given value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{classgko_1_1array_ad38e4c252d698a4581ffa0833ab98c3f}{get\+\_\+size}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns the number of elements in the array. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{classgko_1_1array_a9c6a40a8a007af8c6e541fbc030d6291}{get\+\_\+num\+\_\+elems}} () const noexcept
 \begin{DoxyCompactList}\small\item\em Returns the number of elements in the array. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classgko_1_1array_a9a8aebb3d68396889cf98ca877808549}{value\+\_\+type}} $\ast$ \mbox{\hyperlink{classgko_1_1array_a9e144bc31d986eebf64326f0aad1a875}{get\+\_\+data}} () noexcept
@@ -87,9 +91,9 @@ bool \mbox{\hyperlink{classgko_1_1array_a6fe24edd5e764e99ba724d8c0398b187}{is\+\
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static \mbox{\hyperlink{classgko_1_1array}{array}} \mbox{\hyperlink{classgko_1_1array_aa7ca4bfceccaf2579311d4e195daf6ee}{view}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} num\+\_\+elems, \mbox{\hyperlink{classgko_1_1array_a9a8aebb3d68396889cf98ca877808549}{value\+\_\+type}} $\ast$data)
+static \mbox{\hyperlink{classgko_1_1array}{array}} \mbox{\hyperlink{classgko_1_1array_aac2a7c2d59045e56fb751b18712a4635}{view}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} size, \mbox{\hyperlink{classgko_1_1array_a9a8aebb3d68396889cf98ca877808549}{value\+\_\+type}} $\ast$data)
 \begin{DoxyCompactList}\small\item\em Creates an array from existing memory. \end{DoxyCompactList}\item 
-static detail\+::const\+\_\+array\+\_\+view$<$ Value\+Type $>$ \mbox{\hyperlink{classgko_1_1array_a02b7c4fabeb73bccbb0e116805e9ddf4}{const\+\_\+view}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} num\+\_\+elems, const \mbox{\hyperlink{classgko_1_1array_a9a8aebb3d68396889cf98ca877808549}{value\+\_\+type}} $\ast$data)
+static detail\+::const\+\_\+array\+\_\+view$<$ Value\+Type $>$ \mbox{\hyperlink{classgko_1_1array_a4d77553dfcc0c30dd7fff9c20886e94e}{const\+\_\+view}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} size, const \mbox{\hyperlink{classgko_1_1array_a9a8aebb3d68396889cf98ca877808549}{value\+\_\+type}} $\ast$data)
 \begin{DoxyCompactList}\small\item\em Creates a constant (immutable) array from existing memory. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
@@ -144,12 +148,12 @@ Creates an empty array tied to the specified \mbox{\hyperlink{classgko_1_1Execut
 {\em exec} & the \mbox{\hyperlink{classgko_1_1Executor}{Executor}} where the array data is allocated \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{classgko_1_1array_a3f731f5cc16ab298c93cb89f33ada311}\label{classgko_1_1array_a3f731f5cc16ab298c93cb89f33ada311}} 
+\mbox{\Hypertarget{classgko_1_1array_a9da78040715432ea1f88ec7b2078c215}\label{classgko_1_1array_a9da78040715432ea1f88ec7b2078c215}} 
 \index{gko::array$<$ ValueType $>$@{gko::array$<$ ValueType $>$}!array@{array}}
 \index{array@{array}!gko::array$<$ ValueType $>$@{gko::array$<$ ValueType $>$}}
 \doxysubsubsection{\texorpdfstring{array()}{array()}\hspace{0.1cm}{\footnotesize\ttfamily [3/11]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type$>$ \\
-\mbox{\hyperlink{classgko_1_1array}{gko\+::array}}$<$ Value\+Type $>$\+::\mbox{\hyperlink{classgko_1_1array}{array}} (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{num\+\_\+elems }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classgko_1_1array}{gko\+::array}}$<$ Value\+Type $>$\+::\mbox{\hyperlink{classgko_1_1array}{array}} (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -159,16 +163,16 @@ Creates an array on the specified \mbox{\hyperlink{classgko_1_1Executor}{Executo
 \begin{DoxyParams}{Parameters}
 {\em exec} & the \mbox{\hyperlink{classgko_1_1Executor}{Executor}} where the array data will be allocated \\
 \hline
-{\em num\+\_\+elems} & the amount of memory (expressed as the number of {\ttfamily value\+\_\+type} elements) allocated on the \mbox{\hyperlink{classgko_1_1Executor}{Executor}} \\
+{\em size} & the amount of memory (expressed as the number of {\ttfamily value\+\_\+type} elements) allocated on the \mbox{\hyperlink{classgko_1_1Executor}{Executor}} \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{classgko_1_1array_ad5544052b019f8ab83cabd1ae98017aa}\label{classgko_1_1array_ad5544052b019f8ab83cabd1ae98017aa}} 
+\mbox{\Hypertarget{classgko_1_1array_a83e140ae0fa8e62cac38a13b0e5ed16a}\label{classgko_1_1array_a83e140ae0fa8e62cac38a13b0e5ed16a}} 
 \index{gko::array$<$ ValueType $>$@{gko::array$<$ ValueType $>$}!array@{array}}
 \index{array@{array}!gko::array$<$ ValueType $>$@{gko::array$<$ ValueType $>$}}
 \doxysubsubsection{\texorpdfstring{array()}{array()}\hspace{0.1cm}{\footnotesize\ttfamily [4/11]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type$>$ \\
 template$<$typename Deleter\+Type $>$ \\
-\mbox{\hyperlink{classgko_1_1array}{gko\+::array}}$<$ Value\+Type $>$\+::\mbox{\hyperlink{classgko_1_1array}{array}} (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{num\+\_\+elems,  }\item[{\mbox{\hyperlink{classgko_1_1array_a9a8aebb3d68396889cf98ca877808549}{value\+\_\+type}} $\ast$}]{data,  }\item[{Deleter\+Type}]{deleter }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classgko_1_1array}{gko\+::array}}$<$ Value\+Type $>$\+::\mbox{\hyperlink{classgko_1_1array}{array}} (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{size,  }\item[{\mbox{\hyperlink{classgko_1_1array_a9a8aebb3d68396889cf98ca877808549}{value\+\_\+type}} $\ast$}]{data,  }\item[{Deleter\+Type}]{deleter }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -185,7 +189,7 @@ The memory will be managed by the array, and deallocated using the specified del
 \begin{DoxyParams}{Parameters}
 {\em exec} & executor where {\ttfamily data} is located \\
 \hline
-{\em num\+\_\+elems} & number of elements in {\ttfamily data} \\
+{\em size} & number of elements in {\ttfamily data} \\
 \hline
 {\em data} & chunk of memory used to create the array \\
 \hline
@@ -193,16 +197,16 @@ The memory will be managed by the array, and deallocated using the specified del
 \hline
 \end{DoxyParams}
 \begin{DoxySeeAlso}{See also}
-\mbox{\hyperlink{classgko_1_1array_aa7ca4bfceccaf2579311d4e195daf6ee}{array\+::view()}} to create an \mbox{\hyperlink{classgko_1_1array}{array}} that does not deallocate memory 
+\mbox{\hyperlink{classgko_1_1array_aac2a7c2d59045e56fb751b18712a4635}{array\+::view()}} to create an \mbox{\hyperlink{classgko_1_1array}{array}} that does not deallocate memory 
 
 \mbox{\hyperlink{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68af1f713c9e000f5d3f280adbd124df4f5}{array(std\+::shared\+\_\+ptr$<$cont Executor$>$, size\+\_\+type, value\+\_\+type$\ast$)}} to deallocate the memory using \mbox{\hyperlink{classgko_1_1Executor_a0befe43d21c93e199d1620eaae4ccc0c}{Executor\+::free()}} method 
 \end{DoxySeeAlso}
-\mbox{\Hypertarget{classgko_1_1array_abdc35a63e0d7dc35a4a6ea0aaeaa8a19}\label{classgko_1_1array_abdc35a63e0d7dc35a4a6ea0aaeaa8a19}} 
+\mbox{\Hypertarget{classgko_1_1array_aaf29a7dee071347b3c9f8b73c67473e5}\label{classgko_1_1array_aaf29a7dee071347b3c9f8b73c67473e5}} 
 \index{gko::array$<$ ValueType $>$@{gko::array$<$ ValueType $>$}!array@{array}}
 \index{array@{array}!gko::array$<$ ValueType $>$@{gko::array$<$ ValueType $>$}}
 \doxysubsubsection{\texorpdfstring{array()}{array()}\hspace{0.1cm}{\footnotesize\ttfamily [5/11]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type$>$ \\
-\mbox{\hyperlink{classgko_1_1array}{gko\+::array}}$<$ Value\+Type $>$\+::\mbox{\hyperlink{classgko_1_1array}{array}} (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{num\+\_\+elems,  }\item[{\mbox{\hyperlink{classgko_1_1array_a9a8aebb3d68396889cf98ca877808549}{value\+\_\+type}} $\ast$}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\hyperlink{classgko_1_1array}{gko\+::array}}$<$ Value\+Type $>$\+::\mbox{\hyperlink{classgko_1_1array}{array}} (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{size,  }\item[{\mbox{\hyperlink{classgko_1_1array_a9a8aebb3d68396889cf98ca877808549}{value\+\_\+type}} $\ast$}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -214,7 +218,7 @@ The memory will be managed by the array, and deallocated using the \mbox{\hyperl
 \begin{DoxyParams}{Parameters}
 {\em exec} & executor where {\ttfamily data} is located \\
 \hline
-{\em num\+\_\+elems} & number of elements in {\ttfamily data} \\
+{\em size} & number of elements in {\ttfamily data} \\
 \hline
 {\em data} & chunk of memory used to create the array \\
 \hline
@@ -385,12 +389,12 @@ The array is left in a valid, but empty state, so the same array can be used to 
 
 Referenced by gko\+::index\+\_\+set$<$ Index\+Type $>$\+::clear(), and gko\+::array$<$ index\+\_\+type $>$\+::operator=().
 
-\mbox{\Hypertarget{classgko_1_1array_a02b7c4fabeb73bccbb0e116805e9ddf4}\label{classgko_1_1array_a02b7c4fabeb73bccbb0e116805e9ddf4}} 
+\mbox{\Hypertarget{classgko_1_1array_a4d77553dfcc0c30dd7fff9c20886e94e}\label{classgko_1_1array_a4d77553dfcc0c30dd7fff9c20886e94e}} 
 \index{gko::array$<$ ValueType $>$@{gko::array$<$ ValueType $>$}!const\_view@{const\_view}}
 \index{const\_view@{const\_view}!gko::array$<$ ValueType $>$@{gko::array$<$ ValueType $>$}}
 \doxysubsubsection{\texorpdfstring{const\_view()}{const\_view()}}
 {\footnotesize\ttfamily template$<$typename Value\+Type$>$ \\
-static detail\+::const\+\_\+array\+\_\+view$<$Value\+Type$>$ \mbox{\hyperlink{classgko_1_1array}{gko\+::array}}$<$ Value\+Type $>$\+::const\+\_\+view (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{num\+\_\+elems,  }\item[{const \mbox{\hyperlink{classgko_1_1array_a9a8aebb3d68396889cf98ca877808549}{value\+\_\+type}} $\ast$}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+static detail\+::const\+\_\+array\+\_\+view$<$Value\+Type$>$ \mbox{\hyperlink{classgko_1_1array}{gko\+::array}}$<$ Value\+Type $>$\+::const\+\_\+view (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{size,  }\item[{const \mbox{\hyperlink{classgko_1_1array_a9a8aebb3d68396889cf98ca877808549}{value\+\_\+type}} $\ast$}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
 
 
@@ -402,7 +406,7 @@ The array does not take ownership of the memory, and will not deallocate it once
 \begin{DoxyParams}{Parameters}
 {\em exec} & executor where {\ttfamily data} is located \\
 \hline
-{\em num\+\_\+elems} & number of elements in {\ttfamily data} \\
+{\em size} & number of elements in {\ttfamily data} \\
 \hline
 {\em data} & chunk of memory used to create the array\\
 \hline
@@ -446,7 +450,7 @@ a constant pointer to the block of memory used to store the elements of the arra
 \end{DoxyReturn}
 
 
-Referenced by gko\+::array$<$ index\+\_\+type $>$\+::as\+\_\+const\+\_\+view(), gko\+::batch\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::at(), gko\+::batch\+::\+Multi\+Vector$<$ Value\+Type $>$\+::at(), gko\+::matrix\+::\+Dense$<$ value\+\_\+type $>$\+::at(), gko\+::preconditioner\+::\+Jacobi$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+blocks(), gko\+::preconditioner\+::\+Jacobi$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+conditioning(), gko\+::multigrid\+::\+Pgm$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+agg(), gko\+::batch\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+col\+\_\+idxs(), gko\+::matrix\+::\+Sparsity\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+col\+\_\+idxs(), gko\+::matrix\+::\+Sellp$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+col\+\_\+idxs(), gko\+::matrix\+::\+Coo$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+col\+\_\+idxs(), gko\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+col\+\_\+idxs(), gko\+::device\+\_\+matrix\+\_\+data$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+col\+\_\+idxs(), gko\+::matrix\+::\+Fbcsr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+col\+\_\+idxs(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+col\+\_\+idxs(), gko\+::batch\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+col\+\_\+idxs\+\_\+for\+\_\+item(), gko\+::matrix\+::\+Scaled\+Permutation$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+permutation(), gko\+::matrix\+::\+Permutation$<$ Index\+Type $>$\+::get\+\_\+const\+\_\+permutation(), gko\+::matrix\+::\+Row\+Gatherer$<$ Index\+Type $>$\+::get\+\_\+const\+\_\+row\+\_\+idxs(), gko\+::device\+\_\+matrix\+\_\+data$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+row\+\_\+idxs(), gko\+::matrix\+::\+Coo$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+row\+\_\+idxs(), gko\+::matrix\+::\+Sparsity\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+row\+\_\+ptrs(), gko\+::matrix\+::\+Fbcsr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+row\+\_\+ptrs(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+row\+\_\+ptrs(), gko\+::matrix\+::\+Scaled\+Permutation$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+scaling\+\_\+factors(), gko\+::matrix\+::\+Sellp$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+slice\+\_\+lengths(), gko\+::matrix\+::\+Sellp$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+slice\+\_\+sets(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+srow(), gko\+::matrix\+::\+Sparsity\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+value(), gko\+::batch\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+values(), gko\+::matrix\+::\+Diagonal$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+values(), gko\+::batch\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+values(), gko\+::matrix\+::\+Sellp$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+values(), gko\+::matrix\+::\+Coo$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+values(), gko\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+values(), gko\+::batch\+::\+Multi\+Vector$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+values(), gko\+::device\+\_\+matrix\+\_\+data$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+values(), gko\+::matrix\+::\+Fbcsr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+values(), gko\+::matrix\+::\+Dense$<$ value\+\_\+type $>$\+::get\+\_\+const\+\_\+values(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+values(), gko\+::batch\+::\+Multi\+Vector$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+values\+\_\+for\+\_\+item(), gko\+::batch\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+values\+\_\+for\+\_\+item(), gko\+::batch\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+values\+\_\+for\+\_\+item(), gko\+::experimental\+::distributed\+::\+Partition$<$ Local\+Index\+Type, Global\+Index\+Type $>$\+::get\+\_\+part\+\_\+ids(), gko\+::experimental\+::distributed\+::\+Partition$<$ Local\+Index\+Type, Global\+Index\+Type $>$\+::get\+\_\+part\+\_\+size(), gko\+::experimental\+::distributed\+::\+Partition$<$ Local\+Index\+Type, Global\+Index\+Type $>$\+::get\+\_\+part\+\_\+sizes(), gko\+::experimental\+::distributed\+::\+Partition$<$ Local\+Index\+Type, Global\+Index\+Type $>$\+::get\+\_\+range\+\_\+bounds(), gko\+::experimental\+::distributed\+::\+Partition$<$ Local\+Index\+Type, Global\+Index\+Type $>$\+::get\+\_\+range\+\_\+starting\+\_\+indices(), gko\+::index\+\_\+set$<$ Index\+Type $>$\+::get\+\_\+subsets\+\_\+begin(), gko\+::index\+\_\+set$<$ Index\+Type $>$\+::get\+\_\+subsets\+\_\+end(), gko\+::index\+\_\+set$<$ Index\+Type $>$\+::get\+\_\+superset\+\_\+indices(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::classical\+::process(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::load\+\_\+balance\+::process(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::automatical\+::process(), gko\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$\+::val\+\_\+at(), and gko\+::matrix\+::\+Sellp$<$ Value\+Type, Index\+Type $>$\+::val\+\_\+at().
+Referenced by gko\+::array$<$ index\+\_\+type $>$\+::as\+\_\+const\+\_\+view(), gko\+::batch\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::at(), gko\+::batch\+::\+Multi\+Vector$<$ Value\+Type $>$\+::at(), gko\+::matrix\+::\+Dense$<$ value\+\_\+type $>$\+::at(), gko\+::preconditioner\+::\+Jacobi$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+blocks(), gko\+::preconditioner\+::\+Jacobi$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+conditioning(), gko\+::multigrid\+::\+Pgm$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+agg(), gko\+::batch\+::preconditioner\+::\+Jacobi$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+block\+\_\+pointers(), gko\+::batch\+::preconditioner\+::\+Jacobi$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+blocks(), gko\+::batch\+::preconditioner\+::\+Jacobi$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+blocks\+\_\+cumulative\+\_\+offsets(), gko\+::batch\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+col\+\_\+idxs(), gko\+::batch\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+col\+\_\+idxs(), gko\+::matrix\+::\+Sparsity\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+col\+\_\+idxs(), gko\+::matrix\+::\+Sellp$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+col\+\_\+idxs(), gko\+::matrix\+::\+Coo$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+col\+\_\+idxs(), gko\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+col\+\_\+idxs(), gko\+::device\+\_\+matrix\+\_\+data$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+col\+\_\+idxs(), gko\+::matrix\+::\+Fbcsr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+col\+\_\+idxs(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+col\+\_\+idxs(), gko\+::batch\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+col\+\_\+idxs\+\_\+for\+\_\+item(), gko\+::batch\+::preconditioner\+::\+Jacobi$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+map\+\_\+block\+\_\+to\+\_\+row(), gko\+::matrix\+::\+Scaled\+Permutation$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+permutation(), gko\+::matrix\+::\+Permutation$<$ Index\+Type $>$\+::get\+\_\+const\+\_\+permutation(), gko\+::matrix\+::\+Row\+Gatherer$<$ Index\+Type $>$\+::get\+\_\+const\+\_\+row\+\_\+idxs(), gko\+::matrix\+::\+Coo$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+row\+\_\+idxs(), gko\+::device\+\_\+matrix\+\_\+data$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+row\+\_\+idxs(), gko\+::batch\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+row\+\_\+ptrs(), gko\+::matrix\+::\+Sparsity\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+row\+\_\+ptrs(), gko\+::matrix\+::\+Fbcsr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+row\+\_\+ptrs(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+row\+\_\+ptrs(), gko\+::matrix\+::\+Scaled\+Permutation$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+scaling\+\_\+factors(), gko\+::matrix\+::\+Sellp$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+slice\+\_\+lengths(), gko\+::matrix\+::\+Sellp$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+slice\+\_\+sets(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+srow(), gko\+::matrix\+::\+Sparsity\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+value(), gko\+::batch\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+values(), gko\+::batch\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+values(), gko\+::matrix\+::\+Diagonal$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+values(), gko\+::batch\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+values(), gko\+::matrix\+::\+Sellp$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+values(), gko\+::matrix\+::\+Coo$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+values(), gko\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+values(), gko\+::batch\+::\+Multi\+Vector$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+values(), gko\+::device\+\_\+matrix\+\_\+data$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+values(), gko\+::matrix\+::\+Fbcsr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+values(), gko\+::matrix\+::\+Dense$<$ value\+\_\+type $>$\+::get\+\_\+const\+\_\+values(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+values(), gko\+::batch\+::\+Multi\+Vector$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+values\+\_\+for\+\_\+item(), gko\+::batch\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+values\+\_\+for\+\_\+item(), gko\+::batch\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+values\+\_\+for\+\_\+item(), gko\+::batch\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+values\+\_\+for\+\_\+item(), gko\+::experimental\+::distributed\+::\+Partition$<$ Local\+Index\+Type, Global\+Index\+Type $>$\+::get\+\_\+part\+\_\+ids(), gko\+::experimental\+::distributed\+::\+Partition$<$ Local\+Index\+Type, Global\+Index\+Type $>$\+::get\+\_\+part\+\_\+sizes(), gko\+::experimental\+::distributed\+::\+Partition$<$ Local\+Index\+Type, Global\+Index\+Type $>$\+::get\+\_\+range\+\_\+bounds(), gko\+::experimental\+::distributed\+::\+Partition$<$ Local\+Index\+Type, Global\+Index\+Type $>$\+::get\+\_\+range\+\_\+starting\+\_\+indices(), gko\+::index\+\_\+set$<$ Index\+Type $>$\+::get\+\_\+subsets\+\_\+begin(), gko\+::index\+\_\+set$<$ Index\+Type $>$\+::get\+\_\+subsets\+\_\+end(), gko\+::index\+\_\+set$<$ Index\+Type $>$\+::get\+\_\+superset\+\_\+indices(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::classical\+::process(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::load\+\_\+balance\+::process(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::automatical\+::process(), gko\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$\+::val\+\_\+at(), and gko\+::matrix\+::\+Sellp$<$ Value\+Type, Index\+Type $>$\+::val\+\_\+at().
 
 \mbox{\Hypertarget{classgko_1_1array_a9e144bc31d986eebf64326f0aad1a875}\label{classgko_1_1array_a9e144bc31d986eebf64326f0aad1a875}} 
 \index{gko::array$<$ ValueType $>$@{gko::array$<$ ValueType $>$}!get\_data@{get\_data}}
@@ -464,7 +468,7 @@ a pointer to the block of memory used to store the elements of the array
 \end{DoxyReturn}
 
 
-Referenced by gko\+::array$<$ index\+\_\+type $>$\+::as\+\_\+view(), gko\+::batch\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::at(), gko\+::batch\+::\+Multi\+Vector$<$ Value\+Type $>$\+::at(), gko\+::matrix\+::\+Dense$<$ value\+\_\+type $>$\+::at(), gko\+::matrix\+::\+Hybrid$<$ Value\+Type, Index\+Type $>$\+::imbalance\+\_\+limit\+::compute\+\_\+ell\+\_\+num\+\_\+stored\+\_\+elements\+\_\+per\+\_\+row(), gko\+::multigrid\+::\+Pgm$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+agg(), gko\+::batch\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+col\+\_\+idxs(), gko\+::matrix\+::\+Sparsity\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+col\+\_\+idxs(), gko\+::matrix\+::\+Sellp$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+col\+\_\+idxs(), gko\+::matrix\+::\+Coo$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+col\+\_\+idxs(), gko\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+col\+\_\+idxs(), gko\+::device\+\_\+matrix\+\_\+data$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+col\+\_\+idxs(), gko\+::matrix\+::\+Fbcsr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+col\+\_\+idxs(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+col\+\_\+idxs(), gko\+::batch\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+col\+\_\+idxs\+\_\+for\+\_\+item(), gko\+::matrix\+::\+Scaled\+Permutation$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+permutation(), gko\+::matrix\+::\+Permutation$<$ Index\+Type $>$\+::get\+\_\+permutation(), gko\+::matrix\+::\+Row\+Gatherer$<$ Index\+Type $>$\+::get\+\_\+row\+\_\+idxs(), gko\+::matrix\+::\+Coo$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+row\+\_\+idxs(), gko\+::device\+\_\+matrix\+\_\+data$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+row\+\_\+idxs(), gko\+::matrix\+::\+Sparsity\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+row\+\_\+ptrs(), gko\+::matrix\+::\+Fbcsr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+row\+\_\+ptrs(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+row\+\_\+ptrs(), gko\+::matrix\+::\+Scaled\+Permutation$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+scaling\+\_\+factors(), gko\+::matrix\+::\+Sellp$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+slice\+\_\+lengths(), gko\+::matrix\+::\+Sellp$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+slice\+\_\+sets(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+srow(), gko\+::matrix\+::\+Sparsity\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+value(), gko\+::batch\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+values(), gko\+::matrix\+::\+Diagonal$<$ Value\+Type $>$\+::get\+\_\+values(), gko\+::batch\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::get\+\_\+values(), gko\+::matrix\+::\+Sellp$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+values(), gko\+::matrix\+::\+Coo$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+values(), gko\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+values(), gko\+::batch\+::\+Multi\+Vector$<$ Value\+Type $>$\+::get\+\_\+values(), gko\+::device\+\_\+matrix\+\_\+data$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+values(), gko\+::matrix\+::\+Fbcsr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+values(), gko\+::matrix\+::\+Dense$<$ value\+\_\+type $>$\+::get\+\_\+values(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+values(), gko\+::batch\+::\+Multi\+Vector$<$ Value\+Type $>$\+::get\+\_\+values\+\_\+for\+\_\+item(), gko\+::batch\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::get\+\_\+values\+\_\+for\+\_\+item(), gko\+::batch\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+values\+\_\+for\+\_\+item(), gko\+::array$<$ index\+\_\+type $>$\+::operator=(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::load\+\_\+balance\+::process(), gko\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$\+::val\+\_\+at(), and gko\+::matrix\+::\+Sellp$<$ Value\+Type, Index\+Type $>$\+::val\+\_\+at().
+Referenced by gko\+::array$<$ index\+\_\+type $>$\+::as\+\_\+view(), gko\+::batch\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::at(), gko\+::batch\+::\+Multi\+Vector$<$ Value\+Type $>$\+::at(), gko\+::matrix\+::\+Dense$<$ value\+\_\+type $>$\+::at(), gko\+::matrix\+::\+Hybrid$<$ Value\+Type, Index\+Type $>$\+::imbalance\+\_\+limit\+::compute\+\_\+ell\+\_\+num\+\_\+stored\+\_\+elements\+\_\+per\+\_\+row(), gko\+::multigrid\+::\+Pgm$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+agg(), gko\+::batch\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+col\+\_\+idxs(), gko\+::batch\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+col\+\_\+idxs(), gko\+::matrix\+::\+Sparsity\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+col\+\_\+idxs(), gko\+::matrix\+::\+Sellp$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+col\+\_\+idxs(), gko\+::matrix\+::\+Coo$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+col\+\_\+idxs(), gko\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+col\+\_\+idxs(), gko\+::device\+\_\+matrix\+\_\+data$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+col\+\_\+idxs(), gko\+::matrix\+::\+Fbcsr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+col\+\_\+idxs(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+col\+\_\+idxs(), gko\+::batch\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+col\+\_\+idxs\+\_\+for\+\_\+item(), gko\+::matrix\+::\+Scaled\+Permutation$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+permutation(), gko\+::matrix\+::\+Permutation$<$ Index\+Type $>$\+::get\+\_\+permutation(), gko\+::matrix\+::\+Row\+Gatherer$<$ Index\+Type $>$\+::get\+\_\+row\+\_\+idxs(), gko\+::matrix\+::\+Coo$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+row\+\_\+idxs(), gko\+::device\+\_\+matrix\+\_\+data$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+row\+\_\+idxs(), gko\+::batch\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+row\+\_\+ptrs(), gko\+::matrix\+::\+Sparsity\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+row\+\_\+ptrs(), gko\+::matrix\+::\+Fbcsr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+row\+\_\+ptrs(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+row\+\_\+ptrs(), gko\+::matrix\+::\+Scaled\+Permutation$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+scaling\+\_\+factors(), gko\+::matrix\+::\+Sellp$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+slice\+\_\+lengths(), gko\+::matrix\+::\+Sellp$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+slice\+\_\+sets(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+srow(), gko\+::matrix\+::\+Sparsity\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+value(), gko\+::batch\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+values(), gko\+::batch\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+values(), gko\+::matrix\+::\+Diagonal$<$ Value\+Type $>$\+::get\+\_\+values(), gko\+::batch\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::get\+\_\+values(), gko\+::matrix\+::\+Sellp$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+values(), gko\+::matrix\+::\+Coo$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+values(), gko\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+values(), gko\+::batch\+::\+Multi\+Vector$<$ Value\+Type $>$\+::get\+\_\+values(), gko\+::device\+\_\+matrix\+\_\+data$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+values(), gko\+::matrix\+::\+Fbcsr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+values(), gko\+::matrix\+::\+Dense$<$ value\+\_\+type $>$\+::get\+\_\+values(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+values(), gko\+::batch\+::\+Multi\+Vector$<$ Value\+Type $>$\+::get\+\_\+values\+\_\+for\+\_\+item(), gko\+::batch\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+values\+\_\+for\+\_\+item(), gko\+::batch\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::get\+\_\+values\+\_\+for\+\_\+item(), gko\+::batch\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+values\+\_\+for\+\_\+item(), gko\+::array$<$ index\+\_\+type $>$\+::operator=(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::load\+\_\+balance\+::process(), gko\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$\+::val\+\_\+at(), and gko\+::matrix\+::\+Sellp$<$ Value\+Type, Index\+Type $>$\+::val\+\_\+at().
 
 \mbox{\Hypertarget{classgko_1_1array_afc3615dbe25f4e51b8219e018e261abf}\label{classgko_1_1array_afc3615dbe25f4e51b8219e018e261abf}} 
 \index{gko::array$<$ ValueType $>$@{gko::array$<$ ValueType $>$}!get\_executor@{get\_executor}}
@@ -498,9 +502,23 @@ Returns the number of elements in the array.
 \begin{DoxyReturn}{Returns}
 the number of elements in the array 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1array_ad38e4c252d698a4581ffa0833ab98c3f}\label{classgko_1_1array_ad38e4c252d698a4581ffa0833ab98c3f}} 
+\index{gko::array$<$ ValueType $>$@{gko::array$<$ ValueType $>$}!get\_size@{get\_size}}
+\index{get\_size@{get\_size}!gko::array$<$ ValueType $>$@{gko::array$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_size()}{get\_size()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type$>$ \\
+\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{classgko_1_1array}{gko\+::array}}$<$ Value\+Type $>$\+::get\+\_\+size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
 
 
-Referenced by gko\+::array$<$ index\+\_\+type $>$\+::as\+\_\+const\+\_\+view(), gko\+::array$<$ index\+\_\+type $>$\+::as\+\_\+view(), gko\+::matrix\+::\+Hybrid$<$ Value\+Type, Index\+Type $>$\+::imbalance\+\_\+limit\+::compute\+\_\+ell\+\_\+num\+\_\+stored\+\_\+elements\+\_\+per\+\_\+row(), gko\+::matrix\+::\+Hybrid$<$ Value\+Type, Index\+Type $>$\+::imbalance\+\_\+bounded\+\_\+limit\+::compute\+\_\+ell\+\_\+num\+\_\+stored\+\_\+elements\+\_\+per\+\_\+row(), gko\+::matrix\+::\+Hybrid$<$ Value\+Type, Index\+Type $>$\+::strategy\+\_\+type\+::compute\+\_\+hybrid\+\_\+config(), gko\+::device\+\_\+matrix\+\_\+data$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+num\+\_\+elems(), gko\+::matrix\+::\+Sparsity\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+num\+\_\+nonzeros(), gko\+::experimental\+::distributed\+::\+Partition$<$ Local\+Index\+Type, Global\+Index\+Type $>$\+::get\+\_\+num\+\_\+ranges(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+num\+\_\+srow\+\_\+elements(), gko\+::matrix\+::\+Fbcsr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+num\+\_\+stored\+\_\+blocks(), gko\+::batch\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+num\+\_\+stored\+\_\+elements(), gko\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+num\+\_\+stored\+\_\+elements(), gko\+::matrix\+::\+Coo$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+num\+\_\+stored\+\_\+elements(), gko\+::batch\+::\+Multi\+Vector$<$ Value\+Type $>$\+::get\+\_\+num\+\_\+stored\+\_\+elements(), gko\+::batch\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::get\+\_\+num\+\_\+stored\+\_\+elements(), gko\+::matrix\+::\+Sellp$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+num\+\_\+stored\+\_\+elements(), gko\+::preconditioner\+::\+Jacobi$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+num\+\_\+stored\+\_\+elements(), gko\+::matrix\+::\+Fbcsr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+num\+\_\+stored\+\_\+elements(), gko\+::matrix\+::\+Dense$<$ value\+\_\+type $>$\+::get\+\_\+num\+\_\+stored\+\_\+elements(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+num\+\_\+stored\+\_\+elements(), gko\+::index\+\_\+set$<$ Index\+Type $>$\+::get\+\_\+num\+\_\+subsets(), gko\+::matrix\+::\+Sellp$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+total\+\_\+cols(), gko\+::index\+\_\+set$<$ Index\+Type $>$\+::index\+\_\+set(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::classical\+::process(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::load\+\_\+balance\+::process(), and gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::automatical\+::process().
+
+Returns the number of elements in the array. 
+
+\begin{DoxyReturn}{Returns}
+the number of elements in the array 
+\end{DoxyReturn}
+
+
+Referenced by gko\+::array$<$ index\+\_\+type $>$\+::as\+\_\+const\+\_\+view(), gko\+::array$<$ index\+\_\+type $>$\+::as\+\_\+view(), gko\+::matrix\+::\+Hybrid$<$ Value\+Type, Index\+Type $>$\+::imbalance\+\_\+limit\+::compute\+\_\+ell\+\_\+num\+\_\+stored\+\_\+elements\+\_\+per\+\_\+row(), gko\+::matrix\+::\+Hybrid$<$ Value\+Type, Index\+Type $>$\+::imbalance\+\_\+bounded\+\_\+limit\+::compute\+\_\+ell\+\_\+num\+\_\+stored\+\_\+elements\+\_\+per\+\_\+row(), gko\+::matrix\+::\+Hybrid$<$ Value\+Type, Index\+Type $>$\+::strategy\+\_\+type\+::compute\+\_\+hybrid\+\_\+config(), gko\+::batch\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+values\+\_\+for\+\_\+item(), gko\+::matrix\+::\+Sparsity\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+num\+\_\+nonzeros(), gko\+::experimental\+::distributed\+::\+Partition$<$ Local\+Index\+Type, Global\+Index\+Type $>$\+::get\+\_\+num\+\_\+ranges(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+num\+\_\+srow\+\_\+elements(), gko\+::matrix\+::\+Fbcsr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+num\+\_\+stored\+\_\+blocks(), gko\+::batch\+::preconditioner\+::\+Jacobi$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+num\+\_\+stored\+\_\+elements(), gko\+::batch\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+num\+\_\+stored\+\_\+elements(), gko\+::batch\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+num\+\_\+stored\+\_\+elements(), gko\+::device\+\_\+matrix\+\_\+data$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+num\+\_\+stored\+\_\+elements(), gko\+::matrix\+::\+Ell$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+num\+\_\+stored\+\_\+elements(), gko\+::matrix\+::\+Coo$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+num\+\_\+stored\+\_\+elements(), gko\+::batch\+::\+Multi\+Vector$<$ Value\+Type $>$\+::get\+\_\+num\+\_\+stored\+\_\+elements(), gko\+::batch\+::matrix\+::\+Dense$<$ Value\+Type $>$\+::get\+\_\+num\+\_\+stored\+\_\+elements(), gko\+::matrix\+::\+Sellp$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+num\+\_\+stored\+\_\+elements(), gko\+::preconditioner\+::\+Jacobi$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+num\+\_\+stored\+\_\+elements(), gko\+::matrix\+::\+Fbcsr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+num\+\_\+stored\+\_\+elements(), gko\+::matrix\+::\+Dense$<$ value\+\_\+type $>$\+::get\+\_\+num\+\_\+stored\+\_\+elements(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+num\+\_\+stored\+\_\+elements(), gko\+::index\+\_\+set$<$ Index\+Type $>$\+::get\+\_\+num\+\_\+subsets(), gko\+::matrix\+::\+Sellp$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+total\+\_\+cols(), gko\+::batch\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+values\+\_\+for\+\_\+item(), gko\+::index\+\_\+set$<$ Index\+Type $>$\+::index\+\_\+set(), gko\+::array$<$ index\+\_\+type $>$\+::operator=(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::classical\+::process(), gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::load\+\_\+balance\+::process(), and gko\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$\+::automatical\+::process().
 
 \mbox{\Hypertarget{classgko_1_1array_a6fe24edd5e764e99ba724d8c0398b187}\label{classgko_1_1array_a6fe24edd5e764e99ba724d8c0398b187}} 
 \index{gko::array$<$ ValueType $>$@{gko::array$<$ ValueType $>$}!is\_owning@{is\_owning}}
@@ -525,7 +543,7 @@ Referenced by gko\+::array$<$ index\+\_\+type $>$\+::operator=().
 \mbox{\Hypertarget{classgko_1_1array_ab1934c116314437bbab77923c7b7dc33}\label{classgko_1_1array_ab1934c116314437bbab77923c7b7dc33}} 
 \index{gko::array$<$ ValueType $>$@{gko::array$<$ ValueType $>$}!operator=@{operator=}}
 \index{operator=@{operator=}!gko::array$<$ ValueType $>$@{gko::array$<$ ValueType $>$}}
-\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type$>$ \\
 \mbox{\hyperlink{classgko_1_1array}{array}}\& \mbox{\hyperlink{classgko_1_1array}{gko\+::array}}$<$ Value\+Type $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1array}{array}}$<$ Value\+Type $>$ \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
@@ -564,7 +582,7 @@ this
 \mbox{\Hypertarget{classgko_1_1array_a7efcd4243ae3e58c15d21c211fd12dcb}\label{classgko_1_1array_a7efcd4243ae3e58c15d21c211fd12dcb}} 
 \index{gko::array$<$ ValueType $>$@{gko::array$<$ ValueType $>$}!operator=@{operator=}}
 \index{operator=@{operator=}!gko::array$<$ ValueType $>$@{gko::array$<$ ValueType $>$}}
-\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type$>$ \\
 \mbox{\hyperlink{classgko_1_1array}{array}}\& \mbox{\hyperlink{classgko_1_1array}{gko\+::array}}$<$ Value\+Type $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1array}{array}}$<$ Value\+Type $>$ \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
@@ -589,7 +607,7 @@ this
 \mbox{\Hypertarget{classgko_1_1array_a603f2425e548308ce82c3cd6c713f697}\label{classgko_1_1array_a603f2425e548308ce82c3cd6c713f697}} 
 \index{gko::array$<$ ValueType $>$@{gko::array$<$ ValueType $>$}!operator=@{operator=}}
 \index{operator=@{operator=}!gko::array$<$ ValueType $>$@{gko::array$<$ ValueType $>$}}
-\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type$>$ \\
 template$<$typename Other\+Value\+Type $>$ \\
 std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+same$<$Value\+Type, Other\+Value\+Type$>$\+::value, \mbox{\hyperlink{classgko_1_1array}{array}}$>$\& \mbox{\hyperlink{classgko_1_1array}{gko\+::array}}$<$ Value\+Type $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1array}{array}}$<$ Other\+Value\+Type $>$ \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
@@ -617,12 +635,37 @@ The executor of this is preserved. In case this does not have an assigned execut
 \begin{DoxyReturn}{Returns}
 this 
 \end{DoxyReturn}
-\mbox{\Hypertarget{classgko_1_1array_a7e4aa5d297021125793e6943928a8ae4}\label{classgko_1_1array_a7e4aa5d297021125793e6943928a8ae4}} 
+\mbox{\Hypertarget{classgko_1_1array_a586d8eea1b54c32d3fc39dff83c42caa}\label{classgko_1_1array_a586d8eea1b54c32d3fc39dff83c42caa}} 
+\index{gko::array$<$ ValueType $>$@{gko::array$<$ ValueType $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!gko::array$<$ ValueType $>$@{gko::array$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type$>$ \\
+\mbox{\hyperlink{classgko_1_1array}{array}}\& \mbox{\hyperlink{classgko_1_1array}{gko\+::array}}$<$ Value\+Type $>$\+::operator= (\begin{DoxyParamCaption}\item[{const detail\+::const\+\_\+array\+\_\+view$<$ Value\+Type $>$ \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copies data from a const\+\_\+array\+\_\+view. 
+
+In the case of an array target, the array is resized to match the source\textquotesingle{}s size. In the case of a view target, if the dimensions are not compatible a \mbox{\hyperlink{classgko_1_1OutOfBoundsError}{gko\+::\+Out\+Of\+Bounds\+Error}} is thrown.
+
+This does not invoke the constructors of the elements, instead they are copied as P\+OD types.
+
+The executor of this is preserved. In case this does not have an assigned executor, it will inherit the executor of other.
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & the const\+\_\+array\+\_\+view to copy from\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+this 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1array_a085b8df0daa446f48d14c47d1fa49f9e}\label{classgko_1_1array_a085b8df0daa446f48d14c47d1fa49f9e}} 
 \index{gko::array$<$ ValueType $>$@{gko::array$<$ ValueType $>$}!resize\_and\_reset@{resize\_and\_reset}}
 \index{resize\_and\_reset@{resize\_and\_reset}!gko::array$<$ ValueType $>$@{gko::array$<$ ValueType $>$}}
 \doxysubsubsection{\texorpdfstring{resize\_and\_reset()}{resize\_and\_reset()}}
 {\footnotesize\ttfamily template$<$typename Value\+Type$>$ \\
-void \mbox{\hyperlink{classgko_1_1array}{gko\+::array}}$<$ Value\+Type $>$\+::resize\+\_\+and\+\_\+reset (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{num\+\_\+elems }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classgko_1_1array}{gko\+::array}}$<$ Value\+Type $>$\+::resize\+\_\+and\+\_\+reset (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -636,7 +679,7 @@ If the array is not assigned an executor, an exception will be thrown.
 
 
 \begin{DoxyParams}{Parameters}
-{\em num\+\_\+elems} & the amount of memory (expressed as the number of {\ttfamily value\+\_\+type} elements) allocated on the \mbox{\hyperlink{classgko_1_1Executor}{Executor}} \\
+{\em size} & the amount of memory (expressed as the number of {\ttfamily value\+\_\+type} elements) allocated on the \mbox{\hyperlink{classgko_1_1Executor}{Executor}} \\
 \hline
 \end{DoxyParams}
 
@@ -659,12 +702,12 @@ Changes the \mbox{\hyperlink{classgko_1_1Executor}{Executor}} of the array, movi
 {\em exec} & the \mbox{\hyperlink{classgko_1_1Executor}{Executor}} where the data will be moved to \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{classgko_1_1array_aa7ca4bfceccaf2579311d4e195daf6ee}\label{classgko_1_1array_aa7ca4bfceccaf2579311d4e195daf6ee}} 
+\mbox{\Hypertarget{classgko_1_1array_aac2a7c2d59045e56fb751b18712a4635}\label{classgko_1_1array_aac2a7c2d59045e56fb751b18712a4635}} 
 \index{gko::array$<$ ValueType $>$@{gko::array$<$ ValueType $>$}!view@{view}}
 \index{view@{view}!gko::array$<$ ValueType $>$@{gko::array$<$ ValueType $>$}}
 \doxysubsubsection{\texorpdfstring{view()}{view()}}
 {\footnotesize\ttfamily template$<$typename Value\+Type$>$ \\
-static \mbox{\hyperlink{classgko_1_1array}{array}} \mbox{\hyperlink{classgko_1_1array}{gko\+::array}}$<$ Value\+Type $>$\+::view (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{num\+\_\+elems,  }\item[{\mbox{\hyperlink{classgko_1_1array_a9a8aebb3d68396889cf98ca877808549}{value\+\_\+type}} $\ast$}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+static \mbox{\hyperlink{classgko_1_1array}{array}} \mbox{\hyperlink{classgko_1_1array}{gko\+::array}}$<$ Value\+Type $>$\+::view (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{size,  }\item[{\mbox{\hyperlink{classgko_1_1array_a9a8aebb3d68396889cf98ca877808549}{value\+\_\+type}} $\ast$}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
 
 
@@ -676,7 +719,7 @@ The array does not take ownership of the memory, and will not deallocate it once
 \begin{DoxyParams}{Parameters}
 {\em exec} & executor where {\ttfamily data} is located \\
 \hline
-{\em num\+\_\+elems} & number of elements in {\ttfamily data} \\
+{\em size} & number of elements in {\ttfamily data} \\
 \hline
 {\em data} & chunk of memory used to create the array\\
 \hline

@@ -14,34 +14,6 @@ This example depends on simple-\/solver, minimal-\/cuda-\/solver.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
-\DoxyCodeLine{}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include <fstream>}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include <map>}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include <string>}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include <thread>}}
-\DoxyCodeLine{}
-\DoxyCodeLine{}
-\DoxyCodeLine{/ **}
-\DoxyCodeLine{ * The ByInteraction \textcolor{keyword}{class }is a \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a4d4b370ab9b3dbca1ccdb1a5cca6a728}{criterion}} which asks for \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27aee11cbb19052e40b07aac0ca060c23ee}{user}} input to stop}
-\DoxyCodeLine{ * the iteration process. Using \textcolor{keyword}{this} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a4d4b370ab9b3dbca1ccdb1a5cca6a728}{criterion}} is slightly more complex than the}
-\DoxyCodeLine{ * other ones, because it is asynchronous therefore requires the use of threads.}
-\DoxyCodeLine{ * /}
-\DoxyCodeLine{\textcolor{keyword}{class }ByInteraction}
-\DoxyCodeLine{    : \textcolor{keyword}{public} \mbox{\hyperlink{classgko_1_1EnablePolymorphicObject}{gko::EnablePolymorphicObject}}<ByInteraction, gko::stop::Criterion> \{}
-\DoxyCodeLine{    \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classgko_1_1EnablePolymorphicObject}{gko::EnablePolymorphicObject}}<ByInteraction,}
-\DoxyCodeLine{                                              \mbox{\hyperlink{namespacegko}{gko}}::stop::Criterion>;}
-\DoxyCodeLine{    using Criterion = \mbox{\hyperlink{classgko_1_1stop_1_1Criterion}{gko::stop::Criterion}};}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keyword}{public}:}
-\DoxyCodeLine{    \mbox{\hyperlink{group__LinOp_ga1fc8e9d8be0c9ad2d72bc1ddfc6d8358}{GKO\_CREATE\_FACTORY\_PARAMETERS}}(parameters, Factory)}
-\DoxyCodeLine{    \{}
-\DoxyCodeLine{        / **}
-\DoxyCodeLine{         * Boolean set by the \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27aee11cbb19052e40b07aac0ca060c23ee}{user}} to stop the iteration process}
-\DoxyCodeLine{         * /}
-\DoxyCodeLine{        std::add\_pointer<volatile bool>::type \mbox{\hyperlink{group__LinOp_ga49d4c09c39f06b22bebbbfd1d8bfe450}{GKO\_FACTORY\_PARAMETER\_SCALAR}}(}
 \DoxyCodeLine{            stop\_iteration\_process, \textcolor{keyword}{nullptr});}
 \DoxyCodeLine{    \};}
 \DoxyCodeLine{    GKO\_ENABLE\_CRITERION\_FACTORY(ByInteraction, parameters, Factory);}
@@ -346,37 +318,6 @@ This is the expected output\+:
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{/*******************************<GINKGO LICENSE>******************************}}
-\DoxyCodeLine{\textcolor{comment}{Copyright (c) 2017-\/2023, the Ginkgo authors}}
-\DoxyCodeLine{\textcolor{comment}{All rights reserved.}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{Redistribution and use in source and binary forms, with or without}}
-\DoxyCodeLine{\textcolor{comment}{modification, are permitted provided that the following conditions}}
-\DoxyCodeLine{\textcolor{comment}{are met:}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{1. Redistributions of source code must retain the above copyright}}
-\DoxyCodeLine{\textcolor{comment}{notice, this list of conditions and the following disclaimer.}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{2. Redistributions in binary form must reproduce the above copyright}}
-\DoxyCodeLine{\textcolor{comment}{notice, this list of conditions and the following disclaimer in the}}
-\DoxyCodeLine{\textcolor{comment}{documentation and/or other materials provided with the distribution.}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{3. Neither the name of the copyright holder nor the names of its}}
-\DoxyCodeLine{\textcolor{comment}{contributors may be used to endorse or promote products derived from}}
-\DoxyCodeLine{\textcolor{comment}{this software without specific prior written permission.}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS}}
-\DoxyCodeLine{\textcolor{comment}{IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED}}
-\DoxyCodeLine{\textcolor{comment}{TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A}}
-\DoxyCodeLine{\textcolor{comment}{PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT}}
-\DoxyCodeLine{\textcolor{comment}{HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,}}
-\DoxyCodeLine{\textcolor{comment}{SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT}}
-\DoxyCodeLine{\textcolor{comment}{LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,}}
-\DoxyCodeLine{\textcolor{comment}{DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY}}
-\DoxyCodeLine{\textcolor{comment}{THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT}}
-\DoxyCodeLine{\textcolor{comment}{(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE}}
-\DoxyCodeLine{\textcolor{comment}{OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.}}
-\DoxyCodeLine{\textcolor{comment}{******************************<GINKGO LICENSE>*******************************/}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
 \DoxyCodeLine{}

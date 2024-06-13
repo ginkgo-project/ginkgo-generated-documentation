@@ -208,7 +208,7 @@ kcycle\+\_\+rel\+\_\+tol $<$= 0\+: always run one iterations. kcycle\+\_\+rel\+\
 
 Custom selector size\+\_\+type (size\+\_\+type level, const Lin\+Op$\ast$ fine\+\_\+matrix) Selector function returns the element index in the vector for any given level index and the matrix of the fine level. 
 
-For each level, this function is used to select the smoothers and multigrid level generation from the respective lists. For example, 
+The level 0 is the finest level and it is ascending when going to coarser levels. For each level, this function is used to select the smoothers and multigrid level generation from the respective lists. For example, 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{[](\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\_type}} level, \textcolor{keyword}{const} LinOp* fine\_matrix) \{}
 \DoxyCodeLine{    \textcolor{keywordflow}{if} (level < 3) \{}
@@ -222,7 +222,7 @@ For each level, this function is used to select the smoothers and multigrid leve
 \end{DoxyCode}
  It uses the 0-\/idx element if level $<$ 3, the 1-\/idx element if level $>$= 3 and the number of rows of fine matrix $>$ 1024, or the 2-\/idx elements otherwise.
 
-default selector\+: use the first factory when mg\+\_\+level size = 1 use the level as the index when mg\+\_\+level size $>$ 1 \mbox{\Hypertarget{structgko_1_1solver_1_1Multigrid_1_1parameters__type_a2e4dd4ccd56c5becbbc60d3538b8dfe6}\label{structgko_1_1solver_1_1Multigrid_1_1parameters__type_a2e4dd4ccd56c5becbbc60d3538b8dfe6}} 
+default selector\+: use the level as the index when the level $<$ \mbox{\hyperlink{structgko_1_1solver_1_1Multigrid_1_1parameters__type_af8671d3890209b0063dae79c31ce489d}{mg\+\_\+level}} and reuse the last one when the level $>$= \mbox{\hyperlink{structgko_1_1solver_1_1Multigrid_1_1parameters__type_af8671d3890209b0063dae79c31ce489d}{mg\+\_\+level}} \mbox{\Hypertarget{structgko_1_1solver_1_1Multigrid_1_1parameters__type_a2e4dd4ccd56c5becbbc60d3538b8dfe6}\label{structgko_1_1solver_1_1Multigrid_1_1parameters__type_a2e4dd4ccd56c5becbbc60d3538b8dfe6}} 
 \index{gko::solver::Multigrid::parameters\_type@{gko::solver::Multigrid::parameters\_type}!max\_levels@{max\_levels}}
 \index{max\_levels@{max\_levels}!gko::solver::Multigrid::parameters\_type@{gko::solver::Multigrid::parameters\_type}}
 \doxysubsubsection{\texorpdfstring{max\_levels}{max\_levels}}

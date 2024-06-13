@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1068515030 branch based on master. Ginkgo version 1.7.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1330831941 branch based on master. Ginkgo version 1.8.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -432,7 +432,7 @@ C++ standard stream objects</h2>
 <p>These are global objects and are shared inside the same translation unit. Therefore, whenever its state or formatting is changed (e.g. using <code>std::hex</code> or floating point formatting) inside library code, make sure to restore the state before returning the control to the user. See this <a href="https://stackoverflow.com/questions/2273330/restore-the-state-of-stdcout-after-manipulating-it">stackoverflow question</a> for examples on how to do it correctly. This is extremely important for header files.</p>
 <h2><a class="anchor" id="autotoc_md66"></a>
 Warnings</h2>
-<p>By default, the <code>-DGINKGO_COMPILER_FLAGS</code> is set to <code>-Wpedantic</code> and hence pedantic warnings are emitted by default. Some of these warnings are false positives and a complete list of the resolved warnings and their solutions is listed in <a href="https://github.com/ginkgo-project/ginkgo/issues/174">Issue 174</a>. Specifically, when macros are being used, we have the issue of having <code>extra ;</code> warnings, which is resolved by adding a <code>static_assert()</code>. The CI system additionally also has a step where it compiles for pedantic warnings to be errors.</p>
+<p>By default, the <code>-DCMAKE_CXX_FLAGS</code> should be set to <code>-Wpedantic</code> to emit pedantic warnings by default. The CI system additionally also has a step where it compiles for pedantic warnings to be errors.</p>
 <h2><a class="anchor" id="autotoc_md67"></a>
 Avoiding circular dependencies</h2>
 <p>To facilitate finding circular dependencies issues (see <a href="#using-library-classes">Using library classes</a> for more details), a CI step <code>no-circular-deps</code> was created. For more details on its usage, see <a href="https://gitlab.com/ginkgo-project/ginkgo-public-ci/pipelines/52941979">this pipeline</a>, where Ginkgo did not abide to this policy and <a href="https://github.com/ginkgo-project/ginkgo/pull/278">PR #278</a> which fixed this. Note that doing so is not enough to guarantee with 100% accuracy that no circular dependency is present. For an example of such a case, take a look at <a href="https://gitlab.com/ginkgo-project/ginkgo-public-ci/pipelines/53006772">this pipeline</a> where one of the compiler setups detected an incorrect dependency of the <code>cuda</code> module (due to jacobi) on the <code>core</code> module. </p>

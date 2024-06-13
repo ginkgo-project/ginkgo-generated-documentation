@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1068515030 branch based on master. Ginkgo version 1.7.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1330831941 branch based on master. Ginkgo version 1.8.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -344,6 +344,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a2a26699e2849bfb90bcb88ddbc1f950b"><td class="memItemLeft" align="right" valign="top"><a id="a2a26699e2849bfb90bcb88ddbc1f950b"></a>
 static auto&#160;</td><td class="memItemRight" valign="bottom"><b>build</b> () -&gt; decltype(<a class="el" href="classgko_1_1preconditioner_1_1Isai_1_1Factory.html">Factory</a> ::create())</td></tr>
 <tr class="separator:a2a26699e2849bfb90bcb88ddbc1f950b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56afe4405af9d8046346f3280b12c54c"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structgko_1_1preconditioner_1_1Isai_1_1parameters__type.html">parameters_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1preconditioner_1_1Isai.html#a56afe4405af9d8046346f3280b12c54c">parse</a> (const <a class="el" href="classgko_1_1config_1_1pnode.html">config::pnode</a> &amp;config, const <a class="el" href="classgko_1_1config_1_1registry.html">config::registry</a> &amp;context, const <a class="el" href="classgko_1_1config_1_1type__descriptor.html">config::type_descriptor</a> &amp;td_for_child=config::make_type_descriptor&lt; ValueType, IndexType &gt;())</td></tr>
+<tr class="memdesc:a56afe4405af9d8046346f3280b12c54c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the parameters from the property_tree.  <a href="classgko_1_1preconditioner_1_1Isai.html#a56afe4405af9d8046346f3280b12c54c">More...</a><br /></td></tr>
+<tr class="separator:a56afe4405af9d8046346f3280b12c54c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -377,7 +380,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>Isai&lt; isai_type::
 class gko::preconditioner::Isai&lt; IsaiType, ValueType, IndexType &gt;</h3>
 
 <p>The Incomplete Sparse Approximate Inverse (ISAI) Preconditioner generates an approximate inverse matrix for a given square matrix A, lower triangular matrix L, upper triangular matrix U or symmetric positive (spd) matrix B. </p>
-<p>Using the preconditioner computes <img class="formulaInl" alt="$aiA * x$" src="form_85.png"/>, <img class="formulaInl" alt="$aiU * x$" src="form_86.png"/>, <img class="formulaInl" alt="$aiL * x$" src="form_87.png"/> or <img class="formulaInl" alt="$aiC^T * aiC * x$" src="form_88.png"/> (depending on the type of the <a class="el" href="classgko_1_1preconditioner_1_1Isai.html" title="The Incomplete Sparse Approximate Inverse (ISAI) Preconditioner generates an approximate inverse matr...">Isai</a>) for a given vector x (may have multiple right hand sides). aiA, aiU and aiL are the approximate inverses for A, U and L respectively. aiC is an approximation to C, the exact Cholesky factor of B (This is commonly referred to as a Factorized Sparse Approximate Inverse, short FSPAI).</p>
+<p>Using the preconditioner computes <img class="formulaInl" alt="$aiA * x$" src="form_106.png"/>, <img class="formulaInl" alt="$aiU * x$" src="form_107.png"/>, <img class="formulaInl" alt="$aiL * x$" src="form_108.png"/> or <img class="formulaInl" alt="$aiC^T * aiC * x$" src="form_109.png"/> (depending on the type of the <a class="el" href="classgko_1_1preconditioner_1_1Isai.html" title="The Incomplete Sparse Approximate Inverse (ISAI) Preconditioner generates an approximate inverse matr...">Isai</a>) for a given vector x (may have multiple right hand sides). aiA, aiU and aiL are the approximate inverses for A, U and L respectively. aiC is an approximation to C, the exact Cholesky factor of B (This is commonly referred to as a Factorized Sparse Approximate Inverse, short FSPAI).</p>
 <p>The sparsity pattern used for the approximate inverse of A, L and U is the same as the sparsity pattern of the respective matrix. For B, the sparsity pattern used for the approximate inverse is the same as the sparsity pattern of the lower triangular half of B.</p>
 <p>Note that, except for the spd case, for a matrix A generally ISAI(A)^T != ISAI(A^T).</p>
 <p>For more details on the algorithm, see the paper <a href="https://doi.org/10.1016/j.parco.2017.10.003">Incomplete Sparse Approximate Inverses for Parallel Preconditioning</a>, which is the basis for this work.</p>
@@ -545,6 +548,62 @@ template&lt;isai_type IsaiType, typename ValueType , typename IndexType &gt; </d
 
 <p>Move-assigns an ISAI preconditioner. </p>
 <p>Preserves the executor, moves the matrix and parameters. Creates a clone of the matrix if it is on the wrong executor. The moved-from object is empty (0x0 with nullptr matrix and default parameters) </p>
+
+</div>
+</div>
+<a id="a56afe4405af9d8046346f3280b12c54c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56afe4405af9d8046346f3280b12c54c">&#9670;&nbsp;</a></span>parse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;isai_type IsaiType, typename ValueType , typename IndexType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="structgko_1_1preconditioner_1_1Isai_1_1parameters__type.html">parameters_type</a> <a class="el" href="classgko_1_1preconditioner_1_1Isai.html">gko::preconditioner::Isai</a>&lt; IsaiType, ValueType, IndexType &gt;::parse </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classgko_1_1config_1_1pnode.html">config::pnode</a> &amp;&#160;</td>
+          <td class="paramname"><em>config</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classgko_1_1config_1_1registry.html">config::registry</a> &amp;&#160;</td>
+          <td class="paramname"><em>context</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classgko_1_1config_1_1type__descriptor.html">config::type_descriptor</a> &amp;&#160;</td>
+          <td class="paramname"><em>td_for_child</em> = <code>config::make_type_descriptor&lt;&#160;ValueType,&#160;IndexType&#160;&gt;()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create the parameters from the property_tree. </p>
+<p>Because this is directly tied to the specific type, the value/index type settings within config are ignored and type_descriptor is only used for children configs.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">config</td><td>the property tree for setting </td></tr>
+    <tr><td class="paramname">context</td><td>the registry </td></tr>
+    <tr><td class="paramname">td_for_child</td><td>the type descriptor for children configs. The default uses the value/index type of this class.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>parameters </dd></dl>
 
 </div>
 </div>

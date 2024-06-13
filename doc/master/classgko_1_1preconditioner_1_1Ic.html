@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1068515030 branch based on master. Ginkgo version 1.7.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1330831941 branch based on master. Ginkgo version 1.8.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -81,7 +81,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>The Incomplete Cholesky (IC) preconditioner solves the equation <img class="formulaInl" alt="$LL^H*x = b$" src="form_83.png"/> for a given lower triangular matrix L and the right hand side b (can contain multiple right hand sides).  
+<p>The Incomplete Cholesky (IC) preconditioner solves the equation <img class="formulaInl" alt="$LL^H*x = b$" src="form_104.png"/> for a given lower triangular matrix L and the right hand side b (can contain multiple right hand sides).  
  <a href="classgko_1_1preconditioner_1_1Ic.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="preconditioner_2ic_8hpp_source.html">ginkgo/core/preconditioner/ic.hpp</a>&gt;</code></p>
@@ -343,6 +343,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ab78fdf7b9a8400c8081d7c13c86c6fc4"><td class="memItemLeft" align="right" valign="top"><a id="ab78fdf7b9a8400c8081d7c13c86c6fc4"></a>
 static auto&#160;</td><td class="memItemRight" valign="bottom"><b>build</b> () -&gt; decltype(<a class="el" href="classgko_1_1preconditioner_1_1Ic_1_1Factory.html">Factory</a> ::create())</td></tr>
 <tr class="separator:ab78fdf7b9a8400c8081d7c13c86c6fc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c9420284654e954e2aa86e6f815ccd7"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structgko_1_1preconditioner_1_1Ic_1_1parameters__type.html">parameters_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1preconditioner_1_1Ic.html#a9c9420284654e954e2aa86e6f815ccd7">parse</a> (const <a class="el" href="classgko_1_1config_1_1pnode.html">config::pnode</a> &amp;config, const <a class="el" href="classgko_1_1config_1_1registry.html">config::registry</a> &amp;context, const <a class="el" href="classgko_1_1config_1_1type__descriptor.html">config::type_descriptor</a> &amp;td_for_child=config::make_type_descriptor&lt; value_type, index_type &gt;())</td></tr>
+<tr class="memdesc:a9c9420284654e954e2aa86e6f815ccd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the parameters from the property_tree.  <a href="classgko_1_1preconditioner_1_1Ic.html#a9c9420284654e954e2aa86e6f815ccd7">More...</a><br /></td></tr>
+<tr class="separator:a9c9420284654e954e2aa86e6f815ccd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
@@ -357,13 +360,13 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>EnablePolymorphicObj
 <div class="textblock"><h3>template&lt;typename LSolverType = solver::LowerTrs&lt;&gt;, typename IndexType = int32&gt;<br />
 class gko::preconditioner::Ic&lt; LSolverType, IndexType &gt;</h3>
 
-<p>The Incomplete Cholesky (IC) preconditioner solves the equation <img class="formulaInl" alt="$LL^H*x = b$" src="form_83.png"/> for a given lower triangular matrix L and the right hand side b (can contain multiple right hand sides). </p>
+<p>The Incomplete Cholesky (IC) preconditioner solves the equation <img class="formulaInl" alt="$LL^H*x = b$" src="form_104.png"/> for a given lower triangular matrix L and the right hand side b (can contain multiple right hand sides). </p>
 <p>It allows to set both the solver for L defaulting to <a class="el" href="classgko_1_1solver_1_1LowerTrs.html" title="LowerTrs is the triangular solver which solves the system L x = b, when L is a lower triangular matri...">solver::LowerTrs</a>, which is a direct triangular solvers. The solver for L^H is the conjugate-transposed solver for L, ensuring that the preconditioner is symmetric and positive-definite. For this L solver, a factory can be provided (using <code>with_l_solver</code>) to have more control over their behavior. In particular, it is possible to use an iterative method for solving the triangular systems. The default parameters for an iterative triangluar solver are:</p><ul>
 <li>reduction factor = 1e-4</li>
 <li>max iteration = &lt;number of="" rows="" of="" the="" matrix="" given="" to="" the="" solver&gt;=""&gt; Solvers without such criteria can also be used, in which case none are set.</li>
 </ul>
 <p>An object of this class can be created with a matrix or a <a class="el" href="classgko_1_1Composition.html" title="The Composition class can be used to compose linear operators op1, op2, ..., opn and obtain the opera...">gko::Composition</a> containing two matrices. If created with a matrix, it is factorized before creating the solver. If a <a class="el" href="classgko_1_1Composition.html" title="The Composition class can be used to compose linear operators op1, op2, ..., opn and obtain the opera...">gko::Composition</a> (containing two matrices) is used, the first operand will be taken as the L matrix, the second will be considered the L^H matrix, which helps to avoid the otherwise necessary transposition of L inside the solver. ParIc can be directly used, since it orders the factors in the correct way.</p>
-<dl class="section note"><dt>Note</dt><dd>When providing a <a class="el" href="classgko_1_1Composition.html" title="The Composition class can be used to compose linear operators op1, op2, ..., opn and obtain the opera...">gko::Composition</a>, the first matrix must be the lower matrix ( <img class="formulaInl" alt="$L$" src="form_9.png"/>), and the second matrix must be its conjugate-transpose ( <img class="formulaInl" alt="$L^H$" src="form_23.png"/>). If they are swapped, solving might crash or return the wrong result.</dd>
+<dl class="section note"><dt>Note</dt><dd>When providing a <a class="el" href="classgko_1_1Composition.html" title="The Composition class can be used to compose linear operators op1, op2, ..., opn and obtain the opera...">gko::Composition</a>, the first matrix must be the lower matrix ( <img class="formulaInl" alt="$L$" src="form_9.png"/>), and the second matrix must be its conjugate-transpose ( <img class="formulaInl" alt="$L^H$" src="form_45.png"/>). If they are swapped, solving might crash or return the wrong result.</dd>
 <dd>
 Do not use symmetric solvers (like CG) for the L solver since both matrices (L and L^H) are, by design, not symmetric.</dd>
 <dd>
@@ -604,6 +607,63 @@ template&lt;typename LSolverType  = solver::LowerTrs&lt;&gt;, typename IndexType
 <p>Preserves the executor, moves the solvers and parameters. Creates a clone of the solvers if they are on the wrong executor. The moved-from object is empty (0x0 with nullptr solvers and default parameters) </p>
 
 <p class="reference">References <a class="el" href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone()</a>, and <a class="el" href="classgko_1_1PolymorphicObject.html#ab40586bff071b7f11c2cf6b5cbf598eb">gko::PolymorphicObject::get_executor()</a>.</p>
+
+</div>
+</div>
+<a id="a9c9420284654e954e2aa86e6f815ccd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c9420284654e954e2aa86e6f815ccd7">&#9670;&nbsp;</a></span>parse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename LSolverType  = solver::LowerTrs&lt;&gt;, typename IndexType  = int32&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="structgko_1_1preconditioner_1_1Ic_1_1parameters__type.html">parameters_type</a> <a class="el" href="classgko_1_1preconditioner_1_1Ic.html">gko::preconditioner::Ic</a>&lt; LSolverType, IndexType &gt;::parse </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classgko_1_1config_1_1pnode.html">config::pnode</a> &amp;&#160;</td>
+          <td class="paramname"><em>config</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classgko_1_1config_1_1registry.html">config::registry</a> &amp;&#160;</td>
+          <td class="paramname"><em>context</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classgko_1_1config_1_1type__descriptor.html">config::type_descriptor</a> &amp;&#160;</td>
+          <td class="paramname"><em>td_for_child</em> = <code>config::make_type_descriptor&lt;value_type,&#160;index_type&gt;()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create the parameters from the property_tree. </p>
+<p>Because this is directly tied to the specific type, the value/index type settings within config are ignored and type_descriptor is only used for children configs.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">config</td><td>the property tree for setting </td></tr>
+    <tr><td class="paramname">context</td><td>the registry </td></tr>
+    <tr><td class="paramname">td_for_child</td><td>the type descriptor for children configs. The default uses the value/index type of this class.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>parameters</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>only support the following for l_solver: Ir, Gmres, LowerTrs, and LowerIsai </dd></dl>
 
 </div>
 </div>

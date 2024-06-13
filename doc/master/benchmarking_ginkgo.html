@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1068515030 branch based on master. Ginkgo version 1.7.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1330831941 branch based on master. Ginkgo version 1.8.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -70,16 +70,18 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>In addition to the unit tests designed to verify correctness, Ginkgo also includes an extensive benchmark suite for checking its performance on all Ginkgo supported systems. The purpose of Ginkgo's benchmarking suite is to allow easy and complete reproduction of Ginkgo's performance, and to facilitate performance debugging as well. Most results published in Ginkgo papers are generated thanks to this benchmarking suite and are accessible online under the <a href="https://github.com/ginkgo-project/ginkgo-data/">ginkgo-data repository</a>. These results can also be used for performance comparison in order to ensure that you get similar performance as what is published on this repository.</p>
-<p>To compile the benchmarks, the flag <code>-GINKGO_BUILD_BENCHMARKS=ON</code> has to be set during the <code>cmake</code> step. In addition, the <a href="https://github.com/ginkgo-project/ssget"><code>ssget</code> command-line utility</a> has to be installed on the system. The purpose of this file is to explain in detail the capacities of this benchmarking suite as well as how to properly setup everything.</p>
+<p>To compile the benchmarks, the flag <code>-DGINKGO_BUILD_BENCHMARKS=ON</code> has to be set during the <code>cmake</code> step. In addition, the <a href="https://github.com/ginkgo-project/ssget"><code>ssget</code> command-line utility</a> has to be installed on the system. The purpose of this file is to explain in detail the capacities of this benchmarking suite as well as how to properly setup everything.</p>
+<p>There are two ways to benchmark Ginkgo. When compiling the benchmark suite, executables are generated for collecting matrix statistics, running sparse-matrix vector product, solvers (possibly distributed) benchmarks. Another way to run benchmarks is through the convenience script <code>run_all_benchmarks.sh</code>, but not all features are exposed through this tool!</p>
 <p>Here is a short description of the content of this file:</p><ol type="1">
 <li>Ginkgo setup and best practice guidelines</li>
 <li>Installing and using the <code>ssget</code> tool to fetch the <a href="https://sparse.tamu.edu/">SuiteSparse matrices</a>.</li>
-<li>Benchmarking overview and how to run them in a simple way.</li>
+<li>Running benchmarks manually</li>
+<li>Benchmarking with the script utility</li>
 <li>How to publish the benchmark results online and use the <a href="https://ginkgo-project.github.io/gpe/">Ginkgo Performance Explorer (GPE)</a> for performance analysis (optional).</li>
 <li>Using the benchmark suite for performance debugging thanks to the loggers.</li>
-<li>All available benchmark customization options.</li>
+<li>Available benchmark customization options with the script utility.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md12"></a>
+<h2><a class="anchor" id="autotoc_md11"></a>
 1: Ginkgo setup and best practice guidelines</h2>
 <p>Before benchmarking Ginkgo, make sure that you follow the general guidelines in order to ensure best performance.</p>
 <ol type="1">
@@ -91,9 +93,9 @@ $(function() {
 <li>When specifically using the adaptive block jacobi preconditioner, enable the <code>GINKGO_JACOBI_FULL_OPTIMIZATIONS</code> CMake flag. Be careful that this will use much more memory and time for the compilation due to compiler performance issues with register optimizations, in particular.</li>
 <li>The current benchmarking setup also allows to benchmark only the overhead by using as either (or for all) preconditioner/spmv/solver, the special <code>overhead</code> LinOp. If your purpose is to check Ginkgo's overhead, make sure to try this mode.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md13"></a>
+<h2><a class="anchor" id="autotoc_md12"></a>
 2: Using ssget to fetch the matrices</h2>
-<p>The benchmark suite tests Ginkgo's performance using the <a href="https://sparse.tamu.edu/">SuiteSparse matrix collection</a> and artificially generated matrices. The suite sparse collection will be downloaded automatically when the benchmarks are run. This is done thanks to the <a href="https://github.com/ginkgo-project/ssget"><code>ssget</code> command-line utility</a>.</p>
+<p>To benchmark <code>ginkgo</code>, matrices need to be provided as input in the <code>Matrix Market</code> format. A convenient way is to run benchmark with the <a href="https://sparse.tamu.edu/">SuiteSparse matrix collection</a>. A helper tool, the <a href="https://github.com/ginkgo-project/ssget"><code>ssget</code> command-line utility</a> can be used to facilitate downloading and extracting matrices from the suitesparse collection. When running the benchmarks with the helper script <code>run_all_benchmarks.sh</code> (or calling <code>make benchmark</code>), the <code>ssget</code> tool is required.</p>
 <p>To install <code>ssget</code>, access the repository and copy the file <code>ssget</code> into a directory present in your <code>PATH</code> variable as per the tool's <code>README.md</code> instructions. The tool can be installed either in a global system path or a local directory such as <code>$HOME/.local/bin</code>. After installing the tool, it is important to review the <code>ssget</code> script and configure as needed the variable <code>ARCHIVE_LOCATION</code> on line 39. This is where the matrices will be stored into.</p>
 <p>The Ginkgo benchmark can be set to run on only a portion of the SuiteSparse matrix collection as we will see in the following section. Please note that the entire collection requires roughly 100GB of disk storage in its compressed format, and roughly 25GB of additional disk space for intermediate data (such us uncompressing the archive). Additionally, the benchmark runs usually take a long time (SpMV benchmarks on the complete collection take roughly 24h using the K20 GPU), and will stress the system.</p>
 <p>Before proceeding, it can be useful in order to save time to download the matrices as preparation. This can be done by using the <code>ssget -f -i i</code> command where <code>i</code> is the ID of the matrix to be downloaded. The following loop allows to download the full SuiteSparse matrix collection:</p>
@@ -109,8 +111,41 @@ $(function() {
 <div class="line">        ssget -f -i ${i}</div>
 <div class="line">    fi</div>
 <div class="line">done</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md14"></a>
-3: Benchmarking overview</h2>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md13"></a>
+3: Running benchmarks manually</h2>
+<p>When compiling Ginkgo with the flag <code>-DGINKGO_BUILD_BENCHMARKS=ON</code>, a suite of executables will be generated depending on the CMake configuration. These executables are the backbone of the benchmarking suite. Note that all of these executables describe the available options and the required input format when running them with the <code>--help</code> option. All executables have multiple variants depending on the precision, by default <code>double</code> precision is used for the type of values, but variants with <code>single</code> and <code>complex</code> (single and double) value types are also available. Here is a non exhaustive list of the available benchmarks:</p>
+<ul>
+<li><code>blas/blas</code>: supports benchmarking many of Ginkgo's BLAS operations: dot products, axpy, copy, etc.</li>
+<li><code>conversion/conversion</code>: conversion between matrix formats.</li>
+<li><code>matrix_generator/matrix_generator</code>: mostly allows generating block diagonal matrices (to benchmark the block-jacobi preconditioner).</li>
+<li><code>matrix_statistics/matrix_statistics</code>: computes size and other matrix statistics (such as variance, load imbalance, ...).</li>
+<li><code>preconditioner/preconditioner</code>: benchmarks most Ginkgo preconditioner.</li>
+<li><code>solver/solver</code>: benchmark most of Ginkgo's solvers in a non distributed setting.</li>
+<li><code>sparse_blas/sparse_blas</code>: benchmarks Sparse BLAS operations, such as SpGEMM, SpGEAM, transpose.</li>
+<li><code>spmv/spmv</code>: benchmarks Ginkgo's matrix formats (Sparse-Matrix Vector product).</li>
+</ul>
+<p>Optionally when compiling with MPI support:</p><ul>
+<li><code>blas/distributed/multi_vector</code>: measures BLAS performance on (distributed) multi-vectors.</li>
+<li><code>solver/distributed/solver</code>: distributed solver benchmarks.</li>
+<li><code>spmv/distributed/spmv</code>: distributed matrix Sparse-Matrix Vector (SpMV) product benchmark.</li>
+</ul>
+<p>All benchmarks require input data as in a <code>JSON</code> format. The json file has to consist of exactly one array, and within that array the test cases are defined. The exact syntax can change between executables, the <code>--help</code> option will explain the necessary <code>JSON</code> input format. For example for the <code>spmv</code> benchmark case, and many other benchmarks the following minimal input should be provided:</p>
+<div class="fragment"><div class="line">[</div>
+<div class="line">  {</div>
+<div class="line">    &quot;filename&quot;: &quot;path/to/your/matrix&quot;,</div>
+<div class="line">    &quot;rhs&quot;: &quot;path/to/your/rhs&quot;</div>
+<div class="line">  },</div>
+<div class="line">  { ... }</div>
+<div class="line">]</div>
+</div><!-- fragment --><p> The files have to be in matrix market format.</p>
+<p>Some benchmarks require some extra fields. For example the solver benchmarks requires the field <code>"optimal": {"spmv": "matrix format (such as csr)"}</code>. This is automatically populated when running the <code>spmv</code> benchmark which finds the optimal (fastest) format among all requested formats.</p>
+<p>After writing the necessary data in a JSON file, the benchmark can be called by passing in the input via stdin, i.e.</p>
+<div class="fragment"><div class="line">./solver &lt; input.json</div>
+</div><!-- fragment --><p>The output of our benchmarks is again JSON, and it is printed to stdout, while our status messages are printed to stderr. So, the output can be stored with</p>
+<div class="fragment"><div class="line">./solver &lt; input.json &gt; output.json</div>
+</div><!-- fragment --><p>Note that in most cases, the JSON output by our benchmarks is compatible with other benchmarks, therefore it is possible to first call the <code>spmv</code> benchmark, use the resulting output JSON as input to the <code>solver</code> benchmark, and finally use the resulting solver JSON output as input to the <code>preconditioner</code> benchmark.</p>
+<h2><a class="anchor" id="autotoc_md14"></a>
+4: Benchmarking overview</h2>
 <p>The benchmark suite is invoked using the <code>make benchmark</code> command in the build directory. Under the hood, this command simply calls the script <code>benchmark/run_all_benchmarks.sh</code> so it is possible to manually launch this script as well. The behavior of the suite can be modified using environment variables. Assuming the <code>bash</code> shell is used, these can either be specified via the <code>export</code> command to persist between multiple runs:</p>
 <div class="fragment"><div class="line">export VARIABLE=&quot;value&quot;</div>
 <div class="line">...</div>
@@ -133,7 +168,7 @@ benchmark options">available benchmark options</a>. Here are the most important 
 </li>
 </ul>
 <h2><a class="anchor" id="autotoc_md15"></a>
-4: Publishing the results on Github and analyze the results with the GPE (optional)</h2>
+5: Publishing the results on Github and analyze the results with the GPE (optional)</h2>
 <p>The previous experiments generated json files for each matrices, each containing timing, iteration count, achieved precision, ... depending on the type of benchmark run. These files are available in the directory <code>${ginkgo_build_dir}/benchmark/results/</code>. These files can be analyzed and processed through any tool (e.g. python). In this section, we describe how to generate the plots by using Ginkgo's <a href="https://ginkgo-project.github.io/gpe/">GPE</a> tool. First, we need to publish the experiments into a Github repository which will be then linked as source input to the GPE. For this, we can simply fork the ginkgo-data repository. To do so, we can go to the github repository and use the forking interface: <a href="https://github.com/ginkgo-project/ginkgo-data/">https://github.com/ginkgo-project/ginkgo-data/</a></p>
 <p>Once it's done, we want to clone the repository locally, put all results online and access the GPE for plotting the results. Here are the detailed steps:</p>
 <div class="fragment"><div class="line">git clone https://github.com/&lt;username&gt;/ginkgo-data.git $HOME/ginkgo_benchmark/ginkgo-data</div>
@@ -160,11 +195,11 @@ benchmark options">available benchmark options</a>. Here are the most important 
 <li>The results should be available in the tab "plot" on the right side. Other tabs allow to access the result of the processed data after invoking the processing script.</li>
 </ol>
 <h2><a class="anchor" id="autotoc_md16"></a>
-5: Detailed performance analysis and debugging</h2>
+6: Detailed performance analysis and debugging</h2>
 <p>Detailed performance analysis can be ran by passing the environment variable <code>DETAILED=1</code> to the benchmarking script. This detailed run is available for solvers and allows to log the internal residual after every iteration as well as log the time taken by all operations. These features are also available in the <code>performance-debugging</code> example which can be used instead and modified as needed to analyze Ginkgo's performance.</p>
 <p>These features are implemented thanks to the loggers located in the file <code>${ginkgo_src_dir}/benchmark/utils/loggers.hpp</code>. Ginkgo possesses hooks at all important code location points which can be inspected thanks to the logger. In this fashion, it is easy to use these loggers also for tracking memory allocation sizes and other important library aspects.</p>
 <h2><a class="anchor" id="autotoc_md17"></a>
-6: Available benchmark options</h2>
+7: Available benchmark options</h2>
 <p>There are a set amount of options available for benchmarking. Most important options can be configured through the benchmarking script itself thanks to environment variables. Otherwise, some specific options are not available through the benchmarking scripts but can be directly configured when running the benchmarking program itself. For a list of all options, run for example <code>${ginkgo_build_dir}/benchmark/solver/solver --help</code>.</p>
 <p>The supported environment variables are described in the following list:</p><ul>
 <li><code>BENCHMARK={spmv, solver, preconditioner}</code> - allows to select the type of benchmark to be ran. Default is <code>spmv</code>.<ul>
@@ -188,7 +223,7 @@ benchmark options">available benchmark options</a>. Here are the most important 
 <li><code>SOLVERS_MAX_ITERATIONS=&lt;number&gt;</code> - the maximum number of iterations with which a solver should be ran. The default is <code>10000</code>.</li>
 <li><code>SOLVERS_RHS={1, random, sinus}</code> - whether to use a vector of all ones, random values or b = A * (s / |s|)$ with s(idx) = sin(idx) (for complex numbers, s(idx) = sin(2*idx) + i * sin(2*idx+1)) as the right-hand side in solver benchmarks. Default is <code>1</code>.</li>
 <li><code>SOLVERS_INITIAL_GUESS={rhs,0,random}</code> - the initial guess generation of the solvers. <code>rhs</code> uses the right-hand side, <code>0</code> uses a zero vector and <code>random</code> generates a random vector as the initial guess.</li>
-<li><code>DETAILED={0,1}</code> - selects whether detailed benchmarks should be ran for the solver benchmarks, can be either <code>0</code> (off) or <code>1</code> (on). The default is <code>0</code>.</li>
+<li><code>DETAILED={0,1}</code> - selects whether detailed benchmarks should be ran. This generally provides extra, verbose information at the cost of one or more extra benchmark runs. It can be either <code>0</code> (off) or <code>1</code> (on).</li>
 <li><code>GPU_TIMER={true, false}</code> - If set to <code>true</code>, use the gpu timer, which is valid for cuda/hip executor, to measure the timing. Default is <code>false</code>.</li>
 <li><code>SOLVERS_JACOBI_MAX_BS</code> - sets the maximum block size for the Jacobi preconditioner (if used, otherwise, it does nothing) in the solvers benchmark. The default is '32'.</li>
 <li><code>SOLVERS_GMRES_RESTART</code> - the maximum dimension of the Krylov space to use in GMRES. The default is <code>100</code>. </li>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Ginkgo: The kokkos_assembly program</title>
+<title>Ginkgo: The kokkos-assembly program</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1068515030 branch based on master. Ginkgo version 1.7.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1330831941 branch based on master. Ginkgo version 1.8.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -66,7 +66,7 @@ $(function() {
 </div><!-- top -->
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">The kokkos_assembly program </div>  </div>
+<div class="title">The kokkos-assembly program </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>The Kokkos assembly example..</p>
@@ -92,21 +92,70 @@ $(function() {
  <a class="anchor" id="Intro"></a> <a class="anchor" id="Introduction"></a></p><h1>Introduction</h1>
 <p>This example solves a 1D Poisson equation:</p>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\[ u : [0, 1] \rightarrow R\\ u'' = f\\ u(0) = u0\\ u(1) = u1 \]" src="form_117.png"/>
+<img class="formulaDsp" alt="\[ u : [0, 1] \rightarrow R\\ u'' = f\\ u(0) = u0\\ u(1) = u1 \]" src="form_138.png"/>
 </p>
 <p>using a finite difference method on an equidistant grid with <code>K</code> discretization points (<code>K</code> can be controlled with a command line parameter).</p>
 <p>The resulting CSR matrix is assembled using Kokkos kernels. This example show how to use Ginkgo data with Kokkos kernels.</p>
 <p><a class="anchor" id="Notes"></a></p><h3>Notes </h3>
 <p>If this example is built as part of Ginkgo, it is advised to configure Ginkgo with <code>-DGINKGO_WITH_CCACHE=OFF</code> to prevent incompabilities with Kokkos' compiler wrapper for <code>nvcc</code>.</p>
 <p><a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;map&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="fragment"><div class="line">     * of arrays.</div>
+<div class="line">     *</div>
+<div class="line">     * @tparam ValueType_c  The value type of the matrix elements, might have</div>
+<div class="line">     *                      other cv qualifiers than ValueType</div>
+<div class="line">     * @tparam IndexType_c  The index type of the matrix elements, might have</div>
+<div class="line">     *                      other cv qualifiers than IndexType</div>
+<div class="line">     * /</div>
+<div class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType_c, <span class="keyword">typename</span> IndexType_c&gt;</div>
+<div class="line">    <span class="keyword">struct </span>type {</div>
+<div class="line">        <span class="keyword">using</span> index_array = <span class="keyword">typename</span> index_mapper::template type&lt;IndexType_c&gt;;</div>
+<div class="line">        <span class="keyword">using</span> value_array = <span class="keyword">typename</span> value_mapper::template type&lt;ValueType_c&gt;;</div>
+<div class="line"> </div>
+<div class="line">        / **</div>
+<div class="line">         * Constructor based on size and raw pointers</div>
+<div class="line">         *</div>
+<div class="line">         * @param size  The number of stored elements</div>
+<div class="line">         * @param row_idxs  Pointer to the row indices</div>
+<div class="line">         * @param col_idxs  Pointer to the column indices</div>
+<div class="line">         * @param values  Pointer to the values</div>
+<div class="line">         *</div>
+<div class="line">         * @<span class="keywordflow">return</span>  An <span class="keywordtype">object</span> which has each <a class="code" href="classgko_1_1array.html">gko::array</a> of the</div>
+<div class="line">         *          device_matrix_data mapped to a Kokkos view</div>
+<div class="line">         * /</div>
+<div class="line">        <span class="keyword">static</span> type map(size_type size, IndexType_c* row_idxs,</div>
+<div class="line">                        IndexType_c* col_idxs, ValueType_c* values)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordflow">return</span> {index_mapper::map(row_idxs, size),</div>
+<div class="line">                    index_mapper::map(col_idxs, size),</div>
+<div class="line">                    value_mapper::map(values, size)};</div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        index_array row_idxs;</div>
+<div class="line">        index_array col_idxs;</div>
+<div class="line">        value_array values;</div>
+<div class="line">    };</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">static</span> type&lt;ValueType, IndexType&gt; map(</div>
+<div class="line">        device_matrix_data&lt;ValueType, IndexType&gt;&amp; md)</div>
+<div class="line">    {</div>
+<div class="line">        assert_compatibility&lt;MemorySpace&gt;(md);</div>
+<div class="line">        <span class="keywordflow">return</span> type&lt;ValueType, IndexType&gt;::map(</div>
+<div class="line">            md.get_num_stored_elements(), md.get_row_idxs(), md.get_col_idxs(),</div>
+<div class="line">            md.get_values());</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">static</span> type&lt;const ValueType, const IndexType&gt; map(</div>
+<div class="line">        <span class="keyword">const</span> device_matrix_data&lt;ValueType, IndexType&gt;&amp; md)</div>
+<div class="line">    {</div>
+<div class="line">        assert_compatibility&lt;MemorySpace&gt;(md);</div>
+<div class="line">        <span class="keywordflow">return</span> type&lt;const ValueType, const IndexType&gt;::map(</div>
+<div class="line">            md.get_num_stored_elements(), md.get_const_row_idxs(),</div>
+<div class="line">            md.get_const_col_idxs(), md.get_const_values());</div>
+<div class="line">    }</div>
+<div class="line">};</div>
 <div class="line"> </div>
 <div class="line"> </div>
-<div class="line"><span class="preprocessor">#include &lt;omp.h&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;Kokkos_Core.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;ginkgo/ginkgo.hpp&gt;</span></div>
+<div class="line">}  <span class="comment">// namespace gko::ext::kokkos::detail</span></div>
 </div><!-- fragment --><p>Creates a stencil matrix in CSR format for the given number of discretization points.</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType, <span class="keyword">typename</span> IndexType&gt;</div>
 <div class="line"><span class="keywordtype">void</span> generate_stencil_matrix(<a class="code" href="classgko_1_1matrix_1_1Csr.html">gko::matrix::Csr&lt;ValueType, IndexType&gt;</a>* matrix)</div>
@@ -117,12 +166,11 @@ $(function() {
 <div class="fragment"><div class="line"><a class="code" href="classgko_1_1device__matrix__data.html">gko::device_matrix_data&lt;ValueType, IndexType&gt;</a> md(exec, matrix-&gt;<a class="code" href="classgko_1_1LinOp.html#a31b3c003388eb0b95393154f68c2b98d">get_size</a>(),</div>
 <div class="line">                                                 discretization_points * 3);</div>
 </div><!-- fragment --><p>Create Kokkos views on Ginkgo data.</p>
-<div class="fragment"><div class="line">Kokkos::View&lt;IndexType*&gt; v_row_idxs(md.get_row_idxs(), md.get_num_elems());</div>
-<div class="line">Kokkos::View&lt;IndexType*&gt; v_col_idxs(md.get_col_idxs(), md.get_num_elems());</div>
-<div class="line">Kokkos::View&lt;ValueType*&gt; v_values(md.get_values(), md.get_num_elems());</div>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> k_md = gko::ext::kokkos::map_data(md);</div>
 </div><!-- fragment --><p>Create the matrix entries. This also creates zero entries for the first and second row to handle all rows uniformly.</p>
 <div class="fragment"><div class="line">Kokkos::parallel_for(</div>
-<div class="line">    <span class="stringliteral">&quot;generate_stencil_matrix&quot;</span>, md.get_num_elems(), KOKKOS_LAMBDA(<span class="keywordtype">int</span> i) {</div>
+<div class="line">    <span class="stringliteral">&quot;generate_stencil_matrix&quot;</span>, md.get_num_stored_elements(),</div>
+<div class="line">    KOKKOS_LAMBDA(<span class="keywordtype">int</span> i) {</div>
 <div class="line">        <span class="keyword">const</span> ValueType coefs[] = {-1, 2, -1};</div>
 <div class="line">        <span class="keyword">auto</span> ofs = static_cast&lt;IndexType&gt;((i % 3) - 1);</div>
 <div class="line">        <span class="keyword">auto</span> row = static_cast&lt;IndexType&gt;(i / 3);</div>
@@ -131,9 +179,9 @@ $(function() {
 <div class="fragment"><div class="line">    <span class="keyword">auto</span> mask =</div>
 <div class="line">        static_cast&lt;IndexType&gt;(0 &lt;= col &amp;&amp; col &lt; discretization_points);</div>
 <div class="line"> </div>
-<div class="line">    v_row_idxs[i] = mask * row;</div>
-<div class="line">    v_col_idxs[i] = mask * col;</div>
-<div class="line">    v_values[i] = mask * coefs[ofs + 1];</div>
+<div class="line">    k_md.row_idxs[i] = mask * row;</div>
+<div class="line">    k_md.col_idxs[i] = mask * col;</div>
+<div class="line">    k_md.values[i] = mask * coefs[ofs + 1];</div>
 <div class="line">});</div>
 </div><!-- fragment --><p>Add up duplicate (zero) entries.</p>
 <div class="fragment"><div class="line">md.sum_duplicates();</div>
@@ -146,18 +194,17 @@ $(function() {
 <div class="line">                  <a class="code" href="classgko_1_1matrix_1_1Dense.html">gko::matrix::Dense&lt;ValueType&gt;</a>* rhs)</div>
 <div class="line">{</div>
 <div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> discretization_points = <a class="code" href="namespacegko_1_1solver.html#a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e">rhs</a>-&gt;get_size()[0];</div>
-<div class="line">    <span class="keyword">auto</span> values = <a class="code" href="namespacegko_1_1solver.html#a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e">rhs</a>-&gt;get_values();</div>
-<div class="line">    Kokkos::View&lt;ValueType*&gt; values_view(values, discretization_points);</div>
+<div class="line">    <span class="keyword">auto</span> k_rhs = gko::ext::kokkos::map_data(rhs);</div>
 <div class="line">    Kokkos::parallel_for(</div>
 <div class="line">        <span class="stringliteral">&quot;generate_rhs&quot;</span>, discretization_points, KOKKOS_LAMBDA(<span class="keywordtype">int</span> i) {</div>
 <div class="line">            <span class="keyword">const</span> ValueType h = 1.0 / (discretization_points + 1);</div>
 <div class="line">            <span class="keyword">const</span> ValueType xi = ValueType(i + 1) * h;</div>
-<div class="line">            values_view[i] = -f(xi) * h * h;</div>
+<div class="line">            k_rhs(i, 0) = -f(xi) * h * h;</div>
 <div class="line">            <span class="keywordflow">if</span> (i == 0) {</div>
-<div class="line">                values_view[i] += u0;</div>
+<div class="line">                k_rhs(i, 0) += u0;</div>
 <div class="line">            }</div>
 <div class="line">            <span class="keywordflow">if</span> (i == discretization_points - 1) {</div>
-<div class="line">                values_view[i] += u1;</div>
+<div class="line">                k_rhs(i, 0) += u1;</div>
 <div class="line">            }</div>
 <div class="line">        });</div>
 <div class="line">}</div>
@@ -167,17 +214,15 @@ $(function() {
 <div class="line">                       <span class="keyword">const</span> <a class="code" href="classgko_1_1matrix_1_1Dense.html">gko::matrix::Dense&lt;ValueType&gt;</a>* u,</div>
 <div class="line">                       Closure&amp;&amp; correct_u)</div>
 <div class="line">{</div>
-<div class="line">    Kokkos::View&lt;const ValueType*&gt; v_u(u-&gt;<a class="code" href="classgko_1_1matrix_1_1Dense.html#ab83c739c1b11abaecc3bfd89506f6c9c">get_const_values</a>(),</div>
-<div class="line">                                       discretization_points);</div>
+<div class="line">    <span class="keyword">auto</span> k_u = gko::ext::kokkos::map_data(u);</div>
 <div class="line">    <span class="keyword">auto</span> error = 0.0;</div>
 <div class="line">    Kokkos::parallel_reduce(</div>
 <div class="line">        <span class="stringliteral">&quot;calculate_error&quot;</span>, discretization_points,</div>
 <div class="line">        KOKKOS_LAMBDA(<span class="keywordtype">int</span> i, <span class="keywordtype">double</span>&amp; lsum) {</div>
 <div class="line">            <span class="keyword">const</span> <span class="keyword">auto</span> h = 1.0 / (discretization_points + 1);</div>
 <div class="line">            <span class="keyword">const</span> <span class="keyword">auto</span> xi = (i + 1) * h;</div>
-<div class="line">            lsum += Kokkos::Experimental::abs(</div>
-<div class="line">                (v_u(i) - correct_u(xi)) /</div>
-<div class="line">                Kokkos::Experimental::abs(correct_u(xi)));</div>
+<div class="line">            lsum += Kokkos::abs((k_u(i, 0) - correct_u(xi)) /</div>
+<div class="line">                                Kokkos::abs(correct_u(xi)));</div>
 <div class="line">        },</div>
 <div class="line">        error);</div>
 <div class="line">    <span class="keywordflow">return</span> error;</div>
@@ -186,7 +231,6 @@ $(function() {
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
 <div class="line">{</div>
-<div class="line">    Kokkos::ScopeGuard kokkos(argc, argv);</div>
 </div><!-- fragment --><p>Some shortcuts</p>
 <div class="fragment"><div class="line"><span class="keyword">using</span> ValueType = double;</div>
 <div class="line"><span class="keyword">using</span> RealValueType = <a class="code" href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">gko::remove_complex&lt;ValueType&gt;</a>;</div>
@@ -200,38 +244,16 @@ $(function() {
 <div class="fragment"><div class="line"><span class="keywordflow">if</span> (argc == 2 &amp;&amp; (std::string(argv[1]) == <span class="stringliteral">&quot;--help&quot;</span>)) {</div>
 <div class="line">    std::cerr &lt;&lt; <span class="stringliteral">&quot;Usage: &quot;</span> &lt;&lt; argv[0]</div>
 <div class="line">              &lt;&lt; <span class="stringliteral">&quot; [discretization_points] [kokkos-options]&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line">    std::exit(-1);</div>
+<div class="line">    Kokkos::ScopeGuard kokkos(argc, argv);  <span class="comment">// print Kokkos help</span></div>
+<div class="line">    std::exit(1);</div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> discretization_points =</div>
-<div class="line">    argc &gt;= 2 ? std::atoi(argv[1]) : 100u;</div>
+<div class="line">Kokkos::ScopeGuard kokkos(argc, argv);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">const</span> <span class="keyword">auto</span> discretization_points =</div>
+<div class="line">    static_cast&lt;gko::size_type&gt;(argc &gt;= 2 ? std::atoi(argv[1]) : 100u);</div>
 </div><!-- fragment --><p>chooses the executor that corresponds to the Kokkos DefaultExecutionSpace</p>
-<div class="fragment"><div class="line">    <span class="keyword">auto</span> exec = []() -&gt; std::shared_ptr&lt;gko::Executor&gt; {</div>
-<div class="line"><span class="preprocessor">#ifdef KOKKOS_ENABLE_SERIAL</span></div>
-<div class="line">        <span class="keywordflow">if</span> (std::is_same&lt;Kokkos::DefaultExecutionSpace,</div>
-<div class="line">                         Kokkos::Serial&gt;::value) {</div>
-<div class="line">            <span class="keywordflow">return</span> gko::ReferenceExecutor::create();</div>
-<div class="line">        }</div>
-<div class="line"><span class="preprocessor">#endif</span></div>
-<div class="line"><span class="preprocessor">#ifdef KOKKOS_ENABLE_OPENMP</span></div>
-<div class="line">        <span class="keywordflow">if</span> (std::is_same&lt;Kokkos::DefaultExecutionSpace,</div>
-<div class="line">                         Kokkos::OpenMP&gt;::value) {</div>
-<div class="line">            <span class="keywordflow">return</span> <a class="code" href="classgko_1_1OmpExecutor.html#a8930142a1913bcbcac4fb6c917f930d9">gko::OmpExecutor::create</a>();</div>
-<div class="line">        }</div>
-<div class="line"><span class="preprocessor">#endif</span></div>
-<div class="line"><span class="preprocessor">#ifdef KOKKOS_ENABLE_CUDA</span></div>
-<div class="line">        <span class="keywordflow">if</span> (std::is_same&lt;Kokkos::DefaultExecutionSpace, Kokkos::Cuda&gt;::value) {</div>
-<div class="line">            <span class="keywordflow">return</span> <a class="code" href="classgko_1_1CudaExecutor.html#a6c423656c7c0eb53810cb77bb4a66d15">gko::CudaExecutor::create</a>(0,</div>
-<div class="line">                                             gko::ReferenceExecutor::create());</div>
-<div class="line">        }</div>
-<div class="line"><span class="preprocessor">#endif</span></div>
-<div class="line"><span class="preprocessor">#ifdef KOKKOS_ENABLE_HIP</span></div>
-<div class="line">        <span class="keywordflow">if</span> (std::is_same&lt;Kokkos::DefaultExecutionSpace, Kokkos::HIP&gt;::value) {</div>
-<div class="line">            <span class="keywordflow">return</span> <a class="code" href="classgko_1_1HipExecutor.html#aa0701fe1303e03a8331da7e95008100d">gko::HipExecutor::create</a>(0,</div>
-<div class="line">                                            gko::ReferenceExecutor::create());</div>
-<div class="line">        }</div>
-<div class="line"><span class="preprocessor">#endif</span></div>
-<div class="line"><span class="preprocessor">    }();</span></div>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> exec = gko::ext::kokkos::create_default_executor();</div>
 </div><!-- fragment --><p>problem:</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> correct_u = [] KOKKOS_FUNCTION(ValueType x) { <span class="keywordflow">return</span> x * x * x; };</div>
 <div class="line"><span class="keyword">auto</span> f = [] KOKKOS_FUNCTION(ValueType x) { <span class="keywordflow">return</span> ValueType{6} * x; };</div>
@@ -241,9 +263,7 @@ $(function() {
 <div class="fragment"><div class="line"><span class="keyword">auto</span> <a class="code" href="namespacegko_1_1solver.html#a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e">rhs</a> = vec::create(exec, <a class="code" href="structgko_1_1dim.html">gko::dim&lt;2&gt;</a>(discretization_points, 1));</div>
 <div class="line">generate_rhs(f, u0, u1, <a class="code" href="namespacegko_1_1solver.html#a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e">rhs</a>.get());</div>
 <div class="line"><span class="keyword">auto</span> u = vec::create(exec, <a class="code" href="structgko_1_1dim.html">gko::dim&lt;2&gt;</a>(discretization_points, 1));</div>
-<div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; u-&gt;get_size()[0]; ++i) {</div>
-<div class="line">    u-&gt;get_values()[i] = 0.0;</div>
-<div class="line">}</div>
+<div class="line">u-&gt;fill(0.0);</div>
 </div><!-- fragment --><p>initialize the stencil matrix</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> A = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">share</a>(mtx::create(</div>
 <div class="line">    exec, <a class="code" href="structgko_1_1dim.html">gko::dim&lt;2&gt;</a>{discretization_points, discretization_points}));</div>
@@ -273,46 +293,65 @@ $(function() {
 <div class="line">Solve complete.</div>
 <div class="line">The average relative error is 1.05488e-11</div>
 </div><!-- fragment --><p>The actual error depends on the used hardware. <a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
-<div class="fragment"><div class="line"><span class="comment">/*******************************&lt;GINKGO LICENSE&gt;******************************</span></div>
-<div class="line"><span class="comment">Copyright (c) 2017-2023, the Ginkgo authors</span></div>
-<div class="line"><span class="comment">All rights reserved.</span></div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment">Redistribution and use in source and binary forms, with or without</span></div>
-<div class="line"><span class="comment">modification, are permitted provided that the following conditions</span></div>
-<div class="line"><span class="comment">are met:</span></div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment">1. Redistributions of source code must retain the above copyright</span></div>
-<div class="line"><span class="comment">notice, this list of conditions and the following disclaimer.</span></div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment">2. Redistributions in binary form must reproduce the above copyright</span></div>
-<div class="line"><span class="comment">notice, this list of conditions and the following disclaimer in the</span></div>
-<div class="line"><span class="comment">documentation and/or other materials provided with the distribution.</span></div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment">3. Neither the name of the copyright holder nor the names of its</span></div>
-<div class="line"><span class="comment">contributors may be used to endorse or promote products derived from</span></div>
-<div class="line"><span class="comment">this software without specific prior written permission.</span></div>
-<div class="line"><span class="comment"></span> </div>
-<div class="line"><span class="comment">THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS</span></div>
-<div class="line"><span class="comment">IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED</span></div>
-<div class="line"><span class="comment">TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A</span></div>
-<div class="line"><span class="comment">PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT</span></div>
-<div class="line"><span class="comment">HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,</span></div>
-<div class="line"><span class="comment">SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT</span></div>
-<div class="line"><span class="comment">LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,</span></div>
-<div class="line"><span class="comment">DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY</span></div>
-<div class="line"><span class="comment">THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT</span></div>
-<div class="line"><span class="comment">(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span></div>
-<div class="line"><span class="comment">OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span></div>
-<div class="line"><span class="comment">******************************&lt;GINKGO LICENSE&gt;*******************************/</span></div>
-<div class="line"> </div>
+<div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;map&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"> </div>
 <div class="line"> </div>
-<div class="line"><span class="preprocessor">#include &lt;omp.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;Kokkos_Core.hpp&gt;</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;ginkgo/extensions/kokkos.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;ginkgo/ginkgo.hpp&gt;</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">namespace </span>gko::ext::kokkos::detail {</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType, <span class="keyword">typename</span> IndexType, <span class="keyword">typename</span> MemorySpace&gt;</div>
+<div class="line"><span class="keyword">struct </span>mapper&lt;device_matrix_data&lt;ValueType, IndexType&gt;, MemorySpace&gt; {</div>
+<div class="line">    <span class="keyword">using</span> index_mapper = mapper&lt;array&lt;IndexType&gt;, MemorySpace&gt;;</div>
+<div class="line">    <span class="keyword">using</span> value_mapper = mapper&lt;array&lt;ValueType&gt;, MemorySpace&gt;;</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType_c, <span class="keyword">typename</span> IndexType_c&gt;</div>
+<div class="line">    <span class="keyword">struct </span>type {</div>
+<div class="line">        <span class="keyword">using</span> index_array = <span class="keyword">typename</span> index_mapper::template type&lt;IndexType_c&gt;;</div>
+<div class="line">        <span class="keyword">using</span> value_array = <span class="keyword">typename</span> value_mapper::template type&lt;ValueType_c&gt;;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keyword">static</span> type map(<a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> size, IndexType_c* row_idxs,</div>
+<div class="line">                        IndexType_c* col_idxs, ValueType_c* values)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordflow">return</span> {index_mapper::map(row_idxs, size),</div>
+<div class="line">                    index_mapper::map(col_idxs, size),</div>
+<div class="line">                    value_mapper::map(values, size)};</div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        index_array row_idxs;</div>
+<div class="line">        index_array col_idxs;</div>
+<div class="line">        value_array values;</div>
+<div class="line">    };</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">static</span> type&lt;ValueType, IndexType&gt; map(</div>
+<div class="line">        device_matrix_data&lt;ValueType, IndexType&gt;&amp; md)</div>
+<div class="line">    {</div>
+<div class="line">        assert_compatibility&lt;MemorySpace&gt;(md);</div>
+<div class="line">        <span class="keywordflow">return</span> type&lt;ValueType, IndexType&gt;::map(</div>
+<div class="line">            md.get_num_stored_elements(), md.get_row_idxs(), md.get_col_idxs(),</div>
+<div class="line">            md.get_values());</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">static</span> type&lt;const ValueType, const IndexType&gt; map(</div>
+<div class="line">        <span class="keyword">const</span> device_matrix_data&lt;ValueType, IndexType&gt;&amp; md)</div>
+<div class="line">    {</div>
+<div class="line">        assert_compatibility&lt;MemorySpace&gt;(md);</div>
+<div class="line">        <span class="keywordflow">return</span> type&lt;const ValueType, const IndexType&gt;::map(</div>
+<div class="line">            md.get_num_stored_elements(), md.get_const_row_idxs(),</div>
+<div class="line">            md.get_const_col_idxs(), md.get_const_values());</div>
+<div class="line">    }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">}  <span class="comment">// namespace gko::ext::kokkos::detail</span></div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType, <span class="keyword">typename</span> IndexType&gt;</div>
@@ -324,12 +363,11 @@ $(function() {
 <div class="line">    <a class="code" href="classgko_1_1device__matrix__data.html">gko::device_matrix_data&lt;ValueType, IndexType&gt;</a> md(exec, matrix-&gt;<a class="code" href="classgko_1_1LinOp.html#a31b3c003388eb0b95393154f68c2b98d">get_size</a>(),</div>
 <div class="line">                                                     discretization_points * 3);</div>
 <div class="line"> </div>
-<div class="line">    Kokkos::View&lt;IndexType*&gt; v_row_idxs(md.get_row_idxs(), md.get_num_elems());</div>
-<div class="line">    Kokkos::View&lt;IndexType*&gt; v_col_idxs(md.get_col_idxs(), md.get_num_elems());</div>
-<div class="line">    Kokkos::View&lt;ValueType*&gt; v_values(md.get_values(), md.get_num_elems());</div>
+<div class="line">    <span class="keyword">auto</span> k_md = gko::ext::kokkos::map_data(md);</div>
 <div class="line"> </div>
 <div class="line">    Kokkos::parallel_for(</div>
-<div class="line">        <span class="stringliteral">&quot;generate_stencil_matrix&quot;</span>, md.get_num_elems(), KOKKOS_LAMBDA(<span class="keywordtype">int</span> i) {</div>
+<div class="line">        <span class="stringliteral">&quot;generate_stencil_matrix&quot;</span>, md.get_num_stored_elements(),</div>
+<div class="line">        KOKKOS_LAMBDA(<span class="keywordtype">int</span> i) {</div>
 <div class="line">            <span class="keyword">const</span> ValueType coefs[] = {-1, 2, -1};</div>
 <div class="line">            <span class="keyword">auto</span> ofs = static_cast&lt;IndexType&gt;((i % 3) - 1);</div>
 <div class="line">            <span class="keyword">auto</span> row = static_cast&lt;IndexType&gt;(i / 3);</div>
@@ -338,12 +376,12 @@ $(function() {
 <div class="line">            <span class="keyword">auto</span> mask =</div>
 <div class="line">                static_cast&lt;IndexType&gt;(0 &lt;= col &amp;&amp; col &lt; discretization_points);</div>
 <div class="line"> </div>
-<div class="line">            v_row_idxs[i] = mask * row;</div>
-<div class="line">            v_col_idxs[i] = mask * col;</div>
-<div class="line">            v_values[i] = mask * coefs[ofs + 1];</div>
+<div class="line">            k_md.row_idxs[i] = mask * row;</div>
+<div class="line">            k_md.col_idxs[i] = mask * col;</div>
+<div class="line">            k_md.values[i] = mask * coefs[ofs + 1];</div>
 <div class="line">        });</div>
 <div class="line"> </div>
-<div class="line">    md.<a class="code" href="classgko_1_1device__matrix__data.html#a8b58afc780989cfcba739829572fe7ab">sum_duplicates</a>();</div>
+<div class="line">    md.sum_duplicates();</div>
 <div class="line"> </div>
 <div class="line">    matrix-&gt;<a class="code" href="classgko_1_1matrix_1_1Csr.html#ac4db41146ed3c3a8653b03d6b2c6c675">read</a>(std::move(md));</div>
 <div class="line">}</div>
@@ -354,18 +392,17 @@ $(function() {
 <div class="line">                  <a class="code" href="classgko_1_1matrix_1_1Dense.html">gko::matrix::Dense&lt;ValueType&gt;</a>* rhs)</div>
 <div class="line">{</div>
 <div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> discretization_points = <a class="code" href="namespacegko_1_1solver.html#a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e">rhs</a>-&gt;get_size()[0];</div>
-<div class="line">    <span class="keyword">auto</span> values = <a class="code" href="namespacegko_1_1solver.html#a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e">rhs</a>-&gt;get_values();</div>
-<div class="line">    Kokkos::View&lt;ValueType*&gt; values_view(values, discretization_points);</div>
+<div class="line">    <span class="keyword">auto</span> k_rhs = gko::ext::kokkos::map_data(rhs);</div>
 <div class="line">    Kokkos::parallel_for(</div>
 <div class="line">        <span class="stringliteral">&quot;generate_rhs&quot;</span>, discretization_points, KOKKOS_LAMBDA(<span class="keywordtype">int</span> i) {</div>
 <div class="line">            <span class="keyword">const</span> ValueType h = 1.0 / (discretization_points + 1);</div>
 <div class="line">            <span class="keyword">const</span> ValueType xi = ValueType(i + 1) * h;</div>
-<div class="line">            values_view[i] = -f(xi) * h * h;</div>
+<div class="line">            k_rhs(i, 0) = -f(xi) * h * h;</div>
 <div class="line">            <span class="keywordflow">if</span> (i == 0) {</div>
-<div class="line">                values_view[i] += u0;</div>
+<div class="line">                k_rhs(i, 0) += u0;</div>
 <div class="line">            }</div>
 <div class="line">            <span class="keywordflow">if</span> (i == discretization_points - 1) {</div>
-<div class="line">                values_view[i] += u1;</div>
+<div class="line">                k_rhs(i, 0) += u1;</div>
 <div class="line">            }</div>
 <div class="line">        });</div>
 <div class="line">}</div>
@@ -376,17 +413,15 @@ $(function() {
 <div class="line">                       <span class="keyword">const</span> <a class="code" href="classgko_1_1matrix_1_1Dense.html">gko::matrix::Dense&lt;ValueType&gt;</a>* u,</div>
 <div class="line">                       Closure&amp;&amp; correct_u)</div>
 <div class="line">{</div>
-<div class="line">    Kokkos::View&lt;const ValueType*&gt; v_u(u-&gt;<a class="code" href="classgko_1_1matrix_1_1Dense.html#ab83c739c1b11abaecc3bfd89506f6c9c">get_const_values</a>(),</div>
-<div class="line">                                       discretization_points);</div>
+<div class="line">    <span class="keyword">auto</span> k_u = gko::ext::kokkos::map_data(u);</div>
 <div class="line">    <span class="keyword">auto</span> error = 0.0;</div>
 <div class="line">    Kokkos::parallel_reduce(</div>
 <div class="line">        <span class="stringliteral">&quot;calculate_error&quot;</span>, discretization_points,</div>
 <div class="line">        KOKKOS_LAMBDA(<span class="keywordtype">int</span> i, <span class="keywordtype">double</span>&amp; lsum) {</div>
 <div class="line">            <span class="keyword">const</span> <span class="keyword">auto</span> h = 1.0 / (discretization_points + 1);</div>
 <div class="line">            <span class="keyword">const</span> <span class="keyword">auto</span> xi = (i + 1) * h;</div>
-<div class="line">            lsum += Kokkos::Experimental::abs(</div>
-<div class="line">                (v_u(i) - correct_u(xi)) /</div>
-<div class="line">                Kokkos::Experimental::abs(correct_u(xi)));</div>
+<div class="line">            lsum += Kokkos::abs((k_u(i, 0) - correct_u(xi)) /</div>
+<div class="line">                                Kokkos::abs(correct_u(xi)));</div>
 <div class="line">        },</div>
 <div class="line">        error);</div>
 <div class="line">    <span class="keywordflow">return</span> error;</div>
@@ -395,8 +430,6 @@ $(function() {
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[])</div>
 <div class="line">{</div>
-<div class="line">    Kokkos::ScopeGuard kokkos(argc, argv);</div>
-<div class="line"> </div>
 <div class="line">    <span class="keyword">using</span> ValueType = double;</div>
 <div class="line">    <span class="keyword">using</span> RealValueType = <a class="code" href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">gko::remove_complex&lt;ValueType&gt;</a>;</div>
 <div class="line">    <span class="keyword">using</span> IndexType = int;</div>
@@ -409,38 +442,16 @@ $(function() {
 <div class="line">    <span class="keywordflow">if</span> (argc == 2 &amp;&amp; (std::string(argv[1]) == <span class="stringliteral">&quot;--help&quot;</span>)) {</div>
 <div class="line">        std::cerr &lt;&lt; <span class="stringliteral">&quot;Usage: &quot;</span> &lt;&lt; argv[0]</div>
 <div class="line">                  &lt;&lt; <span class="stringliteral">&quot; [discretization_points] [kokkos-options]&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line">        std::exit(-1);</div>
+<div class="line">        Kokkos::ScopeGuard kokkos(argc, argv);  <span class="comment">// print Kokkos help</span></div>
+<div class="line">        std::exit(1);</div>
 <div class="line">    }</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> discretization_points =</div>
-<div class="line">        argc &gt;= 2 ? std::atoi(argv[1]) : 100u;</div>
+<div class="line">    Kokkos::ScopeGuard kokkos(argc, argv);</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">auto</span> exec = []() -&gt; std::shared_ptr&lt;gko::Executor&gt; {</div>
-<div class="line"><span class="preprocessor">#ifdef KOKKOS_ENABLE_SERIAL</span></div>
-<div class="line">        <span class="keywordflow">if</span> (std::is_same&lt;Kokkos::DefaultExecutionSpace,</div>
-<div class="line">                         Kokkos::Serial&gt;::value) {</div>
-<div class="line">            <span class="keywordflow">return</span> gko::ReferenceExecutor::create();</div>
-<div class="line">        }</div>
-<div class="line"><span class="preprocessor">#endif</span></div>
-<div class="line"><span class="preprocessor">#ifdef KOKKOS_ENABLE_OPENMP</span></div>
-<div class="line">        <span class="keywordflow">if</span> (std::is_same&lt;Kokkos::DefaultExecutionSpace,</div>
-<div class="line">                         Kokkos::OpenMP&gt;::value) {</div>
-<div class="line">            <span class="keywordflow">return</span> <a class="code" href="classgko_1_1OmpExecutor.html#a8930142a1913bcbcac4fb6c917f930d9">gko::OmpExecutor::create</a>();</div>
-<div class="line">        }</div>
-<div class="line"><span class="preprocessor">#endif</span></div>
-<div class="line"><span class="preprocessor">#ifdef KOKKOS_ENABLE_CUDA</span></div>
-<div class="line">        <span class="keywordflow">if</span> (std::is_same&lt;Kokkos::DefaultExecutionSpace, Kokkos::Cuda&gt;::value) {</div>
-<div class="line">            <span class="keywordflow">return</span> <a class="code" href="classgko_1_1CudaExecutor.html#a6c423656c7c0eb53810cb77bb4a66d15">gko::CudaExecutor::create</a>(0,</div>
-<div class="line">                                             gko::ReferenceExecutor::create());</div>
-<div class="line">        }</div>
-<div class="line"><span class="preprocessor">#endif</span></div>
-<div class="line"><span class="preprocessor">#ifdef KOKKOS_ENABLE_HIP</span></div>
-<div class="line">        <span class="keywordflow">if</span> (std::is_same&lt;Kokkos::DefaultExecutionSpace, Kokkos::HIP&gt;::value) {</div>
-<div class="line">            <span class="keywordflow">return</span> <a class="code" href="classgko_1_1HipExecutor.html#aa0701fe1303e03a8331da7e95008100d">gko::HipExecutor::create</a>(0,</div>
-<div class="line">                                            gko::ReferenceExecutor::create());</div>
-<div class="line">        }</div>
-<div class="line"><span class="preprocessor">#endif</span></div>
-<div class="line">    }();</div>
+<div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> discretization_points =</div>
+<div class="line">        static_cast&lt;gko::size_type&gt;(argc &gt;= 2 ? std::atoi(argv[1]) : 100u);</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">auto</span> exec = gko::ext::kokkos::create_default_executor();</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">auto</span> correct_u = [] KOKKOS_FUNCTION(ValueType x) { <span class="keywordflow">return</span> x * x * x; };</div>
 <div class="line">    <span class="keyword">auto</span> f = [] KOKKOS_FUNCTION(ValueType x) { <span class="keywordflow">return</span> ValueType{6} * x; };</div>
@@ -450,9 +461,7 @@ $(function() {
 <div class="line">    <span class="keyword">auto</span> <a class="code" href="namespacegko_1_1solver.html#a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e">rhs</a> = vec::create(exec, <a class="code" href="structgko_1_1dim.html">gko::dim&lt;2&gt;</a>(discretization_points, 1));</div>
 <div class="line">    generate_rhs(f, u0, u1, <a class="code" href="namespacegko_1_1solver.html#a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e">rhs</a>.get());</div>
 <div class="line">    <span class="keyword">auto</span> u = vec::create(exec, <a class="code" href="structgko_1_1dim.html">gko::dim&lt;2&gt;</a>(discretization_points, 1));</div>
-<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; u-&gt;get_size()[0]; ++i) {</div>
-<div class="line">        u-&gt;get_values()[i] = 0.0;</div>
-<div class="line">    }</div>
+<div class="line">    u-&gt;fill(0.0);</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">auto</span> A = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">share</a>(mtx::create(</div>
 <div class="line">        exec, <a class="code" href="structgko_1_1dim.html">gko::dim&lt;2&gt;</a>{discretization_points, discretization_points}));</div>
@@ -477,23 +486,20 @@ $(function() {
 <div class="line">}</div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->
-<div class="ttc" id="aclassgko_1_1matrix_1_1Csr_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Csr.html">gko::matrix::Csr</a></div><div class="ttdoc">CSR is a matrix format which stores only the nonzero coefficients by compressing each row of the matr...</div><div class="ttdef"><b>Definition:</b> matrix.hpp:54</div></div>
-<div class="ttc" id="aclassgko_1_1matrix_1_1Dense_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Dense.html">gko::matrix::Dense</a></div><div class="ttdoc">Dense is a matrix format which explicitly stores all values of the matrix.</div><div class="ttdef"><b>Definition:</b> dense_cache.hpp:48</div></div>
-<div class="ttc" id="aclassgko_1_1device__matrix__data_html_a8b58afc780989cfcba739829572fe7ab"><div class="ttname"><a href="classgko_1_1device__matrix__data.html#a8b58afc780989cfcba739829572fe7ab">gko::device_matrix_data::sum_duplicates</a></div><div class="ttdeci">void sum_duplicates()</div><div class="ttdoc">Sums up all duplicate entries pointing to the same non-zero location.</div></div>
-<div class="ttc" id="aclassgko_1_1HipExecutor_html_aa0701fe1303e03a8331da7e95008100d"><div class="ttname"><a href="classgko_1_1HipExecutor.html#aa0701fe1303e03a8331da7e95008100d">gko::HipExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; HipExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, bool device_reset, allocation_mode alloc_mode=default_hip_alloc_mode, CUstream_st *stream=nullptr)</div><div class="ttdoc">Creates a new HipExecutor.</div></div>
-<div class="ttc" id="aclassgko_1_1preconditioner_1_1Jacobi_html"><div class="ttname"><a href="classgko_1_1preconditioner_1_1Jacobi.html">gko::preconditioner::Jacobi</a></div><div class="ttdoc">A block-Jacobi preconditioner is a block-diagonal linear operator, obtained by inverting the diagonal...</div><div class="ttdef"><b>Definition:</b> jacobi.hpp:213</div></div>
-<div class="ttc" id="aclassgko_1_1stop_1_1ResidualNorm_html"><div class="ttname"><a href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm</a></div><div class="ttdoc">The ResidualNorm class is a stopping criterion which stops the iteration process when the actual resi...</div><div class="ttdef"><b>Definition:</b> residual_norm.hpp:138</div></div>
+<div class="ttc" id="aclassgko_1_1matrix_1_1Csr_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Csr.html">gko::matrix::Csr</a></div><div class="ttdoc">CSR is a matrix format which stores only the nonzero coefficients by compressing each row of the matr...</div><div class="ttdef"><b>Definition:</b> matrix.hpp:27</div></div>
+<div class="ttc" id="aclassgko_1_1matrix_1_1Dense_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Dense.html">gko::matrix::Dense</a></div><div class="ttdoc">Dense is a matrix format which explicitly stores all values of the matrix.</div><div class="ttdef"><b>Definition:</b> dense_cache.hpp:20</div></div>
+<div class="ttc" id="anamespacegko_html_a6e5c95df0ae4e47aab2f604a22d98ee7"><div class="ttname"><a href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">gko::size_type</a></div><div class="ttdeci">std::size_t size_type</div><div class="ttdoc">Integral type used for allocation quantities.</div><div class="ttdef"><b>Definition:</b> types.hpp:108</div></div>
+<div class="ttc" id="aclassgko_1_1preconditioner_1_1Jacobi_html"><div class="ttname"><a href="classgko_1_1preconditioner_1_1Jacobi.html">gko::preconditioner::Jacobi</a></div><div class="ttdoc">A block-Jacobi preconditioner is a block-diagonal linear operator, obtained by inverting the diagonal...</div><div class="ttdef"><b>Definition:</b> jacobi.hpp:187</div></div>
+<div class="ttc" id="aclassgko_1_1array_html"><div class="ttname"><a href="classgko_1_1array.html">gko::array</a></div><div class="ttdoc">An array is a container which encapsulates fixed-sized arrays, stored on the Executor tied to the arr...</div><div class="ttdef"><b>Definition:</b> array.hpp:27</div></div>
+<div class="ttc" id="aclassgko_1_1stop_1_1ResidualNorm_html"><div class="ttname"><a href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm</a></div><div class="ttdoc">The ResidualNorm class is a stopping criterion which stops the iteration process when the actual resi...</div><div class="ttdef"><b>Definition:</b> residual_norm.hpp:110</div></div>
 <div class="ttc" id="astructgko_1_1dim_html"><div class="ttname"><a href="structgko_1_1dim.html">gko::dim&lt; 2 &gt;</a></div></div>
-<div class="ttc" id="aclassgko_1_1solver_1_1Cg_html"><div class="ttname"><a href="classgko_1_1solver_1_1Cg.html">gko::solver::Cg</a></div><div class="ttdoc">CG or the conjugate gradient method is an iterative type Krylov subspace method which is suitable for...</div><div class="ttdef"><b>Definition:</b> cg.hpp:74</div></div>
-<div class="ttc" id="anamespacegko_html_a3ce296f73db0ff398bdea6009a3a5c58"><div class="ttname"><a href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a></div><div class="ttdeci">detail::shared_type&lt; OwningPointer &gt; share(OwningPointer &amp;&amp;p)</div><div class="ttdoc">Marks the object pointed to by p as shared.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:254</div></div>
-<div class="ttc" id="aclassgko_1_1CudaExecutor_html_a6c423656c7c0eb53810cb77bb4a66d15"><div class="ttname"><a href="classgko_1_1CudaExecutor.html#a6c423656c7c0eb53810cb77bb4a66d15">gko::CudaExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; CudaExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, bool device_reset, allocation_mode alloc_mode=default_cuda_alloc_mode, CUstream_st *stream=nullptr)</div><div class="ttdoc">Creates a new CudaExecutor.</div></div>
+<div class="ttc" id="aclassgko_1_1solver_1_1Cg_html"><div class="ttname"><a href="classgko_1_1solver_1_1Cg.html">gko::solver::Cg</a></div><div class="ttdoc">CG or the conjugate gradient method is an iterative type Krylov subspace method which is suitable for...</div><div class="ttdef"><b>Definition:</b> cg.hpp:49</div></div>
+<div class="ttc" id="anamespacegko_html_a3ce296f73db0ff398bdea6009a3a5c58"><div class="ttname"><a href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a></div><div class="ttdeci">detail::shared_type&lt; OwningPointer &gt; share(OwningPointer &amp;&amp;p)</div><div class="ttdoc">Marks the object pointed to by p as shared.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:226</div></div>
 <div class="ttc" id="anamespacegko_1_1solver_html_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e"><div class="ttname"><a href="namespacegko_1_1solver.html#a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e">gko::solver::initial_guess_mode::rhs</a></div><div class="ttdoc">the input is right hand side</div></div>
-<div class="ttc" id="aclassgko_1_1OmpExecutor_html_a8930142a1913bcbcac4fb6c917f930d9"><div class="ttname"><a href="classgko_1_1OmpExecutor.html#a8930142a1913bcbcac4fb6c917f930d9">gko::OmpExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; OmpExecutor &gt; create(std::shared_ptr&lt; CpuAllocatorBase &gt; alloc=std::make_shared&lt; CpuAllocator &gt;())</div><div class="ttdoc">Creates a new OmpExecutor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1373</div></div>
-<div class="ttc" id="aclassgko_1_1matrix_1_1Dense_html_ab83c739c1b11abaecc3bfd89506f6c9c"><div class="ttname"><a href="classgko_1_1matrix_1_1Dense.html#ab83c739c1b11abaecc3bfd89506f6c9c">gko::matrix::Dense::get_const_values</a></div><div class="ttdeci">const value_type * get_const_values() const noexcept</div><div class="ttdoc">Returns a pointer to the array of values of the matrix.</div><div class="ttdef"><b>Definition:</b> dense.hpp:865</div></div>
-<div class="ttc" id="aclassgko_1_1PolymorphicObject_html_ab40586bff071b7f11c2cf6b5cbf598eb"><div class="ttname"><a href="classgko_1_1PolymorphicObject.html#ab40586bff071b7f11c2cf6b5cbf598eb">gko::PolymorphicObject::get_executor</a></div><div class="ttdeci">std::shared_ptr&lt; const Executor &gt; get_executor() const noexcept</div><div class="ttdoc">Returns the Executor of the object.</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:263</div></div>
-<div class="ttc" id="aclassgko_1_1LinOp_html_a31b3c003388eb0b95393154f68c2b98d"><div class="ttname"><a href="classgko_1_1LinOp.html#a31b3c003388eb0b95393154f68c2b98d">gko::LinOp::get_size</a></div><div class="ttdeci">const dim&lt; 2 &gt; &amp; get_size() const noexcept</div><div class="ttdoc">Returns the size of the operator.</div><div class="ttdef"><b>Definition:</b> lin_op.hpp:239</div></div>
-<div class="ttc" id="anamespacegko_html_afd46d554050c4ae90e84ea4fcd9a41f3"><div class="ttname"><a href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">gko::remove_complex</a></div><div class="ttdeci">typename detail::remove_complex_s&lt; T &gt;::type remove_complex</div><div class="ttdoc">Obtain the type which removed the complex of complex/scalar type or the template parameter of class b...</div><div class="ttdef"><b>Definition:</b> math.hpp:354</div></div>
-<div class="ttc" id="aclassgko_1_1device__matrix__data_html"><div class="ttname"><a href="classgko_1_1device__matrix__data.html">gko::device_matrix_data</a></div><div class="ttdoc">This type is a device-side equivalent to matrix_data.</div><div class="ttdef"><b>Definition:</b> device_matrix_data.hpp:63</div></div>
+<div class="ttc" id="aclassgko_1_1PolymorphicObject_html_ab40586bff071b7f11c2cf6b5cbf598eb"><div class="ttname"><a href="classgko_1_1PolymorphicObject.html#ab40586bff071b7f11c2cf6b5cbf598eb">gko::PolymorphicObject::get_executor</a></div><div class="ttdeci">std::shared_ptr&lt; const Executor &gt; get_executor() const noexcept</div><div class="ttdoc">Returns the Executor of the object.</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:235</div></div>
+<div class="ttc" id="aclassgko_1_1LinOp_html_a31b3c003388eb0b95393154f68c2b98d"><div class="ttname"><a href="classgko_1_1LinOp.html#a31b3c003388eb0b95393154f68c2b98d">gko::LinOp::get_size</a></div><div class="ttdeci">const dim&lt; 2 &gt; &amp; get_size() const noexcept</div><div class="ttdoc">Returns the size of the operator.</div><div class="ttdef"><b>Definition:</b> lin_op.hpp:211</div></div>
+<div class="ttc" id="anamespacegko_html_afd46d554050c4ae90e84ea4fcd9a41f3"><div class="ttname"><a href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">gko::remove_complex</a></div><div class="ttdeci">typename detail::remove_complex_s&lt; T &gt;::type remove_complex</div><div class="ttdoc">Obtain the type which removed the complex of complex/scalar type or the template parameter of class b...</div><div class="ttdef"><b>Definition:</b> math.hpp:326</div></div>
+<div class="ttc" id="aclassgko_1_1device__matrix__data_html"><div class="ttname"><a href="classgko_1_1device__matrix__data.html">gko::device_matrix_data</a></div><div class="ttdoc">This type is a device-side equivalent to matrix_data.</div><div class="ttdef"><b>Definition:</b> device_matrix_data.hpp:36</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Csr_html_ac4db41146ed3c3a8653b03d6b2c6c675"><div class="ttname"><a href="classgko_1_1matrix_1_1Csr.html#ac4db41146ed3c3a8653b03d6b2c6c675">gko::matrix::Csr::read</a></div><div class="ttdeci">void read(const mat_data &amp;data) override</div><div class="ttdoc">Reads a matrix from a matrix_data structure.</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

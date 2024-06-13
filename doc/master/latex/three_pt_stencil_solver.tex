@@ -30,50 +30,22 @@ The intention of the example is to show how Ginkgo can be integrated into existi
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{/ *****************************<DESCRIPTION>***********************************}
-\DoxyCodeLine{This example solves a 1D Poisson equation:}
+\DoxyCodeLine{The \textcolor{keyword}{function} `f` is set to `f(x) = 6x` (making the solution `u(x) = x\string^3`), but}
+\DoxyCodeLine{that can be changed in the `main` \textcolor{keyword}{function}.}
 \DoxyCodeLine{}
-\DoxyCodeLine{    u : [0, 1] -\/> R}
-\DoxyCodeLine{    u\textcolor{stringliteral}{''} = f}
-\DoxyCodeLine{    u(0) = u0}
-\DoxyCodeLine{    u(1) = u1}
+\DoxyCodeLine{The intention of the example is to show how Ginkgo can be integrated into}
+\DoxyCodeLine{existing software -\/ the `generate\_stencil\_matrix`, `generate\_rhs`,}
+\DoxyCodeLine{`print\_solution`, `compute\_error` and `main` \textcolor{keyword}{function} \textcolor{keywordflow}{do} not reference Ginkgo at}
+\DoxyCodeLine{all (i.e. they could have been there before the application developer decided to}
+\DoxyCodeLine{use Ginkgo, and the only part where Ginkgo is introduced is inside the}
+\DoxyCodeLine{`solve\_system` \textcolor{keyword}{function}.}
+\DoxyCodeLine{*****************************<DESCRIPTION>********************************** /}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keyword}{using} a finite difference method on an equidistant grid with `K` discretization}
-\DoxyCodeLine{points (`K` can be controlled with a command line parameter). The discretization}
-\DoxyCodeLine{is done via the second order Taylor polynomial:}
-\DoxyCodeLine{}
-\DoxyCodeLine{u(x + h) = u(x) -\/ u\textcolor{stringliteral}{'(x)h + 1/2 u'}\textcolor{stringliteral}{'(x)h\string^2 + O(h\string^3)}}
-\DoxyCodeLine{\textcolor{stringliteral}{u(x -\/ h) = u(x) + u'}(x)h + 1/2 u\textcolor{stringliteral}{''}(x)h\string^2 + O(h\string^3)  / +}
-\DoxyCodeLine{-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}
-\DoxyCodeLine{-\/u(x -\/ h) + 2u(x) + -\/u(x + h) = -\/f(x)h\string^2 + O(h\string^3)}
-\DoxyCodeLine{}
-\DoxyCodeLine{For an equidistant grid with K \textcolor{stringliteral}{"inner"} discretization points x1, ..., xk, and}
-\DoxyCodeLine{step size h = 1 / (K + 1), the formula produces a system of linear equations}
-\DoxyCodeLine{}
-\DoxyCodeLine{           2u\_1 -\/ u\_2     = -\/f\_1 h\string^2 + u0}
-\DoxyCodeLine{-\/u\_(k-\/1) + 2u\_k -\/ u\_(k+1) = -\/f\_k h\string^2,       k = 2, ..., K -\/ 1}
-\DoxyCodeLine{-\/u\_(K-\/1) + 2u\_K           = -\/f\_K h\string^2 + u1}
-\DoxyCodeLine{}
-\DoxyCodeLine{}
-\DoxyCodeLine{which is then solved \textcolor{keyword}{using} Ginkgo\textcolor{stringliteral}{'s implementation of the CG method}}
-\DoxyCodeLine{\textcolor{stringliteral}{preconditioned with block-\/Jacobi. It is also possible to specify on which}}
-\DoxyCodeLine{\textcolor{stringliteral}{executor Ginkgo will solve the system via the command line.}}
-\DoxyCodeLine{\textcolor{stringliteral}{The function `f` is set to `f(x) = 6x` (making the solution `u(x) = x\string^3`), but}}
-\DoxyCodeLine{\textcolor{stringliteral}{that can be changed in the `main` function.}}
-\DoxyCodeLine{\textcolor{stringliteral}{}}
-\DoxyCodeLine{\textcolor{stringliteral}{The intention of the example is to show how Ginkgo can be integrated into}}
-\DoxyCodeLine{\textcolor{stringliteral}{existing software -\/ the `generate\_stencil\_matrix`, `generate\_rhs`,}}
-\DoxyCodeLine{\textcolor{stringliteral}{`print\_solution`, `compute\_error` and `main` function do not reference Ginkgo at}}
-\DoxyCodeLine{\textcolor{stringliteral}{all (i.e. they could have been there before the application developer decided to}}
-\DoxyCodeLine{\textcolor{stringliteral}{use Ginkgo, and the only part where Ginkgo is introduced is inside the}}
-\DoxyCodeLine{\textcolor{stringliteral}{`solve\_system` function.}}
-\DoxyCodeLine{\textcolor{stringliteral}{*****************************<DESCRIPTION>********************************** /}}
-\DoxyCodeLine{\textcolor{stringliteral}{}}
-\DoxyCodeLine{\textcolor{stringliteral}{\#include <ginkgo/ginkgo.hpp>}}
-\DoxyCodeLine{\textcolor{stringliteral}{\#include <iostream>}}
-\DoxyCodeLine{\textcolor{stringliteral}{\#include <map>}}
-\DoxyCodeLine{\textcolor{stringliteral}{\#include <string>}}
-\DoxyCodeLine{\textcolor{stringliteral}{\#include <vector>}}
+\DoxyCodeLine{\#include <ginkgo/ginkgo.hpp>}
+\DoxyCodeLine{\#include <iostream>}
+\DoxyCodeLine{\#include <map>}
+\DoxyCodeLine{\#include <string>}
+\DoxyCodeLine{\#include <vector>}
 \end{DoxyCode}
 
 
@@ -389,37 +361,6 @@ This is the expected output\+:
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{/*******************************<GINKGO LICENSE>******************************}}
-\DoxyCodeLine{\textcolor{comment}{Copyright (c) 2017-\/2023, the Ginkgo authors}}
-\DoxyCodeLine{\textcolor{comment}{All rights reserved.}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{Redistribution and use in source and binary forms, with or without}}
-\DoxyCodeLine{\textcolor{comment}{modification, are permitted provided that the following conditions}}
-\DoxyCodeLine{\textcolor{comment}{are met:}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{1. Redistributions of source code must retain the above copyright}}
-\DoxyCodeLine{\textcolor{comment}{notice, this list of conditions and the following disclaimer.}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{2. Redistributions in binary form must reproduce the above copyright}}
-\DoxyCodeLine{\textcolor{comment}{notice, this list of conditions and the following disclaimer in the}}
-\DoxyCodeLine{\textcolor{comment}{documentation and/or other materials provided with the distribution.}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{3. Neither the name of the copyright holder nor the names of its}}
-\DoxyCodeLine{\textcolor{comment}{contributors may be used to endorse or promote products derived from}}
-\DoxyCodeLine{\textcolor{comment}{this software without specific prior written permission.}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS}}
-\DoxyCodeLine{\textcolor{comment}{IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED}}
-\DoxyCodeLine{\textcolor{comment}{TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A}}
-\DoxyCodeLine{\textcolor{comment}{PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT}}
-\DoxyCodeLine{\textcolor{comment}{HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,}}
-\DoxyCodeLine{\textcolor{comment}{SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT}}
-\DoxyCodeLine{\textcolor{comment}{LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,}}
-\DoxyCodeLine{\textcolor{comment}{DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY}}
-\DoxyCodeLine{\textcolor{comment}{THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT}}
-\DoxyCodeLine{\textcolor{comment}{(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE}}
-\DoxyCodeLine{\textcolor{comment}{OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.}}
-\DoxyCodeLine{\textcolor{comment}{******************************<GINKGO LICENSE>*******************************/}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{/*****************************<DESCRIPTION>***********************************}}
 \DoxyCodeLine{\textcolor{comment}{This example solves a 1D Poisson equation:}}

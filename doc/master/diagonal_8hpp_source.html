@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1068515030 branch based on master. Ginkgo version 1.7.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1330831941 branch based on master. Ginkgo version 1.8.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -73,229 +73,202 @@ $(function() {
 <div class="title">diagonal.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*******************************&lt;GINKGO LICENSE&gt;******************************</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">Copyright (c) 2017-2023, the Ginkgo authors</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">All rights reserved.</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">Redistribution and use in source and binary forms, with or without</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">modification, are permitted provided that the following conditions</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">are met:</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">1. Redistributions of source code must retain the above copyright</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">notice, this list of conditions and the following disclaimer.</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">2. Redistributions in binary form must reproduce the above copyright</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">notice, this list of conditions and the following disclaimer in the</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">documentation and/or other materials provided with the distribution.</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">3. Neither the name of the copyright holder nor the names of its</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">contributors may be used to endorse or promote products derived from</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">this software without specific prior written permission.</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">******************************&lt;GINKGO LICENSE&gt;*******************************/</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#ifndef GKO_PUBLIC_CORE_MATRIX_DIAGONAL_HPP_</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#define GKO_PUBLIC_CORE_MATRIX_DIAGONAL_HPP_</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &lt;ginkgo/core/base/array.hpp&gt;</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &lt;ginkgo/core/base/lin_op.hpp&gt;</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacegko.html">gko</a> {</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">namespace </span>matrix {</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType, <span class="keyword">typename</span> IndexType&gt;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">class </span>Csr;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType&gt;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">class </span>Dense;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType = default_precision&gt;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keyword">class </span>Diagonal</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    : <span class="keyword">public</span> EnableLinOp&lt;Diagonal&lt;ValueType&gt;&gt;,</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;      <span class="keyword">public</span> EnableCreateMethod&lt;Diagonal&lt;ValueType&gt;&gt;,</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;      <span class="keyword">public</span> ConvertibleTo&lt;Csr&lt;ValueType, int32&gt;&gt;,</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;      <span class="keyword">public</span> ConvertibleTo&lt;Csr&lt;ValueType, int64&gt;&gt;,</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;      <span class="keyword">public</span> ConvertibleTo&lt;Diagonal&lt;next_precision&lt;ValueType&gt;&gt;&gt;,</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      <span class="keyword">public</span> Transposable,</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;      <span class="keyword">public</span> WritableToMatrixData&lt;ValueType, int32&gt;,</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;      <span class="keyword">public</span> WritableToMatrixData&lt;ValueType, int64&gt;,</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;      <span class="keyword">public</span> ReadableFromMatrixData&lt;ValueType, int32&gt;,</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;      <span class="keyword">public</span> ReadableFromMatrixData&lt;ValueType, int64&gt;,</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;      <span class="keyword">public</span> EnableAbsoluteComputation&lt;remove_complex&lt;Diagonal&lt;ValueType&gt;&gt;&gt; {</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>EnablePolymorphicObject&lt;Diagonal, <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>&gt;;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>EnableCreateMethod&lt;Diagonal&gt;;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>Csr&lt;ValueType, <a class="code" href="namespacegko.html#a1ec26caa2379a21a8d0cde611559fff6">int32</a>&gt;;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>Csr&lt;ValueType, <a class="code" href="namespacegko.html#a6c57dbf3168b1ecad3ea133aaf2efbc1">int64</a>&gt;;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>Diagonal&lt;<a class="code" href="namespacegko.html#acc281c8ff5bfa4fd6f25afcce466b1af">to_complex</a>&lt;ValueType&gt;&gt;;</div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// SPDX-FileCopyrightText: 2017 - 2024 The Ginkgo authors</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// SPDX-License-Identifier: BSD-3-Clause</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#ifndef GKO_PUBLIC_CORE_MATRIX_DIAGONAL_HPP_</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#define GKO_PUBLIC_CORE_MATRIX_DIAGONAL_HPP_</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;ginkgo/core/base/array.hpp&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;ginkgo/core/base/lin_op.hpp&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacegko.html">gko</a> {</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">namespace </span>matrix {</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType, <span class="keyword">typename</span> IndexType&gt;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">class </span>Csr;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType&gt;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">class </span>Dense;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType = default_precision&gt;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">class </span>Diagonal</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    : <span class="keyword">public</span> EnableLinOp&lt;Diagonal&lt;ValueType&gt;&gt;,</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;      <span class="keyword">public</span> ConvertibleTo&lt;Csr&lt;ValueType, int32&gt;&gt;,</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;      <span class="keyword">public</span> ConvertibleTo&lt;Csr&lt;ValueType, int64&gt;&gt;,</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;      <span class="keyword">public</span> ConvertibleTo&lt;Diagonal&lt;next_precision&lt;ValueType&gt;&gt;&gt;,</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;      <span class="keyword">public</span> Transposable,</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;      <span class="keyword">public</span> WritableToMatrixData&lt;ValueType, int32&gt;,</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;      <span class="keyword">public</span> WritableToMatrixData&lt;ValueType, int64&gt;,</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      <span class="keyword">public</span> ReadableFromMatrixData&lt;ValueType, int32&gt;,</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;      <span class="keyword">public</span> ReadableFromMatrixData&lt;ValueType, int64&gt;,</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;      <span class="keyword">public</span> EnableAbsoluteComputation&lt;remove_complex&lt;Diagonal&lt;ValueType&gt;&gt;&gt; {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>EnablePolymorphicObject&lt;Diagonal, <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>&gt;;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>Csr&lt;ValueType, <a class="code" href="namespacegko.html#a1ec26caa2379a21a8d0cde611559fff6">int32</a>&gt;;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>Csr&lt;ValueType, <a class="code" href="namespacegko.html#a6c57dbf3168b1ecad3ea133aaf2efbc1">int64</a>&gt;;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>Diagonal&lt;<a class="code" href="namespacegko.html#acc281c8ff5bfa4fd6f25afcce466b1af">to_complex</a>&lt;ValueType&gt;&gt;;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keyword">using</span> <a class="code" href="classgko_1_1EnablePolymorphicAssignment.html#a6b7e6872e96084636f8ab5091063ada8">EnableLinOp&lt;Diagonal&gt;::convert_to</a>;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keyword">using</span> <a class="code" href="classgko_1_1EnablePolymorphicAssignment.html#a0a4cf244139e7761d6a91c61e029810e">EnableLinOp&lt;Diagonal&gt;::move_to</a>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keyword">using</span> ConvertibleTo&lt;Csr&lt;ValueType, int32&gt;&gt;::convert_to;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">using</span> ConvertibleTo&lt;Csr&lt;ValueType, int32&gt;&gt;::move_to;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keyword">using</span> ConvertibleTo&lt;Csr&lt;ValueType, int64&gt;&gt;::convert_to;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">using</span> ConvertibleTo&lt;Csr&lt;ValueType, int64&gt;&gt;::move_to;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">using</span> ConvertibleTo&lt;Diagonal&lt;next_precision&lt;ValueType&gt;&gt;&gt;::convert_to;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">using</span> ConvertibleTo&lt;Diagonal&lt;next_precision&lt;ValueType&gt;&gt;&gt;::move_to;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keyword">using</span> value_type = ValueType;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">using</span> index_type = <a class="code" href="namespacegko.html#a6c57dbf3168b1ecad3ea133aaf2efbc1">int64</a>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">using</span> mat_data = matrix_data&lt;ValueType, int64&gt;;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keyword">using</span> mat_data32 = matrix_data&lt;ValueType, int32&gt;;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keyword">using</span> device_mat_data = device_matrix_data&lt;ValueType, int64&gt;;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keyword">using</span> device_mat_data32 = device_matrix_data&lt;ValueType, int32&gt;;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keyword">using</span> absolute_type = remove_complex&lt;Diagonal&gt;;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>Diagonal&lt;<a class="code" href="namespacegko.html#a6362f751c7753cf4fa0a4771d56e8ede">next_precision</a>&lt;ValueType&gt;&gt;;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    std::unique_ptr&lt;LinOp&gt; <a class="code" href="classgko_1_1matrix_1_1Diagonal.html#af0f8fc14f3388512d744f2fad8bb933e">transpose</a>() <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    std::unique_ptr&lt;LinOp&gt; <a class="code" href="classgko_1_1matrix_1_1Diagonal.html#a130eef2d95c64a7a3c27cdb3ac5ce4a3">conj_transpose</a>() <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">void</span> convert_to(Diagonal&lt;next_precision&lt;ValueType&gt;&gt;* result) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">void</span> move_to(Diagonal&lt;next_precision&lt;ValueType&gt;&gt;* result) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordtype">void</span> convert_to(Csr&lt;ValueType, int32&gt;* result) <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keyword">using</span> <a class="code" href="classgko_1_1EnablePolymorphicAssignment.html#a6b7e6872e96084636f8ab5091063ada8">EnableLinOp&lt;Diagonal&gt;::convert_to</a>;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keyword">using</span> <a class="code" href="classgko_1_1EnablePolymorphicAssignment.html#a0a4cf244139e7761d6a91c61e029810e">EnableLinOp&lt;Diagonal&gt;::move_to</a>;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keyword">using</span> ConvertibleTo&lt;Csr&lt;ValueType, int32&gt;&gt;::convert_to;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keyword">using</span> ConvertibleTo&lt;Csr&lt;ValueType, int32&gt;&gt;::move_to;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keyword">using</span> ConvertibleTo&lt;Csr&lt;ValueType, int64&gt;&gt;::convert_to;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keyword">using</span> ConvertibleTo&lt;Csr&lt;ValueType, int64&gt;&gt;::move_to;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keyword">using</span> ConvertibleTo&lt;Diagonal&lt;next_precision&lt;ValueType&gt;&gt;&gt;::convert_to;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keyword">using</span> ConvertibleTo&lt;Diagonal&lt;next_precision&lt;ValueType&gt;&gt;&gt;::move_to;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">void</span> move_to(Csr&lt;ValueType, int32&gt;* result) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordtype">void</span> convert_to(Csr&lt;ValueType, int64&gt;* result) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">void</span> move_to(Csr&lt;ValueType, int64&gt;* result) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    std::unique_ptr&lt;absolute_type&gt; <a class="code" href="classgko_1_1matrix_1_1Diagonal.html#a4a67d516d7ad7e5b14ada2c9196aac70">compute_absolute</a>() <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1matrix_1_1Diagonal.html#ad349aae97a96df89ce2497657c774db7">compute_absolute_inplace</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keyword">using</span> value_type = ValueType;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keyword">using</span> index_type = <a class="code" href="namespacegko.html#a6c57dbf3168b1ecad3ea133aaf2efbc1">int64</a>;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keyword">using</span> mat_data = matrix_data&lt;ValueType, int64&gt;;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keyword">using</span> mat_data32 = matrix_data&lt;ValueType, int32&gt;;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keyword">using</span> device_mat_data = device_matrix_data&lt;ValueType, int64&gt;;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keyword">using</span> device_mat_data32 = device_matrix_data&lt;ValueType, int32&gt;;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keyword">using</span> absolute_type = remove_complex&lt;Diagonal&gt;;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>Diagonal&lt;<a class="code" href="namespacegko.html#a6362f751c7753cf4fa0a4771d56e8ede">next_precision</a>&lt;ValueType&gt;&gt;;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    std::unique_ptr&lt;LinOp&gt; <a class="code" href="classgko_1_1matrix_1_1Diagonal.html#af0f8fc14f3388512d744f2fad8bb933e">transpose</a>() <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    std::unique_ptr&lt;LinOp&gt; <a class="code" href="classgko_1_1matrix_1_1Diagonal.html#a130eef2d95c64a7a3c27cdb3ac5ce4a3">conj_transpose</a>() <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordtype">void</span> convert_to(Diagonal&lt;next_precision&lt;ValueType&gt;&gt;* result) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordtype">void</span> move_to(Diagonal&lt;next_precision&lt;ValueType&gt;&gt;* result) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordtype">void</span> convert_to(Csr&lt;ValueType, int32&gt;* result) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keywordtype">void</span> move_to(Csr&lt;ValueType, int32&gt;* result) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keywordtype">void</span> convert_to(Csr&lt;ValueType, int64&gt;* result) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keywordtype">void</span> move_to(Csr&lt;ValueType, int64&gt;* result) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    std::unique_ptr&lt;absolute_type&gt; <a class="code" href="classgko_1_1matrix_1_1Diagonal.html#a4a67d516d7ad7e5b14ada2c9196aac70">compute_absolute</a>() <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1matrix_1_1Diagonal.html#ad349aae97a96df89ce2497657c774db7">compute_absolute_inplace</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
-<div class="line"><a name="l00131"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Diagonal.html#ad219c265e4990ad115b013a7db9f8665">  131</a></span>&#160;    value_type* <a class="code" href="classgko_1_1matrix_1_1Diagonal.html#ad219c265e4990ad115b013a7db9f8665">get_values</a>() noexcept { <span class="keywordflow">return</span> values_.<a class="code" href="classgko_1_1array.html#a9e144bc31d986eebf64326f0aad1a875">get_data</a>(); }</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
-<div class="line"><a name="l00140"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Diagonal.html#aef4fc59053ea3e0be4ebcecca4f70317">  140</a></span>&#160;    <span class="keyword">const</span> value_type* <a class="code" href="classgko_1_1matrix_1_1Diagonal.html#aef4fc59053ea3e0be4ebcecca4f70317">get_const_values</a>() const noexcept</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    {</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        <span class="keywordflow">return</span> values_.<a class="code" href="classgko_1_1array.html#a4bbd9f9a19077bd7cfff8659992e430e">get_const_data</a>();</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    }</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; </div>
-<div class="line"><a name="l00152"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Diagonal.html#a1b0ac09acf678b127602191f20477cdc">  152</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1matrix_1_1Diagonal.html#a1b0ac09acf678b127602191f20477cdc">rapply</a>(<a class="code" href="classgko_1_1ptr__param.html">ptr_param&lt;const LinOp&gt;</a> b, <a class="code" href="classgko_1_1ptr__param.html">ptr_param&lt;LinOp&gt;</a> x)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        GKO_ASSERT_REVERSE_CONFORMANT(<span class="keyword">this</span>, b);</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        GKO_ASSERT_EQUAL_ROWS(b, x);</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        GKO_ASSERT_EQUAL_COLS(<span class="keyword">this</span>, x);</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        this-&gt;rapply_impl(b.<a class="code" href="classgko_1_1ptr__param.html#a815e682f273679b99cd632a83c974057">get</a>(), x.<a class="code" href="classgko_1_1ptr__param.html#a815e682f273679b99cd632a83c974057">get</a>());</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    }</div>
+<div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Diagonal.html#ad219c265e4990ad115b013a7db9f8665">  101</a></span>&#160;    value_type* <a class="code" href="classgko_1_1matrix_1_1Diagonal.html#ad219c265e4990ad115b013a7db9f8665">get_values</a>() noexcept { <span class="keywordflow">return</span> values_.<a class="code" href="classgko_1_1array.html#a9e144bc31d986eebf64326f0aad1a875">get_data</a>(); }</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Diagonal.html#aef4fc59053ea3e0be4ebcecca4f70317">  110</a></span>&#160;    <span class="keyword">const</span> value_type* <a class="code" href="classgko_1_1matrix_1_1Diagonal.html#aef4fc59053ea3e0be4ebcecca4f70317">get_const_values</a>() const noexcept</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    {</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <span class="keywordflow">return</span> values_.<a class="code" href="classgko_1_1array.html#a4bbd9f9a19077bd7cfff8659992e430e">get_const_data</a>();</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    }</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00122"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Diagonal.html#a1b0ac09acf678b127602191f20477cdc">  122</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1matrix_1_1Diagonal.html#a1b0ac09acf678b127602191f20477cdc">rapply</a>(<a class="code" href="classgko_1_1ptr__param.html">ptr_param&lt;const LinOp&gt;</a> b, <a class="code" href="classgko_1_1ptr__param.html">ptr_param&lt;LinOp&gt;</a> x)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        GKO_ASSERT_REVERSE_CONFORMANT(<span class="keyword">this</span>, b);</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        GKO_ASSERT_EQUAL_ROWS(b, x);</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        GKO_ASSERT_EQUAL_COLS(<span class="keyword">this</span>, x);</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        this-&gt;rapply_impl(b.<a class="code" href="classgko_1_1ptr__param.html#a815e682f273679b99cd632a83c974057">get</a>(), x.<a class="code" href="classgko_1_1ptr__param.html#a815e682f273679b99cd632a83c974057">get</a>());</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    }</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
+<div class="line"><a name="l00140"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Diagonal.html#a35de90f46460a480ccb780b17ac5d1d7">  140</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1matrix_1_1Diagonal.html#a35de90f46460a480ccb780b17ac5d1d7">inverse_apply</a>(<a class="code" href="classgko_1_1ptr__param.html">ptr_param&lt;const LinOp&gt;</a> b, <a class="code" href="classgko_1_1ptr__param.html">ptr_param&lt;LinOp&gt;</a> x)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        GKO_ASSERT_CONFORMANT(<span class="keyword">this</span>, b);</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        GKO_ASSERT_EQUAL_ROWS(b, x);</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;        GKO_ASSERT_EQUAL_ROWS(<span class="keyword">this</span>, x);</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        this-&gt;inverse_apply_impl(b.<a class="code" href="classgko_1_1ptr__param.html#a815e682f273679b99cd632a83c974057">get</a>(), x.<a class="code" href="classgko_1_1ptr__param.html#a815e682f273679b99cd632a83c974057">get</a>());</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    }</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <span class="keywordtype">void</span> read(<span class="keyword">const</span> mat_data&amp; data) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="keywordtype">void</span> read(<span class="keyword">const</span> mat_data32&amp; data) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keywordtype">void</span> read(<span class="keyword">const</span> device_mat_data&amp; data) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    <span class="keywordtype">void</span> read(<span class="keyword">const</span> device_mat_data32&amp; data) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    <span class="keywordtype">void</span> read(device_mat_data&amp;&amp; data) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <span class="keywordtype">void</span> read(device_mat_data32&amp;&amp; data) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
-<div class="line"><a name="l00170"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Diagonal.html#a35de90f46460a480ccb780b17ac5d1d7">  170</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1matrix_1_1Diagonal.html#a35de90f46460a480ccb780b17ac5d1d7">inverse_apply</a>(<a class="code" href="classgko_1_1ptr__param.html">ptr_param&lt;const LinOp&gt;</a> b, <a class="code" href="classgko_1_1ptr__param.html">ptr_param&lt;LinOp&gt;</a> x)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;        GKO_ASSERT_CONFORMANT(<span class="keyword">this</span>, b);</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        GKO_ASSERT_EQUAL_ROWS(b, x);</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        GKO_ASSERT_EQUAL_ROWS(<span class="keyword">this</span>, x);</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    <span class="keywordtype">void</span> write(mat_data&amp; data) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; </div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <span class="keywordtype">void</span> write(mat_data32&amp; data) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;Diagonal&gt; <a class="code" href="classgko_1_1matrix_1_1Diagonal.html#ab0f69662916bec07ba77b5779352a0f0">create</a>(</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        std::shared_ptr&lt;const Executor&gt; exec, <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> size = 0);</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        this-&gt;inverse_apply_impl(b.<a class="code" href="classgko_1_1ptr__param.html#a815e682f273679b99cd632a83c974057">get</a>(), x.<a class="code" href="classgko_1_1ptr__param.html#a815e682f273679b99cd632a83c974057">get</a>());</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    }</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    <span class="keywordtype">void</span> read(<span class="keyword">const</span> mat_data&amp; data) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    <span class="keywordtype">void</span> read(<span class="keyword">const</span> mat_data32&amp; data) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; </div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    <span class="keywordtype">void</span> read(<span class="keyword">const</span> device_mat_data&amp; data) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; </div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    <span class="keywordtype">void</span> read(<span class="keyword">const</span> device_mat_data32&amp; data) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <span class="keywordtype">void</span> read(device_mat_data&amp;&amp; data) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    <span class="keywordtype">void</span> read(device_mat_data32&amp;&amp; data) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    <span class="keywordtype">void</span> write(mat_data&amp; data) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <span class="keywordtype">void</span> write(mat_data32&amp; data) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
-<div class="line"><a name="l00205"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Diagonal.html#a7d63e33782bf1ed1843e22a329ec8f77">  205</a></span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;const Diagonal&gt; <a class="code" href="classgko_1_1matrix_1_1Diagonal.html#a7d63e33782bf1ed1843e22a329ec8f77">create_const</a>(</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;        std::shared_ptr&lt;const Executor&gt; exec, <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> size,</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        gko::detail::const_array_view&lt;ValueType&gt;&amp;&amp; values)</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    {</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        <span class="comment">// cast const-ness away, but return a const object afterwards,</span></div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        <span class="comment">// so we can ensure that no modifications take place.</span></div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        <span class="keywordflow">return</span> std::unique_ptr&lt;const Diagonal&gt;(<span class="keyword">new</span> <a class="code" href="classgko_1_1matrix_1_1Diagonal.html">Diagonal</a>{</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;            exec, size, gko::detail::array_const_cast(std::move(values))});</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    }</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160; </div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classgko_1_1matrix_1_1Diagonal.html">Diagonal</a>(std::shared_ptr&lt;const Executor&gt; exec)</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;        : <a class="code" href="classgko_1_1matrix_1_1Diagonal.html">Diagonal</a>(std::move(exec), <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a>{})</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    {}</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160; </div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    Diagonal(std::shared_ptr&lt;const Executor&gt; exec, <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> size)</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;        : EnableLinOp&lt;Diagonal&gt;(exec, dim&lt;2&gt;{size}), values_(exec, size)</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    {}</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160; </div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValuesArray&gt;</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    Diagonal(std::shared_ptr&lt;const Executor&gt; exec, <span class="keyword">const</span> <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> size,</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;             ValuesArray&amp;&amp; values)</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;        : EnableLinOp&lt;Diagonal&gt;(exec, dim&lt;2&gt;(size)),</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;          values_{exec, std::forward&lt;ValuesArray&gt;(values)}</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    {</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;        GKO_ENSURE_IN_BOUNDS(size - 1, values_.<a class="code" href="classgko_1_1array.html#a9c6a40a8a007af8c6e541fbc030d6291">get_num_elems</a>());</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    }</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160; </div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    <span class="keywordtype">void</span> apply_impl(<span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>* b, <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>* x) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    <span class="keywordtype">void</span> apply_impl(<span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>* alpha, <span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>* b, <span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>* beta,</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;                    <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>* x) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160; </div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    <span class="keywordtype">void</span> rapply_impl(<span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>* b, <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>* x) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; </div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    <span class="keywordtype">void</span> inverse_apply_impl(<span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>* b, <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>* x) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160; </div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    array&lt;value_type&gt; values_;</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;};</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; </div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; </div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;}  <span class="comment">// namespace matrix</span></div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;}  <span class="comment">// namespace gko</span></div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160; </div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160; </div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_MATRIX_DIAGONAL_HPP_</span></div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;Diagonal&gt; <a class="code" href="classgko_1_1matrix_1_1Diagonal.html#ab0f69662916bec07ba77b5779352a0f0">create</a>(</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        std::shared_ptr&lt;const Executor&gt; exec, <span class="keyword">const</span> <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> size,</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        <a class="code" href="classgko_1_1array.html">array&lt;value_type&gt;</a> values);</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> InputValueType&gt;</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    GKO_DEPRECATED(</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        <span class="stringliteral">&quot;explicitly construct the gko::array argument instead of passing an&quot;</span></div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        <span class="stringliteral">&quot;initializer list&quot;</span>)</div>
+<div class="line"><a name="l00202"></a><span class="lineno"><a class="line" href="classgko_1_1matrix_1_1Diagonal.html#ace012160e532e128d6eb67475c143c9b">  202</a></span>&#160;    static std::unique_ptr&lt;<a class="code" href="classgko_1_1matrix_1_1Diagonal.html">Diagonal</a>&gt; <a class="code" href="classgko_1_1matrix_1_1Diagonal.html#ab0f69662916bec07ba77b5779352a0f0">create</a>(</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        std::shared_ptr&lt;const <a class="code" href="classgko_1_1Executor.html">Executor</a>&gt; exec, const <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> size,</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        std::initializer_list&lt;InputValueType&gt; values)</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    {</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classgko_1_1matrix_1_1Diagonal.html#ab0f69662916bec07ba77b5779352a0f0">create</a>(exec, size, <a class="code" href="classgko_1_1array.html">array&lt;value_type&gt;</a>{exec, std::move(values)});</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    }</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; </div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;const Diagonal&gt; <a class="code" href="classgko_1_1matrix_1_1Diagonal.html#a7d63e33782bf1ed1843e22a329ec8f77">create_const</a>(</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;        std::shared_ptr&lt;const Executor&gt; exec, <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> size,</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;        gko::detail::const_array_view&lt;ValueType&gt;&amp;&amp; values);</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160; </div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    <a class="code" href="classgko_1_1matrix_1_1Diagonal.html">Diagonal</a>(std::shared_ptr&lt;const Executor&gt; exec, <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> size = 0);</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160; </div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    <a class="code" href="classgko_1_1matrix_1_1Diagonal.html">Diagonal</a>(std::shared_ptr&lt;const Executor&gt; exec, <span class="keyword">const</span> <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> size,</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;             <a class="code" href="classgko_1_1array.html">array&lt;value_type&gt;</a> values);</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160; </div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    <span class="keywordtype">void</span> apply_impl(<span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html">LinOp</a>* b, <a class="code" href="classgko_1_1LinOp.html">LinOp</a>* x) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160; </div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    <span class="keywordtype">void</span> apply_impl(<span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html">LinOp</a>* alpha, <span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html">LinOp</a>* b, <span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html">LinOp</a>* beta,</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;                    <a class="code" href="classgko_1_1LinOp.html">LinOp</a>* x) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160; </div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    <span class="keywordtype">void</span> rapply_impl(<span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html">LinOp</a>* b, <a class="code" href="classgko_1_1LinOp.html">LinOp</a>* x) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; </div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    <span class="keywordtype">void</span> inverse_apply_impl(<span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html">LinOp</a>* b, <a class="code" href="classgko_1_1LinOp.html">LinOp</a>* x) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160; </div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    <a class="code" href="classgko_1_1array.html">array&lt;value_type&gt;</a> values_;</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;};</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160; </div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160; </div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;}  <span class="comment">// namespace matrix</span></div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;}  <span class="comment">// namespace gko</span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; </div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160; </div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_MATRIX_DIAGONAL_HPP_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassgko_1_1matrix_1_1Diagonal_html_ad349aae97a96df89ce2497657c774db7"><div class="ttname"><a href="classgko_1_1matrix_1_1Diagonal.html#ad349aae97a96df89ce2497657c774db7">gko::matrix::Diagonal::compute_absolute_inplace</a></div><div class="ttdeci">void compute_absolute_inplace() override</div><div class="ttdoc">Compute absolute inplace on each element.</div></div>
-<div class="ttc" id="aclassgko_1_1EnablePolymorphicAssignment_html_a0a4cf244139e7761d6a91c61e029810e"><div class="ttname"><a href="classgko_1_1EnablePolymorphicAssignment.html#a0a4cf244139e7761d6a91c61e029810e">gko::EnablePolymorphicAssignment&lt; ConcreteLinOp &gt;::move_to</a></div><div class="ttdeci">void move_to(result_type *result) override</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:760</div></div>
-<div class="ttc" id="aclassgko_1_1EnablePolymorphicAssignment_html_a6b7e6872e96084636f8ab5091063ada8"><div class="ttname"><a href="classgko_1_1EnablePolymorphicAssignment.html#a6b7e6872e96084636f8ab5091063ada8">gko::EnablePolymorphicAssignment&lt; ConcreteLinOp &gt;::convert_to</a></div><div class="ttdeci">void convert_to(result_type *result) const override</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:758</div></div>
-<div class="ttc" id="anamespacegko_html_a6e5c95df0ae4e47aab2f604a22d98ee7"><div class="ttname"><a href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">gko::size_type</a></div><div class="ttdeci">std::size_t size_type</div><div class="ttdoc">Integral type used for allocation quantities.</div><div class="ttdef"><b>Definition:</b> types.hpp:120</div></div>
+<div class="ttc" id="aclassgko_1_1EnablePolymorphicAssignment_html_a0a4cf244139e7761d6a91c61e029810e"><div class="ttname"><a href="classgko_1_1EnablePolymorphicAssignment.html#a0a4cf244139e7761d6a91c61e029810e">gko::EnablePolymorphicAssignment&lt; ConcreteLinOp &gt;::move_to</a></div><div class="ttdeci">void move_to(result_type *result) override</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:732</div></div>
+<div class="ttc" id="aclassgko_1_1EnablePolymorphicAssignment_html_a6b7e6872e96084636f8ab5091063ada8"><div class="ttname"><a href="classgko_1_1EnablePolymorphicAssignment.html#a6b7e6872e96084636f8ab5091063ada8">gko::EnablePolymorphicAssignment&lt; ConcreteLinOp &gt;::convert_to</a></div><div class="ttdeci">void convert_to(result_type *result) const override</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:730</div></div>
+<div class="ttc" id="aclassgko_1_1LinOp_html"><div class="ttname"><a href="classgko_1_1LinOp.html">gko::LinOp</a></div><div class="ttdef"><b>Definition:</b> lin_op.hpp:118</div></div>
+<div class="ttc" id="anamespacegko_html_a6e5c95df0ae4e47aab2f604a22d98ee7"><div class="ttname"><a href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">gko::size_type</a></div><div class="ttdeci">std::size_t size_type</div><div class="ttdoc">Integral type used for allocation quantities.</div><div class="ttdef"><b>Definition:</b> types.hpp:108</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Diagonal_html_af0f8fc14f3388512d744f2fad8bb933e"><div class="ttname"><a href="classgko_1_1matrix_1_1Diagonal.html#af0f8fc14f3388512d744f2fad8bb933e">gko::matrix::Diagonal::transpose</a></div><div class="ttdeci">std::unique_ptr&lt; LinOp &gt; transpose() const override</div><div class="ttdoc">Returns a LinOp representing the transpose of the Transposable object.</div></div>
-<div class="ttc" id="aclassgko_1_1ptr__param_html_a815e682f273679b99cd632a83c974057"><div class="ttname"><a href="classgko_1_1ptr__param.html#a815e682f273679b99cd632a83c974057">gko::ptr_param::get</a></div><div class="ttdeci">T * get() const</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:105</div></div>
-<div class="ttc" id="aclassgko_1_1matrix_1_1Diagonal_html_a7d63e33782bf1ed1843e22a329ec8f77"><div class="ttname"><a href="classgko_1_1matrix_1_1Diagonal.html#a7d63e33782bf1ed1843e22a329ec8f77">gko::matrix::Diagonal::create_const</a></div><div class="ttdeci">static std::unique_ptr&lt; const Diagonal &gt; create_const(std::shared_ptr&lt; const Executor &gt; exec, size_type size, gko::detail::const_array_view&lt; ValueType &gt; &amp;&amp;values)</div><div class="ttdoc">Creates a constant (immutable) Diagonal matrix from a constant array.</div><div class="ttdef"><b>Definition:</b> diagonal.hpp:205</div></div>
-<div class="ttc" id="anamespacegko_html"><div class="ttname"><a href="namespacegko.html">gko</a></div><div class="ttdoc">The Ginkgo namespace.</div><div class="ttdef"><b>Definition:</b> abstract_factory.hpp:48</div></div>
+<div class="ttc" id="aclassgko_1_1ptr__param_html_a815e682f273679b99cd632a83c974057"><div class="ttname"><a href="classgko_1_1ptr__param.html#a815e682f273679b99cd632a83c974057">gko::ptr_param::get</a></div><div class="ttdeci">T * get() const</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:77</div></div>
+<div class="ttc" id="aclassgko_1_1matrix_1_1Diagonal_html_a7d63e33782bf1ed1843e22a329ec8f77"><div class="ttname"><a href="classgko_1_1matrix_1_1Diagonal.html#a7d63e33782bf1ed1843e22a329ec8f77">gko::matrix::Diagonal::create_const</a></div><div class="ttdeci">static std::unique_ptr&lt; const Diagonal &gt; create_const(std::shared_ptr&lt; const Executor &gt; exec, size_type size, gko::detail::const_array_view&lt; ValueType &gt; &amp;&amp;values)</div><div class="ttdoc">Creates a constant (immutable) Diagonal matrix from a constant array.</div></div>
+<div class="ttc" id="anamespacegko_html"><div class="ttname"><a href="namespacegko.html">gko</a></div><div class="ttdoc">The Ginkgo namespace.</div><div class="ttdef"><b>Definition:</b> abstract_factory.hpp:20</div></div>
+<div class="ttc" id="aclassgko_1_1array_html"><div class="ttname"><a href="classgko_1_1array.html">gko::array&lt; value_type &gt;</a></div></div>
+<div class="ttc" id="aclassgko_1_1matrix_1_1Diagonal_html_ab0f69662916bec07ba77b5779352a0f0"><div class="ttname"><a href="classgko_1_1matrix_1_1Diagonal.html#ab0f69662916bec07ba77b5779352a0f0">gko::matrix::Diagonal::create</a></div><div class="ttdeci">static std::unique_ptr&lt; Diagonal &gt; create(std::shared_ptr&lt; const Executor &gt; exec, size_type size=0)</div><div class="ttdoc">Creates an Diagonal matrix of the specified size.</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Diagonal_html_a4a67d516d7ad7e5b14ada2c9196aac70"><div class="ttname"><a href="classgko_1_1matrix_1_1Diagonal.html#a4a67d516d7ad7e5b14ada2c9196aac70">gko::matrix::Diagonal::compute_absolute</a></div><div class="ttdeci">std::unique_ptr&lt; absolute_type &gt; compute_absolute() const override</div><div class="ttdoc">Gets the AbsoluteLinOp.</div></div>
-<div class="ttc" id="aclassgko_1_1array_html_a9c6a40a8a007af8c6e541fbc030d6291"><div class="ttname"><a href="classgko_1_1array.html#a9c6a40a8a007af8c6e541fbc030d6291">gko::array::get_num_elems</a></div><div class="ttdeci">size_type get_num_elems() const noexcept</div><div class="ttdoc">Returns the number of elements in the array.</div><div class="ttdef"><b>Definition:</b> array.hpp:637</div></div>
-<div class="ttc" id="aclassgko_1_1matrix_1_1Diagonal_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Diagonal.html">gko::matrix::Diagonal</a></div><div class="ttdoc">This class is a utility which efficiently implements the diagonal matrix (a linear operator which sca...</div><div class="ttdef"><b>Definition:</b> lin_op.hpp:60</div></div>
-<div class="ttc" id="anamespacegko_html_a6362f751c7753cf4fa0a4771d56e8ede"><div class="ttname"><a href="namespacegko.html#a6362f751c7753cf4fa0a4771d56e8ede">gko::next_precision</a></div><div class="ttdeci">typename detail::next_precision_impl&lt; T &gt;::type next_precision</div><div class="ttdoc">Obtains the next type in the singly-linked precision list.</div><div class="ttdef"><b>Definition:</b> math.hpp:490</div></div>
-<div class="ttc" id="aclassgko_1_1ptr__param_html"><div class="ttname"><a href="classgko_1_1ptr__param.html">gko::ptr_param</a></div><div class="ttdoc">This class is used for function parameters in the place of raw pointers.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:71</div></div>
-<div class="ttc" id="aclassgko_1_1array_html_a9e144bc31d986eebf64326f0aad1a875"><div class="ttname"><a href="classgko_1_1array.html#a9e144bc31d986eebf64326f0aad1a875">gko::array::get_data</a></div><div class="ttdeci">value_type * get_data() noexcept</div><div class="ttdoc">Returns a pointer to the block of memory used to store the elements of the array.</div><div class="ttdef"><b>Definition:</b> array.hpp:646</div></div>
-<div class="ttc" id="aclassgko_1_1matrix_1_1Diagonal_html_a1b0ac09acf678b127602191f20477cdc"><div class="ttname"><a href="classgko_1_1matrix_1_1Diagonal.html#a1b0ac09acf678b127602191f20477cdc">gko::matrix::Diagonal::rapply</a></div><div class="ttdeci">void rapply(ptr_param&lt; const LinOp &gt; b, ptr_param&lt; LinOp &gt; x) const</div><div class="ttdoc">Applies the diagonal matrix from the right side to a matrix b, which means scales the columns of b wi...</div><div class="ttdef"><b>Definition:</b> diagonal.hpp:152</div></div>
-<div class="ttc" id="anamespacegko_html_a6c57dbf3168b1ecad3ea133aaf2efbc1"><div class="ttname"><a href="namespacegko.html#a6c57dbf3168b1ecad3ea133aaf2efbc1">gko::int64</a></div><div class="ttdeci">std::int64_t int64</div><div class="ttdoc">64-bit signed integral type.</div><div class="ttdef"><b>Definition:</b> types.hpp:143</div></div>
-<div class="ttc" id="anamespacegko_html_a1ec26caa2379a21a8d0cde611559fff6"><div class="ttname"><a href="namespacegko.html#a1ec26caa2379a21a8d0cde611559fff6">gko::int32</a></div><div class="ttdeci">std::int32_t int32</div><div class="ttdoc">32-bit signed integral type.</div><div class="ttdef"><b>Definition:</b> types.hpp:137</div></div>
-<div class="ttc" id="aclassgko_1_1array_html_a4bbd9f9a19077bd7cfff8659992e430e"><div class="ttname"><a href="classgko_1_1array.html#a4bbd9f9a19077bd7cfff8659992e430e">gko::array::get_const_data</a></div><div class="ttdeci">const value_type * get_const_data() const noexcept</div><div class="ttdoc">Returns a constant pointer to the block of memory used to store the elements of the array.</div><div class="ttdef"><b>Definition:</b> array.hpp:655</div></div>
-<div class="ttc" id="aclassgko_1_1matrix_1_1Diagonal_html_ad219c265e4990ad115b013a7db9f8665"><div class="ttname"><a href="classgko_1_1matrix_1_1Diagonal.html#ad219c265e4990ad115b013a7db9f8665">gko::matrix::Diagonal::get_values</a></div><div class="ttdeci">value_type * get_values() noexcept</div><div class="ttdoc">Returns a pointer to the array of values of the matrix.</div><div class="ttdef"><b>Definition:</b> diagonal.hpp:131</div></div>
-<div class="ttc" id="aclassgko_1_1matrix_1_1Diagonal_html_a35de90f46460a480ccb780b17ac5d1d7"><div class="ttname"><a href="classgko_1_1matrix_1_1Diagonal.html#a35de90f46460a480ccb780b17ac5d1d7">gko::matrix::Diagonal::inverse_apply</a></div><div class="ttdeci">void inverse_apply(ptr_param&lt; const LinOp &gt; b, ptr_param&lt; LinOp &gt; x) const</div><div class="ttdoc">Applies the inverse of the diagonal matrix to a matrix b, which means scales the columns of b with th...</div><div class="ttdef"><b>Definition:</b> diagonal.hpp:170</div></div>
+<div class="ttc" id="aclassgko_1_1matrix_1_1Diagonal_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Diagonal.html">gko::matrix::Diagonal</a></div><div class="ttdoc">This class is a utility which efficiently implements the diagonal matrix (a linear operator which sca...</div><div class="ttdef"><b>Definition:</b> lin_op.hpp:32</div></div>
+<div class="ttc" id="anamespacegko_html_a6362f751c7753cf4fa0a4771d56e8ede"><div class="ttname"><a href="namespacegko.html#a6362f751c7753cf4fa0a4771d56e8ede">gko::next_precision</a></div><div class="ttdeci">typename detail::next_precision_impl&lt; T &gt;::type next_precision</div><div class="ttdoc">Obtains the next type in the singly-linked precision list.</div><div class="ttdef"><b>Definition:</b> math.hpp:462</div></div>
+<div class="ttc" id="aclassgko_1_1ptr__param_html"><div class="ttname"><a href="classgko_1_1ptr__param.html">gko::ptr_param</a></div><div class="ttdoc">This class is used for function parameters in the place of raw pointers.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:43</div></div>
+<div class="ttc" id="aclassgko_1_1array_html_a9e144bc31d986eebf64326f0aad1a875"><div class="ttname"><a href="classgko_1_1array.html#a9e144bc31d986eebf64326f0aad1a875">gko::array::get_data</a></div><div class="ttdeci">value_type * get_data() noexcept</div><div class="ttdoc">Returns a pointer to the block of memory used to store the elements of the array.</div><div class="ttdef"><b>Definition:</b> array.hpp:674</div></div>
+<div class="ttc" id="aclassgko_1_1matrix_1_1Diagonal_html_a1b0ac09acf678b127602191f20477cdc"><div class="ttname"><a href="classgko_1_1matrix_1_1Diagonal.html#a1b0ac09acf678b127602191f20477cdc">gko::matrix::Diagonal::rapply</a></div><div class="ttdeci">void rapply(ptr_param&lt; const LinOp &gt; b, ptr_param&lt; LinOp &gt; x) const</div><div class="ttdoc">Applies the diagonal matrix from the right side to a matrix b, which means scales the columns of b wi...</div><div class="ttdef"><b>Definition:</b> diagonal.hpp:122</div></div>
+<div class="ttc" id="anamespacegko_html_a6c57dbf3168b1ecad3ea133aaf2efbc1"><div class="ttname"><a href="namespacegko.html#a6c57dbf3168b1ecad3ea133aaf2efbc1">gko::int64</a></div><div class="ttdeci">std::int64_t int64</div><div class="ttdoc">64-bit signed integral type.</div><div class="ttdef"><b>Definition:</b> types.hpp:131</div></div>
+<div class="ttc" id="anamespacegko_html_a1ec26caa2379a21a8d0cde611559fff6"><div class="ttname"><a href="namespacegko.html#a1ec26caa2379a21a8d0cde611559fff6">gko::int32</a></div><div class="ttdeci">std::int32_t int32</div><div class="ttdoc">32-bit signed integral type.</div><div class="ttdef"><b>Definition:</b> types.hpp:125</div></div>
+<div class="ttc" id="aclassgko_1_1Executor_html"><div class="ttname"><a href="classgko_1_1Executor.html">gko::Executor</a></div><div class="ttdoc">The first step in using the Ginkgo library consists of creating an executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:616</div></div>
+<div class="ttc" id="aclassgko_1_1array_html_a4bbd9f9a19077bd7cfff8659992e430e"><div class="ttname"><a href="classgko_1_1array.html#a4bbd9f9a19077bd7cfff8659992e430e">gko::array::get_const_data</a></div><div class="ttdeci">const value_type * get_const_data() const noexcept</div><div class="ttdoc">Returns a constant pointer to the block of memory used to store the elements of the array.</div><div class="ttdef"><b>Definition:</b> array.hpp:683</div></div>
+<div class="ttc" id="aclassgko_1_1matrix_1_1Diagonal_html_ad219c265e4990ad115b013a7db9f8665"><div class="ttname"><a href="classgko_1_1matrix_1_1Diagonal.html#ad219c265e4990ad115b013a7db9f8665">gko::matrix::Diagonal::get_values</a></div><div class="ttdeci">value_type * get_values() noexcept</div><div class="ttdoc">Returns a pointer to the array of values of the matrix.</div><div class="ttdef"><b>Definition:</b> diagonal.hpp:101</div></div>
+<div class="ttc" id="aclassgko_1_1matrix_1_1Diagonal_html_a35de90f46460a480ccb780b17ac5d1d7"><div class="ttname"><a href="classgko_1_1matrix_1_1Diagonal.html#a35de90f46460a480ccb780b17ac5d1d7">gko::matrix::Diagonal::inverse_apply</a></div><div class="ttdeci">void inverse_apply(ptr_param&lt; const LinOp &gt; b, ptr_param&lt; LinOp &gt; x) const</div><div class="ttdoc">Applies the inverse of the diagonal matrix to a matrix b, which means scales the columns of b with th...</div><div class="ttdef"><b>Definition:</b> diagonal.hpp:140</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Diagonal_html_a130eef2d95c64a7a3c27cdb3ac5ce4a3"><div class="ttname"><a href="classgko_1_1matrix_1_1Diagonal.html#a130eef2d95c64a7a3c27cdb3ac5ce4a3">gko::matrix::Diagonal::conj_transpose</a></div><div class="ttdeci">std::unique_ptr&lt; LinOp &gt; conj_transpose() const override</div><div class="ttdoc">Returns a LinOp representing the conjugate transpose of the Transposable object.</div></div>
-<div class="ttc" id="aclassgko_1_1matrix_1_1Diagonal_html_aef4fc59053ea3e0be4ebcecca4f70317"><div class="ttname"><a href="classgko_1_1matrix_1_1Diagonal.html#aef4fc59053ea3e0be4ebcecca4f70317">gko::matrix::Diagonal::get_const_values</a></div><div class="ttdeci">const value_type * get_const_values() const noexcept</div><div class="ttdoc">Returns a pointer to the array of values of the matrix.</div><div class="ttdef"><b>Definition:</b> diagonal.hpp:140</div></div>
+<div class="ttc" id="aclassgko_1_1matrix_1_1Diagonal_html_aef4fc59053ea3e0be4ebcecca4f70317"><div class="ttname"><a href="classgko_1_1matrix_1_1Diagonal.html#aef4fc59053ea3e0be4ebcecca4f70317">gko::matrix::Diagonal::get_const_values</a></div><div class="ttdeci">const value_type * get_const_values() const noexcept</div><div class="ttdoc">Returns a pointer to the array of values of the matrix.</div><div class="ttdef"><b>Definition:</b> diagonal.hpp:110</div></div>
 <div class="ttc" id="aclassgko_1_1LinOp_html_a1f2a4cc7323e0b9816428e3545fc6ed7"><div class="ttname"><a href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">gko::LinOp::LinOp</a></div><div class="ttdeci">LinOp(const LinOp &amp;)=default</div><div class="ttdoc">Copy-constructs a LinOp.</div></div>
-<div class="ttc" id="anamespacegko_html_acc281c8ff5bfa4fd6f25afcce466b1af"><div class="ttname"><a href="namespacegko.html#acc281c8ff5bfa4fd6f25afcce466b1af">gko::to_complex</a></div><div class="ttdeci">typename detail::to_complex_s&lt; T &gt;::type to_complex</div><div class="ttdoc">Obtain the type which adds the complex of complex/scalar type or the template parameter of class by a...</div><div class="ttdef"><b>Definition:</b> math.hpp:373</div></div>
+<div class="ttc" id="anamespacegko_html_acc281c8ff5bfa4fd6f25afcce466b1af"><div class="ttname"><a href="namespacegko.html#acc281c8ff5bfa4fd6f25afcce466b1af">gko::to_complex</a></div><div class="ttdeci">typename detail::to_complex_s&lt; T &gt;::type to_complex</div><div class="ttdoc">Obtain the type which adds the complex of complex/scalar type or the template parameter of class by a...</div><div class="ttdef"><b>Definition:</b> math.hpp:345</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

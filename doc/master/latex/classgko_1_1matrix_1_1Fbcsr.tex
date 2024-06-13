@@ -132,13 +132,18 @@ index\+\_\+type \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr_af29a823fd47588118a
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr_a2663712bedab192e0e27a3fb539ff7b7}{create}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, int block\+\_\+size=1)
+\begin{DoxyCompactList}\small\item\em Creates an uninitialized F\+B\+C\+SR matrix with the given block size. \end{DoxyCompactList}\item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr_ada1f1561fd5ed2c2a0ce3c4446e54998}{create}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \&size, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} num\+\_\+nonzeros, int block\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Creates an uninitialized F\+B\+C\+SR matrix of the specified size. \end{DoxyCompactList}\item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr_aa54875010c6d683a8e8f8d80b79f6aac}{create}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \&size, int block\+\_\+size, \mbox{\hyperlink{classgko_1_1array}{array}}$<$ value\+\_\+type $>$ values, \mbox{\hyperlink{classgko_1_1array}{array}}$<$ index\+\_\+type $>$ col\+\_\+idxs, \mbox{\hyperlink{classgko_1_1array}{array}}$<$ index\+\_\+type $>$ row\+\_\+ptrs)
+\begin{DoxyCompactList}\small\item\em Creates a F\+B\+C\+SR matrix from already allocated (and initialized) row pointer, column index and value arrays. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Input\+Value\+Type , typename Input\+Column\+Index\+Type , typename Input\+Row\+Ptr\+Type $>$ }\\static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr_a343f4f7c4f931cf884a36a14e6bff533}{create}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \&size, int block\+\_\+size, std\+::initializer\+\_\+list$<$ Input\+Value\+Type $>$ values, std\+::initializer\+\_\+list$<$ Input\+Column\+Index\+Type $>$ col\+\_\+idxs, std\+::initializer\+\_\+list$<$ Input\+Row\+Ptr\+Type $>$ row\+\_\+ptrs)
+\begin{DoxyCompactList}\small\item\em create(std\+::shared\+\_\+ptr$<$const Executor$>$, \end{DoxyCompactList}\item 
 static std\+::unique\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr_ae27b2db23ff1ea37dd50c0ee52649848}{create\+\_\+const}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \&size, int blocksize, gko\+::detail\+::const\+\_\+array\+\_\+view$<$ Value\+Type $>$ \&\&values, gko\+::detail\+::const\+\_\+array\+\_\+view$<$ Index\+Type $>$ \&\&col\+\_\+idxs, gko\+::detail\+::const\+\_\+array\+\_\+view$<$ Index\+Type $>$ \&\&row\+\_\+ptrs)
 \begin{DoxyCompactList}\small\item\em Creates a constant (immutable) \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}} matrix from a constant array. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
-\item 
-\mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_a55ccb225f0161e2bc8db81df4c5753c9}\label{classgko_1_1matrix_1_1Fbcsr_a55ccb225f0161e2bc8db81df4c5753c9}} 
-class {\bfseries Enable\+Create\+Method$<$ Fbcsr $>$}
 \item 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_aef5d3013d13c6d9a1b47b24d81715f63}\label{classgko_1_1matrix_1_1Fbcsr_aef5d3013d13c6d9a1b47b24d81715f63}} 
 class {\bfseries Enable\+Polymorphic\+Object$<$ Fbcsr, Lin\+Op $>$}
@@ -292,12 +297,110 @@ Get the block sparsity pattern in C\+S\+R-\/like format.
 \begin{DoxyNote}{Note}
 The actual non-\/zero values are never copied; the result always has a value array of size 1 with the value 1. 
 \end{DoxyNote}
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_aa54875010c6d683a8e8f8d80b79f6aac}\label{classgko_1_1matrix_1_1Fbcsr_aa54875010c6d683a8e8f8d80b79f6aac}} 
+\index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!create@{create}}
+\index{create@{create}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+static std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::create (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \&}]{size,  }\item[{int}]{block\+\_\+size,  }\item[{\mbox{\hyperlink{classgko_1_1array}{array}}$<$ value\+\_\+type $>$}]{values,  }\item[{\mbox{\hyperlink{classgko_1_1array}{array}}$<$ index\+\_\+type $>$}]{col\+\_\+idxs,  }\item[{\mbox{\hyperlink{classgko_1_1array}{array}}$<$ index\+\_\+type $>$}]{row\+\_\+ptrs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a F\+B\+C\+SR matrix from already allocated (and initialized) row pointer, column index and value arrays. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & \mbox{\hyperlink{classgko_1_1Executor}{Executor}} associated to the matrix \\
+\hline
+{\em size} & size of the matrix \\
+\hline
+{\em block\+\_\+size} & Size of the small square dense nonzero blocks \\
+\hline
+{\em values} & the value array of the matrix, stored in column-\/major order for each block \\
+\hline
+{\em col\+\_\+idxs} & the block column index array of the matrix \\
+\hline
+{\em row\+\_\+ptrs} & the block row pointer array of the matrix\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+If one of {\ttfamily row\+\_\+ptrs}, {\ttfamily col\+\_\+idxs} or {\ttfamily values} is not an rvalue, not an array of Index\+Type, Index\+Type and Value\+Type, respectively, or is on the wrong executor, an internal copy of that array will be created, and the original array data will not be used in the matrix.
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+A smart pointer to the newly created matrix. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_a343f4f7c4f931cf884a36a14e6bff533}\label{classgko_1_1matrix_1_1Fbcsr_a343f4f7c4f931cf884a36a14e6bff533}} 
+\index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!create@{create}}
+\index{create@{create}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+template$<$typename Input\+Value\+Type , typename Input\+Column\+Index\+Type , typename Input\+Row\+Ptr\+Type $>$ \\
+static std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::create (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \&}]{size,  }\item[{int}]{block\+\_\+size,  }\item[{std\+::initializer\+\_\+list$<$ Input\+Value\+Type $>$}]{values,  }\item[{std\+::initializer\+\_\+list$<$ Input\+Column\+Index\+Type $>$}]{col\+\_\+idxs,  }\item[{std\+::initializer\+\_\+list$<$ Input\+Row\+Ptr\+Type $>$}]{row\+\_\+ptrs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+create(std\+::shared\+\_\+ptr$<$const Executor$>$, 
+
+create(std\+::shared\+\_\+ptr$<$const Executor$>$, const \mbox{\hyperlink{structgko_1_1dim}{dim$<$2$>$}}\&, int, \mbox{\hyperlink{classgko_1_1array}{array$<$value\+\_\+type$>$}}, \mbox{\hyperlink{classgko_1_1array}{array$<$index\+\_\+type$>$}}, \mbox{\hyperlink{classgko_1_1array}{array$<$index\+\_\+type$>$}}) 
+
+References gko\+::matrix\+::\+Fbcsr$<$ Value\+Type, Index\+Type $>$\+::create().
+
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_ada1f1561fd5ed2c2a0ce3c4446e54998}\label{classgko_1_1matrix_1_1Fbcsr_ada1f1561fd5ed2c2a0ce3c4446e54998}} 
+\index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!create@{create}}
+\index{create@{create}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+static std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::create (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \&}]{size,  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{num\+\_\+nonzeros,  }\item[{int}]{block\+\_\+size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates an uninitialized F\+B\+C\+SR matrix of the specified size. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & \mbox{\hyperlink{classgko_1_1Executor}{Executor}} associated to the matrix \\
+\hline
+{\em size} & size of the matrix \\
+\hline
+{\em num\+\_\+nonzeros} & number of stored nonzeros. It needs to be a multiple of block\+\_\+size $\ast$ block\+\_\+size. \\
+\hline
+{\em block\+\_\+size} & size of the small dense square blocks\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A smart pointer to the newly created matrix. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_a2663712bedab192e0e27a3fb539ff7b7}\label{classgko_1_1matrix_1_1Fbcsr_a2663712bedab192e0e27a3fb539ff7b7}} 
+\index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!create@{create}}
+\index{create@{create}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+static std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::create (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{int}]{block\+\_\+size = {\ttfamily 1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates an uninitialized F\+B\+C\+SR matrix with the given block size. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & \mbox{\hyperlink{classgko_1_1Executor}{Executor}} associated to the matrix \\
+\hline
+{\em block\+\_\+size} & The desired size of the dense square nonzero blocks; defaults to 1.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A smart pointer to the newly created matrix. 
+\end{DoxyReturn}
+
+
+Referenced by gko\+::matrix\+::\+Fbcsr$<$ Value\+Type, Index\+Type $>$\+::create().
+
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_ae27b2db23ff1ea37dd50c0ee52649848}\label{classgko_1_1matrix_1_1Fbcsr_ae27b2db23ff1ea37dd50c0ee52649848}} 
 \index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!create\_const@{create\_const}}
 \index{create\_const@{create\_const}!gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}}
 \doxysubsubsection{\texorpdfstring{create\_const()}{create\_const()}}
 {\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
-static std\+::unique\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::create\+\_\+const (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \&}]{size,  }\item[{int}]{blocksize,  }\item[{gko\+::detail\+::const\+\_\+array\+\_\+view$<$ Value\+Type $>$ \&\&}]{values,  }\item[{gko\+::detail\+::const\+\_\+array\+\_\+view$<$ Index\+Type $>$ \&\&}]{col\+\_\+idxs,  }\item[{gko\+::detail\+::const\+\_\+array\+\_\+view$<$ Index\+Type $>$ \&\&}]{row\+\_\+ptrs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+static std\+::unique\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbcsr}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{gko\+::matrix\+::\+Fbcsr}}$<$ Value\+Type, Index\+Type $>$\+::create\+\_\+const (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \&}]{size,  }\item[{int}]{blocksize,  }\item[{gko\+::detail\+::const\+\_\+array\+\_\+view$<$ Value\+Type $>$ \&\&}]{values,  }\item[{gko\+::detail\+::const\+\_\+array\+\_\+view$<$ Index\+Type $>$ \&\&}]{col\+\_\+idxs,  }\item[{gko\+::detail\+::const\+\_\+array\+\_\+view$<$ Index\+Type $>$ \&\&}]{row\+\_\+ptrs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
@@ -311,7 +414,7 @@ Creates a constant (immutable) \mbox{\hyperlink{classgko_1_1matrix_1_1Fbcsr}{Fbc
 \hline
 {\em blocksize} & the block size of the matrix \\
 \hline
-{\em values} & the value array of the matrix \\
+{\em values} & the value array of the matrix, stored in column-\/major order for each block \\
 \hline
 {\em col\+\_\+idxs} & the block column index array of the matrix \\
 \hline
@@ -468,7 +571,7 @@ The number of non-\/zero blocks explicitly stored in the matrix
 \end{DoxyReturn}
 
 
-References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+num\+\_\+elems().
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+size().
 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_a2409efcc99603ab55623f854991ea169}\label{classgko_1_1matrix_1_1Fbcsr_a2409efcc99603ab55623f854991ea169}} 
 \index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!get\_num\_stored\_elements@{get\_num\_stored\_elements}}
@@ -482,7 +585,7 @@ The number of elements explicitly stored in the matrix
 \end{DoxyReturn}
 
 
-References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+num\+\_\+elems().
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+size().
 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Fbcsr_a6ba527b33d23fea9a69ae0fe92135ca9}\label{classgko_1_1matrix_1_1Fbcsr_a6ba527b33d23fea9a69ae0fe92135ca9}} 
 \index{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$@{gko::matrix::Fbcsr$<$ ValueType, IndexType $>$}!get\_row\_ptrs@{get\_row\_ptrs}}

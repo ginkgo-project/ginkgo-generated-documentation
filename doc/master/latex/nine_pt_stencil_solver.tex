@@ -33,52 +33,24 @@ The intention of this is to show how generation of stencil values and the right 
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{/ *****************************<DESCRIPTION>***********************************}
-\DoxyCodeLine{This example solves a 2D Poisson equation:}
+\DoxyCodeLine{preconditioned with block-\/Jacobi. It is also possible to specify on which}
+\DoxyCodeLine{executor Ginkgo will solve the system via the command line.}
+\DoxyCodeLine{The \textcolor{keyword}{function} `f` is set to `f(x,y) = 6x + 6y` (making the solution `u(x,y) = x\string^3}
+\DoxyCodeLine{+ y\string^3`), but that can be changed in the `main` \textcolor{keyword}{function}. Also the stencil values}
+\DoxyCodeLine{\textcolor{keywordflow}{for} the core, the faces, the edge and the corners can be changed when passing}
+\DoxyCodeLine{additional parameters.}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \(\backslash\)Omega = (0,1)\string^2}
-\DoxyCodeLine{    \(\backslash\)Omega\_b = [0,1]\string^2   (with boundary)}
-\DoxyCodeLine{    \(\backslash\)partial\(\backslash\)Omega = \(\backslash\)Omega\_b \(\backslash\)backslash \(\backslash\)Omega}
-\DoxyCodeLine{    u : \(\backslash\)Omega\_b -\/> R}
-\DoxyCodeLine{    u\textcolor{stringliteral}{''} = f in \(\backslash\)Omega}
-\DoxyCodeLine{    u = u\_D on \(\backslash\)partial\(\backslash\)Omega}
+\DoxyCodeLine{The intention of \textcolor{keyword}{this} is to show how generation of stencil values and the right}
+\DoxyCodeLine{hand side vector changes when increasing the dimension.}
+\DoxyCodeLine{*****************************<DESCRIPTION>********************************** /}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keyword}{using} a finite difference method on an equidistant grid with `K` discretization}
-\DoxyCodeLine{points (`K` can be controlled with a command line parameter). The discretization}
-\DoxyCodeLine{may be done by any order Taylor polynomial.}
-\DoxyCodeLine{For an equidistant grid with K \textcolor{stringliteral}{"inner"} discretization points (x1,y1), ...,}
-\DoxyCodeLine{(xk,y1),(x1,y2), ..., (xk,yk) step size h = 1 / (K + 1) and a stencil \(\backslash\)in}
-\DoxyCodeLine{\(\backslash\)R\string^\{3 x 3\}, the formula produces a system of linear equations}
-\DoxyCodeLine{}
-\DoxyCodeLine{\(\backslash\)sum\_\{a,b=-\/1\}\string^1 stencil(a,b) * u\_\{(i+a,j+b\} = -\/f\_k h\string^2,  on any inner node with}
-\DoxyCodeLine{a neighborhood of inner nodes}
-\DoxyCodeLine{}
-\DoxyCodeLine{On any node, where neighbor is on the border, the neighbor is replaced with a}
-\DoxyCodeLine{\textcolor{stringliteral}{'-\/stencil(a,b) * u\_\{i+a,j+b\}'} and added to the right hand side vector. For}
-\DoxyCodeLine{example a node with a neighborhood of only edge nodes may look like this}
-\DoxyCodeLine{}
-\DoxyCodeLine{\(\backslash\)sum\_\{a,b=-\/1\}\string^(1,0) stencil(a,b) * u\_\{(i+a,j+b\} = -\/f\_k h\string^2 -\/ \(\backslash\)sum\_\{a=-\/1\}\string^1}
-\DoxyCodeLine{stencil(a,1) * u\_\{(i+a,j+1\}}
-\DoxyCodeLine{}
-\DoxyCodeLine{which is then solved \textcolor{keyword}{using} Ginkgo\textcolor{stringliteral}{'s implementation of the CG method}}
-\DoxyCodeLine{\textcolor{stringliteral}{preconditioned with block-\/Jacobi. It is also possible to specify on which}}
-\DoxyCodeLine{\textcolor{stringliteral}{executor Ginkgo will solve the system via the command line.}}
-\DoxyCodeLine{\textcolor{stringliteral}{The function `f` is set to `f(x,y) = 6x + 6y` (making the solution `u(x,y) = x\string^3}}
-\DoxyCodeLine{\textcolor{stringliteral}{+ y\string^3`), but that can be changed in the `main` function. Also the stencil values}}
-\DoxyCodeLine{\textcolor{stringliteral}{for the core, the faces, the edge and the corners can be changed when passing}}
-\DoxyCodeLine{\textcolor{stringliteral}{additional parameters.}}
-\DoxyCodeLine{\textcolor{stringliteral}{}}
-\DoxyCodeLine{\textcolor{stringliteral}{The intention of this is to show how generation of stencil values and the right}}
-\DoxyCodeLine{\textcolor{stringliteral}{hand side vector changes when increasing the dimension.}}
-\DoxyCodeLine{\textcolor{stringliteral}{*****************************<DESCRIPTION>********************************** /}}
-\DoxyCodeLine{\textcolor{stringliteral}{}}
-\DoxyCodeLine{\textcolor{stringliteral}{\#include <array>}}
-\DoxyCodeLine{\textcolor{stringliteral}{\#include <chrono>}}
-\DoxyCodeLine{\textcolor{stringliteral}{\#include <ginkgo/ginkgo.hpp>}}
-\DoxyCodeLine{\textcolor{stringliteral}{\#include <iostream>}}
-\DoxyCodeLine{\textcolor{stringliteral}{\#include <map>}}
-\DoxyCodeLine{\textcolor{stringliteral}{\#include <string>}}
-\DoxyCodeLine{\textcolor{stringliteral}{\#include <vector>}}
+\DoxyCodeLine{\#include <array>}
+\DoxyCodeLine{\#include <chrono>}
+\DoxyCodeLine{\#include <ginkgo/ginkgo.hpp>}
+\DoxyCodeLine{\#include <iostream>}
+\DoxyCodeLine{\#include <map>}
+\DoxyCodeLine{\#include <string>}
+\DoxyCodeLine{\#include <vector>}
 \end{DoxyCode}
 
 
@@ -509,37 +481,6 @@ The expected output should be
 
 
 \begin{DoxyCodeInclude}{0}
-\DoxyCodeLine{\textcolor{comment}{/*******************************<GINKGO LICENSE>******************************}}
-\DoxyCodeLine{\textcolor{comment}{Copyright (c) 2017-\/2023, the Ginkgo authors}}
-\DoxyCodeLine{\textcolor{comment}{All rights reserved.}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{Redistribution and use in source and binary forms, with or without}}
-\DoxyCodeLine{\textcolor{comment}{modification, are permitted provided that the following conditions}}
-\DoxyCodeLine{\textcolor{comment}{are met:}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{1. Redistributions of source code must retain the above copyright}}
-\DoxyCodeLine{\textcolor{comment}{notice, this list of conditions and the following disclaimer.}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{2. Redistributions in binary form must reproduce the above copyright}}
-\DoxyCodeLine{\textcolor{comment}{notice, this list of conditions and the following disclaimer in the}}
-\DoxyCodeLine{\textcolor{comment}{documentation and/or other materials provided with the distribution.}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{3. Neither the name of the copyright holder nor the names of its}}
-\DoxyCodeLine{\textcolor{comment}{contributors may be used to endorse or promote products derived from}}
-\DoxyCodeLine{\textcolor{comment}{this software without specific prior written permission.}}
-\DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS}}
-\DoxyCodeLine{\textcolor{comment}{IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED}}
-\DoxyCodeLine{\textcolor{comment}{TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A}}
-\DoxyCodeLine{\textcolor{comment}{PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT}}
-\DoxyCodeLine{\textcolor{comment}{HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,}}
-\DoxyCodeLine{\textcolor{comment}{SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT}}
-\DoxyCodeLine{\textcolor{comment}{LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,}}
-\DoxyCodeLine{\textcolor{comment}{DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY}}
-\DoxyCodeLine{\textcolor{comment}{THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT}}
-\DoxyCodeLine{\textcolor{comment}{(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE}}
-\DoxyCodeLine{\textcolor{comment}{OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.}}
-\DoxyCodeLine{\textcolor{comment}{******************************<GINKGO LICENSE>*******************************/}}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{comment}{/*****************************<DESCRIPTION>***********************************}}
 \DoxyCodeLine{\textcolor{comment}{This example solves a 2D Poisson equation:}}

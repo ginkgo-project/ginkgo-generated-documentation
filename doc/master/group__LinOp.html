@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1068515030 branch based on master. Ginkgo version 1.7.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1330831941 branch based on master. Ginkgo version 1.8.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -220,10 +220,10 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parallel graph match (<a class="el" href="classgko_1_1multigrid_1_1Pgm.html" title="Parallel graph match (Pgm) is the aggregate method introduced in the paper M.">Pgm</a>) is the aggregate method introduced in the paper M.  <a href="classgko_1_1multigrid_1_1Pgm.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1preconditioner_1_1Ic.html">gko::preconditioner::Ic&lt; LSolverType, IndexType &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Incomplete Cholesky (IC) preconditioner solves the equation <img class="formulaInl" alt="$LL^H*x = b$" src="form_83.png"/> for a given lower triangular matrix L and the right hand side b (can contain multiple right hand sides).  <a href="classgko_1_1preconditioner_1_1Ic.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Incomplete Cholesky (IC) preconditioner solves the equation <img class="formulaInl" alt="$LL^H*x = b$" src="form_104.png"/> for a given lower triangular matrix L and the right hand side b (can contain multiple right hand sides).  <a href="classgko_1_1preconditioner_1_1Ic.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu&lt; LSolverType, USolverType, ReverseApply, IndexType &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Incomplete LU (ILU) preconditioner solves the equation <img class="formulaInl" alt="$LUx = b$" src="form_84.png"/> for a given lower triangular matrix L, an upper triangular matrix U and the right hand side b (can contain multiple right hand sides).  <a href="classgko_1_1preconditioner_1_1Ilu.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Incomplete LU (ILU) preconditioner solves the equation <img class="formulaInl" alt="$LUx = b$" src="form_105.png"/> for a given lower triangular matrix L, an upper triangular matrix U and the right hand side b (can contain multiple right hand sides).  <a href="classgko_1_1preconditioner_1_1Ilu.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1preconditioner_1_1Isai.html">gko::preconditioner::Isai&lt; IsaiType, ValueType, IndexType &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Incomplete Sparse Approximate Inverse (ISAI) Preconditioner generates an approximate inverse matrix for a given square matrix A, lower triangular matrix L, upper triangular matrix U or symmetric positive (spd) matrix B.  <a href="classgko_1_1preconditioner_1_1Isai.html#details">More...</a><br /></td></tr>
@@ -487,13 +487,13 @@ Linear operator as a concept</h1>
 <div class="line"><span class="comment">// create a factory with default `my_value` parameter</span></div>
 <div class="line"><span class="keyword">auto</span> fact = MyLinOp::build().on(exec);</div>
 <div class="line"><span class="comment">// create a operator using the factory:</span></div>
-<div class="line"><span class="keyword">auto</span> my_op = fact-&gt;generate(gko::matrix::Identity::create(exec, 2));</div>
+<div class="line"><span class="keyword">auto</span> my_op = fact-&gt;generate(<a class="code" href="classgko_1_1matrix_1_1Identity.html#ac8f28ec7da5e01316836ab945725896c">gko::matrix::Identity::create</a>(exec, 2));</div>
 <div class="line">std::cout &lt;&lt; my_op-&gt;get_my_parameters().my_value;  <span class="comment">// prints 5</span></div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// create a factory with custom `my_value` parameter</span></div>
 <div class="line"><span class="keyword">auto</span> fact = MyLinOp::build().with_my_value(0).on(exec);</div>
 <div class="line"><span class="comment">// create a operator using the factory:</span></div>
-<div class="line"><span class="keyword">auto</span> my_op = fact-&gt;generate(gko::matrix::Identity::create(exec, 2));</div>
+<div class="line"><span class="keyword">auto</span> my_op = fact-&gt;generate(<a class="code" href="classgko_1_1matrix_1_1Identity.html#ac8f28ec7da5e01316836ab945725896c">gko::matrix::Identity::create</a>(exec, 2));</div>
 <div class="line">std::cout &lt;&lt; my_op-&gt;get_my_parameters().my_value;  <span class="comment">// prints 0</span></div>
 </div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>It is possible to combine both the #GKO_CREATE_FACTORY_PARAMETER_*() macros with this one in a unique macro for class <b>templates</b> (not with regular classes). Splitting this into two distinct macros allows to use them in all contexts. See <a href="https://stackoverflow.com/q/50202718/9385966">https://stackoverflow.com/q/50202718/9385966</a> for more details.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -900,9 +900,10 @@ template&lt;typename Matrix , typename... TArgs&gt; </div>
 </div>
 </div>
 </div><!-- contents -->
-<div class="ttc" id="anamespacegko_html_a1beb80750459e4201aa9d882d2d074c3"><div class="ttname"><a href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a></div><div class="ttdeci">detail::cloned_type&lt; Pointer &gt; clone(const Pointer &amp;p)</div><div class="ttdoc">Creates a unique clone of the object pointed to by p.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:203</div></div>
-<div class="ttc" id="anamespacegko_html_a618c9b64c35b0452240e9e57a9673b94"><div class="ttname"><a href="namespacegko.html#a618c9b64c35b0452240e9e57a9673b94">gko::as</a></div><div class="ttdeci">std::decay_t&lt; T &gt; * as(U *obj)</div><div class="ttdoc">Performs polymorphic type conversion.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:337</div></div>
-<div class="ttc" id="anamespacegko_html_a0059e27f8f4bc348ff65c1e60caf47c8"><div class="ttname"><a href="namespacegko.html#a0059e27f8f4bc348ff65c1e60caf47c8">gko::one</a></div><div class="ttdeci">constexpr T one()</div><div class="ttdoc">Returns the multiplicative identity for T.</div><div class="ttdef"><b>Definition:</b> math.hpp:803</div></div>
+<div class="ttc" id="anamespacegko_html_a1beb80750459e4201aa9d882d2d074c3"><div class="ttname"><a href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone</a></div><div class="ttdeci">detail::cloned_type&lt; Pointer &gt; clone(const Pointer &amp;p)</div><div class="ttdoc">Creates a unique clone of the object pointed to by p.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:175</div></div>
+<div class="ttc" id="anamespacegko_html_a618c9b64c35b0452240e9e57a9673b94"><div class="ttname"><a href="namespacegko.html#a618c9b64c35b0452240e9e57a9673b94">gko::as</a></div><div class="ttdeci">std::decay_t&lt; T &gt; * as(U *obj)</div><div class="ttdoc">Performs polymorphic type conversion.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:309</div></div>
+<div class="ttc" id="aclassgko_1_1matrix_1_1Identity_html_ac8f28ec7da5e01316836ab945725896c"><div class="ttname"><a href="classgko_1_1matrix_1_1Identity.html#ac8f28ec7da5e01316836ab945725896c">gko::matrix::Identity::create</a></div><div class="ttdeci">static std::unique_ptr&lt; Identity &gt; create(std::shared_ptr&lt; const Executor &gt; exec, dim&lt; 2 &gt; size)</div><div class="ttdoc">Creates an Identity matrix of the specified size.</div></div>
+<div class="ttc" id="anamespacegko_html_a0059e27f8f4bc348ff65c1e60caf47c8"><div class="ttname"><a href="namespacegko.html#a0059e27f8f4bc348ff65c1e60caf47c8">gko::one</a></div><div class="ttdeci">constexpr T one()</div><div class="ttdoc">Returns the multiplicative identity for T.</div><div class="ttdef"><b>Definition:</b> math.hpp:775</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
