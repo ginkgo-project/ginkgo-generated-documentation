@@ -1,0 +1,712 @@
+\hypertarget{classgko_1_1batch_1_1MultiVector}{}\doxysection{gko\+::batch\+::Multi\+Vector$<$ Value\+Type $>$ Class Template Reference}
+\label{classgko_1_1batch_1_1MultiVector}\index{gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}}
+
+
+\mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}} stores multiple vectors in a batched fashion and is useful for batched operations.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/base/batch\+\_\+multi\+\_\+vector.\+hpp$>$}
+
+
+
+Inheritance diagram for gko\+::batch\+::Multi\+Vector$<$ Value\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1batch_1_1MultiVector__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for gko\+::batch\+::Multi\+Vector$<$ Value\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1batch_1_1MultiVector__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_ae70b8f94f0fe062f926d3ccaff92d1c2}\label{classgko_1_1batch_1_1MultiVector_ae70b8f94f0fe062f926d3ccaff92d1c2}} 
+using {\bfseries value\+\_\+type} = Value\+Type
+\item 
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_a3715c730eca84eacafdc9fdc91c80f6b}\label{classgko_1_1batch_1_1MultiVector_a3715c730eca84eacafdc9fdc91c80f6b}} 
+using {\bfseries index\+\_\+type} = \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{int32}}
+\item 
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_ab95be1216b77273908faeb6e9377cc2e}\label{classgko_1_1batch_1_1MultiVector_ab95be1216b77273908faeb6e9377cc2e}} 
+using {\bfseries unbatch\+\_\+type} = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$
+\item 
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_ae626e4ea30469cf4dd6336233cb2e67f}\label{classgko_1_1batch_1_1MultiVector_ae626e4ea30469cf4dd6336233cb2e67f}} 
+using {\bfseries absolute\+\_\+type} = \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{remove\+\_\+complex}}$<$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ Value\+Type $>$ $>$
+\item 
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_a487bc7c6fa81d502b5c258cac89790b1}\label{classgko_1_1batch_1_1MultiVector_a487bc7c6fa81d502b5c258cac89790b1}} 
+using {\bfseries complex\+\_\+type} = \mbox{\hyperlink{namespacegko_acc281c8ff5bfa4fd6f25afcce466b1af}{to\+\_\+complex}}$<$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ Value\+Type $>$ $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_afc57287cfa2c847f88c2515ad69a4e77}\label{classgko_1_1batch_1_1MultiVector_afc57287cfa2c847f88c2515ad69a4e77}} 
+void {\bfseries convert\+\_\+to} (\mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ \mbox{\hyperlink{namespacegko_a6362f751c7753cf4fa0a4771d56e8ede}{next\+\_\+precision}}$<$ Value\+Type $>$$>$ $\ast$result) const override
+\item 
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_a2dd4fe21e56c8d2c65cadfddeda8e92a}\label{classgko_1_1batch_1_1MultiVector_a2dd4fe21e56c8d2c65cadfddeda8e92a}} 
+void {\bfseries move\+\_\+to} (\mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ \mbox{\hyperlink{namespacegko_a6362f751c7753cf4fa0a4771d56e8ede}{next\+\_\+precision}}$<$ Value\+Type $>$$>$ $\ast$result) override
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{unbatch\+\_\+type}} $>$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector_a6b5474fa90d5a356d724a3ec34961a5d}{create\+\_\+view\+\_\+for\+\_\+item}} (\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} item\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Creates a mutable view (of \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Dense}{matrix\+::\+Dense}} type) of one item of the Batch \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}} object. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{unbatch\+\_\+type}} $>$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector_a94e680b3b91d54cd8eda7c3bcccf3230}{create\+\_\+const\+\_\+view\+\_\+for\+\_\+item}} (\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} item\+\_\+id) const
+\begin{DoxyCompactList}\small\item\em Creates a mutable view (of \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Dense}{matrix\+::\+Dense}} type) of one item of the Batch \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structgko_1_1batch__dim}{batch\+\_\+dim}}$<$ 2 $>$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector_a5aaedae39d59086a73609bdcf5319cd2}{get\+\_\+size}} () const
+\begin{DoxyCompactList}\small\item\em Returns the batch size. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector_a7e866dde6ed93bfb3489a74da31c82a6}{get\+\_\+num\+\_\+batch\+\_\+items}} () const
+\begin{DoxyCompactList}\small\item\em Returns the number of batch items. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector_a059f66154291545321b99154b1eaf993}{get\+\_\+common\+\_\+size}} () const
+\begin{DoxyCompactList}\small\item\em Returns the common size of the batch items. \end{DoxyCompactList}\item 
+value\+\_\+type $\ast$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector_a1bb84dc66ef95b40c866d93765f3f763}{get\+\_\+values}} () noexcept
+\begin{DoxyCompactList}\small\item\em Returns a pointer to the array of values of the multi-\/vector. \end{DoxyCompactList}\item 
+const value\+\_\+type $\ast$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector_a462501ed49c6e7dca4f75b212c6ba828}{get\+\_\+const\+\_\+values}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns a pointer to the array of values of the multi-\/vector. \end{DoxyCompactList}\item 
+value\+\_\+type $\ast$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector_a24851ffb44ce339fd5d834d1adfbdd85}{get\+\_\+values\+\_\+for\+\_\+item}} (\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} batch\+\_\+id) noexcept
+\begin{DoxyCompactList}\small\item\em Returns a pointer to the array of values of the multi-\/vector for a specific batch item. \end{DoxyCompactList}\item 
+const value\+\_\+type $\ast$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector_a2b149f1cb9187db168a8e38616d2bd60}{get\+\_\+const\+\_\+values\+\_\+for\+\_\+item}} (\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} batch\+\_\+id) const noexcept
+\begin{DoxyCompactList}\small\item\em Returns a pointer to the array of values of the multi-\/vector for a specific batch item. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector_a9218ea22b110991a45a797b983c98897}{get\+\_\+num\+\_\+stored\+\_\+elements}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns the number of elements explicitly stored in the batch matrix, cumulative across all the batch items. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector_a25f8de26b81b428d44914d99eb24a853}{get\+\_\+cumulative\+\_\+offset}} (\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} batch\+\_\+id) const
+\begin{DoxyCompactList}\small\item\em Get the cumulative storage size offset. \end{DoxyCompactList}\item 
+value\+\_\+type \& \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector_adac42b115d0d103429714fe9163cc7f9}{at}} (\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} batch\+\_\+id, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} row, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} col)
+\begin{DoxyCompactList}\small\item\em Returns a single element for a particular batch item. \end{DoxyCompactList}\item 
+value\+\_\+type \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector_adb9b8a1052dffd0e065123b8d402b5cb}{at}} (\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} batch\+\_\+id, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} row, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} col) const
+\begin{DoxyCompactList}\small\item\em Returns a single element for a particular batch item. \end{DoxyCompactList}\item 
+Value\+Type \& \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector_ab0fdbf65be66c22b1fdd49b3556f0457}{at}} (\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} batch\+\_\+id, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} idx) noexcept
+\begin{DoxyCompactList}\small\item\em Returns a single element for a particular batch item. \end{DoxyCompactList}\item 
+Value\+Type \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector_a9cdff419d416bb89a24e1082db3d7a68}{at}} (\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} batch\+\_\+id, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} idx) const noexcept
+\begin{DoxyCompactList}\small\item\em Returns a single element for a particular batch item. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector_ab4ded9e304e4568f4f58b4ca0e651ce4}{scale}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ Value\+Type $>$$>$ alpha)
+\begin{DoxyCompactList}\small\item\em Scales the vector with a scalar (aka\+: B\+L\+AS scal). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector_a39c7eef35032a72e157ce165dd998ae4}{add\+\_\+scaled}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ Value\+Type $>$$>$ alpha, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ Value\+Type $>$$>$ b)
+\begin{DoxyCompactList}\small\item\em Adds {\ttfamily b} scaled by {\ttfamily alpha} to the vector (aka\+: B\+L\+AS axpy). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector_a7fd8a0e99460f9828c9c02551b1e37bb}{compute\+\_\+dot}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ Value\+Type $>$$>$ b, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ Value\+Type $>$$>$ result) const
+\begin{DoxyCompactList}\small\item\em Computes the column-\/wise dot product of each multi-\/vector in this batch and its corresponding entry in {\ttfamily b}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector_a0e06df7d65c3f5b4154385390b06e197}{compute\+\_\+conj\+\_\+dot}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ Value\+Type $>$$>$ b, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ Value\+Type $>$$>$ result) const
+\begin{DoxyCompactList}\small\item\em Computes the column-\/wise conjugate dot product of each multi-\/vector in this batch and its corresponding entry in {\ttfamily b}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector_af957ef3ef2000032c1b8bb79852a8c7e}{compute\+\_\+norm2}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{remove\+\_\+complex}}$<$ Value\+Type $>$$>$$>$ result) const
+\begin{DoxyCompactList}\small\item\em Computes the Euclidean (L$^\wedge$2) norm of each multi-\/vector in this batch. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector_a5faa1c1dee3e390d73d5df10b51377c9}{fill}} (Value\+Type value)
+\begin{DoxyCompactList}\small\item\em Fills the input \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}} with a given value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}} $>$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector_a5af04153abb36502563ed136a356f6cb}{create\+\_\+with\+\_\+config\+\_\+of}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}} $>$ other)
+\begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}} with the configuration of another \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}. \end{DoxyCompactList}\item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}} $>$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector_ace0a705b4c04b18cd0928ac12783c511}{create}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const \mbox{\hyperlink{structgko_1_1batch__dim}{batch\+\_\+dim}}$<$ 2 $>$ \&size=\mbox{\hyperlink{structgko_1_1batch__dim}{batch\+\_\+dim}}$<$ 2 $>$\{\})
+\begin{DoxyCompactList}\small\item\em Creates an uninitialized multi-\/vector of the specified size. \end{DoxyCompactList}\item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}} $>$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector_a18b36f8453558071c9c27c48151c46b8}{create}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const \mbox{\hyperlink{structgko_1_1batch__dim}{batch\+\_\+dim}}$<$ 2 $>$ \&size, \mbox{\hyperlink{classgko_1_1array}{array}}$<$ value\+\_\+type $>$ values)
+\begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}} from an already allocated (and initialized) array. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Input\+Value\+Type $>$ }\\static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}} $>$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector_a5045f07066f9703fbd7e901ac77a04cb}{create}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const \mbox{\hyperlink{structgko_1_1batch__dim}{batch\+\_\+dim}}$<$ 2 $>$ \&size, std\+::initializer\+\_\+list$<$ Input\+Value\+Type $>$ values)
+\begin{DoxyCompactList}\small\item\em create(std\+::shared\+\_\+ptr$<$const \end{DoxyCompactList}\item 
+static std\+::unique\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}} $>$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector_a18b8005c8ec7901f6c23b8e857b8ca1d}{create\+\_\+const}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const \mbox{\hyperlink{structgko_1_1batch__dim}{batch\+\_\+dim}}$<$ 2 $>$ \&sizes, gko\+::detail\+::const\+\_\+array\+\_\+view$<$ Value\+Type $>$ \&\&values)
+\begin{DoxyCompactList}\small\item\em Creates a constant (immutable) batch multi-\/vector from a constant array. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_a6506dc0c9bdbd116867c3a9a8b75e72a}\label{classgko_1_1batch_1_1MultiVector_a6506dc0c9bdbd116867c3a9a8b75e72a}} 
+class {\bfseries Enable\+Polymorphic\+Object$<$ Multi\+Vector $>$}
+\item 
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_a5988165a6eae958af9f37eca18360e52}\label{classgko_1_1batch_1_1MultiVector_a5988165a6eae958af9f37eca18360e52}} 
+class {\bfseries Multi\+Vector$<$ to\+\_\+complex$<$ Value\+Type $>$ $>$}
+\item 
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_ad2eb5a11cc5632b4cc2bf6fbee473a88}\label{classgko_1_1batch_1_1MultiVector_ad2eb5a11cc5632b4cc2bf6fbee473a88}} 
+class {\bfseries Multi\+Vector$<$ next\+\_\+precision$<$ Value\+Type $>$ $>$}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Value\+Type = default\+\_\+precision$>$\newline
+class gko\+::batch\+::\+Multi\+Vector$<$ Value\+Type $>$}
+
+\mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}} stores multiple vectors in a batched fashion and is useful for batched operations. 
+
+For example, if you want to store two batch items with multi-\/vectors of size (3 x 2) given below\+:
+
+\mbox{[}1 2 ; 3 4 1 2 ; 3 4 1 2 ; 3 4\mbox{]}
+
+In memory, they would be stored as a single array\+: \mbox{[}1 2 1 2 1 2 3 4 3 4 3 4\mbox{]}.
+
+Access functions @at can help access individual item if necessary.
+
+The values of the different batch items are stored consecutively and in each batch item, the multi-\/vectors are stored in a row-\/major fashion.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Value\+Type} & precision of multi-\/vector elements \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_a39c7eef35032a72e157ce165dd998ae4}\label{classgko_1_1batch_1_1MultiVector_a39c7eef35032a72e157ce165dd998ae4}} 
+\index{gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}!add\_scaled@{add\_scaled}}
+\index{add\_scaled@{add\_scaled}!gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{add\_scaled()}{add\_scaled()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{gko\+::batch\+::\+Multi\+Vector}}$<$ Value\+Type $>$\+::add\+\_\+scaled (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ Value\+Type $>$$>$}]{alpha,  }\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ Value\+Type $>$$>$}]{b }\end{DoxyParamCaption})}
+
+
+
+Adds {\ttfamily b} scaled by {\ttfamily alpha} to the vector (aka\+: B\+L\+AS axpy). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em alpha} & the scalar \\
+\hline
+{\em b} & a multi-\/vector of the same dimension as this\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+If alpha is 1x1 \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}} matrix, the entire multi-\/vector (all batches) is scaled by alpha. If it is a \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}} row vector of values, then i-\/th column of the vector is scaled with the i-\/th element of alpha (the number of columns of alpha has to match the number of columns of the multi-\/vector). 
+\end{DoxyNote}
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_a9cdff419d416bb89a24e1082db3d7a68}\label{classgko_1_1batch_1_1MultiVector_a9cdff419d416bb89a24e1082db3d7a68}} 
+\index{gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}!at@{at}}
+\index{at@{at}!gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+Value\+Type \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{gko\+::batch\+::\+Multi\+Vector}}$<$ Value\+Type $>$\+::at (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{batch\+\_\+id,  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{idx }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns a single element for a particular batch item. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em batch\+\_\+id} & the batch item index to be queried \\
+\hline
+{\em row} & the row of the requested element \\
+\hline
+{\em col} & the column of the requested element\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+the method has to be called on the same \mbox{\hyperlink{classgko_1_1Executor}{Executor}} the vector is stored at (e.\+g. trying to call this method on a G\+PU multi-\/vector from the O\+MP results in a runtime error) 
+\end{DoxyNote}
+
+
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+data().
+
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_ab0fdbf65be66c22b1fdd49b3556f0457}\label{classgko_1_1batch_1_1MultiVector_ab0fdbf65be66c22b1fdd49b3556f0457}} 
+\index{gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}!at@{at}}
+\index{at@{at}!gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+Value\+Type\& \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{gko\+::batch\+::\+Multi\+Vector}}$<$ Value\+Type $>$\+::at (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{batch\+\_\+id,  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{idx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns a single element for a particular batch item. 
+
+Useful for iterating across all elements of the vector. However, it is less efficient than the two-\/parameter variant of this method.
+
+
+\begin{DoxyParams}{Parameters}
+{\em batch\+\_\+id} & the batch item index to be queried \\
+\hline
+{\em idx} & a linear index of the requested element\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+the method has to be called on the same \mbox{\hyperlink{classgko_1_1Executor}{Executor}} the vector is stored at (e.\+g. trying to call this method on a G\+PU multi-\/vector from the O\+MP results in a runtime error) 
+\end{DoxyNote}
+
+
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+data().
+
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_adac42b115d0d103429714fe9163cc7f9}\label{classgko_1_1batch_1_1MultiVector_adac42b115d0d103429714fe9163cc7f9}} 
+\index{gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}!at@{at}}
+\index{at@{at}!gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+value\+\_\+type\& \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{gko\+::batch\+::\+Multi\+Vector}}$<$ Value\+Type $>$\+::at (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{batch\+\_\+id,  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{row,  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{col }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a single element for a particular batch item. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em batch\+\_\+id} & the batch item index to be queried \\
+\hline
+{\em row} & the row of the requested element \\
+\hline
+{\em col} & the column of the requested element\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+the method has to be called on the same \mbox{\hyperlink{classgko_1_1Executor}{Executor}} the vector is stored at (e.\+g. trying to call this method on a G\+PU multi-\/vector from the O\+MP results in a runtime error) 
+\end{DoxyNote}
+
+
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+data(), and gko\+::batch\+::\+Multi\+Vector$<$ Value\+Type $>$\+::get\+\_\+num\+\_\+batch\+\_\+items().
+
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_adb9b8a1052dffd0e065123b8d402b5cb}\label{classgko_1_1batch_1_1MultiVector_adb9b8a1052dffd0e065123b8d402b5cb}} 
+\index{gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}!at@{at}}
+\index{at@{at}!gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+value\+\_\+type \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{gko\+::batch\+::\+Multi\+Vector}}$<$ Value\+Type $>$\+::at (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{batch\+\_\+id,  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{row,  }\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{col }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a single element for a particular batch item. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em batch\+\_\+id} & the batch item index to be queried \\
+\hline
+{\em row} & the row of the requested element \\
+\hline
+{\em col} & the column of the requested element\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+the method has to be called on the same \mbox{\hyperlink{classgko_1_1Executor}{Executor}} the vector is stored at (e.\+g. trying to call this method on a G\+PU multi-\/vector from the O\+MP results in a runtime error) 
+\end{DoxyNote}
+
+
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+data(), and gko\+::batch\+::\+Multi\+Vector$<$ Value\+Type $>$\+::get\+\_\+num\+\_\+batch\+\_\+items().
+
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_a0e06df7d65c3f5b4154385390b06e197}\label{classgko_1_1batch_1_1MultiVector_a0e06df7d65c3f5b4154385390b06e197}} 
+\index{gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}!compute\_conj\_dot@{compute\_conj\_dot}}
+\index{compute\_conj\_dot@{compute\_conj\_dot}!gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{compute\_conj\_dot()}{compute\_conj\_dot()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{gko\+::batch\+::\+Multi\+Vector}}$<$ Value\+Type $>$\+::compute\+\_\+conj\+\_\+dot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ Value\+Type $>$$>$}]{b,  }\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ Value\+Type $>$$>$}]{result }\end{DoxyParamCaption}) const}
+
+
+
+Computes the column-\/wise conjugate dot product of each multi-\/vector in this batch and its corresponding entry in {\ttfamily b}. 
+
+If the vector has complex value\+\_\+type, then the conjugate of this is taken.
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & a \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}} of same dimension as this \\
+\hline
+{\em result} & a \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}} row vector, used to store the dot product (the number of column in the vector must match the number of columns of this) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_a7fd8a0e99460f9828c9c02551b1e37bb}\label{classgko_1_1batch_1_1MultiVector_a7fd8a0e99460f9828c9c02551b1e37bb}} 
+\index{gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}!compute\_dot@{compute\_dot}}
+\index{compute\_dot@{compute\_dot}!gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{compute\_dot()}{compute\_dot()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{gko\+::batch\+::\+Multi\+Vector}}$<$ Value\+Type $>$\+::compute\+\_\+dot (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ Value\+Type $>$$>$}]{b,  }\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ Value\+Type $>$$>$}]{result }\end{DoxyParamCaption}) const}
+
+
+
+Computes the column-\/wise dot product of each multi-\/vector in this batch and its corresponding entry in {\ttfamily b}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & a \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}} of same dimension as this \\
+\hline
+{\em result} & a \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}} row vector, used to store the dot product \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_af957ef3ef2000032c1b8bb79852a8c7e}\label{classgko_1_1batch_1_1MultiVector_af957ef3ef2000032c1b8bb79852a8c7e}} 
+\index{gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}!compute\_norm2@{compute\_norm2}}
+\index{compute\_norm2@{compute\_norm2}!gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{compute\_norm2()}{compute\_norm2()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{gko\+::batch\+::\+Multi\+Vector}}$<$ Value\+Type $>$\+::compute\+\_\+norm2 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{remove\+\_\+complex}}$<$ Value\+Type $>$$>$$>$}]{result }\end{DoxyParamCaption}) const}
+
+
+
+Computes the Euclidean (L$^\wedge$2) norm of each multi-\/vector in this batch. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em result} & a \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}, used to store the norm (the number of columns in the vector must match the number of columns of this) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_a18b36f8453558071c9c27c48151c46b8}\label{classgko_1_1batch_1_1MultiVector_a18b36f8453558071c9c27c48151c46b8}} 
+\index{gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}!create@{create}}
+\index{create@{create}!gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+static std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$>$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{gko\+::batch\+::\+Multi\+Vector}}$<$ Value\+Type $>$\+::create (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const \mbox{\hyperlink{structgko_1_1batch__dim}{batch\+\_\+dim}}$<$ 2 $>$ \&}]{size,  }\item[{\mbox{\hyperlink{classgko_1_1array}{array}}$<$ value\+\_\+type $>$}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}} from an already allocated (and initialized) array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & \mbox{\hyperlink{classgko_1_1Executor}{Executor}} associated to the vector \\
+\hline
+{\em size} & sizes of the batch matrices in a \mbox{\hyperlink{structgko_1_1batch__dim}{batch\+\_\+dim}} object \\
+\hline
+{\em values} & array of values\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+If {\ttfamily values} is not an rvalue, not an array of Value\+Type, or is on the wrong executor, an internal copy will be created, and the original array data will not be used in the vector. 
+\end{DoxyNote}
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_a5045f07066f9703fbd7e901ac77a04cb}\label{classgko_1_1batch_1_1MultiVector_a5045f07066f9703fbd7e901ac77a04cb}} 
+\index{gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}!create@{create}}
+\index{create@{create}!gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+template$<$typename Input\+Value\+Type $>$ \\
+static std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$>$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{gko\+::batch\+::\+Multi\+Vector}}$<$ Value\+Type $>$\+::create (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const \mbox{\hyperlink{structgko_1_1batch__dim}{batch\+\_\+dim}}$<$ 2 $>$ \&}]{size,  }\item[{std\+::initializer\+\_\+list$<$ Input\+Value\+Type $>$}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+create(std\+::shared\+\_\+ptr$<$const 
+
+create(std\+::shared\+\_\+ptr$<$const executor$>$=\char`\"{}\char`\"{}$>$, const \mbox{\hyperlink{structgko_1_1batch__dim}{batch\+\_\+dim$<$2$>$}}\&, \mbox{\hyperlink{classgko_1_1array}{array$<$value\+\_\+type$>$}}) 
+
+References gko\+::batch\+::\+Multi\+Vector$<$ Value\+Type $>$\+::create().
+
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_ace0a705b4c04b18cd0928ac12783c511}\label{classgko_1_1batch_1_1MultiVector_ace0a705b4c04b18cd0928ac12783c511}} 
+\index{gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}!create@{create}}
+\index{create@{create}!gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+static std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$>$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{gko\+::batch\+::\+Multi\+Vector}}$<$ Value\+Type $>$\+::create (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const \mbox{\hyperlink{structgko_1_1batch__dim}{batch\+\_\+dim}}$<$ 2 $>$ \&}]{size = {\ttfamily \mbox{\hyperlink{structgko_1_1batch__dim}{batch\+\_\+dim}}$<$~2~$>$\{\}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates an uninitialized multi-\/vector of the specified size. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & \mbox{\hyperlink{classgko_1_1Executor}{Executor}} associated to the vector \\
+\hline
+{\em size} & size of the batch multi vector\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A smart pointer to the newly created matrix. 
+\end{DoxyReturn}
+
+
+Referenced by gko\+::batch\+::\+Multi\+Vector$<$ Value\+Type $>$\+::create().
+
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_a18b8005c8ec7901f6c23b8e857b8ca1d}\label{classgko_1_1batch_1_1MultiVector_a18b8005c8ec7901f6c23b8e857b8ca1d}} 
+\index{gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}!create\_const@{create\_const}}
+\index{create\_const@{create\_const}!gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{create\_const()}{create\_const()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+static std\+::unique\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$>$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{gko\+::batch\+::\+Multi\+Vector}}$<$ Value\+Type $>$\+::create\+\_\+const (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const \mbox{\hyperlink{structgko_1_1batch__dim}{batch\+\_\+dim}}$<$ 2 $>$ \&}]{sizes,  }\item[{gko\+::detail\+::const\+\_\+array\+\_\+view$<$ Value\+Type $>$ \&\&}]{values }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a constant (immutable) batch multi-\/vector from a constant array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & the executor to create the vector on \\
+\hline
+{\em size} & the dimensions of the vector \\
+\hline
+{\em values} & the value array of the vector \\
+\hline
+{\em stride} & the row-\/stride of the vector\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A smart pointer to the constant multi-\/vector wrapping the input array (if it resides on the same executor as the vector) or a copy of the array on the correct executor. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_a94e680b3b91d54cd8eda7c3bcccf3230}\label{classgko_1_1batch_1_1MultiVector_a94e680b3b91d54cd8eda7c3bcccf3230}} 
+\index{gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}!create\_const\_view\_for\_item@{create\_const\_view\_for\_item}}
+\index{create\_const\_view\_for\_item@{create\_const\_view\_for\_item}!gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{create\_const\_view\_for\_item()}{create\_const\_view\_for\_item()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+std\+::unique\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{unbatch\+\_\+type}}$>$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{gko\+::batch\+::\+Multi\+Vector}}$<$ Value\+Type $>$\+::create\+\_\+const\+\_\+view\+\_\+for\+\_\+item (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{item\+\_\+id }\end{DoxyParamCaption}) const}
+
+
+
+Creates a mutable view (of \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Dense}{matrix\+::\+Dense}} type) of one item of the Batch \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}} object. 
+
+Does not perform any deep copies, but only returns a view of the data.
+
+
+\begin{DoxyParams}{Parameters}
+{\em item\+\_\+id} & The index of the batch item\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Dense}{matrix\+::\+Dense}} object with the data from the batch item at the given index. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_a6b5474fa90d5a356d724a3ec34961a5d}\label{classgko_1_1batch_1_1MultiVector_a6b5474fa90d5a356d724a3ec34961a5d}} 
+\index{gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}!create\_view\_for\_item@{create\_view\_for\_item}}
+\index{create\_view\_for\_item@{create\_view\_for\_item}!gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{create\_view\_for\_item()}{create\_view\_for\_item()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{unbatch\+\_\+type}}$>$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{gko\+::batch\+::\+Multi\+Vector}}$<$ Value\+Type $>$\+::create\+\_\+view\+\_\+for\+\_\+item (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{item\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Creates a mutable view (of \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Dense}{matrix\+::\+Dense}} type) of one item of the Batch \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}} object. 
+
+Does not perform any deep copies, but only returns a view of the data.
+
+
+\begin{DoxyParams}{Parameters}
+{\em item\+\_\+id} & The index of the batch item\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Dense}{matrix\+::\+Dense}} object with the data from the batch item at the given index. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_a5af04153abb36502563ed136a356f6cb}\label{classgko_1_1batch_1_1MultiVector_a5af04153abb36502563ed136a356f6cb}} 
+\index{gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}!create\_with\_config\_of@{create\_with\_config\_of}}
+\index{create\_with\_config\_of@{create\_with\_config\_of}!gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{create\_with\_config\_of()}{create\_with\_config\_of()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+static std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$>$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{gko\+::batch\+::\+Multi\+Vector}}$<$ Value\+Type $>$\+::create\+\_\+with\+\_\+config\+\_\+of (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ Value\+Type $>$ $>$}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}} with the configuration of another \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other multi-\/vector whose configuration needs to copied. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_a5faa1c1dee3e390d73d5df10b51377c9}\label{classgko_1_1batch_1_1MultiVector_a5faa1c1dee3e390d73d5df10b51377c9}} 
+\index{gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}!fill@{fill}}
+\index{fill@{fill}!gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{fill()}{fill()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{gko\+::batch\+::\+Multi\+Vector}}$<$ Value\+Type $>$\+::fill (\begin{DoxyParamCaption}\item[{Value\+Type}]{value }\end{DoxyParamCaption})}
+
+
+
+Fills the input \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}} with a given value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & the value to be filled \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_a059f66154291545321b99154b1eaf993}\label{classgko_1_1batch_1_1MultiVector_a059f66154291545321b99154b1eaf993}} 
+\index{gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}!get\_common\_size@{get\_common\_size}}
+\index{get\_common\_size@{get\_common\_size}!gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_common\_size()}{get\_common\_size()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+\mbox{\hyperlink{structgko_1_1dim}{dim}}$<$2$>$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{gko\+::batch\+::\+Multi\+Vector}}$<$ Value\+Type $>$\+::get\+\_\+common\+\_\+size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the common size of the batch items. 
+
+\begin{DoxyReturn}{Returns}
+the common size stored 
+\end{DoxyReturn}
+
+
+References gko\+::batch\+\_\+dim$<$ Dimensionality, Dimension\+Type $>$\+::get\+\_\+common\+\_\+size().
+
+
+
+Referenced by gko\+::batch\+::\+Multi\+Vector$<$ Value\+Type $>$\+::get\+\_\+cumulative\+\_\+offset(), and gko\+::batch\+::\+Batch\+Lin\+Op\+::validate\+\_\+application\+\_\+parameters().
+
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_a462501ed49c6e7dca4f75b212c6ba828}\label{classgko_1_1batch_1_1MultiVector_a462501ed49c6e7dca4f75b212c6ba828}} 
+\index{gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}!get\_const\_values@{get\_const\_values}}
+\index{get\_const\_values@{get\_const\_values}!gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_const\_values()}{get\_const\_values()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+const value\+\_\+type$\ast$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{gko\+::batch\+::\+Multi\+Vector}}$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns a pointer to the array of values of the multi-\/vector. 
+
+\begin{DoxyReturn}{Returns}
+the pointer to the array of values
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+This is the constant version of the function, which can be significantly more memory efficient than the non-\/constant version, so always prefer this version. 
+\end{DoxyNote}
+
+
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+data().
+
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_a2b149f1cb9187db168a8e38616d2bd60}\label{classgko_1_1batch_1_1MultiVector_a2b149f1cb9187db168a8e38616d2bd60}} 
+\index{gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}!get\_const\_values\_for\_item@{get\_const\_values\_for\_item}}
+\index{get\_const\_values\_for\_item@{get\_const\_values\_for\_item}!gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_const\_values\_for\_item()}{get\_const\_values\_for\_item()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+const value\+\_\+type$\ast$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{gko\+::batch\+::\+Multi\+Vector}}$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+values\+\_\+for\+\_\+item (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{batch\+\_\+id }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns a pointer to the array of values of the multi-\/vector for a specific batch item. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em batch\+\_\+id} & the id of the batch item.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the pointer to the array of values
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+This is the constant version of the function, which can be significantly more memory efficient than the non-\/constant version, so always prefer this version. 
+\end{DoxyNote}
+
+
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+data(), gko\+::batch\+::\+Multi\+Vector$<$ Value\+Type $>$\+::get\+\_\+cumulative\+\_\+offset(), and gko\+::batch\+::\+Multi\+Vector$<$ Value\+Type $>$\+::get\+\_\+num\+\_\+batch\+\_\+items().
+
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_a25f8de26b81b428d44914d99eb24a853}\label{classgko_1_1batch_1_1MultiVector_a25f8de26b81b428d44914d99eb24a853}} 
+\index{gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}!get\_cumulative\_offset@{get\_cumulative\_offset}}
+\index{get\_cumulative\_offset@{get\_cumulative\_offset}!gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_cumulative\_offset()}{get\_cumulative\_offset()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{gko\+::batch\+::\+Multi\+Vector}}$<$ Value\+Type $>$\+::get\+\_\+cumulative\+\_\+offset (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{batch\+\_\+id }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the cumulative storage size offset. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em batch\+\_\+id} & the batch id\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the cumulative offset 
+\end{DoxyReturn}
+
+
+References gko\+::batch\+::\+Multi\+Vector$<$ Value\+Type $>$\+::get\+\_\+common\+\_\+size().
+
+
+
+Referenced by gko\+::batch\+::\+Multi\+Vector$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+values\+\_\+for\+\_\+item(), and gko\+::batch\+::\+Multi\+Vector$<$ Value\+Type $>$\+::get\+\_\+values\+\_\+for\+\_\+item().
+
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_a7e866dde6ed93bfb3489a74da31c82a6}\label{classgko_1_1batch_1_1MultiVector_a7e866dde6ed93bfb3489a74da31c82a6}} 
+\index{gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}!get\_num\_batch\_items@{get\_num\_batch\_items}}
+\index{get\_num\_batch\_items@{get\_num\_batch\_items}!gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_num\_batch\_items()}{get\_num\_batch\_items()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{gko\+::batch\+::\+Multi\+Vector}}$<$ Value\+Type $>$\+::get\+\_\+num\+\_\+batch\+\_\+items (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the number of batch items. 
+
+\begin{DoxyReturn}{Returns}
+the number of batch items 
+\end{DoxyReturn}
+
+
+References gko\+::batch\+\_\+dim$<$ Dimensionality, Dimension\+Type $>$\+::get\+\_\+num\+\_\+batch\+\_\+items().
+
+
+
+Referenced by gko\+::batch\+::\+Multi\+Vector$<$ Value\+Type $>$\+::at(), gko\+::batch\+::\+Multi\+Vector$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+values\+\_\+for\+\_\+item(), gko\+::batch\+::\+Multi\+Vector$<$ Value\+Type $>$\+::get\+\_\+values\+\_\+for\+\_\+item(), and gko\+::batch\+::\+Batch\+Lin\+Op\+::validate\+\_\+application\+\_\+parameters().
+
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_a9218ea22b110991a45a797b983c98897}\label{classgko_1_1batch_1_1MultiVector_a9218ea22b110991a45a797b983c98897}} 
+\index{gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}!get\_num\_stored\_elements@{get\_num\_stored\_elements}}
+\index{get\_num\_stored\_elements@{get\_num\_stored\_elements}!gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_num\_stored\_elements()}{get\_num\_stored\_elements()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{gko\+::batch\+::\+Multi\+Vector}}$<$ Value\+Type $>$\+::get\+\_\+num\+\_\+stored\+\_\+elements (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns the number of elements explicitly stored in the batch matrix, cumulative across all the batch items. 
+
+\begin{DoxyReturn}{Returns}
+the number of elements explicitly stored in the vector, cumulative across all the batch items 
+\end{DoxyReturn}
+
+
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+size().
+
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_a5aaedae39d59086a73609bdcf5319cd2}\label{classgko_1_1batch_1_1MultiVector_a5aaedae39d59086a73609bdcf5319cd2}} 
+\index{gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}!get\_size@{get\_size}}
+\index{get\_size@{get\_size}!gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_size()}{get\_size()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+\mbox{\hyperlink{structgko_1_1batch__dim}{batch\+\_\+dim}}$<$2$>$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{gko\+::batch\+::\+Multi\+Vector}}$<$ Value\+Type $>$\+::get\+\_\+size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the batch size. 
+
+\begin{DoxyReturn}{Returns}
+the batch size 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_a1bb84dc66ef95b40c866d93765f3f763}\label{classgko_1_1batch_1_1MultiVector_a1bb84dc66ef95b40c866d93765f3f763}} 
+\index{gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}!get\_values@{get\_values}}
+\index{get\_values@{get\_values}!gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_values()}{get\_values()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+value\+\_\+type$\ast$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{gko\+::batch\+::\+Multi\+Vector}}$<$ Value\+Type $>$\+::get\+\_\+values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns a pointer to the array of values of the multi-\/vector. 
+
+\begin{DoxyReturn}{Returns}
+the pointer to the array of values 
+\end{DoxyReturn}
+
+
+References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+data().
+
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_a24851ffb44ce339fd5d834d1adfbdd85}\label{classgko_1_1batch_1_1MultiVector_a24851ffb44ce339fd5d834d1adfbdd85}} 
+\index{gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}!get\_values\_for\_item@{get\_values\_for\_item}}
+\index{get\_values\_for\_item@{get\_values\_for\_item}!gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_values\_for\_item()}{get\_values\_for\_item()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+value\+\_\+type$\ast$ \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{gko\+::batch\+::\+Multi\+Vector}}$<$ Value\+Type $>$\+::get\+\_\+values\+\_\+for\+\_\+item (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{batch\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns a pointer to the array of values of the multi-\/vector for a specific batch item. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em batch\+\_\+id} & the id of the batch item.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the pointer to the array of values 
+\end{DoxyReturn}
+
+
+References gko\+::batch\+::\+Multi\+Vector$<$ Value\+Type $>$\+::get\+\_\+cumulative\+\_\+offset(), gko\+::array$<$ Value\+Type $>$\+::get\+\_\+data(), and gko\+::batch\+::\+Multi\+Vector$<$ Value\+Type $>$\+::get\+\_\+num\+\_\+batch\+\_\+items().
+
+\mbox{\Hypertarget{classgko_1_1batch_1_1MultiVector_ab4ded9e304e4568f4f58b4ca0e651ce4}\label{classgko_1_1batch_1_1MultiVector_ab4ded9e304e4568f4f58b4ca0e651ce4}} 
+\index{gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}!scale@{scale}}
+\index{scale@{scale}!gko::batch::MultiVector$<$ ValueType $>$@{gko::batch::MultiVector$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{scale()}{scale()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{gko\+::batch\+::\+Multi\+Vector}}$<$ Value\+Type $>$\+::scale (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}}$<$ Value\+Type $>$$>$}]{alpha }\end{DoxyParamCaption})}
+
+
+
+Scales the vector with a scalar (aka\+: B\+L\+AS scal). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em alpha} & the scalar\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+If alpha is 1x1 \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}} matrix, the entire multi-\/vector (all batches) is scaled by alpha. If it is a \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}} row vector of values, then i-\/th column of the vector is scaled with the i-\/th element of alpha (the number of columns of alpha has to match the number of columns of the multi-\/vector). If it is a \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}} of the same size as this, then an element wise scaling is performed. 
+\end{DoxyNote}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/base/batch\+\_\+multi\+\_\+vector.\+hpp\end{DoxyCompactItemize}

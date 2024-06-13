@@ -1,0 +1,68 @@
+\hypertarget{classgko_1_1config_1_1type__descriptor}{}\doxysection{gko\+::config\+::type\+\_\+descriptor Class Reference}
+\label{classgko_1_1config_1_1type__descriptor}\index{gko::config::type\_descriptor@{gko::config::type\_descriptor}}
+
+
+This class describes the value and index types to be used when building a Ginkgo type from a configuration file.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/config/type\+\_\+descriptor.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgko_1_1config_1_1type__descriptor_a2edc43c2f174dce3e933951ef028af49}{type\+\_\+descriptor}} (std\+::string value\+\_\+typestr=\char`\"{}float64\char`\"{}, std\+::string index\+\_\+typestr=\char`\"{}int32\char`\"{})
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1config_1_1type__descriptor}{type\+\_\+descriptor}} constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1config_1_1type__descriptor_a2aeb0732b5022a4f41186eb95a43857a}\label{classgko_1_1config_1_1type__descriptor_a2aeb0732b5022a4f41186eb95a43857a}} 
+const std\+::string \& \mbox{\hyperlink{classgko_1_1config_1_1type__descriptor_a2aeb0732b5022a4f41186eb95a43857a}{get\+\_\+value\+\_\+typestr}} () const
+\begin{DoxyCompactList}\small\item\em Get the value type string. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1config_1_1type__descriptor_a81124bac30caf3d22920e1a7555144fe}\label{classgko_1_1config_1_1type__descriptor_a81124bac30caf3d22920e1a7555144fe}} 
+const std\+::string \& \mbox{\hyperlink{classgko_1_1config_1_1type__descriptor_a81124bac30caf3d22920e1a7555144fe}{get\+\_\+index\+\_\+typestr}} () const
+\begin{DoxyCompactList}\small\item\em Get the index type string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class describes the value and index types to be used when building a Ginkgo type from a configuration file. 
+
+A \mbox{\hyperlink{classgko_1_1config_1_1type__descriptor}{type\+\_\+descriptor}} is passed in order to define the parse function defines which template parameters, in terms of value\+\_\+type and/or index\+\_\+type, the created object will have. For example, a CG solver created like this\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} cg = parse(config, context, \mbox{\hyperlink{classgko_1_1config_1_1type__descriptor_a2edc43c2f174dce3e933951ef028af49}{type\_descriptor}}(\textcolor{stringliteral}{"float64"}, \textcolor{stringliteral}{"int32"}));}
+\end{DoxyCode}
+ will have the value type {\ttfamily float64} and the index type {\ttfamily int32}. Any Ginkgo object that does not require one of these types will just ignore it. The value {\ttfamily void} can be used to specify that no default type is provided. In this case, the configuration has to provide the necessary template types.
+
+If the configuration specifies one of the fields (or both)\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{value\_type: \textcolor{stringliteral}{"some\_value\_type"}}
+\DoxyCodeLine{index\_type: \textcolor{stringliteral}{"some\_index\_type"}}
+\end{DoxyCode}
+ these types will take precedence over the \mbox{\hyperlink{classgko_1_1config_1_1type__descriptor}{type\+\_\+descriptor}}. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classgko_1_1config_1_1type__descriptor_a2edc43c2f174dce3e933951ef028af49}\label{classgko_1_1config_1_1type__descriptor_a2edc43c2f174dce3e933951ef028af49}} 
+\index{gko::config::type\_descriptor@{gko::config::type\_descriptor}!type\_descriptor@{type\_descriptor}}
+\index{type\_descriptor@{type\_descriptor}!gko::config::type\_descriptor@{gko::config::type\_descriptor}}
+\doxysubsubsection{\texorpdfstring{type\_descriptor()}{type\_descriptor()}}
+{\footnotesize\ttfamily gko\+::config\+::type\+\_\+descriptor\+::type\+\_\+descriptor (\begin{DoxyParamCaption}\item[{std\+::string}]{value\+\_\+typestr = {\ttfamily \char`\"{}float64\char`\"{}},  }\item[{std\+::string}]{index\+\_\+typestr = {\ttfamily \char`\"{}int32\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+\mbox{\hyperlink{classgko_1_1config_1_1type__descriptor}{type\+\_\+descriptor}} constructor. 
+
+There is free function {\ttfamily make\+\_\+type\+\_\+descriptor} to create the object by template.
+
+
+\begin{DoxyParams}{Parameters}
+{\em value\+\_\+typestr} & the value type string. \char`\"{}void\char`\"{} means no default. \\
+\hline
+{\em index\+\_\+typestr} & the index type string. \char`\"{}void\char`\"{} means no default.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+there is no way to call the constructor with explicit template, so we create another free function to handle it. 
+\end{DoxyNote}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/config/type\+\_\+descriptor.\+hpp\end{DoxyCompactItemize}
