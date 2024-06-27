@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1350943712 branch based on develop. Ginkgo version 1.9.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1351416132 branch based on develop. Ginkgo version 1.9.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -910,363 +910,382 @@ $(function() {
 <div class="line"><a name="l01595"></a><span class="lineno"> 1595</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().minor;</div>
 <div class="line"><a name="l01596"></a><span class="lineno"> 1596</span>&#160;    }</div>
 <div class="line"><a name="l01597"></a><span class="lineno"> 1597</span>&#160; </div>
-<div class="line"><a name="l01603"></a><span class="lineno"><a class="line" href="classgko_1_1CudaExecutor.html#a5b5f8febb914c9984bc77b15e7bb7601"> 1603</a></span>&#160;    cublasContext* <a class="code" href="classgko_1_1CudaExecutor.html#a5b5f8febb914c9984bc77b15e7bb7601">get_cublas_handle</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> cublas_handle_.get(); }</div>
-<div class="line"><a name="l01604"></a><span class="lineno"> 1604</span>&#160; </div>
-<div class="line"><a name="l01610"></a><span class="lineno"><a class="line" href="classgko_1_1CudaExecutor.html#ade84197157cc2695e5c94310692ab323"> 1610</a></span>&#160;    cusparseContext* <a class="code" href="classgko_1_1CudaExecutor.html#ade84197157cc2695e5c94310692ab323">get_cusparse_handle</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l01611"></a><span class="lineno"> 1611</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l01612"></a><span class="lineno"> 1612</span>&#160;        <span class="keywordflow">return</span> cusparse_handle_.get();</div>
-<div class="line"><a name="l01613"></a><span class="lineno"> 1613</span>&#160;    }</div>
-<div class="line"><a name="l01614"></a><span class="lineno"> 1614</span>&#160; </div>
-<div class="line"><a name="l01620"></a><span class="lineno"><a class="line" href="classgko_1_1CudaExecutor.html#ab7e9f82cce904e2649a61d39e7161538"> 1620</a></span>&#160;    std::vector&lt;int&gt; <a class="code" href="classgko_1_1CudaExecutor.html#ab7e9f82cce904e2649a61d39e7161538">get_closest_pus</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l01621"></a><span class="lineno"> 1621</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l01622"></a><span class="lineno"> 1622</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().closest_pu_ids;</div>
-<div class="line"><a name="l01623"></a><span class="lineno"> 1623</span>&#160;    }</div>
-<div class="line"><a name="l01624"></a><span class="lineno"> 1624</span>&#160; </div>
-<div class="line"><a name="l01630"></a><span class="lineno"><a class="line" href="classgko_1_1CudaExecutor.html#a23a13ee1b82ea850660da25376d6cf4e"> 1630</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classgko_1_1CudaExecutor.html#a23a13ee1b82ea850660da25376d6cf4e">get_closest_numa</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> this-&gt;get_exec_info().numa_node; }</div>
-<div class="line"><a name="l01631"></a><span class="lineno"> 1631</span>&#160; </div>
-<div class="line"><a name="l01638"></a><span class="lineno"><a class="line" href="classgko_1_1CudaExecutor.html#a95709d82526c878c8d33ffb0eece62b9"> 1638</a></span>&#160;    CUstream_st* <a class="code" href="classgko_1_1CudaExecutor.html#a95709d82526c878c8d33ffb0eece62b9">get_stream</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> stream_; }</div>
+<div class="line"><a name="l01603"></a><span class="lineno"> 1603</span>&#160;    GKO_DEPRECATED(<span class="stringliteral">&quot;use get_blas_handle() instead&quot;</span>)</div>
+<div class="line"><a name="l01604"></a><span class="lineno"><a class="line" href="classgko_1_1CudaExecutor.html#a5b5f8febb914c9984bc77b15e7bb7601"> 1604</a></span>&#160;    cublasContext* get_cublas_handle()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> get_blas_handle(); }</div>
+<div class="line"><a name="l01605"></a><span class="lineno"> 1605</span>&#160; </div>
+<div class="line"><a name="l01609"></a><span class="lineno"><a class="line" href="classgko_1_1CudaExecutor.html#a6310b548ceda90c584108bf8efc4e1c1"> 1609</a></span>&#160;    cublasContext* <a class="code" href="classgko_1_1CudaExecutor.html#a6310b548ceda90c584108bf8efc4e1c1">get_blas_handle</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> cublas_handle_.get(); }</div>
+<div class="line"><a name="l01610"></a><span class="lineno"> 1610</span>&#160; </div>
+<div class="line"><a name="l01616"></a><span class="lineno"> 1616</span>&#160;    GKO_DEPRECATED(<span class="stringliteral">&quot;use get_sparselib_handle() instead&quot;</span>)</div>
+<div class="line"><a name="l01617"></a><span class="lineno"><a class="line" href="classgko_1_1CudaExecutor.html#ade84197157cc2695e5c94310692ab323"> 1617</a></span>&#160;    cusparseContext* get_cusparse_handle()<span class="keyword"> const</span></div>
+<div class="line"><a name="l01618"></a><span class="lineno"> 1618</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l01619"></a><span class="lineno"> 1619</span>&#160;        <span class="keywordflow">return</span> get_sparselib_handle();</div>
+<div class="line"><a name="l01620"></a><span class="lineno"> 1620</span>&#160;    }</div>
+<div class="line"><a name="l01621"></a><span class="lineno"> 1621</span>&#160; </div>
+<div class="line"><a name="l01625"></a><span class="lineno"><a class="line" href="classgko_1_1CudaExecutor.html#a3e71f1cef44cc3381fc4907112548c8f"> 1625</a></span>&#160;    cusparseContext* <a class="code" href="classgko_1_1CudaExecutor.html#a3e71f1cef44cc3381fc4907112548c8f">get_sparselib_handle</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l01626"></a><span class="lineno"> 1626</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l01627"></a><span class="lineno"> 1627</span>&#160;        <span class="keywordflow">return</span> cusparse_handle_.get();</div>
+<div class="line"><a name="l01628"></a><span class="lineno"> 1628</span>&#160;    }</div>
+<div class="line"><a name="l01629"></a><span class="lineno"> 1629</span>&#160; </div>
+<div class="line"><a name="l01635"></a><span class="lineno"><a class="line" href="classgko_1_1CudaExecutor.html#ab7e9f82cce904e2649a61d39e7161538"> 1635</a></span>&#160;    std::vector&lt;int&gt; <a class="code" href="classgko_1_1CudaExecutor.html#ab7e9f82cce904e2649a61d39e7161538">get_closest_pus</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l01636"></a><span class="lineno"> 1636</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l01637"></a><span class="lineno"> 1637</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().closest_pu_ids;</div>
+<div class="line"><a name="l01638"></a><span class="lineno"> 1638</span>&#160;    }</div>
 <div class="line"><a name="l01639"></a><span class="lineno"> 1639</span>&#160; </div>
-<div class="line"><a name="l01640"></a><span class="lineno"> 1640</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l01641"></a><span class="lineno"> 1641</span>&#160;    <span class="keywordtype">void</span> set_gpu_property();</div>
-<div class="line"><a name="l01642"></a><span class="lineno"> 1642</span>&#160; </div>
-<div class="line"><a name="l01643"></a><span class="lineno"> 1643</span>&#160;    <span class="keywordtype">void</span> init_handles();</div>
-<div class="line"><a name="l01644"></a><span class="lineno"> 1644</span>&#160; </div>
-<div class="line"><a name="l01645"></a><span class="lineno"> 1645</span>&#160;    <a class="code" href="classgko_1_1CudaExecutor.html">CudaExecutor</a>(<span class="keywordtype">int</span> device_id, std::shared_ptr&lt;Executor&gt; master,</div>
-<div class="line"><a name="l01646"></a><span class="lineno"> 1646</span>&#160;                 std::shared_ptr&lt;CudaAllocatorBase&gt; alloc, CUstream_st* stream)</div>
-<div class="line"><a name="l01647"></a><span class="lineno"> 1647</span>&#160;        : alloc_{std::move(alloc)}, master_(master), stream_{stream}</div>
-<div class="line"><a name="l01648"></a><span class="lineno"> 1648</span>&#160;    {</div>
-<div class="line"><a name="l01649"></a><span class="lineno"> 1649</span>&#160;        this-&gt;get_exec_info().device_id = device_id;</div>
-<div class="line"><a name="l01650"></a><span class="lineno"> 1650</span>&#160;        this-&gt;get_exec_info().num_computing_units = 0;</div>
-<div class="line"><a name="l01651"></a><span class="lineno"> 1651</span>&#160;        this-&gt;get_exec_info().num_pu_per_cu = 0;</div>
-<div class="line"><a name="l01652"></a><span class="lineno"> 1652</span>&#160;        this-&gt;CudaExecutor::populate_exec_info(</div>
-<div class="line"><a name="l01653"></a><span class="lineno"> 1653</span>&#160;            <a class="code" href="classgko_1_1machine__topology.html#af386c47b448d710e62f3b186b358c775">machine_topology::get_instance</a>());</div>
-<div class="line"><a name="l01654"></a><span class="lineno"> 1654</span>&#160;        this-&gt;set_gpu_property();</div>
-<div class="line"><a name="l01655"></a><span class="lineno"> 1655</span>&#160;        this-&gt;init_handles();</div>
-<div class="line"><a name="l01656"></a><span class="lineno"> 1656</span>&#160;    }</div>
+<div class="line"><a name="l01645"></a><span class="lineno"><a class="line" href="classgko_1_1CudaExecutor.html#a23a13ee1b82ea850660da25376d6cf4e"> 1645</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classgko_1_1CudaExecutor.html#a23a13ee1b82ea850660da25376d6cf4e">get_closest_numa</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> this-&gt;get_exec_info().numa_node; }</div>
+<div class="line"><a name="l01646"></a><span class="lineno"> 1646</span>&#160; </div>
+<div class="line"><a name="l01653"></a><span class="lineno"><a class="line" href="classgko_1_1CudaExecutor.html#a95709d82526c878c8d33ffb0eece62b9"> 1653</a></span>&#160;    CUstream_st* <a class="code" href="classgko_1_1CudaExecutor.html#a95709d82526c878c8d33ffb0eece62b9">get_stream</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> stream_; }</div>
+<div class="line"><a name="l01654"></a><span class="lineno"> 1654</span>&#160; </div>
+<div class="line"><a name="l01655"></a><span class="lineno"> 1655</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l01656"></a><span class="lineno"> 1656</span>&#160;    <span class="keywordtype">void</span> set_gpu_property();</div>
 <div class="line"><a name="l01657"></a><span class="lineno"> 1657</span>&#160; </div>
-<div class="line"><a name="l01658"></a><span class="lineno"> 1658</span>&#160;    <span class="keywordtype">void</span>* raw_alloc(<a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> size) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l01658"></a><span class="lineno"> 1658</span>&#160;    <span class="keywordtype">void</span> init_handles();</div>
 <div class="line"><a name="l01659"></a><span class="lineno"> 1659</span>&#160; </div>
-<div class="line"><a name="l01660"></a><span class="lineno"> 1660</span>&#160;    <span class="keywordtype">void</span> raw_free(<span class="keywordtype">void</span>* ptr) <span class="keyword">const</span> noexcept <span class="keyword">override</span>;</div>
-<div class="line"><a name="l01661"></a><span class="lineno"> 1661</span>&#160; </div>
-<div class="line"><a name="l01662"></a><span class="lineno"> 1662</span>&#160;    GKO_ENABLE_FOR_ALL_EXECUTORS(GKO_OVERRIDE_RAW_COPY_TO);</div>
-<div class="line"><a name="l01663"></a><span class="lineno"> 1663</span>&#160; </div>
-<div class="line"><a name="l01664"></a><span class="lineno"> 1664</span>&#160;    GKO_DEFAULT_OVERRIDE_VERIFY_MEMORY(OmpExecutor, <span class="keyword">false</span>);</div>
-<div class="line"><a name="l01665"></a><span class="lineno"> 1665</span>&#160; </div>
-<div class="line"><a name="l01666"></a><span class="lineno"> 1666</span>&#160;    GKO_DEFAULT_OVERRIDE_VERIFY_MEMORY(ReferenceExecutor, <span class="keyword">false</span>);</div>
-<div class="line"><a name="l01667"></a><span class="lineno"> 1667</span>&#160; </div>
-<div class="line"><a name="l01668"></a><span class="lineno"> 1668</span>&#160;    GKO_DEFAULT_OVERRIDE_VERIFY_MEMORY(DpcppExecutor, <span class="keyword">false</span>);</div>
-<div class="line"><a name="l01669"></a><span class="lineno"> 1669</span>&#160; </div>
-<div class="line"><a name="l01670"></a><span class="lineno"> 1670</span>&#160;    <span class="keywordtype">bool</span> verify_memory_to(<span class="keyword">const</span> HipExecutor* dest_exec) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l01671"></a><span class="lineno"> 1671</span>&#160; </div>
-<div class="line"><a name="l01672"></a><span class="lineno"> 1672</span>&#160;    <span class="keywordtype">bool</span> verify_memory_to(<span class="keyword">const</span> CudaExecutor* dest_exec) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l01673"></a><span class="lineno"> 1673</span>&#160; </div>
-<div class="line"><a name="l01674"></a><span class="lineno"> 1674</span>&#160;    <span class="keywordtype">void</span> populate_exec_info(<span class="keyword">const</span> machine_topology* mach_topo) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l01675"></a><span class="lineno"> 1675</span>&#160; </div>
-<div class="line"><a name="l01676"></a><span class="lineno"> 1676</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l01677"></a><span class="lineno"> 1677</span>&#160;    std::shared_ptr&lt;Executor&gt; master_;</div>
+<div class="line"><a name="l01660"></a><span class="lineno"> 1660</span>&#160;    <a class="code" href="classgko_1_1CudaExecutor.html">CudaExecutor</a>(<span class="keywordtype">int</span> device_id, std::shared_ptr&lt;Executor&gt; master,</div>
+<div class="line"><a name="l01661"></a><span class="lineno"> 1661</span>&#160;                 std::shared_ptr&lt;CudaAllocatorBase&gt; alloc, CUstream_st* stream)</div>
+<div class="line"><a name="l01662"></a><span class="lineno"> 1662</span>&#160;        : alloc_{std::move(alloc)}, master_(master), stream_{stream}</div>
+<div class="line"><a name="l01663"></a><span class="lineno"> 1663</span>&#160;    {</div>
+<div class="line"><a name="l01664"></a><span class="lineno"> 1664</span>&#160;        this-&gt;get_exec_info().device_id = device_id;</div>
+<div class="line"><a name="l01665"></a><span class="lineno"> 1665</span>&#160;        this-&gt;get_exec_info().num_computing_units = 0;</div>
+<div class="line"><a name="l01666"></a><span class="lineno"> 1666</span>&#160;        this-&gt;get_exec_info().num_pu_per_cu = 0;</div>
+<div class="line"><a name="l01667"></a><span class="lineno"> 1667</span>&#160;        this-&gt;CudaExecutor::populate_exec_info(</div>
+<div class="line"><a name="l01668"></a><span class="lineno"> 1668</span>&#160;            <a class="code" href="classgko_1_1machine__topology.html#af386c47b448d710e62f3b186b358c775">machine_topology::get_instance</a>());</div>
+<div class="line"><a name="l01669"></a><span class="lineno"> 1669</span>&#160;        this-&gt;set_gpu_property();</div>
+<div class="line"><a name="l01670"></a><span class="lineno"> 1670</span>&#160;        this-&gt;init_handles();</div>
+<div class="line"><a name="l01671"></a><span class="lineno"> 1671</span>&#160;    }</div>
+<div class="line"><a name="l01672"></a><span class="lineno"> 1672</span>&#160; </div>
+<div class="line"><a name="l01673"></a><span class="lineno"> 1673</span>&#160;    <span class="keywordtype">void</span>* raw_alloc(<a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> size) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l01674"></a><span class="lineno"> 1674</span>&#160; </div>
+<div class="line"><a name="l01675"></a><span class="lineno"> 1675</span>&#160;    <span class="keywordtype">void</span> raw_free(<span class="keywordtype">void</span>* ptr) <span class="keyword">const</span> noexcept <span class="keyword">override</span>;</div>
+<div class="line"><a name="l01676"></a><span class="lineno"> 1676</span>&#160; </div>
+<div class="line"><a name="l01677"></a><span class="lineno"> 1677</span>&#160;    GKO_ENABLE_FOR_ALL_EXECUTORS(GKO_OVERRIDE_RAW_COPY_TO);</div>
 <div class="line"><a name="l01678"></a><span class="lineno"> 1678</span>&#160; </div>
-<div class="line"><a name="l01679"></a><span class="lineno"> 1679</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l01680"></a><span class="lineno"> 1680</span>&#160;    <span class="keyword">using</span> handle_manager = std::unique_ptr&lt;T, std::function&lt;void(T*)&gt;&gt;;</div>
-<div class="line"><a name="l01681"></a><span class="lineno"> 1681</span>&#160;    handle_manager&lt;cublasContext&gt; cublas_handle_;</div>
-<div class="line"><a name="l01682"></a><span class="lineno"> 1682</span>&#160;    handle_manager&lt;cusparseContext&gt; cusparse_handle_;</div>
-<div class="line"><a name="l01683"></a><span class="lineno"> 1683</span>&#160;    std::shared_ptr&lt;CudaAllocatorBase&gt; alloc_;</div>
-<div class="line"><a name="l01684"></a><span class="lineno"> 1684</span>&#160;    CUstream_st* stream_;</div>
-<div class="line"><a name="l01685"></a><span class="lineno"> 1685</span>&#160;};</div>
+<div class="line"><a name="l01679"></a><span class="lineno"> 1679</span>&#160;    GKO_DEFAULT_OVERRIDE_VERIFY_MEMORY(OmpExecutor, <span class="keyword">false</span>);</div>
+<div class="line"><a name="l01680"></a><span class="lineno"> 1680</span>&#160; </div>
+<div class="line"><a name="l01681"></a><span class="lineno"> 1681</span>&#160;    GKO_DEFAULT_OVERRIDE_VERIFY_MEMORY(ReferenceExecutor, <span class="keyword">false</span>);</div>
+<div class="line"><a name="l01682"></a><span class="lineno"> 1682</span>&#160; </div>
+<div class="line"><a name="l01683"></a><span class="lineno"> 1683</span>&#160;    GKO_DEFAULT_OVERRIDE_VERIFY_MEMORY(DpcppExecutor, <span class="keyword">false</span>);</div>
+<div class="line"><a name="l01684"></a><span class="lineno"> 1684</span>&#160; </div>
+<div class="line"><a name="l01685"></a><span class="lineno"> 1685</span>&#160;    <span class="keywordtype">bool</span> verify_memory_to(<span class="keyword">const</span> HipExecutor* dest_exec) <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l01686"></a><span class="lineno"> 1686</span>&#160; </div>
-<div class="line"><a name="l01687"></a><span class="lineno"> 1687</span>&#160; </div>
-<div class="line"><a name="l01688"></a><span class="lineno"> 1688</span>&#160;<span class="keyword">namespace </span>kernels {</div>
-<div class="line"><a name="l01689"></a><span class="lineno"> 1689</span>&#160;<span class="keyword">namespace </span>cuda {</div>
-<div class="line"><a name="l01690"></a><span class="lineno"> 1690</span>&#160;<span class="keyword">using</span> DefaultExecutor = CudaExecutor;</div>
-<div class="line"><a name="l01691"></a><span class="lineno"> 1691</span>&#160;}  <span class="comment">// namespace cuda</span></div>
-<div class="line"><a name="l01692"></a><span class="lineno"> 1692</span>&#160;}  <span class="comment">// namespace kernels</span></div>
+<div class="line"><a name="l01687"></a><span class="lineno"> 1687</span>&#160;    <span class="keywordtype">bool</span> verify_memory_to(<span class="keyword">const</span> CudaExecutor* dest_exec) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l01688"></a><span class="lineno"> 1688</span>&#160; </div>
+<div class="line"><a name="l01689"></a><span class="lineno"> 1689</span>&#160;    <span class="keywordtype">void</span> populate_exec_info(<span class="keyword">const</span> machine_topology* mach_topo) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l01690"></a><span class="lineno"> 1690</span>&#160; </div>
+<div class="line"><a name="l01691"></a><span class="lineno"> 1691</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l01692"></a><span class="lineno"> 1692</span>&#160;    std::shared_ptr&lt;Executor&gt; master_;</div>
 <div class="line"><a name="l01693"></a><span class="lineno"> 1693</span>&#160; </div>
-<div class="line"><a name="l01694"></a><span class="lineno"> 1694</span>&#160; </div>
-<div class="line"><a name="l01701"></a><span class="lineno"><a class="line" href="classgko_1_1HipExecutor.html"> 1701</a></span>&#160;<span class="keyword">class </span><a class="code" href="classgko_1_1HipExecutor.html">HipExecutor</a> : <span class="keyword">public</span> detail::ExecutorBase&lt;HipExecutor&gt;,</div>
-<div class="line"><a name="l01702"></a><span class="lineno"> 1702</span>&#160;                    <span class="keyword">public</span> std::enable_shared_from_this&lt;HipExecutor&gt;,</div>
-<div class="line"><a name="l01703"></a><span class="lineno"> 1703</span>&#160;                    <span class="keyword">public</span> detail::EnableDeviceReset {</div>
-<div class="line"><a name="l01704"></a><span class="lineno"> 1704</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>detail::ExecutorBase&lt;<a class="code" href="classgko_1_1HipExecutor.html">HipExecutor</a>&gt;;</div>
-<div class="line"><a name="l01705"></a><span class="lineno"> 1705</span>&#160; </div>
-<div class="line"><a name="l01706"></a><span class="lineno"> 1706</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l01718"></a><span class="lineno"> 1718</span>&#160;    GKO_DEPRECATED(</div>
-<div class="line"><a name="l01719"></a><span class="lineno"> 1719</span>&#160;        <span class="stringliteral">&quot;device_reset is deprecated entirely, call hipDeviceReset directly. &quot;</span></div>
-<div class="line"><a name="l01720"></a><span class="lineno"> 1720</span>&#160;        <span class="stringliteral">&quot;alloc_mode was replaced by the Allocator type &quot;</span></div>
-<div class="line"><a name="l01721"></a><span class="lineno"> 1721</span>&#160;        <span class="stringliteral">&quot;hierarchy.&quot;</span>)</div>
-<div class="line"><a name="l01722"></a><span class="lineno"> 1722</span>&#160;    <span class="keyword">static</span> std::shared_ptr&lt;HipExecutor&gt; <a class="code" href="classgko_1_1HipExecutor.html#aa0701fe1303e03a8331da7e95008100d">create</a>(</div>
-<div class="line"><a name="l01723"></a><span class="lineno"> 1723</span>&#160;        <span class="keywordtype">int</span> device_id, std::shared_ptr&lt;Executor&gt; master, <span class="keywordtype">bool</span> device_reset,</div>
-<div class="line"><a name="l01724"></a><span class="lineno"> 1724</span>&#160;        <a class="code" href="namespacegko.html#afbed8e2cbd3ee4ca962e12f688858bdb">allocation_mode</a> alloc_mode = default_hip_alloc_mode,</div>
-<div class="line"><a name="l01725"></a><span class="lineno"> 1725</span>&#160;        GKO_HIP_STREAM_STRUCT* stream = <span class="keyword">nullptr</span>);</div>
-<div class="line"><a name="l01726"></a><span class="lineno"> 1726</span>&#160; </div>
-<div class="line"><a name="l01727"></a><span class="lineno"> 1727</span>&#160;    <span class="keyword">static</span> std::shared_ptr&lt;HipExecutor&gt; <a class="code" href="classgko_1_1HipExecutor.html#aa0701fe1303e03a8331da7e95008100d">create</a>(</div>
-<div class="line"><a name="l01728"></a><span class="lineno"> 1728</span>&#160;        <span class="keywordtype">int</span> device_id, std::shared_ptr&lt;Executor&gt; master,</div>
-<div class="line"><a name="l01729"></a><span class="lineno"> 1729</span>&#160;        std::shared_ptr&lt;HipAllocatorBase&gt; <a class="code" href="classgko_1_1Executor.html#a5a216c2b1f7ceb8a0190c08941c1c687">alloc</a> =</div>
-<div class="line"><a name="l01730"></a><span class="lineno"> 1730</span>&#160;            std::make_shared&lt;HipAllocator&gt;(),</div>
-<div class="line"><a name="l01731"></a><span class="lineno"> 1731</span>&#160;        GKO_HIP_STREAM_STRUCT* stream = <span class="keyword">nullptr</span>);</div>
-<div class="line"><a name="l01732"></a><span class="lineno"> 1732</span>&#160; </div>
-<div class="line"><a name="l01733"></a><span class="lineno"> 1733</span>&#160;    std::shared_ptr&lt;Executor&gt; <a class="code" href="classgko_1_1HipExecutor.html#aad8e01fc70095ad5df48a02da9555400">get_master</a>() noexcept <span class="keyword">override</span>;</div>
-<div class="line"><a name="l01734"></a><span class="lineno"> 1734</span>&#160; </div>
-<div class="line"><a name="l01735"></a><span class="lineno"> 1735</span>&#160;    std::shared_ptr&lt;const Executor&gt; <a class="code" href="classgko_1_1HipExecutor.html#aad8e01fc70095ad5df48a02da9555400">get_master</a>() <span class="keyword">const</span> noexcept <span class="keyword">override</span>;</div>
-<div class="line"><a name="l01736"></a><span class="lineno"> 1736</span>&#160; </div>
-<div class="line"><a name="l01737"></a><span class="lineno"> 1737</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1HipExecutor.html#a0ea0ec8722767138953110b52d325b4a">synchronize</a>() <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l01738"></a><span class="lineno"> 1738</span>&#160; </div>
-<div class="line"><a name="l01739"></a><span class="lineno"> 1739</span>&#160;    <a class="code" href="classgko_1_1scoped__device__id__guard.html">scoped_device_id_guard</a> get_scoped_device_id_guard() <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l01740"></a><span class="lineno"> 1740</span>&#160; </div>
-<div class="line"><a name="l01744"></a><span class="lineno"><a class="line" href="classgko_1_1HipExecutor.html#a37a35665c3983e56105c6acea9de73c6"> 1744</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classgko_1_1HipExecutor.html#a37a35665c3983e56105c6acea9de73c6">get_device_id</a>() const noexcept</div>
-<div class="line"><a name="l01745"></a><span class="lineno"> 1745</span>&#160;    {</div>
-<div class="line"><a name="l01746"></a><span class="lineno"> 1746</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().device_id;</div>
-<div class="line"><a name="l01747"></a><span class="lineno"> 1747</span>&#160;    }</div>
-<div class="line"><a name="l01748"></a><span class="lineno"> 1748</span>&#160; </div>
-<div class="line"><a name="l01752"></a><span class="lineno"> 1752</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="classgko_1_1HipExecutor.html#a7b34cbd84692dafa2290e6630754aa97">get_num_devices</a>();</div>
+<div class="line"><a name="l01694"></a><span class="lineno"> 1694</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l01695"></a><span class="lineno"> 1695</span>&#160;    <span class="keyword">using</span> handle_manager = std::unique_ptr&lt;T, std::function&lt;void(T*)&gt;&gt;;</div>
+<div class="line"><a name="l01696"></a><span class="lineno"> 1696</span>&#160;    handle_manager&lt;cublasContext&gt; cublas_handle_;</div>
+<div class="line"><a name="l01697"></a><span class="lineno"> 1697</span>&#160;    handle_manager&lt;cusparseContext&gt; cusparse_handle_;</div>
+<div class="line"><a name="l01698"></a><span class="lineno"> 1698</span>&#160;    std::shared_ptr&lt;CudaAllocatorBase&gt; alloc_;</div>
+<div class="line"><a name="l01699"></a><span class="lineno"> 1699</span>&#160;    CUstream_st* stream_;</div>
+<div class="line"><a name="l01700"></a><span class="lineno"> 1700</span>&#160;};</div>
+<div class="line"><a name="l01701"></a><span class="lineno"> 1701</span>&#160; </div>
+<div class="line"><a name="l01702"></a><span class="lineno"> 1702</span>&#160; </div>
+<div class="line"><a name="l01703"></a><span class="lineno"> 1703</span>&#160;<span class="keyword">namespace </span>kernels {</div>
+<div class="line"><a name="l01704"></a><span class="lineno"> 1704</span>&#160;<span class="keyword">namespace </span>cuda {</div>
+<div class="line"><a name="l01705"></a><span class="lineno"> 1705</span>&#160;<span class="keyword">using</span> DefaultExecutor = CudaExecutor;</div>
+<div class="line"><a name="l01706"></a><span class="lineno"> 1706</span>&#160;}  <span class="comment">// namespace cuda</span></div>
+<div class="line"><a name="l01707"></a><span class="lineno"> 1707</span>&#160;}  <span class="comment">// namespace kernels</span></div>
+<div class="line"><a name="l01708"></a><span class="lineno"> 1708</span>&#160; </div>
+<div class="line"><a name="l01709"></a><span class="lineno"> 1709</span>&#160; </div>
+<div class="line"><a name="l01716"></a><span class="lineno"><a class="line" href="classgko_1_1HipExecutor.html"> 1716</a></span>&#160;<span class="keyword">class </span><a class="code" href="classgko_1_1HipExecutor.html">HipExecutor</a> : <span class="keyword">public</span> detail::ExecutorBase&lt;HipExecutor&gt;,</div>
+<div class="line"><a name="l01717"></a><span class="lineno"> 1717</span>&#160;                    <span class="keyword">public</span> std::enable_shared_from_this&lt;HipExecutor&gt;,</div>
+<div class="line"><a name="l01718"></a><span class="lineno"> 1718</span>&#160;                    <span class="keyword">public</span> detail::EnableDeviceReset {</div>
+<div class="line"><a name="l01719"></a><span class="lineno"> 1719</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>detail::ExecutorBase&lt;<a class="code" href="classgko_1_1HipExecutor.html">HipExecutor</a>&gt;;</div>
+<div class="line"><a name="l01720"></a><span class="lineno"> 1720</span>&#160; </div>
+<div class="line"><a name="l01721"></a><span class="lineno"> 1721</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l01733"></a><span class="lineno"> 1733</span>&#160;    GKO_DEPRECATED(</div>
+<div class="line"><a name="l01734"></a><span class="lineno"> 1734</span>&#160;        <span class="stringliteral">&quot;device_reset is deprecated entirely, call hipDeviceReset directly. &quot;</span></div>
+<div class="line"><a name="l01735"></a><span class="lineno"> 1735</span>&#160;        <span class="stringliteral">&quot;alloc_mode was replaced by the Allocator type &quot;</span></div>
+<div class="line"><a name="l01736"></a><span class="lineno"> 1736</span>&#160;        <span class="stringliteral">&quot;hierarchy.&quot;</span>)</div>
+<div class="line"><a name="l01737"></a><span class="lineno"> 1737</span>&#160;    <span class="keyword">static</span> std::shared_ptr&lt;HipExecutor&gt; <a class="code" href="classgko_1_1HipExecutor.html#aa0701fe1303e03a8331da7e95008100d">create</a>(</div>
+<div class="line"><a name="l01738"></a><span class="lineno"> 1738</span>&#160;        <span class="keywordtype">int</span> device_id, std::shared_ptr&lt;Executor&gt; master, <span class="keywordtype">bool</span> device_reset,</div>
+<div class="line"><a name="l01739"></a><span class="lineno"> 1739</span>&#160;        <a class="code" href="namespacegko.html#afbed8e2cbd3ee4ca962e12f688858bdb">allocation_mode</a> alloc_mode = default_hip_alloc_mode,</div>
+<div class="line"><a name="l01740"></a><span class="lineno"> 1740</span>&#160;        GKO_HIP_STREAM_STRUCT* stream = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l01741"></a><span class="lineno"> 1741</span>&#160; </div>
+<div class="line"><a name="l01742"></a><span class="lineno"> 1742</span>&#160;    <span class="keyword">static</span> std::shared_ptr&lt;HipExecutor&gt; <a class="code" href="classgko_1_1HipExecutor.html#aa0701fe1303e03a8331da7e95008100d">create</a>(</div>
+<div class="line"><a name="l01743"></a><span class="lineno"> 1743</span>&#160;        <span class="keywordtype">int</span> device_id, std::shared_ptr&lt;Executor&gt; master,</div>
+<div class="line"><a name="l01744"></a><span class="lineno"> 1744</span>&#160;        std::shared_ptr&lt;HipAllocatorBase&gt; <a class="code" href="classgko_1_1Executor.html#a5a216c2b1f7ceb8a0190c08941c1c687">alloc</a> =</div>
+<div class="line"><a name="l01745"></a><span class="lineno"> 1745</span>&#160;            std::make_shared&lt;HipAllocator&gt;(),</div>
+<div class="line"><a name="l01746"></a><span class="lineno"> 1746</span>&#160;        GKO_HIP_STREAM_STRUCT* stream = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l01747"></a><span class="lineno"> 1747</span>&#160; </div>
+<div class="line"><a name="l01748"></a><span class="lineno"> 1748</span>&#160;    std::shared_ptr&lt;Executor&gt; <a class="code" href="classgko_1_1HipExecutor.html#aad8e01fc70095ad5df48a02da9555400">get_master</a>() noexcept <span class="keyword">override</span>;</div>
+<div class="line"><a name="l01749"></a><span class="lineno"> 1749</span>&#160; </div>
+<div class="line"><a name="l01750"></a><span class="lineno"> 1750</span>&#160;    std::shared_ptr&lt;const Executor&gt; <a class="code" href="classgko_1_1HipExecutor.html#aad8e01fc70095ad5df48a02da9555400">get_master</a>() <span class="keyword">const</span> noexcept <span class="keyword">override</span>;</div>
+<div class="line"><a name="l01751"></a><span class="lineno"> 1751</span>&#160; </div>
+<div class="line"><a name="l01752"></a><span class="lineno"> 1752</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1HipExecutor.html#a0ea0ec8722767138953110b52d325b4a">synchronize</a>() <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l01753"></a><span class="lineno"> 1753</span>&#160; </div>
-<div class="line"><a name="l01757"></a><span class="lineno"><a class="line" href="classgko_1_1HipExecutor.html#a43bc417378f1c0f07ef49d2856ddd37c"> 1757</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classgko_1_1HipExecutor.html#a43bc417378f1c0f07ef49d2856ddd37c">get_num_warps_per_sm</a>() const noexcept</div>
-<div class="line"><a name="l01758"></a><span class="lineno"> 1758</span>&#160;    {</div>
-<div class="line"><a name="l01759"></a><span class="lineno"> 1759</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().num_pu_per_cu;</div>
-<div class="line"><a name="l01760"></a><span class="lineno"> 1760</span>&#160;    }</div>
-<div class="line"><a name="l01761"></a><span class="lineno"> 1761</span>&#160; </div>
-<div class="line"><a name="l01765"></a><span class="lineno"><a class="line" href="classgko_1_1HipExecutor.html#ac69c763f9d90e948d03ed1e5ed23903c"> 1765</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classgko_1_1HipExecutor.html#ac69c763f9d90e948d03ed1e5ed23903c">get_num_multiprocessor</a>() const noexcept</div>
-<div class="line"><a name="l01766"></a><span class="lineno"> 1766</span>&#160;    {</div>
-<div class="line"><a name="l01767"></a><span class="lineno"> 1767</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().num_computing_units;</div>
-<div class="line"><a name="l01768"></a><span class="lineno"> 1768</span>&#160;    }</div>
-<div class="line"><a name="l01769"></a><span class="lineno"> 1769</span>&#160; </div>
-<div class="line"><a name="l01773"></a><span class="lineno"><a class="line" href="classgko_1_1HipExecutor.html#a4cdda4e0d7031ab353555193927d0975"> 1773</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classgko_1_1HipExecutor.html#a4cdda4e0d7031ab353555193927d0975">get_major_version</a>() const noexcept</div>
-<div class="line"><a name="l01774"></a><span class="lineno"> 1774</span>&#160;    {</div>
-<div class="line"><a name="l01775"></a><span class="lineno"> 1775</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().major;</div>
-<div class="line"><a name="l01776"></a><span class="lineno"> 1776</span>&#160;    }</div>
-<div class="line"><a name="l01777"></a><span class="lineno"> 1777</span>&#160; </div>
-<div class="line"><a name="l01781"></a><span class="lineno"><a class="line" href="classgko_1_1HipExecutor.html#a78f3bfa05f6d38c286309436781a6f7a"> 1781</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classgko_1_1HipExecutor.html#a78f3bfa05f6d38c286309436781a6f7a">get_minor_version</a>() const noexcept</div>
-<div class="line"><a name="l01782"></a><span class="lineno"> 1782</span>&#160;    {</div>
-<div class="line"><a name="l01783"></a><span class="lineno"> 1783</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().minor;</div>
-<div class="line"><a name="l01784"></a><span class="lineno"> 1784</span>&#160;    }</div>
-<div class="line"><a name="l01785"></a><span class="lineno"> 1785</span>&#160; </div>
-<div class="line"><a name="l01789"></a><span class="lineno"><a class="line" href="classgko_1_1HipExecutor.html#add2eb69abc3225f1ab7e5b01d9ebb307"> 1789</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classgko_1_1HipExecutor.html#add2eb69abc3225f1ab7e5b01d9ebb307">get_num_warps</a>() const noexcept</div>
-<div class="line"><a name="l01790"></a><span class="lineno"> 1790</span>&#160;    {</div>
-<div class="line"><a name="l01791"></a><span class="lineno"> 1791</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().num_computing_units *</div>
-<div class="line"><a name="l01792"></a><span class="lineno"> 1792</span>&#160;               this-&gt;get_exec_info().num_pu_per_cu;</div>
-<div class="line"><a name="l01793"></a><span class="lineno"> 1793</span>&#160;    }</div>
-<div class="line"><a name="l01794"></a><span class="lineno"> 1794</span>&#160; </div>
-<div class="line"><a name="l01798"></a><span class="lineno"><a class="line" href="classgko_1_1HipExecutor.html#ae470cdfd4273b02b2563101d6146db26"> 1798</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classgko_1_1HipExecutor.html#ae470cdfd4273b02b2563101d6146db26">get_warp_size</a>() const noexcept</div>
-<div class="line"><a name="l01799"></a><span class="lineno"> 1799</span>&#160;    {</div>
-<div class="line"><a name="l01800"></a><span class="lineno"> 1800</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().max_subgroup_size;</div>
-<div class="line"><a name="l01801"></a><span class="lineno"> 1801</span>&#160;    }</div>
-<div class="line"><a name="l01802"></a><span class="lineno"> 1802</span>&#160; </div>
-<div class="line"><a name="l01808"></a><span class="lineno"><a class="line" href="classgko_1_1HipExecutor.html#a3e9de37cb851c04cd1d8f02712421f83"> 1808</a></span>&#160;    hipblasContext* <a class="code" href="classgko_1_1HipExecutor.html#a3e9de37cb851c04cd1d8f02712421f83">get_hipblas_handle</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> hipblas_handle_.get(); }</div>
+<div class="line"><a name="l01754"></a><span class="lineno"> 1754</span>&#160;    <a class="code" href="classgko_1_1scoped__device__id__guard.html">scoped_device_id_guard</a> get_scoped_device_id_guard() <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l01755"></a><span class="lineno"> 1755</span>&#160; </div>
+<div class="line"><a name="l01759"></a><span class="lineno"><a class="line" href="classgko_1_1HipExecutor.html#a37a35665c3983e56105c6acea9de73c6"> 1759</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classgko_1_1HipExecutor.html#a37a35665c3983e56105c6acea9de73c6">get_device_id</a>() const noexcept</div>
+<div class="line"><a name="l01760"></a><span class="lineno"> 1760</span>&#160;    {</div>
+<div class="line"><a name="l01761"></a><span class="lineno"> 1761</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().device_id;</div>
+<div class="line"><a name="l01762"></a><span class="lineno"> 1762</span>&#160;    }</div>
+<div class="line"><a name="l01763"></a><span class="lineno"> 1763</span>&#160; </div>
+<div class="line"><a name="l01767"></a><span class="lineno"> 1767</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="classgko_1_1HipExecutor.html#a7b34cbd84692dafa2290e6630754aa97">get_num_devices</a>();</div>
+<div class="line"><a name="l01768"></a><span class="lineno"> 1768</span>&#160; </div>
+<div class="line"><a name="l01772"></a><span class="lineno"><a class="line" href="classgko_1_1HipExecutor.html#a43bc417378f1c0f07ef49d2856ddd37c"> 1772</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classgko_1_1HipExecutor.html#a43bc417378f1c0f07ef49d2856ddd37c">get_num_warps_per_sm</a>() const noexcept</div>
+<div class="line"><a name="l01773"></a><span class="lineno"> 1773</span>&#160;    {</div>
+<div class="line"><a name="l01774"></a><span class="lineno"> 1774</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().num_pu_per_cu;</div>
+<div class="line"><a name="l01775"></a><span class="lineno"> 1775</span>&#160;    }</div>
+<div class="line"><a name="l01776"></a><span class="lineno"> 1776</span>&#160; </div>
+<div class="line"><a name="l01780"></a><span class="lineno"><a class="line" href="classgko_1_1HipExecutor.html#ac69c763f9d90e948d03ed1e5ed23903c"> 1780</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classgko_1_1HipExecutor.html#ac69c763f9d90e948d03ed1e5ed23903c">get_num_multiprocessor</a>() const noexcept</div>
+<div class="line"><a name="l01781"></a><span class="lineno"> 1781</span>&#160;    {</div>
+<div class="line"><a name="l01782"></a><span class="lineno"> 1782</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().num_computing_units;</div>
+<div class="line"><a name="l01783"></a><span class="lineno"> 1783</span>&#160;    }</div>
+<div class="line"><a name="l01784"></a><span class="lineno"> 1784</span>&#160; </div>
+<div class="line"><a name="l01788"></a><span class="lineno"><a class="line" href="classgko_1_1HipExecutor.html#a4cdda4e0d7031ab353555193927d0975"> 1788</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classgko_1_1HipExecutor.html#a4cdda4e0d7031ab353555193927d0975">get_major_version</a>() const noexcept</div>
+<div class="line"><a name="l01789"></a><span class="lineno"> 1789</span>&#160;    {</div>
+<div class="line"><a name="l01790"></a><span class="lineno"> 1790</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().major;</div>
+<div class="line"><a name="l01791"></a><span class="lineno"> 1791</span>&#160;    }</div>
+<div class="line"><a name="l01792"></a><span class="lineno"> 1792</span>&#160; </div>
+<div class="line"><a name="l01796"></a><span class="lineno"><a class="line" href="classgko_1_1HipExecutor.html#a78f3bfa05f6d38c286309436781a6f7a"> 1796</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classgko_1_1HipExecutor.html#a78f3bfa05f6d38c286309436781a6f7a">get_minor_version</a>() const noexcept</div>
+<div class="line"><a name="l01797"></a><span class="lineno"> 1797</span>&#160;    {</div>
+<div class="line"><a name="l01798"></a><span class="lineno"> 1798</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().minor;</div>
+<div class="line"><a name="l01799"></a><span class="lineno"> 1799</span>&#160;    }</div>
+<div class="line"><a name="l01800"></a><span class="lineno"> 1800</span>&#160; </div>
+<div class="line"><a name="l01804"></a><span class="lineno"><a class="line" href="classgko_1_1HipExecutor.html#add2eb69abc3225f1ab7e5b01d9ebb307"> 1804</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classgko_1_1HipExecutor.html#add2eb69abc3225f1ab7e5b01d9ebb307">get_num_warps</a>() const noexcept</div>
+<div class="line"><a name="l01805"></a><span class="lineno"> 1805</span>&#160;    {</div>
+<div class="line"><a name="l01806"></a><span class="lineno"> 1806</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().num_computing_units *</div>
+<div class="line"><a name="l01807"></a><span class="lineno"> 1807</span>&#160;               this-&gt;get_exec_info().num_pu_per_cu;</div>
+<div class="line"><a name="l01808"></a><span class="lineno"> 1808</span>&#160;    }</div>
 <div class="line"><a name="l01809"></a><span class="lineno"> 1809</span>&#160; </div>
-<div class="line"><a name="l01815"></a><span class="lineno"><a class="line" href="classgko_1_1HipExecutor.html#ac644de4030c96e20db7489957a949c49"> 1815</a></span>&#160;    hipsparseContext* <a class="code" href="classgko_1_1HipExecutor.html#ac644de4030c96e20db7489957a949c49">get_hipsparse_handle</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l01816"></a><span class="lineno"> 1816</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l01817"></a><span class="lineno"> 1817</span>&#160;        <span class="keywordflow">return</span> hipsparse_handle_.get();</div>
-<div class="line"><a name="l01818"></a><span class="lineno"> 1818</span>&#160;    }</div>
-<div class="line"><a name="l01819"></a><span class="lineno"> 1819</span>&#160; </div>
-<div class="line"><a name="l01825"></a><span class="lineno"><a class="line" href="classgko_1_1HipExecutor.html#ae39be6e255dfe5ecf6fe542da914afec"> 1825</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classgko_1_1HipExecutor.html#ae39be6e255dfe5ecf6fe542da914afec">get_closest_numa</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> this-&gt;get_exec_info().numa_node; }</div>
-<div class="line"><a name="l01826"></a><span class="lineno"> 1826</span>&#160; </div>
-<div class="line"><a name="l01832"></a><span class="lineno"><a class="line" href="classgko_1_1HipExecutor.html#a7c6f4683d767aa1588dc69d79280bf72"> 1832</a></span>&#160;    std::vector&lt;int&gt; <a class="code" href="classgko_1_1HipExecutor.html#a7c6f4683d767aa1588dc69d79280bf72">get_closest_pus</a>()<span class="keyword"> const</span></div>
-<div class="line"><a name="l01833"></a><span class="lineno"> 1833</span>&#160;<span class="keyword">    </span>{</div>
-<div class="line"><a name="l01834"></a><span class="lineno"> 1834</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().closest_pu_ids;</div>
-<div class="line"><a name="l01835"></a><span class="lineno"> 1835</span>&#160;    }</div>
-<div class="line"><a name="l01836"></a><span class="lineno"> 1836</span>&#160; </div>
-<div class="line"><a name="l01837"></a><span class="lineno"> 1837</span>&#160;    GKO_HIP_STREAM_STRUCT* get_stream()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> stream_; }</div>
-<div class="line"><a name="l01838"></a><span class="lineno"> 1838</span>&#160; </div>
-<div class="line"><a name="l01839"></a><span class="lineno"> 1839</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l01840"></a><span class="lineno"> 1840</span>&#160;    <span class="keywordtype">void</span> set_gpu_property();</div>
+<div class="line"><a name="l01813"></a><span class="lineno"><a class="line" href="classgko_1_1HipExecutor.html#ae470cdfd4273b02b2563101d6146db26"> 1813</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classgko_1_1HipExecutor.html#ae470cdfd4273b02b2563101d6146db26">get_warp_size</a>() const noexcept</div>
+<div class="line"><a name="l01814"></a><span class="lineno"> 1814</span>&#160;    {</div>
+<div class="line"><a name="l01815"></a><span class="lineno"> 1815</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().max_subgroup_size;</div>
+<div class="line"><a name="l01816"></a><span class="lineno"> 1816</span>&#160;    }</div>
+<div class="line"><a name="l01817"></a><span class="lineno"> 1817</span>&#160; </div>
+<div class="line"><a name="l01823"></a><span class="lineno"> 1823</span>&#160;    GKO_DEPRECATED(<span class="stringliteral">&quot;use get_blas_handle() instead&quot;</span>)</div>
+<div class="line"><a name="l01824"></a><span class="lineno"><a class="line" href="classgko_1_1HipExecutor.html#a3e9de37cb851c04cd1d8f02712421f83"> 1824</a></span>&#160;    hipblasContext* <a class="code" href="classgko_1_1HipExecutor.html#a3e9de37cb851c04cd1d8f02712421f83">get_hipblas_handle</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="classgko_1_1HipExecutor.html#ab5619600c382b8b90f794d60b82481f2">get_blas_handle</a>(); }</div>
+<div class="line"><a name="l01825"></a><span class="lineno"> 1825</span>&#160; </div>
+<div class="line"><a name="l01829"></a><span class="lineno"><a class="line" href="classgko_1_1HipExecutor.html#ab5619600c382b8b90f794d60b82481f2"> 1829</a></span>&#160;    hipblasContext* <a class="code" href="classgko_1_1HipExecutor.html#ab5619600c382b8b90f794d60b82481f2">get_blas_handle</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> hipblas_handle_.get(); }</div>
+<div class="line"><a name="l01830"></a><span class="lineno"> 1830</span>&#160; </div>
+<div class="line"><a name="l01836"></a><span class="lineno"> 1836</span>&#160;    GKO_DEPRECATED(<span class="stringliteral">&quot;use get_sparselib_handle() instead&quot;</span>)</div>
+<div class="line"><a name="l01837"></a><span class="lineno"><a class="line" href="classgko_1_1HipExecutor.html#ac644de4030c96e20db7489957a949c49"> 1837</a></span>&#160;    hipsparseContext* <a class="code" href="classgko_1_1HipExecutor.html#ac644de4030c96e20db7489957a949c49">get_hipsparse_handle</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l01838"></a><span class="lineno"> 1838</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l01839"></a><span class="lineno"> 1839</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classgko_1_1HipExecutor.html#a47df269986a5fc21f3ec7a6aa3e67395">get_sparselib_handle</a>();</div>
+<div class="line"><a name="l01840"></a><span class="lineno"> 1840</span>&#160;    }</div>
 <div class="line"><a name="l01841"></a><span class="lineno"> 1841</span>&#160; </div>
-<div class="line"><a name="l01842"></a><span class="lineno"> 1842</span>&#160;    <span class="keywordtype">void</span> init_handles();</div>
-<div class="line"><a name="l01843"></a><span class="lineno"> 1843</span>&#160; </div>
-<div class="line"><a name="l01844"></a><span class="lineno"> 1844</span>&#160;    HipExecutor(<span class="keywordtype">int</span> device_id, std::shared_ptr&lt;Executor&gt; master,</div>
-<div class="line"><a name="l01845"></a><span class="lineno"> 1845</span>&#160;                std::shared_ptr&lt;HipAllocatorBase&gt; <a class="code" href="classgko_1_1Executor.html#a5a216c2b1f7ceb8a0190c08941c1c687">alloc</a>,</div>
-<div class="line"><a name="l01846"></a><span class="lineno"> 1846</span>&#160;                GKO_HIP_STREAM_STRUCT* stream)</div>
-<div class="line"><a name="l01847"></a><span class="lineno"> 1847</span>&#160;        : master_{std::move(master)}, alloc_{std::move(<a class="code" href="classgko_1_1Executor.html#a5a216c2b1f7ceb8a0190c08941c1c687">alloc</a>)}, stream_{stream}</div>
-<div class="line"><a name="l01848"></a><span class="lineno"> 1848</span>&#160;    {</div>
-<div class="line"><a name="l01849"></a><span class="lineno"> 1849</span>&#160;        this-&gt;get_exec_info().device_id = device_id;</div>
-<div class="line"><a name="l01850"></a><span class="lineno"> 1850</span>&#160;        this-&gt;get_exec_info().num_computing_units = 0;</div>
-<div class="line"><a name="l01851"></a><span class="lineno"> 1851</span>&#160;        this-&gt;get_exec_info().num_pu_per_cu = 0;</div>
-<div class="line"><a name="l01852"></a><span class="lineno"> 1852</span>&#160;        this-&gt;HipExecutor::populate_exec_info(<a class="code" href="classgko_1_1machine__topology.html#af386c47b448d710e62f3b186b358c775">machine_topology::get_instance</a>());</div>
-<div class="line"><a name="l01853"></a><span class="lineno"> 1853</span>&#160;        this-&gt;set_gpu_property();</div>
-<div class="line"><a name="l01854"></a><span class="lineno"> 1854</span>&#160;        this-&gt;init_handles();</div>
-<div class="line"><a name="l01855"></a><span class="lineno"> 1855</span>&#160;    }</div>
+<div class="line"><a name="l01845"></a><span class="lineno"><a class="line" href="classgko_1_1HipExecutor.html#a47df269986a5fc21f3ec7a6aa3e67395"> 1845</a></span>&#160;    hipsparseContext* <a class="code" href="classgko_1_1HipExecutor.html#a47df269986a5fc21f3ec7a6aa3e67395">get_sparselib_handle</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l01846"></a><span class="lineno"> 1846</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l01847"></a><span class="lineno"> 1847</span>&#160;        <span class="keywordflow">return</span> hipsparse_handle_.get();</div>
+<div class="line"><a name="l01848"></a><span class="lineno"> 1848</span>&#160;    }</div>
+<div class="line"><a name="l01849"></a><span class="lineno"> 1849</span>&#160; </div>
+<div class="line"><a name="l01855"></a><span class="lineno"><a class="line" href="classgko_1_1HipExecutor.html#ae39be6e255dfe5ecf6fe542da914afec"> 1855</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classgko_1_1HipExecutor.html#ae39be6e255dfe5ecf6fe542da914afec">get_closest_numa</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> this-&gt;get_exec_info().numa_node; }</div>
 <div class="line"><a name="l01856"></a><span class="lineno"> 1856</span>&#160; </div>
-<div class="line"><a name="l01857"></a><span class="lineno"> 1857</span>&#160;    <span class="keywordtype">void</span>* raw_alloc(<a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> size) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l01858"></a><span class="lineno"> 1858</span>&#160; </div>
-<div class="line"><a name="l01859"></a><span class="lineno"> 1859</span>&#160;    <span class="keywordtype">void</span> raw_free(<span class="keywordtype">void</span>* ptr) <span class="keyword">const</span> noexcept <span class="keyword">override</span>;</div>
-<div class="line"><a name="l01860"></a><span class="lineno"> 1860</span>&#160; </div>
-<div class="line"><a name="l01861"></a><span class="lineno"> 1861</span>&#160;    GKO_ENABLE_FOR_ALL_EXECUTORS(GKO_OVERRIDE_RAW_COPY_TO);</div>
-<div class="line"><a name="l01862"></a><span class="lineno"> 1862</span>&#160; </div>
-<div class="line"><a name="l01863"></a><span class="lineno"> 1863</span>&#160;    GKO_DEFAULT_OVERRIDE_VERIFY_MEMORY(OmpExecutor, <span class="keyword">false</span>);</div>
-<div class="line"><a name="l01864"></a><span class="lineno"> 1864</span>&#160; </div>
-<div class="line"><a name="l01865"></a><span class="lineno"> 1865</span>&#160;    GKO_DEFAULT_OVERRIDE_VERIFY_MEMORY(ReferenceExecutor, <span class="keyword">false</span>);</div>
+<div class="line"><a name="l01862"></a><span class="lineno"><a class="line" href="classgko_1_1HipExecutor.html#a7c6f4683d767aa1588dc69d79280bf72"> 1862</a></span>&#160;    std::vector&lt;int&gt; <a class="code" href="classgko_1_1HipExecutor.html#a7c6f4683d767aa1588dc69d79280bf72">get_closest_pus</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l01863"></a><span class="lineno"> 1863</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l01864"></a><span class="lineno"> 1864</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().closest_pu_ids;</div>
+<div class="line"><a name="l01865"></a><span class="lineno"> 1865</span>&#160;    }</div>
 <div class="line"><a name="l01866"></a><span class="lineno"> 1866</span>&#160; </div>
-<div class="line"><a name="l01867"></a><span class="lineno"> 1867</span>&#160;    GKO_DEFAULT_OVERRIDE_VERIFY_MEMORY(DpcppExecutor, <span class="keyword">false</span>);</div>
+<div class="line"><a name="l01867"></a><span class="lineno"> 1867</span>&#160;    GKO_HIP_STREAM_STRUCT* get_stream()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> stream_; }</div>
 <div class="line"><a name="l01868"></a><span class="lineno"> 1868</span>&#160; </div>
-<div class="line"><a name="l01869"></a><span class="lineno"> 1869</span>&#160;    <span class="keywordtype">bool</span> verify_memory_to(<span class="keyword">const</span> CudaExecutor* dest_exec) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l01870"></a><span class="lineno"> 1870</span>&#160; </div>
-<div class="line"><a name="l01871"></a><span class="lineno"> 1871</span>&#160;    <span class="keywordtype">bool</span> verify_memory_to(<span class="keyword">const</span> HipExecutor* dest_exec) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l01872"></a><span class="lineno"> 1872</span>&#160; </div>
-<div class="line"><a name="l01873"></a><span class="lineno"> 1873</span>&#160;    <span class="keywordtype">void</span> populate_exec_info(<span class="keyword">const</span> machine_topology* mach_topo) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l01874"></a><span class="lineno"> 1874</span>&#160; </div>
-<div class="line"><a name="l01875"></a><span class="lineno"> 1875</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l01876"></a><span class="lineno"> 1876</span>&#160;    std::shared_ptr&lt;Executor&gt; master_;</div>
-<div class="line"><a name="l01877"></a><span class="lineno"> 1877</span>&#160; </div>
-<div class="line"><a name="l01878"></a><span class="lineno"> 1878</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l01879"></a><span class="lineno"> 1879</span>&#160;    <span class="keyword">using</span> handle_manager = std::unique_ptr&lt;T, std::function&lt;void(T*)&gt;&gt;;</div>
-<div class="line"><a name="l01880"></a><span class="lineno"> 1880</span>&#160;    handle_manager&lt;hipblasContext&gt; hipblas_handle_;</div>
-<div class="line"><a name="l01881"></a><span class="lineno"> 1881</span>&#160;    handle_manager&lt;hipsparseContext&gt; hipsparse_handle_;</div>
-<div class="line"><a name="l01882"></a><span class="lineno"> 1882</span>&#160;    std::shared_ptr&lt;HipAllocatorBase&gt; alloc_;</div>
-<div class="line"><a name="l01883"></a><span class="lineno"> 1883</span>&#160;    GKO_HIP_STREAM_STRUCT* stream_;</div>
-<div class="line"><a name="l01884"></a><span class="lineno"> 1884</span>&#160;};</div>
-<div class="line"><a name="l01885"></a><span class="lineno"> 1885</span>&#160; </div>
+<div class="line"><a name="l01869"></a><span class="lineno"> 1869</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l01870"></a><span class="lineno"> 1870</span>&#160;    <span class="keywordtype">void</span> set_gpu_property();</div>
+<div class="line"><a name="l01871"></a><span class="lineno"> 1871</span>&#160; </div>
+<div class="line"><a name="l01872"></a><span class="lineno"> 1872</span>&#160;    <span class="keywordtype">void</span> init_handles();</div>
+<div class="line"><a name="l01873"></a><span class="lineno"> 1873</span>&#160; </div>
+<div class="line"><a name="l01874"></a><span class="lineno"> 1874</span>&#160;    HipExecutor(<span class="keywordtype">int</span> device_id, std::shared_ptr&lt;Executor&gt; master,</div>
+<div class="line"><a name="l01875"></a><span class="lineno"> 1875</span>&#160;                std::shared_ptr&lt;HipAllocatorBase&gt; <a class="code" href="classgko_1_1Executor.html#a5a216c2b1f7ceb8a0190c08941c1c687">alloc</a>,</div>
+<div class="line"><a name="l01876"></a><span class="lineno"> 1876</span>&#160;                GKO_HIP_STREAM_STRUCT* stream)</div>
+<div class="line"><a name="l01877"></a><span class="lineno"> 1877</span>&#160;        : master_{std::move(master)}, alloc_{std::move(<a class="code" href="classgko_1_1Executor.html#a5a216c2b1f7ceb8a0190c08941c1c687">alloc</a>)}, stream_{stream}</div>
+<div class="line"><a name="l01878"></a><span class="lineno"> 1878</span>&#160;    {</div>
+<div class="line"><a name="l01879"></a><span class="lineno"> 1879</span>&#160;        this-&gt;get_exec_info().device_id = device_id;</div>
+<div class="line"><a name="l01880"></a><span class="lineno"> 1880</span>&#160;        this-&gt;get_exec_info().num_computing_units = 0;</div>
+<div class="line"><a name="l01881"></a><span class="lineno"> 1881</span>&#160;        this-&gt;get_exec_info().num_pu_per_cu = 0;</div>
+<div class="line"><a name="l01882"></a><span class="lineno"> 1882</span>&#160;        this-&gt;HipExecutor::populate_exec_info(<a class="code" href="classgko_1_1machine__topology.html#af386c47b448d710e62f3b186b358c775">machine_topology::get_instance</a>());</div>
+<div class="line"><a name="l01883"></a><span class="lineno"> 1883</span>&#160;        this-&gt;set_gpu_property();</div>
+<div class="line"><a name="l01884"></a><span class="lineno"> 1884</span>&#160;        this-&gt;init_handles();</div>
+<div class="line"><a name="l01885"></a><span class="lineno"> 1885</span>&#160;    }</div>
 <div class="line"><a name="l01886"></a><span class="lineno"> 1886</span>&#160; </div>
-<div class="line"><a name="l01887"></a><span class="lineno"> 1887</span>&#160;<span class="keyword">namespace </span>kernels {</div>
-<div class="line"><a name="l01888"></a><span class="lineno"> 1888</span>&#160;<span class="keyword">namespace </span>hip {</div>
-<div class="line"><a name="l01889"></a><span class="lineno"> 1889</span>&#160;<span class="keyword">using</span> DefaultExecutor = HipExecutor;</div>
-<div class="line"><a name="l01890"></a><span class="lineno"> 1890</span>&#160;}  <span class="comment">// namespace hip</span></div>
-<div class="line"><a name="l01891"></a><span class="lineno"> 1891</span>&#160;}  <span class="comment">// namespace kernels</span></div>
+<div class="line"><a name="l01887"></a><span class="lineno"> 1887</span>&#160;    <span class="keywordtype">void</span>* raw_alloc(<a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> size) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l01888"></a><span class="lineno"> 1888</span>&#160; </div>
+<div class="line"><a name="l01889"></a><span class="lineno"> 1889</span>&#160;    <span class="keywordtype">void</span> raw_free(<span class="keywordtype">void</span>* ptr) <span class="keyword">const</span> noexcept <span class="keyword">override</span>;</div>
+<div class="line"><a name="l01890"></a><span class="lineno"> 1890</span>&#160; </div>
+<div class="line"><a name="l01891"></a><span class="lineno"> 1891</span>&#160;    GKO_ENABLE_FOR_ALL_EXECUTORS(GKO_OVERRIDE_RAW_COPY_TO);</div>
 <div class="line"><a name="l01892"></a><span class="lineno"> 1892</span>&#160; </div>
-<div class="line"><a name="l01893"></a><span class="lineno"> 1893</span>&#160; </div>
-<div class="line"><a name="l01900"></a><span class="lineno"><a class="line" href="classgko_1_1DpcppExecutor.html"> 1900</a></span>&#160;<span class="keyword">class </span><a class="code" href="classgko_1_1DpcppExecutor.html">DpcppExecutor</a> : <span class="keyword">public</span> detail::ExecutorBase&lt;DpcppExecutor&gt;,</div>
-<div class="line"><a name="l01901"></a><span class="lineno"> 1901</span>&#160;                      <span class="keyword">public</span> std::enable_shared_from_this&lt;DpcppExecutor&gt; {</div>
-<div class="line"><a name="l01902"></a><span class="lineno"> 1902</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>detail::ExecutorBase&lt;<a class="code" href="classgko_1_1DpcppExecutor.html">DpcppExecutor</a>&gt;;</div>
-<div class="line"><a name="l01903"></a><span class="lineno"> 1903</span>&#160; </div>
-<div class="line"><a name="l01904"></a><span class="lineno"> 1904</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l01914"></a><span class="lineno"> 1914</span>&#160;    <span class="keyword">static</span> std::shared_ptr&lt;DpcppExecutor&gt; <a class="code" href="classgko_1_1DpcppExecutor.html#ae9b875dfe3af7f3f3f24071bfb2f895e">create</a>(</div>
-<div class="line"><a name="l01915"></a><span class="lineno"> 1915</span>&#160;        <span class="keywordtype">int</span> device_id, std::shared_ptr&lt;Executor&gt; master,</div>
-<div class="line"><a name="l01916"></a><span class="lineno"> 1916</span>&#160;        std::string device_type = <span class="stringliteral">&quot;all&quot;</span>,</div>
-<div class="line"><a name="l01917"></a><span class="lineno"> 1917</span>&#160;        dpcpp_queue_property property = dpcpp_queue_property::in_order);</div>
-<div class="line"><a name="l01918"></a><span class="lineno"> 1918</span>&#160; </div>
-<div class="line"><a name="l01919"></a><span class="lineno"> 1919</span>&#160;    std::shared_ptr&lt;Executor&gt; <a class="code" href="classgko_1_1DpcppExecutor.html#ac9a28c1178bde1244960a2bdd6c7e7a9">get_master</a>() noexcept <span class="keyword">override</span>;</div>
-<div class="line"><a name="l01920"></a><span class="lineno"> 1920</span>&#160; </div>
-<div class="line"><a name="l01921"></a><span class="lineno"> 1921</span>&#160;    std::shared_ptr&lt;const Executor&gt; <a class="code" href="classgko_1_1DpcppExecutor.html#ac9a28c1178bde1244960a2bdd6c7e7a9">get_master</a>() <span class="keyword">const</span> noexcept <span class="keyword">override</span>;</div>
+<div class="line"><a name="l01893"></a><span class="lineno"> 1893</span>&#160;    GKO_DEFAULT_OVERRIDE_VERIFY_MEMORY(OmpExecutor, <span class="keyword">false</span>);</div>
+<div class="line"><a name="l01894"></a><span class="lineno"> 1894</span>&#160; </div>
+<div class="line"><a name="l01895"></a><span class="lineno"> 1895</span>&#160;    GKO_DEFAULT_OVERRIDE_VERIFY_MEMORY(ReferenceExecutor, <span class="keyword">false</span>);</div>
+<div class="line"><a name="l01896"></a><span class="lineno"> 1896</span>&#160; </div>
+<div class="line"><a name="l01897"></a><span class="lineno"> 1897</span>&#160;    GKO_DEFAULT_OVERRIDE_VERIFY_MEMORY(DpcppExecutor, <span class="keyword">false</span>);</div>
+<div class="line"><a name="l01898"></a><span class="lineno"> 1898</span>&#160; </div>
+<div class="line"><a name="l01899"></a><span class="lineno"> 1899</span>&#160;    <span class="keywordtype">bool</span> verify_memory_to(<span class="keyword">const</span> CudaExecutor* dest_exec) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l01900"></a><span class="lineno"> 1900</span>&#160; </div>
+<div class="line"><a name="l01901"></a><span class="lineno"> 1901</span>&#160;    <span class="keywordtype">bool</span> verify_memory_to(<span class="keyword">const</span> HipExecutor* dest_exec) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l01902"></a><span class="lineno"> 1902</span>&#160; </div>
+<div class="line"><a name="l01903"></a><span class="lineno"> 1903</span>&#160;    <span class="keywordtype">void</span> populate_exec_info(<span class="keyword">const</span> machine_topology* mach_topo) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l01904"></a><span class="lineno"> 1904</span>&#160; </div>
+<div class="line"><a name="l01905"></a><span class="lineno"> 1905</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l01906"></a><span class="lineno"> 1906</span>&#160;    std::shared_ptr&lt;Executor&gt; master_;</div>
+<div class="line"><a name="l01907"></a><span class="lineno"> 1907</span>&#160; </div>
+<div class="line"><a name="l01908"></a><span class="lineno"> 1908</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l01909"></a><span class="lineno"> 1909</span>&#160;    <span class="keyword">using</span> handle_manager = std::unique_ptr&lt;T, std::function&lt;void(T*)&gt;&gt;;</div>
+<div class="line"><a name="l01910"></a><span class="lineno"> 1910</span>&#160;    handle_manager&lt;hipblasContext&gt; hipblas_handle_;</div>
+<div class="line"><a name="l01911"></a><span class="lineno"> 1911</span>&#160;    handle_manager&lt;hipsparseContext&gt; hipsparse_handle_;</div>
+<div class="line"><a name="l01912"></a><span class="lineno"> 1912</span>&#160;    std::shared_ptr&lt;HipAllocatorBase&gt; alloc_;</div>
+<div class="line"><a name="l01913"></a><span class="lineno"> 1913</span>&#160;    GKO_HIP_STREAM_STRUCT* stream_;</div>
+<div class="line"><a name="l01914"></a><span class="lineno"> 1914</span>&#160;};</div>
+<div class="line"><a name="l01915"></a><span class="lineno"> 1915</span>&#160; </div>
+<div class="line"><a name="l01916"></a><span class="lineno"> 1916</span>&#160; </div>
+<div class="line"><a name="l01917"></a><span class="lineno"> 1917</span>&#160;<span class="keyword">namespace </span>kernels {</div>
+<div class="line"><a name="l01918"></a><span class="lineno"> 1918</span>&#160;<span class="keyword">namespace </span>hip {</div>
+<div class="line"><a name="l01919"></a><span class="lineno"> 1919</span>&#160;<span class="keyword">using</span> DefaultExecutor = HipExecutor;</div>
+<div class="line"><a name="l01920"></a><span class="lineno"> 1920</span>&#160;}  <span class="comment">// namespace hip</span></div>
+<div class="line"><a name="l01921"></a><span class="lineno"> 1921</span>&#160;}  <span class="comment">// namespace kernels</span></div>
 <div class="line"><a name="l01922"></a><span class="lineno"> 1922</span>&#160; </div>
-<div class="line"><a name="l01923"></a><span class="lineno"> 1923</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1DpcppExecutor.html#a6b2a82c46748ddbf097fa2da3ec64d90">synchronize</a>() <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l01924"></a><span class="lineno"> 1924</span>&#160; </div>
-<div class="line"><a name="l01925"></a><span class="lineno"> 1925</span>&#160;    <a class="code" href="classgko_1_1scoped__device__id__guard.html">scoped_device_id_guard</a> get_scoped_device_id_guard() <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l01926"></a><span class="lineno"> 1926</span>&#160; </div>
-<div class="line"><a name="l01932"></a><span class="lineno"><a class="line" href="classgko_1_1DpcppExecutor.html#aefdd7095f2d18ff8e4ab8354006f305b"> 1932</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classgko_1_1DpcppExecutor.html#aefdd7095f2d18ff8e4ab8354006f305b">get_device_id</a>() const noexcept</div>
-<div class="line"><a name="l01933"></a><span class="lineno"> 1933</span>&#160;    {</div>
-<div class="line"><a name="l01934"></a><span class="lineno"> 1934</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().device_id;</div>
-<div class="line"><a name="l01935"></a><span class="lineno"> 1935</span>&#160;    }</div>
-<div class="line"><a name="l01936"></a><span class="lineno"> 1936</span>&#160; </div>
-<div class="line"><a name="l01937"></a><span class="lineno"> 1937</span>&#160;    sycl::queue* get_queue()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> queue_.get(); }</div>
-<div class="line"><a name="l01938"></a><span class="lineno"> 1938</span>&#160; </div>
-<div class="line"><a name="l01946"></a><span class="lineno"> 1946</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="classgko_1_1DpcppExecutor.html#adf306338233c8e8aca0dec96aefe5d93">get_num_devices</a>(std::string device_type);</div>
-<div class="line"><a name="l01947"></a><span class="lineno"> 1947</span>&#160; </div>
-<div class="line"><a name="l01953"></a><span class="lineno"><a class="line" href="classgko_1_1DpcppExecutor.html#a5a8a807279c9dfeef114bd8875c7a369"> 1953</a></span>&#160;    <span class="keyword">const</span> std::vector&lt;int&gt;&amp; <a class="code" href="classgko_1_1DpcppExecutor.html#a5a8a807279c9dfeef114bd8875c7a369">get_subgroup_sizes</a>() const noexcept</div>
-<div class="line"><a name="l01954"></a><span class="lineno"> 1954</span>&#160;    {</div>
-<div class="line"><a name="l01955"></a><span class="lineno"> 1955</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().subgroup_sizes;</div>
-<div class="line"><a name="l01956"></a><span class="lineno"> 1956</span>&#160;    }</div>
-<div class="line"><a name="l01957"></a><span class="lineno"> 1957</span>&#160; </div>
-<div class="line"><a name="l01963"></a><span class="lineno"><a class="line" href="classgko_1_1DpcppExecutor.html#a1a9ef86016a05905955e2d05812bf00d"> 1963</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classgko_1_1DpcppExecutor.html#a1a9ef86016a05905955e2d05812bf00d">get_num_computing_units</a>() const noexcept</div>
-<div class="line"><a name="l01964"></a><span class="lineno"> 1964</span>&#160;    {</div>
-<div class="line"><a name="l01965"></a><span class="lineno"> 1965</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().num_computing_units;</div>
-<div class="line"><a name="l01966"></a><span class="lineno"> 1966</span>&#160;    }</div>
-<div class="line"><a name="l01967"></a><span class="lineno"> 1967</span>&#160; </div>
-<div class="line"><a name="l01971"></a><span class="lineno"><a class="line" href="classgko_1_1DpcppExecutor.html#a5539608a0027a5ff6b1330d9595e7e58"> 1971</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classgko_1_1DpcppExecutor.html#a5539608a0027a5ff6b1330d9595e7e58">get_num_subgroups</a>() const noexcept</div>
-<div class="line"><a name="l01972"></a><span class="lineno"> 1972</span>&#160;    {</div>
-<div class="line"><a name="l01973"></a><span class="lineno"> 1973</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().num_computing_units *</div>
-<div class="line"><a name="l01974"></a><span class="lineno"> 1974</span>&#160;               this-&gt;get_exec_info().num_pu_per_cu;</div>
-<div class="line"><a name="l01975"></a><span class="lineno"> 1975</span>&#160;    }</div>
-<div class="line"><a name="l01976"></a><span class="lineno"> 1976</span>&#160; </div>
-<div class="line"><a name="l01982"></a><span class="lineno"><a class="line" href="classgko_1_1DpcppExecutor.html#a1ebddf08efc499ab31d1fbfcccc4d2f5"> 1982</a></span>&#160;    <span class="keyword">const</span> std::vector&lt;int&gt;&amp; <a class="code" href="classgko_1_1DpcppExecutor.html#a1ebddf08efc499ab31d1fbfcccc4d2f5">get_max_workitem_sizes</a>() const noexcept</div>
-<div class="line"><a name="l01983"></a><span class="lineno"> 1983</span>&#160;    {</div>
-<div class="line"><a name="l01984"></a><span class="lineno"> 1984</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().max_workitem_sizes;</div>
-<div class="line"><a name="l01985"></a><span class="lineno"> 1985</span>&#160;    }</div>
-<div class="line"><a name="l01986"></a><span class="lineno"> 1986</span>&#160; </div>
-<div class="line"><a name="l01992"></a><span class="lineno"><a class="line" href="classgko_1_1DpcppExecutor.html#a2a4b81ed45477d3c4d38a340cb994ec5"> 1992</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classgko_1_1DpcppExecutor.html#a2a4b81ed45477d3c4d38a340cb994ec5">get_max_workgroup_size</a>() const noexcept</div>
-<div class="line"><a name="l01993"></a><span class="lineno"> 1993</span>&#160;    {</div>
-<div class="line"><a name="l01994"></a><span class="lineno"> 1994</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().max_workgroup_size;</div>
-<div class="line"><a name="l01995"></a><span class="lineno"> 1995</span>&#160;    }</div>
-<div class="line"><a name="l01996"></a><span class="lineno"> 1996</span>&#160; </div>
-<div class="line"><a name="l02002"></a><span class="lineno"><a class="line" href="classgko_1_1DpcppExecutor.html#a950a8f15ace58f5f54af3a9b52a11998"> 2002</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classgko_1_1DpcppExecutor.html#a950a8f15ace58f5f54af3a9b52a11998">get_max_subgroup_size</a>() const noexcept</div>
-<div class="line"><a name="l02003"></a><span class="lineno"> 2003</span>&#160;    {</div>
-<div class="line"><a name="l02004"></a><span class="lineno"> 2004</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().max_subgroup_size;</div>
+<div class="line"><a name="l01923"></a><span class="lineno"> 1923</span>&#160; </div>
+<div class="line"><a name="l01930"></a><span class="lineno"><a class="line" href="classgko_1_1DpcppExecutor.html"> 1930</a></span>&#160;<span class="keyword">class </span><a class="code" href="classgko_1_1DpcppExecutor.html">DpcppExecutor</a> : <span class="keyword">public</span> detail::ExecutorBase&lt;DpcppExecutor&gt;,</div>
+<div class="line"><a name="l01931"></a><span class="lineno"> 1931</span>&#160;                      <span class="keyword">public</span> std::enable_shared_from_this&lt;DpcppExecutor&gt; {</div>
+<div class="line"><a name="l01932"></a><span class="lineno"> 1932</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>detail::ExecutorBase&lt;<a class="code" href="classgko_1_1DpcppExecutor.html">DpcppExecutor</a>&gt;;</div>
+<div class="line"><a name="l01933"></a><span class="lineno"> 1933</span>&#160; </div>
+<div class="line"><a name="l01934"></a><span class="lineno"> 1934</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l01944"></a><span class="lineno"> 1944</span>&#160;    <span class="keyword">static</span> std::shared_ptr&lt;DpcppExecutor&gt; <a class="code" href="classgko_1_1DpcppExecutor.html#ae9b875dfe3af7f3f3f24071bfb2f895e">create</a>(</div>
+<div class="line"><a name="l01945"></a><span class="lineno"> 1945</span>&#160;        <span class="keywordtype">int</span> device_id, std::shared_ptr&lt;Executor&gt; master,</div>
+<div class="line"><a name="l01946"></a><span class="lineno"> 1946</span>&#160;        std::string device_type = <span class="stringliteral">&quot;all&quot;</span>,</div>
+<div class="line"><a name="l01947"></a><span class="lineno"> 1947</span>&#160;        dpcpp_queue_property property = dpcpp_queue_property::in_order);</div>
+<div class="line"><a name="l01948"></a><span class="lineno"> 1948</span>&#160; </div>
+<div class="line"><a name="l01949"></a><span class="lineno"> 1949</span>&#160;    std::shared_ptr&lt;Executor&gt; <a class="code" href="classgko_1_1DpcppExecutor.html#ac9a28c1178bde1244960a2bdd6c7e7a9">get_master</a>() noexcept <span class="keyword">override</span>;</div>
+<div class="line"><a name="l01950"></a><span class="lineno"> 1950</span>&#160; </div>
+<div class="line"><a name="l01951"></a><span class="lineno"> 1951</span>&#160;    std::shared_ptr&lt;const Executor&gt; <a class="code" href="classgko_1_1DpcppExecutor.html#ac9a28c1178bde1244960a2bdd6c7e7a9">get_master</a>() <span class="keyword">const</span> noexcept <span class="keyword">override</span>;</div>
+<div class="line"><a name="l01952"></a><span class="lineno"> 1952</span>&#160; </div>
+<div class="line"><a name="l01953"></a><span class="lineno"> 1953</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1DpcppExecutor.html#a6b2a82c46748ddbf097fa2da3ec64d90">synchronize</a>() <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l01954"></a><span class="lineno"> 1954</span>&#160; </div>
+<div class="line"><a name="l01955"></a><span class="lineno"> 1955</span>&#160;    <a class="code" href="classgko_1_1scoped__device__id__guard.html">scoped_device_id_guard</a> get_scoped_device_id_guard() <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l01956"></a><span class="lineno"> 1956</span>&#160; </div>
+<div class="line"><a name="l01962"></a><span class="lineno"><a class="line" href="classgko_1_1DpcppExecutor.html#aefdd7095f2d18ff8e4ab8354006f305b"> 1962</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classgko_1_1DpcppExecutor.html#aefdd7095f2d18ff8e4ab8354006f305b">get_device_id</a>() const noexcept</div>
+<div class="line"><a name="l01963"></a><span class="lineno"> 1963</span>&#160;    {</div>
+<div class="line"><a name="l01964"></a><span class="lineno"> 1964</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().device_id;</div>
+<div class="line"><a name="l01965"></a><span class="lineno"> 1965</span>&#160;    }</div>
+<div class="line"><a name="l01966"></a><span class="lineno"> 1966</span>&#160; </div>
+<div class="line"><a name="l01967"></a><span class="lineno"> 1967</span>&#160;    sycl::queue* get_queue()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> queue_.get(); }</div>
+<div class="line"><a name="l01968"></a><span class="lineno"> 1968</span>&#160; </div>
+<div class="line"><a name="l01976"></a><span class="lineno"> 1976</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code" href="classgko_1_1DpcppExecutor.html#adf306338233c8e8aca0dec96aefe5d93">get_num_devices</a>(std::string device_type);</div>
+<div class="line"><a name="l01977"></a><span class="lineno"> 1977</span>&#160; </div>
+<div class="line"><a name="l01983"></a><span class="lineno"><a class="line" href="classgko_1_1DpcppExecutor.html#a5a8a807279c9dfeef114bd8875c7a369"> 1983</a></span>&#160;    <span class="keyword">const</span> std::vector&lt;int&gt;&amp; <a class="code" href="classgko_1_1DpcppExecutor.html#a5a8a807279c9dfeef114bd8875c7a369">get_subgroup_sizes</a>() const noexcept</div>
+<div class="line"><a name="l01984"></a><span class="lineno"> 1984</span>&#160;    {</div>
+<div class="line"><a name="l01985"></a><span class="lineno"> 1985</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().subgroup_sizes;</div>
+<div class="line"><a name="l01986"></a><span class="lineno"> 1986</span>&#160;    }</div>
+<div class="line"><a name="l01987"></a><span class="lineno"> 1987</span>&#160; </div>
+<div class="line"><a name="l01993"></a><span class="lineno"><a class="line" href="classgko_1_1DpcppExecutor.html#a1a9ef86016a05905955e2d05812bf00d"> 1993</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classgko_1_1DpcppExecutor.html#a1a9ef86016a05905955e2d05812bf00d">get_num_computing_units</a>() const noexcept</div>
+<div class="line"><a name="l01994"></a><span class="lineno"> 1994</span>&#160;    {</div>
+<div class="line"><a name="l01995"></a><span class="lineno"> 1995</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().num_computing_units;</div>
+<div class="line"><a name="l01996"></a><span class="lineno"> 1996</span>&#160;    }</div>
+<div class="line"><a name="l01997"></a><span class="lineno"> 1997</span>&#160; </div>
+<div class="line"><a name="l02001"></a><span class="lineno"><a class="line" href="classgko_1_1DpcppExecutor.html#a5539608a0027a5ff6b1330d9595e7e58"> 2001</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classgko_1_1DpcppExecutor.html#a5539608a0027a5ff6b1330d9595e7e58">get_num_subgroups</a>() const noexcept</div>
+<div class="line"><a name="l02002"></a><span class="lineno"> 2002</span>&#160;    {</div>
+<div class="line"><a name="l02003"></a><span class="lineno"> 2003</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().num_computing_units *</div>
+<div class="line"><a name="l02004"></a><span class="lineno"> 2004</span>&#160;               this-&gt;get_exec_info().num_pu_per_cu;</div>
 <div class="line"><a name="l02005"></a><span class="lineno"> 2005</span>&#160;    }</div>
 <div class="line"><a name="l02006"></a><span class="lineno"> 2006</span>&#160; </div>
-<div class="line"><a name="l02012"></a><span class="lineno"><a class="line" href="classgko_1_1DpcppExecutor.html#ab6ff2a7bc51dca54ef9cce5c836ade2f"> 2012</a></span>&#160;    std::string <a class="code" href="classgko_1_1DpcppExecutor.html#ab6ff2a7bc51dca54ef9cce5c836ade2f">get_device_type</a>() const noexcept</div>
+<div class="line"><a name="l02012"></a><span class="lineno"><a class="line" href="classgko_1_1DpcppExecutor.html#a1ebddf08efc499ab31d1fbfcccc4d2f5"> 2012</a></span>&#160;    <span class="keyword">const</span> std::vector&lt;int&gt;&amp; <a class="code" href="classgko_1_1DpcppExecutor.html#a1ebddf08efc499ab31d1fbfcccc4d2f5">get_max_workitem_sizes</a>() const noexcept</div>
 <div class="line"><a name="l02013"></a><span class="lineno"> 2013</span>&#160;    {</div>
-<div class="line"><a name="l02014"></a><span class="lineno"> 2014</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().device_type;</div>
+<div class="line"><a name="l02014"></a><span class="lineno"> 2014</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().max_workitem_sizes;</div>
 <div class="line"><a name="l02015"></a><span class="lineno"> 2015</span>&#160;    }</div>
 <div class="line"><a name="l02016"></a><span class="lineno"> 2016</span>&#160; </div>
-<div class="line"><a name="l02017"></a><span class="lineno"> 2017</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l02018"></a><span class="lineno"> 2018</span>&#160;    <span class="keywordtype">void</span> set_device_property(</div>
-<div class="line"><a name="l02019"></a><span class="lineno"> 2019</span>&#160;        dpcpp_queue_property property = dpcpp_queue_property::in_order);</div>
-<div class="line"><a name="l02020"></a><span class="lineno"> 2020</span>&#160; </div>
-<div class="line"><a name="l02021"></a><span class="lineno"> 2021</span>&#160;    <a class="code" href="classgko_1_1DpcppExecutor.html">DpcppExecutor</a>(</div>
-<div class="line"><a name="l02022"></a><span class="lineno"> 2022</span>&#160;        <span class="keywordtype">int</span> device_id, std::shared_ptr&lt;Executor&gt; master,</div>
-<div class="line"><a name="l02023"></a><span class="lineno"> 2023</span>&#160;        std::string device_type = <span class="stringliteral">&quot;all&quot;</span>,</div>
-<div class="line"><a name="l02024"></a><span class="lineno"> 2024</span>&#160;        dpcpp_queue_property property = dpcpp_queue_property::in_order)</div>
-<div class="line"><a name="l02025"></a><span class="lineno"> 2025</span>&#160;        : master_(master)</div>
-<div class="line"><a name="l02026"></a><span class="lineno"> 2026</span>&#160;    {</div>
-<div class="line"><a name="l02027"></a><span class="lineno"> 2027</span>&#160;        std::for_each(device_type.begin(), device_type.end(),</div>
-<div class="line"><a name="l02028"></a><span class="lineno"> 2028</span>&#160;                      [](<span class="keywordtype">char</span>&amp; c) { c = std::tolower(c); });</div>
-<div class="line"><a name="l02029"></a><span class="lineno"> 2029</span>&#160;        this-&gt;get_exec_info().device_type = std::string(device_type);</div>
-<div class="line"><a name="l02030"></a><span class="lineno"> 2030</span>&#160;        this-&gt;get_exec_info().device_id = device_id;</div>
-<div class="line"><a name="l02031"></a><span class="lineno"> 2031</span>&#160;        this-&gt;set_device_property(property);</div>
-<div class="line"><a name="l02032"></a><span class="lineno"> 2032</span>&#160;    }</div>
-<div class="line"><a name="l02033"></a><span class="lineno"> 2033</span>&#160; </div>
-<div class="line"><a name="l02034"></a><span class="lineno"> 2034</span>&#160;    <span class="keywordtype">void</span> populate_exec_info(<span class="keyword">const</span> machine_topology* mach_topo) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l02035"></a><span class="lineno"> 2035</span>&#160; </div>
-<div class="line"><a name="l02036"></a><span class="lineno"> 2036</span>&#160;    <span class="keywordtype">void</span>* raw_alloc(<a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> size) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l02037"></a><span class="lineno"> 2037</span>&#160; </div>
-<div class="line"><a name="l02038"></a><span class="lineno"> 2038</span>&#160;    <span class="keywordtype">void</span> raw_free(<span class="keywordtype">void</span>* ptr) <span class="keyword">const</span> noexcept <span class="keyword">override</span>;</div>
-<div class="line"><a name="l02039"></a><span class="lineno"> 2039</span>&#160; </div>
-<div class="line"><a name="l02040"></a><span class="lineno"> 2040</span>&#160;    GKO_ENABLE_FOR_ALL_EXECUTORS(GKO_OVERRIDE_RAW_COPY_TO);</div>
-<div class="line"><a name="l02041"></a><span class="lineno"> 2041</span>&#160; </div>
-<div class="line"><a name="l02042"></a><span class="lineno"> 2042</span>&#160;    GKO_DEFAULT_OVERRIDE_VERIFY_MEMORY(CudaExecutor, <span class="keyword">false</span>);</div>
-<div class="line"><a name="l02043"></a><span class="lineno"> 2043</span>&#160; </div>
-<div class="line"><a name="l02044"></a><span class="lineno"> 2044</span>&#160;    GKO_DEFAULT_OVERRIDE_VERIFY_MEMORY(HipExecutor, <span class="keyword">false</span>);</div>
-<div class="line"><a name="l02045"></a><span class="lineno"> 2045</span>&#160; </div>
-<div class="line"><a name="l02046"></a><span class="lineno"> 2046</span>&#160;    GKO_DEFAULT_OVERRIDE_VERIFY_MEMORY(ReferenceExecutor, <span class="keyword">false</span>);</div>
-<div class="line"><a name="l02047"></a><span class="lineno"> 2047</span>&#160; </div>
-<div class="line"><a name="l02048"></a><span class="lineno"> 2048</span>&#160;    <span class="keywordtype">bool</span> verify_memory_to(<span class="keyword">const</span> OmpExecutor* dest_exec) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l02049"></a><span class="lineno"> 2049</span>&#160; </div>
-<div class="line"><a name="l02050"></a><span class="lineno"> 2050</span>&#160;    <span class="keywordtype">bool</span> verify_memory_to(<span class="keyword">const</span> DpcppExecutor* dest_exec) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l02051"></a><span class="lineno"> 2051</span>&#160; </div>
-<div class="line"><a name="l02052"></a><span class="lineno"> 2052</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l02053"></a><span class="lineno"> 2053</span>&#160;    std::shared_ptr&lt;Executor&gt; master_;</div>
-<div class="line"><a name="l02054"></a><span class="lineno"> 2054</span>&#160; </div>
-<div class="line"><a name="l02055"></a><span class="lineno"> 2055</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l02056"></a><span class="lineno"> 2056</span>&#160;    <span class="keyword">using</span> queue_manager = std::unique_ptr&lt;T, std::function&lt;void(T*)&gt;&gt;;</div>
-<div class="line"><a name="l02057"></a><span class="lineno"> 2057</span>&#160;    queue_manager&lt;sycl::queue&gt; queue_;</div>
-<div class="line"><a name="l02058"></a><span class="lineno"> 2058</span>&#160;};</div>
-<div class="line"><a name="l02059"></a><span class="lineno"> 2059</span>&#160; </div>
-<div class="line"><a name="l02060"></a><span class="lineno"> 2060</span>&#160; </div>
-<div class="line"><a name="l02061"></a><span class="lineno"> 2061</span>&#160;<span class="keyword">namespace </span>kernels {</div>
-<div class="line"><a name="l02062"></a><span class="lineno"> 2062</span>&#160;<span class="keyword">namespace </span>dpcpp {</div>
-<div class="line"><a name="l02063"></a><span class="lineno"> 2063</span>&#160;<span class="keyword">using</span> DefaultExecutor = DpcppExecutor;</div>
-<div class="line"><a name="l02064"></a><span class="lineno"> 2064</span>&#160;}  <span class="comment">// namespace dpcpp</span></div>
-<div class="line"><a name="l02065"></a><span class="lineno"> 2065</span>&#160;}  <span class="comment">// namespace kernels</span></div>
-<div class="line"><a name="l02066"></a><span class="lineno"> 2066</span>&#160; </div>
+<div class="line"><a name="l02022"></a><span class="lineno"><a class="line" href="classgko_1_1DpcppExecutor.html#a2a4b81ed45477d3c4d38a340cb994ec5"> 2022</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classgko_1_1DpcppExecutor.html#a2a4b81ed45477d3c4d38a340cb994ec5">get_max_workgroup_size</a>() const noexcept</div>
+<div class="line"><a name="l02023"></a><span class="lineno"> 2023</span>&#160;    {</div>
+<div class="line"><a name="l02024"></a><span class="lineno"> 2024</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().max_workgroup_size;</div>
+<div class="line"><a name="l02025"></a><span class="lineno"> 2025</span>&#160;    }</div>
+<div class="line"><a name="l02026"></a><span class="lineno"> 2026</span>&#160; </div>
+<div class="line"><a name="l02032"></a><span class="lineno"><a class="line" href="classgko_1_1DpcppExecutor.html#a950a8f15ace58f5f54af3a9b52a11998"> 2032</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classgko_1_1DpcppExecutor.html#a950a8f15ace58f5f54af3a9b52a11998">get_max_subgroup_size</a>() const noexcept</div>
+<div class="line"><a name="l02033"></a><span class="lineno"> 2033</span>&#160;    {</div>
+<div class="line"><a name="l02034"></a><span class="lineno"> 2034</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().max_subgroup_size;</div>
+<div class="line"><a name="l02035"></a><span class="lineno"> 2035</span>&#160;    }</div>
+<div class="line"><a name="l02036"></a><span class="lineno"> 2036</span>&#160; </div>
+<div class="line"><a name="l02042"></a><span class="lineno"><a class="line" href="classgko_1_1DpcppExecutor.html#ab6ff2a7bc51dca54ef9cce5c836ade2f"> 2042</a></span>&#160;    std::string <a class="code" href="classgko_1_1DpcppExecutor.html#ab6ff2a7bc51dca54ef9cce5c836ade2f">get_device_type</a>() const noexcept</div>
+<div class="line"><a name="l02043"></a><span class="lineno"> 2043</span>&#160;    {</div>
+<div class="line"><a name="l02044"></a><span class="lineno"> 2044</span>&#160;        <span class="keywordflow">return</span> this-&gt;get_exec_info().device_type;</div>
+<div class="line"><a name="l02045"></a><span class="lineno"> 2045</span>&#160;    }</div>
+<div class="line"><a name="l02046"></a><span class="lineno"> 2046</span>&#160; </div>
+<div class="line"><a name="l02047"></a><span class="lineno"> 2047</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l02048"></a><span class="lineno"> 2048</span>&#160;    <span class="keywordtype">void</span> set_device_property(</div>
+<div class="line"><a name="l02049"></a><span class="lineno"> 2049</span>&#160;        dpcpp_queue_property property = dpcpp_queue_property::in_order);</div>
+<div class="line"><a name="l02050"></a><span class="lineno"> 2050</span>&#160; </div>
+<div class="line"><a name="l02051"></a><span class="lineno"> 2051</span>&#160;    <a class="code" href="classgko_1_1DpcppExecutor.html">DpcppExecutor</a>(</div>
+<div class="line"><a name="l02052"></a><span class="lineno"> 2052</span>&#160;        <span class="keywordtype">int</span> device_id, std::shared_ptr&lt;Executor&gt; master,</div>
+<div class="line"><a name="l02053"></a><span class="lineno"> 2053</span>&#160;        std::string device_type = <span class="stringliteral">&quot;all&quot;</span>,</div>
+<div class="line"><a name="l02054"></a><span class="lineno"> 2054</span>&#160;        dpcpp_queue_property property = dpcpp_queue_property::in_order)</div>
+<div class="line"><a name="l02055"></a><span class="lineno"> 2055</span>&#160;        : master_(master)</div>
+<div class="line"><a name="l02056"></a><span class="lineno"> 2056</span>&#160;    {</div>
+<div class="line"><a name="l02057"></a><span class="lineno"> 2057</span>&#160;        std::for_each(device_type.begin(), device_type.end(),</div>
+<div class="line"><a name="l02058"></a><span class="lineno"> 2058</span>&#160;                      [](<span class="keywordtype">char</span>&amp; c) { c = std::tolower(c); });</div>
+<div class="line"><a name="l02059"></a><span class="lineno"> 2059</span>&#160;        this-&gt;get_exec_info().device_type = std::string(device_type);</div>
+<div class="line"><a name="l02060"></a><span class="lineno"> 2060</span>&#160;        this-&gt;get_exec_info().device_id = device_id;</div>
+<div class="line"><a name="l02061"></a><span class="lineno"> 2061</span>&#160;        this-&gt;set_device_property(property);</div>
+<div class="line"><a name="l02062"></a><span class="lineno"> 2062</span>&#160;    }</div>
+<div class="line"><a name="l02063"></a><span class="lineno"> 2063</span>&#160; </div>
+<div class="line"><a name="l02064"></a><span class="lineno"> 2064</span>&#160;    <span class="keywordtype">void</span> populate_exec_info(<span class="keyword">const</span> machine_topology* mach_topo) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l02065"></a><span class="lineno"> 2065</span>&#160; </div>
+<div class="line"><a name="l02066"></a><span class="lineno"> 2066</span>&#160;    <span class="keywordtype">void</span>* raw_alloc(<a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> size) <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l02067"></a><span class="lineno"> 2067</span>&#160; </div>
-<div class="line"><a name="l02068"></a><span class="lineno"> 2068</span>&#160;<span class="preprocessor">#undef GKO_OVERRIDE_RAW_COPY_TO</span></div>
+<div class="line"><a name="l02068"></a><span class="lineno"> 2068</span>&#160;    <span class="keywordtype">void</span> raw_free(<span class="keywordtype">void</span>* ptr) <span class="keyword">const</span> noexcept <span class="keyword">override</span>;</div>
 <div class="line"><a name="l02069"></a><span class="lineno"> 2069</span>&#160; </div>
-<div class="line"><a name="l02070"></a><span class="lineno"> 2070</span>&#160; </div>
-<div class="line"><a name="l02071"></a><span class="lineno"> 2071</span>&#160;}  <span class="comment">// namespace gko</span></div>
-<div class="line"><a name="l02072"></a><span class="lineno"> 2072</span>&#160; </div>
+<div class="line"><a name="l02070"></a><span class="lineno"> 2070</span>&#160;    GKO_ENABLE_FOR_ALL_EXECUTORS(GKO_OVERRIDE_RAW_COPY_TO);</div>
+<div class="line"><a name="l02071"></a><span class="lineno"> 2071</span>&#160; </div>
+<div class="line"><a name="l02072"></a><span class="lineno"> 2072</span>&#160;    GKO_DEFAULT_OVERRIDE_VERIFY_MEMORY(CudaExecutor, <span class="keyword">false</span>);</div>
 <div class="line"><a name="l02073"></a><span class="lineno"> 2073</span>&#160; </div>
-<div class="line"><a name="l02074"></a><span class="lineno"> 2074</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_BASE_EXECUTOR_HPP_</span></div>
+<div class="line"><a name="l02074"></a><span class="lineno"> 2074</span>&#160;    GKO_DEFAULT_OVERRIDE_VERIFY_MEMORY(HipExecutor, <span class="keyword">false</span>);</div>
+<div class="line"><a name="l02075"></a><span class="lineno"> 2075</span>&#160; </div>
+<div class="line"><a name="l02076"></a><span class="lineno"> 2076</span>&#160;    GKO_DEFAULT_OVERRIDE_VERIFY_MEMORY(ReferenceExecutor, <span class="keyword">false</span>);</div>
+<div class="line"><a name="l02077"></a><span class="lineno"> 2077</span>&#160; </div>
+<div class="line"><a name="l02078"></a><span class="lineno"> 2078</span>&#160;    <span class="keywordtype">bool</span> verify_memory_to(<span class="keyword">const</span> OmpExecutor* dest_exec) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l02079"></a><span class="lineno"> 2079</span>&#160; </div>
+<div class="line"><a name="l02080"></a><span class="lineno"> 2080</span>&#160;    <span class="keywordtype">bool</span> verify_memory_to(<span class="keyword">const</span> DpcppExecutor* dest_exec) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l02081"></a><span class="lineno"> 2081</span>&#160; </div>
+<div class="line"><a name="l02082"></a><span class="lineno"> 2082</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l02083"></a><span class="lineno"> 2083</span>&#160;    std::shared_ptr&lt;Executor&gt; master_;</div>
+<div class="line"><a name="l02084"></a><span class="lineno"> 2084</span>&#160; </div>
+<div class="line"><a name="l02085"></a><span class="lineno"> 2085</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l02086"></a><span class="lineno"> 2086</span>&#160;    <span class="keyword">using</span> queue_manager = std::unique_ptr&lt;T, std::function&lt;void(T*)&gt;&gt;;</div>
+<div class="line"><a name="l02087"></a><span class="lineno"> 2087</span>&#160;    queue_manager&lt;sycl::queue&gt; queue_;</div>
+<div class="line"><a name="l02088"></a><span class="lineno"> 2088</span>&#160;};</div>
+<div class="line"><a name="l02089"></a><span class="lineno"> 2089</span>&#160; </div>
+<div class="line"><a name="l02090"></a><span class="lineno"> 2090</span>&#160; </div>
+<div class="line"><a name="l02091"></a><span class="lineno"> 2091</span>&#160;<span class="keyword">namespace </span>kernels {</div>
+<div class="line"><a name="l02092"></a><span class="lineno"> 2092</span>&#160;<span class="keyword">namespace </span>dpcpp {</div>
+<div class="line"><a name="l02093"></a><span class="lineno"> 2093</span>&#160;<span class="keyword">using</span> DefaultExecutor = DpcppExecutor;</div>
+<div class="line"><a name="l02094"></a><span class="lineno"> 2094</span>&#160;}  <span class="comment">// namespace dpcpp</span></div>
+<div class="line"><a name="l02095"></a><span class="lineno"> 2095</span>&#160;}  <span class="comment">// namespace kernels</span></div>
+<div class="line"><a name="l02096"></a><span class="lineno"> 2096</span>&#160; </div>
+<div class="line"><a name="l02097"></a><span class="lineno"> 2097</span>&#160; </div>
+<div class="line"><a name="l02098"></a><span class="lineno"> 2098</span>&#160;<span class="preprocessor">#undef GKO_OVERRIDE_RAW_COPY_TO</span></div>
+<div class="line"><a name="l02099"></a><span class="lineno"> 2099</span>&#160; </div>
+<div class="line"><a name="l02100"></a><span class="lineno"> 2100</span>&#160; </div>
+<div class="line"><a name="l02101"></a><span class="lineno"> 2101</span>&#160;}  <span class="comment">// namespace gko</span></div>
+<div class="line"><a name="l02102"></a><span class="lineno"> 2102</span>&#160; </div>
+<div class="line"><a name="l02103"></a><span class="lineno"> 2103</span>&#160; </div>
+<div class="line"><a name="l02104"></a><span class="lineno"> 2104</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_BASE_EXECUTOR_HPP_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="anamespacegko_html_afbed8e2cbd3ee4ca962e12f688858bdb"><div class="ttname"><a href="namespacegko.html#afbed8e2cbd3ee4ca962e12f688858bdb">gko::allocation_mode</a></div><div class="ttdeci">allocation_mode</div><div class="ttdoc">Specify the mode of allocation for CUDA/HIP GPUs.</div><div class="ttdef"><b>Definition:</b> executor.hpp:63</div></div>
+<div class="ttc" id="aclassgko_1_1CudaExecutor_html_a3e71f1cef44cc3381fc4907112548c8f"><div class="ttname"><a href="classgko_1_1CudaExecutor.html#a3e71f1cef44cc3381fc4907112548c8f">gko::CudaExecutor::get_sparselib_handle</a></div><div class="ttdeci">cusparseContext * get_sparselib_handle() const</div><div class="ttdoc">Get the cusparse handle for this executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1625</div></div>
 <div class="ttc" id="aclassgko_1_1CudaExecutor_html_a245c1c35a18e6534d87ef6e9cad24f7c"><div class="ttname"><a href="classgko_1_1CudaExecutor.html#a245c1c35a18e6534d87ef6e9cad24f7c">gko::CudaExecutor::get_num_warps_per_sm</a></div><div class="ttdeci">int get_num_warps_per_sm() const noexcept</div><div class="ttdoc">Get the number of warps per SM of this executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1552</div></div>
 <div class="ttc" id="aclassgko_1_1executor__deleter_html"><div class="ttname"><a href="classgko_1_1executor__deleter.html">gko::executor_deleter</a></div><div class="ttdoc">This is a deleter that uses an executor's free method to deallocate the data.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1171</div></div>
-<div class="ttc" id="aclassgko_1_1HipExecutor_html_a43bc417378f1c0f07ef49d2856ddd37c"><div class="ttname"><a href="classgko_1_1HipExecutor.html#a43bc417378f1c0f07ef49d2856ddd37c">gko::HipExecutor::get_num_warps_per_sm</a></div><div class="ttdeci">int get_num_warps_per_sm() const noexcept</div><div class="ttdoc">Get the number of warps per SM of this executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1757</div></div>
+<div class="ttc" id="aclassgko_1_1HipExecutor_html_a43bc417378f1c0f07ef49d2856ddd37c"><div class="ttname"><a href="classgko_1_1HipExecutor.html#a43bc417378f1c0f07ef49d2856ddd37c">gko::HipExecutor::get_num_warps_per_sm</a></div><div class="ttdeci">int get_num_warps_per_sm() const noexcept</div><div class="ttdoc">Get the number of warps per SM of this executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1772</div></div>
 <div class="ttc" id="aclassgko_1_1executor__deleter_html_a260f79ed87560fefc48d52b072bbb776"><div class="ttname"><a href="classgko_1_1executor__deleter.html#a260f79ed87560fefc48d52b072bbb776">gko::executor_deleter::executor_deleter</a></div><div class="ttdeci">executor_deleter(std::shared_ptr&lt; const Executor &gt; exec)</div><div class="ttdoc">Creates a new deleter.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1180</div></div>
-<div class="ttc" id="aclassgko_1_1CudaExecutor_html_a95709d82526c878c8d33ffb0eece62b9"><div class="ttname"><a href="classgko_1_1CudaExecutor.html#a95709d82526c878c8d33ffb0eece62b9">gko::CudaExecutor::get_stream</a></div><div class="ttdeci">CUstream_st * get_stream() const</div><div class="ttdoc">Returns the CUDA stream used by this executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1638</div></div>
+<div class="ttc" id="aclassgko_1_1CudaExecutor_html_a95709d82526c878c8d33ffb0eece62b9"><div class="ttname"><a href="classgko_1_1CudaExecutor.html#a95709d82526c878c8d33ffb0eece62b9">gko::CudaExecutor::get_stream</a></div><div class="ttdeci">CUstream_st * get_stream() const</div><div class="ttdoc">Returns the CUDA stream used by this executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1653</div></div>
 <div class="ttc" id="aclassgko_1_1Executor_html_a24eeee7648c0f0fd07c9866d07154875"><div class="ttname"><a href="classgko_1_1Executor.html#a24eeee7648c0f0fd07c9866d07154875">gko::Executor::synchronize</a></div><div class="ttdeci">virtual void synchronize() const =0</div><div class="ttdoc">Synchronize the operations launched on the executor with its master.</div></div>
-<div class="ttc" id="aclassgko_1_1DpcppExecutor_html_a1ebddf08efc499ab31d1fbfcccc4d2f5"><div class="ttname"><a href="classgko_1_1DpcppExecutor.html#a1ebddf08efc499ab31d1fbfcccc4d2f5">gko::DpcppExecutor::get_max_workitem_sizes</a></div><div class="ttdeci">const std::vector&lt; int &gt; &amp; get_max_workitem_sizes() const noexcept</div><div class="ttdoc">Get the maximum work item sizes.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1982</div></div>
+<div class="ttc" id="aclassgko_1_1DpcppExecutor_html_a1ebddf08efc499ab31d1fbfcccc4d2f5"><div class="ttname"><a href="classgko_1_1DpcppExecutor.html#a1ebddf08efc499ab31d1fbfcccc4d2f5">gko::DpcppExecutor::get_max_workitem_sizes</a></div><div class="ttdeci">const std::vector&lt; int &gt; &amp; get_max_workitem_sizes() const noexcept</div><div class="ttdoc">Get the maximum work item sizes.</div><div class="ttdef"><b>Definition:</b> executor.hpp:2012</div></div>
 <div class="ttc" id="aclassgko_1_1Executor_html_a0befe43d21c93e199d1620eaae4ccc0c"><div class="ttname"><a href="classgko_1_1Executor.html#a0befe43d21c93e199d1620eaae4ccc0c">gko::Executor::free</a></div><div class="ttdeci">void free(void *ptr) const noexcept</div><div class="ttdoc">Frees memory previously allocated with Executor::alloc().</div><div class="ttdef"><b>Definition:</b> executor.hpp:692</div></div>
-<div class="ttc" id="aclassgko_1_1HipExecutor_html_a3e9de37cb851c04cd1d8f02712421f83"><div class="ttname"><a href="classgko_1_1HipExecutor.html#a3e9de37cb851c04cd1d8f02712421f83">gko::HipExecutor::get_hipblas_handle</a></div><div class="ttdeci">hipblasContext * get_hipblas_handle() const</div><div class="ttdoc">Get the hipblas handle for this executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1808</div></div>
+<div class="ttc" id="aclassgko_1_1HipExecutor_html_a3e9de37cb851c04cd1d8f02712421f83"><div class="ttname"><a href="classgko_1_1HipExecutor.html#a3e9de37cb851c04cd1d8f02712421f83">gko::HipExecutor::get_hipblas_handle</a></div><div class="ttdeci">hipblasContext * get_hipblas_handle() const</div><div class="ttdoc">Get the hipblas handle for this executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1824</div></div>
 <div class="ttc" id="aclassgko_1_1Executor_html_a452d0a9f4ea10ea3c3ba5c820e1e8d10"><div class="ttname"><a href="classgko_1_1Executor.html#a452d0a9f4ea10ea3c3ba5c820e1e8d10">gko::Executor::memory_accessible</a></div><div class="ttdeci">bool memory_accessible(const std::shared_ptr&lt; const Executor &gt; &amp;other) const</div><div class="ttdoc">Verifies whether the executors share the same memory.</div><div class="ttdef"><b>Definition:</b> executor.hpp:862</div></div>
-<div class="ttc" id="aclassgko_1_1DpcppExecutor_html_ab6ff2a7bc51dca54ef9cce5c836ade2f"><div class="ttname"><a href="classgko_1_1DpcppExecutor.html#ab6ff2a7bc51dca54ef9cce5c836ade2f">gko::DpcppExecutor::get_device_type</a></div><div class="ttdeci">std::string get_device_type() const noexcept</div><div class="ttdoc">Get a string representing the device type.</div><div class="ttdef"><b>Definition:</b> executor.hpp:2012</div></div>
+<div class="ttc" id="aclassgko_1_1DpcppExecutor_html_ab6ff2a7bc51dca54ef9cce5c836ade2f"><div class="ttname"><a href="classgko_1_1DpcppExecutor.html#ab6ff2a7bc51dca54ef9cce5c836ade2f">gko::DpcppExecutor::get_device_type</a></div><div class="ttdeci">std::string get_device_type() const noexcept</div><div class="ttdoc">Get a string representing the device type.</div><div class="ttdef"><b>Definition:</b> executor.hpp:2042</div></div>
 <div class="ttc" id="aclassgko_1_1HipExecutor_html_a7b34cbd84692dafa2290e6630754aa97"><div class="ttname"><a href="classgko_1_1HipExecutor.html#a7b34cbd84692dafa2290e6630754aa97">gko::HipExecutor::get_num_devices</a></div><div class="ttdeci">static int get_num_devices()</div><div class="ttdoc">Get the number of devices present on the system.</div></div>
-<div class="ttc" id="aclassgko_1_1HipExecutor_html_ae39be6e255dfe5ecf6fe542da914afec"><div class="ttname"><a href="classgko_1_1HipExecutor.html#ae39be6e255dfe5ecf6fe542da914afec">gko::HipExecutor::get_closest_numa</a></div><div class="ttdeci">int get_closest_numa() const</div><div class="ttdoc">Get the closest NUMA node.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1825</div></div>
+<div class="ttc" id="aclassgko_1_1HipExecutor_html_ae39be6e255dfe5ecf6fe542da914afec"><div class="ttname"><a href="classgko_1_1HipExecutor.html#ae39be6e255dfe5ecf6fe542da914afec">gko::HipExecutor::get_closest_numa</a></div><div class="ttdeci">int get_closest_numa() const</div><div class="ttdoc">Get the closest NUMA node.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1855</div></div>
 <div class="ttc" id="aclassgko_1_1scoped__device__id__guard_html"><div class="ttname"><a href="classgko_1_1scoped__device__id__guard.html">gko::scoped_device_id_guard</a></div><div class="ttdoc">This move-only class uses RAII to set the device id within a scoped block, if necessary.</div><div class="ttdef"><b>Definition:</b> scoped_device_id_guard.hpp:76</div></div>
 <div class="ttc" id="aclassgko_1_1DpcppExecutor_html_adf306338233c8e8aca0dec96aefe5d93"><div class="ttname"><a href="classgko_1_1DpcppExecutor.html#adf306338233c8e8aca0dec96aefe5d93">gko::DpcppExecutor::get_num_devices</a></div><div class="ttdeci">static int get_num_devices(std::string device_type)</div><div class="ttdoc">Get the number of devices present on the system.</div></div>
-<div class="ttc" id="aclassgko_1_1DpcppExecutor_html_a1a9ef86016a05905955e2d05812bf00d"><div class="ttname"><a href="classgko_1_1DpcppExecutor.html#a1a9ef86016a05905955e2d05812bf00d">gko::DpcppExecutor::get_num_computing_units</a></div><div class="ttdeci">int get_num_computing_units() const noexcept</div><div class="ttdoc">Get the number of Computing Units of this executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1963</div></div>
+<div class="ttc" id="aclassgko_1_1DpcppExecutor_html_a1a9ef86016a05905955e2d05812bf00d"><div class="ttname"><a href="classgko_1_1DpcppExecutor.html#a1a9ef86016a05905955e2d05812bf00d">gko::DpcppExecutor::get_num_computing_units</a></div><div class="ttdeci">int get_num_computing_units() const noexcept</div><div class="ttdoc">Get the number of Computing Units of this executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1993</div></div>
 <div class="ttc" id="anamespacegko_html_aa2543f42cbbe1a9373dc46d04c112beea2bd9c0ed00116be1258e0cc66617d7c8"><div class="ttname"><a href="namespacegko.html#aa2543f42cbbe1a9373dc46d04c112beea2bd9c0ed00116be1258e0cc66617d7c8">gko::log_propagation_mode::automatic</a></div><div class="ttdoc">Events get reported to loggers attached to the triggering object and propagating loggers (Logger::nee...</div></div>
 <div class="ttc" id="aclassgko_1_1Executor_html_af04cdc1a9af6c8efc34ddebb9e7aaf00"><div class="ttname"><a href="classgko_1_1Executor.html#af04cdc1a9af6c8efc34ddebb9e7aaf00">gko::Executor::remove_logger</a></div><div class="ttdeci">void remove_logger(const log::Logger *logger) override</div><div class="ttdef"><b>Definition:</b> executor.hpp:821</div></div>
-<div class="ttc" id="aclassgko_1_1DpcppExecutor_html_a5539608a0027a5ff6b1330d9595e7e58"><div class="ttname"><a href="classgko_1_1DpcppExecutor.html#a5539608a0027a5ff6b1330d9595e7e58">gko::DpcppExecutor::get_num_subgroups</a></div><div class="ttdeci">int get_num_subgroups() const noexcept</div><div class="ttdoc">Get the number of subgroups of this executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1971</div></div>
+<div class="ttc" id="aclassgko_1_1DpcppExecutor_html_a5539608a0027a5ff6b1330d9595e7e58"><div class="ttname"><a href="classgko_1_1DpcppExecutor.html#a5539608a0027a5ff6b1330d9595e7e58">gko::DpcppExecutor::get_num_subgroups</a></div><div class="ttdeci">int get_num_subgroups() const noexcept</div><div class="ttdoc">Get the number of subgroups of this executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:2001</div></div>
 <div class="ttc" id="anamespacegko_html_a6e5c95df0ae4e47aab2f604a22d98ee7"><div class="ttname"><a href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">gko::size_type</a></div><div class="ttdeci">std::size_t size_type</div><div class="ttdoc">Integral type used for allocation quantities.</div><div class="ttdef"><b>Definition:</b> types.hpp:108</div></div>
 <div class="ttc" id="aclassgko_1_1Executor_html_a8050a118e6ac312a768ec56d3d3aae20"><div class="ttname"><a href="classgko_1_1Executor.html#a8050a118e6ac312a768ec56d3d3aae20">gko::Executor::copy_from</a></div><div class="ttdeci">void copy_from(ptr_param&lt; const Executor &gt; src_exec, size_type num_elems, const T *src_ptr, T *dest_ptr) const</div><div class="ttdoc">Copies data from another Executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:714</div></div>
 <div class="ttc" id="aclassgko_1_1Executor_html_acaec4f999d52fc71e5e5a3d3ad93609c"><div class="ttname"><a href="classgko_1_1Executor.html#acaec4f999d52fc71e5e5a3d3ad93609c">gko::Executor::get_master</a></div><div class="ttdeci">virtual std::shared_ptr&lt; Executor &gt; get_master() noexcept=0</div><div class="ttdoc">Returns the master OmpExecutor of this Executor.</div></div>
 <div class="ttc" id="aclassgko_1_1ptr__param_html_a815e682f273679b99cd632a83c974057"><div class="ttname"><a href="classgko_1_1ptr__param.html#a815e682f273679b99cd632a83c974057">gko::ptr_param::get</a></div><div class="ttdeci">T * get() const</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:77</div></div>
 <div class="ttc" id="aclassgko_1_1Executor_html_a1de8e2668b76e66690acf5eef9e8324d"><div class="ttname"><a href="classgko_1_1Executor.html#a1de8e2668b76e66690acf5eef9e8324d">gko::Executor::run</a></div><div class="ttdeci">virtual void run(const Operation &amp;op) const =0</div><div class="ttdoc">Runs the specified Operation using this Executor.</div></div>
-<div class="ttc" id="aclassgko_1_1HipExecutor_html"><div class="ttname"><a href="classgko_1_1HipExecutor.html">gko::HipExecutor</a></div><div class="ttdoc">This is the Executor subclass which represents the HIP enhanced device.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1701</div></div>
+<div class="ttc" id="aclassgko_1_1HipExecutor_html"><div class="ttname"><a href="classgko_1_1HipExecutor.html">gko::HipExecutor</a></div><div class="ttdoc">This is the Executor subclass which represents the HIP enhanced device.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1716</div></div>
 <div class="ttc" id="aclassgko_1_1CudaExecutor_html_aa7d7a5cd7aeb38b8ab8fe3e4d1538481"><div class="ttname"><a href="classgko_1_1CudaExecutor.html#aa7d7a5cd7aeb38b8ab8fe3e4d1538481">gko::CudaExecutor::get_minor_version</a></div><div class="ttdeci">int get_minor_version() const noexcept</div><div class="ttdoc">Get the minor version of compute capability.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1593</div></div>
 <div class="ttc" id="aclassgko_1_1DpcppExecutor_html_ac9a28c1178bde1244960a2bdd6c7e7a9"><div class="ttname"><a href="classgko_1_1DpcppExecutor.html#ac9a28c1178bde1244960a2bdd6c7e7a9">gko::DpcppExecutor::get_master</a></div><div class="ttdeci">std::shared_ptr&lt; Executor &gt; get_master() noexcept override</div><div class="ttdoc">Returns the master OmpExecutor of this Executor.</div></div>
 <div class="ttc" id="anamespacegko_html_aa2543f42cbbe1a9373dc46d04c112beeac7561db7a418dd39b2201dfe110ab4a4"><div class="ttname"><a href="namespacegko.html#aa2543f42cbbe1a9373dc46d04c112beeac7561db7a418dd39b2201dfe110ab4a4">gko::log_propagation_mode::never</a></div><div class="ttdoc">Events only get reported at loggers attached to the triggering object.</div></div>
@@ -1274,53 +1293,54 @@ $(function() {
 <div class="ttc" id="aclassgko_1_1ReferenceExecutor_html"><div class="ttname"><a href="classgko_1_1ReferenceExecutor.html">gko::ReferenceExecutor</a></div><div class="ttdoc">This is a specialization of the OmpExecutor, which runs the reference implementations of the kernels ...</div><div class="ttdef"><b>Definition:</b> executor.hpp:1415</div></div>
 <div class="ttc" id="aclassgko_1_1CudaExecutor_html_a6a3894e9f4d98b5f7523e067c88ef521"><div class="ttname"><a href="classgko_1_1CudaExecutor.html#a6a3894e9f4d98b5f7523e067c88ef521">gko::CudaExecutor::get_warp_size</a></div><div class="ttdeci">int get_warp_size() const noexcept</div><div class="ttdoc">Get the warp size of this executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1577</div></div>
 <div class="ttc" id="aclassgko_1_1NotSupported_html"><div class="ttname"><a href="classgko_1_1NotSupported.html">gko::NotSupported</a></div><div class="ttdoc">NotSupported is thrown in case it is not possible to perform the requested operation on the given obj...</div><div class="ttdef"><b>Definition:</b> exception.hpp:128</div></div>
-<div class="ttc" id="aclassgko_1_1HipExecutor_html_a37a35665c3983e56105c6acea9de73c6"><div class="ttname"><a href="classgko_1_1HipExecutor.html#a37a35665c3983e56105c6acea9de73c6">gko::HipExecutor::get_device_id</a></div><div class="ttdeci">int get_device_id() const noexcept</div><div class="ttdoc">Get the HIP device id of the device associated to this executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1744</div></div>
-<div class="ttc" id="aclassgko_1_1HipExecutor_html_ac644de4030c96e20db7489957a949c49"><div class="ttname"><a href="classgko_1_1HipExecutor.html#ac644de4030c96e20db7489957a949c49">gko::HipExecutor::get_hipsparse_handle</a></div><div class="ttdeci">hipsparseContext * get_hipsparse_handle() const</div><div class="ttdoc">Get the hipsparse handle for this executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1815</div></div>
+<div class="ttc" id="aclassgko_1_1HipExecutor_html_a37a35665c3983e56105c6acea9de73c6"><div class="ttname"><a href="classgko_1_1HipExecutor.html#a37a35665c3983e56105c6acea9de73c6">gko::HipExecutor::get_device_id</a></div><div class="ttdeci">int get_device_id() const noexcept</div><div class="ttdoc">Get the HIP device id of the device associated to this executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1759</div></div>
+<div class="ttc" id="aclassgko_1_1HipExecutor_html_ac644de4030c96e20db7489957a949c49"><div class="ttname"><a href="classgko_1_1HipExecutor.html#ac644de4030c96e20db7489957a949c49">gko::HipExecutor::get_hipsparse_handle</a></div><div class="ttdeci">hipsparseContext * get_hipsparse_handle() const</div><div class="ttdoc">Get the hipsparse handle for this executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1837</div></div>
 <div class="ttc" id="aclassgko_1_1CudaExecutor_html"><div class="ttname"><a href="classgko_1_1CudaExecutor.html">gko::CudaExecutor</a></div><div class="ttdoc">This is the Executor subclass which represents the CUDA device.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1483</div></div>
 <div class="ttc" id="anamespacegko_html_aa2543f42cbbe1a9373dc46d04c112bee"><div class="ttname"><a href="namespacegko.html#aa2543f42cbbe1a9373dc46d04c112bee">gko::log_propagation_mode</a></div><div class="ttdeci">log_propagation_mode</div><div class="ttdoc">How Logger events are propagated to their Executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:35</div></div>
 <div class="ttc" id="aclassgko_1_1HipExecutor_html_aa0701fe1303e03a8331da7e95008100d"><div class="ttname"><a href="classgko_1_1HipExecutor.html#aa0701fe1303e03a8331da7e95008100d">gko::HipExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; HipExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, bool device_reset, allocation_mode alloc_mode=default_hip_alloc_mode, CUstream_st *stream=nullptr)</div><div class="ttdoc">Creates a new HipExecutor.</div></div>
 <div class="ttc" id="anamespacegko_html"><div class="ttname"><a href="namespacegko.html">gko</a></div><div class="ttdoc">The Ginkgo namespace.</div><div class="ttdef"><b>Definition:</b> abstract_factory.hpp:20</div></div>
 <div class="ttc" id="aclassgko_1_1Executor_html_a520dad04b7e74f285ab0956873a5413d"><div class="ttname"><a href="classgko_1_1Executor.html#a520dad04b7e74f285ab0956873a5413d">gko::Executor::add_logger</a></div><div class="ttdeci">void add_logger(std::shared_ptr&lt; const log::Logger &gt; logger) override</div><div class="ttdef"><b>Definition:</b> executor.hpp:808</div></div>
-<div class="ttc" id="aclassgko_1_1CudaExecutor_html_a5b5f8febb914c9984bc77b15e7bb7601"><div class="ttname"><a href="classgko_1_1CudaExecutor.html#a5b5f8febb914c9984bc77b15e7bb7601">gko::CudaExecutor::get_cublas_handle</a></div><div class="ttdeci">cublasContext * get_cublas_handle() const</div><div class="ttdoc">Get the cublas handle for this executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1603</div></div>
 <div class="ttc" id="aclassgko_1_1HipExecutor_html_aad8e01fc70095ad5df48a02da9555400"><div class="ttname"><a href="classgko_1_1HipExecutor.html#aad8e01fc70095ad5df48a02da9555400">gko::HipExecutor::get_master</a></div><div class="ttdeci">std::shared_ptr&lt; Executor &gt; get_master() noexcept override</div><div class="ttdoc">Returns the master OmpExecutor of this Executor.</div></div>
+<div class="ttc" id="aclassgko_1_1CudaExecutor_html_a6310b548ceda90c584108bf8efc4e1c1"><div class="ttname"><a href="classgko_1_1CudaExecutor.html#a6310b548ceda90c584108bf8efc4e1c1">gko::CudaExecutor::get_blas_handle</a></div><div class="ttdeci">cublasContext * get_blas_handle() const</div><div class="ttdoc">Get the cublas handle for this executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1609</div></div>
 <div class="ttc" id="aclassgko_1_1executor__deleter_html_aaefa9d9f1c8ae4f4723668d5f946e5c0"><div class="ttname"><a href="classgko_1_1executor__deleter.html#aaefa9d9f1c8ae4f4723668d5f946e5c0">gko::executor_deleter::operator()</a></div><div class="ttdeci">void operator()(pointer ptr) const</div><div class="ttdoc">Deletes the object.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1189</div></div>
-<div class="ttc" id="aclassgko_1_1HipExecutor_html_a7c6f4683d767aa1588dc69d79280bf72"><div class="ttname"><a href="classgko_1_1HipExecutor.html#a7c6f4683d767aa1588dc69d79280bf72">gko::HipExecutor::get_closest_pus</a></div><div class="ttdeci">std::vector&lt; int &gt; get_closest_pus() const</div><div class="ttdoc">Get the closest PUs.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1832</div></div>
-<div class="ttc" id="aclassgko_1_1DpcppExecutor_html_a950a8f15ace58f5f54af3a9b52a11998"><div class="ttname"><a href="classgko_1_1DpcppExecutor.html#a950a8f15ace58f5f54af3a9b52a11998">gko::DpcppExecutor::get_max_subgroup_size</a></div><div class="ttdeci">int get_max_subgroup_size() const noexcept</div><div class="ttdoc">Get the maximum subgroup size.</div><div class="ttdef"><b>Definition:</b> executor.hpp:2002</div></div>
+<div class="ttc" id="aclassgko_1_1HipExecutor_html_a7c6f4683d767aa1588dc69d79280bf72"><div class="ttname"><a href="classgko_1_1HipExecutor.html#a7c6f4683d767aa1588dc69d79280bf72">gko::HipExecutor::get_closest_pus</a></div><div class="ttdeci">std::vector&lt; int &gt; get_closest_pus() const</div><div class="ttdoc">Get the closest PUs.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1862</div></div>
+<div class="ttc" id="aclassgko_1_1DpcppExecutor_html_a950a8f15ace58f5f54af3a9b52a11998"><div class="ttname"><a href="classgko_1_1DpcppExecutor.html#a950a8f15ace58f5f54af3a9b52a11998">gko::DpcppExecutor::get_max_subgroup_size</a></div><div class="ttdeci">int get_max_subgroup_size() const noexcept</div><div class="ttdoc">Get the maximum subgroup size.</div><div class="ttdef"><b>Definition:</b> executor.hpp:2032</div></div>
 <div class="ttc" id="aclassgko_1_1log_1_1EnableLogging_html"><div class="ttname"><a href="classgko_1_1log_1_1EnableLogging.html">gko::log::EnableLogging</a></div><div class="ttdoc">EnableLogging is a mixin which should be inherited by any class which wants to enable logging.</div><div class="ttdef"><b>Definition:</b> logger.hpp:749</div></div>
 <div class="ttc" id="aclassgko_1_1Operation_html_ab3b940849d1daf02830f3387c52888d0"><div class="ttname"><a href="classgko_1_1Operation.html#ab3b940849d1daf02830f3387c52888d0">gko::Operation::get_name</a></div><div class="ttdeci">virtual const char * get_name() const noexcept</div><div class="ttdoc">Returns the operation's name.</div></div>
 <div class="ttc" id="aclassgko_1_1DpcppExecutor_html_a6b2a82c46748ddbf097fa2da3ec64d90"><div class="ttname"><a href="classgko_1_1DpcppExecutor.html#a6b2a82c46748ddbf097fa2da3ec64d90">gko::DpcppExecutor::synchronize</a></div><div class="ttdeci">void synchronize() const override</div><div class="ttdoc">Synchronize the operations launched on the executor with its master.</div></div>
-<div class="ttc" id="aclassgko_1_1DpcppExecutor_html"><div class="ttname"><a href="classgko_1_1DpcppExecutor.html">gko::DpcppExecutor</a></div><div class="ttdoc">This is the Executor subclass which represents a DPC++ enhanced device.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1900</div></div>
+<div class="ttc" id="aclassgko_1_1DpcppExecutor_html"><div class="ttname"><a href="classgko_1_1DpcppExecutor.html">gko::DpcppExecutor</a></div><div class="ttdoc">This is the Executor subclass which represents a DPC++ enhanced device.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1930</div></div>
 <div class="ttc" id="aclassgko_1_1ptr__param_html"><div class="ttname"><a href="classgko_1_1ptr__param.html">gko::ptr_param</a></div><div class="ttdoc">This class is used for function parameters in the place of raw pointers.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:43</div></div>
 <div class="ttc" id="aclassgko_1_1log_1_1Logger_html"><div class="ttname"><a href="classgko_1_1log_1_1Logger.html">gko::log::Logger</a></div><div class="ttdef"><b>Definition:</b> logger.hpp:76</div></div>
 <div class="ttc" id="aclassgko_1_1Executor_html_ab5ee27c7997a4e109831e27c42242073"><div class="ttname"><a href="classgko_1_1Executor.html#ab5ee27c7997a4e109831e27c42242073">gko::Executor::copy_val_to_host</a></div><div class="ttdeci">T copy_val_to_host(const T *ptr) const</div><div class="ttdoc">Retrieves a single element at the given location from executor memory.</div><div class="ttdef"><b>Definition:</b> executor.hpp:779</div></div>
 <div class="ttc" id="aclassgko_1_1OmpExecutor_html"><div class="ttname"><a href="classgko_1_1OmpExecutor.html">gko::OmpExecutor</a></div><div class="ttdoc">This is the Executor subclass which represents the OpenMP device (typically CPU).</div><div class="ttdef"><b>Definition:</b> executor.hpp:1337</div></div>
 <div class="ttc" id="aclassgko_1_1Executor_html_a294787f033b02fd013af087d02a4ae1b"><div class="ttname"><a href="classgko_1_1Executor.html#a294787f033b02fd013af087d02a4ae1b">gko::Executor::run</a></div><div class="ttdeci">void run(const ClosureOmp &amp;op_omp, const ClosureCuda &amp;op_cuda, const ClosureHip &amp;op_hip, const ClosureDpcpp &amp;op_dpcpp) const</div><div class="ttdoc">Runs one of the passed in functors, depending on the Executor type.</div><div class="ttdef"><b>Definition:</b> executor.hpp:655</div></div>
-<div class="ttc" id="aclassgko_1_1CudaExecutor_html_ab7e9f82cce904e2649a61d39e7161538"><div class="ttname"><a href="classgko_1_1CudaExecutor.html#ab7e9f82cce904e2649a61d39e7161538">gko::CudaExecutor::get_closest_pus</a></div><div class="ttdeci">std::vector&lt; int &gt; get_closest_pus() const</div><div class="ttdoc">Get the closest PUs.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1620</div></div>
+<div class="ttc" id="aclassgko_1_1CudaExecutor_html_ab7e9f82cce904e2649a61d39e7161538"><div class="ttname"><a href="classgko_1_1CudaExecutor.html#ab7e9f82cce904e2649a61d39e7161538">gko::CudaExecutor::get_closest_pus</a></div><div class="ttdeci">std::vector&lt; int &gt; get_closest_pus() const</div><div class="ttdoc">Get the closest PUs.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1635</div></div>
+<div class="ttc" id="aclassgko_1_1HipExecutor_html_a47df269986a5fc21f3ec7a6aa3e67395"><div class="ttname"><a href="classgko_1_1HipExecutor.html#a47df269986a5fc21f3ec7a6aa3e67395">gko::HipExecutor::get_sparselib_handle</a></div><div class="ttdeci">hipsparseContext * get_sparselib_handle() const</div><div class="ttdoc">Get the hipsparse handle for this executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1845</div></div>
 <div class="ttc" id="agroup__stop_html_ga5fe97c4263e876f68b5d4a21f0e615b9"><div class="ttname"><a href="group__stop.html#ga5fe97c4263e876f68b5d4a21f0e615b9">gko::stop::mode</a></div><div class="ttdeci">mode</div><div class="ttdoc">The mode for the residual norm criterion.</div><div class="ttdef"><b>Definition:</b> residual_norm.hpp:37</div></div>
 <div class="ttc" id="aclassgko_1_1OmpExecutor_html_a8930142a1913bcbcac4fb6c917f930d9"><div class="ttname"><a href="classgko_1_1OmpExecutor.html#a8930142a1913bcbcac4fb6c917f930d9">gko::OmpExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; OmpExecutor &gt; create(std::shared_ptr&lt; CpuAllocatorBase &gt; alloc=std::make_shared&lt; CpuAllocator &gt;())</div><div class="ttdoc">Creates a new OmpExecutor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1345</div></div>
-<div class="ttc" id="aclassgko_1_1CudaExecutor_html_ade84197157cc2695e5c94310692ab323"><div class="ttname"><a href="classgko_1_1CudaExecutor.html#ade84197157cc2695e5c94310692ab323">gko::CudaExecutor::get_cusparse_handle</a></div><div class="ttdeci">cusparseContext * get_cusparse_handle() const</div><div class="ttdoc">Get the cusparse handle for this executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1610</div></div>
 <div class="ttc" id="aclassgko_1_1Executor_html_a5a216c2b1f7ceb8a0190c08941c1c687"><div class="ttname"><a href="classgko_1_1Executor.html#a5a216c2b1f7ceb8a0190c08941c1c687">gko::Executor::alloc</a></div><div class="ttdeci">T * alloc(size_type num_elems) const</div><div class="ttdoc">Allocates memory in this Executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:675</div></div>
 <div class="ttc" id="aclassgko_1_1ReferenceExecutor_html_a82b41b42dbd26e8ac5b0146de79e5d34"><div class="ttname"><a href="classgko_1_1ReferenceExecutor.html#a82b41b42dbd26e8ac5b0146de79e5d34">gko::ReferenceExecutor::run</a></div><div class="ttdeci">void run(const Operation &amp;op) const override</div><div class="ttdoc">Runs the specified Operation using this Executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1430</div></div>
 <div class="ttc" id="aclassgko_1_1Executor_html_a45377b6ee4c1d1852ec299ce2133eabb"><div class="ttname"><a href="classgko_1_1Executor.html#a45377b6ee4c1d1852ec299ce2133eabb">gko::Executor::copy</a></div><div class="ttdeci">void copy(size_type num_elems, const T *src_ptr, T *dest_ptr) const</div><div class="ttdoc">Copies data within this Executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:764</div></div>
-<div class="ttc" id="aclassgko_1_1HipExecutor_html_ac69c763f9d90e948d03ed1e5ed23903c"><div class="ttname"><a href="classgko_1_1HipExecutor.html#ac69c763f9d90e948d03ed1e5ed23903c">gko::HipExecutor::get_num_multiprocessor</a></div><div class="ttdeci">int get_num_multiprocessor() const noexcept</div><div class="ttdoc">Get the number of multiprocessor of this executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1765</div></div>
+<div class="ttc" id="aclassgko_1_1HipExecutor_html_ac69c763f9d90e948d03ed1e5ed23903c"><div class="ttname"><a href="classgko_1_1HipExecutor.html#ac69c763f9d90e948d03ed1e5ed23903c">gko::HipExecutor::get_num_multiprocessor</a></div><div class="ttdeci">int get_num_multiprocessor() const noexcept</div><div class="ttdoc">Get the number of multiprocessor of this executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1780</div></div>
 <div class="ttc" id="aclassgko_1_1Executor_html_a3d59329aa9e2db037f2ebb6748bf4a5b"><div class="ttname"><a href="classgko_1_1Executor.html#a3d59329aa9e2db037f2ebb6748bf4a5b">gko::Executor::should_propagate_log</a></div><div class="ttdeci">bool should_propagate_log() const</div><div class="ttdoc">Returns true iff events occurring at an object created on this executor should be logged at propagati...</div><div class="ttdef"><b>Definition:</b> executor.hpp:849</div></div>
-<div class="ttc" id="aclassgko_1_1DpcppExecutor_html_aefdd7095f2d18ff8e4ab8354006f305b"><div class="ttname"><a href="classgko_1_1DpcppExecutor.html#aefdd7095f2d18ff8e4ab8354006f305b">gko::DpcppExecutor::get_device_id</a></div><div class="ttdeci">int get_device_id() const noexcept</div><div class="ttdoc">Get the DPCPP device id of the device associated to this executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1932</div></div>
-<div class="ttc" id="aclassgko_1_1DpcppExecutor_html_a2a4b81ed45477d3c4d38a340cb994ec5"><div class="ttname"><a href="classgko_1_1DpcppExecutor.html#a2a4b81ed45477d3c4d38a340cb994ec5">gko::DpcppExecutor::get_max_workgroup_size</a></div><div class="ttdeci">int get_max_workgroup_size() const noexcept</div><div class="ttdoc">Get the maximum workgroup size.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1992</div></div>
+<div class="ttc" id="aclassgko_1_1DpcppExecutor_html_aefdd7095f2d18ff8e4ab8354006f305b"><div class="ttname"><a href="classgko_1_1DpcppExecutor.html#aefdd7095f2d18ff8e4ab8354006f305b">gko::DpcppExecutor::get_device_id</a></div><div class="ttdeci">int get_device_id() const noexcept</div><div class="ttdoc">Get the DPCPP device id of the device associated to this executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1962</div></div>
+<div class="ttc" id="aclassgko_1_1DpcppExecutor_html_a2a4b81ed45477d3c4d38a340cb994ec5"><div class="ttname"><a href="classgko_1_1DpcppExecutor.html#a2a4b81ed45477d3c4d38a340cb994ec5">gko::DpcppExecutor::get_max_workgroup_size</a></div><div class="ttdeci">int get_max_workgroup_size() const noexcept</div><div class="ttdoc">Get the maximum workgroup size.</div><div class="ttdef"><b>Definition:</b> executor.hpp:2022</div></div>
 <div class="ttc" id="aclassgko_1_1CudaExecutor_html_a3868f53f82b6398acb1ba1f9647a6e46"><div class="ttname"><a href="classgko_1_1CudaExecutor.html#a3868f53f82b6398acb1ba1f9647a6e46">gko::CudaExecutor::get_major_version</a></div><div class="ttdeci">int get_major_version() const noexcept</div><div class="ttdoc">Get the major version of compute capability.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1585</div></div>
 <div class="ttc" id="aclassgko_1_1CudaExecutor_html_aa9d77db0b87322a8bef12380029b5310"><div class="ttname"><a href="classgko_1_1CudaExecutor.html#aa9d77db0b87322a8bef12380029b5310">gko::CudaExecutor::get_num_warps</a></div><div class="ttdeci">int get_num_warps() const noexcept</div><div class="ttdoc">Get the number of warps of this executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1568</div></div>
 <div class="ttc" id="aclassgko_1_1log_1_1Logger_html_a6f60c7a79a4716836d232558c58777d0"><div class="ttname"><a href="classgko_1_1log_1_1Logger.html#a6f60c7a79a4716836d232558c58777d0">gko::log::Logger::needs_propagation</a></div><div class="ttdeci">virtual bool needs_propagation() const</div><div class="ttdoc">Returns true if this logger, when attached to an Executor, needs to be forwarded all events from obje...</div><div class="ttdef"><b>Definition:</b> logger.hpp:643</div></div>
-<div class="ttc" id="aclassgko_1_1CudaExecutor_html_a23a13ee1b82ea850660da25376d6cf4e"><div class="ttname"><a href="classgko_1_1CudaExecutor.html#a23a13ee1b82ea850660da25376d6cf4e">gko::CudaExecutor::get_closest_numa</a></div><div class="ttdeci">int get_closest_numa() const</div><div class="ttdoc">Get the closest NUMA node.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1630</div></div>
+<div class="ttc" id="aclassgko_1_1CudaExecutor_html_a23a13ee1b82ea850660da25376d6cf4e"><div class="ttname"><a href="classgko_1_1CudaExecutor.html#a23a13ee1b82ea850660da25376d6cf4e">gko::CudaExecutor::get_closest_numa</a></div><div class="ttdeci">int get_closest_numa() const</div><div class="ttdoc">Get the closest NUMA node.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1645</div></div>
 <div class="ttc" id="aclassgko_1_1Executor_html"><div class="ttname"><a href="classgko_1_1Executor.html">gko::Executor</a></div><div class="ttdoc">The first step in using the Ginkgo library consists of creating an executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:616</div></div>
-<div class="ttc" id="aclassgko_1_1HipExecutor_html_add2eb69abc3225f1ab7e5b01d9ebb307"><div class="ttname"><a href="classgko_1_1HipExecutor.html#add2eb69abc3225f1ab7e5b01d9ebb307">gko::HipExecutor::get_num_warps</a></div><div class="ttdeci">int get_num_warps() const noexcept</div><div class="ttdoc">Get the number of warps of this executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1789</div></div>
-<div class="ttc" id="aclassgko_1_1HipExecutor_html_a4cdda4e0d7031ab353555193927d0975"><div class="ttname"><a href="classgko_1_1HipExecutor.html#a4cdda4e0d7031ab353555193927d0975">gko::HipExecutor::get_major_version</a></div><div class="ttdeci">int get_major_version() const noexcept</div><div class="ttdoc">Get the major version of compute capability.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1773</div></div>
+<div class="ttc" id="aclassgko_1_1HipExecutor_html_ab5619600c382b8b90f794d60b82481f2"><div class="ttname"><a href="classgko_1_1HipExecutor.html#ab5619600c382b8b90f794d60b82481f2">gko::HipExecutor::get_blas_handle</a></div><div class="ttdeci">hipblasContext * get_blas_handle() const</div><div class="ttdoc">Get the hipblas handle for this executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1829</div></div>
+<div class="ttc" id="aclassgko_1_1HipExecutor_html_add2eb69abc3225f1ab7e5b01d9ebb307"><div class="ttname"><a href="classgko_1_1HipExecutor.html#add2eb69abc3225f1ab7e5b01d9ebb307">gko::HipExecutor::get_num_warps</a></div><div class="ttdeci">int get_num_warps() const noexcept</div><div class="ttdoc">Get the number of warps of this executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1804</div></div>
+<div class="ttc" id="aclassgko_1_1HipExecutor_html_a4cdda4e0d7031ab353555193927d0975"><div class="ttname"><a href="classgko_1_1HipExecutor.html#a4cdda4e0d7031ab353555193927d0975">gko::HipExecutor::get_major_version</a></div><div class="ttdeci">int get_major_version() const noexcept</div><div class="ttdoc">Get the major version of compute capability.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1788</div></div>
 <div class="ttc" id="aclassgko_1_1DpcppExecutor_html_ae9b875dfe3af7f3f3f24071bfb2f895e"><div class="ttname"><a href="classgko_1_1DpcppExecutor.html#ae9b875dfe3af7f3f3f24071bfb2f895e">gko::DpcppExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; DpcppExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, std::string device_type=&quot;all&quot;, dpcpp_queue_property property=dpcpp_queue_property::in_order)</div><div class="ttdoc">Creates a new DpcppExecutor.</div></div>
 <div class="ttc" id="aclassgko_1_1machine__topology_html_af386c47b448d710e62f3b186b358c775"><div class="ttname"><a href="classgko_1_1machine__topology.html#af386c47b448d710e62f3b186b358c775">gko::machine_topology::get_instance</a></div><div class="ttdeci">static machine_topology * get_instance()</div><div class="ttdoc">Returns an instance of the machine_topology object.</div><div class="ttdef"><b>Definition:</b> machine_topology.hpp:183</div></div>
 <div class="ttc" id="aclassgko_1_1HipExecutor_html_a0ea0ec8722767138953110b52d325b4a"><div class="ttname"><a href="classgko_1_1HipExecutor.html#a0ea0ec8722767138953110b52d325b4a">gko::HipExecutor::synchronize</a></div><div class="ttdeci">void synchronize() const override</div><div class="ttdoc">Synchronize the operations launched on the executor with its master.</div></div>
 <div class="ttc" id="aclassgko_1_1Operation_html"><div class="ttname"><a href="classgko_1_1Operation.html">gko::Operation</a></div><div class="ttdoc">Operations can be used to define functionalities whose implementations differ among devices.</div><div class="ttdef"><b>Definition:</b> executor.hpp:259</div></div>
 <div class="ttc" id="aclassgko_1_1Executor_html_a8801d54a4ac842def0b88d643b37b1db"><div class="ttname"><a href="classgko_1_1Executor.html#a8801d54a4ac842def0b88d643b37b1db">gko::Executor::set_log_propagation_mode</a></div><div class="ttdeci">void set_log_propagation_mode(log_propagation_mode mode)</div><div class="ttdoc">Sets the logger event propagation mode for the executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:837</div></div>
-<div class="ttc" id="aclassgko_1_1DpcppExecutor_html_a5a8a807279c9dfeef114bd8875c7a369"><div class="ttname"><a href="classgko_1_1DpcppExecutor.html#a5a8a807279c9dfeef114bd8875c7a369">gko::DpcppExecutor::get_subgroup_sizes</a></div><div class="ttdeci">const std::vector&lt; int &gt; &amp; get_subgroup_sizes() const noexcept</div><div class="ttdoc">Get the available subgroup sizes for this device.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1953</div></div>
-<div class="ttc" id="aclassgko_1_1HipExecutor_html_ae470cdfd4273b02b2563101d6146db26"><div class="ttname"><a href="classgko_1_1HipExecutor.html#ae470cdfd4273b02b2563101d6146db26">gko::HipExecutor::get_warp_size</a></div><div class="ttdeci">int get_warp_size() const noexcept</div><div class="ttdoc">Get the warp size of this executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1798</div></div>
-<div class="ttc" id="aclassgko_1_1HipExecutor_html_a78f3bfa05f6d38c286309436781a6f7a"><div class="ttname"><a href="classgko_1_1HipExecutor.html#a78f3bfa05f6d38c286309436781a6f7a">gko::HipExecutor::get_minor_version</a></div><div class="ttdeci">int get_minor_version() const noexcept</div><div class="ttdoc">Get the minor version of compute capability.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1781</div></div>
+<div class="ttc" id="aclassgko_1_1DpcppExecutor_html_a5a8a807279c9dfeef114bd8875c7a369"><div class="ttname"><a href="classgko_1_1DpcppExecutor.html#a5a8a807279c9dfeef114bd8875c7a369">gko::DpcppExecutor::get_subgroup_sizes</a></div><div class="ttdeci">const std::vector&lt; int &gt; &amp; get_subgroup_sizes() const noexcept</div><div class="ttdoc">Get the available subgroup sizes for this device.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1983</div></div>
+<div class="ttc" id="aclassgko_1_1HipExecutor_html_ae470cdfd4273b02b2563101d6146db26"><div class="ttname"><a href="classgko_1_1HipExecutor.html#ae470cdfd4273b02b2563101d6146db26">gko::HipExecutor::get_warp_size</a></div><div class="ttdeci">int get_warp_size() const noexcept</div><div class="ttdoc">Get the warp size of this executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1813</div></div>
+<div class="ttc" id="aclassgko_1_1HipExecutor_html_a78f3bfa05f6d38c286309436781a6f7a"><div class="ttname"><a href="classgko_1_1HipExecutor.html#a78f3bfa05f6d38c286309436781a6f7a">gko::HipExecutor::get_minor_version</a></div><div class="ttdeci">int get_minor_version() const noexcept</div><div class="ttdoc">Get the minor version of compute capability.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1796</div></div>
 <div class="ttc" id="aclassgko_1_1CudaExecutor_html_a7cfa915eadd2329eb897dc1ee2712488"><div class="ttname"><a href="classgko_1_1CudaExecutor.html#a7cfa915eadd2329eb897dc1ee2712488">gko::CudaExecutor::get_device_id</a></div><div class="ttdeci">int get_device_id() const noexcept</div><div class="ttdoc">Get the CUDA device id of the device associated to this executor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1539</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
