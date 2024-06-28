@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1351416132 branch based on develop. Ginkgo version 1.9.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1352441528 branch based on develop. Ginkgo version 1.9.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -165,7 +165,7 @@ Creating, Reviewing and Merging Pull Requests</h2>
 Code style</h1>
 <h2><a class="anchor" id="autotoc_md29"></a>
 Automatic code formatting</h2>
-<p>Ginkgo uses <a href="https://clang.llvm.org/docs/ClangFormat.html">ClangFormat</a> (executable is usually named <code>clang-format</code>) and a custom <code>.clang-format</code> configuration file (mostly based on ClangFormat's <em>Google</em> style) to automatically format your code. <b>Make sure you have ClangFormat set up and running properly</b> ( you should be able to run <code>make format</code> from Ginkgo's build directory) before committing anything that will end up in a pull request against <code>ginkgo-project/ginkgo</code> repository. In addition, you should <b>never</b> modify the <code>.clang-format</code> configuration file shipped with Ginkgo. E.g. if ClangFormat has trouble reading this file on your system, you should install a newer version of ClangFormat, and avoid commenting out parts of the configuration file.</p>
+<p>Ginkgo uses <a href="https://pre-commit.com/">pre-commit</a> to automatically apply code formatting when committing changes to git. What formatting is applied is managed through <a href="https://clang.llvm.org/docs/ClangFormat.html">ClangFormat</a> with a custom <code>.clang-format</code> configuration file (mostly based on ClangFormat's <em>Google</em> style). <b>Make sure you have pre-commit set up and running properly</b> before committing anything that will end up in a pull request against <code>ginkgo-project/ginkgo</code> repository. In addition, you should <b>never</b> modify the <code>.clang-format</code> configuration file shipped with Ginkgo. E.g. if ClangFormat has trouble reading this file on your system, you should install a newer version of ClangFormat, and avoid commenting out parts of the configuration file.</p>
 <p>ClangFormat is the primary tool that helps us achieve a uniform look of Ginkgo's codebase, while reducing the learning curve of potential contributors. However, ClangFormat configuration is not expressive enough to incorporate the entire coding style, so there are several additional rules that all contributed code should follow.</p>
 <p><em>Note</em>: To learn more about how ClangFormat will format your code, see existing files in Ginkgo, <code>.clang-format</code> configuration file shipped with Ginkgo, and ClangFormat's documentation.</p>
 <h2><a class="anchor" id="autotoc_md30"></a>
@@ -273,58 +273,39 @@ Whitespace</h2>
 </ol>
 <h2><a class="anchor" id="autotoc_md41"></a>
 Include statement grouping</h2>
-<p>In general, all include statements should be present on the top of the file, ordered in the following groups, with two blank lines between each group:</p>
+<p>The concrete ordering will be done by <code>clang-format</code>. Here are the rules that <code>clang-format</code> will follow. In general, all include statements should be present on the top of the file, ordered in the following groups, with <em>one</em> blank lines between each group:</p>
 <ol type="1">
-<li>Related header file (e.g. <code>core/foo/bar.hpp</code> included in <code>core/foo/bar.cpp</code>, or in the unit test<code>core/test/foo/bar.cpp</code>)</li>
+<li>Main header file (e.g. <code>core/foo/bar.hpp</code> included in <code>core/foo/bar.cpp</code>, or in the unit test<code>core/test/foo/bar.cpp</code>)</li>
 <li>Standard library headers (e.g. <code>vector</code>)</li>
 <li>Executor specific library headers (e.g. <code>omp.h</code>)</li>
 <li>System third-party library headers (e.g. <code>papi.h</code>)</li>
-<li>Local third-party library headers</li>
 <li>Public Ginkgo headers</li>
-<li>Private Ginkgo headers</li>
+<li>Local headers</li>
 </ol>
 <p><em>Example</em>: A file <code>core/base/my_file.cpp</code> might have an include list like this:</p>
 <div class="fragment"><div class="line"> {c++}</div>
-<div class="line">#include &lt;ginkgo/core/base/my_file.hpp&gt;</div>
-<div class="line"> </div>
+<div class="line">#include &quot;ginkgo/core/base/my_file.hpp&quot;</div>
 <div class="line"> </div>
 <div class="line">#include &lt;algorithm&gt;</div>
 <div class="line">#include &lt;vector&gt;</div>
 <div class="line">#include &lt;tuple&gt;</div>
 <div class="line"> </div>
-<div class="line"> </div>
 <div class="line">#include &lt;omp.h&gt;</div>
-<div class="line"> </div>
 <div class="line"> </div>
 <div class="line">#include &lt;papi.h&gt;</div>
 <div class="line"> </div>
-<div class="line"> </div>
-<div class="line">#include &quot;third_party/blas/cblas.hpp&quot;</div>
-<div class="line">#include &quot;third_party/lapack/lapack.hpp&quot;</div>
-<div class="line"> </div>
+<div class="line">#include &lt;third_party/blas/cblas.hpp&gt;</div>
+<div class="line">#include &lt;third_party/lapack/lapack.hpp&gt;</div>
 <div class="line"> </div>
 <div class="line">#include &lt;ginkgo/core/base/executor.hpp&gt;</div>
 <div class="line">#include &lt;ginkgo/core/base/lin_op.hpp&gt;</div>
 <div class="line">#include &lt;ginkgo/core/base/types.hpp&gt;</div>
 <div class="line"> </div>
-<div class="line"> </div>
 <div class="line">#include &quot;core/base/my_file_kernels.hpp&quot;</div>
 </div><!-- fragment --><h3><a class="anchor" id="autotoc_md42"></a>
 Main header</h3>
-<p>This section presents general rules used to define the main header attributed to the file. In the previous example, this would be <code>#include &lt;ginkgo/core/base/my_file.hpp&gt;</code>.</p>
-<p>General rules:</p><ol type="1">
-<li>Some fixed main header.</li>
-<li>components:<ul>
-<li>with <code>_kernel</code> suffix looks for the header in the same folder.</li>
-<li>without <code>_kernel</code> suffix looks for the header in <code>core</code>.</li>
-</ul>
-</li>
-<li><code>test/utils</code>: looks for the header in <code>core</code></li>
-<li><code>core</code>: looks for the header in <code>ginkgo</code></li>
-<li><code>test</code> or <code>base</code>: looks for the header in <code>ginkgo/core</code></li>
-<li>others: looks for the header in <code>core</code></li>
-</ol>
-<p><em>Note</em>: Please see the detail in the <code>dev_tools/scripts/config</code>.</p>
+<p>This section presents the handling of the main header attributed to a file. For a given file, the main header is the header that contains the declarations of the functions, classes, etc., which are implemented in this file. In the previous example, this would be <code>#include "ginkgo/core/base/my_file.hpp"</code>. The <code>clang-format</code> tool figures out the main header. The only intervention form a contributor is to <em>always</em> include the main header using <code>"..."</code>.</p>
+<p>Please note that this only applies to implementation files, so files ending in <code>.cpp</code> or <code>.cu</code>.</p>
 <h3><a class="anchor" id="autotoc_md43"></a>
 Some general comments.</h3>
 <ol type="1">
@@ -332,19 +313,12 @@ Some general comments.</h3>
 <li>It is a good idea to keep the headers self-sufficient, See <a href="https://google.github.io/styleguide/cppguide.html#Self_contained_Headers">Google Style guide for reasoning</a>. When compiling with <code>GINKGO_CHECK_CIRCULAR_DEPS</code> enabled, this property is explicitly checked.</li>
 <li>The recommendations of the <code>iwyu</code> (Include what you use) tool can be used to make sure that the headers are self-sufficient and that the compiled files ( <code>.cu</code>, <code>.cpp</code>, <code>.hip.cpp</code> ) include only what they use. A <a href="https://gitlab.com/ginkgo-project/ginkgo-public-ci/-/jobs/584358356">CI pipeline</a> is available that runs with the <code>iwyu</code> tool. Please be aware that this tool can be incorrect in some cases.</li>
 </ol>
-<h3><a class="anchor" id="autotoc_md44"></a>
-Automatic header arrangement</h3>
-<ol type="1">
-<li><code>dev_tools/script/format_header.sh</code> will take care of the group/sorting of headers according to this guideline.</li>
-<li><code>make format_header</code> arranges the header of the modified files in the branch.</li>
-<li><code>make format_header_all</code> arranges the header of all files.</li>
-</ol>
-<h2><a class="anchor" id="autotoc_md45"></a>
+<h2><a class="anchor" id="autotoc_md44"></a>
 Other Code Formatting not handled by ClangFormat</h2>
-<h3><a class="anchor" id="autotoc_md46"></a>
+<h3><a class="anchor" id="autotoc_md45"></a>
 Control flow constructs</h3>
 <p>Single line statements should be avoided in all cases. Use of brackets is mandatory for all control flow constructs (e.g. <code>if</code>, <code>for</code>, <code>while</code>, ...).</p>
-<h3><a class="anchor" id="autotoc_md47"></a>
+<h3><a class="anchor" id="autotoc_md46"></a>
 Variable declarations</h3>
 <p>C++ supports declaring / defining multiple variables using a single <em>type-specifier</em>. However, this is often very confusing as references and pointers exhibit strange behavior:</p>
 <div class="fragment"><div class="line"> {c++}</div>
@@ -353,62 +327,62 @@ Variable declarations</h3>
 <div class="line">int *        x, y;  // x is a pointer, y is not</div>
 <div class="line">pointer&lt;int&gt; x, y;  // both x and y are pointers</div>
 </div><!-- fragment --><p>For this reason, <b>always</b> declare each variable on a separate line, with its own <em>type-specifier</em>.</p>
-<h2><a class="anchor" id="autotoc_md48"></a>
+<h2><a class="anchor" id="autotoc_md47"></a>
 CMake coding style</h2>
-<h3><a class="anchor" id="autotoc_md49"></a>
+<h3><a class="anchor" id="autotoc_md48"></a>
 Whitespaces</h3>
 <p>All alignment in CMake files should use four spaces.</p>
-<h3><a class="anchor" id="autotoc_md50"></a>
+<h3><a class="anchor" id="autotoc_md49"></a>
 Use of macros vs functions</h3>
 <p>Macros in CMake do not have a scope. This means that any variable set in this macro will be available to the whole project. In contrast, functions in CMake have local scope and therefore all set variables are local only. In general, wrap all piece of algorithms using temporary variables in a function and use macros to propagate variables to the whole project.</p>
-<h3><a class="anchor" id="autotoc_md51"></a>
+<h3><a class="anchor" id="autotoc_md50"></a>
 Naming style</h3>
 <p>All Ginkgo specific variables should be prefixed with a <code>GINKGO_</code> and all functions by <code>ginkgo_</code>.</p>
-<h1><a class="anchor" id="autotoc_md52"></a>
+<h1><a class="anchor" id="autotoc_md51"></a>
 Helper scripts</h1>
 <p>To facilitate easy development within Ginkgo and to encourage coders and scientists who do not want get bogged down by the details of the Ginkgo library, but rather focus on writing the algorithms and the kernels, Ginkgo provides the developers with a few helper scripts.</p>
-<h2><a class="anchor" id="autotoc_md53"></a>
+<h2><a class="anchor" id="autotoc_md52"></a>
 Create a new algorithm</h2>
 <p>A <code>create_new_algorithm.sh</code> script is available for developers to facilitate easy addition of new algorithms. The options it provides can be queried with</p>
 <div class="fragment"><div class="line">./create_new_algorithm.sh --help</div>
 </div><!-- fragment --><p> The main objective of this script is to add files and boiler plate code for the new algorithm using a model and an instance of that model. For example, models can be any one of <code>factorization</code>, <code>matrix</code>, <code>preconditioner</code> or <code>solver</code>. For example to create a new solver named <code>my_solver</code> similar to <code>gmres</code>, you would set the <code>ModelType</code> to <code>solver</code> and set the <code>ModelName</code> to <code>gmres</code>. This would duplicate the core algorithm and kernels of the <code>gmres</code> algorithm and replace the naming to <code>my_solver</code>. Additionally, all the kernels of the new <code>my_solver</code> are marked as <code>GKO_NOT_IMPLEMENTED</code>. For easy navigation and <code>.txt</code> file is created in the folder where the script is run, which lists all the TODO's. These TODO's can also be found in the corresponding files.</p>
-<h2><a class="anchor" id="autotoc_md54"></a>
+<h2><a class="anchor" id="autotoc_md53"></a>
 Converting CUDA code to HIP code</h2>
 <p>We provide a <code>cuda2hip</code> script that converts <code>cuda</code> kernel code into <code>hip</code> kernel code. Internally, this script calls the <a href="https://github.com/ROCm-Developer-Tools/HIPIFY"><code>hipify</code> script</a> provided by HIP, converting the CUDA syntax to HIP syntax. Additionally, it also automatically replaces the instances of CUDA with HIP as appropriate. Hence, this script can be called on a Ginkgo CUDA file. You can find this script in the <code>dev_tools/scripts/</code> folder.</p>
-<h1><a class="anchor" id="autotoc_md55"></a>
+<h1><a class="anchor" id="autotoc_md54"></a>
 Writing Tests</h1>
 <p>Ginkgo uses the <a href="https://github.com/google/googletest">GTest framework</a> for the unit test framework within Ginkgo. Writing good tests are extremely important to verify the functionality of the new code and to make sure that none of the existing code has been broken.</p>
-<h2><a class="anchor" id="autotoc_md56"></a>
+<h2><a class="anchor" id="autotoc_md55"></a>
 Testing know-how</h2>
 <ul>
 <li>GTest provides a <a href="https://github.com/google/googletest/blob/master/googletest/docs/primer.md">comprehensive documentation</a> of the functionality available within Gtest.</li>
 <li>Reduce code duplication with <a href="https://github.com/google/googletest/blob/master/googletest/docs/primer.md#test-fixtures-using-the-same-data-configuration-for-multiple-tests-same-data-multiple-tests">Testing Fixtures, <code>TEST_F</code></a></li>
 <li>Write templated tests using <a href="https://github.com/google/googletest/blob/master/googletest/docs/advanced.md#typed-tests"><code>TYPED_TEST</code></a>.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md57"></a>
+<h2><a class="anchor" id="autotoc_md56"></a>
 Some general rules.</h2>
 <ul>
 <li>Unit tests must follow the <a href="https://en.wikipedia.org/wiki/KISS_principle">KISS principle</a>.</li>
 <li>Unit tests must follow the <a href="http://wiki.c2.com/?ArrangeActAssert">AAA</a> pattern, and a single blank line must appear between consecutive "A" sections.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md58"></a>
+<h2><a class="anchor" id="autotoc_md57"></a>
 Writing tests for kernels</h2>
 <ul>
 <li>Reference kernels, kernels on the <code>ReferenceExecutor</code>, are meant to be single threaded reference implementations. Therefore, tests for reference kernels need to be performed with data that can be as small as possible. For example, matrices lesser than 5x5 are acceptable. This allows the reviewers to verify the results for exactness with tools such as MATLAB.</li>
 <li>OpenMP, CUDA, HIP and DPC++ kernels have to be tested against the reference kernels. Hence data for the tests of these kernels can be generated in the test files using helper functions or by using external files to be read through the standard input. In particular for CUDA, HIP and DPC++ the data size should be at least bigger than the architecture's warp size to ensure there is no corner case in the kernels.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md59"></a>
+<h1><a class="anchor" id="autotoc_md58"></a>
 Documentation style</h1>
 <p>Documentation uses standard Doxygen.</p>
-<h2><a class="anchor" id="autotoc_md60"></a>
+<h2><a class="anchor" id="autotoc_md59"></a>
 Developer targeted notes</h2>
 <p>Make use of <code>@internal</code> doxygen tag. This can be used for any comment which is not intended for users, but is useful to better understand a piece of code.</p>
-<h2><a class="anchor" id="autotoc_md61"></a>
+<h2><a class="anchor" id="autotoc_md60"></a>
 Whitespaces</h2>
-<h3><a class="anchor" id="autotoc_md62"></a>
+<h3><a class="anchor" id="autotoc_md61"></a>
 After named tags such as &lt;tt&gt;@param foo&lt;/tt&gt;</h3>
 <p>The documentation tags which use an additional name should be followed by two spaces in order to better distinguish the text from the doxygen tag. It is also possible to use a line break instead.</p>
-<h2><a class="anchor" id="autotoc_md63"></a>
+<h2><a class="anchor" id="autotoc_md62"></a>
 Documenting examples</h2>
 <p>There are two main steps:</p>
 <ol type="1">
@@ -425,15 +399,15 @@ Documenting examples</h2>
 <ol type="1">
 <li>You also need to modify the <a href="https://github.com/ginkgo-project/ginkgo/blob/develop/doc/examples/examples.hpp.in">examples.hpp.in</a> file. You add the name of the example in the main section and in the section that you specified in the <code>doc/kind</code> file in the example documentation.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md64"></a>
+<h1><a class="anchor" id="autotoc_md63"></a>
 Other programming comments</h1>
-<h2><a class="anchor" id="autotoc_md65"></a>
+<h2><a class="anchor" id="autotoc_md64"></a>
 C++ standard stream objects</h2>
 <p>These are global objects and are shared inside the same translation unit. Therefore, whenever its state or formatting is changed (e.g. using <code>std::hex</code> or floating point formatting) inside library code, make sure to restore the state before returning the control to the user. See this <a href="https://stackoverflow.com/questions/2273330/restore-the-state-of-stdcout-after-manipulating-it">stackoverflow question</a> for examples on how to do it correctly. This is extremely important for header files.</p>
-<h2><a class="anchor" id="autotoc_md66"></a>
+<h2><a class="anchor" id="autotoc_md65"></a>
 Warnings</h2>
 <p>By default, the <code>-DCMAKE_CXX_FLAGS</code> should be set to <code>-Wpedantic</code> to emit pedantic warnings by default. The CI system additionally also has a step where it compiles for pedantic warnings to be errors.</p>
-<h2><a class="anchor" id="autotoc_md67"></a>
+<h2><a class="anchor" id="autotoc_md66"></a>
 Avoiding circular dependencies</h2>
 <p>To facilitate finding circular dependencies issues (see <a href="#using-library-classes">Using library classes</a> for more details), a CI step <code>no-circular-deps</code> was created. For more details on its usage, see <a href="https://gitlab.com/ginkgo-project/ginkgo-public-ci/pipelines/52941979">this pipeline</a>, where Ginkgo did not abide to this policy and <a href="https://github.com/ginkgo-project/ginkgo/pull/278">PR #278</a> which fixed this. Note that doing so is not enough to guarantee with 100% accuracy that no circular dependency is present. For an example of such a case, take a look at <a href="https://gitlab.com/ginkgo-project/ginkgo-public-ci/pipelines/53006772">this pipeline</a> where one of the compiler setups detected an incorrect dependency of the <code>cuda</code> module (due to jacobi) on the <code>core</code> module. </p>
 </div></div><!-- contents -->
