@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1363093349 branch based on develop. Ginkgo version 1.9.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1365280836 branch based on develop. Ginkgo version 1.9.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -620,7 +620,7 @@ $(function() {
 <div class="line"><a name="l00868"></a><span class="lineno">  868</span>&#160;<span class="keyword">namespace </span>detail {</div>
 <div class="line"><a name="l00869"></a><span class="lineno">  869</span>&#160; </div>
 <div class="line"><a name="l00870"></a><span class="lineno">  870</span>&#160; </div>
-<div class="line"><a name="l00880"></a><span class="lineno">  880</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> Ref, <span class="keyword">typename</span> Dummy = xstd::<span class="keywordtype">void</span>_t&lt;&gt;&gt;</div>
+<div class="line"><a name="l00880"></a><span class="lineno">  880</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> Ref, <span class="keyword">typename</span> Dummy = std::<span class="keywordtype">void</span>_t&lt;&gt;&gt;</div>
 <div class="line"><a name="l00881"></a><span class="lineno">  881</span>&#160;<span class="keyword">struct </span>has_to_arithmetic_type : std::false_type {</div>
 <div class="line"><a name="l00882"></a><span class="lineno">  882</span>&#160;    static_assert(std::is_same&lt;Dummy, void&gt;::value,</div>
 <div class="line"><a name="l00883"></a><span class="lineno">  883</span>&#160;                  <span class="stringliteral">&quot;Do not modify the Dummy value!&quot;</span>);</div>
@@ -629,20 +629,20 @@ $(function() {
 <div class="line"><a name="l00886"></a><span class="lineno">  886</span>&#160; </div>
 <div class="line"><a name="l00887"></a><span class="lineno">  887</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> Ref&gt;</div>
 <div class="line"><a name="l00888"></a><span class="lineno">  888</span>&#160;<span class="keyword">struct </span>has_to_arithmetic_type&lt;</div>
-<div class="line"><a name="l00889"></a><span class="lineno">  889</span>&#160;    Ref, xstd::void_t&lt;decltype(std::declval&lt;Ref&gt;().to_arithmetic_type())&gt;&gt;</div>
+<div class="line"><a name="l00889"></a><span class="lineno">  889</span>&#160;    Ref, std::void_t&lt;decltype(std::declval&lt;Ref&gt;().to_arithmetic_type())&gt;&gt;</div>
 <div class="line"><a name="l00890"></a><span class="lineno">  890</span>&#160;    : std::true_type {</div>
 <div class="line"><a name="l00891"></a><span class="lineno">  891</span>&#160;    <span class="keyword">using</span> type = decltype(std::declval&lt;Ref&gt;().to_arithmetic_type());</div>
 <div class="line"><a name="l00892"></a><span class="lineno">  892</span>&#160;};</div>
 <div class="line"><a name="l00893"></a><span class="lineno">  893</span>&#160; </div>
 <div class="line"><a name="l00894"></a><span class="lineno">  894</span>&#160; </div>
-<div class="line"><a name="l00899"></a><span class="lineno">  899</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> Ref, <span class="keyword">typename</span> Dummy = xstd::<span class="keywordtype">void</span>_t&lt;&gt;&gt;</div>
+<div class="line"><a name="l00899"></a><span class="lineno">  899</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> Ref, <span class="keyword">typename</span> Dummy = std::<span class="keywordtype">void</span>_t&lt;&gt;&gt;</div>
 <div class="line"><a name="l00900"></a><span class="lineno">  900</span>&#160;<span class="keyword">struct </span>has_arithmetic_type : std::false_type {</div>
 <div class="line"><a name="l00901"></a><span class="lineno">  901</span>&#160;    static_assert(std::is_same&lt;Dummy, void&gt;::value,</div>
 <div class="line"><a name="l00902"></a><span class="lineno">  902</span>&#160;                  <span class="stringliteral">&quot;Do not modify the Dummy value!&quot;</span>);</div>
 <div class="line"><a name="l00903"></a><span class="lineno">  903</span>&#160;};</div>
 <div class="line"><a name="l00904"></a><span class="lineno">  904</span>&#160; </div>
 <div class="line"><a name="l00905"></a><span class="lineno">  905</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> Ref&gt;</div>
-<div class="line"><a name="l00906"></a><span class="lineno">  906</span>&#160;<span class="keyword">struct </span>has_arithmetic_type&lt;Ref, xstd::void_t&lt;typename Ref::arithmetic_type&gt;&gt;</div>
+<div class="line"><a name="l00906"></a><span class="lineno">  906</span>&#160;<span class="keyword">struct </span>has_arithmetic_type&lt;Ref, std::void_t&lt;typename Ref::arithmetic_type&gt;&gt;</div>
 <div class="line"><a name="l00907"></a><span class="lineno">  907</span>&#160;    : std::true_type {};</div>
 <div class="line"><a name="l00908"></a><span class="lineno">  908</span>&#160; </div>
 <div class="line"><a name="l00909"></a><span class="lineno">  909</span>&#160; </div>
@@ -757,131 +757,130 @@ $(function() {
 <div class="line"><a name="l01061"></a><span class="lineno"> 1061</span>&#160; </div>
 <div class="line"><a name="l01062"></a><span class="lineno"> 1062</span>&#160; </div>
 <div class="line"><a name="l01072"></a><span class="lineno"> 1072</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l01073"></a><span class="lineno"> 1073</span>&#160;GKO_INLINE</div>
-<div class="line"><a name="l01074"></a><span class="lineno"> 1074</span>&#160;    GKO_ATTRIBUTES constexpr xstd::enable_if_t&lt;!is_complex_s&lt;T&gt;::value, T&gt;</div>
-<div class="line"><a name="l01075"></a><span class="lineno"><a class="line" href="namespacegko.html#adeb470aaf293d7c5548392b2f451e8e4"> 1075</a></span>&#160;    <a class="code" href="namespacegko.html#adeb470aaf293d7c5548392b2f451e8e4">abs</a>(<span class="keyword">const</span> T&amp; x)</div>
-<div class="line"><a name="l01076"></a><span class="lineno"> 1076</span>&#160;{</div>
-<div class="line"><a name="l01077"></a><span class="lineno"> 1077</span>&#160;    <span class="keywordflow">return</span> x &gt;= zero&lt;T&gt;() ? x : -x;</div>
-<div class="line"><a name="l01078"></a><span class="lineno"> 1078</span>&#160;}</div>
+<div class="line"><a name="l01073"></a><span class="lineno"> 1073</span>&#160;GKO_INLINE GKO_ATTRIBUTES constexpr std::enable_if_t&lt;!is_complex_s&lt;T&gt;::value, T&gt;</div>
+<div class="line"><a name="l01074"></a><span class="lineno"><a class="line" href="namespacegko.html#a99791881a0d56a1c5392ce52b4dce1ac"> 1074</a></span>&#160;<a class="code" href="namespacegko.html#a99791881a0d56a1c5392ce52b4dce1ac">abs</a>(<span class="keyword">const</span> T&amp; x)</div>
+<div class="line"><a name="l01075"></a><span class="lineno"> 1075</span>&#160;{</div>
+<div class="line"><a name="l01076"></a><span class="lineno"> 1076</span>&#160;    <span class="keywordflow">return</span> x &gt;= zero&lt;T&gt;() ? x : -x;</div>
+<div class="line"><a name="l01077"></a><span class="lineno"> 1077</span>&#160;}</div>
+<div class="line"><a name="l01078"></a><span class="lineno"> 1078</span>&#160; </div>
 <div class="line"><a name="l01079"></a><span class="lineno"> 1079</span>&#160; </div>
-<div class="line"><a name="l01080"></a><span class="lineno"> 1080</span>&#160; </div>
-<div class="line"><a name="l01081"></a><span class="lineno"> 1081</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l01082"></a><span class="lineno"> 1082</span>&#160;GKO_INLINE GKO_ATTRIBUTES constexpr xstd::enable_if_t&lt;is_complex_s&lt;T&gt;::value,</div>
-<div class="line"><a name="l01083"></a><span class="lineno"> 1083</span>&#160;                                                      remove_complex&lt;T&gt;&gt;</div>
-<div class="line"><a name="l01084"></a><span class="lineno"> 1084</span>&#160;<a class="code" href="namespacegko.html#adeb470aaf293d7c5548392b2f451e8e4">abs</a>(<span class="keyword">const</span> T&amp; x)</div>
-<div class="line"><a name="l01085"></a><span class="lineno"> 1085</span>&#160;{</div>
-<div class="line"><a name="l01086"></a><span class="lineno"> 1086</span>&#160;    <span class="keywordflow">return</span> sqrt(<a class="code" href="namespacegko.html#abbb55709b10d707b2cbef803832aa834">squared_norm</a>(x));</div>
-<div class="line"><a name="l01087"></a><span class="lineno"> 1087</span>&#160;}</div>
+<div class="line"><a name="l01080"></a><span class="lineno"> 1080</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l01081"></a><span class="lineno"> 1081</span>&#160;GKO_INLINE GKO_ATTRIBUTES constexpr std::enable_if_t&lt;is_complex_s&lt;T&gt;::value,</div>
+<div class="line"><a name="l01082"></a><span class="lineno"> 1082</span>&#160;                                                     remove_complex&lt;T&gt;&gt;</div>
+<div class="line"><a name="l01083"></a><span class="lineno"> 1083</span>&#160;<a class="code" href="namespacegko.html#a99791881a0d56a1c5392ce52b4dce1ac">abs</a>(<span class="keyword">const</span> T&amp; x)</div>
+<div class="line"><a name="l01084"></a><span class="lineno"> 1084</span>&#160;{</div>
+<div class="line"><a name="l01085"></a><span class="lineno"> 1085</span>&#160;    <span class="keywordflow">return</span> sqrt(<a class="code" href="namespacegko.html#abbb55709b10d707b2cbef803832aa834">squared_norm</a>(x));</div>
+<div class="line"><a name="l01086"></a><span class="lineno"> 1086</span>&#160;}</div>
+<div class="line"><a name="l01087"></a><span class="lineno"> 1087</span>&#160; </div>
 <div class="line"><a name="l01088"></a><span class="lineno"> 1088</span>&#160; </div>
-<div class="line"><a name="l01089"></a><span class="lineno"> 1089</span>&#160; </div>
-<div class="line"><a name="l01095"></a><span class="lineno"> 1095</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l01096"></a><span class="lineno"><a class="line" href="namespacegko.html#a0603ce0a60183a6698ac9b523694fb68"> 1096</a></span>&#160;GKO_INLINE GKO_ATTRIBUTES constexpr T <a class="code" href="namespacegko.html#a0603ce0a60183a6698ac9b523694fb68">pi</a>()</div>
-<div class="line"><a name="l01097"></a><span class="lineno"> 1097</span>&#160;{</div>
-<div class="line"><a name="l01098"></a><span class="lineno"> 1098</span>&#160;    <span class="keywordflow">return</span> static_cast&lt;T&gt;(3.1415926535897932384626433);</div>
-<div class="line"><a name="l01099"></a><span class="lineno"> 1099</span>&#160;}</div>
+<div class="line"><a name="l01094"></a><span class="lineno"> 1094</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l01095"></a><span class="lineno"><a class="line" href="namespacegko.html#a0603ce0a60183a6698ac9b523694fb68"> 1095</a></span>&#160;GKO_INLINE GKO_ATTRIBUTES constexpr T <a class="code" href="namespacegko.html#a0603ce0a60183a6698ac9b523694fb68">pi</a>()</div>
+<div class="line"><a name="l01096"></a><span class="lineno"> 1096</span>&#160;{</div>
+<div class="line"><a name="l01097"></a><span class="lineno"> 1097</span>&#160;    <span class="keywordflow">return</span> static_cast&lt;T&gt;(3.1415926535897932384626433);</div>
+<div class="line"><a name="l01098"></a><span class="lineno"> 1098</span>&#160;}</div>
+<div class="line"><a name="l01099"></a><span class="lineno"> 1099</span>&#160; </div>
 <div class="line"><a name="l01100"></a><span class="lineno"> 1100</span>&#160; </div>
-<div class="line"><a name="l01101"></a><span class="lineno"> 1101</span>&#160; </div>
-<div class="line"><a name="l01110"></a><span class="lineno"> 1110</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l01111"></a><span class="lineno"><a class="line" href="namespacegko.html#ab92d450201f5b215901c0f8c3e2e376c"> 1111</a></span>&#160;GKO_INLINE GKO_ATTRIBUTES constexpr std::complex&lt;remove_complex&lt;T&gt;&gt; <a class="code" href="namespacegko.html#ab92d450201f5b215901c0f8c3e2e376c">unit_root</a>(</div>
-<div class="line"><a name="l01112"></a><span class="lineno"> 1112</span>&#160;    <a class="code" href="namespacegko.html#a6c57dbf3168b1ecad3ea133aaf2efbc1">int64</a> n, <a class="code" href="namespacegko.html#a6c57dbf3168b1ecad3ea133aaf2efbc1">int64</a> k = 1)</div>
-<div class="line"><a name="l01113"></a><span class="lineno"> 1113</span>&#160;{</div>
-<div class="line"><a name="l01114"></a><span class="lineno"> 1114</span>&#160;    <span class="keywordflow">return</span> std::polar(<a class="code" href="namespacegko.html#a0059e27f8f4bc348ff65c1e60caf47c8">one</a>&lt;<a class="code" href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">remove_complex&lt;T&gt;</a>&gt;(),</div>
-<div class="line"><a name="l01115"></a><span class="lineno"> 1115</span>&#160;                      <a class="code" href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">remove_complex&lt;T&gt;</a>{2} * pi&lt;remove_complex&lt;T&gt;&gt;() * k / n);</div>
-<div class="line"><a name="l01116"></a><span class="lineno"> 1116</span>&#160;}</div>
+<div class="line"><a name="l01109"></a><span class="lineno"> 1109</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l01110"></a><span class="lineno"><a class="line" href="namespacegko.html#ab92d450201f5b215901c0f8c3e2e376c"> 1110</a></span>&#160;GKO_INLINE GKO_ATTRIBUTES constexpr std::complex&lt;remove_complex&lt;T&gt;&gt; <a class="code" href="namespacegko.html#ab92d450201f5b215901c0f8c3e2e376c">unit_root</a>(</div>
+<div class="line"><a name="l01111"></a><span class="lineno"> 1111</span>&#160;    <a class="code" href="namespacegko.html#a6c57dbf3168b1ecad3ea133aaf2efbc1">int64</a> n, <a class="code" href="namespacegko.html#a6c57dbf3168b1ecad3ea133aaf2efbc1">int64</a> k = 1)</div>
+<div class="line"><a name="l01112"></a><span class="lineno"> 1112</span>&#160;{</div>
+<div class="line"><a name="l01113"></a><span class="lineno"> 1113</span>&#160;    <span class="keywordflow">return</span> std::polar(<a class="code" href="namespacegko.html#a0059e27f8f4bc348ff65c1e60caf47c8">one</a>&lt;<a class="code" href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">remove_complex&lt;T&gt;</a>&gt;(),</div>
+<div class="line"><a name="l01114"></a><span class="lineno"> 1114</span>&#160;                      <a class="code" href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">remove_complex&lt;T&gt;</a>{2} * pi&lt;remove_complex&lt;T&gt;&gt;() * k / n);</div>
+<div class="line"><a name="l01115"></a><span class="lineno"> 1115</span>&#160;}</div>
+<div class="line"><a name="l01116"></a><span class="lineno"> 1116</span>&#160; </div>
 <div class="line"><a name="l01117"></a><span class="lineno"> 1117</span>&#160; </div>
-<div class="line"><a name="l01118"></a><span class="lineno"> 1118</span>&#160; </div>
-<div class="line"><a name="l01131"></a><span class="lineno"> 1131</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l01132"></a><span class="lineno"><a class="line" href="namespacegko.html#a4eea40e4123a3fdb60fcd92f902c6d6d"> 1132</a></span>&#160;constexpr <a class="code" href="namespacegko.html#a318c831e3fe269ba04c6ed8bf5a71073">uint32</a> <a class="code" href="namespacegko.html#a4eea40e4123a3fdb60fcd92f902c6d6d">get_significant_bit</a>(<span class="keyword">const</span> T&amp; n, <a class="code" href="namespacegko.html#a318c831e3fe269ba04c6ed8bf5a71073">uint32</a> hint = 0u) noexcept</div>
-<div class="line"><a name="l01133"></a><span class="lineno"> 1133</span>&#160;{</div>
-<div class="line"><a name="l01134"></a><span class="lineno"> 1134</span>&#160;    <span class="keywordflow">return</span> (T{1} &lt;&lt; (hint + 1)) &gt; n ? hint : <a class="code" href="namespacegko.html#a4eea40e4123a3fdb60fcd92f902c6d6d">get_significant_bit</a>(n, hint + 1u);</div>
-<div class="line"><a name="l01135"></a><span class="lineno"> 1135</span>&#160;}</div>
+<div class="line"><a name="l01130"></a><span class="lineno"> 1130</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l01131"></a><span class="lineno"><a class="line" href="namespacegko.html#a4eea40e4123a3fdb60fcd92f902c6d6d"> 1131</a></span>&#160;constexpr <a class="code" href="namespacegko.html#a318c831e3fe269ba04c6ed8bf5a71073">uint32</a> <a class="code" href="namespacegko.html#a4eea40e4123a3fdb60fcd92f902c6d6d">get_significant_bit</a>(<span class="keyword">const</span> T&amp; n, <a class="code" href="namespacegko.html#a318c831e3fe269ba04c6ed8bf5a71073">uint32</a> hint = 0u) noexcept</div>
+<div class="line"><a name="l01132"></a><span class="lineno"> 1132</span>&#160;{</div>
+<div class="line"><a name="l01133"></a><span class="lineno"> 1133</span>&#160;    <span class="keywordflow">return</span> (T{1} &lt;&lt; (hint + 1)) &gt; n ? hint : <a class="code" href="namespacegko.html#a4eea40e4123a3fdb60fcd92f902c6d6d">get_significant_bit</a>(n, hint + 1u);</div>
+<div class="line"><a name="l01134"></a><span class="lineno"> 1134</span>&#160;}</div>
+<div class="line"><a name="l01135"></a><span class="lineno"> 1135</span>&#160; </div>
 <div class="line"><a name="l01136"></a><span class="lineno"> 1136</span>&#160; </div>
-<div class="line"><a name="l01137"></a><span class="lineno"> 1137</span>&#160; </div>
-<div class="line"><a name="l01149"></a><span class="lineno"> 1149</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l01150"></a><span class="lineno"><a class="line" href="namespacegko.html#ad39645fe8148a8a812a9528865a77600"> 1150</a></span>&#160;constexpr T <a class="code" href="namespacegko.html#ad39645fe8148a8a812a9528865a77600">get_superior_power</a>(<span class="keyword">const</span> T&amp; base, <span class="keyword">const</span> T&amp; limit,</div>
-<div class="line"><a name="l01151"></a><span class="lineno"> 1151</span>&#160;                               <span class="keyword">const</span> T&amp; hint = T{1}) noexcept</div>
-<div class="line"><a name="l01152"></a><span class="lineno"> 1152</span>&#160;{</div>
-<div class="line"><a name="l01153"></a><span class="lineno"> 1153</span>&#160;    <span class="keywordflow">return</span> hint &gt;= limit ? hint : <a class="code" href="namespacegko.html#ad39645fe8148a8a812a9528865a77600">get_superior_power</a>(base, limit, hint * base);</div>
-<div class="line"><a name="l01154"></a><span class="lineno"> 1154</span>&#160;}</div>
+<div class="line"><a name="l01148"></a><span class="lineno"> 1148</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l01149"></a><span class="lineno"><a class="line" href="namespacegko.html#ad39645fe8148a8a812a9528865a77600"> 1149</a></span>&#160;constexpr T <a class="code" href="namespacegko.html#ad39645fe8148a8a812a9528865a77600">get_superior_power</a>(<span class="keyword">const</span> T&amp; base, <span class="keyword">const</span> T&amp; limit,</div>
+<div class="line"><a name="l01150"></a><span class="lineno"> 1150</span>&#160;                               <span class="keyword">const</span> T&amp; hint = T{1}) noexcept</div>
+<div class="line"><a name="l01151"></a><span class="lineno"> 1151</span>&#160;{</div>
+<div class="line"><a name="l01152"></a><span class="lineno"> 1152</span>&#160;    <span class="keywordflow">return</span> hint &gt;= limit ? hint : <a class="code" href="namespacegko.html#ad39645fe8148a8a812a9528865a77600">get_superior_power</a>(base, limit, hint * base);</div>
+<div class="line"><a name="l01153"></a><span class="lineno"> 1153</span>&#160;}</div>
+<div class="line"><a name="l01154"></a><span class="lineno"> 1154</span>&#160; </div>
 <div class="line"><a name="l01155"></a><span class="lineno"> 1155</span>&#160; </div>
-<div class="line"><a name="l01156"></a><span class="lineno"> 1156</span>&#160; </div>
-<div class="line"><a name="l01168"></a><span class="lineno"> 1168</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l01169"></a><span class="lineno"> 1169</span>&#160;GKO_INLINE GKO_ATTRIBUTES std::enable_if_t&lt;!is_complex_s&lt;T&gt;::value, <span class="keywordtype">bool</span>&gt;</div>
-<div class="line"><a name="l01170"></a><span class="lineno"><a class="line" href="namespacegko.html#a58498d28d199c188555a48fda471f103"> 1170</a></span>&#160;<a class="code" href="namespacegko.html#a58498d28d199c188555a48fda471f103">is_finite</a>(<span class="keyword">const</span> T&amp; value)</div>
-<div class="line"><a name="l01171"></a><span class="lineno"> 1171</span>&#160;{</div>
-<div class="line"><a name="l01172"></a><span class="lineno"> 1172</span>&#160;    constexpr T infinity{detail::infinity_impl&lt;T&gt;::value};</div>
-<div class="line"><a name="l01173"></a><span class="lineno"> 1173</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="namespacegko.html#adeb470aaf293d7c5548392b2f451e8e4">abs</a>(value) &lt; infinity;</div>
-<div class="line"><a name="l01174"></a><span class="lineno"> 1174</span>&#160;}</div>
+<div class="line"><a name="l01167"></a><span class="lineno"> 1167</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l01168"></a><span class="lineno"> 1168</span>&#160;GKO_INLINE GKO_ATTRIBUTES std::enable_if_t&lt;!is_complex_s&lt;T&gt;::value, <span class="keywordtype">bool</span>&gt;</div>
+<div class="line"><a name="l01169"></a><span class="lineno"><a class="line" href="namespacegko.html#a58498d28d199c188555a48fda471f103"> 1169</a></span>&#160;<a class="code" href="namespacegko.html#a58498d28d199c188555a48fda471f103">is_finite</a>(<span class="keyword">const</span> T&amp; value)</div>
+<div class="line"><a name="l01170"></a><span class="lineno"> 1170</span>&#160;{</div>
+<div class="line"><a name="l01171"></a><span class="lineno"> 1171</span>&#160;    constexpr T infinity{detail::infinity_impl&lt;T&gt;::value};</div>
+<div class="line"><a name="l01172"></a><span class="lineno"> 1172</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="namespacegko.html#a99791881a0d56a1c5392ce52b4dce1ac">abs</a>(value) &lt; infinity;</div>
+<div class="line"><a name="l01173"></a><span class="lineno"> 1173</span>&#160;}</div>
+<div class="line"><a name="l01174"></a><span class="lineno"> 1174</span>&#160; </div>
 <div class="line"><a name="l01175"></a><span class="lineno"> 1175</span>&#160; </div>
-<div class="line"><a name="l01176"></a><span class="lineno"> 1176</span>&#160; </div>
-<div class="line"><a name="l01188"></a><span class="lineno"> 1188</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l01189"></a><span class="lineno"> 1189</span>&#160;GKO_INLINE GKO_ATTRIBUTES std::enable_if_t&lt;is_complex_s&lt;T&gt;::value, <span class="keywordtype">bool</span>&gt;</div>
-<div class="line"><a name="l01190"></a><span class="lineno"><a class="line" href="namespacegko.html#a737d84b498f462463fa40846e22aec6d"> 1190</a></span>&#160;<a class="code" href="namespacegko.html#a58498d28d199c188555a48fda471f103">is_finite</a>(<span class="keyword">const</span> T&amp; value)</div>
-<div class="line"><a name="l01191"></a><span class="lineno"> 1191</span>&#160;{</div>
-<div class="line"><a name="l01192"></a><span class="lineno"> 1192</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="namespacegko.html#a58498d28d199c188555a48fda471f103">is_finite</a>(value.real()) &amp;&amp; <a class="code" href="namespacegko.html#a58498d28d199c188555a48fda471f103">is_finite</a>(value.imag());</div>
-<div class="line"><a name="l01193"></a><span class="lineno"> 1193</span>&#160;}</div>
+<div class="line"><a name="l01187"></a><span class="lineno"> 1187</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l01188"></a><span class="lineno"> 1188</span>&#160;GKO_INLINE GKO_ATTRIBUTES std::enable_if_t&lt;is_complex_s&lt;T&gt;::value, <span class="keywordtype">bool</span>&gt;</div>
+<div class="line"><a name="l01189"></a><span class="lineno"><a class="line" href="namespacegko.html#a737d84b498f462463fa40846e22aec6d"> 1189</a></span>&#160;<a class="code" href="namespacegko.html#a58498d28d199c188555a48fda471f103">is_finite</a>(<span class="keyword">const</span> T&amp; value)</div>
+<div class="line"><a name="l01190"></a><span class="lineno"> 1190</span>&#160;{</div>
+<div class="line"><a name="l01191"></a><span class="lineno"> 1191</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="namespacegko.html#a58498d28d199c188555a48fda471f103">is_finite</a>(value.real()) &amp;&amp; <a class="code" href="namespacegko.html#a58498d28d199c188555a48fda471f103">is_finite</a>(value.imag());</div>
+<div class="line"><a name="l01192"></a><span class="lineno"> 1192</span>&#160;}</div>
+<div class="line"><a name="l01193"></a><span class="lineno"> 1193</span>&#160; </div>
 <div class="line"><a name="l01194"></a><span class="lineno"> 1194</span>&#160; </div>
-<div class="line"><a name="l01195"></a><span class="lineno"> 1195</span>&#160; </div>
-<div class="line"><a name="l01207"></a><span class="lineno"> 1207</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l01208"></a><span class="lineno"><a class="line" href="namespacegko.html#aa1470fdc2a75dcda76bea4b879a29886"> 1208</a></span>&#160;GKO_INLINE GKO_ATTRIBUTES T <a class="code" href="namespacegko.html#aa1470fdc2a75dcda76bea4b879a29886">safe_divide</a>(T a, T b)</div>
-<div class="line"><a name="l01209"></a><span class="lineno"> 1209</span>&#160;{</div>
-<div class="line"><a name="l01210"></a><span class="lineno"> 1210</span>&#160;    <span class="keywordflow">return</span> b == zero&lt;T&gt;() ? zero&lt;T&gt;() : a / b;</div>
-<div class="line"><a name="l01211"></a><span class="lineno"> 1211</span>&#160;}</div>
+<div class="line"><a name="l01206"></a><span class="lineno"> 1206</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l01207"></a><span class="lineno"><a class="line" href="namespacegko.html#aa1470fdc2a75dcda76bea4b879a29886"> 1207</a></span>&#160;GKO_INLINE GKO_ATTRIBUTES T <a class="code" href="namespacegko.html#aa1470fdc2a75dcda76bea4b879a29886">safe_divide</a>(T a, T b)</div>
+<div class="line"><a name="l01208"></a><span class="lineno"> 1208</span>&#160;{</div>
+<div class="line"><a name="l01209"></a><span class="lineno"> 1209</span>&#160;    <span class="keywordflow">return</span> b == zero&lt;T&gt;() ? zero&lt;T&gt;() : a / b;</div>
+<div class="line"><a name="l01210"></a><span class="lineno"> 1210</span>&#160;}</div>
+<div class="line"><a name="l01211"></a><span class="lineno"> 1211</span>&#160; </div>
 <div class="line"><a name="l01212"></a><span class="lineno"> 1212</span>&#160; </div>
-<div class="line"><a name="l01213"></a><span class="lineno"> 1213</span>&#160; </div>
-<div class="line"><a name="l01223"></a><span class="lineno"> 1223</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l01224"></a><span class="lineno"> 1224</span>&#160;GKO_INLINE GKO_ATTRIBUTES std::enable_if_t&lt;!is_complex_s&lt;T&gt;::value, <span class="keywordtype">bool</span>&gt;</div>
-<div class="line"><a name="l01225"></a><span class="lineno"><a class="line" href="namespacegko.html#ae8b5bfaadc2c5a40f17f0459a3aa412d"> 1225</a></span>&#160;<a class="code" href="namespacegko.html#ae8b5bfaadc2c5a40f17f0459a3aa412d">is_nan</a>(<span class="keyword">const</span> T&amp; value)</div>
-<div class="line"><a name="l01226"></a><span class="lineno"> 1226</span>&#160;{</div>
-<div class="line"><a name="l01227"></a><span class="lineno"> 1227</span>&#160;    <span class="keywordflow">return</span> std::isnan(value);</div>
-<div class="line"><a name="l01228"></a><span class="lineno"> 1228</span>&#160;}</div>
+<div class="line"><a name="l01222"></a><span class="lineno"> 1222</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l01223"></a><span class="lineno"> 1223</span>&#160;GKO_INLINE GKO_ATTRIBUTES std::enable_if_t&lt;!is_complex_s&lt;T&gt;::value, <span class="keywordtype">bool</span>&gt;</div>
+<div class="line"><a name="l01224"></a><span class="lineno"><a class="line" href="namespacegko.html#ae8b5bfaadc2c5a40f17f0459a3aa412d"> 1224</a></span>&#160;<a class="code" href="namespacegko.html#ae8b5bfaadc2c5a40f17f0459a3aa412d">is_nan</a>(<span class="keyword">const</span> T&amp; value)</div>
+<div class="line"><a name="l01225"></a><span class="lineno"> 1225</span>&#160;{</div>
+<div class="line"><a name="l01226"></a><span class="lineno"> 1226</span>&#160;    <span class="keywordflow">return</span> std::isnan(value);</div>
+<div class="line"><a name="l01227"></a><span class="lineno"> 1227</span>&#160;}</div>
+<div class="line"><a name="l01228"></a><span class="lineno"> 1228</span>&#160; </div>
 <div class="line"><a name="l01229"></a><span class="lineno"> 1229</span>&#160; </div>
-<div class="line"><a name="l01230"></a><span class="lineno"> 1230</span>&#160; </div>
-<div class="line"><a name="l01240"></a><span class="lineno"> 1240</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l01241"></a><span class="lineno"><a class="line" href="namespacegko.html#abb8963a80e755ccccebd819827995e1e"> 1241</a></span>&#160;GKO_INLINE GKO_ATTRIBUTES std::enable_if_t&lt;is_complex_s&lt;T&gt;::value, <span class="keywordtype">bool</span>&gt; <a class="code" href="namespacegko.html#ae8b5bfaadc2c5a40f17f0459a3aa412d">is_nan</a>(</div>
-<div class="line"><a name="l01242"></a><span class="lineno"> 1242</span>&#160;    <span class="keyword">const</span> T&amp; value)</div>
-<div class="line"><a name="l01243"></a><span class="lineno"> 1243</span>&#160;{</div>
-<div class="line"><a name="l01244"></a><span class="lineno"> 1244</span>&#160;    <span class="keywordflow">return</span> std::isnan(value.real()) || std::isnan(value.imag());</div>
-<div class="line"><a name="l01245"></a><span class="lineno"> 1245</span>&#160;}</div>
+<div class="line"><a name="l01239"></a><span class="lineno"> 1239</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l01240"></a><span class="lineno"><a class="line" href="namespacegko.html#abb8963a80e755ccccebd819827995e1e"> 1240</a></span>&#160;GKO_INLINE GKO_ATTRIBUTES std::enable_if_t&lt;is_complex_s&lt;T&gt;::value, <span class="keywordtype">bool</span>&gt; <a class="code" href="namespacegko.html#ae8b5bfaadc2c5a40f17f0459a3aa412d">is_nan</a>(</div>
+<div class="line"><a name="l01241"></a><span class="lineno"> 1241</span>&#160;    <span class="keyword">const</span> T&amp; value)</div>
+<div class="line"><a name="l01242"></a><span class="lineno"> 1242</span>&#160;{</div>
+<div class="line"><a name="l01243"></a><span class="lineno"> 1243</span>&#160;    <span class="keywordflow">return</span> std::isnan(value.real()) || std::isnan(value.imag());</div>
+<div class="line"><a name="l01244"></a><span class="lineno"> 1244</span>&#160;}</div>
+<div class="line"><a name="l01245"></a><span class="lineno"> 1245</span>&#160; </div>
 <div class="line"><a name="l01246"></a><span class="lineno"> 1246</span>&#160; </div>
-<div class="line"><a name="l01247"></a><span class="lineno"> 1247</span>&#160; </div>
-<div class="line"><a name="l01255"></a><span class="lineno"> 1255</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l01256"></a><span class="lineno"> 1256</span>&#160;GKO_INLINE GKO_ATTRIBUTES constexpr std::enable_if_t&lt;!is_complex_s&lt;T&gt;::value, T&gt;</div>
-<div class="line"><a name="l01257"></a><span class="lineno"><a class="line" href="namespacegko.html#a4235252c8531e7028f76eff44b14dc53"> 1257</a></span>&#160;<a class="code" href="namespacegko.html#a4235252c8531e7028f76eff44b14dc53">nan</a>()</div>
-<div class="line"><a name="l01258"></a><span class="lineno"> 1258</span>&#160;{</div>
-<div class="line"><a name="l01259"></a><span class="lineno"> 1259</span>&#160;    <span class="keywordflow">return</span> std::numeric_limits&lt;T&gt;::quiet_NaN();</div>
-<div class="line"><a name="l01260"></a><span class="lineno"> 1260</span>&#160;}</div>
+<div class="line"><a name="l01254"></a><span class="lineno"> 1254</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l01255"></a><span class="lineno"> 1255</span>&#160;GKO_INLINE GKO_ATTRIBUTES constexpr std::enable_if_t&lt;!is_complex_s&lt;T&gt;::value, T&gt;</div>
+<div class="line"><a name="l01256"></a><span class="lineno"><a class="line" href="namespacegko.html#a4235252c8531e7028f76eff44b14dc53"> 1256</a></span>&#160;<a class="code" href="namespacegko.html#a4235252c8531e7028f76eff44b14dc53">nan</a>()</div>
+<div class="line"><a name="l01257"></a><span class="lineno"> 1257</span>&#160;{</div>
+<div class="line"><a name="l01258"></a><span class="lineno"> 1258</span>&#160;    <span class="keywordflow">return</span> std::numeric_limits&lt;T&gt;::quiet_NaN();</div>
+<div class="line"><a name="l01259"></a><span class="lineno"> 1259</span>&#160;}</div>
+<div class="line"><a name="l01260"></a><span class="lineno"> 1260</span>&#160; </div>
 <div class="line"><a name="l01261"></a><span class="lineno"> 1261</span>&#160; </div>
-<div class="line"><a name="l01262"></a><span class="lineno"> 1262</span>&#160; </div>
-<div class="line"><a name="l01270"></a><span class="lineno"> 1270</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l01271"></a><span class="lineno"> 1271</span>&#160;GKO_INLINE GKO_ATTRIBUTES constexpr std::enable_if_t&lt;is_complex_s&lt;T&gt;::value, T&gt;</div>
-<div class="line"><a name="l01272"></a><span class="lineno"><a class="line" href="namespacegko.html#a2fab450618d0d6a0bab20cead0d5b60b"> 1272</a></span>&#160;<a class="code" href="namespacegko.html#a4235252c8531e7028f76eff44b14dc53">nan</a>()</div>
-<div class="line"><a name="l01273"></a><span class="lineno"> 1273</span>&#160;{</div>
-<div class="line"><a name="l01274"></a><span class="lineno"> 1274</span>&#160;    <span class="keywordflow">return</span> T{nan&lt;remove_complex&lt;T&gt;&gt;(), <a class="code" href="namespacegko.html#a4235252c8531e7028f76eff44b14dc53">nan</a>&lt;<a class="code" href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">remove_complex&lt;T&gt;</a>&gt;()};</div>
-<div class="line"><a name="l01275"></a><span class="lineno"> 1275</span>&#160;}</div>
+<div class="line"><a name="l01269"></a><span class="lineno"> 1269</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l01270"></a><span class="lineno"> 1270</span>&#160;GKO_INLINE GKO_ATTRIBUTES constexpr std::enable_if_t&lt;is_complex_s&lt;T&gt;::value, T&gt;</div>
+<div class="line"><a name="l01271"></a><span class="lineno"><a class="line" href="namespacegko.html#a2fab450618d0d6a0bab20cead0d5b60b"> 1271</a></span>&#160;<a class="code" href="namespacegko.html#a4235252c8531e7028f76eff44b14dc53">nan</a>()</div>
+<div class="line"><a name="l01272"></a><span class="lineno"> 1272</span>&#160;{</div>
+<div class="line"><a name="l01273"></a><span class="lineno"> 1273</span>&#160;    <span class="keywordflow">return</span> T{nan&lt;remove_complex&lt;T&gt;&gt;(), <a class="code" href="namespacegko.html#a4235252c8531e7028f76eff44b14dc53">nan</a>&lt;<a class="code" href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">remove_complex&lt;T&gt;</a>&gt;()};</div>
+<div class="line"><a name="l01274"></a><span class="lineno"> 1274</span>&#160;}</div>
+<div class="line"><a name="l01275"></a><span class="lineno"> 1275</span>&#160; </div>
 <div class="line"><a name="l01276"></a><span class="lineno"> 1276</span>&#160; </div>
-<div class="line"><a name="l01277"></a><span class="lineno"> 1277</span>&#160; </div>
-<div class="line"><a name="l01278"></a><span class="lineno"> 1278</span>&#160;}  <span class="comment">// namespace gko</span></div>
+<div class="line"><a name="l01277"></a><span class="lineno"> 1277</span>&#160;}  <span class="comment">// namespace gko</span></div>
+<div class="line"><a name="l01278"></a><span class="lineno"> 1278</span>&#160; </div>
 <div class="line"><a name="l01279"></a><span class="lineno"> 1279</span>&#160; </div>
-<div class="line"><a name="l01280"></a><span class="lineno"> 1280</span>&#160; </div>
-<div class="line"><a name="l01281"></a><span class="lineno"> 1281</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_BASE_MATH_HPP_</span></div>
+<div class="line"><a name="l01280"></a><span class="lineno"> 1280</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_BASE_MATH_HPP_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="anamespacegko_html_a785976e6dbc9d8511325617ca46040bf"><div class="ttname"><a href="namespacegko.html#a785976e6dbc9d8511325617ca46040bf">gko::is_zero</a></div><div class="ttdeci">constexpr bool is_zero(T value)</div><div class="ttdoc">Returns true if and only if the given value is zero.</div><div class="ttdef"><b>Definition:</b> math.hpp:811</div></div>
-<div class="ttc" id="anamespacegko_html_ab92d450201f5b215901c0f8c3e2e376c"><div class="ttname"><a href="namespacegko.html#ab92d450201f5b215901c0f8c3e2e376c">gko::unit_root</a></div><div class="ttdeci">constexpr std::complex&lt; remove_complex&lt; T &gt; &gt; unit_root(int64 n, int64 k=1)</div><div class="ttdoc">Returns the value of exp(2 * pi * i * k / n), i.e.</div><div class="ttdef"><b>Definition:</b> math.hpp:1111</div></div>
+<div class="ttc" id="anamespacegko_html_ab92d450201f5b215901c0f8c3e2e376c"><div class="ttname"><a href="namespacegko.html#ab92d450201f5b215901c0f8c3e2e376c">gko::unit_root</a></div><div class="ttdeci">constexpr std::complex&lt; remove_complex&lt; T &gt; &gt; unit_root(int64 n, int64 k=1)</div><div class="ttdoc">Returns the value of exp(2 * pi * i * k / n), i.e.</div><div class="ttdef"><b>Definition:</b> math.hpp:1110</div></div>
 <div class="ttc" id="astructgko_1_1default__converter_html_aeeb535f41abb975f20857989c8ac2470"><div class="ttname"><a href="structgko_1_1default__converter.html#aeeb535f41abb975f20857989c8ac2470">gko::default_converter::operator()</a></div><div class="ttdeci">R operator()(S val)</div><div class="ttdoc">Converts the object to result type.</div><div class="ttdef"><b>Definition:</b> math.hpp:597</div></div>
 <div class="ttc" id="anamespacegko_html_af1812df45c6ec07780d579a12b64c753"><div class="ttname"><a href="namespacegko.html#af1812df45c6ec07780d579a12b64c753">gko::max</a></div><div class="ttdeci">constexpr T max(const T &amp;x, const T &amp;y)</div><div class="ttdoc">Returns the larger of the arguments.</div><div class="ttdef"><b>Definition:</b> math.hpp:844</div></div>
 <div class="ttc" id="anamespacegko_html_a71559818fee20b97bc6ea6712ec75034"><div class="ttname"><a href="namespacegko.html#a71559818fee20b97bc6ea6712ec75034">gko::previous_precision</a></div><div class="ttdeci">next_precision&lt; T &gt; previous_precision</div><div class="ttdoc">Obtains the previous type in the singly-linked precision list.</div><div class="ttdef"><b>Definition:</b> math.hpp:471</div></div>
-<div class="ttc" id="anamespacegko_html_a4eea40e4123a3fdb60fcd92f902c6d6d"><div class="ttname"><a href="namespacegko.html#a4eea40e4123a3fdb60fcd92f902c6d6d">gko::get_significant_bit</a></div><div class="ttdeci">constexpr uint32 get_significant_bit(const T &amp;n, uint32 hint=0u) noexcept</div><div class="ttdoc">Returns the position of the most significant bit of the number.</div><div class="ttdef"><b>Definition:</b> math.hpp:1132</div></div>
-<div class="ttc" id="anamespacegko_html_ae8b5bfaadc2c5a40f17f0459a3aa412d"><div class="ttname"><a href="namespacegko.html#ae8b5bfaadc2c5a40f17f0459a3aa412d">gko::is_nan</a></div><div class="ttdeci">std::enable_if_t&lt;!is_complex_s&lt; T &gt;::value, bool &gt; is_nan(const T &amp;value)</div><div class="ttdoc">Checks if a floating point number is NaN.</div><div class="ttdef"><b>Definition:</b> math.hpp:1225</div></div>
+<div class="ttc" id="anamespacegko_html_a99791881a0d56a1c5392ce52b4dce1ac"><div class="ttname"><a href="namespacegko.html#a99791881a0d56a1c5392ce52b4dce1ac">gko::abs</a></div><div class="ttdeci">constexpr std::enable_if_t&lt;!is_complex_s&lt; T &gt;::value, T &gt; abs(const T &amp;x)</div><div class="ttdoc">Returns the absolute value of the object.</div><div class="ttdef"><b>Definition:</b> math.hpp:1074</div></div>
+<div class="ttc" id="anamespacegko_html_a4eea40e4123a3fdb60fcd92f902c6d6d"><div class="ttname"><a href="namespacegko.html#a4eea40e4123a3fdb60fcd92f902c6d6d">gko::get_significant_bit</a></div><div class="ttdeci">constexpr uint32 get_significant_bit(const T &amp;n, uint32 hint=0u) noexcept</div><div class="ttdoc">Returns the position of the most significant bit of the number.</div><div class="ttdef"><b>Definition:</b> math.hpp:1131</div></div>
+<div class="ttc" id="anamespacegko_html_ae8b5bfaadc2c5a40f17f0459a3aa412d"><div class="ttname"><a href="namespacegko.html#ae8b5bfaadc2c5a40f17f0459a3aa412d">gko::is_nan</a></div><div class="ttdeci">std::enable_if_t&lt;!is_complex_s&lt; T &gt;::value, bool &gt; is_nan(const T &amp;value)</div><div class="ttdoc">Checks if a floating point number is NaN.</div><div class="ttdef"><b>Definition:</b> math.hpp:1224</div></div>
 <div class="ttc" id="anamespacegko_html_aef9b29733e6eb45475a2b84f79a6d012"><div class="ttname"><a href="namespacegko.html#aef9b29733e6eb45475a2b84f79a6d012">gko::is_nonzero</a></div><div class="ttdeci">constexpr bool is_nonzero(T value)</div><div class="ttdoc">Returns true if and only if the given value is not zero.</div><div class="ttdef"><b>Definition:</b> math.hpp:826</div></div>
 <div class="ttc" id="anamespacegko_html_ace1eb45b2e5273be609ca5746089d18d"><div class="ttname"><a href="namespacegko.html#ace1eb45b2e5273be609ca5746089d18d">gko::to_real</a></div><div class="ttdeci">remove_complex&lt; T &gt; to_real</div><div class="ttdoc">to_real is alias of remove_complex</div><div class="ttdef"><b>Definition:</b> math.hpp:353</div></div>
-<div class="ttc" id="anamespacegko_html_adeb470aaf293d7c5548392b2f451e8e4"><div class="ttname"><a href="namespacegko.html#adeb470aaf293d7c5548392b2f451e8e4">gko::abs</a></div><div class="ttdeci">constexpr xstd::enable_if_t&lt;!is_complex_s&lt; T &gt;::value, T &gt; abs(const T &amp;x)</div><div class="ttdoc">Returns the absolute value of the object.</div><div class="ttdef"><b>Definition:</b> math.hpp:1075</div></div>
 <div class="ttc" id="aclassgko_1_1truncated_html"><div class="ttname"><a href="classgko_1_1truncated.html">gko::truncated</a></div><div class="ttdef"><b>Definition:</b> math.hpp:537</div></div>
 <div class="ttc" id="anamespacegko_html_abbb55709b10d707b2cbef803832aa834"><div class="ttname"><a href="namespacegko.html#abbb55709b10d707b2cbef803832aa834">gko::squared_norm</a></div><div class="ttdeci">constexpr auto squared_norm(const T &amp;x) -&gt; decltype(real(conj(x) *x))</div><div class="ttdoc">Returns the squared norm of the object.</div><div class="ttdef"><b>Definition:</b> math.hpp:1056</div></div>
 <div class="ttc" id="anamespacegko_html_acae2e648052ec788bd8ba9e0192652a6"><div class="ttname"><a href="namespacegko.html#acae2e648052ec788bd8ba9e0192652a6">gko::byte_size</a></div><div class="ttdeci">constexpr size_type byte_size</div><div class="ttdoc">Number of bits in a byte.</div><div class="ttdef"><b>Definition:</b> types.hpp:199</div></div>
-<div class="ttc" id="anamespacegko_html"><div class="ttname"><a href="namespacegko.html">gko</a></div><div class="ttdoc">The Ginkgo namespace.</div><div class="ttdef"><b>Definition:</b> abstract_factory.hpp:19</div></div>
+<div class="ttc" id="anamespacegko_html"><div class="ttname"><a href="namespacegko.html">gko</a></div><div class="ttdoc">The Ginkgo namespace.</div><div class="ttdef"><b>Definition:</b> abstract_factory.hpp:20</div></div>
 <div class="ttc" id="anamespacegko_html_a5f9c197f1db98fdc874f8907978ad114"><div class="ttname"><a href="namespacegko.html#a5f9c197f1db98fdc874f8907978ad114">gko::round_down</a></div><div class="ttdeci">constexpr reduce_precision&lt; T &gt; round_down(T val)</div><div class="ttdoc">Reduces the precision of the input parameter.</div><div class="ttdef"><b>Definition:</b> math.hpp:514</div></div>
-<div class="ttc" id="anamespacegko_html_ad39645fe8148a8a812a9528865a77600"><div class="ttname"><a href="namespacegko.html#ad39645fe8148a8a812a9528865a77600">gko::get_superior_power</a></div><div class="ttdeci">constexpr T get_superior_power(const T &amp;base, const T &amp;limit, const T &amp;hint=T{1}) noexcept</div><div class="ttdoc">Returns the smallest power of base not smaller than limit.</div><div class="ttdef"><b>Definition:</b> math.hpp:1150</div></div>
+<div class="ttc" id="anamespacegko_html_ad39645fe8148a8a812a9528865a77600"><div class="ttname"><a href="namespacegko.html#ad39645fe8148a8a812a9528865a77600">gko::get_superior_power</a></div><div class="ttdeci">constexpr T get_superior_power(const T &amp;base, const T &amp;limit, const T &amp;hint=T{1}) noexcept</div><div class="ttdoc">Returns the smallest power of base not smaller than limit.</div><div class="ttdef"><b>Definition:</b> math.hpp:1149</div></div>
 <div class="ttc" id="anamespacegko_html_ab5d71c1f4bd1b654df1e561ea7a811f2"><div class="ttname"><a href="namespacegko.html#ab5d71c1f4bd1b654df1e561ea7a811f2">gko::reduce_precision</a></div><div class="ttdeci">typename detail::reduce_precision_impl&lt; T &gt;::type reduce_precision</div><div class="ttdoc">Obtains the next type in the hierarchy with lower precision than T.</div><div class="ttdef"><b>Definition:</b> math.hpp:478</div></div>
 <div class="ttc" id="anamespacegko_html_a318c831e3fe269ba04c6ed8bf5a71073"><div class="ttname"><a href="namespacegko.html#a318c831e3fe269ba04c6ed8bf5a71073">gko::uint32</a></div><div class="ttdeci">std::uint32_t uint32</div><div class="ttdoc">32-bit unsigned integral type.</div><div class="ttdef"><b>Definition:</b> types.hpp:148</div></div>
 <div class="ttc" id="anamespacegko_html_aeede19206954d5c8ebd04c95cf63bb88"><div class="ttname"><a href="namespacegko.html#aeede19206954d5c8ebd04c95cf63bb88">gko::is_complex_s</a></div><div class="ttdeci">detail::is_complex_impl&lt; T &gt; is_complex_s</div><div class="ttdoc">Allows to check if T is a complex value during compile time by accessing the value attribute of this ...</div><div class="ttdef"><b>Definition:</b> math.hpp:276</div></div>
@@ -889,12 +888,12 @@ $(function() {
 <div class="ttc" id="anamespacegko_html_a512fc29f227f5d452e13787bf3df7d48"><div class="ttname"><a href="namespacegko.html#a512fc29f227f5d452e13787bf3df7d48">gko::truncate_type</a></div><div class="ttdeci">std::conditional_t&lt; detail::type_size_impl&lt; T &gt;::value &gt;=2 *Limit, typename detail::truncate_type_impl&lt; T &gt;::type, T &gt; truncate_type</div><div class="ttdoc">Truncates the type by half (by dropping bits), but ensures that it is at least Limit bits wide.</div><div class="ttdef"><b>Definition:</b> math.hpp:580</div></div>
 <div class="ttc" id="astructgko_1_1default__converter_html"><div class="ttname"><a href="structgko_1_1default__converter.html">gko::default_converter</a></div><div class="ttdoc">Used to convert objects of type S to objects of type R using static_cast.</div><div class="ttdef"><b>Definition:</b> math.hpp:590</div></div>
 <div class="ttc" id="anamespacegko_html_a6362f751c7753cf4fa0a4771d56e8ede"><div class="ttname"><a href="namespacegko.html#a6362f751c7753cf4fa0a4771d56e8ede">gko::next_precision</a></div><div class="ttdeci">typename detail::next_precision_impl&lt; T &gt;::type next_precision</div><div class="ttdoc">Obtains the next type in the singly-linked precision list.</div><div class="ttdef"><b>Definition:</b> math.hpp:461</div></div>
-<div class="ttc" id="anamespacegko_html_a0603ce0a60183a6698ac9b523694fb68"><div class="ttname"><a href="namespacegko.html#a0603ce0a60183a6698ac9b523694fb68">gko::pi</a></div><div class="ttdeci">constexpr T pi()</div><div class="ttdoc">Returns the value of pi.</div><div class="ttdef"><b>Definition:</b> math.hpp:1096</div></div>
+<div class="ttc" id="anamespacegko_html_a0603ce0a60183a6698ac9b523694fb68"><div class="ttname"><a href="namespacegko.html#a0603ce0a60183a6698ac9b523694fb68">gko::pi</a></div><div class="ttdeci">constexpr T pi()</div><div class="ttdoc">Returns the value of pi.</div><div class="ttdef"><b>Definition:</b> math.hpp:1095</div></div>
 <div class="ttc" id="anamespacegko_html_ad79fd5c1fb85403796c40c0a916a15f2"><div class="ttname"><a href="namespacegko.html#ad79fd5c1fb85403796c40c0a916a15f2">gko::conj</a></div><div class="ttdeci">constexpr auto conj(const T &amp;x)</div><div class="ttdoc">Returns the conjugate of an object.</div><div class="ttdef"><b>Definition:</b> math.hpp:1042</div></div>
 <div class="ttc" id="astructgko_1_1cpx__real__type_html"><div class="ttname"><a href="structgko_1_1cpx__real__type.html">gko::cpx_real_type</a></div><div class="ttdoc">Access the underlying real type of a complex number.</div><div class="ttdef"><b>Definition:</b> math.hpp:250</div></div>
 <div class="ttc" id="anamespacegko_html_a6837b759dc528737540a83c79fbdda29"><div class="ttname"><a href="namespacegko.html#a6837b759dc528737540a83c79fbdda29">gko::highest_precision</a></div><div class="ttdeci">typename detail::highest_precision_variadic&lt; Ts... &gt;::type highest_precision</div><div class="ttdoc">Obtains the smallest arithmetic type that is able to store elements of all template parameter types e...</div><div class="ttdef"><b>Definition:</b> math.hpp:501</div></div>
-<div class="ttc" id="anamespacegko_html_a58498d28d199c188555a48fda471f103"><div class="ttname"><a href="namespacegko.html#a58498d28d199c188555a48fda471f103">gko::is_finite</a></div><div class="ttdeci">std::enable_if_t&lt;!is_complex_s&lt; T &gt;::value, bool &gt; is_finite(const T &amp;value)</div><div class="ttdoc">Checks if a floating point number is finite, meaning it is neither +/- infinity nor NaN.</div><div class="ttdef"><b>Definition:</b> math.hpp:1170</div></div>
-<div class="ttc" id="anamespacegko_html_aa1470fdc2a75dcda76bea4b879a29886"><div class="ttname"><a href="namespacegko.html#aa1470fdc2a75dcda76bea4b879a29886">gko::safe_divide</a></div><div class="ttdeci">T safe_divide(T a, T b)</div><div class="ttdoc">Computes the quotient of the given parameters, guarding against division by zero.</div><div class="ttdef"><b>Definition:</b> math.hpp:1208</div></div>
+<div class="ttc" id="anamespacegko_html_a58498d28d199c188555a48fda471f103"><div class="ttname"><a href="namespacegko.html#a58498d28d199c188555a48fda471f103">gko::is_finite</a></div><div class="ttdeci">std::enable_if_t&lt;!is_complex_s&lt; T &gt;::value, bool &gt; is_finite(const T &amp;value)</div><div class="ttdoc">Checks if a floating point number is finite, meaning it is neither +/- infinity nor NaN.</div><div class="ttdef"><b>Definition:</b> math.hpp:1169</div></div>
+<div class="ttc" id="anamespacegko_html_aa1470fdc2a75dcda76bea4b879a29886"><div class="ttname"><a href="namespacegko.html#aa1470fdc2a75dcda76bea4b879a29886">gko::safe_divide</a></div><div class="ttdeci">T safe_divide(T a, T b)</div><div class="ttdoc">Computes the quotient of the given parameters, guarding against division by zero.</div><div class="ttdef"><b>Definition:</b> math.hpp:1207</div></div>
 <div class="ttc" id="astructgko_1_1cpx__real__type_html_a6fec5b28321901b6da393b424afb144b"><div class="ttname"><a href="structgko_1_1cpx__real__type.html#a6fec5b28321901b6da393b424afb144b">gko::cpx_real_type::type</a></div><div class="ttdeci">T type</div><div class="ttdoc">The type.</div><div class="ttdef"><b>Definition:</b> math.hpp:252</div></div>
 <div class="ttc" id="anamespacegko_html_a6881ebae53e15cb88342c0540d953f59"><div class="ttname"><a href="namespacegko.html#a6881ebae53e15cb88342c0540d953f59">gko::is_complex_or_scalar</a></div><div class="ttdeci">constexpr bool is_complex_or_scalar()</div><div class="ttdoc">Checks if T is a complex/scalar type.</div><div class="ttdef"><b>Definition:</b> math.hpp:310</div></div>
 <div class="ttc" id="anamespacegko_html_a6c57dbf3168b1ecad3ea133aaf2efbc1"><div class="ttname"><a href="namespacegko.html#a6c57dbf3168b1ecad3ea133aaf2efbc1">gko::int64</a></div><div class="ttdeci">std::int64_t int64</div><div class="ttdoc">64-bit signed integral type.</div><div class="ttdef"><b>Definition:</b> types.hpp:131</div></div>
@@ -908,7 +907,7 @@ $(function() {
 <div class="ttc" id="anamespacegko_html_a70dbe01ff95c7b953d3d737424c6feb5"><div class="ttname"><a href="namespacegko.html#a70dbe01ff95c7b953d3d737424c6feb5">gko::zero</a></div><div class="ttdeci">constexpr T zero()</div><div class="ttdoc">Returns the additive identity for T.</div><div class="ttdef"><b>Definition:</b> math.hpp:746</div></div>
 <div class="ttc" id="anamespacegko_html_a0059e27f8f4bc348ff65c1e60caf47c8"><div class="ttname"><a href="namespacegko.html#a0059e27f8f4bc348ff65c1e60caf47c8">gko::one</a></div><div class="ttdeci">constexpr T one()</div><div class="ttdoc">Returns the multiplicative identity for T.</div><div class="ttdef"><b>Definition:</b> math.hpp:774</div></div>
 <div class="ttc" id="anamespacegko_html_acc281c8ff5bfa4fd6f25afcce466b1af"><div class="ttname"><a href="namespacegko.html#acc281c8ff5bfa4fd6f25afcce466b1af">gko::to_complex</a></div><div class="ttdeci">typename detail::to_complex_s&lt; T &gt;::type to_complex</div><div class="ttdoc">Obtain the type which adds the complex of complex/scalar type or the template parameter of class by a...</div><div class="ttdef"><b>Definition:</b> math.hpp:344</div></div>
-<div class="ttc" id="anamespacegko_html_a4235252c8531e7028f76eff44b14dc53"><div class="ttname"><a href="namespacegko.html#a4235252c8531e7028f76eff44b14dc53">gko::nan</a></div><div class="ttdeci">constexpr std::enable_if_t&lt;!is_complex_s&lt; T &gt;::value, T &gt; nan()</div><div class="ttdoc">Returns a quiet NaN of the given type.</div><div class="ttdef"><b>Definition:</b> math.hpp:1257</div></div>
+<div class="ttc" id="anamespacegko_html_a4235252c8531e7028f76eff44b14dc53"><div class="ttname"><a href="namespacegko.html#a4235252c8531e7028f76eff44b14dc53">gko::nan</a></div><div class="ttdeci">constexpr std::enable_if_t&lt;!is_complex_s&lt; T &gt;::value, T &gt; nan()</div><div class="ttdoc">Returns a quiet NaN of the given type.</div><div class="ttdef"><b>Definition:</b> math.hpp:1256</div></div>
 <div class="ttc" id="anamespacegko_html_a795f649e3744fbfe128aec0b0f928aaa"><div class="ttname"><a href="namespacegko.html#a795f649e3744fbfe128aec0b0f928aaa">gko::imag</a></div><div class="ttdeci">constexpr auto imag(const T &amp;x)</div><div class="ttdoc">Returns the imaginary part of the object.</div><div class="ttdef"><b>Definition:</b> math.hpp:1028</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
