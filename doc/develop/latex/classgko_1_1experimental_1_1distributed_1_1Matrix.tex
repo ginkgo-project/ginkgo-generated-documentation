@@ -78,7 +78,11 @@ std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>
 \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}} \& \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a8bda4b3eafc4ca7885697d4d18d4f24c}{operator=}} (const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}} \&other)
 \begin{DoxyCompactList}\small\item\em Copy assigns a \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}}. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}} \& \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a0596d42402c49091a76f8f0c70724538}{operator=}} (\mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}} \&\&other)
-\begin{DoxyCompactList}\small\item\em Move assigns a \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Move assigns a \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a4054a842c6914472f6ec8af1ea2e44be}{col\+\_\+scale}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{global\+\_\+vector\+\_\+type}} $>$ scaling\+\_\+factors)
+\begin{DoxyCompactList}\small\item\em Scales the columns of the matrix by the respective entries of the vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a7f9d815d3c67029267e3cb4b2b7da327}{row\+\_\+scale}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{global\+\_\+vector\+\_\+type}} $>$ scaling\+\_\+factors)
+\begin{DoxyCompactList}\small\item\em Scales the rows of the matrix by the respective entries of the vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -244,6 +248,24 @@ Move constructs a \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Ma
 
 
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Matrix_a4054a842c6914472f6ec8af1ea2e44be}\label{classgko_1_1experimental_1_1distributed_1_1Matrix_a4054a842c6914472f6ec8af1ea2e44be}} 
+\index{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}!col\_scale@{col\_scale}}
+\index{col\_scale@{col\_scale}!gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}}
+\doxysubsubsection{\texorpdfstring{col\_scale()}{col\_scale()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Local\+Index\+Type  = int32, typename Global\+Index\+Type  = int64$>$ \\
+void \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{gko\+::experimental\+::distributed\+::\+Matrix}}$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$\+::col\+\_\+scale (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{global\+\_\+vector\+\_\+type}} $>$}]{scaling\+\_\+factors }\end{DoxyParamCaption})}
+
+
+
+Scales the columns of the matrix by the respective entries of the vector. 
+
+The vector\textquotesingle{}s row partition has to be the same as the matrix\textquotesingle{}s column partition. The scaling is done in-\/place.
+
+
+\begin{DoxyParams}{Parameters}
+{\em scaling\+\_\+factors} & The vector containing the scaling factors. \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Matrix_a9e1847cfae540ba74e6a179c3f624cb2}\label{classgko_1_1experimental_1_1distributed_1_1Matrix_a9e1847cfae540ba74e6a179c3f624cb2}} 
 \index{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}!create@{create}}
 \index{create@{create}!gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}}
@@ -626,6 +648,24 @@ Reads a matrix from the \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+
 \begin{DoxyNote}{Note}
 For efficiency it is advised to use the \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} overload. 
 \end{DoxyNote}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Matrix_a7f9d815d3c67029267e3cb4b2b7da327}\label{classgko_1_1experimental_1_1distributed_1_1Matrix_a7f9d815d3c67029267e3cb4b2b7da327}} 
+\index{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}!row\_scale@{row\_scale}}
+\index{row\_scale@{row\_scale}!gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}}
+\doxysubsubsection{\texorpdfstring{row\_scale()}{row\_scale()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Local\+Index\+Type  = int32, typename Global\+Index\+Type  = int64$>$ \\
+void \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{gko\+::experimental\+::distributed\+::\+Matrix}}$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$\+::row\+\_\+scale (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{global\+\_\+vector\+\_\+type}} $>$}]{scaling\+\_\+factors }\end{DoxyParamCaption})}
+
+
+
+Scales the rows of the matrix by the respective entries of the vector. 
+
+The vector and the matrix have to have the same row partition. The scaling is done in-\/place.
+
+
+\begin{DoxyParams}{Parameters}
+{\em scaling\+\_\+factors} & The vector containing the scaling factors. \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
