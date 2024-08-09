@@ -48,6 +48,7 @@ var searchData=
   ['operator_5b_5d_1269',['operator[]',['../structgko_1_1dim.html#a33151623775cbe4c229a3bd59046de36',1,'gko::dim::operator[](const size_type &amp;dimension) const noexcept'],['../structgko_1_1dim.html#a02bf1bbda6859052e8b881dfd43b64a9',1,'gko::dim::operator[](const size_type &amp;dimension) noexcept']]],
   ['operator_5e_1270',['operator^',['../namespacegko_1_1matrix.html#ac03a0f9ce5a76b70bf035e75b1a9dbc8',1,'gko::matrix']]],
   ['operator_7c_1271',['operator|',['../namespacegko_1_1matrix.html#a1351826db36482d9ad54f6ee6eab53f7',1,'gko::matrix']]],
-  ['outofboundserror_1272',['OutOfBoundsError',['../classgko_1_1OutOfBoundsError.html',1,'gko::OutOfBoundsError'],['../classgko_1_1OutOfBoundsError.html#a21254b6802ba852e3f9f44744ad63faf',1,'gko::OutOfBoundsError::OutOfBoundsError()']]],
-  ['overflowerror_1273',['OverflowError',['../classgko_1_1OverflowError.html',1,'gko::OverflowError'],['../classgko_1_1OverflowError.html#a68537483586cbde075e3353f2c73ddba',1,'gko::OverflowError::OverflowError()']]]
+  ['ortho_5fmethod_1272',['ortho_method',['../structgko_1_1solver_1_1Gmres_1_1parameters__type.html#ae7f17e22cc7295c4a5bdfa2ad323b53b',1,'gko::solver::Gmres::parameters_type']]],
+  ['outofboundserror_1273',['OutOfBoundsError',['../classgko_1_1OutOfBoundsError.html',1,'gko::OutOfBoundsError'],['../classgko_1_1OutOfBoundsError.html#a21254b6802ba852e3f9f44744ad63faf',1,'gko::OutOfBoundsError::OutOfBoundsError()']]],
+  ['overflowerror_1274',['OverflowError',['../classgko_1_1OverflowError.html',1,'gko::OverflowError'],['../classgko_1_1OverflowError.html#a68537483586cbde075e3353f2c73ddba',1,'gko::OverflowError::OverflowError()']]]
 ];
