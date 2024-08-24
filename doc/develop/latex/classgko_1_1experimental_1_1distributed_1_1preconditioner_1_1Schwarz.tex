@@ -62,7 +62,9 @@ const \mbox{\hyperlink{structgko_1_1experimental_1_1distributed_1_1preconditione
 \item 
 \mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1preconditioner_1_1Schwarz_a964d1be3c767f05ccf25b0ab190f51f7}\label{classgko_1_1experimental_1_1distributed_1_1preconditioner_1_1Schwarz_a964d1be3c767f05ccf25b0ab190f51f7}} 
 static auto {\bfseries build} () -\/$>$ decltype(\mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1preconditioner_1_1Schwarz_1_1Factory}{Factory}} \+::create())
-\end{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{structgko_1_1experimental_1_1distributed_1_1preconditioner_1_1Schwarz_1_1parameters__type}{parameters\+\_\+type}} \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1preconditioner_1_1Schwarz_a5ce5036cabc56d49d2cc912381f5d45d}{parse}} (const \mbox{\hyperlink{classgko_1_1config_1_1pnode}{config\+::pnode}} \&config, const \mbox{\hyperlink{classgko_1_1config_1_1registry}{config\+::registry}} \&context, const \mbox{\hyperlink{classgko_1_1config_1_1type__descriptor}{config\+::type\+\_\+descriptor}} \&td\+\_\+for\+\_\+child=config\+::make\+\_\+type\+\_\+descriptor$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$())
+\begin{DoxyCompactList}\small\item\em Create the parameters from the property\+\_\+tree. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
@@ -87,11 +89,41 @@ Currently overlap and coarse grid correction are not supported (T\+O\+DO).
 \end{DoxyNote}
 
 \begin{DoxyTemplParams}{Template Parameters}
-{\em Value\+Type} & precision of matrix elements \\
+{\em Value\+Type} & precision of matrix element \\
 \hline
-{\em Index\+Type} & integral type of the preconditioner \\
+{\em Local\+Index\+Type} & local integer type of the matrix \\
+\hline
+{\em Global\+Index\+Type} & global integer type of the matrix \\
 \hline
 \end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1preconditioner_1_1Schwarz_a5ce5036cabc56d49d2cc912381f5d45d}\label{classgko_1_1experimental_1_1distributed_1_1preconditioner_1_1Schwarz_a5ce5036cabc56d49d2cc912381f5d45d}} 
+\index{gko::experimental::distributed::preconditioner::Schwarz$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::preconditioner::Schwarz$<$ ValueType, LocalIndexType, GlobalIndexType $>$}!parse@{parse}}
+\index{parse@{parse}!gko::experimental::distributed::preconditioner::Schwarz$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::preconditioner::Schwarz$<$ ValueType, LocalIndexType, GlobalIndexType $>$}}
+\doxysubsubsection{\texorpdfstring{parse()}{parse()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Local\+Index\+Type  = int32, typename Global\+Index\+Type  = int64$>$ \\
+static \mbox{\hyperlink{structgko_1_1experimental_1_1distributed_1_1preconditioner_1_1Schwarz_1_1parameters__type}{parameters\+\_\+type}} \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1preconditioner_1_1Schwarz}{gko\+::experimental\+::distributed\+::preconditioner\+::\+Schwarz}}$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$\+::parse (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1config_1_1pnode}{config\+::pnode}} \&}]{config,  }\item[{const \mbox{\hyperlink{classgko_1_1config_1_1registry}{config\+::registry}} \&}]{context,  }\item[{const \mbox{\hyperlink{classgko_1_1config_1_1type__descriptor}{config\+::type\+\_\+descriptor}} \&}]{td\+\_\+for\+\_\+child = {\ttfamily config\+:\+:make\+\_\+type\+\_\+descriptor$<$~ValueType,~LocalIndexType,~GlobalIndexType~$>$()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Create the parameters from the property\+\_\+tree. 
+
+Because this is directly tied to the specific type, the value/index type settings within config are ignored and type\+\_\+descriptor is only used for children objects.
+
+
+\begin{DoxyParams}{Parameters}
+{\em config} & the property tree for setting \\
+\hline
+{\em context} & the registry \\
+\hline
+{\em td\+\_\+for\+\_\+child} & the type descriptor for children objects. The default uses the value/local/global index type of this class.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+parameters 
+\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

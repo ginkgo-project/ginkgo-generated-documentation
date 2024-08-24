@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1425319733 branch based on develop. Ginkgo version 1.9.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1425767746 branch based on develop. Ginkgo version 1.9.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -83,38 +83,51 @@ $(function() {
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacegko.html">gko</a> {</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">namespace </span>config {</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classgko_1_1config_1_1type__descriptor.html">   37</a></span>&#160;<span class="keyword">class </span><a class="code" href="classgko_1_1config_1_1type__descriptor.html">type_descriptor</a> final {</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classgko_1_1config_1_1type__descriptor.html#a2edc43c2f174dce3e933951ef028af49">type_descriptor</a>(std::string value_typestr = <span class="stringliteral">&quot;float64&quot;</span>,</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                             std::string index_typestr = <span class="stringliteral">&quot;int32&quot;</span>);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keyword">const</span> std::string&amp; <a class="code" href="classgko_1_1config_1_1type__descriptor.html#a2aeb0732b5022a4f41186eb95a43857a">get_value_typestr</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">const</span> std::string&amp; <a class="code" href="classgko_1_1config_1_1type__descriptor.html#a81124bac30caf3d22920e1a7555144fe">get_index_typestr</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    std::string value_typestr_;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    std::string index_typestr_;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;};</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType = <span class="keywordtype">double</span>, <span class="keyword">typename</span> IndexType = <span class="keywordtype">int</span>&gt;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<a class="code" href="classgko_1_1config_1_1type__descriptor.html">type_descriptor</a> make_type_descriptor();</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;}  <span class="comment">// namespace config</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;}  <span class="comment">// namespace gko</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_CONFIG_TYPE_DESCRIPTOR_HPP_</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;ginkgo/core/base/types.hpp&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacegko.html">gko</a> {</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">namespace </span>config {</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classgko_1_1config_1_1type__descriptor.html">   39</a></span>&#160;<span class="keyword">class </span><a class="code" href="classgko_1_1config_1_1type__descriptor.html">type_descriptor</a> final {</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classgko_1_1config_1_1type__descriptor.html#a174c5d07919038e0f5858ca25d55002d">type_descriptor</a>(std::string value_typestr = <span class="stringliteral">&quot;float64&quot;</span>,</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                             std::string index_typestr = <span class="stringliteral">&quot;int32&quot;</span>,</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                             std::string global_index_typestr = <span class="stringliteral">&quot;int64&quot;</span>);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keyword">const</span> std::string&amp; <a class="code" href="classgko_1_1config_1_1type__descriptor.html#a2aeb0732b5022a4f41186eb95a43857a">get_value_typestr</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">const</span> std::string&amp; <a class="code" href="classgko_1_1config_1_1type__descriptor.html#a81124bac30caf3d22920e1a7555144fe">get_index_typestr</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keyword">const</span> std::string&amp; <a class="code" href="classgko_1_1config_1_1type__descriptor.html#a4e47512d469db2977398f3b0cfb64a66">get_local_index_typestr</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keyword">const</span> std::string&amp; <a class="code" href="classgko_1_1config_1_1type__descriptor.html#a02ef7f99d51c27694bb3afe5e68f6422">get_global_index_typestr</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    std::string value_typestr_;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    std::string index_typestr_;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    std::string global_index_typestr_;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;};</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType = double, <span class="keyword">typename</span> IndexType = <a class="code" href="namespacegko.html#a1ec26caa2379a21a8d0cde611559fff6">int32</a>,</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;          <span class="keyword">typename</span> GlobalIndexType = <a class="code" href="namespacegko.html#a6c57dbf3168b1ecad3ea133aaf2efbc1">int64</a>&gt;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<a class="code" href="classgko_1_1config_1_1type__descriptor.html">type_descriptor</a> make_type_descriptor();</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;}  <span class="comment">// namespace config</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;}  <span class="comment">// namespace gko</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_CONFIG_TYPE_DESCRIPTOR_HPP_</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassgko_1_1config_1_1type__descriptor_html_a2edc43c2f174dce3e933951ef028af49"><div class="ttname"><a href="classgko_1_1config_1_1type__descriptor.html#a2edc43c2f174dce3e933951ef028af49">gko::config::type_descriptor::type_descriptor</a></div><div class="ttdeci">type_descriptor(std::string value_typestr=&quot;float64&quot;, std::string index_typestr=&quot;int32&quot;)</div><div class="ttdoc">type_descriptor constructor.</div></div>
-<div class="ttc" id="aclassgko_1_1config_1_1type__descriptor_html"><div class="ttname"><a href="classgko_1_1config_1_1type__descriptor.html">gko::config::type_descriptor</a></div><div class="ttdoc">This class describes the value and index types to be used when building a Ginkgo type from a configur...</div><div class="ttdef"><b>Definition:</b> type_descriptor.hpp:37</div></div>
+<div class="ttc" id="aclassgko_1_1config_1_1type__descriptor_html_a174c5d07919038e0f5858ca25d55002d"><div class="ttname"><a href="classgko_1_1config_1_1type__descriptor.html#a174c5d07919038e0f5858ca25d55002d">gko::config::type_descriptor::type_descriptor</a></div><div class="ttdeci">type_descriptor(std::string value_typestr=&quot;float64&quot;, std::string index_typestr=&quot;int32&quot;, std::string global_index_typestr=&quot;int64&quot;)</div><div class="ttdoc">type_descriptor constructor.</div></div>
+<div class="ttc" id="aclassgko_1_1config_1_1type__descriptor_html"><div class="ttname"><a href="classgko_1_1config_1_1type__descriptor.html">gko::config::type_descriptor</a></div><div class="ttdoc">This class describes the value and index types to be used when building a Ginkgo type from a configur...</div><div class="ttdef"><b>Definition:</b> type_descriptor.hpp:39</div></div>
 <div class="ttc" id="anamespacegko_html"><div class="ttname"><a href="namespacegko.html">gko</a></div><div class="ttdoc">The Ginkgo namespace.</div><div class="ttdef"><b>Definition:</b> abstract_factory.hpp:20</div></div>
+<div class="ttc" id="aclassgko_1_1config_1_1type__descriptor_html_a4e47512d469db2977398f3b0cfb64a66"><div class="ttname"><a href="classgko_1_1config_1_1type__descriptor.html#a4e47512d469db2977398f3b0cfb64a66">gko::config::type_descriptor::get_local_index_typestr</a></div><div class="ttdeci">const std::string &amp; get_local_index_typestr() const</div><div class="ttdoc">Get the local index type string, which gives the same result as get_index_typestr()</div></div>
+<div class="ttc" id="aclassgko_1_1config_1_1type__descriptor_html_a02ef7f99d51c27694bb3afe5e68f6422"><div class="ttname"><a href="classgko_1_1config_1_1type__descriptor.html#a02ef7f99d51c27694bb3afe5e68f6422">gko::config::type_descriptor::get_global_index_typestr</a></div><div class="ttdeci">const std::string &amp; get_global_index_typestr() const</div><div class="ttdoc">Get the global index type string.</div></div>
 <div class="ttc" id="aclassgko_1_1config_1_1type__descriptor_html_a2aeb0732b5022a4f41186eb95a43857a"><div class="ttname"><a href="classgko_1_1config_1_1type__descriptor.html#a2aeb0732b5022a4f41186eb95a43857a">gko::config::type_descriptor::get_value_typestr</a></div><div class="ttdeci">const std::string &amp; get_value_typestr() const</div><div class="ttdoc">Get the value type string.</div></div>
+<div class="ttc" id="anamespacegko_html_a6c57dbf3168b1ecad3ea133aaf2efbc1"><div class="ttname"><a href="namespacegko.html#a6c57dbf3168b1ecad3ea133aaf2efbc1">gko::int64</a></div><div class="ttdeci">std::int64_t int64</div><div class="ttdoc">64-bit signed integral type.</div><div class="ttdef"><b>Definition:</b> types.hpp:131</div></div>
+<div class="ttc" id="anamespacegko_html_a1ec26caa2379a21a8d0cde611559fff6"><div class="ttname"><a href="namespacegko.html#a1ec26caa2379a21a8d0cde611559fff6">gko::int32</a></div><div class="ttdeci">std::int32_t int32</div><div class="ttdoc">32-bit signed integral type.</div><div class="ttdef"><b>Definition:</b> types.hpp:125</div></div>
 <div class="ttc" id="aclassgko_1_1config_1_1type__descriptor_html_a81124bac30caf3d22920e1a7555144fe"><div class="ttname"><a href="classgko_1_1config_1_1type__descriptor.html#a81124bac30caf3d22920e1a7555144fe">gko::config::type_descriptor::get_index_typestr</a></div><div class="ttdeci">const std::string &amp; get_index_typestr() const</div><div class="ttdoc">Get the index type string.</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
