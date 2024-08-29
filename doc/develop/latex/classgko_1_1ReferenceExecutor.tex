@@ -38,7 +38,13 @@ Collaboration diagram for gko\+::Reference\+Executor\+:
 std\+::string \mbox{\hyperlink{classgko_1_1ReferenceExecutor_a84e5353b33e9d648476aed0e76999358}{get\+\_\+description}} () const override
 \item 
 void \mbox{\hyperlink{classgko_1_1ReferenceExecutor_a82b41b42dbd26e8ac5b0146de79e5d34}{run}} (const \mbox{\hyperlink{classgko_1_1Operation}{Operation}} \&op) const override
-\begin{DoxyCompactList}\small\item\em Runs the specified \mbox{\hyperlink{classgko_1_1Operation}{Operation}} using this \mbox{\hyperlink{classgko_1_1Executor}{Executor}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Runs the specified \mbox{\hyperlink{classgko_1_1Operation}{Operation}} using this \mbox{\hyperlink{classgko_1_1Executor}{Executor}}. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classgko_1_1ReferenceExecutor_a4fdbf8100b039d3858634bf9c502f5d7}{run}} (const \mbox{\hyperlink{classgko_1_1Operation}{Operation}} \&op) const=0
+\begin{DoxyCompactList}\small\item\em Runs the specified \mbox{\hyperlink{classgko_1_1Operation}{Operation}} using this \mbox{\hyperlink{classgko_1_1Executor}{Executor}}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Closure\+Omp , typename Closure\+Cuda , typename Closure\+Hip , typename Closure\+Dpcpp $>$ }\\void \mbox{\hyperlink{classgko_1_1ReferenceExecutor_a294787f033b02fd013af087d02a4ae1b}{run}} (const Closure\+Omp \&op\+\_\+omp, const Closure\+Cuda \&op\+\_\+cuda, const Closure\+Hip \&op\+\_\+hip, const Closure\+Dpcpp \&op\+\_\+dpcpp) const
+\begin{DoxyCompactList}\small\item\em Runs one of the passed in functors, depending on the \mbox{\hyperlink{classgko_1_1Executor}{Executor}} type. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Closure\+Reference , typename Closure\+Omp , typename Closure\+Cuda , typename Closure\+Hip , typename Closure\+Dpcpp $>$ }\\void \mbox{\hyperlink{classgko_1_1ReferenceExecutor_abe906f109824da54447e504ff88aa97f}{run}} (std\+::string name, const Closure\+Reference \&op\+\_\+ref, const Closure\+Omp \&op\+\_\+omp, const Closure\+Cuda \&op\+\_\+cuda, const Closure\+Hip \&op\+\_\+hip, const Closure\+Dpcpp \&op\+\_\+dpcpp) const
+\begin{DoxyCompactList}\small\item\em Runs one of the passed in functors, depending on the \mbox{\hyperlink{classgko_1_1Executor}{Executor}} type. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -64,10 +70,43 @@ a textual representation of the executor and its device.
 
 Reimplemented from \mbox{\hyperlink{classgko_1_1OmpExecutor_a157fbc623333a1658f8a3915e7b2da2d}{gko\+::\+Omp\+Executor}}.
 
+\mbox{\Hypertarget{classgko_1_1ReferenceExecutor_a294787f033b02fd013af087d02a4ae1b}\label{classgko_1_1ReferenceExecutor_a294787f033b02fd013af087d02a4ae1b}} 
+\index{gko::ReferenceExecutor@{gko::ReferenceExecutor}!run@{run}}
+\index{run@{run}!gko::ReferenceExecutor@{gko::ReferenceExecutor}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$typename Closure\+Omp , typename Closure\+Cuda , typename Closure\+Hip , typename Closure\+Dpcpp $>$ \\
+void gko\+::\+Executor\+::run (\begin{DoxyParamCaption}\item[{typename Closure\+Omp}]{,  }\item[{typename Closure\+Cuda}]{,  }\item[{typename Closure\+Hip}]{,  }\item[{typename Closure\+Dpcpp}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Runs one of the passed in functors, depending on the \mbox{\hyperlink{classgko_1_1Executor}{Executor}} type. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Closure\+Omp} & type of op\+\_\+omp \\
+\hline
+{\em Closure\+Cuda} & type of op\+\_\+cuda \\
+\hline
+{\em Closure\+Hip} & type of op\+\_\+hip \\
+\hline
+{\em Closure\+Dpcpp} & type of op\+\_\+dpcpp\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em op\+\_\+omp} & functor to run in case of a \mbox{\hyperlink{classgko_1_1OmpExecutor}{Omp\+Executor}} or \mbox{\hyperlink{classgko_1_1ReferenceExecutor}{Reference\+Executor}} \\
+\hline
+{\em op\+\_\+cuda} & functor to run in case of a \mbox{\hyperlink{classgko_1_1CudaExecutor}{Cuda\+Executor}} \\
+\hline
+{\em op\+\_\+hip} & functor to run in case of a \mbox{\hyperlink{classgko_1_1HipExecutor}{Hip\+Executor}} \\
+\hline
+{\em op\+\_\+dpcpp} & functor to run in case of a \mbox{\hyperlink{classgko_1_1DpcppExecutor}{Dpcpp\+Executor}} \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classgko_1_1ReferenceExecutor_a82b41b42dbd26e8ac5b0146de79e5d34}\label{classgko_1_1ReferenceExecutor_a82b41b42dbd26e8ac5b0146de79e5d34}} 
 \index{gko::ReferenceExecutor@{gko::ReferenceExecutor}!run@{run}}
 \index{run@{run}!gko::ReferenceExecutor@{gko::ReferenceExecutor}}
-\doxysubsubsection{\texorpdfstring{run()}{run()}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
 {\footnotesize\ttfamily void gko\+::\+Reference\+Executor\+::run (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1Operation}{Operation}} \&}]{op }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
@@ -83,6 +122,60 @@ Runs the specified \mbox{\hyperlink{classgko_1_1Operation}{Operation}} using thi
 
 Implements \mbox{\hyperlink{classgko_1_1Executor_a1de8e2668b76e66690acf5eef9e8324d}{gko\+::\+Executor}}.
 
+\mbox{\Hypertarget{classgko_1_1ReferenceExecutor_a4fdbf8100b039d3858634bf9c502f5d7}\label{classgko_1_1ReferenceExecutor_a4fdbf8100b039d3858634bf9c502f5d7}} 
+\index{gko::ReferenceExecutor@{gko::ReferenceExecutor}!run@{run}}
+\index{run@{run}!gko::ReferenceExecutor@{gko::ReferenceExecutor}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily virtual void gko\+::\+Executor\+::run}
+
+
+
+Runs the specified \mbox{\hyperlink{classgko_1_1Operation}{Operation}} using this \mbox{\hyperlink{classgko_1_1Executor}{Executor}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em op} & the operation to run \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1ReferenceExecutor_abe906f109824da54447e504ff88aa97f}\label{classgko_1_1ReferenceExecutor_abe906f109824da54447e504ff88aa97f}} 
+\index{gko::ReferenceExecutor@{gko::ReferenceExecutor}!run@{run}}
+\index{run@{run}!gko::ReferenceExecutor@{gko::ReferenceExecutor}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$typename Closure\+Reference , typename Closure\+Omp , typename Closure\+Cuda , typename Closure\+Hip , typename Closure\+Dpcpp $>$ \\
+void gko\+::\+Executor\+::run (\begin{DoxyParamCaption}\item[{typename Closure\+Reference}]{,  }\item[{typename Closure\+Omp}]{,  }\item[{typename Closure\+Cuda}]{,  }\item[{typename Closure\+Hip}]{,  }\item[{typename Closure\+Dpcpp}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Runs one of the passed in functors, depending on the \mbox{\hyperlink{classgko_1_1Executor}{Executor}} type. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Closure\+Reference} & type of op\+\_\+ref \\
+\hline
+{\em Closure\+Omp} & type of op\+\_\+omp \\
+\hline
+{\em Closure\+Cuda} & type of op\+\_\+cuda \\
+\hline
+{\em Closure\+Hip} & type of op\+\_\+hip \\
+\hline
+{\em Closure\+Dpcpp} & type of op\+\_\+dpcpp\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em name} & the name of the operation \\
+\hline
+{\em op\+\_\+ref} & functor to run in case of a \mbox{\hyperlink{classgko_1_1ReferenceExecutor}{Reference\+Executor}} \\
+\hline
+{\em op\+\_\+omp} & functor to run in case of a \mbox{\hyperlink{classgko_1_1OmpExecutor}{Omp\+Executor}} \\
+\hline
+{\em op\+\_\+cuda} & functor to run in case of a \mbox{\hyperlink{classgko_1_1CudaExecutor}{Cuda\+Executor}} \\
+\hline
+{\em op\+\_\+hip} & functor to run in case of a \mbox{\hyperlink{classgko_1_1HipExecutor}{Hip\+Executor}} \\
+\hline
+{\em op\+\_\+dpcpp} & functor to run in case of a \mbox{\hyperlink{classgko_1_1DpcppExecutor}{Dpcpp\+Executor}} \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

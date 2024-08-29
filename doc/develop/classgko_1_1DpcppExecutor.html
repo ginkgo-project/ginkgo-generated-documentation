@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1427716008 branch based on develop. Ginkgo version 1.9.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1431676660 branch based on develop. Ginkgo version 1.9.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -140,6 +140,17 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 <tr class="memitem:ab6ff2a7bc51dca54ef9cce5c836ade2f"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1DpcppExecutor.html#ab6ff2a7bc51dca54ef9cce5c836ade2f">get_device_type</a> () const noexcept</td></tr>
 <tr class="memdesc:ab6ff2a7bc51dca54ef9cce5c836ade2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a string representing the device type.  <a href="classgko_1_1DpcppExecutor.html#ab6ff2a7bc51dca54ef9cce5c836ade2f">More...</a><br /></td></tr>
 <tr class="separator:ab6ff2a7bc51dca54ef9cce5c836ade2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fdbf8100b039d3858634bf9c502f5d7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1DpcppExecutor.html#a4fdbf8100b039d3858634bf9c502f5d7">run</a> (const <a class="el" href="classgko_1_1Operation.html">Operation</a> &amp;op) const=0</td></tr>
+<tr class="memdesc:a4fdbf8100b039d3858634bf9c502f5d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs the specified <a class="el" href="classgko_1_1Operation.html" title="Operations can be used to define functionalities whose implementations differ among devices.">Operation</a> using this <a class="el" href="classgko_1_1Executor.html" title="The first step in using the Ginkgo library consists of creating an executor.">Executor</a>.  <a href="classgko_1_1DpcppExecutor.html#a4fdbf8100b039d3858634bf9c502f5d7">More...</a><br /></td></tr>
+<tr class="separator:a4fdbf8100b039d3858634bf9c502f5d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a294787f033b02fd013af087d02a4ae1b"><td class="memTemplParams" colspan="2">template&lt;typename ClosureOmp , typename ClosureCuda , typename ClosureHip , typename ClosureDpcpp &gt; </td></tr>
+<tr class="memitem:a294787f033b02fd013af087d02a4ae1b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classgko_1_1DpcppExecutor.html#a294787f033b02fd013af087d02a4ae1b">run</a> (const ClosureOmp &amp;op_omp, const ClosureCuda &amp;op_cuda, const ClosureHip &amp;op_hip, const ClosureDpcpp &amp;op_dpcpp) const</td></tr>
+<tr class="memdesc:a294787f033b02fd013af087d02a4ae1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs one of the passed in functors, depending on the <a class="el" href="classgko_1_1Executor.html" title="The first step in using the Ginkgo library consists of creating an executor.">Executor</a> type.  <a href="classgko_1_1DpcppExecutor.html#a294787f033b02fd013af087d02a4ae1b">More...</a><br /></td></tr>
+<tr class="separator:a294787f033b02fd013af087d02a4ae1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe906f109824da54447e504ff88aa97f"><td class="memTemplParams" colspan="2">template&lt;typename ClosureReference , typename ClosureOmp , typename ClosureCuda , typename ClosureHip , typename ClosureDpcpp &gt; </td></tr>
+<tr class="memitem:abe906f109824da54447e504ff88aa97f"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classgko_1_1DpcppExecutor.html#abe906f109824da54447e504ff88aa97f">run</a> (std::string name, const ClosureReference &amp;op_ref, const ClosureOmp &amp;op_omp, const ClosureCuda &amp;op_cuda, const ClosureHip &amp;op_hip, const ClosureDpcpp &amp;op_dpcpp) const</td></tr>
+<tr class="memdesc:abe906f109824da54447e504ff88aa97f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs one of the passed in functors, depending on the <a class="el" href="classgko_1_1Executor.html" title="The first step in using the Ginkgo library consists of creating an executor.">Executor</a> type.  <a href="classgko_1_1DpcppExecutor.html#abe906f109824da54447e504ff88aa97f">More...</a><br /></td></tr>
+<tr class="separator:abe906f109824da54447e504ff88aa97f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -527,6 +538,177 @@ Static Public Member Functions</h2></td></tr>
 
 <p>Get the available subgroup sizes for this device. </p>
 <dl class="section return"><dt>Returns</dt><dd>the available subgroup sizes for this device </dd></dl>
+
+</div>
+</div>
+<a id="a294787f033b02fd013af087d02a4ae1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a294787f033b02fd013af087d02a4ae1b">&#9670;&nbsp;</a></span>run() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClosureOmp , typename ClosureCuda , typename ClosureHip , typename ClosureDpcpp &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gko::Executor::run </td>
+          <td>(</td>
+          <td class="paramtype">typename ClosureOmp&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">typename ClosureCuda&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">typename ClosureHip&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">typename ClosureDpcpp&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Runs one of the passed in functors, depending on the <a class="el" href="classgko_1_1Executor.html" title="The first step in using the Ginkgo library consists of creating an executor.">Executor</a> type. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">ClosureOmp</td><td>type of op_omp </td></tr>
+    <tr><td class="paramname">ClosureCuda</td><td>type of op_cuda </td></tr>
+    <tr><td class="paramname">ClosureHip</td><td>type of op_hip </td></tr>
+    <tr><td class="paramname">ClosureDpcpp</td><td>type of op_dpcpp</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">op_omp</td><td>functor to run in case of a <a class="el" href="classgko_1_1OmpExecutor.html" title="This is the Executor subclass which represents the OpenMP device (typically CPU).">OmpExecutor</a> or <a class="el" href="classgko_1_1ReferenceExecutor.html" title="This is a specialization of the OmpExecutor, which runs the reference implementations of the kernels ...">ReferenceExecutor</a> </td></tr>
+    <tr><td class="paramname">op_cuda</td><td>functor to run in case of a <a class="el" href="classgko_1_1CudaExecutor.html" title="This is the Executor subclass which represents the CUDA device.">CudaExecutor</a> </td></tr>
+    <tr><td class="paramname">op_hip</td><td>functor to run in case of a <a class="el" href="classgko_1_1HipExecutor.html" title="This is the Executor subclass which represents the HIP enhanced device.">HipExecutor</a> </td></tr>
+    <tr><td class="paramname">op_dpcpp</td><td>functor to run in case of a <a class="el" href="classgko_1_1DpcppExecutor.html" title="This is the Executor subclass which represents a DPC++ enhanced device.">DpcppExecutor</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a4fdbf8100b039d3858634bf9c502f5d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fdbf8100b039d3858634bf9c502f5d7">&#9670;&nbsp;</a></span>run() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void gko::Executor::run</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Runs the specified <a class="el" href="classgko_1_1Operation.html" title="Operations can be used to define functionalities whose implementations differ among devices.">Operation</a> using this <a class="el" href="classgko_1_1Executor.html" title="The first step in using the Ginkgo library consists of creating an executor.">Executor</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">op</td><td>the operation to run </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abe906f109824da54447e504ff88aa97f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe906f109824da54447e504ff88aa97f">&#9670;&nbsp;</a></span>run() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ClosureReference , typename ClosureOmp , typename ClosureCuda , typename ClosureHip , typename ClosureDpcpp &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gko::Executor::run </td>
+          <td>(</td>
+          <td class="paramtype">typename ClosureReference&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">typename ClosureOmp&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">typename ClosureCuda&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">typename ClosureHip&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">typename ClosureDpcpp&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Runs one of the passed in functors, depending on the <a class="el" href="classgko_1_1Executor.html" title="The first step in using the Ginkgo library consists of creating an executor.">Executor</a> type. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">ClosureReference</td><td>type of op_ref </td></tr>
+    <tr><td class="paramname">ClosureOmp</td><td>type of op_omp </td></tr>
+    <tr><td class="paramname">ClosureCuda</td><td>type of op_cuda </td></tr>
+    <tr><td class="paramname">ClosureHip</td><td>type of op_hip </td></tr>
+    <tr><td class="paramname">ClosureDpcpp</td><td>type of op_dpcpp</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>the name of the operation </td></tr>
+    <tr><td class="paramname">op_ref</td><td>functor to run in case of a <a class="el" href="classgko_1_1ReferenceExecutor.html" title="This is a specialization of the OmpExecutor, which runs the reference implementations of the kernels ...">ReferenceExecutor</a> </td></tr>
+    <tr><td class="paramname">op_omp</td><td>functor to run in case of a <a class="el" href="classgko_1_1OmpExecutor.html" title="This is the Executor subclass which represents the OpenMP device (typically CPU).">OmpExecutor</a> </td></tr>
+    <tr><td class="paramname">op_cuda</td><td>functor to run in case of a <a class="el" href="classgko_1_1CudaExecutor.html" title="This is the Executor subclass which represents the CUDA device.">CudaExecutor</a> </td></tr>
+    <tr><td class="paramname">op_hip</td><td>functor to run in case of a <a class="el" href="classgko_1_1HipExecutor.html" title="This is the Executor subclass which represents the HIP enhanced device.">HipExecutor</a> </td></tr>
+    <tr><td class="paramname">op_dpcpp</td><td>functor to run in case of a <a class="el" href="classgko_1_1DpcppExecutor.html" title="This is the Executor subclass which represents a DPC++ enhanced device.">DpcppExecutor</a> </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
