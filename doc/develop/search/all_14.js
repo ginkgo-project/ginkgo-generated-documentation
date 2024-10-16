@@ -9,5 +9,6 @@ var searchData=
   ['version_1562',['version',['../structgko_1_1version.html',1,'gko']]],
   ['version_5finfo_1563',['version_info',['../classgko_1_1version__info.html',1,'gko']]],
   ['view_1564',['view',['../classgko_1_1array.html#aac2a7c2d59045e56fb751b18712a4635',1,'gko::array']]],
-  ['view_5fdeleter_1565',['view_deleter',['../classgko_1_1array.html#a377a6aaf5ee6c2747781b889eea6c226',1,'gko::array']]]
+  ['view_5fdeleter_1565',['view_deleter',['../classgko_1_1array.html#a377a6aaf5ee6c2747781b889eea6c226',1,'gko::array']]],
+  ['void_5ft_1566',['void_t',['../namespacegko_1_1xstd.html#a185b5a0964814a042089d2a6b994d8e9',1,'gko::xstd']]]
 ];
