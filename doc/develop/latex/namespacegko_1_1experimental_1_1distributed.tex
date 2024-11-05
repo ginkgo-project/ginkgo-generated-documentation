@@ -39,9 +39,9 @@ enum \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a3d50932cfebdd
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\footnotesize template$<$typename Value\+Type $>$ }\\detail\+::temporary\+\_\+conversion$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{experimental\+::distributed\+::\+Vector}}$<$ Value\+Type $>$ $>$ \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a5352c1035799170c7b28d9b68fb062a1}{make\+\_\+temporary\+\_\+conversion}} (\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$matrix)
+{\footnotesize template$<$typename Value\+Type $>$ }\\gko\+::detail\+::temporary\+\_\+conversion$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{Vector}}$<$ Value\+Type $>$ $>$ \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_ad64bf64ad3f733e744bac66cb3c91217}{make\+\_\+temporary\+\_\+conversion}} (\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$matrix)
 \begin{DoxyCompactList}\small\item\em Convert the given \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} from experimental\+::distributed\+::\+Vector$<$...$>$ to experimental\+::distributed\+::\+Vector$<$\+Value\+Type$>$. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename Value\+Type $>$ }\\detail\+::temporary\+\_\+conversion$<$ const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{experimental\+::distributed\+::\+Vector}}$<$ Value\+Type $>$ $>$ \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_adb6757491deb94230274c72e012de2a1}{make\+\_\+temporary\+\_\+conversion}} (const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$matrix)
+{\footnotesize template$<$typename Value\+Type $>$ }\\gko\+::detail\+::temporary\+\_\+conversion$<$ const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{Vector}}$<$ Value\+Type $>$ $>$ \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_ad97bb60ba2cc655d8bcf849498fe2a56}{make\+\_\+temporary\+\_\+conversion}} (const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$matrix)
 \begin{DoxyCompactList}\small\item\em Convert the given \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} from experimental\+::distributed\+::\+Vector$<$...$>$ to experimental\+::distributed\+::\+Vector$<$\+Value\+Type$>$. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Value\+Type , typename Function , typename... Args$>$ }\\void \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_ae834447464baacc73ee8d2bc6a0d61a0}{precision\+\_\+dispatch}} (Function fn, Args $\ast$... linops)
 \begin{DoxyCompactList}\small\item\em Calls the given function with each given argument \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} temporarily converted into experimental\+::distributed\+::\+Vector$<$\+Value\+Type$>$ as parameters. \end{DoxyCompactList}\item 
@@ -150,12 +150,12 @@ Builds a partition from a local size.
 \begin{DoxyReturn}{Returns}
 a \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{Partition}} where each range has the specified local size. More specifically, if this is called on process i with local\+\_\+size {\ttfamily s\+\_\+i}, then the range {\ttfamily i} has size {\ttfamily s\+\_\+i}, and range {\ttfamily r\+\_\+i = \mbox{[}start, start + s\+\_\+i)}, where {\ttfamily start = sum\+\_\+j$^\wedge$(i-\/1) s\+\_\+j}. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{namespacegko_1_1experimental_1_1distributed_adb6757491deb94230274c72e012de2a1}\label{namespacegko_1_1experimental_1_1distributed_adb6757491deb94230274c72e012de2a1}} 
+\mbox{\Hypertarget{namespacegko_1_1experimental_1_1distributed_ad97bb60ba2cc655d8bcf849498fe2a56}\label{namespacegko_1_1experimental_1_1distributed_ad97bb60ba2cc655d8bcf849498fe2a56}} 
 \index{gko::experimental::distributed@{gko::experimental::distributed}!make\_temporary\_conversion@{make\_temporary\_conversion}}
 \index{make\_temporary\_conversion@{make\_temporary\_conversion}!gko::experimental::distributed@{gko::experimental::distributed}}
 \doxysubsubsection{\texorpdfstring{make\_temporary\_conversion()}{make\_temporary\_conversion()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type $>$ \\
-detail\+::temporary\+\_\+conversion$<$const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{experimental\+::distributed\+::\+Vector}}$<$Value\+Type$>$ $>$ gko\+::experimental\+::distributed\+::make\+\_\+temporary\+\_\+conversion (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{matrix }\end{DoxyParamCaption})}
+gko\+::detail\+::temporary\+\_\+conversion$<$const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{Vector}}$<$Value\+Type$>$ $>$ gko\+::experimental\+::distributed\+::make\+\_\+temporary\+\_\+conversion (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{matrix }\end{DoxyParamCaption})}
 
 
 
@@ -178,15 +178,15 @@ a detail\+::temporary\+\_\+conversion pointing to the (potentially converted) ob
 \end{DoxyExceptions}
 
 \begin{DoxyTemplParams}{Template Parameters}
-{\em Value\+Type} & the value type into whose associated \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{experimental\+::distributed\+::\+Vector}} type to convert the input \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}. \\
+{\em Value\+Type} & the value type into whose associated \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{Vector}} type to convert the input \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}. \\
 \hline
 \end{DoxyTemplParams}
-\mbox{\Hypertarget{namespacegko_1_1experimental_1_1distributed_a5352c1035799170c7b28d9b68fb062a1}\label{namespacegko_1_1experimental_1_1distributed_a5352c1035799170c7b28d9b68fb062a1}} 
+\mbox{\Hypertarget{namespacegko_1_1experimental_1_1distributed_ad64bf64ad3f733e744bac66cb3c91217}\label{namespacegko_1_1experimental_1_1distributed_ad64bf64ad3f733e744bac66cb3c91217}} 
 \index{gko::experimental::distributed@{gko::experimental::distributed}!make\_temporary\_conversion@{make\_temporary\_conversion}}
 \index{make\_temporary\_conversion@{make\_temporary\_conversion}!gko::experimental::distributed@{gko::experimental::distributed}}
 \doxysubsubsection{\texorpdfstring{make\_temporary\_conversion()}{make\_temporary\_conversion()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type $>$ \\
-detail\+::temporary\+\_\+conversion$<$\mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{experimental\+::distributed\+::\+Vector}}$<$Value\+Type$>$ $>$ gko\+::experimental\+::distributed\+::make\+\_\+temporary\+\_\+conversion (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{matrix }\end{DoxyParamCaption})}
+gko\+::detail\+::temporary\+\_\+conversion$<$\mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{Vector}}$<$Value\+Type$>$ $>$ gko\+::experimental\+::distributed\+::make\+\_\+temporary\+\_\+conversion (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{matrix }\end{DoxyParamCaption})}
 
 
 
@@ -209,7 +209,7 @@ a detail\+::temporary\+\_\+conversion pointing to the (potentially converted) ob
 \end{DoxyExceptions}
 
 \begin{DoxyTemplParams}{Template Parameters}
-{\em Value\+Type} & the value type into whose associated \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{experimental\+::distributed\+::\+Vector}} type to convert the input \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}. \\
+{\em Value\+Type} & the value type into whose associated \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{Vector}} type to convert the input \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}. \\
 \hline
 \end{DoxyTemplParams}
 \mbox{\Hypertarget{namespacegko_1_1experimental_1_1distributed_ae834447464baacc73ee8d2bc6a0d61a0}\label{namespacegko_1_1experimental_1_1distributed_ae834447464baacc73ee8d2bc6a0d61a0}} 

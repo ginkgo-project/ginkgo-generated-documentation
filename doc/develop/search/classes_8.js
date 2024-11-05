@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['ic_2230',['Ic',['../classgko_1_1preconditioner_1_1Ic.html',1,'gko::preconditioner::Ic&lt; LSolverType, IndexType &gt;'],['../classgko_1_1factorization_1_1Ic.html',1,'gko::factorization::Ic&lt; ValueType, IndexType &gt;']]],
+  ['ic_2230',['Ic',['../classgko_1_1factorization_1_1Ic.html',1,'gko::factorization::Ic&lt; ValueType, IndexType &gt;'],['../classgko_1_1preconditioner_1_1Ic.html',1,'gko::preconditioner::Ic&lt; LSolverType, IndexType &gt;']]],
   ['identity_2231',['Identity',['../classgko_1_1batch_1_1matrix_1_1Identity.html',1,'gko::batch::matrix::Identity&lt; ValueType &gt;'],['../classgko_1_1matrix_1_1Identity.html',1,'gko::matrix::Identity&lt; ValueType &gt;']]],
   ['identityfactory_2232',['IdentityFactory',['../classgko_1_1matrix_1_1IdentityFactory.html',1,'gko::matrix']]],
   ['idr_2233',['Idr',['../classgko_1_1solver_1_1Idr.html',1,'gko::solver']]],
