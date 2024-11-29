@@ -35,7 +35,11 @@ enum \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a3d50932cfebdd
 \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a3d50932cfebdde844b88d2c82b96947ba9182221a9ec0a65321d5a206c9c174ca}{index\+\_\+space\+::non\+\_\+local}}, 
 \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a3d50932cfebdde844b88d2c82b96947ba507d922378ecab8e10b81dcbc2ff8bf3}{index\+\_\+space\+::combined}}
  \}
-\begin{DoxyCompactList}\small\item\em Index space classification for the locally stored indices. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Index space classification for the locally stored indices. \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a4b66bc2bbe95fe0a818a5f4423acbb4e}{assembly\+\_\+mode}} \{ {\bfseries communicate}, 
+{\bfseries local\+\_\+only}
+ \}
+\begin{DoxyCompactList}\small\item\em assembly\+\_\+mode defines how the read\+\_\+distributed function of the distributed matrix treats non-\/local indices in the (device\+\_\+)matrix\+\_\+data\+: \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -51,6 +55,8 @@ enum \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a3d50932cfebdd
 \begin{DoxyCompactList}\small\item\em Calls the given function with the given Lin\+Ops temporarily converted to experimental\+::distributed\+::\+Vector$<$\+Value\+Type$>$$\ast$ as parameters. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Value\+Type , typename Function $>$ }\\void \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a76b1f78aad396f2a87ae070e0b11c1f3}{precision\+\_\+dispatch\+\_\+real\+\_\+complex}} (Function fn, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$alpha, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$in, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$beta, \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$out)
 \begin{DoxyCompactList}\small\item\em Calls the given function with the given Lin\+Ops temporarily converted to experimental\+::distributed\+::\+Vector$<$\+Value\+Type$>$$\ast$ as parameters. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Value\+Type , typename Local\+Index\+Type , typename Global\+Index\+Type $>$ }\\\mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}}$<$ Value\+Type, Global\+Index\+Type $>$ \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_afcc07c02b461af86d0aa8eb3dd96ca02}{assemble\+\_\+rows\+\_\+from\+\_\+neighbors}} (\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}} comm, const \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}}$<$ Value\+Type, Global\+Index\+Type $>$ \&input, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{Partition}}$<$ Local\+Index\+Type, Global\+Index\+Type $>$$>$ partition)
+\begin{DoxyCompactList}\small\item\em Assembles \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} entries owned by this M\+PI rank from other ranks and communicates entries located on this M\+PI rank owned by other ranks to their respective owners. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Local\+Index\+Type , typename Global\+Index\+Type $>$ }\\std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{Partition}}$<$ Local\+Index\+Type, Global\+Index\+Type $>$ $>$ \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a7ec42d4068b89c36be8098b0edeeef1e}{build\+\_\+partition\+\_\+from\+\_\+local\+\_\+range}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}} comm, \mbox{\hyperlink{structgko_1_1span}{span}} local\+\_\+range)
 \begin{DoxyCompactList}\small\item\em Builds a partition from a local range. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Local\+Index\+Type , typename Global\+Index\+Type $>$ }\\std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{Partition}}$<$ Local\+Index\+Type, Global\+Index\+Type $>$ $>$ \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a77de4e471064605da5953340f66be48e}{build\+\_\+partition\+\_\+from\+\_\+local\+\_\+size}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}} comm, \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} local\+\_\+size)
@@ -74,7 +80,21 @@ Index type for enumerating processes in a distributed application.
 Conforms to the M\+PI C interface of e.\+g. M\+PI rank or size 
 
 \doxysubsection{Enumeration Type Documentation}
-\mbox{\Hypertarget{namespacegko_1_1experimental_1_1distributed_a3d50932cfebdde844b88d2c82b96947b}\label{namespacegko_1_1experimental_1_1distributed_a3d50932cfebdde844b88d2c82b96947b}} 
+\mbox{\Hypertarget{namespacegko_1_1experimental_1_1distributed_a4b66bc2bbe95fe0a818a5f4423acbb4e}\label{namespacegko_1_1experimental_1_1distributed_a4b66bc2bbe95fe0a818a5f4423acbb4e}} 
+\index{gko::experimental::distributed@{gko::experimental::distributed}!assembly\_mode@{assembly\_mode}}
+\index{assembly\_mode@{assembly\_mode}!gko::experimental::distributed@{gko::experimental::distributed}}
+\doxysubsubsection{\texorpdfstring{assembly\_mode}{assembly\_mode}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a4b66bc2bbe95fe0a818a5f4423acbb4e}{gko\+::experimental\+::distributed\+::assembly\+\_\+mode}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+assembly\+\_\+mode defines how the read\+\_\+distributed function of the distributed matrix treats non-\/local indices in the (device\+\_\+)\mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}}\+: 
+
+
+\begin{DoxyItemize}
+\item {\ttfamily communicate} communicates the overlap between ranks and adds up all local contributions. Indices smaller than 0 or larger than the global size of the matrix are ignored.
+\item {\ttfamily local\+\_\+only} does not communicate any overlap but ignores all non-\/local indices. 
+\end{DoxyItemize}\mbox{\Hypertarget{namespacegko_1_1experimental_1_1distributed_a3d50932cfebdde844b88d2c82b96947b}\label{namespacegko_1_1experimental_1_1distributed_a3d50932cfebdde844b88d2c82b96947b}} 
 \index{gko::experimental::distributed@{gko::experimental::distributed}!index\_space@{index\_space}}
 \index{index\_space@{index\_space}!gko::experimental::distributed@{gko::experimental::distributed}}
 \doxysubsubsection{\texorpdfstring{index\_space}{index\_space}}
@@ -101,6 +121,31 @@ combined&both local and non\+\_\+local indices \\
 
 
 \doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacegko_1_1experimental_1_1distributed_afcc07c02b461af86d0aa8eb3dd96ca02}\label{namespacegko_1_1experimental_1_1distributed_afcc07c02b461af86d0aa8eb3dd96ca02}} 
+\index{gko::experimental::distributed@{gko::experimental::distributed}!assemble\_rows\_from\_neighbors@{assemble\_rows\_from\_neighbors}}
+\index{assemble\_rows\_from\_neighbors@{assemble\_rows\_from\_neighbors}!gko::experimental::distributed@{gko::experimental::distributed}}
+\doxysubsubsection{\texorpdfstring{assemble\_rows\_from\_neighbors()}{assemble\_rows\_from\_neighbors()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type , typename Local\+Index\+Type , typename Global\+Index\+Type $>$ \\
+\mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}}$<$Value\+Type, Global\+Index\+Type$>$ gko\+::experimental\+::distributed\+::assemble\+\_\+rows\+\_\+from\+\_\+neighbors (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}}}]{comm,  }\item[{const \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}}$<$ Value\+Type, Global\+Index\+Type $>$ \&}]{input,  }\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{Partition}}$<$ Local\+Index\+Type, Global\+Index\+Type $>$$>$}]{partition }\end{DoxyParamCaption})}
+
+
+
+Assembles \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} entries owned by this M\+PI rank from other ranks and communicates entries located on this M\+PI rank owned by other ranks to their respective owners. 
+
+This can be useful e.\+g. in a finite element code where each rank assembles a local contribution to a global system matrix and the global matrix has to be assembled by summing up the local contributions on rank boundaries. The partition used is only relevant for row ownership.
+
+
+\begin{DoxyParams}{Parameters}
+{\em comm} & the communicator used to assemble the global matrix. \\
+\hline
+{\em input} & the \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} structure. \\
+\hline
+{\em partition} & the partition used to determine row owndership.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the globally assembled \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} structure for this M\+PI rank. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{namespacegko_1_1experimental_1_1distributed_a7ec42d4068b89c36be8098b0edeeef1e}\label{namespacegko_1_1experimental_1_1distributed_a7ec42d4068b89c36be8098b0edeeef1e}} 
 \index{gko::experimental::distributed@{gko::experimental::distributed}!build\_partition\_from\_local\_range@{build\_partition\_from\_local\_range}}
 \index{build\_partition\_from\_local\_range@{build\_partition\_from\_local\_range}!gko::experimental::distributed@{gko::experimental::distributed}}
