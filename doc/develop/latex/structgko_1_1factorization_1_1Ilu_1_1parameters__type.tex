@@ -31,6 +31,9 @@ Collaboration diagram for gko\+::factorization\+::Ilu$<$ Value\+Type, Index\+Typ
 \item 
 \mbox{\Hypertarget{structgko_1_1factorization_1_1Ilu_1_1parameters__type_ad6f563857dfa4598dd7fb47daaf1e890}\label{structgko_1_1factorization_1_1Ilu_1_1parameters__type_ad6f563857dfa4598dd7fb47daaf1e890}} 
 {\footnotesize template$<$typename... Args$>$ }\\auto {\bfseries with\+\_\+skip\+\_\+sorting} (Args \&\&... \+\_\+value) -\/$>$ std\+::decay\+\_\+t$<$ decltype($\ast$(this-\/$>$self()))$>$ \&
+\item 
+\mbox{\Hypertarget{structgko_1_1factorization_1_1Ilu_1_1parameters__type_a16738ba6cd22e2101f758a2e6d9d4319}\label{structgko_1_1factorization_1_1Ilu_1_1parameters__type_a16738ba6cd22e2101f758a2e6d9d4319}} 
+{\footnotesize template$<$typename... Args$>$ }\\auto {\bfseries with\+\_\+algorithm} (Args \&\&... \+\_\+value) -\/$>$ std\+::decay\+\_\+t$<$ decltype($\ast$(this-\/$>$self()))$>$ \&
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -40,12 +43,25 @@ std\+::shared\+\_\+ptr$<$ typename \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_
 std\+::shared\+\_\+ptr$<$ typename \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1strategy__type}{matrix\+\_\+type\+::strategy\+\_\+type}} $>$ \mbox{\hyperlink{structgko_1_1factorization_1_1Ilu_1_1parameters__type_ae39206eef0cd32835df5b636e1a60236}{u\+\_\+strategy}} \{ nullptr \}
 \begin{DoxyCompactList}\small\item\em Strategy which will be used by the U matrix. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{structgko_1_1factorization_1_1Ilu_1_1parameters__type_a12cbd76c5a9cce1814fd5c2dc918323f}{skip\+\_\+sorting}} \{ false \}
-\begin{DoxyCompactList}\small\item\em The {\ttfamily system\+\_\+matrix}, which will be given to this factory, must be sorted (first by row, then by column) in order for the algorithm to work. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The {\ttfamily system\+\_\+matrix}, which will be given to this factory, must be sorted (first by row, then by column) in order for the algorithm to work. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacegko_1_1factorization_a42430a5d93539c24303273804684ef67}{incomplete\+\_\+algorithm}} \mbox{\hyperlink{structgko_1_1factorization_1_1Ilu_1_1parameters__type_accc8821162d5eab103579d606ca8ff32}{algorithm}} \{ incomplete\+\_\+algorithm\+::sparselib \}
+\begin{DoxyCompactList}\small\item\em Select the implementation which is supposed to be used for the incomplete factorization. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{structgko_1_1factorization_1_1Ilu_1_1parameters__type_a78cb05198d399f30b435626048c23415}\label{structgko_1_1factorization_1_1Ilu_1_1parameters__type_a78cb05198d399f30b435626048c23415}} 
+\mbox{\Hypertarget{structgko_1_1factorization_1_1Ilu_1_1parameters__type_accc8821162d5eab103579d606ca8ff32}\label{structgko_1_1factorization_1_1Ilu_1_1parameters__type_accc8821162d5eab103579d606ca8ff32}} 
+\index{gko::factorization::Ilu$<$ ValueType, IndexType $>$::parameters\_type@{gko::factorization::Ilu$<$ ValueType, IndexType $>$::parameters\_type}!algorithm@{algorithm}}
+\index{algorithm@{algorithm}!gko::factorization::Ilu$<$ ValueType, IndexType $>$::parameters\_type@{gko::factorization::Ilu$<$ ValueType, IndexType $>$::parameters\_type}}
+\doxysubsubsection{\texorpdfstring{algorithm}{algorithm}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = gko\+::default\+\_\+precision, typename Index\+Type  = gko\+::int32$>$ \\
+\mbox{\hyperlink{namespacegko_1_1factorization_a42430a5d93539c24303273804684ef67}{incomplete\+\_\+algorithm}} \mbox{\hyperlink{classgko_1_1factorization_1_1Ilu}{gko\+::factorization\+::\+Ilu}}$<$ Value\+Type, Index\+Type $>$\+::parameters\+\_\+type\+::algorithm \{ incomplete\+\_\+algorithm\+::sparselib \}}
+
+
+
+Select the implementation which is supposed to be used for the incomplete factorization. 
+
+This only matters for the C\+U\+DA and H\+IP executor where the choice is between the Ginkgo (syncfree) and the cu\+S\+P\+A\+R\+S\+E/hip\+S\+P\+A\+R\+S\+E/reference (sparselib) implementation. Default is sparselib. \mbox{\Hypertarget{structgko_1_1factorization_1_1Ilu_1_1parameters__type_a78cb05198d399f30b435626048c23415}\label{structgko_1_1factorization_1_1Ilu_1_1parameters__type_a78cb05198d399f30b435626048c23415}} 
 \index{gko::factorization::Ilu$<$ ValueType, IndexType $>$::parameters\_type@{gko::factorization::Ilu$<$ ValueType, IndexType $>$::parameters\_type}!l\_strategy@{l\_strategy}}
 \index{l\_strategy@{l\_strategy}!gko::factorization::Ilu$<$ ValueType, IndexType $>$::parameters\_type@{gko::factorization::Ilu$<$ ValueType, IndexType $>$::parameters\_type}}
 \doxysubsubsection{\texorpdfstring{l\_strategy}{l\_strategy}}
