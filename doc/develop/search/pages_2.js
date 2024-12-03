@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['installation_20instructions_3324',['Installation Instructions',['../install_ginkgo.html',1,'']]]
+  ['installation_20instructions_3332',['Installation Instructions',['../install_ginkgo.html',1,'']]]
 ];
