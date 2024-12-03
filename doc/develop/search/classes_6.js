@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['gaussseidel_2211',['GaussSeidel',['../classgko_1_1preconditioner_1_1GaussSeidel.html',1,'gko::preconditioner']]],
-  ['gcr_2212',['Gcr',['../classgko_1_1solver_1_1Gcr.html',1,'gko::solver']]],
-  ['gmres_2213',['Gmres',['../classgko_1_1solver_1_1Gmres.html',1,'gko::solver']]],
-  ['greater_2214',['greater',['../structgko_1_1accessor_1_1greater.html',1,'gko::accessor']]],
-  ['greater_5for_5fequal_2215',['greater_or_equal',['../structgko_1_1accessor_1_1greater__or__equal.html',1,'gko::accessor']]]
+  ['gaussseidel_2212',['GaussSeidel',['../classgko_1_1preconditioner_1_1GaussSeidel.html',1,'gko::preconditioner']]],
+  ['gcr_2213',['Gcr',['../classgko_1_1solver_1_1Gcr.html',1,'gko::solver']]],
+  ['gmres_2214',['Gmres',['../classgko_1_1solver_1_1Gmres.html',1,'gko::solver']]],
+  ['greater_2215',['greater',['../structgko_1_1accessor_1_1greater.html',1,'gko::accessor']]],
+  ['greater_5for_5fequal_2216',['greater_or_equal',['../structgko_1_1accessor_1_1greater__or__equal.html',1,'gko::accessor']]]
 ];
