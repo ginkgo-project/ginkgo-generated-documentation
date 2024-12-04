@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['previous_5fprecision_3240',['previous_precision',['../namespacegko.html#a71559818fee20b97bc6ea6712ec75034',1,'gko']]]
+  ['previous_5fprecision_5fbase_3240',['previous_precision_base',['../namespacegko.html#a7637275ce59930ce2926bfcc1cd42e28',1,'gko']]]
 ];
