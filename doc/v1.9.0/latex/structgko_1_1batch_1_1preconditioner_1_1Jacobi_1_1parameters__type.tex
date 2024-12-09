@@ -1,0 +1,89 @@
+\hypertarget{structgko_1_1batch_1_1preconditioner_1_1Jacobi_1_1parameters__type}{}\doxysection{gko\+::batch\+::preconditioner\+::Jacobi$<$ Value\+Type, Index\+Type $>$\+::parameters\+\_\+type Struct Reference}
+\label{structgko_1_1batch_1_1preconditioner_1_1Jacobi_1_1parameters__type}\index{gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$::parameters\_type@{gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$::parameters\_type}}
+
+
+Inheritance diagram for gko\+::batch\+::preconditioner\+::Jacobi$<$ Value\+Type, Index\+Type $>$\+::parameters\+\_\+type\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=271pt]{structgko_1_1batch_1_1preconditioner_1_1Jacobi_1_1parameters__type__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for gko\+::batch\+::preconditioner\+::Jacobi$<$ Value\+Type, Index\+Type $>$\+::parameters\+\_\+type\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structgko_1_1batch_1_1preconditioner_1_1Jacobi_1_1parameters__type__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structgko_1_1batch_1_1preconditioner_1_1Jacobi_1_1parameters__type_a02bdae2e7fc9db909c3a237388830a86}\label{structgko_1_1batch_1_1preconditioner_1_1Jacobi_1_1parameters__type_a02bdae2e7fc9db909c3a237388830a86}} 
+{\footnotesize template$<$typename... Args$>$ }\\auto {\bfseries with\+\_\+max\+\_\+block\+\_\+size} (Args \&\&... \+\_\+value) -\/$>$ std\+::decay\+\_\+t$<$ decltype($\ast$(this-\/$>$self()))$>$ \&
+\item 
+\mbox{\Hypertarget{structgko_1_1batch_1_1preconditioner_1_1Jacobi_1_1parameters__type_a41da80c823caf68d21114fe3fee6267b}\label{structgko_1_1batch_1_1preconditioner_1_1Jacobi_1_1parameters__type_a41da80c823caf68d21114fe3fee6267b}} 
+{\footnotesize template$<$typename... Args$>$ }\\auto {\bfseries with\+\_\+block\+\_\+pointers} (Args \&\&... \+\_\+value) -\/$>$ std\+::decay\+\_\+t$<$ decltype($\ast$(this-\/$>$self()))$>$ \&
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacegko_a318c831e3fe269ba04c6ed8bf5a71073}{uint32}} \mbox{\hyperlink{structgko_1_1batch_1_1preconditioner_1_1Jacobi_1_1parameters__type_a06ada09498ccd4f438aa5107d66d83e9}{max\+\_\+block\+\_\+size}} \{ 8u \}
+\begin{DoxyCompactList}\small\item\em Maximal size of diagonal blocks. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1array}{gko\+::array}}$<$ index\+\_\+type $>$ \mbox{\hyperlink{structgko_1_1batch_1_1preconditioner_1_1Jacobi_1_1parameters__type_afd91913f62dc55b7173d41f6d6144961}{block\+\_\+pointers}} \{ nullptr \}
+\begin{DoxyCompactList}\small\item\em Starting (row / column) indexes of individual blocks, for a single batch item. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{structgko_1_1batch_1_1preconditioner_1_1Jacobi_1_1parameters__type_afd91913f62dc55b7173d41f6d6144961}\label{structgko_1_1batch_1_1preconditioner_1_1Jacobi_1_1parameters__type_afd91913f62dc55b7173d41f6d6144961}} 
+\index{gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$::parameters\_type@{gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$::parameters\_type}!block\_pointers@{block\_pointers}}
+\index{block\_pointers@{block\_pointers}!gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$::parameters\_type@{gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$::parameters\_type}}
+\doxysubsubsection{\texorpdfstring{block\_pointers}{block\_pointers}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+\mbox{\hyperlink{classgko_1_1array}{gko\+::array}}$<$index\+\_\+type$>$ \mbox{\hyperlink{classgko_1_1batch_1_1preconditioner_1_1Jacobi}{gko\+::batch\+::preconditioner\+::\+Jacobi}}$<$ Value\+Type, Index\+Type $>$\+::parameters\+\_\+type\+::block\+\_\+pointers \{ nullptr \}}
+
+
+
+Starting (row / column) indexes of individual blocks, for a single batch item. 
+
+An index past the last block has to be supplied as the last value. I.\+e. the size of the array has to be the number of blocks plus 1, where the first value is 0, and the last value is the number of rows / columns of the matrix.
+
+\begin{DoxyNote}{Note}
+Even if not set explicitly, this parameter will be set to automatically detected values once the preconditioner is generated. 
+
+If the parameter is set automatically, the size of the array does not correlate to the number of blocks, and is implementation defined. To obtain the number of blocks {\ttfamily n} use \mbox{\hyperlink{classgko_1_1batch_1_1preconditioner_1_1Jacobi_a4d5fe04bfd88e13bbfcac393595707c7}{Jacobi\+::get\+\_\+num\+\_\+blocks()}}. The starting indexes of the blocks are stored in the first {\ttfamily n+1} values of this array. 
+
+If the block-\/diagonal structure can be determined from the problem characteristics, it may be beneficial to pass this information specifically via this parameter, as the autodetection procedure is only a rough approximation of the true block structure. 
+
+The maximum block size set by the max\+\_\+block\+\_\+size parameter has to be respected when setting this parameter. Failure to do so will lead to undefined behavior. 
+\end{DoxyNote}
+\mbox{\Hypertarget{structgko_1_1batch_1_1preconditioner_1_1Jacobi_1_1parameters__type_a06ada09498ccd4f438aa5107d66d83e9}\label{structgko_1_1batch_1_1preconditioner_1_1Jacobi_1_1parameters__type_a06ada09498ccd4f438aa5107d66d83e9}} 
+\index{gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$::parameters\_type@{gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$::parameters\_type}!max\_block\_size@{max\_block\_size}}
+\index{max\_block\_size@{max\_block\_size}!gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$::parameters\_type@{gko::batch::preconditioner::Jacobi$<$ ValueType, IndexType $>$::parameters\_type}}
+\doxysubsubsection{\texorpdfstring{max\_block\_size}{max\_block\_size}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+\mbox{\hyperlink{namespacegko_a318c831e3fe269ba04c6ed8bf5a71073}{uint32}} \mbox{\hyperlink{classgko_1_1batch_1_1preconditioner_1_1Jacobi}{gko\+::batch\+::preconditioner\+::\+Jacobi}}$<$ Value\+Type, Index\+Type $>$\+::parameters\+\_\+type\+::max\+\_\+block\+\_\+size \{ 8u \}}
+
+
+
+Maximal size of diagonal blocks. 
+
+\begin{DoxyNote}{Note}
+This value has to be between 1 and 32 (N\+V\+I\+D\+IA)/64 (A\+MD). For efficiency, when the max\+\_\+block\+\_\+size is set to 1, specialized kernels are used and the additional objects (block\+\_\+ptrs etc) are set to null values.
+
+Unlike the regular block \mbox{\hyperlink{classgko_1_1batch_1_1preconditioner_1_1Jacobi}{Jacobi}} preconditioner, for the batched preconditioner, smaller blocks are more efficient, as the matrices themselves are considerably smaller. 
+\end{DoxyNote}
+
+
+Referenced by gko\+::batch\+::preconditioner\+::\+Jacobi$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+max\+\_\+block\+\_\+size().
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/preconditioner/batch\+\_\+jacobi.\+hpp\end{DoxyCompactItemize}

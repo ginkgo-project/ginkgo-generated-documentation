@@ -1,0 +1,58 @@
+\hypertarget{namespacegko_1_1solver_1_1multigrid}{}\doxysection{gko\+::solver\+::multigrid Namespace Reference}
+\label{namespacegko_1_1solver_1_1multigrid}\index{gko::solver::multigrid@{gko::solver::multigrid}}
+
+
+The solver multigrid namespace.  
+
+
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespacegko_1_1solver_1_1multigrid_a4f89fc8a003f879d4ff2f482c2fbab68}{cycle}} \{ {\bfseries v}, 
+{\bfseries f}, 
+{\bfseries w}
+ \}
+\begin{DoxyCompactList}\small\item\em cycle defines which kind of multigrid cycle can be used. \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{namespacegko_1_1solver_1_1multigrid_a24ab73573aae583623848c9bfaf0fddf}{mid\+\_\+smooth\+\_\+type}} \{ {\bfseries both}, 
+{\bfseries post\+\_\+smoother}, 
+{\bfseries pre\+\_\+smoother}, 
+{\bfseries standalone}
+ \}
+\begin{DoxyCompactList}\small\item\em mid\+\_\+smooth\+\_\+type gives the options to handle the middle smoother behavior between the two cycles in the same level. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The solver multigrid namespace. 
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{namespacegko_1_1solver_1_1multigrid_a4f89fc8a003f879d4ff2f482c2fbab68}\label{namespacegko_1_1solver_1_1multigrid_a4f89fc8a003f879d4ff2f482c2fbab68}} 
+\index{gko::solver::multigrid@{gko::solver::multigrid}!cycle@{cycle}}
+\index{cycle@{cycle}!gko::solver::multigrid@{gko::solver::multigrid}}
+\doxysubsubsection{\texorpdfstring{cycle}{cycle}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{namespacegko_1_1solver_1_1multigrid_a4f89fc8a003f879d4ff2f482c2fbab68}{gko\+::solver\+::multigrid\+::cycle}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+cycle defines which kind of multigrid cycle can be used. 
+
+It contains V, W, and F cycle.
+\begin{DoxyItemize}
+\item V, W cycle uses the algorithm according to Briggs, Henson, and Mc\+Cormick\+: A multigrid tutorial 2nd Edition.
+\item F cycle uses the algorithm according to Trottenberg, Oosterlee, and Schuller\+: \mbox{\hyperlink{classgko_1_1solver_1_1Multigrid}{Multigrid}} 1st Edition. F cycle first uses the recursive call but second uses the V-\/cycle call such that F-\/cycle is between V and W cycle. 
+\end{DoxyItemize}\mbox{\Hypertarget{namespacegko_1_1solver_1_1multigrid_a24ab73573aae583623848c9bfaf0fddf}\label{namespacegko_1_1solver_1_1multigrid_a24ab73573aae583623848c9bfaf0fddf}} 
+\index{gko::solver::multigrid@{gko::solver::multigrid}!mid\_smooth\_type@{mid\_smooth\_type}}
+\index{mid\_smooth\_type@{mid\_smooth\_type}!gko::solver::multigrid@{gko::solver::multigrid}}
+\doxysubsubsection{\texorpdfstring{mid\_smooth\_type}{mid\_smooth\_type}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{namespacegko_1_1solver_1_1multigrid_a24ab73573aae583623848c9bfaf0fddf}{gko\+::solver\+::multigrid\+::mid\+\_\+smooth\+\_\+type}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+mid\+\_\+smooth\+\_\+type gives the options to handle the middle smoother behavior between the two cycles in the same level. 
+
+It only affects the behavior when there\textquotesingle{}s no operation between the post smoother of previous cycle and the pre smoother of next cycle. Thus, it only affects W cycle and F cycle.
+\begin{DoxyItemize}
+\item both\+: gives the same behavior as the original algorithm, which use posts smoother from previous cycle and pre smoother from next cycle.
+\item post\+\_\+smoother\+: only uses the post smoother of previous cycle in the mid smoother
+\item pre\+\_\+smoother\+: only uses the pre smoother of next cycle in the mid smoother
+\item standalone\+: uses the defined smoother in the mid smoother 
+\end{DoxyItemize}
