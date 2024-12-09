@@ -1,0 +1,354 @@
+\hypertarget{classgko_1_1config_1_1pnode}{}\doxysection{gko\+::config\+::pnode Class Reference}
+\label{classgko_1_1config_1_1pnode}\index{gko::config::pnode@{gko::config::pnode}}
+
+
+pnode describes a tree of properties.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/config/property\+\_\+tree.\+hpp$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1config_1_1pnode_a2c068169721fba2785b0940c02b912bd}\label{classgko_1_1config_1_1pnode_a2c068169721fba2785b0940c02b912bd}} 
+enum \mbox{\hyperlink{classgko_1_1config_1_1pnode_a2c068169721fba2785b0940c02b912bd}{tag\+\_\+t}} \{ \newline
+{\bfseries empty}, 
+{\bfseries array}, 
+{\bfseries boolean}, 
+{\bfseries real}, 
+\newline
+{\bfseries integer}, 
+{\bfseries string}, 
+{\bfseries map}
+ \}
+\begin{DoxyCompactList}\small\item\em tag\+\_\+t is the indicator for the current node storage. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1config_1_1pnode_af2f281a73d02f8aa49048f400a2d575e}\label{classgko_1_1config_1_1pnode_af2f281a73d02f8aa49048f400a2d575e}} 
+using {\bfseries key\+\_\+type} = std\+::string
+\item 
+\mbox{\Hypertarget{classgko_1_1config_1_1pnode_add44525b7e4d23d5eb5616504c2434e5}\label{classgko_1_1config_1_1pnode_add44525b7e4d23d5eb5616504c2434e5}} 
+using {\bfseries map\+\_\+type} = std\+::map$<$ key\+\_\+type, \mbox{\hyperlink{classgko_1_1config_1_1pnode}{pnode}} $>$
+\item 
+\mbox{\Hypertarget{classgko_1_1config_1_1pnode_a047c7bf57107b7712f631cade0f0acb1}\label{classgko_1_1config_1_1pnode_a047c7bf57107b7712f631cade0f0acb1}} 
+using {\bfseries array\+\_\+type} = std\+::vector$<$ \mbox{\hyperlink{classgko_1_1config_1_1pnode}{pnode}} $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1config_1_1pnode_abdcb6d2251d263a0e6326af8d42fc770}\label{classgko_1_1config_1_1pnode_abdcb6d2251d263a0e6326af8d42fc770}} 
+\mbox{\hyperlink{classgko_1_1config_1_1pnode_abdcb6d2251d263a0e6326af8d42fc770}{pnode}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor\+: create an empty node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1config_1_1pnode_ab907633a3fc1886a3e200362302ddae6}{pnode}} (bool boolean)
+\begin{DoxyCompactList}\small\item\em Constructor for bool. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T , std\+::enable\+\_\+if\+\_\+t$<$ std\+::is\+\_\+integral$<$ T $>$\+::value $>$ $\ast$  = nullptr$>$ }\\\mbox{\hyperlink{classgko_1_1config_1_1pnode_a86eab8f09cb87a6f251560ad957d92ff}{pnode}} (T integer)
+\begin{DoxyCompactList}\small\item\em Constructor for integer with all integer type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1config_1_1pnode_ab279fc7dcff62ebdfc1fa0e9d389fa2e}{pnode}} (const std\+::string \&str)
+\begin{DoxyCompactList}\small\item\em Constructor for string. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1config_1_1pnode_adfdf9bd96663228ce27630f79fed3069}{pnode}} (const char $\ast$str)
+\begin{DoxyCompactList}\small\item\em Constructor for char$\ast$ (otherwise, it will use bool) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1config_1_1pnode_a9348847c0a14ef8904fd0e4a9759efad}{pnode}} (double \mbox{\hyperlink{namespacegko_af21648097306adbabc6234b4609ce297}{real}})
+\begin{DoxyCompactList}\small\item\em Constructor for double (and also float) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1config_1_1pnode_a34a8fa6b22496f805d9f06bac3f96cf6}{pnode}} (const array\+\_\+type \&\mbox{\hyperlink{classgko_1_1array}{array}})
+\begin{DoxyCompactList}\small\item\em Constructor for array. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1config_1_1pnode_a3b5eac91e5865801b16dd346b47fa0d2}{pnode}} (const map\+\_\+type \&map)
+\begin{DoxyCompactList}\small\item\em Constructor for map. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1config_1_1pnode_a5b4667cf028a343101da974d7bb6cead}{operator bool}} () const noexcept
+\begin{DoxyCompactList}\small\item\em bool conversion. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1config_1_1pnode_a2c068169721fba2785b0940c02b912bd}{tag\+\_\+t}} \mbox{\hyperlink{classgko_1_1config_1_1pnode_ab9e069d8947db51c15d1a68a0b1fa14f}{get\+\_\+tag}} () const
+\begin{DoxyCompactList}\small\item\em Get the current node tag. \end{DoxyCompactList}\item 
+const array\+\_\+type \& \mbox{\hyperlink{classgko_1_1config_1_1pnode_ac7ef1c0916b2fb12caf06eb73a039cf3}{get\+\_\+array}} () const
+\begin{DoxyCompactList}\small\item\em Access the array stored in this property node. \end{DoxyCompactList}\item 
+const map\+\_\+type \& \mbox{\hyperlink{classgko_1_1config_1_1pnode_a4d358e1638488c78cc304297831a5bbf}{get\+\_\+map}} () const
+\begin{DoxyCompactList}\small\item\em Access the map stored in this property node. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classgko_1_1config_1_1pnode_a47c8d2647021b0ea15841387db66f654}{get\+\_\+boolean}} () const
+\begin{DoxyCompactList}\small\item\em Access the boolean value stored in this property node. \end{DoxyCompactList}\item 
+std\+::int64\+\_\+t \mbox{\hyperlink{classgko_1_1config_1_1pnode_aed54bb5d0cac77934778c8a81e347652}{get\+\_\+integer}} () const
+\item 
+double \mbox{\hyperlink{classgko_1_1config_1_1pnode_a6a15e501427aec38f5950dce193ffdb9}{get\+\_\+real}} () const
+\begin{DoxyCompactList}\small\item\em Access the real floating point value stored in this property node. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classgko_1_1config_1_1pnode_a93f969ede6654bf0d557f1840f929f28}{get\+\_\+string}} () const
+\begin{DoxyCompactList}\small\item\em Access the string stored in this property node. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classgko_1_1config_1_1pnode}{pnode}} \& \mbox{\hyperlink{classgko_1_1config_1_1pnode_afdba5745934f441f3609ba61d18f35a9}{get}} (const std\+::string \&key) const
+\begin{DoxyCompactList}\small\item\em This function is to access the data under the map. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classgko_1_1config_1_1pnode}{pnode}} \& \mbox{\hyperlink{classgko_1_1config_1_1pnode_a50efea082f30e98dd7815a7d8e548ddf}{get}} (int index) const
+\begin{DoxyCompactList}\small\item\em This function is to access the data under the array. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+pnode describes a tree of properties. 
+
+A pnode can either be empty, hold a value (a string, integer, real, or bool), contain an array of pnode., or contain a mapping between strings and pnodes. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classgko_1_1config_1_1pnode_ab907633a3fc1886a3e200362302ddae6}\label{classgko_1_1config_1_1pnode_ab907633a3fc1886a3e200362302ddae6}} 
+\index{gko::config::pnode@{gko::config::pnode}!pnode@{pnode}}
+\index{pnode@{pnode}!gko::config::pnode@{gko::config::pnode}}
+\doxysubsubsection{\texorpdfstring{pnode()}{pnode()}\hspace{0.1cm}{\footnotesize\ttfamily [1/7]}}
+{\footnotesize\ttfamily gko\+::config\+::pnode\+::pnode (\begin{DoxyParamCaption}\item[{bool}]{boolean }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructor for bool. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em boolean} & the bool type value \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1config_1_1pnode_a86eab8f09cb87a6f251560ad957d92ff}\label{classgko_1_1config_1_1pnode_a86eab8f09cb87a6f251560ad957d92ff}} 
+\index{gko::config::pnode@{gko::config::pnode}!pnode@{pnode}}
+\index{pnode@{pnode}!gko::config::pnode@{gko::config::pnode}}
+\doxysubsubsection{\texorpdfstring{pnode()}{pnode()}\hspace{0.1cm}{\footnotesize\ttfamily [2/7]}}
+{\footnotesize\ttfamily template$<$typename T , std\+::enable\+\_\+if\+\_\+t$<$ std\+::is\+\_\+integral$<$ T $>$\+::value $>$ $\ast$ $>$ \\
+gko\+::config\+::pnode\+::pnode (\begin{DoxyParamCaption}\item[{T}]{integer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructor for integer with all integer type. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & input type\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em integer} & the integer type value \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1config_1_1pnode_ab279fc7dcff62ebdfc1fa0e9d389fa2e}\label{classgko_1_1config_1_1pnode_ab279fc7dcff62ebdfc1fa0e9d389fa2e}} 
+\index{gko::config::pnode@{gko::config::pnode}!pnode@{pnode}}
+\index{pnode@{pnode}!gko::config::pnode@{gko::config::pnode}}
+\doxysubsubsection{\texorpdfstring{pnode()}{pnode()}\hspace{0.1cm}{\footnotesize\ttfamily [3/7]}}
+{\footnotesize\ttfamily gko\+::config\+::pnode\+::pnode (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructor for string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & string type value \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1config_1_1pnode_adfdf9bd96663228ce27630f79fed3069}\label{classgko_1_1config_1_1pnode_adfdf9bd96663228ce27630f79fed3069}} 
+\index{gko::config::pnode@{gko::config::pnode}!pnode@{pnode}}
+\index{pnode@{pnode}!gko::config::pnode@{gko::config::pnode}}
+\doxysubsubsection{\texorpdfstring{pnode()}{pnode()}\hspace{0.1cm}{\footnotesize\ttfamily [4/7]}}
+{\footnotesize\ttfamily gko\+::config\+::pnode\+::pnode (\begin{DoxyParamCaption}\item[{const char $\ast$}]{str }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructor for char$\ast$ (otherwise, it will use bool) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & the string like \char`\"{}...\char`\"{} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1config_1_1pnode_a9348847c0a14ef8904fd0e4a9759efad}\label{classgko_1_1config_1_1pnode_a9348847c0a14ef8904fd0e4a9759efad}} 
+\index{gko::config::pnode@{gko::config::pnode}!pnode@{pnode}}
+\index{pnode@{pnode}!gko::config::pnode@{gko::config::pnode}}
+\doxysubsubsection{\texorpdfstring{pnode()}{pnode()}\hspace{0.1cm}{\footnotesize\ttfamily [5/7]}}
+{\footnotesize\ttfamily gko\+::config\+::pnode\+::pnode (\begin{DoxyParamCaption}\item[{double}]{real }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructor for double (and also float) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em real} & the floating point type value \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1config_1_1pnode_a34a8fa6b22496f805d9f06bac3f96cf6}\label{classgko_1_1config_1_1pnode_a34a8fa6b22496f805d9f06bac3f96cf6}} 
+\index{gko::config::pnode@{gko::config::pnode}!pnode@{pnode}}
+\index{pnode@{pnode}!gko::config::pnode@{gko::config::pnode}}
+\doxysubsubsection{\texorpdfstring{pnode()}{pnode()}\hspace{0.1cm}{\footnotesize\ttfamily [6/7]}}
+{\footnotesize\ttfamily gko\+::config\+::pnode\+::pnode (\begin{DoxyParamCaption}\item[{const array\+\_\+type \&}]{array }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructor for array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em array} & an pnode array \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1config_1_1pnode_a3b5eac91e5865801b16dd346b47fa0d2}\label{classgko_1_1config_1_1pnode_a3b5eac91e5865801b16dd346b47fa0d2}} 
+\index{gko::config::pnode@{gko::config::pnode}!pnode@{pnode}}
+\index{pnode@{pnode}!gko::config::pnode@{gko::config::pnode}}
+\doxysubsubsection{\texorpdfstring{pnode()}{pnode()}\hspace{0.1cm}{\footnotesize\ttfamily [7/7]}}
+{\footnotesize\ttfamily gko\+::config\+::pnode\+::pnode (\begin{DoxyParamCaption}\item[{const map\+\_\+type \&}]{map }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructor for map. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em map} & a (string, pnode)-\/map \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1config_1_1pnode_afdba5745934f441f3609ba61d18f35a9}\label{classgko_1_1config_1_1pnode_afdba5745934f441f3609ba61d18f35a9}} 
+\index{gko::config::pnode@{gko::config::pnode}!get@{get}}
+\index{get@{get}!gko::config::pnode@{gko::config::pnode}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classgko_1_1config_1_1pnode}{pnode}}\& gko\+::config\+::pnode\+::get (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key }\end{DoxyParamCaption}) const}
+
+
+
+This function is to access the data under the map. 
+
+It will throw error when it does not hold a map. When access non-\/existent key in the map, it will return an empty node.
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & the key for the node of the map\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+node. If the map does not have the key, return an empty node. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1config_1_1pnode_a50efea082f30e98dd7815a7d8e548ddf}\label{classgko_1_1config_1_1pnode_a50efea082f30e98dd7815a7d8e548ddf}} 
+\index{gko::config::pnode@{gko::config::pnode}!get@{get}}
+\index{get@{get}!gko::config::pnode@{gko::config::pnode}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classgko_1_1config_1_1pnode}{pnode}}\& gko\+::config\+::pnode\+::get (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption}) const}
+
+
+
+This function is to access the data under the array. 
+
+It will throw error when it does not hold an array or access out-\/of-\/bound index.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & the node index in array\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+node. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1config_1_1pnode_ac7ef1c0916b2fb12caf06eb73a039cf3}\label{classgko_1_1config_1_1pnode_ac7ef1c0916b2fb12caf06eb73a039cf3}} 
+\index{gko::config::pnode@{gko::config::pnode}!get\_array@{get\_array}}
+\index{get\_array@{get\_array}!gko::config::pnode@{gko::config::pnode}}
+\doxysubsubsection{\texorpdfstring{get\_array()}{get\_array()}}
+{\footnotesize\ttfamily const array\+\_\+type\& gko\+::config\+::pnode\+::get\+\_\+array (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Access the array stored in this property node. 
+
+Throws {\ttfamily \mbox{\hyperlink{classgko_1_1InvalidStateError}{gko\+::\+Invalid\+State\+Error}}} if the property node does not store an array.
+
+\begin{DoxyReturn}{Returns}
+the array 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1config_1_1pnode_a47c8d2647021b0ea15841387db66f654}\label{classgko_1_1config_1_1pnode_a47c8d2647021b0ea15841387db66f654}} 
+\index{gko::config::pnode@{gko::config::pnode}!get\_boolean@{get\_boolean}}
+\index{get\_boolean@{get\_boolean}!gko::config::pnode@{gko::config::pnode}}
+\doxysubsubsection{\texorpdfstring{get\_boolean()}{get\_boolean()}}
+{\footnotesize\ttfamily bool gko\+::config\+::pnode\+::get\+\_\+boolean (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Access the boolean value stored in this property node. 
+
+Throws {\ttfamily \mbox{\hyperlink{classgko_1_1InvalidStateError}{gko\+::\+Invalid\+State\+Error}}} if the property node does not store a boolean value.
+
+\begin{DoxyReturn}{Returns}
+the boolean value 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1config_1_1pnode_aed54bb5d0cac77934778c8a81e347652}\label{classgko_1_1config_1_1pnode_aed54bb5d0cac77934778c8a81e347652}} 
+\index{gko::config::pnode@{gko::config::pnode}!get\_integer@{get\_integer}}
+\index{get\_integer@{get\_integer}!gko::config::pnode@{gko::config::pnode}}
+\doxysubsubsection{\texorpdfstring{get\_integer()}{get\_integer()}}
+{\footnotesize\ttfamily std\+::int64\+\_\+t gko\+::config\+::pnode\+::get\+\_\+integer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+\begin{DoxyItemize}
+\item Access the integer value stored in this property node. Throws {\ttfamily \mbox{\hyperlink{classgko_1_1InvalidStateError}{gko\+::\+Invalid\+State\+Error}}} if the property node does not store an integer value.
+\end{DoxyItemize}
+
+\begin{DoxyReturn}{Returns}
+the integer value 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1config_1_1pnode_a4d358e1638488c78cc304297831a5bbf}\label{classgko_1_1config_1_1pnode_a4d358e1638488c78cc304297831a5bbf}} 
+\index{gko::config::pnode@{gko::config::pnode}!get\_map@{get\_map}}
+\index{get\_map@{get\_map}!gko::config::pnode@{gko::config::pnode}}
+\doxysubsubsection{\texorpdfstring{get\_map()}{get\_map()}}
+{\footnotesize\ttfamily const map\+\_\+type\& gko\+::config\+::pnode\+::get\+\_\+map (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Access the map stored in this property node. 
+
+Throws {\ttfamily \mbox{\hyperlink{classgko_1_1InvalidStateError}{gko\+::\+Invalid\+State\+Error}}} if the property node does not store a map.
+
+\begin{DoxyReturn}{Returns}
+the map 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1config_1_1pnode_a6a15e501427aec38f5950dce193ffdb9}\label{classgko_1_1config_1_1pnode_a6a15e501427aec38f5950dce193ffdb9}} 
+\index{gko::config::pnode@{gko::config::pnode}!get\_real@{get\_real}}
+\index{get\_real@{get\_real}!gko::config::pnode@{gko::config::pnode}}
+\doxysubsubsection{\texorpdfstring{get\_real()}{get\_real()}}
+{\footnotesize\ttfamily double gko\+::config\+::pnode\+::get\+\_\+real (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Access the real floating point value stored in this property node. 
+
+Throws {\ttfamily \mbox{\hyperlink{classgko_1_1InvalidStateError}{gko\+::\+Invalid\+State\+Error}}} if the property node does not store a real value
+
+\begin{DoxyReturn}{Returns}
+the real floating point value 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1config_1_1pnode_a93f969ede6654bf0d557f1840f929f28}\label{classgko_1_1config_1_1pnode_a93f969ede6654bf0d557f1840f929f28}} 
+\index{gko::config::pnode@{gko::config::pnode}!get\_string@{get\_string}}
+\index{get\_string@{get\_string}!gko::config::pnode@{gko::config::pnode}}
+\doxysubsubsection{\texorpdfstring{get\_string()}{get\_string()}}
+{\footnotesize\ttfamily const std\+::string\& gko\+::config\+::pnode\+::get\+\_\+string (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Access the string stored in this property node. 
+
+Throws {\ttfamily \mbox{\hyperlink{classgko_1_1InvalidStateError}{gko\+::\+Invalid\+State\+Error}}} if the property node does not store a string.
+
+\begin{DoxyReturn}{Returns}
+the string 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1config_1_1pnode_ab9e069d8947db51c15d1a68a0b1fa14f}\label{classgko_1_1config_1_1pnode_ab9e069d8947db51c15d1a68a0b1fa14f}} 
+\index{gko::config::pnode@{gko::config::pnode}!get\_tag@{get\_tag}}
+\index{get\_tag@{get\_tag}!gko::config::pnode@{gko::config::pnode}}
+\doxysubsubsection{\texorpdfstring{get\_tag()}{get\_tag()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classgko_1_1config_1_1pnode_a2c068169721fba2785b0940c02b912bd}{tag\+\_\+t}} gko\+::config\+::pnode\+::get\+\_\+tag (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the current node tag. 
+
+\begin{DoxyReturn}{Returns}
+the tag 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1config_1_1pnode_a5b4667cf028a343101da974d7bb6cead}\label{classgko_1_1config_1_1pnode_a5b4667cf028a343101da974d7bb6cead}} 
+\index{gko::config::pnode@{gko::config::pnode}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!gko::config::pnode@{gko::config::pnode}}
+\doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily gko\+::config\+::pnode\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [explicit]}, {\ttfamily [noexcept]}}
+
+
+
+bool conversion. 
+
+It\textquotesingle{}s true if and only if it is not empty. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/config/property\+\_\+tree.\+hpp\end{DoxyCompactItemize}

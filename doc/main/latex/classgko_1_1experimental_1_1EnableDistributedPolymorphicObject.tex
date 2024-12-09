@@ -1,0 +1,70 @@
+\hypertarget{classgko_1_1experimental_1_1EnableDistributedPolymorphicObject}{}\doxysection{gko\+::experimental\+::Enable\+Distributed\+Polymorphic\+Object$<$ Concrete\+Object, Polymorphic\+Base $>$ Class Template Reference}
+\label{classgko_1_1experimental_1_1EnableDistributedPolymorphicObject}\index{gko::experimental::EnableDistributedPolymorphicObject$<$ ConcreteObject, PolymorphicBase $>$@{gko::experimental::EnableDistributedPolymorphicObject$<$ ConcreteObject, PolymorphicBase $>$}}
+
+
+This mixin does the same as \mbox{\hyperlink{classgko_1_1EnablePolymorphicObject}{Enable\+Polymorphic\+Object}}, but for concrete types that are derived from \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1DistributedBase}{distributed\+::\+Distributed\+Base}}.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/distributed/polymorphic\+\_\+object.\+hpp$>$}
+
+
+
+Inheritance diagram for gko\+::experimental\+::Enable\+Distributed\+Polymorphic\+Object$<$ Concrete\+Object, Polymorphic\+Base $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1experimental_1_1EnableDistributedPolymorphicObject__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for gko\+::experimental\+::Enable\+Distributed\+Polymorphic\+Object$<$ Concrete\+Object, Polymorphic\+Base $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1experimental_1_1EnableDistributedPolymorphicObject__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Concrete\+Object, typename Polymorphic\+Base = Polymorphic\+Object$>$\newline
+class gko\+::experimental\+::\+Enable\+Distributed\+Polymorphic\+Object$<$ Concrete\+Object, Polymorphic\+Base $>$}
+
+This mixin does the same as \mbox{\hyperlink{classgko_1_1EnablePolymorphicObject}{Enable\+Polymorphic\+Object}}, but for concrete types that are derived from \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1DistributedBase}{distributed\+::\+Distributed\+Base}}. 
+
+\begin{DoxySeeAlso}{See also}
+Enable\+Polymporphic\+Object.
+\end{DoxySeeAlso}
+The following is a minimal example of a distributed \mbox{\hyperlink{classgko_1_1PolymorphicObject}{Polymorphic\+Object}}\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ \{c++\}}
+\DoxyCodeLine{\textcolor{keyword}{struct }MyObject : EnableDistributedPolymorphicObject<MyObject>,}
+\DoxyCodeLine{                  distributed::DistributedBase \{}
+\DoxyCodeLine{    MyObject(std::shared\_ptr<const Executor> exec, mpi::communicator comm)}
+\DoxyCodeLine{        : EnableDistributedPolymorphicObject<MyObject>(std::move(exec)),}
+\DoxyCodeLine{          distributed::DistributedBase(std::move(comm))}
+\DoxyCodeLine{    \{\}}
+\DoxyCodeLine{\};}
+\end{DoxyCode}
+
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Concrete\+Object} & the concrete type which is being implemented that is derived from \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1DistributedBase}{distributed\+::\+Distributed\+Base}} \mbox{[}C\+R\+TP parameter\mbox{]} \\
+\hline
+{\em Polymorphic\+Base} & parent of Concrete\+Object in the polymorphic hierarchy, has to be a subclass of polymorphic object \\
+\hline
+\end{DoxyTemplParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/distributed/polymorphic\+\_\+object.\+hpp\end{DoxyCompactItemize}
