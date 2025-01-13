@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1589998975 branch based on develop. Ginkgo version 1.10.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1622470878 branch based on develop. Ginkgo version 1.10.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -175,7 +175,7 @@ class gko::index_set&lt; IndexType &gt;</h3>
 <p>An index set class represents an ordered set of intervals. </p>
 <p>The index set contains subsets which store the starting and end points of a range, [a,b), storing the first index and one past the last index. As the index set only stores the end-points of ranges, it can be quite efficient in terms of storage.</p>
 <p>This class is particularly useful in storing continuous ranges. For example, consider the index set (1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 18, 19, 20, 21, 42). Instead of storing the entire array of indices, one can store intervals ([1,9), [10,13), [18,22), [42,43)), thereby only using half the storage.</p>
-<p>We store three arrays, one (subsets_begin) with the starting indices of the subsets in the index set, another (subsets_end) storing one index beyond the end indices of the subsets and the last (superset_cumulative_indices) storing the cumulative number of indices in the subsequent subsets with an initial zero which speeds up the querying. Additionally, the arrays conataining the range boundaries (subsets_begin, subsets_end) are stored in a sorted fashion.</p>
+<p>We store three arrays, one (subsets_begin) with the starting indices of the subsets in the index set, another (subsets_end) storing one index beyond the end indices of the subsets and the last (superset_cumulative_indices) storing the cumulative number of indices in the subsequent subsets with an initial zero which speeds up the querying. Additionally, the arrays containing the range boundaries (subsets_begin, subsets_end) are stored in a sorted fashion.</p>
 <p>Therefore the storage would look as follows</p>
 <blockquote class="doxtable">
 <p><a class="el" href="classgko_1_1index__set.html" title="An index set class represents an ordered set of intervals.">index_set</a> = (1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 18, 19, 20, 21, 42) subsets_begin = {1, 10, 18, 42} subsets_end = {9, 13, 22, 43} superset_cumulative_indices = {0, 8, 11, 15, 16} </p>
