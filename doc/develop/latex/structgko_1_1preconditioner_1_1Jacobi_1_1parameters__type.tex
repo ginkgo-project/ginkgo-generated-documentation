@@ -35,6 +35,9 @@ Collaboration diagram for gko\+::preconditioner\+::Jacobi$<$ Value\+Type, Index\
 \mbox{\Hypertarget{structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type_a5dc57e6bb91a7d284cef5218c576b798}\label{structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type_a5dc57e6bb91a7d284cef5218c576b798}} 
 {\footnotesize template$<$typename... Args$>$ }\\auto {\bfseries with\+\_\+block\+\_\+pointers} (Args \&\&... \+\_\+value) -\/$>$ std\+::decay\+\_\+t$<$ decltype($\ast$(this-\/$>$self()))$>$ \&
 \item 
+\mbox{\Hypertarget{structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type_af7e207f61638f863ada54fc5f045a5b4}\label{structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type_af7e207f61638f863ada54fc5f045a5b4}} 
+{\footnotesize template$<$typename... Args$>$ }\\auto {\bfseries with\+\_\+aggregate\+\_\+l1} (Args \&\&... \+\_\+value) -\/$>$ std\+::decay\+\_\+t$<$ decltype($\ast$(this-\/$>$self()))$>$ \&
+\item 
 \mbox{\Hypertarget{structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type_a4296ff044ae7cc9628ef1ff3caee94d2}\label{structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type_a4296ff044ae7cc9628ef1ff3caee94d2}} 
 {\footnotesize template$<$typename... Args$>$ }\\auto {\bfseries with\+\_\+storage\+\_\+optimization} (Args \&\&... \+\_\+value) -\/$>$ std\+::decay\+\_\+t$<$ decltype($\ast$(this-\/$>$self()))$>$ \&
 \item 
@@ -52,6 +55,8 @@ bool \mbox{\hyperlink{structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type_
 \begin{DoxyCompactList}\small\item\em {\ttfamily true} means it is known that the matrix given to this factory will be sorted first by row, then by column index, {\ttfamily false} means it is unknown or not sorted, so an additional sorting step will be performed during the preconditioner generation (it will not change the matrix given). \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classgko_1_1array}{gko\+::array}}$<$ index\+\_\+type $>$ \mbox{\hyperlink{structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type_ad90b07202f15b6cd5c649f6b61480053}{block\+\_\+pointers}} \{ nullptr \}
 \begin{DoxyCompactList}\small\item\em Starting (row / column) indexes of individual blocks. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type_afa467c5ec8491236cde56117b09cd821}{aggregate\+\_\+l1}} \{ false \}
+\begin{DoxyCompactList}\small\item\em Use L1 Jacboi, which is introduced in the paper A. \end{DoxyCompactList}\item 
 storage\+\_\+optimization\+\_\+type \mbox{\hyperlink{structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type_a51d0eec65f99d6dd5b0ebe5ba69390dd}{storage\+\_\+optimization}} \{ \mbox{\hyperlink{classgko_1_1precision__reduction}{precision\+\_\+reduction}}(0, 0) \}
 \begin{DoxyCompactList}\small\item\em The precisions to use for the blocks of the matrix. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{remove\+\_\+complex}}$<$ value\+\_\+type $>$ \mbox{\hyperlink{structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type_ad4fd0de7ce4d390584e947afb6d0ce73}{accuracy}} \{ static\+\_\+cast$<$\mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{remove\+\_\+complex}}$<$value\+\_\+type$>$$>$(1e-\/1) \}
@@ -83,7 +88,18 @@ The parameter represents the number of correct digits in the result of Jacobi\+:
 
 where {\ttfamily c} is some constant depending on the problem size and roundoff error and {\ttfamily dropout} the error introduced by disregarding off-\/diagonal elements.
 
-Larger values reduce the volume of memory transfer, but increase the error compared to using full precision storage. Thus, tuning the accuracy to a value as close as possible to {\ttfamily dropout} will result in optimal memory savings, while not degrading the quality of solution. \mbox{\Hypertarget{structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type_ad90b07202f15b6cd5c649f6b61480053}\label{structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type_ad90b07202f15b6cd5c649f6b61480053}} 
+Larger values reduce the volume of memory transfer, but increase the error compared to using full precision storage. Thus, tuning the accuracy to a value as close as possible to {\ttfamily dropout} will result in optimal memory savings, while not degrading the quality of solution. \mbox{\Hypertarget{structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type_afa467c5ec8491236cde56117b09cd821}\label{structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type_afa467c5ec8491236cde56117b09cd821}} 
+\index{gko::preconditioner::Jacobi$<$ ValueType, IndexType $>$::parameters\_type@{gko::preconditioner::Jacobi$<$ ValueType, IndexType $>$::parameters\_type}!aggregate\_l1@{aggregate\_l1}}
+\index{aggregate\_l1@{aggregate\_l1}!gko::preconditioner::Jacobi$<$ ValueType, IndexType $>$::parameters\_type@{gko::preconditioner::Jacobi$<$ ValueType, IndexType $>$::parameters\_type}}
+\doxysubsubsection{\texorpdfstring{aggregate\_l1}{aggregate\_l1}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+bool \mbox{\hyperlink{classgko_1_1preconditioner_1_1Jacobi}{gko\+::preconditioner\+::\+Jacobi}}$<$ Value\+Type, Index\+Type $>$\+::parameters\+\_\+type\+::aggregate\+\_\+l1 \{ false \}}
+
+
+
+Use L1 Jacboi, which is introduced in the paper A. 
+
+H. Baker et al. \char`\"{}\+Multigrid smoothers for ultraparallel computing.\char`\"{} This paper discusses this type of smoother with the following matrix property. $ A_{ii} \geq \theta \sum_{j \in \text{off diagonal block}} |A_{ij}|, \theta \geq 0 $ If it is true, it generates the preconditioner on A + Diag(sum\+\_\+\{k in off-\/diagonal block of i\} $\vert$\+A\+\_\+ik$\vert$) instead of A. We aggregate the absolute value of the entries with the same row in the off-\/diagonal block into the diagonal value. \mbox{\Hypertarget{structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type_ad90b07202f15b6cd5c649f6b61480053}\label{structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type_ad90b07202f15b6cd5c649f6b61480053}} 
 \index{gko::preconditioner::Jacobi$<$ ValueType, IndexType $>$::parameters\_type@{gko::preconditioner::Jacobi$<$ ValueType, IndexType $>$::parameters\_type}!block\_pointers@{block\_pointers}}
 \index{block\_pointers@{block\_pointers}!gko::preconditioner::Jacobi$<$ ValueType, IndexType $>$::parameters\_type@{gko::preconditioner::Jacobi$<$ ValueType, IndexType $>$::parameters\_type}}
 \doxysubsubsection{\texorpdfstring{block\_pointers}{block\_pointers}}
