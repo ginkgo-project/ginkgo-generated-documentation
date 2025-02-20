@@ -42,6 +42,8 @@ class \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1load__balance}{load\+\_\+bal
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1load__balance}{load\+\_\+balance}} is a \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1strategy__type}{strategy\+\_\+type}} which uses the load balance algorithm. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1merge__path}{merge\+\_\+path}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1merge__path}{merge\+\_\+path}} is a \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1strategy__type}{strategy\+\_\+type}} which uses the \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1merge__path}{merge\+\_\+path}} algorithm. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structgko_1_1matrix_1_1Csr_1_1permuting__reuse__info}{permuting\+\_\+reuse\+\_\+info}}
+\begin{DoxyCompactList}\small\item\em A struct describing a transformation of the matrix that reorders the values of the matrix into the transformed matrix. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1sparselib}{sparselib}}
 \begin{DoxyCompactList}\small\item\em sparselib is a \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1strategy__type}{strategy\+\_\+type}} which uses the sparselib csr. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1strategy__type}{strategy\+\_\+type}}
@@ -130,10 +132,16 @@ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbo
 \begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_a38820451af5424f18b767667f3067d72}{conj\+\_\+transpose}} () const override
 \begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the conjugate transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. \end{DoxyCompactList}\item 
+std\+::pair$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}} $>$, \mbox{\hyperlink{structgko_1_1matrix_1_1Csr_1_1permuting__reuse__info}{permuting\+\_\+reuse\+\_\+info}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_a9499f67061ef38ceed7a504a9dc1c66e}{transpose\+\_\+reuse}} () const
+\begin{DoxyCompactList}\small\item\em Computes the necessary data to update a transposed matrix from its original matrix. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_ab94a9c9f420e3348830eb54e0420bf5c}{permute}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Permutation}{Permutation}}$<$ index\+\_\+type $>$$>$ permutation, \mbox{\hyperlink{namespacegko_1_1matrix_ade1f3cdbf05032c2d681fa151de02972}{permute\+\_\+mode}} mode=\mbox{\hyperlink{namespacegko_1_1matrix_ade1f3cdbf05032c2d681fa151de02972afeca3c730601be7fd57f1f0b668b4637}{permute\+\_\+mode\+::symmetric}}) const
 \begin{DoxyCompactList}\small\item\em Creates a permuted copy $A\text{'}$ of this matrix $A$ with the given permutation $P$. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_ae8eefcb84b7dfd701d5d2029da89937d}{permute}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Permutation}{Permutation}}$<$ index\+\_\+type $>$$>$ row\+\_\+permutation, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Permutation}{Permutation}}$<$ index\+\_\+type $>$$>$ column\+\_\+permutation, bool invert=false) const
 \begin{DoxyCompactList}\small\item\em Creates a non-\/symmetrically permuted copy $A\text{'}$ of this matrix $A$ with the given row and column permutations $P$ and $Q$. \end{DoxyCompactList}\item 
+std\+::pair$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}} $>$, \mbox{\hyperlink{structgko_1_1matrix_1_1Csr_1_1permuting__reuse__info}{permuting\+\_\+reuse\+\_\+info}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_a8d57363fc4fef4c47623e13485f69f2d}{permute\+\_\+reuse}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Permutation}{Permutation}}$<$ index\+\_\+type $>$$>$ permutation, \mbox{\hyperlink{namespacegko_1_1matrix_ade1f3cdbf05032c2d681fa151de02972}{permute\+\_\+mode}} mode=\mbox{\hyperlink{namespacegko_1_1matrix_ade1f3cdbf05032c2d681fa151de02972afeca3c730601be7fd57f1f0b668b4637}{permute\+\_\+mode\+::symmetric}}) const
+\begin{DoxyCompactList}\small\item\em Computes the operations necessary to propagate changed values from a matrix A to a permuted matrix. \end{DoxyCompactList}\item 
+std\+::pair$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}} $>$, \mbox{\hyperlink{structgko_1_1matrix_1_1Csr_1_1permuting__reuse__info}{permuting\+\_\+reuse\+\_\+info}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_a8c1da9dcf5150467b7736a68985e2048}{permute\+\_\+reuse}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Permutation}{Permutation}}$<$ index\+\_\+type $>$$>$ row\+\_\+permutation, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Permutation}{Permutation}}$<$ index\+\_\+type $>$$>$ column\+\_\+permutation, bool invert=false) const
+\begin{DoxyCompactList}\small\item\em Computes the operations necessary to propagate changed values from a matrix A to a permuted matrix. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_ab7006dfb4ee87709dbcc2de20e58bfee}{scale\+\_\+permute}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1ScaledPermutation}{Scaled\+Permutation}}$<$ value\+\_\+type, index\+\_\+type $>$$>$ permutation, \mbox{\hyperlink{namespacegko_1_1matrix_ade1f3cdbf05032c2d681fa151de02972}{permute\+\_\+mode}}=\mbox{\hyperlink{namespacegko_1_1matrix_ade1f3cdbf05032c2d681fa151de02972afeca3c730601be7fd57f1f0b668b4637}{permute\+\_\+mode\+::symmetric}}) const
 \begin{DoxyCompactList}\small\item\em Creates a scaled and permuted copy of this matrix. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_ad02ee7c76319092dcda2ec38df6aaedf}{scale\+\_\+permute}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1ScaledPermutation}{Scaled\+Permutation}}$<$ value\+\_\+type, index\+\_\+type $>$$>$ row\+\_\+permutation, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1ScaledPermutation}{Scaled\+Permutation}}$<$ value\+\_\+type, index\+\_\+type $>$$>$ column\+\_\+permutation, bool invert=false) const
@@ -167,6 +175,12 @@ value\+\_\+type $\ast$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_a929b0a194e6ae
 \begin{DoxyCompactList}\small\item\em Returns the values of the matrix. \end{DoxyCompactList}\item 
 const value\+\_\+type $\ast$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_a1801347665214bbefc837b44ba0695ff}{get\+\_\+const\+\_\+values}} () const noexcept
 \begin{DoxyCompactList}\small\item\em Returns the values of the matrix. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_a0d0d9156aca5ad4a798514dc7b681bb3}\label{classgko_1_1matrix_1_1Csr_a0d0d9156aca5ad4a798514dc7b681bb3}} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ Value\+Type $>$ $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_a0d0d9156aca5ad4a798514dc7b681bb3}{create\+\_\+value\+\_\+view}} ()
+\begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} view of the value array of this matrix as a column vector of dimensions nnz x 1. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_ad04a2728c3b95bea98fc49e9ae9c237b}\label{classgko_1_1matrix_1_1Csr_ad04a2728c3b95bea98fc49e9ae9c237b}} 
+std\+::unique\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ Value\+Type $>$ $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_ad04a2728c3b95bea98fc49e9ae9c237b}{create\+\_\+const\+\_\+value\+\_\+view}} () const
+\begin{DoxyCompactList}\small\item\em Creates a const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} view of the value array of this matrix as a column vector of dimensions nnz x 1. \end{DoxyCompactList}\item 
 index\+\_\+type $\ast$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_a81c6294177a1be4873804c8a85a9fc64}{get\+\_\+col\+\_\+idxs}} () noexcept
 \begin{DoxyCompactList}\small\item\em Returns the column indexes of the matrix. \end{DoxyCompactList}\item 
 const index\+\_\+type $\ast$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_ac9d640d26449e0ee46c7cb2b80100d65}{get\+\_\+const\+\_\+col\+\_\+idxs}} () const noexcept
@@ -986,6 +1000,62 @@ The operation will compute $A\text{'}(i, j) = A(p[i], q[j])$, or $A\text{'} = P 
 \begin{DoxyReturn}{Returns}
 The permuted matrix. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_a8d57363fc4fef4c47623e13485f69f2d}\label{classgko_1_1matrix_1_1Csr_a8d57363fc4fef4c47623e13485f69f2d}} 
+\index{gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}!permute\_reuse@{permute\_reuse}}
+\index{permute\_reuse@{permute\_reuse}!gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{permute\_reuse()}{permute\_reuse()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+std\+::pair$<$std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}}$>$, \mbox{\hyperlink{structgko_1_1matrix_1_1Csr_1_1permuting__reuse__info}{permuting\+\_\+reuse\+\_\+info}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko\+::matrix\+::\+Csr}}$<$ Value\+Type, Index\+Type $>$\+::permute\+\_\+reuse (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Permutation}{Permutation}}$<$ index\+\_\+type $>$$>$}]{permutation,  }\item[{\mbox{\hyperlink{namespacegko_1_1matrix_ade1f3cdbf05032c2d681fa151de02972}{permute\+\_\+mode}}}]{mode = {\ttfamily \mbox{\hyperlink{namespacegko_1_1matrix_ade1f3cdbf05032c2d681fa151de02972afeca3c730601be7fd57f1f0b668b4637}{permute\+\_\+mode\+::symmetric}}} }\end{DoxyParamCaption}) const}
+
+
+
+Computes the operations necessary to propagate changed values from a matrix A to a permuted matrix. 
+
+The semantics of this function match those of permute(ptr\+\_\+param$<$const Permutation$<$index\+\_\+type$>$$>$, permute\+\_\+mode). Updating values works as follows\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} [permuted, reuse] = matrix-\/>permute\_reuse(permutation, \mbox{\hyperlink{group__stop_ga5fe97c4263e876f68b5d4a21f0e615b9}{mode}});}
+\DoxyCodeLine{change\_values(matrix);}
+\DoxyCodeLine{reuse-\/>update\_values(matrix, permuted);}
+\end{DoxyCode}
+ 
+\begin{DoxyParams}{Parameters}
+{\em permutation} & The input permutation. \\
+\hline
+{\em mode} & The permutation mode. If \mbox{\hyperlink{namespacegko_1_1matrix_ade1f3cdbf05032c2d681fa151de02972aa91c78e040f7b9d158f381e197f8beb4}{permute\+\_\+mode\+::inverse}} is set, we use the inverse permutation $P^{-1}$ instead of $P$. If \mbox{\hyperlink{namespacegko_1_1matrix_ade1f3cdbf05032c2d681fa151de02972adf347a373b8f92aa0ae3dd920a5ec2f6}{permute\+\_\+mode\+::rows}} is set, the rows will be permuted. If \mbox{\hyperlink{namespacegko_1_1matrix_ade1f3cdbf05032c2d681fa151de02972a54ca84a794888fe8d92834787dfa935a}{permute\+\_\+mode\+::columns}} is set, the columns will be permuted. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+an std\+::pair consisting of the permuted matrix and the reuse info that can be used to update values in the permuted matrix. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_a8c1da9dcf5150467b7736a68985e2048}\label{classgko_1_1matrix_1_1Csr_a8c1da9dcf5150467b7736a68985e2048}} 
+\index{gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}!permute\_reuse@{permute\_reuse}}
+\index{permute\_reuse@{permute\_reuse}!gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{permute\_reuse()}{permute\_reuse()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+std\+::pair$<$std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}}$>$, \mbox{\hyperlink{structgko_1_1matrix_1_1Csr_1_1permuting__reuse__info}{permuting\+\_\+reuse\+\_\+info}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko\+::matrix\+::\+Csr}}$<$ Value\+Type, Index\+Type $>$\+::permute\+\_\+reuse (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Permutation}{Permutation}}$<$ index\+\_\+type $>$$>$}]{row\+\_\+permutation,  }\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Permutation}{Permutation}}$<$ index\+\_\+type $>$$>$}]{column\+\_\+permutation,  }\item[{bool}]{invert = {\ttfamily false} }\end{DoxyParamCaption}) const}
+
+
+
+Computes the operations necessary to propagate changed values from a matrix A to a permuted matrix. 
+
+The semantics of this function match those of permute(\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$const Permutation$<$index\+\_\+type$>$$>$, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$const Permutation$<$index\+\_\+type$>$$>$, bool). Updating values works as follows\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} [permuted, reuse] = matrix-\/>permute\_reuse(row\_perm, col\_perm, inv);}
+\DoxyCodeLine{change\_values(matrix);}
+\DoxyCodeLine{reuse-\/>update\_values(matrix, permuted);}
+\end{DoxyCode}
+ 
+\begin{DoxyParams}{Parameters}
+{\em row\+\_\+permutation} & The permutation $P$ to apply to the rows \\
+\hline
+{\em column\+\_\+permutation} & The permutation $Q$ to apply to the columns \\
+\hline
+{\em invert} & If set to {\ttfamily false}, uses the input permutations, otherwise uses their inverses $P^{-1}, Q^{-1}$ \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+an std\+::pair consisting of the permuted matrix and the reuse info that can be used to update values in the permuted matrix. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_a446d7ff64347297601c8e65e82d19b80}\label{classgko_1_1matrix_1_1Csr_a446d7ff64347297601c8e65e82d19b80}} 
 \index{gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}!read@{read}}
 \index{read@{read}!gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}}
@@ -1177,6 +1247,26 @@ a pointer to the new transposed object
 
 Implements \mbox{\hyperlink{classgko_1_1Transposable_a5c6b778b71b47d53e0bda6ccf894d318}{gko\+::\+Transposable}}.
 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_a9499f67061ef38ceed7a504a9dc1c66e}\label{classgko_1_1matrix_1_1Csr_a9499f67061ef38ceed7a504a9dc1c66e}} 
+\index{gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}!transpose\_reuse@{transpose\_reuse}}
+\index{transpose\_reuse@{transpose\_reuse}!gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{transpose\_reuse()}{transpose\_reuse()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+std\+::pair$<$std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}}$>$, \mbox{\hyperlink{structgko_1_1matrix_1_1Csr_1_1permuting__reuse__info}{permuting\+\_\+reuse\+\_\+info}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko\+::matrix\+::\+Csr}}$<$ Value\+Type, Index\+Type $>$\+::transpose\+\_\+reuse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Computes the necessary data to update a transposed matrix from its original matrix. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} [transposed, reuse] = matrix-\/>transpose\_reuse();}
+\DoxyCodeLine{change\_values(matrix);}
+\DoxyCodeLine{reuse-\/>update\_values(matrix, transposed);}
+\end{DoxyCode}
+ \begin{DoxyReturn}{Returns}
+the reuse info struct that can be used to update values in the transposed matrix. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_a205fc391f4cf4f7718a55b0a61f62bc9}\label{classgko_1_1matrix_1_1Csr_a205fc391f4cf4f7718a55b0a61f62bc9}} 
 \index{gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}!write@{write}}
 \index{write@{write}!gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}}
