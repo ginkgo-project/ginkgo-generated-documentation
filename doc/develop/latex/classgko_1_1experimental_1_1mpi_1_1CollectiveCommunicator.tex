@@ -1,0 +1,172 @@
+\hypertarget{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator}{}\doxysection{gko\+::experimental\+::mpi\+::Collective\+Communicator Class Reference}
+\label{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator}\index{gko::experimental::mpi::CollectiveCommunicator@{gko::experimental::mpi::CollectiveCommunicator}}
+
+
+Interface for a collective communicator.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/distributed/collective\+\_\+communicator.\+hpp$>$}
+
+
+
+Inheritance diagram for gko\+::experimental\+::mpi\+::Collective\+Communicator\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_aaf9ed066272d6065dff755ae2c772427}\label{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_aaf9ed066272d6065dff755ae2c772427}} 
+{\bfseries Collective\+Communicator} (\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}} base=M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+N\+U\+LL)
+\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_a3eca5840969622ffc026a573ab461c1e}\label{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_a3eca5840969622ffc026a573ab461c1e}} 
+const \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}} \& {\bfseries get\+\_\+base\+\_\+communicator} () const
+\item 
+{\footnotesize template$<$typename Send\+Type , typename Recv\+Type $>$ }\\\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_a94f644ab6d92ef607f82de7092a56056}{i\+\_\+all\+\_\+to\+\_\+all\+\_\+v}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const Send\+Type $\ast$send\+\_\+buffer, Recv\+Type $\ast$recv\+\_\+buffer) const
+\begin{DoxyCompactList}\small\item\em Non-\/blocking all-\/to-\/all communication. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_a8be792dac2b7d4df3f1524bbf0b5e625}{i\+\_\+all\+\_\+to\+\_\+all\+\_\+v}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const void $\ast$send\+\_\+buffer, M\+P\+I\+\_\+\+Datatype send\+\_\+type, void $\ast$recv\+\_\+buffer, M\+P\+I\+\_\+\+Datatype recv\+\_\+type) const
+\item 
+virtual std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator}{Collective\+Communicator}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_a1ebc70927cb96af7a14fae8baa1f4e11}{create\+\_\+with\+\_\+same\+\_\+type}} (\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}} base, const distributed\+::index\+\_\+map\+\_\+variant \&imap) const =0
+\begin{DoxyCompactList}\small\item\em Creates a new \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator}{Collective\+Communicator}} with the same dynamic type. \end{DoxyCompactList}\item 
+virtual std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator}{Collective\+Communicator}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_a001a2ba8a80a25dd3987b06ee48371b6}{create\+\_\+inverse}} () const =0
+\begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator}{Collective\+Communicator}} with the inverse communication pattern than this object. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a660817949d982b397475164bec730900}{comm\+\_\+index\+\_\+type}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_a77b426c85c3cdada3cd3936c7e5e1e19}{get\+\_\+recv\+\_\+size}} () const =0
+\begin{DoxyCompactList}\small\item\em Get the total number of received elements this communication patterns expects. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a660817949d982b397475164bec730900}{comm\+\_\+index\+\_\+type}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_ad96f20bbe51b403a08819f27d3be53bf}{get\+\_\+send\+\_\+size}} () const =0
+\begin{DoxyCompactList}\small\item\em Get the total number of sent elements this communication patterns expects. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interface for a collective communicator. 
+
+A collective communicator only provides routines for collective communications. At the moment this is restricted to the variable all-\/to-\/all. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_a001a2ba8a80a25dd3987b06ee48371b6}\label{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_a001a2ba8a80a25dd3987b06ee48371b6}} 
+\index{gko::experimental::mpi::CollectiveCommunicator@{gko::experimental::mpi::CollectiveCommunicator}!create\_inverse@{create\_inverse}}
+\index{create\_inverse@{create\_inverse}!gko::experimental::mpi::CollectiveCommunicator@{gko::experimental::mpi::CollectiveCommunicator}}
+\doxysubsubsection{\texorpdfstring{create\_inverse()}{create\_inverse()}}
+{\footnotesize\ttfamily virtual std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator}{Collective\+Communicator}}$>$ gko\+::experimental\+::mpi\+::\+Collective\+Communicator\+::create\+\_\+inverse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Creates a \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator}{Collective\+Communicator}} with the inverse communication pattern than this object. 
+
+\begin{DoxyReturn}{Returns}
+a \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator}{Collective\+Communicator}} with the inverse communication pattern. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1NeighborhoodCommunicator_a31073b1941ac0415aee5004cc9f94766}{gko\+::experimental\+::mpi\+::\+Neighborhood\+Communicator}}, and \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1DenseCommunicator_a479f0511e6201074f5d5fc17a91ae9a6}{gko\+::experimental\+::mpi\+::\+Dense\+Communicator}}.
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_a1ebc70927cb96af7a14fae8baa1f4e11}\label{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_a1ebc70927cb96af7a14fae8baa1f4e11}} 
+\index{gko::experimental::mpi::CollectiveCommunicator@{gko::experimental::mpi::CollectiveCommunicator}!create\_with\_same\_type@{create\_with\_same\_type}}
+\index{create\_with\_same\_type@{create\_with\_same\_type}!gko::experimental::mpi::CollectiveCommunicator@{gko::experimental::mpi::CollectiveCommunicator}}
+\doxysubsubsection{\texorpdfstring{create\_with\_same\_type()}{create\_with\_same\_type()}}
+{\footnotesize\ttfamily virtual std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator}{Collective\+Communicator}}$>$ gko\+::experimental\+::mpi\+::\+Collective\+Communicator\+::create\+\_\+with\+\_\+same\+\_\+type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}}}]{base,  }\item[{const distributed\+::index\+\_\+map\+\_\+variant \&}]{imap }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Creates a new \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator}{Collective\+Communicator}} with the same dynamic type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & The base communicator \\
+\hline
+{\em imap} & The index\+\_\+map that defines the communication pattern\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator}{Collective\+Communicator}} with the same dynamic type 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1NeighborhoodCommunicator_a820c5d301611c6f2a9e663c0e1530bf4}{gko\+::experimental\+::mpi\+::\+Neighborhood\+Communicator}}, and \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1DenseCommunicator_a231b5806942784ea8e7822cfc544617d}{gko\+::experimental\+::mpi\+::\+Dense\+Communicator}}.
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_a77b426c85c3cdada3cd3936c7e5e1e19}\label{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_a77b426c85c3cdada3cd3936c7e5e1e19}} 
+\index{gko::experimental::mpi::CollectiveCommunicator@{gko::experimental::mpi::CollectiveCommunicator}!get\_recv\_size@{get\_recv\_size}}
+\index{get\_recv\_size@{get\_recv\_size}!gko::experimental::mpi::CollectiveCommunicator@{gko::experimental::mpi::CollectiveCommunicator}}
+\doxysubsubsection{\texorpdfstring{get\_recv\_size()}{get\_recv\_size()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a660817949d982b397475164bec730900}{comm\+\_\+index\+\_\+type}} gko\+::experimental\+::mpi\+::\+Collective\+Communicator\+::get\+\_\+recv\+\_\+size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Get the total number of received elements this communication patterns expects. 
+
+\begin{DoxyReturn}{Returns}
+number of received elements. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1NeighborhoodCommunicator_a885ed4e93933ee39d85537ab202dba76}{gko\+::experimental\+::mpi\+::\+Neighborhood\+Communicator}}, and \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1DenseCommunicator_a42ea7976b0f0294326e452cc39fecb63}{gko\+::experimental\+::mpi\+::\+Dense\+Communicator}}.
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_ad96f20bbe51b403a08819f27d3be53bf}\label{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_ad96f20bbe51b403a08819f27d3be53bf}} 
+\index{gko::experimental::mpi::CollectiveCommunicator@{gko::experimental::mpi::CollectiveCommunicator}!get\_send\_size@{get\_send\_size}}
+\index{get\_send\_size@{get\_send\_size}!gko::experimental::mpi::CollectiveCommunicator@{gko::experimental::mpi::CollectiveCommunicator}}
+\doxysubsubsection{\texorpdfstring{get\_send\_size()}{get\_send\_size()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a660817949d982b397475164bec730900}{comm\+\_\+index\+\_\+type}} gko\+::experimental\+::mpi\+::\+Collective\+Communicator\+::get\+\_\+send\+\_\+size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Get the total number of sent elements this communication patterns expects. 
+
+\begin{DoxyReturn}{Returns}
+number of sent elements. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1NeighborhoodCommunicator_ad032c76b8a0aecc5f0113efab3326a39}{gko\+::experimental\+::mpi\+::\+Neighborhood\+Communicator}}, and \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1DenseCommunicator_a69f783c216c743560b9b92c143770648}{gko\+::experimental\+::mpi\+::\+Dense\+Communicator}}.
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_a94f644ab6d92ef607f82de7092a56056}\label{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_a94f644ab6d92ef607f82de7092a56056}} 
+\index{gko::experimental::mpi::CollectiveCommunicator@{gko::experimental::mpi::CollectiveCommunicator}!i\_all\_to\_all\_v@{i\_all\_to\_all\_v}}
+\index{i\_all\_to\_all\_v@{i\_all\_to\_all\_v}!gko::experimental::mpi::CollectiveCommunicator@{gko::experimental::mpi::CollectiveCommunicator}}
+\doxysubsubsection{\texorpdfstring{i\_all\_to\_all\_v()}{i\_all\_to\_all\_v()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Send\+Type , typename Recv\+Type $>$ \\
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} gko\+::experimental\+::mpi\+::\+Collective\+Communicator\+::i\+\_\+all\+\_\+to\+\_\+all\+\_\+v (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const Send\+Type $\ast$}]{send\+\_\+buffer,  }\item[{Recv\+Type $\ast$}]{recv\+\_\+buffer }\end{DoxyParamCaption}) const}
+
+
+
+Non-\/blocking all-\/to-\/all communication. 
+
+The send\+\_\+buffer must have allocated at least get\+\_\+send\+\_\+size number of elements, and the recv\+\_\+buffer must have allocated at least get\+\_\+recv\+\_\+size number of elements.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Send\+Type} & the type of the elements to send \\
+\hline
+{\em Recv\+Type} & the type of the elements to receive\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & the executor for the communication \\
+\hline
+{\em send\+\_\+buffer} & the send buffer \\
+\hline
+{\em recv\+\_\+buffer} & the receive buffer\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a request handle 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_a8be792dac2b7d4df3f1524bbf0b5e625}\label{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_a8be792dac2b7d4df3f1524bbf0b5e625}} 
+\index{gko::experimental::mpi::CollectiveCommunicator@{gko::experimental::mpi::CollectiveCommunicator}!i\_all\_to\_all\_v@{i\_all\_to\_all\_v}}
+\index{i\_all\_to\_all\_v@{i\_all\_to\_all\_v}!gko::experimental::mpi::CollectiveCommunicator@{gko::experimental::mpi::CollectiveCommunicator}}
+\doxysubsubsection{\texorpdfstring{i\_all\_to\_all\_v()}{i\_all\_to\_all\_v()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} gko\+::experimental\+::mpi\+::\+Collective\+Communicator\+::i\+\_\+all\+\_\+to\+\_\+all\+\_\+v (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const void $\ast$}]{send\+\_\+buffer,  }\item[{M\+P\+I\+\_\+\+Datatype}]{send\+\_\+type,  }\item[{void $\ast$}]{recv\+\_\+buffer,  }\item[{M\+P\+I\+\_\+\+Datatype}]{recv\+\_\+type }\end{DoxyParamCaption}) const}
+
+
+
+
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/distributed/collective\+\_\+communicator.\+hpp\end{DoxyCompactItemize}
