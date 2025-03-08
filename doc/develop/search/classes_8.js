@@ -10,7 +10,7 @@ var searchData=
   ['imbalance_5fbounded_5flimit_2280',['imbalance_bounded_limit',['../classgko_1_1matrix_1_1Hybrid_1_1imbalance__bounded__limit.html',1,'gko::matrix::Hybrid']]],
   ['imbalance_5flimit_2281',['imbalance_limit',['../classgko_1_1matrix_1_1Hybrid_1_1imbalance__limit.html',1,'gko::matrix::Hybrid']]],
   ['implicitresidualnorm_2282',['ImplicitResidualNorm',['../classgko_1_1stop_1_1ImplicitResidualNorm.html',1,'gko::stop']]],
-  ['index_5fmap_2283',['index_map',['../structgko_1_1experimental_1_1distributed_1_1index__map.html',1,'gko::experimental::distributed']]],
+  ['index_5fmap_2283',['index_map',['../classgko_1_1experimental_1_1distributed_1_1index__map.html',1,'gko::experimental::distributed']]],
   ['index_5fset_2284',['index_set',['../classgko_1_1index__set.html',1,'gko']]],
   ['invalidstateerror_2285',['InvalidStateError',['../classgko_1_1InvalidStateError.html',1,'gko']]],
   ['ir_2286',['Ir',['../classgko_1_1solver_1_1Ir.html',1,'gko::solver']]],
