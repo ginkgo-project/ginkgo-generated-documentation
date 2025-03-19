@@ -28,6 +28,9 @@ auto {\bfseries with\+\_\+local\+\_\+solver} (\+::\mbox{\hyperlink{classgko_1_1d
 \item 
 \mbox{\Hypertarget{structgko_1_1experimental_1_1distributed_1_1preconditioner_1_1Schwarz_1_1parameters__type_ac1573f683f07a0147bb2a43065b13bd0}\label{structgko_1_1experimental_1_1distributed_1_1preconditioner_1_1Schwarz_1_1parameters__type_ac1573f683f07a0147bb2a43065b13bd0}} 
 {\footnotesize template$<$typename... Args$>$ }\\auto {\bfseries with\+\_\+generated\+\_\+local\+\_\+solver} (Args \&\&... \+\_\+value) -\/$>$ std\+::decay\+\_\+t$<$ decltype($\ast$(this-\/$>$self()))$>$ \&
+\item 
+\mbox{\Hypertarget{structgko_1_1experimental_1_1distributed_1_1preconditioner_1_1Schwarz_1_1parameters__type_a56eb42534f546f1ea7957e500b3e71d2}\label{structgko_1_1experimental_1_1distributed_1_1preconditioner_1_1Schwarz_1_1parameters__type_a56eb42534f546f1ea7957e500b3e71d2}} 
+{\footnotesize template$<$typename... Args$>$ }\\auto {\bfseries with\+\_\+l1\+\_\+smoother} (Args \&\&... \+\_\+value) -\/$>$ std\+::decay\+\_\+t$<$ decltype($\ast$(this-\/$>$self()))$>$ \&
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -37,9 +40,25 @@ std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOpFactory}{Lin\+
 \begin{DoxyCompactList}\small\item\em Local solver factory. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{structgko_1_1experimental_1_1distributed_1_1preconditioner_1_1Schwarz_1_1parameters__type_a6fb14b36a6cfc1b42e98ab01bfac9e08}\label{structgko_1_1experimental_1_1distributed_1_1preconditioner_1_1Schwarz_1_1parameters__type_a6fb14b36a6cfc1b42e98ab01bfac9e08}} 
 std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{structgko_1_1experimental_1_1distributed_1_1preconditioner_1_1Schwarz_1_1parameters__type_a6fb14b36a6cfc1b42e98ab01bfac9e08}{generated\+\_\+local\+\_\+solver}} \{ nullptr \}
-\begin{DoxyCompactList}\small\item\em Generated Inner solvers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Generated Inner solvers. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structgko_1_1experimental_1_1distributed_1_1preconditioner_1_1Schwarz_1_1parameters__type_ac3dc2f0edd0a79f9d6acca15ecca96e6}{l1\+\_\+smoother}} \{ false \}
+\begin{DoxyCompactList}\small\item\em Enable l1 smoother. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{structgko_1_1experimental_1_1distributed_1_1preconditioner_1_1Schwarz_1_1parameters__type_ac3dc2f0edd0a79f9d6acca15ecca96e6}\label{structgko_1_1experimental_1_1distributed_1_1preconditioner_1_1Schwarz_1_1parameters__type_ac3dc2f0edd0a79f9d6acca15ecca96e6}} 
+\index{gko::experimental::distributed::preconditioner::Schwarz$<$ ValueType, LocalIndexType, GlobalIndexType $>$::parameters\_type@{gko::experimental::distributed::preconditioner::Schwarz$<$ ValueType, LocalIndexType, GlobalIndexType $>$::parameters\_type}!l1\_smoother@{l1\_smoother}}
+\index{l1\_smoother@{l1\_smoother}!gko::experimental::distributed::preconditioner::Schwarz$<$ ValueType, LocalIndexType, GlobalIndexType $>$::parameters\_type@{gko::experimental::distributed::preconditioner::Schwarz$<$ ValueType, LocalIndexType, GlobalIndexType $>$::parameters\_type}}
+\doxysubsubsection{\texorpdfstring{l1\_smoother}{l1\_smoother}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Local\+Index\+Type  = int32, typename Global\+Index\+Type  = int64$>$ \\
+bool \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1preconditioner_1_1Schwarz}{gko\+::experimental\+::distributed\+::preconditioner\+::\+Schwarz}}$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$\+::parameters\+\_\+type\+::l1\+\_\+smoother \{ false \}}
+
+
+
+Enable l1 smoother. 
+
+This creates a diagonal matrix from the row-\/wise absolute sum of the non-\/local matrix entries. The diagonal matrix is then added to the system matrix when generating the local solver. 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['_7econtiguous_5ftype_3151',['~contiguous_type',['../classgko_1_1experimental_1_1mpi_1_1contiguous__type.html#ad1bdbefc51419efd8b43d9085f5537c4',1,'gko::experimental::mpi::contiguous_type']]],
-  ['_7ecuda_5fstream_3152',['~cuda_stream',['../classgko_1_1cuda__stream.html#a5a6c6243d4370032a018b8ed4eb49378',1,'gko::cuda_stream']]],
-  ['_7eenvironment_3153',['~environment',['../classgko_1_1experimental_1_1mpi_1_1environment.html#a08ffaad353e8a90f5c23f5a1867a225c',1,'gko::experimental::mpi::environment']]],
-  ['_7ehip_5fstream_3154',['~hip_stream',['../classgko_1_1hip__stream.html#ae66a34d15d251ab942af982d409a8e93',1,'gko::hip_stream']]],
-  ['_7eprofiling_5fscope_5fguard_3155',['~profiling_scope_guard',['../classgko_1_1log_1_1profiling__scope__guard.html#abadc621495dd5fe8ecf1c4b3d065dd87',1,'gko::log::profiling_scope_guard']]],
-  ['_7erange_3156',['~range',['../classgko_1_1range.html#a8c8f2ca9dcaf25ca52fbf21fc7bb8a94',1,'gko::range']]],
-  ['_7ewindow_3157',['~window',['../classgko_1_1experimental_1_1mpi_1_1window.html#a1f4a86eb7b1289e7580a92191f4ed2fe',1,'gko::experimental::mpi::window']]]
+  ['_7econtiguous_5ftype_3152',['~contiguous_type',['../classgko_1_1experimental_1_1mpi_1_1contiguous__type.html#ad1bdbefc51419efd8b43d9085f5537c4',1,'gko::experimental::mpi::contiguous_type']]],
+  ['_7ecuda_5fstream_3153',['~cuda_stream',['../classgko_1_1cuda__stream.html#a5a6c6243d4370032a018b8ed4eb49378',1,'gko::cuda_stream']]],
+  ['_7eenvironment_3154',['~environment',['../classgko_1_1experimental_1_1mpi_1_1environment.html#a08ffaad353e8a90f5c23f5a1867a225c',1,'gko::experimental::mpi::environment']]],
+  ['_7ehip_5fstream_3155',['~hip_stream',['../classgko_1_1hip__stream.html#ae66a34d15d251ab942af982d409a8e93',1,'gko::hip_stream']]],
+  ['_7eprofiling_5fscope_5fguard_3156',['~profiling_scope_guard',['../classgko_1_1log_1_1profiling__scope__guard.html#abadc621495dd5fe8ecf1c4b3d065dd87',1,'gko::log::profiling_scope_guard']]],
+  ['_7erange_3157',['~range',['../classgko_1_1range.html#a8c8f2ca9dcaf25ca52fbf21fc7bb8a94',1,'gko::range']]],
+  ['_7ewindow_3158',['~window',['../classgko_1_1experimental_1_1mpi_1_1window.html#a1f4a86eb7b1289e7580a92191f4ed2fe',1,'gko::experimental::mpi::window']]]
 ];
