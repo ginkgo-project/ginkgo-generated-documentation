@@ -38,6 +38,9 @@ using {\bfseries value\+\_\+type} = Value\+Type
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Coo_ab7f7b99f477cfb086298104cf90105d2}\label{classgko_1_1matrix_1_1Coo_ab7f7b99f477cfb086298104cf90105d2}} 
 using {\bfseries index\+\_\+type} = Index\+Type
 \item 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Coo_abb30abcce2a2e2ff3ae32b5b5eef7a1a}\label{classgko_1_1matrix_1_1Coo_abb30abcce2a2e2ff3ae32b5b5eef7a1a}} 
+using {\bfseries transposed\+\_\+type} = \mbox{\hyperlink{classgko_1_1matrix_1_1Coo}{Coo}}$<$ Value\+Type, Index\+Type $>$
+\item 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Coo_a52198fe6654bd0a2bec566a65bdc60ac}\label{classgko_1_1matrix_1_1Coo_a52198fe6654bd0a2bec566a65bdc60ac}} 
 using {\bfseries mat\+\_\+data} = \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}}$<$ Value\+Type, Index\+Type $>$
 \item 
@@ -76,6 +79,10 @@ void \mbox{\hyperlink{classgko_1_1matrix_1_1Coo_a464f133eebf917eb59241497f1ea510
 \begin{DoxyCompactList}\small\item\em Reads a matrix from a \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} structure. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classgko_1_1matrix_1_1Coo_ae193466ca1a4a3c7d1383ddc5a2701ab}{write}} (\mbox{\hyperlink{structgko_1_1matrix__data}{mat\+\_\+data}} \&data) const override
 \begin{DoxyCompactList}\small\item\em Writes a matrix to a \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} structure. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Coo_ae6533c08c7f818d3bdd80b2871784dab}{transpose}} () const override
+\begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Coo_ac1d91c524ca616b4c9e5f2a62f3f55ce}{conj\+\_\+transpose}} () const override
+\begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the conjugate transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal}{Diagonal}}$<$ Value\+Type $>$ $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Coo_a718eae56f6939543529ad5522d2d14e5}{extract\+\_\+diagonal}} () const override
 \begin{DoxyCompactList}\small\item\em Extracts the diagonal entries of the matrix into a vector. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ absolute\+\_\+type $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Coo_ab79b7f7b81b279774dd15edbd98965f1}{compute\+\_\+absolute}} () const override
@@ -245,6 +252,24 @@ a pointer to the new absolute object
 
 
 Implements \mbox{\hyperlink{classgko_1_1EnableAbsoluteComputation_ac30ab2b34bfa3e28e3324cb46f5f030a}{gko\+::\+Enable\+Absolute\+Computation$<$ remove\+\_\+complex$<$ Coo$<$ Value\+Type, Index\+Type $>$ $>$ $>$}}.
+
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Coo_ac1d91c524ca616b4c9e5f2a62f3f55ce}\label{classgko_1_1matrix_1_1Coo_ac1d91c524ca616b4c9e5f2a62f3f55ce}} 
+\index{gko::matrix::Coo$<$ ValueType, IndexType $>$@{gko::matrix::Coo$<$ ValueType, IndexType $>$}!conj\_transpose@{conj\_transpose}}
+\index{conj\_transpose@{conj\_transpose}!gko::matrix::Coo$<$ ValueType, IndexType $>$@{gko::matrix::Coo$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{conj\_transpose()}{conj\_transpose()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Coo}{gko\+::matrix\+::\+Coo}}$<$ Value\+Type, Index\+Type $>$\+::conj\+\_\+transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the conjugate transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. 
+
+\begin{DoxyReturn}{Returns}
+a pointer to the new conjugate transposed object 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classgko_1_1Transposable_ab41b669288740cf2a6f7bf76e875b077}{gko\+::\+Transposable}}.
 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Coo_af407c7748bc2e7ee171534e9a9692f64}\label{classgko_1_1matrix_1_1Coo_af407c7748bc2e7ee171534e9a9692f64}} 
 \index{gko::matrix::Coo$<$ ValueType, IndexType $>$@{gko::matrix::Coo$<$ ValueType, IndexType $>$}!create@{create}}
@@ -559,6 +584,24 @@ The structure may be emptied by this function.
 
 
 Reimplemented from \mbox{\hyperlink{classgko_1_1ReadableFromMatrixData_a0fcdcdbef5e8d673bf19f5d5ab7afb45}{gko\+::\+Readable\+From\+Matrix\+Data$<$ Value\+Type, Index\+Type $>$}}.
+
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Coo_ae6533c08c7f818d3bdd80b2871784dab}\label{classgko_1_1matrix_1_1Coo_ae6533c08c7f818d3bdd80b2871784dab}} 
+\index{gko::matrix::Coo$<$ ValueType, IndexType $>$@{gko::matrix::Coo$<$ ValueType, IndexType $>$}!transpose@{transpose}}
+\index{transpose@{transpose}!gko::matrix::Coo$<$ ValueType, IndexType $>$@{gko::matrix::Coo$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{transpose()}{transpose()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Coo}{gko\+::matrix\+::\+Coo}}$<$ Value\+Type, Index\+Type $>$\+::transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. 
+
+\begin{DoxyReturn}{Returns}
+a pointer to the new transposed object 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classgko_1_1Transposable_a5c6b778b71b47d53e0bda6ccf894d318}{gko\+::\+Transposable}}.
 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Coo_ae193466ca1a4a3c7d1383ddc5a2701ab}\label{classgko_1_1matrix_1_1Coo_ae193466ca1a4a3c7d1383ddc5a2701ab}} 
 \index{gko::matrix::Coo$<$ ValueType, IndexType $>$@{gko::matrix::Coo$<$ ValueType, IndexType $>$}!write@{write}}
