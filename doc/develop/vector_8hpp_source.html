@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1803687126 branch based on develop. Ginkgo version 1.10.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1805905577 branch based on develop. Ginkgo version 1.10.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -116,268 +116,290 @@ $(function() {
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    : <span class="keyword">public</span> EnableLinOp&lt;Vector&lt;ValueType&gt;&gt;,</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;      <span class="keyword">public</span> ConvertibleTo&lt;Vector&lt;next_precision&lt;ValueType&gt;&gt;&gt;,</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor">#if GINKGO_ENABLE_HALF || GINKGO_ENABLE_BFLOAT16</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;      <span class="keyword">public</span> ConvertibleTo&lt;Vector&lt;next_precision&lt;next_precision&lt;ValueType&gt;&gt;&gt;&gt;,</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;      <span class="keyword">public</span> ConvertibleTo&lt;Vector&lt;next_precision&lt;ValueType, 2&gt;&gt;&gt;,</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;      <span class="keyword">public</span> EnableAbsoluteComputation&lt;remove_complex&lt;Vector&lt;ValueType&gt;&gt;&gt;,</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      <span class="keyword">public</span> DistributedBase {</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>EnablePolymorphicObject&lt;Vector, <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>&gt;;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>Vector&lt;<a class="code" href="namespacegko.html#acc281c8ff5bfa4fd6f25afcce466b1af">to_complex</a>&lt;ValueType&gt;&gt;;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>Vector&lt;<a class="code" href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">remove_complex</a>&lt;ValueType&gt;&gt;;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>Vector&lt;previous_precision&lt;ValueType&gt;&gt;;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>detail::VectorCache&lt;ValueType&gt;;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keyword">using</span> <a class="code" href="classgko_1_1EnablePolymorphicAssignment.html#a6b7e6872e96084636f8ab5091063ada8">EnableLinOp&lt;Vector&gt;::convert_to</a>;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keyword">using</span> <a class="code" href="classgko_1_1EnablePolymorphicAssignment.html#a0a4cf244139e7761d6a91c61e029810e">EnableLinOp&lt;Vector&gt;::move_to</a>;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keyword">using</span> ConvertibleTo&lt;Vector&lt;next_precision&lt;ValueType&gt;&gt;&gt;::convert_to;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keyword">using</span> ConvertibleTo&lt;Vector&lt;next_precision&lt;ValueType&gt;&gt;&gt;::move_to;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keyword">using</span> value_type = ValueType;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keyword">using</span> absolute_type = remove_complex&lt;Vector&gt;;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keyword">using</span> real_type = absolute_type;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keyword">using</span> complex_type = Vector&lt;to_complex&lt;value_type&gt;&gt;;</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keyword">using</span> local_vector_type = <a class="code" href="classgko_1_1matrix_1_1Dense.html">gko::matrix::Dense&lt;value_type&gt;</a>;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;Vector&gt; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#ab1c5e032b1b919f402193d649bddfb36">create_with_config_of</a>(</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        ptr_param&lt;const Vector&gt; other);</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;Vector&gt; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#aa4dae5f422965b9808689fba27ea6d73">create_with_type_of</a>(</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        ptr_param&lt;const Vector&gt; other, std::shared_ptr&lt;const Executor&gt; exec);</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;Vector&gt; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#aa4dae5f422965b9808689fba27ea6d73">create_with_type_of</a>(</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        ptr_param&lt;const Vector&gt; other, std::shared_ptr&lt;const Executor&gt; exec,</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        <span class="keyword">const</span> dim&lt;2&gt;&amp; global_size, <span class="keyword">const</span> dim&lt;2&gt;&amp; local_size, <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> stride);</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a5d1d813f5e44851fb7f4a080d8fa7758">read_distributed</a>(<span class="keyword">const</span> device_matrix_data&lt;ValueType, int64&gt;&amp; data,</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                          ptr_param&lt;<span class="keyword">const</span> Partition&lt;int64, int64&gt;&gt; partition);</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">#if GINKGO_ENABLE_HALF &amp;&amp; GINKGO_ENABLE_BFLOAT16</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      <span class="keyword">public</span> ConvertibleTo&lt;Vector&lt;next_precision&lt;ValueType, 3&gt;&gt;&gt;,</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;      <span class="keyword">public</span> EnableAbsoluteComputation&lt;remove_complex&lt;Vector&lt;ValueType&gt;&gt;&gt;,</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;      <span class="keyword">public</span> DistributedBase {</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>EnablePolymorphicObject&lt;Vector, <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>&gt;;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>Vector&lt;<a class="code" href="namespacegko.html#acc281c8ff5bfa4fd6f25afcce466b1af">to_complex</a>&lt;ValueType&gt;&gt;;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>Vector&lt;<a class="code" href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">remove_complex</a>&lt;ValueType&gt;&gt;;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>Vector&lt;<a class="code" href="namespacegko.html#a5c244b670709748bb8af2bf462f4d4b1">previous_precision</a>&lt;ValueType&gt;&gt;;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>detail::VectorCache&lt;ValueType&gt;;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keyword">using</span> <a class="code" href="classgko_1_1EnablePolymorphicAssignment.html#a6b7e6872e96084636f8ab5091063ada8">EnableLinOp&lt;Vector&gt;::convert_to</a>;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keyword">using</span> <a class="code" href="classgko_1_1EnablePolymorphicAssignment.html#a0a4cf244139e7761d6a91c61e029810e">EnableLinOp&lt;Vector&gt;::move_to</a>;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keyword">using</span> ConvertibleTo&lt;Vector&lt;next_precision&lt;ValueType&gt;&gt;&gt;::convert_to;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keyword">using</span> ConvertibleTo&lt;Vector&lt;next_precision&lt;ValueType&gt;&gt;&gt;::move_to;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keyword">using</span> value_type = ValueType;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keyword">using</span> absolute_type = remove_complex&lt;Vector&gt;;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keyword">using</span> real_type = absolute_type;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keyword">using</span> complex_type = Vector&lt;to_complex&lt;value_type&gt;&gt;;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keyword">using</span> local_vector_type = <a class="code" href="classgko_1_1matrix_1_1Dense.html">gko::matrix::Dense&lt;value_type&gt;</a>;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;Vector&gt; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#ab1c5e032b1b919f402193d649bddfb36">create_with_config_of</a>(</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        ptr_param&lt;const Vector&gt; other);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;Vector&gt; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#aa4dae5f422965b9808689fba27ea6d73">create_with_type_of</a>(</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        ptr_param&lt;const Vector&gt; other, std::shared_ptr&lt;const Executor&gt; exec);</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;Vector&gt; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#aa4dae5f422965b9808689fba27ea6d73">create_with_type_of</a>(</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        ptr_param&lt;const Vector&gt; other, std::shared_ptr&lt;const Executor&gt; exec,</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        <span class="keyword">const</span> dim&lt;2&gt;&amp; global_size, <span class="keyword">const</span> dim&lt;2&gt;&amp; local_size, <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> stride);</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a5d1d813f5e44851fb7f4a080d8fa7758">read_distributed</a>(<span class="keyword">const</span> device_matrix_data&lt;ValueType, int64&gt;&amp; data,</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                          ptr_param&lt;<span class="keyword">const</span> Partition&lt;int32, int64&gt;&gt; partition);</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                          ptr_param&lt;<span class="keyword">const</span> Partition&lt;int64, int64&gt;&gt; partition);</div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a5d1d813f5e44851fb7f4a080d8fa7758">read_distributed</a>(<span class="keyword">const</span> device_matrix_data&lt;ValueType, int32&gt;&amp; data,</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                          ptr_param&lt;<span class="keyword">const</span> Partition&lt;int32, int32&gt;&gt; partition);</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a5d1d813f5e44851fb7f4a080d8fa7758">read_distributed</a>(<span class="keyword">const</span> device_matrix_data&lt;ValueType, int64&gt;&amp; data,</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                          ptr_param&lt;<span class="keyword">const</span> Partition&lt;int32, int64&gt;&gt; partition);</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a5d1d813f5e44851fb7f4a080d8fa7758">read_distributed</a>(<span class="keyword">const</span> matrix_data&lt;ValueType, int64&gt;&amp; data,</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                          ptr_param&lt;<span class="keyword">const</span> Partition&lt;int64, int64&gt;&gt; partition);</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160; </div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a5d1d813f5e44851fb7f4a080d8fa7758">read_distributed</a>(<span class="keyword">const</span> device_matrix_data&lt;ValueType, int32&gt;&amp; data,</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                          ptr_param&lt;<span class="keyword">const</span> Partition&lt;int32, int32&gt;&gt; partition);</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a5d1d813f5e44851fb7f4a080d8fa7758">read_distributed</a>(<span class="keyword">const</span> matrix_data&lt;ValueType, int64&gt;&amp; data,</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;                          ptr_param&lt;<span class="keyword">const</span> Partition&lt;int32, int64&gt;&gt; partition);</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;                          ptr_param&lt;<span class="keyword">const</span> Partition&lt;int64, int64&gt;&gt; partition);</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a5d1d813f5e44851fb7f4a080d8fa7758">read_distributed</a>(<span class="keyword">const</span> matrix_data&lt;ValueType, int32&gt;&amp; data,</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                          ptr_param&lt;<span class="keyword">const</span> Partition&lt;int32, int32&gt;&gt; partition);</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a5d1d813f5e44851fb7f4a080d8fa7758">read_distributed</a>(<span class="keyword">const</span> matrix_data&lt;ValueType, int64&gt;&amp; data,</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                          ptr_param&lt;<span class="keyword">const</span> Partition&lt;int32, int64&gt;&gt; partition);</div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    <span class="keywordtype">void</span> convert_to(Vector&lt;next_precision&lt;ValueType&gt;&gt;* result) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    <span class="keywordtype">void</span> move_to(Vector&lt;next_precision&lt;ValueType&gt;&gt;* result) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="preprocessor">#if GINKGO_ENABLE_HALF || GINKGO_ENABLE_BFLOAT16</span></div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>Vector&lt;previous_precision&lt;previous_precision&lt;ValueType&gt;&gt;&gt;;</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <span class="keyword">using</span> ConvertibleTo&lt;</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        Vector&lt;next_precision&lt;next_precision&lt;ValueType&gt;&gt;&gt;&gt;::convert_to;</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    <span class="keyword">using</span> ConvertibleTo&lt;</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        Vector&lt;next_precision&lt;next_precision&lt;ValueType&gt;&gt;&gt;&gt;::move_to;</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; </div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    <span class="keywordtype">void</span> convert_to(Vector&lt;<a class="code" href="namespacegko.html#a5c7eb99ec1a77c39fbf93b828d6b3775">next_precision</a>&lt;next_precision&lt;ValueType&gt;&gt;&gt;* result)</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    <span class="keywordtype">void</span> move_to(</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        Vector&lt;<a class="code" href="namespacegko.html#a5c7eb99ec1a77c39fbf93b828d6b3775">next_precision</a>&lt;next_precision&lt;ValueType&gt;&gt;&gt;* result) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a5d1d813f5e44851fb7f4a080d8fa7758">read_distributed</a>(<span class="keyword">const</span> matrix_data&lt;ValueType, int32&gt;&amp; data,</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                          ptr_param&lt;<span class="keyword">const</span> Partition&lt;int32, int32&gt;&gt; partition);</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    <span class="keywordtype">void</span> convert_to(Vector&lt;next_precision&lt;ValueType&gt;&gt;* result) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    <span class="keywordtype">void</span> move_to(Vector&lt;next_precision&lt;ValueType&gt;&gt;* result) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="preprocessor">#if GINKGO_ENABLE_HALF || GINKGO_ENABLE_BFLOAT16</span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>Vector&lt;<a class="code" href="namespacegko.html#a5c244b670709748bb8af2bf462f4d4b1">previous_precision</a>&lt;ValueType, 2&gt;&gt;;</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    <span class="keyword">using</span> ConvertibleTo&lt;Vector&lt;next_precision&lt;ValueType, 2&gt;&gt;&gt;::convert_to;</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <span class="keyword">using</span> ConvertibleTo&lt;Vector&lt;next_precision&lt;ValueType, 2&gt;&gt;&gt;::move_to;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; </div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    <span class="keywordtype">void</span> convert_to(</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        Vector&lt;next_precision&lt;ValueType, 2&gt;&gt;* result) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    <span class="keywordtype">void</span> move_to(Vector&lt;next_precision&lt;ValueType, 2&gt;&gt;* result) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    std::unique_ptr&lt;absolute_type&gt; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#abe6d3d10b64daa03cf4ee6f58f85a3a8">compute_absolute</a>() <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a7c24911b281d56382a2c280e2cb8019e">compute_absolute_inplace</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    std::unique_ptr&lt;complex_type&gt; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a2a8809174a9af544112dab0c899c6764">make_complex</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a2a8809174a9af544112dab0c899c6764">make_complex</a>(ptr_param&lt;complex_type&gt; result) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; </div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    std::unique_ptr&lt;real_type&gt; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a63d5979607cee954beaf75818c655638">get_real</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160; </div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a63d5979607cee954beaf75818c655638">get_real</a>(ptr_param&lt;real_type&gt; result) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="preprocessor">#if GINKGO_ENABLE_HALF &amp;&amp; GINKGO_ENABLE_BFLOAT16</span></div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <span class="keyword">friend</span> <span class="keyword">class </span>Vector&lt;<a class="code" href="namespacegko.html#a5c244b670709748bb8af2bf462f4d4b1">previous_precision</a>&lt;ValueType, 3&gt;&gt;;</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    <span class="keyword">using</span> ConvertibleTo&lt;Vector&lt;next_precision&lt;ValueType, 3&gt;&gt;&gt;::convert_to;</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <span class="keyword">using</span> ConvertibleTo&lt;Vector&lt;next_precision&lt;ValueType, 3&gt;&gt;&gt;::move_to;</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160; </div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <span class="keywordtype">void</span> convert_to(</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;        Vector&lt;next_precision&lt;ValueType, 3&gt;&gt;* result) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    <span class="keywordtype">void</span> move_to(Vector&lt;next_precision&lt;ValueType, 3&gt;&gt;* result) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    std::unique_ptr&lt;absolute_type&gt; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#abe6d3d10b64daa03cf4ee6f58f85a3a8">compute_absolute</a>() <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160; </div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a7c24911b281d56382a2c280e2cb8019e">compute_absolute_inplace</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    std::unique_ptr&lt;complex_type&gt; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a2a8809174a9af544112dab0c899c6764">make_complex</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160; </div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a2a8809174a9af544112dab0c899c6764">make_complex</a>(ptr_param&lt;complex_type&gt; result) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160; </div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    std::unique_ptr&lt;real_type&gt; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a30630eadd1c09a8a0a387ba8cca82f07">get_imag</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    std::unique_ptr&lt;real_type&gt; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a63d5979607cee954beaf75818c655638">get_real</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160; </div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a30630eadd1c09a8a0a387ba8cca82f07">get_imag</a>(ptr_param&lt;real_type&gt; result) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160; </div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a4a172e7b6b6088918e0c7f8070d43204">fill</a>(ValueType value);</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160; </div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#ad5e5752219717ff7360e48b794f86b3e">scale</a>(ptr_param&lt;const LinOp&gt; alpha);</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a63d5979607cee954beaf75818c655638">get_real</a>(ptr_param&lt;real_type&gt; result) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160; </div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    std::unique_ptr&lt;real_type&gt; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a30630eadd1c09a8a0a387ba8cca82f07">get_imag</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160; </div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a30630eadd1c09a8a0a387ba8cca82f07">get_imag</a>(ptr_param&lt;real_type&gt; result) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160; </div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a4a172e7b6b6088918e0c7f8070d43204">fill</a>(ValueType value);</div>
 <div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160; </div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#abda3edba7d097804468a7bfddd38e70f">inv_scale</a>(ptr_param&lt;const LinOp&gt; alpha);</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#ad5e5752219717ff7360e48b794f86b3e">scale</a>(ptr_param&lt;const LinOp&gt; alpha);</div>
 <div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160; </div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#acdafd131787d7c74478000ef8fdd82b8">add_scaled</a>(ptr_param&lt;const LinOp&gt; alpha, ptr_param&lt;const LinOp&gt; b);</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#abda3edba7d097804468a7bfddd38e70f">inv_scale</a>(ptr_param&lt;const LinOp&gt; alpha);</div>
 <div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; </div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a7ff7ccd5ebf9042bf7840767032551f5">sub_scaled</a>(ptr_param&lt;const LinOp&gt; alpha, ptr_param&lt;const LinOp&gt; b);</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160; </div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a81adfd6cfe1c585d60d65d95842bcf6a">compute_dot</a>(ptr_param&lt;const LinOp&gt; b, ptr_param&lt;LinOp&gt; result) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#acdafd131787d7c74478000ef8fdd82b8">add_scaled</a>(ptr_param&lt;const LinOp&gt; alpha, ptr_param&lt;const LinOp&gt; b);</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; </div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a7ff7ccd5ebf9042bf7840767032551f5">sub_scaled</a>(ptr_param&lt;const LinOp&gt; alpha, ptr_param&lt;const LinOp&gt; b);</div>
 <div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160; </div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a81adfd6cfe1c585d60d65d95842bcf6a">compute_dot</a>(ptr_param&lt;const LinOp&gt; b, ptr_param&lt;LinOp&gt; result,</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;                     array&lt;char&gt;&amp; tmp) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160; </div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a72ebeb082d05afea0fb30cfc0aaf3b30">compute_conj_dot</a>(ptr_param&lt;const LinOp&gt; b,</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;                          ptr_param&lt;LinOp&gt; result) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160; </div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a72ebeb082d05afea0fb30cfc0aaf3b30">compute_conj_dot</a>(ptr_param&lt;const LinOp&gt; b, ptr_param&lt;LinOp&gt; result,</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;                          array&lt;char&gt;&amp; tmp) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160; </div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a7e9df98ba640deae6e9c3a73aff8074d">compute_squared_norm2</a>(ptr_param&lt;LinOp&gt; result) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160; </div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a7e9df98ba640deae6e9c3a73aff8074d">compute_squared_norm2</a>(ptr_param&lt;LinOp&gt; result, array&lt;char&gt;&amp; tmp) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160; </div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a1703cac44dc1591cafdd0a576cd55dbd">compute_norm2</a>(ptr_param&lt;LinOp&gt; result) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160; </div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a1703cac44dc1591cafdd0a576cd55dbd">compute_norm2</a>(ptr_param&lt;LinOp&gt; result, array&lt;char&gt;&amp; tmp) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160; </div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a95f68c957368afb25de478336dd3d615">compute_norm1</a>(ptr_param&lt;LinOp&gt; result) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160; </div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a95f68c957368afb25de478336dd3d615">compute_norm1</a>(ptr_param&lt;LinOp&gt; result, array&lt;char&gt;&amp; tmp) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160; </div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a0b682993b33f1686d6b81477d2f05a5e">compute_mean</a>(ptr_param&lt;LinOp&gt; result) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160; </div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a0b682993b33f1686d6b81477d2f05a5e">compute_mean</a>(ptr_param&lt;LinOp&gt; result, array&lt;char&gt;&amp; tmp) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160; </div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;    value_type&amp; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a288283b486deb8f0a58dc43148f1693f">at_local</a>(<a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> row, <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> col) noexcept;</div>
-<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160; </div>
-<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;    value_type <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a288283b486deb8f0a58dc43148f1693f">at_local</a>(<a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> row, <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> col) <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160; </div>
-<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;    ValueType&amp; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a288283b486deb8f0a58dc43148f1693f">at_local</a>(<a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> idx) noexcept;</div>
-<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160; </div>
-<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;    ValueType <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a288283b486deb8f0a58dc43148f1693f">at_local</a>(<a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> idx) <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160; </div>
-<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;    value_type* <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a32a197154b41fce09fad1c7134173f13">get_local_values</a>();</div>
-<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160; </div>
-<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;    <span class="keyword">const</span> value_type* <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#afd7eb388cd72dedee2bcdc9e0203b0ff">get_const_local_values</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160; </div>
-<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;    <span class="keyword">const</span> local_vector_type* <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a2ef33f89c7a1534920127fe3fb696b11">get_local_vector</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160; </div>
-<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;    std::unique_ptr&lt;const real_type&gt; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a345106d2a9b53d85bd93c7733d633dd0">create_real_view</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160; </div>
-<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;    std::unique_ptr&lt;real_type&gt; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a345106d2a9b53d85bd93c7733d633dd0">create_real_view</a>();</div>
-<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160; </div>
-<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;    <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> get_stride() const noexcept { <span class="keywordflow">return</span> local_.<a class="code" href="classgko_1_1matrix_1_1Dense.html#a8c1b220b9b9292893d9be22d632a9a0e">get_stride</a>(); }</div>
-<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160; </div>
-<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;Vector&gt; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a38e53776a4d12312089c63a55b771df2">create</a>(std::shared_ptr&lt;const Executor&gt; exec,</div>
-<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;                                          mpi::communicator comm,</div>
-<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;                                          dim&lt;2&gt; global_size, dim&lt;2&gt; local_size,</div>
-<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;                                          <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> stride);</div>
-<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160; </div>
-<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;Vector&gt; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a38e53776a4d12312089c63a55b771df2">create</a>(std::shared_ptr&lt;const Executor&gt; exec,</div>
-<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;                                          mpi::communicator comm,</div>
-<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;                                          dim&lt;2&gt; global_size = {},</div>
-<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;                                          dim&lt;2&gt; local_size = {});</div>
-<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160; </div>
-<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;Vector&gt; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a38e53776a4d12312089c63a55b771df2">create</a>(</div>
-<div class="line"><a name="l00553"></a><span class="lineno">  553</span>&#160;        std::shared_ptr&lt;const Executor&gt; exec, mpi::communicator comm,</div>
-<div class="line"><a name="l00554"></a><span class="lineno">  554</span>&#160;        dim&lt;2&gt; global_size, std::unique_ptr&lt;local_vector_type&gt; local_vector);</div>
-<div class="line"><a name="l00555"></a><span class="lineno">  555</span>&#160; </div>
-<div class="line"><a name="l00574"></a><span class="lineno">  574</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;Vector&gt; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a38e53776a4d12312089c63a55b771df2">create</a>(</div>
-<div class="line"><a name="l00575"></a><span class="lineno">  575</span>&#160;        std::shared_ptr&lt;const Executor&gt; exec, mpi::communicator comm,</div>
-<div class="line"><a name="l00576"></a><span class="lineno">  576</span>&#160;        std::unique_ptr&lt;local_vector_type&gt; local_vector);</div>
-<div class="line"><a name="l00577"></a><span class="lineno">  577</span>&#160; </div>
-<div class="line"><a name="l00590"></a><span class="lineno">  590</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;const Vector&gt; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a7873a23454ad8f968159c32f6c9d01a1">create_const</a>(</div>
-<div class="line"><a name="l00591"></a><span class="lineno">  591</span>&#160;        std::shared_ptr&lt;const Executor&gt; exec, mpi::communicator comm,</div>
-<div class="line"><a name="l00592"></a><span class="lineno">  592</span>&#160;        dim&lt;2&gt; global_size,</div>
-<div class="line"><a name="l00593"></a><span class="lineno">  593</span>&#160;        std::unique_ptr&lt;const local_vector_type&gt; local_vector);</div>
-<div class="line"><a name="l00594"></a><span class="lineno">  594</span>&#160; </div>
-<div class="line"><a name="l00607"></a><span class="lineno">  607</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;const Vector&gt; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a7873a23454ad8f968159c32f6c9d01a1">create_const</a>(</div>
-<div class="line"><a name="l00608"></a><span class="lineno">  608</span>&#160;        std::shared_ptr&lt;const Executor&gt; exec, mpi::communicator comm,</div>
-<div class="line"><a name="l00609"></a><span class="lineno">  609</span>&#160;        std::unique_ptr&lt;const local_vector_type&gt; local_vector);</div>
-<div class="line"><a name="l00610"></a><span class="lineno">  610</span>&#160; </div>
-<div class="line"><a name="l00611"></a><span class="lineno">  611</span>&#160;<span class="keyword">protected</span>:</div>
-<div class="line"><a name="l00612"></a><span class="lineno">  612</span>&#160;    Vector(std::shared_ptr&lt;const Executor&gt; exec, mpi::communicator comm,</div>
-<div class="line"><a name="l00613"></a><span class="lineno">  613</span>&#160;           dim&lt;2&gt; global_size, dim&lt;2&gt; local_size, <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> stride);</div>
-<div class="line"><a name="l00614"></a><span class="lineno">  614</span>&#160; </div>
-<div class="line"><a name="l00615"></a><span class="lineno">  615</span>&#160;    <span class="keyword">explicit</span> Vector(std::shared_ptr&lt;const Executor&gt; exec,</div>
-<div class="line"><a name="l00616"></a><span class="lineno">  616</span>&#160;                    mpi::communicator comm, dim&lt;2&gt; global_size = {},</div>
-<div class="line"><a name="l00617"></a><span class="lineno">  617</span>&#160;                    dim&lt;2&gt; local_size = {});</div>
-<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160; </div>
-<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;    Vector(std::shared_ptr&lt;const Executor&gt; exec, mpi::communicator comm,</div>
-<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;           dim&lt;2&gt; global_size, std::unique_ptr&lt;local_vector_type&gt; local_vector);</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a81adfd6cfe1c585d60d65d95842bcf6a">compute_dot</a>(ptr_param&lt;const LinOp&gt; b, ptr_param&lt;LinOp&gt; result) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160; </div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a81adfd6cfe1c585d60d65d95842bcf6a">compute_dot</a>(ptr_param&lt;const LinOp&gt; b, ptr_param&lt;LinOp&gt; result,</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;                     array&lt;char&gt;&amp; tmp) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160; </div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a72ebeb082d05afea0fb30cfc0aaf3b30">compute_conj_dot</a>(ptr_param&lt;const LinOp&gt; b,</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;                          ptr_param&lt;LinOp&gt; result) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160; </div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a72ebeb082d05afea0fb30cfc0aaf3b30">compute_conj_dot</a>(ptr_param&lt;const LinOp&gt; b, ptr_param&lt;LinOp&gt; result,</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;                          array&lt;char&gt;&amp; tmp) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160; </div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a7e9df98ba640deae6e9c3a73aff8074d">compute_squared_norm2</a>(ptr_param&lt;LinOp&gt; result) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160; </div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a7e9df98ba640deae6e9c3a73aff8074d">compute_squared_norm2</a>(ptr_param&lt;LinOp&gt; result, array&lt;char&gt;&amp; tmp) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160; </div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a1703cac44dc1591cafdd0a576cd55dbd">compute_norm2</a>(ptr_param&lt;LinOp&gt; result) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160; </div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a1703cac44dc1591cafdd0a576cd55dbd">compute_norm2</a>(ptr_param&lt;LinOp&gt; result, array&lt;char&gt;&amp; tmp) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160; </div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a95f68c957368afb25de478336dd3d615">compute_norm1</a>(ptr_param&lt;LinOp&gt; result) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160; </div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a95f68c957368afb25de478336dd3d615">compute_norm1</a>(ptr_param&lt;LinOp&gt; result, array&lt;char&gt;&amp; tmp) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160; </div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a0b682993b33f1686d6b81477d2f05a5e">compute_mean</a>(ptr_param&lt;LinOp&gt; result) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160; </div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a0b682993b33f1686d6b81477d2f05a5e">compute_mean</a>(ptr_param&lt;LinOp&gt; result, array&lt;char&gt;&amp; tmp) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160; </div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;    value_type&amp; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a288283b486deb8f0a58dc43148f1693f">at_local</a>(<a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> row, <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> col) noexcept;</div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160; </div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;    value_type <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a288283b486deb8f0a58dc43148f1693f">at_local</a>(<a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> row, <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> col) <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160; </div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;    ValueType&amp; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a288283b486deb8f0a58dc43148f1693f">at_local</a>(<a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> idx) noexcept;</div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160; </div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;    ValueType <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a288283b486deb8f0a58dc43148f1693f">at_local</a>(<a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> idx) <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160; </div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;    value_type* <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a32a197154b41fce09fad1c7134173f13">get_local_values</a>();</div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160; </div>
+<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;    <span class="keyword">const</span> value_type* <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#afd7eb388cd72dedee2bcdc9e0203b0ff">get_const_local_values</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160; </div>
+<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;    <span class="keyword">const</span> local_vector_type* <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a2ef33f89c7a1534920127fe3fb696b11">get_local_vector</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160; </div>
+<div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;    std::unique_ptr&lt;const real_type&gt; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a345106d2a9b53d85bd93c7733d633dd0">create_real_view</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160; </div>
+<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;    std::unique_ptr&lt;real_type&gt; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a345106d2a9b53d85bd93c7733d633dd0">create_real_view</a>();</div>
+<div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160; </div>
+<div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;    <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> get_stride() const noexcept { <span class="keywordflow">return</span> local_.<a class="code" href="classgko_1_1matrix_1_1Dense.html#a8c1b220b9b9292893d9be22d632a9a0e">get_stride</a>(); }</div>
+<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160; </div>
+<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;Vector&gt; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a38e53776a4d12312089c63a55b771df2">create</a>(std::shared_ptr&lt;const Executor&gt; exec,</div>
+<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;                                          mpi::communicator comm,</div>
+<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;                                          dim&lt;2&gt; global_size, dim&lt;2&gt; local_size,</div>
+<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;                                          <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> stride);</div>
+<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160; </div>
+<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;Vector&gt; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a38e53776a4d12312089c63a55b771df2">create</a>(std::shared_ptr&lt;const Executor&gt; exec,</div>
+<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;                                          mpi::communicator comm,</div>
+<div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;                                          dim&lt;2&gt; global_size = {},</div>
+<div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;                                          dim&lt;2&gt; local_size = {});</div>
+<div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160; </div>
+<div class="line"><a name="l00563"></a><span class="lineno">  563</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;Vector&gt; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a38e53776a4d12312089c63a55b771df2">create</a>(</div>
+<div class="line"><a name="l00564"></a><span class="lineno">  564</span>&#160;        std::shared_ptr&lt;const Executor&gt; exec, mpi::communicator comm,</div>
+<div class="line"><a name="l00565"></a><span class="lineno">  565</span>&#160;        dim&lt;2&gt; global_size, std::unique_ptr&lt;local_vector_type&gt; local_vector);</div>
+<div class="line"><a name="l00566"></a><span class="lineno">  566</span>&#160; </div>
+<div class="line"><a name="l00585"></a><span class="lineno">  585</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;Vector&gt; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a38e53776a4d12312089c63a55b771df2">create</a>(</div>
+<div class="line"><a name="l00586"></a><span class="lineno">  586</span>&#160;        std::shared_ptr&lt;const Executor&gt; exec, mpi::communicator comm,</div>
+<div class="line"><a name="l00587"></a><span class="lineno">  587</span>&#160;        std::unique_ptr&lt;local_vector_type&gt; local_vector);</div>
+<div class="line"><a name="l00588"></a><span class="lineno">  588</span>&#160; </div>
+<div class="line"><a name="l00601"></a><span class="lineno">  601</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;const Vector&gt; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a7873a23454ad8f968159c32f6c9d01a1">create_const</a>(</div>
+<div class="line"><a name="l00602"></a><span class="lineno">  602</span>&#160;        std::shared_ptr&lt;const Executor&gt; exec, mpi::communicator comm,</div>
+<div class="line"><a name="l00603"></a><span class="lineno">  603</span>&#160;        dim&lt;2&gt; global_size,</div>
+<div class="line"><a name="l00604"></a><span class="lineno">  604</span>&#160;        std::unique_ptr&lt;const local_vector_type&gt; local_vector);</div>
+<div class="line"><a name="l00605"></a><span class="lineno">  605</span>&#160; </div>
+<div class="line"><a name="l00618"></a><span class="lineno">  618</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;const Vector&gt; <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a7873a23454ad8f968159c32f6c9d01a1">create_const</a>(</div>
+<div class="line"><a name="l00619"></a><span class="lineno">  619</span>&#160;        std::shared_ptr&lt;const Executor&gt; exec, mpi::communicator comm,</div>
+<div class="line"><a name="l00620"></a><span class="lineno">  620</span>&#160;        std::unique_ptr&lt;const local_vector_type&gt; local_vector);</div>
 <div class="line"><a name="l00621"></a><span class="lineno">  621</span>&#160; </div>
-<div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160;    Vector(std::shared_ptr&lt;const Executor&gt; exec, mpi::communicator comm,</div>
-<div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160;           std::unique_ptr&lt;local_vector_type&gt; local_vector);</div>
-<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160; </div>
-<div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160;    <span class="keywordtype">void</span> resize(dim&lt;2&gt; global_size, dim&lt;2&gt; local_size);</div>
-<div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160; </div>
-<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> LocalIndexType, <span class="keyword">typename</span> GlobalIndexType&gt;</div>
-<div class="line"><a name="l00628"></a><span class="lineno">  628</span>&#160;    <span class="keywordtype">void</span> read_distributed_impl(</div>
-<div class="line"><a name="l00629"></a><span class="lineno">  629</span>&#160;        <span class="keyword">const</span> device_matrix_data&lt;ValueType, GlobalIndexType&gt;&amp; data,</div>
-<div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160;        <span class="keyword">const</span> Partition&lt;LocalIndexType, GlobalIndexType&gt;* partition);</div>
-<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160; </div>
-<div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160;    <span class="keywordtype">void</span> apply_impl(<span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>*, <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>*) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160; </div>
-<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;    <span class="keywordtype">void</span> apply_impl(<span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>*, <span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>*, <span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>*,</div>
-<div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160;                    <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>*) <span class="keyword">const override</span>;</div>
-<div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160; </div>
-<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160;    <span class="keyword">virtual</span> std::unique_ptr&lt;Vector&gt; create_with_same_config() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00622"></a><span class="lineno">  622</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00623"></a><span class="lineno">  623</span>&#160;    Vector(std::shared_ptr&lt;const Executor&gt; exec, mpi::communicator comm,</div>
+<div class="line"><a name="l00624"></a><span class="lineno">  624</span>&#160;           dim&lt;2&gt; global_size, dim&lt;2&gt; local_size, <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> stride);</div>
+<div class="line"><a name="l00625"></a><span class="lineno">  625</span>&#160; </div>
+<div class="line"><a name="l00626"></a><span class="lineno">  626</span>&#160;    <span class="keyword">explicit</span> Vector(std::shared_ptr&lt;const Executor&gt; exec,</div>
+<div class="line"><a name="l00627"></a><span class="lineno">  627</span>&#160;                    mpi::communicator comm, dim&lt;2&gt; global_size = {},</div>
+<div class="line"><a name="l00628"></a><span class="lineno">  628</span>&#160;                    dim&lt;2&gt; local_size = {});</div>
+<div class="line"><a name="l00629"></a><span class="lineno">  629</span>&#160; </div>
+<div class="line"><a name="l00630"></a><span class="lineno">  630</span>&#160;    Vector(std::shared_ptr&lt;const Executor&gt; exec, mpi::communicator comm,</div>
+<div class="line"><a name="l00631"></a><span class="lineno">  631</span>&#160;           dim&lt;2&gt; global_size, std::unique_ptr&lt;local_vector_type&gt; local_vector);</div>
+<div class="line"><a name="l00632"></a><span class="lineno">  632</span>&#160; </div>
+<div class="line"><a name="l00633"></a><span class="lineno">  633</span>&#160;    Vector(std::shared_ptr&lt;const Executor&gt; exec, mpi::communicator comm,</div>
+<div class="line"><a name="l00634"></a><span class="lineno">  634</span>&#160;           std::unique_ptr&lt;local_vector_type&gt; local_vector);</div>
+<div class="line"><a name="l00635"></a><span class="lineno">  635</span>&#160; </div>
+<div class="line"><a name="l00636"></a><span class="lineno">  636</span>&#160;    <span class="keywordtype">void</span> resize(dim&lt;2&gt; global_size, dim&lt;2&gt; local_size);</div>
+<div class="line"><a name="l00637"></a><span class="lineno">  637</span>&#160; </div>
+<div class="line"><a name="l00638"></a><span class="lineno">  638</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> LocalIndexType, <span class="keyword">typename</span> GlobalIndexType&gt;</div>
+<div class="line"><a name="l00639"></a><span class="lineno">  639</span>&#160;    <span class="keywordtype">void</span> read_distributed_impl(</div>
+<div class="line"><a name="l00640"></a><span class="lineno">  640</span>&#160;        <span class="keyword">const</span> device_matrix_data&lt;ValueType, GlobalIndexType&gt;&amp; data,</div>
+<div class="line"><a name="l00641"></a><span class="lineno">  641</span>&#160;        <span class="keyword">const</span> Partition&lt;LocalIndexType, GlobalIndexType&gt;* partition);</div>
+<div class="line"><a name="l00642"></a><span class="lineno">  642</span>&#160; </div>
+<div class="line"><a name="l00643"></a><span class="lineno">  643</span>&#160;    <span class="keywordtype">void</span> apply_impl(<span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>*, <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>*) <span class="keyword">const override</span>;</div>
 <div class="line"><a name="l00644"></a><span class="lineno">  644</span>&#160; </div>
-<div class="line"><a name="l00657"></a><span class="lineno">  657</span>&#160;    <span class="keyword">virtual</span> std::unique_ptr&lt;Vector&gt; create_with_type_of_impl(</div>
-<div class="line"><a name="l00658"></a><span class="lineno">  658</span>&#160;        std::shared_ptr&lt;const Executor&gt; exec, <span class="keyword">const</span> dim&lt;2&gt;&amp; global_size,</div>
-<div class="line"><a name="l00659"></a><span class="lineno">  659</span>&#160;        <span class="keyword">const</span> dim&lt;2&gt;&amp; local_size, <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> stride) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00660"></a><span class="lineno">  660</span>&#160; </div>
-<div class="line"><a name="l00661"></a><span class="lineno">  661</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00662"></a><span class="lineno">  662</span>&#160;    local_vector_type local_;</div>
-<div class="line"><a name="l00663"></a><span class="lineno">  663</span>&#160;    ::gko::detail::DenseCache&lt;ValueType&gt; host_reduction_buffer_;</div>
-<div class="line"><a name="l00664"></a><span class="lineno">  664</span>&#160;    ::gko::detail::DenseCache&lt;remove_complex&lt;ValueType&gt;&gt; host_norm_buffer_;</div>
-<div class="line"><a name="l00665"></a><span class="lineno">  665</span>&#160;};</div>
-<div class="line"><a name="l00666"></a><span class="lineno">  666</span>&#160; </div>
-<div class="line"><a name="l00667"></a><span class="lineno">  667</span>&#160; </div>
-<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;}  <span class="comment">// namespace distributed</span></div>
-<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;}  <span class="comment">// namespace experimental</span></div>
-<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160; </div>
+<div class="line"><a name="l00645"></a><span class="lineno">  645</span>&#160;    <span class="keywordtype">void</span> apply_impl(<span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>*, <span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>*, <span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>*,</div>
+<div class="line"><a name="l00646"></a><span class="lineno">  646</span>&#160;                    <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>*) <span class="keyword">const override</span>;</div>
+<div class="line"><a name="l00647"></a><span class="lineno">  647</span>&#160; </div>
+<div class="line"><a name="l00654"></a><span class="lineno">  654</span>&#160;    <span class="keyword">virtual</span> std::unique_ptr&lt;Vector&gt; create_with_same_config() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00655"></a><span class="lineno">  655</span>&#160; </div>
+<div class="line"><a name="l00668"></a><span class="lineno">  668</span>&#160;    <span class="keyword">virtual</span> std::unique_ptr&lt;Vector&gt; create_with_type_of_impl(</div>
+<div class="line"><a name="l00669"></a><span class="lineno">  669</span>&#160;        std::shared_ptr&lt;const Executor&gt; exec, <span class="keyword">const</span> dim&lt;2&gt;&amp; global_size,</div>
+<div class="line"><a name="l00670"></a><span class="lineno">  670</span>&#160;        <span class="keyword">const</span> dim&lt;2&gt;&amp; local_size, <a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> stride) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00671"></a><span class="lineno">  671</span>&#160; </div>
-<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;<span class="keyword">namespace </span>detail {</div>
-<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160; </div>
-<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160; </div>
-<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> TargetType&gt;</div>
-<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;<span class="keyword">struct </span>conversion_target_helper;</div>
+<div class="line"><a name="l00672"></a><span class="lineno">  672</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00673"></a><span class="lineno">  673</span>&#160;    local_vector_type local_;</div>
+<div class="line"><a name="l00674"></a><span class="lineno">  674</span>&#160;    ::gko::detail::DenseCache&lt;ValueType&gt; host_reduction_buffer_;</div>
+<div class="line"><a name="l00675"></a><span class="lineno">  675</span>&#160;    ::gko::detail::DenseCache&lt;remove_complex&lt;ValueType&gt;&gt; host_norm_buffer_;</div>
+<div class="line"><a name="l00676"></a><span class="lineno">  676</span>&#160;};</div>
 <div class="line"><a name="l00677"></a><span class="lineno">  677</span>&#160; </div>
 <div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160; </div>
-<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType&gt;</div>
-<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;<span class="keyword">struct </span>conversion_target_helper&lt;experimental::distributed::Vector&lt;ValueType&gt;&gt; {</div>
-<div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;    <span class="keyword">using</span> target_type = experimental::distributed::Vector&lt;ValueType&gt;;</div>
-<div class="line"><a name="l00691"></a><span class="lineno">  691</span>&#160;    <span class="keyword">using</span> source_type =</div>
-<div class="line"><a name="l00692"></a><span class="lineno">  692</span>&#160;        experimental::distributed::Vector&lt;previous_precision&lt;ValueType&gt;&gt;;</div>
-<div class="line"><a name="l00693"></a><span class="lineno">  693</span>&#160; </div>
-<div class="line"><a name="l00694"></a><span class="lineno">  694</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;target_type&gt; create_empty(<span class="keyword">const</span> source_type* source)</div>
-<div class="line"><a name="l00695"></a><span class="lineno">  695</span>&#160;    {</div>
-<div class="line"><a name="l00696"></a><span class="lineno">  696</span>&#160;        <span class="keywordflow">return</span> target_type::create(source-&gt;get_executor(),</div>
-<div class="line"><a name="l00697"></a><span class="lineno">  697</span>&#160;                                   source-&gt;get_communicator());</div>
-<div class="line"><a name="l00698"></a><span class="lineno">  698</span>&#160;    }</div>
-<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160; </div>
-<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;    <span class="comment">// Allow to create_empty of the same type</span></div>
-<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;    <span class="comment">// For distributed case, next&lt;next&lt;V&gt;&gt; will be V in the candidate list.</span></div>
-<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160;    <span class="comment">// TODO: decide to whether to add this or add condition to the list</span></div>
-<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;target_type&gt; create_empty(<span class="keyword">const</span> target_type* source)</div>
-<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160;    {</div>
-<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;        <span class="keywordflow">return</span> target_type::create(source-&gt;get_executor(),</div>
-<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;                                   source-&gt;get_communicator());</div>
-<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;    }</div>
-<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160; </div>
-<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;<span class="preprocessor">#if GINKGO_ENABLE_HALF || GINKGO_ENABLE_BFLOAT16</span></div>
-<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160;    <span class="keyword">using</span> snd_source_type = experimental::distributed::Vector&lt;</div>
-<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;        previous_precision&lt;previous_precision&lt;ValueType&gt;&gt;&gt;;</div>
-<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160; </div>
-<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;target_type&gt; create_empty(</div>
-<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;        <span class="keyword">const</span> snd_source_type* source)</div>
+<div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;}  <span class="comment">// namespace distributed</span></div>
+<div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;}  <span class="comment">// namespace experimental</span></div>
+<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160; </div>
+<div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160; </div>
+<div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160;<span class="keyword">namespace </span>detail {</div>
+<div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160; </div>
+<div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160; </div>
+<div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> TargetType&gt;</div>
+<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;<span class="keyword">struct </span>conversion_target_helper;</div>
+<div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160; </div>
+<div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160; </div>
+<div class="line"><a name="l00699"></a><span class="lineno">  699</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType&gt;</div>
+<div class="line"><a name="l00700"></a><span class="lineno">  700</span>&#160;<span class="keyword">struct </span>conversion_target_helper&lt;experimental::distributed::Vector&lt;ValueType&gt;&gt; {</div>
+<div class="line"><a name="l00701"></a><span class="lineno">  701</span>&#160;    <span class="keyword">using</span> target_type = experimental::distributed::Vector&lt;ValueType&gt;;</div>
+<div class="line"><a name="l00702"></a><span class="lineno">  702</span>&#160;    <span class="keyword">using</span> source_type =</div>
+<div class="line"><a name="l00703"></a><span class="lineno">  703</span>&#160;        experimental::distributed::Vector&lt;previous_precision&lt;ValueType&gt;&gt;;</div>
+<div class="line"><a name="l00704"></a><span class="lineno">  704</span>&#160; </div>
+<div class="line"><a name="l00705"></a><span class="lineno">  705</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;target_type&gt; create_empty(<span class="keyword">const</span> source_type* source)</div>
+<div class="line"><a name="l00706"></a><span class="lineno">  706</span>&#160;    {</div>
+<div class="line"><a name="l00707"></a><span class="lineno">  707</span>&#160;        <span class="keywordflow">return</span> target_type::create(source-&gt;get_executor(),</div>
+<div class="line"><a name="l00708"></a><span class="lineno">  708</span>&#160;                                   source-&gt;get_communicator());</div>
+<div class="line"><a name="l00709"></a><span class="lineno">  709</span>&#160;    }</div>
+<div class="line"><a name="l00710"></a><span class="lineno">  710</span>&#160; </div>
+<div class="line"><a name="l00711"></a><span class="lineno">  711</span>&#160;    <span class="comment">// Allow to create_empty of the same type</span></div>
+<div class="line"><a name="l00712"></a><span class="lineno">  712</span>&#160;    <span class="comment">// For distributed case, next&lt;next&lt;V&gt;&gt; will be V in the candidate list.</span></div>
+<div class="line"><a name="l00713"></a><span class="lineno">  713</span>&#160;    <span class="comment">// TODO: decide to whether to add this or add condition to the list</span></div>
+<div class="line"><a name="l00714"></a><span class="lineno">  714</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;target_type&gt; create_empty(<span class="keyword">const</span> target_type* source)</div>
 <div class="line"><a name="l00715"></a><span class="lineno">  715</span>&#160;    {</div>
 <div class="line"><a name="l00716"></a><span class="lineno">  716</span>&#160;        <span class="keywordflow">return</span> target_type::create(source-&gt;get_executor(),</div>
 <div class="line"><a name="l00717"></a><span class="lineno">  717</span>&#160;                                   source-&gt;get_communicator());</div>
 <div class="line"><a name="l00718"></a><span class="lineno">  718</span>&#160;    }</div>
-<div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160;};</div>
-<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160; </div>
-<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160; </div>
-<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160;}  <span class="comment">// namespace detail</span></div>
-<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;}  <span class="comment">// namespace gko</span></div>
-<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160; </div>
-<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160; </div>
-<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;<span class="preprocessor">#endif  // GINKGO_BUILD_MPI</span></div>
-<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160; </div>
-<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160; </div>
-<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_DISTRIBUTED_VECTOR_HPP_</span></div>
+<div class="line"><a name="l00719"></a><span class="lineno">  719</span>&#160; </div>
+<div class="line"><a name="l00720"></a><span class="lineno">  720</span>&#160;<span class="preprocessor">#if GINKGO_ENABLE_HALF || GINKGO_ENABLE_BFLOAT16</span></div>
+<div class="line"><a name="l00721"></a><span class="lineno">  721</span>&#160;    <span class="keyword">using</span> snd_source_type =</div>
+<div class="line"><a name="l00722"></a><span class="lineno">  722</span>&#160;        experimental::distributed::Vector&lt;previous_precision&lt;ValueType, 2&gt;&gt;;</div>
+<div class="line"><a name="l00723"></a><span class="lineno">  723</span>&#160; </div>
+<div class="line"><a name="l00724"></a><span class="lineno">  724</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;target_type&gt; create_empty(</div>
+<div class="line"><a name="l00725"></a><span class="lineno">  725</span>&#160;        <span class="keyword">const</span> snd_source_type* source)</div>
+<div class="line"><a name="l00726"></a><span class="lineno">  726</span>&#160;    {</div>
+<div class="line"><a name="l00727"></a><span class="lineno">  727</span>&#160;        <span class="keywordflow">return</span> target_type::create(source-&gt;get_executor(),</div>
+<div class="line"><a name="l00728"></a><span class="lineno">  728</span>&#160;                                   source-&gt;get_communicator());</div>
+<div class="line"><a name="l00729"></a><span class="lineno">  729</span>&#160;    }</div>
+<div class="line"><a name="l00730"></a><span class="lineno">  730</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00731"></a><span class="lineno">  731</span>&#160;<span class="preprocessor">#if GINKGO_ENABLE_HALF &amp;&amp; GINKGO_ENABLE_BFLOAT16</span></div>
+<div class="line"><a name="l00732"></a><span class="lineno">  732</span>&#160;    <span class="keyword">using</span> trd_source_type =</div>
+<div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;        experimental::distributed::Vector&lt;previous_precision&lt;ValueType, 3&gt;&gt;;</div>
+<div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160; </div>
+<div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160;    <span class="keyword">static</span> std::unique_ptr&lt;target_type&gt; create_empty(</div>
+<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;        <span class="keyword">const</span> trd_source_type* source)</div>
+<div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;    {</div>
+<div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;        <span class="keywordflow">return</span> target_type::create(source-&gt;get_executor(),</div>
+<div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;                                   source-&gt;get_communicator());</div>
+<div class="line"><a name="l00740"></a><span class="lineno">  740</span>&#160;    }</div>
+<div class="line"><a name="l00741"></a><span class="lineno">  741</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00742"></a><span class="lineno">  742</span>&#160;};</div>
+<div class="line"><a name="l00743"></a><span class="lineno">  743</span>&#160; </div>
+<div class="line"><a name="l00744"></a><span class="lineno">  744</span>&#160; </div>
+<div class="line"><a name="l00745"></a><span class="lineno">  745</span>&#160;}  <span class="comment">// namespace detail</span></div>
+<div class="line"><a name="l00746"></a><span class="lineno">  746</span>&#160;}  <span class="comment">// namespace gko</span></div>
+<div class="line"><a name="l00747"></a><span class="lineno">  747</span>&#160; </div>
+<div class="line"><a name="l00748"></a><span class="lineno">  748</span>&#160; </div>
+<div class="line"><a name="l00749"></a><span class="lineno">  749</span>&#160;<span class="preprocessor">#endif  // GINKGO_BUILD_MPI</span></div>
+<div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160; </div>
+<div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160; </div>
+<div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_DISTRIBUTED_VECTOR_HPP_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassgko_1_1EnablePolymorphicAssignment_html_a0a4cf244139e7761d6a91c61e029810e"><div class="ttname"><a href="classgko_1_1EnablePolymorphicAssignment.html#a0a4cf244139e7761d6a91c61e029810e">gko::EnablePolymorphicAssignment&lt; ConcreteLinOp &gt;::move_to</a></div><div class="ttdeci">void move_to(result_type *result) override</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:751</div></div>
 <div class="ttc" id="aclassgko_1_1EnablePolymorphicAssignment_html_a6b7e6872e96084636f8ab5091063ada8"><div class="ttname"><a href="classgko_1_1EnablePolymorphicAssignment.html#a6b7e6872e96084636f8ab5091063ada8">gko::EnablePolymorphicAssignment&lt; ConcreteLinOp &gt;::convert_to</a></div><div class="ttdeci">void convert_to(result_type *result) const override</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:749</div></div>
@@ -393,7 +415,7 @@ $(function() {
 <div class="ttc" id="aclassgko_1_1experimental_1_1distributed_1_1Vector_html_a95f68c957368afb25de478336dd3d615"><div class="ttname"><a href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a95f68c957368afb25de478336dd3d615">gko::experimental::distributed::Vector::compute_norm1</a></div><div class="ttdeci">void compute_norm1(ptr_param&lt; LinOp &gt; result) const</div><div class="ttdoc">Computes the column-wise (L^1) norm of this (multi-)vector.</div></div>
 <div class="ttc" id="aclassgko_1_1experimental_1_1distributed_1_1Vector_html_a63d5979607cee954beaf75818c655638"><div class="ttname"><a href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a63d5979607cee954beaf75818c655638">gko::experimental::distributed::Vector::get_real</a></div><div class="ttdeci">std::unique_ptr&lt; real_type &gt; get_real() const</div><div class="ttdoc">Creates new real vectors and extracts the real part of the original vectors into that.</div></div>
 <div class="ttc" id="aclassgko_1_1experimental_1_1distributed_1_1Vector_html_a32a197154b41fce09fad1c7134173f13"><div class="ttname"><a href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a32a197154b41fce09fad1c7134173f13">gko::experimental::distributed::Vector::get_local_values</a></div><div class="ttdeci">value_type * get_local_values()</div><div class="ttdoc">Returns a pointer to the array of local values of the multi-vector.</div></div>
-<div class="ttc" id="aclassgko_1_1matrix_1_1Dense_html_a8c1b220b9b9292893d9be22d632a9a0e"><div class="ttname"><a href="classgko_1_1matrix_1_1Dense.html#a8c1b220b9b9292893d9be22d632a9a0e">gko::matrix::Dense::get_stride</a></div><div class="ttdeci">size_type get_stride() const noexcept</div><div class="ttdoc">Returns the stride of the matrix.</div><div class="ttdef"><b>Definition:</b> dense.hpp:870</div></div>
+<div class="ttc" id="aclassgko_1_1matrix_1_1Dense_html_a8c1b220b9b9292893d9be22d632a9a0e"><div class="ttname"><a href="classgko_1_1matrix_1_1Dense.html#a8c1b220b9b9292893d9be22d632a9a0e">gko::matrix::Dense::get_stride</a></div><div class="ttdeci">size_type get_stride() const noexcept</div><div class="ttdoc">Returns the stride of the matrix.</div><div class="ttdef"><b>Definition:</b> dense.hpp:879</div></div>
 <div class="ttc" id="aclassgko_1_1experimental_1_1distributed_1_1Vector_html_a2ef33f89c7a1534920127fe3fb696b11"><div class="ttname"><a href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a2ef33f89c7a1534920127fe3fb696b11">gko::experimental::distributed::Vector::get_local_vector</a></div><div class="ttdeci">const local_vector_type * get_local_vector() const</div><div class="ttdoc">Direct (read) access to the underlying local local_vector_type vectors.</div></div>
 <div class="ttc" id="anamespacegko_html"><div class="ttname"><a href="namespacegko.html">gko</a></div><div class="ttdoc">The Ginkgo namespace.</div><div class="ttdef"><b>Definition:</b> abstract_factory.hpp:20</div></div>
 <div class="ttc" id="aclassgko_1_1experimental_1_1distributed_1_1Vector_html_a4a172e7b6b6088918e0c7f8070d43204"><div class="ttname"><a href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a4a172e7b6b6088918e0c7f8070d43204">gko::experimental::distributed::Vector::fill</a></div><div class="ttdeci">void fill(ValueType value)</div><div class="ttdoc">Fill the distributed vectors with a given value.</div></div>
@@ -402,18 +424,18 @@ $(function() {
 <div class="ttc" id="aclassgko_1_1experimental_1_1distributed_1_1Vector_html_abe6d3d10b64daa03cf4ee6f58f85a3a8"><div class="ttname"><a href="classgko_1_1experimental_1_1distributed_1_1Vector.html#abe6d3d10b64daa03cf4ee6f58f85a3a8">gko::experimental::distributed::Vector::compute_absolute</a></div><div class="ttdeci">std::unique_ptr&lt; absolute_type &gt; compute_absolute() const override</div><div class="ttdoc">Gets the AbsoluteLinOp.</div></div>
 <div class="ttc" id="aclassgko_1_1experimental_1_1distributed_1_1Vector_html_acdafd131787d7c74478000ef8fdd82b8"><div class="ttname"><a href="classgko_1_1experimental_1_1distributed_1_1Vector.html#acdafd131787d7c74478000ef8fdd82b8">gko::experimental::distributed::Vector::add_scaled</a></div><div class="ttdeci">void add_scaled(ptr_param&lt; const LinOp &gt; alpha, ptr_param&lt; const LinOp &gt; b)</div><div class="ttdoc">Adds b scaled by alpha to the vectors (aka: BLAS axpy).</div></div>
 <div class="ttc" id="aclassgko_1_1experimental_1_1distributed_1_1Vector_html_a81adfd6cfe1c585d60d65d95842bcf6a"><div class="ttname"><a href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a81adfd6cfe1c585d60d65d95842bcf6a">gko::experimental::distributed::Vector::compute_dot</a></div><div class="ttdeci">void compute_dot(ptr_param&lt; const LinOp &gt; b, ptr_param&lt; LinOp &gt; result) const</div><div class="ttdoc">Computes the column-wise dot product of this (multi-)vector and b using a global reduction.</div></div>
-<div class="ttc" id="anamespacegko_html_a5c7eb99ec1a77c39fbf93b828d6b3775"><div class="ttname"><a href="namespacegko.html#a5c7eb99ec1a77c39fbf93b828d6b3775">gko::next_precision</a></div><div class="ttdeci">next_precision_base&lt; T &gt; next_precision</div><div class="ttdoc">Obtains the next type in the singly-linked precision list with half.</div><div class="ttdef"><b>Definition:</b> math.hpp:456</div></div>
 <div class="ttc" id="aclassgko_1_1experimental_1_1distributed_1_1Vector_html_a72ebeb082d05afea0fb30cfc0aaf3b30"><div class="ttname"><a href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a72ebeb082d05afea0fb30cfc0aaf3b30">gko::experimental::distributed::Vector::compute_conj_dot</a></div><div class="ttdeci">void compute_conj_dot(ptr_param&lt; const LinOp &gt; b, ptr_param&lt; LinOp &gt; result) const</div><div class="ttdoc">Computes the column-wise dot product of this (multi-)vector and conj(b) using a global reduction.</div></div>
+<div class="ttc" id="anamespacegko_html_a5c244b670709748bb8af2bf462f4d4b1"><div class="ttname"><a href="namespacegko.html#a5c244b670709748bb8af2bf462f4d4b1">gko::previous_precision</a></div><div class="ttdeci">typename detail::find_precision_impl&lt; T, -step &gt;::type previous_precision</div><div class="ttdoc">Obtains the previous move type of T in the singly-linked precision corresponding bfloat16/half.</div><div class="ttdef"><b>Definition:</b> math.hpp:473</div></div>
 <div class="ttc" id="aclassgko_1_1experimental_1_1distributed_1_1Vector_html_a7c24911b281d56382a2c280e2cb8019e"><div class="ttname"><a href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a7c24911b281d56382a2c280e2cb8019e">gko::experimental::distributed::Vector::compute_absolute_inplace</a></div><div class="ttdeci">void compute_absolute_inplace() override</div><div class="ttdoc">Compute absolute inplace on each element.</div></div>
 <div class="ttc" id="aclassgko_1_1experimental_1_1distributed_1_1Vector_html_a7873a23454ad8f968159c32f6c9d01a1"><div class="ttname"><a href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a7873a23454ad8f968159c32f6c9d01a1">gko::experimental::distributed::Vector::create_const</a></div><div class="ttdeci">static std::unique_ptr&lt; const Vector &gt; create_const(std::shared_ptr&lt; const Executor &gt; exec, mpi::communicator comm, dim&lt; 2 &gt; global_size, std::unique_ptr&lt; const local_vector_type &gt; local_vector)</div><div class="ttdoc">Creates a constant (immutable) distributed Vector from a constant local vector.</div></div>
 <div class="ttc" id="aclassgko_1_1experimental_1_1distributed_1_1Vector_html_a30630eadd1c09a8a0a387ba8cca82f07"><div class="ttname"><a href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a30630eadd1c09a8a0a387ba8cca82f07">gko::experimental::distributed::Vector::get_imag</a></div><div class="ttdeci">std::unique_ptr&lt; real_type &gt; get_imag() const</div><div class="ttdoc">Creates new real vectors and extracts the imaginary part of the original vectors into that.</div></div>
 <div class="ttc" id="aclassgko_1_1experimental_1_1distributed_1_1Vector_html_a1703cac44dc1591cafdd0a576cd55dbd"><div class="ttname"><a href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a1703cac44dc1591cafdd0a576cd55dbd">gko::experimental::distributed::Vector::compute_norm2</a></div><div class="ttdeci">void compute_norm2(ptr_param&lt; LinOp &gt; result) const</div><div class="ttdoc">Computes the Euclidean (L^2) norm of this (multi-)vector using a global reduction.</div></div>
 <div class="ttc" id="aclassgko_1_1experimental_1_1distributed_1_1Vector_html_afd7eb388cd72dedee2bcdc9e0203b0ff"><div class="ttname"><a href="classgko_1_1experimental_1_1distributed_1_1Vector.html#afd7eb388cd72dedee2bcdc9e0203b0ff">gko::experimental::distributed::Vector::get_const_local_values</a></div><div class="ttdeci">const value_type * get_const_local_values() const</div><div class="ttdoc">Returns a pointer to the array of local values of the multi-vector.</div></div>
-<div class="ttc" id="anamespacegko_html_afd46d554050c4ae90e84ea4fcd9a41f3"><div class="ttname"><a href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">gko::remove_complex</a></div><div class="ttdeci">typename detail::remove_complex_s&lt; T &gt;::type remove_complex</div><div class="ttdoc">Obtain the type which removed the complex of complex/scalar type or the template parameter of class b...</div><div class="ttdef"><b>Definition:</b> math.hpp:263</div></div>
+<div class="ttc" id="anamespacegko_html_afd46d554050c4ae90e84ea4fcd9a41f3"><div class="ttname"><a href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">gko::remove_complex</a></div><div class="ttdeci">typename detail::remove_complex_s&lt; T &gt;::type remove_complex</div><div class="ttdoc">Obtain the type which removed the complex of complex/scalar type or the template parameter of class b...</div><div class="ttdef"><b>Definition:</b> math.hpp:264</div></div>
 <div class="ttc" id="aclassgko_1_1experimental_1_1distributed_1_1Vector_html_abda3edba7d097804468a7bfddd38e70f"><div class="ttname"><a href="classgko_1_1experimental_1_1distributed_1_1Vector.html#abda3edba7d097804468a7bfddd38e70f">gko::experimental::distributed::Vector::inv_scale</a></div><div class="ttdeci">void inv_scale(ptr_param&lt; const LinOp &gt; alpha)</div><div class="ttdoc">Scales the vectors with the inverse of a scalar.</div></div>
 <div class="ttc" id="aclassgko_1_1experimental_1_1distributed_1_1Vector_html_a7ff7ccd5ebf9042bf7840767032551f5"><div class="ttname"><a href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a7ff7ccd5ebf9042bf7840767032551f5">gko::experimental::distributed::Vector::sub_scaled</a></div><div class="ttdeci">void sub_scaled(ptr_param&lt; const LinOp &gt; alpha, ptr_param&lt; const LinOp &gt; b)</div><div class="ttdoc">Subtracts b scaled by alpha from the vectors (aka: BLAS axpy).</div></div>
 <div class="ttc" id="aclassgko_1_1LinOp_html_a1f2a4cc7323e0b9816428e3545fc6ed7"><div class="ttname"><a href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">gko::LinOp::LinOp</a></div><div class="ttdeci">LinOp(const LinOp &amp;)=default</div><div class="ttdoc">Copy-constructs a LinOp.</div></div>
-<div class="ttc" id="anamespacegko_html_acc281c8ff5bfa4fd6f25afcce466b1af"><div class="ttname"><a href="namespacegko.html#acc281c8ff5bfa4fd6f25afcce466b1af">gko::to_complex</a></div><div class="ttdeci">typename detail::to_complex_s&lt; T &gt;::type to_complex</div><div class="ttdoc">Obtain the type which adds the complex of complex/scalar type or the template parameter of class by a...</div><div class="ttdef"><b>Definition:</b> math.hpp:282</div></div>
+<div class="ttc" id="anamespacegko_html_acc281c8ff5bfa4fd6f25afcce466b1af"><div class="ttname"><a href="namespacegko.html#acc281c8ff5bfa4fd6f25afcce466b1af">gko::to_complex</a></div><div class="ttdeci">typename detail::to_complex_s&lt; T &gt;::type to_complex</div><div class="ttdoc">Obtain the type which adds the complex of complex/scalar type or the template parameter of class by a...</div><div class="ttdef"><b>Definition:</b> math.hpp:283</div></div>
 <div class="ttc" id="aclassgko_1_1experimental_1_1distributed_1_1Vector_html_ad5e5752219717ff7360e48b794f86b3e"><div class="ttname"><a href="classgko_1_1experimental_1_1distributed_1_1Vector.html#ad5e5752219717ff7360e48b794f86b3e">gko::experimental::distributed::Vector::scale</a></div><div class="ttdeci">void scale(ptr_param&lt; const LinOp &gt; alpha)</div><div class="ttdoc">Scales the vectors with a scalar (aka: BLAS scal).</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

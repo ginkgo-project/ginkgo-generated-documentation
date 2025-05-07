@@ -7,7 +7,7 @@ var searchData=
   ['nested_5fsummary_5fentry_1270',['nested_summary_entry',['../structgko_1_1log_1_1ProfilerHook_1_1nested__summary__entry.html',1,'gko::log::ProfilerHook']]],
   ['nestedsummarywriter_1271',['NestedSummaryWriter',['../classgko_1_1log_1_1ProfilerHook_1_1NestedSummaryWriter.html',1,'gko::log::ProfilerHook']]],
   ['never_1272',['never',['../namespacegko.html#aa2543f42cbbe1a9373dc46d04c112beeac7561db7a418dd39b2201dfe110ab4a4',1,'gko']]],
-  ['next_5fprecision_1273',['next_precision',['../namespacegko.html#a5c7eb99ec1a77c39fbf93b828d6b3775',1,'gko']]],
+  ['next_5fprecision_1273',['next_precision',['../namespacegko.html#a861156f9c64df6146d771527eb2e179d',1,'gko']]],
   ['next_5fprecision_5fbase_1274',['next_precision_base',['../namespacegko.html#a3a3680038c88373d22ba1825fb150a53',1,'gko']]],
   ['node_5flocal_5frank_1275',['node_local_rank',['../classgko_1_1experimental_1_1mpi_1_1communicator.html#a8dc8a949e3bc0e5e00ad0af13ca62104',1,'gko::experimental::mpi::communicator']]],
   ['non_5flocal_1276',['non_local',['../namespacegko_1_1experimental_1_1distributed.html#a3d50932cfebdde844b88d2c82b96947ba9182221a9ec0a65321d5a206c9c174ca',1,'gko::experimental::distributed']]],
