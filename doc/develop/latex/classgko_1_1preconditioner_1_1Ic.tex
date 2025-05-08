@@ -1,5 +1,5 @@
-\hypertarget{classgko_1_1preconditioner_1_1Ic}{}\doxysection{gko\+::preconditioner\+::Ic$<$ L\+Solver\+Type, Index\+Type $>$ Class Template Reference}
-\label{classgko_1_1preconditioner_1_1Ic}\index{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$}}
+\hypertarget{classgko_1_1preconditioner_1_1Ic}{}\doxysection{gko\+::preconditioner\+::Ic$<$ L\+Solver\+Type\+Or\+Value\+Type, Index\+Type $>$ Class Template Reference}
+\label{classgko_1_1preconditioner_1_1Ic}\index{gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$}}
 
 
 The Incomplete Cholesky (IC) preconditioner solves the equation $LL^H*x = b$ for a given lower triangular matrix L and the right hand side b (can contain multiple right hand sides).  
@@ -11,7 +11,7 @@ The Incomplete Cholesky (IC) preconditioner solves the equation $LL^H*x = b$ for
 
 
 
-Inheritance diagram for gko\+::preconditioner\+::Ic$<$ L\+Solver\+Type, Index\+Type $>$\+:
+Inheritance diagram for gko\+::preconditioner\+::Ic$<$ L\+Solver\+Type\+Or\+Value\+Type, Index\+Type $>$\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -21,7 +21,7 @@ Inheritance diagram for gko\+::preconditioner\+::Ic$<$ L\+Solver\+Type, Index\+T
 \end{figure}
 
 
-Collaboration diagram for gko\+::preconditioner\+::Ic$<$ L\+Solver\+Type, Index\+Type $>$\+:
+Collaboration diagram for gko\+::preconditioner\+::Ic$<$ L\+Solver\+Type\+Or\+Value\+Type, Index\+Type $>$\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -39,50 +39,50 @@ struct \mbox{\hyperlink{structgko_1_1preconditioner_1_1Ic_1_1parameters__type}{p
 \doxysubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_aa18e1721e26bd74f8991f05190505df4}\label{classgko_1_1preconditioner_1_1Ic_aa18e1721e26bd74f8991f05190505df4}} 
-using {\bfseries value\+\_\+type} = typename L\+Solver\+Type\+::value\+\_\+type
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_a86e66d16b036f28774a5cc7c3ad83580}\label{classgko_1_1preconditioner_1_1Ic_a86e66d16b036f28774a5cc7c3ad83580}} 
+using {\bfseries l\+\_\+solver\+\_\+type} = std\+::conditional\+\_\+t$<$ gko\+::detail\+::is\+\_\+ginkgo\+\_\+linop$<$ L\+Solver\+Type\+Or\+Value\+Type $>$, L\+Solver\+Type\+Or\+Value\+Type, \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$
 \item 
-\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_a2c78896377754bd3bfed59fdfc68f400}\label{classgko_1_1preconditioner_1_1Ic_a2c78896377754bd3bfed59fdfc68f400}} 
-using {\bfseries l\+\_\+solver\+\_\+type} = L\+Solver\+Type
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_a6c163e3eae5247e323003daa20918442}\label{classgko_1_1preconditioner_1_1Ic_a6c163e3eae5247e323003daa20918442}} 
+using {\bfseries value\+\_\+type} = gko\+::detail\+::get\+\_\+value\+\_\+type$<$ L\+Solver\+Type\+Or\+Value\+Type $>$
 \item 
-\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_a084afe722b1264965e5d68a773fc159e}\label{classgko_1_1preconditioner_1_1Ic_a084afe722b1264965e5d68a773fc159e}} 
-using {\bfseries lh\+\_\+solver\+\_\+type} = typename L\+Solver\+Type\+::transposed\+\_\+type
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_a8ad789a8e6a2ee69f9f0b0895f9fd7e3}\label{classgko_1_1preconditioner_1_1Ic_a8ad789a8e6a2ee69f9f0b0895f9fd7e3}} 
+using {\bfseries lh\+\_\+solver\+\_\+type} = gko\+::detail\+::transposed\+\_\+type$<$ l\+\_\+solver\+\_\+type $>$
 \item 
-\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_ae7d0969303fdbd6ed810c4a880377c1f}\label{classgko_1_1preconditioner_1_1Ic_ae7d0969303fdbd6ed810c4a880377c1f}} 
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_ae7dd145e7efd85ab4ee066ae238b379b}\label{classgko_1_1preconditioner_1_1Ic_ae7dd145e7efd85ab4ee066ae238b379b}} 
 using {\bfseries index\+\_\+type} = Index\+Type
 \item 
-\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_acfe39a46a1d0d7e52c43f63b8cc27837}\label{classgko_1_1preconditioner_1_1Ic_acfe39a46a1d0d7e52c43f63b8cc27837}} 
-using {\bfseries transposed\+\_\+type} = \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{Ic}}$<$ L\+Solver\+Type, Index\+Type $>$
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_a891b6fcdfc1f8579ffc96cb4d6a8c030}\label{classgko_1_1preconditioner_1_1Ic_a891b6fcdfc1f8579ffc96cb4d6a8c030}} 
+using {\bfseries transposed\+\_\+type} = \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{Ic}}$<$ L\+Solver\+Type\+Or\+Value\+Type, Index\+Type $>$
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_ae3b5d5f219ad702ad7c661f77ee41b0b}\label{classgko_1_1preconditioner_1_1Ic_ae3b5d5f219ad702ad7c661f77ee41b0b}} 
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_aa9ee1130d0651d84ab7f032f1d28018d}\label{classgko_1_1preconditioner_1_1Ic_aa9ee1130d0651d84ab7f032f1d28018d}} 
 const \mbox{\hyperlink{structgko_1_1preconditioner_1_1Ic_1_1parameters__type}{parameters\+\_\+type}} \& {\bfseries get\+\_\+parameters} () const
 \item 
-std\+::shared\+\_\+ptr$<$ const l\+\_\+solver\+\_\+type $>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic_aa4d593fa751aa5cc418fd3cb9155b3bb}{get\+\_\+l\+\_\+solver}} () const
+std\+::shared\+\_\+ptr$<$ const l\+\_\+solver\+\_\+type $>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic_a9f03697babe56242bed46becc442e937}{get\+\_\+l\+\_\+solver}} () const
 \begin{DoxyCompactList}\small\item\em Returns the solver which is used for the provided L matrix. \end{DoxyCompactList}\item 
-std\+::shared\+\_\+ptr$<$ const lh\+\_\+solver\+\_\+type $>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic_abeedef49ea383aa54cdaef48e5f01b68}{get\+\_\+lh\+\_\+solver}} () const
+std\+::shared\+\_\+ptr$<$ const lh\+\_\+solver\+\_\+type $>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic_a98cf316f57f9ec597b035b625403d490}{get\+\_\+lh\+\_\+solver}} () const
 \begin{DoxyCompactList}\small\item\em Returns the solver which is used for the L$^\wedge$H matrix. \end{DoxyCompactList}\item 
-std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic_aa058395d245de4ffdaddd5aa5a8fb42a}{transpose}} () const override
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic_a097b9056c39e75f30d8ca8c37bf01454}{transpose}} () const override
 \begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. \end{DoxyCompactList}\item 
-std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic_ac5e214fa1008b2d1611a8cf0b4edd545}{conj\+\_\+transpose}} () const override
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic_a500c8d4ac0abf05d7730844ecb4918ce}{conj\+\_\+transpose}} () const override
 \begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the conjugate transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{Ic}} \& \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic_a1090b05e9e795c46bab7211aa20934ca}{operator=}} (const \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{Ic}} \&other)
+\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{Ic}} \& \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic_aa364e04d3edf691449a098d6384cffd4}{operator=}} (const \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{Ic}} \&other)
 \begin{DoxyCompactList}\small\item\em Copy-\/assigns an IC preconditioner. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{Ic}} \& \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic_a9430a801ebfffe9553936e48cc1ba7f5}{operator=}} (\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{Ic}} \&\&other)
+\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{Ic}} \& \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic_a6b8d714e083360a50720b9c1f332aaa5}{operator=}} (\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{Ic}} \&\&other)
 \begin{DoxyCompactList}\small\item\em Move-\/assigns an IC preconditioner. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic_a6fe54246201b563a5b848a1e65a57529}{Ic}} (const \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{Ic}} \&other)
+\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic_ac5aed93da8c97cfeff5364070fabec67}{Ic}} (const \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{Ic}} \&other)
 \begin{DoxyCompactList}\small\item\em Copy-\/constructs an IC preconditioner. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic_a7a7c2d519d8408492fd18bd4de028521}{Ic}} (\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{Ic}} \&\&other)
+\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic_a829838c89844bf6eb96a01ec17249be9}{Ic}} (\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{Ic}} \&\&other)
 \begin{DoxyCompactList}\small\item\em Move-\/constructs an IC preconditioner. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_ab78fdf7b9a8400c8081d7c13c86c6fc4}\label{classgko_1_1preconditioner_1_1Ic_ab78fdf7b9a8400c8081d7c13c86c6fc4}} 
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_ae0d4d753196a1fb8ab9a50963a5f0e90}\label{classgko_1_1preconditioner_1_1Ic_ae0d4d753196a1fb8ab9a50963a5f0e90}} 
 static auto {\bfseries build} () -\/$>$ decltype(\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic_1_1Factory}{Factory}} \+::create())
 \item 
-static \mbox{\hyperlink{structgko_1_1preconditioner_1_1Ic_1_1parameters__type}{parameters\+\_\+type}} \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic_a9c9420284654e954e2aa86e6f815ccd7}{parse}} (const \mbox{\hyperlink{classgko_1_1config_1_1pnode}{config\+::pnode}} \&config, const \mbox{\hyperlink{classgko_1_1config_1_1registry}{config\+::registry}} \&context, const \mbox{\hyperlink{classgko_1_1config_1_1type__descriptor}{config\+::type\+\_\+descriptor}} \&td\+\_\+for\+\_\+child=config\+::make\+\_\+type\+\_\+descriptor$<$ value\+\_\+type, index\+\_\+type $>$())
+static \mbox{\hyperlink{structgko_1_1preconditioner_1_1Ic_1_1parameters__type}{parameters\+\_\+type}} \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic_a280d45df2d4caafb80b2401d65c22ff6}{parse}} (const \mbox{\hyperlink{classgko_1_1config_1_1pnode}{config\+::pnode}} \&config, const \mbox{\hyperlink{classgko_1_1config_1_1registry}{config\+::registry}} \&context, const \mbox{\hyperlink{classgko_1_1config_1_1type__descriptor}{config\+::type\+\_\+descriptor}} \&td\+\_\+for\+\_\+child=config\+::make\+\_\+type\+\_\+descriptor$<$ value\+\_\+type, index\+\_\+type $>$())
 \begin{DoxyCompactList}\small\item\em Create the parameters from the property\+\_\+tree. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
@@ -96,8 +96,8 @@ class {\bfseries Enable\+Polymorphic\+Object$<$ Ic, Lin\+Op $>$}
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$typename L\+Solver\+Type = solver\+::\+Lower\+Trs$<$$>$, typename Index\+Type = int32$>$\newline
-class gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type, Index\+Type $>$}
+\subsubsection*{template$<$typename L\+Solver\+Type\+Or\+Value\+Type = solver\+::\+Lower\+Trs$<$$>$, typename Index\+Type = int32$>$\newline
+class gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type\+Or\+Value\+Type, Index\+Type $>$}
 
 The Incomplete Cholesky (IC) preconditioner solves the equation $LL^H*x = b$ for a given lower triangular matrix L and the right hand side b (can contain multiple right hand sides). 
 
@@ -115,10 +115,12 @@ When providing a \mbox{\hyperlink{classgko_1_1Composition}{gko\+::\+Composition}
 Do not use symmetric solvers (like CG) for the L solver since both matrices (L and L$^\wedge$H) are, by design, not symmetric.
 
 This class is not thread safe (even a const object is not) because it uses an internal cache to accelerate multiple (sequential) applies. Using it in parallel can lead to segmentation faults, wrong results and other unwanted behavior.
+
+The default template during parse is $<$Value\+Type, Index\+Type$>$ not $<$Lower\+Trs, Index\+Type$>$. Only the variants with Value\+Type are supported in parse.
 \end{DoxyNote}
 
 \begin{DoxyTemplParams}{Template Parameters}
-{\em L\+Solver\+Type} & type of the solver used for the L matrix. Defaults to \mbox{\hyperlink{classgko_1_1solver_1_1LowerTrs}{solver\+::\+Lower\+Trs}} \\
+{\em L\+Solver\+Type\+Or\+Value\+Type} & type of the solver or the value type used for the L matrix. Defaults to \mbox{\hyperlink{classgko_1_1solver_1_1LowerTrs}{solver\+::\+Lower\+Trs}} \\
 \hline
 {\em Index\+Type} & type of the indices when Par\+Ic is used to generate the L and L$^\wedge$H factors. Irrelevant otherwise. \\
 \hline
@@ -126,12 +128,12 @@ This class is not thread safe (even a const object is not) because it uses an in
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_a6fe54246201b563a5b848a1e65a57529}\label{classgko_1_1preconditioner_1_1Ic_a6fe54246201b563a5b848a1e65a57529}} 
-\index{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$}!Ic@{Ic}}
-\index{Ic@{Ic}!gko::preconditioner::Ic$<$ LSolverType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$}}
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_ac5aed93da8c97cfeff5364070fabec67}\label{classgko_1_1preconditioner_1_1Ic_ac5aed93da8c97cfeff5364070fabec67}} 
+\index{gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$}!Ic@{Ic}}
+\index{Ic@{Ic}!gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$}}
 \doxysubsubsection{\texorpdfstring{Ic()}{Ic()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$typename L\+Solver\+Type  = solver\+::\+Lower\+Trs$<$$>$, typename Index\+Type  = int32$>$ \\
-\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{gko\+::preconditioner\+::\+Ic}}$<$ L\+Solver\+Type, Index\+Type $>$\+::\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{Ic}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{Ic}}$<$ L\+Solver\+Type, Index\+Type $>$ \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$typename L\+Solver\+Type\+Or\+Value\+Type  = solver\+::\+Lower\+Trs$<$$>$, typename Index\+Type  = int32$>$ \\
+\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{gko\+::preconditioner\+::\+Ic}}$<$ L\+Solver\+Type\+Or\+Value\+Type, Index\+Type $>$\+::\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{Ic}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{Ic}}$<$ L\+Solver\+Type\+Or\+Value\+Type, Index\+Type $>$ \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -141,12 +143,12 @@ Inherits the executor, shallow-\/copies the solvers and parameters.
 
 References gko\+::\+Polymorphic\+Object\+::get\+\_\+executor().
 
-\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_a7a7c2d519d8408492fd18bd4de028521}\label{classgko_1_1preconditioner_1_1Ic_a7a7c2d519d8408492fd18bd4de028521}} 
-\index{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$}!Ic@{Ic}}
-\index{Ic@{Ic}!gko::preconditioner::Ic$<$ LSolverType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$}}
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_a829838c89844bf6eb96a01ec17249be9}\label{classgko_1_1preconditioner_1_1Ic_a829838c89844bf6eb96a01ec17249be9}} 
+\index{gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$}!Ic@{Ic}}
+\index{Ic@{Ic}!gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$}}
 \doxysubsubsection{\texorpdfstring{Ic()}{Ic()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$typename L\+Solver\+Type  = solver\+::\+Lower\+Trs$<$$>$, typename Index\+Type  = int32$>$ \\
-\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{gko\+::preconditioner\+::\+Ic}}$<$ L\+Solver\+Type, Index\+Type $>$\+::\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{Ic}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{Ic}}$<$ L\+Solver\+Type, Index\+Type $>$ \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$typename L\+Solver\+Type\+Or\+Value\+Type  = solver\+::\+Lower\+Trs$<$$>$, typename Index\+Type  = int32$>$ \\
+\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{gko\+::preconditioner\+::\+Ic}}$<$ L\+Solver\+Type\+Or\+Value\+Type, Index\+Type $>$\+::\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{Ic}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{Ic}}$<$ L\+Solver\+Type\+Or\+Value\+Type, Index\+Type $>$ \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -159,12 +161,12 @@ References gko\+::\+Polymorphic\+Object\+::get\+\_\+executor().
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_ac5e214fa1008b2d1611a8cf0b4edd545}\label{classgko_1_1preconditioner_1_1Ic_ac5e214fa1008b2d1611a8cf0b4edd545}} 
-\index{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$}!conj\_transpose@{conj\_transpose}}
-\index{conj\_transpose@{conj\_transpose}!gko::preconditioner::Ic$<$ LSolverType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$}}
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_a500c8d4ac0abf05d7730844ecb4918ce}\label{classgko_1_1preconditioner_1_1Ic_a500c8d4ac0abf05d7730844ecb4918ce}} 
+\index{gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$}!conj\_transpose@{conj\_transpose}}
+\index{conj\_transpose@{conj\_transpose}!gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$}}
 \doxysubsubsection{\texorpdfstring{conj\_transpose()}{conj\_transpose()}}
-{\footnotesize\ttfamily template$<$typename L\+Solver\+Type  = solver\+::\+Lower\+Trs$<$$>$, typename Index\+Type  = int32$>$ \\
-std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{gko\+::preconditioner\+::\+Ic}}$<$ L\+Solver\+Type, Index\+Type $>$\+::conj\+\_\+transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$typename L\+Solver\+Type\+Or\+Value\+Type  = solver\+::\+Lower\+Trs$<$$>$, typename Index\+Type  = int32$>$ \\
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{gko\+::preconditioner\+::\+Ic}}$<$ L\+Solver\+Type\+Or\+Value\+Type, Index\+Type $>$\+::conj\+\_\+transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
@@ -179,14 +181,14 @@ Implements \mbox{\hyperlink{classgko_1_1Transposable_ab41b669288740cf2a6f7bf76e8
 
 
 
-References gko\+::\+Polymorphic\+Object\+::get\+\_\+executor(), gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type, Index\+Type $>$\+::get\+\_\+l\+\_\+solver(), gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type, Index\+Type $>$\+::get\+\_\+lh\+\_\+solver(), gko\+::\+Lin\+Op\+::get\+\_\+size(), gko\+::share(), and gko\+::transpose().
+References gko\+::as(), gko\+::\+Polymorphic\+Object\+::get\+\_\+executor(), gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type\+Or\+Value\+Type, Index\+Type $>$\+::get\+\_\+l\+\_\+solver(), gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type\+Or\+Value\+Type, Index\+Type $>$\+::get\+\_\+lh\+\_\+solver(), gko\+::\+Lin\+Op\+::get\+\_\+size(), gko\+::share(), and gko\+::transpose().
 
-\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_aa4d593fa751aa5cc418fd3cb9155b3bb}\label{classgko_1_1preconditioner_1_1Ic_aa4d593fa751aa5cc418fd3cb9155b3bb}} 
-\index{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$}!get\_l\_solver@{get\_l\_solver}}
-\index{get\_l\_solver@{get\_l\_solver}!gko::preconditioner::Ic$<$ LSolverType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$}}
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_a9f03697babe56242bed46becc442e937}\label{classgko_1_1preconditioner_1_1Ic_a9f03697babe56242bed46becc442e937}} 
+\index{gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$}!get\_l\_solver@{get\_l\_solver}}
+\index{get\_l\_solver@{get\_l\_solver}!gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$}}
 \doxysubsubsection{\texorpdfstring{get\_l\_solver()}{get\_l\_solver()}}
-{\footnotesize\ttfamily template$<$typename L\+Solver\+Type  = solver\+::\+Lower\+Trs$<$$>$, typename Index\+Type  = int32$>$ \\
-std\+::shared\+\_\+ptr$<$const l\+\_\+solver\+\_\+type$>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{gko\+::preconditioner\+::\+Ic}}$<$ L\+Solver\+Type, Index\+Type $>$\+::get\+\_\+l\+\_\+solver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$typename L\+Solver\+Type\+Or\+Value\+Type  = solver\+::\+Lower\+Trs$<$$>$, typename Index\+Type  = int32$>$ \\
+std\+::shared\+\_\+ptr$<$const l\+\_\+solver\+\_\+type$>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{gko\+::preconditioner\+::\+Ic}}$<$ L\+Solver\+Type\+Or\+Value\+Type, Index\+Type $>$\+::get\+\_\+l\+\_\+solver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -197,14 +199,14 @@ the solver which is used for the provided L matrix
 \end{DoxyReturn}
 
 
-Referenced by gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type, Index\+Type $>$\+::conj\+\_\+transpose(), and gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type, Index\+Type $>$\+::transpose().
+Referenced by gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type\+Or\+Value\+Type, Index\+Type $>$\+::conj\+\_\+transpose(), and gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type\+Or\+Value\+Type, Index\+Type $>$\+::transpose().
 
-\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_abeedef49ea383aa54cdaef48e5f01b68}\label{classgko_1_1preconditioner_1_1Ic_abeedef49ea383aa54cdaef48e5f01b68}} 
-\index{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$}!get\_lh\_solver@{get\_lh\_solver}}
-\index{get\_lh\_solver@{get\_lh\_solver}!gko::preconditioner::Ic$<$ LSolverType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$}}
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_a98cf316f57f9ec597b035b625403d490}\label{classgko_1_1preconditioner_1_1Ic_a98cf316f57f9ec597b035b625403d490}} 
+\index{gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$}!get\_lh\_solver@{get\_lh\_solver}}
+\index{get\_lh\_solver@{get\_lh\_solver}!gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$}}
 \doxysubsubsection{\texorpdfstring{get\_lh\_solver()}{get\_lh\_solver()}}
-{\footnotesize\ttfamily template$<$typename L\+Solver\+Type  = solver\+::\+Lower\+Trs$<$$>$, typename Index\+Type  = int32$>$ \\
-std\+::shared\+\_\+ptr$<$const lh\+\_\+solver\+\_\+type$>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{gko\+::preconditioner\+::\+Ic}}$<$ L\+Solver\+Type, Index\+Type $>$\+::get\+\_\+lh\+\_\+solver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$typename L\+Solver\+Type\+Or\+Value\+Type  = solver\+::\+Lower\+Trs$<$$>$, typename Index\+Type  = int32$>$ \\
+std\+::shared\+\_\+ptr$<$const lh\+\_\+solver\+\_\+type$>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{gko\+::preconditioner\+::\+Ic}}$<$ L\+Solver\+Type\+Or\+Value\+Type, Index\+Type $>$\+::get\+\_\+lh\+\_\+solver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -215,14 +217,14 @@ the solver which is used for the L$^\wedge$H matrix
 \end{DoxyReturn}
 
 
-Referenced by gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type, Index\+Type $>$\+::conj\+\_\+transpose(), and gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type, Index\+Type $>$\+::transpose().
+Referenced by gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type\+Or\+Value\+Type, Index\+Type $>$\+::conj\+\_\+transpose(), and gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type\+Or\+Value\+Type, Index\+Type $>$\+::transpose().
 
-\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_a1090b05e9e795c46bab7211aa20934ca}\label{classgko_1_1preconditioner_1_1Ic_a1090b05e9e795c46bab7211aa20934ca}} 
-\index{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$}!operator=@{operator=}}
-\index{operator=@{operator=}!gko::preconditioner::Ic$<$ LSolverType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$}}
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_aa364e04d3edf691449a098d6384cffd4}\label{classgko_1_1preconditioner_1_1Ic_aa364e04d3edf691449a098d6384cffd4}} 
+\index{gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily template$<$typename L\+Solver\+Type  = solver\+::\+Lower\+Trs$<$$>$, typename Index\+Type  = int32$>$ \\
-\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{Ic}}\& \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{gko\+::preconditioner\+::\+Ic}}$<$ L\+Solver\+Type, Index\+Type $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{Ic}}$<$ L\+Solver\+Type, Index\+Type $>$ \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$typename L\+Solver\+Type\+Or\+Value\+Type  = solver\+::\+Lower\+Trs$<$$>$, typename Index\+Type  = int32$>$ \\
+\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{Ic}}\& \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{gko\+::preconditioner\+::\+Ic}}$<$ L\+Solver\+Type\+Or\+Value\+Type, Index\+Type $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{Ic}}$<$ L\+Solver\+Type\+Or\+Value\+Type, Index\+Type $>$ \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -232,12 +234,12 @@ Preserves the executor, shallow-\/copies the solvers and parameters. Creates a c
 
 References gko\+::clone(), and gko\+::\+Polymorphic\+Object\+::get\+\_\+executor().
 
-\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_a9430a801ebfffe9553936e48cc1ba7f5}\label{classgko_1_1preconditioner_1_1Ic_a9430a801ebfffe9553936e48cc1ba7f5}} 
-\index{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$}!operator=@{operator=}}
-\index{operator=@{operator=}!gko::preconditioner::Ic$<$ LSolverType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$}}
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_a6b8d714e083360a50720b9c1f332aaa5}\label{classgko_1_1preconditioner_1_1Ic_a6b8d714e083360a50720b9c1f332aaa5}} 
+\index{gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$}}
 \doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily template$<$typename L\+Solver\+Type  = solver\+::\+Lower\+Trs$<$$>$, typename Index\+Type  = int32$>$ \\
-\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{Ic}}\& \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{gko\+::preconditioner\+::\+Ic}}$<$ L\+Solver\+Type, Index\+Type $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{Ic}}$<$ L\+Solver\+Type, Index\+Type $>$ \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily template$<$typename L\+Solver\+Type\+Or\+Value\+Type  = solver\+::\+Lower\+Trs$<$$>$, typename Index\+Type  = int32$>$ \\
+\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{Ic}}\& \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{gko\+::preconditioner\+::\+Ic}}$<$ L\+Solver\+Type\+Or\+Value\+Type, Index\+Type $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{Ic}}$<$ L\+Solver\+Type\+Or\+Value\+Type, Index\+Type $>$ \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -247,12 +249,12 @@ Preserves the executor, moves the solvers and parameters. Creates a clone of the
 
 References gko\+::clone(), and gko\+::\+Polymorphic\+Object\+::get\+\_\+executor().
 
-\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_a9c9420284654e954e2aa86e6f815ccd7}\label{classgko_1_1preconditioner_1_1Ic_a9c9420284654e954e2aa86e6f815ccd7}} 
-\index{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$}!parse@{parse}}
-\index{parse@{parse}!gko::preconditioner::Ic$<$ LSolverType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$}}
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_a280d45df2d4caafb80b2401d65c22ff6}\label{classgko_1_1preconditioner_1_1Ic_a280d45df2d4caafb80b2401d65c22ff6}} 
+\index{gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$}!parse@{parse}}
+\index{parse@{parse}!gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$}}
 \doxysubsubsection{\texorpdfstring{parse()}{parse()}}
-{\footnotesize\ttfamily template$<$typename L\+Solver\+Type  = solver\+::\+Lower\+Trs$<$$>$, typename Index\+Type  = int32$>$ \\
-static \mbox{\hyperlink{structgko_1_1preconditioner_1_1Ic_1_1parameters__type}{parameters\+\_\+type}} \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{gko\+::preconditioner\+::\+Ic}}$<$ L\+Solver\+Type, Index\+Type $>$\+::parse (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1config_1_1pnode}{config\+::pnode}} \&}]{config,  }\item[{const \mbox{\hyperlink{classgko_1_1config_1_1registry}{config\+::registry}} \&}]{context,  }\item[{const \mbox{\hyperlink{classgko_1_1config_1_1type__descriptor}{config\+::type\+\_\+descriptor}} \&}]{td\+\_\+for\+\_\+child = {\ttfamily config\+:\+:make\+\_\+type\+\_\+descriptor$<$value\+\_\+type,~index\+\_\+type$>$()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+{\footnotesize\ttfamily template$<$typename L\+Solver\+Type\+Or\+Value\+Type  = solver\+::\+Lower\+Trs$<$$>$, typename Index\+Type  = int32$>$ \\
+static \mbox{\hyperlink{structgko_1_1preconditioner_1_1Ic_1_1parameters__type}{parameters\+\_\+type}} \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{gko\+::preconditioner\+::\+Ic}}$<$ L\+Solver\+Type\+Or\+Value\+Type, Index\+Type $>$\+::parse (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1config_1_1pnode}{config\+::pnode}} \&}]{config,  }\item[{const \mbox{\hyperlink{classgko_1_1config_1_1registry}{config\+::registry}} \&}]{context,  }\item[{const \mbox{\hyperlink{classgko_1_1config_1_1type__descriptor}{config\+::type\+\_\+descriptor}} \&}]{td\+\_\+for\+\_\+child = {\ttfamily config\+:\+:make\+\_\+type\+\_\+descriptor$<$value\+\_\+type,~index\+\_\+type$>$()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
 
 
@@ -266,21 +268,21 @@ Because this is directly tied to the specific type, the value/index type setting
 \hline
 {\em context} & the registry \\
 \hline
-{\em td\+\_\+for\+\_\+child} & the type descriptor for children configs. The default uses the value/index type of this class.\\
+{\em td\+\_\+for\+\_\+child} & the type descriptor for children configs. The default uses the value/index type of this class. When l\+\_\+solver\+\_\+type uses \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} not concrete type, it will use the default\+\_\+precision in ginkgo.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 parameters
 \end{DoxyReturn}
 \begin{DoxyNote}{Note}
-only support the following for l\+\_\+solver\+: Ir, Gmres, Lower\+Trs, and Lower\+Isai 
+only support the following when using $<$Value\+Type, Index\+Type$>$ not $<$L\+Solver\+Type, Index\+Type$>$ variants 
 \end{DoxyNote}
-\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_aa058395d245de4ffdaddd5aa5a8fb42a}\label{classgko_1_1preconditioner_1_1Ic_aa058395d245de4ffdaddd5aa5a8fb42a}} 
-\index{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$}!transpose@{transpose}}
-\index{transpose@{transpose}!gko::preconditioner::Ic$<$ LSolverType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverType, IndexType $>$}}
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_a097b9056c39e75f30d8ca8c37bf01454}\label{classgko_1_1preconditioner_1_1Ic_a097b9056c39e75f30d8ca8c37bf01454}} 
+\index{gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$}!transpose@{transpose}}
+\index{transpose@{transpose}!gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$@{gko::preconditioner::Ic$<$ LSolverTypeOrValueType, IndexType $>$}}
 \doxysubsubsection{\texorpdfstring{transpose()}{transpose()}}
-{\footnotesize\ttfamily template$<$typename L\+Solver\+Type  = solver\+::\+Lower\+Trs$<$$>$, typename Index\+Type  = int32$>$ \\
-std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{gko\+::preconditioner\+::\+Ic}}$<$ L\+Solver\+Type, Index\+Type $>$\+::transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+{\footnotesize\ttfamily template$<$typename L\+Solver\+Type\+Or\+Value\+Type  = solver\+::\+Lower\+Trs$<$$>$, typename Index\+Type  = int32$>$ \\
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{gko\+::preconditioner\+::\+Ic}}$<$ L\+Solver\+Type\+Or\+Value\+Type, Index\+Type $>$\+::transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
 
 
 
@@ -295,7 +297,7 @@ Implements \mbox{\hyperlink{classgko_1_1Transposable_a5c6b778b71b47d53e0bda6ccf8
 
 
 
-References gko\+::\+Polymorphic\+Object\+::get\+\_\+executor(), gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type, Index\+Type $>$\+::get\+\_\+l\+\_\+solver(), gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type, Index\+Type $>$\+::get\+\_\+lh\+\_\+solver(), gko\+::\+Lin\+Op\+::get\+\_\+size(), gko\+::share(), and gko\+::transpose().
+References gko\+::as(), gko\+::\+Polymorphic\+Object\+::get\+\_\+executor(), gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type\+Or\+Value\+Type, Index\+Type $>$\+::get\+\_\+l\+\_\+solver(), gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type\+Or\+Value\+Type, Index\+Type $>$\+::get\+\_\+lh\+\_\+solver(), gko\+::\+Lin\+Op\+::get\+\_\+size(), gko\+::share(), and gko\+::transpose().
 
 
 
