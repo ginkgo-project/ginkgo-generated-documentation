@@ -19,6 +19,12 @@ Inheritance diagram for gko\+::experimental\+::mpi\+::Collective\+Communicator\+
 \includegraphics[width=350pt]{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator__inherit__graph}
 \end{center}
 \end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_a1200e48c5fbf95f0059bd7c5553c363e}\label{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_a1200e48c5fbf95f0059bd7c5553c363e}} 
+using \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_a1200e48c5fbf95f0059bd7c5553c363e}{index\+\_\+map\+\_\+ptr}} = std\+::variant$<$ const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1index__map}{distributed\+::index\+\_\+map}}$<$ \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{int32}}, \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{int32}} $>$ $\ast$, const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1index__map}{distributed\+::index\+\_\+map}}$<$ \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{int32}}, \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}} $>$ $\ast$, const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1index__map}{distributed\+::index\+\_\+map}}$<$ \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}}, \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}} $>$ $\ast$ $>$
+\begin{DoxyCompactList}\small\item\em All allowed index\+\_\+map types (as const $\ast$) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -32,14 +38,14 @@ const \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communic
 \begin{DoxyCompactList}\small\item\em Non-\/blocking all-\/to-\/all communication. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_a8be792dac2b7d4df3f1524bbf0b5e625}{i\+\_\+all\+\_\+to\+\_\+all\+\_\+v}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const void $\ast$send\+\_\+buffer, M\+P\+I\+\_\+\+Datatype send\+\_\+type, void $\ast$recv\+\_\+buffer, M\+P\+I\+\_\+\+Datatype recv\+\_\+type) const
 \item 
-virtual std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator}{Collective\+Communicator}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_a1ebc70927cb96af7a14fae8baa1f4e11}{create\+\_\+with\+\_\+same\+\_\+type}} (\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}} base, const distributed\+::index\+\_\+map\+\_\+variant \&imap) const =0
+virtual std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator}{Collective\+Communicator}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_abc7b0ffd6506110cd062c66341f0130d}{create\+\_\+with\+\_\+same\+\_\+type}} (\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}} base, \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_a1200e48c5fbf95f0059bd7c5553c363e}{index\+\_\+map\+\_\+ptr}} imap) const =0
 \begin{DoxyCompactList}\small\item\em Creates a new \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator}{Collective\+Communicator}} with the same dynamic type. \end{DoxyCompactList}\item 
 virtual std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator}{Collective\+Communicator}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_a001a2ba8a80a25dd3987b06ee48371b6}{create\+\_\+inverse}} () const =0
 \begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator}{Collective\+Communicator}} with the inverse communication pattern than this object. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a660817949d982b397475164bec730900}{comm\+\_\+index\+\_\+type}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_a77b426c85c3cdada3cd3936c7e5e1e19}{get\+\_\+recv\+\_\+size}} () const =0
-\begin{DoxyCompactList}\small\item\em Get the total number of received elements this communication patterns expects. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Get the number of elements received by this process within this communication pattern. \end{DoxyCompactList}\item 
 virtual \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a660817949d982b397475164bec730900}{comm\+\_\+index\+\_\+type}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_ad96f20bbe51b403a08819f27d3be53bf}{get\+\_\+send\+\_\+size}} () const =0
-\begin{DoxyCompactList}\small\item\em Get the total number of sent elements this communication patterns expects. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Get the number of elements sent by this process within this communication pattern. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -65,11 +71,11 @@ a \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator}{Co
 
 Implemented in \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1NeighborhoodCommunicator_a31073b1941ac0415aee5004cc9f94766}{gko\+::experimental\+::mpi\+::\+Neighborhood\+Communicator}}, and \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1DenseCommunicator_a479f0511e6201074f5d5fc17a91ae9a6}{gko\+::experimental\+::mpi\+::\+Dense\+Communicator}}.
 
-\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_a1ebc70927cb96af7a14fae8baa1f4e11}\label{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_a1ebc70927cb96af7a14fae8baa1f4e11}} 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_abc7b0ffd6506110cd062c66341f0130d}\label{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_abc7b0ffd6506110cd062c66341f0130d}} 
 \index{gko::experimental::mpi::CollectiveCommunicator@{gko::experimental::mpi::CollectiveCommunicator}!create\_with\_same\_type@{create\_with\_same\_type}}
 \index{create\_with\_same\_type@{create\_with\_same\_type}!gko::experimental::mpi::CollectiveCommunicator@{gko::experimental::mpi::CollectiveCommunicator}}
 \doxysubsubsection{\texorpdfstring{create\_with\_same\_type()}{create\_with\_same\_type()}}
-{\footnotesize\ttfamily virtual std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator}{Collective\+Communicator}}$>$ gko\+::experimental\+::mpi\+::\+Collective\+Communicator\+::create\+\_\+with\+\_\+same\+\_\+type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}}}]{base,  }\item[{const distributed\+::index\+\_\+map\+\_\+variant \&}]{imap }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator}{Collective\+Communicator}}$>$ gko\+::experimental\+::mpi\+::\+Collective\+Communicator\+::create\+\_\+with\+\_\+same\+\_\+type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}}}]{base,  }\item[{\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_a1200e48c5fbf95f0059bd7c5553c363e}{index\+\_\+map\+\_\+ptr}}}]{imap }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 
 
@@ -87,7 +93,7 @@ a \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator}{Co
 \end{DoxyReturn}
 
 
-Implemented in \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1NeighborhoodCommunicator_a820c5d301611c6f2a9e663c0e1530bf4}{gko\+::experimental\+::mpi\+::\+Neighborhood\+Communicator}}, and \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1DenseCommunicator_a231b5806942784ea8e7822cfc544617d}{gko\+::experimental\+::mpi\+::\+Dense\+Communicator}}.
+Implemented in \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1NeighborhoodCommunicator_a6f08646ae3f5c2a3d1b6b1851d68accd}{gko\+::experimental\+::mpi\+::\+Neighborhood\+Communicator}}, and \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1DenseCommunicator_a233b0b983f9f88321d9039e70e68e1dc}{gko\+::experimental\+::mpi\+::\+Dense\+Communicator}}.
 
 \mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_a77b426c85c3cdada3cd3936c7e5e1e19}\label{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_a77b426c85c3cdada3cd3936c7e5e1e19}} 
 \index{gko::experimental::mpi::CollectiveCommunicator@{gko::experimental::mpi::CollectiveCommunicator}!get\_recv\_size@{get\_recv\_size}}
@@ -97,7 +103,7 @@ Implemented in \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1NeighborhoodC
 
 
 
-Get the total number of received elements this communication patterns expects. 
+Get the number of elements received by this process within this communication pattern. 
 
 \begin{DoxyReturn}{Returns}
 number of received elements. 
@@ -114,7 +120,7 @@ Implemented in \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1NeighborhoodC
 
 
 
-Get the total number of sent elements this communication patterns expects. 
+Get the number of elements sent by this process within this communication pattern. 
 
 \begin{DoxyReturn}{Returns}
 number of sent elements. 
