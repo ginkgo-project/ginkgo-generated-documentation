@@ -1,0 +1,168 @@
+\hypertarget{classgko_1_1solver_1_1Minres}{}\doxysection{gko\+::solver\+::Minres$<$ Value\+Type $>$ Class Template Reference}
+\label{classgko_1_1solver_1_1Minres}\index{gko::solver::Minres$<$ ValueType $>$@{gko::solver::Minres$<$ ValueType $>$}}
+
+
+\mbox{\hyperlink{classgko_1_1solver_1_1Minres}{Minres}} is an iterative type Krylov subspace method, which is suitable for indefinite and full-\/rank symmetric/hermitian operators.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/solver/minres.\+hpp$>$}
+
+
+
+Inheritance diagram for gko\+::solver\+::Minres$<$ Value\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1solver_1_1Minres__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for gko\+::solver\+::Minres$<$ Value\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1solver_1_1Minres__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classgko_1_1solver_1_1Minres_1_1Factory}{Factory}}
+\item 
+struct \mbox{\hyperlink{structgko_1_1solver_1_1Minres_1_1parameters__type}{parameters\+\_\+type}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1Minres_a0b6c9e8d49d9b9642069c8af3a68920b}\label{classgko_1_1solver_1_1Minres_a0b6c9e8d49d9b9642069c8af3a68920b}} 
+using {\bfseries value\+\_\+type} = Value\+Type
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1Minres_a62f1799ec23eb06cd7a330f7bb4d4641}\label{classgko_1_1solver_1_1Minres_a62f1799ec23eb06cd7a330f7bb4d4641}} 
+using {\bfseries transposed\+\_\+type} = \mbox{\hyperlink{classgko_1_1solver_1_1Minres}{Minres}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1solver_1_1Minres_a96d5ded356205b360854f5e99420f480}{transpose}} () const override
+\begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1solver_1_1Minres_a3263cbf1fd0eca5833c47620559f1b76}{conj\+\_\+transpose}} () const override
+\begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the conjugate transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1Minres_a6563de6abe6ab2bf8f792419e7947000}\label{classgko_1_1solver_1_1Minres_a6563de6abe6ab2bf8f792419e7947000}} 
+bool \mbox{\hyperlink{classgko_1_1solver_1_1Minres_a6563de6abe6ab2bf8f792419e7947000}{apply\+\_\+uses\+\_\+initial\+\_\+guess}} () const override
+\begin{DoxyCompactList}\small\item\em Return true as iterative solvers use the data in x as an initial guess. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1Minres_ac13dcb698e9f7efd28499b1b743f2067}\label{classgko_1_1solver_1_1Minres_ac13dcb698e9f7efd28499b1b743f2067}} 
+const \mbox{\hyperlink{structgko_1_1solver_1_1Minres_1_1parameters__type}{parameters\+\_\+type}} \& {\bfseries get\+\_\+parameters} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1Minres_aa8117865d8e39a14e47a02232ab566a8}\label{classgko_1_1solver_1_1Minres_aa8117865d8e39a14e47a02232ab566a8}} 
+static auto {\bfseries build} () -\/$>$ decltype(\mbox{\hyperlink{classgko_1_1solver_1_1Minres_1_1Factory}{Factory}} \+::create())
+\item 
+static \mbox{\hyperlink{structgko_1_1solver_1_1Minres_1_1parameters__type}{parameters\+\_\+type}} \mbox{\hyperlink{classgko_1_1solver_1_1Minres_a60d58605a2eabc31a98ed1ed5f73f6f0}{parse}} (const \mbox{\hyperlink{classgko_1_1config_1_1pnode}{config\+::pnode}} \&config, const \mbox{\hyperlink{classgko_1_1config_1_1registry}{config\+::registry}} \&context, const \mbox{\hyperlink{classgko_1_1config_1_1type__descriptor}{config\+::type\+\_\+descriptor}} \&td\+\_\+for\+\_\+child=config\+::make\+\_\+type\+\_\+descriptor$<$ Value\+Type $>$())
+\begin{DoxyCompactList}\small\item\em Create the parameters from the property\+\_\+tree. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1Minres_a132075559d173b0f0cdc50d9d889d3c8}\label{classgko_1_1solver_1_1Minres_a132075559d173b0f0cdc50d9d889d3c8}} 
+class {\bfseries Enable\+Lin\+Op$<$ Minres $>$}
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1Minres_a0b1a661150ce2a65c14f98567eaffb99}\label{classgko_1_1solver_1_1Minres_a0b1a661150ce2a65c14f98567eaffb99}} 
+class {\bfseries Enable\+Polymorphic\+Object$<$ Minres, Lin\+Op $>$}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Value\+Type = default\+\_\+precision$>$\newline
+class gko\+::solver\+::\+Minres$<$ Value\+Type $>$}
+
+\mbox{\hyperlink{classgko_1_1solver_1_1Minres}{Minres}} is an iterative type Krylov subspace method, which is suitable for indefinite and full-\/rank symmetric/hermitian operators. 
+
+It is a specialization of the \mbox{\hyperlink{classgko_1_1solver_1_1Gmres}{Gmres}} method for symmetric/hermitian operators, and can be computed using short recurrences, similar to the CG method.
+
+The implementation in Ginkgo makes use of the merged kernel to make the best use of data locality. The inner operations in one iteration of \mbox{\hyperlink{classgko_1_1solver_1_1Minres}{Minres}} are merged into 2 separate steps.
+
+For more details see Anne Grennbaum\textquotesingle{}s \textquotesingle{}Iterative Methods for Solving Linear Systems\textquotesingle{} (D\+OI\+: 10.\+1137/1.9781611970937), and Sou-\/\+Cheng (Terrya) Choi\textquotesingle{}s \textquotesingle{}I\+T\+E\+R\+A\+T\+I\+VE M\+E\+T\+H\+O\+DS F\+OR S\+I\+N\+G\+U\+L\+AR L\+I\+N\+E\+AR E\+Q\+U\+A\+T\+I\+O\+NS A\+ND L\+E\+A\+S\+T-\/\+S\+Q\+U\+A\+R\+ES P\+R\+O\+B\+L\+E\+MS\textquotesingle{}.
+
+\begin{DoxyNote}{Note}
+\+: The \mbox{\hyperlink{classgko_1_1solver_1_1Minres}{Minres}} solver only reports an approximation of the residual norm directly to the stopping criteria. Neither the actual residual, nor the actual residual norm are reported. Thus, to get the minimal overhead, the \mbox{\hyperlink{classgko_1_1stop_1_1ImplicitResidualNorm}{gko\+::stop\+::\+Implicit\+Residual\+Norm}} criteria should be used. The \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko\+::stop\+::\+Residual\+Norm}} criteria will require an additional matrix-\/vector product and global reduction.
+\end{DoxyNote}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Value\+Type} & precision of matrix elements \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1solver_1_1Minres_a3263cbf1fd0eca5833c47620559f1b76}\label{classgko_1_1solver_1_1Minres_a3263cbf1fd0eca5833c47620559f1b76}} 
+\index{gko::solver::Minres$<$ ValueType $>$@{gko::solver::Minres$<$ ValueType $>$}!conj\_transpose@{conj\_transpose}}
+\index{conj\_transpose@{conj\_transpose}!gko::solver::Minres$<$ ValueType $>$@{gko::solver::Minres$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{conj\_transpose()}{conj\_transpose()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1solver_1_1Minres}{gko\+::solver\+::\+Minres}}$<$ Value\+Type $>$\+::conj\+\_\+transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the conjugate transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. 
+
+\begin{DoxyReturn}{Returns}
+a pointer to the new conjugate transposed object 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classgko_1_1Transposable_ab41b669288740cf2a6f7bf76e875b077}{gko\+::\+Transposable}}.
+
+\mbox{\Hypertarget{classgko_1_1solver_1_1Minres_a60d58605a2eabc31a98ed1ed5f73f6f0}\label{classgko_1_1solver_1_1Minres_a60d58605a2eabc31a98ed1ed5f73f6f0}} 
+\index{gko::solver::Minres$<$ ValueType $>$@{gko::solver::Minres$<$ ValueType $>$}!parse@{parse}}
+\index{parse@{parse}!gko::solver::Minres$<$ ValueType $>$@{gko::solver::Minres$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{parse()}{parse()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+static \mbox{\hyperlink{structgko_1_1solver_1_1Minres_1_1parameters__type}{parameters\+\_\+type}} \mbox{\hyperlink{classgko_1_1solver_1_1Minres}{gko\+::solver\+::\+Minres}}$<$ Value\+Type $>$\+::parse (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1config_1_1pnode}{config\+::pnode}} \&}]{config,  }\item[{const \mbox{\hyperlink{classgko_1_1config_1_1registry}{config\+::registry}} \&}]{context,  }\item[{const \mbox{\hyperlink{classgko_1_1config_1_1type__descriptor}{config\+::type\+\_\+descriptor}} \&}]{td\+\_\+for\+\_\+child = {\ttfamily config\+:\+:make\+\_\+type\+\_\+descriptor$<$~ValueType~$>$()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Create the parameters from the property\+\_\+tree. 
+
+Because this is directly tied to the specific type, the value/index type settings within config are ignored and type\+\_\+descriptor is only used for children configs.
+
+
+\begin{DoxyParams}{Parameters}
+{\em config} & the property tree for setting \\
+\hline
+{\em context} & the registry \\
+\hline
+{\em td\+\_\+for\+\_\+child} & the type descriptor for children configs. The default uses the value type of this class.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+parameters 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1solver_1_1Minres_a96d5ded356205b360854f5e99420f480}\label{classgko_1_1solver_1_1Minres_a96d5ded356205b360854f5e99420f480}} 
+\index{gko::solver::Minres$<$ ValueType $>$@{gko::solver::Minres$<$ ValueType $>$}!transpose@{transpose}}
+\index{transpose@{transpose}!gko::solver::Minres$<$ ValueType $>$@{gko::solver::Minres$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{transpose()}{transpose()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1solver_1_1Minres}{gko\+::solver\+::\+Minres}}$<$ Value\+Type $>$\+::transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. 
+
+\begin{DoxyReturn}{Returns}
+a pointer to the new transposed object 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classgko_1_1Transposable_a5c6b778b71b47d53e0bda6ccf894d318}{gko\+::\+Transposable}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/solver/minres.\+hpp\end{DoxyCompactItemize}

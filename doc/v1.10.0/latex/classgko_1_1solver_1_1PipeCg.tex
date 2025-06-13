@@ -1,0 +1,187 @@
+\hypertarget{classgko_1_1solver_1_1PipeCg}{}\doxysection{gko\+::solver\+::Pipe\+Cg$<$ Value\+Type $>$ Class Template Reference}
+\label{classgko_1_1solver_1_1PipeCg}\index{gko::solver::PipeCg$<$ ValueType $>$@{gko::solver::PipeCg$<$ ValueType $>$}}
+
+
+P\+I\+P\+E\+\_\+\+CG or the pipelined conjugate gradient method is an iterative type Krylov subspace method which is suitable for symmetric positive definite methods.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/solver/pipe\+\_\+cg.\+hpp$>$}
+
+
+
+Inheritance diagram for gko\+::solver\+::Pipe\+Cg$<$ Value\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1solver_1_1PipeCg__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for gko\+::solver\+::Pipe\+Cg$<$ Value\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1solver_1_1PipeCg__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classgko_1_1solver_1_1PipeCg_1_1Factory}{Factory}}
+\item 
+struct \mbox{\hyperlink{structgko_1_1solver_1_1PipeCg_1_1parameters__type}{parameters\+\_\+type}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1PipeCg_a641217d1084134ec900b33306e802238}\label{classgko_1_1solver_1_1PipeCg_a641217d1084134ec900b33306e802238}} 
+using {\bfseries value\+\_\+type} = Value\+Type
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1PipeCg_a5e219478763a0440c1bd696342169807}\label{classgko_1_1solver_1_1PipeCg_a5e219478763a0440c1bd696342169807}} 
+using {\bfseries transposed\+\_\+type} = \mbox{\hyperlink{classgko_1_1solver_1_1PipeCg}{Pipe\+Cg}}$<$ Value\+Type $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1solver_1_1PipeCg_a3e9381efcc8f34d7bd2e1478e5b66e1f}{transpose}} () const override
+\begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1solver_1_1PipeCg_ad8790ec952b39290e914135f22630bfa}{conj\+\_\+transpose}} () const override
+\begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the conjugate transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classgko_1_1solver_1_1PipeCg_a9c281801a55afcf6e6bfa0a0e55e5825}{apply\+\_\+uses\+\_\+initial\+\_\+guess}} () const override
+\begin{DoxyCompactList}\small\item\em Return true as iterative solvers use the data in x as an initial guess. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1PipeCg_a8eb1659667025241c65b913ad4ae1325}\label{classgko_1_1solver_1_1PipeCg_a8eb1659667025241c65b913ad4ae1325}} 
+const \mbox{\hyperlink{structgko_1_1solver_1_1PipeCg_1_1parameters__type}{parameters\+\_\+type}} \& {\bfseries get\+\_\+parameters} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1PipeCg_a019df9122f89a9bba955751dbec3f41c}\label{classgko_1_1solver_1_1PipeCg_a019df9122f89a9bba955751dbec3f41c}} 
+static auto {\bfseries build} () -\/$>$ decltype(\mbox{\hyperlink{classgko_1_1solver_1_1PipeCg_1_1Factory}{Factory}} \+::create())
+\item 
+static \mbox{\hyperlink{structgko_1_1solver_1_1PipeCg_1_1parameters__type}{parameters\+\_\+type}} \mbox{\hyperlink{classgko_1_1solver_1_1PipeCg_aaf33e66323571c9fe466c1cdac7073e2}{parse}} (const \mbox{\hyperlink{classgko_1_1config_1_1pnode}{config\+::pnode}} \&config, const \mbox{\hyperlink{classgko_1_1config_1_1registry}{config\+::registry}} \&context, const \mbox{\hyperlink{classgko_1_1config_1_1type__descriptor}{config\+::type\+\_\+descriptor}} \&td\+\_\+for\+\_\+child=config\+::make\+\_\+type\+\_\+descriptor$<$ Value\+Type $>$())
+\begin{DoxyCompactList}\small\item\em Create the parameters from the property\+\_\+tree. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1PipeCg_a251b3e2b347b045631e829527630dc7f}\label{classgko_1_1solver_1_1PipeCg_a251b3e2b347b045631e829527630dc7f}} 
+class {\bfseries Enable\+Lin\+Op$<$ Pipe\+Cg $>$}
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1PipeCg_a773344161b2e2c7210ee5b35b7bae3d4}\label{classgko_1_1solver_1_1PipeCg_a773344161b2e2c7210ee5b35b7bae3d4}} 
+class {\bfseries Enable\+Polymorphic\+Object$<$ Pipe\+Cg, Lin\+Op $>$}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Value\+Type = default\+\_\+precision$>$\newline
+class gko\+::solver\+::\+Pipe\+Cg$<$ Value\+Type $>$}
+
+P\+I\+P\+E\+\_\+\+CG or the pipelined conjugate gradient method is an iterative type Krylov subspace method which is suitable for symmetric positive definite methods. 
+
+It improves upon the CG method by allowing computation of inner products and norms to be overlapped with operator and preconditioner application. The pipelined method scales up to the 10$^\wedge$6 nodes of the assumed exascale machine, while its standard counterpart level off about one order of magnitude earlier, as suggested in the referenced paper (see below).
+
+Possible issues\+:
+\begin{DoxyEnumerate}
+\item Numerical instability\+: Due to the rearrangement of the operations, the method is known to be less stable than standard P\+CG.
+\item The method is suitable for cases where a large number of iterations need to be performed and when the solver is distributed over a large number of distributed nodes. The advantage of lesser number of reductions that need to be performed comes at the cost of increased vector operations, and the cost of increased storage of vectors.
+\item As the CG itself, this method performs very well for symmetric positive definite matrices but it is in general not suitable for general matrices.
+\end{DoxyEnumerate}
+
+The implementation in Ginkgo is based on the following paper\+: Pipelined, Flexible Krylov Subspace Methods, P. Sanan et. al, S\+I\+SC, 2016, doi\+: 10.\+1137/15\+M1049130
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Value\+Type} & precision of matrix elements \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1solver_1_1PipeCg_a9c281801a55afcf6e6bfa0a0e55e5825}\label{classgko_1_1solver_1_1PipeCg_a9c281801a55afcf6e6bfa0a0e55e5825}} 
+\index{gko::solver::PipeCg$<$ ValueType $>$@{gko::solver::PipeCg$<$ ValueType $>$}!apply\_uses\_initial\_guess@{apply\_uses\_initial\_guess}}
+\index{apply\_uses\_initial\_guess@{apply\_uses\_initial\_guess}!gko::solver::PipeCg$<$ ValueType $>$@{gko::solver::PipeCg$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{apply\_uses\_initial\_guess()}{apply\_uses\_initial\_guess()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+bool \mbox{\hyperlink{classgko_1_1solver_1_1PipeCg}{gko\+::solver\+::\+Pipe\+Cg}}$<$ Value\+Type $>$\+::apply\+\_\+uses\+\_\+initial\+\_\+guess (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Return true as iterative solvers use the data in x as an initial guess. 
+
+\begin{DoxyReturn}{Returns}
+true as iterative solvers use the data in x as an initial guess. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classgko_1_1LinOp_a80967e89745c73e5df8640fe1c7e4aaa}{gko\+::\+Lin\+Op}}.
+
+\mbox{\Hypertarget{classgko_1_1solver_1_1PipeCg_ad8790ec952b39290e914135f22630bfa}\label{classgko_1_1solver_1_1PipeCg_ad8790ec952b39290e914135f22630bfa}} 
+\index{gko::solver::PipeCg$<$ ValueType $>$@{gko::solver::PipeCg$<$ ValueType $>$}!conj\_transpose@{conj\_transpose}}
+\index{conj\_transpose@{conj\_transpose}!gko::solver::PipeCg$<$ ValueType $>$@{gko::solver::PipeCg$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{conj\_transpose()}{conj\_transpose()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1solver_1_1PipeCg}{gko\+::solver\+::\+Pipe\+Cg}}$<$ Value\+Type $>$\+::conj\+\_\+transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the conjugate transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. 
+
+\begin{DoxyReturn}{Returns}
+a pointer to the new conjugate transposed object 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classgko_1_1Transposable_ab41b669288740cf2a6f7bf76e875b077}{gko\+::\+Transposable}}.
+
+\mbox{\Hypertarget{classgko_1_1solver_1_1PipeCg_aaf33e66323571c9fe466c1cdac7073e2}\label{classgko_1_1solver_1_1PipeCg_aaf33e66323571c9fe466c1cdac7073e2}} 
+\index{gko::solver::PipeCg$<$ ValueType $>$@{gko::solver::PipeCg$<$ ValueType $>$}!parse@{parse}}
+\index{parse@{parse}!gko::solver::PipeCg$<$ ValueType $>$@{gko::solver::PipeCg$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{parse()}{parse()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+static \mbox{\hyperlink{structgko_1_1solver_1_1PipeCg_1_1parameters__type}{parameters\+\_\+type}} \mbox{\hyperlink{classgko_1_1solver_1_1PipeCg}{gko\+::solver\+::\+Pipe\+Cg}}$<$ Value\+Type $>$\+::parse (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1config_1_1pnode}{config\+::pnode}} \&}]{config,  }\item[{const \mbox{\hyperlink{classgko_1_1config_1_1registry}{config\+::registry}} \&}]{context,  }\item[{const \mbox{\hyperlink{classgko_1_1config_1_1type__descriptor}{config\+::type\+\_\+descriptor}} \&}]{td\+\_\+for\+\_\+child = {\ttfamily config\+:\+:make\+\_\+type\+\_\+descriptor$<$~ValueType~$>$()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Create the parameters from the property\+\_\+tree. 
+
+Because this is directly tied to the specific type, the value/index type settings within config are ignored and type\+\_\+descriptor is only used for children configs.
+
+
+\begin{DoxyParams}{Parameters}
+{\em config} & the property tree for setting \\
+\hline
+{\em context} & the registry \\
+\hline
+{\em td\+\_\+for\+\_\+child} & the type descriptor for children configs. The default uses the value type of this class.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+parameters 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1solver_1_1PipeCg_a3e9381efcc8f34d7bd2e1478e5b66e1f}\label{classgko_1_1solver_1_1PipeCg_a3e9381efcc8f34d7bd2e1478e5b66e1f}} 
+\index{gko::solver::PipeCg$<$ ValueType $>$@{gko::solver::PipeCg$<$ ValueType $>$}!transpose@{transpose}}
+\index{transpose@{transpose}!gko::solver::PipeCg$<$ ValueType $>$@{gko::solver::PipeCg$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{transpose()}{transpose()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1solver_1_1PipeCg}{gko\+::solver\+::\+Pipe\+Cg}}$<$ Value\+Type $>$\+::transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. 
+
+\begin{DoxyReturn}{Returns}
+a pointer to the new transposed object 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classgko_1_1Transposable_a5c6b778b71b47d53e0bda6ccf894d318}{gko\+::\+Transposable}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/solver/pipe\+\_\+cg.\+hpp\end{DoxyCompactItemize}
