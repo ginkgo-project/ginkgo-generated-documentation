@@ -1,6 +1,5 @@
 This is the main page for the Ginkgo library user documentation. The repository is hosted on [github](https://github.com/ginkgo-project/ginkgo). Documentation on aspects such as the build system, can be found at the @ref install_ginkgo page. The @ref Examples can help you get started with using Ginkgo. 
 
-
 ### Modules
 
 The Ginkgo library can be grouped into [modules](modules.html) and these modules form the basic building blocks of Ginkgo. The modules can be summarized as follows:
@@ -12,4 +11,3 @@ The Ginkgo library can be grouped into [modules](modules.html) and these modules
     * @ref mat_formats : Perform a sparse matrix vector multiplication with a particular matrix format.
 *   @ref log : Monitor your code execution.
 *   @ref stop : Manage your iteration stopping criteria.
-

@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1580377518 branch based on main. Ginkgo version 1.9.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1868155508 branch based on main. Ginkgo version 1.10.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -149,6 +149,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgko_1_1batch__dim.html">batch_dim</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type representing the dimensions of a multidimensional batch object.  <a href="structgko_1_1batch__dim.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1bfloat16.html">bfloat16</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A class providing basic support for <a class="el" href="classgko_1_1bfloat16.html" title="A class providing basic support for bfloat16 precision floating point types.">bfloat16</a> precision floating point types.  <a href="classgko_1_1bfloat16.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1BlockOperator.html">BlockOperator</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A <a class="el" href="classgko_1_1BlockOperator.html" title="A BlockOperator represents a linear operator that is partitioned into multiple blocks.">BlockOperator</a> represents a linear operator that is partitioned into multiple blocks.  <a href="classgko_1_1BlockOperator.html#details">More...</a><br /></td></tr>
@@ -498,15 +501,16 @@ template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a7637275ce59930ce2926bfcc1cd42e28"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegko.html#a7637275ce59930ce2926bfcc1cd42e28">previous_precision_base</a> = <a class="el" href="namespacegko.html#a3a3680038c88373d22ba1825fb150a53">next_precision_base</a>&lt; T &gt;</td></tr>
 <tr class="memdesc:a7637275ce59930ce2926bfcc1cd42e28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtains the previous type in the singly-linked precision list.  <a href="namespacegko.html#a7637275ce59930ce2926bfcc1cd42e28">More...</a><br /></td></tr>
 <tr class="separator:a7637275ce59930ce2926bfcc1cd42e28"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c7eb99ec1a77c39fbf93b828d6b3775"><td class="memTemplParams" colspan="2"><a id="a5c7eb99ec1a77c39fbf93b828d6b3775"></a>
-template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a5c7eb99ec1a77c39fbf93b828d6b3775"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegko.html#a5c7eb99ec1a77c39fbf93b828d6b3775">next_precision</a> = <a class="el" href="namespacegko.html#a3a3680038c88373d22ba1825fb150a53">next_precision_base</a>&lt; T &gt;</td></tr>
-<tr class="memdesc:a5c7eb99ec1a77c39fbf93b828d6b3775"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtains the next type in the singly-linked precision list with half. <br /></td></tr>
-<tr class="separator:a5c7eb99ec1a77c39fbf93b828d6b3775"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e5f00484a10625327bbd3b2f173bfdc"><td class="memTemplParams" colspan="2"><a id="a9e5f00484a10625327bbd3b2f173bfdc"></a>
-template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a9e5f00484a10625327bbd3b2f173bfdc"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><b>previous_precision</b> = <a class="el" href="namespacegko.html#a7637275ce59930ce2926bfcc1cd42e28">previous_precision_base</a>&lt; T &gt;</td></tr>
-<tr class="separator:a9e5f00484a10625327bbd3b2f173bfdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a861156f9c64df6146d771527eb2e179d"><td class="memTemplParams" colspan="2"><a id="a861156f9c64df6146d771527eb2e179d"></a>
+template&lt;typename T , int step = 1&gt; </td></tr>
+<tr class="memitem:a861156f9c64df6146d771527eb2e179d"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegko.html#a861156f9c64df6146d771527eb2e179d">next_precision</a> = typename detail::find_precision_impl&lt; T, step &gt;::type</td></tr>
+<tr class="memdesc:a861156f9c64df6146d771527eb2e179d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtains the next <code>move</code> type of T in the singly-linked precision corresponding bfloat16/half. <br /></td></tr>
+<tr class="separator:a861156f9c64df6146d771527eb2e179d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c244b670709748bb8af2bf462f4d4b1"><td class="memTemplParams" colspan="2"><a id="a5c244b670709748bb8af2bf462f4d4b1"></a>
+template&lt;typename T , int step = 1&gt; </td></tr>
+<tr class="memitem:a5c244b670709748bb8af2bf462f4d4b1"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegko.html#a5c244b670709748bb8af2bf462f4d4b1">previous_precision</a> = typename detail::find_precision_impl&lt; T, -step &gt;::type</td></tr>
+<tr class="memdesc:a5c244b670709748bb8af2bf462f4d4b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtains the previous <code>move</code> type of T in the singly-linked precision corresponding bfloat16/half. <br /></td></tr>
+<tr class="separator:a5c244b670709748bb8af2bf462f4d4b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab5d71c1f4bd1b654df1e561ea7a811f2"><td class="memTemplParams" colspan="2"><a id="ab5d71c1f4bd1b654df1e561ea7a811f2"></a>
 template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ab5d71c1f4bd1b654df1e561ea7a811f2"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegko.html#ab5d71c1f4bd1b654df1e561ea7a811f2">reduce_precision</a> = typename detail::reduce_precision_impl&lt; T &gt;::type</td></tr>
@@ -568,7 +572,7 @@ using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="nam
 <tr class="separator:a0913bfb81622f6bdde52884015c2a4ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86477c0acba18c50cac69112d791dfa6"><td class="memItemLeft" align="right" valign="top"><a id="a86477c0acba18c50cac69112d791dfa6"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegko.html#a86477c0acba18c50cac69112d791dfa6">float16</a> = <a class="el" href="classgko_1_1half.html">half</a></td></tr>
-<tr class="memdesc:a86477c0acba18c50cac69112d791dfa6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Half precision floating point type. <br /></td></tr>
+<tr class="memdesc:a86477c0acba18c50cac69112d791dfa6"><td class="mdescLeft">&#160;</td><td class="mdescRight">16 bit floating point type. <br /></td></tr>
 <tr class="separator:a86477c0acba18c50cac69112d791dfa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b5dbd886493d4ccaba6a7a1ba74896c"><td class="memItemLeft" align="right" valign="top"><a id="a0b5dbd886493d4ccaba6a7a1ba74896c"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegko.html#a0b5dbd886493d4ccaba6a7a1ba74896c">float32</a> = float</td></tr>
@@ -667,6 +671,10 @@ Functions</h2></td></tr>
 template&lt;&gt; </td></tr>
 <tr class="memitem:a082f4684d162759a96c26fa30181103f"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="classgko_1_1half.html">half</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><b>one&lt; half &gt;</b> ()</td></tr>
 <tr class="separator:a082f4684d162759a96c26fa30181103f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7842aa374806eb88cd974ac102e81def"><td class="memTemplParams" colspan="2"><a id="a7842aa374806eb88cd974ac102e81def"></a>
+template&lt;&gt; </td></tr>
+<tr class="memitem:a7842aa374806eb88cd974ac102e81def"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="classgko_1_1bfloat16.html">bfloat16</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><b>one&lt; bfloat16 &gt;</b> ()</td></tr>
+<tr class="separator:a7842aa374806eb88cd974ac102e81def"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4f16ecf0a759f46259cf9518f1e4568"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ab4f16ecf0a759f46259cf9518f1e4568"><td class="memTemplItemLeft" align="right" valign="top">constexpr T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegko.html#ab4f16ecf0a759f46259cf9518f1e4568">one</a> (const T &amp;)</td></tr>
 <tr class="memdesc:ab4f16ecf0a759f46259cf9518f1e4568"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the multiplicative identity for T.  <a href="namespacegko.html#ab4f16ecf0a759f46259cf9518f1e4568">More...</a><br /></td></tr>
@@ -714,12 +722,21 @@ template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a706e6d4214dcd751b0f6dda94bf11608"><td class="memItemLeft" align="right" valign="top"><a id="a706e6d4214dcd751b0f6dda94bf11608"></a>
 <a class="el" href="classgko_1_1half.html">gko::half</a>&#160;</td><td class="memItemRight" valign="bottom"><b>abs</b> (const std::complex&lt; <a class="el" href="classgko_1_1half.html">gko::half</a> &gt; &amp;x)</td></tr>
 <tr class="separator:a706e6d4214dcd751b0f6dda94bf11608"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af32f4b09c884d173e83f770d867c75f3"><td class="memItemLeft" align="right" valign="top"><a id="af32f4b09c884d173e83f770d867c75f3"></a>
+<a class="el" href="classgko_1_1bfloat16.html">gko::bfloat16</a>&#160;</td><td class="memItemRight" valign="bottom"><b>abs</b> (const std::complex&lt; <a class="el" href="classgko_1_1bfloat16.html">gko::bfloat16</a> &gt; &amp;x)</td></tr>
+<tr class="separator:af32f4b09c884d173e83f770d867c75f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab6a35f93a8a77f8fffd7d7e1c1338941"><td class="memItemLeft" align="right" valign="top"><a id="ab6a35f93a8a77f8fffd7d7e1c1338941"></a>
 <a class="el" href="classgko_1_1half.html">gko::half</a>&#160;</td><td class="memItemRight" valign="bottom"><b>sqrt</b> (<a class="el" href="classgko_1_1half.html">gko::half</a> a)</td></tr>
 <tr class="separator:ab6a35f93a8a77f8fffd7d7e1c1338941"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86108d9eebb2b770179c8b1de8d2cf1d"><td class="memItemLeft" align="right" valign="top"><a id="a86108d9eebb2b770179c8b1de8d2cf1d"></a>
 std::complex&lt; <a class="el" href="classgko_1_1half.html">gko::half</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>sqrt</b> (std::complex&lt; <a class="el" href="classgko_1_1half.html">gko::half</a> &gt; a)</td></tr>
 <tr class="separator:a86108d9eebb2b770179c8b1de8d2cf1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50295b2c4b1072234a0abe00b027fe94"><td class="memItemLeft" align="right" valign="top"><a id="a50295b2c4b1072234a0abe00b027fe94"></a>
+<a class="el" href="classgko_1_1bfloat16.html">gko::bfloat16</a>&#160;</td><td class="memItemRight" valign="bottom"><b>sqrt</b> (<a class="el" href="classgko_1_1bfloat16.html">gko::bfloat16</a> a)</td></tr>
+<tr class="separator:a50295b2c4b1072234a0abe00b027fe94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a454f1ae66edde285e97abbb384cfb800"><td class="memItemLeft" align="right" valign="top"><a id="a454f1ae66edde285e97abbb384cfb800"></a>
+std::complex&lt; <a class="el" href="classgko_1_1bfloat16.html">gko::bfloat16</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>sqrt</b> (std::complex&lt; <a class="el" href="classgko_1_1bfloat16.html">gko::bfloat16</a> &gt; a)</td></tr>
+<tr class="separator:a454f1ae66edde285e97abbb384cfb800"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0603ce0a60183a6698ac9b523694fb68"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a0603ce0a60183a6698ac9b523694fb68"><td class="memTemplItemLeft" align="right" valign="top">constexpr T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegko.html#a0603ce0a60183a6698ac9b523694fb68">pi</a> ()</td></tr>
 <tr class="memdesc:a0603ce0a60183a6698ac9b523694fb68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the value of pi.  <a href="namespacegko.html#a0603ce0a60183a6698ac9b523694fb68">More...</a><br /></td></tr>
@@ -2004,7 +2021,7 @@ template&lt;typename T , typename U &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>If successful, returns a pointer to the subtype, otherwise throws <a class="el" href="classgko_1_1NotSupported.html" title="NotSupported is thrown in case it is not possible to perform the requested operation on the given obj...">NotSupported</a>. </dd></dl>
 
-<p class="reference">Referenced by <a class="el" href="classgko_1_1preconditioner_1_1Isai.html#a76b0195c7742295144b38edcc6bd4a0b">gko::preconditioner::Isai&lt; IsaiType, ValueType, IndexType &gt;::get_approximate_inverse()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="classgko_1_1preconditioner_1_1Ic.html#a500c8d4ac0abf05d7730844ecb4918ce">gko::preconditioner::Ic&lt; LSolverTypeOrValueType, IndexType &gt;::conj_transpose()</a>, <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#a739d68011f5c36663ea642f860eca761">gko::preconditioner::Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt;::conj_transpose()</a>, <a class="el" href="classgko_1_1preconditioner_1_1Isai.html#a76b0195c7742295144b38edcc6bd4a0b">gko::preconditioner::Isai&lt; IsaiType, ValueType, IndexType &gt;::get_approximate_inverse()</a>, <a class="el" href="classgko_1_1preconditioner_1_1Ic.html#a097b9056c39e75f30d8ca8c37bf01454">gko::preconditioner::Ic&lt; LSolverTypeOrValueType, IndexType &gt;::transpose()</a>, and <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#a6545dc5c042ba7e89d3fbbdfc72e1a91">gko::preconditioner::Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt;::transpose()</a>.</p>
 
 </div>
 </div>
@@ -2098,7 +2115,7 @@ template&lt;typename Pointer &gt; </div>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>The difference between this function and directly calling LinOp::clone() is that this one preserves the static type of the object. </dd></dl>
 
-<p class="reference">Referenced by <a class="el" href="classgko_1_1preconditioner_1_1Ic.html#a1090b05e9e795c46bab7211aa20934ca">gko::preconditioner::Ic&lt; LSolverType, IndexType &gt;::operator=()</a>, <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#a23a9881155894ed00b7f216f269fd4e7">gko::preconditioner::Ilu&lt; LSolverType, USolverType, ReverseApply, IndexType &gt;::operator=()</a>, <a class="el" href="classgko_1_1solver_1_1EnablePreconditionable.html#ad1f52e213256cd7c50811787dfcf4288">gko::solver::EnablePreconditionable&lt; Bicg&lt; ValueType &gt; &gt;::set_preconditioner()</a>, and <a class="el" href="classgko_1_1solver_1_1EnableIterativeBase.html#a5e96a31681a2bc03fffb2d76e7a7da12">gko::solver::EnableIterativeBase&lt; Bicg&lt; ValueType &gt; &gt;::set_stop_criterion_factory()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="classgko_1_1preconditioner_1_1Ic.html#aa364e04d3edf691449a098d6384cffd4">gko::preconditioner::Ic&lt; LSolverTypeOrValueType, IndexType &gt;::operator=()</a>, <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#a42f198304113da4ee2da21da21da3251">gko::preconditioner::Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt;::operator=()</a>, <a class="el" href="classgko_1_1solver_1_1EnablePreconditionable.html#ad1f52e213256cd7c50811787dfcf4288">gko::solver::EnablePreconditionable&lt; Chebyshev&lt; ValueType &gt; &gt;::set_preconditioner()</a>, and <a class="el" href="classgko_1_1solver_1_1EnableIterativeBase.html#a5e96a31681a2bc03fffb2d76e7a7da12">gko::solver::EnableIterativeBase&lt; Chebyshev&lt; ValueType &gt; &gt;::set_stop_criterion_factory()</a>.</p>
 
 </div>
 </div>
@@ -3078,7 +3095,7 @@ template&lt;typename ValueType &gt; </div>
 
 <p class="reference">References <a class="el" href="namespacegko.html#ab6c63e16608df2b83cf706b490bcef72">make_array_view()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="namespacegko.html#ab6c63e16608df2b83cf706b490bcef72">make_array_view()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="classgko_1_1array.html#a2451805c6bf5b09c86ae9ef2c5bc1b7b">gko::array&lt; index_type &gt;::copy_to_host()</a>, and <a class="el" href="namespacegko.html#ab6c63e16608df2b83cf706b490bcef72">make_array_view()</a>.</p>
 
 </div>
 </div>
@@ -4138,7 +4155,7 @@ template&lt;typename ValueType , typename Function &gt; </div>
 </div><div class="memdoc">
 
 <p>Calls the given function with the given LinOps temporarily converted to matrix::Dense&lt;ValueType&gt;* as parameters. </p>
-<p>If ValueType is real and both <code>in</code> and <code>out</code> are complex, uses matrix::Dense::get_real_view() to convert them into real matrices after precision conversion.</p>
+<p>If ValueType is real and both <code>in</code> and <code>out</code> are complex, uses <a class="el" href="classgko_1_1matrix_1_1Dense.html#af57c2f04c8703f9ce98c474c5c8d5b11" title="Create a real view of the (potentially) complex original matrix.">matrix::Dense::create_real_view()</a> to convert them into real matrices after precision conversion.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="namespacegko.html#a3c46f1caf8135f7492aa83d9ac3bc83e" title="Calls the given function with each given argument LinOp temporarily converted into matrix::Dense&lt;Valu...">precision_dispatch()</a> </dd></dl>
 
 </div>
@@ -4178,7 +4195,7 @@ template&lt;typename ValueType , typename Function &gt; </div>
 </div><div class="memdoc">
 
 <p>Calls the given function with the given LinOps temporarily converted to matrix::Dense&lt;ValueType&gt;* as parameters. </p>
-<p>If ValueType is real and both input vectors are complex, uses matrix::Dense::get_real_view() to convert them into real matrices after precision conversion.</p>
+<p>If ValueType is real and both input vectors are complex, uses <a class="el" href="classgko_1_1matrix_1_1Dense.html#af57c2f04c8703f9ce98c474c5c8d5b11" title="Create a real view of the (potentially) complex original matrix.">matrix::Dense::create_real_view()</a> to convert them into real matrices after precision conversion.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="namespacegko.html#a3c46f1caf8135f7492aa83d9ac3bc83e" title="Calls the given function with each given argument LinOp temporarily converted into matrix::Dense&lt;Valu...">precision_dispatch()</a> </dd></dl>
 
 </div>
@@ -4799,7 +4816,7 @@ template&lt;typename OwningPointer &gt; </div>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>The original pointer <code>p</code> becomes invalid after this call. </dd></dl>
 
-<p class="reference">Referenced by <a class="el" href="classgko_1_1preconditioner_1_1Ic.html#ac5e214fa1008b2d1611a8cf0b4edd545">gko::preconditioner::Ic&lt; LSolverType, IndexType &gt;::conj_transpose()</a>, <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#a730786dbc37890c71f7555d563640fec">gko::preconditioner::Ilu&lt; LSolverType, USolverType, ReverseApply, IndexType &gt;::conj_transpose()</a>, <a class="el" href="classgko_1_1preconditioner_1_1Ic.html#aa058395d245de4ffdaddd5aa5a8fb42a">gko::preconditioner::Ic&lt; LSolverType, IndexType &gt;::transpose()</a>, and <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#a2dafdb3722dc990c5143237f40d812ba">gko::preconditioner::Ilu&lt; LSolverType, USolverType, ReverseApply, IndexType &gt;::transpose()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="classgko_1_1preconditioner_1_1Ic.html#a500c8d4ac0abf05d7730844ecb4918ce">gko::preconditioner::Ic&lt; LSolverTypeOrValueType, IndexType &gt;::conj_transpose()</a>, <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#a739d68011f5c36663ea642f860eca761">gko::preconditioner::Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt;::conj_transpose()</a>, <a class="el" href="classgko_1_1preconditioner_1_1Ic.html#a097b9056c39e75f30d8ca8c37bf01454">gko::preconditioner::Ic&lt; LSolverTypeOrValueType, IndexType &gt;::transpose()</a>, and <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#a6545dc5c042ba7e89d3fbbdfc72e1a91">gko::preconditioner::Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt;::transpose()</a>.</p>
 
 </div>
 </div>
@@ -4886,7 +4903,7 @@ template&lt;typename DimensionType &gt; </div>
 
 <p class="reference">References <a class="el" href="structgko_1_1batch__dim.html#aa945ce6b61c1dd08bc28fb12ab7b152d">gko::batch_dim&lt; Dimensionality, DimensionType &gt;::get_common_size()</a>, and <a class="el" href="structgko_1_1batch__dim.html#a380f449cd6305c8baba95569627503b2">gko::batch_dim&lt; Dimensionality, DimensionType &gt;::get_num_batch_items()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="classgko_1_1preconditioner_1_1Ic.html#ac5e214fa1008b2d1611a8cf0b4edd545">gko::preconditioner::Ic&lt; LSolverType, IndexType &gt;::conj_transpose()</a>, <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#a730786dbc37890c71f7555d563640fec">gko::preconditioner::Ilu&lt; LSolverType, USolverType, ReverseApply, IndexType &gt;::conj_transpose()</a>, <a class="el" href="classgko_1_1preconditioner_1_1Ic.html#aa058395d245de4ffdaddd5aa5a8fb42a">gko::preconditioner::Ic&lt; LSolverType, IndexType &gt;::transpose()</a>, and <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#a2dafdb3722dc990c5143237f40d812ba">gko::preconditioner::Ilu&lt; LSolverType, USolverType, ReverseApply, IndexType &gt;::transpose()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="classgko_1_1preconditioner_1_1Ic.html#a500c8d4ac0abf05d7730844ecb4918ce">gko::preconditioner::Ic&lt; LSolverTypeOrValueType, IndexType &gt;::conj_transpose()</a>, <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#a739d68011f5c36663ea642f860eca761">gko::preconditioner::Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt;::conj_transpose()</a>, <a class="el" href="classgko_1_1preconditioner_1_1Ic.html#a097b9056c39e75f30d8ca8c37bf01454">gko::preconditioner::Ic&lt; LSolverTypeOrValueType, IndexType &gt;::transpose()</a>, and <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#a6545dc5c042ba7e89d3fbbdfc72e1a91">gko::preconditioner::Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt;::transpose()</a>.</p>
 
 </div>
 </div>

@@ -18,6 +18,14 @@ A thin wrapper of M\+P\+I\+\_\+\+Comm that supports most M\+PI calls.
 \begin{DoxyCompactList}\small\item\em Create a communicator object from an existing M\+P\+I\+\_\+\+Comm object using color and key. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_af94280388fb46d5e330a0c40d615a543}{communicator}} (const \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}} \&comm, int color, int key)
 \begin{DoxyCompactList}\small\item\em Create a communicator object from an existing M\+P\+I\+\_\+\+Comm object using color and key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a0c7aa9f454cc545769c481bdd639f2d9}{communicator}} (const \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}} \&other)=default
+\begin{DoxyCompactList}\small\item\em Create a copy of a communicator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_af6d496d85ef798160b890b4658ddfe13}{communicator}} (\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}} \&\&other)
+\begin{DoxyCompactList}\small\item\em Move constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}} \& \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_ade50d614d15eee8c3360d65f0d2e7f6b}{operator=}} (const \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}} \&other)=default
+\item 
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}} \& \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a7f1022b99c0e235f308fe48ac33079bf}{operator=}} (\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}} \&\&other)
+\item 
 const M\+P\+I\+\_\+\+Comm \& \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a53f1690ba9030e25604bbedae083d623}{get}} () const
 \begin{DoxyCompactList}\small\item\em Return the underlying M\+P\+I\+\_\+\+Comm object. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a7cb098a45e11dfee1489130b12fb71b2}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a7cb098a45e11dfee1489130b12fb71b2}} 
@@ -33,6 +41,10 @@ bool \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_ab76930922
 \begin{DoxyCompactList}\small\item\em Compare two communicator objects for equality. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a54576f5130895a18bc40305e28a0f41e}{operator!=}} (const \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}} \&rhs) const
 \begin{DoxyCompactList}\small\item\em Compare two communicator objects for non-\/equality. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a3c30ea0db4f095109d1eeb2875d72dc9}{is\+\_\+identical}} (const \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}} \&rhs) const
+\begin{DoxyCompactList}\small\item\em Checks if the rhs communicator is identical to this communicator. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_ab9b319dfe23cce517b793ea85766d1bc}{is\+\_\+congruent}} (const \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}} \&rhs) const
+\begin{DoxyCompactList}\small\item\em Checks if the rhs communicator is congruent to this communicator. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a5644abcc067c0959c49a0cc14dcc96a7}{synchronize}} () const
 \begin{DoxyCompactList}\small\item\em This function is used to synchronize the ranks in the communicator. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Send\+Type $>$ }\\void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a62d7d3e3cdd2625840b8505d2b266b26}{send}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const Send\+Type $\ast$send\+\_\+buffer, const int send\+\_\+count, const int destination\+\_\+rank, const int send\+\_\+tag) const
@@ -99,6 +111,11 @@ void \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a895acb8b9
 \begin{DoxyCompactList}\small\item\em Does a scan operation with the given operator. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Scan\+Type $>$ }\\\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1request}{request}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_ad7b0f3302cff2314ade8d3fd9468eb0c}{i\+\_\+scan}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const Scan\+Type $\ast$send\+\_\+buffer, Scan\+Type $\ast$recv\+\_\+buffer, int count, M\+P\+I\+\_\+\+Op operation) const
 \begin{DoxyCompactList}\small\item\em Does a scan operation with the given operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a98f2e7b649953328824b3781d4b9df01}{create\+\_\+owning}} (const M\+P\+I\+\_\+\+Comm \&comm, bool force\+\_\+host\+\_\+buffer=false)
+\begin{DoxyCompactList}\small\item\em Creates a new communicator and takes ownership of the M\+P\+I\+\_\+\+Comm. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -115,7 +132,7 @@ All M\+PI calls that work on a buffer take in an \mbox{\hyperlink{classgko_1_1Ex
 \mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_ad3a80ad9c2e4918fde299b1bd41c5d47}\label{classgko_1_1experimental_1_1mpi_1_1communicator_ad3a80ad9c2e4918fde299b1bd41c5d47}} 
 \index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!communicator@{communicator}}
 \index{communicator@{communicator}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
-\doxysubsubsection{\texorpdfstring{communicator()}{communicator()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+\doxysubsubsection{\texorpdfstring{communicator()}{communicator()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
 {\footnotesize\ttfamily gko\+::experimental\+::mpi\+::communicator\+::communicator (\begin{DoxyParamCaption}\item[{const M\+P\+I\+\_\+\+Comm \&}]{comm,  }\item[{bool}]{force\+\_\+host\+\_\+buffer = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
@@ -134,7 +151,7 @@ The M\+P\+I\+\_\+\+Comm object will not be deleted after the communicator object
 \mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_aa425d5f68991e101f146e1a909ff7a2e}\label{classgko_1_1experimental_1_1mpi_1_1communicator_aa425d5f68991e101f146e1a909ff7a2e}} 
 \index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!communicator@{communicator}}
 \index{communicator@{communicator}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
-\doxysubsubsection{\texorpdfstring{communicator()}{communicator()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+\doxysubsubsection{\texorpdfstring{communicator()}{communicator()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
 {\footnotesize\ttfamily gko\+::experimental\+::mpi\+::communicator\+::communicator (\begin{DoxyParamCaption}\item[{const M\+P\+I\+\_\+\+Comm \&}]{comm,  }\item[{int}]{color,  }\item[{int}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
@@ -153,7 +170,7 @@ Create a communicator object from an existing M\+P\+I\+\_\+\+Comm object using c
 \mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_af94280388fb46d5e330a0c40d615a543}\label{classgko_1_1experimental_1_1mpi_1_1communicator_af94280388fb46d5e330a0c40d615a543}} 
 \index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!communicator@{communicator}}
 \index{communicator@{communicator}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
-\doxysubsubsection{\texorpdfstring{communicator()}{communicator()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+\doxysubsubsection{\texorpdfstring{communicator()}{communicator()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
 {\footnotesize\ttfamily gko\+::experimental\+::mpi\+::communicator\+::communicator (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}} \&}]{comm,  }\item[{int}]{color,  }\item[{int}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
@@ -173,7 +190,27 @@ Create a communicator object from an existing M\+P\+I\+\_\+\+Comm object using c
 
 References get().
 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a0c7aa9f454cc545769c481bdd639f2d9}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a0c7aa9f454cc545769c481bdd639f2d9}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!communicator@{communicator}}
+\index{communicator@{communicator}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{communicator()}{communicator()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily gko\+::experimental\+::mpi\+::communicator\+::communicator (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}} \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
 
+
+
+Create a copy of a communicator. 
+
+Potential ownership of the underlying M\+P\+I\+\_\+\+Comm will be shared. \mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_af6d496d85ef798160b890b4658ddfe13}\label{classgko_1_1experimental_1_1mpi_1_1communicator_af6d496d85ef798160b890b4658ddfe13}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!communicator@{communicator}}
+\index{communicator@{communicator}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{communicator()}{communicator()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily gko\+::experimental\+::mpi\+::communicator\+::communicator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}} \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Move constructor. 
+
+The other communicator will relinquish any potential ownership and use M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+N\+U\+LL as underlying M\+P\+I\+\_\+\+Comm after the move operation. 
 
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_aaeec2373a2100e3e0e2f22256f810737}\label{classgko_1_1experimental_1_1mpi_1_1communicator_aaeec2373a2100e3e0e2f22256f810737}} 
@@ -441,7 +478,7 @@ Broadcast data from calling process to all ranks in the communicator.
 \begin{DoxyParams}{Parameters}
 {\em exec} & The executor, on which the message buffer is located. \\
 \hline
-{\em buffer} & the buffer to broadcsat \\
+{\em buffer} & the buffer to broadcast \\
 \hline
 {\em count} & the number of elements to broadcast \\
 \hline
@@ -457,6 +494,21 @@ Broadcast data from calling process to all ranks in the communicator.
 
 References get().
 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a98f2e7b649953328824b3781d4b9df01}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a98f2e7b649953328824b3781d4b9df01}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!create\_owning@{create\_owning}}
+\index{create\_owning@{create\_owning}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{create\_owning()}{create\_owning()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}} gko\+::experimental\+::mpi\+::communicator\+::create\+\_\+owning (\begin{DoxyParamCaption}\item[{const M\+P\+I\+\_\+\+Comm \&}]{comm,  }\item[{bool}]{force\+\_\+host\+\_\+buffer = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Creates a new communicator and takes ownership of the M\+P\+I\+\_\+\+Comm. 
+
+The ownership is shared with all \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}} objects that are a copy from the newly created communicator. The underlying M\+P\+I\+\_\+\+Comm will be freed when the last communicator with ownership is destroyed.
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_ad3a80ad9c2e4918fde299b1bd41c5d47}{communicator(const M\+P\+I\+\_\+\+Comm\&, bool)}} 
+\end{DoxySeeAlso}
 \mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a0f3b6b2a414c8fda967dc08dd1ec5927}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a0f3b6b2a414c8fda967dc08dd1ec5927}} 
 \index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!gather@{gather}}
 \index{gather@{gather}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
@@ -548,7 +600,7 @@ the M\+P\+I\+\_\+\+Comm object
 \end{DoxyReturn}
 
 
-Referenced by all\+\_\+gather(), all\+\_\+reduce(), all\+\_\+to\+\_\+all(), all\+\_\+to\+\_\+all\+\_\+v(), broadcast(), communicator(), gather(), gather\+\_\+v(), i\+\_\+all\+\_\+gather(), i\+\_\+all\+\_\+reduce(), i\+\_\+all\+\_\+to\+\_\+all(), i\+\_\+all\+\_\+to\+\_\+all\+\_\+v(), i\+\_\+broadcast(), i\+\_\+gather(), i\+\_\+gather\+\_\+v(), i\+\_\+recv(), i\+\_\+reduce(), i\+\_\+scan(), i\+\_\+scatter(), i\+\_\+scatter\+\_\+v(), i\+\_\+send(), recv(), reduce(), scan(), scatter(), scatter\+\_\+v(), send(), synchronize(), and gko\+::experimental\+::mpi\+::window$<$ Value\+Type $>$\+::window().
+Referenced by all\+\_\+gather(), all\+\_\+reduce(), all\+\_\+to\+\_\+all(), all\+\_\+to\+\_\+all\+\_\+v(), broadcast(), communicator(), gather(), gather\+\_\+v(), i\+\_\+all\+\_\+gather(), i\+\_\+all\+\_\+reduce(), i\+\_\+all\+\_\+to\+\_\+all(), i\+\_\+all\+\_\+to\+\_\+all\+\_\+v(), i\+\_\+broadcast(), i\+\_\+gather(), i\+\_\+gather\+\_\+v(), i\+\_\+recv(), i\+\_\+reduce(), i\+\_\+scan(), i\+\_\+scatter(), i\+\_\+scatter\+\_\+v(), i\+\_\+send(), is\+\_\+congruent(), is\+\_\+identical(), recv(), reduce(), scan(), scatter(), scatter\+\_\+v(), send(), synchronize(), and gko\+::experimental\+::mpi\+::window$<$ Value\+Type $>$\+::window().
 
 \mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_ab72560fb614cb0d16cd5c52048e98360}\label{classgko_1_1experimental_1_1mpi_1_1communicator_ab72560fb614cb0d16cd5c52048e98360}} 
 \index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!i\_all\_gather@{i\_all\_gather}}
@@ -843,7 +895,7 @@ Referenced by i\+\_\+all\+\_\+to\+\_\+all\+\_\+v().
 \begin{DoxyParams}{Parameters}
 {\em exec} & The executor, on which the message buffer is located. \\
 \hline
-{\em buffer} & the buffer to broadcsat \\
+{\em buffer} & the buffer to broadcast \\
 \hline
 {\em count} & the number of elements to broadcast \\
 \hline
@@ -1170,6 +1222,52 @@ the request handle for the send call
 
 References gko\+::experimental\+::mpi\+::request\+::get(), and get().
 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_ab9b319dfe23cce517b793ea85766d1bc}\label{classgko_1_1experimental_1_1mpi_1_1communicator_ab9b319dfe23cce517b793ea85766d1bc}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!is\_congruent@{is\_congruent}}
+\index{is\_congruent@{is\_congruent}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{is\_congruent()}{is\_congruent()}}
+{\footnotesize\ttfamily bool gko\+::experimental\+::mpi\+::communicator\+::is\+\_\+congruent (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}} \&}]{rhs }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if the rhs communicator is congruent to this communicator. 
+
+Congruent communicators are defined as having identical rank members and rank ordering.
+
+\begin{DoxyNote}{Note}
+If M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+N\+U\+LL is the underlying M\+P\+I\+\_\+\+C\+O\+MM of this, then the communicator is congruent to rhs, iff M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+N\+U\+LL is also the underlying M\+P\+I\+\_\+\+C\+O\+MM of rhs.
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+true if rhs is congruent to this 
+\end{DoxyReturn}
+
+
+References get().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a3c30ea0db4f095109d1eeb2875d72dc9}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a3c30ea0db4f095109d1eeb2875d72dc9}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!is\_identical@{is\_identical}}
+\index{is\_identical@{is\_identical}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{is\_identical()}{is\_identical()}}
+{\footnotesize\ttfamily bool gko\+::experimental\+::mpi\+::communicator\+::is\+\_\+identical (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}} \&}]{rhs }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if the rhs communicator is identical to this communicator. 
+
+\begin{DoxyNote}{Note}
+If M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+N\+U\+LL is the underlying M\+P\+I\+\_\+\+C\+O\+MM of this, then the communicator is equal to rhs, iff M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+N\+U\+LL is also the underlying M\+P\+I\+\_\+\+C\+O\+MM of rhs.
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+true if rhs is identical to this 
+\end{DoxyReturn}
+
+
+References get().
+
+
+
+Referenced by operator==().
+
 \mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a8dc8a949e3bc0e5e00ad0af13ca62104}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a8dc8a949e3bc0e5e00ad0af13ca62104}} 
 \index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!node\_local\_rank@{node\_local\_rank}}
 \index{node\_local\_rank@{node\_local\_rank}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
@@ -1196,6 +1294,24 @@ Compare two communicator objects for non-\/equality.
 \begin{DoxyReturn}{Returns}
 if the two comm objects are not equal 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a7f1022b99c0e235f308fe48ac33079bf}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a7f1022b99c0e235f308fe48ac33079bf}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!operator=@{operator=}}
+\index{operator=@{operator=}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}}\& gko\+::experimental\+::mpi\+::communicator\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}} \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_af6d496d85ef798160b890b4658ddfe13}{communicator(communicator\&\&)}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_ade50d614d15eee8c3360d65f0d2e7f6b}\label{classgko_1_1experimental_1_1mpi_1_1communicator_ade50d614d15eee8c3360d65f0d2e7f6b}} 
+\index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!operator=@{operator=}}
+\index{operator=@{operator=}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}}\& gko\+::experimental\+::mpi\+::communicator\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}} \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator_a0c7aa9f454cc545769c481bdd639f2d9}{communicator(const communicator\&)}} 
+\end{DoxySeeAlso}
 \mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_ab769309228bcbff10cdf798d07c68bdd}\label{classgko_1_1experimental_1_1mpi_1_1communicator_ab769309228bcbff10cdf798d07c68bdd}} 
 \index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!operator==@{operator==}}
 \index{operator==@{operator==}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}
@@ -1209,6 +1325,10 @@ Compare two communicator objects for equality.
 \begin{DoxyReturn}{Returns}
 if the two comm objects are equal 
 \end{DoxyReturn}
+
+
+References is\+\_\+identical().
+
 \mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1communicator_a58c4515edcb0dee79b2be1eb40333a61}\label{classgko_1_1experimental_1_1mpi_1_1communicator_a58c4515edcb0dee79b2be1eb40333a61}} 
 \index{gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}!rank@{rank}}
 \index{rank@{rank}!gko::experimental::mpi::communicator@{gko::experimental::mpi::communicator}}

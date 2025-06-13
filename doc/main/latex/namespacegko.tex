@@ -55,6 +55,8 @@ class \mbox{\hyperlink{classgko_1_1BadDimension}{Bad\+Dimension}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1BadDimension}{Bad\+Dimension}} is thrown if an operation is being applied to a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} with bad dimensions. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structgko_1_1batch__dim}{batch\+\_\+dim}}
 \begin{DoxyCompactList}\small\item\em A type representing the dimensions of a multidimensional batch object. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1bfloat16}{bfloat16}}
+\begin{DoxyCompactList}\small\item\em A class providing basic support for \mbox{\hyperlink{classgko_1_1bfloat16}{bfloat16}} precision floating point types. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1BlockOperator}{Block\+Operator}}
 \begin{DoxyCompactList}\small\item\em A \mbox{\hyperlink{classgko_1_1BlockOperator}{Block\+Operator}} represents a linear operator that is partitioned into multiple blocks. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1BlockSizeError}{Block\+Size\+Error}}
@@ -293,12 +295,12 @@ using {\bfseries Machine\+Topology} = \mbox{\hyperlink{classgko_1_1machine__topo
 \begin{DoxyCompactList}\small\item\em Obtains the next type in the singly-\/linked precision list. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename T $>$ }\\using \mbox{\hyperlink{namespacegko_a7637275ce59930ce2926bfcc1cd42e28}{previous\+\_\+precision\+\_\+base}} = \mbox{\hyperlink{namespacegko_a3a3680038c88373d22ba1825fb150a53}{next\+\_\+precision\+\_\+base}}$<$ T $>$
 \begin{DoxyCompactList}\small\item\em Obtains the previous type in the singly-\/linked precision list. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{namespacegko_a5c7eb99ec1a77c39fbf93b828d6b3775}\label{namespacegko_a5c7eb99ec1a77c39fbf93b828d6b3775}} 
-{\footnotesize template$<$typename T $>$ }\\using \mbox{\hyperlink{namespacegko_a5c7eb99ec1a77c39fbf93b828d6b3775}{next\+\_\+precision}} = \mbox{\hyperlink{namespacegko_a3a3680038c88373d22ba1825fb150a53}{next\+\_\+precision\+\_\+base}}$<$ T $>$
-\begin{DoxyCompactList}\small\item\em Obtains the next type in the singly-\/linked precision list with half. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{namespacegko_a9e5f00484a10625327bbd3b2f173bfdc}\label{namespacegko_a9e5f00484a10625327bbd3b2f173bfdc}} 
-{\footnotesize template$<$typename T $>$ }\\using {\bfseries previous\+\_\+precision} = \mbox{\hyperlink{namespacegko_a7637275ce59930ce2926bfcc1cd42e28}{previous\+\_\+precision\+\_\+base}}$<$ T $>$
-\item 
+\mbox{\Hypertarget{namespacegko_a861156f9c64df6146d771527eb2e179d}\label{namespacegko_a861156f9c64df6146d771527eb2e179d}} 
+{\footnotesize template$<$typename T , int step = 1$>$ }\\using \mbox{\hyperlink{namespacegko_a861156f9c64df6146d771527eb2e179d}{next\+\_\+precision}} = typename detail\+::find\+\_\+precision\+\_\+impl$<$ T, step $>$\+::type
+\begin{DoxyCompactList}\small\item\em Obtains the next {\ttfamily move} type of T in the singly-\/linked precision corresponding bfloat16/half. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacegko_a5c244b670709748bb8af2bf462f4d4b1}\label{namespacegko_a5c244b670709748bb8af2bf462f4d4b1}} 
+{\footnotesize template$<$typename T , int step = 1$>$ }\\using \mbox{\hyperlink{namespacegko_a5c244b670709748bb8af2bf462f4d4b1}{previous\+\_\+precision}} = typename detail\+::find\+\_\+precision\+\_\+impl$<$ T, -\/step $>$\+::type
+\begin{DoxyCompactList}\small\item\em Obtains the previous {\ttfamily move} type of T in the singly-\/linked precision corresponding bfloat16/half. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{namespacegko_ab5d71c1f4bd1b654df1e561ea7a811f2}\label{namespacegko_ab5d71c1f4bd1b654df1e561ea7a811f2}} 
 {\footnotesize template$<$typename T $>$ }\\using \mbox{\hyperlink{namespacegko_ab5d71c1f4bd1b654df1e561ea7a811f2}{reduce\+\_\+precision}} = typename detail\+::reduce\+\_\+precision\+\_\+impl$<$ T $>$\+::type
 \begin{DoxyCompactList}\small\item\em Obtains the next type in the hierarchy with lower precision than T. \end{DoxyCompactList}\item 
@@ -342,7 +344,7 @@ using \mbox{\hyperlink{namespacegko_a0913bfb81622f6bdde52884015c2a4ed}{uintptr}}
 \begin{DoxyCompactList}\small\item\em Unsigned integer type capable of holding a pointer to void. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{namespacegko_a86477c0acba18c50cac69112d791dfa6}\label{namespacegko_a86477c0acba18c50cac69112d791dfa6}} 
 using \mbox{\hyperlink{namespacegko_a86477c0acba18c50cac69112d791dfa6}{float16}} = \mbox{\hyperlink{classgko_1_1half}{half}}
-\begin{DoxyCompactList}\small\item\em Half precision floating point type. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em 16 bit floating point type. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{namespacegko_a0b5dbd886493d4ccaba6a7a1ba74896c}\label{namespacegko_a0b5dbd886493d4ccaba6a7a1ba74896c}} 
 using \mbox{\hyperlink{namespacegko_a0b5dbd886493d4ccaba6a7a1ba74896c}{float32}} = float
 \begin{DoxyCompactList}\small\item\em Single precision floating point type. \end{DoxyCompactList}\item 
@@ -405,6 +407,9 @@ constexpr \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64
 \mbox{\Hypertarget{namespacegko_a082f4684d162759a96c26fa30181103f}\label{namespacegko_a082f4684d162759a96c26fa30181103f}} 
 {\footnotesize template$<$$>$ }\\constexpr \mbox{\hyperlink{classgko_1_1half}{half}} {\bfseries one$<$ half $>$} ()
 \item 
+\mbox{\Hypertarget{namespacegko_a7842aa374806eb88cd974ac102e81def}\label{namespacegko_a7842aa374806eb88cd974ac102e81def}} 
+{\footnotesize template$<$$>$ }\\constexpr \mbox{\hyperlink{classgko_1_1bfloat16}{bfloat16}} {\bfseries one$<$ bfloat16 $>$} ()
+\item 
 {\footnotesize template$<$typename T $>$ }\\constexpr T \mbox{\hyperlink{namespacegko_ab4f16ecf0a759f46259cf9518f1e4568}{one}} (const T \&)
 \begin{DoxyCompactList}\small\item\em Returns the multiplicative identity for T. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename T $>$ }\\constexpr bool \mbox{\hyperlink{namespacegko_a785976e6dbc9d8511325617ca46040bf}{is\+\_\+zero}} (T value)
@@ -431,11 +436,20 @@ constexpr \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64
 \mbox{\Hypertarget{namespacegko_a706e6d4214dcd751b0f6dda94bf11608}\label{namespacegko_a706e6d4214dcd751b0f6dda94bf11608}} 
 \mbox{\hyperlink{classgko_1_1half}{gko\+::half}} {\bfseries abs} (const std\+::complex$<$ \mbox{\hyperlink{classgko_1_1half}{gko\+::half}} $>$ \&x)
 \item 
+\mbox{\Hypertarget{namespacegko_af32f4b09c884d173e83f770d867c75f3}\label{namespacegko_af32f4b09c884d173e83f770d867c75f3}} 
+\mbox{\hyperlink{classgko_1_1bfloat16}{gko\+::bfloat16}} {\bfseries abs} (const std\+::complex$<$ \mbox{\hyperlink{classgko_1_1bfloat16}{gko\+::bfloat16}} $>$ \&x)
+\item 
 \mbox{\Hypertarget{namespacegko_ab6a35f93a8a77f8fffd7d7e1c1338941}\label{namespacegko_ab6a35f93a8a77f8fffd7d7e1c1338941}} 
 \mbox{\hyperlink{classgko_1_1half}{gko\+::half}} {\bfseries sqrt} (\mbox{\hyperlink{classgko_1_1half}{gko\+::half}} a)
 \item 
 \mbox{\Hypertarget{namespacegko_a86108d9eebb2b770179c8b1de8d2cf1d}\label{namespacegko_a86108d9eebb2b770179c8b1de8d2cf1d}} 
 std\+::complex$<$ \mbox{\hyperlink{classgko_1_1half}{gko\+::half}} $>$ {\bfseries sqrt} (std\+::complex$<$ \mbox{\hyperlink{classgko_1_1half}{gko\+::half}} $>$ a)
+\item 
+\mbox{\Hypertarget{namespacegko_a50295b2c4b1072234a0abe00b027fe94}\label{namespacegko_a50295b2c4b1072234a0abe00b027fe94}} 
+\mbox{\hyperlink{classgko_1_1bfloat16}{gko\+::bfloat16}} {\bfseries sqrt} (\mbox{\hyperlink{classgko_1_1bfloat16}{gko\+::bfloat16}} a)
+\item 
+\mbox{\Hypertarget{namespacegko_a454f1ae66edde285e97abbb384cfb800}\label{namespacegko_a454f1ae66edde285e97abbb384cfb800}} 
+std\+::complex$<$ \mbox{\hyperlink{classgko_1_1bfloat16}{gko\+::bfloat16}} $>$ {\bfseries sqrt} (std\+::complex$<$ \mbox{\hyperlink{classgko_1_1bfloat16}{gko\+::bfloat16}} $>$ a)
 \item 
 {\footnotesize template$<$typename T $>$ }\\constexpr T \mbox{\hyperlink{namespacegko_a0603ce0a60183a6698ac9b523694fb68}{pi}} ()
 \begin{DoxyCompactList}\small\item\em Returns the value of pi. \end{DoxyCompactList}\item 
@@ -1303,7 +1317,7 @@ If successful, returns a pointer to the subtype, otherwise throws \mbox{\hyperli
 \end{DoxyReturn}
 
 
-Referenced by gko\+::preconditioner\+::\+Isai$<$ Isai\+Type, Value\+Type, Index\+Type $>$\+::get\+\_\+approximate\+\_\+inverse().
+Referenced by gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type\+Or\+Value\+Type, Index\+Type $>$\+::conj\+\_\+transpose(), gko\+::preconditioner\+::\+Ilu$<$ L\+Solver\+Type\+Or\+Value\+Type, U\+Solver\+Type\+Or\+Value\+Type, Reverse\+Apply, Index\+Type $>$\+::conj\+\_\+transpose(), gko\+::preconditioner\+::\+Isai$<$ Isai\+Type, Value\+Type, Index\+Type $>$\+::get\+\_\+approximate\+\_\+inverse(), gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type\+Or\+Value\+Type, Index\+Type $>$\+::transpose(), and gko\+::preconditioner\+::\+Ilu$<$ L\+Solver\+Type\+Or\+Value\+Type, U\+Solver\+Type\+Or\+Value\+Type, Reverse\+Apply, Index\+Type $>$\+::transpose().
 
 \mbox{\Hypertarget{namespacegko_a93065a86872e6511b701b73b75823483}\label{namespacegko_a93065a86872e6511b701b73b75823483}} 
 \index{gko@{gko}!ceildiv@{ceildiv}}
@@ -1357,7 +1371,7 @@ The difference between this function and directly calling Lin\+Op\+::clone() is 
 \end{DoxyNote}
 
 
-Referenced by gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type, Index\+Type $>$\+::operator=(), gko\+::preconditioner\+::\+Ilu$<$ L\+Solver\+Type, U\+Solver\+Type, Reverse\+Apply, Index\+Type $>$\+::operator=(), gko\+::solver\+::\+Enable\+Preconditionable$<$ Bicg$<$ Value\+Type $>$ $>$\+::set\+\_\+preconditioner(), and gko\+::solver\+::\+Enable\+Iterative\+Base$<$ Bicg$<$ Value\+Type $>$ $>$\+::set\+\_\+stop\+\_\+criterion\+\_\+factory().
+Referenced by gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type\+Or\+Value\+Type, Index\+Type $>$\+::operator=(), gko\+::preconditioner\+::\+Ilu$<$ L\+Solver\+Type\+Or\+Value\+Type, U\+Solver\+Type\+Or\+Value\+Type, Reverse\+Apply, Index\+Type $>$\+::operator=(), gko\+::solver\+::\+Enable\+Preconditionable$<$ Chebyshev$<$ Value\+Type $>$ $>$\+::set\+\_\+preconditioner(), and gko\+::solver\+::\+Enable\+Iterative\+Base$<$ Chebyshev$<$ Value\+Type $>$ $>$\+::set\+\_\+stop\+\_\+criterion\+\_\+factory().
 
 \mbox{\Hypertarget{namespacegko_a13b00a9dd24aa08d4495762d89f3762a}\label{namespacegko_a13b00a9dd24aa08d4495762d89f3762a}} 
 \index{gko@{gko}!clone@{clone}}
@@ -1938,7 +1952,7 @@ References make\+\_\+array\+\_\+view().
 
 
 
-Referenced by make\+\_\+array\+\_\+view().
+Referenced by gko\+::array$<$ index\+\_\+type $>$\+::copy\+\_\+to\+\_\+host(), and make\+\_\+array\+\_\+view().
 
 \mbox{\Hypertarget{namespacegko_aaf3c05a831ad72e1383bf393ff43e013}\label{namespacegko_aaf3c05a831ad72e1383bf393ff43e013}} 
 \index{gko@{gko}!make\_const\_array\_view@{make\_const\_array\_view}}
@@ -2491,7 +2505,7 @@ void gko\+::precision\+\_\+dispatch\+\_\+real\+\_\+complex (\begin{DoxyParamCapt
 
 Calls the given function with the given Lin\+Ops temporarily converted to matrix\+::\+Dense$<$\+Value\+Type$>$$\ast$ as parameters. 
 
-If Value\+Type is real and both {\ttfamily in} and {\ttfamily out} are complex, uses matrix\+::\+Dense\+::get\+\_\+real\+\_\+view() to convert them into real matrices after precision conversion.
+If Value\+Type is real and both {\ttfamily in} and {\ttfamily out} are complex, uses \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_af57c2f04c8703f9ce98c474c5c8d5b11}{matrix\+::\+Dense\+::create\+\_\+real\+\_\+view()}} to convert them into real matrices after precision conversion.
 
 \begin{DoxySeeAlso}{See also}
 \mbox{\hyperlink{namespacegko_a3c46f1caf8135f7492aa83d9ac3bc83e}{precision\+\_\+dispatch()}} 
@@ -2507,7 +2521,7 @@ void gko\+::precision\+\_\+dispatch\+\_\+real\+\_\+complex (\begin{DoxyParamCapt
 
 Calls the given function with the given Lin\+Ops temporarily converted to matrix\+::\+Dense$<$\+Value\+Type$>$$\ast$ as parameters. 
 
-If Value\+Type is real and both input vectors are complex, uses matrix\+::\+Dense\+::get\+\_\+real\+\_\+view() to convert them into real matrices after precision conversion.
+If Value\+Type is real and both input vectors are complex, uses \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_af57c2f04c8703f9ce98c474c5c8d5b11}{matrix\+::\+Dense\+::create\+\_\+real\+\_\+view()}} to convert them into real matrices after precision conversion.
 
 \begin{DoxySeeAlso}{See also}
 \mbox{\hyperlink{namespacegko_a3c46f1caf8135f7492aa83d9ac3bc83e}{precision\+\_\+dispatch()}} 
@@ -2904,7 +2918,7 @@ The original pointer {\ttfamily p} becomes invalid after this call.
 \end{DoxyNote}
 
 
-Referenced by gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type, Index\+Type $>$\+::conj\+\_\+transpose(), gko\+::preconditioner\+::\+Ilu$<$ L\+Solver\+Type, U\+Solver\+Type, Reverse\+Apply, Index\+Type $>$\+::conj\+\_\+transpose(), gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type, Index\+Type $>$\+::transpose(), and gko\+::preconditioner\+::\+Ilu$<$ L\+Solver\+Type, U\+Solver\+Type, Reverse\+Apply, Index\+Type $>$\+::transpose().
+Referenced by gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type\+Or\+Value\+Type, Index\+Type $>$\+::conj\+\_\+transpose(), gko\+::preconditioner\+::\+Ilu$<$ L\+Solver\+Type\+Or\+Value\+Type, U\+Solver\+Type\+Or\+Value\+Type, Reverse\+Apply, Index\+Type $>$\+::conj\+\_\+transpose(), gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type\+Or\+Value\+Type, Index\+Type $>$\+::transpose(), and gko\+::preconditioner\+::\+Ilu$<$ L\+Solver\+Type\+Or\+Value\+Type, U\+Solver\+Type\+Or\+Value\+Type, Reverse\+Apply, Index\+Type $>$\+::transpose().
 
 \mbox{\Hypertarget{namespacegko_abbb55709b10d707b2cbef803832aa834}\label{namespacegko_abbb55709b10d707b2cbef803832aa834}} 
 \index{gko@{gko}!squared\_norm@{squared\_norm}}
@@ -2960,7 +2974,7 @@ References gko\+::batch\+\_\+dim$<$ Dimensionality, Dimension\+Type $>$\+::get\+
 
 
 
-Referenced by gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type, Index\+Type $>$\+::conj\+\_\+transpose(), gko\+::preconditioner\+::\+Ilu$<$ L\+Solver\+Type, U\+Solver\+Type, Reverse\+Apply, Index\+Type $>$\+::conj\+\_\+transpose(), gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type, Index\+Type $>$\+::transpose(), and gko\+::preconditioner\+::\+Ilu$<$ L\+Solver\+Type, U\+Solver\+Type, Reverse\+Apply, Index\+Type $>$\+::transpose().
+Referenced by gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type\+Or\+Value\+Type, Index\+Type $>$\+::conj\+\_\+transpose(), gko\+::preconditioner\+::\+Ilu$<$ L\+Solver\+Type\+Or\+Value\+Type, U\+Solver\+Type\+Or\+Value\+Type, Reverse\+Apply, Index\+Type $>$\+::conj\+\_\+transpose(), gko\+::preconditioner\+::\+Ic$<$ L\+Solver\+Type\+Or\+Value\+Type, Index\+Type $>$\+::transpose(), and gko\+::preconditioner\+::\+Ilu$<$ L\+Solver\+Type\+Or\+Value\+Type, U\+Solver\+Type\+Or\+Value\+Type, Reverse\+Apply, Index\+Type $>$\+::transpose().
 
 \mbox{\Hypertarget{namespacegko_a9b6a9d7018703d6d1f2140054e2afe4a}\label{namespacegko_a9b6a9d7018703d6d1f2140054e2afe4a}} 
 \index{gko@{gko}!transpose@{transpose}}

@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1580377518 branch based on main. Ginkgo version 1.9.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1868155508 branch based on main. Ginkgo version 1.10.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -109,6 +109,10 @@ template&lt;typename... Args&gt; </td></tr>
 template&lt;typename... Args&gt; </td></tr>
 <tr class="memitem:a5dc57e6bb91a7d284cef5218c576b798"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>with_block_pointers</b> (Args &amp;&amp;... _value) -&gt; std::decay_t&lt; decltype(*(this-&gt;self()))&gt; &amp;</td></tr>
 <tr class="separator:a5dc57e6bb91a7d284cef5218c576b798"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7e207f61638f863ada54fc5f045a5b4"><td class="memTemplParams" colspan="2"><a id="af7e207f61638f863ada54fc5f045a5b4"></a>
+template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:af7e207f61638f863ada54fc5f045a5b4"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>with_aggregate_l1</b> (Args &amp;&amp;... _value) -&gt; std::decay_t&lt; decltype(*(this-&gt;self()))&gt; &amp;</td></tr>
+<tr class="separator:af7e207f61638f863ada54fc5f045a5b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4296ff044ae7cc9628ef1ff3caee94d2"><td class="memTemplParams" colspan="2"><a id="a4296ff044ae7cc9628ef1ff3caee94d2"></a>
 template&lt;typename... Args&gt; </td></tr>
 <tr class="memitem:a4296ff044ae7cc9628ef1ff3caee94d2"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>with_storage_optimization</b> (Args &amp;&amp;... _value) -&gt; std::decay_t&lt; decltype(*(this-&gt;self()))&gt; &amp;</td></tr>
@@ -140,6 +144,9 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:ad90b07202f15b6cd5c649f6b61480053"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgko_1_1array.html">gko::array</a>&lt; index_type &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type.html#ad90b07202f15b6cd5c649f6b61480053">block_pointers</a> { nullptr }</td></tr>
 <tr class="memdesc:ad90b07202f15b6cd5c649f6b61480053"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starting (row / column) indexes of individual blocks.  <a href="structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type.html#ad90b07202f15b6cd5c649f6b61480053">More...</a><br /></td></tr>
 <tr class="separator:ad90b07202f15b6cd5c649f6b61480053"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa467c5ec8491236cde56117b09cd821"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type.html#afa467c5ec8491236cde56117b09cd821">aggregate_l1</a> { false }</td></tr>
+<tr class="memdesc:afa467c5ec8491236cde56117b09cd821"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use L1 Jacboi, which is introduced in the paper A.  <a href="structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type.html#afa467c5ec8491236cde56117b09cd821">More...</a><br /></td></tr>
+<tr class="separator:afa467c5ec8491236cde56117b09cd821"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51d0eec65f99d6dd5b0ebe5ba69390dd"><td class="memItemLeft" align="right" valign="top">storage_optimization_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type.html#a51d0eec65f99d6dd5b0ebe5ba69390dd">storage_optimization</a> { <a class="el" href="classgko_1_1precision__reduction.html">precision_reduction</a>(0, 0) }</td></tr>
 <tr class="memdesc:a51d0eec65f99d6dd5b0ebe5ba69390dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">The precisions to use for the blocks of the matrix.  <a href="structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type.html#a51d0eec65f99d6dd5b0ebe5ba69390dd">More...</a><br /></td></tr>
 <tr class="separator:a51d0eec65f99d6dd5b0ebe5ba69390dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -175,6 +182,25 @@ template&lt;typename ValueType  = default_precision, typename IndexType  = int32
 <div class="fragment"><div class="line">|| inv(A)x - inv(M)x|| / || inv(A)x || &lt;= c * (dropout + <a class="code" href="structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type.html#ad4fd0de7ce4d390584e947afb6d0ce73">accuracy</a>)</div>
 </div><!-- fragment --><p>where <code>c</code> is some constant depending on the problem size and roundoff error and <code>dropout</code> the error introduced by disregarding off-diagonal elements.</p>
 <p>Larger values reduce the volume of memory transfer, but increase the error compared to using full precision storage. Thus, tuning the accuracy to a value as close as possible to <code>dropout</code> will result in optimal memory savings, while not degrading the quality of solution. </p>
+
+</div>
+</div>
+<a id="afa467c5ec8491236cde56117b09cd821"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa467c5ec8491236cde56117b09cd821">&#9670;&nbsp;</a></span>aggregate_l1</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ValueType  = default_precision, typename IndexType  = int32&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classgko_1_1preconditioner_1_1Jacobi.html">gko::preconditioner::Jacobi</a>&lt; ValueType, IndexType &gt;::parameters_type::aggregate_l1 { false }</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Use L1 Jacboi, which is introduced in the paper A. </p>
+<p>H. Baker et al. "Multigrid smoothers for ultraparallel computing." This paper discusses this type of smoother with the following matrix property. <img class="formulaInl" alt="$ A_{ii} \geq \theta \sum_{j \in \text{off diagonal block}} |A_{ij}|, \theta \geq 0 $" src="form_111.png"/> If it is true, it generates the preconditioner on A + Diag(sum_{k in off-diagonal block of i} |A_ik|) instead of A. We aggregate the absolute value of the entries with the same row in the off-diagonal block into the diagonal value. </p>
 
 </div>
 </div>
@@ -293,7 +319,7 @@ template&lt;typename ValueType  = default_precision, typename IndexType  = int32
 <li>ginkgo/core/preconditioner/<a class="el" href="include_2ginkgo_2core_2preconditioner_2jacobi_8hpp_source.html">jacobi.hpp</a></li>
 </ul>
 </div><!-- contents -->
-<div class="ttc" id="astructgko_1_1preconditioner_1_1Jacobi_1_1parameters__type_html_ad4fd0de7ce4d390584e947afb6d0ce73"><div class="ttname"><a href="structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type.html#ad4fd0de7ce4d390584e947afb6d0ce73">gko::preconditioner::Jacobi::parameters_type::accuracy</a></div><div class="ttdeci">remove_complex&lt; value_type &gt; accuracy</div><div class="ttdoc">The relative accuracy of the adaptive Jacobi variant.</div><div class="ttdef"><b>Definition:</b> jacobi.hpp:499</div></div>
+<div class="ttc" id="astructgko_1_1preconditioner_1_1Jacobi_1_1parameters__type_html_ad4fd0de7ce4d390584e947afb6d0ce73"><div class="ttname"><a href="structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type.html#ad4fd0de7ce4d390584e947afb6d0ce73">gko::preconditioner::Jacobi::parameters_type::accuracy</a></div><div class="ttdeci">remove_complex&lt; value_type &gt; accuracy</div><div class="ttdoc">The relative accuracy of the adaptive Jacobi variant.</div><div class="ttdef"><b>Definition:</b> jacobi.hpp:512</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

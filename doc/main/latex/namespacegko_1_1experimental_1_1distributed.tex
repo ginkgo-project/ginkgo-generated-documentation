@@ -15,19 +15,16 @@ The distributed namespace.
 \item 
 class \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1DistributedBase}{Distributed\+Base}}
 \begin{DoxyCompactList}\small\item\em A base class for distributed objects. \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{structgko_1_1experimental_1_1distributed_1_1index__map}{index\+\_\+map}}
+class \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1index__map}{index\+\_\+map}}
 \begin{DoxyCompactList}\small\item\em This class defines mappings between global and local indices. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}}
 \begin{DoxyCompactList}\small\item\em The \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}} class defines a (M\+P\+I-\/)distributed matrix. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{Partition}}
 \begin{DoxyCompactList}\small\item\em Represents a partition of a range of indices \mbox{[}0, size) into a disjoint set of parts. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1RowGatherer}{Row\+Gatherer}}
+\begin{DoxyCompactList}\small\item\em The \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1RowGatherer}{distributed\+::\+Row\+Gatherer}} gathers the rows of \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{distributed\+::\+Vector}} that are located on other processes. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{Vector}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{Vector}} is a format which explicitly stores (multiple) distributed column vectors in a dense storage format. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Typedefs}
-\begin{DoxyCompactItemize}
-\item 
-using \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a5f06060f58c28612829ebc8ab5bc6511}{comm\+\_\+index\+\_\+type}} = int
-\begin{DoxyCompactList}\small\item\em Index type for enumerating processes in a distributed application. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
@@ -49,8 +46,14 @@ enum \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a4b66bc2bbe95f
 \begin{DoxyCompactList}\small\item\em Convert the given \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} from experimental\+::distributed\+::\+Vector$<$...$>$ to experimental\+::distributed\+::\+Vector$<$\+Value\+Type$>$. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Value\+Type , typename Function , typename... Args$>$ }\\void \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_ae834447464baacc73ee8d2bc6a0d61a0}{precision\+\_\+dispatch}} (Function fn, Args $\ast$... linops)
 \begin{DoxyCompactList}\small\item\em Calls the given function with each given argument \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} temporarily converted into experimental\+::distributed\+::\+Vector$<$\+Value\+Type$>$ as parameters. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacegko_1_1experimental_1_1distributed_a7663e792beec02510b042dc298681882}\label{namespacegko_1_1experimental_1_1distributed_a7663e792beec02510b042dc298681882}} 
+{\footnotesize template$<$typename Value\+Type , typename Function $>$ }\\void {\bfseries mixed\+\_\+precision\+\_\+dispatch} (Function fn, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$in, \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$out)
+\item 
 {\footnotesize template$<$typename Value\+Type , typename Function $>$ }\\void \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a6348d5cfc6451aa9f12509e5658de943}{precision\+\_\+dispatch\+\_\+real\+\_\+complex}} (Function fn, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$in, \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$out)
 \begin{DoxyCompactList}\small\item\em Calls the given function with the given Lin\+Ops temporarily converted to experimental\+::distributed\+::\+Vector$<$\+Value\+Type$>$$\ast$ as parameters. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacegko_1_1experimental_1_1distributed_a06178dd9c578230500c69926185cade6}\label{namespacegko_1_1experimental_1_1distributed_a06178dd9c578230500c69926185cade6}} 
+{\footnotesize template$<$typename Value\+Type , typename Function $>$ }\\void {\bfseries mixed\+\_\+precision\+\_\+dispatch\+\_\+real\+\_\+complex} (Function fn, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$in, \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$out)
+\item 
 {\footnotesize template$<$typename Value\+Type , typename Function $>$ }\\void \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a87ee066b077fed30ab6e2da949faef6e}{precision\+\_\+dispatch\+\_\+real\+\_\+complex}} (Function fn, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$alpha, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$in, \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$out)
 \begin{DoxyCompactList}\small\item\em Calls the given function with the given Lin\+Ops temporarily converted to experimental\+::distributed\+::\+Vector$<$\+Value\+Type$>$$\ast$ as parameters. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Value\+Type , typename Function $>$ }\\void \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a76b1f78aad396f2a87ae070e0b11c1f3}{precision\+\_\+dispatch\+\_\+real\+\_\+complex}} (Function fn, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$alpha, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$in, const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$beta, \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$out)
@@ -65,19 +68,6 @@ enum \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a4b66bc2bbe95f
 
 \doxysubsection{Detailed Description}
 The distributed namespace. 
-
-\doxysubsection{Typedef Documentation}
-\mbox{\Hypertarget{namespacegko_1_1experimental_1_1distributed_a5f06060f58c28612829ebc8ab5bc6511}\label{namespacegko_1_1experimental_1_1distributed_a5f06060f58c28612829ebc8ab5bc6511}} 
-\index{gko::experimental::distributed@{gko::experimental::distributed}!comm\_index\_type@{comm\_index\_type}}
-\index{comm\_index\_type@{comm\_index\_type}!gko::experimental::distributed@{gko::experimental::distributed}}
-\doxysubsubsection{\texorpdfstring{comm\_index\_type}{comm\_index\_type}}
-{\footnotesize\ttfamily using \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a5f06060f58c28612829ebc8ab5bc6511}{gko\+::experimental\+::distributed\+::comm\+\_\+index\+\_\+type}} = typedef int}
-
-
-
-Index type for enumerating processes in a distributed application. 
-
-Conforms to the M\+PI C interface of e.\+g. M\+PI rank or size 
 
 \doxysubsection{Enumeration Type Documentation}
 \mbox{\Hypertarget{namespacegko_1_1experimental_1_1distributed_a4b66bc2bbe95fe0a818a5f4423acbb4e}\label{namespacegko_1_1experimental_1_1distributed_a4b66bc2bbe95fe0a818a5f4423acbb4e}} 
@@ -104,7 +94,7 @@ assembly\+\_\+mode defines how the read\+\_\+distributed function of the distrib
 
 Index space classification for the locally stored indices. 
 
-The definitions of the enum values is clarified in \mbox{\hyperlink{structgko_1_1experimental_1_1distributed_1_1index__map}{index\+\_\+map}}. \begin{DoxyEnumFields}{Enumerator}
+The definitions of the enum values is clarified in \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1index__map}{index\+\_\+map}}. \begin{DoxyEnumFields}{Enumerator}
 \raisebox{\heightof{T}}[0pt][0pt]{\index{local@{local}!gko::experimental::distributed@{gko::experimental::distributed}}\index{gko::experimental::distributed@{gko::experimental::distributed}!local@{local}}}\mbox{\Hypertarget{namespacegko_1_1experimental_1_1distributed_a3d50932cfebdde844b88d2c82b96947baf5ddaf0ca7929578b408c909429f68f2}\label{namespacegko_1_1experimental_1_1distributed_a3d50932cfebdde844b88d2c82b96947baf5ddaf0ca7929578b408c909429f68f2}} 
 local&indices that are locally owned \\
 \hline

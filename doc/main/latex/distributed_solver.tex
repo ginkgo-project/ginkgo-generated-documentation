@@ -55,6 +55,7 @@ We can use here the same solver type as you would use in a non-\/distributed pro
 \DoxyCodeLine{\textcolor{keyword}{using} schwarz = \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1preconditioner_1_1Schwarz}{gko::experimental::distributed::preconditioner::Schwarz}}<}
 \DoxyCodeLine{    ValueType, LocalIndexType, GlobalIndexType>;}
 \DoxyCodeLine{\textcolor{keyword}{using} bj = \mbox{\hyperlink{classgko_1_1preconditioner_1_1Jacobi}{gko::preconditioner::Jacobi<ValueType, LocalIndexType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} pgm = \mbox{\hyperlink{classgko_1_1multigrid_1_1Pgm}{gko::multigrid::Pgm<ValueType, LocalIndexType>}};}
 \end{DoxyCode}
 
 
@@ -75,6 +76,7 @@ User input settings\+:
 \item The executor, defaults to reference.
 \item The number of grid points, defaults to 100.
 \item The number of iterations, defaults to 1000.
+\item One-\/level, two-\/level preconditioner, and no preconditioner, defaults to one-\/level.
 \end{DoxyItemize}
 
 
@@ -83,6 +85,7 @@ User input settings\+:
 \DoxyCodeLine{    \textcolor{keywordflow}{if} (rank == 0) \{}
 \DoxyCodeLine{        std::cerr << \textcolor{stringliteral}{"Usage: "} << argv[0]}
 \DoxyCodeLine{                  << \textcolor{stringliteral}{" [executor] [num\_grid\_points] [num\_iterations] "}}
+\DoxyCodeLine{                     \textcolor{stringliteral}{"[schwarz\_prec\_type] "}}
 \DoxyCodeLine{                  << std::endl;}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{    std::exit(-\/1);}
@@ -95,6 +98,7 @@ User input settings\+:
 \DoxyCodeLine{    static\_cast<gko::size\_type>(argc >= 3 ? std::atoi(argv[2]) : 100);}
 \DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} num\_iters =}
 \DoxyCodeLine{    static\_cast<gko::size\_type>(argc >= 4 ? std::atoi(argv[3]) : 1000);}
+\DoxyCodeLine{std::string schw\_type = argc >= 5 ? argv[4] : \textcolor{stringliteral}{"one-\/level"};}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{const} std::map<std::string,}
 \DoxyCodeLine{               std::function<std::shared\_ptr<gko::Executor>(MPI\_Comm)>>}
@@ -232,6 +236,25 @@ Setup the local block diagonal solver factory.
 \end{DoxyCode}
 
 
+Setup the coarse solver. If it is more accurate, then the outer iterations will reduce, but the cost of the coarse solve increases. The coarse solver can in turn have another Schwarz preconditioner if needed.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} coarse\_solver = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(}
+\DoxyCodeLine{    solver::build()}
+\DoxyCodeLine{        .with\_preconditioner(}
+\DoxyCodeLine{            schwarz::build().with\_local\_solver(local\_solver).on(exec))}
+\DoxyCodeLine{        .with\_criteria(}
+\DoxyCodeLine{            gko::stop::Iteration::build().with\_max\_iters(1000u).on(exec),}
+\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                .with\_reduction\_factor(1e-\/7)}
+\DoxyCodeLine{                .on(exec))}
+\DoxyCodeLine{        .on(exec));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{auto} pgm\_fac = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(pgm::build().on(exec));}
+\end{DoxyCode}
+
+
 Setup the stopping criterion and logger
 
 
@@ -239,15 +262,56 @@ Setup the stopping criterion and logger
 \DoxyCodeLine{\textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} reduction\_factor\{1e-\/8\};}
 \DoxyCodeLine{std::shared\_ptr<const gko::log::Convergence<ValueType>> logger =}
 \DoxyCodeLine{    \mbox{\hyperlink{classgko_1_1log_1_1Convergence_aa67955ea9d1d18f15f0330d12b93d330}{gko::log::Convergence<ValueType>::create}}();}
-\DoxyCodeLine{\textcolor{keyword}{auto} Ainv = solver::build()}
-\DoxyCodeLine{                .with\_preconditioner(}
-\DoxyCodeLine{                    schwarz::build().with\_local\_solver(local\_solver))}
-\DoxyCodeLine{                .with\_criteria(}
-\DoxyCodeLine{                    gko::stop::Iteration::build().with\_max\_iters(num\_iters),}
-\DoxyCodeLine{                    \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                        .with\_reduction\_factor(reduction\_factor))}
-\DoxyCodeLine{                .on(exec)}
-\DoxyCodeLine{                -\/>generate(A);}
+\DoxyCodeLine{std::shared\_ptr<gko::LinOp> Ainv\{\};}
+\end{DoxyCode}
+
+
+The benefit of the two-\/level Schwarz preconditioner is generally observable (in runtime and in number of iterations) usually for larger problem sizes and for larger number of ranks.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (schw\_type == \textcolor{stringliteral}{"two-\/level"}) \{}
+\DoxyCodeLine{    Ainv =}
+\DoxyCodeLine{        solver::build()}
+\DoxyCodeLine{            .with\_preconditioner(schwarz::build()}
+\DoxyCodeLine{                                     .with\_local\_solver(local\_solver)}
+\DoxyCodeLine{                                     .with\_coarse\_level(pgm\_fac)}
+\DoxyCodeLine{                                     .with\_coarse\_solver(coarse\_solver)}
+\DoxyCodeLine{                                     .on(exec))}
+\DoxyCodeLine{            .with\_criteria(}
+\DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(num\_iters).on(}
+\DoxyCodeLine{                    exec),}
+\DoxyCodeLine{                \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                    .with\_reduction\_factor(reduction\_factor)}
+\DoxyCodeLine{                    .on(exec))}
+\DoxyCodeLine{            .on(exec)}
+\DoxyCodeLine{            -\/>generate(A);}
+\DoxyCodeLine{\} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (schw\_type == \textcolor{stringliteral}{"one-\/level"}) \{}
+\DoxyCodeLine{    Ainv =}
+\DoxyCodeLine{        solver::build()}
+\DoxyCodeLine{            .with\_preconditioner(}
+\DoxyCodeLine{                schwarz::build().with\_local\_solver(local\_solver).on(exec))}
+\DoxyCodeLine{            .with\_criteria(}
+\DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(num\_iters).on(}
+\DoxyCodeLine{                    exec),}
+\DoxyCodeLine{                \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                    .with\_reduction\_factor(reduction\_factor)}
+\DoxyCodeLine{                    .on(exec))}
+\DoxyCodeLine{            .on(exec)}
+\DoxyCodeLine{            -\/>generate(A);}
+\DoxyCodeLine{\} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{    schw\_type = \textcolor{stringliteral}{"no-\/precond"};}
+\DoxyCodeLine{    Ainv =}
+\DoxyCodeLine{        solver::build()}
+\DoxyCodeLine{            .with\_criteria(}
+\DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(num\_iters).on(}
+\DoxyCodeLine{                    exec),}
+\DoxyCodeLine{                \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                    .with\_reduction\_factor(reduction\_factor)}
+\DoxyCodeLine{                    .on(exec))}
+\DoxyCodeLine{            .on(exec)}
+\DoxyCodeLine{            -\/>generate(A);}
+\DoxyCodeLine{\}}
 \end{DoxyCode}
 
 
@@ -289,8 +353,8 @@ Get the residual.
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{auto} res\_norm = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(exec-\/>get\_master(),}
-\DoxyCodeLine{                           gko::as<vec>(logger-\/>get\_residual\_norm()));}
+\DoxyCodeLine{\textcolor{keyword}{auto} res\_norm = gko::as<vec>(logger-\/>get\_residual\_norm());}
+\DoxyCodeLine{\textcolor{keyword}{auto} host\_res = \mbox{\hyperlink{namespacegko_a7e65327b79b773f00f5bf4a480dd2066}{gko::make\_temporary\_clone}}(exec-\/>get\_master(), res\_norm);}
 \end{DoxyCode}
 
 
@@ -311,7 +375,8 @@ clang-\/format off
 \begin{DoxyCode}{0}
 \DoxyCodeLine{std::cout << \textcolor{stringliteral}{"\(\backslash\)nNum rows in matrix: "} << num\_rows}
 \DoxyCodeLine{          << \textcolor{stringliteral}{"\(\backslash\)nNum ranks: "} << comm.size()}
-\DoxyCodeLine{          << \textcolor{stringliteral}{"\(\backslash\)nFinal Res norm: "} << res\_norm-\/>at(0, 0)}
+\DoxyCodeLine{          << \textcolor{stringliteral}{"\(\backslash\)nPrecond type: "} << schw\_type}
+\DoxyCodeLine{          << \textcolor{stringliteral}{"\(\backslash\)nFinal Res norm: "} << *host\_res-\/>get\_const\_values()}
 \DoxyCodeLine{          << \textcolor{stringliteral}{"\(\backslash\)nIteration count: "} << logger-\/>get\_num\_iterations()}
 \DoxyCodeLine{          << \textcolor{stringliteral}{"\(\backslash\)nInit time: "} << t\_init\_end -\/ t\_init}
 \DoxyCodeLine{          << \textcolor{stringliteral}{"\(\backslash\)nRead time: "} << t\_read\_setup\_end -\/ t\_init}
@@ -380,6 +445,7 @@ The timings may vary depending on the machine. \label{_PlainProg}%
 \DoxyCodeLine{    \textcolor{keyword}{using} schwarz = \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1preconditioner_1_1Schwarz}{gko::experimental::distributed::preconditioner::Schwarz}}<}
 \DoxyCodeLine{        ValueType, LocalIndexType, GlobalIndexType>;}
 \DoxyCodeLine{    \textcolor{keyword}{using} bj = \mbox{\hyperlink{classgko_1_1preconditioner_1_1Jacobi}{gko::preconditioner::Jacobi<ValueType, LocalIndexType>}};}
+\DoxyCodeLine{    \textcolor{keyword}{using} pgm = \mbox{\hyperlink{classgko_1_1multigrid_1_1Pgm}{gko::multigrid::Pgm<ValueType, LocalIndexType>}};}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} comm = \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{gko::experimental::mpi::communicator}}(MPI\_COMM\_WORLD);}
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} rank = comm.rank();}
@@ -388,6 +454,7 @@ The timings may vary depending on the machine. \label{_PlainProg}%
 \DoxyCodeLine{        \textcolor{keywordflow}{if} (rank == 0) \{}
 \DoxyCodeLine{            std::cerr << \textcolor{stringliteral}{"Usage: "} << argv[0]}
 \DoxyCodeLine{                      << \textcolor{stringliteral}{" [executor] [num\_grid\_points] [num\_iterations] "}}
+\DoxyCodeLine{                         \textcolor{stringliteral}{"[schwarz\_prec\_type] "}}
 \DoxyCodeLine{                      << std::endl;}
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{        std::exit(-\/1);}
@@ -400,6 +467,7 @@ The timings may vary depending on the machine. \label{_PlainProg}%
 \DoxyCodeLine{        static\_cast<gko::size\_type>(argc >= 3 ? std::atoi(argv[2]) : 100);}
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} num\_iters =}
 \DoxyCodeLine{        static\_cast<gko::size\_type>(argc >= 4 ? std::atoi(argv[3]) : 1000);}
+\DoxyCodeLine{    std::string schw\_type = argc >= 5 ? argv[4] : \textcolor{stringliteral}{"one-\/level"};}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{const} std::map<std::string,}
 \DoxyCodeLine{                   std::function<std::shared\_ptr<gko::Executor>(MPI\_Comm)>>}
@@ -485,19 +553,65 @@ The timings may vary depending on the machine. \label{_PlainProg}%
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} local\_solver = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(bj::build().on(exec));}
+\DoxyCodeLine{    \textcolor{keyword}{auto} coarse\_solver = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(}
+\DoxyCodeLine{        solver::build()}
+\DoxyCodeLine{            .with\_preconditioner(}
+\DoxyCodeLine{                schwarz::build().with\_local\_solver(local\_solver).on(exec))}
+\DoxyCodeLine{            .with\_criteria(}
+\DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(1000u).on(exec),}
+\DoxyCodeLine{                \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                    .with\_reduction\_factor(1e-\/7)}
+\DoxyCodeLine{                    .on(exec))}
+\DoxyCodeLine{            .on(exec));}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{auto} pgm\_fac = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(pgm::build().on(exec));}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}} reduction\_factor\{1e-\/8\};}
 \DoxyCodeLine{    std::shared\_ptr<const gko::log::Convergence<ValueType>> logger =}
 \DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1log_1_1Convergence_aa67955ea9d1d18f15f0330d12b93d330}{gko::log::Convergence<ValueType>::create}}();}
-\DoxyCodeLine{    \textcolor{keyword}{auto} Ainv = solver::build()}
-\DoxyCodeLine{                    .with\_preconditioner(}
-\DoxyCodeLine{                        schwarz::build().with\_local\_solver(local\_solver))}
-\DoxyCodeLine{                    .with\_criteria(}
-\DoxyCodeLine{                        gko::stop::Iteration::build().with\_max\_iters(num\_iters),}
-\DoxyCodeLine{                        \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
-\DoxyCodeLine{                            .with\_reduction\_factor(reduction\_factor))}
-\DoxyCodeLine{                    .on(exec)}
-\DoxyCodeLine{                    -\/>generate(A);}
+\DoxyCodeLine{    std::shared\_ptr<gko::LinOp> Ainv\{\};}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (schw\_type == \textcolor{stringliteral}{"two-\/level"}) \{}
+\DoxyCodeLine{        Ainv =}
+\DoxyCodeLine{            solver::build()}
+\DoxyCodeLine{                .with\_preconditioner(schwarz::build()}
+\DoxyCodeLine{                                         .with\_local\_solver(local\_solver)}
+\DoxyCodeLine{                                         .with\_coarse\_level(pgm\_fac)}
+\DoxyCodeLine{                                         .with\_coarse\_solver(coarse\_solver)}
+\DoxyCodeLine{                                         .on(exec))}
+\DoxyCodeLine{                .with\_criteria(}
+\DoxyCodeLine{                    gko::stop::Iteration::build().with\_max\_iters(num\_iters).on(}
+\DoxyCodeLine{                        exec),}
+\DoxyCodeLine{                    \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                        .with\_reduction\_factor(reduction\_factor)}
+\DoxyCodeLine{                        .on(exec))}
+\DoxyCodeLine{                .on(exec)}
+\DoxyCodeLine{                -\/>generate(A);}
+\DoxyCodeLine{    \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (schw\_type == \textcolor{stringliteral}{"one-\/level"}) \{}
+\DoxyCodeLine{        Ainv =}
+\DoxyCodeLine{            solver::build()}
+\DoxyCodeLine{                .with\_preconditioner(}
+\DoxyCodeLine{                    schwarz::build().with\_local\_solver(local\_solver).on(exec))}
+\DoxyCodeLine{                .with\_criteria(}
+\DoxyCodeLine{                    gko::stop::Iteration::build().with\_max\_iters(num\_iters).on(}
+\DoxyCodeLine{                        exec),}
+\DoxyCodeLine{                    \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                        .with\_reduction\_factor(reduction\_factor)}
+\DoxyCodeLine{                        .on(exec))}
+\DoxyCodeLine{                .on(exec)}
+\DoxyCodeLine{                -\/>generate(A);}
+\DoxyCodeLine{    \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{        schw\_type = \textcolor{stringliteral}{"no-\/precond"};}
+\DoxyCodeLine{        Ainv =}
+\DoxyCodeLine{            solver::build()}
+\DoxyCodeLine{                .with\_criteria(}
+\DoxyCodeLine{                    gko::stop::Iteration::build().with\_max\_iters(num\_iters).on(}
+\DoxyCodeLine{                        exec),}
+\DoxyCodeLine{                    \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                        .with\_reduction\_factor(reduction\_factor)}
+\DoxyCodeLine{                        .on(exec))}
+\DoxyCodeLine{                .on(exec)}
+\DoxyCodeLine{                -\/>generate(A);}
+\DoxyCodeLine{    \}}
 \DoxyCodeLine{    Ainv-\/>add\_logger(logger);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    comm.synchronize();}
@@ -508,13 +622,14 @@ The timings may vary depending on the machine. \label{_PlainProg}%
 \DoxyCodeLine{    comm.synchronize();}
 \DoxyCodeLine{    ValueType t\_end = \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a508f97387781bb32dd2c7616dee1a786}{gko::experimental::mpi::get\_walltime}}();}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{auto} res\_norm = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(exec-\/>get\_master(),}
-\DoxyCodeLine{                               gko::as<vec>(logger-\/>get\_residual\_norm()));}
+\DoxyCodeLine{    \textcolor{keyword}{auto} res\_norm = gko::as<vec>(logger-\/>get\_residual\_norm());}
+\DoxyCodeLine{    \textcolor{keyword}{auto} host\_res = \mbox{\hyperlink{namespacegko_a7e65327b79b773f00f5bf4a480dd2066}{gko::make\_temporary\_clone}}(exec-\/>get\_master(), res\_norm);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keywordflow}{if} (comm.rank() == 0) \{}
 \DoxyCodeLine{        std::cout << \textcolor{stringliteral}{"\(\backslash\)nNum rows in matrix: "} << num\_rows}
 \DoxyCodeLine{                  << \textcolor{stringliteral}{"\(\backslash\)nNum ranks: "} << comm.size()}
-\DoxyCodeLine{                  << \textcolor{stringliteral}{"\(\backslash\)nFinal Res norm: "} << res\_norm-\/>at(0, 0)}
+\DoxyCodeLine{                  << \textcolor{stringliteral}{"\(\backslash\)nPrecond type: "} << schw\_type}
+\DoxyCodeLine{                  << \textcolor{stringliteral}{"\(\backslash\)nFinal Res norm: "} << *host\_res-\/>get\_const\_values()}
 \DoxyCodeLine{                  << \textcolor{stringliteral}{"\(\backslash\)nIteration count: "} << logger-\/>get\_num\_iterations()}
 \DoxyCodeLine{                  << \textcolor{stringliteral}{"\(\backslash\)nInit time: "} << t\_init\_end -\/ t\_init}
 \DoxyCodeLine{                  << \textcolor{stringliteral}{"\(\backslash\)nRead time: "} << t\_read\_setup\_end -\/ t\_init}
