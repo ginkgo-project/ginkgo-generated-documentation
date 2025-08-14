@@ -363,6 +363,8 @@ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} 
 \begin{DoxyCompactList}\small\item\em Create a submatrix from the original matrix. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a621650dbf619a21aafb8cc311dd14bc9}{create\+\_\+submatrix}} (const \mbox{\hyperlink{structgko_1_1span}{span}} \&\mbox{\hyperlink{namespacegko_1_1matrix_ade1f3cdbf05032c2d681fa151de02972adf347a373b8f92aa0ae3dd920a5ec2f6}{rows}}, const \mbox{\hyperlink{structgko_1_1span}{span}} \&\mbox{\hyperlink{namespacegko_1_1matrix_ade1f3cdbf05032c2d681fa151de02972a54ca84a794888fe8d92834787dfa935a}{columns}})
 \begin{DoxyCompactList}\small\item\em Create a submatrix from the original matrix. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_afee93c86318c7212e61af68398ed3a6c}{create\+\_\+submatrix}} (const \mbox{\hyperlink{structgko_1_1local__span}{local\+\_\+span}} \&\mbox{\hyperlink{namespacegko_1_1matrix_ade1f3cdbf05032c2d681fa151de02972adf347a373b8f92aa0ae3dd920a5ec2f6}{rows}}, const \mbox{\hyperlink{structgko_1_1local__span}{local\+\_\+span}} \&\mbox{\hyperlink{namespacegko_1_1matrix_ade1f3cdbf05032c2d681fa151de02972a54ca84a794888fe8d92834787dfa935a}{columns}}, \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ size)
+\begin{DoxyCompactList}\small\item\em Create a submatrix from the original matrix. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ real\+\_\+type $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_af57c2f04c8703f9ce98c474c5c8d5b11}{create\+\_\+real\+\_\+view}} ()
 \begin{DoxyCompactList}\small\item\em Create a real view of the (potentially) complex original matrix. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ const real\+\_\+type $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a9d372821428c8243dc5905078acfaecb}{create\+\_\+real\+\_\+view}} () const
@@ -1116,10 +1118,30 @@ std\+::unique\+\_\+ptr$<$const real\+\_\+type$>$ \mbox{\hyperlink{classgko_1_1ma
 
 Create a real view of the (potentially) complex original matrix. 
 
-If the original matrix is real, nothing changes. If the original matrix is complex, the result is created by viewing the complex matrix with as real with a reinterpret\+\_\+cast with twice the number of columns and double the stride. \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a621650dbf619a21aafb8cc311dd14bc9}\label{classgko_1_1matrix_1_1Dense_a621650dbf619a21aafb8cc311dd14bc9}} 
+If the original matrix is real, nothing changes. If the original matrix is complex, the result is created by viewing the complex matrix with as real with a reinterpret\+\_\+cast with twice the number of columns and double the stride. \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_afee93c86318c7212e61af68398ed3a6c}\label{classgko_1_1matrix_1_1Dense_afee93c86318c7212e61af68398ed3a6c}} 
 \index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!create\_submatrix@{create\_submatrix}}
 \index{create\_submatrix@{create\_submatrix}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
-\doxysubsubsection{\texorpdfstring{create\_submatrix()}{create\_submatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\doxysubsubsection{\texorpdfstring{create\_submatrix()}{create\_submatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::create\+\_\+submatrix (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structgko_1_1local__span}{local\+\_\+span}} \&}]{rows,  }\item[{const \mbox{\hyperlink{structgko_1_1local__span}{local\+\_\+span}} \&}]{columns,  }\item[{\mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Create a submatrix from the original matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rows} & row span \\
+\hline
+{\em columns} & column span \\
+\hline
+{\em size} & size of the submatrix (only used for consistency with distributed\+::\+Vector) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a621650dbf619a21aafb8cc311dd14bc9}\label{classgko_1_1matrix_1_1Dense_a621650dbf619a21aafb8cc311dd14bc9}} 
+\index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!create\_submatrix@{create\_submatrix}}
+\index{create\_submatrix@{create\_submatrix}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{create\_submatrix()}{create\_submatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
 std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::create\+\_\+submatrix (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structgko_1_1span}{span}} \&}]{rows,  }\item[{const \mbox{\hyperlink{structgko_1_1span}{span}} \&}]{columns }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
@@ -1137,7 +1159,7 @@ Create a submatrix from the original matrix.
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_ad606073cc426e9164bb2445354f22366}\label{classgko_1_1matrix_1_1Dense_ad606073cc426e9164bb2445354f22366}} 
 \index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!create\_submatrix@{create\_submatrix}}
 \index{create\_submatrix@{create\_submatrix}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
-\doxysubsubsection{\texorpdfstring{create\_submatrix()}{create\_submatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\doxysubsubsection{\texorpdfstring{create\_submatrix()}{create\_submatrix()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
 std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::create\+\_\+submatrix (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structgko_1_1span}{span}} \&}]{rows,  }\item[{const \mbox{\hyperlink{structgko_1_1span}{span}} \&}]{columns,  }\item[{const \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{stride }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 

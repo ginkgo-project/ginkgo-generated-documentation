@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1982415290 branch based on develop. Ginkgo version 1.11.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/1984134364 branch based on develop. Ginkgo version 1.11.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -262,6 +262,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="memitem:abf044a2573c3897ce415771357967ff0"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; real_type &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#abf044a2573c3897ce415771357967ff0">create_real_view</a> ()</td></tr>
 <tr class="memdesc:abf044a2573c3897ce415771357967ff0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a real view of the (potentially) complex original multi-vector.  <a href="classgko_1_1experimental_1_1distributed_1_1Vector.html#abf044a2573c3897ce415771357967ff0">More...</a><br /></td></tr>
 <tr class="separator:abf044a2573c3897ce415771357967ff0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a560532d34be5cd95d4e5680a8f6cc669"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classgko_1_1experimental_1_1distributed_1_1Vector.html">Vector</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a560532d34be5cd95d4e5680a8f6cc669">create_submatrix</a> (<a class="el" href="structgko_1_1local__span.html">local_span</a> rows, <a class="el" href="structgko_1_1local__span.html">local_span</a> columns, <a class="el" href="structgko_1_1dim.html">dim</a>&lt; 2 &gt; global_size)</td></tr>
+<tr class="memdesc:a560532d34be5cd95d4e5680a8f6cc669"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a view of a submatrix of this vector.  <a href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a560532d34be5cd95d4e5680a8f6cc669">More...</a><br /></td></tr>
+<tr class="separator:a560532d34be5cd95d4e5680a8f6cc669"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06cc70a97b006935b68ac52d5e5757f7"><td class="memItemLeft" align="right" valign="top"><a id="a06cc70a97b006935b68ac52d5e5757f7"></a>
 <a class="el" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a>&#160;</td><td class="memItemRight" valign="bottom"><b>get_stride</b> () const noexcept</td></tr>
 <tr class="separator:a06cc70a97b006935b68ac52d5e5757f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1615,6 +1618,53 @@ template&lt;typename ValueType  = double&gt; </div>
 
 <p>Create a real view of the (potentially) complex original multi-vector. </p>
 <p>If the original vector is real, nothing changes. If the original vector is complex, the result is created by viewing the complex vector with as real with a reinterpret_cast with twice the number of columns and double the stride. </p>
+
+</div>
+</div>
+<a id="a560532d34be5cd95d4e5680a8f6cc669"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a560532d34be5cd95d4e5680a8f6cc669">&#9670;&nbsp;</a></span>create_submatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ValueType  = double&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt;<a class="el" href="classgko_1_1experimental_1_1distributed_1_1Vector.html">Vector</a>&gt; <a class="el" href="classgko_1_1experimental_1_1distributed_1_1Vector.html">gko::experimental::distributed::Vector</a>&lt; ValueType &gt;::create_submatrix </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structgko_1_1local__span.html">local_span</a>&#160;</td>
+          <td class="paramname"><em>rows</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structgko_1_1local__span.html">local_span</a>&#160;</td>
+          <td class="paramname"><em>columns</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structgko_1_1dim.html">dim</a>&lt; 2 &gt;&#160;</td>
+          <td class="paramname"><em>global_size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creates a view of a submatrix of this vector. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rows</td><td>The local rows of the submatrix </td></tr>
+    <tr><td class="paramname">columns</td><td>The local columns of the submatrix </td></tr>
+    <tr><td class="paramname">global_size</td><td>The global size of the submatrix</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A view of a submatrix. </dd></dl>
 
 </div>
 </div>
