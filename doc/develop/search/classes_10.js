@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['range_2457',['range',['../structgko_1_1syn_1_1range.html',1,'gko::syn::range&lt; Start, End, Step &gt;'],['../classgko_1_1range.html',1,'gko::range&lt; Accessor &gt;']]],
+  ['range_2457',['range',['../classgko_1_1range.html',1,'gko::range&lt; Accessor &gt;'],['../structgko_1_1syn_1_1range.html',1,'gko::syn::range&lt; Start, End, Step &gt;']]],
   ['rcm_2458',['Rcm',['../classgko_1_1experimental_1_1reorder_1_1Rcm.html',1,'gko::experimental::reorder::Rcm&lt; IndexType &gt;'],['../classgko_1_1reorder_1_1Rcm.html',1,'gko::reorder::Rcm&lt; ValueType, IndexType &gt;']]],
   ['readablefrommatrixdata_2459',['ReadableFromMatrixData',['../classgko_1_1ReadableFromMatrixData.html',1,'gko']]],
   ['readablefrommatrixdata_3c_20valuetype_2c_20int32_20_3e_2460',['ReadableFromMatrixData&lt; ValueType, int32 &gt;',['../classgko_1_1ReadableFromMatrixData.html',1,'gko']]],
