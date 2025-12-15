@@ -42,8 +42,14 @@ class \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1load__balance}{load\+\_\+bal
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1load__balance}{load\+\_\+balance}} is a \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1strategy__type}{strategy\+\_\+type}} which uses the load balance algorithm. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1merge__path}{merge\+\_\+path}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1merge__path}{merge\+\_\+path}} is a \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1strategy__type}{strategy\+\_\+type}} which uses the \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1merge__path}{merge\+\_\+path}} algorithm. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1multiply__add__reuse__info}{multiply\+\_\+add\+\_\+reuse\+\_\+info}}
+\begin{DoxyCompactList}\small\item\em Class describing the internal lookup structures created by multiply\+\_\+add\+\_\+reuse to recompute a sparse matrix-\/matrix product with updated values. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1multiply__reuse__info}{multiply\+\_\+reuse\+\_\+info}}
+\begin{DoxyCompactList}\small\item\em Class describing the internal lookup structures created by multiply\+\_\+reuse(const Csr$\ast$) to recompute a sparse matrix-\/matrix product with updated values. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structgko_1_1matrix_1_1Csr_1_1permuting__reuse__info}{permuting\+\_\+reuse\+\_\+info}}
 \begin{DoxyCompactList}\small\item\em A struct describing a transformation of the matrix that reorders the values of the matrix into the transformed matrix. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1scale__add__reuse__info}{scale\+\_\+add\+\_\+reuse\+\_\+info}}
+\begin{DoxyCompactList}\small\item\em Class describing the internal lookup structures created by scale\+\_\+add\+\_\+reuse to recompute a sparse matrix-\/matrix sum with updated values. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1sparselib}{sparselib}}
 \begin{DoxyCompactList}\small\item\em sparselib is a \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1strategy__type}{strategy\+\_\+type}} which uses the sparselib csr. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1strategy__type}{strategy\+\_\+type}}
@@ -132,6 +138,18 @@ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbo
 \begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_a38820451af5424f18b767667f3067d72}{conj\+\_\+transpose}} () const override
 \begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the conjugate transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_ab958cdcd1f53f12d979cf06edc84735c}{multiply}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}} $>$ other) const
+\begin{DoxyCompactList}\small\item\em Computes the sparse matrix product {\ttfamily this $\ast$ other} on the executor of this matrix. \end{DoxyCompactList}\item 
+std\+::pair$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}} $>$, \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1multiply__reuse__info}{multiply\+\_\+reuse\+\_\+info}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_a3498d28b8dd8cad7a17933fb9f81a24a}{multiply\+\_\+reuse}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}} $>$ other) const
+\begin{DoxyCompactList}\small\item\em Computes the sparse matrix product {\ttfamily this $\ast$ other} on the executor of this matrix, and necessary data for value updates\+: \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_a5eb2c1973f2dffa5c29f042949127848}{multiply\+\_\+add}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ value\+\_\+type $>$$>$ scale\+\_\+mult, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}} $>$ mtx\+\_\+mult, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ value\+\_\+type $>$$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_adcece6662e99d755e396cfa25b027028}{scale\+\_\+add}}, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}} $>$ mtx\+\_\+add) const
+\begin{DoxyCompactList}\small\item\em Computes the sparse matrix product {\ttfamily scale\+\_\+mult $\ast$ this $\ast$ mtx\+\_\+mult + scale\+\_\+add $\ast$ mtx\+\_\+add} on the executor of this matrix. \end{DoxyCompactList}\item 
+std\+::pair$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}} $>$, \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1multiply__add__reuse__info}{multiply\+\_\+add\+\_\+reuse\+\_\+info}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_afa36e84995da692aa906ade5752c4c9c}{multiply\+\_\+add\+\_\+reuse}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ value\+\_\+type $>$$>$ scale\+\_\+mult, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}} $>$ mtx\+\_\+mult, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ value\+\_\+type $>$$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_adcece6662e99d755e396cfa25b027028}{scale\+\_\+add}}, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}} $>$ mtx\+\_\+add) const
+\begin{DoxyCompactList}\small\item\em Computes the sparse matrix product {\ttfamily scale\+\_\+mult $\ast$ this $\ast$ mtx\+\_\+mult + scale\+\_\+add $\ast$ mtx\+\_\+add} on the executor of this matrix, and necessary data for value updates\+: \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_adcece6662e99d755e396cfa25b027028}{scale\+\_\+add}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ value\+\_\+type $>$$>$ scale\+\_\+this, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ value\+\_\+type $>$$>$ scale\+\_\+other, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}} $>$ mtx\+\_\+other) const
+\begin{DoxyCompactList}\small\item\em Computes the sparse matrix sum {\ttfamily scale\+\_\+this $\ast$ this + scale\+\_\+other $\ast$ mtx\+\_\+add} on the executor of this matrix. \end{DoxyCompactList}\item 
+std\+::pair$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}} $>$, \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1scale__add__reuse__info}{scale\+\_\+add\+\_\+reuse\+\_\+info}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_af957fc409500f3ca0d7ebbdb2e5e1622}{add\+\_\+scale\+\_\+reuse}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ value\+\_\+type $>$$>$ scale\+\_\+this, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ value\+\_\+type $>$$>$ scale\+\_\+other, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}} $>$ mtx\+\_\+other) const
+\begin{DoxyCompactList}\small\item\em Computes the sparse matrix sum {\ttfamily scale\+\_\+this $\ast$ this + scale\+\_\+other $\ast$ mtx\+\_\+add} on the executor of this matrix, and necessary data for value updates\+: \end{DoxyCompactList}\item 
 std\+::pair$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}} $>$, \mbox{\hyperlink{structgko_1_1matrix_1_1Csr_1_1permuting__reuse__info}{permuting\+\_\+reuse\+\_\+info}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_a9499f67061ef38ceed7a504a9dc1c66e}{transpose\+\_\+reuse}} () const
 \begin{DoxyCompactList}\small\item\em Computes the necessary data to update a transposed matrix from its original matrix. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_ab94a9c9f420e3348830eb54e0420bf5c}{permute}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Permutation}{Permutation}}$<$ index\+\_\+type $>$$>$ permutation, \mbox{\hyperlink{namespacegko_1_1matrix_ade1f3cdbf05032c2d681fa151de02972}{permute\+\_\+mode}} mode=\mbox{\hyperlink{namespacegko_1_1matrix_ade1f3cdbf05032c2d681fa151de02972afeca3c730601be7fd57f1f0b668b4637}{permute\+\_\+mode\+::symmetric}}) const
@@ -336,6 +354,37 @@ Move-\/constructs a \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}} matrix.
 Inherits executor and strategy, moves the data and leaves the moved-\/from object in an empty state (0x0 \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} with unchanged executor and strategy, no nonzeros and valid row pointers). 
 
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_af957fc409500f3ca0d7ebbdb2e5e1622}\label{classgko_1_1matrix_1_1Csr_af957fc409500f3ca0d7ebbdb2e5e1622}} 
+\index{gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}!add\_scale\_reuse@{add\_scale\_reuse}}
+\index{add\_scale\_reuse@{add\_scale\_reuse}!gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{add\_scale\_reuse()}{add\_scale\_reuse()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+std\+::pair$<$std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}}$>$, \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1scale__add__reuse__info}{scale\+\_\+add\+\_\+reuse\+\_\+info}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko\+::matrix\+::\+Csr}}$<$ Value\+Type, Index\+Type $>$\+::add\+\_\+scale\+\_\+reuse (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ value\+\_\+type $>$$>$}]{scale\+\_\+this,  }\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ value\+\_\+type $>$$>$}]{scale\+\_\+other,  }\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}}$<$ Value\+Type, Index\+Type $>$ $>$}]{mtx\+\_\+other }\end{DoxyParamCaption}) const}
+
+
+
+Computes the sparse matrix sum {\ttfamily scale\+\_\+this $\ast$ this + scale\+\_\+other $\ast$ mtx\+\_\+add} on the executor of this matrix, and necessary data for value updates\+: 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} [result, reuse] = mtx-\/>add\_scale\_reuse(alpha, beta, mtx2);}
+\DoxyCodeLine{change\_values(alpha, mtx, beta, mtx2);}
+\DoxyCodeLine{reuse-\/>update\_values(alpha, mtx, beta, mtx2, result);}
+\end{DoxyCode}
+ This matrix needs to be sorted by column index, otherwise the result will be incorrect.
+
+
+\begin{DoxyParams}{Parameters}
+{\em scale\+\_\+this} & the scalar by which this matrix will be scaled. \\
+\hline
+{\em scale\+\_\+other} & the scalar by which this matrix will be scaled. \\
+\hline
+{\em mtx\+\_\+other} & the matrix which will be added to this, scaled by scale\+\_\+other. It needs to be sorted by column index, otherwise the result will be incorrect. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::pair containing the result of the computation, stored on the same executor as this matrix, and a \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1scale__add__reuse__info}{scale\+\_\+add\+\_\+reuse\+\_\+info}} object allowing value updates to the output matrix. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_aa22094fa1c2345b5b22a9f5d03a7c5a4}\label{classgko_1_1matrix_1_1Csr_aa22094fa1c2345b5b22a9f5d03a7c5a4}} 
 \index{gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}!column\_permute@{column\_permute}}
 \index{column\_permute@{column\_permute}!gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}}
@@ -903,6 +952,110 @@ a pointer to the new inverse permuted object
 
 Implements \mbox{\hyperlink{classgko_1_1Permutable_a42e0e0583694d84cdfba136ecc26dbe6}{gko\+::\+Permutable$<$ Index\+Type $>$}}.
 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_ab958cdcd1f53f12d979cf06edc84735c}\label{classgko_1_1matrix_1_1Csr_ab958cdcd1f53f12d979cf06edc84735c}} 
+\index{gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}!multiply@{multiply}}
+\index{multiply@{multiply}!gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{multiply()}{multiply()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko\+::matrix\+::\+Csr}}$<$ Value\+Type, Index\+Type $>$\+::multiply (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}}$<$ Value\+Type, Index\+Type $>$ $>$}]{other }\end{DoxyParamCaption}) const}
+
+
+
+Computes the sparse matrix product {\ttfamily this $\ast$ other} on the executor of this matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & the matrix with which the product will be computed. It needs to be sorted by column indices when using \mbox{\hyperlink{classgko_1_1OmpExecutor}{Omp\+Executor}} or \mbox{\hyperlink{classgko_1_1DpcppExecutor}{Dpcpp\+Executor}} for {\ttfamily this}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the product of the two matrices, stored on the same executor as this matrix. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_a5eb2c1973f2dffa5c29f042949127848}\label{classgko_1_1matrix_1_1Csr_a5eb2c1973f2dffa5c29f042949127848}} 
+\index{gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}!multiply\_add@{multiply\_add}}
+\index{multiply\_add@{multiply\_add}!gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{multiply\_add()}{multiply\_add()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko\+::matrix\+::\+Csr}}$<$ Value\+Type, Index\+Type $>$\+::multiply\+\_\+add (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ value\+\_\+type $>$$>$}]{scale\+\_\+mult,  }\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}}$<$ Value\+Type, Index\+Type $>$ $>$}]{mtx\+\_\+mult,  }\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ value\+\_\+type $>$$>$}]{scale\+\_\+add,  }\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}}$<$ Value\+Type, Index\+Type $>$ $>$}]{mtx\+\_\+add }\end{DoxyParamCaption}) const}
+
+
+
+Computes the sparse matrix product {\ttfamily scale\+\_\+mult $\ast$ this $\ast$ mtx\+\_\+mult + scale\+\_\+add $\ast$ mtx\+\_\+add} on the executor of this matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scale\+\_\+mult} & the scalar by which the matrix product will be scaled. \\
+\hline
+{\em mtx\+\_\+mult} & the matrix with which the product will be computed. It needs to be sorted by column indices when using \mbox{\hyperlink{classgko_1_1OmpExecutor}{Omp\+Executor}} or \mbox{\hyperlink{classgko_1_1DpcppExecutor}{Dpcpp\+Executor}} for {\ttfamily this}. \\
+\hline
+{\em scale\+\_\+add} & the scalar by which the matrix mtx\+\_\+add will be scaled. \\
+\hline
+{\em mtx\+\_\+add} & the matrix which will be added to the product, scaled by scale\+\_\+add. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the result of the computation, stored on the same executor as this matrix. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_afa36e84995da692aa906ade5752c4c9c}\label{classgko_1_1matrix_1_1Csr_afa36e84995da692aa906ade5752c4c9c}} 
+\index{gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}!multiply\_add\_reuse@{multiply\_add\_reuse}}
+\index{multiply\_add\_reuse@{multiply\_add\_reuse}!gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{multiply\_add\_reuse()}{multiply\_add\_reuse()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+std\+::pair$<$std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}}$>$, \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1multiply__add__reuse__info}{multiply\+\_\+add\+\_\+reuse\+\_\+info}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko\+::matrix\+::\+Csr}}$<$ Value\+Type, Index\+Type $>$\+::multiply\+\_\+add\+\_\+reuse (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ value\+\_\+type $>$$>$}]{scale\+\_\+mult,  }\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}}$<$ Value\+Type, Index\+Type $>$ $>$}]{mtx\+\_\+mult,  }\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ value\+\_\+type $>$$>$}]{scale\+\_\+add,  }\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}}$<$ Value\+Type, Index\+Type $>$ $>$}]{mtx\+\_\+add }\end{DoxyParamCaption}) const}
+
+
+
+Computes the sparse matrix product {\ttfamily scale\+\_\+mult $\ast$ this $\ast$ mtx\+\_\+mult + scale\+\_\+add $\ast$ mtx\+\_\+add} on the executor of this matrix, and necessary data for value updates\+: 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} [result, reuse] = mtx-\/>multiply\_add\_reuse(sm, mm, sa, ma);}
+\DoxyCodeLine{change\_values(mtx, sm, mm, sa, ma);}
+\DoxyCodeLine{reuse-\/>update\_values(mtx, sm, mm, sa, ma, result);}
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em scale\+\_\+mult} & the scalar by which the matrix product will be scaled. \\
+\hline
+{\em mtx\+\_\+mult} & the matrix with which the product will be computed. It needs to be sorted by column indices when using \mbox{\hyperlink{classgko_1_1OmpExecutor}{Omp\+Executor}} or \mbox{\hyperlink{classgko_1_1DpcppExecutor}{Dpcpp\+Executor}} for {\ttfamily this}. \\
+\hline
+{\em scale\+\_\+add} & the scalar by which the matrix mtx\+\_\+add will be scaled. \\
+\hline
+{\em mtx\+\_\+add} & the matrix which will be added to the product, scaled by scale\+\_\+add. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::pair containing the result of the computation, stored on the same executor as this matrix, and a \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1multiply__add__reuse__info}{multiply\+\_\+add\+\_\+reuse\+\_\+info}} object allowing value updates to the output matrix. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_a3498d28b8dd8cad7a17933fb9f81a24a}\label{classgko_1_1matrix_1_1Csr_a3498d28b8dd8cad7a17933fb9f81a24a}} 
+\index{gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}!multiply\_reuse@{multiply\_reuse}}
+\index{multiply\_reuse@{multiply\_reuse}!gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{multiply\_reuse()}{multiply\_reuse()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+std\+::pair$<$std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}}$>$, \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1multiply__reuse__info}{multiply\+\_\+reuse\+\_\+info}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko\+::matrix\+::\+Csr}}$<$ Value\+Type, Index\+Type $>$\+::multiply\+\_\+reuse (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}}$<$ Value\+Type, Index\+Type $>$ $>$}]{other }\end{DoxyParamCaption}) const}
+
+
+
+Computes the sparse matrix product {\ttfamily this $\ast$ other} on the executor of this matrix, and necessary data for value updates\+: 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} [C, reuse] = A-\/>multiply\_reuse(B);}
+\DoxyCodeLine{change\_values(A, B);}
+\DoxyCodeLine{reuse-\/>update\_values(A, B, C);}
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & the matrix with which the product will be computed. It needs to be sorted by column indices when using \mbox{\hyperlink{classgko_1_1OmpExecutor}{Omp\+Executor}} or \mbox{\hyperlink{classgko_1_1DpcppExecutor}{Dpcpp\+Executor}} for {\ttfamily this}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::pair containing the product of the two matrices, stored on the same executor as this matrix, and a \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1multiply__reuse__info}{multiply\+\_\+reuse\+\_\+info}} object allowing value updates to the output matrix. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_ac179b21381b5522601ac7a6c507d0c52}\label{classgko_1_1matrix_1_1Csr_ac179b21381b5522601ac7a6c507d0c52}} 
 \index{gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}!operator=@{operator=}}
 \index{operator=@{operator=}!gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}}
@@ -1165,6 +1318,31 @@ Scales the matrix with a scalar.
 
 References gko\+::\+Polymorphic\+Object\+::get\+\_\+executor(), and gko\+::make\+\_\+temporary\+\_\+clone().
 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_adcece6662e99d755e396cfa25b027028}\label{classgko_1_1matrix_1_1Csr_adcece6662e99d755e396cfa25b027028}} 
+\index{gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}!scale\_add@{scale\_add}}
+\index{scale\_add@{scale\_add}!gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{scale\_add()}{scale\_add()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}}$>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko\+::matrix\+::\+Csr}}$<$ Value\+Type, Index\+Type $>$\+::scale\+\_\+add (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ value\+\_\+type $>$$>$}]{scale\+\_\+this,  }\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}$<$ value\+\_\+type $>$$>$}]{scale\+\_\+other,  }\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}}$<$ Value\+Type, Index\+Type $>$ $>$}]{mtx\+\_\+other }\end{DoxyParamCaption}) const}
+
+
+
+Computes the sparse matrix sum {\ttfamily scale\+\_\+this $\ast$ this + scale\+\_\+other $\ast$ mtx\+\_\+add} on the executor of this matrix. 
+
+This matrix needs to be sorted by column index, otherwise the result will be incorrect.
+
+
+\begin{DoxyParams}{Parameters}
+{\em scale\+\_\+this} & the scalar by which this matrix will be scaled. \\
+\hline
+{\em scale\+\_\+other} & the scalar by which this matrix will be scaled. \\
+\hline
+{\em mtx\+\_\+other} & the matrix which will be added to this, scaled by scale\+\_\+other. It needs to be sorted by column index, otherwise the result will be incorrect. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the result of the computation, stored on the same executor as this matrix. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_ab7006dfb4ee87709dbcc2de20e58bfee}\label{classgko_1_1matrix_1_1Csr_ab7006dfb4ee87709dbcc2de20e58bfee}} 
 \index{gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}!scale\_permute@{scale\_permute}}
 \index{scale\_permute@{scale\_permute}!gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}}
@@ -1265,7 +1443,7 @@ Computes the necessary data to update a transposed matrix from its original matr
 \DoxyCodeLine{reuse-\/>update\_values(matrix, transposed);}
 \end{DoxyCode}
  \begin{DoxyReturn}{Returns}
-the reuse info struct that can be used to update values in the transposed matrix. 
+an std\+::pair consisting of the transposed matrix and a reuse info struct that can be used to update values in the transposed matrix. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_a205fc391f4cf4f7718a55b0a61f62bc9}\label{classgko_1_1matrix_1_1Csr_a205fc391f4cf4f7718a55b0a61f62bc9}} 
 \index{gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}!write@{write}}

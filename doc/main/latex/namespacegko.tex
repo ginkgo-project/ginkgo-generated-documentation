@@ -187,6 +187,8 @@ class \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}
 \item 
 class \mbox{\hyperlink{classgko_1_1LinOpFactory}{Lin\+Op\+Factory}}
 \begin{DoxyCompactList}\small\item\em A \mbox{\hyperlink{classgko_1_1LinOpFactory}{Lin\+Op\+Factory}} represents a higher order mapping which transforms one linear operator into another. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structgko_1_1local__span}{local\+\_\+span}}
+\begin{DoxyCompactList}\small\item\em A span that is used exclusively for local numbering. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1machine__topology}{machine\+\_\+topology}}
 \begin{DoxyCompactList}\small\item\em The machine topology class represents the hierarchical topology of a machine, including N\+U\+MA nodes, cores and P\+CI Devices. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1matrix__assembly__data}{matrix\+\_\+assembly\+\_\+data}}
@@ -489,8 +491,10 @@ std\+::complex$<$ \mbox{\hyperlink{classgko_1_1bfloat16}{gko\+::bfloat16}} $>$ {
 \begin{DoxyCompactList}\small\item\em Reads a matrix stored in binary format from an input stream. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Matrix\+Type , typename Stream\+Type , typename... Matrix\+Args$>$ }\\std\+::unique\+\_\+ptr$<$ Matrix\+Type $>$ \mbox{\hyperlink{namespacegko_ac71759a8a78d3c4946a11ce4b378a88e}{read\+\_\+generic}} (Stream\+Type \&\&is, Matrix\+Args \&\&... args)
 \begin{DoxyCompactList}\small\item\em Reads a matrix stored either in binary or matrix market format from an input stream. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename Matrix\+Ptr\+Type , typename Stream\+Type $>$ }\\void \mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{write}} (Stream\+Type \&\&os, Matrix\+Ptr\+Type \&\&matrix, \mbox{\hyperlink{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68}{layout\+\_\+type}} layout=detail\+::mtx\+\_\+io\+\_\+traits$<$ std\+::remove\+\_\+cv\+\_\+t$<$ detail\+::pointee$<$ Matrix\+Ptr\+Type $>$$>$$>$\+::default\+\_\+layout)
+{\footnotesize template$<$typename Matrix\+Ptr\+Type , typename Stream\+Type , std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+same\+\_\+v$<$ std\+::remove\+\_\+cv\+\_\+t$<$ detail\+::pointee$<$ Matrix\+Ptr\+Type $>$$>$, Lin\+Op $>$$>$ $\ast$  = nullptr$>$ }\\void \mbox{\hyperlink{namespacegko_a577a2f0345ee607f64277b3364b6431b}{write}} (Stream\+Type \&\&os, Matrix\+Ptr\+Type \&\&matrix, \mbox{\hyperlink{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68}{layout\+\_\+type}} layout=detail\+::mtx\+\_\+io\+\_\+traits$<$ std\+::remove\+\_\+cv\+\_\+t$<$ detail\+::pointee$<$ Matrix\+Ptr\+Type $>$$>$$>$\+::default\+\_\+layout)
 \begin{DoxyCompactList}\small\item\em Writes a matrix into an output stream in matrix market format. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacegko_abc28c235c3fbbf3c495b1850c61746d2}{write}} (std\+::ostream \&os, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ matrix)
+\begin{DoxyCompactList}\small\item\em Writes a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} into an output stream in matrix market format. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Matrix\+Ptr\+Type , typename Stream\+Type $>$ }\\void \mbox{\hyperlink{namespacegko_aba9ca89ef08421197d3dbf84b0ad884c}{write\+\_\+binary}} (Stream\+Type \&\&os, Matrix\+Ptr\+Type \&\&matrix)
 \begin{DoxyCompactList}\small\item\em Writes a matrix into an output stream in binary format. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename R , typename T $>$ }\\std\+::unique\+\_\+ptr$<$ R, std\+::function$<$ void(R $\ast$)$>$ $>$ \mbox{\hyperlink{namespacegko_abb378b82b7b7c6347ebdfb4c2ddc9366}{copy\+\_\+and\+\_\+convert\+\_\+to}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, T $\ast$obj)
@@ -3073,11 +3077,30 @@ This is mainly a helper function to specify the local matrix type for a \mbox{\h
 \begin{DoxyReturn}{Returns}
 A type with a function {\ttfamily create$<$value\+\_\+type, index\+\_\+type$>$(executor)}. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}\label{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}} 
+\mbox{\Hypertarget{namespacegko_abc28c235c3fbbf3c495b1850c61746d2}\label{namespacegko_abc28c235c3fbbf3c495b1850c61746d2}} 
 \index{gko@{gko}!write@{write}}
 \index{write@{write}!gko@{gko}}
-\doxysubsubsection{\texorpdfstring{write()}{write()}}
-{\footnotesize\ttfamily template$<$typename Matrix\+Ptr\+Type , typename Stream\+Type $>$ \\
+\doxysubsubsection{\texorpdfstring{write()}{write()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void gko\+::write (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$}]{matrix }\end{DoxyParamCaption})}
+
+
+
+Writes a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} into an output stream in matrix market format. 
+
+The matrix market format use coordinate format if the sparsity is less than 25\%. Otherwise, use array format.
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & output stream where the data is to be written \\
+\hline
+{\em matrix} & the matrix to write \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{namespacegko_a577a2f0345ee607f64277b3364b6431b}\label{namespacegko_a577a2f0345ee607f64277b3364b6431b}} 
+\index{gko@{gko}!write@{write}}
+\index{write@{write}!gko@{gko}}
+\doxysubsubsection{\texorpdfstring{write()}{write()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Matrix\+Ptr\+Type , typename Stream\+Type , std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+same\+\_\+v$<$ std\+::remove\+\_\+cv\+\_\+t$<$ detail\+::pointee$<$ Matrix\+Ptr\+Type $>$$>$, Lin\+Op $>$$>$ $\ast$  = nullptr$>$ \\
 void gko\+::write (\begin{DoxyParamCaption}\item[{Stream\+Type \&\&}]{os,  }\item[{Matrix\+Ptr\+Type \&\&}]{matrix,  }\item[{\mbox{\hyperlink{namespacegko_ae749a5ea11a93c1bcc9158d9a6e9fb68}{layout\+\_\+type}}}]{layout = {\ttfamily detail\+:\+:mtx\+\_\+io\+\_\+traits$<$~std\+:\+:remove\+\_\+cv\+\_\+t$<$detail\+:\+:pointee$<$MatrixPtrType$>$$>$$>$\+:\+:default\+\_\+layout} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
@@ -3197,7 +3220,7 @@ Writes a \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} structur
 \hline
 \end{DoxyParams}
 \begin{DoxyNote}{Note}
-This is an advanced routine that writes the raw matrix data structure. If you are trying to write an existing matrix, consider using \mbox{\hyperlink{namespacegko_a8c8403e4cdb91e225515ed7d7f6c4463}{gko\+::write}} instead. 
+This is an advanced routine that writes the raw matrix data structure. If you are trying to write an existing matrix, consider using \mbox{\hyperlink{namespacegko_a577a2f0345ee607f64277b3364b6431b}{gko\+::write}} instead. 
 \end{DoxyNote}
 
 

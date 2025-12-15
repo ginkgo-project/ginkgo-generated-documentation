@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/1868155508 branch based on main. Ginkgo version 1.10.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2214755618 branch based on main. Ginkgo version 1.11.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -336,6 +336,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1LinOpFactory.html">LinOpFactory</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A <a class="el" href="classgko_1_1LinOpFactory.html" title="A LinOpFactory represents a higher order mapping which transforms one linear operator into another.">LinOpFactory</a> represents a higher order mapping which transforms one linear operator into another.  <a href="classgko_1_1LinOpFactory.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgko_1_1local__span.html">local_span</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A span that is used exclusively for local numbering.  <a href="structgko_1_1local__span.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1machine__topology.html">machine_topology</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The machine topology class represents the hierarchical topology of a machine, including NUMA nodes, cores and PCI Devices.  <a href="classgko_1_1machine__topology.html#details">More...</a><br /></td></tr>
@@ -813,10 +816,13 @@ std::complex&lt; <a class="el" href="classgko_1_1bfloat16.html">gko::bfloat16</a
 <tr class="memitem:ac71759a8a78d3c4946a11ce4b378a88e"><td class="memTemplItemLeft" align="right" valign="top">std::unique_ptr&lt; MatrixType &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegko.html#ac71759a8a78d3c4946a11ce4b378a88e">read_generic</a> (StreamType &amp;&amp;is, MatrixArgs &amp;&amp;... args)</td></tr>
 <tr class="memdesc:ac71759a8a78d3c4946a11ce4b378a88e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a matrix stored either in binary or matrix market format from an input stream.  <a href="namespacegko.html#ac71759a8a78d3c4946a11ce4b378a88e">More...</a><br /></td></tr>
 <tr class="separator:ac71759a8a78d3c4946a11ce4b378a88e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c8403e4cdb91e225515ed7d7f6c4463"><td class="memTemplParams" colspan="2">template&lt;typename MatrixPtrType , typename StreamType &gt; </td></tr>
-<tr class="memitem:a8c8403e4cdb91e225515ed7d7f6c4463"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegko.html#a8c8403e4cdb91e225515ed7d7f6c4463">write</a> (StreamType &amp;&amp;os, MatrixPtrType &amp;&amp;matrix, <a class="el" href="namespacegko.html#ae749a5ea11a93c1bcc9158d9a6e9fb68">layout_type</a> layout=detail::mtx_io_traits&lt; std::remove_cv_t&lt; detail::pointee&lt; MatrixPtrType &gt;&gt;&gt;::default_layout)</td></tr>
-<tr class="memdesc:a8c8403e4cdb91e225515ed7d7f6c4463"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a matrix into an output stream in matrix market format.  <a href="namespacegko.html#a8c8403e4cdb91e225515ed7d7f6c4463">More...</a><br /></td></tr>
-<tr class="separator:a8c8403e4cdb91e225515ed7d7f6c4463"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a577a2f0345ee607f64277b3364b6431b"><td class="memTemplParams" colspan="2">template&lt;typename MatrixPtrType , typename StreamType , std::enable_if_t&lt;!std::is_same_v&lt; std::remove_cv_t&lt; detail::pointee&lt; MatrixPtrType &gt;&gt;, LinOp &gt;&gt; *  = nullptr&gt; </td></tr>
+<tr class="memitem:a577a2f0345ee607f64277b3364b6431b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegko.html#a577a2f0345ee607f64277b3364b6431b">write</a> (StreamType &amp;&amp;os, MatrixPtrType &amp;&amp;matrix, <a class="el" href="namespacegko.html#ae749a5ea11a93c1bcc9158d9a6e9fb68">layout_type</a> layout=detail::mtx_io_traits&lt; std::remove_cv_t&lt; detail::pointee&lt; MatrixPtrType &gt;&gt;&gt;::default_layout)</td></tr>
+<tr class="memdesc:a577a2f0345ee607f64277b3364b6431b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a matrix into an output stream in matrix market format.  <a href="namespacegko.html#a577a2f0345ee607f64277b3364b6431b">More...</a><br /></td></tr>
+<tr class="separator:a577a2f0345ee607f64277b3364b6431b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc28c235c3fbbf3c495b1850c61746d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegko.html#abc28c235c3fbbf3c495b1850c61746d2">write</a> (std::ostream &amp;os, <a class="el" href="classgko_1_1ptr__param.html">ptr_param</a>&lt; const <a class="el" href="classgko_1_1LinOp.html">LinOp</a> &gt; matrix)</td></tr>
+<tr class="memdesc:abc28c235c3fbbf3c495b1850c61746d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a <a class="el" href="classgko_1_1LinOp.html">LinOp</a> into an output stream in matrix market format.  <a href="namespacegko.html#abc28c235c3fbbf3c495b1850c61746d2">More...</a><br /></td></tr>
+<tr class="separator:abc28c235c3fbbf3c495b1850c61746d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba9ca89ef08421197d3dbf84b0ad884c"><td class="memTemplParams" colspan="2">template&lt;typename MatrixPtrType , typename StreamType &gt; </td></tr>
 <tr class="memitem:aba9ca89ef08421197d3dbf84b0ad884c"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacegko.html#aba9ca89ef08421197d3dbf84b0ad884c">write_binary</a> (StreamType &amp;&amp;os, MatrixPtrType &amp;&amp;matrix)</td></tr>
 <tr class="memdesc:aba9ca89ef08421197d3dbf84b0ad884c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a matrix into an output stream in binary format.  <a href="namespacegko.html#aba9ca89ef08421197d3dbf84b0ad884c">More...</a><br /></td></tr>
@@ -5052,13 +5058,51 @@ template&lt;template&lt; typename, typename &gt; class MatrixType, typename... A
 
 </div>
 </div>
-<a id="a8c8403e4cdb91e225515ed7d7f6c4463"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8c8403e4cdb91e225515ed7d7f6c4463">&#9670;&nbsp;</a></span>write()</h2>
+<a id="abc28c235c3fbbf3c495b1850c61746d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc28c235c3fbbf3c495b1850c61746d2">&#9670;&nbsp;</a></span>write() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gko::write </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>os</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classgko_1_1ptr__param.html">ptr_param</a>&lt; const <a class="el" href="classgko_1_1LinOp.html">LinOp</a> &gt;&#160;</td>
+          <td class="paramname"><em>matrix</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Writes a <a class="el" href="classgko_1_1LinOp.html">LinOp</a> into an output stream in matrix market format. </p>
+<p>The matrix market format use coordinate format if the sparsity is less than 25%. Otherwise, use array format.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">os</td><td>output stream where the data is to be written </td></tr>
+    <tr><td class="paramname">matrix</td><td>the matrix to write </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a577a2f0345ee607f64277b3364b6431b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a577a2f0345ee607f64277b3364b6431b">&#9670;&nbsp;</a></span>write() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename MatrixPtrType , typename StreamType &gt; </div>
+template&lt;typename MatrixPtrType , typename StreamType , std::enable_if_t&lt;!std::is_same_v&lt; std::remove_cv_t&lt; detail::pointee&lt; MatrixPtrType &gt;&gt;, LinOp &gt;&gt; *  = nullptr&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -5272,9 +5316,9 @@ template&lt;typename ValueType , typename IndexType &gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>This is an advanced routine that writes the raw matrix data structure. If you are trying to write an existing matrix, consider using <a class="el" href="namespacegko.html#a8c8403e4cdb91e225515ed7d7f6c4463" title="Writes a matrix into an output stream in matrix market format.">gko::write</a> instead. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This is an advanced routine that writes the raw matrix data structure. If you are trying to write an existing matrix, consider using <a class="el" href="namespacegko.html#a577a2f0345ee607f64277b3364b6431b" title="Writes a matrix into an output stream in matrix market format.">gko::write</a> instead. </dd></dl>
 
-<p class="reference">Referenced by <a class="el" href="namespacegko.html#a8c8403e4cdb91e225515ed7d7f6c4463">write()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="namespacegko.html#a577a2f0345ee607f64277b3364b6431b">write()</a>.</p>
 
 </div>
 </div>
