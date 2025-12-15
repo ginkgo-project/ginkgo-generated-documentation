@@ -1,0 +1,316 @@
+\hypertarget{classgko_1_1preconditioner_1_1Ilu}{}\doxysection{gko\+::preconditioner\+::Ilu$<$ L\+Solver\+Type\+Or\+Value\+Type, U\+Solver\+Type\+Or\+Value\+Type, Reverse\+Apply, Index\+Type $>$ Class Template Reference}
+\label{classgko_1_1preconditioner_1_1Ilu}\index{gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$@{gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$}}
+
+
+The Incomplete LU (I\+LU) preconditioner solves the equation $LUx = b$ for a given lower triangular matrix L, an upper triangular matrix U and the right hand side b (can contain multiple right hand sides).  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/preconditioner/ilu.\+hpp$>$}
+
+
+
+Inheritance diagram for gko\+::preconditioner\+::Ilu$<$ L\+Solver\+Type\+Or\+Value\+Type, U\+Solver\+Type\+Or\+Value\+Type, Reverse\+Apply, Index\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1preconditioner_1_1Ilu__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for gko\+::preconditioner\+::Ilu$<$ L\+Solver\+Type\+Or\+Value\+Type, U\+Solver\+Type\+Or\+Value\+Type, Reverse\+Apply, Index\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1preconditioner_1_1Ilu__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu_1_1Factory}{Factory}}
+\item 
+struct \mbox{\hyperlink{structgko_1_1preconditioner_1_1Ilu_1_1parameters__type}{parameters\+\_\+type}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ilu_a9ddc01cc4a67dd462bceab628a0f6003}\label{classgko_1_1preconditioner_1_1Ilu_a9ddc01cc4a67dd462bceab628a0f6003}} 
+using {\bfseries value\+\_\+type} = gko\+::detail\+::get\+\_\+value\+\_\+type$<$ L\+Solver\+Type\+Or\+Value\+Type $>$
+\item 
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ilu_a245b8f401f4c94b5f0e62d2093df2c33}\label{classgko_1_1preconditioner_1_1Ilu_a245b8f401f4c94b5f0e62d2093df2c33}} 
+using {\bfseries l\+\_\+solver\+\_\+type} = std\+::conditional\+\_\+t$<$ gko\+::detail\+::is\+\_\+ginkgo\+\_\+linop$<$ L\+Solver\+Type\+Or\+Value\+Type $>$, L\+Solver\+Type\+Or\+Value\+Type, \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$
+\item 
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ilu_afb566cc350a27ff153c78379c2045e52}\label{classgko_1_1preconditioner_1_1Ilu_afb566cc350a27ff153c78379c2045e52}} 
+using {\bfseries u\+\_\+solver\+\_\+type} = std\+::conditional\+\_\+t$<$ gko\+::detail\+::is\+\_\+ginkgo\+\_\+linop$<$ U\+Solver\+Type\+Or\+Value\+Type $>$, U\+Solver\+Type\+Or\+Value\+Type, \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$
+\item 
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ilu_a7ee512aecdc54ad2130765e3d74efcea}\label{classgko_1_1preconditioner_1_1Ilu_a7ee512aecdc54ad2130765e3d74efcea}} 
+using {\bfseries index\+\_\+type} = Index\+Type
+\item 
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ilu_ad7d6f85896fa29833c53bd5de439b85d}\label{classgko_1_1preconditioner_1_1Ilu_ad7d6f85896fa29833c53bd5de439b85d}} 
+using {\bfseries transposed\+\_\+type} = \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{Ilu}}$<$ gko\+::detail\+::transposed\+\_\+type$<$ U\+Solver\+Type\+Or\+Value\+Type $>$, gko\+::detail\+::transposed\+\_\+type$<$ L\+Solver\+Type\+Or\+Value\+Type $>$, Reverse\+Apply, Index\+Type $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ilu_a03c3244abed124de06df4d2292984173}\label{classgko_1_1preconditioner_1_1Ilu_a03c3244abed124de06df4d2292984173}} 
+const \mbox{\hyperlink{structgko_1_1preconditioner_1_1Ilu_1_1parameters__type}{parameters\+\_\+type}} \& {\bfseries get\+\_\+parameters} () const
+\item 
+std\+::shared\+\_\+ptr$<$ const l\+\_\+solver\+\_\+type $>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu_ab7291bb17ef9cb1c3ee1e1593f71e395}{get\+\_\+l\+\_\+solver}} () const
+\begin{DoxyCompactList}\small\item\em Returns the solver which is used for the provided L matrix. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const u\+\_\+solver\+\_\+type $>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu_add7d500e01acc2a308186f482747905d}{get\+\_\+u\+\_\+solver}} () const
+\begin{DoxyCompactList}\small\item\em Returns the solver which is used for the provided U matrix. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu_a6545dc5c042ba7e89d3fbbdfc72e1a91}{transpose}} () const override
+\begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu_a739d68011f5c36663ea642f860eca761}{conj\+\_\+transpose}} () const override
+\begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the conjugate transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{Ilu}} \& \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu_a42f198304113da4ee2da21da21da3251}{operator=}} (const \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{Ilu}} \&other)
+\begin{DoxyCompactList}\small\item\em Copy-\/assigns an I\+LU preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{Ilu}} \& \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu_a3aaa5025072f8f1865aa2cc8915f8ebe}{operator=}} (\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{Ilu}} \&\&other)
+\begin{DoxyCompactList}\small\item\em Move-\/assigns an I\+LU preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu_a071ffbb4acb7f654c4476374a728b0a3}{Ilu}} (const \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{Ilu}} \&other)
+\begin{DoxyCompactList}\small\item\em Copy-\/constructs an I\+LU preconditioner. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu_a1b11a5e85bb6fcb969d4e745e0db4a1e}{Ilu}} (\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{Ilu}} \&\&other)
+\begin{DoxyCompactList}\small\item\em Move-\/constructs an I\+LU preconditioner. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ilu_abd826eb1f81414fb9e3cba823f816bdf}\label{classgko_1_1preconditioner_1_1Ilu_abd826eb1f81414fb9e3cba823f816bdf}} 
+static auto {\bfseries build} () -\/$>$ decltype(\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu_1_1Factory}{Factory}} \+::create())
+\item 
+static \mbox{\hyperlink{structgko_1_1preconditioner_1_1Ilu_1_1parameters__type}{parameters\+\_\+type}} \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu_a05a6a4b4cfd03eed108c9f107932fedc}{parse}} (const \mbox{\hyperlink{classgko_1_1config_1_1pnode}{config\+::pnode}} \&config, const \mbox{\hyperlink{classgko_1_1config_1_1registry}{config\+::registry}} \&context, const \mbox{\hyperlink{classgko_1_1config_1_1type__descriptor}{config\+::type\+\_\+descriptor}} \&td\+\_\+for\+\_\+child=config\+::make\+\_\+type\+\_\+descriptor$<$ value\+\_\+type, index\+\_\+type $>$())
+\begin{DoxyCompactList}\small\item\em Create the parameters from the property\+\_\+tree. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ilu_a3bef66cc1995345cf6171d8a7cf41f1f}\label{classgko_1_1preconditioner_1_1Ilu_a3bef66cc1995345cf6171d8a7cf41f1f}} 
+static constexpr bool {\bfseries performs\+\_\+reverse\+\_\+apply} = Reverse\+Apply
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ilu_adb36e2f28014180f7ce53ccfa5b6a08f}\label{classgko_1_1preconditioner_1_1Ilu_adb36e2f28014180f7ce53ccfa5b6a08f}} 
+class {\bfseries Enable\+Lin\+Op$<$ Ilu $>$}
+\item 
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ilu_a211c0b867df6d3bef3c8f5589c499bc9}\label{classgko_1_1preconditioner_1_1Ilu_a211c0b867df6d3bef3c8f5589c499bc9}} 
+class {\bfseries Enable\+Polymorphic\+Object$<$ Ilu, Lin\+Op $>$}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename L\+Solver\+Type\+Or\+Value\+Type = solver\+::\+Lower\+Trs$<$$>$, typename U\+Solver\+Type\+Or\+Value\+Type = gko\+::detail\+::transposed\+\_\+type$<$\+L\+Solver\+Type\+Or\+Value\+Type$>$, bool Reverse\+Apply = false, typename Index\+Type = int32$>$\newline
+class gko\+::preconditioner\+::\+Ilu$<$ L\+Solver\+Type\+Or\+Value\+Type, U\+Solver\+Type\+Or\+Value\+Type, Reverse\+Apply, Index\+Type $>$}
+
+The Incomplete LU (I\+LU) preconditioner solves the equation $LUx = b$ for a given lower triangular matrix L, an upper triangular matrix U and the right hand side b (can contain multiple right hand sides). 
+
+It allows to set both the solver for L and the solver for U independently, while providing the defaults \mbox{\hyperlink{classgko_1_1solver_1_1LowerTrs}{solver\+::\+Lower\+Trs}} and \mbox{\hyperlink{classgko_1_1solver_1_1UpperTrs}{solver\+::\+Upper\+Trs}}, which are direct triangular solvers. For these solvers, a factory can be provided (with {\ttfamily with\+\_\+l\+\_\+solver} and {\ttfamily with\+\_\+u\+\_\+solver}) to have more control over their behavior. In particular, it is possible to use an iterative method for solving the triangular systems. The default parameters for an iterative triangluar solver are\+:
+\begin{DoxyItemize}
+\item reduction factor = 1e-\/4
+\item max iteration = $<$number of=\char`\"{}\char`\"{} rows=\char`\"{}\char`\"{} of=\char`\"{}\char`\"{} the=\char`\"{}\char`\"{} matrix=\char`\"{}\char`\"{} given=\char`\"{}\char`\"{} to=\char`\"{}\char`\"{} the=\char`\"{}\char`\"{} solver$>$=\char`\"{}\char`\"{}$>$ Solvers without such criteria can also be used, in which case none are set.
+\end{DoxyItemize}
+
+An object of this class can be created with a matrix or a \mbox{\hyperlink{classgko_1_1Composition}{gko\+::\+Composition}} containing two matrices. If created with a matrix, it is factorized before creating the solver. If a \mbox{\hyperlink{classgko_1_1Composition}{gko\+::\+Composition}} (containing two matrices) is used, the first operand will be taken as the L matrix, the second will be considered the U matrix. Par\+Ilu can be directly used, since it orders the factors in the correct way.
+
+\begin{DoxyNote}{Note}
+When providing a \mbox{\hyperlink{classgko_1_1Composition}{gko\+::\+Composition}}, the first matrix must be the lower matrix ( $L$), and the second matrix must be the upper matrix ( $U$). If they are swapped, solving might crash or return the wrong result.
+
+Do not use symmetric solvers (like CG) for L or U solvers since both matrices (L and U) are, by design, not symmetric.
+
+This class is not thread safe (even a const object is not) because it uses an internal cache to accelerate multiple (sequential) applies. Using it in parallel can lead to segmentation faults, wrong results and other unwanted behavior. 
+
+The default template during parse is $<$Value\+Type, Index\+Type$>$ not $<$Lower\+Trs, Index\+Type$>$. Only the variants with Value\+Type are supported in parse.
+\end{DoxyNote}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em L\+Solver\+Type\+Or\+Value\+Type} & type of the solver or the value type used for the L matrix. Defaults to \mbox{\hyperlink{classgko_1_1solver_1_1LowerTrs}{solver\+::\+Lower\+Trs}} \\
+\hline
+{\em U\+Solver\+Type\+Or\+Value\+Type} & type of the solver or the value type used for the U matrix Defaults to \mbox{\hyperlink{classgko_1_1solver_1_1UpperTrs}{solver\+::\+Upper\+Trs}} \\
+\hline
+{\em Reverse\+Apply} & default behavior (Reverse\+Apply = false) is first to solve with L (Ly = b) and then with U (Ux = y). When set to true, it will solve first with U, and then with L. \\
+\hline
+{\em Index\+Type\+Par\+Ilu} & Type of the indices when Par\+Ilu is used to generate both L and U factors. Irrelevant otherwise. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ilu_a071ffbb4acb7f654c4476374a728b0a3}\label{classgko_1_1preconditioner_1_1Ilu_a071ffbb4acb7f654c4476374a728b0a3}} 
+\index{gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$@{gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$}!Ilu@{Ilu}}
+\index{Ilu@{Ilu}!gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$@{gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{Ilu()}{Ilu()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename L\+Solver\+Type\+Or\+Value\+Type = solver\+::\+Lower\+Trs$<$$>$, typename U\+Solver\+Type\+Or\+Value\+Type = gko\+::detail\+::transposed\+\_\+type$<$\+L\+Solver\+Type\+Or\+Value\+Type$>$, bool Reverse\+Apply = false, typename Index\+Type = int32$>$ \\
+\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{gko\+::preconditioner\+::\+Ilu}}$<$ L\+Solver\+Type\+Or\+Value\+Type, U\+Solver\+Type\+Or\+Value\+Type, Reverse\+Apply, Index\+Type $>$\+::\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{Ilu}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{Ilu}}$<$ L\+Solver\+Type\+Or\+Value\+Type, U\+Solver\+Type\+Or\+Value\+Type, Reverse\+Apply, Index\+Type $>$ \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy-\/constructs an I\+LU preconditioner. 
+
+Inherits the executor, shallow-\/copies the solvers and parameters. 
+
+References gko\+::\+Polymorphic\+Object\+::get\+\_\+executor().
+
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ilu_a1b11a5e85bb6fcb969d4e745e0db4a1e}\label{classgko_1_1preconditioner_1_1Ilu_a1b11a5e85bb6fcb969d4e745e0db4a1e}} 
+\index{gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$@{gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$}!Ilu@{Ilu}}
+\index{Ilu@{Ilu}!gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$@{gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{Ilu()}{Ilu()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename L\+Solver\+Type\+Or\+Value\+Type = solver\+::\+Lower\+Trs$<$$>$, typename U\+Solver\+Type\+Or\+Value\+Type = gko\+::detail\+::transposed\+\_\+type$<$\+L\+Solver\+Type\+Or\+Value\+Type$>$, bool Reverse\+Apply = false, typename Index\+Type = int32$>$ \\
+\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{gko\+::preconditioner\+::\+Ilu}}$<$ L\+Solver\+Type\+Or\+Value\+Type, U\+Solver\+Type\+Or\+Value\+Type, Reverse\+Apply, Index\+Type $>$\+::\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{Ilu}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{Ilu}}$<$ L\+Solver\+Type\+Or\+Value\+Type, U\+Solver\+Type\+Or\+Value\+Type, Reverse\+Apply, Index\+Type $>$ \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Move-\/constructs an I\+LU preconditioner. 
+
+Inherits the executor, moves the solvers and parameters. The moved-\/from object is empty (0x0 with nullptr solvers and default parameters) 
+
+References gko\+::\+Polymorphic\+Object\+::get\+\_\+executor().
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ilu_a739d68011f5c36663ea642f860eca761}\label{classgko_1_1preconditioner_1_1Ilu_a739d68011f5c36663ea642f860eca761}} 
+\index{gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$@{gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$}!conj\_transpose@{conj\_transpose}}
+\index{conj\_transpose@{conj\_transpose}!gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$@{gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{conj\_transpose()}{conj\_transpose()}}
+{\footnotesize\ttfamily template$<$typename L\+Solver\+Type\+Or\+Value\+Type = solver\+::\+Lower\+Trs$<$$>$, typename U\+Solver\+Type\+Or\+Value\+Type = gko\+::detail\+::transposed\+\_\+type$<$\+L\+Solver\+Type\+Or\+Value\+Type$>$, bool Reverse\+Apply = false, typename Index\+Type = int32$>$ \\
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{gko\+::preconditioner\+::\+Ilu}}$<$ L\+Solver\+Type\+Or\+Value\+Type, U\+Solver\+Type\+Or\+Value\+Type, Reverse\+Apply, Index\+Type $>$\+::conj\+\_\+transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the conjugate transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. 
+
+\begin{DoxyReturn}{Returns}
+a pointer to the new conjugate transposed object 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classgko_1_1Transposable_ab41b669288740cf2a6f7bf76e875b077}{gko\+::\+Transposable}}.
+
+
+
+References gko\+::as(), gko\+::\+Polymorphic\+Object\+::get\+\_\+executor(), gko\+::preconditioner\+::\+Ilu$<$ L\+Solver\+Type\+Or\+Value\+Type, U\+Solver\+Type\+Or\+Value\+Type, Reverse\+Apply, Index\+Type $>$\+::get\+\_\+l\+\_\+solver(), gko\+::\+Lin\+Op\+::get\+\_\+size(), gko\+::preconditioner\+::\+Ilu$<$ L\+Solver\+Type\+Or\+Value\+Type, U\+Solver\+Type\+Or\+Value\+Type, Reverse\+Apply, Index\+Type $>$\+::get\+\_\+u\+\_\+solver(), gko\+::share(), and gko\+::transpose().
+
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ilu_ab7291bb17ef9cb1c3ee1e1593f71e395}\label{classgko_1_1preconditioner_1_1Ilu_ab7291bb17ef9cb1c3ee1e1593f71e395}} 
+\index{gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$@{gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$}!get\_l\_solver@{get\_l\_solver}}
+\index{get\_l\_solver@{get\_l\_solver}!gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$@{gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_l\_solver()}{get\_l\_solver()}}
+{\footnotesize\ttfamily template$<$typename L\+Solver\+Type\+Or\+Value\+Type = solver\+::\+Lower\+Trs$<$$>$, typename U\+Solver\+Type\+Or\+Value\+Type = gko\+::detail\+::transposed\+\_\+type$<$\+L\+Solver\+Type\+Or\+Value\+Type$>$, bool Reverse\+Apply = false, typename Index\+Type = int32$>$ \\
+std\+::shared\+\_\+ptr$<$const l\+\_\+solver\+\_\+type$>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{gko\+::preconditioner\+::\+Ilu}}$<$ L\+Solver\+Type\+Or\+Value\+Type, U\+Solver\+Type\+Or\+Value\+Type, Reverse\+Apply, Index\+Type $>$\+::get\+\_\+l\+\_\+solver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the solver which is used for the provided L matrix. 
+
+\begin{DoxyReturn}{Returns}
+the solver which is used for the provided L matrix 
+\end{DoxyReturn}
+
+
+Referenced by gko\+::preconditioner\+::\+Ilu$<$ L\+Solver\+Type\+Or\+Value\+Type, U\+Solver\+Type\+Or\+Value\+Type, Reverse\+Apply, Index\+Type $>$\+::conj\+\_\+transpose(), and gko\+::preconditioner\+::\+Ilu$<$ L\+Solver\+Type\+Or\+Value\+Type, U\+Solver\+Type\+Or\+Value\+Type, Reverse\+Apply, Index\+Type $>$\+::transpose().
+
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ilu_add7d500e01acc2a308186f482747905d}\label{classgko_1_1preconditioner_1_1Ilu_add7d500e01acc2a308186f482747905d}} 
+\index{gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$@{gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$}!get\_u\_solver@{get\_u\_solver}}
+\index{get\_u\_solver@{get\_u\_solver}!gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$@{gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_u\_solver()}{get\_u\_solver()}}
+{\footnotesize\ttfamily template$<$typename L\+Solver\+Type\+Or\+Value\+Type = solver\+::\+Lower\+Trs$<$$>$, typename U\+Solver\+Type\+Or\+Value\+Type = gko\+::detail\+::transposed\+\_\+type$<$\+L\+Solver\+Type\+Or\+Value\+Type$>$, bool Reverse\+Apply = false, typename Index\+Type = int32$>$ \\
+std\+::shared\+\_\+ptr$<$const u\+\_\+solver\+\_\+type$>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{gko\+::preconditioner\+::\+Ilu}}$<$ L\+Solver\+Type\+Or\+Value\+Type, U\+Solver\+Type\+Or\+Value\+Type, Reverse\+Apply, Index\+Type $>$\+::get\+\_\+u\+\_\+solver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the solver which is used for the provided U matrix. 
+
+\begin{DoxyReturn}{Returns}
+the solver which is used for the provided U matrix 
+\end{DoxyReturn}
+
+
+Referenced by gko\+::preconditioner\+::\+Ilu$<$ L\+Solver\+Type\+Or\+Value\+Type, U\+Solver\+Type\+Or\+Value\+Type, Reverse\+Apply, Index\+Type $>$\+::conj\+\_\+transpose(), and gko\+::preconditioner\+::\+Ilu$<$ L\+Solver\+Type\+Or\+Value\+Type, U\+Solver\+Type\+Or\+Value\+Type, Reverse\+Apply, Index\+Type $>$\+::transpose().
+
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ilu_a42f198304113da4ee2da21da21da3251}\label{classgko_1_1preconditioner_1_1Ilu_a42f198304113da4ee2da21da21da3251}} 
+\index{gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$@{gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$@{gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename L\+Solver\+Type\+Or\+Value\+Type = solver\+::\+Lower\+Trs$<$$>$, typename U\+Solver\+Type\+Or\+Value\+Type = gko\+::detail\+::transposed\+\_\+type$<$\+L\+Solver\+Type\+Or\+Value\+Type$>$, bool Reverse\+Apply = false, typename Index\+Type = int32$>$ \\
+\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{Ilu}}\& \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{gko\+::preconditioner\+::\+Ilu}}$<$ L\+Solver\+Type\+Or\+Value\+Type, U\+Solver\+Type\+Or\+Value\+Type, Reverse\+Apply, Index\+Type $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{Ilu}}$<$ L\+Solver\+Type\+Or\+Value\+Type, U\+Solver\+Type\+Or\+Value\+Type, Reverse\+Apply, Index\+Type $>$ \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy-\/assigns an I\+LU preconditioner. 
+
+Preserves the executor, shallow-\/copies the solvers and parameters. Creates a clone of the solvers if they are on the wrong executor. 
+
+References gko\+::clone(), and gko\+::\+Polymorphic\+Object\+::get\+\_\+executor().
+
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ilu_a3aaa5025072f8f1865aa2cc8915f8ebe}\label{classgko_1_1preconditioner_1_1Ilu_a3aaa5025072f8f1865aa2cc8915f8ebe}} 
+\index{gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$@{gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$@{gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename L\+Solver\+Type\+Or\+Value\+Type = solver\+::\+Lower\+Trs$<$$>$, typename U\+Solver\+Type\+Or\+Value\+Type = gko\+::detail\+::transposed\+\_\+type$<$\+L\+Solver\+Type\+Or\+Value\+Type$>$, bool Reverse\+Apply = false, typename Index\+Type = int32$>$ \\
+\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{Ilu}}\& \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{gko\+::preconditioner\+::\+Ilu}}$<$ L\+Solver\+Type\+Or\+Value\+Type, U\+Solver\+Type\+Or\+Value\+Type, Reverse\+Apply, Index\+Type $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{Ilu}}$<$ L\+Solver\+Type\+Or\+Value\+Type, U\+Solver\+Type\+Or\+Value\+Type, Reverse\+Apply, Index\+Type $>$ \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Move-\/assigns an I\+LU preconditioner. 
+
+Preserves the executor, moves the solvers and parameters. Creates a clone of the solvers if they are on the wrong executor. The moved-\/from object is empty (0x0 with nullptr solvers and default parameters) 
+
+References gko\+::clone(), and gko\+::\+Polymorphic\+Object\+::get\+\_\+executor().
+
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ilu_a05a6a4b4cfd03eed108c9f107932fedc}\label{classgko_1_1preconditioner_1_1Ilu_a05a6a4b4cfd03eed108c9f107932fedc}} 
+\index{gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$@{gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$}!parse@{parse}}
+\index{parse@{parse}!gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$@{gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{parse()}{parse()}}
+{\footnotesize\ttfamily template$<$typename L\+Solver\+Type\+Or\+Value\+Type = solver\+::\+Lower\+Trs$<$$>$, typename U\+Solver\+Type\+Or\+Value\+Type = gko\+::detail\+::transposed\+\_\+type$<$\+L\+Solver\+Type\+Or\+Value\+Type$>$, bool Reverse\+Apply = false, typename Index\+Type = int32$>$ \\
+static \mbox{\hyperlink{structgko_1_1preconditioner_1_1Ilu_1_1parameters__type}{parameters\+\_\+type}} \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{gko\+::preconditioner\+::\+Ilu}}$<$ L\+Solver\+Type\+Or\+Value\+Type, U\+Solver\+Type\+Or\+Value\+Type, Reverse\+Apply, Index\+Type $>$\+::parse (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1config_1_1pnode}{config\+::pnode}} \&}]{config,  }\item[{const \mbox{\hyperlink{classgko_1_1config_1_1registry}{config\+::registry}} \&}]{context,  }\item[{const \mbox{\hyperlink{classgko_1_1config_1_1type__descriptor}{config\+::type\+\_\+descriptor}} \&}]{td\+\_\+for\+\_\+child = {\ttfamily config\+:\+:make\+\_\+type\+\_\+descriptor$<$value\+\_\+type,~index\+\_\+type$>$()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Create the parameters from the property\+\_\+tree. 
+
+Because this is directly tied to the specific type, the value/index type settings within config are ignored and type\+\_\+descriptor is only used for children configs.
+
+
+\begin{DoxyParams}{Parameters}
+{\em config} & the property tree for setting \\
+\hline
+{\em context} & the registry \\
+\hline
+{\em td\+\_\+for\+\_\+child} & the type descriptor for children configs. The default uses the value/index type of this class.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+parameters
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+only support the following when using $<$Value\+Type, Value\+Type, Reverse\+Apply, Index\+Type$>$ not $<$L\+Solver\+Type, U\+Solver\+Type, Reverse\+Apply, Index\+Type$>$ variants 
+\end{DoxyNote}
+\mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ilu_a6545dc5c042ba7e89d3fbbdfc72e1a91}\label{classgko_1_1preconditioner_1_1Ilu_a6545dc5c042ba7e89d3fbbdfc72e1a91}} 
+\index{gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$@{gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$}!transpose@{transpose}}
+\index{transpose@{transpose}!gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$@{gko::preconditioner::Ilu$<$ LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{transpose()}{transpose()}}
+{\footnotesize\ttfamily template$<$typename L\+Solver\+Type\+Or\+Value\+Type = solver\+::\+Lower\+Trs$<$$>$, typename U\+Solver\+Type\+Or\+Value\+Type = gko\+::detail\+::transposed\+\_\+type$<$\+L\+Solver\+Type\+Or\+Value\+Type$>$, bool Reverse\+Apply = false, typename Index\+Type = int32$>$ \\
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{gko\+::preconditioner\+::\+Ilu}}$<$ L\+Solver\+Type\+Or\+Value\+Type, U\+Solver\+Type\+Or\+Value\+Type, Reverse\+Apply, Index\+Type $>$\+::transpose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. 
+
+\begin{DoxyReturn}{Returns}
+a pointer to the new transposed object 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classgko_1_1Transposable_a5c6b778b71b47d53e0bda6ccf894d318}{gko\+::\+Transposable}}.
+
+
+
+References gko\+::as(), gko\+::\+Polymorphic\+Object\+::get\+\_\+executor(), gko\+::preconditioner\+::\+Ilu$<$ L\+Solver\+Type\+Or\+Value\+Type, U\+Solver\+Type\+Or\+Value\+Type, Reverse\+Apply, Index\+Type $>$\+::get\+\_\+l\+\_\+solver(), gko\+::\+Lin\+Op\+::get\+\_\+size(), gko\+::preconditioner\+::\+Ilu$<$ L\+Solver\+Type\+Or\+Value\+Type, U\+Solver\+Type\+Or\+Value\+Type, Reverse\+Apply, Index\+Type $>$\+::get\+\_\+u\+\_\+solver(), gko\+::share(), and gko\+::transpose().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/preconditioner/ilu.\+hpp\end{DoxyCompactItemize}

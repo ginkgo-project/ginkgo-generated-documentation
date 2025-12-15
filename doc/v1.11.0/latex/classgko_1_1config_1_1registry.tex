@@ -1,0 +1,98 @@
+\hypertarget{classgko_1_1config_1_1registry}{}\doxysection{gko\+::config\+::registry Class Reference}
+\label{classgko_1_1config_1_1registry}\index{gko::config::registry@{gko::config::registry}}
+
+
+This class stores additional context for creating Ginkgo objects from configuration files.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/config/registry.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgko_1_1config_1_1registry_a7654f0aa74acafe25e75f5d4361ed1a7}{registry}} (const configuration\+\_\+map \&additional\+\_\+map=\{\})
+\begin{DoxyCompactList}\small\item\em registry constructor \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1config_1_1registry_a0177e182b5c819d025012d9b267404da}{registry}} (const std\+::unordered\+\_\+map$<$ std\+::string, detail\+::allowed\+\_\+ptr $>$ \&stored\+\_\+map, const configuration\+\_\+map \&additional\+\_\+map=\{\})
+\begin{DoxyCompactList}\small\item\em registry constructor \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\bool \mbox{\hyperlink{classgko_1_1config_1_1registry_ab22c49993b94f307f29a85bb663fff47}{emplace}} (std\+::string key, std\+::shared\+\_\+ptr$<$ T $>$ data)
+\begin{DoxyCompactList}\small\item\em Store the data with the key. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class stores additional context for creating Ginkgo objects from configuration files. 
+
+The context can contain user-\/provided objects that derive from the following base types\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}
+\item \mbox{\hyperlink{classgko_1_1LinOpFactory}{Lin\+Op\+Factory}}
+\item Criterion\+Factory
+\end{DoxyItemize}
+
+Additionally, users can provide mappings from a configuration (provided as a pnode) to user-\/defined types that are derived from \mbox{\hyperlink{classgko_1_1LinOpFactory}{Lin\+Op\+Factory}} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classgko_1_1config_1_1registry_a7654f0aa74acafe25e75f5d4361ed1a7}\label{classgko_1_1config_1_1registry_a7654f0aa74acafe25e75f5d4361ed1a7}} 
+\index{gko::config::registry@{gko::config::registry}!registry@{registry}}
+\index{registry@{registry}!gko::config::registry@{gko::config::registry}}
+\doxysubsubsection{\texorpdfstring{registry()}{registry()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily gko\+::config\+::registry\+::registry (\begin{DoxyParamCaption}\item[{const configuration\+\_\+map \&}]{additional\+\_\+map = {\ttfamily \{\}} }\end{DoxyParamCaption})}
+
+
+
+registry constructor 
+
+
+\begin{DoxyParams}{Parameters}
+{\em additional\+\_\+map} & the additional map to dispatch the class base. Users can extend the map to fit their own \mbox{\hyperlink{classgko_1_1LinOpFactory}{Lin\+Op\+Factory}}. We suggest using \char`\"{}usr\+::\char`\"{} as the prefix in the key to simply avoid conflict with ginkgo\textquotesingle{}s map. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1config_1_1registry_a0177e182b5c819d025012d9b267404da}\label{classgko_1_1config_1_1registry_a0177e182b5c819d025012d9b267404da}} 
+\index{gko::config::registry@{gko::config::registry}!registry@{registry}}
+\index{registry@{registry}!gko::config::registry@{gko::config::registry}}
+\doxysubsubsection{\texorpdfstring{registry()}{registry()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily gko\+::config\+::registry\+::registry (\begin{DoxyParamCaption}\item[{const std\+::unordered\+\_\+map$<$ std\+::string, detail\+::allowed\+\_\+ptr $>$ \&}]{stored\+\_\+map,  }\item[{const configuration\+\_\+map \&}]{additional\+\_\+map = {\ttfamily \{\}} }\end{DoxyParamCaption})}
+
+
+
+registry constructor 
+
+
+\begin{DoxyParams}{Parameters}
+{\em stored\+\_\+map} & the map stores the shared pointer of users\textquotesingle{} objects. It can hold any type whose base type is Lin\+Op/\+Lin\+Op\+Factory/\+Criterion\+Factory. \\
+\hline
+{\em additional\+\_\+map} & the additional map to dispatch the class base. Users can extend the map to fit their own \mbox{\hyperlink{classgko_1_1LinOpFactory}{Lin\+Op\+Factory}}. We suggest using \char`\"{}usr\+::\char`\"{} as the prefix in the key to simply avoid conflict with ginkgo\textquotesingle{}s map. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1config_1_1registry_ab22c49993b94f307f29a85bb663fff47}\label{classgko_1_1config_1_1registry_ab22c49993b94f307f29a85bb663fff47}} 
+\index{gko::config::registry@{gko::config::registry}!emplace@{emplace}}
+\index{emplace@{emplace}!gko::config::registry@{gko::config::registry}}
+\doxysubsubsection{\texorpdfstring{emplace()}{emplace()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool gko\+::config\+::registry\+::emplace (\begin{DoxyParamCaption}\item[{std\+::string}]{key,  }\item[{std\+::shared\+\_\+ptr$<$ T $>$}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Store the data with the key. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & the type\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em key} & the unique key string \\
+\hline
+{\em data} & the shared pointer of the object \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/config/registry.\+hpp\end{DoxyCompactItemize}

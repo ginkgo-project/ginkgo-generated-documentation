@@ -1,0 +1,201 @@
+\hypertarget{classgko_1_1experimental_1_1factorization_1_1Factorization}{}\doxysection{gko\+::experimental\+::factorization\+::Factorization$<$ Value\+Type, Index\+Type $>$ Class Template Reference}
+\label{classgko_1_1experimental_1_1factorization_1_1Factorization}\index{gko::experimental::factorization::Factorization$<$ ValueType, IndexType $>$@{gko::experimental::factorization::Factorization$<$ ValueType, IndexType $>$}}
+
+
+Represents a generic factorization consisting of two triangular factors (upper and lower) and an optional diagonal scaling matrix.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/factorization/factorization.\+hpp$>$}
+
+
+
+Inheritance diagram for gko\+::experimental\+::factorization\+::Factorization$<$ Value\+Type, Index\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1experimental_1_1factorization_1_1Factorization__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for gko\+::experimental\+::factorization\+::Factorization$<$ Value\+Type, Index\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1experimental_1_1factorization_1_1Factorization__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1factorization_1_1Factorization_abd5e012c6ff59764f7d927ce7968974d}\label{classgko_1_1experimental_1_1factorization_1_1Factorization_abd5e012c6ff59764f7d927ce7968974d}} 
+using {\bfseries value\+\_\+type} = Value\+Type
+\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1factorization_1_1Factorization_ab6b1ef4e14ad8788324f2b9f5859385f}\label{classgko_1_1experimental_1_1factorization_1_1Factorization_ab6b1ef4e14ad8788324f2b9f5859385f}} 
+using {\bfseries index\+\_\+type} = Index\+Type
+\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1factorization_1_1Factorization_af312ff4390b0f7cf1c7da3241fba4c7f}\label{classgko_1_1experimental_1_1factorization_1_1Factorization_af312ff4390b0f7cf1c7da3241fba4c7f}} 
+using {\bfseries matrix\+\_\+type} = \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{matrix\+::\+Csr}}$<$ Value\+Type, Index\+Type $>$
+\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1factorization_1_1Factorization_afdf6fab676dc09b6fb709e6119685ee8}\label{classgko_1_1experimental_1_1factorization_1_1Factorization_afdf6fab676dc09b6fb709e6119685ee8}} 
+using {\bfseries diag\+\_\+type} = \mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal}{matrix\+::\+Diagonal}}$<$ Value\+Type $>$
+\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1factorization_1_1Factorization_ac2caf1d1a3e3078835592e955de2241f}\label{classgko_1_1experimental_1_1factorization_1_1Factorization_ac2caf1d1a3e3078835592e955de2241f}} 
+using {\bfseries composition\+\_\+type} = \mbox{\hyperlink{classgko_1_1Composition}{Composition}}$<$ Value\+Type $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization}{Factorization}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization_a2d9dc69553e37f79e79c547881887aa5}{unpack}} () const
+\begin{DoxyCompactList}\small\item\em Transforms the factorization from a compact representation suitable only for triangular solves to a composition representation that can also be used to access individual factors and multiply with the factorization. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1factorization_1_1Factorization_a83193188cd0fd4fd0e89c50e56dab03c}\label{classgko_1_1experimental_1_1factorization_1_1Factorization_a83193188cd0fd4fd0e89c50e56dab03c}} 
+storage\+\_\+type \mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization_a83193188cd0fd4fd0e89c50e56dab03c}{get\+\_\+storage\+\_\+type}} () const
+\begin{DoxyCompactList}\small\item\em Returns the storage type used by this factorization. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1factorization_1_1Factorization_a9641aa633bf97b48d4215a6847561093}\label{classgko_1_1experimental_1_1factorization_1_1Factorization_a9641aa633bf97b48d4215a6847561093}} 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{matrix\+\_\+type}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization_a9641aa633bf97b48d4215a6847561093}{get\+\_\+lower\+\_\+factor}} () const
+\begin{DoxyCompactList}\small\item\em Returns the lower triangular factor of the factorization, if available, nullptr otherwise. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1factorization_1_1Factorization_a8497a5ab933fa3b3c6f08957ce25300d}\label{classgko_1_1experimental_1_1factorization_1_1Factorization_a8497a5ab933fa3b3c6f08957ce25300d}} 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Diagonal}{diag\+\_\+type}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization_a8497a5ab933fa3b3c6f08957ce25300d}{get\+\_\+diagonal}} () const
+\begin{DoxyCompactList}\small\item\em Returns the diagonal scaling matrix of the factorization, if available, nullptr otherwise. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1factorization_1_1Factorization_abe6e3ed783c5b5deb58d6a1f1814bcda}\label{classgko_1_1experimental_1_1factorization_1_1Factorization_abe6e3ed783c5b5deb58d6a1f1814bcda}} 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{matrix\+\_\+type}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization_abe6e3ed783c5b5deb58d6a1f1814bcda}{get\+\_\+upper\+\_\+factor}} () const
+\begin{DoxyCompactList}\small\item\em Returns the upper triangular factor of the factorization, if available, nullptr otherwise. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1factorization_1_1Factorization_ae351c72e2da25152ed9854793298e1c8}\label{classgko_1_1experimental_1_1factorization_1_1Factorization_ae351c72e2da25152ed9854793298e1c8}} 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{matrix\+\_\+type}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization_ae351c72e2da25152ed9854793298e1c8}{get\+\_\+combined}} () const
+\begin{DoxyCompactList}\small\item\em Returns the matrix storing a compact representation of the factorization, if available, nullptr otherwise. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1factorization_1_1Factorization_a8e939895eed947b5317c91f6bbe03004}\label{classgko_1_1experimental_1_1factorization_1_1Factorization_a8e939895eed947b5317c91f6bbe03004}} 
+\mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization_a8e939895eed947b5317c91f6bbe03004}{Factorization}} (const \mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization}{Factorization}} \&)
+\begin{DoxyCompactList}\small\item\em Creates a deep copy of the factorization. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1factorization_1_1Factorization_afa55f6bf600858d6ffacc7182ab08085}\label{classgko_1_1experimental_1_1factorization_1_1Factorization_afa55f6bf600858d6ffacc7182ab08085}} 
+\mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization_afa55f6bf600858d6ffacc7182ab08085}{Factorization}} (\mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization}{Factorization}} \&\&)
+\begin{DoxyCompactList}\small\item\em Moves from the given factorization, leaving it empty. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1factorization_1_1Factorization_ab7b4e8fd2da2c4db4b6be247c1066adf}\label{classgko_1_1experimental_1_1factorization_1_1Factorization_ab7b4e8fd2da2c4db4b6be247c1066adf}} 
+\mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization}{Factorization}} \& {\bfseries operator=} (const \mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization}{Factorization}} \&)
+\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1factorization_1_1Factorization_a08af90bfd35edb3223374757ef651fd2}\label{classgko_1_1experimental_1_1factorization_1_1Factorization_a08af90bfd35edb3223374757ef651fd2}} 
+\mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization}{Factorization}} \& {\bfseries operator=} (\mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization}{Factorization}} \&\&)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization}{Factorization}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization_af48da80a6a33e14e0042584e942a0cda}{create\+\_\+from\+\_\+composition}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1Composition}{composition\+\_\+type}} $>$ composition)
+\begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization}{Factorization}} from an existing composition. \end{DoxyCompactList}\item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization}{Factorization}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization_a50798e02c7e09a5e8fe1f9e0f78ecc3a}{create\+\_\+from\+\_\+symm\+\_\+composition}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1Composition}{composition\+\_\+type}} $>$ composition)
+\begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization}{Factorization}} from an existing symmetric composition. \end{DoxyCompactList}\item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization}{Factorization}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization_a86c19ab0e72e67a248ffb63a1b8d60ee}{create\+\_\+from\+\_\+combined\+\_\+lu}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{matrix\+\_\+type}} $>$ matrix)
+\begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization}{Factorization}} from an existing combined representation of an LU factorization. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1factorization_1_1Factorization_ae29b02cdd4616a045808530732b67d0d}\label{classgko_1_1experimental_1_1factorization_1_1Factorization_ae29b02cdd4616a045808530732b67d0d}} 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization}{Factorization}} $>$ {\bfseries create\+\_\+from\+\_\+combined\+\_\+ldu} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{matrix\+\_\+type}} $>$ matrix)
+\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1factorization_1_1Factorization_ab0a5f1ff9e7b2a71f9bcdaa3b878614c}\label{classgko_1_1experimental_1_1factorization_1_1Factorization_ab0a5f1ff9e7b2a71f9bcdaa3b878614c}} 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization}{Factorization}} $>$ {\bfseries create\+\_\+from\+\_\+combined\+\_\+cholesky} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{matrix\+\_\+type}} $>$ matrix)
+\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1factorization_1_1Factorization_a8523103908afe87e5017fe95ac1c102d}\label{classgko_1_1experimental_1_1factorization_1_1Factorization_a8523103908afe87e5017fe95ac1c102d}} 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization}{Factorization}} $>$ {\bfseries create\+\_\+from\+\_\+combined\+\_\+ldl} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{matrix\+\_\+type}} $>$ matrix)
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1factorization_1_1Factorization_a1d18a07f052162d10c140b66b2d2d4f7}\label{classgko_1_1experimental_1_1factorization_1_1Factorization_a1d18a07f052162d10c140b66b2d2d4f7}} 
+class {\bfseries Enable\+Polymorphic\+Object$<$ Factorization, Lin\+Op $>$}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Value\+Type, typename Index\+Type$>$\newline
+class gko\+::experimental\+::factorization\+::\+Factorization$<$ Value\+Type, Index\+Type $>$}
+
+Represents a generic factorization consisting of two triangular factors (upper and lower) and an optional diagonal scaling matrix. 
+
+This class is used to represent a wide range of different factorizations to be passed on to direct solvers and other similar operations. The storage\+\_\+type represents how the individual factors are stored internally\+: They may be stored as separate matrices or in a single matrix, and be symmetric or unsymmetric, with the diagonal belonging to both factory, a single factor or being a separate scaling factor (\mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Cholesky}{Cholesky}} vs. L\+D\+L$^\wedge$H vs. LU vs. L\+DU).
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Value\+Type} & the value type used to store the factorization entries \\
+\hline
+{\em Index\+Type} & the index type used to represent the sparsity pattern \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1factorization_1_1Factorization_a86c19ab0e72e67a248ffb63a1b8d60ee}\label{classgko_1_1experimental_1_1factorization_1_1Factorization_a86c19ab0e72e67a248ffb63a1b8d60ee}} 
+\index{gko::experimental::factorization::Factorization$<$ ValueType, IndexType $>$@{gko::experimental::factorization::Factorization$<$ ValueType, IndexType $>$}!create\_from\_combined\_lu@{create\_from\_combined\_lu}}
+\index{create\_from\_combined\_lu@{create\_from\_combined\_lu}!gko::experimental::factorization::Factorization$<$ ValueType, IndexType $>$@{gko::experimental::factorization::Factorization$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{create\_from\_combined\_lu()}{create\_from\_combined\_lu()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type , typename Index\+Type $>$ \\
+static std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization}{Factorization}}$>$ \mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization}{gko\+::experimental\+::factorization\+::\+Factorization}}$<$ Value\+Type, Index\+Type $>$\+::create\+\_\+from\+\_\+combined\+\_\+lu (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{matrix\+\_\+type}} $>$}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a \mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization}{Factorization}} from an existing combined representation of an LU factorization. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em matrix} & the composition consisting of 2 or 3 elements. We expect the first entry to be a lower triangular matrix, and the last entry to be the transpose of the first entry. If the composition has 3 elements, we expect the middle entry to be a diagonal matrix.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a symmetric \mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization}{Factorization}} storing the elements from the \mbox{\hyperlink{classgko_1_1Composition}{Composition}}. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1factorization_1_1Factorization_af48da80a6a33e14e0042584e942a0cda}\label{classgko_1_1experimental_1_1factorization_1_1Factorization_af48da80a6a33e14e0042584e942a0cda}} 
+\index{gko::experimental::factorization::Factorization$<$ ValueType, IndexType $>$@{gko::experimental::factorization::Factorization$<$ ValueType, IndexType $>$}!create\_from\_composition@{create\_from\_composition}}
+\index{create\_from\_composition@{create\_from\_composition}!gko::experimental::factorization::Factorization$<$ ValueType, IndexType $>$@{gko::experimental::factorization::Factorization$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{create\_from\_composition()}{create\_from\_composition()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type , typename Index\+Type $>$ \\
+static std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization}{Factorization}}$>$ \mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization}{gko\+::experimental\+::factorization\+::\+Factorization}}$<$ Value\+Type, Index\+Type $>$\+::create\+\_\+from\+\_\+composition (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1Composition}{composition\+\_\+type}} $>$}]{composition }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a \mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization}{Factorization}} from an existing composition. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em composition} & the composition consisting of 2 or 3 elements. We expect the first entry to be a lower triangular matrix, and the last entry to be an upper triangular matrix. If the composition has 3 elements, we expect the middle entry to be a diagonal matrix.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a \mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization}{Factorization}} storing the elements from the \mbox{\hyperlink{classgko_1_1Composition}{Composition}}. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1factorization_1_1Factorization_a50798e02c7e09a5e8fe1f9e0f78ecc3a}\label{classgko_1_1experimental_1_1factorization_1_1Factorization_a50798e02c7e09a5e8fe1f9e0f78ecc3a}} 
+\index{gko::experimental::factorization::Factorization$<$ ValueType, IndexType $>$@{gko::experimental::factorization::Factorization$<$ ValueType, IndexType $>$}!create\_from\_symm\_composition@{create\_from\_symm\_composition}}
+\index{create\_from\_symm\_composition@{create\_from\_symm\_composition}!gko::experimental::factorization::Factorization$<$ ValueType, IndexType $>$@{gko::experimental::factorization::Factorization$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{create\_from\_symm\_composition()}{create\_from\_symm\_composition()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type , typename Index\+Type $>$ \\
+static std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization}{Factorization}}$>$ \mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization}{gko\+::experimental\+::factorization\+::\+Factorization}}$<$ Value\+Type, Index\+Type $>$\+::create\+\_\+from\+\_\+symm\+\_\+composition (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1Composition}{composition\+\_\+type}} $>$}]{composition }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a \mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization}{Factorization}} from an existing symmetric composition. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em composition} & the composition consisting of 2 or 3 elements. We expect the first entry to be a lower triangular matrix, and the last entry to be the transpose of the first entry. If the composition has 3 elements, we expect the middle entry to be a diagonal matrix.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a symmetric \mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization}{Factorization}} storing the elements from the \mbox{\hyperlink{classgko_1_1Composition}{Composition}}. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1factorization_1_1Factorization_a2d9dc69553e37f79e79c547881887aa5}\label{classgko_1_1experimental_1_1factorization_1_1Factorization_a2d9dc69553e37f79e79c547881887aa5}} 
+\index{gko::experimental::factorization::Factorization$<$ ValueType, IndexType $>$@{gko::experimental::factorization::Factorization$<$ ValueType, IndexType $>$}!unpack@{unpack}}
+\index{unpack@{unpack}!gko::experimental::factorization::Factorization$<$ ValueType, IndexType $>$@{gko::experimental::factorization::Factorization$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{unpack()}{unpack()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type , typename Index\+Type $>$ \\
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization}{Factorization}}$>$ \mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization}{gko\+::experimental\+::factorization\+::\+Factorization}}$<$ Value\+Type, Index\+Type $>$\+::unpack (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Transforms the factorization from a compact representation suitable only for triangular solves to a composition representation that can also be used to access individual factors and multiply with the factorization. 
+
+\begin{DoxyReturn}{Returns}
+a new \mbox{\hyperlink{classgko_1_1experimental_1_1factorization_1_1Factorization}{Factorization}} object containing this factorization represented as storage\+\_\+type\+::composition. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/factorization/factorization.\+hpp\end{DoxyCompactItemize}
