@@ -51,8 +51,13 @@ enum \mbox{\hyperlink{group__stop_ga5fe97c4263e876f68b5d4a21f0e615b9}{mode}} \{ 
 \item 
 {\footnotesize template$<$typename Factory\+Container $>$ }\\std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{namespacegko_1_1stop_ab12a51109c50b35ec36dc5a393d6a9a0}{Criterion\+Factory}} $>$ \mbox{\hyperlink{group__stop_ga3a3325b3a7660501f3bb72d08b09f2d2}{combine}} (Factory\+Container \&\&factories)
 \begin{DoxyCompactList}\small\item\em Combines multiple criterion factories into a single combined criterion factory. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classgko_1_1deferred__factory__parameter}{deferred\+\_\+factory\+\_\+parameter}}$<$ \mbox{\hyperlink{classgko_1_1stop_1_1Iteration_1_1Factory}{Iteration\+::\+Factory}} $>$ \mbox{\hyperlink{namespacegko_1_1stop_a31f5e1011fbdcbc3fcd62c31b3f70eaf}{max\+\_\+iters}} (\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} count)
+\mbox{\hyperlink{classgko_1_1deferred__factory__parameter}{deferred\+\_\+factory\+\_\+parameter}}$<$ const \mbox{\hyperlink{classgko_1_1stop_1_1Iteration_1_1Factory}{Iteration\+::\+Factory}} $>$ \mbox{\hyperlink{namespacegko_1_1stop_afcbdb7495467cfc7e059209e53144989}{max\+\_\+iters}} (\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} count)
 \begin{DoxyCompactList}\small\item\em Creates the precursor to an \mbox{\hyperlink{classgko_1_1stop_1_1Iteration}{Iteration}} stopping criterion factory, to be used in conjunction with {\ttfamily .with\+\_\+criteria(...)} function calls when building a solver factory. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgko_1_1deferred__factory__parameter}{deferred\+\_\+factory\+\_\+parameter}}$<$ const \mbox{\hyperlink{namespacegko_1_1stop_ab12a51109c50b35ec36dc5a393d6a9a0}{Criterion\+Factory}} $>$ \mbox{\hyperlink{namespacegko_1_1stop_aa0e55e3e65ba147a84a64ee693ef702b}{min\+\_\+iters}} (\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} count, \mbox{\hyperlink{classgko_1_1deferred__factory__parameter}{deferred\+\_\+factory\+\_\+parameter}}$<$ const \mbox{\hyperlink{namespacegko_1_1stop_ab12a51109c50b35ec36dc5a393d6a9a0}{Criterion\+Factory}} $>$ criterion)
+\begin{DoxyCompactList}\small\item\em Creates the precursor to an Minimum\+Iteration stopping criterion factory, to be used in conjunction with {\ttfamily .with\+\_\+criteria(...)} function calls when building a solver factory. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacegko_1_1stop_ab97f548f332f4c6758d8f640833022d5}\label{namespacegko_1_1stop_ab97f548f332f4c6758d8f640833022d5}} 
+{\footnotesize template$<$typename... Args$>$ }\\\mbox{\hyperlink{classgko_1_1deferred__factory__parameter}{deferred\+\_\+factory\+\_\+parameter}}$<$ const \mbox{\hyperlink{namespacegko_1_1stop_ab12a51109c50b35ec36dc5a393d6a9a0}{Criterion\+Factory}} $>$ {\bfseries min\+\_\+iters} (\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} count, Args \&\&... criteria)
+\item 
 \mbox{\hyperlink{classgko_1_1deferred__factory__parameter}{deferred\+\_\+factory\+\_\+parameter}}$<$ \mbox{\hyperlink{namespacegko_1_1stop_ab12a51109c50b35ec36dc5a393d6a9a0}{Criterion\+Factory}} $>$ \mbox{\hyperlink{namespacegko_1_1stop_a0d85aedb9af7b75e7b58bf786b297b89}{absolute\+\_\+residual\+\_\+norm}} (double tolerance)
 \begin{DoxyCompactList}\small\item\em Creates the precursor to a \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{Residual\+Norm}} stopping criterion factory, to be used in conjunction with {\ttfamily .with\+\_\+criteria(...)} function calls when building a solver factory. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classgko_1_1deferred__factory__parameter}{deferred\+\_\+factory\+\_\+parameter}}$<$ \mbox{\hyperlink{namespacegko_1_1stop_ab12a51109c50b35ec36dc5a393d6a9a0}{Criterion\+Factory}} $>$ \mbox{\hyperlink{namespacegko_1_1stop_a1756eff836c8fb0e9419d63e50538924}{relative\+\_\+residual\+\_\+norm}} (double tolerance)
@@ -116,7 +121,7 @@ Full usage example\+: Stop after 100 iterations or when the absolute residual no
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}} = \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{gko::solver::Cg<double>::build}}()}
 \DoxyCodeLine{                   .with\_criteria(}
-\DoxyCodeLine{                       \mbox{\hyperlink{namespacegko_1_1stop_a31f5e1011fbdcbc3fcd62c31b3f70eaf}{gko::stop::max\_iters}}(100),}
+\DoxyCodeLine{                       \mbox{\hyperlink{namespacegko_1_1stop_afcbdb7495467cfc7e059209e53144989}{gko::stop::max\_iters}}(100),}
 \DoxyCodeLine{                       \mbox{\hyperlink{namespacegko_1_1stop_a0d85aedb9af7b75e7b58bf786b297b89}{gko::stop::absolute\_residual\_norm}}(1e-\/10))}
 \DoxyCodeLine{                   .on(exec);}
 \end{DoxyCode}
@@ -146,7 +151,7 @@ Full usage example\+: Stop after 100 iterations or when the absolute residual no
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}} = \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{gko::solver::Cg<double>::build}}()}
 \DoxyCodeLine{                   .with\_criteria(}
-\DoxyCodeLine{                       \mbox{\hyperlink{namespacegko_1_1stop_a31f5e1011fbdcbc3fcd62c31b3f70eaf}{gko::stop::max\_iters}}(100),}
+\DoxyCodeLine{                       \mbox{\hyperlink{namespacegko_1_1stop_afcbdb7495467cfc7e059209e53144989}{gko::stop::max\_iters}}(100),}
 \DoxyCodeLine{                       \mbox{\hyperlink{namespacegko_1_1stop_a0d85aedb9af7b75e7b58bf786b297b89}{gko::stop::absolute\_residual\_norm}}(1e-\/10))}
 \DoxyCodeLine{                   .on(exec);}
 \end{DoxyCode}
@@ -176,7 +181,7 @@ Full usage example\+: Stop after 100 iterations or when the absolute residual no
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}} = \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{gko::solver::Cg<double>::build}}()}
 \DoxyCodeLine{                   .with\_criteria(}
-\DoxyCodeLine{                       \mbox{\hyperlink{namespacegko_1_1stop_a31f5e1011fbdcbc3fcd62c31b3f70eaf}{gko::stop::max\_iters}}(100),}
+\DoxyCodeLine{                       \mbox{\hyperlink{namespacegko_1_1stop_afcbdb7495467cfc7e059209e53144989}{gko::stop::max\_iters}}(100),}
 \DoxyCodeLine{                       \mbox{\hyperlink{namespacegko_1_1stop_a0d85aedb9af7b75e7b58bf786b297b89}{gko::stop::absolute\_residual\_norm}}(1e-\/10))}
 \DoxyCodeLine{                   .on(exec);}
 \end{DoxyCode}
@@ -206,7 +211,7 @@ Full usage example\+: Stop after 100 iterations or when the absolute residual no
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}} = \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{gko::solver::Cg<double>::build}}()}
 \DoxyCodeLine{                   .with\_criteria(}
-\DoxyCodeLine{                       \mbox{\hyperlink{namespacegko_1_1stop_a31f5e1011fbdcbc3fcd62c31b3f70eaf}{gko::stop::max\_iters}}(100),}
+\DoxyCodeLine{                       \mbox{\hyperlink{namespacegko_1_1stop_afcbdb7495467cfc7e059209e53144989}{gko::stop::max\_iters}}(100),}
 \DoxyCodeLine{                       \mbox{\hyperlink{namespacegko_1_1stop_a0d85aedb9af7b75e7b58bf786b297b89}{gko::stop::absolute\_residual\_norm}}(1e-\/10))}
 \DoxyCodeLine{                   .on(exec);}
 \end{DoxyCode}
@@ -220,11 +225,11 @@ Full usage example\+: Stop after 100 iterations or when the absolute residual no
 \begin{DoxyReturn}{Returns}
 a \mbox{\hyperlink{classgko_1_1deferred__factory__parameter}{deferred\+\_\+factory\+\_\+parameter}} that can be passed to the {\ttfamily with\+\_\+criteria} function when building a solver. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{namespacegko_1_1stop_a31f5e1011fbdcbc3fcd62c31b3f70eaf}\label{namespacegko_1_1stop_a31f5e1011fbdcbc3fcd62c31b3f70eaf}} 
+\mbox{\Hypertarget{namespacegko_1_1stop_afcbdb7495467cfc7e059209e53144989}\label{namespacegko_1_1stop_afcbdb7495467cfc7e059209e53144989}} 
 \index{gko::stop@{gko::stop}!max\_iters@{max\_iters}}
 \index{max\_iters@{max\_iters}!gko::stop@{gko::stop}}
 \doxysubsubsection{\texorpdfstring{max\_iters()}{max\_iters()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classgko_1_1deferred__factory__parameter}{deferred\+\_\+factory\+\_\+parameter}}$<$\mbox{\hyperlink{classgko_1_1stop_1_1Iteration_1_1Factory}{Iteration\+::\+Factory}}$>$ gko\+::stop\+::max\+\_\+iters (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{count }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{classgko_1_1deferred__factory__parameter}{deferred\+\_\+factory\+\_\+parameter}}$<$const \mbox{\hyperlink{classgko_1_1stop_1_1Iteration_1_1Factory}{Iteration\+::\+Factory}}$>$ gko\+::stop\+::max\+\_\+iters (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{count }\end{DoxyParamCaption})}
 
 
 
@@ -236,7 +241,7 @@ Full usage example\+: Stop after 100 iterations or when the relative residual no
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}} = \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{gko::solver::Cg<double>::build}}()}
 \DoxyCodeLine{                   .with\_criteria(}
-\DoxyCodeLine{                       \mbox{\hyperlink{namespacegko_1_1stop_a31f5e1011fbdcbc3fcd62c31b3f70eaf}{gko::stop::max\_iters}}(100),}
+\DoxyCodeLine{                       \mbox{\hyperlink{namespacegko_1_1stop_afcbdb7495467cfc7e059209e53144989}{gko::stop::max\_iters}}(100),}
 \DoxyCodeLine{                       \mbox{\hyperlink{namespacegko_1_1stop_a1756eff836c8fb0e9419d63e50538924}{gko::stop::relative\_residual\_norm}}(1e-\/10))}
 \DoxyCodeLine{                   .on(exec);}
 \end{DoxyCode}
@@ -245,6 +250,37 @@ Full usage example\+: Stop after 100 iterations or when the relative residual no
 
 \begin{DoxyParams}{Parameters}
 {\em count} & the number of iterations after which to stop \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a \mbox{\hyperlink{classgko_1_1deferred__factory__parameter}{deferred\+\_\+factory\+\_\+parameter}} that can be passed to the {\ttfamily with\+\_\+criteria} function when building a solver. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacegko_1_1stop_aa0e55e3e65ba147a84a64ee693ef702b}\label{namespacegko_1_1stop_aa0e55e3e65ba147a84a64ee693ef702b}} 
+\index{gko::stop@{gko::stop}!min\_iters@{min\_iters}}
+\index{min\_iters@{min\_iters}!gko::stop@{gko::stop}}
+\doxysubsubsection{\texorpdfstring{min\_iters()}{min\_iters()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classgko_1_1deferred__factory__parameter}{deferred\+\_\+factory\+\_\+parameter}}$<$const \mbox{\hyperlink{namespacegko_1_1stop_ab12a51109c50b35ec36dc5a393d6a9a0}{Criterion\+Factory}}$>$ gko\+::stop\+::min\+\_\+iters (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}}]{count,  }\item[{\mbox{\hyperlink{classgko_1_1deferred__factory__parameter}{deferred\+\_\+factory\+\_\+parameter}}$<$ const \mbox{\hyperlink{namespacegko_1_1stop_ab12a51109c50b35ec36dc5a393d6a9a0}{Criterion\+Factory}} $>$}]{criterion }\end{DoxyParamCaption})}
+
+
+
+Creates the precursor to an Minimum\+Iteration stopping criterion factory, to be used in conjunction with {\ttfamily .with\+\_\+criteria(...)} function calls when building a solver factory. 
+
+This stopping criterion wraps another stopping criterion inside, which only starts getting checked after the first {\ttfamily count} iterations finished.
+
+Full usage example\+: Stop when the relative residual norm is below $10^{-10}$, but with at least 100 iterations. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}} = \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{gko::solver::Cg<double>::build}}()}
+\DoxyCodeLine{                   .with\_criteria(\mbox{\hyperlink{namespacegko_1_1stop_aa0e55e3e65ba147a84a64ee693ef702b}{gko::stop::min\_iters}}(100,}
+\DoxyCodeLine{                       \mbox{\hyperlink{namespacegko_1_1stop_a1756eff836c8fb0e9419d63e50538924}{gko::stop::relative\_residual\_norm}}(1e-\/10)))}
+\DoxyCodeLine{                   .on(exec);}
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em count} & the number of iterations after which to start checking the inner criterion \\
+\hline
+{\em criterion} & the inner criterion, which will not be checked until {\ttfamily count} iterations finished, afterwards the min\+\_\+iters stopping criterion behaves like the inner criterion.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -266,7 +302,7 @@ Full usage example\+: Stop after 100 iterations or when the absolute residual no
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}} = \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{gko::solver::Cg<double>::build}}()}
 \DoxyCodeLine{                   .with\_criteria(}
-\DoxyCodeLine{                       \mbox{\hyperlink{namespacegko_1_1stop_a31f5e1011fbdcbc3fcd62c31b3f70eaf}{gko::stop::max\_iters}}(100),}
+\DoxyCodeLine{                       \mbox{\hyperlink{namespacegko_1_1stop_afcbdb7495467cfc7e059209e53144989}{gko::stop::max\_iters}}(100),}
 \DoxyCodeLine{                       \mbox{\hyperlink{namespacegko_1_1stop_a0d85aedb9af7b75e7b58bf786b297b89}{gko::stop::absolute\_residual\_norm}}(1e-\/10))}
 \DoxyCodeLine{                   .on(exec);}
 \end{DoxyCode}
@@ -296,7 +332,7 @@ Full usage example\+: Stop after 100 iterations or when the absolute residual no
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}} = \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{gko::solver::Cg<double>::build}}()}
 \DoxyCodeLine{                   .with\_criteria(}
-\DoxyCodeLine{                       \mbox{\hyperlink{namespacegko_1_1stop_a31f5e1011fbdcbc3fcd62c31b3f70eaf}{gko::stop::max\_iters}}(100),}
+\DoxyCodeLine{                       \mbox{\hyperlink{namespacegko_1_1stop_afcbdb7495467cfc7e059209e53144989}{gko::stop::max\_iters}}(100),}
 \DoxyCodeLine{                       \mbox{\hyperlink{namespacegko_1_1stop_a0d85aedb9af7b75e7b58bf786b297b89}{gko::stop::absolute\_residual\_norm}}(1e-\/10))}
 \DoxyCodeLine{                   .on(exec);}
 \end{DoxyCode}
