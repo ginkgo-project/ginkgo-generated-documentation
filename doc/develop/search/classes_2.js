@@ -106,7 +106,7 @@ var searchData=
   ['convertibleto_3c_20uppertrs_3c_20valuetype_2c_20indextype_20_3e_20_3e_1884',['ConvertibleTo&lt; UpperTrs&lt; ValueType, IndexType &gt; &gt;',['../classgko_1_1ConvertibleTo.html',1,'gko']]],
   ['convertibleto_3c_20vector_3c_20next_5fprecision_3c_20valuetype_20_3e_20_3e_20_3e_1885',['ConvertibleTo&lt; Vector&lt; next_precision&lt; ValueType &gt; &gt; &gt;',['../classgko_1_1ConvertibleTo.html',1,'gko']]],
   ['convertibleto_3c_20vector_3c_20valuetype_20_3e_20_3e_1886',['ConvertibleTo&lt; Vector&lt; ValueType &gt; &gt;',['../classgko_1_1ConvertibleTo.html',1,'gko']]],
-  ['coo_1887',['Coo',['../classgko_1_1matrix_1_1Coo.html',1,'gko::matrix']]],
+  ['coo_1887',['Coo',['../classgko_1_1matrix_1_1Coo.html',1,'gko::matrix::Coo&lt; ValueType, IndexType &gt;'],['../structgko_1_1matrix_1_1view_1_1coo.html',1,'gko::matrix::view::coo&lt; ValueType, IndexType &gt;']]],
   ['coobuilder_1888',['CooBuilder',['../classgko_1_1matrix_1_1CooBuilder.html',1,'gko::matrix']]],
   ['cpuallocator_1889',['CpuAllocator',['../classgko_1_1CpuAllocator.html',1,'gko']]],
   ['cpuallocatorbase_1890',['CpuAllocatorBase',['../classgko_1_1CpuAllocatorBase.html',1,'gko']]],

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['citing_20ginkgo_3520',['Citing Ginkgo',['../citing_ginkgo.html',1,'']]],
-  ['contributing_20guidelines_3521',['Contributing guidelines',['../contributing_guidelines.html',1,'']]]
+  ['citing_20ginkgo_3521',['Citing Ginkgo',['../citing_ginkgo.html',1,'']]],
+  ['contributing_20guidelines_3522',['Contributing guidelines',['../contributing_guidelines.html',1,'']]]
 ];
