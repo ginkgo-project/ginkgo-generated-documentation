@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2446651470 branch based on develop. Ginkgo version 1.12.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2447356364 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -346,7 +346,7 @@ Advantages of this approach and usage</h1>
 <h1><a class="anchor" id="linop_concept"></a>
 Linear operator as a concept</h1>
 <p>The linear operator (<a class="el" href="classgko_1_1LinOp.html">LinOp</a>) is a base class for all linear algebra objects in Ginkgo. The main benefit of having a single base class for the entire collection of linear algebra objects (as opposed to having separate hierarchies for matrices, solvers and preconditioners) is the generality it provides.</p>
-<p>First, since all subclasses provide a common interface, the library users are exposed to a smaller set of routines. For example, a matrix-vector product, a preconditioner application, or even a system solve are just different terms given to the operation of applying a certain linear operator to a vector. As such, Ginkgo uses the same routine name, <a class="el" href="classgko_1_1LinOp.html#aff0379dbd0d86bd9ce2db03ac05f789f" title="Applies a linear operator to a vector (or a sequence of vectors).">LinOp::apply()</a> for each of these operations, where the actual operation performed depends on the type of linear operator involved in the operation.</p>
+<p>First, since all subclasses provide a common interface, the library users are exposed to a smaller set of routines. For example, a matrix-vector product, a preconditioner application, or even a system solve are just different terms given to the operation of applying a certain linear operator to a vector. As such, Ginkgo uses the same routine name, <a class="el" href="classgko_1_1LinOp.html#af9979dfd1401bd219b02caaaa445b893" title="Applies a linear operator to a vector (or a sequence of vectors).">LinOp::apply()</a> for each of these operations, where the actual operation performed depends on the type of linear operator involved in the operation.</p>
 <p>Second, a common interface often allows for writing more generic code. If a user's routine requires only operations provided by the <a class="el" href="classgko_1_1LinOp.html">LinOp</a> interface, the same code can be used for any kind of linear operators, independent of whether these are matrices, solvers or preconditioners. This feature is also extensively used in Ginkgo itself. For example, a preconditioner used inside a Krylov solver is a <a class="el" href="classgko_1_1LinOp.html">LinOp</a>. This allows the user to supply a wide variety of preconditioners: either the ones which were designed to be used in this scenario (like ILU or block-Jacobi), a user-supplied matrix which is known to be a good preconditioner for the specific problem, or even another solver (e.g., if constructing a flexible GMRES solver).</p>
 <p>A key observation for providing a unified interface for matrices, solvers, and preconditioners is that the most common operation performed on all of them can be expressed as an application of a linear operator to a vector:</p>
 <ul>
@@ -370,7 +370,7 @@ Linear operator as a concept</h1>
 <div class="line">    }</div>
 <div class="line">    <span class="keywordflow">return</span> x;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>Here, if <img class="formulaInl" alt="$L$" src="form_9.png"/> is a matrix, <a class="el" href="classgko_1_1LinOp.html#aff0379dbd0d86bd9ce2db03ac05f789f" title="Applies a linear operator to a vector (or a sequence of vectors).">LinOp::apply()</a> refers to the matrix vector product, and <code>L-&gt;apply(a, b)</code> computes <img class="formulaInl" alt="$b = L \cdot a$" src="form_10.png"/>. <code>x-&gt;add_scaled(one, b)</code> is the <code>axpy</code> vector update <img class="formulaInl" alt="$x:=x+b$" src="form_11.png"/>.</p>
+</div><!-- fragment --><p>Here, if <img class="formulaInl" alt="$L$" src="form_9.png"/> is a matrix, <a class="el" href="classgko_1_1LinOp.html#af9979dfd1401bd219b02caaaa445b893" title="Applies a linear operator to a vector (or a sequence of vectors).">LinOp::apply()</a> refers to the matrix vector product, and <code>L-&gt;apply(a, b)</code> computes <img class="formulaInl" alt="$b = L \cdot a$" src="form_10.png"/>. <code>x-&gt;add_scaled(one, b)</code> is the <code>axpy</code> vector update <img class="formulaInl" alt="$x:=x+b$" src="form_11.png"/>.</p>
 <p>The interesting part of this example is the apply() routine at line 4 of the function body. Since this routine is part of the <a class="el" href="classgko_1_1LinOp.html">LinOp</a> base class, the fixed-point iteration routine can calculate a fixed point not only for matrices, but for any type of linear operator.</p>
 <p><a class="el" href="group__LinOp.html">Linear Operators</a> </p>
 <h2 class="groupheader">Macro Definition Documentation</h2>

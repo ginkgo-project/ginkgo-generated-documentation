@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2446651470 branch based on develop. Ginkgo version 1.12.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2447356364 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -178,7 +178,7 @@ template&lt;typename ValueType  = default_precision, typename IndexType  = int32
 
 <p>The relative accuracy of the adaptive <a class="el" href="classgko_1_1preconditioner_1_1Jacobi.html" title="A block-Jacobi preconditioner is a block-diagonal linear operator, obtained by inverting the diagonal...">Jacobi</a> variant. </p>
 <p>This parameter is only used if the adaptive version of the algorithm is selected (see storage_optimization parameter for more details). The parameter is used when detecting the optimal precisions of blocks whose precision has been set to <a class="el" href="classgko_1_1precision__reduction.html#a1fde4dd48fab015698c1616408f3ef81" title="Returns a special encoding which instructs the algorithm to automatically detect the best precision.">precision_reduction::autodetect()</a>.</p>
-<p>The parameter represents the number of correct digits in the result of Jacobi::apply() operation of the adaptive variant, compared to the non-adaptive variant. In other words, the total preconditioning error will be:</p>
+<p>The parameter represents the number of correct digits in the result of <a class="el" href="classgko_1_1LinOp.html#af9979dfd1401bd219b02caaaa445b893" title="Applies a linear operator to a vector (or a sequence of vectors).">Jacobi::apply()</a> operation of the adaptive variant, compared to the non-adaptive variant. In other words, the total preconditioning error will be:</p>
 <div class="fragment"><div class="line">|| inv(A)x - inv(M)x|| / || inv(A)x || &lt;= c * (dropout + <a class="code" href="structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type.html#ad4fd0de7ce4d390584e947afb6d0ce73">accuracy</a>)</div>
 </div><!-- fragment --><p>where <code>c</code> is some constant depending on the problem size and roundoff error and <code>dropout</code> the error introduced by disregarding off-diagonal elements.</p>
 <p>Larger values reduce the volume of memory transfer, but increase the error compared to using full precision storage. Thus, tuning the accuracy to a value as close as possible to <code>dropout</code> will result in optimal memory savings, while not degrading the quality of solution. </p>
