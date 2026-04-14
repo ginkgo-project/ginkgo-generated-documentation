@@ -106,6 +106,9 @@ concatenate remaining arguments for filename
 \DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keyword}{auto} i = 4; i < argc; ++i) \{}
 \DoxyCodeLine{    output\_suffix = output\_suffix + \textcolor{stringliteral}{"-\/"} + argv[i];}
 \DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{using} LowerIsai = \mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{gko::preconditioner::LowerIsai<>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} UpperIsai = \mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{gko::preconditioner::UpperIsai<>}};}
 \end{DoxyCode}
 
 
@@ -211,18 +214,19 @@ ilu-\/isai\+: sparsity power
 \DoxyCodeLine{        sparsity\_power = std::stoi(argv[4]);}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{    \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}} =}
-\DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{gko::preconditioner::Ilu<gko::preconditioner::LowerIsai<>}},}
-\DoxyCodeLine{                                 \mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{gko::preconditioner::UpperIsai<>}}>::build()}
+\DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{gko::preconditioner::Ilu<>::build}}()}
 \DoxyCodeLine{            .with\_factorization(fact\_factory)}
-\DoxyCodeLine{            .with\_l\_solver(\mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{gko::preconditioner::LowerIsai<>::build}}()}
-\DoxyCodeLine{                               .with\_sparsity\_power(sparsity\_power))}
-\DoxyCodeLine{            .with\_u\_solver(\mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{gko::preconditioner::UpperIsai<>::build}}()}
-\DoxyCodeLine{                               .with\_sparsity\_power(sparsity\_power))}
+\DoxyCodeLine{            .with\_l\_solver(}
+\DoxyCodeLine{                LowerIsai::build().with\_sparsity\_power(sparsity\_power))}
+\DoxyCodeLine{            .with\_u\_solver(}
+\DoxyCodeLine{                UpperIsai::build().with\_sparsity\_power(sparsity\_power))}
 \DoxyCodeLine{            .on(exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} ilu\_isai = try\_generate([\&] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}}-\/>generate(mtx); \});}
-\DoxyCodeLine{    output(ilu\_isai-\/>get\_l\_solver()-\/>get\_approximate\_inverse(),}
+\DoxyCodeLine{    output(gko::as<LowerIsai>(ilu\_isai-\/>get\_l\_solver())}
+\DoxyCodeLine{               -\/>get\_approximate\_inverse(),}
 \DoxyCodeLine{           matrix + \textcolor{stringliteral}{".ilu-\/isai"} + output\_suffix + \textcolor{stringliteral}{"-\/l"});}
-\DoxyCodeLine{    output(ilu\_isai-\/>get\_u\_solver()-\/>get\_approximate\_inverse(),}
+\DoxyCodeLine{    output(gko::as<UpperIsai>(ilu\_isai-\/>get\_u\_solver())}
+\DoxyCodeLine{               -\/>get\_approximate\_inverse(),}
 \DoxyCodeLine{           matrix + \textcolor{stringliteral}{".ilu-\/isai"} + output\_suffix + \textcolor{stringliteral}{"-\/u"});}
 \DoxyCodeLine{\} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (precond == \textcolor{stringliteral}{"parilu-\/isai"}) \{}
 \end{DoxyCode}
@@ -243,18 +247,19 @@ parilu-\/isai\+: iterations, sparsity power
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{    \textcolor{keyword}{auto} fact\_factory = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(fact\_parameter.on(exec));}
 \DoxyCodeLine{    \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}} =}
-\DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{gko::preconditioner::Ilu<gko::preconditioner::LowerIsai<>}},}
-\DoxyCodeLine{                                 \mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{gko::preconditioner::UpperIsai<>}}>::build()}
+\DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{gko::preconditioner::Ilu<>::build}}()}
 \DoxyCodeLine{            .with\_factorization(fact\_factory)}
-\DoxyCodeLine{            .with\_l\_solver(\mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{gko::preconditioner::LowerIsai<>::build}}()}
-\DoxyCodeLine{                               .with\_sparsity\_power(sparsity\_power))}
-\DoxyCodeLine{            .with\_u\_solver(\mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{gko::preconditioner::UpperIsai<>::build}}()}
-\DoxyCodeLine{                               .with\_sparsity\_power(sparsity\_power))}
+\DoxyCodeLine{            .with\_l\_solver(}
+\DoxyCodeLine{                LowerIsai::build().with\_sparsity\_power(sparsity\_power))}
+\DoxyCodeLine{            .with\_u\_solver(}
+\DoxyCodeLine{                UpperIsai::build().with\_sparsity\_power(sparsity\_power))}
 \DoxyCodeLine{            .on(exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} ilu\_isai = try\_generate([\&] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}}-\/>generate(mtx); \});}
-\DoxyCodeLine{    output(ilu\_isai-\/>get\_l\_solver()-\/>get\_approximate\_inverse(),}
+\DoxyCodeLine{    output(gko::as<LowerIsai>(ilu\_isai-\/>get\_l\_solver())}
+\DoxyCodeLine{               -\/>get\_approximate\_inverse(),}
 \DoxyCodeLine{           matrix + \textcolor{stringliteral}{".parilu-\/isai"} + output\_suffix + \textcolor{stringliteral}{"-\/l"});}
-\DoxyCodeLine{    output(ilu\_isai-\/>get\_u\_solver()-\/>get\_approximate\_inverse(),}
+\DoxyCodeLine{    output(gko::as<UpperIsai>(ilu\_isai-\/>get\_u\_solver())}
+\DoxyCodeLine{               -\/>get\_approximate\_inverse(),}
 \DoxyCodeLine{           matrix + \textcolor{stringliteral}{".parilu-\/isai"} + output\_suffix + \textcolor{stringliteral}{"-\/u"});}
 \DoxyCodeLine{\} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (precond == \textcolor{stringliteral}{"parilut-\/isai"}) \{}
 \end{DoxyCode}
@@ -278,18 +283,19 @@ parilut-\/isai\+: iterations, fill-\/in limit, sparsity power
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{        \textcolor{keyword}{auto} fact\_factory = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(fact\_parameter.on(exec));}
 \DoxyCodeLine{        \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}} =}
-\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{gko::preconditioner::Ilu<gko::preconditioner::LowerIsai<>}},}
-\DoxyCodeLine{                                     \mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{gko::preconditioner::UpperIsai<>}}>::build()}
+\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{gko::preconditioner::Ilu<>::build}}()}
 \DoxyCodeLine{                .with\_factorization(fact\_factory)}
-\DoxyCodeLine{                .with\_l\_solver(\mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{gko::preconditioner::LowerIsai<>::build}}()}
-\DoxyCodeLine{                                   .with\_sparsity\_power(sparsity\_power))}
-\DoxyCodeLine{                .with\_u\_solver(\mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{gko::preconditioner::UpperIsai<>::build}}()}
-\DoxyCodeLine{                                   .with\_sparsity\_power(sparsity\_power))}
+\DoxyCodeLine{                .with\_l\_solver(}
+\DoxyCodeLine{                    LowerIsai::build().with\_sparsity\_power(sparsity\_power))}
+\DoxyCodeLine{                .with\_u\_solver(}
+\DoxyCodeLine{                    UpperIsai::build().with\_sparsity\_power(sparsity\_power))}
 \DoxyCodeLine{                .on(exec);}
 \DoxyCodeLine{        \textcolor{keyword}{auto} ilu\_isai = try\_generate([\&] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}}-\/>generate(mtx); \});}
-\DoxyCodeLine{        output(ilu\_isai-\/>get\_l\_solver()-\/>get\_approximate\_inverse(),}
+\DoxyCodeLine{        output(gko::as<LowerIsai>(ilu\_isai-\/>get\_l\_solver())}
+\DoxyCodeLine{                   -\/>get\_approximate\_inverse(),}
 \DoxyCodeLine{               matrix + \textcolor{stringliteral}{".parilut-\/isai"} + output\_suffix + \textcolor{stringliteral}{"-\/l"});}
-\DoxyCodeLine{        output(ilu\_isai-\/>get\_u\_solver()-\/>get\_approximate\_inverse(),}
+\DoxyCodeLine{        output(gko::as<UpperIsai>(ilu\_isai-\/>get\_u\_solver())}
+\DoxyCodeLine{                   -\/>get\_approximate\_inverse(),}
 \DoxyCodeLine{               matrix + \textcolor{stringliteral}{".parilut-\/isai"} + output\_suffix + \textcolor{stringliteral}{"-\/u"});}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{\}}
@@ -420,6 +426,9 @@ When specifying an executor\+:
 \DoxyCodeLine{        output\_suffix = output\_suffix + \textcolor{stringliteral}{"-\/"} + argv[i];}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{using} LowerIsai = \mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{gko::preconditioner::LowerIsai<>}};}
+\DoxyCodeLine{    \textcolor{keyword}{using} UpperIsai = \mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{gko::preconditioner::UpperIsai<>}};}
+\DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keywordflow}{if} (precond == \textcolor{stringliteral}{"jacobi"}) \{}
 \DoxyCodeLine{        \textcolor{keyword}{auto} factory\_parameter = \mbox{\hyperlink{classgko_1_1preconditioner_1_1Jacobi}{gko::preconditioner::Jacobi<>::build}}();}
 \DoxyCodeLine{        \textcolor{keywordflow}{if} (argc >= 5) \{}
@@ -483,18 +492,19 @@ When specifying an executor\+:
 \DoxyCodeLine{            sparsity\_power = std::stoi(argv[4]);}
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{        \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}} =}
-\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{gko::preconditioner::Ilu<gko::preconditioner::LowerIsai<>}},}
-\DoxyCodeLine{                                     \mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{gko::preconditioner::UpperIsai<>}}>::build()}
+\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{gko::preconditioner::Ilu<>::build}}()}
 \DoxyCodeLine{                .with\_factorization(fact\_factory)}
-\DoxyCodeLine{                .with\_l\_solver(\mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{gko::preconditioner::LowerIsai<>::build}}()}
-\DoxyCodeLine{                                   .with\_sparsity\_power(sparsity\_power))}
-\DoxyCodeLine{                .with\_u\_solver(\mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{gko::preconditioner::UpperIsai<>::build}}()}
-\DoxyCodeLine{                                   .with\_sparsity\_power(sparsity\_power))}
+\DoxyCodeLine{                .with\_l\_solver(}
+\DoxyCodeLine{                    LowerIsai::build().with\_sparsity\_power(sparsity\_power))}
+\DoxyCodeLine{                .with\_u\_solver(}
+\DoxyCodeLine{                    UpperIsai::build().with\_sparsity\_power(sparsity\_power))}
 \DoxyCodeLine{                .on(exec);}
 \DoxyCodeLine{        \textcolor{keyword}{auto} ilu\_isai = try\_generate([\&] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}}-\/>generate(mtx); \});}
-\DoxyCodeLine{        output(ilu\_isai-\/>get\_l\_solver()-\/>get\_approximate\_inverse(),}
+\DoxyCodeLine{        output(gko::as<LowerIsai>(ilu\_isai-\/>get\_l\_solver())}
+\DoxyCodeLine{                   -\/>get\_approximate\_inverse(),}
 \DoxyCodeLine{               matrix + \textcolor{stringliteral}{".ilu-\/isai"} + output\_suffix + \textcolor{stringliteral}{"-\/l"});}
-\DoxyCodeLine{        output(ilu\_isai-\/>get\_u\_solver()-\/>get\_approximate\_inverse(),}
+\DoxyCodeLine{        output(gko::as<UpperIsai>(ilu\_isai-\/>get\_u\_solver())}
+\DoxyCodeLine{                   -\/>get\_approximate\_inverse(),}
 \DoxyCodeLine{               matrix + \textcolor{stringliteral}{".ilu-\/isai"} + output\_suffix + \textcolor{stringliteral}{"-\/u"});}
 \DoxyCodeLine{    \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (precond == \textcolor{stringliteral}{"parilu-\/isai"}) \{}
 \DoxyCodeLine{        \textcolor{keyword}{auto} fact\_parameter = \mbox{\hyperlink{classgko_1_1factorization_1_1ParIlu}{gko::factorization::ParIlu<>::build}}();}
@@ -508,18 +518,19 @@ When specifying an executor\+:
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{        \textcolor{keyword}{auto} fact\_factory = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(fact\_parameter.on(exec));}
 \DoxyCodeLine{        \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}} =}
-\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{gko::preconditioner::Ilu<gko::preconditioner::LowerIsai<>}},}
-\DoxyCodeLine{                                     \mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{gko::preconditioner::UpperIsai<>}}>::build()}
+\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{gko::preconditioner::Ilu<>::build}}()}
 \DoxyCodeLine{                .with\_factorization(fact\_factory)}
-\DoxyCodeLine{                .with\_l\_solver(\mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{gko::preconditioner::LowerIsai<>::build}}()}
-\DoxyCodeLine{                                   .with\_sparsity\_power(sparsity\_power))}
-\DoxyCodeLine{                .with\_u\_solver(\mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{gko::preconditioner::UpperIsai<>::build}}()}
-\DoxyCodeLine{                                   .with\_sparsity\_power(sparsity\_power))}
+\DoxyCodeLine{                .with\_l\_solver(}
+\DoxyCodeLine{                    LowerIsai::build().with\_sparsity\_power(sparsity\_power))}
+\DoxyCodeLine{                .with\_u\_solver(}
+\DoxyCodeLine{                    UpperIsai::build().with\_sparsity\_power(sparsity\_power))}
 \DoxyCodeLine{                .on(exec);}
 \DoxyCodeLine{        \textcolor{keyword}{auto} ilu\_isai = try\_generate([\&] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}}-\/>generate(mtx); \});}
-\DoxyCodeLine{        output(ilu\_isai-\/>get\_l\_solver()-\/>get\_approximate\_inverse(),}
+\DoxyCodeLine{        output(gko::as<LowerIsai>(ilu\_isai-\/>get\_l\_solver())}
+\DoxyCodeLine{                   -\/>get\_approximate\_inverse(),}
 \DoxyCodeLine{               matrix + \textcolor{stringliteral}{".parilu-\/isai"} + output\_suffix + \textcolor{stringliteral}{"-\/l"});}
-\DoxyCodeLine{        output(ilu\_isai-\/>get\_u\_solver()-\/>get\_approximate\_inverse(),}
+\DoxyCodeLine{        output(gko::as<UpperIsai>(ilu\_isai-\/>get\_u\_solver())}
+\DoxyCodeLine{                   -\/>get\_approximate\_inverse(),}
 \DoxyCodeLine{               matrix + \textcolor{stringliteral}{".parilu-\/isai"} + output\_suffix + \textcolor{stringliteral}{"-\/u"});}
 \DoxyCodeLine{    \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (precond == \textcolor{stringliteral}{"parilut-\/isai"}) \{}
 \DoxyCodeLine{        \textcolor{keyword}{auto} fact\_parameter = \mbox{\hyperlink{classgko_1_1factorization_1_1ParIlut}{gko::factorization::ParIlut<>::build}}();}
@@ -536,18 +547,19 @@ When specifying an executor\+:
 \DoxyCodeLine{        \}}
 \DoxyCodeLine{        \textcolor{keyword}{auto} fact\_factory = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(fact\_parameter.on(exec));}
 \DoxyCodeLine{        \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}} =}
-\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{gko::preconditioner::Ilu<gko::preconditioner::LowerIsai<>}},}
-\DoxyCodeLine{                                     \mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{gko::preconditioner::UpperIsai<>}}>::build()}
+\DoxyCodeLine{            \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{gko::preconditioner::Ilu<>::build}}()}
 \DoxyCodeLine{                .with\_factorization(fact\_factory)}
-\DoxyCodeLine{                .with\_l\_solver(\mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{gko::preconditioner::LowerIsai<>::build}}()}
-\DoxyCodeLine{                                   .with\_sparsity\_power(sparsity\_power))}
-\DoxyCodeLine{                .with\_u\_solver(\mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{gko::preconditioner::UpperIsai<>::build}}()}
-\DoxyCodeLine{                                   .with\_sparsity\_power(sparsity\_power))}
+\DoxyCodeLine{                .with\_l\_solver(}
+\DoxyCodeLine{                    LowerIsai::build().with\_sparsity\_power(sparsity\_power))}
+\DoxyCodeLine{                .with\_u\_solver(}
+\DoxyCodeLine{                    UpperIsai::build().with\_sparsity\_power(sparsity\_power))}
 \DoxyCodeLine{                .on(exec);}
 \DoxyCodeLine{        \textcolor{keyword}{auto} ilu\_isai = try\_generate([\&] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}}-\/>generate(mtx); \});}
-\DoxyCodeLine{        output(ilu\_isai-\/>get\_l\_solver()-\/>get\_approximate\_inverse(),}
+\DoxyCodeLine{        output(gko::as<LowerIsai>(ilu\_isai-\/>get\_l\_solver())}
+\DoxyCodeLine{                   -\/>get\_approximate\_inverse(),}
 \DoxyCodeLine{               matrix + \textcolor{stringliteral}{".parilut-\/isai"} + output\_suffix + \textcolor{stringliteral}{"-\/l"});}
-\DoxyCodeLine{        output(ilu\_isai-\/>get\_u\_solver()-\/>get\_approximate\_inverse(),}
+\DoxyCodeLine{        output(gko::as<UpperIsai>(ilu\_isai-\/>get\_u\_solver())}
+\DoxyCodeLine{                   -\/>get\_approximate\_inverse(),}
 \DoxyCodeLine{               matrix + \textcolor{stringliteral}{".parilut-\/isai"} + output\_suffix + \textcolor{stringliteral}{"-\/u"});}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{\}}

@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2447356364 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2452053621 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -155,6 +155,9 @@ $(function() {
 <div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span> i = 4; i &lt; argc; ++i) {</div>
 <div class="line">    output_suffix = output_suffix + <span class="stringliteral">&quot;-&quot;</span> + argv[i];</div>
 <div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using</span> LowerIsai = <a class="code" href="classgko_1_1preconditioner_1_1Isai.html">gko::preconditioner::LowerIsai&lt;&gt;</a>;</div>
+<div class="line"><span class="keyword">using</span> UpperIsai = <a class="code" href="classgko_1_1preconditioner_1_1Isai.html">gko::preconditioner::UpperIsai&lt;&gt;</a>;</div>
 </div><!-- fragment --><p>handle different preconditioners</p>
 <div class="fragment"><div class="line"><span class="keywordflow">if</span> (precond == <span class="stringliteral">&quot;jacobi&quot;</span>) {</div>
 </div><!-- fragment --><p>jacobi: max_block_size, accuracy, storage_optimization</p>
@@ -224,18 +227,19 @@ $(function() {
 <div class="line">        sparsity_power = std::stoi(argv[4]);</div>
 <div class="line">    }</div>
 <div class="line">    <span class="keyword">auto</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a> =</div>
-<div class="line">        <a class="code" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu&lt;gko::preconditioner::LowerIsai&lt;&gt;</a>,</div>
-<div class="line">                                 <a class="code" href="classgko_1_1preconditioner_1_1Isai.html">gko::preconditioner::UpperIsai&lt;&gt;</a>&gt;::build()</div>
+<div class="line">        <a class="code" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu&lt;&gt;::build</a>()</div>
 <div class="line">            .with_factorization(fact_factory)</div>
-<div class="line">            .with_l_solver(<a class="code" href="classgko_1_1preconditioner_1_1Isai.html">gko::preconditioner::LowerIsai&lt;&gt;::build</a>()</div>
-<div class="line">                               .with_sparsity_power(sparsity_power))</div>
-<div class="line">            .with_u_solver(<a class="code" href="classgko_1_1preconditioner_1_1Isai.html">gko::preconditioner::UpperIsai&lt;&gt;::build</a>()</div>
-<div class="line">                               .with_sparsity_power(sparsity_power))</div>
+<div class="line">            .with_l_solver(</div>
+<div class="line">                LowerIsai::build().with_sparsity_power(sparsity_power))</div>
+<div class="line">            .with_u_solver(</div>
+<div class="line">                UpperIsai::build().with_sparsity_power(sparsity_power))</div>
 <div class="line">            .on(exec);</div>
 <div class="line">    <span class="keyword">auto</span> ilu_isai = try_generate([&amp;] { <span class="keywordflow">return</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a>-&gt;generate(mtx); });</div>
-<div class="line">    output(ilu_isai-&gt;get_l_solver()-&gt;get_approximate_inverse(),</div>
+<div class="line">    output(gko::as&lt;LowerIsai&gt;(ilu_isai-&gt;get_l_solver())</div>
+<div class="line">               -&gt;get_approximate_inverse(),</div>
 <div class="line">           matrix + <span class="stringliteral">&quot;.ilu-isai&quot;</span> + output_suffix + <span class="stringliteral">&quot;-l&quot;</span>);</div>
-<div class="line">    output(ilu_isai-&gt;get_u_solver()-&gt;get_approximate_inverse(),</div>
+<div class="line">    output(gko::as&lt;UpperIsai&gt;(ilu_isai-&gt;get_u_solver())</div>
+<div class="line">               -&gt;get_approximate_inverse(),</div>
 <div class="line">           matrix + <span class="stringliteral">&quot;.ilu-isai&quot;</span> + output_suffix + <span class="stringliteral">&quot;-u&quot;</span>);</div>
 <div class="line">} <span class="keywordflow">else</span> <span class="keywordflow">if</span> (precond == <span class="stringliteral">&quot;parilu-isai&quot;</span>) {</div>
 </div><!-- fragment --><p>parilu-isai: iterations, sparsity power</p>
@@ -250,18 +254,19 @@ $(function() {
 <div class="line">    }</div>
 <div class="line">    <span class="keyword">auto</span> fact_factory = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a>(fact_parameter.on(exec));</div>
 <div class="line">    <span class="keyword">auto</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a> =</div>
-<div class="line">        <a class="code" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu&lt;gko::preconditioner::LowerIsai&lt;&gt;</a>,</div>
-<div class="line">                                 <a class="code" href="classgko_1_1preconditioner_1_1Isai.html">gko::preconditioner::UpperIsai&lt;&gt;</a>&gt;::build()</div>
+<div class="line">        <a class="code" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu&lt;&gt;::build</a>()</div>
 <div class="line">            .with_factorization(fact_factory)</div>
-<div class="line">            .with_l_solver(<a class="code" href="classgko_1_1preconditioner_1_1Isai.html">gko::preconditioner::LowerIsai&lt;&gt;::build</a>()</div>
-<div class="line">                               .with_sparsity_power(sparsity_power))</div>
-<div class="line">            .with_u_solver(<a class="code" href="classgko_1_1preconditioner_1_1Isai.html">gko::preconditioner::UpperIsai&lt;&gt;::build</a>()</div>
-<div class="line">                               .with_sparsity_power(sparsity_power))</div>
+<div class="line">            .with_l_solver(</div>
+<div class="line">                LowerIsai::build().with_sparsity_power(sparsity_power))</div>
+<div class="line">            .with_u_solver(</div>
+<div class="line">                UpperIsai::build().with_sparsity_power(sparsity_power))</div>
 <div class="line">            .on(exec);</div>
 <div class="line">    <span class="keyword">auto</span> ilu_isai = try_generate([&amp;] { <span class="keywordflow">return</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a>-&gt;generate(mtx); });</div>
-<div class="line">    output(ilu_isai-&gt;get_l_solver()-&gt;get_approximate_inverse(),</div>
+<div class="line">    output(gko::as&lt;LowerIsai&gt;(ilu_isai-&gt;get_l_solver())</div>
+<div class="line">               -&gt;get_approximate_inverse(),</div>
 <div class="line">           matrix + <span class="stringliteral">&quot;.parilu-isai&quot;</span> + output_suffix + <span class="stringliteral">&quot;-l&quot;</span>);</div>
-<div class="line">    output(ilu_isai-&gt;get_u_solver()-&gt;get_approximate_inverse(),</div>
+<div class="line">    output(gko::as&lt;UpperIsai&gt;(ilu_isai-&gt;get_u_solver())</div>
+<div class="line">               -&gt;get_approximate_inverse(),</div>
 <div class="line">           matrix + <span class="stringliteral">&quot;.parilu-isai&quot;</span> + output_suffix + <span class="stringliteral">&quot;-u&quot;</span>);</div>
 <div class="line">} <span class="keywordflow">else</span> <span class="keywordflow">if</span> (precond == <span class="stringliteral">&quot;parilut-isai&quot;</span>) {</div>
 </div><!-- fragment --><p>parilut-isai: iterations, fill-in limit, sparsity power</p>
@@ -279,18 +284,19 @@ $(function() {
 <div class="line">        }</div>
 <div class="line">        <span class="keyword">auto</span> fact_factory = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a>(fact_parameter.on(exec));</div>
 <div class="line">        <span class="keyword">auto</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a> =</div>
-<div class="line">            <a class="code" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu&lt;gko::preconditioner::LowerIsai&lt;&gt;</a>,</div>
-<div class="line">                                     <a class="code" href="classgko_1_1preconditioner_1_1Isai.html">gko::preconditioner::UpperIsai&lt;&gt;</a>&gt;::build()</div>
+<div class="line">            <a class="code" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu&lt;&gt;::build</a>()</div>
 <div class="line">                .with_factorization(fact_factory)</div>
-<div class="line">                .with_l_solver(<a class="code" href="classgko_1_1preconditioner_1_1Isai.html">gko::preconditioner::LowerIsai&lt;&gt;::build</a>()</div>
-<div class="line">                                   .with_sparsity_power(sparsity_power))</div>
-<div class="line">                .with_u_solver(<a class="code" href="classgko_1_1preconditioner_1_1Isai.html">gko::preconditioner::UpperIsai&lt;&gt;::build</a>()</div>
-<div class="line">                                   .with_sparsity_power(sparsity_power))</div>
+<div class="line">                .with_l_solver(</div>
+<div class="line">                    LowerIsai::build().with_sparsity_power(sparsity_power))</div>
+<div class="line">                .with_u_solver(</div>
+<div class="line">                    UpperIsai::build().with_sparsity_power(sparsity_power))</div>
 <div class="line">                .on(exec);</div>
 <div class="line">        <span class="keyword">auto</span> ilu_isai = try_generate([&amp;] { <span class="keywordflow">return</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a>-&gt;generate(mtx); });</div>
-<div class="line">        output(ilu_isai-&gt;get_l_solver()-&gt;get_approximate_inverse(),</div>
+<div class="line">        output(gko::as&lt;LowerIsai&gt;(ilu_isai-&gt;get_l_solver())</div>
+<div class="line">                   -&gt;get_approximate_inverse(),</div>
 <div class="line">               matrix + <span class="stringliteral">&quot;.parilut-isai&quot;</span> + output_suffix + <span class="stringliteral">&quot;-l&quot;</span>);</div>
-<div class="line">        output(ilu_isai-&gt;get_u_solver()-&gt;get_approximate_inverse(),</div>
+<div class="line">        output(gko::as&lt;UpperIsai&gt;(ilu_isai-&gt;get_u_solver())</div>
+<div class="line">                   -&gt;get_approximate_inverse(),</div>
 <div class="line">               matrix + <span class="stringliteral">&quot;.parilut-isai&quot;</span> + output_suffix + <span class="stringliteral">&quot;-u&quot;</span>);</div>
 <div class="line">    }</div>
 <div class="line">}</div>
@@ -400,6 +406,9 @@ $(function() {
 <div class="line">        output_suffix = output_suffix + <span class="stringliteral">&quot;-&quot;</span> + argv[i];</div>
 <div class="line">    }</div>
 <div class="line"> </div>
+<div class="line">    <span class="keyword">using</span> LowerIsai = <a class="code" href="classgko_1_1preconditioner_1_1Isai.html">gko::preconditioner::LowerIsai&lt;&gt;</a>;</div>
+<div class="line">    <span class="keyword">using</span> UpperIsai = <a class="code" href="classgko_1_1preconditioner_1_1Isai.html">gko::preconditioner::UpperIsai&lt;&gt;</a>;</div>
+<div class="line"> </div>
 <div class="line">    <span class="keywordflow">if</span> (precond == <span class="stringliteral">&quot;jacobi&quot;</span>) {</div>
 <div class="line">        <span class="keyword">auto</span> factory_parameter = <a class="code" href="classgko_1_1preconditioner_1_1Jacobi.html">gko::preconditioner::Jacobi&lt;&gt;::build</a>();</div>
 <div class="line">        <span class="keywordflow">if</span> (argc &gt;= 5) {</div>
@@ -463,18 +472,19 @@ $(function() {
 <div class="line">            sparsity_power = std::stoi(argv[4]);</div>
 <div class="line">        }</div>
 <div class="line">        <span class="keyword">auto</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a> =</div>
-<div class="line">            <a class="code" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu&lt;gko::preconditioner::LowerIsai&lt;&gt;</a>,</div>
-<div class="line">                                     <a class="code" href="classgko_1_1preconditioner_1_1Isai.html">gko::preconditioner::UpperIsai&lt;&gt;</a>&gt;::build()</div>
+<div class="line">            <a class="code" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu&lt;&gt;::build</a>()</div>
 <div class="line">                .with_factorization(fact_factory)</div>
-<div class="line">                .with_l_solver(<a class="code" href="classgko_1_1preconditioner_1_1Isai.html">gko::preconditioner::LowerIsai&lt;&gt;::build</a>()</div>
-<div class="line">                                   .with_sparsity_power(sparsity_power))</div>
-<div class="line">                .with_u_solver(<a class="code" href="classgko_1_1preconditioner_1_1Isai.html">gko::preconditioner::UpperIsai&lt;&gt;::build</a>()</div>
-<div class="line">                                   .with_sparsity_power(sparsity_power))</div>
+<div class="line">                .with_l_solver(</div>
+<div class="line">                    LowerIsai::build().with_sparsity_power(sparsity_power))</div>
+<div class="line">                .with_u_solver(</div>
+<div class="line">                    UpperIsai::build().with_sparsity_power(sparsity_power))</div>
 <div class="line">                .on(exec);</div>
 <div class="line">        <span class="keyword">auto</span> ilu_isai = try_generate([&amp;] { <span class="keywordflow">return</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a>-&gt;generate(mtx); });</div>
-<div class="line">        output(ilu_isai-&gt;get_l_solver()-&gt;get_approximate_inverse(),</div>
+<div class="line">        output(gko::as&lt;LowerIsai&gt;(ilu_isai-&gt;get_l_solver())</div>
+<div class="line">                   -&gt;get_approximate_inverse(),</div>
 <div class="line">               matrix + <span class="stringliteral">&quot;.ilu-isai&quot;</span> + output_suffix + <span class="stringliteral">&quot;-l&quot;</span>);</div>
-<div class="line">        output(ilu_isai-&gt;get_u_solver()-&gt;get_approximate_inverse(),</div>
+<div class="line">        output(gko::as&lt;UpperIsai&gt;(ilu_isai-&gt;get_u_solver())</div>
+<div class="line">                   -&gt;get_approximate_inverse(),</div>
 <div class="line">               matrix + <span class="stringliteral">&quot;.ilu-isai&quot;</span> + output_suffix + <span class="stringliteral">&quot;-u&quot;</span>);</div>
 <div class="line">    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (precond == <span class="stringliteral">&quot;parilu-isai&quot;</span>) {</div>
 <div class="line">        <span class="keyword">auto</span> fact_parameter = <a class="code" href="classgko_1_1factorization_1_1ParIlu.html">gko::factorization::ParIlu&lt;&gt;::build</a>();</div>
@@ -488,18 +498,19 @@ $(function() {
 <div class="line">        }</div>
 <div class="line">        <span class="keyword">auto</span> fact_factory = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a>(fact_parameter.on(exec));</div>
 <div class="line">        <span class="keyword">auto</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a> =</div>
-<div class="line">            <a class="code" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu&lt;gko::preconditioner::LowerIsai&lt;&gt;</a>,</div>
-<div class="line">                                     <a class="code" href="classgko_1_1preconditioner_1_1Isai.html">gko::preconditioner::UpperIsai&lt;&gt;</a>&gt;::build()</div>
+<div class="line">            <a class="code" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu&lt;&gt;::build</a>()</div>
 <div class="line">                .with_factorization(fact_factory)</div>
-<div class="line">                .with_l_solver(<a class="code" href="classgko_1_1preconditioner_1_1Isai.html">gko::preconditioner::LowerIsai&lt;&gt;::build</a>()</div>
-<div class="line">                                   .with_sparsity_power(sparsity_power))</div>
-<div class="line">                .with_u_solver(<a class="code" href="classgko_1_1preconditioner_1_1Isai.html">gko::preconditioner::UpperIsai&lt;&gt;::build</a>()</div>
-<div class="line">                                   .with_sparsity_power(sparsity_power))</div>
+<div class="line">                .with_l_solver(</div>
+<div class="line">                    LowerIsai::build().with_sparsity_power(sparsity_power))</div>
+<div class="line">                .with_u_solver(</div>
+<div class="line">                    UpperIsai::build().with_sparsity_power(sparsity_power))</div>
 <div class="line">                .on(exec);</div>
 <div class="line">        <span class="keyword">auto</span> ilu_isai = try_generate([&amp;] { <span class="keywordflow">return</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a>-&gt;generate(mtx); });</div>
-<div class="line">        output(ilu_isai-&gt;get_l_solver()-&gt;get_approximate_inverse(),</div>
+<div class="line">        output(gko::as&lt;LowerIsai&gt;(ilu_isai-&gt;get_l_solver())</div>
+<div class="line">                   -&gt;get_approximate_inverse(),</div>
 <div class="line">               matrix + <span class="stringliteral">&quot;.parilu-isai&quot;</span> + output_suffix + <span class="stringliteral">&quot;-l&quot;</span>);</div>
-<div class="line">        output(ilu_isai-&gt;get_u_solver()-&gt;get_approximate_inverse(),</div>
+<div class="line">        output(gko::as&lt;UpperIsai&gt;(ilu_isai-&gt;get_u_solver())</div>
+<div class="line">                   -&gt;get_approximate_inverse(),</div>
 <div class="line">               matrix + <span class="stringliteral">&quot;.parilu-isai&quot;</span> + output_suffix + <span class="stringliteral">&quot;-u&quot;</span>);</div>
 <div class="line">    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (precond == <span class="stringliteral">&quot;parilut-isai&quot;</span>) {</div>
 <div class="line">        <span class="keyword">auto</span> fact_parameter = <a class="code" href="classgko_1_1factorization_1_1ParIlut.html">gko::factorization::ParIlut&lt;&gt;::build</a>();</div>
@@ -516,18 +527,19 @@ $(function() {
 <div class="line">        }</div>
 <div class="line">        <span class="keyword">auto</span> fact_factory = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a>(fact_parameter.on(exec));</div>
 <div class="line">        <span class="keyword">auto</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a> =</div>
-<div class="line">            <a class="code" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu&lt;gko::preconditioner::LowerIsai&lt;&gt;</a>,</div>
-<div class="line">                                     <a class="code" href="classgko_1_1preconditioner_1_1Isai.html">gko::preconditioner::UpperIsai&lt;&gt;</a>&gt;::build()</div>
+<div class="line">            <a class="code" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu&lt;&gt;::build</a>()</div>
 <div class="line">                .with_factorization(fact_factory)</div>
-<div class="line">                .with_l_solver(<a class="code" href="classgko_1_1preconditioner_1_1Isai.html">gko::preconditioner::LowerIsai&lt;&gt;::build</a>()</div>
-<div class="line">                                   .with_sparsity_power(sparsity_power))</div>
-<div class="line">                .with_u_solver(<a class="code" href="classgko_1_1preconditioner_1_1Isai.html">gko::preconditioner::UpperIsai&lt;&gt;::build</a>()</div>
-<div class="line">                                   .with_sparsity_power(sparsity_power))</div>
+<div class="line">                .with_l_solver(</div>
+<div class="line">                    LowerIsai::build().with_sparsity_power(sparsity_power))</div>
+<div class="line">                .with_u_solver(</div>
+<div class="line">                    UpperIsai::build().with_sparsity_power(sparsity_power))</div>
 <div class="line">                .on(exec);</div>
 <div class="line">        <span class="keyword">auto</span> ilu_isai = try_generate([&amp;] { <span class="keywordflow">return</span> <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536">factory</a>-&gt;generate(mtx); });</div>
-<div class="line">        output(ilu_isai-&gt;get_l_solver()-&gt;get_approximate_inverse(),</div>
+<div class="line">        output(gko::as&lt;LowerIsai&gt;(ilu_isai-&gt;get_l_solver())</div>
+<div class="line">                   -&gt;get_approximate_inverse(),</div>
 <div class="line">               matrix + <span class="stringliteral">&quot;.parilut-isai&quot;</span> + output_suffix + <span class="stringliteral">&quot;-l&quot;</span>);</div>
-<div class="line">        output(ilu_isai-&gt;get_u_solver()-&gt;get_approximate_inverse(),</div>
+<div class="line">        output(gko::as&lt;UpperIsai&gt;(ilu_isai-&gt;get_u_solver())</div>
+<div class="line">                   -&gt;get_approximate_inverse(),</div>
 <div class="line">               matrix + <span class="stringliteral">&quot;.parilut-isai&quot;</span> + output_suffix + <span class="stringliteral">&quot;-u&quot;</span>);</div>
 <div class="line">    }</div>
 <div class="line">}</div>
@@ -555,7 +567,7 @@ $(function() {
 <div class="ttc" id="aclassgko_1_1DpcppExecutor_html_ae9b875dfe3af7f3f3f24071bfb2f895e"><div class="ttname"><a href="classgko_1_1DpcppExecutor.html#ae9b875dfe3af7f3f3f24071bfb2f895e">gko::DpcppExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; DpcppExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, std::string device_type=&quot;all&quot;, dpcpp_queue_property property=dpcpp_queue_property::in_order)</div><div class="ttdoc">Creates a new DpcppExecutor.</div></div>
 <div class="ttc" id="aclassgko_1_1Error_html"><div class="ttname"><a href="classgko_1_1Error.html">gko::Error</a></div><div class="ttdoc">The Error class is used to report exceptional behaviour in library functions.</div><div class="ttdef"><b>Definition:</b> exception.hpp:57</div></div>
 <div class="ttc" id="aclassgko_1_1factorization_1_1Ilu_html"><div class="ttname"><a href="classgko_1_1factorization_1_1Ilu.html">gko::factorization::Ilu</a></div><div class="ttdoc">Represents an incomplete LU factorization – ILU(0) – of a sparse matrix.</div><div class="ttdef"><b>Definition:</b> ilu.hpp:45</div></div>
-<div class="ttc" id="aclassgko_1_1preconditioner_1_1Ilu_html"><div class="ttname"><a href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu</a></div><div class="ttdoc">The Incomplete LU (ILU) preconditioner solves the equation  for a given lower triangular matrix L,...</div><div class="ttdef"><b>Definition:</b> ilu.hpp:114</div></div>
+<div class="ttc" id="aclassgko_1_1preconditioner_1_1Ilu_html"><div class="ttname"><a href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu</a></div><div class="ttdoc">The Incomplete LU (ILU) preconditioner solves the equation  for a given lower triangular matrix L,...</div><div class="ttdef"><b>Definition:</b> ilu.hpp:81</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

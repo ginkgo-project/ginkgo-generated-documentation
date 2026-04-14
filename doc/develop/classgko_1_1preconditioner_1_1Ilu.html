@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Ginkgo: gko::preconditioner::Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt; Class Template Reference</title>
+<title>Ginkgo: gko::preconditioner::Ilu&lt; ValueType, ReverseApply, IndexType &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2447356364 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2452053621 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -78,7 +78,7 @@ $(function() {
 <a href="#friends">Friends</a> &#124;
 <a href="classgko_1_1preconditioner_1_1Ilu-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">gko::preconditioner::Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__LinOp.html">Linear Operators</a> &raquo; <a class="el" href="group__precond.html">Preconditioners</a> &#124; <a class="el" href="group__LinOp.html">Linear Operators</a></div></div>  </div>
+<div class="title">gko::preconditioner::Ilu&lt; ValueType, ReverseApply, IndexType &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__LinOp.html">Linear Operators</a> &raquo; <a class="el" href="group__precond.html">Preconditioners</a> &#124; <a class="el" href="group__LinOp.html">Linear Operators</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -87,13 +87,13 @@ $(function() {
 
 <p><code>#include &lt;<a class="el" href="preconditioner_2ilu_8hpp_source.html">ginkgo/core/preconditioner/ilu.hpp</a>&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for gko::preconditioner::Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt;:</div>
+Inheritance diagram for gko::preconditioner::Ilu&lt; ValueType, ReverseApply, IndexType &gt;:</div>
 <div class="dyncontent">
 <div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classgko_1_1preconditioner_1_1Ilu__inherit__graph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
-Collaboration diagram for gko::preconditioner::Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt;:</div>
+Collaboration diagram for gko::preconditioner::Ilu&lt; ValueType, ReverseApply, IndexType &gt;:</div>
 <div class="dyncontent">
 <div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classgko_1_1preconditioner_1_1Ilu__coll__graph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
@@ -108,89 +108,83 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a9ddc01cc4a67dd462bceab628a0f6003"><td class="memItemLeft" align="right" valign="top"><a id="a9ddc01cc4a67dd462bceab628a0f6003"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>value_type</b> = gko::detail::get_value_type&lt; LSolverTypeOrValueType &gt;</td></tr>
-<tr class="separator:a9ddc01cc4a67dd462bceab628a0f6003"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a245b8f401f4c94b5f0e62d2093df2c33"><td class="memItemLeft" align="right" valign="top"><a id="a245b8f401f4c94b5f0e62d2093df2c33"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>l_solver_type</b> = std::conditional_t&lt; gko::detail::is_ginkgo_linop&lt; LSolverTypeOrValueType &gt;, LSolverTypeOrValueType, <a class="el" href="classgko_1_1LinOp.html">LinOp</a> &gt;</td></tr>
-<tr class="separator:a245b8f401f4c94b5f0e62d2093df2c33"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afb566cc350a27ff153c78379c2045e52"><td class="memItemLeft" align="right" valign="top"><a id="afb566cc350a27ff153c78379c2045e52"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>u_solver_type</b> = std::conditional_t&lt; gko::detail::is_ginkgo_linop&lt; USolverTypeOrValueType &gt;, USolverTypeOrValueType, <a class="el" href="classgko_1_1LinOp.html">LinOp</a> &gt;</td></tr>
-<tr class="separator:afb566cc350a27ff153c78379c2045e52"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ee512aecdc54ad2130765e3d74efcea"><td class="memItemLeft" align="right" valign="top"><a id="a7ee512aecdc54ad2130765e3d74efcea"></a>
+<tr class="memitem:a01767fdbde4cb10ccb7d81b1db32b68c"><td class="memItemLeft" align="right" valign="top"><a id="a01767fdbde4cb10ccb7d81b1db32b68c"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>value_type</b> = ValueType</td></tr>
+<tr class="separator:a01767fdbde4cb10ccb7d81b1db32b68c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a405e3626833fd99d855de53281b5f5da"><td class="memItemLeft" align="right" valign="top"><a id="a405e3626833fd99d855de53281b5f5da"></a>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>index_type</b> = IndexType</td></tr>
-<tr class="separator:a7ee512aecdc54ad2130765e3d74efcea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad7d6f85896fa29833c53bd5de439b85d"><td class="memItemLeft" align="right" valign="top"><a id="ad7d6f85896fa29833c53bd5de439b85d"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>transposed_type</b> = <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">Ilu</a>&lt; gko::detail::transposed_type&lt; USolverTypeOrValueType &gt;, gko::detail::transposed_type&lt; LSolverTypeOrValueType &gt;, ReverseApply, IndexType &gt;</td></tr>
-<tr class="separator:ad7d6f85896fa29833c53bd5de439b85d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_types_classgko_1_1EnablePolymorphicAssignment"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classgko_1_1EnablePolymorphicAssignment')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classgko_1_1EnablePolymorphicAssignment.html">gko::EnablePolymorphicAssignment&lt; Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt; &gt;</a></td></tr>
+<tr class="separator:a405e3626833fd99d855de53281b5f5da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80e65bb7ff05cf31f61881c10490f0f6"><td class="memItemLeft" align="right" valign="top"><a id="a80e65bb7ff05cf31f61881c10490f0f6"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>transposed_type</b> = <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">Ilu</a></td></tr>
+<tr class="separator:a80e65bb7ff05cf31f61881c10490f0f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_types_classgko_1_1EnablePolymorphicAssignment"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classgko_1_1EnablePolymorphicAssignment')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classgko_1_1EnablePolymorphicAssignment.html">gko::EnablePolymorphicAssignment&lt; Ilu&lt; ValueType, ReverseApply, IndexType &gt; &gt;</a></td></tr>
 <tr class="memitem:a2e92aa4e8262a8f6625330b76a24deeb inherit pub_types_classgko_1_1EnablePolymorphicAssignment"><td class="memItemLeft" align="right" valign="top"><a id="a2e92aa4e8262a8f6625330b76a24deeb"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>result_type</b> = Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt;</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>result_type</b> = Ilu&lt; ValueType, ReverseApply, IndexType &gt;</td></tr>
 <tr class="separator:a2e92aa4e8262a8f6625330b76a24deeb inherit pub_types_classgko_1_1EnablePolymorphicAssignment"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_types_classgko_1_1ConvertibleTo"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classgko_1_1ConvertibleTo')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classgko_1_1ConvertibleTo.html">gko::ConvertibleTo&lt; Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt; &gt;</a></td></tr>
+<tr class="inherit_header pub_types_classgko_1_1ConvertibleTo"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classgko_1_1ConvertibleTo')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classgko_1_1ConvertibleTo.html">gko::ConvertibleTo&lt; Ilu&lt; ValueType, ReverseApply, IndexType &gt; &gt;</a></td></tr>
 <tr class="memitem:a96d1c9f59700620c31fca1062f57de92 inherit pub_types_classgko_1_1ConvertibleTo"><td class="memItemLeft" align="right" valign="top"><a id="a96d1c9f59700620c31fca1062f57de92"></a>
-using&#160;</td><td class="memItemRight" valign="bottom"><b>result_type</b> = Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt;</td></tr>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>result_type</b> = Ilu&lt; ValueType, ReverseApply, IndexType &gt;</td></tr>
 <tr class="separator:a96d1c9f59700620c31fca1062f57de92 inherit pub_types_classgko_1_1ConvertibleTo"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a03c3244abed124de06df4d2292984173"><td class="memItemLeft" align="right" valign="top"><a id="a03c3244abed124de06df4d2292984173"></a>
+<tr class="memitem:ab48418dcda5664103dfdaf6ea6deb66c"><td class="memItemLeft" align="right" valign="top"><a id="ab48418dcda5664103dfdaf6ea6deb66c"></a>
 const <a class="el" href="structgko_1_1preconditioner_1_1Ilu_1_1parameters__type.html">parameters_type</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get_parameters</b> () const</td></tr>
-<tr class="separator:a03c3244abed124de06df4d2292984173"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7291bb17ef9cb1c3ee1e1593f71e395"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; const l_solver_type &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#ab7291bb17ef9cb1c3ee1e1593f71e395">get_l_solver</a> () const</td></tr>
-<tr class="memdesc:ab7291bb17ef9cb1c3ee1e1593f71e395"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the solver which is used for the provided L matrix.  <a href="classgko_1_1preconditioner_1_1Ilu.html#ab7291bb17ef9cb1c3ee1e1593f71e395">More...</a><br /></td></tr>
-<tr class="separator:ab7291bb17ef9cb1c3ee1e1593f71e395"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add7d500e01acc2a308186f482747905d"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; const u_solver_type &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#add7d500e01acc2a308186f482747905d">get_u_solver</a> () const</td></tr>
-<tr class="memdesc:add7d500e01acc2a308186f482747905d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the solver which is used for the provided U matrix.  <a href="classgko_1_1preconditioner_1_1Ilu.html#add7d500e01acc2a308186f482747905d">More...</a><br /></td></tr>
-<tr class="separator:add7d500e01acc2a308186f482747905d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6545dc5c042ba7e89d3fbbdfc72e1a91"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classgko_1_1LinOp.html">LinOp</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#a6545dc5c042ba7e89d3fbbdfc72e1a91">transpose</a> () const override</td></tr>
-<tr class="memdesc:a6545dc5c042ba7e89d3fbbdfc72e1a91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a <a class="el" href="classgko_1_1LinOp.html">LinOp</a> representing the transpose of the <a class="el" href="classgko_1_1Transposable.html" title="Linear operators which support transposition should implement the Transposable interface.">Transposable</a> object.  <a href="classgko_1_1preconditioner_1_1Ilu.html#a6545dc5c042ba7e89d3fbbdfc72e1a91">More...</a><br /></td></tr>
-<tr class="separator:a6545dc5c042ba7e89d3fbbdfc72e1a91"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a739d68011f5c36663ea642f860eca761"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classgko_1_1LinOp.html">LinOp</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#a739d68011f5c36663ea642f860eca761">conj_transpose</a> () const override</td></tr>
-<tr class="memdesc:a739d68011f5c36663ea642f860eca761"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a <a class="el" href="classgko_1_1LinOp.html">LinOp</a> representing the conjugate transpose of the <a class="el" href="classgko_1_1Transposable.html" title="Linear operators which support transposition should implement the Transposable interface.">Transposable</a> object.  <a href="classgko_1_1preconditioner_1_1Ilu.html#a739d68011f5c36663ea642f860eca761">More...</a><br /></td></tr>
-<tr class="separator:a739d68011f5c36663ea642f860eca761"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42f198304113da4ee2da21da21da3251"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">Ilu</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#a42f198304113da4ee2da21da21da3251">operator=</a> (const <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">Ilu</a> &amp;other)</td></tr>
-<tr class="memdesc:a42f198304113da4ee2da21da21da3251"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy-assigns an ILU preconditioner.  <a href="classgko_1_1preconditioner_1_1Ilu.html#a42f198304113da4ee2da21da21da3251">More...</a><br /></td></tr>
-<tr class="separator:a42f198304113da4ee2da21da21da3251"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3aaa5025072f8f1865aa2cc8915f8ebe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">Ilu</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#a3aaa5025072f8f1865aa2cc8915f8ebe">operator=</a> (<a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">Ilu</a> &amp;&amp;other)</td></tr>
-<tr class="memdesc:a3aaa5025072f8f1865aa2cc8915f8ebe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move-assigns an ILU preconditioner.  <a href="classgko_1_1preconditioner_1_1Ilu.html#a3aaa5025072f8f1865aa2cc8915f8ebe">More...</a><br /></td></tr>
-<tr class="separator:a3aaa5025072f8f1865aa2cc8915f8ebe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a071ffbb4acb7f654c4476374a728b0a3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#a071ffbb4acb7f654c4476374a728b0a3">Ilu</a> (const <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">Ilu</a> &amp;other)</td></tr>
-<tr class="memdesc:a071ffbb4acb7f654c4476374a728b0a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy-constructs an ILU preconditioner.  <a href="classgko_1_1preconditioner_1_1Ilu.html#a071ffbb4acb7f654c4476374a728b0a3">More...</a><br /></td></tr>
-<tr class="separator:a071ffbb4acb7f654c4476374a728b0a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b11a5e85bb6fcb969d4e745e0db4a1e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#a1b11a5e85bb6fcb969d4e745e0db4a1e">Ilu</a> (<a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">Ilu</a> &amp;&amp;other)</td></tr>
-<tr class="memdesc:a1b11a5e85bb6fcb969d4e745e0db4a1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move-constructs an ILU preconditioner.  <a href="classgko_1_1preconditioner_1_1Ilu.html#a1b11a5e85bb6fcb969d4e745e0db4a1e">More...</a><br /></td></tr>
-<tr class="separator:a1b11a5e85bb6fcb969d4e745e0db4a1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classgko_1_1EnableAbstractPolymorphicObject"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classgko_1_1EnableAbstractPolymorphicObject')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classgko_1_1EnableAbstractPolymorphicObject.html">gko::EnableAbstractPolymorphicObject&lt; Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt;, LinOp &gt;</a></td></tr>
+<tr class="separator:ab48418dcda5664103dfdaf6ea6deb66c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a0af3c8b69864636de77f3d6aa3982d"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; const <a class="el" href="classgko_1_1LinOp.html">LinOp</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#a1a0af3c8b69864636de77f3d6aa3982d">get_l_solver</a> () const</td></tr>
+<tr class="memdesc:a1a0af3c8b69864636de77f3d6aa3982d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the solver which is used for the provided L matrix.  <a href="classgko_1_1preconditioner_1_1Ilu.html#a1a0af3c8b69864636de77f3d6aa3982d">More...</a><br /></td></tr>
+<tr class="separator:a1a0af3c8b69864636de77f3d6aa3982d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b1999bc97f77b2519191966732268d0"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; const <a class="el" href="classgko_1_1LinOp.html">LinOp</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#a3b1999bc97f77b2519191966732268d0">get_u_solver</a> () const</td></tr>
+<tr class="memdesc:a3b1999bc97f77b2519191966732268d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the solver which is used for the provided U matrix.  <a href="classgko_1_1preconditioner_1_1Ilu.html#a3b1999bc97f77b2519191966732268d0">More...</a><br /></td></tr>
+<tr class="separator:a3b1999bc97f77b2519191966732268d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9834a49e141eccdf80523900b3358a64"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classgko_1_1LinOp.html">LinOp</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#a9834a49e141eccdf80523900b3358a64">transpose</a> () const override</td></tr>
+<tr class="memdesc:a9834a49e141eccdf80523900b3358a64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a <a class="el" href="classgko_1_1LinOp.html">LinOp</a> representing the transpose of the <a class="el" href="classgko_1_1Transposable.html" title="Linear operators which support transposition should implement the Transposable interface.">Transposable</a> object.  <a href="classgko_1_1preconditioner_1_1Ilu.html#a9834a49e141eccdf80523900b3358a64">More...</a><br /></td></tr>
+<tr class="separator:a9834a49e141eccdf80523900b3358a64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a373ca7fa07df71336d6639d60b147d0f"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classgko_1_1LinOp.html">LinOp</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#a373ca7fa07df71336d6639d60b147d0f">conj_transpose</a> () const override</td></tr>
+<tr class="memdesc:a373ca7fa07df71336d6639d60b147d0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a <a class="el" href="classgko_1_1LinOp.html">LinOp</a> representing the conjugate transpose of the <a class="el" href="classgko_1_1Transposable.html" title="Linear operators which support transposition should implement the Transposable interface.">Transposable</a> object.  <a href="classgko_1_1preconditioner_1_1Ilu.html#a373ca7fa07df71336d6639d60b147d0f">More...</a><br /></td></tr>
+<tr class="separator:a373ca7fa07df71336d6639d60b147d0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52fb0cc81227b28279759d107ad3389c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">Ilu</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#a52fb0cc81227b28279759d107ad3389c">operator=</a> (const <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">Ilu</a> &amp;other)</td></tr>
+<tr class="memdesc:a52fb0cc81227b28279759d107ad3389c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy-assigns an ILU preconditioner.  <a href="classgko_1_1preconditioner_1_1Ilu.html#a52fb0cc81227b28279759d107ad3389c">More...</a><br /></td></tr>
+<tr class="separator:a52fb0cc81227b28279759d107ad3389c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7957235af49d049c415ded1017cdf615"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">Ilu</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#a7957235af49d049c415ded1017cdf615">operator=</a> (<a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">Ilu</a> &amp;&amp;other)</td></tr>
+<tr class="memdesc:a7957235af49d049c415ded1017cdf615"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move-assigns an ILU preconditioner.  <a href="classgko_1_1preconditioner_1_1Ilu.html#a7957235af49d049c415ded1017cdf615">More...</a><br /></td></tr>
+<tr class="separator:a7957235af49d049c415ded1017cdf615"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a582b44824cc3ba7f6fe0385c69d0635c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#a582b44824cc3ba7f6fe0385c69d0635c">Ilu</a> (const <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">Ilu</a> &amp;other)</td></tr>
+<tr class="memdesc:a582b44824cc3ba7f6fe0385c69d0635c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy-constructs an ILU preconditioner.  <a href="classgko_1_1preconditioner_1_1Ilu.html#a582b44824cc3ba7f6fe0385c69d0635c">More...</a><br /></td></tr>
+<tr class="separator:a582b44824cc3ba7f6fe0385c69d0635c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac8245ffede1c06c1a077e6f81fcbe6a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#aac8245ffede1c06c1a077e6f81fcbe6a">Ilu</a> (<a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">Ilu</a> &amp;&amp;other)</td></tr>
+<tr class="memdesc:aac8245ffede1c06c1a077e6f81fcbe6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move-constructs an ILU preconditioner.  <a href="classgko_1_1preconditioner_1_1Ilu.html#aac8245ffede1c06c1a077e6f81fcbe6a">More...</a><br /></td></tr>
+<tr class="separator:aac8245ffede1c06c1a077e6f81fcbe6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classgko_1_1EnableAbstractPolymorphicObject"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classgko_1_1EnableAbstractPolymorphicObject')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classgko_1_1EnableAbstractPolymorphicObject.html">gko::EnableAbstractPolymorphicObject&lt; Ilu&lt; ValueType, ReverseApply, IndexType &gt;, LinOp &gt;</a></td></tr>
 <tr class="memitem:ac84c5033523a8c59662287fa0541c18c inherit pub_methods_classgko_1_1EnableAbstractPolymorphicObject"><td class="memItemLeft" align="right" valign="top"><a id="ac84c5033523a8c59662287fa0541c18c"></a>
-std::unique_ptr&lt; Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>create_default</b> (std::shared_ptr&lt; const <a class="el" href="classgko_1_1Executor.html">Executor</a> &gt; exec) const</td></tr>
+std::unique_ptr&lt; Ilu&lt; ValueType, ReverseApply, IndexType &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>create_default</b> (std::shared_ptr&lt; const <a class="el" href="classgko_1_1Executor.html">Executor</a> &gt; exec) const</td></tr>
 <tr class="separator:ac84c5033523a8c59662287fa0541c18c inherit pub_methods_classgko_1_1EnableAbstractPolymorphicObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5153f52a413e92a0477c0b99c5bc3b37 inherit pub_methods_classgko_1_1EnableAbstractPolymorphicObject"><td class="memItemLeft" align="right" valign="top"><a id="a5153f52a413e92a0477c0b99c5bc3b37"></a>
-std::unique_ptr&lt; Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>create_default</b> () const</td></tr>
+std::unique_ptr&lt; Ilu&lt; ValueType, ReverseApply, IndexType &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>create_default</b> () const</td></tr>
 <tr class="separator:a5153f52a413e92a0477c0b99c5bc3b37 inherit pub_methods_classgko_1_1EnableAbstractPolymorphicObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab580b1eed2674cd1eda5d18086bc1944 inherit pub_methods_classgko_1_1EnableAbstractPolymorphicObject"><td class="memItemLeft" align="right" valign="top"><a id="ab580b1eed2674cd1eda5d18086bc1944"></a>
-std::unique_ptr&lt; Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>clone</b> (std::shared_ptr&lt; const <a class="el" href="classgko_1_1Executor.html">Executor</a> &gt; exec) const</td></tr>
+std::unique_ptr&lt; Ilu&lt; ValueType, ReverseApply, IndexType &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>clone</b> (std::shared_ptr&lt; const <a class="el" href="classgko_1_1Executor.html">Executor</a> &gt; exec) const</td></tr>
 <tr class="separator:ab580b1eed2674cd1eda5d18086bc1944 inherit pub_methods_classgko_1_1EnableAbstractPolymorphicObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08485221c0ea27e9100069c65c40f5cb inherit pub_methods_classgko_1_1EnableAbstractPolymorphicObject"><td class="memItemLeft" align="right" valign="top"><a id="a08485221c0ea27e9100069c65c40f5cb"></a>
-std::unique_ptr&lt; Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>clone</b> () const</td></tr>
+std::unique_ptr&lt; Ilu&lt; ValueType, ReverseApply, IndexType &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>clone</b> () const</td></tr>
 <tr class="separator:a08485221c0ea27e9100069c65c40f5cb inherit pub_methods_classgko_1_1EnableAbstractPolymorphicObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a9588dfdd287538548e513c79793d5e inherit pub_methods_classgko_1_1EnableAbstractPolymorphicObject"><td class="memItemLeft" align="right" valign="top"><a id="a6a9588dfdd287538548e513c79793d5e"></a>
-Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>copy_from</b> (const <a class="el" href="classgko_1_1PolymorphicObject.html">PolymorphicObject</a> *other)</td></tr>
+Ilu&lt; ValueType, ReverseApply, IndexType &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>copy_from</b> (const <a class="el" href="classgko_1_1PolymorphicObject.html">PolymorphicObject</a> *other)</td></tr>
 <tr class="separator:a6a9588dfdd287538548e513c79793d5e inherit pub_methods_classgko_1_1EnableAbstractPolymorphicObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a505e7d44152d542e40e12a48e2980077 inherit pub_methods_classgko_1_1EnableAbstractPolymorphicObject"><td class="memItemLeft" align="right" valign="top"><a id="a505e7d44152d542e40e12a48e2980077"></a>
-std::enable_if_t&lt; std::is_base_of&lt; <a class="el" href="classgko_1_1PolymorphicObject.html">PolymorphicObject</a>, std::decay_t&lt; Derived &gt; &gt;::value, Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt; &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>copy_from</b> (std::unique_ptr&lt; Derived &gt; &amp;&amp;other)</td></tr>
+std::enable_if_t&lt; std::is_base_of&lt; <a class="el" href="classgko_1_1PolymorphicObject.html">PolymorphicObject</a>, std::decay_t&lt; Derived &gt; &gt;::value, Ilu&lt; ValueType, ReverseApply, IndexType &gt; &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>copy_from</b> (std::unique_ptr&lt; Derived &gt; &amp;&amp;other)</td></tr>
 <tr class="separator:a505e7d44152d542e40e12a48e2980077 inherit pub_methods_classgko_1_1EnableAbstractPolymorphicObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a23d190d8f7601c268250d202068f5d inherit pub_methods_classgko_1_1EnableAbstractPolymorphicObject"><td class="memItemLeft" align="right" valign="top"><a id="a3a23d190d8f7601c268250d202068f5d"></a>
-std::enable_if_t&lt; std::is_base_of&lt; <a class="el" href="classgko_1_1PolymorphicObject.html">PolymorphicObject</a>, std::decay_t&lt; Derived &gt; &gt;::value, Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt; &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>copy_from</b> (const std::unique_ptr&lt; Derived &gt; &amp;other)</td></tr>
+std::enable_if_t&lt; std::is_base_of&lt; <a class="el" href="classgko_1_1PolymorphicObject.html">PolymorphicObject</a>, std::decay_t&lt; Derived &gt; &gt;::value, Ilu&lt; ValueType, ReverseApply, IndexType &gt; &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>copy_from</b> (const std::unique_ptr&lt; Derived &gt; &amp;other)</td></tr>
 <tr class="separator:a3a23d190d8f7601c268250d202068f5d inherit pub_methods_classgko_1_1EnableAbstractPolymorphicObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e1775137cc12b58f8bb506402c3198a inherit pub_methods_classgko_1_1EnableAbstractPolymorphicObject"><td class="memItemLeft" align="right" valign="top"><a id="a8e1775137cc12b58f8bb506402c3198a"></a>
-Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>copy_from</b> (const std::shared_ptr&lt; const <a class="el" href="classgko_1_1PolymorphicObject.html">PolymorphicObject</a> &gt; &amp;other)</td></tr>
+Ilu&lt; ValueType, ReverseApply, IndexType &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>copy_from</b> (const std::shared_ptr&lt; const <a class="el" href="classgko_1_1PolymorphicObject.html">PolymorphicObject</a> &gt; &amp;other)</td></tr>
 <tr class="separator:a8e1775137cc12b58f8bb506402c3198a inherit pub_methods_classgko_1_1EnableAbstractPolymorphicObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a50632f7409e660930ce1f2aed09fd3 inherit pub_methods_classgko_1_1EnableAbstractPolymorphicObject"><td class="memItemLeft" align="right" valign="top"><a id="a4a50632f7409e660930ce1f2aed09fd3"></a>
-Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>move_from</b> (<a class="el" href="classgko_1_1ptr__param.html">ptr_param</a>&lt; <a class="el" href="classgko_1_1PolymorphicObject.html">PolymorphicObject</a> &gt; other)</td></tr>
+Ilu&lt; ValueType, ReverseApply, IndexType &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>move_from</b> (<a class="el" href="classgko_1_1ptr__param.html">ptr_param</a>&lt; <a class="el" href="classgko_1_1PolymorphicObject.html">PolymorphicObject</a> &gt; other)</td></tr>
 <tr class="separator:a4a50632f7409e660930ce1f2aed09fd3 inherit pub_methods_classgko_1_1EnableAbstractPolymorphicObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae74d41178d0f0e6bfcada520ea3e3099 inherit pub_methods_classgko_1_1EnableAbstractPolymorphicObject"><td class="memItemLeft" align="right" valign="top"><a id="ae74d41178d0f0e6bfcada520ea3e3099"></a>
-Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr>
+Ilu&lt; ValueType, ReverseApply, IndexType &gt; *&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()</td></tr>
 <tr class="separator:ae74d41178d0f0e6bfcada520ea3e3099 inherit pub_methods_classgko_1_1EnableAbstractPolymorphicObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classgko_1_1LinOp"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classgko_1_1LinOp')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classgko_1_1LinOp.html">gko::LinOp</a></td></tr>
 <tr class="memitem:af9979dfd1401bd219b02caaaa445b893 inherit pub_methods_classgko_1_1LinOp"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1LinOp.html#af9979dfd1401bd219b02caaaa445b893">apply</a> (<a class="el" href="classgko_1_1ptr__param.html">ptr_param</a>&lt; const <a class="el" href="classgko_1_1LinOp.html">LinOp</a> &gt; b, <a class="el" href="classgko_1_1ptr__param.html">ptr_param</a>&lt; <a class="el" href="classgko_1_1LinOp.html">LinOp</a> &gt; x) const</td></tr>
@@ -307,14 +301,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>clear_loggers</b> () 
 <tr class="memitem:a56b8943cc63e0f48e480f63b67a0070f inherit pub_methods_classgko_1_1log_1_1Loggable"><td class="memItemLeft" align="right" valign="top"><a id="a56b8943cc63e0f48e480f63b67a0070f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>remove_logger</b> (<a class="el" href="classgko_1_1ptr__param.html">ptr_param</a>&lt; const <a class="el" href="classgko_1_1log_1_1Logger.html">Logger</a> &gt; logger)</td></tr>
 <tr class="separator:a56b8943cc63e0f48e480f63b67a0070f inherit pub_methods_classgko_1_1log_1_1Loggable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classgko_1_1EnablePolymorphicAssignment"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classgko_1_1EnablePolymorphicAssignment')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classgko_1_1EnablePolymorphicAssignment.html">gko::EnablePolymorphicAssignment&lt; Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt; &gt;</a></td></tr>
+<tr class="inherit_header pub_methods_classgko_1_1EnablePolymorphicAssignment"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classgko_1_1EnablePolymorphicAssignment')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classgko_1_1EnablePolymorphicAssignment.html">gko::EnablePolymorphicAssignment&lt; Ilu&lt; ValueType, ReverseApply, IndexType &gt; &gt;</a></td></tr>
 <tr class="memitem:a6b7e6872e96084636f8ab5091063ada8 inherit pub_methods_classgko_1_1EnablePolymorphicAssignment"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><b>convert_to</b> (result_type *result) const override</td></tr>
 <tr class="memdesc:a6b7e6872e96084636f8ab5091063ada8 inherit pub_methods_classgko_1_1EnablePolymorphicAssignment"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts the implementer to an object of type result_type.  <a href="classgko_1_1EnablePolymorphicAssignment.html#a6b7e6872e96084636f8ab5091063ada8">More...</a><br /></td></tr>
 <tr class="separator:a6b7e6872e96084636f8ab5091063ada8 inherit pub_methods_classgko_1_1EnablePolymorphicAssignment"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a4cf244139e7761d6a91c61e029810e inherit pub_methods_classgko_1_1EnablePolymorphicAssignment"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><b>move_to</b> (result_type *result) override</td></tr>
 <tr class="memdesc:a0a4cf244139e7761d6a91c61e029810e inherit pub_methods_classgko_1_1EnablePolymorphicAssignment"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts the implementer to an object of type result_type by moving data from this object.  <a href="classgko_1_1EnablePolymorphicAssignment.html#a0a4cf244139e7761d6a91c61e029810e">More...</a><br /></td></tr>
 <tr class="separator:a0a4cf244139e7761d6a91c61e029810e inherit pub_methods_classgko_1_1EnablePolymorphicAssignment"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classgko_1_1ConvertibleTo"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classgko_1_1ConvertibleTo')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classgko_1_1ConvertibleTo.html">gko::ConvertibleTo&lt; Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt; &gt;</a></td></tr>
+<tr class="inherit_header pub_methods_classgko_1_1ConvertibleTo"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classgko_1_1ConvertibleTo')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classgko_1_1ConvertibleTo.html">gko::ConvertibleTo&lt; Ilu&lt; ValueType, ReverseApply, IndexType &gt; &gt;</a></td></tr>
 <tr class="memitem:a530f3d770e6f427357f75ed825d21106 inherit pub_methods_classgko_1_1ConvertibleTo"><td class="memItemLeft" align="right" valign="top"><a id="a530f3d770e6f427357f75ed825d21106"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>convert_to</b> (<a class="el" href="classgko_1_1ptr__param.html">ptr_param</a>&lt; result_type &gt; result) const</td></tr>
 <tr class="separator:a530f3d770e6f427357f75ed825d21106 inherit pub_methods_classgko_1_1ConvertibleTo"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -324,18 +318,18 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>move_to</b> (<a class
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:abd826eb1f81414fb9e3cba823f816bdf"><td class="memItemLeft" align="right" valign="top"><a id="abd826eb1f81414fb9e3cba823f816bdf"></a>
+<tr class="memitem:a9708a45eeff10c92dc55e0933334ef01"><td class="memItemLeft" align="right" valign="top"><a id="a9708a45eeff10c92dc55e0933334ef01"></a>
 static auto&#160;</td><td class="memItemRight" valign="bottom"><b>build</b> () -&gt; decltype(<a class="el" href="classgko_1_1preconditioner_1_1Ilu_1_1Factory.html">Factory</a> ::create())</td></tr>
-<tr class="separator:abd826eb1f81414fb9e3cba823f816bdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05a6a4b4cfd03eed108c9f107932fedc"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structgko_1_1preconditioner_1_1Ilu_1_1parameters__type.html">parameters_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#a05a6a4b4cfd03eed108c9f107932fedc">parse</a> (const <a class="el" href="classgko_1_1config_1_1pnode.html">config::pnode</a> &amp;config, const <a class="el" href="classgko_1_1config_1_1registry.html">config::registry</a> &amp;context, const <a class="el" href="classgko_1_1config_1_1type__descriptor.html">config::type_descriptor</a> &amp;td_for_child=config::make_type_descriptor&lt; value_type, index_type &gt;())</td></tr>
-<tr class="memdesc:a05a6a4b4cfd03eed108c9f107932fedc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the parameters from the property_tree.  <a href="classgko_1_1preconditioner_1_1Ilu.html#a05a6a4b4cfd03eed108c9f107932fedc">More...</a><br /></td></tr>
-<tr class="separator:a05a6a4b4cfd03eed108c9f107932fedc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a9708a45eeff10c92dc55e0933334ef01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a931837d68037e422b8630c44cb7eaa52"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structgko_1_1preconditioner_1_1Ilu_1_1parameters__type.html">parameters_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#a931837d68037e422b8630c44cb7eaa52">parse</a> (const <a class="el" href="classgko_1_1config_1_1pnode.html">config::pnode</a> &amp;config, const <a class="el" href="classgko_1_1config_1_1registry.html">config::registry</a> &amp;context, const <a class="el" href="classgko_1_1config_1_1type__descriptor.html">config::type_descriptor</a> &amp;td_for_child=config::make_type_descriptor&lt; value_type, index_type &gt;())</td></tr>
+<tr class="memdesc:a931837d68037e422b8630c44cb7eaa52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the parameters from the property_tree.  <a href="classgko_1_1preconditioner_1_1Ilu.html#a931837d68037e422b8630c44cb7eaa52">More...</a><br /></td></tr>
+<tr class="separator:a931837d68037e422b8630c44cb7eaa52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:a3bef66cc1995345cf6171d8a7cf41f1f"><td class="memItemLeft" align="right" valign="top"><a id="a3bef66cc1995345cf6171d8a7cf41f1f"></a>
+<tr class="memitem:a06df7c613de5a213d4778892b3088bbb"><td class="memItemLeft" align="right" valign="top"><a id="a06df7c613de5a213d4778892b3088bbb"></a>
 static constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><b>performs_reverse_apply</b> = ReverseApply</td></tr>
-<tr class="separator:a3bef66cc1995345cf6171d8a7cf41f1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a06df7c613de5a213d4778892b3088bbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
@@ -347,14 +341,11 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>EnablePolymorphicObj
 <tr class="separator:a211c0b867df6d3bef3c8f5589c499bc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;typename LSolverTypeOrValueType = solver::LowerTrs&lt;&gt;, typename USolverTypeOrValueType = gko::detail::transposed_type&lt;LSolverTypeOrValueType&gt;, bool ReverseApply = false, typename IndexType = int32&gt;<br />
-class gko::preconditioner::Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt;</h3>
+<div class="textblock"><h3>template&lt;typename ValueType = default_precision, bool ReverseApply = false, typename IndexType = int32&gt;<br />
+class gko::preconditioner::Ilu&lt; ValueType, ReverseApply, IndexType &gt;</h3>
 
 <p>The Incomplete LU (ILU) preconditioner solves the equation <img class="formulaInl" alt="$LUx = b$" src="form_106.png"/> for a given lower triangular matrix L, an upper triangular matrix U and the right hand side b (can contain multiple right hand sides). </p>
-<p>It allows to set both the solver for L and the solver for U independently, while providing the defaults <a class="el" href="classgko_1_1solver_1_1LowerTrs.html" title="LowerTrs is the triangular solver which solves the system L x = b, when L is a lower triangular matri...">solver::LowerTrs</a> and <a class="el" href="classgko_1_1solver_1_1UpperTrs.html" title="UpperTrs is the triangular solver which solves the system U x = b, when U is an upper triangular matr...">solver::UpperTrs</a>, which are direct triangular solvers. For these solvers, a factory can be provided (with <code>with_l_solver</code> and <code>with_u_solver</code>) to have more control over their behavior. In particular, it is possible to use an iterative method for solving the triangular systems. The default parameters for an iterative triangluar solver are:</p><ul>
-<li>reduction factor = 1e-4</li>
-<li>max iteration = &lt;number of="" rows="" of="" the="" matrix="" given="" to="" the="" solver&gt;=""&gt; Solvers without such criteria can also be used, in which case none are set.</li>
-</ul>
+<p>It allows to set both the solver for L and the solver for U independently, while providing the defaults <a class="el" href="classgko_1_1solver_1_1LowerTrs.html" title="LowerTrs is the triangular solver which solves the system L x = b, when L is a lower triangular matri...">solver::LowerTrs</a> and <a class="el" href="classgko_1_1solver_1_1UpperTrs.html" title="UpperTrs is the triangular solver which solves the system U x = b, when U is an upper triangular matr...">solver::UpperTrs</a>, which are direct triangular solvers. For these solvers, a factory can be provided (with <code>with_l_solver</code> and <code>with_u_solver</code>) to have more control over their behavior. In particular, it is possible to use an iterative method for solving the triangular systems.</p>
 <p>An object of this class can be created with a matrix or a <a class="el" href="classgko_1_1Composition.html" title="The Composition class can be used to compose linear operators op1, op2, ..., opn and obtain the opera...">gko::Composition</a> containing two matrices. If created with a matrix, it is factorized before creating the solver. If a <a class="el" href="classgko_1_1Composition.html" title="The Composition class can be used to compose linear operators op1, op2, ..., opn and obtain the opera...">gko::Composition</a> (containing two matrices) is used, the first operand will be taken as the L matrix, the second will be considered the U matrix. ParIlu can be directly used, since it orders the factors in the correct way.</p>
 <dl class="section note"><dt>Note</dt><dd>When providing a <a class="el" href="classgko_1_1Composition.html" title="The Composition class can be used to compose linear operators op1, op2, ..., opn and obtain the opera...">gko::Composition</a>, the first matrix must be the lower matrix ( <img class="formulaInl" alt="$L$" src="form_9.png"/>), and the second matrix must be the upper matrix ( <img class="formulaInl" alt="$U$" src="form_49.png"/>). If they are swapped, solving might crash or return the wrong result.</dd>
 <dd>
@@ -365,94 +356,73 @@ This class is not thread safe (even a const object is not) because it uses an in
 The default template during parse is &lt;ValueType, IndexType&gt; not &lt;LowerTrs, IndexType&gt;. Only the variants with ValueType are supported in parse.</dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">LSolverTypeOrValueType</td><td>type of the solver or the value type used for the L matrix. Defaults to <a class="el" href="classgko_1_1solver_1_1LowerTrs.html" title="LowerTrs is the triangular solver which solves the system L x = b, when L is a lower triangular matri...">solver::LowerTrs</a> </td></tr>
-    <tr><td class="paramname">USolverTypeOrValueType</td><td>type of the solver or the value type used for the U matrix Defaults to <a class="el" href="classgko_1_1solver_1_1UpperTrs.html" title="UpperTrs is the triangular solver which solves the system U x = b, when U is an upper triangular matr...">solver::UpperTrs</a> </td></tr>
+    <tr><td class="paramname">ValueType</td><td>the value type used for the L and U matrices. </td></tr>
     <tr><td class="paramname">ReverseApply</td><td>default behavior (ReverseApply = false) is first to solve with L (Ly = b) and then with U (Ux = y). When set to true, it will solve first with U, and then with L. </td></tr>
-    <tr><td class="paramname">IndexTypeParIlu</td><td>Type of the indices when ParIlu is used to generate both L and U factors. Irrelevant otherwise. </td></tr>
+    <tr><td class="paramname">IndexType</td><td>Type of the indices when ParIlu is used to generate both L and U factors. Irrelevant otherwise. </td></tr>
   </table>
   </dd>
 </dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a071ffbb4acb7f654c4476374a728b0a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a071ffbb4acb7f654c4476374a728b0a3">&#9670;&nbsp;</a></span>Ilu() <span class="overload">[1/2]</span></h2>
+<a id="a582b44824cc3ba7f6fe0385c69d0635c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a582b44824cc3ba7f6fe0385c69d0635c">&#9670;&nbsp;</a></span>Ilu() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename LSolverTypeOrValueType = solver::LowerTrs&lt;&gt;, typename USolverTypeOrValueType = gko::detail::transposed_type&lt;LSolverTypeOrValueType&gt;, bool ReverseApply = false, typename IndexType = int32&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
+template&lt;typename ValueType  = default_precision, bool ReverseApply = false, typename IndexType  = int32&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu</a>&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt;::<a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">Ilu</a> </td>
+          <td class="memname"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu</a>&lt; ValueType, ReverseApply, IndexType &gt;::<a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">Ilu</a> </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">Ilu</a>&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">Ilu</a>&lt; ValueType, ReverseApply, IndexType &gt; &amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Copy-constructs an ILU preconditioner. </p>
 <p>Inherits the executor, shallow-copies the solvers and parameters. </p>
 
-<p class="reference">References <a class="el" href="classgko_1_1PolymorphicObject.html#ab40586bff071b7f11c2cf6b5cbf598eb">gko::PolymorphicObject::get_executor()</a>.</p>
-
 </div>
 </div>
-<a id="a1b11a5e85bb6fcb969d4e745e0db4a1e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1b11a5e85bb6fcb969d4e745e0db4a1e">&#9670;&nbsp;</a></span>Ilu() <span class="overload">[2/2]</span></h2>
+<a id="aac8245ffede1c06c1a077e6f81fcbe6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac8245ffede1c06c1a077e6f81fcbe6a">&#9670;&nbsp;</a></span>Ilu() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename LSolverTypeOrValueType = solver::LowerTrs&lt;&gt;, typename USolverTypeOrValueType = gko::detail::transposed_type&lt;LSolverTypeOrValueType&gt;, bool ReverseApply = false, typename IndexType = int32&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
+template&lt;typename ValueType  = default_precision, bool ReverseApply = false, typename IndexType  = int32&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu</a>&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt;::<a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">Ilu</a> </td>
+          <td class="memname"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu</a>&lt; ValueType, ReverseApply, IndexType &gt;::<a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">Ilu</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">Ilu</a>&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt; &amp;&amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">Ilu</a>&lt; ValueType, ReverseApply, IndexType &gt; &amp;&amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Move-constructs an ILU preconditioner. </p>
 <p>Inherits the executor, moves the solvers and parameters. The moved-from object is empty (0x0 with nullptr solvers and default parameters) </p>
 
-<p class="reference">References <a class="el" href="classgko_1_1PolymorphicObject.html#ab40586bff071b7f11c2cf6b5cbf598eb">gko::PolymorphicObject::get_executor()</a>.</p>
-
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a739d68011f5c36663ea642f860eca761"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a739d68011f5c36663ea642f860eca761">&#9670;&nbsp;</a></span>conj_transpose()</h2>
+<a id="a373ca7fa07df71336d6639d60b147d0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a373ca7fa07df71336d6639d60b147d0f">&#9670;&nbsp;</a></span>conj_transpose()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename LSolverTypeOrValueType = solver::LowerTrs&lt;&gt;, typename USolverTypeOrValueType = gko::detail::transposed_type&lt;LSolverTypeOrValueType&gt;, bool ReverseApply = false, typename IndexType = int32&gt; </div>
+template&lt;typename ValueType  = default_precision, bool ReverseApply = false, typename IndexType  = int32&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::unique_ptr&lt;<a class="el" href="classgko_1_1LinOp.html">LinOp</a>&gt; <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu</a>&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt;::conj_transpose </td>
+          <td class="memname">std::unique_ptr&lt;<a class="el" href="classgko_1_1LinOp.html">LinOp</a>&gt; <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu</a>&lt; ValueType, ReverseApply, IndexType &gt;::conj_transpose </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -460,7 +430,7 @@ template&lt;typename LSolverTypeOrValueType = solver::LowerTrs&lt;&gt;, typename
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -470,23 +440,21 @@ template&lt;typename LSolverTypeOrValueType = solver::LowerTrs&lt;&gt;, typename
 
 <p>Implements <a class="el" href="classgko_1_1Transposable.html#ab41b669288740cf2a6f7bf76e875b077">gko::Transposable</a>.</p>
 
-<p class="reference">References <a class="el" href="namespacegko.html#a618c9b64c35b0452240e9e57a9673b94">gko::as()</a>, <a class="el" href="classgko_1_1PolymorphicObject.html#ab40586bff071b7f11c2cf6b5cbf598eb">gko::PolymorphicObject::get_executor()</a>, <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#ab7291bb17ef9cb1c3ee1e1593f71e395">gko::preconditioner::Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt;::get_l_solver()</a>, <a class="el" href="classgko_1_1LinOp.html#a31b3c003388eb0b95393154f68c2b98d">gko::LinOp::get_size()</a>, <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#add7d500e01acc2a308186f482747905d">gko::preconditioner::Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt;::get_u_solver()</a>, <a class="el" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share()</a>, and <a class="el" href="namespacegko.html#accf17977b47322fff8526d69711e9d7f">gko::transpose()</a>.</p>
-
 </div>
 </div>
-<a id="ab7291bb17ef9cb1c3ee1e1593f71e395"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab7291bb17ef9cb1c3ee1e1593f71e395">&#9670;&nbsp;</a></span>get_l_solver()</h2>
+<a id="a1a0af3c8b69864636de77f3d6aa3982d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a0af3c8b69864636de77f3d6aa3982d">&#9670;&nbsp;</a></span>get_l_solver()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename LSolverTypeOrValueType = solver::LowerTrs&lt;&gt;, typename USolverTypeOrValueType = gko::detail::transposed_type&lt;LSolverTypeOrValueType&gt;, bool ReverseApply = false, typename IndexType = int32&gt; </div>
+template&lt;typename ValueType  = default_precision, bool ReverseApply = false, typename IndexType  = int32&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::shared_ptr&lt;const l_solver_type&gt; <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu</a>&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt;::get_l_solver </td>
+          <td class="memname">std::shared_ptr&lt;const <a class="el" href="classgko_1_1LinOp.html">LinOp</a>&gt; <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu</a>&lt; ValueType, ReverseApply, IndexType &gt;::get_l_solver </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -502,23 +470,21 @@ template&lt;typename LSolverTypeOrValueType = solver::LowerTrs&lt;&gt;, typename
 <p>Returns the solver which is used for the provided L matrix. </p>
 <dl class="section return"><dt>Returns</dt><dd>the solver which is used for the provided L matrix </dd></dl>
 
-<p class="reference">Referenced by <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#a739d68011f5c36663ea642f860eca761">gko::preconditioner::Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt;::conj_transpose()</a>, and <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#a6545dc5c042ba7e89d3fbbdfc72e1a91">gko::preconditioner::Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt;::transpose()</a>.</p>
-
 </div>
 </div>
-<a id="add7d500e01acc2a308186f482747905d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#add7d500e01acc2a308186f482747905d">&#9670;&nbsp;</a></span>get_u_solver()</h2>
+<a id="a3b1999bc97f77b2519191966732268d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b1999bc97f77b2519191966732268d0">&#9670;&nbsp;</a></span>get_u_solver()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename LSolverTypeOrValueType = solver::LowerTrs&lt;&gt;, typename USolverTypeOrValueType = gko::detail::transposed_type&lt;LSolverTypeOrValueType&gt;, bool ReverseApply = false, typename IndexType = int32&gt; </div>
+template&lt;typename ValueType  = default_precision, bool ReverseApply = false, typename IndexType  = int32&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::shared_ptr&lt;const u_solver_type&gt; <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu</a>&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt;::get_u_solver </td>
+          <td class="memname">std::shared_ptr&lt;const <a class="el" href="classgko_1_1LinOp.html">LinOp</a>&gt; <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu</a>&lt; ValueType, ReverseApply, IndexType &gt;::get_u_solver </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -534,89 +500,67 @@ template&lt;typename LSolverTypeOrValueType = solver::LowerTrs&lt;&gt;, typename
 <p>Returns the solver which is used for the provided U matrix. </p>
 <dl class="section return"><dt>Returns</dt><dd>the solver which is used for the provided U matrix </dd></dl>
 
-<p class="reference">Referenced by <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#a739d68011f5c36663ea642f860eca761">gko::preconditioner::Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt;::conj_transpose()</a>, and <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#a6545dc5c042ba7e89d3fbbdfc72e1a91">gko::preconditioner::Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt;::transpose()</a>.</p>
-
 </div>
 </div>
-<a id="a42f198304113da4ee2da21da21da3251"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a42f198304113da4ee2da21da21da3251">&#9670;&nbsp;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+<a id="a52fb0cc81227b28279759d107ad3389c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52fb0cc81227b28279759d107ad3389c">&#9670;&nbsp;</a></span>operator=() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename LSolverTypeOrValueType = solver::LowerTrs&lt;&gt;, typename USolverTypeOrValueType = gko::detail::transposed_type&lt;LSolverTypeOrValueType&gt;, bool ReverseApply = false, typename IndexType = int32&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
+template&lt;typename ValueType  = default_precision, bool ReverseApply = false, typename IndexType  = int32&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">Ilu</a>&amp; <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu</a>&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt;::operator= </td>
+          <td class="memname"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">Ilu</a>&amp; <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu</a>&lt; ValueType, ReverseApply, IndexType &gt;::operator= </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">Ilu</a>&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">Ilu</a>&lt; ValueType, ReverseApply, IndexType &gt; &amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Copy-assigns an ILU preconditioner. </p>
 <p>Preserves the executor, shallow-copies the solvers and parameters. Creates a clone of the solvers if they are on the wrong executor. </p>
 
-<p class="reference">References <a class="el" href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone()</a>, and <a class="el" href="classgko_1_1PolymorphicObject.html#ab40586bff071b7f11c2cf6b5cbf598eb">gko::PolymorphicObject::get_executor()</a>.</p>
-
 </div>
 </div>
-<a id="a3aaa5025072f8f1865aa2cc8915f8ebe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3aaa5025072f8f1865aa2cc8915f8ebe">&#9670;&nbsp;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+<a id="a7957235af49d049c415ded1017cdf615"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7957235af49d049c415ded1017cdf615">&#9670;&nbsp;</a></span>operator=() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename LSolverTypeOrValueType = solver::LowerTrs&lt;&gt;, typename USolverTypeOrValueType = gko::detail::transposed_type&lt;LSolverTypeOrValueType&gt;, bool ReverseApply = false, typename IndexType = int32&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
+template&lt;typename ValueType  = default_precision, bool ReverseApply = false, typename IndexType  = int32&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">Ilu</a>&amp; <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu</a>&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt;::operator= </td>
+          <td class="memname"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">Ilu</a>&amp; <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu</a>&lt; ValueType, ReverseApply, IndexType &gt;::operator= </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">Ilu</a>&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt; &amp;&amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">Ilu</a>&lt; ValueType, ReverseApply, IndexType &gt; &amp;&amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Move-assigns an ILU preconditioner. </p>
 <p>Preserves the executor, moves the solvers and parameters. Creates a clone of the solvers if they are on the wrong executor. The moved-from object is empty (0x0 with nullptr solvers and default parameters) </p>
 
-<p class="reference">References <a class="el" href="namespacegko.html#a1beb80750459e4201aa9d882d2d074c3">gko::clone()</a>, and <a class="el" href="classgko_1_1PolymorphicObject.html#ab40586bff071b7f11c2cf6b5cbf598eb">gko::PolymorphicObject::get_executor()</a>.</p>
-
 </div>
 </div>
-<a id="a05a6a4b4cfd03eed108c9f107932fedc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05a6a4b4cfd03eed108c9f107932fedc">&#9670;&nbsp;</a></span>parse()</h2>
+<a id="a931837d68037e422b8630c44cb7eaa52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a931837d68037e422b8630c44cb7eaa52">&#9670;&nbsp;</a></span>parse()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename LSolverTypeOrValueType = solver::LowerTrs&lt;&gt;, typename USolverTypeOrValueType = gko::detail::transposed_type&lt;LSolverTypeOrValueType&gt;, bool ReverseApply = false, typename IndexType = int32&gt; </div>
+template&lt;typename ValueType  = default_precision, bool ReverseApply = false, typename IndexType  = int32&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="structgko_1_1preconditioner_1_1Ilu_1_1parameters__type.html">parameters_type</a> <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu</a>&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt;::parse </td>
+          <td class="memname">static <a class="el" href="structgko_1_1preconditioner_1_1Ilu_1_1parameters__type.html">parameters_type</a> <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu</a>&lt; ValueType, ReverseApply, IndexType &gt;::parse </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classgko_1_1config_1_1pnode.html">config::pnode</a> &amp;&#160;</td>
           <td class="paramname"><em>config</em>, </td>
@@ -631,7 +575,7 @@ template&lt;typename LSolverTypeOrValueType = solver::LowerTrs&lt;&gt;, typename
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="classgko_1_1config_1_1type__descriptor.html">config::type_descriptor</a> &amp;&#160;</td>
-          <td class="paramname"><em>td_for_child</em> = <code>config::make_type_descriptor&lt;value_type,&#160;index_type&gt;()</code>&#160;</td>
+          <td class="paramname"><em>td_for_child</em> = <code>config::make_type_descriptor&lt;&#160;value_type,&#160;index_type&#160;&gt;()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -641,7 +585,7 @@ template&lt;typename LSolverTypeOrValueType = solver::LowerTrs&lt;&gt;, typename
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -661,19 +605,19 @@ template&lt;typename LSolverTypeOrValueType = solver::LowerTrs&lt;&gt;, typename
 
 </div>
 </div>
-<a id="a6545dc5c042ba7e89d3fbbdfc72e1a91"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6545dc5c042ba7e89d3fbbdfc72e1a91">&#9670;&nbsp;</a></span>transpose()</h2>
+<a id="a9834a49e141eccdf80523900b3358a64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9834a49e141eccdf80523900b3358a64">&#9670;&nbsp;</a></span>transpose()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename LSolverTypeOrValueType = solver::LowerTrs&lt;&gt;, typename USolverTypeOrValueType = gko::detail::transposed_type&lt;LSolverTypeOrValueType&gt;, bool ReverseApply = false, typename IndexType = int32&gt; </div>
+template&lt;typename ValueType  = default_precision, bool ReverseApply = false, typename IndexType  = int32&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::unique_ptr&lt;<a class="el" href="classgko_1_1LinOp.html">LinOp</a>&gt; <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu</a>&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt;::transpose </td>
+          <td class="memname">std::unique_ptr&lt;<a class="el" href="classgko_1_1LinOp.html">LinOp</a>&gt; <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html">gko::preconditioner::Ilu</a>&lt; ValueType, ReverseApply, IndexType &gt;::transpose </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -681,7 +625,7 @@ template&lt;typename LSolverTypeOrValueType = solver::LowerTrs&lt;&gt;, typename
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -690,8 +634,6 @@ template&lt;typename LSolverTypeOrValueType = solver::LowerTrs&lt;&gt;, typename
 <dl class="section return"><dt>Returns</dt><dd>a pointer to the new transposed object </dd></dl>
 
 <p>Implements <a class="el" href="classgko_1_1Transposable.html#a5c6b778b71b47d53e0bda6ccf894d318">gko::Transposable</a>.</p>
-
-<p class="reference">References <a class="el" href="namespacegko.html#a618c9b64c35b0452240e9e57a9673b94">gko::as()</a>, <a class="el" href="classgko_1_1PolymorphicObject.html#ab40586bff071b7f11c2cf6b5cbf598eb">gko::PolymorphicObject::get_executor()</a>, <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#ab7291bb17ef9cb1c3ee1e1593f71e395">gko::preconditioner::Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt;::get_l_solver()</a>, <a class="el" href="classgko_1_1LinOp.html#a31b3c003388eb0b95393154f68c2b98d">gko::LinOp::get_size()</a>, <a class="el" href="classgko_1_1preconditioner_1_1Ilu.html#add7d500e01acc2a308186f482747905d">gko::preconditioner::Ilu&lt; LSolverTypeOrValueType, USolverTypeOrValueType, ReverseApply, IndexType &gt;::get_u_solver()</a>, <a class="el" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share()</a>, and <a class="el" href="namespacegko.html#accf17977b47322fff8526d69711e9d7f">gko::transpose()</a>.</p>
 
 </div>
 </div>
