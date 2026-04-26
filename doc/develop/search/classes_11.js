@@ -12,7 +12,7 @@ var searchData=
   ['segmented_5farray_3c_20local_5findex_5ftype_20_3e_2492',['segmented_array&lt; local_index_type &gt;',['../structgko_1_1segmented__array.html',1,'gko']]],
   ['segmented_5farray_3c_20localindextype_20_3e_2493',['segmented_array&lt; LocalIndexType &gt;',['../structgko_1_1segmented__array.html',1,'gko']]],
   ['segmented_5farray_3c_20size_5ftype_20_3e_2494',['segmented_array&lt; size_type &gt;',['../structgko_1_1segmented__array.html',1,'gko']]],
-  ['sellp_2495',['Sellp',['../classgko_1_1matrix_1_1Sellp.html',1,'gko::matrix']]],
+  ['sellp_2495',['Sellp',['../classgko_1_1matrix_1_1Sellp.html',1,'gko::matrix::Sellp&lt; ValueType, IndexType &gt;'],['../structgko_1_1matrix_1_1view_1_1sellp.html',1,'gko::matrix::view::sellp&lt; ValueType, IndexType &gt;']]],
   ['solverbase_2496',['SolverBase',['../classgko_1_1solver_1_1SolverBase.html',1,'gko::solver']]],
   ['solverbase_3c_20factorization_3a_3afactorization_3c_20valuetype_2c_20indextype_20_3e_20_3e_2497',['SolverBase&lt; factorization::Factorization&lt; ValueType, IndexType &gt; &gt;',['../classgko_1_1solver_1_1SolverBase.html',1,'gko::solver']]],
   ['solverbase_3c_20linop_20_3e_2498',['SolverBase&lt; LinOp &gt;',['../classgko_1_1solver_1_1SolverBase.html',1,'gko::solver']]],

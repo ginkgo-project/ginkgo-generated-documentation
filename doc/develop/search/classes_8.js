@@ -1,7 +1,7 @@
 var searchData=
 [
   ['ic_2363',['Ic',['../classgko_1_1factorization_1_1Ic.html',1,'gko::factorization::Ic&lt; ValueType, IndexType &gt;'],['../classgko_1_1preconditioner_1_1Ic.html',1,'gko::preconditioner::Ic&lt; ValueType, IndexType &gt;']]],
-  ['identity_2364',['Identity',['../classgko_1_1matrix_1_1Identity.html',1,'gko::matrix::Identity&lt; ValueType &gt;'],['../classgko_1_1batch_1_1matrix_1_1Identity.html',1,'gko::batch::matrix::Identity&lt; ValueType &gt;']]],
+  ['identity_2364',['Identity',['../classgko_1_1batch_1_1matrix_1_1Identity.html',1,'gko::batch::matrix::Identity&lt; ValueType &gt;'],['../classgko_1_1matrix_1_1Identity.html',1,'gko::matrix::Identity&lt; ValueType &gt;']]],
   ['identityfactory_2365',['IdentityFactory',['../classgko_1_1matrix_1_1IdentityFactory.html',1,'gko::matrix']]],
   ['idr_2366',['Idr',['../classgko_1_1solver_1_1Idr.html',1,'gko::solver']]],
   ['ilu_2367',['Ilu',['../classgko_1_1factorization_1_1Ilu.html',1,'gko::factorization::Ilu&lt; ValueType, IndexType &gt;'],['../classgko_1_1preconditioner_1_1Ilu.html',1,'gko::preconditioner::Ilu&lt; ValueType, ReverseApply, IndexType &gt;']]],
