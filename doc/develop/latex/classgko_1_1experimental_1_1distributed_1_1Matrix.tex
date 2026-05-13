@@ -67,10 +67,14 @@ void \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a8469c31
 \begin{DoxyCompactList}\small\item\em Reads a matrix from the \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} structure, a global row partition, and a global column partition. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a83f7857d0997f659b57bedf2fe4cc95c}{read\+\_\+distributed}} (const \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}}$<$ value\+\_\+type, global\+\_\+index\+\_\+type $>$ \&data, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{Partition}}$<$ local\+\_\+index\+\_\+type, global\+\_\+index\+\_\+type $>$$>$ row\+\_\+partition, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{Partition}}$<$ local\+\_\+index\+\_\+type, global\+\_\+index\+\_\+type $>$$>$ col\+\_\+partition, \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a4b66bc2bbe95fe0a818a5f4423acbb4e}{assembly\+\_\+mode}} assembly\+\_\+type=assembly\+\_\+mode\+::local\+\_\+only)
 \begin{DoxyCompactList}\small\item\em Reads a matrix from the \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} structure, a global row partition, and a global column partition. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_af4b6b179c862cbbbf0247dc2bfcf3df0}{get\+\_\+diag\+\_\+matrix}} () const
+\begin{DoxyCompactList}\small\item\em Get read access to the stored diagonal matrix block. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a392c4e09a7a9a476066e8a36d1b51e10}{get\+\_\+off\+\_\+diag\+\_\+matrix}} () const
+\begin{DoxyCompactList}\small\item\em Get read access to the stored off-\/diagonal matrix block. \end{DoxyCompactList}\item 
 std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a46f542a248e1e401e88dd8c7de419881}{get\+\_\+local\+\_\+matrix}} () const
-\begin{DoxyCompactList}\small\item\em Get read access to the stored local matrix. \end{DoxyCompactList}\item 
+\item 
 std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a19c806db41b1d4c9d68324b742050396}{get\+\_\+non\+\_\+local\+\_\+matrix}} () const
-\begin{DoxyCompactList}\small\item\em Get read access to the stored non-\/local matrix. \end{DoxyCompactList}\item 
+\item 
 \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_ab6c64195b6d62cab3ac641668884e037}{Matrix}} (const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}} \&other)
 \begin{DoxyCompactList}\small\item\em Copy constructs a \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}}. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a0d91aaf63e48ced333e4d63f26a91f71}{Matrix}} (\mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}} \&\&other) noexcept
@@ -92,18 +96,18 @@ static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1di
 \begin{DoxyCompactList}\small\item\em Creates an empty distributed matrix with a specified implementation of the row gather operation. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename Matrix\+Type , typename  = std\+::enable\+\_\+if\+\_\+t$<$gko\+::detail\+::is\+\_\+matrix\+\_\+type\+\_\+builder$<$                  Matrix\+Type, Value\+Type, Local\+Index\+Type$>$\+::value$>$$>$ }\\static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a26dd6230b0bcf0a6b669c298b14ccd91}{create}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}} comm, Matrix\+Type matrix\+\_\+template)
 \begin{DoxyCompactList}\small\item\em Creates an empty distributed matrix with specified type for local matrices. \end{DoxyCompactList}\item 
-{\footnotesize template$<$typename Local\+Matrix\+Type , typename Non\+Local\+Matrix\+Type , typename  = std\+::enable\+\_\+if\+\_\+t$<$                  gko\+::detail\+::is\+\_\+matrix\+\_\+type\+\_\+builder$<$                      Local\+Matrix\+Type, Value\+Type, Local\+Index\+Type$>$\+::value \&\&                  gko\+::detail\+::is\+\_\+matrix\+\_\+type\+\_\+builder$<$                      Non\+Local\+Matrix\+Type, Value\+Type, Local\+Index\+Type$>$\+::value$>$$>$ }\\static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a4924a80e9bc12cc8afe23b755c77e349}{create}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}} comm, Local\+Matrix\+Type local\+\_\+matrix\+\_\+template, Non\+Local\+Matrix\+Type non\+\_\+local\+\_\+matrix\+\_\+template)
-\begin{DoxyCompactList}\small\item\em Creates an empty distributed matrix with specified types for the local matrix and the non-\/local matrix. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Diag\+Matrix\+Type , typename Off\+Diag\+Matrix\+Type , typename  = std\+::enable\+\_\+if\+\_\+t$<$                  gko\+::detail\+::is\+\_\+matrix\+\_\+type\+\_\+builder$<$\+Diag\+Matrix\+Type, Value\+Type,                                                      Local\+Index\+Type$>$\+::value \&\&                  gko\+::detail\+::is\+\_\+matrix\+\_\+type\+\_\+builder$<$                      Off\+Diag\+Matrix\+Type, Value\+Type, Local\+Index\+Type$>$\+::value$>$$>$ }\\static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a71e45d816f7b2d245d3a8f5a4a6846d9}{create}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}} comm, Diag\+Matrix\+Type diag\+\_\+matrix\+\_\+template, Off\+Diag\+Matrix\+Type off\+\_\+diag\+\_\+matrix\+\_\+template)
+\begin{DoxyCompactList}\small\item\em Creates an empty distributed matrix with specified types for the diagonal matrix and the off-\/diagonal matrix. \end{DoxyCompactList}\item 
 static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_af8b84d68e0e72d9ad458f7ca1d1f389e}{create}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}} comm, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ matrix\+\_\+template)
 \begin{DoxyCompactList}\small\item\em Creates an empty distributed matrix with specified type for local matrices. \end{DoxyCompactList}\item 
-static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a1a97179cd3db6a5d29303781062696a0}{create}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}} comm, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ local\+\_\+matrix\+\_\+template, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ non\+\_\+local\+\_\+matrix\+\_\+template)
-\begin{DoxyCompactList}\small\item\em Creates an empty distributed matrix with specified types for the local matrix and the non-\/local matrix. \end{DoxyCompactList}\item 
-static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a97ab911795dfa6d6b0cf7c24244d3f46}{create}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}} comm, \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ size, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ local\+\_\+linop)
-\begin{DoxyCompactList}\small\item\em Creates a local-\/only distributed matrix with existent \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}. \end{DoxyCompactList}\item 
-static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a0f6012201356085815567cf85e6094a8}{create}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}} comm, \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ size, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ local\+\_\+linop, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ non\+\_\+local\+\_\+linop, std\+::vector$<$ comm\+\_\+index\+\_\+type $>$ recv\+\_\+sizes, std\+::vector$<$ comm\+\_\+index\+\_\+type $>$ recv\+\_\+offsets, \mbox{\hyperlink{classgko_1_1array}{array}}$<$ local\+\_\+index\+\_\+type $>$ recv\+\_\+gather\+\_\+idxs)
-\begin{DoxyCompactList}\small\item\em Creates distributed matrix with existent local and non-\/local \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} and the corresponding mapping to collect the non-\/local data from the other ranks. \end{DoxyCompactList}\item 
-static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a02b06aaf20497a20766f2e302b89c62b}{create}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}} comm, \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1index__map}{index\+\_\+map}}$<$ local\+\_\+index\+\_\+type, global\+\_\+index\+\_\+type $>$ imap, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ local\+\_\+linop, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ non\+\_\+local\+\_\+linop)
-\begin{DoxyCompactList}\small\item\em Creates distributed matrix with existent local and non-\/local \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} and the corresponding mapping to collect the non-\/local data from the other ranks. \end{DoxyCompactList}\end{DoxyCompactItemize}
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_aee140a94e2b25bf47172d81a72fc6af6}{create}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}} comm, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ diag\+\_\+matrix\+\_\+template, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ off\+\_\+diag\+\_\+matrix\+\_\+template)
+\begin{DoxyCompactList}\small\item\em Creates an empty distributed matrix with specified types for the diagonal matrix and the off-\/diagonal matrix. \end{DoxyCompactList}\item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a285e77da9e23333cb3224c0004e29c3a}{create}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}} comm, \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ size, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ diag\+\_\+linop)
+\begin{DoxyCompactList}\small\item\em Creates a diag-\/only distributed matrix with existent \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}. \end{DoxyCompactList}\item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_ae0f2e257922d12cc44d6f6ee728b8f0f}{create}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}} comm, \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ size, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ diag\+\_\+linop, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ off\+\_\+diag\+\_\+linop, std\+::vector$<$ comm\+\_\+index\+\_\+type $>$ recv\+\_\+sizes, std\+::vector$<$ comm\+\_\+index\+\_\+type $>$ recv\+\_\+offsets, \mbox{\hyperlink{classgko_1_1array}{array}}$<$ local\+\_\+index\+\_\+type $>$ recv\+\_\+gather\+\_\+idxs)
+\begin{DoxyCompactList}\small\item\em Creates distributed matrix with existent diagonal and off-\/diagonal \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} and the corresponding mapping to collect the off-\/diagonal data from the other ranks. \end{DoxyCompactList}\item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a4d423ae2833b2c88e6c632c69eb004c1}{create}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}} comm, \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1index__map}{index\+\_\+map}}$<$ local\+\_\+index\+\_\+type, global\+\_\+index\+\_\+type $>$ imap, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ diag\+\_\+linop, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ off\+\_\+diag\+\_\+linop)
+\begin{DoxyCompactList}\small\item\em Creates distributed matrix with existent diagonal and off-\/diagonal \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} and the corresponding mapping to collect the off-\/diagonal data from the other ranks. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
@@ -134,9 +138,9 @@ The matrix is stored in a row-\/wise distributed format. Each process owns a spe
 \DoxyCodeLine{1        | .. .. .. 10 11 12 |         2        | .. 5  6  ..  7 .. |}
 \DoxyCodeLine{0        | 13 .. .. .. 14 .. |                  | .. .. .. 8  ..  9 |}
 \end{DoxyCode}
- The local rows are further split into two matrices on each process. One matrix, called {\ttfamily local}, contains only entries from columns that are also owned by the process, while the other one, called {\ttfamily non\+\_\+local}, contains entries from columns that are not owned by the process. The non-\/local matrix is stored in a compressed format, where empty columns are discarded and the remaining columns are renumbered. This splitting is depicted in the following\+: 
+ The local rows are further split into two matrices on each process. One matrix, called {\ttfamily diag}, contains only entries from columns that are also owned by the process, while the other one, called {\ttfamily off\+\_\+diag}, contains entries from columns that are not owned by the process. The off-\/diagonal matrix is stored in a compressed format, where empty columns are discarded and the remaining columns are renumbered. This splitting is depicted in the following\+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{Part-\/Id  Global                            Local      Non-\/Local}
+\DoxyCodeLine{Part-\/Id  Global                            Diag       Off-\/Diag}
 \DoxyCodeLine{0        | .. 1  ! 2  .. ! .. .. |         | .. 1  |  | 2  |}
 \DoxyCodeLine{0        | 3  4  ! .. .. ! .. .. |         | 3  4  |  | .. |}
 \DoxyCodeLine{         |-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/|}
@@ -148,7 +152,7 @@ The matrix is stored in a row-\/wise distributed format. Each process owns a spe
 \end{DoxyCode}
  This uses the same ownership of the columns as for the rows. Additionally, the ownership of the columns may be explicitly defined with an second column partition. If that is not provided, the same row partition will be used for the columns. Using a column partition also allows to create non-\/square matrices, like the one below\+: 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{Part-\/Id  Global                  Local      Non-\/Local}
+\DoxyCodeLine{Part-\/Id  Global                  Diag       Off-\/Diag}
 \DoxyCodeLine{P\_R/P\_C    2  2  0  1}
 \DoxyCodeLine{0        | .. 1  2  .. |         | 2  |     | 1  .. |}
 \DoxyCodeLine{0        | 3  4  .. .. |         | .. |     | 3  4  |}
@@ -295,115 +299,24 @@ A smart pointer to the newly created matrix.
 
 Referenced by gko\+::experimental\+::distributed\+::\+Matrix$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$\+::create().
 
-\mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Matrix_a97ab911795dfa6d6b0cf7c24244d3f46}\label{classgko_1_1experimental_1_1distributed_1_1Matrix_a97ab911795dfa6d6b0cf7c24244d3f46}} 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Matrix_a71e45d816f7b2d245d3a8f5a4a6846d9}\label{classgko_1_1experimental_1_1distributed_1_1Matrix_a71e45d816f7b2d245d3a8f5a4a6846d9}} 
 \index{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}!create@{create}}
 \index{create@{create}!gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}}
 \doxysubsubsection{\texorpdfstring{create()}{create()}\hspace{0.1cm}{\footnotesize\ttfamily [2/9]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Local\+Index\+Type  = int32, typename Global\+Index\+Type  = int64$>$ \\
-static std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}}$>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{gko\+::experimental\+::distributed\+::\+Matrix}}$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$\+::create (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}}}]{comm,  }\item[{\mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$}]{size,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$}]{local\+\_\+linop }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+template$<$typename Diag\+Matrix\+Type , typename Off\+Diag\+Matrix\+Type , typename  = std\+::enable\+\_\+if\+\_\+t$<$                  gko\+::detail\+::is\+\_\+matrix\+\_\+type\+\_\+builder$<$\+Diag\+Matrix\+Type, Value\+Type,                                                      Local\+Index\+Type$>$\+::value \&\&                  gko\+::detail\+::is\+\_\+matrix\+\_\+type\+\_\+builder$<$                      Off\+Diag\+Matrix\+Type, Value\+Type, Local\+Index\+Type$>$\+::value$>$$>$ \\
+static std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}}$>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{gko\+::experimental\+::distributed\+::\+Matrix}}$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$\+::create (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}}}]{comm,  }\item[{Diag\+Matrix\+Type}]{diag\+\_\+matrix\+\_\+template,  }\item[{Off\+Diag\+Matrix\+Type}]{off\+\_\+diag\+\_\+matrix\+\_\+template }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
 
 
-Creates a local-\/only distributed matrix with existent \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}. 
-
-\begin{DoxyNote}{Note}
-It use the input to build up the distributed matrix
-\end{DoxyNote}
-
-\begin{DoxyParams}{Parameters}
-{\em exec} & \mbox{\hyperlink{classgko_1_1Executor}{Executor}} associated with this matrix. \\
-\hline
-{\em comm} & Communicator associated with this matrix. \\
-\hline
-{\em size} & the global size \\
-\hline
-{\em local\+\_\+linop} & the local linop\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-A smart pointer to the newly created matrix. 
-\end{DoxyReturn}
-\mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Matrix_a0f6012201356085815567cf85e6094a8}\label{classgko_1_1experimental_1_1distributed_1_1Matrix_a0f6012201356085815567cf85e6094a8}} 
-\index{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}!create@{create}}
-\index{create@{create}!gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}}
-\doxysubsubsection{\texorpdfstring{create()}{create()}\hspace{0.1cm}{\footnotesize\ttfamily [3/9]}}
-{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Local\+Index\+Type  = int32, typename Global\+Index\+Type  = int64$>$ \\
-static std\+:: unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}}$>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{gko\+::experimental\+::distributed\+::\+Matrix}}$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$\+::create (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}}}]{comm,  }\item[{\mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$}]{size,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$}]{local\+\_\+linop,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$}]{non\+\_\+local\+\_\+linop,  }\item[{std\+::vector$<$ comm\+\_\+index\+\_\+type $>$}]{recv\+\_\+sizes,  }\item[{std\+::vector$<$ comm\+\_\+index\+\_\+type $>$}]{recv\+\_\+offsets,  }\item[{\mbox{\hyperlink{classgko_1_1array}{array}}$<$ local\+\_\+index\+\_\+type $>$}]{recv\+\_\+gather\+\_\+idxs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
-
-
-
-Creates distributed matrix with existent local and non-\/local \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} and the corresponding mapping to collect the non-\/local data from the other ranks. 
-
-\begin{DoxyNote}{Note}
-It use the input to build up the distributed matrix
-\end{DoxyNote}
-
-\begin{DoxyParams}{Parameters}
-{\em exec} & \mbox{\hyperlink{classgko_1_1Executor}{Executor}} associated with this matrix. \\
-\hline
-{\em comm} & Communicator associated with this matrix. \\
-\hline
-{\em size} & the global size \\
-\hline
-{\em local\+\_\+linop} & the local linop \\
-\hline
-{\em non\+\_\+local\+\_\+linop} & the non-\/local linop \\
-\hline
-{\em recv\+\_\+sizes} & the size of non-\/local receiver \\
-\hline
-{\em recv\+\_\+offsets} & the offset of non-\/local receiver \\
-\hline
-{\em recv\+\_\+gather\+\_\+idxs} & the gathering index of non-\/local receiver\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-A smart pointer to the newly created matrix. 
-\end{DoxyReturn}
-\mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Matrix_a02b06aaf20497a20766f2e302b89c62b}\label{classgko_1_1experimental_1_1distributed_1_1Matrix_a02b06aaf20497a20766f2e302b89c62b}} 
-\index{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}!create@{create}}
-\index{create@{create}!gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}}
-\doxysubsubsection{\texorpdfstring{create()}{create()}\hspace{0.1cm}{\footnotesize\ttfamily [4/9]}}
-{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Local\+Index\+Type  = int32, typename Global\+Index\+Type  = int64$>$ \\
-static std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}}$>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{gko\+::experimental\+::distributed\+::\+Matrix}}$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$\+::create (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}}}]{comm,  }\item[{\mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1index__map}{index\+\_\+map}}$<$ local\+\_\+index\+\_\+type, global\+\_\+index\+\_\+type $>$}]{imap,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$}]{local\+\_\+linop,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$}]{non\+\_\+local\+\_\+linop }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
-
-
-
-Creates distributed matrix with existent local and non-\/local \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} and the corresponding mapping to collect the non-\/local data from the other ranks. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em exec} & \mbox{\hyperlink{classgko_1_1Executor}{Executor}} associated with this matrix. \\
-\hline
-{\em comm} & Communicator associated with this matrix. \\
-\hline
-{\em imap} & The index map to define the communication pattern \\
-\hline
-{\em local\+\_\+linop} & the local linop \\
-\hline
-{\em non\+\_\+local\+\_\+linop} & the non-\/local linop\\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-A smart pointer to the newly created matrix. 
-\end{DoxyReturn}
-\mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Matrix_a4924a80e9bc12cc8afe23b755c77e349}\label{classgko_1_1experimental_1_1distributed_1_1Matrix_a4924a80e9bc12cc8afe23b755c77e349}} 
-\index{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}!create@{create}}
-\index{create@{create}!gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}}
-\doxysubsubsection{\texorpdfstring{create()}{create()}\hspace{0.1cm}{\footnotesize\ttfamily [5/9]}}
-{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Local\+Index\+Type  = int32, typename Global\+Index\+Type  = int64$>$ \\
-template$<$typename Local\+Matrix\+Type , typename Non\+Local\+Matrix\+Type , typename  = std\+::enable\+\_\+if\+\_\+t$<$                  gko\+::detail\+::is\+\_\+matrix\+\_\+type\+\_\+builder$<$                      Local\+Matrix\+Type, Value\+Type, Local\+Index\+Type$>$\+::value \&\&                  gko\+::detail\+::is\+\_\+matrix\+\_\+type\+\_\+builder$<$                      Non\+Local\+Matrix\+Type, Value\+Type, Local\+Index\+Type$>$\+::value$>$$>$ \\
-static std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}}$>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{gko\+::experimental\+::distributed\+::\+Matrix}}$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$\+::create (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}}}]{comm,  }\item[{Local\+Matrix\+Type}]{local\+\_\+matrix\+\_\+template,  }\item[{Non\+Local\+Matrix\+Type}]{non\+\_\+local\+\_\+matrix\+\_\+template }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
-
-
-
-Creates an empty distributed matrix with specified types for the local matrix and the non-\/local matrix. 
+Creates an empty distributed matrix with specified types for the diagonal matrix and the off-\/diagonal matrix. 
 
 \begin{DoxyNote}{Note}
 This is mainly a convenience wrapper for \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}}(std\+::shared\+\_\+ptr$<$const Executor$>$, \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}}, const Lin\+Op$\ast$, const Lin\+Op$\ast$)
 \end{DoxyNote}
 
 \begin{DoxyTemplParams}{Template Parameters}
-{\em Local\+Matrix\+Type} & A type that has a {\ttfamily create$<$Value\+Type, Index\+Type$>$(exec)} function to create a smart pointer of a type derived from \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} and \mbox{\hyperlink{classgko_1_1ReadableFromMatrixData}{Readable\+From\+Matrix\+Data}}. \\
+{\em Diag\+Matrix\+Type} & A type that has a {\ttfamily create$<$Value\+Type, Index\+Type$>$(exec)} function to create a smart pointer of a type derived from \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} and \mbox{\hyperlink{classgko_1_1ReadableFromMatrixData}{Readable\+From\+Matrix\+Data}}. \\
 \hline
 \end{DoxyTemplParams}
 \begin{DoxySeeAlso}{See also}
@@ -411,7 +324,7 @@ This is mainly a convenience wrapper for \mbox{\hyperlink{classgko_1_1experiment
 \end{DoxySeeAlso}
 
 \begin{DoxyTemplParams}{Template Parameters}
-{\em Non\+Local\+Matrix\+Type} & A (possible different) type with the same constraints as Local\+Matrix\+Type.\\
+{\em Off\+Diag\+Matrix\+Type} & A (possible different) type with the same constraints as Diag\+Matrix\+Type.\\
 \hline
 \end{DoxyTemplParams}
 
@@ -420,9 +333,9 @@ This is mainly a convenience wrapper for \mbox{\hyperlink{classgko_1_1experiment
 \hline
 {\em comm} & Communicator associated with this matrix. \\
 \hline
-{\em local\+\_\+matrix\+\_\+template} & the local matrix will be constructed with the same type as {\ttfamily create} returns. It should be the return value of make\+\_\+matrix\+\_\+template. \\
+{\em diag\+\_\+matrix\+\_\+template} & the diagonal matrix will be constructed with the same type as {\ttfamily create} returns. It should be the return value of make\+\_\+matrix\+\_\+template. \\
 \hline
-{\em non\+\_\+local\+\_\+matrix\+\_\+template} & the non-\/local matrix will be constructed with the same type as {\ttfamily create} returns. It should be the return value of make\+\_\+matrix\+\_\+template.\\
+{\em off\+\_\+diag\+\_\+matrix\+\_\+template} & the off-\/diagonal matrix will be constructed with the same type as {\ttfamily create} returns. It should be the return value of make\+\_\+matrix\+\_\+template.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -432,6 +345,97 @@ A smart pointer to the newly created matrix.
 
 References gko\+::experimental\+::distributed\+::\+Matrix$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$\+::create().
 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Matrix_a285e77da9e23333cb3224c0004e29c3a}\label{classgko_1_1experimental_1_1distributed_1_1Matrix_a285e77da9e23333cb3224c0004e29c3a}} 
+\index{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}!create@{create}}
+\index{create@{create}!gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}\hspace{0.1cm}{\footnotesize\ttfamily [3/9]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Local\+Index\+Type  = int32, typename Global\+Index\+Type  = int64$>$ \\
+static std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}}$>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{gko\+::experimental\+::distributed\+::\+Matrix}}$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$\+::create (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}}}]{comm,  }\item[{\mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$}]{size,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$}]{diag\+\_\+linop }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a diag-\/only distributed matrix with existent \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}. 
+
+\begin{DoxyNote}{Note}
+It use the input to build up the distributed matrix
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & \mbox{\hyperlink{classgko_1_1Executor}{Executor}} associated with this matrix. \\
+\hline
+{\em comm} & Communicator associated with this matrix. \\
+\hline
+{\em size} & the global size \\
+\hline
+{\em diag\+\_\+linop} & the diagonal block linop\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A smart pointer to the newly created matrix. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Matrix_ae0f2e257922d12cc44d6f6ee728b8f0f}\label{classgko_1_1experimental_1_1distributed_1_1Matrix_ae0f2e257922d12cc44d6f6ee728b8f0f}} 
+\index{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}!create@{create}}
+\index{create@{create}!gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}\hspace{0.1cm}{\footnotesize\ttfamily [4/9]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Local\+Index\+Type  = int32, typename Global\+Index\+Type  = int64$>$ \\
+static std\+:: unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}}$>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{gko\+::experimental\+::distributed\+::\+Matrix}}$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$\+::create (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}}}]{comm,  }\item[{\mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$}]{size,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$}]{diag\+\_\+linop,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$}]{off\+\_\+diag\+\_\+linop,  }\item[{std\+::vector$<$ comm\+\_\+index\+\_\+type $>$}]{recv\+\_\+sizes,  }\item[{std\+::vector$<$ comm\+\_\+index\+\_\+type $>$}]{recv\+\_\+offsets,  }\item[{\mbox{\hyperlink{classgko_1_1array}{array}}$<$ local\+\_\+index\+\_\+type $>$}]{recv\+\_\+gather\+\_\+idxs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates distributed matrix with existent diagonal and off-\/diagonal \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} and the corresponding mapping to collect the off-\/diagonal data from the other ranks. 
+
+\begin{DoxyNote}{Note}
+It use the input to build up the distributed matrix
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & \mbox{\hyperlink{classgko_1_1Executor}{Executor}} associated with this matrix. \\
+\hline
+{\em comm} & Communicator associated with this matrix. \\
+\hline
+{\em size} & the global size \\
+\hline
+{\em diag\+\_\+linop} & the diagonal block linop \\
+\hline
+{\em off\+\_\+diag\+\_\+linop} & the off-\/diagonal block linop \\
+\hline
+{\em recv\+\_\+sizes} & the size of off-\/diagonal receiver \\
+\hline
+{\em recv\+\_\+offsets} & the offset of off-\/diagonal receiver \\
+\hline
+{\em recv\+\_\+gather\+\_\+idxs} & the gathering index of off-\/diagonal receiver\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A smart pointer to the newly created matrix. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Matrix_a4d423ae2833b2c88e6c632c69eb004c1}\label{classgko_1_1experimental_1_1distributed_1_1Matrix_a4d423ae2833b2c88e6c632c69eb004c1}} 
+\index{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}!create@{create}}
+\index{create@{create}!gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}\hspace{0.1cm}{\footnotesize\ttfamily [5/9]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Local\+Index\+Type  = int32, typename Global\+Index\+Type  = int64$>$ \\
+static std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}}$>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{gko\+::experimental\+::distributed\+::\+Matrix}}$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$\+::create (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}}}]{comm,  }\item[{\mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1index__map}{index\+\_\+map}}$<$ local\+\_\+index\+\_\+type, global\+\_\+index\+\_\+type $>$}]{imap,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$}]{diag\+\_\+linop,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$}]{off\+\_\+diag\+\_\+linop }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates distributed matrix with existent diagonal and off-\/diagonal \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} and the corresponding mapping to collect the off-\/diagonal data from the other ranks. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & \mbox{\hyperlink{classgko_1_1Executor}{Executor}} associated with this matrix. \\
+\hline
+{\em comm} & Communicator associated with this matrix. \\
+\hline
+{\em imap} & The index map to define the communication pattern \\
+\hline
+{\em diag\+\_\+linop} & the diagonal block linop \\
+\hline
+{\em off\+\_\+diag\+\_\+linop} & the off-\/diagonal block linop\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A smart pointer to the newly created matrix. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Matrix_a26dd6230b0bcf0a6b669c298b14ccd91}\label{classgko_1_1experimental_1_1distributed_1_1Matrix_a26dd6230b0bcf0a6b669c298b14ccd91}} 
 \index{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}!create@{create}}
 \index{create@{create}!gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}}
@@ -471,19 +475,19 @@ A smart pointer to the newly created matrix.
 
 References gko\+::experimental\+::distributed\+::\+Matrix$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$\+::create().
 
-\mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Matrix_a1a97179cd3db6a5d29303781062696a0}\label{classgko_1_1experimental_1_1distributed_1_1Matrix_a1a97179cd3db6a5d29303781062696a0}} 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Matrix_aee140a94e2b25bf47172d81a72fc6af6}\label{classgko_1_1experimental_1_1distributed_1_1Matrix_aee140a94e2b25bf47172d81a72fc6af6}} 
 \index{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}!create@{create}}
 \index{create@{create}!gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}}
 \doxysubsubsection{\texorpdfstring{create()}{create()}\hspace{0.1cm}{\footnotesize\ttfamily [7/9]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Local\+Index\+Type  = int32, typename Global\+Index\+Type  = int64$>$ \\
-static std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}}$>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{gko\+::experimental\+::distributed\+::\+Matrix}}$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$\+::create (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}}}]{comm,  }\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$}]{local\+\_\+matrix\+\_\+template,  }\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$}]{non\+\_\+local\+\_\+matrix\+\_\+template }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+static std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}}$>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{gko\+::experimental\+::distributed\+::\+Matrix}}$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$\+::create (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{mpi\+::communicator}}}]{comm,  }\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$}]{diag\+\_\+matrix\+\_\+template,  }\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$}]{off\+\_\+diag\+\_\+matrix\+\_\+template }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
 
 
-Creates an empty distributed matrix with specified types for the local matrix and the non-\/local matrix. 
+Creates an empty distributed matrix with specified types for the diagonal matrix and the off-\/diagonal matrix. 
 
 \begin{DoxyNote}{Note}
-It internally clones the passed in local\+\_\+matrix\+\_\+template and non\+\_\+local\+\_\+matrix\+\_\+template. Therefore, those Lin\+Ops should be empty.
+It internally clones the passed in diag\+\_\+matrix\+\_\+template and off\+\_\+diag\+\_\+matrix\+\_\+template. Therefore, those Lin\+Ops should be empty.
 \end{DoxyNote}
 
 \begin{DoxyParams}{Parameters}
@@ -491,9 +495,9 @@ It internally clones the passed in local\+\_\+matrix\+\_\+template and non\+\_\+
 \hline
 {\em comm} & Communicator associated with this matrix. \\
 \hline
-{\em local\+\_\+matrix\+\_\+template} & the local matrix will be constructed with the same runtime type. \\
+{\em diag\+\_\+matrix\+\_\+template} & the diagonal matrix will be constructed with the same runtime type. \\
 \hline
-{\em non\+\_\+local\+\_\+matrix\+\_\+template} & the non-\/local matrix will be constructed with the same runtime type.\\
+{\em off\+\_\+diag\+\_\+matrix\+\_\+template} & the off-\/diagonal matrix will be constructed with the same runtime type.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -546,6 +550,26 @@ Creates an empty distributed matrix with a specified implementation of the row g
 \begin{DoxyReturn}{Returns}
 A smart pointer to the newly created matrix. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Matrix_af4b6b179c862cbbbf0247dc2bfcf3df0}\label{classgko_1_1experimental_1_1distributed_1_1Matrix_af4b6b179c862cbbbf0247dc2bfcf3df0}} 
+\index{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}!get\_diag\_matrix@{get\_diag\_matrix}}
+\index{get\_diag\_matrix@{get\_diag\_matrix}!gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_diag\_matrix()}{get\_diag\_matrix()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Local\+Index\+Type  = int32, typename Global\+Index\+Type  = int64$>$ \\
+std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{gko\+::experimental\+::distributed\+::\+Matrix}}$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$\+::get\+\_\+diag\+\_\+matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get read access to the stored diagonal matrix block. 
+
+The diagonal block contains entries from columns that are owned by this process.
+
+\begin{DoxyReturn}{Returns}
+Shared pointer to the stored diagonal matrix block 
+\end{DoxyReturn}
+
+
+Referenced by gko\+::experimental\+::distributed\+::\+Matrix$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$\+::get\+\_\+local\+\_\+matrix().
+
 \mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Matrix_a46f542a248e1e401e88dd8c7de419881}\label{classgko_1_1experimental_1_1distributed_1_1Matrix_a46f542a248e1e401e88dd8c7de419881}} 
 \index{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}!get\_local\_matrix@{get\_local\_matrix}}
 \index{get\_local\_matrix@{get\_local\_matrix}!gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}}
@@ -555,11 +579,8 @@ std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ 
 
 
 
-Get read access to the stored local matrix. 
+References gko\+::experimental\+::distributed\+::\+Matrix$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$\+::get\+\_\+diag\+\_\+matrix().
 
-\begin{DoxyReturn}{Returns}
-Shared pointer to the stored local matrix 
-\end{DoxyReturn}
 \mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Matrix_a19c806db41b1d4c9d68324b742050396}\label{classgko_1_1experimental_1_1distributed_1_1Matrix_a19c806db41b1d4c9d68324b742050396}} 
 \index{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}!get\_non\_local\_matrix@{get\_non\_local\_matrix}}
 \index{get\_non\_local\_matrix@{get\_non\_local\_matrix}!gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}}
@@ -569,11 +590,28 @@ std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ 
 
 
 
-Get read access to the stored non-\/local matrix. 
+References gko\+::experimental\+::distributed\+::\+Matrix$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$\+::get\+\_\+off\+\_\+diag\+\_\+matrix().
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Matrix_a392c4e09a7a9a476066e8a36d1b51e10}\label{classgko_1_1experimental_1_1distributed_1_1Matrix_a392c4e09a7a9a476066e8a36d1b51e10}} 
+\index{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}!get\_off\_diag\_matrix@{get\_off\_diag\_matrix}}
+\index{get\_off\_diag\_matrix@{get\_off\_diag\_matrix}!gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_off\_diag\_matrix()}{get\_off\_diag\_matrix()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Local\+Index\+Type  = int32, typename Global\+Index\+Type  = int64$>$ \\
+std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{gko\+::experimental\+::distributed\+::\+Matrix}}$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$\+::get\+\_\+off\+\_\+diag\+\_\+matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get read access to the stored off-\/diagonal matrix block. 
+
+The off-\/diagonal block contains entries from columns that are not owned by this process.
 
 \begin{DoxyReturn}{Returns}
-Shared pointer to the stored non-\/local matrix 
+Shared pointer to the stored off-\/diagonal matrix block 
 \end{DoxyReturn}
+
+
+Referenced by gko\+::experimental\+::distributed\+::\+Matrix$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$\+::get\+\_\+non\+\_\+local\+\_\+matrix().
+
 \mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Matrix_a8bda4b3eafc4ca7885697d4d18d4f24c}\label{classgko_1_1experimental_1_1distributed_1_1Matrix_a8bda4b3eafc4ca7885697d4d18d4f24c}} 
 \index{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}!operator=@{operator=}}
 \index{operator=@{operator=}!gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}}
