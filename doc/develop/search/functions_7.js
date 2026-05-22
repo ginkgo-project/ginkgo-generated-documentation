@@ -10,5 +10,5 @@ var searchData=
   ['hipffterror_3032',['HipfftError',['../classgko_1_1HipfftError.html#af0f3f804962813a664b9ce668f060213',1,'gko::HipfftError']]],
   ['hipranderror_3033',['HiprandError',['../classgko_1_1HiprandError.html#af7ee80114b42216f1c0a61a0bd5c9058',1,'gko::HiprandError']]],
   ['hipsparseerror_3034',['HipsparseError',['../classgko_1_1HipsparseError.html#a703714b07299638208a85e5a6d3238e8',1,'gko::HipsparseError']]],
-  ['hybrid_3035',['Hybrid',['../classgko_1_1matrix_1_1Hybrid.html#aaa1a9cee0a9e6a3868819e9b9018d8ed',1,'gko::matrix::Hybrid::Hybrid(const Hybrid &amp;)'],['../classgko_1_1matrix_1_1Hybrid.html#a5cd84a8537ee3d83e76196a4fe6a89f7',1,'gko::matrix::Hybrid::Hybrid(Hybrid &amp;&amp;)']]]
+  ['hybrid_3035',['hybrid',['../structgko_1_1matrix_1_1view_1_1hybrid.html#ad8a40e41c3285a4c514fc375553d4021',1,'gko::matrix::view::hybrid::hybrid()'],['../classgko_1_1matrix_1_1Hybrid.html#aaa1a9cee0a9e6a3868819e9b9018d8ed',1,'gko::matrix::Hybrid::Hybrid(const Hybrid &amp;)'],['../classgko_1_1matrix_1_1Hybrid.html#a5cd84a8537ee3d83e76196a4fe6a89f7',1,'gko::matrix::Hybrid::Hybrid(Hybrid &amp;&amp;)']]]
 ];

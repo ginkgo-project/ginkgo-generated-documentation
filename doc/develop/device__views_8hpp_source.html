@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2522097674 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2546130438 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -245,12 +245,34 @@ $(function() {
 <div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;};</div>
 <div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160; </div>
 <div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160; </div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;}  <span class="comment">// namespace view</span></div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;}  <span class="comment">// namespace matrix</span></div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;}  <span class="comment">// namespace gko</span></div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160; </div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160; </div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_MATRIX_DEVICE_DENSE_HPP_</span></div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType, <span class="keyword">typename</span> IndexType&gt;</div>
+<div class="line"><a name="l00229"></a><span class="lineno"><a class="line" href="structgko_1_1matrix_1_1view_1_1hybrid.html">  229</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structgko_1_1matrix_1_1view_1_1hybrid.html">hybrid</a> {</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    static_assert(std::is_const_v&lt;ValueType&gt; == std::is_const_v&lt;IndexType&gt;,</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;                  <span class="stringliteral">&quot;ValueType and IndexType must share the same constness&quot;</span>);</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    <a class="code" href="structgko_1_1dim.html">dim&lt;2&gt;</a> size;</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    <a class="code" href="structgko_1_1matrix_1_1view_1_1ell.html">ell&lt;ValueType, IndexType&gt;</a> ell_part;</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    <a class="code" href="structgko_1_1matrix_1_1view_1_1coo.html">coo&lt;ValueType, IndexType&gt;</a> coo_part;</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; </div>
+<div class="line"><a name="l00237"></a><span class="lineno"><a class="line" href="structgko_1_1matrix_1_1view_1_1hybrid.html#ad8a40e41c3285a4c514fc375553d4021">  237</a></span>&#160;    constexpr <a class="code" href="structgko_1_1matrix_1_1view_1_1hybrid.html#ad8a40e41c3285a4c514fc375553d4021">hybrid</a>(<a class="code" href="structgko_1_1matrix_1_1view_1_1ell.html">ell&lt;ValueType, IndexType&gt;</a> ell_,</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                     <a class="code" href="structgko_1_1matrix_1_1view_1_1coo.html">coo&lt;ValueType, IndexType&gt;</a> coo_)</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        : size(ell_.size), ell_part(ell_), coo_part(coo_)</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    {</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        assert(ell_part.size == coo_part.size);</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    }</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160; </div>
+<div class="line"><a name="l00245"></a><span class="lineno"><a class="line" href="structgko_1_1matrix_1_1view_1_1hybrid.html#a6a684a797911048c12af6de24b3ce0cd">  245</a></span>&#160;    constexpr <a class="code" href="structgko_1_1matrix_1_1view_1_1hybrid.html">hybrid&lt;const ValueType, const IndexType&gt;</a> <a class="code" href="structgko_1_1matrix_1_1view_1_1hybrid.html#a6a684a797911048c12af6de24b3ce0cd">as_const</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        <span class="keywordflow">return</span> {ell_part.<a class="code" href="structgko_1_1matrix_1_1view_1_1ell.html#a90717dbe7b2163773ef8aee05974a10f">as_const</a>(), coo_part.<a class="code" href="structgko_1_1matrix_1_1view_1_1coo.html#a369eed6b8e1ea6e7464860fcab6cf427">as_const</a>()};</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    }</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;};</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160; </div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160; </div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;}  <span class="comment">// namespace view</span></div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;}  <span class="comment">// namespace matrix</span></div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;}  <span class="comment">// namespace gko</span></div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160; </div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160; </div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_MATRIX_DEVICE_DENSE_HPP_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="astructgko_1_1matrix_1_1view_1_1dense_html"><div class="ttname"><a href="structgko_1_1matrix_1_1view_1_1dense.html">gko::matrix::view::dense</a></div><div class="ttdoc">Non-owning view of a matrix::Dense to be used inside device kernels.</div><div class="ttdef"><b>Definition:</b> device_views.hpp:27</div></div>
 <div class="ttc" id="astructgko_1_1matrix_1_1view_1_1ell_html_a90717dbe7b2163773ef8aee05974a10f"><div class="ttname"><a href="structgko_1_1matrix_1_1view_1_1ell.html#a90717dbe7b2163773ef8aee05974a10f">gko::matrix::view::ell::as_const</a></div><div class="ttdeci">constexpr ell&lt; const ValueType, const IndexType &gt; as_const() const</div><div class="ttdoc">Returns a const view of the same values.</div><div class="ttdef"><b>Definition:</b> device_views.hpp:118</div></div>
@@ -262,6 +284,7 @@ $(function() {
 <div class="ttc" id="anamespacegko_html"><div class="ttname"><a href="namespacegko.html">gko</a></div><div class="ttdoc">The Ginkgo namespace.</div><div class="ttdef"><b>Definition:</b> abstract_factory.hpp:20</div></div>
 <div class="ttc" id="astructgko_1_1matrix_1_1view_1_1sellp_html_a7a82ab061820f27975c38aca43e0f66b"><div class="ttname"><a href="structgko_1_1matrix_1_1view_1_1sellp.html#a7a82ab061820f27975c38aca43e0f66b">gko::matrix::view::sellp::val_at</a></div><div class="ttdeci">constexpr ValueType &amp; val_at(size_type row, size_type slice_set, size_type idx) const</div><div class="ttdoc">accessing the value of the idx-th element within the given row</div><div class="ttdef"><b>Definition:</b> device_views.hpp:194</div></div>
 <div class="ttc" id="astructgko_1_1dim_html"><div class="ttname"><a href="structgko_1_1dim.html">gko::dim&lt; 2 &gt;</a></div></div>
+<div class="ttc" id="astructgko_1_1matrix_1_1view_1_1hybrid_html_a6a684a797911048c12af6de24b3ce0cd"><div class="ttname"><a href="structgko_1_1matrix_1_1view_1_1hybrid.html#a6a684a797911048c12af6de24b3ce0cd">gko::matrix::view::hybrid::as_const</a></div><div class="ttdeci">constexpr hybrid&lt; const ValueType, const IndexType &gt; as_const() const</div><div class="ttdoc">Returns a const view of the same values.</div><div class="ttdef"><b>Definition:</b> device_views.hpp:245</div></div>
 <div class="ttc" id="astructgko_1_1matrix_1_1view_1_1sellp_html_aacb6061e760884ddbe6d068a0e24e257"><div class="ttname"><a href="structgko_1_1matrix_1_1view_1_1sellp.html#aacb6061e760884ddbe6d068a0e24e257">gko::matrix::view::sellp::as_const</a></div><div class="ttdeci">constexpr sellp&lt; const ValueType, const IndexType &gt; as_const() const</div><div class="ttdoc">Returns a const view of the same values.</div><div class="ttdef"><b>Definition:</b> device_views.hpp:186</div></div>
 <div class="ttc" id="astructgko_1_1matrix_1_1view_1_1coo_html_a369eed6b8e1ea6e7464860fcab6cf427"><div class="ttname"><a href="structgko_1_1matrix_1_1view_1_1coo.html#a369eed6b8e1ea6e7464860fcab6cf427">gko::matrix::view::coo::as_const</a></div><div class="ttdeci">constexpr coo&lt; const ValueType, const IndexType &gt; as_const() const</div><div class="ttdoc">Returns a const view of the same data.</div><div class="ttdef"><b>Definition:</b> device_views.hpp:81</div></div>
 <div class="ttc" id="astructgko_1_1matrix_1_1view_1_1dense_html_a4d56ab8d6c5d90cdf651de1c8e0cf41e"><div class="ttname"><a href="structgko_1_1matrix_1_1view_1_1dense.html#a4d56ab8d6c5d90cdf651de1c8e0cf41e">gko::matrix::view::dense::dense</a></div><div class="ttdeci">constexpr dense(dim&lt; 2 &gt; size, size_type stride, ValueType *values)</div><div class="ttdoc">Constructs a dense view from size, stride and values.</div><div class="ttdef"><b>Definition:</b> device_views.hpp:33</div></div>
@@ -271,7 +294,9 @@ $(function() {
 <div class="ttc" id="astructgko_1_1matrix_1_1view_1_1sellp_html_a39614bdff34f41eb8f7a056984d2d405"><div class="ttname"><a href="structgko_1_1matrix_1_1view_1_1sellp.html#a39614bdff34f41eb8f7a056984d2d405">gko::matrix::view::sellp::col_at</a></div><div class="ttdeci">constexpr IndexType &amp; col_at(size_type row, size_type slice_set, size_type idx) const</div><div class="ttdoc">accessing the column index of the idx-th element within the given row</div><div class="ttdef"><b>Definition:</b> device_views.hpp:201</div></div>
 <div class="ttc" id="astructgko_1_1matrix_1_1view_1_1sellp_html_acd647e0ca4ca45993fa682699651a750"><div class="ttname"><a href="structgko_1_1matrix_1_1view_1_1sellp.html#acd647e0ca4ca45993fa682699651a750">gko::matrix::view::sellp::sellp</a></div><div class="ttdeci">constexpr sellp(dim&lt; 2 &gt; size, size_type slice_size, size_type stride_factor, size_type total_cols, ValueType *values, IndexType *col_idxs, adapt_size_type *slice_lengths, adapt_size_type *slice_sets)</div><div class="ttdoc">Constructs a sellp view.</div><div class="ttdef"><b>Definition:</b> device_views.hpp:171</div></div>
 <div class="ttc" id="astructgko_1_1matrix_1_1view_1_1coo_html_abf19bddd115800d97a1571a66751aaf6"><div class="ttname"><a href="structgko_1_1matrix_1_1view_1_1coo.html#abf19bddd115800d97a1571a66751aaf6">gko::matrix::view::coo::coo</a></div><div class="ttdeci">constexpr coo(dim&lt; 2 &gt; size, size_type num_stored_elements, ValueType *values, IndexType *row_idxs, IndexType *col_idxs)</div><div class="ttdoc">Constructs a coo view from size, nnz, values, row and column indices.</div><div class="ttdef"><b>Definition:</b> device_views.hpp:71</div></div>
+<div class="ttc" id="astructgko_1_1matrix_1_1view_1_1hybrid_html"><div class="ttname"><a href="structgko_1_1matrix_1_1view_1_1hybrid.html">gko::matrix::view::hybrid</a></div><div class="ttdoc">Non-owning view of a matrix::Hybrid to be used inside device kernels.</div><div class="ttdef"><b>Definition:</b> device_views.hpp:229</div></div>
 <div class="ttc" id="astructgko_1_1matrix_1_1view_1_1sellp_html"><div class="ttname"><a href="structgko_1_1matrix_1_1view_1_1sellp.html">gko::matrix::view::sellp</a></div><div class="ttdoc">Non-owning view of a matrix::Sellp to be used inside device kernels.</div><div class="ttdef"><b>Definition:</b> device_views.hpp:156</div></div>
+<div class="ttc" id="astructgko_1_1matrix_1_1view_1_1hybrid_html_ad8a40e41c3285a4c514fc375553d4021"><div class="ttname"><a href="structgko_1_1matrix_1_1view_1_1hybrid.html#ad8a40e41c3285a4c514fc375553d4021">gko::matrix::view::hybrid::hybrid</a></div><div class="ttdeci">constexpr hybrid(ell&lt; ValueType, IndexType &gt; ell_, coo&lt; ValueType, IndexType &gt; coo_)</div><div class="ttdoc">Constructs a hybrid view.</div><div class="ttdef"><b>Definition:</b> device_views.hpp:237</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

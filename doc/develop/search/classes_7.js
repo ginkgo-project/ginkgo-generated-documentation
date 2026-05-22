@@ -17,5 +17,5 @@ var searchData=
   ['hipunifiedallocator_2380',['HipUnifiedAllocator',['../classgko_1_1HipUnifiedAllocator.html',1,'gko']]],
   ['hwloc_5fobj_5ft_2381',['hwloc_obj_t',['../structhwloc__obj__t.html',1,'']]],
   ['hwloc_5fobj_5ftype_5ft_2382',['hwloc_obj_type_t',['../structhwloc__obj__type__t.html',1,'']]],
-  ['hybrid_2383',['Hybrid',['../classgko_1_1matrix_1_1Hybrid.html',1,'gko::matrix']]]
+  ['hybrid_2383',['Hybrid',['../classgko_1_1matrix_1_1Hybrid.html',1,'gko::matrix::Hybrid&lt; ValueType, IndexType &gt;'],['../structgko_1_1matrix_1_1view_1_1hybrid.html',1,'gko::matrix::view::hybrid&lt; ValueType, IndexType &gt;']]]
 ];

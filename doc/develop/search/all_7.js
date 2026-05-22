@@ -25,7 +25,7 @@ var searchData=
   ['hipunifiedallocator_1122',['HipUnifiedAllocator',['../classgko_1_1HipUnifiedAllocator.html',1,'gko']]],
   ['hwloc_5fobj_5ft_1123',['hwloc_obj_t',['../structhwloc__obj__t.html',1,'']]],
   ['hwloc_5fobj_5ftype_5ft_1124',['hwloc_obj_type_t',['../structhwloc__obj__type__t.html',1,'']]],
-  ['hybrid_1125',['Hybrid',['../classgko_1_1matrix_1_1Hybrid.html',1,'gko::matrix::Hybrid&lt; ValueType, IndexType &gt;'],['../classgko_1_1matrix_1_1Hybrid.html#aaa1a9cee0a9e6a3868819e9b9018d8ed',1,'gko::matrix::Hybrid::Hybrid(const Hybrid &amp;)'],['../classgko_1_1matrix_1_1Hybrid.html#a5cd84a8537ee3d83e76196a4fe6a89f7',1,'gko::matrix::Hybrid::Hybrid(Hybrid &amp;&amp;)']]],
+  ['hybrid_1125',['Hybrid',['../classgko_1_1matrix_1_1Hybrid.html',1,'gko::matrix::Hybrid&lt; ValueType, IndexType &gt;'],['../structgko_1_1matrix_1_1view_1_1hybrid.html',1,'gko::matrix::view::hybrid&lt; ValueType, IndexType &gt;'],['../structgko_1_1matrix_1_1view_1_1hybrid.html#ad8a40e41c3285a4c514fc375553d4021',1,'gko::matrix::view::hybrid::hybrid()'],['../classgko_1_1matrix_1_1Hybrid.html#aaa1a9cee0a9e6a3868819e9b9018d8ed',1,'gko::matrix::Hybrid::Hybrid(const Hybrid &amp;)'],['../classgko_1_1matrix_1_1Hybrid.html#a5cd84a8537ee3d83e76196a4fe6a89f7',1,'gko::matrix::Hybrid::Hybrid(Hybrid &amp;&amp;)']]],
   ['hybrid_5fexecute_1126',['hybrid_execute',['../structgko_1_1ext_1_1cuda_1_1solver_1_1Cudss_1_1parameters__type.html#aa458739e6a281f0e3ea9c288b666da92',1,'gko::ext::cuda::solver::Cudss::parameters_type']]],
   ['hybrid_5fmemory_1127',['hybrid_memory',['../structgko_1_1ext_1_1cuda_1_1solver_1_1Cudss_1_1parameters__type.html#a2f2444c057cfd521e15ef53447533584',1,'gko::ext::cuda::solver::Cudss::parameters_type']]]
 ];
