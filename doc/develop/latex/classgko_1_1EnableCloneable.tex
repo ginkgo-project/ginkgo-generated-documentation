@@ -1,0 +1,160 @@
+\hypertarget{classgko_1_1EnableCloneable}{}\doxysection{gko\+::Enable\+Cloneable$<$ Concrete\+Type $>$ Class Template Reference}
+\label{classgko_1_1EnableCloneable}\index{gko::EnableCloneable$<$ ConcreteType $>$@{gko::EnableCloneable$<$ ConcreteType $>$}}
+
+
+This mixin is used to enable a default Cloneable\+::clone() implementation and similar for objects that have implemented copy and move constructors.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/base/polymorphic\+\_\+object.\+hpp$>$}
+
+
+
+Inheritance diagram for gko\+::Enable\+Cloneable$<$ Concrete\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1EnableCloneable__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for gko\+::Enable\+Cloneable$<$ Concrete\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=294pt]{classgko_1_1EnableCloneable__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1EnableCloneable_a3a455349c4eb373049747f9c067691dd}\label{classgko_1_1EnableCloneable_a3a455349c4eb373049747f9c067691dd}} 
+using {\bfseries result\+\_\+type} = Concrete\+Type
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unique\+\_\+ptr$<$ Concrete\+Type $>$ \mbox{\hyperlink{classgko_1_1EnableCloneable_afa7bb5ae1afe265e8274f5dc611c7f66}{clone}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec) const
+\begin{DoxyCompactList}\small\item\em Creates a clone of the object. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ Concrete\+Type $>$ \mbox{\hyperlink{classgko_1_1EnableCloneable_a81db302fbc8012269d1e352b5bd4d89b}{clone}} () const
+\begin{DoxyCompactList}\small\item\em Creates a clone of the object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1EnableCloneable_abe2cf0ff854a43c5467445a2c7fa7ebe}{convert\+\_\+to}} (result\+\_\+type $\ast$result) const override
+\begin{DoxyCompactList}\small\item\em Converts the implementer to an object of type result\+\_\+type. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1EnableCloneable_a313aaf717f708a11a91715c7b8534c79}{move\+\_\+to}} (result\+\_\+type $\ast$result) override
+\begin{DoxyCompactList}\small\item\em Converts the implementer to an object of type result\+\_\+type by moving data from this object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1EnableCloneable_ac6ec31de49aabe751e2e66e1b0414e98}\label{classgko_1_1EnableCloneable_ac6ec31de49aabe751e2e66e1b0414e98}} 
+std\+::unique\+\_\+ptr$<$ Concrete\+Type $>$ {\bfseries create\+\_\+default} () const
+\item 
+\mbox{\Hypertarget{classgko_1_1EnableCloneable_a177178e887e37fa9715135514e9a9052}\label{classgko_1_1EnableCloneable_a177178e887e37fa9715135514e9a9052}} 
+std\+::unique\+\_\+ptr$<$ Concrete\+Type $>$ {\bfseries create\+\_\+default} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec) const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Concrete\+Type$>$\newline
+class gko\+::\+Enable\+Cloneable$<$ Concrete\+Type $>$}
+
+This mixin is used to enable a default Cloneable\+::clone() implementation and similar for objects that have implemented copy and move constructors. 
+
+\begin{DoxyNote}{Note}
+The Concrete\+Type must have public constructors, or this class as a friend class.
+\end{DoxyNote}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Concrete\+Type} & the concrete type from which the copy\+\_\+from is being enabled \mbox{[}C\+R\+TP parameter\mbox{]} \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1EnableCloneable_a81db302fbc8012269d1e352b5bd4d89b}\label{classgko_1_1EnableCloneable_a81db302fbc8012269d1e352b5bd4d89b}} 
+\index{gko::EnableCloneable$<$ ConcreteType $>$@{gko::EnableCloneable$<$ ConcreteType $>$}!clone@{clone}}
+\index{clone@{clone}!gko::EnableCloneable$<$ ConcreteType $>$@{gko::EnableCloneable$<$ ConcreteType $>$}}
+\doxysubsubsection{\texorpdfstring{clone()}{clone()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Concrete\+Type$>$ \\
+std\+::unique\+\_\+ptr$<$Concrete\+Type$>$ \mbox{\hyperlink{classgko_1_1EnableCloneable}{gko\+::\+Enable\+Cloneable}}$<$ Concrete\+Type $>$\+::clone (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates a clone of the object. 
+
+This is a shorthand for clone(std\+::shared\+\_\+ptr$<$const Executor$>$) that uses the executor of this object to construct the new object.
+
+\begin{DoxyReturn}{Returns}
+A clone of the \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1EnableCloneable_afa7bb5ae1afe265e8274f5dc611c7f66}\label{classgko_1_1EnableCloneable_afa7bb5ae1afe265e8274f5dc611c7f66}} 
+\index{gko::EnableCloneable$<$ ConcreteType $>$@{gko::EnableCloneable$<$ ConcreteType $>$}!clone@{clone}}
+\index{clone@{clone}!gko::EnableCloneable$<$ ConcreteType $>$@{gko::EnableCloneable$<$ ConcreteType $>$}}
+\doxysubsubsection{\texorpdfstring{clone()}{clone()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Concrete\+Type$>$ \\
+std\+::unique\+\_\+ptr$<$Concrete\+Type$>$ \mbox{\hyperlink{classgko_1_1EnableCloneable}{gko\+::\+Enable\+Cloneable}}$<$ Concrete\+Type $>$\+::clone (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates a clone of the object. 
+
+This is the polymorphic equivalent of the {\itshape executor copy constructor} {\ttfamily decltype($\ast$this)(exec, this)}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & the executor where the clone will be created\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A clone of the \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1EnableCloneable_abe2cf0ff854a43c5467445a2c7fa7ebe}\label{classgko_1_1EnableCloneable_abe2cf0ff854a43c5467445a2c7fa7ebe}} 
+\index{gko::EnableCloneable$<$ ConcreteType $>$@{gko::EnableCloneable$<$ ConcreteType $>$}!convert\_to@{convert\_to}}
+\index{convert\_to@{convert\_to}!gko::EnableCloneable$<$ ConcreteType $>$@{gko::EnableCloneable$<$ ConcreteType $>$}}
+\doxysubsubsection{\texorpdfstring{convert\_to()}{convert\_to()}}
+{\footnotesize\ttfamily template$<$typename Concrete\+Type$>$ \\
+void \mbox{\hyperlink{classgko_1_1EnableCloneable}{gko\+::\+Enable\+Cloneable}}$<$ Concrete\+Type $>$\+::convert\+\_\+to (\begin{DoxyParamCaption}\item[{result\+\_\+type $\ast$}]{result }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Converts the implementer to an object of type result\+\_\+type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em result} & the object used to store the result of the conversion \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classgko_1_1ConvertibleTo_aa7f3420babcbed39ee15bc020bed4f7e}{gko\+::\+Convertible\+To$<$ Concrete\+Type $>$}}.
+
+\mbox{\Hypertarget{classgko_1_1EnableCloneable_a313aaf717f708a11a91715c7b8534c79}\label{classgko_1_1EnableCloneable_a313aaf717f708a11a91715c7b8534c79}} 
+\index{gko::EnableCloneable$<$ ConcreteType $>$@{gko::EnableCloneable$<$ ConcreteType $>$}!move\_to@{move\_to}}
+\index{move\_to@{move\_to}!gko::EnableCloneable$<$ ConcreteType $>$@{gko::EnableCloneable$<$ ConcreteType $>$}}
+\doxysubsubsection{\texorpdfstring{move\_to()}{move\_to()}}
+{\footnotesize\ttfamily template$<$typename Concrete\+Type$>$ \\
+void \mbox{\hyperlink{classgko_1_1EnableCloneable}{gko\+::\+Enable\+Cloneable}}$<$ Concrete\+Type $>$\+::move\+\_\+to (\begin{DoxyParamCaption}\item[{result\+\_\+type $\ast$}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Converts the implementer to an object of type result\+\_\+type by moving data from this object. 
+
+This method is used when the implementer is a temporary object, and move semantics can be used.
+
+
+\begin{DoxyParams}{Parameters}
+{\em result} & the object used to emplace the result of the conversion\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+\mbox{\hyperlink{classgko_1_1ConvertibleTo_ab9047c7c49e0f83c79b54c0034d6197b}{Convertible\+To\+::move\+\_\+to}} can be implemented by simply calling \mbox{\hyperlink{classgko_1_1ConvertibleTo_aa7f3420babcbed39ee15bc020bed4f7e}{Convertible\+To\+::convert\+\_\+to}}. However, this operation can often be optimized by exploiting the fact that implementer\textquotesingle{}s data can be moved to the result. 
+\end{DoxyNote}
+
+
+Implements \mbox{\hyperlink{classgko_1_1ConvertibleTo_ab9047c7c49e0f83c79b54c0034d6197b}{gko\+::\+Convertible\+To$<$ Concrete\+Type $>$}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/base/polymorphic\+\_\+object.\+hpp\end{DoxyCompactItemize}

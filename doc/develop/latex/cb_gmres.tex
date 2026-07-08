@@ -16,6 +16,13 @@ This example showcases the usage of the Ginkgo solver C\+B-\/\+G\+M\+R\+ES (Comp
 Both solves are timed and the residual norm of each solution is computed to show that both solutions are correct. \label{_CommProg}%
  \doxysection*{The commented program}
 
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    x\_copy-\/>copy\_from(x);}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
 Make sure all previous executor operations have finished before starting the time
 
 
@@ -146,7 +153,7 @@ Create a uniform right-\/hand side with a norm2 of 1 on the host (norm2(b) == 1)
 \DoxyCodeLine{\}}
 \DoxyCodeLine{\textcolor{keyword}{auto} b\_norm = gko::initialize<real\_vec>(\{0.0\}, exec);}
 \DoxyCodeLine{b\_host-\/>compute\_norm2(b\_norm);}
-\DoxyCodeLine{\textcolor{keyword}{auto} b = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{clone}}(exec, b\_host);}
+\DoxyCodeLine{\textcolor{keyword}{auto} b = \mbox{\hyperlink{namespacegko_adc9a73d088d88d5dfdaf63aff9e96012}{clone}}(exec, b\_host);}
 \end{DoxyCode}
 
 
@@ -154,8 +161,8 @@ As an initial guess, use the right-\/hand side
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{auto} x\_keep = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{clone}}(b);}
-\DoxyCodeLine{\textcolor{keyword}{auto} x\_reduce = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{clone}}(x\_keep);}
+\DoxyCodeLine{\textcolor{keyword}{auto} x\_keep = \mbox{\hyperlink{namespacegko_adc9a73d088d88d5dfdaf63aff9e96012}{clone}}(b);}
+\DoxyCodeLine{\textcolor{keyword}{auto} x\_reduce = \mbox{\hyperlink{namespacegko_adc9a73d088d88d5dfdaf63aff9e96012}{clone}}(x\_keep);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{const} RealValueType reduction\_factor\{1e-\/6\};}
 \end{DoxyCode}
@@ -235,7 +242,7 @@ To measure if your solution has actually converged, the error of the solution is
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{auto} res\_norm\_keep = gko::initialize<real\_vec>(\{0.0\}, exec);}
 \DoxyCodeLine{\textcolor{keyword}{auto} res\_norm\_reduce = gko::initialize<real\_vec>(\{0.0\}, exec);}
-\DoxyCodeLine{\textcolor{keyword}{auto} tmp = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(b);}
+\DoxyCodeLine{\textcolor{keyword}{auto} tmp = \mbox{\hyperlink{namespacegko_adc9a73d088d88d5dfdaf63aff9e96012}{gko::clone}}(b);}
 \end{DoxyCode}
 
 
@@ -298,13 +305,15 @@ The following is the expected result\+:
 \DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType>}
 \DoxyCodeLine{\textcolor{keywordtype}{double} measure\_solve\_time\_in\_s(std::shared\_ptr<const gko::Executor> exec,}
-\DoxyCodeLine{                               \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* solver, \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* b,}
-\DoxyCodeLine{                               \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* x)}
+\DoxyCodeLine{                               \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* solver,}
+\DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}}* b,}
+\DoxyCodeLine{                               \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}}* x)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    constexpr \textcolor{keywordtype}{int} repeats\{5\};}
 \DoxyCodeLine{    \textcolor{keywordtype}{double} duration\{0\};}
-\DoxyCodeLine{    \textcolor{keyword}{auto} x\_copy = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{clone}}(x);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} x\_copy = \mbox{\hyperlink{namespacegko_adc9a73d088d88d5dfdaf63aff9e96012}{clone}}(x);}
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < repeats; ++i) \{}
 \DoxyCodeLine{        \textcolor{keywordflow}{if} (i != 0) \{}
 \DoxyCodeLine{            x\_copy-\/>copy\_from(x);}
@@ -369,10 +378,10 @@ The following is the expected result\+:
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{    \textcolor{keyword}{auto} b\_norm = gko::initialize<real\_vec>(\{0.0\}, exec);}
 \DoxyCodeLine{    b\_host-\/>compute\_norm2(b\_norm);}
-\DoxyCodeLine{    \textcolor{keyword}{auto} b = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{clone}}(exec, b\_host);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} b = \mbox{\hyperlink{namespacegko_adc9a73d088d88d5dfdaf63aff9e96012}{clone}}(exec, b\_host);}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{auto} x\_keep = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{clone}}(b);}
-\DoxyCodeLine{    \textcolor{keyword}{auto} x\_reduce = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{clone}}(x\_keep);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} x\_keep = \mbox{\hyperlink{namespacegko_adc9a73d088d88d5dfdaf63aff9e96012}{clone}}(b);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} x\_reduce = \mbox{\hyperlink{namespacegko_adc9a73d088d88d5dfdaf63aff9e96012}{clone}}(x\_keep);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{const} RealValueType reduction\_factor\{1e-\/6\};}
 \DoxyCodeLine{}
@@ -414,7 +423,7 @@ The following is the expected result\+:
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} res\_norm\_keep = gko::initialize<real\_vec>(\{0.0\}, exec);}
 \DoxyCodeLine{    \textcolor{keyword}{auto} res\_norm\_reduce = gko::initialize<real\_vec>(\{0.0\}, exec);}
-\DoxyCodeLine{    \textcolor{keyword}{auto} tmp = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(b);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} tmp = \mbox{\hyperlink{namespacegko_adc9a73d088d88d5dfdaf63aff9e96012}{gko::clone}}(b);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    A-\/>apply(one, x\_keep, neg\_one, tmp);}
 \DoxyCodeLine{    tmp-\/>compute\_norm2(res\_norm\_keep);}

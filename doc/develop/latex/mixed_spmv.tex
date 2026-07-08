@@ -50,10 +50,11 @@ Each example has the following sections\+:
 \DoxyCodeLine{ *}
 \DoxyCodeLine{ * @\textcolor{keywordflow}{return} seconds}
 \DoxyCodeLine{ * /}
+\DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueTypeIn, \textcolor{keyword}{typename} ValueTypeOut>}
 \DoxyCodeLine{\textcolor{keywordtype}{double} timing(std::shared\_ptr<const gko::Executor> exec,}
 \DoxyCodeLine{              std::shared\_ptr<const gko::LinOp> A,}
-\DoxyCodeLine{              std::shared\_ptr<const gko::LinOp> b,}
-\DoxyCodeLine{              std::shared\_ptr<gko::LinOp> x)}
+\DoxyCodeLine{              std::shared\_ptr<\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueTypeIn>}}> b,}
+\DoxyCodeLine{              std::shared\_ptr<\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueTypeOut>}}> x)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keywordtype}{int} warmup = 2;}
 \DoxyCodeLine{    \textcolor{keywordtype}{int} rep = 10;}
@@ -238,7 +239,7 @@ copy the data from host to device
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{auto} hp\_b = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{share}}(\mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(exec, host\_b));}
+\DoxyCodeLine{\textcolor{keyword}{auto} hp\_b = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{share}}(\mbox{\hyperlink{namespacegko_adc9a73d088d88d5dfdaf63aff9e96012}{gko::clone}}(exec, host\_b));}
 \DoxyCodeLine{\textcolor{keyword}{auto} lp\_b = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{share}}(lp\_vec::create(exec));}
 \DoxyCodeLine{lp\_b-\/>copy\_from(hp\_b);}
 \end{DoxyCode}
@@ -402,10 +403,11 @@ The following is the expected result (omp)\+:
 \DoxyCodeLine{    \textcolor{keywordflow}{return} ValueType(value\_dist(gen), value\_dist(gen));}
 \DoxyCodeLine{\}}
 \DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueTypeIn, \textcolor{keyword}{typename} ValueTypeOut>}
 \DoxyCodeLine{\textcolor{keywordtype}{double} timing(std::shared\_ptr<const gko::Executor> exec,}
 \DoxyCodeLine{              std::shared\_ptr<const gko::LinOp> A,}
-\DoxyCodeLine{              std::shared\_ptr<const gko::LinOp> b,}
-\DoxyCodeLine{              std::shared\_ptr<gko::LinOp> x)}
+\DoxyCodeLine{              std::shared\_ptr<\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueTypeIn>}}> b,}
+\DoxyCodeLine{              std::shared\_ptr<\mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueTypeOut>}}> x)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keywordtype}{int} warmup = 2;}
 \DoxyCodeLine{    \textcolor{keywordtype}{int} rep = 10;}
@@ -487,7 +489,7 @@ The following is the expected result (omp)\+:
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < host\_b-\/>get\_size()[0]; i++) \{}
 \DoxyCodeLine{        host\_b-\/>at(i, 0) = get\_rand\_value<HighPrecision>(dist, rand\_engine);}
 \DoxyCodeLine{    \}}
-\DoxyCodeLine{    \textcolor{keyword}{auto} hp\_b = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{share}}(\mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(exec, host\_b));}
+\DoxyCodeLine{    \textcolor{keyword}{auto} hp\_b = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{share}}(\mbox{\hyperlink{namespacegko_adc9a73d088d88d5dfdaf63aff9e96012}{gko::clone}}(exec, host\_b));}
 \DoxyCodeLine{    \textcolor{keyword}{auto} lp\_b = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{share}}(lp\_vec::create(exec));}
 \DoxyCodeLine{    lp\_b-\/>copy\_from(hp\_b);}
 \DoxyCodeLine{}

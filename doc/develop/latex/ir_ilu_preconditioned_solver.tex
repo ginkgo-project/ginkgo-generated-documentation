@@ -69,9 +69,9 @@ Create R\+HS and initial guess as 1
 \DoxyCodeLine{\textcolor{keywordflow}{for} (\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} i = 0; i < num\_rows; i++) \{}
 \DoxyCodeLine{    host\_x-\/>at(i, 0) = 1.;}
 \DoxyCodeLine{\}}
-\DoxyCodeLine{\textcolor{keyword}{auto} x = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(exec, host\_x);}
-\DoxyCodeLine{\textcolor{keyword}{auto} b = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(exec, host\_x);}
-\DoxyCodeLine{\textcolor{keyword}{auto} clone\_x = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(exec, x);}
+\DoxyCodeLine{\textcolor{keyword}{auto} x = \mbox{\hyperlink{namespacegko_adc9a73d088d88d5dfdaf63aff9e96012}{gko::clone}}(exec, host\_x);}
+\DoxyCodeLine{\textcolor{keyword}{auto} b = \mbox{\hyperlink{namespacegko_adc9a73d088d88d5dfdaf63aff9e96012}{gko::clone}}(exec, host\_x);}
+\DoxyCodeLine{\textcolor{keyword}{auto} clone\_x = \mbox{\hyperlink{namespacegko_adc9a73d088d88d5dfdaf63aff9e96012}{gko::clone}}(exec, x);}
 \end{DoxyCode}
 
 
@@ -102,11 +102,11 @@ Generate an iterative refinement factory to be used as a triangular solver in th
 \DoxyCodeLine{        .with\_storage\_optimization(\mbox{\hyperlink{classgko_1_1precision__reduction_a1fde4dd48fab015698c1616408f3ef81}{gko::precision\_reduction::autodetect}}())}
 \DoxyCodeLine{        .on(exec));}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keyword}{auto} trisolve\_factory =}
+\DoxyCodeLine{\textcolor{keyword}{auto} trisolve\_factory = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(}
 \DoxyCodeLine{    ir::build()}
 \DoxyCodeLine{        .with\_solver(bj\_factory)}
 \DoxyCodeLine{        .with\_criteria(gko::stop::Iteration::build().with\_max\_iters(sweeps))}
-\DoxyCodeLine{        .on(exec);}
+\DoxyCodeLine{        .on(exec));}
 \end{DoxyCode}
 
 
@@ -115,8 +115,8 @@ Generate an I\+LU preconditioner factory by setting lower and upper triangular s
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{auto} ilu\_pre\_factory = \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{gko::preconditioner::Ilu<ValueType>::build}}()}
-\DoxyCodeLine{                           .with\_l\_solver(\mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(trisolve\_factory))}
-\DoxyCodeLine{                           .with\_u\_solver(\mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(trisolve\_factory))}
+\DoxyCodeLine{                           .with\_l\_solver(trisolve\_factory)}
+\DoxyCodeLine{                           .with\_u\_solver(trisolve\_factory)}
 \DoxyCodeLine{                           .on(exec);}
 \end{DoxyCode}
 
@@ -326,9 +326,9 @@ This is the expected output\+:
 \DoxyCodeLine{    \textcolor{keywordflow}{for} (\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} i = 0; i < num\_rows; i++) \{}
 \DoxyCodeLine{        host\_x-\/>at(i, 0) = 1.;}
 \DoxyCodeLine{    \}}
-\DoxyCodeLine{    \textcolor{keyword}{auto} x = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(exec, host\_x);}
-\DoxyCodeLine{    \textcolor{keyword}{auto} b = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(exec, host\_x);}
-\DoxyCodeLine{    \textcolor{keyword}{auto} clone\_x = \mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(exec, x);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} x = \mbox{\hyperlink{namespacegko_adc9a73d088d88d5dfdaf63aff9e96012}{gko::clone}}(exec, host\_x);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} b = \mbox{\hyperlink{namespacegko_adc9a73d088d88d5dfdaf63aff9e96012}{gko::clone}}(exec, host\_x);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} clone\_x = \mbox{\hyperlink{namespacegko_adc9a73d088d88d5dfdaf63aff9e96012}{gko::clone}}(exec, x);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} par\_ilu\_fact =}
 \DoxyCodeLine{        \mbox{\hyperlink{classgko_1_1factorization_1_1ParIlu}{gko::factorization::ParIlu<ValueType, IndexType>::build}}().on(exec);}
@@ -340,15 +340,15 @@ This is the expected output\+:
 \DoxyCodeLine{            .with\_storage\_optimization(\mbox{\hyperlink{classgko_1_1precision__reduction_a1fde4dd48fab015698c1616408f3ef81}{gko::precision\_reduction::autodetect}}())}
 \DoxyCodeLine{            .on(exec));}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{auto} trisolve\_factory =}
+\DoxyCodeLine{    \textcolor{keyword}{auto} trisolve\_factory = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(}
 \DoxyCodeLine{        ir::build()}
 \DoxyCodeLine{            .with\_solver(bj\_factory)}
 \DoxyCodeLine{            .with\_criteria(gko::stop::Iteration::build().with\_max\_iters(sweeps))}
-\DoxyCodeLine{            .on(exec);}
+\DoxyCodeLine{            .on(exec));}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} ilu\_pre\_factory = \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu}{gko::preconditioner::Ilu<ValueType>::build}}()}
-\DoxyCodeLine{                               .with\_l\_solver(\mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(trisolve\_factory))}
-\DoxyCodeLine{                               .with\_u\_solver(\mbox{\hyperlink{namespacegko_a1beb80750459e4201aa9d882d2d074c3}{gko::clone}}(trisolve\_factory))}
+\DoxyCodeLine{                               .with\_l\_solver(trisolve\_factory)}
+\DoxyCodeLine{                               .with\_u\_solver(trisolve\_factory)}
 \DoxyCodeLine{                               .on(exec);}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{auto} ilu\_preconditioner = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(ilu\_pre\_factory-\/>generate(par\_ilu));}

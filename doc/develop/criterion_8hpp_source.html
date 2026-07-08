@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2603405218 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2662685947 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -73,7 +73,7 @@ $(function() {
 <div class="title">criterion.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// SPDX-FileCopyrightText: 2017 - 2024 The Ginkgo authors</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// SPDX-FileCopyrightText: 2017 - 2026 The Ginkgo authors</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// SPDX-License-Identifier: BSD-3-Clause</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
@@ -95,7 +95,7 @@ $(function() {
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">namespace </span>stop {</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classgko_1_1stop_1_1Criterion.html">   36</a></span>&#160;<span class="keyword">class </span><a class="code" href="classgko_1_1stop_1_1Criterion.html">Criterion</a> : <span class="keyword">public</span> <a class="code" href="classgko_1_1EnableAbstractPolymorphicObject.html">EnableAbstractPolymorphicObject</a>&lt;Criterion&gt; {</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classgko_1_1stop_1_1Criterion.html">   36</a></span>&#160;<span class="keyword">class </span><a class="code" href="classgko_1_1stop_1_1Criterion.html">Criterion</a> : <span class="keyword">public</span> <a class="code" href="classgko_1_1PolymorphicObject.html">PolymorphicObject</a> {</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classgko_1_1stop_1_1Criterion_1_1Updater.html">   55</a></span>&#160;    <span class="keyword">class </span><a class="code" href="classgko_1_1stop_1_1Criterion_1_1Updater.html">Updater</a> {</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classgko_1_1stop_1_1Criterion.html">Criterion</a>;</div>
@@ -176,7 +176,7 @@ $(function() {
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;                          <a class="code" href="classgko_1_1array.html">array&lt;stopping_status&gt;</a>* stop_status);</div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classgko_1_1stop_1_1Criterion.html">Criterion</a>(std::shared_ptr&lt;const gko::Executor&gt; exec)</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        : <a class="code" href="classgko_1_1EnableAbstractPolymorphicObject.html">EnableAbstractPolymorphicObject</a>&lt;<a class="code" href="classgko_1_1stop_1_1Criterion.html">Criterion</a>&gt;(exec)</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        : <a class="code" href="classgko_1_1PolymorphicObject.html">PolymorphicObject</a>(exec)</div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    {}</div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;};</div>
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
@@ -220,49 +220,47 @@ $(function() {
 <div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="preprocessor">    class _factory_name                                                      \</span></div>
 <div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="preprocessor">        : public ::gko::stop::EnableDefaultCriterionFactory&lt;                 \</span></div>
 <div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;<span class="preprocessor">              _factory_name, _criterion, _parameters_name##_type&gt; {          \</span></div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="preprocessor">        friend class ::gko::EnablePolymorphicObject&lt;                         \</span></div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;<span class="preprocessor">            _factory_name, ::gko::stop::CriterionFactory&gt;;                   \</span></div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;<span class="preprocessor">        friend class ::gko::enable_parameters_type&lt;_parameters_name##_type,  \</span></div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="preprocessor">                                                   _factory_name&gt;;           \</span></div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="preprocessor">        explicit _factory_name(std::shared_ptr&lt;const ::gko::Executor&gt; exec)  \</span></div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="preprocessor">            : ::gko::stop::EnableDefaultCriterionFactory&lt;                    \</span></div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="preprocessor">                  _factory_name, _criterion, _parameters_name##_type&gt;(       \</span></div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="preprocessor">                  std::move(exec))                                           \</span></div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="preprocessor">        {}                                                                   \</span></div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="preprocessor">        explicit _factory_name(std::shared_ptr&lt;const ::gko::Executor&gt; exec,  \</span></div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="preprocessor">                               const _parameters_name##_type&amp; parameters)    \</span></div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="preprocessor">            : ::gko::stop::EnableDefaultCriterionFactory&lt;                    \</span></div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="preprocessor">                  _factory_name, _criterion, _parameters_name##_type&gt;(       \</span></div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="preprocessor">                  std::move(exec), parameters)                               \</span></div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="preprocessor">        {}                                                                   \</span></div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="preprocessor">    };                                                                       \</span></div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="preprocessor">    friend ::gko::stop::EnableDefaultCriterionFactory&lt;                       \</span></div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="preprocessor">        _factory_name, _criterion, _parameters_name##_type&gt;;                 \</span></div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;<span class="preprocessor">                                                                             \</span></div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="preprocessor">private:                                                                     \</span></div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="preprocessor">    _parameters_name##_type _parameters_name##_;                             \</span></div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;<span class="preprocessor">                                                                             \</span></div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="preprocessor">public:                                                                      \</span></div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;<span class="preprocessor">    static_assert(true,                                                      \</span></div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;<span class="preprocessor">                  &quot;This assert is used to counter the false positive extra &quot; \</span></div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<span class="preprocessor">                  &quot;semi-colon warnings&quot;)</span></div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160; </div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160; </div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;}  <span class="comment">// namespace stop</span></div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;}  <span class="comment">// namespace gko</span></div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160; </div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160; </div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_STOP_CRITERION_HPP_</span></div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;<span class="preprocessor">        friend class ::gko::enable_parameters_type&lt;_parameters_name##_type,  \</span></div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;<span class="preprocessor">                                                   _factory_name&gt;;           \</span></div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;<span class="preprocessor">        explicit _factory_name(std::shared_ptr&lt;const ::gko::Executor&gt; exec)  \</span></div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="preprocessor">            : ::gko::stop::EnableDefaultCriterionFactory&lt;                    \</span></div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="preprocessor">                  _factory_name, _criterion, _parameters_name##_type&gt;(       \</span></div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="preprocessor">                  std::move(exec))                                           \</span></div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;<span class="preprocessor">        {}                                                                   \</span></div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;<span class="preprocessor">        explicit _factory_name(std::shared_ptr&lt;const ::gko::Executor&gt; exec,  \</span></div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="preprocessor">                               const _parameters_name##_type&amp; parameters)    \</span></div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="preprocessor">            : ::gko::stop::EnableDefaultCriterionFactory&lt;                    \</span></div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="preprocessor">                  _factory_name, _criterion, _parameters_name##_type&gt;(       \</span></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="preprocessor">                  std::move(exec), parameters)                               \</span></div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="preprocessor">        {}                                                                   \</span></div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="preprocessor">    };                                                                       \</span></div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;<span class="preprocessor">    friend ::gko::stop::EnableDefaultCriterionFactory&lt;                       \</span></div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="preprocessor">        _factory_name, _criterion, _parameters_name##_type&gt;;                 \</span></div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="preprocessor">                                                                             \</span></div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;<span class="preprocessor">private:                                                                     \</span></div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;<span class="preprocessor">    _parameters_name##_type _parameters_name##_;                             \</span></div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;<span class="preprocessor">                                                                             \</span></div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="preprocessor">public:                                                                      \</span></div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;<span class="preprocessor">    static_assert(true,                                                      \</span></div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="preprocessor">                  &quot;This assert is used to counter the false positive extra &quot; \</span></div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;<span class="preprocessor">                  &quot;semi-colon warnings&quot;)</span></div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160; </div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160; </div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;}  <span class="comment">// namespace stop</span></div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;}  <span class="comment">// namespace gko</span></div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160; </div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_STOP_CRITERION_HPP_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="astructgko_1_1stop_1_1CriterionArgs_html"><div class="ttname"><a href="structgko_1_1stop_1_1CriterionArgs.html">gko::stop::CriterionArgs</a></div><div class="ttdoc">This struct is used to pass parameters to the EnableDefaultCriterionFactoryCriterionFactory::generate...</div><div class="ttdef"><b>Definition:</b> criterion.hpp:205</div></div>
 <div class="ttc" id="aclassgko_1_1stop_1_1Criterion_1_1Updater_html_a048d209ce640e2b71fcafa8a056a58a4"><div class="ttname"><a href="classgko_1_1stop_1_1Criterion_1_1Updater.html#a048d209ce640e2b71fcafa8a056a58a4">gko::stop::Criterion::Updater::check</a></div><div class="ttdeci">bool check(uint8 stopping_id, bool set_finalized, array&lt; stopping_status &gt; *stop_status, bool *one_changed) const</div><div class="ttdoc">Calls the parent Criterion object's check method.</div><div class="ttdef"><b>Definition:</b> criterion.hpp:73</div></div>
 <div class="ttc" id="anamespacegko_html_a3950fc3732811a8563484e5098c31531"><div class="ttname"><a href="namespacegko.html#a3950fc3732811a8563484e5098c31531">gko::uint8</a></div><div class="ttdeci">std::uint8_t uint8</div><div class="ttdoc">8-bit unsigned integral type.</div><div class="ttdef"><b>Definition:</b> types.hpp:119</div></div>
 <div class="ttc" id="aclassgko_1_1LinOp_html"><div class="ttname"><a href="classgko_1_1LinOp.html">gko::LinOp</a></div><div class="ttdef"><b>Definition:</b> lin_op.hpp:117</div></div>
 <div class="ttc" id="aclassgko_1_1AbstractFactory_html"><div class="ttname"><a href="classgko_1_1AbstractFactory.html">gko::AbstractFactory</a></div><div class="ttdoc">The AbstractFactory is a generic interface template that enables easy implementation of the abstract ...</div><div class="ttdef"><b>Definition:</b> abstract_factory.hpp:45</div></div>
-<div class="ttc" id="aclassgko_1_1EnableAbstractPolymorphicObject_html"><div class="ttname"><a href="classgko_1_1EnableAbstractPolymorphicObject.html">gko::EnableAbstractPolymorphicObject</a></div><div class="ttdoc">This mixin inherits from (a subclass of) PolymorphicObject and provides a base implementation of a ne...</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:354</div></div>
+<div class="ttc" id="aclassgko_1_1PolymorphicObject_html"><div class="ttname"><a href="classgko_1_1PolymorphicObject.html">gko::PolymorphicObject</a></div><div class="ttdoc">A PolymorphicObject is the abstract base for all &quot;heavy&quot; objects in Ginkgo that behave polymorphicall...</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:46</div></div>
 <div class="ttc" id="aclassgko_1_1stop_1_1Criterion_html_a47e22c46eaa742d709dcbf0d26d93e6c"><div class="ttname"><a href="classgko_1_1stop_1_1Criterion.html#a47e22c46eaa742d709dcbf0d26d93e6c">gko::stop::Criterion::update</a></div><div class="ttdeci">Updater update()</div><div class="ttdoc">Returns the updater object.</div><div class="ttdef"><b>Definition:</b> criterion.hpp:122</div></div>
 <div class="ttc" id="anamespacegko_html_a6e5c95df0ae4e47aab2f604a22d98ee7"><div class="ttname"><a href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">gko::size_type</a></div><div class="ttdeci">std::size_t size_type</div><div class="ttdoc">Integral type used for allocation quantities.</div><div class="ttdef"><b>Definition:</b> types.hpp:90</div></div>
-<div class="ttc" id="aclassgko_1_1EnableDefaultFactory_html"><div class="ttname"><a href="classgko_1_1EnableDefaultFactory.html">gko::EnableDefaultFactory</a></div><div class="ttdoc">This mixin provides a default implementation of a concrete factory.</div><div class="ttdef"><b>Definition:</b> abstract_factory.hpp:124</div></div>
+<div class="ttc" id="aclassgko_1_1EnableDefaultFactory_html"><div class="ttname"><a href="classgko_1_1EnableDefaultFactory.html">gko::EnableDefaultFactory</a></div><div class="ttdoc">This mixin provides a default implementation of a concrete factory.</div><div class="ttdef"><b>Definition:</b> abstract_factory.hpp:122</div></div>
 <div class="ttc" id="aclassgko_1_1stop_1_1Criterion_1_1Updater_html_aa8356e2fbfaf46cab62d8f8a905ab8bd"><div class="ttname"><a href="classgko_1_1stop_1_1Criterion_1_1Updater.html#aa8356e2fbfaf46cab62d8f8a905ab8bd">gko::stop::Criterion::Updater::Updater</a></div><div class="ttdeci">Updater(const Updater &amp;)=delete</div><div class="ttdoc">Prevent copying and moving the object This is to enforce the use of argument passing and calling chec...</div></div>
 <div class="ttc" id="anamespacegko_html"><div class="ttname"><a href="namespacegko.html">gko</a></div><div class="ttdoc">The Ginkgo namespace.</div><div class="ttdef"><b>Definition:</b> abstract_factory.hpp:20</div></div>
 <div class="ttc" id="aclassgko_1_1stop_1_1Criterion_html_ae0bb4923fab4d2a60e08c5e5fa57277c"><div class="ttname"><a href="classgko_1_1stop_1_1Criterion.html#ae0bb4923fab4d2a60e08c5e5fa57277c">gko::stop::Criterion::check</a></div><div class="ttdeci">bool check(uint8 stopping_id, bool set_finalized, array&lt; stopping_status &gt; *stop_status, bool *one_changed, const Updater &amp;updater)</div><div class="ttdoc">This checks whether convergence was reached for a certain criterion.</div><div class="ttdef"><b>Definition:</b> criterion.hpp:137</div></div>

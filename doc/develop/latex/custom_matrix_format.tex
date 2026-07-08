@@ -30,8 +30,7 @@ The intention of this example is to show how a custom linear operator can be cre
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType>}
-\DoxyCodeLine{\textcolor{keyword}{class }StencilMatrix : \textcolor{keyword}{public} \mbox{\hyperlink{classgko_1_1EnableLinOp}{gko::EnableLinOp}}<StencilMatrix<ValueType>>,}
+\DoxyCodeLine{\textcolor{keyword}{class }StencilMatrix : \textcolor{keyword}{public} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}},}
 \DoxyCodeLine{                      \textcolor{keyword}{public} \mbox{\hyperlink{classgko_1_1EnableCreateMethod}{gko::EnableCreateMethod}}<StencilMatrix<ValueType>> \{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \end{DoxyCode}
@@ -44,7 +43,7 @@ This constructor will be called by the create method. Here we initialize the coe
 \DoxyCodeLine{    StencilMatrix(std::shared\_ptr<const gko::Executor> exec,}
 \DoxyCodeLine{                  \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} size = 0, ValueType left = -\/1.0,}
 \DoxyCodeLine{                  ValueType center = 2.0, ValueType right = -\/1.0)}
-\DoxyCodeLine{        : \mbox{\hyperlink{namespacegko}{gko}}::EnableLinOp<StencilMatrix>(exec, \mbox{\hyperlink{namespacegko}{gko}}::dim<2>\{size\}),}
+\DoxyCodeLine{        : \mbox{\hyperlink{namespacegko}{gko}}::LinOp(exec, \mbox{\hyperlink{namespacegko}{gko}}::dim<2>\{size\}),}
 \DoxyCodeLine{          coefficients(exec, \{left, center, right\})}
 \DoxyCodeLine{    \{\}}
 \DoxyCodeLine{}
@@ -393,13 +392,13 @@ notice how our custom Stencil\+Matrix can be used in the same way as any built-\
 \DoxyCodeLine{}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType>}
-\DoxyCodeLine{\textcolor{keyword}{class }StencilMatrix : \textcolor{keyword}{public} \mbox{\hyperlink{classgko_1_1EnableLinOp}{gko::EnableLinOp}}<StencilMatrix<ValueType>>,}
+\DoxyCodeLine{\textcolor{keyword}{class }StencilMatrix : \textcolor{keyword}{public} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}},}
 \DoxyCodeLine{                      \textcolor{keyword}{public} \mbox{\hyperlink{classgko_1_1EnableCreateMethod}{gko::EnableCreateMethod}}<StencilMatrix<ValueType>> \{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{    StencilMatrix(std::shared\_ptr<const gko::Executor> exec,}
 \DoxyCodeLine{                  \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} size = 0, ValueType left = -\/1.0,}
 \DoxyCodeLine{                  ValueType center = 2.0, ValueType right = -\/1.0)}
-\DoxyCodeLine{        : \mbox{\hyperlink{namespacegko}{gko}}::EnableLinOp<StencilMatrix>(exec, \mbox{\hyperlink{namespacegko}{gko}}::dim<2>\{size\}),}
+\DoxyCodeLine{        : \mbox{\hyperlink{namespacegko}{gko}}::LinOp(exec, \mbox{\hyperlink{namespacegko}{gko}}::dim<2>\{size\}),}
 \DoxyCodeLine{          coefficients(exec, \{left, center, right\})}
 \DoxyCodeLine{    \{\}}
 \DoxyCodeLine{}
@@ -447,7 +446,7 @@ notice how our custom Stencil\+Matrix can be used in the same way as any built-\
 \DoxyCodeLine{            \textcolor{keyword}{const} vec* b;}
 \DoxyCodeLine{            vec* x;}
 \DoxyCodeLine{        \};}
-\DoxyCodeLine{        this-\/>get\_executor()-\/>run(}
+\DoxyCodeLine{        this-\/>\mbox{\hyperlink{classgko_1_1PolymorphicObject_ab40586bff071b7f11c2cf6b5cbf598eb}{get\_executor}}()-\/>run(}
 \DoxyCodeLine{            stencil\_operation(coefficients, dense\_b, dense\_x));}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{}
