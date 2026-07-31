@@ -67,6 +67,8 @@ void \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a8469c31
 \begin{DoxyCompactList}\small\item\em Reads a matrix from the \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} structure, a global row partition, and a global column partition. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a83f7857d0997f659b57bedf2fe4cc95c}{read\+\_\+distributed}} (const \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}}$<$ value\+\_\+type, global\+\_\+index\+\_\+type $>$ \&data, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{Partition}}$<$ local\+\_\+index\+\_\+type, global\+\_\+index\+\_\+type $>$$>$ row\+\_\+partition, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{Partition}}$<$ local\+\_\+index\+\_\+type, global\+\_\+index\+\_\+type $>$$>$ col\+\_\+partition, \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a4b66bc2bbe95fe0a818a5f4423acbb4e}{assembly\+\_\+mode}} assembly\+\_\+type=assembly\+\_\+mode\+::local\+\_\+only)
 \begin{DoxyCompactList}\small\item\em Reads a matrix from the \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} structure, a global row partition, and a global column partition. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a1bdfa6a2b87082de7fc7c9a991c56e30}{write}} (\mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}}$<$ value\+\_\+type, global\+\_\+index\+\_\+type $>$ \&data) const override
+\begin{DoxyCompactList}\small\item\em Writes the locally stored matrix data into a \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} structure using global row and column indices. \end{DoxyCompactList}\item 
 std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_af4b6b179c862cbbbf0247dc2bfcf3df0}{get\+\_\+diag\+\_\+matrix}} () const
 \begin{DoxyCompactList}\small\item\em Get read access to the stored diagonal matrix block. \end{DoxyCompactList}\item 
 std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a392c4e09a7a9a476066e8a36d1b51e10}{get\+\_\+off\+\_\+diag\+\_\+matrix}} () const
@@ -760,6 +762,29 @@ The vector and the matrix have to have the same row partition. The scaling is do
 {\em scaling\+\_\+factors} & The vector containing the scaling factors. \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Matrix_a1bdfa6a2b87082de7fc7c9a991c56e30}\label{classgko_1_1experimental_1_1distributed_1_1Matrix_a1bdfa6a2b87082de7fc7c9a991c56e30}} 
+\index{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}!write@{write}}
+\index{write@{write}!gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}}
+\doxysubsubsection{\texorpdfstring{write()}{write()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Local\+Index\+Type  = int32, typename Global\+Index\+Type  = int64$>$ \\
+void \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{gko\+::experimental\+::distributed\+::\+Matrix}}$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$\+::write (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}}$<$ value\+\_\+type, global\+\_\+index\+\_\+type $>$ \&}]{data }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Writes the locally stored matrix data into a \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} structure using global row and column indices. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & the output \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+this currently assume the row index mapping is equal to the column index mapping 
+\end{DoxyNote}
+
+
+Implements \mbox{\hyperlink{classgko_1_1WritableToMatrixData_a96036c3a4bf4c67fa93002808b8b14e2}{gko\+::\+Writable\+To\+Matrix\+Data$<$ Value\+Type, Global\+Index\+Type $>$}}.
+
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
