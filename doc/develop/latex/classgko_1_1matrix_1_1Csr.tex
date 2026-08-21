@@ -74,6 +74,12 @@ using {\bfseries device\+\_\+mat\+\_\+data} = \mbox{\hyperlink{classgko_1_1devic
 \item 
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_a6e535707a953fc66bbc22e52f044682a}\label{classgko_1_1matrix_1_1Csr_a6e535707a953fc66bbc22e52f044682a}} 
 using {\bfseries absolute\+\_\+type} = \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{remove\+\_\+complex}}$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}} $>$
+\item 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_a5e79697170bbf53fc4427d712f4093fc}\label{classgko_1_1matrix_1_1Csr_a5e79697170bbf53fc4427d712f4093fc}} 
+using {\bfseries device\+\_\+view} = \mbox{\hyperlink{structgko_1_1matrix_1_1view_1_1csr}{view\+::csr}}$<$ value\+\_\+type, index\+\_\+type $>$
+\item 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_a45707dec9b344d38562a258300b255a6}\label{classgko_1_1matrix_1_1Csr_a45707dec9b344d38562a258300b255a6}} 
+using {\bfseries const\+\_\+device\+\_\+view} = \mbox{\hyperlink{structgko_1_1matrix_1_1view_1_1csr}{view\+::csr}}$<$ const value\+\_\+type, const index\+\_\+type $>$
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -138,6 +144,10 @@ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbo
 \begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_a38820451af5424f18b767667f3067d72}{conj\+\_\+transpose}} () const override
 \begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the conjugate transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structgko_1_1matrix_1_1view_1_1csr}{device\+\_\+view}} \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_afabf240d4ed858333205c029cad06f2a}{get\+\_\+device\+\_\+view}} ()
+\begin{DoxyCompactList}\small\item\em Returns a non-\/owning device view of this matrix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structgko_1_1matrix_1_1view_1_1csr}{const\+\_\+device\+\_\+view}} \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_a0b55cf7bd8c156edb6340fdd4c6001aa}{get\+\_\+const\+\_\+device\+\_\+view}} () const
+\begin{DoxyCompactList}\small\item\em Returns a non-\/owning const device view of this matrix. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_ab958cdcd1f53f12d979cf06edc84735c}{multiply}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}} $>$ other) const
 \begin{DoxyCompactList}\small\item\em Computes the sparse matrix product {\ttfamily this $\ast$ other} on the executor of this matrix. \end{DoxyCompactList}\item 
 std\+::pair$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}} $>$, \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_1_1multiply__reuse__info}{multiply\+\_\+reuse\+\_\+info}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_a3498d28b8dd8cad7a17933fb9f81a24a}{multiply\+\_\+reuse}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}} $>$ other) const
@@ -723,6 +733,20 @@ This is the constant version of the function, which can be significantly more me
 
 References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+data().
 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_a0b55cf7bd8c156edb6340fdd4c6001aa}\label{classgko_1_1matrix_1_1Csr_a0b55cf7bd8c156edb6340fdd4c6001aa}} 
+\index{gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}!get\_const\_device\_view@{get\_const\_device\_view}}
+\index{get\_const\_device\_view@{get\_const\_device\_view}!gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_const\_device\_view()}{get\_const\_device\_view()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+\mbox{\hyperlink{structgko_1_1matrix_1_1view_1_1csr}{const\+\_\+device\+\_\+view}} \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko\+::matrix\+::\+Csr}}$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+const\+\_\+device\+\_\+view (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns a non-\/owning const device view of this matrix. 
+
+\begin{DoxyReturn}{Returns}
+a const device view of this matrix. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_a50c9ce521649450d7ae5ff488e42c190}\label{classgko_1_1matrix_1_1Csr_a50c9ce521649450d7ae5ff488e42c190}} 
 \index{gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}!get\_const\_row\_ptrs@{get\_const\_row\_ptrs}}
 \index{get\_const\_row\_ptrs@{get\_const\_row\_ptrs}!gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}}
@@ -786,6 +810,20 @@ This is the constant version of the function, which can be significantly more me
 
 References gko\+::array$<$ Value\+Type $>$\+::get\+\_\+const\+\_\+data().
 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_afabf240d4ed858333205c029cad06f2a}\label{classgko_1_1matrix_1_1Csr_afabf240d4ed858333205c029cad06f2a}} 
+\index{gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}!get\_device\_view@{get\_device\_view}}
+\index{get\_device\_view@{get\_device\_view}!gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_device\_view()}{get\_device\_view()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+\mbox{\hyperlink{structgko_1_1matrix_1_1view_1_1csr}{device\+\_\+view}} \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko\+::matrix\+::\+Csr}}$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+device\+\_\+view (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns a non-\/owning device view of this matrix. 
+
+\begin{DoxyReturn}{Returns}
+a device view of this matrix. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_a5b8c25c2fb1bbea62a3afdec8f8340c5}\label{classgko_1_1matrix_1_1Csr_a5b8c25c2fb1bbea62a3afdec8f8340c5}} 
 \index{gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}!get\_num\_srow\_elements@{get\_num\_srow\_elements}}
 \index{get\_num\_srow\_elements@{get\_num\_srow\_elements}!gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}}

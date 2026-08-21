@@ -62,7 +62,7 @@ var searchData=
   ['criterion_1520',['Criterion',['../classgko_1_1stop_1_1Criterion.html',1,'gko::stop']]],
   ['criterion_5fdata_1521',['criterion_data',['../structgko_1_1log_1_1criterion__data.html',1,'gko::log']]],
   ['criterionargs_1522',['CriterionArgs',['../structgko_1_1stop_1_1CriterionArgs.html',1,'gko::stop']]],
-  ['csr_1523',['Csr',['../classgko_1_1matrix_1_1Csr.html',1,'gko::matrix::Csr&lt; ValueType, IndexType &gt;'],['../classgko_1_1batch_1_1matrix_1_1Csr.html',1,'gko::batch::matrix::Csr&lt; ValueType, IndexType &gt;']]],
+  ['csr_1523',['Csr',['../classgko_1_1matrix_1_1Csr.html',1,'gko::matrix::Csr&lt; ValueType, IndexType &gt;'],['../classgko_1_1batch_1_1matrix_1_1Csr.html',1,'gko::batch::matrix::Csr&lt; ValueType, IndexType &gt;'],['../structgko_1_1matrix_1_1view_1_1csr.html',1,'gko::matrix::view::csr&lt; ValueType, IndexType &gt;']]],
   ['csrbuilder_1524',['CsrBuilder',['../classgko_1_1matrix_1_1CsrBuilder.html',1,'gko::matrix']]],
   ['cublaserror_1525',['CublasError',['../classgko_1_1CublasError.html',1,'gko']]],
   ['cuda_5fstream_1526',['cuda_stream',['../classgko_1_1cuda__stream.html',1,'gko']]],

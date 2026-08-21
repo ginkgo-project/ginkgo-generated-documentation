@@ -19,6 +19,6 @@ var searchData=
   ['residualnormreduction_1850',['ResidualNormReduction',['../classgko_1_1stop_1_1ResidualNormReduction.html',1,'gko::stop']]],
   ['right_5fshift_1851',['right_shift',['../structgko_1_1accessor_1_1right__shift.html',1,'gko::accessor']]],
   ['row_5fmajor_1852',['row_major',['../classgko_1_1accessor_1_1row__major.html',1,'gko::accessor']]],
-  ['rowgatherer_1853',['RowGatherer',['../classgko_1_1matrix_1_1RowGatherer.html',1,'gko::matrix::RowGatherer&lt; IndexType &gt;'],['../classgko_1_1experimental_1_1distributed_1_1RowGatherer.html',1,'gko::experimental::distributed::RowGatherer&lt; LocalIndexType &gt;']]],
+  ['rowgatherer_1853',['RowGatherer',['../classgko_1_1experimental_1_1distributed_1_1RowGatherer.html',1,'gko::experimental::distributed::RowGatherer&lt; LocalIndexType &gt;'],['../classgko_1_1matrix_1_1RowGatherer.html',1,'gko::matrix::RowGatherer&lt; IndexType &gt;']]],
   ['rs_1854',['Rs',['../classgko_1_1multigrid_1_1Rs.html',1,'gko::multigrid']]]
 ];
