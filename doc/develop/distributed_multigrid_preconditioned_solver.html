@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2788716024 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2795556295 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -119,6 +119,7 @@ $(function() {
 </div><!-- fragment --><p>Multigrid and Pgm can accept the distributed matrix, so we still use the same type as the non-distributed case.</p>
 <div class="fragment"><div class="line"><span class="keyword">using</span> mg = <a class="code" href="classgko_1_1solver_1_1Multigrid.html">gko::solver::Multigrid</a>;</div>
 <div class="line"><span class="keyword">using</span> pgm = <a class="code" href="classgko_1_1multigrid_1_1Pgm.html">gko::multigrid::Pgm&lt;ValueType, LocalIndexType&gt;</a>;</div>
+<div class="line"><span class="keyword">using</span> uc = <a class="code" href="classgko_1_1multigrid_1_1UniformCoarsening.html">gko::multigrid::UniformCoarsening&lt;ValueType, LocalIndexType&gt;</a>;</div>
 </div><!-- fragment --><p>Create an MPI communicator get the rank of the calling process.</p>
 <div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keyword">auto</span> comm = <a class="code" href="classgko_1_1experimental_1_1mpi_1_1communicator.html">gko::experimental::mpi::communicator</a>(MPI_COMM_WORLD);</div>
 <div class="line"><span class="keyword">const</span> <span class="keyword">auto</span> rank = comm.rank();</div>
@@ -131,7 +132,8 @@ $(function() {
 <div class="fragment"><div class="line"><span class="keywordflow">if</span> (argc == 2 &amp;&amp; (std::string(argv[1]) == <span class="stringliteral">&quot;--help&quot;</span>)) {</div>
 <div class="line">    <span class="keywordflow">if</span> (rank == 0) {</div>
 <div class="line">        std::cerr &lt;&lt; <span class="stringliteral">&quot;Usage: &quot;</span> &lt;&lt; argv[0]</div>
-<div class="line">                  &lt;&lt; <span class="stringliteral">&quot; [executor] [num_grid_points] [num_iterations] &quot;</span></div>
+<div class="line">                  &lt;&lt; <span class="stringliteral">&quot; [executor] [grid_side] [num_iterations]&quot;</span></div>
+<div class="line">                  &lt;&lt; <span class="stringliteral">&quot; [mg_type=pgm|uc-agg|uc-inj] [stencil=1d|2d]&quot;</span></div>
 <div class="line">                  &lt;&lt; std::endl;</div>
 <div class="line">    }</div>
 <div class="line">    std::exit(-1);</div>
@@ -144,6 +146,8 @@ $(function() {
 <div class="line">    static_cast&lt;gko::size_type&gt;(argc &gt;= 3 ? std::atoi(argv[2]) : 100);</div>
 <div class="line"><span class="keyword">const</span> <span class="keyword">auto</span> num_iters =</div>
 <div class="line">    static_cast&lt;gko::size_type&gt;(argc &gt;= 4 ? std::atoi(argv[3]) : 1000);</div>
+<div class="line"><span class="keyword">const</span> std::string mg_type = argc &gt;= 5 ? argv[4] : <span class="stringliteral">&quot;pgm&quot;</span>;</div>
+<div class="line"><span class="keyword">const</span> std::string stencil = argc &gt;= 6 ? argv[5] : <span class="stringliteral">&quot;1d&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">const</span> std::map&lt;std::string,</div>
 <div class="line">               std::function&lt;std::shared_ptr&lt;gko::Executor&gt;(MPI_Comm)&gt;&gt;</div>
@@ -183,11 +187,12 @@ $(function() {
 <div class="line"><span class="keyword">auto</span> exec = executor_factory_mpi.at(executor_string)(MPI_COMM_WORLD);</div>
 </div><!-- fragment --><p><a class="anchor" id="CreatingtheDistributedMatrixandVectors"></a> </p><h3>Creating the Distributed Matrix and Vectors</h3>
 <p>As a first step, we create a partition of the rows. The partition consists of ranges of consecutive rows which are assigned a part-id. These part-ids will be used for the distributed data structures to determine which rows will be stored locally. In this example each rank has (nearly) the same number of rows, so we can use the following specialized constructor. See gko::distributed::Partition for other modes of creating a partition.</p>
-<div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keyword">auto</span> num_rows = grid_dim;</div>
+<div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keywordtype">bool</span> is_2d = (stencil == <span class="stringliteral">&quot;2d&quot;</span>);</div>
+<div class="line"><span class="keyword">const</span> <span class="keyword">auto</span> num_rows = is_2d ? grid_dim * grid_dim : grid_dim;</div>
 <div class="line"><span class="keyword">auto</span> partition = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a>(part_type::build_from_global_size_uniform(</div>
 <div class="line">    exec-&gt;get_master(), comm.size(),</div>
 <div class="line">    static_cast&lt;GlobalIndexType&gt;(num_rows)));</div>
-</div><!-- fragment --><p>Assemble the matrix using a 3-pt stencil and fill the right-hand-side with a sine value. The distributed matrix supports only constructing an empty matrix of zero size and filling in the values with <a class="el" href="classgko_1_1experimental_1_1distributed_1_1Matrix.html#a3e7062c96607f0d1efdbf1dff23474db" title="Reads a square matrix from the device_matrix_data structure and a global partition.">gko::experimental::distributed::Matrix::read_distributed</a>. Only the data that belongs to the rows by this rank will be assembled.</p>
+</div><!-- fragment --><p>Assemble the matrix using either a 3-pt 1D Laplacian stencil or a 5-pt 2D Laplacian stencil on a grid_dim x grid_dim grid (row-major). Rows are partitioned across ranks; in 2D, rows near a rank boundary carry cross-rank non-local entries via the i ± grid_dim neighbours.</p>
 <div class="fragment"><div class="line"><a class="code" href="structgko_1_1matrix__data.html">gko::matrix_data&lt;ValueType, GlobalIndexType&gt;</a> A_data;</div>
 <div class="line"><a class="code" href="structgko_1_1matrix__data.html">gko::matrix_data&lt;ValueType, GlobalIndexType&gt;</a> b_data;</div>
 <div class="line"><a class="code" href="structgko_1_1matrix__data.html">gko::matrix_data&lt;ValueType, GlobalIndexType&gt;</a> x_data;</div>
@@ -196,16 +201,39 @@ $(function() {
 <div class="line">x_data.<a class="code" href="structgko_1_1matrix__data.html#a30716bd9e39a7beed52fc56d737fc07b">size</a> = {num_rows, 1};</div>
 <div class="line"><span class="keyword">const</span> <span class="keyword">auto</span> range_start = partition-&gt;get_range_bounds()[rank];</div>
 <div class="line"><span class="keyword">const</span> <span class="keyword">auto</span> range_end = partition-&gt;get_range_bounds()[rank + 1];</div>
-<div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = range_start; i &lt; range_end; i++) {</div>
-<div class="line">    <span class="keywordflow">if</span> (i &gt; 0) {</div>
-<div class="line">        A_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, i - 1, -1);</div>
+<div class="line"><span class="keywordflow">if</span> (is_2d) {</div>
+<div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> N = static_cast&lt;GlobalIndexType&gt;(grid_dim);</div>
+<div class="line">    <span class="keywordflow">for</span> (GlobalIndexType i = range_start; i &lt; range_end; i++) {</div>
+<div class="line">        <span class="keyword">const</span> <span class="keyword">auto</span> r = i / N;</div>
+<div class="line">        <span class="keyword">const</span> <span class="keyword">auto</span> c = i % N;</div>
+<div class="line">        <span class="keywordflow">if</span> (r &gt; 0) {</div>
+<div class="line">            A_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, i - N, -1);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">if</span> (c &gt; 0) {</div>
+<div class="line">            A_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, i - 1, -1);</div>
+<div class="line">        }</div>
+<div class="line">        A_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, i, 4);</div>
+<div class="line">        <span class="keywordflow">if</span> (c &lt; N - 1) {</div>
+<div class="line">            A_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, i + 1, -1);</div>
+<div class="line">        }</div>
+<div class="line">        <span class="keywordflow">if</span> (r &lt; N - 1) {</div>
+<div class="line">            A_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, i + N, -1);</div>
+<div class="line">        }</div>
+<div class="line">        b_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, 0, std::sin(i * 0.01));</div>
+<div class="line">        x_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, 0, gko::zero&lt;ValueType&gt;());</div>
 <div class="line">    }</div>
-<div class="line">    A_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, i, 2);</div>
-<div class="line">    <span class="keywordflow">if</span> (i &lt; grid_dim - 1) {</div>
-<div class="line">        A_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, i + 1, -1);</div>
+<div class="line">} <span class="keywordflow">else</span> {</div>
+<div class="line">    <span class="keywordflow">for</span> (GlobalIndexType i = range_start; i &lt; range_end; i++) {</div>
+<div class="line">        <span class="keywordflow">if</span> (i &gt; 0) {</div>
+<div class="line">            A_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, i - 1, -1);</div>
+<div class="line">        }</div>
+<div class="line">        A_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, i, 2);</div>
+<div class="line">        <span class="keywordflow">if</span> (i &lt; static_cast&lt;GlobalIndexType&gt;(grid_dim) - 1) {</div>
+<div class="line">            A_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, i + 1, -1);</div>
+<div class="line">        }</div>
+<div class="line">        b_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, 0, std::sin(i * 0.01));</div>
+<div class="line">        x_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, 0, gko::zero&lt;ValueType&gt;());</div>
 <div class="line">    }</div>
-<div class="line">    b_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, 0, std::sin(i * 0.01));</div>
-<div class="line">    x_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, 0, gko::zero&lt;ValueType&gt;());</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>Take timings.</p>
 <div class="fragment"><div class="line">comm.synchronize();</div>
@@ -239,14 +267,29 @@ $(function() {
 <div class="line">    solver::build()</div>
 <div class="line">        .with_criteria(gko::stop::Iteration::build().with_max_iters(4u))</div>
 <div class="line">        .on(exec));</div>
-</div><!-- fragment --><p>The multigrid preconditioner uses the Schwarz Jacobi as smoother and Cg as coarse solver</p>
-<div class="fragment"><div class="line"><span class="keyword">auto</span> mg_factory = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a>(</div>
-<div class="line">    mg::build()</div>
-<div class="line">        .with_mg_level(pgm::build().with_deterministic(<span class="keyword">true</span>))</div>
-<div class="line">        .with_pre_smoother(smoother_factory)</div>
-<div class="line">        .with_coarsest_solver(coarsest_factory)</div>
-<div class="line">        .with_criteria(gko::stop::Iteration::build().with_max_iters(1u))</div>
-<div class="line">        .on(exec));</div>
+</div><!-- fragment --><p>The multigrid preconditioner uses the Schwarz Jacobi as smoother and Cg as coarse solver. The mg_level can be PGM or UniformCoarsening (aggregation- or injection-style), selected by the CLI argument.</p>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> make_mg_factory = [&amp;]() {</div>
+<div class="line">    <span class="keyword">auto</span> base = mg::build()</div>
+<div class="line">                    .with_pre_smoother(smoother_factory)</div>
+<div class="line">                    .with_coarsest_solver(coarsest_factory)</div>
+<div class="line">                    .with_criteria(</div>
+<div class="line">                        gko::stop::Iteration::build().with_max_iters(1u));</div>
+<div class="line">    <span class="keywordflow">if</span> (mg_type == <span class="stringliteral">&quot;uc-agg&quot;</span>) {</div>
+<div class="line">        <span class="keywordflow">return</span> base</div>
+<div class="line">            .with_mg_level(</div>
+<div class="line">                uc::build().with_aggregation(<span class="keyword">true</span>).with_coarse_skip(2))</div>
+<div class="line">            .on(exec);</div>
+<div class="line">    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (mg_type == <span class="stringliteral">&quot;uc-inj&quot;</span>) {</div>
+<div class="line">        <span class="keywordflow">return</span> base</div>
+<div class="line">            .with_mg_level(</div>
+<div class="line">                uc::build().with_aggregation(<span class="keyword">false</span>).with_coarse_skip(2))</div>
+<div class="line">            .on(exec);</div>
+<div class="line">    } <span class="keywordflow">else</span> {</div>
+<div class="line">        <span class="keywordflow">return</span> base.with_mg_level(pgm::build().with_deterministic(<span class="keyword">true</span>))</div>
+<div class="line">            .on(exec);</div>
+<div class="line">    }</div>
+<div class="line">};</div>
+<div class="line"><span class="keyword">auto</span> mg_factory = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a>(make_mg_factory());</div>
 </div><!-- fragment --><p>Setup the stopping criterion and logger</p>
 <div class="fragment"><div class="line"><span class="keyword">const</span> <a class="code" href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">gko::remove_complex&lt;ValueType&gt;</a> reduction_factor{1e-8};</div>
 <div class="line">std::shared_ptr&lt;const gko::log::Convergence&lt;ValueType&gt;&gt; logger =</div>
@@ -330,6 +373,7 @@ $(function() {
 <div class="line">    <span class="keyword">using</span> bj = <a class="code" href="classgko_1_1preconditioner_1_1Jacobi.html">gko::preconditioner::Jacobi&lt;ValueType, LocalIndexType&gt;</a>;</div>
 <div class="line">    <span class="keyword">using</span> mg = <a class="code" href="classgko_1_1solver_1_1Multigrid.html">gko::solver::Multigrid</a>;</div>
 <div class="line">    <span class="keyword">using</span> pgm = <a class="code" href="classgko_1_1multigrid_1_1Pgm.html">gko::multigrid::Pgm&lt;ValueType, LocalIndexType&gt;</a>;</div>
+<div class="line">    <span class="keyword">using</span> uc = <a class="code" href="classgko_1_1multigrid_1_1UniformCoarsening.html">gko::multigrid::UniformCoarsening&lt;ValueType, LocalIndexType&gt;</a>;</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> comm = <a class="code" href="classgko_1_1experimental_1_1mpi_1_1communicator.html">gko::experimental::mpi::communicator</a>(MPI_COMM_WORLD);</div>
 <div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> rank = comm.rank();</div>
@@ -337,7 +381,8 @@ $(function() {
 <div class="line">    <span class="keywordflow">if</span> (argc == 2 &amp;&amp; (std::string(argv[1]) == <span class="stringliteral">&quot;--help&quot;</span>)) {</div>
 <div class="line">        <span class="keywordflow">if</span> (rank == 0) {</div>
 <div class="line">            std::cerr &lt;&lt; <span class="stringliteral">&quot;Usage: &quot;</span> &lt;&lt; argv[0]</div>
-<div class="line">                      &lt;&lt; <span class="stringliteral">&quot; [executor] [num_grid_points] [num_iterations] &quot;</span></div>
+<div class="line">                      &lt;&lt; <span class="stringliteral">&quot; [executor] [grid_side] [num_iterations]&quot;</span></div>
+<div class="line">                      &lt;&lt; <span class="stringliteral">&quot; [mg_type=pgm|uc-agg|uc-inj] [stencil=1d|2d]&quot;</span></div>
 <div class="line">                      &lt;&lt; std::endl;</div>
 <div class="line">        }</div>
 <div class="line">        std::exit(-1);</div>
@@ -350,6 +395,8 @@ $(function() {
 <div class="line">        static_cast&lt;gko::size_type&gt;(argc &gt;= 3 ? std::atoi(argv[2]) : 100);</div>
 <div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> num_iters =</div>
 <div class="line">        static_cast&lt;gko::size_type&gt;(argc &gt;= 4 ? std::atoi(argv[3]) : 1000);</div>
+<div class="line">    <span class="keyword">const</span> std::string mg_type = argc &gt;= 5 ? argv[4] : <span class="stringliteral">&quot;pgm&quot;</span>;</div>
+<div class="line">    <span class="keyword">const</span> std::string stencil = argc &gt;= 6 ? argv[5] : <span class="stringliteral">&quot;1d&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">const</span> std::map&lt;std::string,</div>
 <div class="line">                   std::function&lt;std::shared_ptr&lt;gko::Executor&gt;(MPI_Comm)&gt;&gt;</div>
@@ -388,7 +435,8 @@ $(function() {
 <div class="line"> </div>
 <div class="line">    <span class="keyword">auto</span> exec = executor_factory_mpi.at(executor_string)(MPI_COMM_WORLD);</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> num_rows = grid_dim;</div>
+<div class="line">    <span class="keyword">const</span> <span class="keywordtype">bool</span> is_2d = (stencil == <span class="stringliteral">&quot;2d&quot;</span>);</div>
+<div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> num_rows = is_2d ? grid_dim * grid_dim : grid_dim;</div>
 <div class="line">    <span class="keyword">auto</span> partition = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a>(part_type::build_from_global_size_uniform(</div>
 <div class="line">        exec-&gt;get_master(), comm.size(),</div>
 <div class="line">        static_cast&lt;GlobalIndexType&gt;(num_rows)));</div>
@@ -401,16 +449,39 @@ $(function() {
 <div class="line">    x_data.<a class="code" href="structgko_1_1matrix__data.html#a30716bd9e39a7beed52fc56d737fc07b">size</a> = {num_rows, 1};</div>
 <div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> range_start = partition-&gt;get_range_bounds()[rank];</div>
 <div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> range_end = partition-&gt;get_range_bounds()[rank + 1];</div>
-<div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = range_start; i &lt; range_end; i++) {</div>
-<div class="line">        <span class="keywordflow">if</span> (i &gt; 0) {</div>
-<div class="line">            A_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, i - 1, -1);</div>
+<div class="line">    <span class="keywordflow">if</span> (is_2d) {</div>
+<div class="line">        <span class="keyword">const</span> <span class="keyword">auto</span> N = static_cast&lt;GlobalIndexType&gt;(grid_dim);</div>
+<div class="line">        <span class="keywordflow">for</span> (GlobalIndexType i = range_start; i &lt; range_end; i++) {</div>
+<div class="line">            <span class="keyword">const</span> <span class="keyword">auto</span> r = i / N;</div>
+<div class="line">            <span class="keyword">const</span> <span class="keyword">auto</span> c = i % N;</div>
+<div class="line">            <span class="keywordflow">if</span> (r &gt; 0) {</div>
+<div class="line">                A_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, i - N, -1);</div>
+<div class="line">            }</div>
+<div class="line">            <span class="keywordflow">if</span> (c &gt; 0) {</div>
+<div class="line">                A_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, i - 1, -1);</div>
+<div class="line">            }</div>
+<div class="line">            A_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, i, 4);</div>
+<div class="line">            <span class="keywordflow">if</span> (c &lt; N - 1) {</div>
+<div class="line">                A_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, i + 1, -1);</div>
+<div class="line">            }</div>
+<div class="line">            <span class="keywordflow">if</span> (r &lt; N - 1) {</div>
+<div class="line">                A_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, i + N, -1);</div>
+<div class="line">            }</div>
+<div class="line">            b_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, 0, std::sin(i * 0.01));</div>
+<div class="line">            x_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, 0, gko::zero&lt;ValueType&gt;());</div>
 <div class="line">        }</div>
-<div class="line">        A_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, i, 2);</div>
-<div class="line">        <span class="keywordflow">if</span> (i &lt; grid_dim - 1) {</div>
-<div class="line">            A_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, i + 1, -1);</div>
+<div class="line">    } <span class="keywordflow">else</span> {</div>
+<div class="line">        <span class="keywordflow">for</span> (GlobalIndexType i = range_start; i &lt; range_end; i++) {</div>
+<div class="line">            <span class="keywordflow">if</span> (i &gt; 0) {</div>
+<div class="line">                A_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, i - 1, -1);</div>
+<div class="line">            }</div>
+<div class="line">            A_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, i, 2);</div>
+<div class="line">            <span class="keywordflow">if</span> (i &lt; static_cast&lt;GlobalIndexType&gt;(grid_dim) - 1) {</div>
+<div class="line">                A_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, i + 1, -1);</div>
+<div class="line">            }</div>
+<div class="line">            b_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, 0, std::sin(i * 0.01));</div>
+<div class="line">            x_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, 0, gko::zero&lt;ValueType&gt;());</div>
 <div class="line">        }</div>
-<div class="line">        b_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, 0, std::sin(i * 0.01));</div>
-<div class="line">        x_data.<a class="code" href="structgko_1_1matrix__data.html#a4f6be92270fa96bccdc502c83d248dc0">nonzeros</a>.emplace_back(i, 0, gko::zero&lt;ValueType&gt;());</div>
 <div class="line">    }</div>
 <div class="line"> </div>
 <div class="line">    comm.synchronize();</div>
@@ -442,13 +513,28 @@ $(function() {
 <div class="line">        solver::build()</div>
 <div class="line">            .with_criteria(gko::stop::Iteration::build().with_max_iters(4u))</div>
 <div class="line">            .on(exec));</div>
-<div class="line">    <span class="keyword">auto</span> mg_factory = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a>(</div>
-<div class="line">        mg::build()</div>
-<div class="line">            .with_mg_level(pgm::build().with_deterministic(<span class="keyword">true</span>))</div>
-<div class="line">            .with_pre_smoother(smoother_factory)</div>
-<div class="line">            .with_coarsest_solver(coarsest_factory)</div>
-<div class="line">            .with_criteria(gko::stop::Iteration::build().with_max_iters(1u))</div>
-<div class="line">            .on(exec));</div>
+<div class="line">    <span class="keyword">auto</span> make_mg_factory = [&amp;]() {</div>
+<div class="line">        <span class="keyword">auto</span> base = mg::build()</div>
+<div class="line">                        .with_pre_smoother(smoother_factory)</div>
+<div class="line">                        .with_coarsest_solver(coarsest_factory)</div>
+<div class="line">                        .with_criteria(</div>
+<div class="line">                            gko::stop::Iteration::build().with_max_iters(1u));</div>
+<div class="line">        <span class="keywordflow">if</span> (mg_type == <span class="stringliteral">&quot;uc-agg&quot;</span>) {</div>
+<div class="line">            <span class="keywordflow">return</span> base</div>
+<div class="line">                .with_mg_level(</div>
+<div class="line">                    uc::build().with_aggregation(<span class="keyword">true</span>).with_coarse_skip(2))</div>
+<div class="line">                .on(exec);</div>
+<div class="line">        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (mg_type == <span class="stringliteral">&quot;uc-inj&quot;</span>) {</div>
+<div class="line">            <span class="keywordflow">return</span> base</div>
+<div class="line">                .with_mg_level(</div>
+<div class="line">                    uc::build().with_aggregation(<span class="keyword">false</span>).with_coarse_skip(2))</div>
+<div class="line">                .on(exec);</div>
+<div class="line">        } <span class="keywordflow">else</span> {</div>
+<div class="line">            <span class="keywordflow">return</span> base.with_mg_level(pgm::build().with_deterministic(<span class="keyword">true</span>))</div>
+<div class="line">                .on(exec);</div>
+<div class="line">        }</div>
+<div class="line">    };</div>
+<div class="line">    <span class="keyword">auto</span> mg_factory = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a>(make_mg_factory());</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">const</span> <a class="code" href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">gko::remove_complex&lt;ValueType&gt;</a> reduction_factor{1e-8};</div>
 <div class="line">    std::shared_ptr&lt;const gko::log::Convergence&lt;ValueType&gt;&gt; logger =</div>
@@ -494,10 +580,11 @@ $(function() {
 <div class="ttc" id="anamespacegko_1_1matrix_html_ade1f3cdbf05032c2d681fa151de02972adf347a373b8f92aa0ae3dd920a5ec2f6"><div class="ttname"><a href="namespacegko_1_1matrix.html#ade1f3cdbf05032c2d681fa151de02972adf347a373b8f92aa0ae3dd920a5ec2f6">gko::matrix::permute_mode::rows</a></div><div class="ttdoc">The rows will be permuted.</div></div>
 <div class="ttc" id="aclassgko_1_1log_1_1Convergence_html_aa67955ea9d1d18f15f0330d12b93d330"><div class="ttname"><a href="classgko_1_1log_1_1Convergence.html#aa67955ea9d1d18f15f0330d12b93d330">gko::log::Convergence::create</a></div><div class="ttdeci">static std::unique_ptr&lt; Convergence &gt; create(std::shared_ptr&lt; const Executor &gt;, const mask_type &amp;enabled_events=Logger::criterion_events_mask|Logger::iteration_complete_mask)</div><div class="ttdoc">Creates a convergence logger.</div><div class="ttdef"><b>Definition:</b> convergence.hpp:75</div></div>
 <div class="ttc" id="aclassgko_1_1CudaExecutor_html_aef0258494d14de0e56149b920c5173e5"><div class="ttname"><a href="classgko_1_1CudaExecutor.html#aef0258494d14de0e56149b920c5173e5">gko::CudaExecutor::get_num_devices</a></div><div class="ttdeci">static int get_num_devices()</div><div class="ttdoc">Get the number of devices present on the system.</div></div>
+<div class="ttc" id="aclassgko_1_1multigrid_1_1UniformCoarsening_html"><div class="ttname"><a href="classgko_1_1multigrid_1_1UniformCoarsening.html">gko::multigrid::UniformCoarsening</a></div><div class="ttdoc">UniformCoarsening is a simple coarse grid generation algorithm.</div><div class="ttdef"><b>Definition:</b> matrix.hpp:43</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Dense_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Dense.html">gko::matrix::Dense</a></div><div class="ttdoc">Dense is a matrix format which explicitly stores all values of the matrix.</div><div class="ttdef"><b>Definition:</b> dense_cache.hpp:28</div></div>
 <div class="ttc" id="aclassgko_1_1HipExecutor_html_a7b34cbd84692dafa2290e6630754aa97"><div class="ttname"><a href="classgko_1_1HipExecutor.html#a7b34cbd84692dafa2290e6630754aa97">gko::HipExecutor::get_num_devices</a></div><div class="ttdeci">static int get_num_devices()</div><div class="ttdoc">Get the number of devices present on the system.</div></div>
-<div class="ttc" id="aclassgko_1_1experimental_1_1distributed_1_1Matrix_html"><div class="ttname"><a href="classgko_1_1experimental_1_1distributed_1_1Matrix.html">gko::experimental::distributed::Matrix</a></div><div class="ttdoc">The Matrix class defines a (MPI-)distributed matrix.</div><div class="ttdef"><b>Definition:</b> matrix.hpp:262</div></div>
-<div class="ttc" id="aclassgko_1_1experimental_1_1distributed_1_1Vector_html"><div class="ttname"><a href="classgko_1_1experimental_1_1distributed_1_1Vector.html">gko::experimental::distributed::Vector</a></div><div class="ttdoc">Vector is a format which explicitly stores (multiple) distributed column vectors in a dense storage f...</div><div class="ttdef"><b>Definition:</b> matrix.hpp:153</div></div>
+<div class="ttc" id="aclassgko_1_1experimental_1_1distributed_1_1Matrix_html"><div class="ttname"><a href="classgko_1_1experimental_1_1distributed_1_1Matrix.html">gko::experimental::distributed::Matrix</a></div><div class="ttdoc">The Matrix class defines a (MPI-)distributed matrix.</div><div class="ttdef"><b>Definition:</b> matrix.hpp:265</div></div>
+<div class="ttc" id="aclassgko_1_1experimental_1_1distributed_1_1Vector_html"><div class="ttname"><a href="classgko_1_1experimental_1_1distributed_1_1Vector.html">gko::experimental::distributed::Vector</a></div><div class="ttdoc">Vector is a format which explicitly stores (multiple) distributed column vectors in a dense storage f...</div><div class="ttdef"><b>Definition:</b> matrix.hpp:156</div></div>
 <div class="ttc" id="aclassgko_1_1experimental_1_1mpi_1_1environment_html"><div class="ttname"><a href="classgko_1_1experimental_1_1mpi_1_1environment.html">gko::experimental::mpi::environment</a></div><div class="ttdoc">Class that sets up and finalizes the MPI environment.</div><div class="ttdef"><b>Definition:</b> mpi.hpp:210</div></div>
 <div class="ttc" id="aclassgko_1_1DpcppExecutor_html_adf306338233c8e8aca0dec96aefe5d93"><div class="ttname"><a href="classgko_1_1DpcppExecutor.html#adf306338233c8e8aca0dec96aefe5d93">gko::DpcppExecutor::get_num_devices</a></div><div class="ttdeci">static int get_num_devices(std::string device_type)</div><div class="ttdoc">Get the number of devices present on the system.</div></div>
 <div class="ttc" id="aclassgko_1_1solver_1_1Multigrid_html"><div class="ttname"><a href="classgko_1_1solver_1_1Multigrid.html">gko::solver::Multigrid</a></div><div class="ttdoc">Multigrid methods have a hierarchy of many levels, whose corase level is a subset of the fine level,...</div><div class="ttdef"><b>Definition:</b> multigrid.hpp:107</div></div>
