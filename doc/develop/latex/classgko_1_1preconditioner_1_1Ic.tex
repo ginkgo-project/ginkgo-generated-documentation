@@ -2,7 +2,7 @@
 \label{classgko_1_1preconditioner_1_1Ic}\index{gko::preconditioner::Ic$<$ ValueType, IndexType $>$@{gko::preconditioner::Ic$<$ ValueType, IndexType $>$}}
 
 
-The Incomplete Cholesky (IC) preconditioner solves the equation $LL^H*x = b$ for a given lower triangular matrix L and the right hand side b (can contain multiple right hand sides).  
+The Incomplete Cholesky (IC) preconditioner solves the equation $L L^H x = b$ for a given lower triangular matrix $L$ and the right hand side $b$ (can contain multiple right hand sides).  
 
 
 
@@ -55,9 +55,9 @@ using {\bfseries transposed\+\_\+type} = \mbox{\hyperlink{classgko_1_1preconditi
 const \mbox{\hyperlink{structgko_1_1preconditioner_1_1Ic_1_1parameters__type}{parameters\+\_\+type}} \& {\bfseries get\+\_\+parameters} () const
 \item 
 std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic_aab4e4c5559c8faab62fcf44711523b7d}{get\+\_\+l\+\_\+solver}} () const
-\begin{DoxyCompactList}\small\item\em Returns the solver which is used for the provided L matrix. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Returns the solver which is used for the provided $L$ matrix. \end{DoxyCompactList}\item 
 std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic_a92cf7778bc9a001cd51ae48de702ca08}{get\+\_\+lh\+\_\+solver}} () const
-\begin{DoxyCompactList}\small\item\em Returns the solver which is used for the L$^\wedge$H matrix. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Returns the solver which is used for the $L^H$ matrix. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic_a6fbf4dd32d0ed74d219d83f6a4bbf945}{transpose}} () const override
 \begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic_a16225bedb705cd88660e8a3c9594b499}{conj\+\_\+transpose}} () const override
@@ -84,16 +84,16 @@ static \mbox{\hyperlink{structgko_1_1preconditioner_1_1Ic_1_1parameters__type}{p
 \subsubsection*{template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$\newline
 class gko\+::preconditioner\+::\+Ic$<$ Value\+Type, Index\+Type $>$}
 
-The Incomplete Cholesky (IC) preconditioner solves the equation $LL^H*x = b$ for a given lower triangular matrix L and the right hand side b (can contain multiple right hand sides). 
+The Incomplete Cholesky (IC) preconditioner solves the equation $L L^H x = b$ for a given lower triangular matrix $L$ and the right hand side $b$ (can contain multiple right hand sides). 
 
-It allows setting the solver for L, defaulting to \mbox{\hyperlink{classgko_1_1solver_1_1LowerTrs}{solver\+::\+Lower\+Trs}}, which is a direct triangular solvers. The solver for L$^\wedge$H is the conjugate-\/transposed solver for L, ensuring that the preconditioner is symmetric and positive-\/definite. For this L solver, a factory can be provided (using {\ttfamily with\+\_\+l\+\_\+solver}) to have more control over their behavior. In particular, it is possible to use an iterative method for solving the triangular systems.
+It allows setting the solver for $L$, defaulting to \mbox{\hyperlink{classgko_1_1solver_1_1LowerTrs}{solver\+::\+Lower\+Trs}}, which is a direct triangular solver. The solver for $L^H$ is the conjugate-\/transposed solver for $L$, ensuring that the preconditioner is symmetric and positive-\/definite. For this $L$ solver, a factory can be provided (using {\ttfamily with\+\_\+l\+\_\+solver}) to have more control over their behavior. In particular, it is possible to use an iterative method for solving the triangular systems.
 
-An object of this class can be created with a matrix or a \mbox{\hyperlink{classgko_1_1Composition}{gko\+::\+Composition}} containing two matrices. If created with a matrix, it is factorized before creating the solver. If a \mbox{\hyperlink{classgko_1_1Composition}{gko\+::\+Composition}} (containing two matrices) is used, the first operand will be taken as the L matrix, the second will be considered the L$^\wedge$H matrix, which helps to avoid the otherwise necessary transposition of L inside the solver. Par\+Ic can be directly used, since it orders the factors in the correct way.
+An object of this class can be created with a matrix or a \mbox{\hyperlink{classgko_1_1Composition}{gko\+::\+Composition}} containing two matrices. If created with a matrix, it is factorized before creating the solver. If a \mbox{\hyperlink{classgko_1_1Composition}{gko\+::\+Composition}} (containing two matrices) is used, the first operand will be taken as the $L$ matrix, the second will be considered the $L^H$ matrix, which helps to avoid the otherwise necessary transposition of $L$ inside the solver. Par\+Ic can be directly used, since it orders the factors in the correct way.
 
 \begin{DoxyNote}{Note}
 When providing a \mbox{\hyperlink{classgko_1_1Composition}{gko\+::\+Composition}}, the first matrix must be the lower matrix ( $L$), and the second matrix must be its conjugate-\/transpose ( $L^H$). If they are swapped, solving might crash or return the wrong result.
 
-Do not use symmetric solvers (like CG) for the L solver since both matrices (L and L$^\wedge$H) are, by design, not symmetric.
+Do not use symmetric solvers (like CG) for the $L$ solver since both matrices ( $L$ and $L^H$) are, by design, not symmetric.
 
 This class is not thread safe (even a const object is not) because it uses an internal cache to accelerate multiple (sequential) applies. Using it in parallel can lead to segmentation faults, wrong results and other unwanted behavior.
 
@@ -101,9 +101,9 @@ The default template during parse is $<$Value\+Type, Index\+Type$>$ not $<$Lower
 \end{DoxyNote}
 
 \begin{DoxyTemplParams}{Template Parameters}
-{\em Value\+Type} & the value type used for the L matrix. \\
+{\em Value\+Type} & the value type used for the $L$ matrix. \\
 \hline
-{\em Index\+Type} & type of the indices when Par\+Ic is used to generate the L and L$^\wedge$H factors. Irrelevant otherwise. \\
+{\em Index\+Type} & type of the indices when Par\+Ic is used to generate the $L$ and $L^H$ factors. Irrelevant otherwise. \\
 \hline
 \end{DoxyTemplParams}
 
@@ -161,10 +161,10 @@ std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ 
 
 
 
-Returns the solver which is used for the provided L matrix. 
+Returns the solver which is used for the provided $L$ matrix. 
 
 \begin{DoxyReturn}{Returns}
-the solver which is used for the provided L matrix 
+the solver which is used for the provided $L$ matrix 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_a92cf7778bc9a001cd51ae48de702ca08}\label{classgko_1_1preconditioner_1_1Ic_a92cf7778bc9a001cd51ae48de702ca08}} 
 \index{gko::preconditioner::Ic$<$ ValueType, IndexType $>$@{gko::preconditioner::Ic$<$ ValueType, IndexType $>$}!get\_lh\_solver@{get\_lh\_solver}}
@@ -175,10 +175,10 @@ std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ 
 
 
 
-Returns the solver which is used for the L$^\wedge$H matrix. 
+Returns the solver which is used for the $L^H$ matrix. 
 
 \begin{DoxyReturn}{Returns}
-the solver which is used for the L$^\wedge$H matrix 
+the solver which is used for the $L^H$ matrix 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ic_ac621d9ce01bc26cda278e98f595344d4}\label{classgko_1_1preconditioner_1_1Ic_ac621d9ce01bc26cda278e98f595344d4}} 
 \index{gko::preconditioner::Ic$<$ ValueType, IndexType $>$@{gko::preconditioner::Ic$<$ ValueType, IndexType $>$}!operator=@{operator=}}

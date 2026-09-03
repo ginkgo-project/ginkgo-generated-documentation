@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2801723526 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2816504854 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -307,14 +307,22 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>EnableApplyWithIniti
 class gko::solver::Chebyshev&lt; ValueType &gt;</h3>
 
 <p><a class="el" href="classgko_1_1solver_1_1Chebyshev.html" title="Chebyshev iteration is an iterative method for solving nonsymmetric problems based on some knowledge ...">Chebyshev</a> iteration is an iterative method for solving nonsymmetric problems based on some knowledge of the spectrum of the (preconditioned) system matrix. </p>
-<p>It avoids the computation of inner products, which may be a performance bottleneck for distributed system. <a class="el" href="classgko_1_1solver_1_1Chebyshev.html" title="Chebyshev iteration is an iterative method for solving nonsymmetric problems based on some knowledge ...">Chebyshev</a> iteration is developed based on <a class="el" href="classgko_1_1solver_1_1Chebyshev.html" title="Chebyshev iteration is an iterative method for solving nonsymmetric problems based on some knowledge ...">Chebyshev</a> polynomials of the first kind. This implementation follows the algorithm in "Templates for the Solution of Linear Systems: Building Blocks for Iterative Methods, 2nd Edition".</p>
+<p>It avoids the computation of inner products, which may be a performance bottleneck for distributed system. <a class="el" href="classgko_1_1solver_1_1Chebyshev.html" title="Chebyshev iteration is an iterative method for solving nonsymmetric problems based on some knowledge ...">Chebyshev</a> iteration is developed based on <a class="el" href="classgko_1_1solver_1_1Chebyshev.html" title="Chebyshev iteration is an iterative method for solving nonsymmetric problems based on some knowledge ...">Chebyshev</a> polynomials of the first kind.</p>
+<p>Given a preconditioner <img class="formulaInl" alt="$ M \approx A^{-1} $" src="form_174.png"/>, the iterate is updated with the three-term recurrence </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ x_{k+1} = x_k + \alpha_k M (b - A x_k) + \beta_k (x_k - x_{k-1}), \]" src="form_177.png"/>
+</p>
+<p> where the scalars <img class="formulaInl" alt="$ \alpha_k, \beta_k $" src="form_178.png"/> are derived from an estimate of the spectrum of <img class="formulaInl" alt="$ M A $" src="form_179.png"/>. In pseudo-code:</p>
 <div class="fragment"><div class="line">solution = initial_guess</div>
 <div class="line"><span class="keywordflow">while</span> not converged:</div>
 <div class="line">    residual = b - A solution</div>
 <div class="line">    error = preconditioner(A) * residual</div>
 <div class="line">    solution = solution + alpha_i * error + beta_i * (solution_i -</div>
 <div class="line">solution_{i-1})</div>
-</div><!-- fragment --><dl class="tparams"><dt>Template Parameters</dt><dd>
+</div><!-- fragment --><dl class="section user"><dt>References</dt><dd><ul>
+<li>Barrett, R., Berry, M., Chan, T. F., et al. <em>Templates for the Solution of Linear Systems: Building Blocks for Iterative Methods.</em> 2nd ed. SIAM, 1994. <a href="https://doi.org/10.1137/1.9781611971538">https://doi.org/10.1137/1.9781611971538</a></li>
+</ul>
+</dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">ValueType</td><td>precision of matrix elements </td></tr>
   </table>

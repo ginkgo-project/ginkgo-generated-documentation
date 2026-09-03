@@ -73,6 +73,10 @@ class gko\+::solver\+::\+Cgs$<$ Value\+Type $>$}
 
 C\+GS or the conjugate gradient square method is an iterative type Krylov subspace method which is suitable for general systems. 
 
+C\+GS rests on the identity that Bi\+CG produces a residual of the form $ r_k^{\mathrm{BiCG}} = \psi_k(A) r_0 $, where $ \psi_k $ is the residual polynomial. Squaring this polynomial yields the C\+GS residual \[ r_k^{\mathrm{CGS}} = \psi_k(A)^2 r_0, \] so the iteration avoids the explicit $ A^H $ apply that Bi\+CG requires, and it contracts the residual twice as fast per step when Bi\+CG converges.
+
+Starting from $ r_0 = b - A x_0 $, a shadow residual $ \tilde r_0 $ (Ginkgo uses $ \tilde r_0 = r_0 $), $ q_{-1} = p_{-1} = 0 $ and $ \rho_{-1} = 1 $, one iteration with the preconditioner $ M \approx A^{-1} $ reads \[ \begin{aligned} \rho_k &= \langle \tilde r_0, r_k \rangle, &\qquad \beta_k &= \rho_k / \rho_{k-1}, \\ u_k &= r_k + \beta_k q_{k-1}, &\qquad p_k &= u_k + \beta_k (q_{k-1} + \beta_k p_{k-1}), \\ \hat v_k &= A M p_k, &\qquad \alpha_k &= \rho_k / \langle \tilde r_0, \hat v_k \rangle, \\ q_k &= u_k - \alpha_k \hat v_k, &\qquad \hat u_k &= M (u_k + q_k), \\ x_{k+1} &= x_k + \alpha_k \hat u_k, &\qquad r_{k+1} &= r_k - \alpha_k A \hat u_k. \end{aligned} \] The pair $ u_k, q_k $ takes the place of the single Bi\+CG search direction, which is why the update of $ x $ uses their sum. The trade-\/off for dropping $ A^H $ is that the squared polynomial also squares the error\+: the residuals lose monotonicity and can oscillate strongly on poorly conditioned systems. When this matters in practice, \mbox{\hyperlink{classgko_1_1solver_1_1Bicgstab}{Bi\+C\+G\+S\+T\+AB}} replaces the second application of $ \psi_k $ by a locally minimizing polynomial for the same number of operator applies and one extra inner product.
+
 The implementation in Ginkgo makes use of the merged kernel to make the best use of data locality. The inner operations in one iteration of C\+GS are merged into 3 separate steps.
 
 

@@ -2,7 +2,7 @@
 \label{classgko_1_1stop_1_1ResidualNorm}\index{gko::stop::ResidualNorm$<$ ValueType $>$@{gko::stop::ResidualNorm$<$ ValueType $>$}}
 
 
-The \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{Residual\+Norm}} class is a stopping criterion which stops the iteration process when the actual residual norm is below a certain threshold relative to.  
+Stopping criterion based on the explicit residual norm $ \| r_k \| = \| b - A x_k \| $.  
 
 
 
@@ -66,19 +66,26 @@ static auto {\bfseries build} () -\/$>$ decltype(\mbox{\hyperlink{classgko_1_1st
 \subsubsection*{template$<$typename Value\+Type = default\+\_\+precision$>$\newline
 class gko\+::stop\+::\+Residual\+Norm$<$ Value\+Type $>$}
 
-The \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{Residual\+Norm}} class is a stopping criterion which stops the iteration process when the actual residual norm is below a certain threshold relative to. 
+Stopping criterion based on the explicit residual norm $ \| r_k \| = \| b - A x_k \| $. 
+
+The iteration halts once $ \| r_k \| \le \tau \cdot \beta $, where $\tau$ is the factory parameter {\ttfamily reduction\+\_\+factor} and the baseline $\beta$ is selected by the {\ttfamily baseline} factory parameter\+:
 
 
-\begin{DoxyEnumerate}
-\item the norm of the right-\/hand side, norm(residual) $\leq$ $<$ threshold $\ast$ norm(right\+\_\+hand\+\_\+side).
-\item the initial residual, norm(residual) $\leq$ threshold $\ast$ norm(initial\+\_\+residual).
-\item one, norm(residual) $\leq$ threshold.
-\end{DoxyEnumerate}
+\begin{DoxyItemize}
+\item {\ttfamily mode\+::rhs\+\_\+norm} (default) — relative to the right-\/hand side\+: $ \beta = \| b \| $, so the condition is $ \| r_k \| \le \tau \| b \| $.
+\item {\ttfamily mode\+::initial\+\_\+resnorm} — relative to the initial residual\+: $ \beta = \| r_0 \| $, so the condition is $ \| r_k \| \le \tau \| r_0 \| $.
+\item {\ttfamily mode\+::absolute} — absolute threshold\+: $ \beta = 1 $, so the condition is $ \| r_k \| \le \tau $.
+\end{DoxyItemize}
 
-For better performance, the checks are run on the executor where the algorithm is executed.
+Per-\/iteration, the criterion prefers a pre-\/computed residual norm passed by the solver (via {\ttfamily Updater\+::residual\+\_\+norm}); otherwise it falls back to computing the 2-\/norm of the residual vector itself (via {\ttfamily Updater\+::residual}), which costs one global reduction. When even cheaper checks are needed and the solver maintains an internal squared-\/norm estimate, use \mbox{\hyperlink{classgko_1_1stop_1_1ImplicitResidualNorm}{Implicit\+Residual\+Norm}} instead.
 
 \begin{DoxyNote}{Note}
-To use this stopping criterion there are some dependencies. The constructor depends on either {\ttfamily b} or the {\ttfamily initial\+\_\+residual} in order to compute their norms. If this is not correctly provided, an exception \+::gko\+::\+Not\+Supported() is thrown. 
+Baseline prerequisites at construction time\+:
+\begin{DoxyItemize}
+\item {\ttfamily mode\+::rhs\+\_\+norm} requires the right-\/hand side $ b $.
+\item {\ttfamily mode\+::initial\+\_\+resnorm} requires either the initial residual $ r_0 $ explicitly, or the triple $ (A, b, x_0) $ from which it is computed as $ r_0 = b - A x_0 $.
+\item {\ttfamily mode\+::absolute} requires $ b $ as well — to determine the number of right-\/hand sides; its baseline is then filled with ones. If the required arguments are missing, \+::gko\+::\+Not\+Supported() is thrown. 
+\end{DoxyItemize}
 \end{DoxyNote}
 
 

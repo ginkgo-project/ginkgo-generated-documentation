@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2801723526 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2816504854 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -290,6 +290,10 @@ class gko::solver::CbGmres&lt; ValueType &gt;</h3>
 <p>CB-GMRES or the compressed basis generalized minimal residual method is an iterative type Krylov subspace method which is suitable for nonsymmetric linear systems. </p>
 <p>The implementation in Ginkgo makes use of the merged kernel to make the best use of data locality. The inner operations in one iteration of CB-GMRES are merged into 2 separate steps. Classical Gram-Schmidt with reorthogonalization is used.</p>
 <p>The Krylov basis can be stored in reduced precision (compressed) to reduce memory accesses, while all computations (including Krylov basis operations) are performed in the same arithmetic precision ValueType. By default, the Krylov basis are stored in one precision lower than ValueType.</p>
+<p>Mathematically CB-GMRES is the same algorithm as standard <a class="el" href="classgko_1_1solver_1_1Gmres.html">GMRES</a> — the Arnoldi process produces an orthonormal basis <img class="formulaInl" alt="$ V_m $" src="form_156.png"/> and an upper Hessenberg <img class="formulaInl" alt="$ \bar H_m $" src="form_157.png"/> with <img class="formulaInl" alt="$ A V_m = V_{m+1} \bar H_m $" src="form_158.png"/>, and the iterate is chosen as </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ x_m = x_0 + V_m y_m, \qquad y_m = \arg\min_{y} \| \beta e_1 - \bar H_m y \|_2. \]" src="form_159.png"/>
+</p>
+<p> The "compressed basis" variant stores the columns of <img class="formulaInl" alt="$ V_m $" src="form_156.png"/> in a precision lower than ValueType: each basis vector is cast down to the storage type when written and cast back up when read. The Hessenberg matrix, the Givens rotations, and the working residual all stay in full ValueType precision, so the final approximation has the same accuracy as standard GMRES while the basis storage and the bandwidth needed to apply it are reduced. See the <code>storage_precision</code> enum for the supported compression options.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">ValueType</td><td>the arithmetic precision and the precision of matrix elements </td></tr>

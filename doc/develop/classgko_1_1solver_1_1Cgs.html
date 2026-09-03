@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2801723526 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2816504854 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -288,6 +288,14 @@ static auto&#160;</td><td class="memItemRight" valign="bottom"><b>build</b> () -
 class gko::solver::Cgs&lt; ValueType &gt;</h3>
 
 <p>CGS or the conjugate gradient square method is an iterative type Krylov subspace method which is suitable for general systems. </p>
+<p>CGS rests on the identity that BiCG produces a residual of the form <img class="formulaInl" alt="$ r_k^{\mathrm{BiCG}} = \psi_k(A) r_0 $" src="form_166.png"/>, where <img class="formulaInl" alt="$ \psi_k $" src="form_167.png"/> is the residual polynomial. Squaring this polynomial yields the CGS residual </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ r_k^{\mathrm{CGS}} = \psi_k(A)^2 r_0, \]" src="form_168.png"/>
+</p>
+<p> so the iteration avoids the explicit <img class="formulaInl" alt="$ A^H $" src="form_145.png"/> apply that BiCG requires, and it contracts the residual twice as fast per step when BiCG converges.</p>
+<p>Starting from <img class="formulaInl" alt="$ r_0 = b - A x_0 $" src="form_169.png"/>, a shadow residual <img class="formulaInl" alt="$ \tilde r_0 $" src="form_170.png"/> (Ginkgo uses <img class="formulaInl" alt="$ \tilde r_0 = r_0 $" src="form_171.png"/>), <img class="formulaInl" alt="$ q_{-1} = p_{-1} = 0 $" src="form_172.png"/> and <img class="formulaInl" alt="$ \rho_{-1} = 1 $" src="form_173.png"/>, one iteration with the preconditioner <img class="formulaInl" alt="$ M \approx A^{-1} $" src="form_174.png"/> reads </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \begin{aligned} \rho_k &amp;= \langle \tilde r_0, r_k \rangle, &amp;\qquad \beta_k &amp;= \rho_k / \rho_{k-1}, \\ u_k &amp;= r_k + \beta_k q_{k-1}, &amp;\qquad p_k &amp;= u_k + \beta_k (q_{k-1} + \beta_k p_{k-1}), \\ \hat v_k &amp;= A M p_k, &amp;\qquad \alpha_k &amp;= \rho_k / \langle \tilde r_0, \hat v_k \rangle, \\ q_k &amp;= u_k - \alpha_k \hat v_k, &amp;\qquad \hat u_k &amp;= M (u_k + q_k), \\ x_{k+1} &amp;= x_k + \alpha_k \hat u_k, &amp;\qquad r_{k+1} &amp;= r_k - \alpha_k A \hat u_k. \end{aligned} \]" src="form_175.png"/>
+</p>
+<p> The pair <img class="formulaInl" alt="$ u_k, q_k $" src="form_176.png"/> takes the place of the single BiCG search direction, which is why the update of <img class="formulaInl" alt="$ x $" src="form_123.png"/> uses their sum. The trade-off for dropping <img class="formulaInl" alt="$ A^H $" src="form_145.png"/> is that the squared polynomial also squares the error: the residuals lose monotonicity and can oscillate strongly on poorly conditioned systems. When this matters in practice, <a class="el" href="classgko_1_1solver_1_1Bicgstab.html">BiCGSTAB</a> replaces the second application of <img class="formulaInl" alt="$ \psi_k $" src="form_167.png"/> by a locally minimizing polynomial for the same number of operator applies and one extra inner product.</p>
 <p>The implementation in Ginkgo makes use of the merged kernel to make the best use of data locality. The inner operations in one iteration of CGS are merged into 3 separate steps.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">

@@ -85,17 +85,23 @@ One iteration of the Par\+I\+CT algorithm consists of the following steps\+:
 
 
 \begin{DoxyEnumerate}
-\item Calculating the residual $R = A - LL^T$
-\item Adding new non-\/zero locations from $R$ to $L$. The new non-\/zero locations are initialized based on the corresponding residual value.
-\item Executing a fixed-\/point iteration on $L$ according to $ F(L) = \begin{cases} \frac{1}{l_{jj}} \left(a_{ij}-\sum_{k=1}^{j-1}l_{ik}l_{jk}\right), \quad & i \neq j \\ \sqrt{a_{ij}-\sum_{k=1}^{j-1}l_{ik}l_{jk}}, \quad & i = j \\ \end{cases} $
-\item Removing the smallest entries (by magnitude) from $L$
-\item Executing a fixed-\/point iteration on the (now sparser) $L$
+\item Calculate the residual $R = A - LL^T$.
+\item Add new non-\/zero locations from $R$ to $L$. The new non-\/zero locations are initialized from the corresponding residual entries.
+\item Execute a fixed-\/point iteration on $L$ according to
+
+\[ F(L)_{ij} = \begin{cases} \frac{1}{l_{jj}} \left( a_{ij} - \sum_{k=1}^{j-1} l_{ik} l_{jk} \right), & i \neq j, \\ \sqrt{ a_{ij} - \sum_{k=1}^{j-1} l_{ik} l_{jk} }, & i = j. \end{cases} \]
+\item Remove the smallest entries (by magnitude) from $L$.
+\item Execute a fixed-\/point iteration on the (now sparser) $L$.
 \end{DoxyEnumerate}
 
 This Par\+I\+CT algorithm thus improves the sparsity pattern and the approximation of $L$ simultaneously.
 
-The implementation follows the design of H. Anzt et al., Par\+I\+L\+UT -\/ A Parallel Threshold I\+LU for G\+P\+Us, 2019 I\+E\+EE International Parallel and Distributed Processing Symposium (I\+P\+D\+PS), pp. 231–241.
+\begin{DoxyParagraph}{References}
 
+\begin{DoxyItemize}
+\item Anzt, H., Chow, E., Dongarra, J. {\itshape Par\+I\+L\+UT — A Parallel Threshold I\+LU for G\+P\+Us.} 2019 I\+E\+EE International Parallel and Distributed Processing Symposium (I\+P\+D\+PS), pp. 231–241. \href{https://doi.org/10.1109/IPDPS.2019.00033}{\texttt{ https\+://doi.\+org/10.\+1109/\+I\+P\+D\+P\+S.\+2019.\+00033}}
+\end{DoxyItemize}
+\end{DoxyParagraph}
 
 \begin{DoxyTemplParams}{Template Parameters}
 {\em Value\+Type} & Type of the values of all matrices used in this class \\

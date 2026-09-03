@@ -2,7 +2,7 @@
 \label{classgko_1_1stop_1_1ImplicitResidualNorm}\index{gko::stop::ImplicitResidualNorm$<$ ValueType $>$@{gko::stop::ImplicitResidualNorm$<$ ValueType $>$}}
 
 
-The \mbox{\hyperlink{classgko_1_1stop_1_1ImplicitResidualNorm}{Implicit\+Residual\+Norm}} class is a stopping criterion which stops the iteration process when the implicit residual norm is below a certain threshold relative to.  
+Stopping criterion based on a solver-\/maintained squared residual-\/norm estimate $ \rho_k^2 \approx \| r_k \|^2 $.  
 
 
 
@@ -66,17 +66,28 @@ static auto {\bfseries build} () -\/$>$ decltype(\mbox{\hyperlink{classgko_1_1st
 \subsubsection*{template$<$typename Value\+Type = default\+\_\+precision$>$\newline
 class gko\+::stop\+::\+Implicit\+Residual\+Norm$<$ Value\+Type $>$}
 
-The \mbox{\hyperlink{classgko_1_1stop_1_1ImplicitResidualNorm}{Implicit\+Residual\+Norm}} class is a stopping criterion which stops the iteration process when the implicit residual norm is below a certain threshold relative to. 
+Stopping criterion based on a solver-\/maintained squared residual-\/norm estimate $ \rho_k^2 \approx \| r_k \|^2 $. 
+
+Several Krylov methods (CG, Bi\+C\+G\+S\+T\+AB, …) already compute this quantity per iteration as a by-\/product of their inner-\/product recurrences, so the criterion can check convergence without computing a norm of its own — saving the global reduction the explicit \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{Residual\+Norm}} form needs when the solver only passes $ r_k $. The iteration halts once $ \rho_k \le \tau \cdot \beta $, with the same {\ttfamily reduction\+\_\+factor} and {\ttfamily baseline} factory parameters as Residual\+Norm\+:
 
 
-\begin{DoxyEnumerate}
-\item the norm of the right-\/hand side, implicit\+\_\+resnorm $\leq$ $<$ threshold $\ast$ norm(right\+\_\+hand\+\_\+side)
-\item the initial residual, implicit\+\_\+resnorm $\leq$ threshold $\ast$ norm(initial\+\_\+residual) .
-\item one, implicit\+\_\+resnorm $\leq$ threshold.
-\end{DoxyEnumerate}
+\begin{DoxyItemize}
+\item {\ttfamily mode\+::rhs\+\_\+norm} (default) — $ \rho_k \le \tau \| b \| $.
+\item {\ttfamily mode\+::initial\+\_\+resnorm} — $ \rho_k \le \tau \| r_0 \| $.
+\item {\ttfamily mode\+::absolute} — $ \rho_k \le \tau $.
+\end{DoxyItemize}
+
+Because $ \rho_k^2 $ is updated by short recurrences rather than recomputed from $ b - A x_k $ each step, it can drift from the true residual norm on long runs in finite precision; pair this criterion with an \mbox{\hyperlink{classgko_1_1stop_1_1Iteration}{Iteration}} cap when that matters.
 
 \begin{DoxyNote}{Note}
-To use this stopping criterion there are some dependencies. The constructor depends on either {\ttfamily b} or the {\ttfamily initial\+\_\+residual} in order to compute their norms. If this is not correctly provided, an exception \+::gko\+::\+Not\+Supported() is thrown. 
+The solver must pass the squared estimate through {\ttfamily Updater\+::implicit\+\_\+sq\+\_\+residual\+\_\+norm} on every check — there is no fallback path. If it is missing, \+::gko\+::\+Not\+Supported() is thrown at check time.
+
+Baseline prerequisites at construction time mirror Residual\+Norm\+:
+\begin{DoxyItemize}
+\item {\ttfamily mode\+::rhs\+\_\+norm} requires $ b $.
+\item {\ttfamily mode\+::initial\+\_\+resnorm} requires either $ r_0 $ explicitly or the triple $ (A, b, x_0) $ to derive it.
+\item {\ttfamily mode\+::absolute} requires $ b $ for sizing the per-\/\+R\+HS baseline. If the required arguments are missing, \+::gko\+::\+Not\+Supported() is thrown. 
+\end{DoxyItemize}
 \end{DoxyNote}
 
 

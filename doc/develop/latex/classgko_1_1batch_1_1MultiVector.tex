@@ -131,13 +131,27 @@ class gko\+::batch\+::\+Multi\+Vector$<$ Value\+Type $>$}
 
 \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}} stores multiple vectors in a batched fashion and is useful for batched operations. 
 
-For example, if you want to store two batch items with multi-\/vectors of size (3 x 2) given below\+:
+For example, two batch items, each a 3 x 2 multi-\/vector, would be laid out as\+:
 
-\mbox{[}1 2 ; 3 4 1 2 ; 3 4 1 2 ; 3 4\mbox{]}
 
-In memory, they would be stored as a single array\+: \mbox{[}1 2 1 2 1 2 3 4 3 4 3 4\mbox{]}.
+\begin{DoxyCode}{0}
+\DoxyCodeLine{batch item 0      batch item 1}
+\DoxyCodeLine{  1 2               3 4}
+\DoxyCodeLine{  1 2               3 4}
+\DoxyCodeLine{  1 2               3 4}
+\end{DoxyCode}
 
-Access functions @at can help access individual item if necessary.
+
+In memory, both items are stored consecutively as a single row-\/major array\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{[ 1 2  1 2  1 2 | 3 4  3 4  3 4 ]}
+\DoxyCodeLine{  item 0          item 1}
+\end{DoxyCode}
+
+
+The accessor {\ttfamily \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector_adac42b115d0d103429714fe9163cc7f9}{at()}}} can be used to reach an individual entry of a specific batch item.
 
 The values of the different batch items are stored consecutively and in each batch item, the multi-\/vectors are stored in a row-\/major fashion.
 

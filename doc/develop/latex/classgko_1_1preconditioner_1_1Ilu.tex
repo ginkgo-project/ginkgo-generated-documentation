@@ -2,7 +2,7 @@
 \label{classgko_1_1preconditioner_1_1Ilu}\index{gko::preconditioner::Ilu$<$ ValueType, ReverseApply, IndexType $>$@{gko::preconditioner::Ilu$<$ ValueType, ReverseApply, IndexType $>$}}
 
 
-The Incomplete LU (I\+LU) preconditioner solves the equation $LUx = b$ for a given lower triangular matrix L, an upper triangular matrix U and the right hand side b (can contain multiple right hand sides).  
+The Incomplete LU (I\+LU) preconditioner solves the equation $LUx = b$ for a given lower triangular matrix $L$, an upper triangular matrix $U$ and the right hand side $b$ (can contain multiple right hand sides).  
 
 
 
@@ -55,9 +55,9 @@ using {\bfseries transposed\+\_\+type} = \mbox{\hyperlink{classgko_1_1preconditi
 const \mbox{\hyperlink{structgko_1_1preconditioner_1_1Ilu_1_1parameters__type}{parameters\+\_\+type}} \& {\bfseries get\+\_\+parameters} () const
 \item 
 std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu_a1a0af3c8b69864636de77f3d6aa3982d}{get\+\_\+l\+\_\+solver}} () const
-\begin{DoxyCompactList}\small\item\em Returns the solver which is used for the provided L matrix. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Returns the solver which is used for the provided $L$ matrix. \end{DoxyCompactList}\item 
 std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu_a3b1999bc97f77b2519191966732268d0}{get\+\_\+u\+\_\+solver}} () const
-\begin{DoxyCompactList}\small\item\em Returns the solver which is used for the provided U matrix. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Returns the solver which is used for the provided $U$ matrix. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu_a9834a49e141eccdf80523900b3358a64}{transpose}} () const override
 \begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ilu_a373ca7fa07df71336d6639d60b147d0f}{conj\+\_\+transpose}} () const override
@@ -90,28 +90,28 @@ static constexpr bool {\bfseries performs\+\_\+reverse\+\_\+apply} = Reverse\+Ap
 \subsubsection*{template$<$typename Value\+Type = default\+\_\+precision, bool Reverse\+Apply = false, typename Index\+Type = int32$>$\newline
 class gko\+::preconditioner\+::\+Ilu$<$ Value\+Type, Reverse\+Apply, Index\+Type $>$}
 
-The Incomplete LU (I\+LU) preconditioner solves the equation $LUx = b$ for a given lower triangular matrix L, an upper triangular matrix U and the right hand side b (can contain multiple right hand sides). 
+The Incomplete LU (I\+LU) preconditioner solves the equation $LUx = b$ for a given lower triangular matrix $L$, an upper triangular matrix $U$ and the right hand side $b$ (can contain multiple right hand sides). 
 
-It allows to set both the solver for L and the solver for U independently, while providing the defaults \mbox{\hyperlink{classgko_1_1solver_1_1LowerTrs}{solver\+::\+Lower\+Trs}} and \mbox{\hyperlink{classgko_1_1solver_1_1UpperTrs}{solver\+::\+Upper\+Trs}}, which are direct triangular solvers. For these solvers, a factory can be provided (with {\ttfamily with\+\_\+l\+\_\+solver} and {\ttfamily with\+\_\+u\+\_\+solver}) to have more control over their behavior. In particular, it is possible to use an iterative method for solving the triangular systems.
+It allows to set both the solver for $L$ and the solver for $U$ independently, while providing the defaults \mbox{\hyperlink{classgko_1_1solver_1_1LowerTrs}{solver\+::\+Lower\+Trs}} and \mbox{\hyperlink{classgko_1_1solver_1_1UpperTrs}{solver\+::\+Upper\+Trs}}, which are direct triangular solvers. For these solvers, a factory can be provided (with {\ttfamily with\+\_\+l\+\_\+solver} and {\ttfamily with\+\_\+u\+\_\+solver}) to have more control over their behavior. In particular, it is possible to use an iterative method for solving the triangular systems.
 
-An object of this class can be created with a matrix or a \mbox{\hyperlink{classgko_1_1Composition}{gko\+::\+Composition}} containing two matrices. If created with a matrix, it is factorized before creating the solver. If a \mbox{\hyperlink{classgko_1_1Composition}{gko\+::\+Composition}} (containing two matrices) is used, the first operand will be taken as the L matrix, the second will be considered the U matrix. Par\+Ilu can be directly used, since it orders the factors in the correct way.
+An object of this class can be created with a matrix or a \mbox{\hyperlink{classgko_1_1Composition}{gko\+::\+Composition}} containing two matrices. If created with a matrix, it is factorized before creating the solver. If a \mbox{\hyperlink{classgko_1_1Composition}{gko\+::\+Composition}} (containing two matrices) is used, the first operand will be taken as the $L$ matrix, the second will be considered the $U$ matrix. Par\+Ilu can be directly used, since it orders the factors in the correct way.
 
 \begin{DoxyNote}{Note}
 When providing a \mbox{\hyperlink{classgko_1_1Composition}{gko\+::\+Composition}}, the first matrix must be the lower matrix ( $L$), and the second matrix must be the upper matrix ( $U$). If they are swapped, solving might crash or return the wrong result.
 
-Do not use symmetric solvers (like CG) for L or U solvers since both matrices (L and U) are, by design, not symmetric.
+Do not use symmetric solvers (like CG) for $L$ or $U$ solvers since both matrices ( $L$ and $U$) are, by design, not symmetric.
 
-This class is not thread safe (even a const object is not) because it uses an internal cache to accelerate multiple (sequential) applies. Using it in parallel can lead to segmentation faults, wrong results and other unwanted behavior. 
+This class is not thread safe (even a const object is not) because it uses an internal cache to accelerate multiple (sequential) applies. Using it in parallel can lead to segmentation faults, wrong results and other unwanted behavior.
 
 The default template during parse is $<$Value\+Type, Index\+Type$>$ not $<$Lower\+Trs, Index\+Type$>$. Only the variants with Value\+Type are supported in parse.
 \end{DoxyNote}
 
 \begin{DoxyTemplParams}{Template Parameters}
-{\em Value\+Type} & the value type used for the L and U matrices. \\
+{\em Value\+Type} & the value type used for the $L$ and $U$ matrices. \\
 \hline
-{\em Reverse\+Apply} & default behavior (Reverse\+Apply = false) is first to solve with L (Ly = b) and then with U (Ux = y). When set to true, it will solve first with U, and then with L. \\
+{\em Reverse\+Apply} & default behavior (Reverse\+Apply = false) is first to solve with $L$ ( $Ly = b$) and then with $U$ ( $Ux = y$). When set to true, it will solve first with $U$, and then with $L$. \\
 \hline
-{\em Index\+Type} & Type of the indices when Par\+Ilu is used to generate both L and U factors. Irrelevant otherwise. \\
+{\em Index\+Type} & Type of the indices when Par\+Ilu is used to generate both $L$ and $U$ factors. Irrelevant otherwise. \\
 \hline
 \end{DoxyTemplParams}
 
@@ -169,10 +169,10 @@ std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ 
 
 
 
-Returns the solver which is used for the provided L matrix. 
+Returns the solver which is used for the provided $L$ matrix. 
 
 \begin{DoxyReturn}{Returns}
-the solver which is used for the provided L matrix 
+the solver which is used for the provided $L$ matrix 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ilu_a3b1999bc97f77b2519191966732268d0}\label{classgko_1_1preconditioner_1_1Ilu_a3b1999bc97f77b2519191966732268d0}} 
 \index{gko::preconditioner::Ilu$<$ ValueType, ReverseApply, IndexType $>$@{gko::preconditioner::Ilu$<$ ValueType, ReverseApply, IndexType $>$}!get\_u\_solver@{get\_u\_solver}}
@@ -183,10 +183,10 @@ std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ 
 
 
 
-Returns the solver which is used for the provided U matrix. 
+Returns the solver which is used for the provided $U$ matrix. 
 
 \begin{DoxyReturn}{Returns}
-the solver which is used for the provided U matrix 
+the solver which is used for the provided $U$ matrix 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classgko_1_1preconditioner_1_1Ilu_a52fb0cc81227b28279759d107ad3389c}\label{classgko_1_1preconditioner_1_1Ilu_a52fb0cc81227b28279759d107ad3389c}} 
 \index{gko::preconditioner::Ilu$<$ ValueType, ReverseApply, IndexType $>$@{gko::preconditioner::Ilu$<$ ValueType, ReverseApply, IndexType $>$}!operator=@{operator=}}

@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2801723526 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2816504854 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -282,15 +282,25 @@ class gko::solver::Ir&lt; ValueType &gt;</h3>
 
 <p>Iterative refinement (IR) is an iterative method that uses another coarse method to approximate the error of the current solution via the current residual. </p>
 <p>Moreover, it can be also considered as preconditioned Richardson iteration with relaxation factor = 1.</p>
-<p>For any approximation of the solution <code>solution</code> to the system <code>Ax = b</code>, the residual is defined as: <code>residual = b - A solution</code>. The error in <code>solution</code>, <code>e = x - solution</code> (with <code>x</code> being the exact solution) can be obtained as the solution to the residual equation <code>Ae = residual</code>, since <code>A e = Ax - A solution = b - A solution = residual</code>. Then, the real solution is computed as <code>x = relaxation_factor * solution + e</code>. Instead of accurately solving the residual equation <code>Ae = residual</code>, the solution of the system <code>e</code> can be approximated to obtain the approximation <code>error</code> using a coarse method <code>solver</code>, which is used to update <code>solution</code>, and the entire process is repeated with the updated <code>solution</code>. This yields the iterative refinement method:</p>
+<p>Let <img class="formulaInl" alt="$ x_k $" src="form_209.png"/> be the approximation of the solution of <img class="formulaInl" alt="$ A x = b $" src="form_210.png"/> after <img class="formulaInl" alt="$ k $" src="form_211.png"/> iterations and let <img class="formulaInl" alt="$ x $" src="form_123.png"/> denote the exact solution. The residual and the error of <img class="formulaInl" alt="$ x_k $" src="form_209.png"/> are </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ r_k = b - A x_k, \qquad e_k = x - x_k, \]" src="form_212.png"/>
+</p>
+<p> and they are linked by the residual equation <img class="formulaInl" alt="$ A e_k = A x - A x_k = b - A x_k = r_k $" src="form_213.png"/>. Knowing <img class="formulaInl" alt="$ e_k $" src="form_214.png"/> exactly would give the exact solution in a single update <img class="formulaInl" alt="$ x = x_k + e_k $" src="form_215.png"/>. Instead of solving <img class="formulaInl" alt="$ A e_k = r_k $" src="form_216.png"/> exactly, IR approximates <img class="formulaInl" alt="$ e_k $" src="form_214.png"/> by <img class="formulaInl" alt="$ \tilde e_k $" src="form_217.png"/> using a cheap inner <code>solver</code>, applies that correction with a relaxation factor <img class="formulaInl" alt="$ \alpha $" src="form_218.png"/>, </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ x_{k+1} = x_k + \alpha \tilde e_k, \]" src="form_219.png"/>
+</p>
+<p> and repeats the process with the updated iterate. Written with the names used below, <img class="formulaInl" alt="$ x_k $" src="form_209.png"/> is <code>solution</code>, <img class="formulaInl" alt="$ r_k $" src="form_146.png"/> is <code>residual</code> and <img class="formulaInl" alt="$ \tilde e_k $" src="form_217.png"/> is <code>error</code>:</p>
 <div class="fragment"><div class="line">solution = initial_guess</div>
 <div class="line"><span class="keywordflow">while</span> not converged:</div>
 <div class="line">    residual = b - A solution</div>
 <div class="line">    error = <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a">solver</a>(A, residual)</div>
 <div class="line">    solution = solution + relaxation_factor * error</div>
 </div><!-- fragment --><p>With <code>relaxation_factor</code> equal to 1 (default), the solver is Iterative Refinement, with <code>relaxation_factor</code> equal to a value other than <code>1</code>, the solver is a Richardson iteration, with possibility for additional preconditioning.</p>
-<p>Assuming that <code>solver</code> has accuracy <code>c</code>, i.e., <code>| e - error | &lt;= c | e |</code>, iterative refinement will converge with a convergence rate of <code>c</code>. Indeed, from <code>e - error = x - solution - error = x - solution*</code> (where <code>solution*</code> denotes the value stored in <code>solution</code> after the update) and <code>e = inv(A) residual = inv(A)b - inv(A) A solution = x - solution</code> it follows that | x - solution* | &lt;= c | x - solution |.</p>
-<p>Unless otherwise specified via the <code>solver</code> factory parameter, this implementation uses the identity operator (i.e. the solver that approximates the solution of a system Ax = b by setting x := b) as the default inner solver. Such a setting results in a relaxation method known as the Richardson iteration with parameter 1, which is guaranteed to converge for matrices whose spectrum is strictly contained within the unit disc around 1 (i.e., all its eigenvalues <code>lambda</code> have to satisfy the equation `|relaxation_factor * lambda - 1| &lt; 1).</p>
+<p>Assume <img class="formulaInl" alt="$ \alpha = 1 $" src="form_220.png"/> and that <code>solver</code> has accuracy <img class="formulaInl" alt="$ c $" src="form_221.png"/>, i.e. <img class="formulaInl" alt="$ \| e_k - \tilde e_k \| \le c \| e_k \| $" src="form_222.png"/>. Then iterative refinement converges with a convergence rate of <img class="formulaInl" alt="$ c $" src="form_221.png"/>: from <img class="formulaInl" alt="$ e_k - \tilde e_k = (x - x_k) - \tilde e_k = x - x_{k+1} $" src="form_223.png"/> it follows that <img class="formulaInl" alt="$ \| x - x_{k+1} \| \le c \| x - x_k \| $" src="form_224.png"/>.</p>
+<p>Unless otherwise specified via the <code>solver</code> factory parameter, this implementation uses the identity operator (i.e. the solver that approximates the solution of a system <img class="formulaInl" alt="$ A x = b $" src="form_210.png"/> by setting <img class="formulaInl" alt="$ x := b $" src="form_225.png"/>) as the default inner solver. It leaves the residual unchanged, <img class="formulaInl" alt="$ \tilde e_k = r_k $" src="form_226.png"/>, so the iteration reduces to the Richardson iteration <img class="formulaInl" alt="$ x_{k+1} = x_k + \alpha r_k $" src="form_227.png"/>, which converges for every initial guess if and only if <img class="formulaInl" alt="$ | 1 - \alpha \lambda | &lt; 1 $" src="form_228.png"/> holds for every eigenvalue <img class="formulaInl" alt="$ \lambda $" src="form_229.png"/> of <img class="formulaInl" alt="$ A $" src="form_118.png"/>.</p>
+<dl class="section user"><dt>References</dt><dd><ul>
+<li>Saad, Y. <em>Iterative Methods for Sparse Linear Systems.</em> 2nd ed. SIAM, 2003. <a href="https://doi.org/10.1137/1.9780898718003">https://doi.org/10.1137/1.9780898718003</a></li>
+</ul>
+</dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">ValueType</td><td>precision of matrix elements </td></tr>

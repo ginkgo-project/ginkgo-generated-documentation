@@ -135,7 +135,17 @@ const value\+\_\+type$\ast$ \mbox{\hyperlink{classgko_1_1batch_1_1preconditioner
 
 Returns the pointer to the memory used for storing the block data. 
 
-Element ({\ttfamily i}, {\ttfamily j}) of the block, which belongs to the batch entry with index = \char`\"{}batch\+\_\+id\char`\"{} and has local id = \char`\"{}block\+\_\+id\char`\"{} within its batch entry is stored at the address = \mbox{\hyperlink{classgko_1_1batch_1_1preconditioner_1_1Jacobi_a3e017b255c359e618ae52f65840dbcc0}{get\+\_\+const\+\_\+blocks()}} + detail\+::get\+\_\+global\+\_\+block\+\_\+offset(batch\+\_\+id, num\+\_\+blocks, block\+\_\+id, cumulative\+\_\+blocks\+\_\+storage) + i $\ast$ detail\+::get\+\_\+stride(block\+\_\+id, block\+\_\+pointers) + j
+Element $(i, j)$ of the block that belongs to batch entry {\ttfamily batch\+\_\+id} and has local id {\ttfamily block\+\_\+id} within that entry is stored at the address
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classgko_1_1batch_1_1preconditioner_1_1Jacobi_a3e017b255c359e618ae52f65840dbcc0}{get\_const\_blocks}}()}
+\DoxyCodeLine{    + detail::get\_global\_block\_offset(batch\_id, num\_blocks, block\_id,}
+\DoxyCodeLine{                                      cumulative\_blocks\_storage)}
+\DoxyCodeLine{    + i * detail::get\_stride(block\_id, block\_pointers)}
+\DoxyCodeLine{    + j}
+\end{DoxyCode}
+
 
 \begin{DoxyNote}{Note}
 Returns nullptr in case of a scalar jacobi preconditioner (max\+\_\+block\+\_\+size = 1). The blocks array is empty in case of scalar jacobi preconditioner as the preconditioner is generated inside the batched solver kernel.

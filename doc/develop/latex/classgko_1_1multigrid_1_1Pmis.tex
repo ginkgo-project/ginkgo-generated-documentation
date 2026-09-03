@@ -1,0 +1,130 @@
+\hypertarget{classgko_1_1multigrid_1_1Pmis}{}\doxysection{gko\+::multigrid\+::Pmis$<$ Value\+Type, Index\+Type $>$ Class Template Reference}
+\label{classgko_1_1multigrid_1_1Pmis}\index{gko::multigrid::Pmis$<$ ValueType, IndexType $>$@{gko::multigrid::Pmis$<$ ValueType, IndexType $>$}}
+
+
+Parallel modified independent set (\mbox{\hyperlink{classgko_1_1multigrid_1_1Pmis}{Pmis}}) is the classical coarsening method introduced in the paper H.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/multigrid/pmis.\+hpp$>$}
+
+
+
+Inheritance diagram for gko\+::multigrid\+::Pmis$<$ Value\+Type, Index\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1multigrid_1_1Pmis__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for gko\+::multigrid\+::Pmis$<$ Value\+Type, Index\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1multigrid_1_1Pmis__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classgko_1_1multigrid_1_1Pmis_1_1Factory}{Factory}}
+\item 
+struct \mbox{\hyperlink{structgko_1_1multigrid_1_1Pmis_1_1parameters__type}{parameters\+\_\+type}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1multigrid_1_1Pmis_a79e810e8111804c3c3ae8a940493b28d}\label{classgko_1_1multigrid_1_1Pmis_a79e810e8111804c3c3ae8a940493b28d}} 
+using {\bfseries value\+\_\+type} = Value\+Type
+\item 
+\mbox{\Hypertarget{classgko_1_1multigrid_1_1Pmis_a5577923ba200a55125bf0fe01f6631a6}\label{classgko_1_1multigrid_1_1Pmis_a5577923ba200a55125bf0fe01f6631a6}} 
+using {\bfseries index\+\_\+type} = Index\+Type
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1multigrid_1_1Pmis_a40d26ac84daee8cb79e0b430983f4955}{get\+\_\+system\+\_\+matrix}} () const
+\begin{DoxyCompactList}\small\item\em Returns the system operator (matrix) of the linear system. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1multigrid_1_1Pmis_a29490feeb1b7d5c29acb325d2fca9f86}\label{classgko_1_1multigrid_1_1Pmis_a29490feeb1b7d5c29acb325d2fca9f86}} 
+const \mbox{\hyperlink{structgko_1_1multigrid_1_1Pmis_1_1parameters__type}{parameters\+\_\+type}} \& {\bfseries get\+\_\+parameters} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1multigrid_1_1Pmis_a5a5ff3993b360630ac0aecf512c2153d}\label{classgko_1_1multigrid_1_1Pmis_a5a5ff3993b360630ac0aecf512c2153d}} 
+static auto {\bfseries build} () -\/$>$ decltype(\mbox{\hyperlink{classgko_1_1multigrid_1_1Pmis_1_1Factory}{Factory}} \+::create())
+\item 
+static \mbox{\hyperlink{structgko_1_1multigrid_1_1Pmis_1_1parameters__type}{parameters\+\_\+type}} \mbox{\hyperlink{classgko_1_1multigrid_1_1Pmis_a6f879e50f9512368a6218249848eb53d}{parse}} (const \mbox{\hyperlink{classgko_1_1config_1_1pnode}{config\+::pnode}} \&config, const \mbox{\hyperlink{classgko_1_1config_1_1registry}{config\+::registry}} \&context, const \mbox{\hyperlink{classgko_1_1config_1_1type__descriptor}{config\+::type\+\_\+descriptor}} \&td\+\_\+for\+\_\+child=config\+::make\+\_\+type\+\_\+descriptor$<$ Value\+Type, Index\+Type $>$())
+\begin{DoxyCompactList}\small\item\em Create the parameters from the property\+\_\+tree. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$\newline
+class gko\+::multigrid\+::\+Pmis$<$ Value\+Type, Index\+Type $>$}
+
+Parallel modified independent set (\mbox{\hyperlink{classgko_1_1multigrid_1_1Pmis}{Pmis}}) is the classical coarsening method introduced in the paper H. 
+
+De Sterck et al., \char`\"{}\+Reducing complexity in parallel
+algebraic multigrid preconditioners\char`\"{}.
+
+\mbox{\hyperlink{classgko_1_1multigrid_1_1Pmis}{Pmis}} creates the coarse-\/ and fine-\/points group according to the matrix value not the structure.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Value\+Type} & precision of matrix elements \\
+\hline
+{\em Index\+Type} & precision of matrix indices \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1multigrid_1_1Pmis_a40d26ac84daee8cb79e0b430983f4955}\label{classgko_1_1multigrid_1_1Pmis_a40d26ac84daee8cb79e0b430983f4955}} 
+\index{gko::multigrid::Pmis$<$ ValueType, IndexType $>$@{gko::multigrid::Pmis$<$ ValueType, IndexType $>$}!get\_system\_matrix@{get\_system\_matrix}}
+\index{get\_system\_matrix@{get\_system\_matrix}!gko::multigrid::Pmis$<$ ValueType, IndexType $>$@{gko::multigrid::Pmis$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_system\_matrix()}{get\_system\_matrix()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1multigrid_1_1Pmis}{gko\+::multigrid\+::\+Pmis}}$<$ Value\+Type, Index\+Type $>$\+::get\+\_\+system\+\_\+matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the system operator (matrix) of the linear system. 
+
+\begin{DoxyReturn}{Returns}
+the system operator (matrix) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1multigrid_1_1Pmis_a6f879e50f9512368a6218249848eb53d}\label{classgko_1_1multigrid_1_1Pmis_a6f879e50f9512368a6218249848eb53d}} 
+\index{gko::multigrid::Pmis$<$ ValueType, IndexType $>$@{gko::multigrid::Pmis$<$ ValueType, IndexType $>$}!parse@{parse}}
+\index{parse@{parse}!gko::multigrid::Pmis$<$ ValueType, IndexType $>$@{gko::multigrid::Pmis$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{parse()}{parse()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Index\+Type  = int32$>$ \\
+static \mbox{\hyperlink{structgko_1_1multigrid_1_1Pmis_1_1parameters__type}{parameters\+\_\+type}} \mbox{\hyperlink{classgko_1_1multigrid_1_1Pmis}{gko\+::multigrid\+::\+Pmis}}$<$ Value\+Type, Index\+Type $>$\+::parse (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1config_1_1pnode}{config\+::pnode}} \&}]{config,  }\item[{const \mbox{\hyperlink{classgko_1_1config_1_1registry}{config\+::registry}} \&}]{context,  }\item[{const \mbox{\hyperlink{classgko_1_1config_1_1type__descriptor}{config\+::type\+\_\+descriptor}} \&}]{td\+\_\+for\+\_\+child = {\ttfamily config\+:\+:make\+\_\+type\+\_\+descriptor$<$~ValueType,~IndexType~$>$()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Create the parameters from the property\+\_\+tree. 
+
+Because this is directly tied to the specific type, the value/index type settings within config are ignored and type\+\_\+descriptor is only used for children configs.
+
+
+\begin{DoxyParams}{Parameters}
+{\em config} & the property tree for setting \\
+\hline
+{\em context} & the registry \\
+\hline
+{\em td\+\_\+for\+\_\+child} & the type descriptor for children configs. The default uses the value/index type of this class.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+parameters 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/multigrid/pmis.\+hpp\end{DoxyCompactItemize}

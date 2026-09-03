@@ -17,13 +17,13 @@ class \mbox{\hyperlink{classgko_1_1stop_1_1Criterion}{Criterion}}
 struct \mbox{\hyperlink{structgko_1_1stop_1_1CriterionArgs}{Criterion\+Args}}
 \begin{DoxyCompactList}\small\item\em This struct is used to pass parameters to the Enable\+Default\+Criterion\+Factory\+Criterion\+Factory\+::generate() method. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1stop_1_1ImplicitResidualNorm}{Implicit\+Residual\+Norm}}
-\begin{DoxyCompactList}\small\item\em The \mbox{\hyperlink{classgko_1_1stop_1_1ImplicitResidualNorm}{Implicit\+Residual\+Norm}} class is a stopping criterion which stops the iteration process when the implicit residual norm is below a certain threshold relative to. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Stopping criterion based on a solver-\/maintained squared residual-\/norm estimate $ \rho_k^2 \approx \| r_k \|^2 $. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1stop_1_1Iteration}{Iteration}}
 \begin{DoxyCompactList}\small\item\em The \mbox{\hyperlink{classgko_1_1stop_1_1Iteration}{Iteration}} class is a stopping criterion which stops the iteration process after a preset number of iterations. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1stop_1_1RelativeResidualNorm}{Relative\+Residual\+Norm}}
 \begin{DoxyCompactList}\small\item\em The \mbox{\hyperlink{classgko_1_1stop_1_1RelativeResidualNorm}{Relative\+Residual\+Norm}} class is a stopping criterion which stops the iteration process when the residual norm is below a certain threshold relative to the norm of the right-\/hand side, i.\+e. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{Residual\+Norm}}
-\begin{DoxyCompactList}\small\item\em The \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{Residual\+Norm}} class is a stopping criterion which stops the iteration process when the actual residual norm is below a certain threshold relative to. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Stopping criterion based on the explicit residual norm $ \| r_k \| = \| b - A x_k \| $. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNormBase}{Residual\+Norm\+Base}}
 \begin{DoxyCompactList}\small\item\em The \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNormBase}{Residual\+Norm\+Base}} class provides a framework for stopping criteria related to the residual norm. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNormReduction}{Residual\+Norm\+Reduction}}
@@ -129,7 +129,7 @@ Full usage example\+: Stop after 100 iterations or when the absolute residual no
 
 
 \begin{DoxyParams}{Parameters}
-{\em tolerance} & the value the residual norm needs to be below. With residual $r$, initial guess $x_0$, right-\/hand side $b$, matrix $A$, {\ttfamily absolute} means the exact value of the norm $||r||$, {\ttfamily relative} means the norm relative to the right-\/hand side $||r||/||b||$, {\ttfamily initial} means the norm relative to the initial residual $||r||/||b - A x_0||$. An implicit stopping criterion is only available with some solvers, and refers to either the energy norm $||r||_A$ in short-\/recurrence solvers like Cg or the euclidian norm $||r||$ in solvers like G\+M\+R\+ES. Implicit residual norms are cheaper to compute, but may be less precise due to accumulating rounding errors. \\
+{\em tolerance} & the value the residual norm needs to be below. With residual $r$, initial guess $x_0$, right-\/hand side $b$ and matrix $A$, {\ttfamily absolute} means the exact value of the norm $||r||$, {\ttfamily relative} means the norm relative to the right-\/hand side $||r||/||b||$, {\ttfamily initial} means the norm relative to the initial residual $||r||/||b - A x_0||$. An implicit stopping criterion is only available with some solvers, and refers to either the energy norm $||r||_A$ in short-\/recurrence solvers like Cg or the euclidian norm $||r||$ in solvers like G\+M\+R\+ES. Implicit residual norms are cheaper to compute, but may be less precise due to accumulating rounding errors. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -159,7 +159,7 @@ Full usage example\+: Stop after 100 iterations or when the absolute residual no
 
 
 \begin{DoxyParams}{Parameters}
-{\em tolerance} & the value the residual norm needs to be below. With residual $r$, initial guess $x_0$, right-\/hand side $b$, matrix $A$, {\ttfamily absolute} means the exact value of the norm $||r||$, {\ttfamily relative} means the norm relative to the right-\/hand side $||r||/||b||$, {\ttfamily initial} means the norm relative to the initial residual $||r||/||b - A x_0||$. An implicit stopping criterion is only available with some solvers, and refers to either the energy norm $||r||_A$ in short-\/recurrence solvers like Cg or the euclidian norm $||r||$ in solvers like G\+M\+R\+ES. Implicit residual norms are cheaper to compute, but may be less precise due to accumulating rounding errors. \\
+{\em tolerance} & the value the residual norm needs to be below. With residual $r$, initial guess $x_0$, right-\/hand side $b$ and matrix $A$, {\ttfamily absolute} means the exact value of the norm $||r||$, {\ttfamily relative} means the norm relative to the right-\/hand side $||r||/||b||$, {\ttfamily initial} means the norm relative to the initial residual $||r||/||b - A x_0||$. An implicit stopping criterion is only available with some solvers, and refers to either the energy norm $||r||_A$ in short-\/recurrence solvers like Cg or the euclidian norm $||r||$ in solvers like G\+M\+R\+ES. Implicit residual norms are cheaper to compute, but may be less precise due to accumulating rounding errors. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -189,7 +189,7 @@ Full usage example\+: Stop after 100 iterations or when the absolute residual no
 
 
 \begin{DoxyParams}{Parameters}
-{\em tolerance} & the value the residual norm needs to be below. With residual $r$, initial guess $x_0$, right-\/hand side $b$, matrix $A$, {\ttfamily absolute} means the exact value of the norm $||r||$, {\ttfamily relative} means the norm relative to the right-\/hand side $||r||/||b||$, {\ttfamily initial} means the norm relative to the initial residual $||r||/||b - A x_0||$. An implicit stopping criterion is only available with some solvers, and refers to either the energy norm $||r||_A$ in short-\/recurrence solvers like Cg or the euclidian norm $||r||$ in solvers like G\+M\+R\+ES. Implicit residual norms are cheaper to compute, but may be less precise due to accumulating rounding errors. \\
+{\em tolerance} & the value the residual norm needs to be below. With residual $r$, initial guess $x_0$, right-\/hand side $b$ and matrix $A$, {\ttfamily absolute} means the exact value of the norm $||r||$, {\ttfamily relative} means the norm relative to the right-\/hand side $||r||/||b||$, {\ttfamily initial} means the norm relative to the initial residual $||r||/||b - A x_0||$. An implicit stopping criterion is only available with some solvers, and refers to either the energy norm $||r||_A$ in short-\/recurrence solvers like Cg or the euclidian norm $||r||$ in solvers like G\+M\+R\+ES. Implicit residual norms are cheaper to compute, but may be less precise due to accumulating rounding errors. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -219,7 +219,7 @@ Full usage example\+: Stop after 100 iterations or when the absolute residual no
 
 
 \begin{DoxyParams}{Parameters}
-{\em tolerance} & the value the residual norm needs to be below. With residual $r$, initial guess $x_0$, right-\/hand side $b$, matrix $A$, {\ttfamily absolute} means the exact value of the norm $||r||$, {\ttfamily relative} means the norm relative to the right-\/hand side $||r||/||b||$, {\ttfamily initial} means the norm relative to the initial residual $||r||/||b - A x_0||$. An implicit stopping criterion is only available with some solvers, and refers to either the energy norm $||r||_A$ in short-\/recurrence solvers like Cg or the euclidian norm $||r||$ in solvers like G\+M\+R\+ES. Implicit residual norms are cheaper to compute, but may be less precise due to accumulating rounding errors. \\
+{\em tolerance} & the value the residual norm needs to be below. With residual $r$, initial guess $x_0$, right-\/hand side $b$ and matrix $A$, {\ttfamily absolute} means the exact value of the norm $||r||$, {\ttfamily relative} means the norm relative to the right-\/hand side $||r||/||b||$, {\ttfamily initial} means the norm relative to the initial residual $||r||/||b - A x_0||$. An implicit stopping criterion is only available with some solvers, and refers to either the energy norm $||r||_A$ in short-\/recurrence solvers like Cg or the euclidian norm $||r||$ in solvers like G\+M\+R\+ES. Implicit residual norms are cheaper to compute, but may be less precise due to accumulating rounding errors. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -310,7 +310,7 @@ Full usage example\+: Stop after 100 iterations or when the absolute residual no
 
 
 \begin{DoxyParams}{Parameters}
-{\em tolerance} & the value the residual norm needs to be below. With residual $r$, initial guess $x_0$, right-\/hand side $b$, matrix $A$, {\ttfamily absolute} means the exact value of the norm $||r||$, {\ttfamily relative} means the norm relative to the right-\/hand side $||r||/||b||$, {\ttfamily initial} means the norm relative to the initial residual $||r||/||b - A x_0||$. An implicit stopping criterion is only available with some solvers, and refers to either the energy norm $||r||_A$ in short-\/recurrence solvers like Cg or the euclidian norm $||r||$ in solvers like G\+M\+R\+ES. Implicit residual norms are cheaper to compute, but may be less precise due to accumulating rounding errors. \\
+{\em tolerance} & the value the residual norm needs to be below. With residual $r$, initial guess $x_0$, right-\/hand side $b$ and matrix $A$, {\ttfamily absolute} means the exact value of the norm $||r||$, {\ttfamily relative} means the norm relative to the right-\/hand side $||r||/||b||$, {\ttfamily initial} means the norm relative to the initial residual $||r||/||b - A x_0||$. An implicit stopping criterion is only available with some solvers, and refers to either the energy norm $||r||_A$ in short-\/recurrence solvers like Cg or the euclidian norm $||r||$ in solvers like G\+M\+R\+ES. Implicit residual norms are cheaper to compute, but may be less precise due to accumulating rounding errors. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -340,7 +340,7 @@ Full usage example\+: Stop after 100 iterations or when the absolute residual no
 
 
 \begin{DoxyParams}{Parameters}
-{\em tolerance} & the value the residual norm needs to be below. With residual $r$, initial guess $x_0$, right-\/hand side $b$, matrix $A$, {\ttfamily absolute} means the exact value of the norm $||r||$, {\ttfamily relative} means the norm relative to the right-\/hand side $||r||/||b||$, {\ttfamily initial} means the norm relative to the initial residual $||r||/||b - A x_0||$. An implicit stopping criterion is only available with some solvers, and refers to either the energy norm $||r||_A$ in short-\/recurrence solvers like Cg or the euclidian norm $||r||$ in solvers like G\+M\+R\+ES. Implicit residual norms are cheaper to compute, but may be less precise due to accumulating rounding errors. \\
+{\em tolerance} & the value the residual norm needs to be below. With residual $r$, initial guess $x_0$, right-\/hand side $b$ and matrix $A$, {\ttfamily absolute} means the exact value of the norm $||r||$, {\ttfamily relative} means the norm relative to the right-\/hand side $||r||/||b||$, {\ttfamily initial} means the norm relative to the initial residual $||r||/||b - A x_0||$. An implicit stopping criterion is only available with some solvers, and refers to either the energy norm $||r||_A$ in short-\/recurrence solvers like Cg or the euclidian norm $||r||$ in solvers like G\+M\+R\+ES. Implicit residual norms are cheaper to compute, but may be less precise due to accumulating rounding errors. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}

@@ -2,7 +2,7 @@
 \label{classgko_1_1preconditioner_1_1Isai}\index{gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$@{gko::preconditioner::Isai$<$ IsaiType, ValueType, IndexType $>$}}
 
 
-The Incomplete Sparse Approximate Inverse (I\+S\+AI) Preconditioner generates an approximate inverse matrix for a given square matrix A, lower triangular matrix L, upper triangular matrix U or symmetric positive (spd) matrix B.  
+The Incomplete Sparse Approximate Inverse (I\+S\+AI) Preconditioner generates an approximate inverse matrix for a given square matrix $A$, lower triangular matrix $L$, upper triangular matrix $U$ or symmetric positive definite (s.\+p.\+d) matrix $B$.  
 
 
 
@@ -112,22 +112,26 @@ class {\bfseries Isai$<$ isai\+\_\+type\+::spd, Value\+Type, Index\+Type $>$}
 \subsubsection*{template$<$isai\+\_\+type Isai\+Type, typename Value\+Type, typename Index\+Type$>$\newline
 class gko\+::preconditioner\+::\+Isai$<$ Isai\+Type, Value\+Type, Index\+Type $>$}
 
-The Incomplete Sparse Approximate Inverse (I\+S\+AI) Preconditioner generates an approximate inverse matrix for a given square matrix A, lower triangular matrix L, upper triangular matrix U or symmetric positive (spd) matrix B. 
+The Incomplete Sparse Approximate Inverse (I\+S\+AI) Preconditioner generates an approximate inverse matrix for a given square matrix $A$, lower triangular matrix $L$, upper triangular matrix $U$ or symmetric positive definite (s.\+p.\+d) matrix $B$. 
 
-Using the preconditioner computes $aiA * x$, $aiU * x$, $aiL * x$ or $aiC^T * aiC * x$ (depending on the type of the \mbox{\hyperlink{classgko_1_1preconditioner_1_1Isai}{Isai}}) for a given vector x (may have multiple right hand sides). aiA, aiU and aiL are the approximate inverses for A, U and L respectively. aiC is an approximation to C, the exact Cholesky factor of B (This is commonly referred to as a Factorized Sparse Approximate Inverse, short F\+S\+P\+AI).
+Let $ M_A \approx A^{-1} $ denote the approximate inverse of a general matrix $ A $, and similarly $ M_L \approx L^{-1} $, $ M_U \approx U^{-1} $ for lower and upper triangular matrices, and $ M_C \approx C^{-1} $ for the Cholesky factor of an s.\+p.\+d matrix $ B = C^T C $ (the last case is commonly called a Factorized Sparse Approximate Inverse, F\+S\+P\+AI). For a given vector $ x $ (which may carry multiple right-\/hand sides), applying the preconditioner computes \[ \begin{aligned} \texttt{isai\_type::general} &: \quad M_A x, \\ \texttt{isai\_type::lower} &: \quad M_L x, \\ \texttt{isai\_type::upper} &: \quad M_U x, \\ \texttt{isai\_type::spd} &: \quad M_C^{T} M_C x. \end{aligned} \]
 
-The sparsity pattern used for the approximate inverse of A, L and U is the same as the sparsity pattern of the respective matrix. For B, the sparsity pattern used for the approximate inverse is the same as the sparsity pattern of the lower triangular half of B.
+The sparsity pattern used for the approximate inverse of $ A $, $ L $ and $ U $ is the same as the sparsity pattern of the respective matrix. For $ B $, the sparsity pattern of $ M_C $ matches the sparsity pattern of the lower triangular half of $ B $.
 
-Note that, except for the spd case, for a matrix A generally I\+S\+A\+I(\+A)$^\wedge$T != I\+S\+A\+I(\+A$^\wedge$\+T).
-
-For more details on the algorithm, see the paper \href{https://doi.org/10.1016/j.parco.2017.10.003}{\texttt{ Incomplete Sparse Approximate Inverses for Parallel Preconditioning}}, which is the basis for this work.
+Note that, except for the s.\+p.\+d case, in general $ \mathrm{ISAI}(A)^T \ne \mathrm{ISAI}(A^T) $.
 
 \begin{DoxyNote}{Note}
 G\+PU implementations can only handle the vector unit width {\ttfamily width} (warp size for C\+U\+DA) as number of elements per row in the sparse matrix. If there are more than {\ttfamily width} elements per row, the remaining elements will be ignored.
 \end{DoxyNote}
+\begin{DoxyParagraph}{References}
+
+\begin{DoxyItemize}
+\item Anzt, H., Huckle, T. K., Bräckle, J., Dongarra, J. {\itshape Incomplete Sparse Approximate Inverses for Parallel Preconditioning.} Parallel Computing, 71, 1–22, 2018. \href{https://doi.org/10.1016/j.parco.2017.10.003}{\texttt{ https\+://doi.\+org/10.\+1016/j.\+parco.\+2017.\+10.\+003}}
+\end{DoxyItemize}
+\end{DoxyParagraph}
 
 \begin{DoxyTemplParams}{Template Parameters}
-{\em Isai\+Type} & determines if the I\+S\+AI is generated for a general square matrix, a lower triangular matrix, an upper triangular matrix or an spd matrix \\
+{\em Isai\+Type} & determines if the I\+S\+AI is generated for a general square matrix, a lower triangular matrix, an upper triangular matrix or an s.\+p.\+d matrix \\
 \hline
 {\em Value\+Type} & precision of matrix elements \\
 \hline

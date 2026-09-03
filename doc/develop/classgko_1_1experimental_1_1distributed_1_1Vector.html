@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2801723526 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2816504854 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -453,12 +453,10 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>Vector&lt; previous_
 class gko::experimental::distributed::Vector&lt; ValueType &gt;</h3>
 
 <p><a class="el" href="classgko_1_1experimental_1_1distributed_1_1Vector.html" title="Vector is a format which explicitly stores (multiple) distributed column vectors in a dense storage f...">Vector</a> is a format which explicitly stores (multiple) distributed column vectors in a dense storage format. </p>
-<p>The (multi-)vector is distributed by row, which is described by a </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="classgko_1_1experimental_1_1distributed_1_1Partition.html" title="Represents a partition of a range of indices [0, size) into a disjoint set of parts.">Partition</a>. The <a class="el" href="namespacegko_1_1experimental_1_1distributed.html#a3d50932cfebdde844b88d2c82b96947baf5ddaf0ca7929578b408c909429f68f2" title="indices that are locally owned">local</a> vectors are stored using the </dd>
-<dd>
-Dense format. The vector should be filled using the <a class="el" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a5d1d813f5e44851fb7f4a080d8fa7758" title="Reads a vector from the device_matrix_data structure and a global row partition.">read_distributed</a> method, e.g. <div class="fragment"><div class="line"><span class="keyword">auto</span> part = <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Partition.html#a196576140065691b5726ce1cb286302c">Partition&lt;...&gt;::build_from_mapping</a>(...);</div>
+<p>The (multi-)vector is distributed by row, which is described by a <a class="el" href="classgko_1_1experimental_1_1distributed_1_1Partition.html" title="Represents a partition of a range of indices [0, size) into a disjoint set of parts.">Partition</a>. The local vectors are stored using the <a class="el" href="classgko_1_1matrix_1_1Dense.html" title="Dense is a matrix format which explicitly stores all values of the matrix.">matrix::Dense</a> format. The vector should be filled using the read_distributed method, e.g. </p><div class="fragment"><div class="line"><span class="keyword">auto</span> part = <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Partition.html#a196576140065691b5726ce1cb286302c">Partition&lt;...&gt;::build_from_mapping</a>(...);</div>
 <div class="line"><span class="keyword">auto</span> vector = <a class="code" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a38e53776a4d12312089c63a55b771df2">Vector&lt;...&gt;::create</a>(exec, comm);</div>
 <div class="line">vector-&gt;read_distributed(matrix_data, part);</div>
-</div><!-- fragment --> Using this approach the size of the global vectors, <a class="el" href="namespacegko.html#a618c9b64c35b0452240e9e57a9673b94" title="Performs polymorphic type conversion.">as</a> well <a class="el" href="namespacegko.html#a618c9b64c35b0452240e9e57a9673b94" title="Performs polymorphic type conversion.">as</a> the size of the <a class="el" href="namespacegko_1_1experimental_1_1distributed.html#a3d50932cfebdde844b88d2c82b96947baf5ddaf0ca7929578b408c909429f68f2" title="indices that are locally owned">local</a> vectors, will be automatically inferred. It is possible to <a class="el" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a38e53776a4d12312089c63a55b771df2" title="Creates an empty distributed vector with a specified size.">create</a> a vector with specified global and <a class="el" href="namespacegko_1_1experimental_1_1distributed.html#a3d50932cfebdde844b88d2c82b96947baf5ddaf0ca7929578b408c909429f68f2" title="indices that are locally owned">local</a> sizes and <a class="el" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a4a172e7b6b6088918e0c7f8070d43204" title="Fill the distributed vectors with a given value.">fill</a> the <a class="el" href="namespacegko_1_1experimental_1_1distributed.html#a3d50932cfebdde844b88d2c82b96947baf5ddaf0ca7929578b408c909429f68f2" title="indices that are locally owned">local</a> vectors using the <a class="el" href="namespacegko_1_1accessor.html" title="The accessor namespace.">accessor</a> <a class="el" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a2ef33f89c7a1534920127fe3fb696b11" title="Direct (read) access to the underlying local local_vector_type vectors.">get_local_vector</a>.</dd></dl>
+</div><!-- fragment --><p> Using this approach the size of the global vectors, as well as the size of the local vectors, will be automatically inferred. It is possible to create a vector with specified global and local sizes and fill the local vectors using the accessor get_local_vector.</p>
 <dl class="section note"><dt>Note</dt><dd>Operations between two vectors (axpy, dot product, etc.) are only valid if both vectors where created using the same partition.</dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -1984,7 +1982,7 @@ template&lt;typename ValueType  = double&gt; </div>
 </div><div class="memdoc">
 
 <p>Reads a vector from the <a class="el" href="structgko_1_1matrix__data.html" title="This structure is used as an intermediate data type to store a sparse matrix.">matrix_data</a> structure and a global row partition. </p>
-<p>See @read_distributed</p>
+<p>See <a class="el" href="classgko_1_1experimental_1_1distributed_1_1Vector.html#a5d1d813f5e44851fb7f4a080d8fa7758" title="Reads a vector from the device_matrix_data structure and a global row partition.">read_distributed()</a>.</p>
 <dl class="section note"><dt>Note</dt><dd>For efficiency it is advised to use the <a class="el" href="classgko_1_1device__matrix__data.html" title="This type is a device-side equivalent to matrix_data.">device_matrix_data</a> overload. </dd></dl>
 
 </div>

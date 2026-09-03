@@ -93,7 +93,7 @@ Iterative refinement (IR) is an iterative method that uses another coarse method
 
 Moreover, it can be also considered as preconditioned Richardson iteration with relaxation factor = 1.
 
-For any approximation of the solution {\ttfamily solution} to the system {\ttfamily Ax = b}, the residual is defined as\+: {\ttfamily residual = b -\/ A solution}. The error in {\ttfamily solution}, {\ttfamily e = x -\/ solution} (with {\ttfamily x} being the exact solution) can be obtained as the solution to the residual equation {\ttfamily Ae = residual}, since {\ttfamily A e = Ax -\/ A solution = b -\/ A solution = residual}. Then, the real solution is computed as {\ttfamily x = relaxation\+\_\+factor $\ast$ solution + e}. Instead of accurately solving the residual equation {\ttfamily Ae = residual}, the solution of the system {\ttfamily e} can be approximated to obtain the approximation {\ttfamily error} using a coarse method {\ttfamily solver}, which is used to update {\ttfamily solution}, and the entire process is repeated with the updated {\ttfamily solution}. This yields the iterative refinement method\+:
+Let $ x_k $ be the approximation of the solution of $ A x = b $ after $ k $ iterations and let $ x $ denote the exact solution. The residual and the error of $ x_k $ are \[ r_k = b - A x_k, \qquad e_k = x - x_k, \] and they are linked by the residual equation $ A e_k = A x - A x_k = b - A x_k = r_k $. Knowing $ e_k $ exactly would give the exact solution in a single update $ x = x_k + e_k $. Instead of solving $ A e_k = r_k $ exactly, IR approximates $ e_k $ by $ \tilde e_k $ using a cheap inner {\ttfamily solver}, applies that correction with a relaxation factor $ \alpha $, \[ x_{k+1} = x_k + \alpha \tilde e_k, \] and repeats the process with the updated iterate. Written with the names used below, $ x_k $ is {\ttfamily solution}, $ r_k $ is {\ttfamily residual} and $ \tilde e_k $ is {\ttfamily error}\+:
 
 
 \begin{DoxyCode}{0}
@@ -107,10 +107,16 @@ For any approximation of the solution {\ttfamily solution} to the system {\ttfam
 
 With {\ttfamily relaxation\+\_\+factor} equal to 1 (default), the solver is Iterative Refinement, with {\ttfamily relaxation\+\_\+factor} equal to a value other than {\ttfamily 1}, the solver is a Richardson iteration, with possibility for additional preconditioning.
 
-Assuming that {\ttfamily solver} has accuracy {\ttfamily c}, i.\+e., {\ttfamily $\vert$ e -\/ error $\vert$ $<$= c $\vert$ e $\vert$}, iterative refinement will converge with a convergence rate of {\ttfamily c}. Indeed, from {\ttfamily e -\/ error = x -\/ solution -\/ error = x -\/ solution$\ast$} (where {\ttfamily solution$\ast$} denotes the value stored in {\ttfamily solution} after the update) and {\ttfamily e = inv(\+A) residual = inv(\+A)b -\/ inv(\+A) A solution = x -\/ solution} it follows that $\vert$ x -\/ solution$\ast$ $\vert$ $<$= c $\vert$ x -\/ solution $\vert$.
+Assume $ \alpha = 1 $ and that {\ttfamily solver} has accuracy $ c $, i.\+e. $ \| e_k - \tilde e_k \| \le c \| e_k \| $. Then iterative refinement converges with a convergence rate of $ c $\+: from $ e_k - \tilde e_k = (x - x_k) - \tilde e_k = x - x_{k+1} $ it follows that $ \| x - x_{k+1} \| \le c \| x - x_k \| $.
 
-Unless otherwise specified via the {\ttfamily solver} factory parameter, this implementation uses the identity operator (i.\+e. the solver that approximates the solution of a system Ax = b by setting x \+:= b) as the default inner solver. Such a setting results in a relaxation method known as the Richardson iteration with parameter 1, which is guaranteed to converge for matrices whose spectrum is strictly contained within the unit disc around 1 (i.\+e., all its eigenvalues {\ttfamily lambda} have to satisfy the equation \`{}$\vert$relaxation\+\_\+factor $\ast$ lambda -\/ 1$\vert$ $<$ 1).
+Unless otherwise specified via the {\ttfamily solver} factory parameter, this implementation uses the identity operator (i.\+e. the solver that approximates the solution of a system $ A x = b $ by setting $ x := b $) as the default inner solver. It leaves the residual unchanged, $ \tilde e_k = r_k $, so the iteration reduces to the Richardson iteration $ x_{k+1} = x_k + \alpha r_k $, which converges for every initial guess if and only if $ | 1 - \alpha \lambda | < 1 $ holds for every eigenvalue $ \lambda $ of $ A $.
 
+\begin{DoxyParagraph}{References}
+
+\begin{DoxyItemize}
+\item Saad, Y. {\itshape Iterative Methods for Sparse Linear Systems.} 2nd ed. S\+I\+AM, 2003. \href{https://doi.org/10.1137/1.9780898718003}{\texttt{ https\+://doi.\+org/10.\+1137/1.\+9780898718003}}
+\end{DoxyItemize}
+\end{DoxyParagraph}
 
 \begin{DoxyTemplParams}{Template Parameters}
 {\em Value\+Type} & precision of matrix elements \\

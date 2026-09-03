@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2801723526 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2816504854 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -294,6 +294,12 @@ static auto&#160;</td><td class="memItemRight" valign="bottom"><b>build</b> () -
 class gko::solver::Gmres&lt; ValueType &gt;</h3>
 
 <p>GMRES or the generalized minimal residual method is an iterative type Krylov subspace method which is suitable for nonsymmetric linear systems. </p>
+<p>The Arnoldi process builds an orthonormal basis <img class="formulaInl" alt="$ V_m $" src="form_156.png"/> of the Krylov subspace </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \mathcal{K}_m(A, r_0) = \mathrm{span}\{r_0, A r_0, A^2 r_0, \ldots, A^{m-1} r_0\}, \]" src="form_193.png"/>
+</p>
+<p> and produces an upper Hessenberg matrix <img class="formulaInl" alt="$ \bar H_m $" src="form_157.png"/> satisfying the Arnoldi relation <img class="formulaInl" alt="$ A V_m = V_{m+1} \bar H_m $" src="form_158.png"/>. GMRES then chooses the approximate solution <img class="formulaInl" alt="$ x_m = x_0 + V_m y_m $" src="form_194.png"/> with <img class="formulaInl" alt="$ y_m $" src="form_195.png"/> minimizing the residual norm over the subspace, </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ y_m = \arg\min_{y \in \mathbb{R}^m} \| \beta e_1 - \bar H_m y \|_2, \qquad \beta = \| r_0 \|_2. \]" src="form_196.png"/>
+</p>
 <p>The implementation in Ginkgo makes use of the merged kernel to make the best use of data locality. The inner operations in one iteration of GMRES are merged into 2 separate steps. Modified Gram-Schmidt is used.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">

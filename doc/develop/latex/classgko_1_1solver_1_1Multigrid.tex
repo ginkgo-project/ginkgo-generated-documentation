@@ -2,7 +2,7 @@
 \label{classgko_1_1solver_1_1Multigrid}\index{gko::solver::Multigrid@{gko::solver::Multigrid}}
 
 
-\mbox{\hyperlink{classgko_1_1solver_1_1Multigrid}{Multigrid}} methods have a hierarchy of many levels, whose corase level is a subset of the fine level, of the problem.  
+\mbox{\hyperlink{classgko_1_1solver_1_1Multigrid}{Multigrid}} solves a linear system by combining cheap iterative sweeps (smoothers) on a hierarchy of progressively coarser representations of the operator with corrections transferred between adjacent levels.  
 
 
 
@@ -75,21 +75,26 @@ class {\bfseries Enable\+Apply\+With\+Initial\+Guess$<$ Multigrid $>$}
 
 
 \doxysubsection{Detailed Description}
-\mbox{\hyperlink{classgko_1_1solver_1_1Multigrid}{Multigrid}} methods have a hierarchy of many levels, whose corase level is a subset of the fine level, of the problem. 
+\mbox{\hyperlink{classgko_1_1solver_1_1Multigrid}{Multigrid}} solves a linear system by combining cheap iterative sweeps (smoothers) on a hierarchy of progressively coarser representations of the operator with corrections transferred between adjacent levels. 
 
-The coarse level solves the system on the residual of fine level and fine level will use the coarse solution to correct its own result. \mbox{\hyperlink{classgko_1_1solver_1_1Multigrid}{Multigrid}} solves the problem by relatively cheap step in each level and refining the result when prolongating back.
+A smoother on the fine level removes the high-\/frequency components of the error quickly; the remaining low-\/frequency error is well-\/resolved on a coarser space, where it is computed by a cheaper solve — or, recursively, by another multigrid call. The correction is prolongated back to the fine level and a second smoothing sweep removes any high-\/frequency error introduced by the transfer. Because each coarser level holds only a fraction of the unknowns of the next, the total work per cycle stays close to that of a single fine-\/level matrix-\/vector apply.
 
-The main step of each level
+Each level $ \ell $ holds a system matrix $ A_\ell $, a smoother $ S_\ell $, a restriction operator $ R_\ell : \mathbb{R}^{n_\ell} \to \mathbb{R}^{n_{\ell+1}} $ and a prolongation operator $ P_\ell : \mathbb{R}^{n_{\ell+1}} \to \mathbb{R}^{n_\ell} $. The Galerkin coarse operator is $ A_{\ell+1} = R_\ell A_\ell P_\ell $. One V-\/cycle step at level $ \ell $ on a fine-\/level system $ A_\ell x = b $ is\+:
+
+\[ \begin{aligned} x &\leftarrow x + S_\ell^{\mathrm{pre}}(b - A_\ell x) && \text{(pre-smooth)}, \\ r_{\ell+1} &= R_\ell (b - A_\ell x) && \text{(restrict)}, \\ e_{\ell+1} &\approx A_{\ell+1}^{-1} r_{\ell+1} && \text{(recursive coarse solve)}, \\ x &\leftarrow x + P_\ell e_{\ell+1} && \text{(prolongate and correct)}, \\ x &\leftarrow x + S_\ell^{\mathrm{post}}(b - A_\ell x) && \text{(post-smooth)}. \end{aligned} \]
+
+At the coarsest level the recursive call is replaced by a direct or iterative coarse solver. W-\/ and F-\/cycles differ from V only in how many recursive coarse-\/solves are performed per level (see the {\ttfamily cycle} enum above).
+
+Ginkgo uses the index from 0 for finest level (original problem size) $\sim$ N for the coarsest level (the coarsest solver), and its level counts is N (N multigrid level generation).
+
+\begin{DoxyParagraph}{References}
+
 \begin{DoxyItemize}
-\item Presmooth (solve on the fine level)
-\item Calculate residual
-\item Restrict (reduce the problem dimension)
-\item Solve residual in next level
-\item Prolongate (return to the fine level size)
-\item Postsmooth (correct the answer in fine level)
+\item Briggs, W. L., Henson, V. E., Mc\+Cormick, S. F. {\itshape A Multigrid Tutorial.} 2nd ed. S\+I\+AM, 2000. \href{https://doi.org/10.1137/1.9780898719505}{\texttt{ https\+://doi.\+org/10.\+1137/1.\+9780898719505}}
+\item Trottenberg, U., Oosterlee, C. W., Schüller, A. {\itshape Multigrid.} 1st ed. Academic Press, 2001. I\+S\+BN 978-\/0-\/12-\/701070-\/0. 
 \end{DoxyItemize}
+\end{DoxyParagraph}
 
-Ginkgo uses the index from 0 for finest level (original problem size) $\sim$ N for the coarsest level (the coarsest solver), and its level counts is N (N multigrid level generation). 
 
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{classgko_1_1solver_1_1Multigrid_a708c25e7a2bcffb7ef0d98092d9d49e2}\label{classgko_1_1solver_1_1Multigrid_a708c25e7a2bcffb7ef0d98092d9d49e2}} 

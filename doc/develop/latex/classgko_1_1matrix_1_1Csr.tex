@@ -316,7 +316,16 @@ C\+SR is a matrix format which stores only the nonzero coefficients by compressi
 
 The nonzero elements are stored in a 1D array row-\/wise, and accompanied with a row pointer array which stores the starting index of each row. An additional column index array is used to identify the column of each nonzero element.
 
-The \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}} \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} supports different operations\+:
+The \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}} \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} supports three families of {\ttfamily apply} operations, dispatched on the type of the right operand\+:
+
+
+\begin{DoxyItemize}
+\item Against a {\ttfamily \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{Dense}}} operand {\ttfamily b}, {\ttfamily apply} computes a sparse matrix-\/vector (or matrix-\/multivector) product\+: \[ x = A b, \qquad x = \alpha A b + \beta x. \]
+\item Against another {\ttfamily \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}}} operand {\ttfamily B}, {\ttfamily apply} computes a sparse-\/sparse matrix product (Sp\+G\+E\+MM)\+: \[ C = A B, \qquad C = \alpha A B + \beta C. \]
+\item Against an {\ttfamily \mbox{\hyperlink{classgko_1_1matrix_1_1Identity}{Identity}}} operand, {\ttfamily apply} reduces to a sparse-\/sparse matrix addition (Sp\+G\+E\+AM)\+: \[ B = \alpha A + \beta B. \]
+\end{DoxyItemize}
+
+In code\+:
 
 
 \begin{DoxyCode}{0}
@@ -1196,13 +1205,13 @@ std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{Csr}}$>$ \m
 
 Creates a permuted copy $A\text{'}$ of this matrix $A$ with the given permutation $P$. 
 
-By default, this computes a symmetric permutation (\mbox{\hyperlink{namespacegko_1_1matrix_ade1f3cdbf05032c2d681fa151de02972afeca3c730601be7fd57f1f0b668b4637}{permute\+\_\+mode\+::symmetric}}). For the effect of the different permutation modes, see \mbox{\hyperlink{namespacegko_1_1matrix_ade1f3cdbf05032c2d681fa151de02972}{permute\+\_\+mode}}
+By default, this computes a symmetric permutation (\mbox{\hyperlink{namespacegko_1_1matrix_ade1f3cdbf05032c2d681fa151de02972afeca3c730601be7fd57f1f0b668b4637}{permute\+\_\+mode\+::symmetric}}). For the effect of the different permutation modes, see \mbox{\hyperlink{namespacegko_1_1matrix_ade1f3cdbf05032c2d681fa151de02972}{permute\+\_\+mode}}.
 
 
 \begin{DoxyParams}{Parameters}
 {\em permutation} & The input permutation. \\
 \hline
-{\em mode} & The permutation mode. If \mbox{\hyperlink{namespacegko_1_1matrix_ade1f3cdbf05032c2d681fa151de02972aa91c78e040f7b9d158f381e197f8beb4}{permute\+\_\+mode\+::inverse}} is set, we use the inverse permutation $P^{-1}$ instead of $P$. If \mbox{\hyperlink{namespacegko_1_1matrix_ade1f3cdbf05032c2d681fa151de02972adf347a373b8f92aa0ae3dd920a5ec2f6}{permute\+\_\+mode\+::rows}} is set, the rows will be permuted. If \mbox{\hyperlink{namespacegko_1_1matrix_ade1f3cdbf05032c2d681fa151de02972a54ca84a794888fe8d92834787dfa935a}{permute\+\_\+mode\+::columns}} is set, the columns will be permuted. \\
+{\em mode} & The permutation mode, see \mbox{\hyperlink{namespacegko_1_1matrix_ade1f3cdbf05032c2d681fa151de02972}{permute\+\_\+mode}}. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -1254,7 +1263,7 @@ The semantics of this function match those of permute(ptr\+\_\+param$<$const Per
 \begin{DoxyParams}{Parameters}
 {\em permutation} & The input permutation. \\
 \hline
-{\em mode} & The permutation mode. If \mbox{\hyperlink{namespacegko_1_1matrix_ade1f3cdbf05032c2d681fa151de02972aa91c78e040f7b9d158f381e197f8beb4}{permute\+\_\+mode\+::inverse}} is set, we use the inverse permutation $P^{-1}$ instead of $P$. If \mbox{\hyperlink{namespacegko_1_1matrix_ade1f3cdbf05032c2d681fa151de02972adf347a373b8f92aa0ae3dd920a5ec2f6}{permute\+\_\+mode\+::rows}} is set, the rows will be permuted. If \mbox{\hyperlink{namespacegko_1_1matrix_ade1f3cdbf05032c2d681fa151de02972a54ca84a794888fe8d92834787dfa935a}{permute\+\_\+mode\+::columns}} is set, the columns will be permuted. \\
+{\em mode} & The permutation mode, see \mbox{\hyperlink{namespacegko_1_1matrix_ade1f3cdbf05032c2d681fa151de02972}{permute\+\_\+mode}}. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}

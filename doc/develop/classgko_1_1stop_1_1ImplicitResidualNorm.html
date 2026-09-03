@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2801723526 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2816504854 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -80,7 +80,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>The <a class="el" href="classgko_1_1stop_1_1ImplicitResidualNorm.html" title="The ImplicitResidualNorm class is a stopping criterion which stops the iteration process when the imp...">ImplicitResidualNorm</a> class is a stopping criterion which stops the iteration process when the implicit residual norm is below a certain threshold relative to.  
+<p>Stopping criterion based on a solver-maintained squared residual-norm estimate <img class="formulaInl" alt="$ \rho_k^2 \approx \| r_k \|^2 $" src="form_274.png"/>.  
  <a href="classgko_1_1stop_1_1ImplicitResidualNorm.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="residual__norm_8hpp_source.html">ginkgo/core/stop/residual_norm.hpp</a>&gt;</code></p>
@@ -170,13 +170,22 @@ static auto&#160;</td><td class="memItemRight" valign="bottom"><b>build</b> () -
 <div class="textblock"><h3>template&lt;typename ValueType = default_precision&gt;<br />
 class gko::stop::ImplicitResidualNorm&lt; ValueType &gt;</h3>
 
-<p>The <a class="el" href="classgko_1_1stop_1_1ImplicitResidualNorm.html" title="The ImplicitResidualNorm class is a stopping criterion which stops the iteration process when the imp...">ImplicitResidualNorm</a> class is a stopping criterion which stops the iteration process when the implicit residual norm is below a certain threshold relative to. </p>
-<ol type="1">
-<li>the norm of the right-hand side, implicit_resnorm <img class="formulaInl" alt="$\leq$" src="form_134.png"/> &lt; threshold * norm(right_hand_side)</li>
-<li>the initial residual, implicit_resnorm <img class="formulaInl" alt="$\leq$" src="form_134.png"/> threshold * norm(initial_residual) .</li>
-<li>one, implicit_resnorm <img class="formulaInl" alt="$\leq$" src="form_134.png"/> threshold.</li>
-</ol>
-<dl class="section note"><dt>Note</dt><dd>To use this stopping criterion there are some dependencies. The constructor depends on either <code>b</code> or the <code>initial_residual</code> in order to compute their norms. If this is not correctly provided, an exception ::gko::NotSupported() is thrown. </dd></dl>
+<p>Stopping criterion based on a solver-maintained squared residual-norm estimate <img class="formulaInl" alt="$ \rho_k^2 \approx \| r_k \|^2 $" src="form_274.png"/>. </p>
+<p>Several Krylov methods (CG, BiCGSTAB, …) already compute this quantity per iteration as a by-product of their inner-product recurrences, so the criterion can check convergence without computing a norm of its own — saving the global reduction the explicit <a class="el" href="classgko_1_1stop_1_1ResidualNorm.html">ResidualNorm</a> form needs when the solver only passes <img class="formulaInl" alt="$ r_k $" src="form_146.png"/>. The iteration halts once <img class="formulaInl" alt="$ \rho_k \le \tau \cdot \beta $" src="form_275.png"/>, with the same <code>reduction_factor</code> and <code>baseline</code> factory parameters as ResidualNorm:</p>
+<ul>
+<li><code>mode::rhs_norm</code> (default) — <img class="formulaInl" alt="$ \rho_k \le \tau \| b \| $" src="form_276.png"/>.</li>
+<li><code>mode::initial_resnorm</code> — <img class="formulaInl" alt="$ \rho_k \le \tau \| r_0 \| $" src="form_277.png"/>.</li>
+<li><code>mode::absolute</code> — <img class="formulaInl" alt="$ \rho_k \le \tau $" src="form_278.png"/>.</li>
+</ul>
+<p>Because <img class="formulaInl" alt="$ \rho_k^2 $" src="form_279.png"/> is updated by short recurrences rather than recomputed from <img class="formulaInl" alt="$ b - A x_k $" src="form_280.png"/> each step, it can drift from the true residual norm on long runs in finite precision; pair this criterion with an <a class="el" href="classgko_1_1stop_1_1Iteration.html">Iteration</a> cap when that matters.</p>
+<dl class="section note"><dt>Note</dt><dd>The solver must pass the squared estimate through <code>Updater::implicit_sq_residual_norm</code> on every check — there is no fallback path. If it is missing, ::gko::NotSupported() is thrown at check time.</dd>
+<dd>
+Baseline prerequisites at construction time mirror ResidualNorm:<ul>
+<li><code>mode::rhs_norm</code> requires <img class="formulaInl" alt="$ b $" src="form_271.png"/>.</li>
+<li><code>mode::initial_resnorm</code> requires either <img class="formulaInl" alt="$ r_0 $" src="form_272.png"/> explicitly or the triple <img class="formulaInl" alt="$ (A, b, x_0) $" src="form_273.png"/> to derive it.</li>
+<li><code>mode::absolute</code> requires <img class="formulaInl" alt="$ b $" src="form_271.png"/> for sizing the per-RHS baseline. If the required arguments are missing, ::gko::NotSupported() is thrown. </li>
+</ul>
+</dd></dl>
 </div><hr/>The documentation for this class was generated from the following file:<ul>
 <li>ginkgo/core/stop/<a class="el" href="residual__norm_8hpp_source.html">residual_norm.hpp</a></li>
 </ul>

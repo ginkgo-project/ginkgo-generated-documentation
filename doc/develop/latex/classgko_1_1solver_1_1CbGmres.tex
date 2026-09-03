@@ -74,6 +74,8 @@ The implementation in Ginkgo makes use of the merged kernel to make the best use
 
 The Krylov basis can be stored in reduced precision (compressed) to reduce memory accesses, while all computations (including Krylov basis operations) are performed in the same arithmetic precision Value\+Type. By default, the Krylov basis are stored in one precision lower than Value\+Type.
 
+Mathematically C\+B-\/\+G\+M\+R\+ES is the same algorithm as standard \mbox{\hyperlink{classgko_1_1solver_1_1Gmres}{G\+M\+R\+ES}} — the Arnoldi process produces an orthonormal basis $ V_m $ and an upper Hessenberg $ \bar H_m $ with $ A V_m = V_{m+1} \bar H_m $, and the iterate is chosen as \[ x_m = x_0 + V_m y_m, \qquad y_m = \arg\min_{y} \| \beta e_1 - \bar H_m y \|_2. \] The \char`\"{}compressed basis\char`\"{} variant stores the columns of $ V_m $ in a precision lower than Value\+Type\+: each basis vector is cast down to the storage type when written and cast back up when read. The Hessenberg matrix, the Givens rotations, and the working residual all stay in full Value\+Type precision, so the final approximation has the same accuracy as standard G\+M\+R\+ES while the basis storage and the bandwidth needed to apply it are reduced. See the {\ttfamily storage\+\_\+precision} enum for the supported compression options.
+
 
 \begin{DoxyTemplParams}{Template Parameters}
 {\em Value\+Type} & the arithmetic precision and the precision of matrix elements \\

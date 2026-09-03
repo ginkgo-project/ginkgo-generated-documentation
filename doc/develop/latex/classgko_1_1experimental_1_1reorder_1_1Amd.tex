@@ -2,7 +2,7 @@
 \label{classgko_1_1experimental_1_1reorder_1_1Amd}\index{gko::experimental::reorder::Amd$<$ IndexType $>$@{gko::experimental::reorder::Amd$<$ IndexType $>$}}
 
 
-Computes a Approximate Minimum Degree (A\+MD) reordering of an input matrix.  
+Computes an Approximate Minimum Degree (A\+MD) reordering of an input matrix.  
 
 
 
@@ -68,8 +68,16 @@ class {\bfseries enable\+\_\+parameters\+\_\+type$<$ parameters\+\_\+type, Amd$<
 \subsubsection*{template$<$typename Index\+Type = int32$>$\newline
 class gko\+::experimental\+::reorder\+::\+Amd$<$ Index\+Type $>$}
 
-Computes a Approximate Minimum Degree (A\+MD) reordering of an input matrix. 
+Computes an Approximate Minimum Degree (A\+MD) reordering of an input matrix. 
 
+The implementation reuses the A\+MD routine from the \href{https://github.com/DrTimothyAldenDavis/SuiteSparse}{\texttt{ Suite\+Sparse}} suite (Tim Davis et al.) — Ginkgo wraps it in a {\ttfamily \mbox{\hyperlink{classgko_1_1LinOpFactory}{Lin\+Op\+Factory}}} that produces a {\ttfamily \mbox{\hyperlink{classgko_1_1matrix_1_1Permutation}{gko\+::matrix\+::\+Permutation}}}. The system matrix must therefore be a structurally-\/symmetric C\+SR matrix.
+
+\begin{DoxyParagraph}{References}
+
+\begin{DoxyItemize}
+\item Amestoy, P. R., Davis, T. A., Duff, I. S. {\itshape Algorithm 837\+: A\+MD, an Approximate Minimum Degree Ordering Algorithm.} A\+CM Transactions on Mathematical Software, 30 (3), 381–388, 2004. \href{https://doi.org/10.1145/1024074.1024081}{\texttt{ https\+://doi.\+org/10.\+1145/1024074.\+1024081}}
+\end{DoxyItemize}
+\end{DoxyParagraph}
 
 \begin{DoxyTemplParams}{Template Parameters}
 {\em Index\+Type} & the type used to store sparsity pattern indices of the system matrix \\

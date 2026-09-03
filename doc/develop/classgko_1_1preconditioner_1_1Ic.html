@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2801723526 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2816504854 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -80,7 +80,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>The Incomplete Cholesky (IC) preconditioner solves the equation <img class="formulaInl" alt="$LL^H*x = b$" src="form_108.png"/> for a given lower triangular matrix L and the right hand side b (can contain multiple right hand sides).  
+<p>The Incomplete Cholesky (IC) preconditioner solves the equation <img class="formulaInl" alt="$L L^H x = b$" src="form_111.png"/> for a given lower triangular matrix <img class="formulaInl" alt="$L$" src="form_9.png"/> and the right hand side <img class="formulaInl" alt="$b$" src="form_112.png"/> (can contain multiple right hand sides).  
  <a href="classgko_1_1preconditioner_1_1Ic.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="preconditioner_2ic_8hpp_source.html">ginkgo/core/preconditioner/ic.hpp</a>&gt;</code></p>
@@ -122,10 +122,10 @@ Public Member Functions</h2></td></tr>
 const <a class="el" href="structgko_1_1preconditioner_1_1Ic_1_1parameters__type.html">parameters_type</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get_parameters</b> () const</td></tr>
 <tr class="separator:a802fc5f7bcc210731ab50eff0c742b68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab4e4c5559c8faab62fcf44711523b7d"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; const <a class="el" href="classgko_1_1LinOp.html">LinOp</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1preconditioner_1_1Ic.html#aab4e4c5559c8faab62fcf44711523b7d">get_l_solver</a> () const</td></tr>
-<tr class="memdesc:aab4e4c5559c8faab62fcf44711523b7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the solver which is used for the provided L matrix.  <a href="classgko_1_1preconditioner_1_1Ic.html#aab4e4c5559c8faab62fcf44711523b7d">More...</a><br /></td></tr>
+<tr class="memdesc:aab4e4c5559c8faab62fcf44711523b7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the solver which is used for the provided <img class="formulaInl" alt="$L$" src="form_9.png"/> matrix.  <a href="classgko_1_1preconditioner_1_1Ic.html#aab4e4c5559c8faab62fcf44711523b7d">More...</a><br /></td></tr>
 <tr class="separator:aab4e4c5559c8faab62fcf44711523b7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92cf7778bc9a001cd51ae48de702ca08"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; const <a class="el" href="classgko_1_1LinOp.html">LinOp</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1preconditioner_1_1Ic.html#a92cf7778bc9a001cd51ae48de702ca08">get_lh_solver</a> () const</td></tr>
-<tr class="memdesc:a92cf7778bc9a001cd51ae48de702ca08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the solver which is used for the L^H matrix.  <a href="classgko_1_1preconditioner_1_1Ic.html#a92cf7778bc9a001cd51ae48de702ca08">More...</a><br /></td></tr>
+<tr class="memdesc:a92cf7778bc9a001cd51ae48de702ca08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the solver which is used for the <img class="formulaInl" alt="$L^H$" src="form_45.png"/> matrix.  <a href="classgko_1_1preconditioner_1_1Ic.html#a92cf7778bc9a001cd51ae48de702ca08">More...</a><br /></td></tr>
 <tr class="separator:a92cf7778bc9a001cd51ae48de702ca08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6fbf4dd32d0ed74d219d83f6a4bbf945"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classgko_1_1LinOp.html">LinOp</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1preconditioner_1_1Ic.html#a6fbf4dd32d0ed74d219d83f6a4bbf945">transpose</a> () const override</td></tr>
 <tr class="memdesc:a6fbf4dd32d0ed74d219d83f6a4bbf945"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a <a class="el" href="classgko_1_1LinOp.html">LinOp</a> representing the transpose of the <a class="el" href="classgko_1_1Transposable.html" title="Linear operators which support transposition should implement the Transposable interface.">Transposable</a> object.  <a href="classgko_1_1preconditioner_1_1Ic.html#a6fbf4dd32d0ed74d219d83f6a4bbf945">More...</a><br /></td></tr>
@@ -215,20 +215,20 @@ static auto&#160;</td><td class="memItemRight" valign="bottom"><b>build</b> () -
 <div class="textblock"><h3>template&lt;typename ValueType = default_precision, typename IndexType = int32&gt;<br />
 class gko::preconditioner::Ic&lt; ValueType, IndexType &gt;</h3>
 
-<p>The Incomplete Cholesky (IC) preconditioner solves the equation <img class="formulaInl" alt="$LL^H*x = b$" src="form_108.png"/> for a given lower triangular matrix L and the right hand side b (can contain multiple right hand sides). </p>
-<p>It allows setting the solver for L, defaulting to <a class="el" href="classgko_1_1solver_1_1LowerTrs.html" title="LowerTrs is the triangular solver which solves the system L x = b, when L is a lower triangular matri...">solver::LowerTrs</a>, which is a direct triangular solvers. The solver for L^H is the conjugate-transposed solver for L, ensuring that the preconditioner is symmetric and positive-definite. For this L solver, a factory can be provided (using <code>with_l_solver</code>) to have more control over their behavior. In particular, it is possible to use an iterative method for solving the triangular systems.</p>
-<p>An object of this class can be created with a matrix or a <a class="el" href="classgko_1_1Composition.html" title="The Composition class can be used to compose linear operators op1, op2, ..., opn and obtain the opera...">gko::Composition</a> containing two matrices. If created with a matrix, it is factorized before creating the solver. If a <a class="el" href="classgko_1_1Composition.html" title="The Composition class can be used to compose linear operators op1, op2, ..., opn and obtain the opera...">gko::Composition</a> (containing two matrices) is used, the first operand will be taken as the L matrix, the second will be considered the L^H matrix, which helps to avoid the otherwise necessary transposition of L inside the solver. ParIc can be directly used, since it orders the factors in the correct way.</p>
+<p>The Incomplete Cholesky (IC) preconditioner solves the equation <img class="formulaInl" alt="$L L^H x = b$" src="form_111.png"/> for a given lower triangular matrix <img class="formulaInl" alt="$L$" src="form_9.png"/> and the right hand side <img class="formulaInl" alt="$b$" src="form_112.png"/> (can contain multiple right hand sides). </p>
+<p>It allows setting the solver for <img class="formulaInl" alt="$L$" src="form_9.png"/>, defaulting to <a class="el" href="classgko_1_1solver_1_1LowerTrs.html" title="LowerTrs is the triangular solver which solves the system L x = b, when L is a lower triangular matri...">solver::LowerTrs</a>, which is a direct triangular solver. The solver for <img class="formulaInl" alt="$L^H$" src="form_45.png"/> is the conjugate-transposed solver for <img class="formulaInl" alt="$L$" src="form_9.png"/>, ensuring that the preconditioner is symmetric and positive-definite. For this <img class="formulaInl" alt="$L$" src="form_9.png"/> solver, a factory can be provided (using <code>with_l_solver</code>) to have more control over their behavior. In particular, it is possible to use an iterative method for solving the triangular systems.</p>
+<p>An object of this class can be created with a matrix or a <a class="el" href="classgko_1_1Composition.html" title="The Composition class can be used to compose linear operators op1, op2, ..., opn and obtain the opera...">gko::Composition</a> containing two matrices. If created with a matrix, it is factorized before creating the solver. If a <a class="el" href="classgko_1_1Composition.html" title="The Composition class can be used to compose linear operators op1, op2, ..., opn and obtain the opera...">gko::Composition</a> (containing two matrices) is used, the first operand will be taken as the <img class="formulaInl" alt="$L$" src="form_9.png"/> matrix, the second will be considered the <img class="formulaInl" alt="$L^H$" src="form_45.png"/> matrix, which helps to avoid the otherwise necessary transposition of <img class="formulaInl" alt="$L$" src="form_9.png"/> inside the solver. ParIc can be directly used, since it orders the factors in the correct way.</p>
 <dl class="section note"><dt>Note</dt><dd>When providing a <a class="el" href="classgko_1_1Composition.html" title="The Composition class can be used to compose linear operators op1, op2, ..., opn and obtain the opera...">gko::Composition</a>, the first matrix must be the lower matrix ( <img class="formulaInl" alt="$L$" src="form_9.png"/>), and the second matrix must be its conjugate-transpose ( <img class="formulaInl" alt="$L^H$" src="form_45.png"/>). If they are swapped, solving might crash or return the wrong result.</dd>
 <dd>
-Do not use symmetric solvers (like CG) for the L solver since both matrices (L and L^H) are, by design, not symmetric.</dd>
+Do not use symmetric solvers (like CG) for the <img class="formulaInl" alt="$L$" src="form_9.png"/> solver since both matrices ( <img class="formulaInl" alt="$L$" src="form_9.png"/> and <img class="formulaInl" alt="$L^H$" src="form_45.png"/>) are, by design, not symmetric.</dd>
 <dd>
 This class is not thread safe (even a const object is not) because it uses an internal cache to accelerate multiple (sequential) applies. Using it in parallel can lead to segmentation faults, wrong results and other unwanted behavior.</dd>
 <dd>
 The default template during parse is &lt;ValueType, IndexType&gt; not &lt;LowerTrs, IndexType&gt;. Only the variants with ValueType are supported in parse.</dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">ValueType</td><td>the value type used for the L matrix. </td></tr>
-    <tr><td class="paramname">IndexType</td><td>type of the indices when ParIc is used to generate the L and L^H factors. Irrelevant otherwise. </td></tr>
+    <tr><td class="paramname">ValueType</td><td>the value type used for the <img class="formulaInl" alt="$L$" src="form_9.png"/> matrix. </td></tr>
+    <tr><td class="paramname">IndexType</td><td>type of the indices when ParIc is used to generate the <img class="formulaInl" alt="$L$" src="form_9.png"/> and <img class="formulaInl" alt="$L^H$" src="form_45.png"/> factors. Irrelevant otherwise. </td></tr>
   </table>
   </dd>
 </dl>
@@ -337,8 +337,8 @@ template&lt;typename ValueType  = default_precision, typename IndexType  = int32
 </table>
 </div><div class="memdoc">
 
-<p>Returns the solver which is used for the provided L matrix. </p>
-<dl class="section return"><dt>Returns</dt><dd>the solver which is used for the provided L matrix </dd></dl>
+<p>Returns the solver which is used for the provided <img class="formulaInl" alt="$L$" src="form_9.png"/> matrix. </p>
+<dl class="section return"><dt>Returns</dt><dd>the solver which is used for the provided <img class="formulaInl" alt="$L$" src="form_9.png"/> matrix </dd></dl>
 
 </div>
 </div>
@@ -367,8 +367,8 @@ template&lt;typename ValueType  = default_precision, typename IndexType  = int32
 </table>
 </div><div class="memdoc">
 
-<p>Returns the solver which is used for the L^H matrix. </p>
-<dl class="section return"><dt>Returns</dt><dd>the solver which is used for the L^H matrix </dd></dl>
+<p>Returns the solver which is used for the <img class="formulaInl" alt="$L^H$" src="form_45.png"/> matrix. </p>
+<dl class="section return"><dt>Returns</dt><dd>the solver which is used for the <img class="formulaInl" alt="$L^H$" src="form_45.png"/> matrix </dd></dl>
 
 </div>
 </div>

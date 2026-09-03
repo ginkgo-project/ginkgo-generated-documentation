@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2801723526 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2816504854 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -315,9 +315,19 @@ static auto&#160;</td><td class="memItemRight" valign="bottom"><b>build</b> () -
 class gko::solver::Idr&lt; ValueType &gt;</h3>
 
 <p>IDR(s) is an efficient method for solving large nonsymmetric systems of linear equations. </p>
-<p>The implemented version is the one presented in the paper "Algorithm 913: An elegant IDR(s) variant that efficiently exploits
-biorthogonality properties" by M. B. Van Gijzen and P. Sonneveld.</p>
-<p>The method is based on the induced dimension reduction theorem which provides a way to construct subsequent residuals that lie in a sequence of shrinking subspaces. These subspaces are spanned by s vectors which are first generated randomly and then orthonormalized. They are stored in a dense matrix.</p>
+<p>The implementation follows the elegant variant that exploits the biorthogonality of the shadow vectors.</p>
+<p>The method is based on the induced dimension reduction (IDR) theorem. Let <img class="formulaInl" alt="$ P = [p_1, \ldots, p_s] $" src="form_197.png"/> be the shadow matrix — the <img class="formulaInl" alt="$ s $" src="form_198.png"/> random, orthonormalized vectors that Ginkgo stores in a dense matrix — and let </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \mathcal{S} = \{ v \in \mathbb{C}^N : P^H v = 0 \} \]" src="form_199.png"/>
+</p>
+<p> be its left null space, that is, the orthogonal complement of the space spanned by the shadow vectors. Starting from the full Krylov space <img class="formulaInl" alt="$ \mathcal{G}_0 = \mathcal{K}_N(A, r_0) $" src="form_200.png"/>, the theorem states that the subspaces </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \mathcal{G}_j = (I - \omega_j A) (\mathcal{G}_{j-1} \cap \mathcal{S}), \qquad \omega_j \ne 0, \]" src="form_201.png"/>
+</p>
+<p> are nested, <img class="formulaInl" alt="$ \mathcal{G}_j \subset \mathcal{G}_{j-1} $" src="form_202.png"/>, and that <img class="formulaInl" alt="$ \mathcal{G}_j = \{0\} $" src="form_203.png"/> for some <img class="formulaInl" alt="$ j \le N $" src="form_204.png"/>. IDR(s) forces the residuals into these shrinking spaces; in exact arithmetic it therefore reaches the true solution after at most <img class="formulaInl" alt="$ N + N/s $" src="form_205.png"/> matrix-vector products.</p>
+<dl class="section user"><dt>References</dt><dd><ul>
+<li>Van Gijzen, M. B., Sonneveld, P. <em>Algorithm 913: An Elegant IDR(s) Variant that Efficiently Exploits Biorthogonality Properties.</em> ACM Transactions on Mathematical Software, 38 (1), Article 5, 2011. <a href="https://doi.org/10.1145/2049662.2049667">https://doi.org/10.1145/2049662.2049667</a> (the implemented variant; the IDR theorem is Theorem 2.1 in Section 2.1)</li>
+<li>Sonneveld, P., Van Gijzen, M. B. <em>IDR(s): A Family of Simple and Fast Algorithms for Solving Large Nonsymmetric Systems of Linear Equations.</em> SIAM Journal on Scientific Computing, 31 (2), 1035–1062, 2008. <a href="https://doi.org/10.1137/070685804">https://doi.org/10.1137/070685804</a> (proof of the IDR theorem and of the <img class="formulaInl" alt="$ N + N/s $" src="form_205.png"/> bound)</li>
+</ul>
+</dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">ValueType</td><td>precision of the elements of the system matrix. </td></tr>

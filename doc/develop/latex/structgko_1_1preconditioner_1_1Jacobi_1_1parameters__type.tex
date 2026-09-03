@@ -56,7 +56,7 @@ bool \mbox{\hyperlink{structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type_
 \mbox{\hyperlink{classgko_1_1array}{gko\+::array}}$<$ index\+\_\+type $>$ \mbox{\hyperlink{structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type_ad90b07202f15b6cd5c649f6b61480053}{block\+\_\+pointers}} \{ nullptr \}
 \begin{DoxyCompactList}\small\item\em Starting (row / column) indexes of individual blocks. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type_afa467c5ec8491236cde56117b09cd821}{aggregate\+\_\+l1}} \{ false \}
-\begin{DoxyCompactList}\small\item\em Use L1 Jacboi, which is introduced in the paper A. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Use L1 \mbox{\hyperlink{classgko_1_1preconditioner_1_1Jacobi}{Jacobi}}, introduced by Baker et al. \end{DoxyCompactList}\item 
 storage\+\_\+optimization\+\_\+type \mbox{\hyperlink{structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type_a51d0eec65f99d6dd5b0ebe5ba69390dd}{storage\+\_\+optimization}} \{ \mbox{\hyperlink{classgko_1_1precision__reduction}{precision\+\_\+reduction}}(0, 0) \}
 \begin{DoxyCompactList}\small\item\em The precisions to use for the blocks of the matrix. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{remove\+\_\+complex}}$<$ value\+\_\+type $>$ \mbox{\hyperlink{structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type_ad4fd0de7ce4d390584e947afb6d0ce73}{accuracy}} \{ static\+\_\+cast$<$\mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{remove\+\_\+complex}}$<$value\+\_\+type$>$$>$(1e-\/1) \}
@@ -97,9 +97,17 @@ bool \mbox{\hyperlink{classgko_1_1preconditioner_1_1Jacobi}{gko\+::preconditione
 
 
 
-Use L1 Jacboi, which is introduced in the paper A. 
+Use L1 \mbox{\hyperlink{classgko_1_1preconditioner_1_1Jacobi}{Jacobi}}, introduced by Baker et al. 
 
-H. Baker et al. \char`\"{}\+Multigrid smoothers for ultraparallel computing.\char`\"{} This paper discusses this type of smoother with the following matrix property. $ A_{ii} \geq \theta \sum_{j \in \text{off diagonal block}} |A_{ij}|, \theta \geq 0 $ If it is true, it generates the preconditioner on A + Diag(sum\+\_\+\{k in off-\/diagonal block of i\} $\vert$\+A\+\_\+ik$\vert$) instead of A. We aggregate the absolute value of the entries with the same row in the off-\/diagonal block into the diagonal value. \mbox{\Hypertarget{structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type_ad90b07202f15b6cd5c649f6b61480053}\label{structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type_ad90b07202f15b6cd5c649f6b61480053}} 
+The smoother applies whenever the matrix satisfies the row-\/dominance condition \[ A_{ii} \geq \theta \sum_{j \in \text{off-diagonal block}} |A_{ij}|, \qquad \theta \geq 0. \] If set, the preconditioner is generated on $ A + \mathrm{diag}\!\left( \sum_{k \in \text{off-diagonal block of } i} |A_{ik}| \right) $ instead of $A$ — i.\+e. the absolute values of off-\/diagonal-\/block entries on each row are aggregated into the diagonal entry before block inversion.
+
+\begin{DoxyParagraph}{References}
+
+\begin{DoxyItemize}
+\item Baker, A. H., Falgout, R. D., Kolev, T. V., Yang, U. M. {\itshape Multigrid Smoothers for Ultraparallel Computing.} S\+I\+AM Journal on Scientific Computing, 33 (5), 2864–2887, 2011. \href{https://doi.org/10.1137/100798806}{\texttt{ https\+://doi.\+org/10.\+1137/100798806}} 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\mbox{\Hypertarget{structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type_ad90b07202f15b6cd5c649f6b61480053}\label{structgko_1_1preconditioner_1_1Jacobi_1_1parameters__type_ad90b07202f15b6cd5c649f6b61480053}} 
 \index{gko::preconditioner::Jacobi$<$ ValueType, IndexType $>$::parameters\_type@{gko::preconditioner::Jacobi$<$ ValueType, IndexType $>$::parameters\_type}!block\_pointers@{block\_pointers}}
 \index{block\_pointers@{block\_pointers}!gko::preconditioner::Jacobi$<$ ValueType, IndexType $>$::parameters\_type@{gko::preconditioner::Jacobi$<$ ValueType, IndexType $>$::parameters\_type}}
 \doxysubsubsection{\texorpdfstring{block\_pointers}{block\_pointers}}

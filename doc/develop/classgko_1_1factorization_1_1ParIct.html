@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2801723526 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2816504854 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -235,17 +235,24 @@ static std::unique_ptr&lt; <a class="el" href="classgko_1_1Composition.html">Com
 class gko::factorization::ParIct&lt; ValueType, IndexType &gt;</h3>
 
 <p>ParICT is an incomplete threshold-based Cholesky factorization which is computed in parallel. </p>
-<p><img class="formulaInl" alt="$L$" src="form_9.png"/> is a lower triangular matrix which approximates a given symmetric positive definite matrix <img class="formulaInl" alt="$A$" src="form_0.png"/> with <img class="formulaInl" alt="$A \approx LL^T$" src="form_57.png"/>. Here, <img class="formulaInl" alt="$L$" src="form_9.png"/> has a sparsity pattern that is improved iteratively based on its element-wise magnitude. The initial sparsity pattern is chosen based on the lower triangle of <img class="formulaInl" alt="$A$" src="form_0.png"/>.</p>
+<p><img class="formulaInl" alt="$L$" src="form_9.png"/> is a lower triangular matrix which approximates a given symmetric positive definite matrix <img class="formulaInl" alt="$A$" src="form_0.png"/> with <img class="formulaInl" alt="$A \approx LL^T$" src="form_56.png"/>. Here, <img class="formulaInl" alt="$L$" src="form_9.png"/> has a sparsity pattern that is improved iteratively based on its element-wise magnitude. The initial sparsity pattern is chosen based on the lower triangle of <img class="formulaInl" alt="$A$" src="form_0.png"/>.</p>
 <p>One iteration of the ParICT algorithm consists of the following steps:</p>
 <ol type="1">
-<li>Calculating the residual <img class="formulaInl" alt="$R = A - LL^T$" src="form_58.png"/></li>
-<li>Adding new non-zero locations from <img class="formulaInl" alt="$R$" src="form_59.png"/> to <img class="formulaInl" alt="$L$" src="form_9.png"/>. The new non-zero locations are initialized based on the corresponding residual value.</li>
-<li>Executing a fixed-point iteration on <img class="formulaInl" alt="$L$" src="form_9.png"/> according to <img class="formulaInl" alt="$ F(L) = \begin{cases} \frac{1}{l_{jj}} \left(a_{ij}-\sum_{k=1}^{j-1}l_{ik}l_{jk}\right), \quad &amp; i \neq j \\ \sqrt{a_{ij}-\sum_{k=1}^{j-1}l_{ik}l_{jk}}, \quad &amp; i = j \\ \end{cases} $" src="form_60.png"/></li>
-<li>Removing the smallest entries (by magnitude) from <img class="formulaInl" alt="$L$" src="form_9.png"/></li>
-<li>Executing a fixed-point iteration on the (now sparser) <img class="formulaInl" alt="$L$" src="form_9.png"/></li>
+<li>Calculate the residual <img class="formulaInl" alt="$R = A - LL^T$" src="form_57.png"/>.</li>
+<li>Add new non-zero locations from <img class="formulaInl" alt="$R$" src="form_58.png"/> to <img class="formulaInl" alt="$L$" src="form_9.png"/>. The new non-zero locations are initialized from the corresponding residual entries.</li>
+<li><p class="startli">Execute a fixed-point iteration on <img class="formulaInl" alt="$L$" src="form_9.png"/> according to</p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[ F(L)_{ij} = \begin{cases} \frac{1}{l_{jj}} \left( a_{ij} - \sum_{k=1}^{j-1} l_{ik} l_{jk} \right), &amp; i \neq j, \\ \sqrt{ a_{ij} - \sum_{k=1}^{j-1} l_{ik} l_{jk} }, &amp; i = j. \end{cases} \]" src="form_59.png"/>
+</p>
+</li>
+<li>Remove the smallest entries (by magnitude) from <img class="formulaInl" alt="$L$" src="form_9.png"/>.</li>
+<li>Execute a fixed-point iteration on the (now sparser) <img class="formulaInl" alt="$L$" src="form_9.png"/>.</li>
 </ol>
 <p>This ParICT algorithm thus improves the sparsity pattern and the approximation of <img class="formulaInl" alt="$L$" src="form_9.png"/> simultaneously.</p>
-<p>The implementation follows the design of H. Anzt et al., ParILUT - A Parallel Threshold ILU for GPUs, 2019 IEEE International Parallel and Distributed Processing Symposium (IPDPS), pp. 231–241.</p>
+<dl class="section user"><dt>References</dt><dd><ul>
+<li>Anzt, H., Chow, E., Dongarra, J. <em>ParILUT — A Parallel Threshold ILU for GPUs.</em> 2019 IEEE International Parallel and Distributed Processing Symposium (IPDPS), pp. 231–241. <a href="https://doi.org/10.1109/IPDPS.2019.00033">https://doi.org/10.1109/IPDPS.2019.00033</a></li>
+</ul>
+</dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">ValueType</td><td>Type of the values of all matrices used in this class </td></tr>

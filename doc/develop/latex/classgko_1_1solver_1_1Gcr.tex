@@ -77,6 +77,8 @@ class gko\+::solver\+::\+Gcr$<$ Value\+Type $>$}
 
 G\+CR or the generalized conjugate residual method is an iterative type Krylov subspace method similar to G\+M\+R\+ES which is suitable for nonsymmetric linear systems. 
 
+G\+CR maintains a sequence of search directions $ p_0, p_1, \ldots $ chosen so that the vectors $ A p_k $ are mutually orthogonal, $ \langle A p_i, A p_j \rangle = 0 $ for $ i \ne j $. At each iteration the residual is updated by orthogonal projection along $ A p_k $, \[ \alpha_k = \frac{\langle r_k, A p_k \rangle} {\langle A p_k, A p_k \rangle}, \qquad r_{k+1} = r_k - \alpha_k A p_k, \] so the iterate $ x_k = x_0 + \sum_{j<k} \alpha_j p_j $ minimizes $ \| r \|_2 $ over $ x_0 + \mathcal{K}_k(A, r_0) $ — the same minimization property as G\+M\+R\+ES, but with a long recurrence over the search directions instead of an Arnoldi basis and Hessenberg solve. The memory cost grows linearly with the iteration count, so G\+CR is typically run with a restart parameter ({\ttfamily krylov\+\_\+dim}).
+
 The implementation in Ginkgo makes use of the merged kernel to make the best use of data locality. The inner operations in one iteration of G\+CR are merged into one step. Modified Gram-\/\+Schmidt is used.
 
 

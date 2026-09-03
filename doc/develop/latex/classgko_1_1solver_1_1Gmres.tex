@@ -77,6 +77,8 @@ class gko\+::solver\+::\+Gmres$<$ Value\+Type $>$}
 
 G\+M\+R\+ES or the generalized minimal residual method is an iterative type Krylov subspace method which is suitable for nonsymmetric linear systems. 
 
+The Arnoldi process builds an orthonormal basis $ V_m $ of the Krylov subspace \[ \mathcal{K}_m(A, r_0) = \mathrm{span}\{r_0, A r_0, A^2 r_0, \ldots, A^{m-1} r_0\}, \] and produces an upper Hessenberg matrix $ \bar H_m $ satisfying the Arnoldi relation $ A V_m = V_{m+1} \bar H_m $. G\+M\+R\+ES then chooses the approximate solution $ x_m = x_0 + V_m y_m $ with $ y_m $ minimizing the residual norm over the subspace, \[ y_m = \arg\min_{y \in \mathbb{R}^m} \| \beta e_1 - \bar H_m y \|_2, \qquad \beta = \| r_0 \|_2. \]
+
 The implementation in Ginkgo makes use of the merged kernel to make the best use of data locality. The inner operations in one iteration of G\+M\+R\+ES are merged into 2 separate steps. Modified Gram-\/\+Schmidt is used.
 
 

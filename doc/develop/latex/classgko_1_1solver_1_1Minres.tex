@@ -76,12 +76,19 @@ class gko\+::solver\+::\+Minres$<$ Value\+Type $>$}
 
 It is a specialization of the \mbox{\hyperlink{classgko_1_1solver_1_1Gmres}{Gmres}} method for symmetric/hermitian operators, and can be computed using short recurrences, similar to the CG method.
 
+For symmetric $ A $, the Arnoldi process collapses to a three-\/term Lanczos recurrence and the Hessenberg matrix $ \bar H_m $ becomes tridiagonal $ \bar T_m $. \mbox{\hyperlink{classgko_1_1solver_1_1Minres}{Minres}} exploits this structure to minimize the residual norm \[ y_m = \arg\min_{y \in \mathbb{R}^m} \| \beta e_1 - \bar T_m y \|_2, \qquad \beta = \| r_0 \|_2, \] The least-\/squares problem is not re-\/solved from scratch\+: a QR factorization of $ \bar T_m $ is carried along and extended in every iteration. Since $ \bar T_m $ is tridiagonal, a new column is brought to upper-\/triangular form by re-\/applying the two previous Givens rotations and then one freshly computed rotation, so only those rotations, three basis vectors and three update directions have to be kept. Each iteration therefore costs one matrix-\/vector product and a constant amount of memory, in contrast to G\+M\+R\+ES\textquotesingle{}s growing Krylov basis.
+
 The implementation in Ginkgo makes use of the merged kernel to make the best use of data locality. The inner operations in one iteration of \mbox{\hyperlink{classgko_1_1solver_1_1Minres}{Minres}} are merged into 2 separate steps.
 
-For more details see Anne Grennbaum\textquotesingle{}s \textquotesingle{}Iterative Methods for Solving Linear Systems\textquotesingle{} (D\+OI\+: 10.\+1137/1.9781611970937), and Sou-\/\+Cheng (Terrya) Choi\textquotesingle{}s \textquotesingle{}I\+T\+E\+R\+A\+T\+I\+VE M\+E\+T\+H\+O\+DS F\+OR S\+I\+N\+G\+U\+L\+AR L\+I\+N\+E\+AR E\+Q\+U\+A\+T\+I\+O\+NS A\+ND L\+E\+A\+S\+T-\/\+S\+Q\+U\+A\+R\+ES P\+R\+O\+B\+L\+E\+MS\textquotesingle{}.
+\begin{DoxyParagraph}{References}
 
+\begin{DoxyItemize}
+\item Greenbaum, A. {\itshape Iterative Methods for Solving Linear Systems.} S\+I\+AM Frontiers in Applied Mathematics, 17, 1997. \href{https://doi.org/10.1137/1.9781611970937}{\texttt{ https\+://doi.\+org/10.\+1137/1.\+9781611970937}}
+\item Choi, S.-\/C. T. {\itshape Iterative Methods for Singular Linear Equations and Least-\/\+Squares Problems.} PhD thesis, Stanford University, 2006. \href{https://web.stanford.edu/group/SOL/dissertations/sou-cheng-choi-thesis.pdf}{\texttt{ https\+://web.\+stanford.\+edu/group/\+S\+O\+L/dissertations/sou-\/cheng-\/choi-\/thesis.\+pdf}}
+\end{DoxyItemize}
+\end{DoxyParagraph}
 \begin{DoxyNote}{Note}
-\+: The \mbox{\hyperlink{classgko_1_1solver_1_1Minres}{Minres}} solver only reports an approximation of the residual norm directly to the stopping criteria. Neither the actual residual, nor the actual residual norm are reported. Thus, to get the minimal overhead, the \mbox{\hyperlink{classgko_1_1stop_1_1ImplicitResidualNorm}{gko\+::stop\+::\+Implicit\+Residual\+Norm}} criteria should be used. The \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko\+::stop\+::\+Residual\+Norm}} criteria will require an additional matrix-\/vector product and global reduction.
+The \mbox{\hyperlink{classgko_1_1solver_1_1Minres}{Minres}} solver only reports an approximation of the residual norm directly to the stopping criteria. Neither the actual residual, nor the actual residual norm are reported. Thus, to get the minimal overhead, the \mbox{\hyperlink{classgko_1_1stop_1_1ImplicitResidualNorm}{gko\+::stop\+::\+Implicit\+Residual\+Norm}} criteria should be used. The \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko\+::stop\+::\+Residual\+Norm}} criteria will require an additional matrix-\/vector product and global reduction.
 \end{DoxyNote}
 
 \begin{DoxyTemplParams}{Template Parameters}

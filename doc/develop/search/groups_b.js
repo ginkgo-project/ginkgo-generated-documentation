@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['spmv_20employing_20different_20matrix_20formats_2886',['SpMV employing different Matrix formats',['../group__mat__formats.html',1,'']]],
-  ['solvers_2887',['Solvers',['../group__solvers.html',1,'']]],
-  ['stopping_20criteria_2888',['Stopping criteria',['../group__stop.html',1,'']]]
+  ['spmv_20employing_20different_20matrix_20formats_2890',['SpMV employing different Matrix formats',['../group__mat__formats.html',1,'']]],
+  ['solvers_2891',['Solvers',['../group__solvers.html',1,'']]],
+  ['stopping_20criteria_2892',['Stopping criteria',['../group__stop.html',1,'']]]
 ];

@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2801723526 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2816504854 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -324,10 +324,15 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>MultiVector&lt; prev
 class gko::batch::MultiVector&lt; ValueType &gt;</h3>
 
 <p><a class="el" href="classgko_1_1batch_1_1MultiVector.html" title="MultiVector stores multiple vectors in a batched fashion and is useful for batched operations.">MultiVector</a> stores multiple vectors in a batched fashion and is useful for batched operations. </p>
-<p>For example, if you want to store two batch items with multi-vectors of size (3 x 2) given below:</p>
-<p>[1 2 ; 3 4 1 2 ; 3 4 1 2 ; 3 4]</p>
-<p>In memory, they would be stored as a single array: [1 2 1 2 1 2 3 4 3 4 3 4].</p>
-<p>Access functions @at can help access individual item if necessary.</p>
+<p>For example, two batch items, each a 3 x 2 multi-vector, would be laid out as:</p>
+<div class="fragment"><div class="line">batch item 0      batch item 1</div>
+<div class="line">  1 2               3 4</div>
+<div class="line">  1 2               3 4</div>
+<div class="line">  1 2               3 4</div>
+</div><!-- fragment --><p>In memory, both items are stored consecutively as a single row-major array:</p>
+<div class="fragment"><div class="line">[ 1 2  1 2  1 2 | 3 4  3 4  3 4 ]</div>
+<div class="line">  item 0          item 1</div>
+</div><!-- fragment --><p>The accessor <code><a class="el" href="classgko_1_1batch_1_1MultiVector.html#adac42b115d0d103429714fe9163cc7f9" title="Returns a single element for a particular batch item.">at()</a></code> can be used to reach an individual entry of a specific batch item.</p>
 <p>The values of the different batch items are stored consecutively and in each batch item, the multi-vectors are stored in a row-major fashion.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">

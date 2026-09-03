@@ -87,7 +87,9 @@ class gko\+::solver\+::\+Chebyshev$<$ Value\+Type $>$}
 
 \mbox{\hyperlink{classgko_1_1solver_1_1Chebyshev}{Chebyshev}} iteration is an iterative method for solving nonsymmetric problems based on some knowledge of the spectrum of the (preconditioned) system matrix. 
 
-It avoids the computation of inner products, which may be a performance bottleneck for distributed system. \mbox{\hyperlink{classgko_1_1solver_1_1Chebyshev}{Chebyshev}} iteration is developed based on \mbox{\hyperlink{classgko_1_1solver_1_1Chebyshev}{Chebyshev}} polynomials of the first kind. This implementation follows the algorithm in "Templates for the Solution of Linear Systems\+: Building Blocks for Iterative Methods, 2nd Edition".
+It avoids the computation of inner products, which may be a performance bottleneck for distributed system. \mbox{\hyperlink{classgko_1_1solver_1_1Chebyshev}{Chebyshev}} iteration is developed based on \mbox{\hyperlink{classgko_1_1solver_1_1Chebyshev}{Chebyshev}} polynomials of the first kind.
+
+Given a preconditioner $ M \approx A^{-1} $, the iterate is updated with the three-\/term recurrence \[ x_{k+1} = x_k + \alpha_k M (b - A x_k) + \beta_k (x_k - x_{k-1}), \] where the scalars $ \alpha_k, \beta_k $ are derived from an estimate of the spectrum of $ M A $. In pseudo-\/code\+:
 
 
 \begin{DoxyCode}{0}
@@ -100,6 +102,12 @@ It avoids the computation of inner products, which may be a performance bottlene
 \end{DoxyCode}
 
 
+\begin{DoxyParagraph}{References}
+
+\begin{DoxyItemize}
+\item Barrett, R., Berry, M., Chan, T. F., et al. {\itshape Templates for the Solution of Linear Systems\+: Building Blocks for Iterative Methods.} 2nd ed. S\+I\+AM, 1994. \href{https://doi.org/10.1137/1.9781611971538}{\texttt{ https\+://doi.\+org/10.\+1137/1.\+9781611971538}}
+\end{DoxyItemize}
+\end{DoxyParagraph}
 
 \begin{DoxyTemplParams}{Template Parameters}
 {\em Value\+Type} & precision of matrix elements \\

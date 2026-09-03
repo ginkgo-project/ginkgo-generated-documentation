@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2801723526 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2816504854 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -289,8 +289,14 @@ class gko::solver::Bicg&lt; ValueType &gt;</h3>
 
 <p>BICG or the Biconjugate gradient method is a Krylov subspace solver. </p>
 <p>Being a generic solver, it is capable of solving general matrices, including non-s.p.d matrices. Though, the memory and the computational requirement of the BiCG solver are higher than of its s.p.d solver counterpart, it has the capability to solve generic systems.</p>
-<p>BiCG is based on the bi-Lanczos tridiagonalization method and in exact arithmetic should terminate in at most N iterations (2N MV's, with A and A^H). It forms the basis of many of the cheaper methods such as BiCGSTAB and CGS.</p>
-<p>Reference: R.Fletcher, Conjugate gradient methods for indefinite systems, doi: 10.1007/BFb0080116</p>
+<p>BiCG is based on the bi-Lanczos tridiagonalization method and in exact arithmetic should terminate in at most <img class="formulaInl" alt="$ N $" src="form_143.png"/> iterations ( <img class="formulaInl" alt="$ 2N $" src="form_144.png"/> matrix-vector products — one per iteration with <img class="formulaInl" alt="$ A $" src="form_118.png"/> and <img class="formulaInl" alt="$ A^H $" src="form_145.png"/> each). It couples two Krylov sequences and maintains residuals <img class="formulaInl" alt="$ r_k $" src="form_146.png"/>, shadow residuals <img class="formulaInl" alt="$ \tilde r_k $" src="form_147.png"/>, and search directions <img class="formulaInl" alt="$ p_k, \tilde p_k $" src="form_148.png"/> that satisfy the biorthogonality conditions <img class="formulaInl" alt="$ \tilde r_i^H r_j = 0 $" src="form_149.png"/> for <img class="formulaInl" alt="$ i \ne j $" src="form_150.png"/>. Each iteration performs the coupled update </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \alpha_k = \frac{\tilde r_k^H r_k}{\tilde p_k^H A p_k}, \qquad r_{k+1} = r_k - \alpha_k A p_k, \qquad \tilde r_{k+1} = \tilde r_k - \alpha_k A^H \tilde p_k. \]" src="form_151.png"/>
+</p>
+<p> It forms the basis of cheaper variants such as BiCGSTAB and CGS, which avoid the explicit <img class="formulaInl" alt="$ A^H $" src="form_145.png"/> apply.</p>
+<dl class="section user"><dt>References</dt><dd><ul>
+<li>Fletcher, R. <em>Conjugate gradient methods for indefinite systems.</em> Numerical Analysis (Dundee 1975), Lecture Notes in Mathematics 506, Springer, 1976. <a href="https://doi.org/10.1007/BFb0080116">https://doi.org/10.1007/BFb0080116</a></li>
+</ul>
+</dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">ValueType</td><td>precision of matrix elements </td></tr>

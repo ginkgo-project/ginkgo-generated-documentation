@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2801723526 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2816504854 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -289,12 +289,20 @@ class gko::solver::PipeCg&lt; ValueType &gt;</h3>
 
 <p>PIPE_CG or the pipelined conjugate gradient method is an iterative type Krylov subspace method which is suitable for symmetric positive definite methods. </p>
 <p>It improves upon the CG method by allowing computation of inner products and norms to be overlapped with operator and preconditioner application. The pipelined method scales up to the 10^6 nodes of the assumed exascale machine, while its standard counterpart level off about one order of magnitude earlier, as suggested in the referenced paper (see below).</p>
+<p>Mathematically the iterates <img class="formulaInl" alt="$ x_k $" src="form_209.png"/> are the same as those produced by <a class="el" href="classgko_1_1solver_1_1Cg.html">CG</a>: the algorithm minimizes the energy-norm error over the Krylov subspace <img class="formulaInl" alt="$ x_0 + \mathcal{K}_k(A, r_0) $" src="form_192.png"/> and uses the same Fletcher-Reeves <img class="formulaInl" alt="$ \beta_k $" src="form_185.png"/>. CG, however, needs two global reductions per iteration that cannot be merged: <img class="formulaInl" alt="$ \rho_k = \langle r_k, z_k \rangle $" src="form_240.png"/> is needed to build <img class="formulaInl" alt="$ p_k $" src="form_241.png"/>, and only afterwards can <img class="formulaInl" alt="$ q_k = A p_k $" src="form_242.png"/> and the second reduction <img class="formulaInl" alt="$ \langle p_k, q_k \rangle $" src="form_243.png"/> be computed.</p>
+<p>The pipelined variant removes that second synchronization point by carrying an extra vector <img class="formulaInl" alt="$ w_k = A z_k $" src="form_244.png"/> — the operator applied to the preconditioned residual <img class="formulaInl" alt="$ z_k = M r_k $" src="form_163.png"/>, which plain CG never forms. It gives access to <img class="formulaInl" alt="$ \delta_k = \langle w_k, z_k \rangle = \langle A z_k, z_k \rangle $" src="form_245.png"/>, from which the denominator of <img class="formulaInl" alt="$ \alpha_k $" src="form_246.png"/> follows by a recurrence instead of a second reduction: </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \langle p_k, A p_k \rangle = \delta_k - \left| \frac{\rho_k}{\rho_{k-1}} \right|^2 \langle p_{k-1}, A p_{k-1} \rangle . \]" src="form_247.png"/>
+</p>
+<p> Because <img class="formulaInl" alt="$ \rho_k $" src="form_248.png"/> and <img class="formulaInl" alt="$ \delta_k $" src="form_249.png"/> are available at the same point of the iteration, they are computed in a single global reduction that can be overlapped with the operator and preconditioner applies updating the auxiliary vectors <img class="formulaInl" alt="$ w_k $" src="form_250.png"/>, <img class="formulaInl" alt="$ q_k = A p_k $" src="form_242.png"/>, <img class="formulaInl" alt="$ m_k = M w_k $" src="form_251.png"/> and <img class="formulaInl" alt="$ n_k = A m_k $" src="form_252.png"/>, all of which are advanced by short recurrences. In exact arithmetic the trajectory is identical to CG; in finite arithmetic the decoupling of dependencies amplifies round-off and the residuals can deviate from the classical iterates.</p>
 <p>Possible issues:</p><ol type="1">
 <li>Numerical instability: Due to the rearrangement of the operations, the method is known to be less stable than standard PCG.</li>
 <li>The method is suitable for cases where a large number of iterations need to be performed and when the solver is distributed over a large number of distributed nodes. The advantage of lesser number of reductions that need to be performed comes at the cost of increased vector operations, and the cost of increased storage of vectors.</li>
 <li>As the CG itself, this method performs very well for symmetric positive definite matrices but it is in general not suitable for general matrices.</li>
 </ol>
-<p>The implementation in Ginkgo is based on the following paper: Pipelined, Flexible Krylov Subspace Methods, P. Sanan et. al, SISC, 2016, doi: 10.1137/15M1049130</p>
+<dl class="section user"><dt>References</dt><dd><ul>
+<li>Sanan, P., Schnepp, S. M., May, D. A. <em>Pipelined, Flexible Krylov Subspace Methods.</em> SIAM Journal on Scientific Computing, 38 (5), 2016. <a href="https://doi.org/10.1137/15M1049130">https://doi.org/10.1137/15M1049130</a></li>
+</ul>
+</dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">ValueType</td><td>precision of matrix elements </td></tr>

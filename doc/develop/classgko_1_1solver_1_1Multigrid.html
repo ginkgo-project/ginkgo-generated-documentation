@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2801723526 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2816504854 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -80,7 +80,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classgko_1_1solver_1_1Multigrid.html" title="Multigrid methods have a hierarchy of many levels, whose corase level is a subset of the fine level,...">Multigrid</a> methods have a hierarchy of many levels, whose corase level is a subset of the fine level, of the problem.  
+<p><a class="el" href="classgko_1_1solver_1_1Multigrid.html" title="Multigrid solves a linear system by combining cheap iterative sweeps (smoothers) on a hierarchy of pr...">Multigrid</a> solves a linear system by combining cheap iterative sweeps (smoothers) on a hierarchy of progressively coarser representations of the operator with corrections transferred between adjacent levels.  
  <a href="classgko_1_1solver_1_1Multigrid.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="multigrid_8hpp_source.html">ginkgo/core/solver/multigrid.hpp</a>&gt;</code></p>
@@ -264,17 +264,19 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>EnableApplyWithIniti
 <tr class="separator:a358febcb7c1294f54d48870347482776"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classgko_1_1solver_1_1Multigrid.html" title="Multigrid methods have a hierarchy of many levels, whose corase level is a subset of the fine level,...">Multigrid</a> methods have a hierarchy of many levels, whose corase level is a subset of the fine level, of the problem. </p>
-<p>The coarse level solves the system on the residual of fine level and fine level will use the coarse solution to correct its own result. <a class="el" href="classgko_1_1solver_1_1Multigrid.html" title="Multigrid methods have a hierarchy of many levels, whose corase level is a subset of the fine level,...">Multigrid</a> solves the problem by relatively cheap step in each level and refining the result when prolongating back.</p>
-<p>The main step of each level</p><ul>
-<li>Presmooth (solve on the fine level)</li>
-<li>Calculate residual</li>
-<li>Restrict (reduce the problem dimension)</li>
-<li>Solve residual in next level</li>
-<li>Prolongate (return to the fine level size)</li>
-<li>Postsmooth (correct the answer in fine level)</li>
+<div class="textblock"><p><a class="el" href="classgko_1_1solver_1_1Multigrid.html" title="Multigrid solves a linear system by combining cheap iterative sweeps (smoothers) on a hierarchy of pr...">Multigrid</a> solves a linear system by combining cheap iterative sweeps (smoothers) on a hierarchy of progressively coarser representations of the operator with corrections transferred between adjacent levels. </p>
+<p>A smoother on the fine level removes the high-frequency components of the error quickly; the remaining low-frequency error is well-resolved on a coarser space, where it is computed by a cheaper solve — or, recursively, by another multigrid call. The correction is prolongated back to the fine level and a second smoothing sweep removes any high-frequency error introduced by the transfer. Because each coarser level holds only a fraction of the unknowns of the next, the total work per cycle stays close to that of a single fine-level matrix-vector apply.</p>
+<p>Each level <img class="formulaInl" alt="$ \ell $" src="form_232.png"/> holds a system matrix <img class="formulaInl" alt="$ A_\ell $" src="form_233.png"/>, a smoother <img class="formulaInl" alt="$ S_\ell $" src="form_234.png"/>, a restriction operator <img class="formulaInl" alt="$ R_\ell : \mathbb{R}^{n_\ell} \to \mathbb{R}^{n_{\ell+1}} $" src="form_235.png"/> and a prolongation operator <img class="formulaInl" alt="$ P_\ell : \mathbb{R}^{n_{\ell+1}} \to \mathbb{R}^{n_\ell} $" src="form_236.png"/>. The Galerkin coarse operator is <img class="formulaInl" alt="$ A_{\ell+1} = R_\ell A_\ell P_\ell $" src="form_237.png"/>. One V-cycle step at level <img class="formulaInl" alt="$ \ell $" src="form_232.png"/> on a fine-level system <img class="formulaInl" alt="$ A_\ell x = b $" src="form_238.png"/> is:</p>
+<p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \begin{aligned} x &amp;\leftarrow x + S_\ell^{\mathrm{pre}}(b - A_\ell x) &amp;&amp; \text{(pre-smooth)}, \\ r_{\ell+1} &amp;= R_\ell (b - A_\ell x) &amp;&amp; \text{(restrict)}, \\ e_{\ell+1} &amp;\approx A_{\ell+1}^{-1} r_{\ell+1} &amp;&amp; \text{(recursive coarse solve)}, \\ x &amp;\leftarrow x + P_\ell e_{\ell+1} &amp;&amp; \text{(prolongate and correct)}, \\ x &amp;\leftarrow x + S_\ell^{\mathrm{post}}(b - A_\ell x) &amp;&amp; \text{(post-smooth)}. \end{aligned} \]" src="form_239.png"/>
+</p>
+<p>At the coarsest level the recursive call is replaced by a direct or iterative coarse solver. W- and F-cycles differ from V only in how many recursive coarse-solves are performed per level (see the <code>cycle</code> enum above).</p>
+<p>Ginkgo uses the index from 0 for finest level (original problem size) ~ N for the coarsest level (the coarsest solver), and its level counts is N (N multigrid level generation).</p>
+<dl class="section user"><dt>References</dt><dd><ul>
+<li>Briggs, W. L., Henson, V. E., McCormick, S. F. <em>A Multigrid Tutorial.</em> 2nd ed. SIAM, 2000. <a href="https://doi.org/10.1137/1.9780898719505">https://doi.org/10.1137/1.9780898719505</a></li>
+<li>Trottenberg, U., Oosterlee, C. W., Schüller, A. <em>Multigrid.</em> 1st ed. Academic Press, 2001. ISBN 978-0-12-701070-0. </li>
 </ul>
-<p>Ginkgo uses the index from 0 for finest level (original problem size) ~ N for the coarsest level (the coarsest solver), and its level counts is N (N multigrid level generation). </p>
+</dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a708c25e7a2bcffb7ef0d98092d9d49e2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a708c25e7a2bcffb7ef0d98092d9d49e2">&#9670;&nbsp;</a></span>apply_uses_initial_guess()</h2>
@@ -529,7 +531,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>EnableApplyWithIniti
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>parameters</dd></dl>
-<dl class="section note"><dt>Note</dt><dd><a class="el" href="classgko_1_1solver_1_1Multigrid.html" title="Multigrid methods have a hierarchy of many levels, whose corase level is a subset of the fine level,...">Multigrid</a> does not support the selector option in file config </dd></dl>
+<dl class="section note"><dt>Note</dt><dd><a class="el" href="classgko_1_1solver_1_1Multigrid.html" title="Multigrid solves a linear system by combining cheap iterative sweeps (smoothers) on a hierarchy of pr...">Multigrid</a> does not support the selector option in file config </dd></dl>
 
 </div>
 </div>

@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2801723526 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2816504854 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -288,7 +288,10 @@ static auto&#160;</td><td class="memItemRight" valign="bottom"><b>build</b> () -
 class gko::solver::Bicgstab&lt; ValueType &gt;</h3>
 
 <p>BiCGSTAB or the Bi-Conjugate Gradient-Stabilized is a Krylov subspace solver. </p>
-<p>Being a generic solver, it is capable of solving general matrices, including non-s.p.d matrices. Though, the memory and the computational requirement of the BiCGSTAB solver are higher than of its s.p.d solver counterpart, it has the capability to solve generic systems. It was developed by stabilizing the BiCG method.</p>
+<p>Being a generic solver, it is capable of solving general matrices, including non-s.p.d matrices. Though, the memory and the computational requirement of the BiCGSTAB solver are higher than of its s.p.d solver counterpart, it has the capability to solve generic systems. It was developed by stabilizing the BiCG method: both operator applications of an iteration use <img class="formulaInl" alt="$ A $" src="form_118.png"/> itself, so no <img class="formulaInl" alt="$ A^H $" src="form_145.png"/> apply (nor a transposed preconditioner) is needed, at the cost of one additional inner product per iteration.</p>
+<p>Each iteration interleaves a BiCG-style step with a one-dimensional GMRES minimization: an intermediate residual <img class="formulaInl" alt="$ s = r_k - \alpha_k A p_k $" src="form_152.png"/> is constructed, then the stabilizing coefficient is chosen to minimize <img class="formulaInl" alt="$ \| r_{k+1} \|_2 $" src="form_153.png"/> along <img class="formulaInl" alt="$ A s $" src="form_154.png"/>: </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \omega_k = \frac{(A s)^H s}{(A s)^H (A s)}, \qquad x_{k+1} = x_k + \alpha_k p_k + \omega_k s, \qquad r_{k+1} = s - \omega_k A s. \]" src="form_155.png"/>
+</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">ValueType</td><td>precision of the elements of the system matrix. </td></tr>

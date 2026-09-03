@@ -75,10 +75,14 @@ B\+I\+CG or the Biconjugate gradient method is a Krylov subspace solver.
 
 Being a generic solver, it is capable of solving general matrices, including non-\/s.\+p.\+d matrices. Though, the memory and the computational requirement of the Bi\+CG solver are higher than of its s.\+p.\+d solver counterpart, it has the capability to solve generic systems.
 
-Bi\+CG is based on the bi-\/\+Lanczos tridiagonalization method and in exact arithmetic should terminate in at most N iterations (2N MV\textquotesingle{}s, with A and A$^\wedge$H). It forms the basis of many of the cheaper methods such as Bi\+C\+G\+S\+T\+AB and C\+GS.
+Bi\+CG is based on the bi-\/\+Lanczos tridiagonalization method and in exact arithmetic should terminate in at most $ N $ iterations ( $ 2N $ matrix-\/vector products — one per iteration with $ A $ and $ A^H $ each). It couples two Krylov sequences and maintains residuals $ r_k $, shadow residuals $ \tilde r_k $, and search directions $ p_k, \tilde p_k $ that satisfy the biorthogonality conditions $ \tilde r_i^H r_j = 0 $ for $ i \ne j $. Each iteration performs the coupled update \[ \alpha_k = \frac{\tilde r_k^H r_k}{\tilde p_k^H A p_k}, \qquad r_{k+1} = r_k - \alpha_k A p_k, \qquad \tilde r_{k+1} = \tilde r_k - \alpha_k A^H \tilde p_k. \] It forms the basis of cheaper variants such as Bi\+C\+G\+S\+T\+AB and C\+GS, which avoid the explicit $ A^H $ apply.
 
-Reference\+: R.\+Fletcher, Conjugate gradient methods for indefinite systems, doi\+: 10.\+1007/\+B\+Fb0080116
+\begin{DoxyParagraph}{References}
 
+\begin{DoxyItemize}
+\item Fletcher, R. {\itshape Conjugate gradient methods for indefinite systems.} Numerical Analysis (Dundee 1975), Lecture Notes in Mathematics 506, Springer, 1976. \href{https://doi.org/10.1007/BFb0080116}{\texttt{ https\+://doi.\+org/10.\+1007/\+B\+Fb0080116}}
+\end{DoxyItemize}
+\end{DoxyParagraph}
 
 \begin{DoxyTemplParams}{Template Parameters}
 {\em Value\+Type} & precision of matrix elements \\

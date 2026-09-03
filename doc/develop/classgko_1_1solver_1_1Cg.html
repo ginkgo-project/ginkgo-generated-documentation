@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2801723526 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2816504854 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -289,6 +289,13 @@ class gko::solver::Cg&lt; ValueType &gt;</h3>
 
 <p>CG or the conjugate gradient method is an iterative type Krylov subspace method which is suitable for symmetric positive definite methods. </p>
 <p>Though this method performs very well for symmetric positive definite matrices, it is in general not suitable for general matrices.</p>
+<p>CG constructs a sequence of search directions <img class="formulaInl" alt="$ p_0, p_1, \ldots $" src="form_160.png"/> that are mutually <img class="formulaInl" alt="$ A $" src="form_118.png"/>-conjugate ( <img class="formulaInl" alt="$ \langle p_i, A p_j \rangle = 0 $" src="form_161.png"/> for <img class="formulaInl" alt="$ i \ne j $" src="form_150.png"/>). The iterate chosen along these directions minimizes the error in the energy norm over the affine Krylov subspace, </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ x_k = \arg\min_{x \in x_0 + \mathcal{K}_k(A, r_0)} \| x - x^{*} \|_A, \qquad \| e \|_A = \sqrt{\langle e, A e \rangle}, \]" src="form_162.png"/>
+</p>
+<p> which yields a short recurrence: at each step the new search direction is built from the preconditioned residual <img class="formulaInl" alt="$ z_k = M r_k $" src="form_163.png"/> and the previous direction via the Fletcher-Reeves coefficient </p><p class="formulaDsp">
+<img class="formulaDsp" alt="\[ \beta_k = \frac{\langle r_k, z_k \rangle} {\langle r_{k-1}, z_{k-1} \rangle}, \qquad p_k = z_k + \beta_k p_{k-1}. \]" src="form_164.png"/>
+</p>
+<p> This formula assumes that <img class="formulaInl" alt="$ M $" src="form_165.png"/> stays fixed across iterations; for a varying preconditioner, use the Polak-Ribière variant in <a class="el" href="classgko_1_1solver_1_1Fcg.html">FCG</a>.</p>
 <p>The implementation in Ginkgo makes use of the merged kernel to make the best use of data locality. The inner operations in one iteration of CG are merged into 2 separate steps.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
