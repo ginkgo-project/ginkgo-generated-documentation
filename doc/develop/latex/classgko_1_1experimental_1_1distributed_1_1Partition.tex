@@ -47,6 +47,8 @@ using {\bfseries global\+\_\+index\+\_\+type} = Global\+Index\+Type
 \begin{DoxyCompactList}\small\item\em Returns the number of ranges stored by this partition. \end{DoxyCompactList}\item 
 comm\+\_\+index\+\_\+type \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition_ab8fea11edeee12878190c566423c53b2}{get\+\_\+num\+\_\+parts}} () const noexcept
 \begin{DoxyCompactList}\small\item\em Returns the number of parts represented in this partition. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition_ab7dce771ff308cc36409662abcca2570}{equals}} (const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{Partition}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks whether this partition describes the same distribution as another one, i.\+e. \end{DoxyCompactList}\item 
 comm\+\_\+index\+\_\+type \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition_a016cf045cc715fec475ef845635db98c}{get\+\_\+num\+\_\+empty\+\_\+parts}} () const noexcept
 \begin{DoxyCompactList}\small\item\em Returns the number of empty parts within this partition. \end{DoxyCompactList}\item 
 const global\+\_\+index\+\_\+type $\ast$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition_a922e3a6b00fa1d9d6c9988c8f3de31e8}{get\+\_\+range\+\_\+bounds}} () const noexcept
@@ -198,6 +200,29 @@ Builds a partition from a given mapping global\+\_\+index -\/$>$ part\+\_\+id.
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 a \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{Partition}} representing the given mapping as a set of ranges 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Partition_ab7dce771ff308cc36409662abcca2570}\label{classgko_1_1experimental_1_1distributed_1_1Partition_ab7dce771ff308cc36409662abcca2570}} 
+\index{gko::experimental::distributed::Partition$<$ LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Partition$<$ LocalIndexType, GlobalIndexType $>$}!equals@{equals}}
+\index{equals@{equals}!gko::experimental::distributed::Partition$<$ LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Partition$<$ LocalIndexType, GlobalIndexType $>$}}
+\doxysubsubsection{\texorpdfstring{equals()}{equals()}}
+{\footnotesize\ttfamily template$<$typename Local\+Index\+Type  = int32, typename Global\+Index\+Type  = int64$>$ \\
+bool \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{gko\+::experimental\+::distributed\+::\+Partition}}$<$ Local\+Index\+Type, Global\+Index\+Type $>$\+::equals (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{Partition}}$<$ Local\+Index\+Type, Global\+Index\+Type $>$ \&}]{other }\end{DoxyParamCaption}) const}
+
+
+
+Checks whether this partition describes the same distribution as another one, i.\+e. 
+
+both span the same global size and assign the same ranges to the same parts.
+
+Comparing two distinct partitions that live on a device executor requires copying their range data to the host, so this is not a cheap operation. Comparing a partition with itself is free.
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & the partition to compare against.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if both partitions describe the same distribution. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Partition_a016cf045cc715fec475ef845635db98c}\label{classgko_1_1experimental_1_1distributed_1_1Partition_a016cf045cc715fec475ef845635db98c}} 
 \index{gko::experimental::distributed::Partition$<$ LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Partition$<$ LocalIndexType, GlobalIndexType $>$}!get\_num\_empty\_parts@{get\_num\_empty\_parts}}

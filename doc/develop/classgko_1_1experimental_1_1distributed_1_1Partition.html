@@ -24,7 +24,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2829619293 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2831000394 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -125,6 +125,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab8fea11edeee12878190c566423c53b2"><td class="memItemLeft" align="right" valign="top">comm_index_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1experimental_1_1distributed_1_1Partition.html#ab8fea11edeee12878190c566423c53b2">get_num_parts</a> () const noexcept</td></tr>
 <tr class="memdesc:ab8fea11edeee12878190c566423c53b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of parts represented in this partition.  <a href="classgko_1_1experimental_1_1distributed_1_1Partition.html#ab8fea11edeee12878190c566423c53b2">More...</a><br /></td></tr>
 <tr class="separator:ab8fea11edeee12878190c566423c53b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7dce771ff308cc36409662abcca2570"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1experimental_1_1distributed_1_1Partition.html#ab7dce771ff308cc36409662abcca2570">equals</a> (const <a class="el" href="classgko_1_1experimental_1_1distributed_1_1Partition.html">Partition</a> &amp;other) const</td></tr>
+<tr class="memdesc:ab7dce771ff308cc36409662abcca2570"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether this partition describes the same distribution as another one, i.e.  <a href="classgko_1_1experimental_1_1distributed_1_1Partition.html#ab7dce771ff308cc36409662abcca2570">More...</a><br /></td></tr>
+<tr class="separator:ab7dce771ff308cc36409662abcca2570"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a016cf045cc715fec475ef845635db98c"><td class="memItemLeft" align="right" valign="top">comm_index_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1experimental_1_1distributed_1_1Partition.html#a016cf045cc715fec475ef845635db98c">get_num_empty_parts</a> () const noexcept</td></tr>
 <tr class="memdesc:a016cf045cc715fec475ef845635db98c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of empty parts within this partition.  <a href="classgko_1_1experimental_1_1distributed_1_1Partition.html#a016cf045cc715fec475ef845635db98c">More...</a><br /></td></tr>
 <tr class="separator:a016cf045cc715fec475ef845635db98c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -436,6 +439,37 @@ template&lt;typename LocalIndexType  = int32, typename GlobalIndexType  = int64&
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a <a class="el" href="classgko_1_1experimental_1_1distributed_1_1Partition.html" title="Represents a partition of a range of indices [0, size) into a disjoint set of parts.">Partition</a> representing the given mapping as a set of ranges </dd></dl>
+
+</div>
+</div>
+<a id="ab7dce771ff308cc36409662abcca2570"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7dce771ff308cc36409662abcca2570">&#9670;&nbsp;</a></span>equals()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename LocalIndexType  = int32, typename GlobalIndexType  = int64&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classgko_1_1experimental_1_1distributed_1_1Partition.html">gko::experimental::distributed::Partition</a>&lt; LocalIndexType, GlobalIndexType &gt;::equals </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classgko_1_1experimental_1_1distributed_1_1Partition.html">Partition</a>&lt; LocalIndexType, GlobalIndexType &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks whether this partition describes the same distribution as another one, i.e. </p>
+<p>both span the same global size and assign the same ranges to the same parts.</p>
+<p>Comparing two distinct partitions that live on a device executor requires copying their range data to the host, so this is not a cheap operation. Comparing a partition with itself is free.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>the partition to compare against.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if both partitions describe the same distribution. </dd></dl>
 
 </div>
 </div>

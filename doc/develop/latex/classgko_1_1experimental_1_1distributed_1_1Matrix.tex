@@ -73,6 +73,8 @@ std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>
 \begin{DoxyCompactList}\small\item\em Get read access to the stored diagonal matrix block. \end{DoxyCompactList}\item 
 std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a392c4e09a7a9a476066e8a36d1b51e10}{get\+\_\+off\+\_\+diag\+\_\+matrix}} () const
 \begin{DoxyCompactList}\small\item\em Get read access to the stored off-\/diagonal matrix block. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1RowGatherer}{Row\+Gatherer}}$<$ Local\+Index\+Type $>$ $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_aba3c57c8bdc2b4109ff498df868603ae}{get\+\_\+row\+\_\+gatherer}} () const
+\begin{DoxyCompactList}\small\item\em Get read access to the row gatherer used to fetch the non-\/local rows during an apply. \end{DoxyCompactList}\item 
 std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a46f542a248e1e401e88dd8c7de419881}{get\+\_\+local\+\_\+matrix}} () const
 \item 
 std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a19c806db41b1d4c9d68324b742050396}{get\+\_\+non\+\_\+local\+\_\+matrix}} () const
@@ -617,6 +619,22 @@ Shared pointer to the stored off-\/diagonal matrix block
 
 Referenced by gko\+::experimental\+::distributed\+::\+Matrix$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$\+::get\+\_\+non\+\_\+local\+\_\+matrix().
 
+\mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Matrix_aba3c57c8bdc2b4109ff498df868603ae}\label{classgko_1_1experimental_1_1distributed_1_1Matrix_aba3c57c8bdc2b4109ff498df868603ae}} 
+\index{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}!get\_row\_gatherer@{get\_row\_gatherer}}
+\index{get\_row\_gatherer@{get\_row\_gatherer}!gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_row\_gatherer()}{get\_row\_gatherer()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Local\+Index\+Type  = int32, typename Global\+Index\+Type  = int64$>$ \\
+std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1RowGatherer}{Row\+Gatherer}}$<$Local\+Index\+Type$>$ $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{gko\+::experimental\+::distributed\+::\+Matrix}}$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$\+::get\+\_\+row\+\_\+gatherer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get read access to the row gatherer used to fetch the non-\/local rows during an apply. 
+
+Its collective communicator determines how this matrix exchanges data, and is carried over to every matrix created from it -- in particular to the one read\+\_\+distributed rebuilds -- so this is how to check which exchange a matrix actually uses.
+
+\begin{DoxyReturn}{Returns}
+Shared pointer to the stored row gatherer 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Matrix_a8bda4b3eafc4ca7885697d4d18d4f24c}\label{classgko_1_1experimental_1_1distributed_1_1Matrix_a8bda4b3eafc4ca7885697d4d18d4f24c}} 
 \index{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}!operator=@{operator=}}
 \index{operator=@{operator=}!gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}}
