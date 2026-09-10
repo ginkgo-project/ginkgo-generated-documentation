@@ -1,16 +1,63 @@
 Using and interfacing with a batched solver..
 
- \label{_Batched Solver}%
- \label{_Usingbatchedsolvers}%
+ \label{_batched_solver_Intro}%
+ \label{_batched_solver_Usingbatchedsolvers}%
 \doxysection*{Using batched solvers}
 
 This example shows how to use Ginkgo batched solvers with data coming from an application. The \char`\"{}application\char`\"{} in this case is just a function in the example itself; nevertheless, the steps to be taken are shown.
 
-A `batch' here means a set of small linear systems that can be solved independently, but each system is too small to use an entire computing device. A requirement is that all the systems need to have the same sparsity pattern. \label{_CommProg}%
+A \char`\"{}batch\char`\"{} here means a set of small linear systems that can be solved independently, but each system is too small to use an entire computing device. A requirement is that all the systems need to have the same sparsity pattern. \label{_batched_solver_CommProg}%
  \doxysection*{The commented program}
+
+\label{_batched_solver_Includefiles}%
+ \doxysubsubsection*{Include files}
 
 
 \begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <random>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <string>}}
+\end{DoxyCode}
+
+
+This is the main ginkgo header file.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
+\end{DoxyCode}
+
+
+\label{_batched_solver_Typealiasesforconvenience}%
+ \doxysubsubsection*{Type aliases for convenience}
+
+Use some shortcuts.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using} value\_type = double;}
+\DoxyCodeLine{\textcolor{keyword}{using} real\_type = \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<value\_type>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} index\_type = int;}
+\DoxyCodeLine{\textcolor{keyword}{using} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\_type}} = \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}};}
+\DoxyCodeLine{\textcolor{keyword}{using} vec\_type = \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{gko::batch::MultiVector<value\_type>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} real\_vec\_type = \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{gko::batch::MultiVector<real\_type>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} mtx\_type = \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Csr}{gko::batch::matrix::Csr<value\_type, index\_type>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} bicgstab = \mbox{\hyperlink{classgko_1_1batch_1_1solver_1_1Bicgstab}{gko::batch::solver::Bicgstab<value\_type>}};}
+\end{DoxyCode}
+
+
+\label{_batched_solver_Conveniencefunctions}%
+ \doxysubsubsection*{Convenience functions}
+
+Unbatch batch items into distinct Ginkgo types
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{namespace }detail \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} InputType>}
 \DoxyCodeLine{\textcolor{keyword}{auto} unbatch(\textcolor{keyword}{const} InputType* batch\_object)}
 \DoxyCodeLine{\{}
@@ -28,7 +75,7 @@ A `batch' here means a set of small linear systems that can be solved independen
 \end{DoxyCode}
 
 
-\label{_Applicationstructuresandfunctions}%
+\label{_batched_solver_Applicationstructuresandfunctions}%
  \doxysubsubsection*{\textquotesingle{}Application\textquotesingle{} structures and functions}
 
 Structure to simulate application data related to the linear systems to be solved.
@@ -141,7 +188,7 @@ Print ginkgo version information
 \end{DoxyCode}
 
 
-\label{_Wheredoyouwanttorunyoursolver}%
+\label{_batched_solver_Wheredoyouwanttorunyoursolver}%
  \doxysubsubsection*{Where do you want to run your solver ?}
 
 The \mbox{\hyperlink{classgko_1_1Executor}{gko\+::\+Executor}} class is one of the cornerstones of Ginkgo. Currently, we have support for an \mbox{\hyperlink{classgko_1_1OmpExecutor}{gko\+::\+Omp\+Executor}}, which uses Open\+MP multi-\/threading in most of its kernels, a \mbox{\hyperlink{classgko_1_1ReferenceExecutor}{gko\+::\+Reference\+Executor}}, a single threaded specialization of the Open\+MP executor, \mbox{\hyperlink{classgko_1_1CudaExecutor}{gko\+::\+Cuda\+Executor}}, \mbox{\hyperlink{classgko_1_1HipExecutor}{gko\+::\+Hip\+Executor}}, \mbox{\hyperlink{classgko_1_1DpcppExecutor}{gko\+::\+Dpcpp\+Executor}} which runs the code on a N\+V\+I\+D\+IA, A\+MD and Intel G\+P\+Us, respectively. \begin{DoxyNote}{Note}
@@ -199,7 +246,7 @@ The number of repetitions for the timing.
 \end{DoxyCode}
 
 
-\label{_Generatedata}%
+\label{_batched_solver_Generatedata}%
  \doxysubsubsection*{Generate data}
 
 The \char`\"{}application\char`\"{} generates the batch of linear systems on the device
@@ -221,7 +268,7 @@ Create batch\+\_\+dim object to describe the dimensions of the batch matrix.
 \end{DoxyCode}
 
 
-\label{_Useofapplicationallocatedmemory}%
+\label{_batched_solver_Useofapplicationallocatedmemory}%
  \doxysubsubsection*{Use of application-\/allocated memory}
 
 We can either work on the existing memory allocated in the application, or we can copy it for the linear solve. Ginkgo expects the nonzero values for all the small matrices to be allocated contiguously, one matrix after the other.
@@ -240,7 +287,7 @@ We can either work on the existing memory allocated in the application, or we ca
 \end{DoxyCode}
 
 
-\label{_RHSandsolutionvectors}%
+\label{_batched_solver_RHSandsolutionvectors}%
  \doxysubsubsection*{R\+HS and solution vectors}
 
 batch\+\_\+stride object specifies the access stride within the individual matrices (vectors) in the batch. In this case, we specify a stride of 1 as the common value for all the matrices. Create R\+HS, again reusing application allocation
@@ -268,7 +315,7 @@ Create initial guess as 0 and copy to device
 \end{DoxyCode}
 
 
-\label{_Createthebatchsolverfactory}%
+\label{_batched_solver_Createthebatchsolverfactory}%
  \doxysubsubsection*{Create the batch solver factory}
 
 
@@ -291,7 +338,7 @@ Create a batched solver factory with relevant parameters.
 \end{DoxyCode}
 
 
-\label{_Batchlogger}%
+\label{_batched_solver_Batchlogger}%
  \doxysubsubsection*{Batch logger}
 
 Create a logger to obtain the iteration counts and \char`\"{}implicit\char`\"{} residual norms for every system after the solve.
@@ -303,7 +350,7 @@ Create a logger to obtain the iteration counts and \char`\"{}implicit\char`\"{} 
 \end{DoxyCode}
 
 
-\label{_Generateandsolve}%
+\label{_batched_solver_Generateandsolve}%
  \doxysubsubsection*{Generate and solve}
 
 add the logger to the solver
@@ -357,7 +404,7 @@ This is not necessary, but one might want to remove the logger before the next s
 \end{DoxyCode}
 
 
-\label{_Checkresult}%
+\label{_batched_solver_Checkresult}%
  \doxysubsubsection*{Check result}
 
 Compute norm of R\+HS on the device and automatically copy to host
@@ -539,7 +586,7 @@ In general, the application would control non-\/const pointers; the const casts 
 \DoxyCodeLine{    exec-\/>free(const\_cast<value\_type*>(appl\_data.all\_rhs));}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
- \label{_Results}%
+ \label{_batched_solver_Results}%
 \doxysection*{Results}
 
 The following is the expected result on the reference executor\+:
@@ -553,10 +600,10 @@ The following is the expected result on the reference executor\+:
 \end{DoxyCode}
 
 
-\label{_Commentsaboutprogramminganddebugging}%
+\label{_batched_solver_Commentsaboutprogramminganddebugging}%
 \doxysubsubsection*{Comments about programming and debugging }
 
-\label{_PlainProg}%
+\label{_batched_solver_PlainProg}%
  \doxysection*{The plain program}
 
 

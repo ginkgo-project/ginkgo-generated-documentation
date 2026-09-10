@@ -12,6 +12,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -24,7 +30,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2835086495 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2836628264 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -238,7 +244,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>enable_parameters_ty
 class gko::preconditioner::GaussSeidel&lt; ValueType, IndexType &gt;</h3>
 
 <p>This class generates the Gauss-Seidel preconditioner. </p>
-<p>This is the special case of the relaxation factor <img class="formulaInl" alt="$\omega = 1$" src="form_110.png"/> of the (S)SOR preconditioner.</p>
+<p>This is the special case of the relaxation factor \(\omega = 1\) of the (S)SOR preconditioner.</p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classgko_1_1preconditioner_1_1Sor.html" title="This class generates the (S)SOR preconditioner.">Sor</a> </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a8a0da954ada0c632e9df42c4a1ee4a41"></a>
@@ -260,6 +266,12 @@ template&lt;typename ValueType  = default_precision, typename IndexType  = int32
 </div><div class="memdoc">
 
 <p></p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">system_matrix</td><td>the source matrix used to generate the preconditioner.</td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section note"><dt>Note</dt><dd>This function overrides the default LinOpFactory::generate to return a Factorization instead of a generic <a class="el" href="classgko_1_1LinOp.html">LinOp</a>, which would need to be cast to Factorization again to access its factors. It is only necessary because smart pointers aren't covariant. </dd></dl>
 
 </div>

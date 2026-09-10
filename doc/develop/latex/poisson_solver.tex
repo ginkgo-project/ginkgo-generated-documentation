@@ -2,8 +2,8 @@ The poisson solver example..
 
 This example depends on simple-\/solver.
 
- \label{_Intro}%
- \label{_Introduction}%
+ \label{_poisson_solver_Intro}%
+ \label{_poisson_solver_Introduction}%
 \doxysection*{Introduction}
 
 This example solves a 1D Poisson equation\+:
@@ -14,22 +14,53 @@ using a finite difference method on an equidistant grid with {\ttfamily K} discr
 
 $ u(x + h) = u(x) - u\text{'}(x)h + 1/2 u\text{'}\text{'}(x)h^2 + O(h^3)\\ u(x - h) = u(x) + u\text{'}(x)h + 1/2 u\text{'}\text{'}(x)h^2 + O(h^3) / +\\ ---------------------- \\ -u(x - h) + 2u(x) + -u(x + h) = -f(x)h^2 + O(h^3) $
 
-For an equidistant grid with K \char`\"{}inner\char`\"{} discretization points $x1, ..., xk, $and step size $ h = 1 / (K + 1)$, the formula produces a system of linear equations
+For an equidistant grid with K \char`\"{}inner\char`\"{} discretization points $x1, ..., xk$ and step size $h = 1 / (K + 1)$, the formula produces a system of linear equations
 
 $ 2u_1 - u_2 = -f_1 h^2 + u0\\ -u_(k-1) + 2u_k - u_(k+1) = -f_k h^2, k = 2, ..., K - 1\\ -u_(K-1) + 2u_K = -f_K h^2 + u1\\ $
 
-which is then solved using Ginkgo\textquotesingle{}s implementation of the CG method preconditioned with block-\/\+Jacobi. It is also possible to specify on which executor Ginkgo will solve the system via the command line. The function $`f` $is set to $`f(x) = 6x`$ (making the solution $`u(x) = x^3`$), but that can be changed in the {\ttfamily main} function.
+which is then solved using Ginkgo\textquotesingle{}s implementation of the CG method preconditioned with block-\/\+Jacobi. It is also possible to specify on which executor Ginkgo will solve the system via the command line. The function {\ttfamily f} is set to {\ttfamily f(x) = 6x} (making the solution {\ttfamily u(x) = x$^\wedge$3}), but that can be changed in the {\ttfamily main} function.
 
 The intention of the example is to show how Ginkgo can be used to build an application solving a real-\/world problem, which includes a solution of a large, sparse linear system as a component.
 
-\label{_Abouttheexample}%
+\label{_poisson_solver_Abouttheexample}%
 \doxysubsubsection*{About the example }
 
-\label{_CommProg}%
+\label{_poisson_solver_CommProg}%
  \doxysection*{The commented program}
 
 
 \begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
+\end{DoxyCode}
+
+
+Creates a stencil matrix in C\+SR format for the given number of discretization points.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType, \textcolor{keyword}{typename} IndexType>}
+\DoxyCodeLine{\textcolor{keywordtype}{void} generate\_stencil\_matrix(\mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<ValueType, IndexType>}}* matrix)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} discretization\_points = matrix-\/>\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\_size}}()[0];}
+\DoxyCodeLine{    \textcolor{keyword}{auto} row\_ptrs = matrix-\/>\mbox{\hyperlink{classgko_1_1matrix_1_1Csr_a068e5158cf282fa977f0a137f8cd7f03}{get\_row\_ptrs}}();}
+\DoxyCodeLine{    \textcolor{keyword}{auto} col\_idxs = matrix-\/>\mbox{\hyperlink{classgko_1_1matrix_1_1Csr_a81c6294177a1be4873804c8a85a9fc64}{get\_col\_idxs}}();}
+\DoxyCodeLine{    \textcolor{keyword}{auto} values = matrix-\/>\mbox{\hyperlink{classgko_1_1matrix_1_1Csr_a929b0a194e6aeb1252b8e6781d162e83}{get\_values}}();}
+\DoxyCodeLine{    \textcolor{keywordtype}{int} pos = 0;}
+\DoxyCodeLine{    \textcolor{keyword}{const} ValueType coefs[] = \{-\/1, 2, -\/1\};}
+\DoxyCodeLine{    row\_ptrs[0] = pos;}
+\DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < discretization\_points; ++i) \{}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} ofs : \{-\/1, 0, 1\}) \{}
+\DoxyCodeLine{            \textcolor{keywordflow}{if} (0 <= i + ofs \&\& i + ofs < discretization\_points) \{}
+\DoxyCodeLine{                values[pos] = coefs[ofs + 1];}
+\DoxyCodeLine{                col\_idxs[pos] = i + ofs;}
+\DoxyCodeLine{                ++pos;}
+\DoxyCodeLine{            \}}
+\DoxyCodeLine{        \}}
 \DoxyCodeLine{        row\_ptrs[i + 1] = pos;}
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{\}}
@@ -242,7 +273,7 @@ Uncomment to print the solution print\+\_\+solution$<$\+Value\+Type$>$(u0, u1, u
 \DoxyCodeLine{              << std::endl;}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
- \label{_Results}%
+ \label{_poisson_solver_Results}%
 \doxysection*{Results}
 
 This is the expected output\+:
@@ -254,10 +285,10 @@ This is the expected output\+:
 \end{DoxyCode}
 
 
-\label{_Commentsaboutprogramminganddebugging}%
+\label{_poisson_solver_Commentsaboutprogramminganddebugging}%
 \doxysubsubsection*{Comments about programming and debugging }
 
-\label{_PlainProg}%
+\label{_poisson_solver_PlainProg}%
  \doxysection*{The plain program}
 
 

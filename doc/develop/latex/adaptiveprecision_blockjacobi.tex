@@ -2,16 +2,56 @@ The preconditioned solver example..
 
 This example depends on preconditioned-\/solver.
 
- \label{_Adaptive Precision block-Jacobi}%
+ \label{_adaptiveprecision_blockjacobi_Intro}%
  \doxysection*{This example shows how to use the adaptive precision block-\/\+Jacobi preconditioner.}
 
 \doxysubsubsection*{In this example, we first read in a matrix from file, then generate a right-\/hand side and an initial guess. The preconditioned CG solver is enhanced with a block-\/\+Jacobi preconditioner that optimizes the storage format for the distinct inverted diagonal blocks to the numerical requirements. The example features the iteration count and runtime of the CG solver.}
 
-\label{_CommProg}%
+\label{_adaptiveprecision_blockjacobi_CommProg}%
  \doxysection*{The commented program}
 
 
 \begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iomanip>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
+\DoxyCodeLine{\{}
+\end{DoxyCode}
+
+
+Some shortcuts
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using} ValueType = double;}
+\DoxyCodeLine{\textcolor{keyword}{using} RealValueType = \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} IndexType = int;}
+\DoxyCodeLine{\textcolor{keyword}{using} vec = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} real\_vec = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<RealValueType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} mtx = \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<ValueType, IndexType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} cg = \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{gko::solver::Cg<ValueType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} bj = \mbox{\hyperlink{classgko_1_1preconditioner_1_1Jacobi}{gko::preconditioner::Jacobi<ValueType, IndexType>}};}
+\end{DoxyCode}
+
+
+Print version information
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::cout << \mbox{\hyperlink{classgko_1_1version__info_a6daeb8a087cfb57fa055526fc133d8eb}{gko::version\_info::get}}() << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (argc == 2 \&\& (std::string(argv[1]) == \textcolor{stringliteral}{"-\/-\/help"})) \{}
+\DoxyCodeLine{    std::cerr << \textcolor{stringliteral}{"Usage: "} << argv[0] << \textcolor{stringliteral}{" [executor]"} << std::endl;}
+\DoxyCodeLine{    std::exit(-\/1);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} executor\_string = argc >= 2 ? argv[1] : \textcolor{stringliteral}{"reference"};}
 \end{DoxyCode}
 
@@ -165,7 +205,7 @@ Print solver statistics
 \DoxyCodeLine{              << static\_cast<double>(time.count()) / 1000000.0 << std::endl;}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
- \label{_Results}%
+ \label{_adaptiveprecision_blockjacobi_Results}%
 \doxysection*{Results}
 
 This is the expected output\+:
@@ -189,10 +229,10 @@ This is the expected output\+:
 \end{DoxyCode}
 
 
-\label{_Commentsaboutprogramminganddebugging}%
+\label{_adaptiveprecision_blockjacobi_Commentsaboutprogramminganddebugging}%
 \doxysubsubsection*{Comments about programming and debugging }
 
-\label{_PlainProg}%
+\label{_adaptiveprecision_blockjacobi_PlainProg}%
  \doxysection*{The plain program}
 
 

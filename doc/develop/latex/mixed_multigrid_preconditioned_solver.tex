@@ -2,14 +2,53 @@ The preconditioned solver example..
 
 This example depends on multigrid-\/preconditioned-\/solver, mixed-\/multigrid-\/solver.
 
- \label{_Multigrid Preconditioner}%
- \label{_Thisexampleshowshowtousethemixedprecisionmultigridpreconditioner}%
+ \label{_mixed_multigrid_preconditioned_solver_Intro}%
+ \label{_mixed_multigrid_preconditioned_solver_Thisexampleshowshowtousethemixedprecisionmultigridpreconditioner}%
 \doxysection*{This example shows how to use the mixed-\/precision multigrid preconditioner.}
 
 \doxysubsubsection*{In this example, we first read in a matrix from a file. The preconditioned CG solver is enhanced with a mixed-\/precision multigrid preconditioner. The example features the generating time and runtime of the CG solver.}
 
-\label{_CommProg}%
+\label{_mixed_multigrid_preconditioned_solver_CommProg}%
  \doxysection*{The commented program}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iomanip>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
+\DoxyCodeLine{\{}
+\end{DoxyCode}
+
+
+Some shortcuts
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using} ValueType = double;}
+\DoxyCodeLine{\textcolor{keyword}{using} MixedType = float;}
+\DoxyCodeLine{\textcolor{keyword}{using} IndexType = int;}
+\DoxyCodeLine{\textcolor{keyword}{using} vec = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} mtx = \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<ValueType, IndexType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} fcg = \mbox{\hyperlink{classgko_1_1solver_1_1Fcg}{gko::solver::Fcg<ValueType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} cg = \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{gko::solver::Cg<ValueType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} ir = \mbox{\hyperlink{classgko_1_1solver_1_1Ir}{gko::solver::Ir<ValueType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} mg = \mbox{\hyperlink{classgko_1_1solver_1_1Multigrid}{gko::solver::Multigrid}};}
+\DoxyCodeLine{\textcolor{keyword}{using} bj = \mbox{\hyperlink{classgko_1_1preconditioner_1_1Jacobi}{gko::preconditioner::Jacobi<ValueType, IndexType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} pgm = \mbox{\hyperlink{classgko_1_1multigrid_1_1Pgm}{gko::multigrid::Pgm<ValueType, IndexType>}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{using} cg\_f = \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{gko::solver::Cg<MixedType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} ir\_f = \mbox{\hyperlink{classgko_1_1solver_1_1Ir}{gko::solver::Ir<MixedType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} bj\_f = \mbox{\hyperlink{classgko_1_1preconditioner_1_1Jacobi}{gko::preconditioner::Jacobi<MixedType, IndexType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} pgm\_f = \mbox{\hyperlink{classgko_1_1multigrid_1_1Pgm}{gko::multigrid::Pgm<MixedType, IndexType>}};}
+\end{DoxyCode}
+
 
 Print version information
 
@@ -292,7 +331,7 @@ Print solver statistics
 \DoxyCodeLine{              << std::endl;}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
- \label{_Results}%
+ \label{_mixed_multigrid_preconditioned_solver_Results}%
 \doxysection*{Results}
 
 This is the expected output\+:
@@ -314,10 +353,10 @@ This is the expected output\+:
 \end{DoxyCode}
 
 
-\label{_Commentsaboutprogramminganddebugging}%
+\label{_mixed_multigrid_preconditioned_solver_Commentsaboutprogramminganddebugging}%
 \doxysubsubsection*{Comments about programming and debugging }
 
-\label{_PlainProg}%
+\label{_mixed_multigrid_preconditioned_solver_PlainProg}%
  \doxysection*{The plain program}
 
 

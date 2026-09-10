@@ -12,6 +12,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -24,7 +30,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2835086495 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2836628264 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -830,7 +836,7 @@ template&lt;typename RecvType &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">exec</td><td>The executor, on which the message buffer is located. </td></tr>
-    <tr><td class="paramname">buffer</td><td>the buffer to send and the buffer receive </td></tr>
+    <tr><td class="paramname">recv_buffer</td><td>the buffer to send and the buffer receive </td></tr>
     <tr><td class="paramname">recv_count</td><td>the number of elements to receive </td></tr>
     <tr><td class="paramname">comm</td><td>the communicator</td></tr>
   </table>
@@ -920,10 +926,10 @@ template&lt;typename SendType , typename RecvType &gt; </div>
   <table class="params">
     <tr><td class="paramname">exec</td><td>The executor, on which the message buffers are located. </td></tr>
     <tr><td class="paramname">send_buffer</td><td>the buffer to send </td></tr>
-    <tr><td class="paramname">send_count</td><td>the number of elements to send </td></tr>
+    <tr><td class="paramname">send_counts</td><td>the number of elements to send </td></tr>
     <tr><td class="paramname">send_offsets</td><td>the offsets for the send buffer </td></tr>
     <tr><td class="paramname">recv_buffer</td><td>the buffer to gather into </td></tr>
-    <tr><td class="paramname">recv_count</td><td>the number of elements to receive </td></tr>
+    <tr><td class="paramname">recv_counts</td><td>the number of elements to receive </td></tr>
     <tr><td class="paramname">recv_offsets</td><td>the offsets for the recv buffer </td></tr>
     <tr><td class="paramname">comm</td><td>the communicator</td></tr>
   </table>
@@ -1021,11 +1027,11 @@ template&lt;typename SendType , typename RecvType &gt; </div>
   <table class="params">
     <tr><td class="paramname">exec</td><td>The executor, on which the message buffers are located. </td></tr>
     <tr><td class="paramname">send_buffer</td><td>the buffer to send </td></tr>
-    <tr><td class="paramname">send_count</td><td>the number of elements to send </td></tr>
+    <tr><td class="paramname">send_counts</td><td>the number of elements to send </td></tr>
     <tr><td class="paramname">send_offsets</td><td>the offsets for the send buffer </td></tr>
     <tr><td class="paramname">send_type</td><td>the MPI_Datatype for the send buffer </td></tr>
     <tr><td class="paramname">recv_buffer</td><td>the buffer to gather into </td></tr>
-    <tr><td class="paramname">recv_count</td><td>the number of elements to receive </td></tr>
+    <tr><td class="paramname">recv_counts</td><td>the number of elements to receive </td></tr>
     <tr><td class="paramname">recv_offsets</td><td>the offsets for the recv buffer </td></tr>
     <tr><td class="paramname">recv_type</td><td>the MPI_Datatype for the recv buffer </td></tr>
     <tr><td class="paramname">comm</td><td>the communicator </td></tr>
@@ -1303,7 +1309,7 @@ template&lt;typename SendType , typename RecvType &gt; </div>
     <tr><td class="paramname">send_buffer</td><td>the buffer to gather from </td></tr>
     <tr><td class="paramname">send_count</td><td>the number of elements to send </td></tr>
     <tr><td class="paramname">recv_buffer</td><td>the buffer to gather into </td></tr>
-    <tr><td class="paramname">recv_count</td><td>the number of elements to receive </td></tr>
+    <tr><td class="paramname">recv_counts</td><td>the number of elements to receive </td></tr>
     <tr><td class="paramname">displacements</td><td>the offsets for the buffer </td></tr>
     <tr><td class="paramname">root_rank</td><td>the rank to gather into</td></tr>
   </table>
@@ -1702,7 +1708,7 @@ template&lt;typename RecvType &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">exec</td><td>The executor, on which the message buffer is located. </td></tr>
-    <tr><td class="paramname">buffer</td><td>the buffer to send and the buffer receive </td></tr>
+    <tr><td class="paramname">recv_buffer</td><td>the buffer to send and the buffer receive </td></tr>
     <tr><td class="paramname">recv_count</td><td>the number of elements to receive </td></tr>
     <tr><td class="paramname">comm</td><td>the communicator</td></tr>
   </table>
@@ -1793,10 +1799,10 @@ template&lt;typename SendType , typename RecvType &gt; </div>
   <table class="params">
     <tr><td class="paramname">exec</td><td>The executor, on which the message buffers are located. </td></tr>
     <tr><td class="paramname">send_buffer</td><td>the buffer to send </td></tr>
-    <tr><td class="paramname">send_count</td><td>the number of elements to send </td></tr>
+    <tr><td class="paramname">send_counts</td><td>the number of elements to send </td></tr>
     <tr><td class="paramname">send_offsets</td><td>the offsets for the send buffer </td></tr>
     <tr><td class="paramname">recv_buffer</td><td>the buffer to gather into </td></tr>
-    <tr><td class="paramname">recv_count</td><td>the number of elements to receive </td></tr>
+    <tr><td class="paramname">recv_counts</td><td>the number of elements to receive </td></tr>
     <tr><td class="paramname">recv_offsets</td><td>the offsets for the recv buffer</td></tr>
   </table>
   </dd>
@@ -1896,11 +1902,11 @@ template&lt;typename SendType , typename RecvType &gt; </div>
   <table class="params">
     <tr><td class="paramname">exec</td><td>The executor, on which the message buffers are located. </td></tr>
     <tr><td class="paramname">send_buffer</td><td>the buffer to send </td></tr>
-    <tr><td class="paramname">send_count</td><td>the number of elements to send </td></tr>
+    <tr><td class="paramname">send_counts</td><td>the number of elements to send </td></tr>
     <tr><td class="paramname">send_offsets</td><td>the offsets for the send buffer </td></tr>
     <tr><td class="paramname">send_type</td><td>the MPI_Datatype for the send buffer </td></tr>
     <tr><td class="paramname">recv_buffer</td><td>the buffer to gather into </td></tr>
-    <tr><td class="paramname">recv_count</td><td>the number of elements to receive </td></tr>
+    <tr><td class="paramname">recv_counts</td><td>the number of elements to receive </td></tr>
     <tr><td class="paramname">recv_offsets</td><td>the offsets for the recv buffer </td></tr>
     <tr><td class="paramname">recv_type</td><td>the MPI_Datatype for the recv buffer</td></tr>
   </table>
@@ -2143,7 +2149,7 @@ template&lt;typename SendType , typename RecvType &gt; </div>
     <tr><td class="paramname">send_buffer</td><td>the buffer to gather from </td></tr>
     <tr><td class="paramname">send_count</td><td>the number of elements to send </td></tr>
     <tr><td class="paramname">recv_buffer</td><td>the buffer to gather into </td></tr>
-    <tr><td class="paramname">recv_count</td><td>the number of elements to receive </td></tr>
+    <tr><td class="paramname">recv_counts</td><td>the number of elements to receive </td></tr>
     <tr><td class="paramname">displacements</td><td>the offsets for the buffer </td></tr>
     <tr><td class="paramname">root_rank</td><td>the rank to gather into</td></tr>
   </table>
@@ -2306,7 +2312,8 @@ template&lt;typename ReduceType &gt; </div>
     <tr><td class="paramname">send_buffer</td><td>the buffer to reduce </td></tr>
     <tr><td class="paramname">recv_buffer</td><td>the reduced result </td></tr>
     <tr><td class="paramname">count</td><td>the number of elements to reduce </td></tr>
-    <tr><td class="paramname">operation</td><td>the MPI_Op type reduce operation.</td></tr>
+    <tr><td class="paramname">operation</td><td>the MPI_Op type reduce operation. </td></tr>
+    <tr><td class="paramname">root_rank</td><td>the rank to reduce into</td></tr>
   </table>
   </dd>
 </dl>
@@ -2383,7 +2390,7 @@ template&lt;typename ScanType &gt; </div>
     <tr><td class="paramname">exec</td><td>The executor, on which the message buffers are located. </td></tr>
     <tr><td class="paramname">send_buffer</td><td>the buffer to scan from </td></tr>
     <tr><td class="paramname">recv_buffer</td><td>the result buffer </td></tr>
-    <tr><td class="paramname">recv_count</td><td>the number of elements to scan </td></tr>
+    <tr><td class="paramname">count</td><td>the number of elements to scan </td></tr>
     <tr><td class="paramname">operation</td><td>the operation type to be used for the scan. See @MPI_Op</td></tr>
   </table>
   </dd>
@@ -2467,7 +2474,8 @@ template&lt;typename SendType , typename RecvType &gt; </div>
     <tr><td class="paramname">send_buffer</td><td>the buffer to gather from </td></tr>
     <tr><td class="paramname">send_count</td><td>the number of elements to send </td></tr>
     <tr><td class="paramname">recv_buffer</td><td>the buffer to gather into </td></tr>
-    <tr><td class="paramname">recv_count</td><td>the number of elements to receive</td></tr>
+    <tr><td class="paramname">recv_count</td><td>the number of elements to receive </td></tr>
+    <tr><td class="paramname">root_rank</td><td>the rank to scatter from</td></tr>
   </table>
   </dd>
 </dl>
@@ -2555,11 +2563,11 @@ template&lt;typename SendType , typename RecvType &gt; </div>
   <table class="params">
     <tr><td class="paramname">exec</td><td>The executor, on which the message buffers are located. </td></tr>
     <tr><td class="paramname">send_buffer</td><td>the buffer to gather from </td></tr>
-    <tr><td class="paramname">send_count</td><td>the number of elements to send </td></tr>
+    <tr><td class="paramname">send_counts</td><td>the number of elements to send </td></tr>
     <tr><td class="paramname">recv_buffer</td><td>the buffer to gather into </td></tr>
     <tr><td class="paramname">recv_count</td><td>the number of elements to receive </td></tr>
     <tr><td class="paramname">displacements</td><td>the offsets for the buffer </td></tr>
-    <tr><td class="paramname">comm</td><td>the communicator</td></tr>
+    <tr><td class="paramname">root_rank</td><td>the rank to scatter from</td></tr>
   </table>
   </dd>
 </dl>
@@ -3034,7 +3042,8 @@ template&lt;typename ReduceType &gt; </div>
     <tr><td class="paramname">send_buffer</td><td>the buffer to reduce </td></tr>
     <tr><td class="paramname">recv_buffer</td><td>the reduced result </td></tr>
     <tr><td class="paramname">count</td><td>the number of elements to reduce </td></tr>
-    <tr><td class="paramname">operation</td><td>the MPI_Op type reduce operation.</td></tr>
+    <tr><td class="paramname">operation</td><td>the MPI_Op type reduce operation. </td></tr>
+    <tr><td class="paramname">root_rank</td><td>the rank to reduce into</td></tr>
   </table>
   </dd>
 </dl>
@@ -3110,7 +3119,7 @@ template&lt;typename ScanType &gt; </div>
     <tr><td class="paramname">exec</td><td>The executor, on which the message buffers are located. </td></tr>
     <tr><td class="paramname">send_buffer</td><td>the buffer to scan from </td></tr>
     <tr><td class="paramname">recv_buffer</td><td>the result buffer </td></tr>
-    <tr><td class="paramname">recv_count</td><td>the number of elements to scan </td></tr>
+    <tr><td class="paramname">count</td><td>the number of elements to scan </td></tr>
     <tr><td class="paramname">operation</td><td>the operation type to be used for the scan. See @MPI_Op</td></tr>
   </table>
   </dd>
@@ -3193,7 +3202,8 @@ template&lt;typename SendType , typename RecvType &gt; </div>
     <tr><td class="paramname">send_buffer</td><td>the buffer to gather from </td></tr>
     <tr><td class="paramname">send_count</td><td>the number of elements to send </td></tr>
     <tr><td class="paramname">recv_buffer</td><td>the buffer to gather into </td></tr>
-    <tr><td class="paramname">recv_count</td><td>the number of elements to receive</td></tr>
+    <tr><td class="paramname">recv_count</td><td>the number of elements to receive </td></tr>
+    <tr><td class="paramname">root_rank</td><td>the rank to scatter from</td></tr>
   </table>
   </dd>
 </dl>
@@ -3280,11 +3290,11 @@ template&lt;typename SendType , typename RecvType &gt; </div>
   <table class="params">
     <tr><td class="paramname">exec</td><td>The executor, on which the message buffers are located. </td></tr>
     <tr><td class="paramname">send_buffer</td><td>the buffer to gather from </td></tr>
-    <tr><td class="paramname">send_count</td><td>the number of elements to send </td></tr>
+    <tr><td class="paramname">send_counts</td><td>the number of elements to send </td></tr>
     <tr><td class="paramname">recv_buffer</td><td>the buffer to gather into </td></tr>
     <tr><td class="paramname">recv_count</td><td>the number of elements to receive </td></tr>
     <tr><td class="paramname">displacements</td><td>the offsets for the buffer </td></tr>
-    <tr><td class="paramname">comm</td><td>the communicator</td></tr>
+    <tr><td class="paramname">root_rank</td><td>the rank to scatter from</td></tr>
   </table>
   </dd>
 </dl>

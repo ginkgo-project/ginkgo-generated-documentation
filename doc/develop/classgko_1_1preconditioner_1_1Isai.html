@@ -12,6 +12,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -24,7 +30,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2835086495 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2836628264 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -82,7 +88,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>The Incomplete Sparse Approximate Inverse (ISAI) Preconditioner generates an approximate inverse matrix for a given square matrix <img class="formulaInl" alt="$A$" src="form_0.png"/>, lower triangular matrix <img class="formulaInl" alt="$L$" src="form_9.png"/>, upper triangular matrix <img class="formulaInl" alt="$U$" src="form_48.png"/> or symmetric positive definite (s.p.d) matrix <img class="formulaInl" alt="$B$" src="form_116.png"/>.  
+<p>The Incomplete Sparse Approximate Inverse (ISAI) Preconditioner generates an approximate inverse matrix for a given square matrix \(A\), lower triangular matrix \(L\), upper triangular matrix \(U\) or symmetric positive definite (s.p.d) matrix \(B\).  
  <a href="classgko_1_1preconditioner_1_1Isai.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="isai_8hpp_source.html">ginkgo/core/preconditioner/isai.hpp</a>&gt;</code></p>
@@ -244,12 +250,12 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>Isai&lt; isai_type::
 <div class="textblock"><h3>template&lt;isai_type IsaiType, typename ValueType, typename IndexType&gt;<br />
 class gko::preconditioner::Isai&lt; IsaiType, ValueType, IndexType &gt;</h3>
 
-<p>The Incomplete Sparse Approximate Inverse (ISAI) Preconditioner generates an approximate inverse matrix for a given square matrix <img class="formulaInl" alt="$A$" src="form_0.png"/>, lower triangular matrix <img class="formulaInl" alt="$L$" src="form_9.png"/>, upper triangular matrix <img class="formulaInl" alt="$U$" src="form_48.png"/> or symmetric positive definite (s.p.d) matrix <img class="formulaInl" alt="$B$" src="form_116.png"/>. </p>
-<p>Let <img class="formulaInl" alt="$ M_A \approx A^{-1} $" src="form_117.png"/> denote the approximate inverse of a general matrix <img class="formulaInl" alt="$ A $" src="form_118.png"/>, and similarly <img class="formulaInl" alt="$ M_L \approx L^{-1} $" src="form_119.png"/>, <img class="formulaInl" alt="$ M_U \approx U^{-1} $" src="form_120.png"/> for lower and upper triangular matrices, and <img class="formulaInl" alt="$ M_C \approx C^{-1} $" src="form_121.png"/> for the Cholesky factor of an s.p.d matrix <img class="formulaInl" alt="$ B = C^T C $" src="form_122.png"/> (the last case is commonly called a Factorized Sparse Approximate Inverse, FSPAI). For a given vector <img class="formulaInl" alt="$ x $" src="form_123.png"/> (which may carry multiple right-hand sides), applying the preconditioner computes </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\[ \begin{aligned} \texttt{isai\_type::general} &amp;: \quad M_A x, \\ \texttt{isai\_type::lower} &amp;: \quad M_L x, \\ \texttt{isai\_type::upper} &amp;: \quad M_U x, \\ \texttt{isai\_type::spd} &amp;: \quad M_C^{T} M_C x. \end{aligned} \]" src="form_124.png"/>
+<p>The Incomplete Sparse Approximate Inverse (ISAI) Preconditioner generates an approximate inverse matrix for a given square matrix \(A\), lower triangular matrix \(L\), upper triangular matrix \(U\) or symmetric positive definite (s.p.d) matrix \(B\). </p>
+<p>Let \( M_A \approx A^{-1} \) denote the approximate inverse of a general matrix \( A \), and similarly \( M_L \approx L^{-1} \), \( M_U \approx U^{-1} \) for lower and upper triangular matrices, and \( M_C \approx C^{-1} \) for the Cholesky factor of an s.p.d matrix \( B = C^T C \) (the last case is commonly called a Factorized Sparse Approximate Inverse, FSPAI). For a given vector \( x \) (which may carry multiple right-hand sides), applying the preconditioner computes </p><p class="formulaDsp">
+\[ \begin{aligned} \texttt{isai\_type::general} &amp;: \quad M_A x, \\ \texttt{isai\_type::lower} &amp;: \quad M_L x, \\ \texttt{isai\_type::upper} &amp;: \quad M_U x, \\ \texttt{isai\_type::spd} &amp;: \quad M_C^{T} M_C x. \end{aligned} \]
 </p>
-<p>The sparsity pattern used for the approximate inverse of <img class="formulaInl" alt="$ A $" src="form_118.png"/>, <img class="formulaInl" alt="$ L $" src="form_125.png"/> and <img class="formulaInl" alt="$ U $" src="form_126.png"/> is the same as the sparsity pattern of the respective matrix. For <img class="formulaInl" alt="$ B $" src="form_127.png"/>, the sparsity pattern of <img class="formulaInl" alt="$ M_C $" src="form_128.png"/> matches the sparsity pattern of the lower triangular half of <img class="formulaInl" alt="$ B $" src="form_127.png"/>.</p>
-<p>Note that, except for the s.p.d case, in general <img class="formulaInl" alt="$ \mathrm{ISAI}(A)^T \ne \mathrm{ISAI}(A^T) $" src="form_129.png"/>.</p>
+<p>The sparsity pattern used for the approximate inverse of \( A \), \( L \) and \( U \) is the same as the sparsity pattern of the respective matrix. For \( B \), the sparsity pattern of \( M_C \) matches the sparsity pattern of the lower triangular half of \( B \).</p>
+<p>Note that, except for the s.p.d case, in general \( \mathrm{ISAI}(A)^T \ne \mathrm{ISAI}(A^T) \).</p>
 <dl class="section note"><dt>Note</dt><dd>GPU implementations can only handle the vector unit width <code>width</code> (warp size for CUDA) as number of elements per row in the sparse matrix. If there are more than <code>width</code> elements per row, the remaining elements will be ignored.</dd></dl>
 <dl class="section user"><dt>References</dt><dd><ul>
 <li>Anzt, H., Huckle, T. K., Bräckle, J., Dongarra, J. <em>Incomplete Sparse Approximate Inverses for Parallel Preconditioning.</em> Parallel Computing, 71, 1–22, 2018. <a href="https://doi.org/10.1016/j.parco.2017.10.003">https://doi.org/10.1016/j.parco.2017.10.003</a></li>

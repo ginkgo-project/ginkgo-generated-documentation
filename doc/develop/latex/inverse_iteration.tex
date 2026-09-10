@@ -2,8 +2,8 @@ The inverse iteration example..
 
 This example depends on simple-\/solver, .
 
- \label{_Intro}%
- \label{_Introduction}%
+ \label{_inverse_iteration_Intro}%
+ \label{_inverse_iteration_Introduction}%
 \doxysection*{Introduction}
 
 This example shows how components available in Ginkgo can be used to implement higher-\/level numerical methods. The method used here will be the shifted inverse iteration method for eigenvalue computation which find the eigenvalue and eigenvector of A closest to z, for some scalar z. The method requires repeatedly solving the shifted linear system (A -\/ zI)x = b, as well as performing matrix-\/vector products with the matrix {\ttfamily A}. Here is the complete pseudocode of the method\+:
@@ -20,11 +20,55 @@ This example shows how components available in Ginkgo can be used to implement h
 \end{DoxyCode}
 
 
-\label{_Abouttheexample}%
+\label{_inverse_iteration_Abouttheexample}%
 \doxysubsubsection*{About the example }
 
-\label{_CommProg}%
+\label{_inverse_iteration_CommProg}%
  \doxysection*{The commented program}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <cmath>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <complex>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iomanip>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
+\DoxyCodeLine{\{}
+\end{DoxyCode}
+
+
+Some shortcuts
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using} precision = std::complex<double>;}
+\DoxyCodeLine{\textcolor{keyword}{using} real\_precision = \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<precision>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} vec = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<precision>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} real\_vec = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<real\_precision>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} mtx = \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<precision>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} solver\_type = \mbox{\hyperlink{classgko_1_1solver_1_1Bicgstab}{gko::solver::Bicgstab<precision>}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{using} std::abs;}
+\DoxyCodeLine{\textcolor{keyword}{using} std::sqrt;}
+\end{DoxyCode}
+
+
+Print version information
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::cout << \mbox{\hyperlink{classgko_1_1version__info_a6daeb8a087cfb57fa055526fc133d8eb}{gko::version\_info::get}}() << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::cout << std::scientific << std::setprecision(8) << std::showpos;}
+\end{DoxyCode}
+
 
 Figure out where to run the code
 
@@ -201,7 +245,7 @@ $\vert$$\vert$\+Ax -\/ gx$\vert$$\vert$ $<$ tol $\ast$ g
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
- \label{_Results}%
+ \label{_inverse_iteration_Results}%
 \doxysection*{Results}
 
 This is the expected output\+:
@@ -231,10 +275,10 @@ This is the expected output\+:
 \end{DoxyCode}
 
 
-\label{_Commentsaboutprogramminganddebugging}%
+\label{_inverse_iteration_Commentsaboutprogramminganddebugging}%
 \doxysubsubsection*{Comments about programming and debugging }
 
-\label{_PlainProg}%
+\label{_inverse_iteration_PlainProg}%
  \doxysection*{The plain program}
 
 

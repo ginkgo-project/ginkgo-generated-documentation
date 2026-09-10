@@ -12,6 +12,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -24,7 +30,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2835086495 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2836628264 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -204,7 +210,7 @@ template&lt;typename ValueType  = default_precision&gt; </div>
 </div><div class="memdoc">
 
 <p>Restart ratio. </p>
-<p>A cycle ends once the residual has fallen to this fraction of its value at the start of the cycle, that is, once <img class="formulaInl" alt="$ \|r_i - A d_i\| \leq \text{restart\_ratio} \cdot \|r_i\| $" src="form_197.png"/> holds for every right-hand side still running, with <img class="formulaInl" alt="$r_i$" src="form_198.png"/> the residual at the start of the cycle and <img class="formulaInl" alt="$d_i$" src="form_199.png"/> the correction built so far. This bounds the normwise backward error of the correction, which is what makes the restarted method analyzable as iterative refinement. A cycle cut short by krylov_dim carries no such bound.</p>
+<p>A cycle ends once the residual has fallen to this fraction of its value at the start of the cycle, that is, once \( \|r_i - A d_i\| \leq \text{restart\_ratio} \cdot \|r_i\| \) holds for every right-hand side still running, with \(r_i\) the residual at the start of the cycle and \(d_i\) the correction built so far. This bounds the normwise backward error of the correction, which is what makes the restarted method analyzable as iterative refinement. A cycle cut short by krylov_dim carries no such bound.</p>
 <p>It is a per-cycle reduction, not a convergence tolerance, so useful values are far larger than a stopping criterion's. It must lie in [0, 1) and must exceed the reduction a krylov_dim-step cycle achieves, or it never fires: use 1e-3 to 1e-1 when a cycle gains orders of magnitude, and around 0.9 when it gains only a few percent.</p>
 <p>Zero, the default, disables the criterion.</p>
 <p>For the criterion and its analysis, see sec. 4.2 of <a href="https://doi.org/10.1093/imanum/draf049">A Modular Framework for the Backward Error Analysis of GMRES</a>. </p>

@@ -37,10 +37,11 @@ var searchData=
   ['dimensionality_317',['dimensionality',['../classgko_1_1range.html#a6796721a162561502474e3150f179167',1,'gko::range::dimensionality()'],['../classgko_1_1accessor_1_1row__major.html#ae969fbac55f5ba6e6f95f25a0aac483d',1,'gko::accessor::row_major::dimensionality()']]],
   ['dimensionmismatch_318',['DimensionMismatch',['../classgko_1_1DimensionMismatch.html',1,'gko::DimensionMismatch'],['../classgko_1_1DimensionMismatch.html#ae9ece719cbd41a39835655ba3e70aa47',1,'gko::DimensionMismatch::DimensionMismatch()']]],
   ['direct_319',['Direct',['../classgko_1_1experimental_1_1solver_1_1Direct.html',1,'gko::experimental::solver::Direct&lt; ValueType, IndexType &gt;'],['../classgko_1_1experimental_1_1solver_1_1Direct.html#a1a58ea893f217dbcd32b4a631255a903',1,'gko::experimental::solver::Direct::Direct(const Direct &amp;)'],['../classgko_1_1experimental_1_1solver_1_1Direct.html#aac5efb2d94b1f32a900a2fe2f67caa2e',1,'gko::experimental::solver::Direct::Direct(Direct &amp;&amp;)']]],
-  ['distributedbase_320',['DistributedBase',['../classgko_1_1experimental_1_1distributed_1_1DistributedBase.html',1,'gko::experimental::distributed']]],
-  ['div_321',['div',['../structgko_1_1accessor_1_1div.html',1,'gko::accessor']]],
-  ['dpcpp_5fversion_322',['dpcpp_version',['../classgko_1_1version__info.html#a21377cf89fa8d05c6c9533017ed3f3d4',1,'gko::version_info']]],
-  ['dpcppexecutor_323',['DpcppExecutor',['../classgko_1_1DpcppExecutor.html',1,'gko']]],
-  ['dpcpptimer_324',['DpcppTimer',['../classgko_1_1DpcppTimer.html',1,'gko']]],
-  ['dpc_2b_2b_20executor_325',['DPC++ Executor',['../group__exec__dpcpp.html',1,'']]]
+  ['distributed_320',['Distributed',['../group__distributed.html',1,'']]],
+  ['distributedbase_321',['DistributedBase',['../classgko_1_1experimental_1_1distributed_1_1DistributedBase.html',1,'gko::experimental::distributed']]],
+  ['div_322',['div',['../structgko_1_1accessor_1_1div.html',1,'gko::accessor']]],
+  ['dpcpp_5fversion_323',['dpcpp_version',['../classgko_1_1version__info.html#a21377cf89fa8d05c6c9533017ed3f3d4',1,'gko::version_info']]],
+  ['dpcppexecutor_324',['DpcppExecutor',['../classgko_1_1DpcppExecutor.html',1,'gko']]],
+  ['dpcpptimer_325',['DpcppTimer',['../classgko_1_1DpcppTimer.html',1,'gko']]],
+  ['dpc_2b_2b_20executor_326',['DPC++ Executor',['../group__exec__dpcpp.html',1,'']]]
 ];

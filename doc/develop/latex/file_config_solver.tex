@@ -2,18 +2,68 @@ The file config solver example..
 
 This example depends on simple-\/solver.
 
- \label{_File Config Solver}%
- \label{_Thisexampleshowshowtousefiletoconfiguresolver}%
+ \label{_file_config_solver_Intro}%
+ \label{_file_config_solver_Thisexampleshowshowtousefiletoconfiguresolver}%
 \doxysection*{This example shows how to use file to configure solver.}
 
-\label{_InthisexamplewefirstreadinamatrixfromafileThenwereadtheconfigfiletoconfigurethesolverTheexampleapplicationreportsthegenerationandruntimeofthesolver}%
+\label{_file_config_solver_InthisexamplewefirstreadinamatrixfromafileThenwereadtheconfigfiletoconfigurethesolverTheexampleapplicationreportsthegenerationandruntimeofthesolver}%
 \doxysubsubsection*{In this example, we first read in a matrix from a file. Then we read the config file to configure the solver. The example application reports the generation and run time of the solver.}
 
-\label{_CommProg}%
+\label{_file_config_solver_CommProg}%
  \doxysection*{The commented program}
 
 
 \begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <chrono>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iomanip>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
+\end{DoxyCode}
+
+
+the header in extensions is not shipped with \mbox{\hyperlink{ginkgo_8hpp_source}{ginkgo.\+hpp}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/extensions/config/json\_config.hpp>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
+\DoxyCodeLine{\{}
+\end{DoxyCode}
+
+
+Some shortcuts
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using} ValueType = double;}
+\DoxyCodeLine{\textcolor{keyword}{using} IndexType = int;}
+\DoxyCodeLine{\textcolor{keyword}{using} vec = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} mtx = \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<ValueType, IndexType>}};}
+\end{DoxyCode}
+
+
+Print version information
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::cout << \mbox{\hyperlink{classgko_1_1version__info_a6daeb8a087cfb57fa055526fc133d8eb}{gko::version\_info::get}}() << std::endl;}
+\end{DoxyCode}
+
+
+Print usage
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::cout << argv[0] << \textcolor{stringliteral}{" executor configfile matrix"} << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} executor\_string = argc >= 2 ? argv[1] : \textcolor{stringliteral}{"reference"};}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} configfile = argc >= 3 ? argv[2] : \textcolor{stringliteral}{"config/cg.json"};}
 \DoxyCodeLine{\textcolor{keyword}{const} std::string matrix\_path = argc >= 4 ? argv[3] : \textcolor{stringliteral}{"data/A.mtx"};}
 \end{DoxyCode}
 
@@ -205,7 +255,7 @@ Print solver statistics
 \DoxyCodeLine{              << std::endl;}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
- \label{_Results}%
+ \label{_file_config_solver_Results}%
 \doxysection*{Results}
 
 This is the expected output\+:
@@ -241,10 +291,10 @@ This is the expected output\+:
 \end{DoxyCode}
 
 
-\label{_Commentsaboutprogramminganddebugging}%
+\label{_file_config_solver_Commentsaboutprogramminganddebugging}%
 \doxysubsubsection*{Comments about programming and debugging }
 
-\label{_PlainProg}%
+\label{_file_config_solver_PlainProg}%
  \doxysection*{The plain program}
 
 

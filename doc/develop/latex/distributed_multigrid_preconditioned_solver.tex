@@ -2,14 +2,84 @@ The distributed multigrid preconditioned solver with customized components examp
 
 This example depends on distributed-\/solver.
 
- \label{_Intro}%
- \label{_Introduction}%
+ \label{_distributed_multigrid_preconditioned_solver_Intro}%
+ \label{_distributed_multigrid_preconditioned_solver_Introduction}%
 \doxysection*{Introduction}
 
 This distributed multigrid preconditioned solver example should help you understand customizing Ginkgo multigrid in a distributed setting. The example will solve a simple 1D Laplace equation where the system can be distributed row-\/wise to multiple processes. Note. Because the stencil for the discretized Laplacian is configured with equal weight, the coarsening method does not perform well on this kind of problem. To run the solver with multiple processes, use {\ttfamily mpirun -\/n N\+U\+M\+\_\+\+P\+R\+O\+CS ./distributed-\/solver \mbox{[}executor\mbox{]} \mbox{[}num\+\_\+grid\+\_\+points\mbox{]} \mbox{[}num\+\_\+iterations\mbox{]}}.
 
-If you are using G\+PU devices, please make sure that you run this example with at most as many processes as you have G\+PU devices available. \label{_CommProg}%
+If you are using G\+PU devices, please make sure that you run this example with at most as many processes as you have G\+PU devices available. \label{_distributed_multigrid_preconditioned_solver_CommProg}%
  \doxysection*{The commented program}
+
+\label{_distributed_multigrid_preconditioned_solver_Includefiles}%
+ \doxysubsubsection*{Include files}
+
+This is the main ginkgo header file.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
+\end{DoxyCode}
+
+
+Add the C++ iostream header to output information to the console.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
+\end{DoxyCode}
+
+
+Add the S\+TL map header for the executor selection
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <map>}}
+\end{DoxyCode}
+
+
+Add the string manipulation header to handle strings.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
+\DoxyCodeLine{\{}
+\end{DoxyCode}
+
+
+\label{_distributed_multigrid_preconditioned_solver_InitializetheMPIenvironment}%
+ \doxysubsubsection*{Initialize the M\+PI environment}
+
+Since this is an M\+PI program, we need to initialize and finalize M\+PI at the begin and end respectively of our program. This can be easily done with the following helper construct that uses R\+A\+II to automate the initialization and finalization.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1environment}{gko::experimental::mpi::environment}} env(argc, argv);}
+\end{DoxyCode}
+
+
+\label{_distributed_multigrid_preconditioned_solver_TypeDefinitions}%
+ \doxysubsubsection*{Type Definitions}
+
+Define the needed types. In a parallel program we need to differentiate between global and local indices, thus we have two index types.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using} GlobalIndexType = \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{gko::int64}};}
+\DoxyCodeLine{\textcolor{keyword}{using} LocalIndexType = \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{gko::int32}};}
+\end{DoxyCode}
+
+
+The underlying value type.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using} ValueType = double;}
+\end{DoxyCode}
+
 
 As vector type we use the following, which implements a subset of \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}.
 
@@ -84,7 +154,7 @@ Create an M\+PI communicator get the rank of the calling process.
 \end{DoxyCode}
 
 
-\label{_UserInputHandling}%
+\label{_distributed_multigrid_preconditioned_solver_UserInputHandling}%
  \doxysubsubsection*{User Input Handling}
 
 User input settings\+:
@@ -155,7 +225,7 @@ User input settings\+:
 \end{DoxyCode}
 
 
-\label{_CreatingtheDistributedMatrixandVectors}%
+\label{_distributed_multigrid_preconditioned_solver_CreatingtheDistributedMatrixandVectors}%
  \doxysubsubsection*{Creating the Distributed Matrix and Vectors}
 
 As a first step, we create a partition of the rows. The partition consists of ranges of consecutive rows which are assigned a part-\/id. These part-\/ids will be used for the distributed data structures to determine which rows will be stored locally. In this example each rank has (nearly) the same number of rows, so we can use the following specialized constructor. See gko\+::distributed\+::\+Partition for other modes of creating a partition.
@@ -263,7 +333,7 @@ Take timings.
 \end{DoxyCode}
 
 
-\label{_SolvetheDistributedSystem}%
+\label{_distributed_multigrid_preconditioned_solver_SolvetheDistributedSystem}%
  \doxysubsubsection*{Solve the Distributed System}
 
 Generate the solver
@@ -380,7 +450,7 @@ Get the residual.
 \end{DoxyCode}
 
 
-\label{_PrintingResults}%
+\label{_distributed_multigrid_preconditioned_solver_PrintingResults}%
  \doxysubsubsection*{Printing Results}
 
 Print the achieved residual norm and timings on rank 0.
@@ -415,7 +485,7 @@ clang-\/format on
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
- \label{_Results}%
+ \label{_distributed_multigrid_preconditioned_solver_Results}%
 \doxysection*{Results}
 
 This is the expected output for {\ttfamily mpirun -\/n 4 ./distributed-\/multigrid-\/preconditioned-\/solver}\+:
@@ -434,7 +504,7 @@ This is the expected output for {\ttfamily mpirun -\/n 4 ./distributed-\/multigr
 \end{DoxyCode}
 
 
-The timings may vary depending on the machine. \label{_PlainProg}%
+The timings may vary depending on the machine. \label{_distributed_multigrid_preconditioned_solver_PlainProg}%
  \doxysection*{The plain program}
 
 

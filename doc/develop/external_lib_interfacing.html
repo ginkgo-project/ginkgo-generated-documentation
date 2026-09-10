@@ -12,6 +12,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -24,7 +30,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2835086495 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2836628264 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -75,29 +81,29 @@ $(function() {
 <tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#external_lib_interfacing_Intro" class=bold>Introduction</a>
     <ul>
-        <li><a href="#Abouttheexample"> About the example </a>
+        <li><a href="#external_lib_interfacing_Abouttheexample"> About the example </a>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#external_lib_interfacing_CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#AdvectionProblemclassdeclaration">AdvectionProblem class declaration</a>
-        <li><a href="#Equationdatadeclaration">Equation data declaration</a>
-        <li><a href="#GradientEstimationclassdeclaration">GradientEstimation class declaration</a>
-        <li><a href="#AdvectionProblemclassimplementation">AdvectionProblem class implementation</a>
-        <li><a href="#GradientEstimationclassimplementation">GradientEstimation class implementation</a>
-        <li><a href="#Mainfunction">Main function</a>
+        <li><a href="#external_lib_interfacing_AdvectionProblemclassdeclaration">AdvectionProblem class declaration</a>
+        <li><a href="#external_lib_interfacing_Equationdatadeclaration">Equation data declaration</a>
+        <li><a href="#external_lib_interfacing_GradientEstimationclassdeclaration">GradientEstimation class declaration</a>
+        <li><a href="#external_lib_interfacing_AdvectionProblemclassimplementation">AdvectionProblem class implementation</a>
+        <li><a href="#external_lib_interfacing_GradientEstimationclassimplementation">GradientEstimation class implementation</a>
+        <li><a href="#external_lib_interfacing_Mainfunction">Main function</a>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#external_lib_interfacing_Results" class=bold>Results</a>
     <ul>
-        <li><a href="#Commentsaboutprogramminganddebugging"> Comments about programming and debugging </a>
+        <li><a href="#external_lib_interfacing_Commentsaboutprogramminganddebugging"> Comments about programming and debugging </a>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#external_lib_interfacing_PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
- <a class="anchor" id="Intro"></a> <a class="anchor" id="Introduction"></a></p><h1>Introduction</h1>
-<p><a class="anchor" id="Abouttheexample"></a></p><h3>About the example </h3>
-<p><a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
+ <a class="anchor" id="external_lib_interfacing_Intro"></a> <a class="anchor" id="external_lib_interfacing_Introduction"></a></p><h1>Introduction</h1>
+<p><a class="anchor" id="external_lib_interfacing_Abouttheexample"></a></p><h3>About the example </h3>
+<p><a class="anchor" id="external_lib_interfacing_CommProg"></a> </p><h1>The commented program</h1>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;deal.II/base/function.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;deal.II/base/logstream.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;deal.II/base/quadrature_lib.h&gt;</span></div>
@@ -136,7 +142,7 @@ $(function() {
 </div><!-- fragment --><p>The last step is as in previous programs:</p>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>Step9 {</div>
 <div class="line"><span class="keyword">using namespace </span>dealii;</div>
-</div><!-- fragment --><p><a class="anchor" id="AdvectionProblemclassdeclaration"></a> </p><h3>AdvectionProblem class declaration</h3>
+</div><!-- fragment --><p><a class="anchor" id="external_lib_interfacing_AdvectionProblemclassdeclaration"></a> </p><h3>AdvectionProblem class declaration</h3>
 <p>Following we declare the main class of this program. It is very much like the main classes of previous examples, so we again only comment on the differences.</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keyword">class </span>AdvectionProblem {</div>
@@ -187,7 +193,7 @@ $(function() {
 <div class="line">    Vector&lt;double&gt; solution;</div>
 <div class="line">    Vector&lt;double&gt; system_rhs;</div>
 <div class="line">};</div>
-</div><!-- fragment --><p><a class="anchor" id="Equationdatadeclaration"></a> </p><h3>Equation data declaration</h3>
+</div><!-- fragment --><p><a class="anchor" id="external_lib_interfacing_Equationdatadeclaration"></a> </p><h3>Equation data declaration</h3>
 <p>Next we declare a class that describes the advection field. This, of course, is a vector field with as many components as there are space dimensions. One could now use a class derived from the <code>Function</code> base class, as we have done for boundary values and coefficients in previous examples, but there is another possibility in the library, namely a base class that describes tensor valued functions. In contrast to the usual <code>Function</code> objects, we provide the compiler with knowledge on the size of the objects of the return type. This enables the compiler to generate efficient code, which is not so simple for usual vector-valued functions where memory has to be allocated on the heap (thus, the <code>Function::vector_value</code> function has to be given the address of an object into which the result is to be written, in order to avoid copying and memory allocation and deallocation on the heap). In addition to the known size, it is possible not only to return vectors, but also tensors of higher rank; however, this is not very often requested by applications, to be honest...</p>
 <p>The interface of the <code>TensorFunction</code> class is relatively close to that of the <code>Function</code> class, so there is probably no need to comment in detail the following declaration:</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
@@ -320,7 +326,7 @@ $(function() {
 <div class="line">    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; points.size(); ++i)</div>
 <div class="line">        values[i] = BoundaryValues&lt;dim&gt;::value(points[i], component);</div>
 <div class="line">}</div>
-</div><!-- fragment --><p><a class="anchor" id="GradientEstimationclassdeclaration"></a> </p><h3>GradientEstimation class declaration</h3>
+</div><!-- fragment --><p><a class="anchor" id="external_lib_interfacing_GradientEstimationclassdeclaration"></a> </p><h3>GradientEstimation class declaration</h3>
 <p>Now, finally, here comes the class that will compute the difference approximation of the gradient on each cell and weighs that with a power of the mesh size, as described in the introduction. This class is a simple version of the <code>DerivativeApproximation</code> class in the library, that uses similar techniques to obtain finite difference approximations of the gradient of a finite element field, or of higher derivatives.</p>
 <p>The class has one public static function <code>estimate</code> that is called to compute a vector of error indicators, and a few private functions that do the actual work on all active cells. As in other parts of the library, we follow an informal convention to use vectors of floats for error indicators rather than the common vectors of doubles, as the additional accuracy is not necessary for estimated values.</p>
 <p>In addition to these two functions, the class declares two exceptions which are raised when a cell has no neighbors in each of the space directions (in which case the matrix described in the introduction would be singular and can't be inverted), while the other one is used in the more common case of invalid parameters to a function, namely a vector of wrong size.</p>
@@ -360,7 +366,7 @@ $(function() {
 <div class="line">        EstimateScratchData&lt;dim&gt;&amp; scratch_data,</div>
 <div class="line">        <span class="keyword">const</span> EstimateCopyData&amp; copy_data);</div>
 <div class="line">};</div>
-</div><!-- fragment --><p><a class="anchor" id="AdvectionProblemclassimplementation"></a> </p><h3>AdvectionProblem class implementation</h3>
+</div><!-- fragment --><p><a class="anchor" id="external_lib_interfacing_AdvectionProblemclassimplementation"></a> </p><h3>AdvectionProblem class implementation</h3>
 <p>Now for the implementation of the main class. Constructor, destructor and the function <code>setup_system</code> follow the same pattern that was used previously, so we need not comment on these three function:</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">AdvectionProblem&lt;dim&gt;::AdvectionProblem() : dof_handler(triangulation), fe(1)</div>
@@ -681,7 +687,7 @@ $(function() {
 <div class="line">        output_results(cycle);</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-</div><!-- fragment --><p><a class="anchor" id="GradientEstimationclassimplementation"></a> </p><h3>GradientEstimation class implementation</h3>
+</div><!-- fragment --><p><a class="anchor" id="external_lib_interfacing_GradientEstimationclassimplementation"></a> </p><h3>GradientEstimation class implementation</h3>
 <p>Now for the implementation of the <code>GradientEstimation</code> class. Let us start by defining constructors for the <code>EstimateScratchData</code> class used by the <code>estimate_cell()</code> function:</p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line">GradientEstimation::EstimateScratchData&lt;dim&gt;::EstimateScratchData(</div>
@@ -781,7 +787,7 @@ $(function() {
 </div><!-- fragment --><p>If the check succeeded, we push the active neighbor we just found to the stack we keep:</p>
 <div class="fragment"><div class="line">    active_neighbors.push_back(neighbor_child);</div>
 <div class="line">} <span class="keywordflow">else</span></div>
-</div><!-- fragment --><p>If we are not in 1d, we collect all neighbor children &lsquo;behind&rsquo; the subfaces of the current face</p>
+</div><!-- fragment --><p>If we are not in 1d, we collect all neighbor children "behind" the subfaces of the current face</p>
 <div class="fragment"><div class="line">            <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> subface_no = 0;</div>
 <div class="line">                 subface_no &lt; face-&gt;n_children(); ++subface_no)</div>
 <div class="line">                active_neighbors.push_back(</div>
@@ -836,7 +842,7 @@ $(function() {
 <div class="line">         std::sqrt(gradient.norm_square()));</div>
 <div class="line">}</div>
 <div class="line">}  <span class="comment">// namespace Step9</span></div>
-</div><!-- fragment --><p><a class="anchor" id="Mainfunction"></a> </p><h3>Main function</h3>
+</div><!-- fragment --><p><a class="anchor" id="external_lib_interfacing_Mainfunction"></a> </p><h3>Main function</h3>
 <p>The <code>main</code> function is similar to the previous examples. The main difference is that we use MultithreadInfo to set the maximum number of threads (see Parallel computing with multiple processors accessing shared memory" documentation module for more explanation). The number of threads used is the minimum of the environment variable DEAL_II_NUM_THREADS and the parameter of <code>set_thread_limit</code>. If no value is given to <code>set_thread_limit</code>, the default value from the Intel Threading Building Blocks (TBB) library is used. If the call to <code>set_thread_limit</code> is omitted, the number of threads will be chosen by TBB independently of DEAL_II_NUM_THREADS.</p>
 <div class="fragment"><div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
@@ -870,9 +876,9 @@ $(function() {
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p> <a class="anchor" id="Results"></a></p><h1>Results</h1>
-<p><a class="anchor" id="Commentsaboutprogramminganddebugging"></a></p><h3>Comments about programming and debugging </h3>
-<p><a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
+</div><!-- fragment --><p> <a class="anchor" id="external_lib_interfacing_Results"></a></p><h1>Results</h1>
+<p><a class="anchor" id="external_lib_interfacing_Commentsaboutprogramminganddebugging"></a></p><h3>Comments about programming and debugging </h3>
+<p><a class="anchor" id="external_lib_interfacing_PlainProg"></a> </p><h1>The plain program</h1>
 <div class="fragment"><div class="line"><span class="comment">/* ---------------------------------------------------------------------</span></div>
 <div class="line"><span class="comment"> *</span></div>
 <div class="line"><span class="comment"> * Copyright (C) 2000 - 2018 by the deal.II authors</span></div>
@@ -1670,7 +1676,7 @@ $(function() {
 <div class="ttc" id="anamespacegko_1_1log_html_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a"><div class="ttname"><a href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a">gko::log::profile_event_category::solver</a></div><div class="ttdoc">Solver events.</div></div>
 <div class="ttc" id="anamespacegko_html_acbd3fd6d07e498892881e8e2ab0b4167"><div class="ttname"><a href="namespacegko.html#acbd3fd6d07e498892881e8e2ab0b4167">gko::give</a></div><div class="ttdeci">std::remove_reference&lt; OwningPointer &gt;::type &amp;&amp; give(OwningPointer &amp;&amp;p)</div><div class="ttdoc">Marks that the object pointed to by p can be given to the callee.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:197</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Dense_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Dense.html">gko::matrix::Dense</a></div><div class="ttdoc">Dense is a matrix format which explicitly stores all values of the matrix.</div><div class="ttdef"><b>Definition:</b> dense_cache.hpp:28</div></div>
-<div class="ttc" id="aclassgko_1_1solver_1_1Bicgstab_html"><div class="ttname"><a href="classgko_1_1solver_1_1Bicgstab.html">gko::solver::Bicgstab</a></div><div class="ttdoc">BiCGSTAB or the Bi-Conjugate Gradient-Stabilized is a Krylov subspace solver.</div><div class="ttdef"><b>Definition:</b> bicgstab.hpp:64</div></div>
+<div class="ttc" id="aclassgko_1_1solver_1_1Bicgstab_html"><div class="ttname"><a href="classgko_1_1solver_1_1Bicgstab.html">gko::solver::Bicgstab</a></div><div class="ttdoc">BiCGSTAB or the Bi-Conjugate Gradient-Stabilized is a Krylov subspace solver.</div><div class="ttdef"><b>Definition:</b> bicgstab.hpp:63</div></div>
 <div class="ttc" id="aclassgko_1_1preconditioner_1_1Jacobi_html"><div class="ttname"><a href="classgko_1_1preconditioner_1_1Jacobi.html">gko::preconditioner::Jacobi</a></div><div class="ttdoc">A block-Jacobi preconditioner is a block-diagonal linear operator, obtained by inverting the diagonal...</div><div class="ttdef"><b>Definition:</b> jacobi.hpp:187</div></div>
 <div class="ttc" id="aclassgko_1_1array_html"><div class="ttname"><a href="classgko_1_1array.html">gko::array</a></div><div class="ttdoc">An array is a container which encapsulates fixed-sized arrays, stored on the Executor tied to the arr...</div><div class="ttdef"><b>Definition:</b> array.hpp:26</div></div>
 <div class="ttc" id="aclassgko_1_1stop_1_1ResidualNorm_html"><div class="ttname"><a href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm</a></div><div class="ttdoc">Stopping criterion based on the explicit residual norm .</div><div class="ttdef"><b>Definition:</b> residual_norm.hpp:126</div></div>

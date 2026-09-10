@@ -2,8 +2,8 @@ The Kokkos assembly example..
 
 This example depends on simple-\/solver, poisson-\/solver, three-\/pt-\/stencil-\/solver, .
 
- \label{_Intro}%
- \label{_Introduction}%
+ \label{_kokkos_assembly_Intro}%
+ \label{_kokkos_assembly_Introduction}%
 \doxysection*{Introduction}
 
 This example solves a 1D Poisson equation\+:
@@ -14,14 +14,42 @@ using a finite difference method on an equidistant grid with {\ttfamily K} discr
 
 The resulting C\+SR matrix is assembled using Kokkos kernels. This example show how to use Ginkgo data with Kokkos kernels.
 
-\label{_Notes}%
+\label{_kokkos_assembly_Notes}%
 \doxysubsubsection*{Notes }
 
-If this example is built as part of Ginkgo, it is advised to configure Ginkgo with {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+W\+I\+T\+H\+\_\+\+C\+C\+A\+C\+HE=O\+FF} to prevent incompabilities with Kokkos\textquotesingle{} compiler wrapper for {\ttfamily nvcc}. \label{_CommProg}%
+If this example is built as part of Ginkgo, it is advised to configure Ginkgo with {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+W\+I\+T\+H\+\_\+\+C\+C\+A\+C\+HE=O\+FF} to prevent incompabilities with Kokkos\textquotesingle{} compiler wrapper for {\ttfamily nvcc}. \label{_kokkos_assembly_CommProg}%
  \doxysection*{The commented program}
 
 
 \begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <Kokkos\_Core.hpp>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/extensions/kokkos.hpp>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace }gko::ext::kokkos::detail \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{/ **}
+\DoxyCodeLine{ * Specialization of type mapper \textcolor{keywordflow}{for} \mbox{\hyperlink{classgko_1_1device__matrix__data}{gko::device\_matrix\_data}}.}
+\DoxyCodeLine{ *}
+\DoxyCodeLine{ * @tparam ValueType  The value type of the matrix elements}
+\DoxyCodeLine{ * @tparam IndexType   The index type of the matrix elements}
+\DoxyCodeLine{ * @tparam MemorySpace  The Kokkos \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27acd69b4957f06cd818d7bf3d61980e291}{memory}} space to use.}
+\DoxyCodeLine{ * /}
+\DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType, \textcolor{keyword}{typename} IndexType, \textcolor{keyword}{typename} MemorySpace>}
+\DoxyCodeLine{\textcolor{keyword}{struct }mapper<device\_matrix\_data<ValueType, IndexType>, MemorySpace> \{}
+\DoxyCodeLine{    \textcolor{keyword}{using} index\_mapper = mapper<array<IndexType>, MemorySpace>;}
+\DoxyCodeLine{    \textcolor{keyword}{using} value\_mapper = mapper<array<ValueType>, MemorySpace>;}
+\DoxyCodeLine{}
+\DoxyCodeLine{    / **}
+\DoxyCodeLine{     * This \textcolor{keyword}{struct }defines the layout of the device\_matrix\_data type in terms}
+\DoxyCodeLine{     * of arrays.}
 \DoxyCodeLine{     *}
 \DoxyCodeLine{     * @tparam ValueType\_c  The value type of the matrix elements, might have}
 \DoxyCodeLine{     *                      other cv qualifiers than ValueType}
@@ -44,7 +72,7 @@ If this example is built as part of Ginkgo, it is advised to configure Ginkgo wi
 \DoxyCodeLine{         * @\textcolor{keywordflow}{return}  An \textcolor{keywordtype}{object} which has each \mbox{\hyperlink{classgko_1_1array}{gko::array}} of the}
 \DoxyCodeLine{         *          device\_matrix\_data mapped to a Kokkos view}
 \DoxyCodeLine{         * /}
-\DoxyCodeLine{        \textcolor{keyword}{static} type map(size\_type size, IndexType\_c* row\_idxs,}
+\DoxyCodeLine{        \textcolor{keyword}{static} type map(\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\_type}} size, IndexType\_c* row\_idxs,}
 \DoxyCodeLine{                        IndexType\_c* col\_idxs, ValueType\_c* values)}
 \DoxyCodeLine{        \{}
 \DoxyCodeLine{            \textcolor{keywordflow}{return} \{index\_mapper::map(row\_idxs, size),}
@@ -306,7 +334,7 @@ Generate solver and solve the system
 \DoxyCodeLine{              << std::endl;}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
- \label{_Results}%
+ \label{_kokkos_assembly_Results}%
 \doxysection*{Results}
 
 Example output\+: 
@@ -318,7 +346,7 @@ Example output\+:
 \end{DoxyCode}
 
 
-The actual error depends on the used hardware. \label{_PlainProg}%
+The actual error depends on the used hardware. \label{_kokkos_assembly_PlainProg}%
  \doxysection*{The plain program}
 
 

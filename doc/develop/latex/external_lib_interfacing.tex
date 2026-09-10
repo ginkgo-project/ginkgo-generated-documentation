@@ -1,13 +1,13 @@
 The external library(deal.\+II) interfacing example..
 
- \label{_Intro}%
- \label{_Introduction}%
+ \label{_external_lib_interfacing_Intro}%
+ \label{_external_lib_interfacing_Introduction}%
 \doxysection*{Introduction}
 
-\label{_Abouttheexample}%
+\label{_external_lib_interfacing_Abouttheexample}%
 \doxysubsubsection*{About the example }
 
-\label{_CommProg}%
+\label{_external_lib_interfacing_CommProg}%
  \doxysection*{The commented program}
 
 
@@ -83,7 +83,7 @@ The last step is as in previous programs\+:
 \end{DoxyCode}
 
 
-\label{_AdvectionProblemclassdeclaration}%
+\label{_external_lib_interfacing_AdvectionProblemclassdeclaration}%
  \doxysubsubsection*{Advection\+Problem class declaration}
 
 Following we declare the main class of this program. It is very much like the main classes of previous examples, so we again only comment on the differences.
@@ -156,7 +156,7 @@ The following functions again are as in previous examples, as are the subsequent
 \end{DoxyCode}
 
 
-\label{_Equationdatadeclaration}%
+\label{_external_lib_interfacing_Equationdatadeclaration}%
  \doxysubsubsection*{Equation data declaration}
 
 Next we declare a class that describes the advection field. This, of course, is a vector field with as many components as there are space dimensions. One could now use a class derived from the {\ttfamily Function} base class, as we have done for boundary values and coefficients in previous examples, but there is another possibility in the library, namely a base class that describes tensor valued functions. In contrast to the usual {\ttfamily Function} objects, we provide the compiler with knowledge on the size of the objects of the return type. This enables the compiler to generate efficient code, which is not so simple for usual vector-\/valued functions where memory has to be allocated on the heap (thus, the {\ttfamily Function\+::vector\+\_\+value} function has to be given the address of an object into which the result is to be written, in order to avoid copying and memory allocation and deallocation on the heap). In addition to the known size, it is possible not only to return vectors, but also tensors of higher rank; however, this is not very often requested by applications, to be honest...
@@ -335,7 +335,7 @@ Finally for the boundary values, which is just another class derived from the {\
 \end{DoxyCode}
 
 
-\label{_GradientEstimationclassdeclaration}%
+\label{_external_lib_interfacing_GradientEstimationclassdeclaration}%
  \doxysubsubsection*{Gradient\+Estimation class declaration}
 
 Now, finally, here comes the class that will compute the difference approximation of the gradient on each cell and weighs that with a power of the mesh size, as described in the introduction. This class is a simple version of the {\ttfamily Derivative\+Approximation} class in the library, that uses similar techniques to obtain finite difference approximations of the gradient of a finite element field, or of higher derivatives.
@@ -388,7 +388,7 @@ Before jumping into the fray with the implementation, let us also comment on the
 \end{DoxyCode}
 
 
-\label{_AdvectionProblemclassimplementation}%
+\label{_external_lib_interfacing_AdvectionProblemclassimplementation}%
  \doxysubsubsection*{Advection\+Problem class implementation}
 
 Now for the implementation of the main class. Constructor, destructor and the function {\ttfamily setup\+\_\+system} follow the same pattern that was used previously, so we need not comment on these three function\+:
@@ -936,7 +936,7 @@ Writing output to disk is done in the same way as in the previous examples. Inde
 \end{DoxyCode}
 
 
-\label{_GradientEstimationclassimplementation}%
+\label{_external_lib_interfacing_GradientEstimationclassimplementation}%
  \doxysubsubsection*{Gradient\+Estimation class implementation}
 
 Now for the implementation of the {\ttfamily Gradient\+Estimation} class. Let us start by defining constructors for the {\ttfamily Estimate\+Scratch\+Data} class used by the {\ttfamily estimate\+\_\+cell()} function\+:
@@ -1131,7 +1131,7 @@ If the check succeeded, we push the active neighbor we just found to the stack w
 \end{DoxyCode}
 
 
-If we are not in 1d, we collect all neighbor children `behind' the subfaces of the current face
+If we are not in 1d, we collect all neighbor children \char`\"{}behind\char`\"{} the subfaces of the current face
 
 
 \begin{DoxyCode}{0}
@@ -1253,7 +1253,7 @@ The last part of this function is the one where we write into the element of the
 \end{DoxyCode}
 
 
-\label{_Mainfunction}%
+\label{_external_lib_interfacing_Mainfunction}%
  \doxysubsubsection*{Main function}
 
 The {\ttfamily main} function is similar to the previous examples. The main difference is that we use Multithread\+Info to set the maximum number of threads (see Parallel computing with multiple processors accessing shared memory" documentation module for more explanation). The number of threads used is the minimum of the environment variable D\+E\+A\+L\+\_\+\+I\+I\+\_\+\+N\+U\+M\+\_\+\+T\+H\+R\+E\+A\+DS and the parameter of {\ttfamily set\+\_\+thread\+\_\+limit}. If no value is given to {\ttfamily set\+\_\+thread\+\_\+limit}, the default value from the Intel Threading Building Blocks (T\+BB) library is used. If the call to {\ttfamily set\+\_\+thread\+\_\+limit} is omitted, the number of threads will be chosen by T\+BB independently of D\+E\+A\+L\+\_\+\+I\+I\+\_\+\+N\+U\+M\+\_\+\+T\+H\+R\+E\+A\+DS.
@@ -1293,13 +1293,13 @@ The {\ttfamily main} function is similar to the previous examples. The main diff
 \DoxyCodeLine{    \textcolor{keywordflow}{return} 0;}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
- \label{_Results}%
+ \label{_external_lib_interfacing_Results}%
 \doxysection*{Results}
 
-\label{_Commentsaboutprogramminganddebugging}%
+\label{_external_lib_interfacing_Commentsaboutprogramminganddebugging}%
 \doxysubsubsection*{Comments about programming and debugging }
 
-\label{_PlainProg}%
+\label{_external_lib_interfacing_PlainProg}%
  \doxysection*{The plain program}
 
 

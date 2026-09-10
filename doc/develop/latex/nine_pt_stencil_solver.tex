@@ -2,8 +2,8 @@ The 9-\/point stencil example..
 
 This example depends on simple-\/solver, three-\/pt-\/stencil-\/solver, poisson-\/solver, .
 
- \label{_Intro}%
- \label{_Introduction}%
+ \label{_nine_pt_stencil_solver_Intro}%
+ \label{_nine_pt_stencil_solver_Introduction}%
 \doxysection*{Introduction}
 
 This example solves a 2D Poisson equation\+:
@@ -25,33 +25,61 @@ which is then solved using Ginkgo\textquotesingle{}s implementation of the CG me
 
 The intention of this is to show how generation of stencil values and the right hand side vector changes when increasing the dimension.
 
-\label{_Abouttheexample}%
+\label{_nine_pt_stencil_solver_Abouttheexample}%
 \doxysubsubsection*{About the example }
 
-\label{_CommProg}%
+\label{_nine_pt_stencil_solver_CommProg}%
  \doxysection*{The commented program}
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{preconditioned with block-\/Jacobi. It is also possible to specify on which}
-\DoxyCodeLine{executor Ginkgo will solve the system via the command line.}
-\DoxyCodeLine{The \textcolor{keyword}{function} `f` is set to `f(x,y) = 6x + 6y` (making the solution `u(x,y) = x\string^3}
-\DoxyCodeLine{+ y\string^3`), but that can be changed in the `main` \textcolor{keyword}{function}. Also the stencil values}
-\DoxyCodeLine{\textcolor{keywordflow}{for} the core, the faces, the edge and the corners can be changed when passing}
-\DoxyCodeLine{additional parameters.}
+\DoxyCodeLine{/ *****************************<DESCRIPTION>***********************************}
+\DoxyCodeLine{This example solves a 2D Poisson equation:}
 \DoxyCodeLine{}
-\DoxyCodeLine{The intention of \textcolor{keyword}{this} is to show how generation of stencil values and the right}
-\DoxyCodeLine{hand side vector changes when increasing the dimension.}
-\DoxyCodeLine{*****************************<DESCRIPTION>********************************** /}
+\DoxyCodeLine{    \(\backslash\)Omega = (0,1)\string^2}
+\DoxyCodeLine{    \(\backslash\)Omega\_b = [0,1]\string^2   (with boundary)}
+\DoxyCodeLine{    \(\backslash\)partial\(\backslash\)Omega = \(\backslash\)Omega\_b \(\backslash\)backslash \(\backslash\)Omega}
+\DoxyCodeLine{    u : \(\backslash\)Omega\_b -\/> R}
+\DoxyCodeLine{    u\textcolor{stringliteral}{''} = f in \(\backslash\)Omega}
+\DoxyCodeLine{    u = u\_D on \(\backslash\)partial\(\backslash\)Omega}
 \DoxyCodeLine{}
-\DoxyCodeLine{\#include <array>}
-\DoxyCodeLine{\#include <chrono>}
-\DoxyCodeLine{\#include <iostream>}
-\DoxyCodeLine{\#include <map>}
-\DoxyCodeLine{\#include <string>}
-\DoxyCodeLine{\#include <vector>}
+\DoxyCodeLine{\textcolor{keyword}{using} a finite difference method on an equidistant grid with `K` discretization}
+\DoxyCodeLine{points (`K` can be controlled with a command line parameter). The discretization}
+\DoxyCodeLine{may be done by any order Taylor polynomial.}
+\DoxyCodeLine{For an equidistant grid with K \textcolor{stringliteral}{"inner"} discretization points (x1,y1), ...,}
+\DoxyCodeLine{(xk,y1),(x1,y2), ..., (xk,yk) step size h = 1 / (K + 1) and a stencil \(\backslash\)in}
+\DoxyCodeLine{\(\backslash\)R\string^\{3 x 3\}, the formula produces a system of linear equations}
 \DoxyCodeLine{}
-\DoxyCodeLine{\#include <ginkgo/ginkgo.hpp>}
+\DoxyCodeLine{\(\backslash\)sum\_\{a,b=-\/1\}\string^1 stencil(a,b) * u\_\{(i+a,j+b\} = -\/f\_k h\string^2,  on any inner node with}
+\DoxyCodeLine{a neighborhood of inner nodes}
+\DoxyCodeLine{}
+\DoxyCodeLine{On any node, where neighbor is on the border, the neighbor is replaced with a}
+\DoxyCodeLine{\textcolor{stringliteral}{'-\/stencil(a,b) * u\_\{i+a,j+b\}'} and added to the right hand side vector. For}
+\DoxyCodeLine{example a node with a neighborhood of only edge nodes may look like this}
+\DoxyCodeLine{}
+\DoxyCodeLine{\(\backslash\)sum\_\{a,b=-\/1\}\string^(1,0) stencil(a,b) * u\_\{(i+a,j+b\} = -\/f\_k h\string^2 -\/ \(\backslash\)sum\_\{a=-\/1\}\string^1}
+\DoxyCodeLine{stencil(a,1) * u\_\{(i+a,j+1\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{which is then solved \textcolor{keyword}{using} Ginkgo\textcolor{stringliteral}{'s implementation of the CG method}}
+\DoxyCodeLine{\textcolor{stringliteral}{preconditioned with block-\/Jacobi. It is also possible to specify on which}}
+\DoxyCodeLine{\textcolor{stringliteral}{executor Ginkgo will solve the system via the command line.}}
+\DoxyCodeLine{\textcolor{stringliteral}{The function `f` is set to `f(x,y) = 6x + 6y` (making the solution `u(x,y) = x\string^3}}
+\DoxyCodeLine{\textcolor{stringliteral}{+ y\string^3`), but that can be changed in the `main` function. Also the stencil values}}
+\DoxyCodeLine{\textcolor{stringliteral}{for the core, the faces, the edge and the corners can be changed when passing}}
+\DoxyCodeLine{\textcolor{stringliteral}{additional parameters.}}
+\DoxyCodeLine{\textcolor{stringliteral}{}}
+\DoxyCodeLine{\textcolor{stringliteral}{The intention of this is to show how generation of stencil values and the right}}
+\DoxyCodeLine{\textcolor{stringliteral}{hand side vector changes when increasing the dimension.}}
+\DoxyCodeLine{\textcolor{stringliteral}{*****************************<DESCRIPTION>********************************** /}}
+\DoxyCodeLine{\textcolor{stringliteral}{}}
+\DoxyCodeLine{\textcolor{stringliteral}{\#include <array>}}
+\DoxyCodeLine{\textcolor{stringliteral}{\#include <chrono>}}
+\DoxyCodeLine{\textcolor{stringliteral}{\#include <iostream>}}
+\DoxyCodeLine{\textcolor{stringliteral}{\#include <map>}}
+\DoxyCodeLine{\textcolor{stringliteral}{\#include <string>}}
+\DoxyCodeLine{\textcolor{stringliteral}{\#include <vector>}}
+\DoxyCodeLine{\textcolor{stringliteral}{}}
+\DoxyCodeLine{\textcolor{stringliteral}{\#include <ginkgo/ginkgo.hpp>}}
 \end{DoxyCode}
 
 
@@ -462,7 +490,7 @@ Uncomment to print the solution print\+\_\+solution(dp, u.\+data());
 \DoxyCodeLine{              << std::endl;}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
- \label{_Results}%
+ \label{_nine_pt_stencil_solver_Results}%
 \doxysection*{Results}
 
 The expected output should be
@@ -474,10 +502,10 @@ The expected output should be
 \end{DoxyCode}
 
 
-\label{_Commentsaboutprogramminganddebugging}%
+\label{_nine_pt_stencil_solver_Commentsaboutprogramminganddebugging}%
 \doxysubsubsection*{Comments about programming and debugging }
 
-\label{_PlainProg}%
+\label{_nine_pt_stencil_solver_PlainProg}%
  \doxysection*{The plain program}
 
 

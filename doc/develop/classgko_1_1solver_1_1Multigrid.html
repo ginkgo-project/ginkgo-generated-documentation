@@ -12,6 +12,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -24,7 +30,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2835086495 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2836628264 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -76,14 +82,14 @@ $(function() {
 <a href="#friends">Friends</a> &#124;
 <a href="classgko_1_1solver_1_1Multigrid-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">gko::solver::Multigrid Class Reference<div class="ingroups"><a class="el" href="group__LinOp.html">Linear Operators</a> &raquo; <a class="el" href="group__solvers.html">Solvers</a> &#124; <a class="el" href="group__LinOp.html">Linear Operators</a></div></div>  </div>
+<div class="title">gko::solver::Multigrid Class Reference<div class="ingroups"><a class="el" href="group__LinOp.html">Linear Operators</a> &raquo; <a class="el" href="group__solvers.html">Solvers</a> &raquo; <a class="el" href="group__Multigrid.html">Multigrid</a><a class="el" href="group__LinOp.html">Linear Operators</a> &raquo;  &#124; <a class="el" href="group__solvers.html">Solvers</a> &#124; <a class="el" href="group__LinOp.html">Linear Operators</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p><a class="el" href="classgko_1_1solver_1_1Multigrid.html" title="Multigrid solves a linear system by combining cheap iterative sweeps (smoothers) on a hierarchy of pr...">Multigrid</a> solves a linear system by combining cheap iterative sweeps (smoothers) on a hierarchy of progressively coarser representations of the operator with corrections transferred between adjacent levels.  
  <a href="classgko_1_1solver_1_1Multigrid.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="multigrid_8hpp_source.html">ginkgo/core/solver/multigrid.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="include_2ginkgo_2core_2solver_2multigrid_8hpp_source.html">ginkgo/core/solver/multigrid.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for gko::solver::Multigrid:</div>
 <div class="dyncontent">
@@ -266,9 +272,9 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>EnableApplyWithIniti
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classgko_1_1solver_1_1Multigrid.html" title="Multigrid solves a linear system by combining cheap iterative sweeps (smoothers) on a hierarchy of pr...">Multigrid</a> solves a linear system by combining cheap iterative sweeps (smoothers) on a hierarchy of progressively coarser representations of the operator with corrections transferred between adjacent levels. </p>
 <p>A smoother on the fine level removes the high-frequency components of the error quickly; the remaining low-frequency error is well-resolved on a coarser space, where it is computed by a cheaper solve — or, recursively, by another multigrid call. The correction is prolongated back to the fine level and a second smoothing sweep removes any high-frequency error introduced by the transfer. Because each coarser level holds only a fraction of the unknowns of the next, the total work per cycle stays close to that of a single fine-level matrix-vector apply.</p>
-<p>Each level <img class="formulaInl" alt="$ \ell $" src="form_235.png"/> holds a system matrix <img class="formulaInl" alt="$ A_\ell $" src="form_236.png"/>, a smoother <img class="formulaInl" alt="$ S_\ell $" src="form_237.png"/>, a restriction operator <img class="formulaInl" alt="$ R_\ell : \mathbb{R}^{n_\ell} \to \mathbb{R}^{n_{\ell+1}} $" src="form_238.png"/> and a prolongation operator <img class="formulaInl" alt="$ P_\ell : \mathbb{R}^{n_{\ell+1}} \to \mathbb{R}^{n_\ell} $" src="form_239.png"/>. The Galerkin coarse operator is <img class="formulaInl" alt="$ A_{\ell+1} = R_\ell A_\ell P_\ell $" src="form_240.png"/>. One V-cycle step at level <img class="formulaInl" alt="$ \ell $" src="form_235.png"/> on a fine-level system <img class="formulaInl" alt="$ A_\ell x = b $" src="form_241.png"/> is:</p>
+<p>Each level \( \ell \) holds a system matrix \( A_\ell \), a smoother \( S_\ell \), a restriction operator \( R_\ell : \mathbb{R}^{n_\ell} \to \mathbb{R}^{n_{\ell+1}} \) and a prolongation operator \( P_\ell : \mathbb{R}^{n_{\ell+1}} \to \mathbb{R}^{n_\ell} \). The Galerkin coarse operator is \( A_{\ell+1} = R_\ell A_\ell P_\ell \). One V-cycle step at level \( \ell \) on a fine-level system \( A_\ell x = b \) is:</p>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\[ \begin{aligned} x &amp;\leftarrow x + S_\ell^{\mathrm{pre}}(b - A_\ell x) &amp;&amp; \text{(pre-smooth)}, \\ r_{\ell+1} &amp;= R_\ell (b - A_\ell x) &amp;&amp; \text{(restrict)}, \\ e_{\ell+1} &amp;\approx A_{\ell+1}^{-1} r_{\ell+1} &amp;&amp; \text{(recursive coarse solve)}, \\ x &amp;\leftarrow x + P_\ell e_{\ell+1} &amp;&amp; \text{(prolongate and correct)}, \\ x &amp;\leftarrow x + S_\ell^{\mathrm{post}}(b - A_\ell x) &amp;&amp; \text{(post-smooth)}. \end{aligned} \]" src="form_242.png"/>
+\[ \begin{aligned} x &amp;\leftarrow x + S_\ell^{\mathrm{pre}}(b - A_\ell x) &amp;&amp; \text{(pre-smooth)}, \\ r_{\ell+1} &amp;= R_\ell (b - A_\ell x) &amp;&amp; \text{(restrict)}, \\ e_{\ell+1} &amp;\approx A_{\ell+1}^{-1} r_{\ell+1} &amp;&amp; \text{(recursive coarse solve)}, \\ x &amp;\leftarrow x + P_\ell e_{\ell+1} &amp;&amp; \text{(prolongate and correct)}, \\ x &amp;\leftarrow x + S_\ell^{\mathrm{post}}(b - A_\ell x) &amp;&amp; \text{(post-smooth)}. \end{aligned} \]
 </p>
 <p>At the coarsest level the recursive call is replaced by a direct or iterative coarse solver. W- and F-cycles differ from V only in how many recursive coarse-solves are performed per level (see the <code>cycle</code> enum above).</p>
 <p>Ginkgo uses the index from 0 for finest level (original problem size) ~ N for the coarsest level (the coarsest solver), and its level counts is N (N multigrid level generation).</p>
@@ -572,7 +578,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>EnableApplyWithIniti
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>ginkgo/core/solver/<a class="el" href="multigrid_8hpp_source.html">multigrid.hpp</a></li>
+<li>ginkgo/core/solver/<a class="el" href="include_2ginkgo_2core_2solver_2multigrid_8hpp_source.html">multigrid.hpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

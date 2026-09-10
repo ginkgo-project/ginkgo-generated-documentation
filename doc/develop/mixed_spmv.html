@@ -12,6 +12,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -24,7 +30,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2835086495 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2836628264 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -75,27 +81,27 @@ $(function() {
 <tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#mixed_spmv_Intro" class=bold>Introduction</a>
     <ul>
-        <li><a href="#Abouttheexample"> About the example </a>
+        <li><a href="#mixed_spmv_Abouttheexample"> About the example </a>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#mixed_spmv_CommProg" class=bold>The commented program</a>
     <ul>
-        <li><a href="#Includefiles">Include files</a>
-        <li><a href="#Wheredoyouwanttorunyouroperation">Where do you want to run your operation?</a>
-        <li><a href="#Preparingyourdataandtransfertotheproperdevice">Preparing your data and transfer to the proper device.</a>
-        <li><a href="#Measurethetimeofapply">Measure the time of apply</a>
+        <li><a href="#mixed_spmv_Includefiles">Include files</a>
+        <li><a href="#mixed_spmv_Wheredoyouwanttorunyouroperation">Where do you want to run your operation?</a>
+        <li><a href="#mixed_spmv_Preparingyourdataandtransfertotheproperdevice">Preparing your data and transfer to the proper device.</a>
+        <li><a href="#mixed_spmv_Measurethetimeofapply">Measure the time of apply</a>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#mixed_spmv_Results" class=bold>Results</a>
     <ul>
-        <li><a href="#Commentsaboutprogramminganddebugging"> Comments about programming and debugging </a>
+        <li><a href="#mixed_spmv_Commentsaboutprogramminganddebugging"> Comments about programming and debugging </a>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#mixed_spmv_PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
- <a class="anchor" id="Intro"></a> <a class="anchor" id="Introduction"></a></p><h1>Introduction</h1>
+ <a class="anchor" id="mixed_spmv_Intro"></a> <a class="anchor" id="mixed_spmv_Introduction"></a></p><h1>Introduction</h1>
 <p>This mixed spmv example should give the usage of Ginkgo mixed precision. This example is meant for you to understand how Ginkgo works with different precision of data. We encourage you to play with the code, change the parameters and see what is best suited for your purposes.</p>
-<p><a class="anchor" id="Abouttheexample"></a></p><h3>About the example </h3>
+<p><a class="anchor" id="mixed_spmv_Abouttheexample"></a></p><h3>About the example </h3>
 <p>Each example has the following sections: </p><ol>
 <li>
 <b>Introduction:</b>This gives an overview of the example and mentions any interesting aspects in the example that might help the reader. </li>
@@ -106,8 +112,34 @@ $(function() {
 <li>
 <b>The plain program:</b> This is the complete code without any comments to have an complete overview of the code. </li>
 </ol>
-<p><a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
-<div class="fragment"><div class="line"> * @param value_dist  distribution of <a class="code" href="namespacegko.html#ae749a5ea11a93c1bcc9158d9a6e9fb68af1f713c9e000f5d3f280adbd124df4f5">array</a> values</div>
+<p><a class="anchor" id="mixed_spmv_CommProg"></a> </p><h1>The commented program</h1>
+<p><a class="anchor" id="mixed_spmv_Includefiles"></a> </p><h3>Include files</h3>
+<p>This is the main ginkgo header file.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;ginkgo/ginkgo.hpp&gt;</span></div>
+</div><!-- fragment --><p>Add the fstream header to read from data from files.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;fstream&gt;</span></div>
+</div><!-- fragment --><p>Add the C++ iostream header to output information to the console.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+</div><!-- fragment --><p>Add the STL map header for the executor selection.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;map&gt;</span></div>
+</div><!-- fragment --><p>Add the string manipulation header to handle strings.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;string&gt;</span></div>
+</div><!-- fragment --><p>Add the timing header for timing.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;chrono&gt;</span></div>
+</div><!-- fragment --><p>Add the random header to generate random vectors.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;random&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">namespace </span>{</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">/ **</div>
+<div class="line"> * Generate a random value.</div>
+<div class="line"> *</div>
+<div class="line"> * @tparam ValueType  valuetype of the value</div>
+<div class="line"> * @tparam ValueDistribution  type of value distribution</div>
+<div class="line"> * @tparam Engine  type of random engine</div>
+<div class="line"> *</div>
+<div class="line"> * @param value_dist  distribution of <a class="code" href="namespacegko.html#ae749a5ea11a93c1bcc9158d9a6e9fb68af1f713c9e000f5d3f280adbd124df4f5">array</a> values</div>
 <div class="line"> * @param engine  a random engine</div>
 <div class="line"> *</div>
 <div class="line"> * @<span class="keywordflow">return</span> ValueType</div>
@@ -195,7 +227,7 @@ $(function() {
 <div class="line">    std::cerr &lt;&lt; <span class="stringliteral">&quot;Usage: &quot;</span> &lt;&lt; argv[0] &lt;&lt; <span class="stringliteral">&quot; [executor] &quot;</span> &lt;&lt; std::endl;</div>
 <div class="line">    std::exit(-1);</div>
 <div class="line">}</div>
-</div><!-- fragment --><p><a class="anchor" id="Wheredoyouwanttorunyouroperation"></a> </p><h3>Where do you want to run your operation?</h3>
+</div><!-- fragment --><p><a class="anchor" id="mixed_spmv_Wheredoyouwanttorunyouroperation"></a> </p><h3>Where do you want to run your operation?</h3>
 <p>The <a class="el" href="classgko_1_1Executor.html" title="The first step in using the Ginkgo library consists of creating an executor.">gko::Executor</a> class is one of the cornerstones of Ginkgo. Currently, we have support for an <a class="el" href="classgko_1_1OmpExecutor.html" title="This is the Executor subclass which represents the OpenMP device (typically CPU).">gko::OmpExecutor</a>, which uses OpenMP multi-threading in most of its kernels, a <a class="el" href="classgko_1_1ReferenceExecutor.html" title="This is a specialization of the OmpExecutor, which runs the reference implementations of the kernels ...">gko::ReferenceExecutor</a>, a single threaded specialization of the OpenMP executor and a <a class="el" href="classgko_1_1CudaExecutor.html" title="This is the Executor subclass which represents the CUDA device.">gko::CudaExecutor</a> which runs the code on a NVIDIA GPU if available. </p><dl class="section note"><dt>Note</dt><dd>With the help of C++, you see that you only ever need to change the executor and all the other functions/ routines within Ginkgo should automatically work and run on the executor with any other changes.</dd></dl>
 <div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keyword">auto</span> executor_string = argc &gt;= 2 ? argv[1] : <span class="stringliteral">&quot;reference&quot;</span>;</div>
 <div class="line">std::map&lt;std::string, std::function&lt;std::shared_ptr&lt;gko::Executor&gt;()&gt;&gt;</div>
@@ -218,7 +250,7 @@ $(function() {
 <div class="line">        {<span class="stringliteral">&quot;reference&quot;</span>, [] { <span class="keywordflow">return</span> gko::ReferenceExecutor::create(); }}};</div>
 </div><!-- fragment --><p>executor where Ginkgo will perform the computation</p>
 <div class="fragment"><div class="line"><span class="keyword">const</span> <span class="keyword">auto</span> exec = exec_map.at(executor_string)();  <span class="comment">// throws if not valid</span></div>
-</div><!-- fragment --><p><a class="anchor" id="Preparingyourdataandtransfertotheproperdevice"></a> </p><h3>Preparing your data and transfer to the proper device.</h3>
+</div><!-- fragment --><p><a class="anchor" id="mixed_spmv_Preparingyourdataandtransfertotheproperdevice"></a> </p><h3>Preparing your data and transfer to the proper device.</h3>
 <p>Read the matrix using the read function and set the right hand side randomly. </p><dl class="section note"><dt>Note</dt><dd>Ginkgo uses C++ smart pointers to automatically manage memory. To this end, we use our own object ownership transfer functions that under the hood call the required smart pointer functions to manage object ownership. <a class="el" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58" title="Marks the object pointed to by p as shared.">gko::share</a> and <a class="el" href="namespacegko.html#acbd3fd6d07e498892881e8e2ab0b4167" title="Marks that the object pointed to by p can be given to the callee.">gko::give</a> are the functions that you would need to use.</dd></dl>
 <p>read the matrix into HighPrecision and LowPrecision.</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> hp_A = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">share</a>(gko::read&lt;hp_mtx&gt;(std::ifstream(<span class="stringliteral">&quot;data/A.mtx&quot;</span>), exec));</div>
@@ -244,7 +276,7 @@ $(function() {
 <div class="line"><span class="keyword">auto</span> hplp_x = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">share</a>(hp_x-&gt;clone());</div>
 <div class="line"><span class="keyword">auto</span> lplp_x = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">share</a>(hp_x-&gt;clone());</div>
 <div class="line"><span class="keyword">auto</span> lphp_x = <a class="code" href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">share</a>(hp_x-&gt;clone());</div>
-</div><!-- fragment --><p><a class="anchor" id="Measurethetimeofapply"></a> </p><h3>Measure the time of apply</h3>
+</div><!-- fragment --><p><a class="anchor" id="mixed_spmv_Measurethetimeofapply"></a> </p><h3>Measure the time of apply</h3>
 <p>We measure the time among different combination of apply operation.</p>
 <p>Hp * Hp -&gt; Hp</p>
 <div class="fragment"><div class="line"><span class="keyword">auto</span> hp_sec = timing(exec, hp_A, hp_b, hp_x);</div>
@@ -297,7 +329,7 @@ $(function() {
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Lp * Hp -&gt; Hp relative error: &quot;</span></div>
 <div class="line">              &lt;&lt; lphp_diff_norm-&gt;at(0) / hp_x_norm-&gt;at(0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p> <a class="anchor" id="Results"></a></p><h1>Results</h1>
+</div><!-- fragment --><p> <a class="anchor" id="mixed_spmv_Results"></a></p><h1>Results</h1>
 <p>The following is the expected result (omp):</p>
 <div class="fragment"><div class="line">High Precision time(s): 2.0568800000e-05</div>
 <div class="line">High Precision result norm: 1.7725534898e+05</div>
@@ -309,8 +341,8 @@ $(function() {
 <div class="line">Lp * Lp -&gt; Hp relative error: 5.7910008031e-08</div>
 <div class="line">Lp * Hp -&gt; Hp time(s): 2.0312300000e-05</div>
 <div class="line">Lp * Hp -&gt; Hp relative error: 3.7173133506e-08</div>
-</div><!-- fragment --><p><a class="anchor" id="Commentsaboutprogramminganddebugging"></a></p><h3>Comments about programming and debugging </h3>
-<p><a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
+</div><!-- fragment --><p><a class="anchor" id="mixed_spmv_Commentsaboutprogramminganddebugging"></a></p><h3>Comments about programming and debugging </h3>
+<p><a class="anchor" id="mixed_spmv_PlainProg"></a> </p><h1>The plain program</h1>
 <div class="fragment"><div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;ginkgo/ginkgo.hpp&gt;</span></div>
@@ -489,14 +521,14 @@ $(function() {
 <div class="ttc" id="aclassgko_1_1matrix_1_1Dense_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Dense.html">gko::matrix::Dense</a></div><div class="ttdoc">Dense is a matrix format which explicitly stores all values of the matrix.</div><div class="ttdef"><b>Definition:</b> dense_cache.hpp:28</div></div>
 <div class="ttc" id="anamespacegko_html_adc9a73d088d88d5dfdaf63aff9e96012"><div class="ttname"><a href="namespacegko.html#adc9a73d088d88d5dfdaf63aff9e96012">gko::clone</a></div><div class="ttdeci">detail::cloned_type&lt; Pointer &gt; clone(const Pointer &amp;p)</div><div class="ttdoc">Creates a unique clone of the object pointed to by p.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:425</div></div>
 <div class="ttc" id="aclassgko_1_1HipExecutor_html_aa0701fe1303e03a8331da7e95008100d"><div class="ttname"><a href="classgko_1_1HipExecutor.html#aa0701fe1303e03a8331da7e95008100d">gko::HipExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; HipExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, bool device_reset, allocation_mode alloc_mode=default_hip_alloc_mode, CUstream_st *stream=nullptr)</div><div class="ttdoc">Creates a new HipExecutor.</div></div>
-<div class="ttc" id="aclassgko_1_1version__info_html_a6daeb8a087cfb57fa055526fc133d8eb"><div class="ttname"><a href="classgko_1_1version__info.html#a6daeb8a087cfb57fa055526fc133d8eb">gko::version_info::get</a></div><div class="ttdeci">static const version_info &amp; get()</div><div class="ttdoc">Returns an instance of version_info.</div><div class="ttdef"><b>Definition:</b> version.hpp:139</div></div>
+<div class="ttc" id="aclassgko_1_1version__info_html_a6daeb8a087cfb57fa055526fc133d8eb"><div class="ttname"><a href="classgko_1_1version__info.html#a6daeb8a087cfb57fa055526fc133d8eb">gko::version_info::get</a></div><div class="ttdeci">static const version_info &amp; get()</div><div class="ttdoc">Returns an instance of version_info.</div><div class="ttdef"><b>Definition:</b> version.hpp:138</div></div>
 <div class="ttc" id="astructgko_1_1dim_html"><div class="ttname"><a href="structgko_1_1dim.html">gko::dim&lt; 2 &gt;</a></div></div>
 <div class="ttc" id="anamespacegko_html_a3ce296f73db0ff398bdea6009a3a5c58"><div class="ttname"><a href="namespacegko.html#a3ce296f73db0ff398bdea6009a3a5c58">gko::share</a></div><div class="ttdeci">detail::shared_type&lt; OwningPointer &gt; share(OwningPointer &amp;&amp;p)</div><div class="ttdoc">Marks the object pointed to by p as shared.</div><div class="ttdef"><b>Definition:</b> utils_helper.hpp:174</div></div>
 <div class="ttc" id="aclassgko_1_1CudaExecutor_html_a6c423656c7c0eb53810cb77bb4a66d15"><div class="ttname"><a href="classgko_1_1CudaExecutor.html#a6c423656c7c0eb53810cb77bb4a66d15">gko::CudaExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; CudaExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, bool device_reset, allocation_mode alloc_mode=default_cuda_alloc_mode, CUstream_st *stream=nullptr)</div><div class="ttdoc">Creates a new CudaExecutor.</div></div>
 <div class="ttc" id="aclassgko_1_1OmpExecutor_html_a8930142a1913bcbcac4fb6c917f930d9"><div class="ttname"><a href="classgko_1_1OmpExecutor.html#a8930142a1913bcbcac4fb6c917f930d9">gko::OmpExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; OmpExecutor &gt; create(std::shared_ptr&lt; CpuAllocatorBase &gt; alloc=std::make_shared&lt; CpuAllocator &gt;())</div><div class="ttdoc">Creates a new OmpExecutor.</div><div class="ttdef"><b>Definition:</b> executor.hpp:1378</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Ell_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Ell.html">gko::matrix::Ell</a></div><div class="ttdoc">ELL is a matrix format where stride with explicit zeros is used such that all rows have the same numb...</div><div class="ttdef"><b>Definition:</b> csr.hpp:32</div></div>
 <div class="ttc" id="anamespacegko_1_1log_html_a15f71654c6c4f4defc95f9359343fa27af7235a61fdc3adc78d866fd8085d44db"><div class="ttname"><a href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27af7235a61fdc3adc78d866fd8085d44db">gko::log::profile_event_category::operation</a></div><div class="ttdoc">Kernel execution and data movement.</div></div>
-<div class="ttc" id="anamespacegko_html_afd46d554050c4ae90e84ea4fcd9a41f3"><div class="ttname"><a href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">gko::remove_complex</a></div><div class="ttdeci">typename detail::remove_complex_s&lt; T &gt;::type remove_complex</div><div class="ttdoc">Obtain the type which removed the complex of complex/scalar type or the template parameter of class b...</div><div class="ttdef"><b>Definition:</b> math.hpp:264</div></div>
+<div class="ttc" id="anamespacegko_html_afd46d554050c4ae90e84ea4fcd9a41f3"><div class="ttname"><a href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">gko::remove_complex</a></div><div class="ttdeci">typename detail::remove_complex_s&lt; T &gt;::type remove_complex</div><div class="ttdoc">Obtain the type which removed the complex of complex/scalar type or the template parameter of class b...</div><div class="ttdef"><b>Definition:</b> math.hpp:263</div></div>
 <div class="ttc" id="aclassgko_1_1DpcppExecutor_html_ae9b875dfe3af7f3f3f24071bfb2f895e"><div class="ttname"><a href="classgko_1_1DpcppExecutor.html#ae9b875dfe3af7f3f3f24071bfb2f895e">gko::DpcppExecutor::create</a></div><div class="ttdeci">static std::shared_ptr&lt; DpcppExecutor &gt; create(int device_id, std::shared_ptr&lt; Executor &gt; master, std::string device_type=&quot;all&quot;, dpcpp_queue_property property=dpcpp_queue_property::in_order)</div><div class="ttdoc">Creates a new DpcppExecutor.</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

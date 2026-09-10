@@ -12,6 +12,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -24,7 +30,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2835086495 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2836628264 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -76,29 +82,57 @@ $(function() {
 <tr><th colspan="2"><b><small>Table of contents</small></b></th></tr>
 <tr><td width="50%" valign="top">
 <ol>
-  <li> <a href="#Intro" class=bold>Introduction</a>
+  <li> <a href="#kokkos_assembly_Intro" class=bold>Introduction</a>
     <ul>
-        <li><a href="#Notes"> Notes </a>
+        <li><a href="#kokkos_assembly_Notes"> Notes </a>
     </ul>
-  <li> <a href="#CommProg" class=bold>The commented program</a>
+  <li> <a href="#kokkos_assembly_CommProg" class=bold>The commented program</a>
     <ul>
       </ul>
 </ol></td><td width="50%" valign="top"><ol>
-  <li value="3"> <a href="#Results" class=bold>Results</a>
+  <li value="3"> <a href="#kokkos_assembly_Results" class=bold>Results</a>
     <ul>
     </ul>
-  <li> <a href="#PlainProg" class=bold>The plain program</a>
+  <li> <a href="#kokkos_assembly_PlainProg" class=bold>The plain program</a>
 </ol> </td> </tr> </table>
- <a class="anchor" id="Intro"></a> <a class="anchor" id="Introduction"></a></p><h1>Introduction</h1>
+ <a class="anchor" id="kokkos_assembly_Intro"></a> <a class="anchor" id="kokkos_assembly_Introduction"></a></p><h1>Introduction</h1>
 <p>This example solves a 1D Poisson equation:</p>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\[ u : [0, 1] \rightarrow R\\ u'' = f\\ u(0) = u0\\ u(1) = u1 \]" src="form_302.png"/>
+\[ u : [0, 1] \rightarrow R\\ u&#39;&#39; = f\\ u(0) = u0\\ u(1) = u1 \]
 </p>
 <p>using a finite difference method on an equidistant grid with <code>K</code> discretization points (<code>K</code> can be controlled with a command line parameter).</p>
 <p>The resulting CSR matrix is assembled using Kokkos kernels. This example show how to use Ginkgo data with Kokkos kernels.</p>
-<p><a class="anchor" id="Notes"></a></p><h3>Notes </h3>
-<p>If this example is built as part of Ginkgo, it is advised to configure Ginkgo with <code>-DGINKGO_WITH_CCACHE=OFF</code> to prevent incompabilities with Kokkos' compiler wrapper for <code>nvcc</code>. <a class="anchor" id="CommProg"></a> </p><h1>The commented program</h1>
-<div class="fragment"><div class="line">     *</div>
+<p><a class="anchor" id="kokkos_assembly_Notes"></a></p><h3>Notes </h3>
+<p>If this example is built as part of Ginkgo, it is advised to configure Ginkgo with <code>-DGINKGO_WITH_CCACHE=OFF</code> to prevent incompabilities with Kokkos' compiler wrapper for <code>nvcc</code>. <a class="anchor" id="kokkos_assembly_CommProg"></a> </p><h1>The commented program</h1>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;Kokkos_Core.hpp&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;ginkgo/ginkgo.hpp&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;ginkgo/extensions/kokkos.hpp&gt;</span></div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">namespace </span>gko::ext::kokkos::detail {</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">/ **</div>
+<div class="line"> * Specialization of type mapper <span class="keywordflow">for</span> <a class="code" href="classgko_1_1device__matrix__data.html">gko::device_matrix_data</a>.</div>
+<div class="line"> *</div>
+<div class="line"> * @tparam ValueType  The value type of the matrix elements</div>
+<div class="line"> * @tparam IndexType   The index type of the matrix elements</div>
+<div class="line"> * @tparam MemorySpace  The Kokkos <a class="code" href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27acd69b4957f06cd818d7bf3d61980e291">memory</a> space to use.</div>
+<div class="line"> * /</div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> ValueType, <span class="keyword">typename</span> IndexType, <span class="keyword">typename</span> MemorySpace&gt;</div>
+<div class="line"><span class="keyword">struct </span>mapper&lt;device_matrix_data&lt;ValueType, IndexType&gt;, MemorySpace&gt; {</div>
+<div class="line">    <span class="keyword">using</span> index_mapper = mapper&lt;array&lt;IndexType&gt;, MemorySpace&gt;;</div>
+<div class="line">    <span class="keyword">using</span> value_mapper = mapper&lt;array&lt;ValueType&gt;, MemorySpace&gt;;</div>
+<div class="line"> </div>
+<div class="line">    / **</div>
+<div class="line">     * This <span class="keyword">struct </span>defines the layout of the device_matrix_data type in terms</div>
+<div class="line">     * of arrays.</div>
+<div class="line">     *</div>
 <div class="line">     * @tparam ValueType_c  The value type of the matrix elements, might have</div>
 <div class="line">     *                      other cv qualifiers than ValueType</div>
 <div class="line">     * @tparam IndexType_c  The index type of the matrix elements, might have</div>
@@ -120,7 +154,7 @@ $(function() {
 <div class="line">         * @<span class="keywordflow">return</span>  An <span class="keywordtype">object</span> which has each <a class="code" href="classgko_1_1array.html">gko::array</a> of the</div>
 <div class="line">         *          device_matrix_data mapped to a Kokkos view</div>
 <div class="line">         * /</div>
-<div class="line">        <span class="keyword">static</span> type map(size_type size, IndexType_c* row_idxs,</div>
+<div class="line">        <span class="keyword">static</span> type map(<a class="code" href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">size_type</a> size, IndexType_c* row_idxs,</div>
 <div class="line">                        IndexType_c* col_idxs, ValueType_c* values)</div>
 <div class="line">        {</div>
 <div class="line">            <span class="keywordflow">return</span> {index_mapper::map(row_idxs, size),</div>
@@ -285,12 +319,12 @@ $(function() {
 <div class="line">                     discretization_points</div>
 <div class="line">              &lt;&lt; std::endl;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p> <a class="anchor" id="Results"></a></p><h1>Results</h1>
+</div><!-- fragment --><p> <a class="anchor" id="kokkos_assembly_Results"></a></p><h1>Results</h1>
 <p>Example output: </p><div class="fragment"><div class="line">&gt; ./kokkos-assembly</div>
 <div class="line"> </div>
 <div class="line">Solve complete.</div>
 <div class="line">The average relative error is 1.05488e-11</div>
-</div><!-- fragment --><p>The actual error depends on the used hardware. <a class="anchor" id="PlainProg"></a> </p><h1>The plain program</h1>
+</div><!-- fragment --><p>The actual error depends on the used hardware. <a class="anchor" id="kokkos_assembly_PlainProg"></a> </p><h1>The plain program</h1>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;string&gt;</span></div>
@@ -486,6 +520,7 @@ $(function() {
 <div class="ttc" id="aclassgko_1_1matrix_1_1Csr_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Csr.html">gko::matrix::Csr</a></div><div class="ttdoc">CSR is a matrix format which stores only the nonzero coefficients by compressing each row of the matr...</div><div class="ttdef"><b>Definition:</b> matrix.hpp:30</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Dense_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Dense.html">gko::matrix::Dense</a></div><div class="ttdoc">Dense is a matrix format which explicitly stores all values of the matrix.</div><div class="ttdef"><b>Definition:</b> dense_cache.hpp:28</div></div>
 <div class="ttc" id="anamespacegko_html_a6e5c95df0ae4e47aab2f604a22d98ee7"><div class="ttname"><a href="namespacegko.html#a6e5c95df0ae4e47aab2f604a22d98ee7">gko::size_type</a></div><div class="ttdeci">std::size_t size_type</div><div class="ttdoc">Integral type used for allocation quantities.</div><div class="ttdef"><b>Definition:</b> types.hpp:101</div></div>
+<div class="ttc" id="anamespacegko_1_1log_html_a15f71654c6c4f4defc95f9359343fa27acd69b4957f06cd818d7bf3d61980e291"><div class="ttname"><a href="namespacegko_1_1log.html#a15f71654c6c4f4defc95f9359343fa27acd69b4957f06cd818d7bf3d61980e291">gko::log::profile_event_category::memory</a></div><div class="ttdoc">Memory allocation.</div></div>
 <div class="ttc" id="aclassgko_1_1preconditioner_1_1Jacobi_html"><div class="ttname"><a href="classgko_1_1preconditioner_1_1Jacobi.html">gko::preconditioner::Jacobi</a></div><div class="ttdoc">A block-Jacobi preconditioner is a block-diagonal linear operator, obtained by inverting the diagonal...</div><div class="ttdef"><b>Definition:</b> jacobi.hpp:187</div></div>
 <div class="ttc" id="aclassgko_1_1array_html"><div class="ttname"><a href="classgko_1_1array.html">gko::array</a></div><div class="ttdoc">An array is a container which encapsulates fixed-sized arrays, stored on the Executor tied to the arr...</div><div class="ttdef"><b>Definition:</b> array.hpp:26</div></div>
 <div class="ttc" id="aclassgko_1_1stop_1_1ResidualNorm_html"><div class="ttname"><a href="classgko_1_1stop_1_1ResidualNorm.html">gko::stop::ResidualNorm</a></div><div class="ttdoc">Stopping criterion based on the explicit residual norm .</div><div class="ttdef"><b>Definition:</b> residual_norm.hpp:126</div></div>
@@ -495,7 +530,7 @@ $(function() {
 <div class="ttc" id="anamespacegko_1_1solver_html_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e"><div class="ttname"><a href="namespacegko_1_1solver.html#a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e">gko::solver::initial_guess_mode::rhs</a></div><div class="ttdoc">the input is right hand side</div></div>
 <div class="ttc" id="aclassgko_1_1PolymorphicObject_html_ab40586bff071b7f11c2cf6b5cbf598eb"><div class="ttname"><a href="classgko_1_1PolymorphicObject.html#ab40586bff071b7f11c2cf6b5cbf598eb">gko::PolymorphicObject::get_executor</a></div><div class="ttdeci">std::shared_ptr&lt; const Executor &gt; get_executor() const noexcept</div><div class="ttdoc">Returns the Executor of the object.</div><div class="ttdef"><b>Definition:</b> polymorphic_object.hpp:69</div></div>
 <div class="ttc" id="aclassgko_1_1LinOp_html_a31b3c003388eb0b95393154f68c2b98d"><div class="ttname"><a href="classgko_1_1LinOp.html#a31b3c003388eb0b95393154f68c2b98d">gko::LinOp::get_size</a></div><div class="ttdeci">const dim&lt; 2 &gt; &amp; get_size() const noexcept</div><div class="ttdoc">Returns the size of the operator.</div><div class="ttdef"><b>Definition:</b> lin_op.hpp:169</div></div>
-<div class="ttc" id="anamespacegko_html_afd46d554050c4ae90e84ea4fcd9a41f3"><div class="ttname"><a href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">gko::remove_complex</a></div><div class="ttdeci">typename detail::remove_complex_s&lt; T &gt;::type remove_complex</div><div class="ttdoc">Obtain the type which removed the complex of complex/scalar type or the template parameter of class b...</div><div class="ttdef"><b>Definition:</b> math.hpp:264</div></div>
+<div class="ttc" id="anamespacegko_html_afd46d554050c4ae90e84ea4fcd9a41f3"><div class="ttname"><a href="namespacegko.html#afd46d554050c4ae90e84ea4fcd9a41f3">gko::remove_complex</a></div><div class="ttdeci">typename detail::remove_complex_s&lt; T &gt;::type remove_complex</div><div class="ttdoc">Obtain the type which removed the complex of complex/scalar type or the template parameter of class b...</div><div class="ttdef"><b>Definition:</b> math.hpp:263</div></div>
 <div class="ttc" id="aclassgko_1_1device__matrix__data_html"><div class="ttname"><a href="classgko_1_1device__matrix__data.html">gko::device_matrix_data</a></div><div class="ttdoc">This type is a device-side equivalent to matrix_data.</div><div class="ttdef"><b>Definition:</b> device_matrix_data.hpp:36</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Csr_html_ac4db41146ed3c3a8653b03d6b2c6c675"><div class="ttname"><a href="classgko_1_1matrix_1_1Csr.html#ac4db41146ed3c3a8653b03d6b2c6c675">gko::matrix::Csr::read</a></div><div class="ttdeci">void read(const mat_data &amp;data) override</div><div class="ttdoc">Reads a matrix from a matrix_data structure.</div></div>
 <!-- start footer part -->

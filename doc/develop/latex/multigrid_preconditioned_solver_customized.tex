@@ -2,34 +2,79 @@ The customized multigrid preconditioned solver example..
 
 This example depends on multigrid-\/preconditioned-\/solver.
 
- \label{_Customized Multigrid Preconditioner}%
- \label{_Thisexampleshowshowtocustomizethemultigridpreconditioner}%
+ \label{_multigrid_preconditioned_solver_customized_Intro}%
+ \label{_multigrid_preconditioned_solver_customized_Thisexampleshowshowtocustomizethemultigridpreconditioner}%
 \doxysection*{This example shows how to customize the multigrid preconditioner.}
 
 \doxysubsubsection*{In this example, we first read in a matrix from a file. The preconditioned CG solver is enhanced with a multigrid preconditioner. Several non-\/default options are used to create this preconditioner. The example features the generating time and runtime of the CG solver.}
 
-\label{_CommProg}%
+\label{_multigrid_preconditioned_solver_customized_CommProg}%
  \doxysection*{The commented program}
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{exec\_map\{}
-\DoxyCodeLine{    \{\textcolor{stringliteral}{"omp"}, [] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}(); \}\},}
-\DoxyCodeLine{    \{\textcolor{stringliteral}{"cuda"},}
-\DoxyCodeLine{     [] \{}
-\DoxyCodeLine{         \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a6c423656c7c0eb53810cb77bb4a66d15}{gko::CudaExecutor::create}}(0,}
-\DoxyCodeLine{                                          \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}());}
-\DoxyCodeLine{     \}\},}
-\DoxyCodeLine{    \{\textcolor{stringliteral}{"hip"},}
-\DoxyCodeLine{     [] \{}
-\DoxyCodeLine{         \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_aa0701fe1303e03a8331da7e95008100d}{gko::HipExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}());}
-\DoxyCodeLine{     \}\},}
-\DoxyCodeLine{    \{\textcolor{stringliteral}{"dpcpp"},}
-\DoxyCodeLine{     [] \{}
-\DoxyCodeLine{         \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1DpcppExecutor_ae9b875dfe3af7f3f3f24071bfb2f895e}{gko::DpcppExecutor::create}}(}
-\DoxyCodeLine{             0, gko::ReferenceExecutor::create());}
-\DoxyCodeLine{     \}\},}
-\DoxyCodeLine{    \{\textcolor{stringliteral}{"reference"}, [] \{ \textcolor{keywordflow}{return} gko::ReferenceExecutor::create(); \}\}\};}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iomanip>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
+\DoxyCodeLine{\{}
+\end{DoxyCode}
+
+
+Some shortcuts
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using} ValueType = double;}
+\DoxyCodeLine{\textcolor{keyword}{using} IndexType = int;}
+\DoxyCodeLine{\textcolor{keyword}{using} vec = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} mtx = \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<ValueType, IndexType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} cg = \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{gko::solver::Cg<ValueType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} ir = \mbox{\hyperlink{classgko_1_1solver_1_1Ir}{gko::solver::Ir<ValueType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} mg = \mbox{\hyperlink{classgko_1_1solver_1_1Multigrid}{gko::solver::Multigrid}};}
+\DoxyCodeLine{\textcolor{keyword}{using} ic = \mbox{\hyperlink{classgko_1_1preconditioner_1_1Ic}{gko::preconditioner::Ic<ValueType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} pgm = \mbox{\hyperlink{classgko_1_1multigrid_1_1Pgm}{gko::multigrid::Pgm<ValueType, IndexType>}};}
+\end{DoxyCode}
+
+
+Print version information
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::cout << \mbox{\hyperlink{classgko_1_1version__info_a6daeb8a087cfb57fa055526fc133d8eb}{gko::version\_info::get}}() << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} executor\_string = argc >= 2 ? argv[1] : \textcolor{stringliteral}{"reference"};}
+\end{DoxyCode}
+
+
+Figure out where to run the code
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::map<std::string, std::function<std::shared\_ptr<gko::Executor>()>>}
+\DoxyCodeLine{    exec\_map\{}
+\DoxyCodeLine{        \{\textcolor{stringliteral}{"omp"}, [] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}(); \}\},}
+\DoxyCodeLine{        \{\textcolor{stringliteral}{"cuda"},}
+\DoxyCodeLine{         [] \{}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a6c423656c7c0eb53810cb77bb4a66d15}{gko::CudaExecutor::create}}(0,}
+\DoxyCodeLine{                                              \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}());}
+\DoxyCodeLine{         \}\},}
+\DoxyCodeLine{        \{\textcolor{stringliteral}{"hip"},}
+\DoxyCodeLine{         [] \{}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_aa0701fe1303e03a8331da7e95008100d}{gko::HipExecutor::create}}(0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}());}
+\DoxyCodeLine{         \}\},}
+\DoxyCodeLine{        \{\textcolor{stringliteral}{"dpcpp"},}
+\DoxyCodeLine{         [] \{}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1DpcppExecutor_ae9b875dfe3af7f3f3f24071bfb2f895e}{gko::DpcppExecutor::create}}(}
+\DoxyCodeLine{                 0, gko::ReferenceExecutor::create());}
+\DoxyCodeLine{         \}\},}
+\DoxyCodeLine{        \{\textcolor{stringliteral}{"reference"}, [] \{ \textcolor{keywordflow}{return} gko::ReferenceExecutor::create(); \}\}\};}
 \end{DoxyCode}
 
 
@@ -233,7 +278,7 @@ Print solver statistics
 \DoxyCodeLine{              << std::endl;}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
- \label{_Results}%
+ \label{_multigrid_preconditioned_solver_customized_Results}%
 \doxysection*{Results}
 
 This is the expected output\+:
@@ -255,10 +300,10 @@ This is the expected output\+:
 \end{DoxyCode}
 
 
-\label{_Commentsaboutprogramminganddebugging}%
+\label{_multigrid_preconditioned_solver_customized_Commentsaboutprogramminganddebugging}%
 \doxysubsubsection*{Comments about programming and debugging }
 
-\label{_PlainProg}%
+\label{_multigrid_preconditioned_solver_customized_PlainProg}%
  \doxysection*{The plain program}
 
 

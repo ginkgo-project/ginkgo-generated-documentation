@@ -12,6 +12,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -24,7 +30,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2835086495 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2836628264 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -308,10 +314,10 @@ class gko::solver::Chebyshev&lt; ValueType &gt;</h3>
 
 <p><a class="el" href="classgko_1_1solver_1_1Chebyshev.html" title="Chebyshev iteration is an iterative method for solving nonsymmetric problems based on some knowledge ...">Chebyshev</a> iteration is an iterative method for solving nonsymmetric problems based on some knowledge of the spectrum of the (preconditioned) system matrix. </p>
 <p>It avoids the computation of inner products, which may be a performance bottleneck for distributed system. <a class="el" href="classgko_1_1solver_1_1Chebyshev.html" title="Chebyshev iteration is an iterative method for solving nonsymmetric problems based on some knowledge ...">Chebyshev</a> iteration is developed based on <a class="el" href="classgko_1_1solver_1_1Chebyshev.html" title="Chebyshev iteration is an iterative method for solving nonsymmetric problems based on some knowledge ...">Chebyshev</a> polynomials of the first kind.</p>
-<p>Given a preconditioner <img class="formulaInl" alt="$ M \approx A^{-1} $" src="form_174.png"/>, the iterate is updated with the three-term recurrence </p><p class="formulaDsp">
-<img class="formulaDsp" alt="\[ x_{k+1} = x_k + \alpha_k M (b - A x_k) + \beta_k (x_k - x_{k-1}), \]" src="form_177.png"/>
+<p>Given a preconditioner \( M \approx A^{-1} \), the iterate is updated with the three-term recurrence </p><p class="formulaDsp">
+\[ x_{k+1} = x_k + \alpha_k M (b - A x_k) + \beta_k (x_k - x_{k-1}), \]
 </p>
-<p> where the scalars <img class="formulaInl" alt="$ \alpha_k, \beta_k $" src="form_178.png"/> are derived from an estimate of the spectrum of <img class="formulaInl" alt="$ M A $" src="form_179.png"/>. In pseudo-code:</p>
+<p> where the scalars \( \alpha_k, \beta_k \) are derived from an estimate of the spectrum of \( M A \). In pseudo-code:</p>
 <div class="fragment"><div class="line">solution = initial_guess</div>
 <div class="line"><span class="keywordflow">while</span> not converged:</div>
 <div class="line">    residual = b - A solution</div>

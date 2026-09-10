@@ -2,15 +2,47 @@ The simple solver with performance debugging example..
 
 This example depends on simple-\/solver-\/logging, minimal-\/cuda-\/solver.
 
- \label{_Intro}%
- \label{_Introduction}%
+ \label{_performance_debugging_Intro}%
+ \label{_performance_debugging_Introduction}%
 \doxysection*{Introduction}
 
-\label{_Abouttheexample}%
+\label{_performance_debugging_Abouttheexample}%
 \doxysubsubsection*{About the example }
 
-This example runs a solver on a test problem and shows how to use loggers to debug performance and convergence rate. \label{_CommProg}%
+This example runs a solver on a test problem and shows how to use loggers to debug performance and convergence rate. \label{_performance_debugging_CommProg}%
  \doxysection*{The commented program}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <algorithm>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <array>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <chrono>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <cstdlib>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iomanip>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <ostream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <sstream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <unordered\_map>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <utility>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType>}
+\DoxyCodeLine{\textcolor{keyword}{using} vec = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType>}
+\DoxyCodeLine{\textcolor{keyword}{using} real\_vec = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<gko::remove\_complex<ValueType>}}>;}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace }utils \{}
+\end{DoxyCode}
+
 
 creates a zero vector
 
@@ -769,7 +801,7 @@ Print output file location
 \DoxyCodeLine{              << std::endl;}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
- \label{_Results}%
+ \label{_performance_debugging_Results}%
 \doxysection*{Results}
 
 This is the expected standard output\+:
@@ -860,10 +892,10 @@ Here is a sample output in the file log.\+txt\+:
 \end{DoxyCode}
 
 
-\label{_Commentsaboutprogramminganddebugging}%
+\label{_performance_debugging_Commentsaboutprogramminganddebugging}%
 \doxysubsubsection*{Comments about programming and debugging }
 
-\label{_PlainProg}%
+\label{_performance_debugging_PlainProg}%
  \doxysection*{The plain program}
 
 

@@ -1,17 +1,45 @@
 The ginkgo overhead measurement example..
 
- \label{_Intro}%
- \label{_Introduction}%
+ \label{_ginkgo_overhead_Intro}%
+ \label{_ginkgo_overhead_Introduction}%
 \doxysection*{Introduction}
 
-\label{_Abouttheexample}%
+\label{_ginkgo_overhead_Abouttheexample}%
 \doxysubsubsection*{About the example }
 
-\label{_CommProg}%
+\label{_ginkgo_overhead_CommProg}%
  \doxysection*{The commented program}
 
 
 \begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <chrono>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <cmath>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{[[noreturn]] \textcolor{keywordtype}{void} print\_usage\_and\_exit(\textcolor{keyword}{const} \textcolor{keywordtype}{char}* name)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    std::cerr << \textcolor{stringliteral}{"Usage: "} << name << \textcolor{stringliteral}{" [NUM\_ITERS]"} << std::endl;}
+\DoxyCodeLine{    std::exit(-\/1);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keyword}{using} ValueType = double;}
+\DoxyCodeLine{    \textcolor{keyword}{using} IndexType = int;}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{using} vec = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}};}
+\DoxyCodeLine{    \textcolor{keyword}{using} mtx = \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<ValueType, IndexType>}};}
+\DoxyCodeLine{    \textcolor{keyword}{using} cg = \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{gko::solver::Cg<ValueType>}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keywordtype}{long} \textcolor{keywordtype}{unsigned} num\_iters = 1000000;}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (argc > 2) \{}
+\DoxyCodeLine{        print\_usage\_and\_exit(argv[0]);}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (argc == 2) \{}
 \DoxyCodeLine{        num\_iters = std::atol(argv[1]);}
 \DoxyCodeLine{        \textcolor{keywordflow}{if} (num\_iters == 0) \{}
 \DoxyCodeLine{            print\_usage\_and\_exit(argv[0]);}
@@ -51,7 +79,7 @@ The ginkgo overhead measurement example..
 \DoxyCodeLine{              << \textcolor{stringliteral}{" [nanoseconds / iteration]"} << std::endl;}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
- \label{_Results}%
+ \label{_ginkgo_overhead_Results}%
 \doxysection*{Results}
 
 This is the expected output\+:
@@ -63,10 +91,10 @@ This is the expected output\+:
 \end{DoxyCode}
 
 
-\label{_Commentsaboutprogramminganddebugging}%
+\label{_ginkgo_overhead_Commentsaboutprogramminganddebugging}%
 \doxysubsubsection*{Comments about programming and debugging }
 
-\label{_PlainProg}%
+\label{_ginkgo_overhead_PlainProg}%
  \doxysection*{The plain program}
 
 

@@ -2,18 +2,46 @@ The custom stopping criterion creation example..
 
 This example depends on simple-\/solver, minimal-\/cuda-\/solver.
 
- \label{_Intro}%
- \label{_Introduction}%
+ \label{_custom_stopping_criterion_Intro}%
+ \label{_custom_stopping_criterion_Introduction}%
 \doxysection*{Introduction}
 
-\label{_Abouttheexample}%
+\label{_custom_stopping_criterion_Abouttheexample}%
 \doxysubsubsection*{About the example }
 
-\label{_CommProg}%
+\label{_custom_stopping_criterion_CommProg}%
  \doxysection*{The commented program}
 
 
 \begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <thread>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{/ **}
+\DoxyCodeLine{ * The ByInteraction \textcolor{keyword}{class }is a \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a4d4b370ab9b3dbca1ccdb1a5cca6a728}{criterion}} which asks for \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27aee11cbb19052e40b07aac0ca060c23ee}{user}} input to stop}
+\DoxyCodeLine{ * the iteration process. Using \textcolor{keyword}{this} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a4d4b370ab9b3dbca1ccdb1a5cca6a728}{criterion}} is slightly more complex than the}
+\DoxyCodeLine{ * other ones, because it is asynchronous therefore requires the use of threads.}
+\DoxyCodeLine{ * /}
+\DoxyCodeLine{\textcolor{keyword}{class }ByInteraction : \textcolor{keyword}{public} \mbox{\hyperlink{classgko_1_1stop_1_1Criterion}{gko::stop::Criterion}} \{}
+\DoxyCodeLine{    \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classgko_1_1stop_1_1Criterion}{gko::stop::Criterion}};}
+\DoxyCodeLine{    \textcolor{keyword}{using} Criterion = \mbox{\hyperlink{classgko_1_1stop_1_1Criterion}{gko::stop::Criterion}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{    \mbox{\hyperlink{group__LinOp_ga1fc8e9d8be0c9ad2d72bc1ddfc6d8358}{GKO\_CREATE\_FACTORY\_PARAMETERS}}(parameters, Factory)}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        / **}
+\DoxyCodeLine{         * Boolean set by the \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27aee11cbb19052e40b07aac0ca060c23ee}{user}} to stop the iteration process}
+\DoxyCodeLine{         * /}
+\DoxyCodeLine{        std::add\_pointer<volatile bool>::type \mbox{\hyperlink{group__LinOp_ga49d4c09c39f06b22bebbbfd1d8bfe450}{GKO\_FACTORY\_PARAMETER\_SCALAR}}(}
+\DoxyCodeLine{            stop\_iteration\_process, \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{    \};}
+\DoxyCodeLine{    GKO\_ENABLE\_CRITERION\_FACTORY(ByInteraction, parameters, Factory);}
 \DoxyCodeLine{    \mbox{\hyperlink{group__LinOp_ga521f65604cc4cf427dcb2ecfa49b757c}{GKO\_ENABLE\_BUILD\_METHOD}}(Factory);}
 \DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keyword}{protected}:}
@@ -215,7 +243,7 @@ Look for an input command \char`\"{}stop\char`\"{} in the console, which sets th
 \DoxyCodeLine{    t.join();}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
- \label{_Results}%
+ \label{_custom_stopping_criterion_Results}%
 \doxysection*{Results}
 
 This is the expected output\+:
@@ -306,10 +334,10 @@ This is the expected output\+:
 \end{DoxyCode}
 
 
-\label{_Commentsaboutprogramminganddebugging}%
+\label{_custom_stopping_criterion_Commentsaboutprogramminganddebugging}%
 \doxysubsubsection*{Comments about programming and debugging }
 
-\label{_PlainProg}%
+\label{_custom_stopping_criterion_PlainProg}%
  \doxysection*{The plain program}
 
 

@@ -12,6 +12,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -24,7 +30,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2835086495 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2836628264 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -116,7 +122,7 @@ class gko::Permutable&lt; IndexType &gt;</h3>
 <p>Linear operators which support permutation should implement the <a class="el" href="classgko_1_1Permutable.html" title="Linear operators which support permutation should implement the Permutable interface.">Permutable</a> interface. </p>
 <p>It provides functions to permute the rows and columns of a <a class="el" href="classgko_1_1LinOp.html">LinOp</a>, independently or symmetrically, and with a regular or inverted permutation.</p>
 <p>After a regular row permutation with permutation array <code>perm</code> the row <code>i</code> in the output <a class="el" href="classgko_1_1LinOp.html">LinOp</a> contains the row <code>perm[i]</code> from the input <a class="el" href="classgko_1_1LinOp.html">LinOp</a>. After an inverse row permutation, the row <code>perm[i]</code> in the output <a class="el" href="classgko_1_1LinOp.html">LinOp</a> contains the row <code>i</code> from the input <a class="el" href="classgko_1_1LinOp.html">LinOp</a>. Equivalently, after a column permutation, the output stores in column <code>i</code> the column <code>perm[i]</code> from the input, and an inverse column permutation stores in column <code>perm[i]</code> the column <code>i</code> from the input. A symmetric permutation is functionally equivalent to calling <code>as&lt;<a class="el" href="classgko_1_1Permutable.html" title="Linear operators which support permutation should implement the Permutable interface.">Permutable</a>&gt;(A-&gt;row_permute(perm))-&gt;column_permute(perm)</code>, but the implementation can provide better performance due to kernel fusion.</p>
-<h2><a class="anchor" id="autotoc_md76"></a>
+<h2><a class="anchor" id="autotoc_md77"></a>
 Example: Permuting a Csr matrix:</h2>
 <div class="fragment"><div class="line"> {c++}</div>
 <div class="line"><span class="comment">//Permuting an object of LinOp type.</span></div>
@@ -153,7 +159,7 @@ template&lt;typename IndexType&gt; </div>
 
 <p>Returns a <a class="el" href="classgko_1_1LinOp.html">LinOp</a> representing the column permutation of the <a class="el" href="classgko_1_1Permutable.html" title="Linear operators which support permutation should implement the Permutable interface.">Permutable</a> object. </p>
 <p>In the resulting <a class="el" href="classgko_1_1LinOp.html">LinOp</a>, the column <code>i</code> contains the input column <code>perm[i]</code>.</p>
-<p>From the linear algebra perspective, with <img class="formulaInl" alt="$P_{ij} = \delta_{i \pi(i)}$" src="form_15.png"/>, this represents the operation <img class="formulaInl" alt="$A P^T$" src="form_19.png"/>.</p>
+<p>From the linear algebra perspective, with \(P_{ij} = \delta_{i \pi(i)}\), this represents the operation \(A P^T\).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">permutation_indices</td><td>the array of indices containing the permutation order <code>perm</code>.</td></tr>
@@ -194,7 +200,7 @@ template&lt;typename IndexType&gt; </div>
 
 <p>Returns a <a class="el" href="classgko_1_1LinOp.html">LinOp</a> representing the row permutation of the inverse permuted object. </p>
 <p>In the resulting <a class="el" href="classgko_1_1LinOp.html">LinOp</a>, the column <code>perm[i]</code> contains the input column <code>i</code>.</p>
-<p>From the linear algebra perspective, with <img class="formulaInl" alt="$P_{ij} = \delta_{i \pi(i)}$" src="form_15.png"/>, this represents the operation <img class="formulaInl" alt="$A P^{-T}$" src="form_21.png"/>.</p>
+<p>From the linear algebra perspective, with \(P_{ij} = \delta_{i \pi(i)}\), this represents the operation \(A P^{-T}\).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">permutation_indices</td><td>the array of indices containing the permutation order <code>perm</code>.</td></tr>
@@ -235,7 +241,7 @@ template&lt;typename IndexType&gt; </div>
 
 <p>Returns a <a class="el" href="classgko_1_1LinOp.html">LinOp</a> representing the symmetric inverse row and column permutation of the <a class="el" href="classgko_1_1Permutable.html" title="Linear operators which support permutation should implement the Permutable interface.">Permutable</a> object. </p>
 <p>In the resulting <a class="el" href="classgko_1_1LinOp.html">LinOp</a>, the entry at location <code>(perm[i],perm[j])</code> contains the input value <code>(i,j)</code>.</p>
-<p>From the linear algebra perspective, with <img class="formulaInl" alt="$P_{ij} = \delta_{i \pi(i)}$" src="form_15.png"/>, this represents the operation <img class="formulaInl" alt="$P^{-1} A P^{-T}$" src="form_17.png"/>.</p>
+<p>From the linear algebra perspective, with \(P_{ij} = \delta_{i \pi(i)}\), this represents the operation \(P^{-1} A P^{-T}\).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">permutation_indices</td><td>the array of indices containing the permutation order.</td></tr>
@@ -276,7 +282,7 @@ template&lt;typename IndexType&gt; </div>
 
 <p>Returns a <a class="el" href="classgko_1_1LinOp.html">LinOp</a> representing the row permutation of the inverse permuted object. </p>
 <p>In the resulting <a class="el" href="classgko_1_1LinOp.html">LinOp</a>, the row <code>perm[i]</code> contains the input row <code>i</code>.</p>
-<p>From the linear algebra perspective, with <img class="formulaInl" alt="$P_{ij} = \delta_{i \pi(i)}$" src="form_15.png"/>, this represents the operation <img class="formulaInl" alt="$P^{-1} A$" src="form_20.png"/>.</p>
+<p>From the linear algebra perspective, with \(P_{ij} = \delta_{i \pi(i)}\), this represents the operation \(P^{-1} A\).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">permutation_indices</td><td>the array of indices containing the permutation order <code>perm</code>.</td></tr>
@@ -317,7 +323,7 @@ template&lt;typename IndexType&gt; </div>
 
 <p>Returns a <a class="el" href="classgko_1_1LinOp.html">LinOp</a> representing the symmetric row and column permutation of the <a class="el" href="classgko_1_1Permutable.html" title="Linear operators which support permutation should implement the Permutable interface.">Permutable</a> object. </p>
 <p>In the resulting <a class="el" href="classgko_1_1LinOp.html">LinOp</a>, the entry at location <code>(i,j)</code> contains the input value <code>(perm[i],perm[j])</code>.</p>
-<p>From the linear algebra perspective, with <img class="formulaInl" alt="$P_{ij} = \delta_{i \pi(i)}$" src="form_15.png"/>, this represents the operation <img class="formulaInl" alt="$P A P^T$" src="form_16.png"/>.</p>
+<p>From the linear algebra perspective, with \(P_{ij} = \delta_{i \pi(i)}\), this represents the operation \(P A P^T\).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">permutation_indices</td><td>the array of indices containing the permutation order.</td></tr>
@@ -358,7 +364,7 @@ template&lt;typename IndexType&gt; </div>
 
 <p>Returns a <a class="el" href="classgko_1_1LinOp.html">LinOp</a> representing the row permutation of the <a class="el" href="classgko_1_1Permutable.html" title="Linear operators which support permutation should implement the Permutable interface.">Permutable</a> object. </p>
 <p>In the resulting <a class="el" href="classgko_1_1LinOp.html">LinOp</a>, the row <code>i</code> contains the input row <code>perm[i]</code>.</p>
-<p>From the linear algebra perspective, with <img class="formulaInl" alt="$P_{ij} = \delta_{i \pi(i)}$" src="form_15.png"/>, this represents the operation <img class="formulaInl" alt="$P A$" src="form_18.png"/>.</p>
+<p>From the linear algebra perspective, with \(P_{ij} = \delta_{i \pi(i)}\), this represents the operation \(P A\).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">permutation_indices</td><td>the array of indices containing the permutation order.</td></tr>

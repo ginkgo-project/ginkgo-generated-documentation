@@ -12,6 +12,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -24,7 +30,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2835086495 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2836628264 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -241,21 +247,21 @@ static std::unique_ptr&lt; <a class="el" href="classgko_1_1Composition.html">Com
 class gko::factorization::ParIlut&lt; ValueType, IndexType &gt;</h3>
 
 <p>ParILUT is an incomplete threshold-based LU factorization which is computed in parallel. </p>
-<p><img class="formulaInl" alt="$L$" src="form_9.png"/> is a lower unitriangular, while <img class="formulaInl" alt="$U$" src="form_48.png"/> is an upper triangular matrix, which approximate a given matrix <img class="formulaInl" alt="$A$" src="form_0.png"/> with <img class="formulaInl" alt="$A \approx LU$" src="form_60.png"/>. Here, <img class="formulaInl" alt="$L$" src="form_9.png"/> and <img class="formulaInl" alt="$U$" src="form_48.png"/> have a sparsity pattern that is improved iteratively based on their element-wise magnitude. The initial sparsity pattern is chosen based on the <img class="formulaInl" alt="$ILU(0)$" src="form_63.png"/> factorization of <img class="formulaInl" alt="$A$" src="form_0.png"/>.</p>
+<p>\(L\) is a lower unitriangular, while \(U\) is an upper triangular matrix, which approximate a given matrix \(A\) with \(A \approx LU\). Here, \(L\) and \(U\) have a sparsity pattern that is improved iteratively based on their element-wise magnitude. The initial sparsity pattern is chosen based on the \(ILU(0)\) factorization of \(A\).</p>
 <p>One iteration of the ParILUT algorithm consists of the following steps:</p>
 <ol type="1">
-<li>Calculate the residual <img class="formulaInl" alt="$R = A - LU$" src="form_64.png"/>.</li>
-<li>Add new non-zero locations from <img class="formulaInl" alt="$R$" src="form_58.png"/> to <img class="formulaInl" alt="$L$" src="form_9.png"/> and <img class="formulaInl" alt="$U$" src="form_48.png"/>. The new non-zero locations are initialized from the corresponding residual entries.</li>
-<li><p class="startli">Execute a fixed-point iteration on <img class="formulaInl" alt="$L$" src="form_9.png"/> and <img class="formulaInl" alt="$U$" src="form_48.png"/> according to</p>
+<li>Calculate the residual \(R = A - LU\).</li>
+<li>Add new non-zero locations from \(R\) to \(L\) and \(U\). The new non-zero locations are initialized from the corresponding residual entries.</li>
+<li><p class="startli">Execute a fixed-point iteration on \(L\) and \(U\) according to</p>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\[ F(L, U)_{ij} = \begin{cases} \frac{1}{u_{jj}} \left( a_{ij} - \sum_{k=1}^{j-1} l_{ik} u_{kj} \right), &amp; i &gt; j, \\ a_{ij} - \sum_{k=1}^{i-1} l_{ik} u_{kj}, &amp; i \leq j. \end{cases} \]" src="form_61.png"/>
+\[ F(L, U)_{ij} = \begin{cases} \frac{1}{u_{jj}} \left( a_{ij} - \sum_{k=1}^{j-1} l_{ik} u_{kj} \right), &amp; i &gt; j, \\ a_{ij} - \sum_{k=1}^{i-1} l_{ik} u_{kj}, &amp; i \leq j. \end{cases} \]
 </p>
 <p class="startli">For a more detailed description of the fixed-point iteration, see <a class="el" href="classgko_1_1factorization_1_1ParIlu.html">ParIlu</a>.</p>
 </li>
-<li>Remove the smallest entries (by magnitude) from <img class="formulaInl" alt="$L$" src="form_9.png"/> and <img class="formulaInl" alt="$U$" src="form_48.png"/>.</li>
-<li>Execute a fixed-point iteration on the (now sparser) <img class="formulaInl" alt="$L$" src="form_9.png"/> and <img class="formulaInl" alt="$U$" src="form_48.png"/>.</li>
+<li>Remove the smallest entries (by magnitude) from \(L\) and \(U\).</li>
+<li>Execute a fixed-point iteration on the (now sparser) \(L\) and \(U\).</li>
 </ol>
-<p>This ParILUT algorithm thus improves the sparsity pattern and the approximation of <img class="formulaInl" alt="$L$" src="form_9.png"/> and <img class="formulaInl" alt="$U$" src="form_48.png"/> simultaneously.</p>
+<p>This ParILUT algorithm thus improves the sparsity pattern and the approximation of \(L\) and \(U\) simultaneously.</p>
 <dl class="section user"><dt>References</dt><dd><ul>
 <li>Anzt, H., Chow, E., Dongarra, J. <em>ParILUT — A Parallel Threshold ILU for GPUs.</em> 2019 IEEE International Parallel and Distributed Processing Symposium (IPDPS), pp. 231–241. <a href="https://doi.org/10.1109/IPDPS.2019.00033">https://doi.org/10.1109/IPDPS.2019.00033</a></li>
 </ul>

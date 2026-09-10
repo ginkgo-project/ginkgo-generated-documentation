@@ -1,12 +1,12 @@
 The simple solver example..
 
- \label{_Intro}%
- \label{_Introduction}%
+ \label{_simple_solver_Intro}%
+ \label{_simple_solver_Introduction}%
 \doxysection*{Introduction}
 
 This simple solver example should help you get started with Ginkgo. This example is meant for you to understand how Ginkgo works and how you can solve a simple linear system with Ginkgo. We encourage you to play with the code, change the parameters and see what is best suited for your purposes.
 
-\label{_Abouttheexample}%
+\label{_simple_solver_Abouttheexample}%
 \doxysubsubsection*{About the example }
 
 Each example has the following sections\+: 
@@ -15,10 +15,69 @@ Each example has the following sections\+:
 \item {\bfseries{The commented program\+:}} This section is intended for you to understand the details of the example so that you can play with it and understand Ginkgo and its features better. 
 \item {\bfseries{Results\+:}} This section shows the results of the code when run. Though the results may not be completely the same, you can expect the behaviour to be similar. 
 \item {\bfseries{The plain program\+:}} This is the complete code without any comments to have an complete overview of the code. 
-\end{DoxyEnumerate}\label{_CommProg}%
+\end{DoxyEnumerate}\label{_simple_solver_CommProg}%
  \doxysection*{The commented program}
 
-\mbox{\hyperlink{classgko_1_1matrix_1_1Sellp}{gko\+::matrix\+::\+Sellp}} could also be used.
+\label{_simple_solver_Includefiles}%
+ \doxysubsubsection*{Include files}
+
+This is the main ginkgo header file.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
+\end{DoxyCode}
+
+
+Add the fstream header to read from data from files.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <fstream>}}
+\end{DoxyCode}
+
+
+Add the C++ iostream header to output information to the console.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
+\end{DoxyCode}
+
+
+Add the S\+TL map header for the executor selection
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <map>}}
+\end{DoxyCode}
+
+
+Add the string manipulation header to handle strings.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
+\DoxyCodeLine{\{}
+\end{DoxyCode}
+
+
+Use some shortcuts. In Ginkgo, vectors are seen as a \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}} with one column/one row. The advantage of this concept is that using multiple vectors is a now a natural extension of adding columns/rows are necessary.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using} ValueType = double;}
+\DoxyCodeLine{\textcolor{keyword}{using} RealValueType = \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} IndexType = int;}
+\DoxyCodeLine{\textcolor{keyword}{using} vec = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} real\_vec = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<RealValueType>}};}
+\end{DoxyCode}
+
+
+The \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko\+::matrix\+::\+Csr}} class is used here, but any other matrix class such as \mbox{\hyperlink{classgko_1_1matrix_1_1Coo}{gko\+::matrix\+::\+Coo}}, \mbox{\hyperlink{classgko_1_1matrix_1_1Hybrid}{gko\+::matrix\+::\+Hybrid}}, \mbox{\hyperlink{classgko_1_1matrix_1_1Ell}{gko\+::matrix\+::\+Ell}} or \mbox{\hyperlink{classgko_1_1matrix_1_1Sellp}{gko\+::matrix\+::\+Sellp}} could also be used.
 
 
 \begin{DoxyCode}{0}
@@ -53,7 +112,7 @@ Print help on how to execute this example.
 \end{DoxyCode}
 
 
-\label{_Wheredoyouwanttorunyoursolver}%
+\label{_simple_solver_Wheredoyouwanttorunyoursolver}%
  \doxysubsubsection*{Where do you want to run your solver ?}
 
 The \mbox{\hyperlink{classgko_1_1Executor}{gko\+::\+Executor}} class is one of the cornerstones of Ginkgo. Currently, we have support for an \mbox{\hyperlink{classgko_1_1OmpExecutor}{gko\+::\+Omp\+Executor}}, which uses Open\+MP multi-\/threading in most of its kernels, a \mbox{\hyperlink{classgko_1_1ReferenceExecutor}{gko\+::\+Reference\+Executor}}, a single threaded specialization of the Open\+MP executor and a \mbox{\hyperlink{classgko_1_1CudaExecutor}{gko\+::\+Cuda\+Executor}} which runs the code on a N\+V\+I\+D\+IA G\+PU if available. \begin{DoxyNote}{Note}
@@ -91,7 +150,7 @@ executor where Ginkgo will perform the computation
 \end{DoxyCode}
 
 
-\label{_Readingyourdataandtransfertotheproperdevice}%
+\label{_simple_solver_Readingyourdataandtransfertotheproperdevice}%
  \doxysubsubsection*{Reading your data and transfer to the proper device.}
 
 Read the matrix, right hand side and the initial solution using the read function. \begin{DoxyNote}{Note}
@@ -105,7 +164,7 @@ Ginkgo uses C++ smart pointers to automatically manage memory. To this end, we u
 \end{DoxyCode}
 
 
-\label{_Creatingthesolver}%
+\label{_simple_solver_Creatingthesolver}%
  \doxysubsubsection*{Creating the solver}
 
 Generate the \mbox{\hyperlink{namespacegko_1_1solver}{gko\+::solver}} factory. Ginkgo uses the concept of Factories to build solvers with certain properties. Observe the Fluent interface used here. Here a cg solver is generated with a stopping criteria of maximum iterations of 20 and a residual norm reduction of 1e-\/7. You also observe that the stopping criteria(gko\+::stop) are also generated from factories using their build methods. You need to specify the executors which each of the object needs to be built on.
@@ -161,7 +220,7 @@ To measure if your solution has actually converged, you can measure the error of
 \DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a577a2f0345ee607f64277b3364b6431b}{write}}(std::cout, res);}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
- \label{_Results}%
+ \label{_simple_solver_Results}%
 \doxysection*{Results}
 
 The following is the expected result\+:
@@ -197,10 +256,10 @@ The following is the expected result\+:
 \end{DoxyCode}
 
 
-\label{_Commentsaboutprogramminganddebugging}%
+\label{_simple_solver_Commentsaboutprogramminganddebugging}%
 \doxysubsubsection*{Comments about programming and debugging }
 
-\label{_PlainProg}%
+\label{_simple_solver_PlainProg}%
  \doxysection*{The plain program}
 
 

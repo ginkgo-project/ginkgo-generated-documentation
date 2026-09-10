@@ -2,14 +2,53 @@ The Mixed Precision Iterative Refinement (M\+P\+IR) solver example..
 
 This example depends on iterative-\/refinement.
 
- \label{_Mixed Precision Iterative Refinement (MPIR)}%
- \label{_ThisexamplemanuallyimplementsaMixedPrecisionIterativeRefinementMPIRsolver}%
+ \label{_mixed_precision_ir_Intro}%
+ \label{_mixed_precision_ir_ThisexamplemanuallyimplementsaMixedPrecisionIterativeRefinementMPIRsolver}%
 \doxysection*{This example manually implements a Mixed Precision Iterative Refinement (M\+P\+IR) solver.}
 
 \doxysubsubsection*{In this example, we first read in a matrix from file, then generate a right-\/hand side and an initial guess. An inaccurate CG solver in single precision is used as the inner solver to an iterative refinement (IR) in double precision method which solves a linear system. }
 
-\label{_CommProg}%
+\label{_mixed_precision_ir_CommProg}%
  \doxysection*{The commented program}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iomanip>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
+\DoxyCodeLine{\{}
+\end{DoxyCode}
+
+
+Some shortcuts
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using} ValueType = double;}
+\DoxyCodeLine{\textcolor{keyword}{using} RealValueType = \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} SolverType = float;}
+\DoxyCodeLine{\textcolor{keyword}{using} RealSolverType = \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<SolverType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} IndexType = int;}
+\DoxyCodeLine{\textcolor{keyword}{using} vec = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} real\_vec = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<RealValueType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} solver\_vec = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<SolverType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} mtx = \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<ValueType, IndexType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} solver\_mtx = \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<SolverType, IndexType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} cg = \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{gko::solver::Cg<SolverType>}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} max\_outer\_iters = 100u;}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} max\_inner\_iters = 100u;}
+\DoxyCodeLine{RealValueType outer\_reduction\_factor\{1e-\/12\};}
+\DoxyCodeLine{RealSolverType inner\_reduction\_factor\{1e-\/2\};}
+\end{DoxyCode}
+
 
 Print version information
 
@@ -225,7 +264,7 @@ Print solver statistics
 \DoxyCodeLine{              << static\_cast<double>(time.count()) / 1000000.0 << std::endl;}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
- \label{_Results}%
+ \label{_mixed_precision_ir_Results}%
 \doxysection*{Results}
 
 This is the expected output\+:
@@ -245,10 +284,10 @@ This is the expected output\+:
 \end{DoxyCode}
 
 
-\label{_Commentsaboutprogramminganddebugging}%
+\label{_mixed_precision_ir_Commentsaboutprogramminganddebugging}%
 \doxysubsubsection*{Comments about programming and debugging }
 
-\label{_PlainProg}%
+\label{_mixed_precision_ir_PlainProg}%
  \doxysection*{The plain program}
 
 

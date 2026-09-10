@@ -2,18 +2,47 @@ The preconditioner export example..
 
 This example depends on simple-\/solver.
 
- \label{_Intro}%
- \label{_Introduction}%
+ \label{_preconditioner_export_Intro}%
+ \label{_preconditioner_export_Introduction}%
 \doxysection*{Introduction}
 
-\label{_Abouttheexample}%
+\label{_preconditioner_export_Abouttheexample}%
 \doxysubsubsection*{About the example }
 
-This example shows how to explicitly generate and store preconditioners for a given matrix. It can also be used to inspect and debug the preconditioner generation. \label{_CommProg}%
+This example shows how to explicitly generate and store preconditioners for a given matrix. It can also be used to inspect and debug the preconditioner generation. \label{_preconditioner_export_CommProg}%
  \doxysection*{The commented program}
 
 
 \begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <functional>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{const} std::map<std::string, std::function<std::shared\_ptr<gko::Executor>()>>}
+\DoxyCodeLine{    executors\{\{\textcolor{stringliteral}{"reference"}, [] \{ \textcolor{keywordflow}{return} gko::ReferenceExecutor::create(); \}\},}
+\DoxyCodeLine{              \{\textcolor{stringliteral}{"omp"}, [] \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}(); \}\},}
+\DoxyCodeLine{              \{\textcolor{stringliteral}{"cuda"},}
+\DoxyCodeLine{               [] \{}
+\DoxyCodeLine{                   \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a6c423656c7c0eb53810cb77bb4a66d15}{gko::CudaExecutor::create}}(}
+\DoxyCodeLine{                       0, gko::ReferenceExecutor::create());}
+\DoxyCodeLine{               \}\},}
+\DoxyCodeLine{              \{\textcolor{stringliteral}{"hip"},}
+\DoxyCodeLine{               [] \{}
+\DoxyCodeLine{                   \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_aa0701fe1303e03a8331da7e95008100d}{gko::HipExecutor::create}}(}
+\DoxyCodeLine{                       0, gko::ReferenceExecutor::create());}
+\DoxyCodeLine{               \}\},}
+\DoxyCodeLine{              \{\textcolor{stringliteral}{"dpcpp"}, [] \{}
+\DoxyCodeLine{                   \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1DpcppExecutor_ae9b875dfe3af7f3f3f24071bfb2f895e}{gko::DpcppExecutor::create}}(}
+\DoxyCodeLine{                       0, gko::ReferenceExecutor::create());}
+\DoxyCodeLine{               \}\}\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
 \DoxyCodeLine{\textcolor{keywordtype}{void} output(\mbox{\hyperlink{classgko_1_1ptr__param}{gko::ptr\_param}}<\textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1WritableToMatrixData}{gko::WritableToMatrixData<double, int>}}> mtx,}
 \DoxyCodeLine{            std::string name)}
 \DoxyCodeLine{\{}
@@ -300,7 +329,7 @@ parilut-\/isai\+: iterations, fill-\/in limit, sparsity power
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
- \label{_Results}%
+ \label{_preconditioner_export_Results}%
 \doxysection*{Results}
 
 This is the expected output\+:
@@ -326,10 +355,10 @@ When specifying an executor\+:
 \end{DoxyCode}
 
 
-\label{_Commentsaboutprogramminganddebugging}%
+\label{_preconditioner_export_Commentsaboutprogramminganddebugging}%
 \doxysubsubsection*{Comments about programming and debugging }
 
-\label{_PlainProg}%
+\label{_preconditioner_export_PlainProg}%
  \doxysection*{The plain program}
 
 

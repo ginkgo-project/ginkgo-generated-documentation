@@ -5,13 +5,19 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Ginkgo: BatchLinOp</title>
+<title>Ginkgo: Batched Linear Operators</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -24,7 +30,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2835086495 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2836628264 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -70,13 +76,16 @@ $(function() {
 <a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle">
-<div class="title">BatchLinOp</div>  </div>
+<div class="title">Batched Linear Operators</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A module dedicated to the implementation and usage of the batched linear operators in Ginkgo.  
+<a href="#details">More...</a></p>
 <div class="dynheader">
-Collaboration diagram for BatchLinOp:</div>
+Collaboration diagram for Batched Linear Operators:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="group__BatchLinOp.svg" width="516" height="316"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="group__BatchLinOp.svg" width="607" height="310"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 <table class="memberdecls">
@@ -84,6 +93,9 @@ Collaboration diagram for BatchLinOp:</div>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1batch_1_1BatchLinOpFactory.html">gko::batch::BatchLinOpFactory</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A <a class="el" href="classgko_1_1batch_1_1BatchLinOpFactory.html" title="A BatchLinOpFactory represents a higher order mapping which transforms one batch linear operator into...">BatchLinOpFactory</a> represents a higher order mapping which transforms one batch linear operator into another.  <a href="classgko_1_1batch_1_1BatchLinOpFactory.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1batch_1_1MultiVector.html">gko::batch::MultiVector&lt; ValueType &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classgko_1_1batch_1_1MultiVector.html" title="MultiVector stores multiple vectors in a batched fashion and is useful for batched operations.">MultiVector</a> stores multiple vectors in a batched fashion and is useful for batched operations.  <a href="classgko_1_1batch_1_1MultiVector.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1batch_1_1matrix_1_1Csr.html">gko::batch::matrix::Csr&lt; ValueType, IndexType &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classgko_1_1batch_1_1matrix_1_1Csr.html" title="Csr is a general sparse matrix format that stores the column indices for each nonzero entry and a cum...">Csr</a> is a general sparse matrix format that stores the column indices for each nonzero entry and a cumulative sum of the number of nonzeros in each row.  <a href="classgko_1_1batch_1_1matrix_1_1Csr.html#details">More...</a><br /></td></tr>
@@ -121,6 +133,8 @@ Typedefs</h2></td></tr>
 <tr class="separator:ga544616e42045fcd07bfb3799d304eb0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p>A module dedicated to the implementation and usage of the batched linear operators in Ginkgo. </p>
+<p>A batched linear operator applies the same operation to a large number of small, independent systems at once. Every item of a batch shares the same dimensions and sparsity pattern, and no data is exchanged between items, which is what allows the whole batch to be solved in a single kernel.</p>
 <h1><a class="anchor" id="batch_linop_concept"></a>
 Batched Linear operator as a concept</h1>
 <p>A batch linear operator (<a class="el" href="classgko_1_1batch_1_1BatchLinOp.html">BatchLinOp</a>) forms the base class for all batched linear algebra objects. In general, it follows the same structure as the <a class="el" href="classgko_1_1LinOp.html">LinOp</a> class, but has some crucial differences which make it not strictly representable through or with the <a class="el" href="classgko_1_1LinOp.html">LinOp</a> class.</p>
@@ -128,7 +142,7 @@ Batched Linear operator as a concept</h1>
 <p>A key difference between the <a class="el" href="classgko_1_1LinOp.html">LinOp</a> and the <a class="el" href="classgko_1_1batch_1_1BatchLinOp.html">BatchLinOp</a> class is that the apply between BatchLinOps is no longer supported. The user can apply a <a class="el" href="classgko_1_1batch_1_1BatchLinOp.html">BatchLinOp</a> to a <a class="el" href="classgko_1_1batch_1_1MultiVector.html" title="MultiVector stores multiple vectors in a batched fashion and is useful for batched operations.">batch::MultiVector</a> but not to any general <a class="el" href="classgko_1_1batch_1_1BatchLinOp.html">BatchLinOp</a>.</p>
 <p>Therefore, the <a class="el" href="classgko_1_1batch_1_1BatchLinOp.html">BatchLinOp</a> serves only as a base class providing necessary core functionality from Polymorphic object and store the dimensions of the batched object.</p>
 <dl class="section note"><dt>Note</dt><dd>Apply to <a class="el" href="classgko_1_1batch_1_1MultiVector.html" title="MultiVector stores multiple vectors in a batched fashion and is useful for batched operations.">batch::MultiVector</a> objects are handled by the concrete <a class="el" href="classgko_1_1LinOp.html">LinOp</a> and may be moved to the base <a class="el" href="classgko_1_1batch_1_1BatchLinOp.html">BatchLinOp</a> class in the future.</dd></dl>
-<p><a class="el" href="group__BatchLinOp.html">BatchLinOp</a> </p>
+<p><a class="el" href="group__BatchLinOp.html">Batched Linear Operators</a> </p>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="gab7f0cd5a4520a215974412e6fff4f25f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gab7f0cd5a4520a215974412e6fff4f25f">&#9670;&nbsp;</a></span>GKO_ENABLE_BATCH_LIN_OP_FACTORY</h2>

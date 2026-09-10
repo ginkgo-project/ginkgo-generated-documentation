@@ -12,6 +12,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -24,7 +30,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2835086495 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2836628264 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -287,7 +293,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>EnableCloneable&lt; 
 class gko::matrix::Permutation&lt; IndexType &gt;</h3>
 
 <p><a class="el" href="classgko_1_1matrix_1_1Permutation.html" title="Permutation is a matrix format that represents a permutation matrix, i.e.">Permutation</a> is a matrix format that represents a permutation matrix, i.e. </p>
-<p>a matrix where each row and column has exactly one entry. The matrix can only be applied to <a class="el" href="classgko_1_1matrix_1_1Dense.html" title="Dense is a matrix format which explicitly stores all values of the matrix.">Dense</a> inputs, where it represents a row permutation: <img class="formulaInl" alt="$A' = PA$" src="form_100.png"/> means <img class="formulaInl" alt="$A'(i, j) = A(p[i], j)$" src="form_101.png"/>.</p>
+<p>a matrix where each row and column has exactly one entry. The matrix can only be applied to <a class="el" href="classgko_1_1matrix_1_1Dense.html" title="Dense is a matrix format which explicitly stores all values of the matrix.">Dense</a> inputs, where it represents a row permutation: \(A&#39; = PA\) means \(A&#39;(i, j) = A(p[i], j)\).</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">IndexType</td><td>precision of permutation array indices. </td></tr>
@@ -314,7 +320,7 @@ template&lt;typename IndexType  = int32&gt; </div>
 </div><div class="memdoc">
 
 <p>Composes this permutation with another permutation. </p>
-<p>The resulting permutation fulfills <code>result[i] = this[other[i]]</code> or <code>result = other * this</code> from the matrix perspective, which is equivalent to first permuting by <code>this</code> and then by <code>other</code>: Combining permutations <img class="formulaInl" alt="$P_1$" src="form_102.png"/> and <img class="formulaInl" alt="$P_2$" src="form_103.png"/> with <code>P = P_1.combine(P_2)</code> performs the operation permute(A, P) = permute(permute(A, P_1), P_2).</p>
+<p>The resulting permutation fulfills <code>result[i] = this[other[i]]</code> or <code>result = other * this</code> from the matrix perspective, which is equivalent to first permuting by <code>this</code> and then by <code>other</code>: Combining permutations \(P_1\) and \(P_2\) with <code>P = P_1.combine(P_2)</code> performs the operation permute(A, P) = permute(permute(A, P_1), P_2).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">other</td><td>the other permutation </td></tr>
@@ -437,7 +443,8 @@ template&lt;typename IndexType  = int32&gt; </div>
 <p>Creates an uninitialized <a class="el" href="classgko_1_1matrix_1_1Permutation.html" title="Permutation is a matrix format that represents a permutation matrix, i.e.">Permutation</a> arrays on the specified executor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">exec</td><td><a class="el" href="classgko_1_1Executor.html" title="The first step in using the Ginkgo library consists of creating an executor.">Executor</a> associated to the <a class="el" href="classgko_1_1LinOp.html">LinOp</a></td></tr>
+    <tr><td class="paramname">exec</td><td><a class="el" href="classgko_1_1Executor.html" title="The first step in using the Ginkgo library consists of creating an executor.">Executor</a> associated to the <a class="el" href="classgko_1_1LinOp.html">LinOp</a> </td></tr>
+    <tr><td class="paramname">size</td><td>the size of the permutation</td></tr>
   </table>
   </dd>
 </dl>

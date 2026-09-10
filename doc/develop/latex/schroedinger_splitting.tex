@@ -2,8 +2,8 @@ The Schroedinger equation example..
 
 This example depends on heat-\/equation.
 
- \label{_Intro}%
- \label{_Introduction}%
+ \label{_schroedinger_splitting_Intro}%
+ \label{_schroedinger_splitting_Introduction}%
 \doxysection*{Introduction}
 
 This example shows how to use the F\+FT and i\+F\+FT implementations in Ginkgo to solve the non-\/linear Schrödinger equation with a splitting method.
@@ -30,14 +30,42 @@ These partial solutions can be used to approximate a solution to the full N\+LS 
 
 For nicer visual results, we add another constant potential term V(x) \textbackslash{}theta to the non-\/linear part, which turns it into the Gross–\+Pitaevskii equation.
 
-\label{_Abouttheexample}%
+\label{_schroedinger_splitting_Abouttheexample}%
 \doxysubsubsection*{About the example }
 
-\label{_CommProg}%
+\label{_schroedinger_splitting_CommProg}%
  \doxysection*{The commented program}
 
 
 \begin{DoxyCode}{0}
+\DoxyCodeLine{/ *****************************<DESCRIPTION>***********************************}
+\DoxyCodeLine{This example shows how to use the FFT and iFFT implementations in Ginkgo}
+\DoxyCodeLine{to solve the non-\/linear Schrödinger equation with a splitting method.}
+\DoxyCodeLine{}
+\DoxyCodeLine{The non-\/linear Schrödinger equation (NLS) is given by}
+\DoxyCodeLine{}
+\DoxyCodeLine{\(\backslash\)f}
+\DoxyCodeLine{    i \(\backslash\)partial\_t \(\backslash\)theta = -\/\(\backslash\)delta \(\backslash\)theta + |\(\backslash\)theta|\string^2 \(\backslash\)theta}
+\DoxyCodeLine{\(\backslash\)f}
+\DoxyCodeLine{}
+\DoxyCodeLine{Here \(\backslash\)f\(\backslash\)theta\(\backslash\)f is the wave \textcolor{keyword}{function} of a single particle in two dimensions.}
+\DoxyCodeLine{Its magnitude \(\backslash\)f|\(\backslash\)theta|\string^2\(\backslash\)f describes the probability distribution of the}
+\DoxyCodeLine{particle\textcolor{stringliteral}{'s position.}}
+\DoxyCodeLine{\textcolor{stringliteral}{}}
+\DoxyCodeLine{\textcolor{stringliteral}{This equation can be split in to its linear (1) and non-\/linear (2) part}}
+\DoxyCodeLine{\textcolor{stringliteral}{}}
+\DoxyCodeLine{\textcolor{stringliteral}{\(\backslash\)f\{align*\}\{}}
+\DoxyCodeLine{\textcolor{stringliteral}{    (1) \(\backslash\)quad i \(\backslash\)partial\_t \(\backslash\)theta \&= -\/\(\backslash\)delta \(\backslash\)theta\(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\textcolor{stringliteral}{    (2) \(\backslash\)quad i \(\backslash\)partial\_t \(\backslash\)theta \&= |\(\backslash\)theta|\string^2 \(\backslash\)theta}}
+\DoxyCodeLine{\textcolor{stringliteral}{\(\backslash\)f\}}}
+\DoxyCodeLine{\textcolor{stringliteral}{}}
+\DoxyCodeLine{\textcolor{stringliteral}{For both of these equations, we can compute exact solutions, assuming periodic}}
+\DoxyCodeLine{\textcolor{stringliteral}{boundary conditions and using the Fourier series expansion for (1) and using the}}
+\DoxyCodeLine{\textcolor{stringliteral}{fact that \(\backslash\)f| \(\backslash\)theta |\string^2\(\backslash\)f is constant in (2):}}
+\DoxyCodeLine{\textcolor{stringliteral}{}}
+\DoxyCodeLine{\textcolor{stringliteral}{\(\backslash\)f\{align*\}\{}}
+\DoxyCodeLine{\textcolor{stringliteral}{    (\(\backslash\)hat 1) \(\backslash\)quad \(\backslash\)quad \(\backslash\)partial\_t \(\backslash\)hat\(\backslash\)theta\_k \&= -\/i |k|\string^2 \(\backslash\)theta \(\backslash\)\(\backslash\)}}
+\DoxyCodeLine{\textcolor{stringliteral}{    (2'}) \(\backslash\)quad \(\backslash\)partial\_t |\(\backslash\)theta|\string^2 \&= i |\(\backslash\)theta|\string^2 (\(\backslash\)theta -\/ \(\backslash\)theta) = 0}
 \DoxyCodeLine{\(\backslash\)f\}}
 \DoxyCodeLine{}
 \DoxyCodeLine{The exact solutions are then given by}
@@ -335,15 +363,15 @@ time step in non-\/linear part
 \DoxyCodeLine{    \}}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
- \label{_Results}%
+ \label{_schroedinger_splitting_Results}%
 \doxysection*{Results}
 
 The program will generate a video file named nls.\+mp4 and output the timestamp of each generated frame.
 
-\label{_Commentsaboutprogramminganddebugging}%
+\label{_schroedinger_splitting_Commentsaboutprogramminganddebugging}%
 \doxysubsubsection*{Comments about programming and debugging }
 
-\label{_PlainProg}%
+\label{_schroedinger_splitting_PlainProg}%
  \doxysection*{The plain program}
 
 
@@ -355,12 +383,12 @@ The program will generate a video file named nls.\+mp4 and output the timestamp 
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{The non-\/linear Schrödinger equation (NLS) is given by}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{@f\$}}
+\DoxyCodeLine{\textcolor{comment}{\(\backslash\)f\$}}
 \DoxyCodeLine{\textcolor{comment}{    i \(\backslash\)partial\_t \(\backslash\)theta = -\/\(\backslash\)delta \(\backslash\)theta + |\(\backslash\)theta|\string^2 \(\backslash\)theta}}
-\DoxyCodeLine{\textcolor{comment}{@f\$}}
+\DoxyCodeLine{\textcolor{comment}{\(\backslash\)f\$}}
 \DoxyCodeLine{\textcolor{comment}{}}
-\DoxyCodeLine{\textcolor{comment}{Here @f\$\(\backslash\)theta@f\$ is the wave function of a single particle in two dimensions.}}
-\DoxyCodeLine{\textcolor{comment}{Its magnitude @f\$|\(\backslash\)theta|\string^2@f\$ describes the probability distribution of the}}
+\DoxyCodeLine{\textcolor{comment}{Here \(\backslash\)f\$\(\backslash\)theta\(\backslash\)f\$ is the wave function of a single particle in two dimensions.}}
+\DoxyCodeLine{\textcolor{comment}{Its magnitude \(\backslash\)f\$|\(\backslash\)theta|\string^2\(\backslash\)f\$ describes the probability distribution of the}}
 \DoxyCodeLine{\textcolor{comment}{particle's position.}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{This equation can be split in to its linear (1) and non-\/linear (2) part}}
@@ -372,7 +400,7 @@ The program will generate a video file named nls.\+mp4 and output the timestamp 
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{For both of these equations, we can compute exact solutions, assuming periodic}}
 \DoxyCodeLine{\textcolor{comment}{boundary conditions and using the Fourier series expansion for (1) and using the}}
-\DoxyCodeLine{\textcolor{comment}{fact that @f\$| \(\backslash\)theta |\string^2@f\$ is constant in (2):}}
+\DoxyCodeLine{\textcolor{comment}{fact that \(\backslash\)f\$| \(\backslash\)theta |\string^2\(\backslash\)f\$ is constant in (2):}}
 \DoxyCodeLine{\textcolor{comment}{}}
 \DoxyCodeLine{\textcolor{comment}{\(\backslash\)f\{align*\}\{}}
 \DoxyCodeLine{\textcolor{comment}{    (\(\backslash\)hat 1) \(\backslash\)quad \(\backslash\)quad \(\backslash\)partial\_t \(\backslash\)hat\(\backslash\)theta\_k \&= -\/i |k|\string^2 \(\backslash\)theta \(\backslash\)\(\backslash\)}}

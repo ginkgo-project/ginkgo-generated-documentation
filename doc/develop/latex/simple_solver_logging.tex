@@ -2,18 +2,46 @@ The simple solver with logging example..
 
 This example depends on simple-\/solver, minimal-\/cuda-\/solver.
 
- \label{_Intro}%
- \label{_Introduction}%
+ \label{_simple_solver_logging_Intro}%
+ \label{_simple_solver_logging_Introduction}%
 \doxysection*{Introduction}
 
-\label{_Abouttheexample}%
+\label{_simple_solver_logging_Abouttheexample}%
 \doxysubsubsection*{About the example }
 
-\label{_CommProg}%
+\label{_simple_solver_logging_CommProg}%
  \doxysection*{The commented program}
 
 
 \begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iomanip>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace }\{}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType>}
+\DoxyCodeLine{\textcolor{keywordtype}{void} print\_vector(\textcolor{keyword}{const} std::string\& name,}
+\DoxyCodeLine{                  \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}}* vec)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    std::cout << name << \textcolor{stringliteral}{" = ["} << std::endl;}
+\DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < vec-\/>\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\_size}}()[0]; ++i) \{}
+\DoxyCodeLine{        std::cout << \textcolor{stringliteral}{"    "} << vec-\/>\mbox{\hyperlink{classgko_1_1matrix_1_1Dense_af0f1af68853537807ca271a296de3cd0}{at}}(i, 0) << std::endl;}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"];"} << std::endl;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}  \textcolor{comment}{// namespace}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
 \DoxyCodeLine{\{}
 \end{DoxyCode}
 
@@ -205,7 +233,7 @@ Print solution
 \DoxyCodeLine{              << convergence\_logger-\/>has\_converged() << std::endl;}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
- \label{_Results}%
+ \label{_simple_solver_logging_Results}%
 \doxysection*{Results}
 
 This is the expected output\+:
@@ -961,10 +989,10 @@ This is the expected output\+:
 \end{DoxyCode}
 
 
-\label{_Commentsaboutprogramminganddebugging}%
+\label{_simple_solver_logging_Commentsaboutprogramminganddebugging}%
 \doxysubsubsection*{Comments about programming and debugging }
 
-\label{_PlainProg}%
+\label{_simple_solver_logging_PlainProg}%
  \doxysection*{The plain program}
 
 

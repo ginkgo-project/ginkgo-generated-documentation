@@ -12,6 +12,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -24,7 +30,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2835086495 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2836628264 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -375,14 +381,18 @@ Writing tests for kernels</h2>
 Documentation style</h1>
 <p>Documentation uses standard Doxygen.</p>
 <h2><a class="anchor" id="autotoc_md59"></a>
+Command prefix: &lt;tt&gt;@&lt;/tt&gt; for Doxygen, &lt;tt&gt;\&lt;/tt&gt; for math</h2>
+<p>Doxygen accepts both <code>\cmd</code> and <code>@cmd</code> and treats them identically. Ginkgo uses the at-sign for all Doxygen commands (<code>@brief</code>, <code>@param</code>, <code>@tparam</code>, <code>@return</code>, <code>@note</code>, <code>@ingroup</code>, <code>@ref</code>, ...) and reserves the backslash for the LaTeX formula delimiters <code>\f$ ... \f$</code> and <code>\f[ ... \f]</code>.</p>
+<p>Keeping the two apart means that the prefix tells you what you are looking at: <code>@</code> introduces Doxygen structure, <code>\</code> introduces LaTeX. It also keeps a formula visually consistent with the math it contains, as in <code>\f$\alpha \frac{a}{b}\f$</code>.</p>
+<h2><a class="anchor" id="autotoc_md60"></a>
 Developer targeted notes</h2>
 <p>Make use of <code>@internal</code> doxygen tag. This can be used for any comment which is not intended for users, but is useful to better understand a piece of code.</p>
-<h2><a class="anchor" id="autotoc_md60"></a>
+<h2><a class="anchor" id="autotoc_md61"></a>
 Whitespaces</h2>
-<h3><a class="anchor" id="autotoc_md61"></a>
+<h3><a class="anchor" id="autotoc_md62"></a>
 After named tags such as &lt;tt&gt;@param foo&lt;/tt&gt;</h3>
 <p>The documentation tags which use an additional name should be followed by two spaces in order to better distinguish the text from the doxygen tag. It is also possible to use a line break instead.</p>
-<h2><a class="anchor" id="autotoc_md62"></a>
+<h2><a class="anchor" id="autotoc_md63"></a>
 Documenting examples</h2>
 <p>There are two main steps:</p>
 <ol type="1">
@@ -399,15 +409,15 @@ Documenting examples</h2>
 <ol type="1">
 <li>You also need to modify the <a href="https://github.com/ginkgo-project/ginkgo/blob/develop/doc/examples/examples.hpp.in">examples.hpp.in</a> file. You add the name of the example in the main section and in the section that you specified in the <code>doc/kind</code> file in the example documentation.</li>
 </ol>
-<h1><a class="anchor" id="autotoc_md63"></a>
+<h1><a class="anchor" id="autotoc_md64"></a>
 Other programming comments</h1>
-<h2><a class="anchor" id="autotoc_md64"></a>
+<h2><a class="anchor" id="autotoc_md65"></a>
 C++ standard stream objects</h2>
 <p>These are global objects and are shared inside the same translation unit. Therefore, whenever its state or formatting is changed (e.g. using <code>std::hex</code> or floating point formatting) inside library code, make sure to restore the state before returning the control to the user. See this <a href="https://stackoverflow.com/questions/2273330/restore-the-state-of-stdcout-after-manipulating-it">stackoverflow question</a> for examples on how to do it correctly. This is extremely important for header files.</p>
-<h2><a class="anchor" id="autotoc_md65"></a>
+<h2><a class="anchor" id="autotoc_md66"></a>
 Warnings</h2>
 <p>By default, the <code>-DCMAKE_CXX_FLAGS</code> should be set to <code>-Wpedantic</code> to emit pedantic warnings by default. The CI system additionally also has a step where it compiles for pedantic warnings to be errors.</p>
-<h2><a class="anchor" id="autotoc_md66"></a>
+<h2><a class="anchor" id="autotoc_md67"></a>
 Avoiding circular dependencies</h2>
 <p>To facilitate finding circular dependencies issues (see <a href="#using-library-classes">Using library classes</a> for more details), a CI step <code>no-circular-deps</code> was created. For more details on its usage, see <a href="https://gitlab.com/ginkgo-project/ginkgo-public-ci/pipelines/52941979">this pipeline</a>, where Ginkgo did not abide to this policy and <a href="https://github.com/ginkgo-project/ginkgo/pull/278">PR #278</a> which fixed this. Note that doing so is not enough to guarantee with 100% accuracy that no circular dependency is present. For an example of such a case, take a look at <a href="https://gitlab.com/ginkgo-project/ginkgo-public-ci/pipelines/53006772">this pipeline</a> where one of the compiler setups detected an incorrect dependency of the <code>cuda</code> module (due to jacobi) on the <code>core</code> module. </p>
 </div></div><!-- contents -->

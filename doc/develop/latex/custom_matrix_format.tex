@@ -2,8 +2,8 @@ The custom matrix format example..
 
 This example depends on simple-\/solver, poisson-\/solver, three-\/pt-\/stencil-\/solver, .
 
- \label{_Intro}%
- \label{_Introduction}%
+ \label{_custom_matrix_format_Intro}%
+ \label{_custom_matrix_format_Introduction}%
 \doxysection*{Introduction}
 
 This example solves a 1D Poisson equation\+:
@@ -14,22 +14,49 @@ using a finite difference method on an equidistant grid with {\ttfamily K} discr
 
 $ u(x + h) = u(x) - u\text{'}(x)h + 1/2 u\text{'}\text{'}(x)h^2 + O(h^3)\\ u(x - h) = u(x) + u\text{'}(x)h + 1/2 u\text{'}\text{'}(x)h^2 + O(h^3) / +\\ ---------------------- \\ -u(x - h) + 2u(x) + -u(x + h) = -f(x)h^2 + O(h^3) $
 
-For an equidistant grid with K \char`\"{}inner\char`\"{} discretization points $x1, ..., xk, $and step size $ h = 1 / (K + 1)$, the formula produces a system of linear equations
+For an equidistant grid with K \char`\"{}inner\char`\"{} discretization points $x1, ..., xk$ and step size $h = 1 / (K + 1)$, the formula produces a system of linear equations
 
 $ 2u_1 - u_2 = -f_1 h^2 + u0\\ -u_(k-1) + 2u_k - u_(k+1) = -f_k h^2, k = 2, ..., K - 1\\ -u_(K-1) + 2u_K = -f_K h^2 + u1\\ $
 
-which is then solved using Ginkgo\textquotesingle{}s implementation of the CG method preconditioned with block-\/\+Jacobi. It is also possible to specify on which executor Ginkgo will solve the system via the command line. The function $`f` $is set to $`f(x) = 6x`$ (making the solution $`u(x) = x^3`$), but that can be changed in the {\ttfamily main} function.
+which is then solved using Ginkgo\textquotesingle{}s implementation of the CG method preconditioned with block-\/\+Jacobi. It is also possible to specify on which executor Ginkgo will solve the system via the command line. The function {\ttfamily f} is set to {\ttfamily f(x) = 6x} (making the solution {\ttfamily u(x) = x$^\wedge$3}), but that can be changed in the {\ttfamily main} function.
 
 The intention of this example is to show how a custom linear operator can be created and integrated into Ginkgo to achieve performance benefits.
 
-\label{_Abouttheexample}%
+\label{_custom_matrix_format_Abouttheexample}%
 \doxysubsubsection*{About the example }
 
-\label{_CommProg}%
+\label{_custom_matrix_format_CommProg}%
  \doxysection*{The commented program}
 
 
 \begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <omp.h>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
+\end{DoxyCode}
+
+
+A C\+U\+DA kernel implementing the stencil, which will be used if running on the C\+U\+DA executor. Unfortunately, N\+V\+CC has serious problems interpreting some parts of Ginkgo\textquotesingle{}s code, so the kernel has to be compiled separately.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType>}
+\DoxyCodeLine{\textcolor{keywordtype}{void} stencil\_kernel(std::size\_t size, \textcolor{keyword}{const} ValueType* coefs,}
+\DoxyCodeLine{                    \textcolor{keyword}{const} ValueType* b, ValueType* x);}
+\end{DoxyCode}
+
+
+A stencil matrix class representing the 3pt stencil linear operator. We include the \mbox{\hyperlink{classgko_1_1LinOp}{gko\+::\+Lin\+Op}} interface, where we need to implement the two apply\+\_\+impl methods, which get called inside the default implementation of apply (after argument verification) to perform the actual application of the linear operator.
+
+It also includes the \mbox{\hyperlink{classgko_1_1EnableCreateMethod}{gko\+::\+Enable\+Create\+Method}} mixin which provides a default implementation of the static create method. This method will forward all its arguments to the constructor to create the object, and return an std\+::unique\+\_\+ptr to the created object.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType>}
 \DoxyCodeLine{\textcolor{keyword}{class }StencilMatrix : \textcolor{keyword}{public} \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}},}
 \DoxyCodeLine{                      \textcolor{keyword}{public} \mbox{\hyperlink{classgko_1_1EnableCreateMethod}{gko::EnableCreateMethod}}<StencilMatrix<ValueType>> \{}
 \DoxyCodeLine{\textcolor{keyword}{public}:}
@@ -365,13 +392,13 @@ notice how our custom Stencil\+Matrix can be used in the same way as any built-\
 \DoxyCodeLine{              << std::endl;}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
- \label{_Results}%
+ \label{_custom_matrix_format_Results}%
 \doxysection*{Results}
 
-\label{_Commentsaboutprogramminganddebugging}%
+\label{_custom_matrix_format_Commentsaboutprogramminganddebugging}%
 \doxysubsubsection*{Comments about programming and debugging }
 
-\label{_PlainProg}%
+\label{_custom_matrix_format_PlainProg}%
  \doxysection*{The plain program}
 
 

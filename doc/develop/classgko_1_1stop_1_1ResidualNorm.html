@@ -12,6 +12,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -24,7 +30,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2835086495 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2836628264 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -80,7 +86,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Stopping criterion based on the explicit residual norm <img class="formulaInl" alt="$ \| r_k \| = \| b - A x_k \| $" src="form_264.png"/>.  
+<p>Stopping criterion based on the explicit residual norm \( \| r_k \| = \| b - A x_k \| \).  
  <a href="classgko_1_1stop_1_1ResidualNorm.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="residual__norm_8hpp_source.html">ginkgo/core/stop/residual_norm.hpp</a>&gt;</code></p>
@@ -170,18 +176,18 @@ static auto&#160;</td><td class="memItemRight" valign="bottom"><b>build</b> () -
 <div class="textblock"><h3>template&lt;typename ValueType = default_precision&gt;<br />
 class gko::stop::ResidualNorm&lt; ValueType &gt;</h3>
 
-<p>Stopping criterion based on the explicit residual norm <img class="formulaInl" alt="$ \| r_k \| = \| b - A x_k \| $" src="form_264.png"/>. </p>
-<p>The iteration halts once <img class="formulaInl" alt="$ \| r_k \| \le \tau \cdot \beta $" src="form_265.png"/>, where <img class="formulaInl" alt="$\tau$" src="form_266.png"/> is the factory parameter <code>reduction_factor</code> and the baseline <img class="formulaInl" alt="$\beta$" src="form_267.png"/> is selected by the <code>baseline</code> factory parameter:</p>
+<p>Stopping criterion based on the explicit residual norm \( \| r_k \| = \| b - A x_k \| \). </p>
+<p>The iteration halts once \( \| r_k \| \le \tau \cdot \beta \), where \(\tau\) is the factory parameter <code>reduction_factor</code> and the baseline \(\beta\) is selected by the <code>baseline</code> factory parameter:</p>
 <ul>
-<li><code>mode::rhs_norm</code> (default) — relative to the right-hand side: <img class="formulaInl" alt="$ \beta = \| b \| $" src="form_268.png"/>, so the condition is <img class="formulaInl" alt="$ \| r_k \| \le \tau \| b \| $" src="form_269.png"/>.</li>
-<li><code>mode::initial_resnorm</code> — relative to the initial residual: <img class="formulaInl" alt="$ \beta = \| r_0 \| $" src="form_270.png"/>, so the condition is <img class="formulaInl" alt="$ \| r_k \| \le \tau \| r_0 \| $" src="form_271.png"/>.</li>
-<li><code>mode::absolute</code> — absolute threshold: <img class="formulaInl" alt="$ \beta = 1 $" src="form_272.png"/>, so the condition is <img class="formulaInl" alt="$ \| r_k \| \le \tau $" src="form_273.png"/>.</li>
+<li><code>mode::rhs_norm</code> (default) — relative to the right-hand side: \( \beta = \| b \| \), so the condition is \( \| r_k \| \le \tau \| b \| \).</li>
+<li><code>mode::initial_resnorm</code> — relative to the initial residual: \( \beta = \| r_0 \| \), so the condition is \( \| r_k \| \le \tau \| r_0 \| \).</li>
+<li><code>mode::absolute</code> — absolute threshold: \( \beta = 1 \), so the condition is \( \| r_k \| \le \tau \).</li>
 </ul>
 <p>Per-iteration, the criterion prefers a pre-computed residual norm passed by the solver (via <code>Updater::residual_norm</code>); otherwise it falls back to computing the 2-norm of the residual vector itself (via <code>Updater::residual</code>), which costs one global reduction. When even cheaper checks are needed and the solver maintains an internal squared-norm estimate, use <a class="el" href="classgko_1_1stop_1_1ImplicitResidualNorm.html">ImplicitResidualNorm</a> instead.</p>
 <dl class="section note"><dt>Note</dt><dd>Baseline prerequisites at construction time:<ul>
-<li><code>mode::rhs_norm</code> requires the right-hand side <img class="formulaInl" alt="$ b $" src="form_274.png"/>.</li>
-<li><code>mode::initial_resnorm</code> requires either the initial residual <img class="formulaInl" alt="$ r_0 $" src="form_275.png"/> explicitly, or the triple <img class="formulaInl" alt="$ (A, b, x_0) $" src="form_276.png"/> from which it is computed as <img class="formulaInl" alt="$ r_0 = b - A x_0 $" src="form_169.png"/>.</li>
-<li><code>mode::absolute</code> requires <img class="formulaInl" alt="$ b $" src="form_274.png"/> as well — to determine the number of right-hand sides; its baseline is then filled with ones. If the required arguments are missing, ::gko::NotSupported() is thrown. </li>
+<li><code>mode::rhs_norm</code> requires the right-hand side \( b \).</li>
+<li><code>mode::initial_resnorm</code> requires either the initial residual \( r_0 \) explicitly, or the triple \( (A, b, x_0) \) from which it is computed as \( r_0 = b - A x_0 \).</li>
+<li><code>mode::absolute</code> requires \( b \) as well — to determine the number of right-hand sides; its baseline is then filled with ones. If the required arguments are missing, ::gko::NotSupported() is thrown. </li>
 </ul>
 </dd></dl>
 </div><hr/>The documentation for this class was generated from the following file:<ul>

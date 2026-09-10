@@ -1,6 +1,11 @@
-\hypertarget{group__BatchLinOp}{}\doxysection{Batch\+Lin\+Op}
-\label{group__BatchLinOp}\index{BatchLinOp@{BatchLinOp}}
-Collaboration diagram for Batch\+Lin\+Op\+:
+\hypertarget{group__BatchLinOp}{}\doxysection{Batched Linear Operators}
+\label{group__BatchLinOp}\index{Batched Linear Operators@{Batched Linear Operators}}
+
+
+A module dedicated to the implementation and usage of the batched linear operators in Ginkgo.  
+
+
+Collaboration diagram for Batched Linear Operators\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -13,6 +18,8 @@ Collaboration diagram for Batch\+Lin\+Op\+:
 \item 
 class \mbox{\hyperlink{classgko_1_1batch_1_1BatchLinOpFactory}{gko\+::batch\+::\+Batch\+Lin\+Op\+Factory}}
 \begin{DoxyCompactList}\small\item\em A \mbox{\hyperlink{classgko_1_1batch_1_1BatchLinOpFactory}{Batch\+Lin\+Op\+Factory}} represents a higher order mapping which transforms one batch linear operator into another. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{gko\+::batch\+::\+Multi\+Vector$<$ Value\+Type $>$}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{Multi\+Vector}} stores multiple vectors in a batched fashion and is useful for batched operations. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Csr}{gko\+::batch\+::matrix\+::\+Csr$<$ Value\+Type, Index\+Type $>$}}
 \begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Csr}{Csr}} is a general sparse matrix format that stores the column indices for each nonzero entry and a cumulative sum of the number of nonzeros in each row. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1batch_1_1matrix_1_1Dense}{gko\+::batch\+::matrix\+::\+Dense$<$ Value\+Type $>$}}
@@ -40,7 +47,9 @@ class \mbox{\hyperlink{classgko_1_1batch_1_1solver_1_1Cg}{gko\+::batch\+::solver
 
 
 \doxysubsection{Detailed Description}
-\hypertarget{group__BatchLinOp_batch_linop_concept}{}\doxysubsection{Batched Linear operator as a concept}\label{group__BatchLinOp_batch_linop_concept}
+A module dedicated to the implementation and usage of the batched linear operators in Ginkgo. 
+
+A batched linear operator applies the same operation to a large number of small, independent systems at once. Every item of a batch shares the same dimensions and sparsity pattern, and no data is exchanged between items, which is what allows the whole batch to be solved in a single kernel.\hypertarget{group__BatchLinOp_batch_linop_concept}{}\doxysubsection{Batched Linear operator as a concept}\label{group__BatchLinOp_batch_linop_concept}
 A batch linear operator (\mbox{\hyperlink{classgko_1_1batch_1_1BatchLinOp}{Batch\+Lin\+Op}}) forms the base class for all batched linear algebra objects. In general, it follows the same structure as the \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} class, but has some crucial differences which make it not strictly representable through or with the \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} class.
 
 A batched operator is defined as a set of independent linear operators which have no communication/information exchange between them. Therefore, any collective operations between the batches is not possible and not implemented. This allows for each batch to be computed and operated on in an embarrassingly parallel fashion.
@@ -52,12 +61,12 @@ Therefore, the \mbox{\hyperlink{classgko_1_1batch_1_1BatchLinOp}{Batch\+Lin\+Op}
 \begin{DoxyNote}{Note}
 Apply to \mbox{\hyperlink{classgko_1_1batch_1_1MultiVector}{batch\+::\+Multi\+Vector}} objects are handled by the concrete \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} and may be moved to the base \mbox{\hyperlink{classgko_1_1batch_1_1BatchLinOp}{Batch\+Lin\+Op}} class in the future.
 \end{DoxyNote}
-\mbox{\hyperlink{group__BatchLinOp}{Batch\+Lin\+Op}} 
+\mbox{\hyperlink{group__BatchLinOp}{Batched Linear Operators}} 
 
 \doxysubsection{Macro Definition Documentation}
 \mbox{\Hypertarget{group__BatchLinOp_gab7f0cd5a4520a215974412e6fff4f25f}\label{group__BatchLinOp_gab7f0cd5a4520a215974412e6fff4f25f}} 
-\index{BatchLinOp@{BatchLinOp}!GKO\_ENABLE\_BATCH\_LIN\_OP\_FACTORY@{GKO\_ENABLE\_BATCH\_LIN\_OP\_FACTORY}}
-\index{GKO\_ENABLE\_BATCH\_LIN\_OP\_FACTORY@{GKO\_ENABLE\_BATCH\_LIN\_OP\_FACTORY}!BatchLinOp@{BatchLinOp}}
+\index{Batched Linear Operators@{Batched Linear Operators}!GKO\_ENABLE\_BATCH\_LIN\_OP\_FACTORY@{GKO\_ENABLE\_BATCH\_LIN\_OP\_FACTORY}}
+\index{GKO\_ENABLE\_BATCH\_LIN\_OP\_FACTORY@{GKO\_ENABLE\_BATCH\_LIN\_OP\_FACTORY}!Batched Linear Operators@{Batched Linear Operators}}
 \doxysubsubsection{\texorpdfstring{GKO\_ENABLE\_BATCH\_LIN\_OP\_FACTORY}{GKO\_ENABLE\_BATCH\_LIN\_OP\_FACTORY}}
 {\footnotesize\ttfamily \#define G\+K\+O\+\_\+\+E\+N\+A\+B\+L\+E\+\_\+\+B\+A\+T\+C\+H\+\_\+\+L\+I\+N\+\_\+\+O\+P\+\_\+\+F\+A\+C\+T\+O\+RY(\begin{DoxyParamCaption}\item[{}]{\+\_\+batch\+\_\+lin\+\_\+op,  }\item[{}]{\+\_\+parameters\+\_\+name,  }\item[{}]{\+\_\+factory\+\_\+name }\end{DoxyParamCaption})}
 
@@ -107,8 +116,8 @@ It is possible to combine both the \#\+G\+K\+O\+\_\+\+C\+R\+E\+A\+T\+E\+\_\+\+F\
 
 \doxysubsection{Typedef Documentation}
 \mbox{\Hypertarget{group__BatchLinOp_ga544616e42045fcd07bfb3799d304eb0c}\label{group__BatchLinOp_ga544616e42045fcd07bfb3799d304eb0c}} 
-\index{BatchLinOp@{BatchLinOp}!EnableDefaultBatchLinOpFactory@{EnableDefaultBatchLinOpFactory}}
-\index{EnableDefaultBatchLinOpFactory@{EnableDefaultBatchLinOpFactory}!BatchLinOp@{BatchLinOp}}
+\index{Batched Linear Operators@{Batched Linear Operators}!EnableDefaultBatchLinOpFactory@{EnableDefaultBatchLinOpFactory}}
+\index{EnableDefaultBatchLinOpFactory@{EnableDefaultBatchLinOpFactory}!Batched Linear Operators@{Batched Linear Operators}}
 \doxysubsubsection{\texorpdfstring{EnableDefaultBatchLinOpFactory}{EnableDefaultBatchLinOpFactory}}
 {\footnotesize\ttfamily template$<$typename Concrete\+Factory , typename Concrete\+Batch\+Lin\+Op , typename Parameters\+Type , typename Polymorphic\+Base  = Batch\+Lin\+Op\+Factory$>$ \\
 using \mbox{\hyperlink{group__BatchLinOp_ga544616e42045fcd07bfb3799d304eb0c}{gko\+::batch\+::\+Enable\+Default\+Batch\+Lin\+Op\+Factory}} = typedef \mbox{\hyperlink{classgko_1_1EnableDefaultFactory}{Enable\+Default\+Factory}}$<$Concrete\+Factory, Concrete\+Batch\+Lin\+Op, Parameters\+Type, Polymorphic\+Base$>$}

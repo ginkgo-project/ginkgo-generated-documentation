@@ -1,10 +1,10 @@
 The C\+B-\/\+G\+M\+R\+ES solver example..
 
- \label{_Intro}%
- \label{_Introduction}%
+ \label{_cb_gmres_Intro}%
+ \label{_cb_gmres_Introduction}%
 \doxysection*{Introduction}
 
-\label{_Abouttheexample}%
+\label{_cb_gmres_Abouttheexample}%
 \doxysubsubsection*{About the example }
 
 This example showcases the usage of the Ginkgo solver C\+B-\/\+G\+M\+R\+ES (Compressed Basis G\+M\+R\+ES). A small system is solved with two un-\/preconditioned C\+B-\/\+G\+M\+R\+ES solvers\+:
@@ -13,11 +13,53 @@ This example showcases the usage of the Ginkgo solver C\+B-\/\+G\+M\+R\+ES (Comp
 \item with a compression of the krylov basis; it uses double precision for the matrix and all arithmetic operations, while using single precision for the storage of the krylov basis
 \end{DoxyEnumerate}
 
-Both solves are timed and the residual norm of each solution is computed to show that both solutions are correct. \label{_CommProg}%
+Both solves are timed and the residual norm of each solution is computed to show that both solutions are correct. \label{_cb_gmres_CommProg}%
  \doxysection*{The commented program}
+
+This is the main ginkgo header file.
 
 
 \begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <chrono>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <cmath>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
+\end{DoxyCode}
+
+
+Helper function which measures the time of {\ttfamily solver-\/$>$apply(b, x)} in seconds To get an accurate result, the solve is repeated multiple times (while ensuring the initial guess is always the same). The result of the solve will be written to x.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType>}
+\DoxyCodeLine{\textcolor{keywordtype}{double} measure\_solve\_time\_in\_s(std::shared\_ptr<const gko::Executor> exec,}
+\DoxyCodeLine{                               \mbox{\hyperlink{classgko_1_1LinOp}{gko::LinOp}}* solver,}
+\DoxyCodeLine{                               \textcolor{keyword}{const} \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}}* b,}
+\DoxyCodeLine{                               \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}}* x)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    constexpr \textcolor{keywordtype}{int} repeats\{5\};}
+\DoxyCodeLine{    \textcolor{keywordtype}{double} duration\{0\};}
+\end{DoxyCode}
+
+
+Make a copy of x, so we can re-\/use the same initial guess multiple times
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} x\_copy = \mbox{\hyperlink{namespacegko_adc9a73d088d88d5dfdaf63aff9e96012}{clone}}(x);}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < repeats; ++i) \{}
+\end{DoxyCode}
+
+
+No need to copy it in the first iteration
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (i != 0) \{}
 \DoxyCodeLine{    x\_copy-\/>copy\_from(x);}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
@@ -264,7 +306,7 @@ tmp = Ax -\/ tmp
 \DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a577a2f0345ee607f64277b3364b6431b}{write}}(std::cout, res\_norm\_reduce);}
 \DoxyCodeLine{\}}
 \end{DoxyCode}
- \label{_Results}%
+ \label{_cb_gmres_Results}%
 \doxysection*{Results}
 
 The following is the expected result\+:
@@ -286,10 +328,10 @@ The following is the expected result\+:
 \end{DoxyCode}
 
 
-\label{_Commentsaboutprogramminganddebugging}%
+\label{_cb_gmres_Commentsaboutprogramminganddebugging}%
 \doxysubsubsection*{Comments about programming and debugging }
 
-\label{_PlainProg}%
+\label{_cb_gmres_PlainProg}%
  \doxysection*{The plain program}
 
 

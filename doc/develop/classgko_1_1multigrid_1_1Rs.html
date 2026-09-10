@@ -12,6 +12,12 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script><script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -24,7 +30,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2835086495 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2836628264 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -76,7 +82,7 @@ $(function() {
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classgko_1_1multigrid_1_1Rs-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">gko::multigrid::Rs&lt; ValueType, IndexType &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__LinOp.html">Linear Operators</a></div></div>  </div>
+<div class="title">gko::multigrid::Rs&lt; ValueType, IndexType &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__LinOp.html">Linear Operators</a> &raquo; <a class="el" href="group__solvers.html">Solvers</a> &raquo; <a class="el" href="group__Multigrid.html">Multigrid</a> &raquo; <a class="el" href="group__MultigridLevel.html">Multigrid Level</a><a class="el" href="group__LinOp.html">Linear Operators</a> &raquo; <a class="el" href="group__solvers.html">Solvers</a> &raquo;  &#124; <a class="el" href="group__Multigrid.html">Multigrid</a> &#124; <a class="el" href="group__LinOp.html">Linear Operators</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -220,8 +226,8 @@ static <a class="el" href="structgko_1_1multigrid_1_1Rs_1_1parameters__type.html
 class gko::multigrid::Rs&lt; ValueType, IndexType &gt;</h3>
 
 <p><a class="el" href="classgko_1_1multigrid_1_1Rs.html" title="Rs implements the Ruge–Stueben (classical) Algebraic Multigrid (AMG) coarsening strategy for M-matric...">Rs</a> implements the Ruge–Stueben (classical) Algebraic Multigrid (AMG) coarsening strategy for M-matrices. </p>
-<p>Given a sparse system <img class="formulaInl" alt="$Ax = b$" src="form_5.png"/>, it produces one level of an AMG hierarchy: a C/F splitting, a prolongation operator <img class="formulaInl" alt="$P$" src="form_23.png"/>, and a coarse-grid operator <img class="formulaInl" alt="$A_c = R A P$" src="form_106.png"/>.</p>
-<p>Coarsening proceeds in three steps. First, neighbour <img class="formulaInl" alt="$j$" src="form_43.png"/> is marked as <em>strongly influencing</em> row <img class="formulaInl" alt="$i$" src="form_107.png"/> when <img class="formulaInl" alt="$-a_{ij} \ge \theta \cdot \max_{k \neq i}(-a_{ik})$" src="form_108.png"/>. Second, a greedy pass selects C-points by repeatedly picking the undecided node with the most strong neighbours, marking its undecided strong neighbours as F-points, and updating neighbour counts accordingly. Third, we create the coarse grid and compute the interpolation via the classical RS direct interpolation formula, accounting for both strong C- and F-neighbours.</p>
+<p>Given a sparse system \(Ax = b\), it produces one level of an AMG hierarchy: a C/F splitting, a prolongation operator \(P\), and a coarse-grid operator \(A_c = R A P\).</p>
+<p>Coarsening proceeds in three steps. First, neighbour \(j\) is marked as <em>strongly influencing</em> row \(i\) when \(-a_{ij} \ge \theta \cdot \max_{k \neq i}(-a_{ik})\). Second, a greedy pass selects C-points by repeatedly picking the undecided node with the most strong neighbours, marking its undecided strong neighbours as F-points, and updating neighbour counts accordingly. Third, we create the coarse grid and compute the interpolation via the classical RS direct interpolation formula, accounting for both strong C- and F-neighbours.</p>
 <p>Ruge, J. W., &amp; Stueben, K. (1987). Algebraic multigrid, Multigrid Methods (Vol. 3, pp. 73–130). Society for Industrial and Applied Mathematics. <a href="https://doi.org/10.1137/1.9781611971057.ch4">https://doi.org/10.1137/1.9781611971057.ch4</a></p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">

@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['spmv_20employing_20different_20matrix_20formats_2902',['SpMV employing different Matrix formats',['../group__mat__formats.html',1,'']]],
-  ['solvers_2903',['Solvers',['../group__solvers.html',1,'']]],
-  ['stopping_20criteria_2904',['Stopping criteria',['../group__stop.html',1,'']]]
+  ['reference_20executor_2907',['Reference Executor',['../group__exec__ref.html',1,'']]],
+  ['reordering_20algorithms_2908',['Reordering Algorithms',['../group__reorder.html',1,'']]]
 ];
