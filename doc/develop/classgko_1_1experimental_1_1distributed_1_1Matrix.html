@@ -30,7 +30,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2837190956 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2842789526 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -179,6 +179,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>move_to</b> (<a class
 <tr class="separator:a46f542a248e1e401e88dd8c7de419881"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a19c806db41b1d4c9d68324b742050396"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; const <a class="el" href="classgko_1_1LinOp.html">LinOp</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1experimental_1_1distributed_1_1Matrix.html#a19c806db41b1d4c9d68324b742050396">get_non_local_matrix</a> () const</td></tr>
 <tr class="separator:a19c806db41b1d4c9d68324b742050396"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab093a9d86bcb0d1ebd87d6c687c71792"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; const <a class="el" href="classgko_1_1experimental_1_1distributed_1_1Partition.html">Partition</a>&lt; local_index_type, global_index_type &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1experimental_1_1distributed_1_1Matrix.html#ab093a9d86bcb0d1ebd87d6c687c71792">get_row_partition</a> () const</td></tr>
+<tr class="memdesc:ab093a9d86bcb0d1ebd87d6c687c71792"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the row partition this matrix was constructed with via read_distributed.  <a href="classgko_1_1experimental_1_1distributed_1_1Matrix.html#ab093a9d86bcb0d1ebd87d6c687c71792">More...</a><br /></td></tr>
+<tr class="separator:ab093a9d86bcb0d1ebd87d6c687c71792"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adba372282cddf3e109abe6e562c65034"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1experimental_1_1distributed_1_1Matrix.html#adba372282cddf3e109abe6e562c65034">multiply</a> (<a class="el" href="classgko_1_1ptr__param.html">ptr_param</a>&lt; const <a class="el" href="classgko_1_1experimental_1_1distributed_1_1Matrix.html">Matrix</a> &gt; b, <a class="el" href="classgko_1_1ptr__param.html">ptr_param</a>&lt; <a class="el" href="classgko_1_1experimental_1_1distributed_1_1Matrix.html">Matrix</a> &gt; c) const</td></tr>
+<tr class="memdesc:adba372282cddf3e109abe6e562c65034"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the distributed sparse matrix-matrix product C = A * B, where A is this matrix.  <a href="classgko_1_1experimental_1_1distributed_1_1Matrix.html#adba372282cddf3e109abe6e562c65034">More...</a><br /></td></tr>
+<tr class="separator:adba372282cddf3e109abe6e562c65034"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab6c64195b6d62cab3ac641668884e037"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1experimental_1_1distributed_1_1Matrix.html#ab6c64195b6d62cab3ac641668884e037">Matrix</a> (const <a class="el" href="classgko_1_1experimental_1_1distributed_1_1Matrix.html">Matrix</a> &amp;other)</td></tr>
 <tr class="memdesc:ab6c64195b6d62cab3ac641668884e037"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructs a <a class="el" href="classgko_1_1experimental_1_1distributed_1_1Matrix.html" title="The Matrix class defines a (MPI-)distributed matrix.">Matrix</a>.  <a href="classgko_1_1experimental_1_1distributed_1_1Matrix.html#ab6c64195b6d62cab3ac641668884e037">More...</a><br /></td></tr>
 <tr class="separator:ab6c64195b6d62cab3ac641668884e037"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1273,6 +1279,70 @@ template&lt;typename ValueType  = default_precision, typename LocalIndexType  = 
 <p>Get read access to the row gatherer used to fetch the non-local rows during an apply. </p>
 <p>Its collective communicator determines how this matrix exchanges data, and is carried over to every matrix created from it &ndash; in particular to the one read_distributed rebuilds &ndash; so this is how to check which exchange a matrix actually uses.</p>
 <dl class="section return"><dt>Returns</dt><dd>Shared pointer to the stored row gatherer </dd></dl>
+
+</div>
+</div>
+<a id="ab093a9d86bcb0d1ebd87d6c687c71792"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab093a9d86bcb0d1ebd87d6c687c71792">&#9670;&nbsp;</a></span>get_row_partition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ValueType  = default_precision, typename LocalIndexType  = int32, typename GlobalIndexType  = int64&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;const <a class="el" href="classgko_1_1experimental_1_1distributed_1_1Partition.html">Partition</a>&lt;local_index_type, global_index_type&gt; &gt; <a class="el" href="classgko_1_1experimental_1_1distributed_1_1Matrix.html">gko::experimental::distributed::Matrix</a>&lt; ValueType, LocalIndexType, GlobalIndexType &gt;::get_row_partition </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the row partition this matrix was constructed with via read_distributed. </p>
+<p>May be null if the matrix was not read. </p>
+
+</div>
+</div>
+<a id="adba372282cddf3e109abe6e562c65034"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adba372282cddf3e109abe6e562c65034">&#9670;&nbsp;</a></span>multiply()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ValueType  = default_precision, typename LocalIndexType  = int32, typename GlobalIndexType  = int64&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classgko_1_1experimental_1_1distributed_1_1Matrix.html">gko::experimental::distributed::Matrix</a>&lt; ValueType, LocalIndexType, GlobalIndexType &gt;::multiply </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classgko_1_1ptr__param.html">ptr_param</a>&lt; const <a class="el" href="classgko_1_1experimental_1_1distributed_1_1Matrix.html">Matrix</a>&lt; ValueType, LocalIndexType, GlobalIndexType &gt; &gt;&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classgko_1_1ptr__param.html">ptr_param</a>&lt; <a class="el" href="classgko_1_1experimental_1_1distributed_1_1Matrix.html">Matrix</a>&lt; ValueType, LocalIndexType, GlobalIndexType &gt; &gt;&#160;</td>
+          <td class="paramname"><em>c</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Computes the distributed sparse matrix-matrix product C = A * B, where A is this matrix. </p>
+<p>The output c is filled in place; any prior contents are overwritten.</p>
+<p>Matmul compatibility requires this matrix's column partition to equal b's row partition. The result c has this matrix's row partition and b's column partition, and shares this matrix's communicator.</p>
+<dl class="section note"><dt>Note</dt><dd>This is only supported when the local and non-local blocks of both operands are of type Csr.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">b</td><td>the right-hand operand of the product. </td></tr>
+    <tr><td class="paramname">c</td><td>a pre-created distributed <a class="el" href="classgko_1_1experimental_1_1distributed_1_1Matrix.html" title="The Matrix class defines a (MPI-)distributed matrix.">Matrix</a> (may be empty) to fill. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

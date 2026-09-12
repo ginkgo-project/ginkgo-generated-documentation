@@ -50,6 +50,8 @@ Collaboration diagram for gko\+::experimental\+::mpi\+::Dense\+Communicator\+:
 \begin{DoxyCompactList}\small\item\em Create a \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1DenseCommunicator}{Dense\+Communicator}} from an index map. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator}{Collective\+Communicator}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1DenseCommunicator_a233b0b983f9f88321d9039e70e68e1dc}{create\+\_\+with\+\_\+same\+\_\+type}} (\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1communicator}{communicator}} base, \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_a1200e48c5fbf95f0059bd7c5553c363e}{index\+\_\+map\+\_\+ptr}} imap) const override
 \begin{DoxyCompactList}\small\item\em Creates a new \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator}{Collective\+Communicator}} with the same dynamic type. \end{DoxyCompactList}\item 
+std\+::pair$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator}{Collective\+Communicator}} $>$, std\+::vector$<$ \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a660817949d982b397475164bec730900}{comm\+\_\+index\+\_\+type}} $>$ $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1DenseCommunicator_aa0ee1058ab31ac2354fca1d2a282e2dc}{resize}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, const std\+::vector$<$ \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a660817949d982b397475164bec730900}{comm\+\_\+index\+\_\+type}} $>$ \&send\+\_\+factors) const override
+\begin{DoxyCompactList}\small\item\em Create new communicator that sends and receives a different number of elements to/from each rank in its current pattern. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator}{Collective\+Communicator}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1DenseCommunicator_a479f0511e6201074f5d5fc17a91ae9a6}{create\+\_\+inverse}} () const override
 \begin{DoxyCompactList}\small\item\em Creates the inverse \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1DenseCommunicator}{Dense\+Communicator}} by switching sources and destinations. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a660817949d982b397475164bec730900}{comm\+\_\+index\+\_\+type}} \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1DenseCommunicator_a42ea7976b0f0294326e452cc39fecb63}{get\+\_\+recv\+\_\+size}} () const override
@@ -237,6 +239,39 @@ a request handle
 
 
 
+
+\mbox{\Hypertarget{classgko_1_1experimental_1_1mpi_1_1DenseCommunicator_aa0ee1058ab31ac2354fca1d2a282e2dc}\label{classgko_1_1experimental_1_1mpi_1_1DenseCommunicator_aa0ee1058ab31ac2354fca1d2a282e2dc}} 
+\index{gko::experimental::mpi::DenseCommunicator@{gko::experimental::mpi::DenseCommunicator}!resize@{resize}}
+\index{resize@{resize}!gko::experimental::mpi::DenseCommunicator@{gko::experimental::mpi::DenseCommunicator}}
+\doxysubsubsection{\texorpdfstring{resize()}{resize()}}
+{\footnotesize\ttfamily std\+::pair$<$std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator}{Collective\+Communicator}}$>$, std\+::vector$<$\mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a660817949d982b397475164bec730900}{comm\+\_\+index\+\_\+type}}$>$ $>$ gko\+::experimental\+::mpi\+::\+Dense\+Communicator\+::resize (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{namespacegko_1_1experimental_1_1mpi_a660817949d982b397475164bec730900}{comm\+\_\+index\+\_\+type}} $>$ \&}]{send\+\_\+factors }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Create new communicator that sends and receives a different number of elements to/from each rank in its current pattern. 
+
+The number of elements to send is deduces from the send\+\_\+factors. If this communicator is used to send 2 elements to rank 0, and 3 elements to rank 1, then send\+\_\+factors needs to have size 5, which is equal to \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1DenseCommunicator_a69f783c216c743560b9b92c143770648}{get\+\_\+send\+\_\+size()}}. An send\+\_\+factors = \{ 4, 2, 1, 3, 2\} means that instead of the first element to send to rank 0, four elements are sent, instead of the second element to send to rank 0, two elements are sent, and so on. A visual representation of the transformation is\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{[ 1 1 | 1 1 1 ] -\/> [ 4 2 | 1 3 2] -\/> [ 1 1 1 1 1 1 | 1 1 1 1 1 1 ]}
+\end{DoxyCode}
+ The communication pattern will not change. Even if send\+\_\+factors is zero for all elements of one rank, the rank will stay in the new pattern.
+
+\begin{DoxyNote}{Note}
+This is a collective call.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & the executor to use for the new communicator \\
+\hline
+{\em send\+\_\+factors} & the new number of elements to send.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The new communicator and the recv\+\_\+factors implied by the send\+\_\+factors 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classgko_1_1experimental_1_1mpi_1_1CollectiveCommunicator_a94ad9552bb3e1d1a9ead4f0502859874}{gko\+::experimental\+::mpi\+::\+Collective\+Communicator}}.
 
 
 

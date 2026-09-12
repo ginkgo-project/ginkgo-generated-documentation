@@ -79,6 +79,10 @@ std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>
 \item 
 std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a19c806db41b1d4c9d68324b742050396}{get\+\_\+non\+\_\+local\+\_\+matrix}} () const
 \item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{Partition}}$<$ local\+\_\+index\+\_\+type, global\+\_\+index\+\_\+type $>$ $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_ab093a9d86bcb0d1ebd87d6c687c71792}{get\+\_\+row\+\_\+partition}} () const
+\begin{DoxyCompactList}\small\item\em Get the row partition this matrix was constructed with via read\+\_\+distributed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_adba372282cddf3e109abe6e562c65034}{multiply}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}} $>$ b, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}} $>$ c) const
+\begin{DoxyCompactList}\small\item\em Computes the distributed sparse matrix-\/matrix product C = A $\ast$ B, where A is this matrix. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_ab6c64195b6d62cab3ac641668884e037}{Matrix}} (const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}} \&other)
 \begin{DoxyCompactList}\small\item\em Copy constructs a \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}}. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a0d91aaf63e48ced333e4d63f26a91f71}{Matrix}} (\mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}} \&\&other) noexcept
@@ -635,6 +639,42 @@ Its collective communicator determines how this matrix exchanges data, and is ca
 \begin{DoxyReturn}{Returns}
 Shared pointer to the stored row gatherer 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Matrix_ab093a9d86bcb0d1ebd87d6c687c71792}\label{classgko_1_1experimental_1_1distributed_1_1Matrix_ab093a9d86bcb0d1ebd87d6c687c71792}} 
+\index{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}!get\_row\_partition@{get\_row\_partition}}
+\index{get\_row\_partition@{get\_row\_partition}!gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_row\_partition()}{get\_row\_partition()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Local\+Index\+Type  = int32, typename Global\+Index\+Type  = int64$>$ \\
+std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{Partition}}$<$local\+\_\+index\+\_\+type, global\+\_\+index\+\_\+type$>$ $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{gko\+::experimental\+::distributed\+::\+Matrix}}$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$\+::get\+\_\+row\+\_\+partition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the row partition this matrix was constructed with via read\+\_\+distributed. 
+
+May be null if the matrix was not read. \mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Matrix_adba372282cddf3e109abe6e562c65034}\label{classgko_1_1experimental_1_1distributed_1_1Matrix_adba372282cddf3e109abe6e562c65034}} 
+\index{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}!multiply@{multiply}}
+\index{multiply@{multiply}!gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}}
+\doxysubsubsection{\texorpdfstring{multiply()}{multiply()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Local\+Index\+Type  = int32, typename Global\+Index\+Type  = int64$>$ \\
+void \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{gko\+::experimental\+::distributed\+::\+Matrix}}$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$\+::multiply (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}}$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$ $>$}]{b,  }\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}}$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$ $>$}]{c }\end{DoxyParamCaption}) const}
+
+
+
+Computes the distributed sparse matrix-\/matrix product C = A $\ast$ B, where A is this matrix. 
+
+The output c is filled in place; any prior contents are overwritten.
+
+Matmul compatibility requires this matrix\textquotesingle{}s column partition to equal b\textquotesingle{}s row partition. The result c has this matrix\textquotesingle{}s row partition and b\textquotesingle{}s column partition, and shares this matrix\textquotesingle{}s communicator.
+
+\begin{DoxyNote}{Note}
+This is only supported when the local and non-\/local blocks of both operands are of type Csr.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em b} & the right-\/hand operand of the product. \\
+\hline
+{\em c} & a pre-\/created distributed \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}} (may be empty) to fill. \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Matrix_a8bda4b3eafc4ca7885697d4d18d4f24c}\label{classgko_1_1experimental_1_1distributed_1_1Matrix_a8bda4b3eafc4ca7885697d4d18d4f24c}} 
 \index{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}!operator=@{operator=}}
 \index{operator=@{operator=}!gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}}
