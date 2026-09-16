@@ -68,7 +68,7 @@ void \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a8469c31
 void \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a83f7857d0997f659b57bedf2fe4cc95c}{read\+\_\+distributed}} (const \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}}$<$ value\+\_\+type, global\+\_\+index\+\_\+type $>$ \&data, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{Partition}}$<$ local\+\_\+index\+\_\+type, global\+\_\+index\+\_\+type $>$$>$ row\+\_\+partition, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Partition}{Partition}}$<$ local\+\_\+index\+\_\+type, global\+\_\+index\+\_\+type $>$$>$ col\+\_\+partition, \mbox{\hyperlink{namespacegko_1_1experimental_1_1distributed_a4b66bc2bbe95fe0a818a5f4423acbb4e}{assembly\+\_\+mode}} assembly\+\_\+type=assembly\+\_\+mode\+::local\+\_\+only)
 \begin{DoxyCompactList}\small\item\em Reads a matrix from the \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} structure, a global row partition, and a global column partition. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a1bdfa6a2b87082de7fc7c9a991c56e30}{write}} (\mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}}$<$ value\+\_\+type, global\+\_\+index\+\_\+type $>$ \&data) const override
-\begin{DoxyCompactList}\small\item\em Writes the locally stored matrix data into a \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} structure using global row and column indices. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Writes a matrix to a \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} structure. \end{DoxyCompactList}\item 
 std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_af4b6b179c862cbbbf0247dc2bfcf3df0}{get\+\_\+diag\+\_\+matrix}} () const
 \begin{DoxyCompactList}\small\item\em Get read access to the stored diagonal matrix block. \end{DoxyCompactList}\item 
 std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a392c4e09a7a9a476066e8a36d1b51e10}{get\+\_\+off\+\_\+diag\+\_\+matrix}} () const
@@ -83,6 +83,8 @@ std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1experimental_1_1dis
 \begin{DoxyCompactList}\small\item\em Get the row partition this matrix was constructed with via read\+\_\+distributed. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_adba372282cddf3e109abe6e562c65034}{multiply}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}} $>$ b, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}} $>$ c) const
 \begin{DoxyCompactList}\small\item\em Computes the distributed sparse matrix-\/matrix product C = A $\ast$ B, where A is this matrix. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a5184556f091b1ece2d67ab999d286477}{transpose}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}} $>$ result) const
+\begin{DoxyCompactList}\small\item\em Computes the transpose of this matrix into result. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_ab6c64195b6d62cab3ac641668884e037}{Matrix}} (const \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}} \&other)
 \begin{DoxyCompactList}\small\item\em Copy constructs a \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}}. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix_a0d91aaf63e48ced333e4d63f26a91f71}{Matrix}} (\mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}} \&\&other) noexcept
@@ -823,6 +825,29 @@ The vector and the matrix have to have the same row partition. The scaling is do
 {\em scaling\+\_\+factors} & The vector containing the scaling factors. \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Matrix_a5184556f091b1ece2d67ab999d286477}\label{classgko_1_1experimental_1_1distributed_1_1Matrix_a5184556f091b1ece2d67ab999d286477}} 
+\index{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}!transpose@{transpose}}
+\index{transpose@{transpose}!gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}}
+\doxysubsubsection{\texorpdfstring{transpose()}{transpose()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision, typename Local\+Index\+Type  = int32, typename Global\+Index\+Type  = int64$>$ \\
+void \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{gko\+::experimental\+::distributed\+::\+Matrix}}$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$\+::transpose (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}}$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$ $>$}]{result }\end{DoxyParamCaption}) const}
+
+
+
+Computes the transpose of this matrix into result. 
+
+The output is filled in place; any prior contents are overwritten.
+
+The result takes this matrix\textquotesingle{}s column partition as its row partition and this matrix\textquotesingle{}s row partition as its column partition, so it is a valid operand of multiply. Entries whose transposed row is owned by another rank are communicated to that rank, so this is a collective call.
+
+\begin{DoxyNote}{Note}
+This requires that this matrix was filled by read\+\_\+distributed, which is what sets both partitions, and that result uses the same executor and communicator as this matrix.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em result} & a pre-\/created distributed \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{Matrix}} (may be empty) to fill. \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classgko_1_1experimental_1_1distributed_1_1Matrix_a1bdfa6a2b87082de7fc7c9a991c56e30}\label{classgko_1_1experimental_1_1distributed_1_1Matrix_a1bdfa6a2b87082de7fc7c9a991c56e30}} 
 \index{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}!write@{write}}
 \index{write@{write}!gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$@{gko::experimental::distributed::Matrix$<$ ValueType, LocalIndexType, GlobalIndexType $>$}}
@@ -832,16 +857,13 @@ void \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Matrix}{gko\+::
 
 
 
-Writes the locally stored matrix data into a \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} structure using global row and column indices. 
+Writes a matrix to a \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} structure. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em data} & the output \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}}\\
+{\em data} & the \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} structure \\
 \hline
 \end{DoxyParams}
-\begin{DoxyNote}{Note}
-this currently assume the row index mapping is equal to the column index mapping 
-\end{DoxyNote}
 
 
 Implements \mbox{\hyperlink{classgko_1_1WritableToMatrixData_a96036c3a4bf4c67fa93002808b8b14e2}{gko\+::\+Writable\+To\+Matrix\+Data$<$ Value\+Type, Global\+Index\+Type $>$}}.

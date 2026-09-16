@@ -140,6 +140,8 @@ void \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_a37d01d26641fd7df068a4baaa824022
 \begin{DoxyCompactList}\small\item\em Reads a matrix from a \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} structure. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_a205fc391f4cf4f7718a55b0a61f62bc9}{write}} (\mbox{\hyperlink{structgko_1_1matrix__data}{mat\+\_\+data}} \&data) const override
 \begin{DoxyCompactList}\small\item\em Writes a matrix to a \mbox{\hyperlink{structgko_1_1matrix__data}{matrix\+\_\+data}} structure. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_a739d3f9a6413d66d0a1aa19954507f2e}{write}} (\mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+mat\+\_\+data}} \&data) const override
+\begin{DoxyCompactList}\small\item\em Writes a matrix to a \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} structure. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_ab79e609214d6b4834d5961ee0a7d3519}{transpose}} () const override
 \begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Csr_a38820451af5424f18b767667f3067d72}{conj\+\_\+transpose}} () const override
@@ -1534,10 +1536,32 @@ Computes the necessary data to update a transposed matrix from its original matr
  \begin{DoxyReturn}{Returns}
 an std\+::pair consisting of the transposed matrix and a reuse info struct that can be used to update values in the transposed matrix. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_a739d3f9a6413d66d0a1aa19954507f2e}\label{classgko_1_1matrix_1_1Csr_a739d3f9a6413d66d0a1aa19954507f2e}} 
+\index{gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}!write@{write}}
+\index{write@{write}!gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}}
+\doxysubsubsection{\texorpdfstring{write()}{write()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko\+::matrix\+::\+Csr}}$<$ Value\+Type, Index\+Type $>$\+::write (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+mat\+\_\+data}} \&}]{data }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Writes a matrix to a \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} structure. 
+
+The entries are written on the executor of the output data. The default implementation goes through the host; formats that can produce the entries on the executor should override this.
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & the \mbox{\hyperlink{classgko_1_1device__matrix__data}{device\+\_\+matrix\+\_\+data}} structure \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classgko_1_1WritableToMatrixData_a40aabf1f4f5550fcbab7b0a98522e8bf}{gko\+::\+Writable\+To\+Matrix\+Data$<$ Value\+Type, Index\+Type $>$}}.
+
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Csr_a205fc391f4cf4f7718a55b0a61f62bc9}\label{classgko_1_1matrix_1_1Csr_a205fc391f4cf4f7718a55b0a61f62bc9}} 
 \index{gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}!write@{write}}
 \index{write@{write}!gko::matrix::Csr$<$ ValueType, IndexType $>$@{gko::matrix::Csr$<$ ValueType, IndexType $>$}}
-\doxysubsubsection{\texorpdfstring{write()}{write()}}
+\doxysubsubsection{\texorpdfstring{write()}{write()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision, typename Index\+Type = int32$>$ \\
 void \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko\+::matrix\+::\+Csr}}$<$ Value\+Type, Index\+Type $>$\+::write (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgko_1_1matrix__data}{mat\+\_\+data}} \&}]{data }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
 
