@@ -49,6 +49,8 @@ class \mbox{\hyperlink{classgko_1_1DiagonalExtractable}{gko\+::\+Diagonal\+Extra
 \begin{DoxyCompactList}\small\item\em The diagonal of a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} implementing this interface can be extracted. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1EnableAbsoluteComputation}{gko\+::\+Enable\+Absolute\+Computation$<$ Absolute\+Lin\+Op $>$}}
 \begin{DoxyCompactList}\small\item\em The \mbox{\hyperlink{classgko_1_1EnableAbsoluteComputation}{Enable\+Absolute\+Computation}} mixin provides the default implementations of {\ttfamily compute\+\_\+absolute\+\_\+linop} and the absolute interface. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classgko_1_1EnableDefaultReusableLinOpFactory}{gko\+::\+Enable\+Default\+Reusable\+Lin\+Op\+Factory$<$ Concrete\+Factory, Concrete\+Lin\+Op, Parameters\+Type, Reuse\+Data\+Type, Polymorphic\+Base $>$}}
+\begin{DoxyCompactList}\small\item\em Enable\+Default\+Lin\+Op\+Factory with \mbox{\hyperlink{classgko_1_1LinOpFactory_ace00778e76cf0fd3d2ca787ac15659d6}{Lin\+Op\+Factory\+::generate\+\_\+reuse()}} support, usually used through \mbox{\hyperlink{group__LinOp_gafbd6672a3726509f99966b685e3fb8e2}{G\+K\+O\+\_\+\+E\+N\+A\+B\+L\+E\+\_\+\+L\+I\+N\+\_\+\+O\+P\+\_\+\+F\+A\+C\+T\+O\+R\+Y\+\_\+\+W\+I\+T\+H\+\_\+\+R\+E\+U\+SE}}. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1Perturbation}{gko\+::\+Perturbation$<$ Value\+Type $>$}}
 \begin{DoxyCompactList}\small\item\em The \mbox{\hyperlink{classgko_1_1Perturbation}{Perturbation}} class can be used to construct a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} to represent the operation {\ttfamily (identity + scalar $\ast$ basis $\ast$ projector)}. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1preconditioner_1_1Schwarz}{gko\+::experimental\+::distributed\+::preconditioner\+::\+Schwarz$<$ Value\+Type, Local\+Index\+Type, Global\+Index\+Type $>$}}
@@ -173,7 +175,9 @@ class \mbox{\hyperlink{classgko_1_1solver_1_1UpperTrs}{gko\+::solver\+::\+Upper\
 \#define \mbox{\hyperlink{group__LinOp_gaa292314d27ec1fb7ad54debaa3606ea8}{G\+K\+O\+\_\+\+F\+A\+C\+T\+O\+R\+Y\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+V\+E\+C\+T\+OR}}(\+\_\+name, ...)~\mbox{\hyperlink{group__LinOp_gaa037309884bbd0562b897cee95dd91c8}{G\+K\+O\+\_\+\+F\+A\+C\+T\+O\+R\+Y\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}}(\+\_\+name, \+\_\+\+\_\+\+V\+A\+\_\+\+A\+R\+G\+S\+\_\+\+\_\+)
 \begin{DoxyCompactList}\small\item\em Creates a vector factory parameter in the factory parameters structure. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{group__LinOp_ga8e0af90ec2414b768266f77cedffc309}{G\+K\+O\+\_\+\+E\+N\+A\+B\+L\+E\+\_\+\+L\+I\+N\+\_\+\+O\+P\+\_\+\+F\+A\+C\+T\+O\+RY}}(\+\_\+lin\+\_\+op,  \+\_\+parameters\+\_\+name,  \+\_\+factory\+\_\+name)
-\begin{DoxyCompactList}\small\item\em This macro will generate a default implementation of a Lin\+Op\+Factory for the Lin\+Op subclass it is defined in. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em This macro will generate a default implementation of a Lin\+Op\+Factory for the Lin\+Op subclass it is defined in. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__LinOp_gafbd6672a3726509f99966b685e3fb8e2}{G\+K\+O\+\_\+\+E\+N\+A\+B\+L\+E\+\_\+\+L\+I\+N\+\_\+\+O\+P\+\_\+\+F\+A\+C\+T\+O\+R\+Y\+\_\+\+W\+I\+T\+H\+\_\+\+R\+E\+U\+SE}}(\+\_\+lin\+\_\+op,  \+\_\+parameters\+\_\+name,  \+\_\+factory\+\_\+name,  \+\_\+reuse\+\_\+data\+\_\+type)
+\begin{DoxyCompactList}\small\item\em Like \mbox{\hyperlink{group__LinOp_ga8e0af90ec2414b768266f77cedffc309}{G\+K\+O\+\_\+\+E\+N\+A\+B\+L\+E\+\_\+\+L\+I\+N\+\_\+\+O\+P\+\_\+\+F\+A\+C\+T\+O\+RY}}, but the factory also supports Lin\+Op\+Factory\+::generate\+\_\+reuse(), with {\ttfamily \+\_\+reuse\+\_\+data\+\_\+type} as its Reuse\+Data. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
@@ -345,6 +349,55 @@ It is possible to combine both the \#\+G\+K\+O\+\_\+\+C\+R\+E\+A\+T\+E\+\_\+\+F\
 {\em \+\_\+factory\+\_\+name} & name of the generated factory type \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{group__LinOp_gafbd6672a3726509f99966b685e3fb8e2}\label{group__LinOp_gafbd6672a3726509f99966b685e3fb8e2}} 
+\index{Linear Operators@{Linear Operators}!GKO\_ENABLE\_LIN\_OP\_FACTORY\_WITH\_REUSE@{GKO\_ENABLE\_LIN\_OP\_FACTORY\_WITH\_REUSE}}
+\index{GKO\_ENABLE\_LIN\_OP\_FACTORY\_WITH\_REUSE@{GKO\_ENABLE\_LIN\_OP\_FACTORY\_WITH\_REUSE}!Linear Operators@{Linear Operators}}
+\doxysubsubsection{\texorpdfstring{GKO\_ENABLE\_LIN\_OP\_FACTORY\_WITH\_REUSE}{GKO\_ENABLE\_LIN\_OP\_FACTORY\_WITH\_REUSE}}
+{\footnotesize\ttfamily \#define G\+K\+O\+\_\+\+E\+N\+A\+B\+L\+E\+\_\+\+L\+I\+N\+\_\+\+O\+P\+\_\+\+F\+A\+C\+T\+O\+R\+Y\+\_\+\+W\+I\+T\+H\+\_\+\+R\+E\+U\+SE(\begin{DoxyParamCaption}\item[{}]{\+\_\+lin\+\_\+op,  }\item[{}]{\+\_\+parameters\+\_\+name,  }\item[{}]{\+\_\+factory\+\_\+name,  }\item[{}]{\+\_\+reuse\+\_\+data\+\_\+type }\end{DoxyParamCaption})}
+
+
+
+Like \mbox{\hyperlink{group__LinOp_ga8e0af90ec2414b768266f77cedffc309}{G\+K\+O\+\_\+\+E\+N\+A\+B\+L\+E\+\_\+\+L\+I\+N\+\_\+\+O\+P\+\_\+\+F\+A\+C\+T\+O\+RY}}, but the factory also supports Lin\+Op\+Factory\+::generate\+\_\+reuse(), with {\ttfamily \+\_\+reuse\+\_\+data\+\_\+type} as its Reuse\+Data. 
+
+The Lin\+Op additionally provides what Enable\+Default\+Reusable\+Lin\+Op\+Factory requires, which may be private. The reuse data type can be defined after the macro, but has to be declared before it\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ \{c++\}}
+\DoxyCodeLine{\textcolor{keyword}{class }MyLinOp : \textcolor{keyword}{public} LinOp \{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{    \mbox{\hyperlink{group__LinOp_ga1fc8e9d8be0c9ad2d72bc1ddfc6d8358}{GKO\_CREATE\_FACTORY\_PARAMETERS}}(parameters, Factory) \{ ... \};}
+\DoxyCodeLine{    \textcolor{keyword}{class }reuse\_data\_type;}
+\DoxyCodeLine{    \mbox{\hyperlink{group__LinOp_gafbd6672a3726509f99966b685e3fb8e2}{GKO\_ENABLE\_LIN\_OP\_FACTORY\_WITH\_REUSE}}(MyLinOp, parameters, Factory,}
+\DoxyCodeLine{                                         reuse\_data\_type);}
+\DoxyCodeLine{    \mbox{\hyperlink{group__LinOp_ga521f65604cc4cf427dcb2ecfa49b757c}{GKO\_ENABLE\_BUILD\_METHOD}}(Factory);}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{class }reuse\_data\_type : \textcolor{keyword}{public} LinOpFactory::ReuseData \{ ... \};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{    \textcolor{comment}{// used by generate() and generate\_reuse()}}
+\DoxyCodeLine{    MyLinOp(\textcolor{keyword}{const} Factory*, std::shared\_ptr<const LinOp>);}
+\DoxyCodeLine{    MyLinOp(\textcolor{keyword}{const} Factory*, std::shared\_ptr<const LinOp>, reuse\_data\_type\&);}
+\DoxyCodeLine{    \textcolor{keyword}{static} \textcolor{keywordtype}{void} check\_reuse\_consistent(\textcolor{keyword}{const} Factory*, \textcolor{keyword}{const} LinOp*,}
+\DoxyCodeLine{                                       \textcolor{keyword}{const} reuse\_data\_type\&);}
+\DoxyCodeLine{\};}
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+lin\+\_\+op} & concrete operator for which the factory is to be created \\
+\hline
+{\em \+\_\+parameters\+\_\+name} & name of the parameters member in the class \\
+\hline
+{\em \+\_\+factory\+\_\+name} & name of the generated factory type \\
+\hline
+{\em \+\_\+reuse\+\_\+data\+\_\+type} & the Reuse\+Data type of the factory\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This interface is experimental. 
+\end{DoxyNote}
 \mbox{\Hypertarget{group__LinOp_gaa037309884bbd0562b897cee95dd91c8}\label{group__LinOp_gaa037309884bbd0562b897cee95dd91c8}} 
 \index{Linear Operators@{Linear Operators}!GKO\_FACTORY\_PARAMETER@{GKO\_FACTORY\_PARAMETER}}
 \index{GKO\_FACTORY\_PARAMETER@{GKO\_FACTORY\_PARAMETER}!Linear Operators@{Linear Operators}}

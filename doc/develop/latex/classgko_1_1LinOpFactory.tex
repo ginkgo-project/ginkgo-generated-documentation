@@ -29,12 +29,23 @@ Collaboration diagram for gko\+::Lin\+Op\+Factory\+:
 \includegraphics[width=350pt]{classgko_1_1LinOpFactory__coll__graph}
 \end{center}
 \end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classgko_1_1LinOpFactory_1_1ReuseData}{Reuse\+Data}}
+\begin{DoxyCompactList}\small\item\em Opaque base for the data a factory records in \mbox{\hyperlink{classgko_1_1LinOpFactory_ace00778e76cf0fd3d2ca787ac15659d6}{generate\+\_\+reuse()}} to speed up later generations. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{classgko_1_1LinOpFactory_aa0487967d33e22a38d8dd2c8a5188c48}\label{classgko_1_1LinOpFactory_aa0487967d33e22a38d8dd2c8a5188c48}} 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ {\bfseries generate} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ input) const
-\end{DoxyCompactItemize}
+\item 
+virtual std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOpFactory_1_1ReuseData}{Reuse\+Data}} $>$ \mbox{\hyperlink{classgko_1_1LinOpFactory_aad64aa77e555a0cb4277d5807990deb7}{create\+\_\+empty\+\_\+reuse\+\_\+data}} () const
+\begin{DoxyCompactList}\small\item\em Creates an empty \mbox{\hyperlink{classgko_1_1LinOpFactory_1_1ReuseData}{Reuse\+Data}}. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1LinOpFactory_ace00778e76cf0fd3d2ca787ac15659d6}{generate\+\_\+reuse}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ input, \mbox{\hyperlink{classgko_1_1LinOpFactory_1_1ReuseData}{Reuse\+Data}} \&reuse\+\_\+data) const
+\begin{DoxyCompactList}\small\item\em Generates a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} like generate(), reusing what earlier calls recorded in {\ttfamily reuse\+\_\+data}. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classgko_1_1LinOpFactory_a490317543c308ad1b6194091c5ef2994}{check\+\_\+reuse\+\_\+consistent}} (const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$input, const \mbox{\hyperlink{classgko_1_1LinOpFactory_1_1ReuseData}{Reuse\+Data}} \&reuse\+\_\+data) const
+\begin{DoxyCompactList}\small\item\em Throws if {\ttfamily input} can\textquotesingle{}t be used with {\ttfamily reuse\+\_\+data}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -72,6 +83,90 @@ Another example of a \mbox{\hyperlink{classgko_1_1LinOpFactory}{Lin\+Op\+Factory
 \DoxyCodeLine{cg-\/>apply(b, x);}
 \end{DoxyCode}
  
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1LinOpFactory_a490317543c308ad1b6194091c5ef2994}\label{classgko_1_1LinOpFactory_a490317543c308ad1b6194091c5ef2994}} 
+\index{gko::LinOpFactory@{gko::LinOpFactory}!check\_reuse\_consistent@{check\_reuse\_consistent}}
+\index{check\_reuse\_consistent@{check\_reuse\_consistent}!gko::LinOpFactory@{gko::LinOpFactory}}
+\doxysubsubsection{\texorpdfstring{check\_reuse\_consistent()}{check\_reuse\_consistent()}}
+{\footnotesize\ttfamily virtual void gko\+::\+Lin\+Op\+Factory\+::check\+\_\+reuse\+\_\+consistent (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $\ast$}]{input,  }\item[{const \mbox{\hyperlink{classgko_1_1LinOpFactory_1_1ReuseData}{Reuse\+Data}} \&}]{reuse\+\_\+data }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Throws if {\ttfamily input} can\textquotesingle{}t be used with {\ttfamily reuse\+\_\+data}. 
+
+\mbox{\hyperlink{classgko_1_1LinOpFactory_ace00778e76cf0fd3d2ca787ac15659d6}{generate\+\_\+reuse()}} calls this first, also while {\ttfamily reuse\+\_\+data} is still empty, so overrides have to accept any input then. Checks that need a converted input may run during the generation instead. The default implementation, used by factories without reuse support, accepts any input, since they generate from scratch.
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \mbox{\hyperlink{classgko_1_1DimensionMismatch}{Dimension\+Mismatch}}} & if a dimension of {\ttfamily input} differs from the input {\ttfamily reuse\+\_\+data} was initialized with \\
+\hline
+{\em \mbox{\hyperlink{classgko_1_1InvalidStateError}{Invalid\+State\+Error}}} & if {\ttfamily input} does not fit {\ttfamily reuse\+\_\+data} otherwise \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classgko_1_1LinOpFactory_aad64aa77e555a0cb4277d5807990deb7}\label{classgko_1_1LinOpFactory_aad64aa77e555a0cb4277d5807990deb7}} 
+\index{gko::LinOpFactory@{gko::LinOpFactory}!create\_empty\_reuse\_data@{create\_empty\_reuse\_data}}
+\index{create\_empty\_reuse\_data@{create\_empty\_reuse\_data}!gko::LinOpFactory@{gko::LinOpFactory}}
+\doxysubsubsection{\texorpdfstring{create\_empty\_reuse\_data()}{create\_empty\_reuse\_data()}}
+{\footnotesize\ttfamily virtual std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOpFactory_1_1ReuseData}{Reuse\+Data}}$>$ gko\+::\+Lin\+Op\+Factory\+::create\+\_\+empty\+\_\+reuse\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Creates an empty \mbox{\hyperlink{classgko_1_1LinOpFactory_1_1ReuseData}{Reuse\+Data}}. 
+
+The default implementation returns a plain \mbox{\hyperlink{classgko_1_1LinOpFactory_1_1ReuseData}{Reuse\+Data}}. \mbox{\Hypertarget{classgko_1_1LinOpFactory_ace00778e76cf0fd3d2ca787ac15659d6}\label{classgko_1_1LinOpFactory_ace00778e76cf0fd3d2ca787ac15659d6}} 
+\index{gko::LinOpFactory@{gko::LinOpFactory}!generate\_reuse@{generate\_reuse}}
+\index{generate\_reuse@{generate\_reuse}!gko::LinOpFactory@{gko::LinOpFactory}}
+\doxysubsubsection{\texorpdfstring{generate\_reuse()}{generate\_reuse()}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ gko\+::\+Lin\+Op\+Factory\+::generate\+\_\+reuse (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$}]{input,  }\item[{\mbox{\hyperlink{classgko_1_1LinOpFactory_1_1ReuseData}{Reuse\+Data}} \&}]{reuse\+\_\+data }\end{DoxyParamCaption}) const}
+
+
+
+Generates a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} like generate(), reusing what earlier calls recorded in {\ttfamily reuse\+\_\+data}. 
+
+A \mbox{\hyperlink{classgko_1_1LinOpFactory_1_1ReuseData}{Reuse\+Data}} is empty when it comes from \mbox{\hyperlink{classgko_1_1LinOpFactory_aad64aa77e555a0cb4277d5807990deb7}{create\+\_\+empty\+\_\+reuse\+\_\+data()}} and initialized after the first successful \mbox{\hyperlink{classgko_1_1LinOpFactory_ace00778e76cf0fd3d2ca787ac15659d6}{generate\+\_\+reuse()}}. With an empty {\ttfamily reuse\+\_\+data}, this is a full generation that also fills it. Once initialized, the input must have the same size and sparsity pattern. What is reused is up to the factory and may depend on values, so the result can differ from generate(). Factories without reuse support just call generate().
+
+As with generate(), the result is independent of {\ttfamily reuse\+\_\+data} and of earlier results\+: it may outlive {\ttfamily reuse\+\_\+data}, and later calls leave it unchanged. One \mbox{\hyperlink{classgko_1_1LinOpFactory_1_1ReuseData}{Reuse\+Data}} serves a whole sequence of generations\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ \{c++\}}
+\DoxyCodeLine{\textcolor{keyword}{auto} reuse\_data = \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}}-\/>create\_empty\_reuse\_data();}
+\DoxyCodeLine{\textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}} = \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}}-\/>generate\_reuse(matrix, *reuse\_data);}
+\DoxyCodeLine{\textcolor{comment}{// change the values of matrix, keeping its sparsity pattern}}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}} = \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a9549dd6065d019211460c59a86dd6536}{factory}}-\/>generate\_reuse(matrix, *reuse\_data);}
+\end{DoxyCode}
+
+
+If this throws, an empty {\ttfamily reuse\+\_\+data} stays empty and an initialized one stays usable.
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & the input, copied to this factory\textquotesingle{}s executor if needed \\
+\hline
+{\em reuse\+\_\+data} & created by this factory, or by one with the same type, parameters and executor\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the generated \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}, with this factory\textquotesingle{}s loggers
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \mbox{\hyperlink{classgko_1_1NotSupported}{Not\+Supported}}} & if {\ttfamily reuse\+\_\+data} has the wrong type for this factory \\
+\hline
+{\em \mbox{\hyperlink{classgko_1_1DimensionMismatch}{Dimension\+Mismatch}}} & if a dimension of {\ttfamily input}, like its size or its number of stored elements, differs from the input {\ttfamily reuse\+\_\+data} was initialized with \\
+\hline
+{\em \mbox{\hyperlink{classgko_1_1InvalidStateError}{Invalid\+State\+Error}}} & if {\ttfamily input} does not fit {\ttfamily reuse\+\_\+data} otherwise\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyNote}{Note}
+This interface is experimental. 
+\end{DoxyNote}
+
+
+Referenced by gko\+::\+Enable\+Default\+Reusable\+Lin\+Op\+Factory$<$ Concrete\+Factory, Concrete\+Lin\+Op, Parameters\+Type, Reuse\+Data\+Type, Polymorphic\+Base $>$\+::generate\+\_\+reuse().
+
+
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
