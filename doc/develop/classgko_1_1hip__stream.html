@@ -30,7 +30,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2925602988 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2925662392 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -94,9 +94,9 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1hip__stream.html#adbbf3251c2e50ae1430ebd2dcb77c0d9">hip_stream</a> ()</td></tr>
 <tr class="memdesc:adbbf3251c2e50ae1430ebd2dcb77c0d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an empty stream wrapper, representing the default stream. <br /></td></tr>
 <tr class="separator:adbbf3251c2e50ae1430ebd2dcb77c0d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6adfa7a3afcfcb97ba5d7f06c085240"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1hip__stream.html#ab6adfa7a3afcfcb97ba5d7f06c085240">hip_stream</a> (int device_id)</td></tr>
-<tr class="memdesc:ab6adfa7a3afcfcb97ba5d7f06c085240"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new custom HIP stream on the given device.  <a href="classgko_1_1hip__stream.html#ab6adfa7a3afcfcb97ba5d7f06c085240">More...</a><br /></td></tr>
-<tr class="separator:ab6adfa7a3afcfcb97ba5d7f06c085240"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af228293d0f52e833b095188a13944e8f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1hip__stream.html#af228293d0f52e833b095188a13944e8f">hip_stream</a> (int device_id, bool non_blocking=false)</td></tr>
+<tr class="memdesc:af228293d0f52e833b095188a13944e8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new custom HIP stream on the given device.  <a href="classgko_1_1hip__stream.html#af228293d0f52e833b095188a13944e8f">More...</a><br /></td></tr>
+<tr class="separator:af228293d0f52e833b095188a13944e8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae66a34d15d251ab942af982d409a8e93"><td class="memItemLeft" align="right" valign="top"><a id="ae66a34d15d251ab942af982d409a8e93"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1hip__stream.html#ae66a34d15d251ab942af982d409a8e93">~hip_stream</a> ()</td></tr>
 <tr class="memdesc:ae66a34d15d251ab942af982d409a8e93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the custom HIP stream, if it isn't empty. <br /></td></tr>
@@ -123,8 +123,8 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><p>An RAII wrapper for a custom HIP stream. </p>
 <p>The stream will be created on construction and destroyed when the lifetime of the wrapper ends. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ab6adfa7a3afcfcb97ba5d7f06c085240"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab6adfa7a3afcfcb97ba5d7f06c085240">&#9670;&nbsp;</a></span>hip_stream()</h2>
+<a id="af228293d0f52e833b095188a13944e8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af228293d0f52e833b095188a13944e8f">&#9670;&nbsp;</a></span>hip_stream()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -133,8 +133,18 @@ Public Member Functions</h2></td></tr>
           <td class="memname">gko::hip_stream::hip_stream </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>device_id</em></td><td>)</td>
+          <td class="paramname"><em>device_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>non_blocking</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -143,6 +153,7 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">device_id</td><td>the device ID to create the stream on. </td></tr>
+    <tr><td class="paramname">non_blocking</td><td>create the stream with hipStreamNonBlocking, so that it does not implicitly order against the legacy default stream. </td></tr>
   </table>
   </dd>
 </dl>
