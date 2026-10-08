@@ -34,6 +34,9 @@ auto {\bfseries with\+\_\+solver} (\+::\mbox{\hyperlink{classgko_1_1deferred__fa
 \item 
 \mbox{\Hypertarget{structgko_1_1solver_1_1Ir_1_1parameters__type_a5f337b963a98a3cc8f8a2ce47c7f60ff}\label{structgko_1_1solver_1_1Ir_1_1parameters__type_a5f337b963a98a3cc8f8a2ce47c7f60ff}} 
 {\footnotesize template$<$typename... Args$>$ }\\auto {\bfseries with\+\_\+default\+\_\+initial\+\_\+guess} (Args \&\&... \+\_\+value) -\/$>$ std\+::decay\+\_\+t$<$ decltype($\ast$(this-\/$>$self()))$>$ \&
+\item 
+\mbox{\Hypertarget{structgko_1_1solver_1_1Ir_1_1parameters__type_ae94d4637ff164106b5cbdcd3a50b8cc9}\label{structgko_1_1solver_1_1Ir_1_1parameters__type_ae94d4637ff164106b5cbdcd3a50b8cc9}} 
+{\footnotesize template$<$typename... Args$>$ }\\auto {\bfseries with\+\_\+inner\+\_\+initial\+\_\+guess} (Args \&\&... \+\_\+value) -\/$>$ std\+::decay\+\_\+t$<$ decltype($\ast$(this-\/$>$self()))$>$ \&
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -47,7 +50,9 @@ std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>
 Value\+Type \mbox{\hyperlink{structgko_1_1solver_1_1Ir_1_1parameters__type_adde5da5ddad690e275111ea316757707}{relaxation\+\_\+factor}} \{ value\+\_\+type\{1\} \}
 \begin{DoxyCompactList}\small\item\em Relaxation factor for Richardson iteration. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8a}{initial\+\_\+guess\+\_\+mode}} \mbox{\hyperlink{structgko_1_1solver_1_1Ir_1_1parameters__type_a2e781c6001020deca1547e734e1bf16f}{default\+\_\+initial\+\_\+guess}} \{ \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa1f5f6080965ed6d0a90e6b9ec599e441}{initial\+\_\+guess\+\_\+mode\+::provided}} \}
-\begin{DoxyCompactList}\small\item\em Default initial guess mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Default initial guess mode. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8a}{initial\+\_\+guess\+\_\+mode}} \mbox{\hyperlink{structgko_1_1solver_1_1Ir_1_1parameters__type_a1d5fe725fac142721749769a39735d44}{inner\+\_\+initial\+\_\+guess}} \{ \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aad02c4c4cde7ae76252540d116a40f23a}{initial\+\_\+guess\+\_\+mode\+::zero}} \}
+\begin{DoxyCompactList}\small\item\em Initial guess of the inner solver for each correction A $\ast$ d = residual, if the inner solver uses an initial guess\+: \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aad02c4c4cde7ae76252540d116a40f23a}{initial\+\_\+guess\+\_\+mode\+::zero}} (scale-\/invariant) or \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{initial\+\_\+guess\+\_\+mode\+::rhs}} (the residual). \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
 
@@ -74,7 +79,18 @@ std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ 
 
 Already generated solver. 
 
-If one is provided, the factory {\ttfamily solver} will be ignored. 
+If one is provided, the factory {\ttfamily solver} will be ignored. \mbox{\Hypertarget{structgko_1_1solver_1_1Ir_1_1parameters__type_a1d5fe725fac142721749769a39735d44}\label{structgko_1_1solver_1_1Ir_1_1parameters__type_a1d5fe725fac142721749769a39735d44}} 
+\index{gko::solver::Ir$<$ ValueType $>$::parameters\_type@{gko::solver::Ir$<$ ValueType $>$::parameters\_type}!inner\_initial\_guess@{inner\_initial\_guess}}
+\index{inner\_initial\_guess@{inner\_initial\_guess}!gko::solver::Ir$<$ ValueType $>$::parameters\_type@{gko::solver::Ir$<$ ValueType $>$::parameters\_type}}
+\doxysubsubsection{\texorpdfstring{inner\_initial\_guess}{inner\_initial\_guess}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+\mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8a}{initial\+\_\+guess\+\_\+mode}} \mbox{\hyperlink{classgko_1_1solver_1_1Ir}{gko\+::solver\+::\+Ir}}$<$ Value\+Type $>$\+::parameters\+\_\+type\+::inner\+\_\+initial\+\_\+guess \{ \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aad02c4c4cde7ae76252540d116a40f23a}{initial\+\_\+guess\+\_\+mode\+::zero}} \}}
+
+
+
+Initial guess of the inner solver for each correction A $\ast$ d = residual, if the inner solver uses an initial guess\+: \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aad02c4c4cde7ae76252540d116a40f23a}{initial\+\_\+guess\+\_\+mode\+::zero}} (scale-\/invariant) or \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa83ff9f9e3dd7561d3dd91204cf546b7e}{initial\+\_\+guess\+\_\+mode\+::rhs}} (the residual). 
+
+Starting from the residual can save inner iterations when the eigenvalues of A are close to 1, but makes IR diverge when they are far from 1. \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa1f5f6080965ed6d0a90e6b9ec599e441}{initial\+\_\+guess\+\_\+mode\+::provided}} is not supported. 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
