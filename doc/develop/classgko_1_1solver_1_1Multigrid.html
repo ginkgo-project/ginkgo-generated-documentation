@@ -30,7 +30,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2925729897 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2927076098 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -108,6 +108,9 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1solver_1_1Multigrid_1_1Factory.html">Factory</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgko_1_1solver_1_1Multigrid_1_1parameters__type.html">parameters_type</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgko_1_1solver_1_1Multigrid_1_1reuse__data__type.html">reuse_data_type</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Records the hierarchy of generate_reuse() and the reuse data of its levels, smoothers and coarsest solver.  <a href="classgko_1_1solver_1_1Multigrid_1_1reuse__data__type.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -280,9 +283,10 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>EnableApplyWithIniti
 <p>Ginkgo uses the index from 0 for finest level (original problem size) ~ N for the coarsest level (the coarsest solver), and its level counts is N (N multigrid level generation).</p>
 <dl class="section user"><dt>References</dt><dd><ul>
 <li>Briggs, W. L., Henson, V. E., McCormick, S. F. <em>A Multigrid Tutorial.</em> 2nd ed. SIAM, 2000. <a href="https://doi.org/10.1137/1.9780898719505">https://doi.org/10.1137/1.9780898719505</a></li>
-<li>Trottenberg, U., Oosterlee, C. W., Schüller, A. <em>Multigrid.</em> 1st ed. Academic Press, 2001. ISBN 978-0-12-701070-0. </li>
+<li>Trottenberg, U., Oosterlee, C. W., Schüller, A. <em>Multigrid.</em> 1st ed. Academic Press, 2001. ISBN 978-0-12-701070-0.</li>
 </ul>
 </dd></dl>
+<p>The factory supports <a class="el" href="classgko_1_1LinOpFactory.html#ace00778e76cf0fd3d2ca787ac15659d6" title="Generates a LinOp like generate(), reusing what earlier calls recorded in reuse_data.">LinOpFactory::generate_reuse()</a>: the recorded hierarchy is reused as long as its levels reproduce their coarse sizes, and levels, smoothers and the coarsest solver are generated through their own generate_reuse(). Below the first level that comes out different, everything is generated anew. Levels such as Pgm keep choices made from the values of the first matrix, so it should be representative of the later ones. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a708c25e7a2bcffb7ef0d98092d9d49e2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a708c25e7a2bcffb7ef0d98092d9d49e2">&#9670;&nbsp;</a></span>apply_uses_initial_guess()</h2>

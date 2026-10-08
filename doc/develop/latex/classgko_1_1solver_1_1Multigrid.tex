@@ -35,7 +35,9 @@ Collaboration diagram for gko\+::solver\+::Multigrid\+:
 class \mbox{\hyperlink{classgko_1_1solver_1_1Multigrid_1_1Factory}{Factory}}
 \item 
 struct \mbox{\hyperlink{structgko_1_1solver_1_1Multigrid_1_1parameters__type}{parameters\+\_\+type}}
-\end{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classgko_1_1solver_1_1Multigrid_1_1reuse__data__type}{reuse\+\_\+data\+\_\+type}}
+\begin{DoxyCompactList}\small\item\em Records the hierarchy of generate\+\_\+reuse() and the reuse data of its levels, smoothers and coarsest solver. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -91,10 +93,10 @@ Ginkgo uses the index from 0 for finest level (original problem size) $\sim$ N f
 
 \begin{DoxyItemize}
 \item Briggs, W. L., Henson, V. E., Mc\+Cormick, S. F. {\itshape A Multigrid Tutorial.} 2nd ed. S\+I\+AM, 2000. \href{https://doi.org/10.1137/1.9780898719505}{\texttt{ https\+://doi.\+org/10.\+1137/1.\+9780898719505}}
-\item Trottenberg, U., Oosterlee, C. W., Schüller, A. {\itshape Multigrid.} 1st ed. Academic Press, 2001. I\+S\+BN 978-\/0-\/12-\/701070-\/0. 
+\item Trottenberg, U., Oosterlee, C. W., Schüller, A. {\itshape Multigrid.} 1st ed. Academic Press, 2001. I\+S\+BN 978-\/0-\/12-\/701070-\/0.
 \end{DoxyItemize}
 \end{DoxyParagraph}
-
+The factory supports \mbox{\hyperlink{classgko_1_1LinOpFactory_ace00778e76cf0fd3d2ca787ac15659d6}{Lin\+Op\+Factory\+::generate\+\_\+reuse()}}\+: the recorded hierarchy is reused as long as its levels reproduce their coarse sizes, and levels, smoothers and the coarsest solver are generated through their own generate\+\_\+reuse(). Below the first level that comes out different, everything is generated anew. Levels such as Pgm keep choices made from the values of the first matrix, so it should be representative of the later ones. 
 
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{classgko_1_1solver_1_1Multigrid_a708c25e7a2bcffb7ef0d98092d9d49e2}\label{classgko_1_1solver_1_1Multigrid_a708c25e7a2bcffb7ef0d98092d9d49e2}} 

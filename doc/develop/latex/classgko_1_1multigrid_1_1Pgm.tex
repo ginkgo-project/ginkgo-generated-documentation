@@ -35,7 +35,9 @@ Collaboration diagram for gko\+::multigrid\+::Pgm$<$ Value\+Type, Index\+Type $>
 class \mbox{\hyperlink{classgko_1_1multigrid_1_1Pgm_1_1Factory}{Factory}}
 \item 
 struct \mbox{\hyperlink{structgko_1_1multigrid_1_1Pgm_1_1parameters__type}{parameters\+\_\+type}}
-\end{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classgko_1_1multigrid_1_1Pgm_1_1reuse__data__type}{reuse\+\_\+data\+\_\+type}}
+\begin{DoxyCompactList}\small\item\em Records the aggregates, the transfer operators and the coarse-\/to-\/fine mappings of the first generate\+\_\+reuse() call. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
@@ -77,6 +79,8 @@ Naumov et al., \char`\"{}\+Amg\+X\+: A Library for G\+P\+U Accelerated Algebraic
 \+Multigrid and Preconditioned Iterative Methods\char`\"{}. Current implementation only contains size = 2 version.
 
 \mbox{\hyperlink{classgko_1_1multigrid_1_1Pgm}{Pgm}} creates the aggregate group according to the matrix value not the structure. \mbox{\hyperlink{classgko_1_1multigrid_1_1Pgm}{Pgm}} gives two steps (one-\/phase handshaking) to group the elements. 1\+: get the strongest neighbor of each unaggregated element. 2\+: group the elements whose strongest neighbor is each other. repeating until reaching the given conditions. After that, the un-\/aggregated elements are assigned to an aggregated group or are left alone.
+
+The factory supports \mbox{\hyperlink{classgko_1_1LinOpFactory_ace00778e76cf0fd3d2ca787ac15659d6}{Lin\+Op\+Factory\+::generate\+\_\+reuse()}}\+: later calls on a matrix with the same sparsity pattern keep the aggregates and only recompute the coarse matrix, so the result can differ from generate(). The aggregates come from the values of the first matrix, so it should be representative of the later ones.
 
 
 \begin{DoxyTemplParams}{Template Parameters}
