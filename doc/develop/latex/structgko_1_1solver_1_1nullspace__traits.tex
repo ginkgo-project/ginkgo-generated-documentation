@@ -1,0 +1,76 @@
+\hypertarget{structgko_1_1solver_1_1nullspace__traits}{}\doxysection{gko\+::solver\+::nullspace\+\_\+traits$<$ Solver $>$ Struct Template Reference}
+\label{structgko_1_1solver_1_1nullspace__traits}\index{gko::solver::nullspace\_traits$<$ Solver $>$@{gko::solver::nullspace\_traits$<$ Solver $>$}}
+
+
+Traits describing how an iterative solver handles the nullspaces given by the {\ttfamily nullspace} and {\ttfamily left\+\_\+nullspace} factory parameters.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/solver/solver\+\_\+base.\+hpp$>$}
+
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr bool \mbox{\hyperlink{structgko_1_1solver_1_1nullspace__traits_a8e40969421798a46ab6e87460ed164eb}{is\+\_\+supported}} = false
+\begin{DoxyCompactList}\small\item\em Whether the solver removes the nullspaces. \end{DoxyCompactList}\item 
+static constexpr bool \mbox{\hyperlink{structgko_1_1solver_1_1nullspace__traits_a5c4229364412bbcf02ef9211fb209be0}{requires\+\_\+hermitian}} = false
+\begin{DoxyCompactList}\small\item\em Whether the solver requires a Hermitian system matrix. \end{DoxyCompactList}\item 
+static constexpr bool \mbox{\hyperlink{structgko_1_1solver_1_1nullspace__traits_a7fba7267a333fa74cf2c984af1da7ec5}{two\+\_\+sided\+\_\+projection}} = false
+\begin{DoxyCompactList}\small\item\em Whether the solver needs the two-\/sided projection $ P M Q $ of its preconditioner $ M $, which is symmetric for symmetric problems (e.\+g. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Solver$>$\newline
+struct gko\+::solver\+::nullspace\+\_\+traits$<$ Solver $>$}
+
+Traits describing how an iterative solver handles the nullspaces given by the {\ttfamily nullspace} and {\ttfamily left\+\_\+nullspace} factory parameters. 
+
+Solvers that support them specialize this class.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Solver} & the solver type \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{structgko_1_1solver_1_1nullspace__traits_a8e40969421798a46ab6e87460ed164eb}\label{structgko_1_1solver_1_1nullspace__traits_a8e40969421798a46ab6e87460ed164eb}} 
+\index{gko::solver::nullspace\_traits$<$ Solver $>$@{gko::solver::nullspace\_traits$<$ Solver $>$}!is\_supported@{is\_supported}}
+\index{is\_supported@{is\_supported}!gko::solver::nullspace\_traits$<$ Solver $>$@{gko::solver::nullspace\_traits$<$ Solver $>$}}
+\doxysubsubsection{\texorpdfstring{is\_supported}{is\_supported}}
+{\footnotesize\ttfamily template$<$typename Solver $>$ \\
+constexpr bool \mbox{\hyperlink{structgko_1_1solver_1_1nullspace__traits}{gko\+::solver\+::nullspace\+\_\+traits}}$<$ Solver $>$\+::is\+\_\+supported = false\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+Whether the solver removes the nullspaces. 
+
+Other solvers throw \mbox{\hyperlink{classgko_1_1NotSupported}{Not\+Supported}} when a nullspace is set instead of ignoring it. \mbox{\Hypertarget{structgko_1_1solver_1_1nullspace__traits_a5c4229364412bbcf02ef9211fb209be0}\label{structgko_1_1solver_1_1nullspace__traits_a5c4229364412bbcf02ef9211fb209be0}} 
+\index{gko::solver::nullspace\_traits$<$ Solver $>$@{gko::solver::nullspace\_traits$<$ Solver $>$}!requires\_hermitian@{requires\_hermitian}}
+\index{requires\_hermitian@{requires\_hermitian}!gko::solver::nullspace\_traits$<$ Solver $>$@{gko::solver::nullspace\_traits$<$ Solver $>$}}
+\doxysubsubsection{\texorpdfstring{requires\_hermitian}{requires\_hermitian}}
+{\footnotesize\ttfamily template$<$typename Solver $>$ \\
+constexpr bool \mbox{\hyperlink{structgko_1_1solver_1_1nullspace__traits}{gko\+::solver\+::nullspace\+\_\+traits}}$<$ Solver $>$\+::requires\+\_\+hermitian = false\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+Whether the solver requires a Hermitian system matrix. 
+
+Then the left and right nullspace coincide, so setting either sets both. \mbox{\Hypertarget{structgko_1_1solver_1_1nullspace__traits_a7fba7267a333fa74cf2c984af1da7ec5}\label{structgko_1_1solver_1_1nullspace__traits_a7fba7267a333fa74cf2c984af1da7ec5}} 
+\index{gko::solver::nullspace\_traits$<$ Solver $>$@{gko::solver::nullspace\_traits$<$ Solver $>$}!two\_sided\_projection@{two\_sided\_projection}}
+\index{two\_sided\_projection@{two\_sided\_projection}!gko::solver::nullspace\_traits$<$ Solver $>$@{gko::solver::nullspace\_traits$<$ Solver $>$}}
+\doxysubsubsection{\texorpdfstring{two\_sided\_projection}{two\_sided\_projection}}
+{\footnotesize\ttfamily template$<$typename Solver $>$ \\
+constexpr bool \mbox{\hyperlink{structgko_1_1solver_1_1nullspace__traits}{gko\+::solver\+::nullspace\+\_\+traits}}$<$ Solver $>$\+::two\+\_\+sided\+\_\+projection = false\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+Whether the solver needs the two-\/sided projection $ P M Q $ of its preconditioner $ M $, which is symmetric for symmetric problems (e.\+g. 
+
+for \mbox{\hyperlink{classgko_1_1solver_1_1Minres}{Minres}}). Otherwise, only the output of the preconditioner is projected, $ P M $. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/solver/solver\+\_\+base.\+hpp\end{DoxyCompactItemize}

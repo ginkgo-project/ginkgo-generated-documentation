@@ -1,0 +1,196 @@
+\hypertarget{classgko_1_1solver_1_1Nullspace}{}\doxysection{gko\+::solver\+::Nullspace$<$ Value\+Type $>$ Class Template Reference}
+\label{classgko_1_1solver_1_1Nullspace}\index{gko::solver::Nullspace$<$ ValueType $>$@{gko::solver::Nullspace$<$ ValueType $>$}}
+
+
+\mbox{\hyperlink{classgko_1_1solver_1_1Nullspace}{Nullspace}} represents the (right or left) nullspace of an operator and {\itshape is} the orthogonal projector $ P = I - V V^H $ onto its complement, where $ V $ is an orthonormal basis of the nullspace.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/solver/nullspace.\+hpp$>$}
+
+
+
+Inheritance diagram for gko\+::solver\+::Nullspace$<$ Value\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1solver_1_1Nullspace__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for gko\+::solver\+::Nullspace$<$ Value\+Type $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1solver_1_1Nullspace__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1Nullspace_a118092c88bdc60bfc561742a9bb01def}\label{classgko_1_1solver_1_1Nullspace_a118092c88bdc60bfc561742a9bb01def}} 
+using {\bfseries value\+\_\+type} = Value\+Type
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1Nullspace_a18e46182c76ccc59a75a6fa96bed24e3}\label{classgko_1_1solver_1_1Nullspace_a18e46182c76ccc59a75a6fa96bed24e3}} 
+using {\bfseries absolute\+\_\+type} = \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{remove\+\_\+complex}}$<$ Value\+Type $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classgko_1_1solver_1_1Nullspace_a91fcd47eb831f360a4e49539f10caf5e}{contains\+\_\+constant}} () const noexcept
+\item 
+\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{classgko_1_1solver_1_1Nullspace_a0a40f0105e4915471bd304c839309a49}{get\+\_\+dimension}} () const noexcept
+\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1solver_1_1Nullspace_a42bb744be5f230e7b50d1182a0b32547}{get\+\_\+basis}} () const noexcept
+\item 
+void \mbox{\hyperlink{classgko_1_1solver_1_1Nullspace_a52025fcea47fedab07efac0a55a92839}{project}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ v) const
+\begin{DoxyCompactList}\small\item\em Applies the projector in place\+: $ v \leftarrow (I - V V^H) v $, for each column of {\ttfamily v} independently. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1Nullspace_a66f4179650fd33f38b266b10eaa8241a}\label{classgko_1_1solver_1_1Nullspace_a66f4179650fd33f38b266b10eaa8241a}} 
+\mbox{\hyperlink{classgko_1_1solver_1_1Nullspace}{Nullspace}} \& {\bfseries operator=} (const \mbox{\hyperlink{classgko_1_1solver_1_1Nullspace}{Nullspace}} \&other)
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1Nullspace_ab764a55c525e512fdf41085a347c5c21}\label{classgko_1_1solver_1_1Nullspace_ab764a55c525e512fdf41085a347c5c21}} 
+\mbox{\hyperlink{classgko_1_1solver_1_1Nullspace}{Nullspace}} \& {\bfseries operator=} (\mbox{\hyperlink{classgko_1_1solver_1_1Nullspace}{Nullspace}} \&\&other)
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1Nullspace_a5b738a9a3c8843cd23ebeb2ec005f49d}\label{classgko_1_1solver_1_1Nullspace_a5b738a9a3c8843cd23ebeb2ec005f49d}} 
+{\bfseries Nullspace} (const \mbox{\hyperlink{classgko_1_1solver_1_1Nullspace}{Nullspace}} \&other)
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1Nullspace_abe77169f61349015e518c4085fab0dee}\label{classgko_1_1solver_1_1Nullspace_abe77169f61349015e518c4085fab0dee}} 
+{\bfseries Nullspace} (\mbox{\hyperlink{classgko_1_1solver_1_1Nullspace}{Nullspace}} \&\&other)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1solver_1_1Nullspace}{Nullspace}} $>$ \mbox{\hyperlink{classgko_1_1solver_1_1Nullspace_a463300cab708d14d4d88617bfc75db6f}{create}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, std\+::vector$<$ std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$$>$ basis, bool \mbox{\hyperlink{classgko_1_1solver_1_1Nullspace_a91fcd47eb831f360a4e49539f10caf5e}{contains\+\_\+constant}}=false)
+\begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{classgko_1_1solver_1_1Nullspace}{Nullspace}} from an explicit basis. \end{DoxyCompactList}\item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1solver_1_1Nullspace}{Nullspace}} $>$ \mbox{\hyperlink{classgko_1_1solver_1_1Nullspace_a15396f15278343cfb76bb362fd443d6a}{create\+\_\+from\+\_\+constant}} (std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$ exec, \mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$ size=\{\})
+\begin{DoxyCompactList}\small\item\em Creates a \mbox{\hyperlink{classgko_1_1solver_1_1Nullspace}{Nullspace}} consisting only of the constant vector (e.\+g. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1Nullspace_abb9941720376aadcad0e15b338777b9b}\label{classgko_1_1solver_1_1Nullspace_abb9941720376aadcad0e15b338777b9b}} 
+class {\bfseries Enable\+Cloneable$<$ Nullspace $>$}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Value\+Type = default\+\_\+precision$>$\newline
+class gko\+::solver\+::\+Nullspace$<$ Value\+Type $>$}
+
+\mbox{\hyperlink{classgko_1_1solver_1_1Nullspace}{Nullspace}} represents the (right or left) nullspace of an operator and {\itshape is} the orthogonal projector $ P = I - V V^H $ onto its complement, where $ V $ is an orthonormal basis of the nullspace. 
+
+
+\begin{DoxyItemize}
+\item The constant vector is handled implicitly by subtracting the mean, so a constant-\/only nullspace works with any vector layout ({\ttfamily \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{matrix\+::\+Dense}}} or {\ttfamily \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{experimental\+::distributed\+::\+Vector}}} with any partition).
+\item An explicit basis is copied and orthonormalized once at creation time (twice-\/iterated Gram-\/\+Schmidt, also against the constant if it is part of the nullspace). Columns that are numerically linearly dependent (relative norm below $ \sqrt{\epsilon} $ after orthogonalization) are dropped; \mbox{\hyperlink{classgko_1_1solver_1_1Nullspace_a0a40f0105e4915471bd304c839309a49}{get\+\_\+dimension()}} reports the remaining dimension.
+\item \mbox{\hyperlink{classgko_1_1solver_1_1Nullspace_a52025fcea47fedab07efac0a55a92839}{project()}} removes the nullspace components of all columns of its input $ X $ at once\+: the coefficients $ C = V^H X $ and the column means are computed in a single pass (and, for distributed vectors, a single all-\/reduce), followed by $ X \leftarrow X - V C $.
+\end{DoxyItemize}
+
+The typical use is as the {\ttfamily nullspace} / {\ttfamily left\+\_\+nullspace} parameter of an iterative solver, see \mbox{\hyperlink{structgko_1_1solver_1_1enable__preconditioned__iterative__solver__factory__parameters}{enable\+\_\+preconditioned\+\_\+iterative\+\_\+solver\+\_\+factory\+\_\+parameters}}.
+
+The object is immutable after creation apart from internal scratch buffers. Solvers and \mbox{\hyperlink{classgko_1_1preconditioner_1_1NullspaceProjection}{preconditioner\+::\+Nullspace\+Projection}} work on their own copy, which shares the basis, so the same object can be passed to any number of factories. Like other Ginkgo Lin\+Ops with internal caches, a single instance must not be applied concurrently from multiple threads.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Value\+Type} & the value type of the vectors it projects. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1solver_1_1Nullspace_a91fcd47eb831f360a4e49539f10caf5e}\label{classgko_1_1solver_1_1Nullspace_a91fcd47eb831f360a4e49539f10caf5e}} 
+\index{gko::solver::Nullspace$<$ ValueType $>$@{gko::solver::Nullspace$<$ ValueType $>$}!contains\_constant@{contains\_constant}}
+\index{contains\_constant@{contains\_constant}!gko::solver::Nullspace$<$ ValueType $>$@{gko::solver::Nullspace$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{contains\_constant()}{contains\_constant()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+bool \mbox{\hyperlink{classgko_1_1solver_1_1Nullspace}{gko\+::solver\+::\+Nullspace}}$<$ Value\+Type $>$\+::contains\+\_\+constant (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+\begin{DoxyReturn}{Returns}
+whether the constant vector is part of the nullspace. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1solver_1_1Nullspace_a463300cab708d14d4d88617bfc75db6f}\label{classgko_1_1solver_1_1Nullspace_a463300cab708d14d4d88617bfc75db6f}} 
+\index{gko::solver::Nullspace$<$ ValueType $>$@{gko::solver::Nullspace$<$ ValueType $>$}!create@{create}}
+\index{create@{create}!gko::solver::Nullspace$<$ ValueType $>$@{gko::solver::Nullspace$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+static std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1solver_1_1Nullspace}{Nullspace}}$>$ \mbox{\hyperlink{classgko_1_1solver_1_1Nullspace}{gko\+::solver\+::\+Nullspace}}$<$ Value\+Type $>$\+::create (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{std\+::vector$<$ std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$$>$}]{basis,  }\item[{bool}]{contains\+\_\+constant = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a \mbox{\hyperlink{classgko_1_1solver_1_1Nullspace}{Nullspace}} from an explicit basis. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & the executor the projector (and its basis) lives on \\
+\hline
+{\em basis} & the nullspace basis vectors. Each entry is an {\ttfamily n x k\+\_\+i} matrix\+::\+Dense$<$\+Value\+Type$>$ or experimental\+::distributed\+::\+Vector$<$\+Value\+Type$>$ (all entries of the same kind and, if distributed, the same partition); their columns together span the nullspace. They do not need to be orthonormal\+: they are copied and orthonormalized, dropping numerically dependent columns. \\
+\hline
+{\em contains\+\_\+constant} & whether the constant vector is also part of the nullspace. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1solver_1_1Nullspace_a15396f15278343cfb76bb362fd443d6a}\label{classgko_1_1solver_1_1Nullspace_a15396f15278343cfb76bb362fd443d6a}} 
+\index{gko::solver::Nullspace$<$ ValueType $>$@{gko::solver::Nullspace$<$ ValueType $>$}!create\_from\_constant@{create\_from\_constant}}
+\index{create\_from\_constant@{create\_from\_constant}!gko::solver::Nullspace$<$ ValueType $>$@{gko::solver::Nullspace$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{create\_from\_constant()}{create\_from\_constant()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+static std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classgko_1_1solver_1_1Nullspace}{Nullspace}}$>$ \mbox{\hyperlink{classgko_1_1solver_1_1Nullspace}{gko\+::solver\+::\+Nullspace}}$<$ Value\+Type $>$\+::create\+\_\+from\+\_\+constant (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classgko_1_1Executor}{Executor}} $>$}]{exec,  }\item[{\mbox{\hyperlink{structgko_1_1dim}{dim}}$<$ 2 $>$}]{size = {\ttfamily \{\}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a \mbox{\hyperlink{classgko_1_1solver_1_1Nullspace}{Nullspace}} consisting only of the constant vector (e.\+g. 
+
+a pure-\/\+Neumann Poisson problem). The constant is never materialized, so the result can project vectors of any type and distribution.
+
+Solvers adapt a constant-\/only nullspace to the size and value type of their system matrix, so the same object can be used in solver factories that are generated for matrices of different sizes (e.\+g. on the levels of a multigrid hierarchy) or precisions. Without a size, \mbox{\hyperlink{classgko_1_1solver_1_1Nullspace_a52025fcea47fedab07efac0a55a92839}{project()}} accepts vectors of any size; the size is only needed to use the \mbox{\hyperlink{classgko_1_1solver_1_1Nullspace}{Nullspace}} as a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em exec} & the executor \\
+\hline
+{\em size} & the (square, global) size {\ttfamily n x n} of the operator. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1solver_1_1Nullspace_a42bb744be5f230e7b50d1182a0b32547}\label{classgko_1_1solver_1_1Nullspace_a42bb744be5f230e7b50d1182a0b32547}} 
+\index{gko::solver::Nullspace$<$ ValueType $>$@{gko::solver::Nullspace$<$ ValueType $>$}!get\_basis@{get\_basis}}
+\index{get\_basis@{get\_basis}!gko::solver::Nullspace$<$ ValueType $>$@{gko::solver::Nullspace$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_basis()}{get\_basis()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}}$>$ \mbox{\hyperlink{classgko_1_1solver_1_1Nullspace}{gko\+::solver\+::\+Nullspace}}$<$ Value\+Type $>$\+::get\+\_\+basis (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+\begin{DoxyReturn}{Returns}
+the orthonormalized explicit basis as a single {\ttfamily n x k} vector of the same kind as the input basis (orthogonal to the constant if \mbox{\hyperlink{classgko_1_1solver_1_1Nullspace_a91fcd47eb831f360a4e49539f10caf5e}{contains\+\_\+constant()}}), or nullptr if there is none. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1solver_1_1Nullspace_a0a40f0105e4915471bd304c839309a49}\label{classgko_1_1solver_1_1Nullspace_a0a40f0105e4915471bd304c839309a49}} 
+\index{gko::solver::Nullspace$<$ ValueType $>$@{gko::solver::Nullspace$<$ ValueType $>$}!get\_dimension@{get\_dimension}}
+\index{get\_dimension@{get\_dimension}!gko::solver::Nullspace$<$ ValueType $>$@{gko::solver::Nullspace$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{get\_dimension()}{get\_dimension()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{classgko_1_1solver_1_1Nullspace}{gko\+::solver\+::\+Nullspace}}$<$ Value\+Type $>$\+::get\+\_\+dimension (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+\begin{DoxyReturn}{Returns}
+the dimension of the nullspace\+: the number of orthonormal explicit basis vectors, plus one if the constant is included. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgko_1_1solver_1_1Nullspace_a52025fcea47fedab07efac0a55a92839}\label{classgko_1_1solver_1_1Nullspace_a52025fcea47fedab07efac0a55a92839}} 
+\index{gko::solver::Nullspace$<$ ValueType $>$@{gko::solver::Nullspace$<$ ValueType $>$}!project@{project}}
+\index{project@{project}!gko::solver::Nullspace$<$ ValueType $>$@{gko::solver::Nullspace$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{project()}{project()}}
+{\footnotesize\ttfamily template$<$typename Value\+Type  = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1solver_1_1Nullspace}{gko\+::solver\+::\+Nullspace}}$<$ Value\+Type $>$\+::project (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$}]{v }\end{DoxyParamCaption}) const}
+
+
+
+Applies the projector in place\+: $ v \leftarrow (I - V V^H) v $, for each column of {\ttfamily v} independently. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & a \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{matrix\+::\+Dense}} or \mbox{\hyperlink{classgko_1_1experimental_1_1distributed_1_1Vector}{experimental\+::distributed\+::\+Vector}} with as many rows as this operator (any number of rows for a constant-\/only nullspace created without a size). Other precisions are converted like in \mbox{\hyperlink{classgko_1_1LinOp_af9979dfd1401bd219b02caaaa445b893}{apply()}}. If the \mbox{\hyperlink{classgko_1_1solver_1_1Nullspace}{Nullspace}} has an explicit basis, {\ttfamily v} must be of the same kind (and distribution) as that basis. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/solver/nullspace.\+hpp\end{DoxyCompactItemize}
