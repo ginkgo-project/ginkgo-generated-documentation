@@ -14,6 +14,7 @@ This example depends on simple-\/solver, minimal-\/cuda-\/solver.
 
 
 \begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <atomic>}}
 \DoxyCodeLine{\textcolor{preprocessor}{\#include <fstream>}}
 \DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
 \DoxyCodeLine{\textcolor{preprocessor}{\#include <map>}}
@@ -38,8 +39,8 @@ This example depends on simple-\/solver, minimal-\/cuda-\/solver.
 \DoxyCodeLine{        / **}
 \DoxyCodeLine{         * Boolean set by the \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27aee11cbb19052e40b07aac0ca060c23ee}{user}} to stop the iteration process}
 \DoxyCodeLine{         * /}
-\DoxyCodeLine{        std::add\_pointer<volatile bool>::type \mbox{\hyperlink{group__LinOp_ga49d4c09c39f06b22bebbbfd1d8bfe450}{GKO\_FACTORY\_PARAMETER\_SCALAR}}(}
-\DoxyCodeLine{            stop\_iteration\_process, \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{        std::atomic<bool>* \mbox{\hyperlink{group__LinOp_ga49d4c09c39f06b22bebbbfd1d8bfe450}{GKO\_FACTORY\_PARAMETER\_SCALAR}}(stop\_iteration\_process,}
+\DoxyCodeLine{                                                        \textcolor{keyword}{nullptr});}
 \DoxyCodeLine{    \};}
 \DoxyCodeLine{    GKO\_ENABLE\_CRITERION\_FACTORY(ByInteraction, parameters, Factory);}
 \DoxyCodeLine{    \mbox{\hyperlink{group__LinOp_ga521f65604cc4cf427dcb2ecfa49b757c}{GKO\_ENABLE\_BUILD\_METHOD}}(Factory);}
@@ -70,7 +71,7 @@ This example depends on simple-\/solver, minimal-\/cuda-\/solver.
 \DoxyCodeLine{\};}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordtype}{void} run\_solver(\textcolor{keyword}{volatile} \textcolor{keywordtype}{bool}* stop\_iteration\_process,}
+\DoxyCodeLine{\textcolor{keywordtype}{void} run\_solver(std::atomic<bool>* stop\_iteration\_process,}
 \DoxyCodeLine{                std::shared\_ptr<gko::Executor> exec)}
 \DoxyCodeLine{\{}
 \end{DoxyCode}
@@ -212,7 +213,7 @@ Declare a user controlled boolean for the iteration process
 
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{volatile} \textcolor{keywordtype}{bool} stop\_iteration\_process\{\};}
+\DoxyCodeLine{std::atomic<bool> stop\_iteration\_process\{\textcolor{keyword}{false}\};}
 \end{DoxyCode}
 
 
@@ -343,6 +344,7 @@ This is the expected output\+:
 
 \begin{DoxyCodeInclude}{0}
 \DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <atomic>}}
 \DoxyCodeLine{\textcolor{preprocessor}{\#include <fstream>}}
 \DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
 \DoxyCodeLine{\textcolor{preprocessor}{\#include <map>}}
@@ -359,8 +361,8 @@ This is the expected output\+:
 \DoxyCodeLine{\textcolor{keyword}{public}:}
 \DoxyCodeLine{    \mbox{\hyperlink{group__LinOp_ga1fc8e9d8be0c9ad2d72bc1ddfc6d8358}{GKO\_CREATE\_FACTORY\_PARAMETERS}}(parameters, Factory)}
 \DoxyCodeLine{    \{}
-\DoxyCodeLine{        std::add\_pointer<volatile bool>::type \mbox{\hyperlink{group__LinOp_ga49d4c09c39f06b22bebbbfd1d8bfe450}{GKO\_FACTORY\_PARAMETER\_SCALAR}}(}
-\DoxyCodeLine{            stop\_iteration\_process, \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{        std::atomic<bool>* \mbox{\hyperlink{group__LinOp_ga49d4c09c39f06b22bebbbfd1d8bfe450}{GKO\_FACTORY\_PARAMETER\_SCALAR}}(stop\_iteration\_process,}
+\DoxyCodeLine{                                                        \textcolor{keyword}{nullptr});}
 \DoxyCodeLine{    \};}
 \DoxyCodeLine{    GKO\_ENABLE\_CRITERION\_FACTORY(ByInteraction, parameters, Factory);}
 \DoxyCodeLine{    \mbox{\hyperlink{group__LinOp_ga521f65604cc4cf427dcb2ecfa49b757c}{GKO\_ENABLE\_BUILD\_METHOD}}(Factory);}
@@ -391,7 +393,7 @@ This is the expected output\+:
 \DoxyCodeLine{\};}
 \DoxyCodeLine{}
 \DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordtype}{void} run\_solver(\textcolor{keyword}{volatile} \textcolor{keywordtype}{bool}* stop\_iteration\_process,}
+\DoxyCodeLine{\textcolor{keywordtype}{void} run\_solver(std::atomic<bool>* stop\_iteration\_process,}
 \DoxyCodeLine{                std::shared\_ptr<gko::Executor> exec)}
 \DoxyCodeLine{\{}
 \DoxyCodeLine{    \textcolor{keyword}{using} ValueType = double;}
@@ -465,7 +467,7 @@ This is the expected output\+:
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} exec = exec\_map.at(executor\_string)();  \textcolor{comment}{// throws if not valid}}
 \DoxyCodeLine{}
-\DoxyCodeLine{    \textcolor{keyword}{volatile} \textcolor{keywordtype}{bool} stop\_iteration\_process\{\};}
+\DoxyCodeLine{    std::atomic<bool> stop\_iteration\_process\{\textcolor{keyword}{false}\};}
 \DoxyCodeLine{}
 \DoxyCodeLine{    std::thread t(run\_solver, \&stop\_iteration\_process, exec);}
 \DoxyCodeLine{}
