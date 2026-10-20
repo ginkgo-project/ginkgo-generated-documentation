@@ -4,7 +4,7 @@ var searchData=
   ['identity_1792',['Identity',['../classgko_1_1batch_1_1matrix_1_1Identity.html',1,'gko::batch::matrix::Identity&lt; ValueType &gt;'],['../classgko_1_1matrix_1_1Identity.html',1,'gko::matrix::Identity&lt; ValueType &gt;']]],
   ['identityfactory_1793',['IdentityFactory',['../classgko_1_1matrix_1_1IdentityFactory.html',1,'gko::matrix']]],
   ['idr_1794',['Idr',['../classgko_1_1solver_1_1Idr.html',1,'gko::solver']]],
-  ['ilu_1795',['Ilu',['../classgko_1_1factorization_1_1Ilu.html',1,'gko::factorization::Ilu&lt; ValueType, IndexType &gt;'],['../classgko_1_1preconditioner_1_1Ilu.html',1,'gko::preconditioner::Ilu&lt; ValueType, ReverseApply, IndexType &gt;']]],
+  ['ilu_1795',['Ilu',['../classgko_1_1preconditioner_1_1Ilu.html',1,'gko::preconditioner::Ilu&lt; ValueType, ReverseApply, IndexType &gt;'],['../classgko_1_1factorization_1_1Ilu.html',1,'gko::factorization::Ilu&lt; ValueType, IndexType &gt;']]],
   ['imag_5foperation_1796',['imag_operation',['../structgko_1_1accessor_1_1imag__operation.html',1,'gko::accessor']]],
   ['imag_5foperaton_1797',['imag_operaton',['../structgko_1_1accessor_1_1imag__operaton.html',1,'gko::accessor']]],
   ['imbalance_5fbounded_5flimit_1798',['imbalance_bounded_limit',['../classgko_1_1matrix_1_1Hybrid_1_1imbalance__bounded__limit.html',1,'gko::matrix::Hybrid']]],

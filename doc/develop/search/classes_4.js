@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['ell_1621',['Ell',['../classgko_1_1batch_1_1matrix_1_1Ell.html',1,'gko::batch::matrix::Ell&lt; ValueType, IndexType &gt;'],['../structgko_1_1matrix_1_1view_1_1ell.html',1,'gko::matrix::view::ell&lt; ValueType, IndexType &gt;'],['../classgko_1_1matrix_1_1Ell.html',1,'gko::matrix::Ell&lt; ValueType, IndexType &gt;']]],
+  ['ell_1621',['Ell',['../classgko_1_1batch_1_1matrix_1_1Ell.html',1,'gko::batch::matrix::Ell&lt; ValueType, IndexType &gt;'],['../classgko_1_1matrix_1_1Ell.html',1,'gko::matrix::Ell&lt; ValueType, IndexType &gt;'],['../structgko_1_1matrix_1_1view_1_1ell.html',1,'gko::matrix::view::ell&lt; ValueType, IndexType &gt;']]],
   ['enable_5fiterative_5fsolver_5ffactory_5fparameters_1622',['enable_iterative_solver_factory_parameters',['../structgko_1_1solver_1_1enable__iterative__solver__factory__parameters.html',1,'gko::solver']]],
   ['enable_5fiterative_5fsolver_5ffactory_5fparameters_3c_20parameters_5ftype_2c_20factory_20_3e_1623',['enable_iterative_solver_factory_parameters&lt; parameters_type, Factory &gt;',['../structgko_1_1solver_1_1enable__iterative__solver__factory__parameters.html',1,'gko::solver']]],
   ['enable_5fparameters_5ftype_1624',['enable_parameters_type',['../classgko_1_1enable__parameters__type.html',1,'gko']]],

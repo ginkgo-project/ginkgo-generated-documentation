@@ -15,5 +15,5 @@ var searchData=
   ['hipsparseerror_1787',['HipsparseError',['../classgko_1_1HipsparseError.html',1,'gko']]],
   ['hiptimer_1788',['HipTimer',['../classgko_1_1HipTimer.html',1,'gko']]],
   ['hipunifiedallocator_1789',['HipUnifiedAllocator',['../classgko_1_1HipUnifiedAllocator.html',1,'gko']]],
-  ['hybrid_1790',['Hybrid',['../classgko_1_1matrix_1_1Hybrid.html',1,'gko::matrix::Hybrid&lt; ValueType, IndexType &gt;'],['../structgko_1_1matrix_1_1view_1_1hybrid.html',1,'gko::matrix::view::hybrid&lt; ValueType, IndexType &gt;']]]
+  ['hybrid_1790',['hybrid',['../structgko_1_1matrix_1_1view_1_1hybrid.html',1,'gko::matrix::view::hybrid&lt; ValueType, IndexType &gt;'],['../classgko_1_1matrix_1_1Hybrid.html',1,'gko::matrix::Hybrid&lt; ValueType, IndexType &gt;']]]
 ];
