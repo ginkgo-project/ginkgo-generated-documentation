@@ -49,6 +49,11 @@ std\+::chrono\+::nanoseconds \mbox{\hyperlink{classgko_1_1DpcppTimer_ae4a46b8259
 \doxysubsection{Detailed Description}
 A timer using kernels for timing on a \mbox{\hyperlink{classgko_1_1DpcppExecutor}{Dpcpp\+Executor}} in profiling mode. 
 
+\begin{DoxyNote}{Note}
+With the Level Zero backend, the S\+Y\+CL runtime truncates the event timestamps to the valid bits of the G\+PU\textquotesingle{}s kernel timestamps, so they wrap around periodically, about every 223 seconds on an Intel Arc A770. A difference between two time points that spans a wrap-\/around is too small by one period, which usually makes it negative. 
+\end{DoxyNote}
+
+
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{classgko_1_1DpcppTimer_ae4a46b8259af4dad4c6a6014e333ecd2}\label{classgko_1_1DpcppTimer_ae4a46b8259af4dad4c6a6014e333ecd2}} 
 \index{gko::DpcppTimer@{gko::DpcppTimer}!difference\_async@{difference\_async}}
