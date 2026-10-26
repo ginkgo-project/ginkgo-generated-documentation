@@ -30,7 +30,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo_doc.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Ginkgo
-   &#160;<span id="projectnumber">Generated from pipelines/2981322047 branch based on develop. Ginkgo version 2.0.0</span>
+   &#160;<span id="projectnumber">Generated from pipelines/2991456621 branch based on develop. Ginkgo version 2.0.0</span>
    </div>
    <div id="projectbrief">A numerical linear algebra library targeting many-core architectures</div>
   </td>
@@ -714,29 +714,31 @@ $(function() {
 <div class="line"><a name="l01167"></a><span class="lineno"> 1167</span>&#160; </div>
 <div class="line"><a name="l01171"></a><span class="lineno"> 1171</span>&#160;    <span class="keywordtype">void</span> make_srow();</div>
 <div class="line"><a name="l01172"></a><span class="lineno"> 1172</span>&#160; </div>
-<div class="line"><a name="l01179"></a><span class="lineno"> 1179</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> scale_impl(<span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>* alpha);</div>
+<div class="line"><a name="l01179"></a><span class="lineno"> 1179</span>&#160;    <span class="keywordtype">void</span> make_srow(index_type max_nnz_per_row);</div>
 <div class="line"><a name="l01180"></a><span class="lineno"> 1180</span>&#160; </div>
-<div class="line"><a name="l01187"></a><span class="lineno"> 1187</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> inv_scale_impl(<span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>* alpha);</div>
+<div class="line"><a name="l01187"></a><span class="lineno"> 1187</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> scale_impl(<span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>* alpha);</div>
 <div class="line"><a name="l01188"></a><span class="lineno"> 1188</span>&#160; </div>
-<div class="line"><a name="l01196"></a><span class="lineno"> 1196</span>&#160;    csr::spmv_strategy get_actual_strategy() const noexcept;</div>
-<div class="line"><a name="l01197"></a><span class="lineno"> 1197</span>&#160; </div>
-<div class="line"><a name="l01198"></a><span class="lineno"> 1198</span>&#160;private:</div>
-<div class="line"><a name="l01199"></a><span class="lineno"> 1199</span>&#160;    csr::spmv_strategy strategy_;</div>
-<div class="line"><a name="l01200"></a><span class="lineno"> 1200</span>&#160;    array&lt;value_type&gt; values_;</div>
-<div class="line"><a name="l01201"></a><span class="lineno"> 1201</span>&#160;    array&lt;index_type&gt; col_idxs_;</div>
-<div class="line"><a name="l01202"></a><span class="lineno"> 1202</span>&#160;    array&lt;index_type&gt; row_ptrs_;</div>
-<div class="line"><a name="l01203"></a><span class="lineno"> 1203</span>&#160;    array&lt;index_type&gt; srow_;</div>
-<div class="line"><a name="l01204"></a><span class="lineno"> 1204</span>&#160;    index_type max_nnz_per_row_;</div>
+<div class="line"><a name="l01195"></a><span class="lineno"> 1195</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> inv_scale_impl(<span class="keyword">const</span> <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>* alpha);</div>
+<div class="line"><a name="l01196"></a><span class="lineno"> 1196</span>&#160; </div>
+<div class="line"><a name="l01204"></a><span class="lineno"> 1204</span>&#160;    csr::spmv_strategy get_actual_strategy() const noexcept;</div>
 <div class="line"><a name="l01205"></a><span class="lineno"> 1205</span>&#160; </div>
-<div class="line"><a name="l01206"></a><span class="lineno"> 1206</span>&#160;    <span class="keywordtype">void</span> add_scaled_identity_impl(const <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>* a, const <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>* b) override;</div>
-<div class="line"><a name="l01207"></a><span class="lineno"> 1207</span>&#160;};</div>
-<div class="line"><a name="l01208"></a><span class="lineno"> 1208</span>&#160; </div>
-<div class="line"><a name="l01209"></a><span class="lineno"> 1209</span>&#160; </div>
-<div class="line"><a name="l01210"></a><span class="lineno"> 1210</span>&#160;}  <span class="comment">// namespace matrix</span></div>
-<div class="line"><a name="l01211"></a><span class="lineno"> 1211</span>&#160;}  <span class="comment">// namespace gko</span></div>
-<div class="line"><a name="l01212"></a><span class="lineno"> 1212</span>&#160; </div>
+<div class="line"><a name="l01206"></a><span class="lineno"> 1206</span>&#160;private:</div>
+<div class="line"><a name="l01207"></a><span class="lineno"> 1207</span>&#160;    csr::spmv_strategy strategy_;</div>
+<div class="line"><a name="l01208"></a><span class="lineno"> 1208</span>&#160;    array&lt;value_type&gt; values_;</div>
+<div class="line"><a name="l01209"></a><span class="lineno"> 1209</span>&#160;    array&lt;index_type&gt; col_idxs_;</div>
+<div class="line"><a name="l01210"></a><span class="lineno"> 1210</span>&#160;    array&lt;index_type&gt; row_ptrs_;</div>
+<div class="line"><a name="l01211"></a><span class="lineno"> 1211</span>&#160;    array&lt;index_type&gt; srow_;</div>
+<div class="line"><a name="l01212"></a><span class="lineno"> 1212</span>&#160;    index_type max_nnz_per_row_;</div>
 <div class="line"><a name="l01213"></a><span class="lineno"> 1213</span>&#160; </div>
-<div class="line"><a name="l01214"></a><span class="lineno"> 1214</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_MATRIX_CSR_HPP_</span></div>
+<div class="line"><a name="l01214"></a><span class="lineno"> 1214</span>&#160;    <span class="keywordtype">void</span> add_scaled_identity_impl(const <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>* a, const <a class="code" href="classgko_1_1LinOp.html#a1f2a4cc7323e0b9816428e3545fc6ed7">LinOp</a>* b) override;</div>
+<div class="line"><a name="l01215"></a><span class="lineno"> 1215</span>&#160;};</div>
+<div class="line"><a name="l01216"></a><span class="lineno"> 1216</span>&#160; </div>
+<div class="line"><a name="l01217"></a><span class="lineno"> 1217</span>&#160; </div>
+<div class="line"><a name="l01218"></a><span class="lineno"> 1218</span>&#160;}  <span class="comment">// namespace matrix</span></div>
+<div class="line"><a name="l01219"></a><span class="lineno"> 1219</span>&#160;}  <span class="comment">// namespace gko</span></div>
+<div class="line"><a name="l01220"></a><span class="lineno"> 1220</span>&#160; </div>
+<div class="line"><a name="l01221"></a><span class="lineno"> 1221</span>&#160; </div>
+<div class="line"><a name="l01222"></a><span class="lineno"> 1222</span>&#160;<span class="preprocessor">#endif  // GKO_PUBLIC_CORE_MATRIX_CSR_HPP_</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassgko_1_1matrix_1_1Csr_1_1automatical_html"><div class="ttname"><a href="classgko_1_1matrix_1_1Csr_1_1automatical.html">gko::matrix::Csr::automatical</a></div><div class="ttdef"><b>Definition:</b> csr.hpp:283</div></div>
 <div class="ttc" id="aclassgko_1_1matrix_1_1Csr_html_ac046f27c47848bf31c9234567661ef48"><div class="ttname"><a href="classgko_1_1matrix_1_1Csr.html#ac046f27c47848bf31c9234567661ef48">gko::matrix::Csr::get_const_srow</a></div><div class="ttdeci">const index_type * get_const_srow() const noexcept</div><div class="ttdoc">Returns the starting rows.</div><div class="ttdef"><b>Definition:</b> csr.hpp:897</div></div>
