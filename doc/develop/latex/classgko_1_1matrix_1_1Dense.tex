@@ -266,6 +266,10 @@ void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a78e3038558a849c80f5b29f6310e5
 \begin{DoxyCompactList}\small\item\em Copies the given rows from this matrix into {\ttfamily row\+\_\+collection} with scaling. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_afd04709638c41905a615561e8516d817}{row\+\_\+gather}} (\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ alpha, const \mbox{\hyperlink{classgko_1_1array}{array}}$<$ \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}} $>$ $\ast$gather\+\_\+indices, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ beta, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ row\+\_\+collection) const
 \item 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a9fa7bdf82f8d0fa79da6e1405d695dcd}{scatter\+\_\+add}} (const \mbox{\hyperlink{classgko_1_1array}{array}}$<$ \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{int32}} $>$ $\ast$scatter\+\_\+indices, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ source)
+\begin{DoxyCompactList}\small\item\em Accumulates rows from {\ttfamily source} into this matrix at scattered positions\+: {\ttfamily this(scatter\+\_\+indices(i), j) += source(i, j)} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_a22ef263dd664bb3b9db167c9822319f8}{scatter\+\_\+add}} (const \mbox{\hyperlink{classgko_1_1array}{array}}$<$ \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}} $>$ $\ast$scatter\+\_\+indices, \mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ source)
+\begin{DoxyCompactList}\small\item\em Accumulates rows from {\ttfamily source} into this matrix at scattered positions\+: {\ttfamily this(scatter\+\_\+indices(i), j) += source(i, j)} \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_ad390a89fc5e89a6160820c375db7942c}{column\+\_\+permute}} (const \mbox{\hyperlink{classgko_1_1array}{array}}$<$ \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{int32}} $>$ $\ast$permutation\+\_\+indices) const override
 \begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the column permutation of the \mbox{\hyperlink{classgko_1_1Permutable}{Permutable}} object. \end{DoxyCompactList}\item 
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1matrix_1_1Dense_ade5008d3bcbc35d6737111ac1c8307d3}{column\+\_\+permute}} (const \mbox{\hyperlink{classgko_1_1array}{array}}$<$ \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}} $>$ $\ast$permutation\+\_\+indices) const override
@@ -2321,6 +2325,42 @@ void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$
 
 
 
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a9fa7bdf82f8d0fa79da6e1405d695dcd}\label{classgko_1_1matrix_1_1Dense_a9fa7bdf82f8d0fa79da6e1405d695dcd}} 
+\index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!scatter\_add@{scatter\_add}}
+\index{scatter\_add@{scatter\_add}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{scatter\_add()}{scatter\_add()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::scatter\+\_\+add (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1array}{array}}$<$ \mbox{\hyperlink{namespacegko_a1ec26caa2379a21a8d0cde611559fff6}{int32}} $>$ $\ast$}]{scatter\+\_\+indices,  }\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$}]{source }\end{DoxyParamCaption})}
+
+
+
+Accumulates rows from {\ttfamily source} into this matrix at scattered positions\+: {\ttfamily this(scatter\+\_\+indices(i), j) += source(i, j)} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scatter\+\_\+indices} & pointer to an array containing target row indices in this matrix. May contain duplicates (contributions are summed). \\
+\hline
+{\em source} & the source matrix whose rows are scattered into this. Must have the same number of columns as this matrix and {\ttfamily scatter\+\_\+indices-\/$>$\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\+\_\+size()}}} rows. If its value type differs from this matrix, it is converted first. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a22ef263dd664bb3b9db167c9822319f8}\label{classgko_1_1matrix_1_1Dense_a22ef263dd664bb3b9db167c9822319f8}} 
+\index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!scatter\_add@{scatter\_add}}
+\index{scatter\_add@{scatter\_add}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
+\doxysubsubsection{\texorpdfstring{scatter\_add()}{scatter\_add()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type = default\+\_\+precision$>$ \\
+void \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko\+::matrix\+::\+Dense}}$<$ Value\+Type $>$\+::scatter\+\_\+add (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgko_1_1array}{array}}$<$ \mbox{\hyperlink{namespacegko_a6c57dbf3168b1ecad3ea133aaf2efbc1}{int64}} $>$ $\ast$}]{scatter\+\_\+indices,  }\item[{\mbox{\hyperlink{classgko_1_1ptr__param}{ptr\+\_\+param}}$<$ const \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$}]{source }\end{DoxyParamCaption})}
+
+
+
+Accumulates rows from {\ttfamily source} into this matrix at scattered positions\+: {\ttfamily this(scatter\+\_\+indices(i), j) += source(i, j)} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scatter\+\_\+indices} & pointer to an array containing target row indices in this matrix. May contain duplicates (contributions are summed). \\
+\hline
+{\em source} & the source matrix whose rows are scattered into this. Must have the same number of columns as this matrix and {\ttfamily scatter\+\_\+indices-\/$>$\mbox{\hyperlink{classgko_1_1LinOp_a31b3c003388eb0b95393154f68c2b98d}{get\+\_\+size()}}} rows. If its value type differs from this matrix, it is converted first. \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classgko_1_1matrix_1_1Dense_a3089b32908dc8eb84999e5100183fb89}\label{classgko_1_1matrix_1_1Dense_a3089b32908dc8eb84999e5100183fb89}} 
 \index{gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}!sub\_scaled@{sub\_scaled}}
 \index{sub\_scaled@{sub\_scaled}!gko::matrix::Dense$<$ ValueType $>$@{gko::matrix::Dense$<$ ValueType $>$}}
