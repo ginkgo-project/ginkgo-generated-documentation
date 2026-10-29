@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['unary_5fminus_1988',['unary_minus',['../structgko_1_1accessor_1_1unary__minus.html',1,'gko::accessor']]],
-  ['unary_5fplus_1989',['unary_plus',['../structgko_1_1accessor_1_1unary__plus.html',1,'gko::accessor']]],
-  ['uniformcoarsening_1990',['UniformCoarsening',['../classgko_1_1multigrid_1_1UniformCoarsening.html',1,'gko::multigrid']]],
-  ['unsupportedmatrixproperty_1991',['UnsupportedMatrixProperty',['../classgko_1_1UnsupportedMatrixProperty.html',1,'gko']]],
-  ['updater_1992',['Updater',['../classgko_1_1stop_1_1Criterion_1_1Updater.html',1,'gko::stop::Criterion']]],
-  ['uppertrs_1993',['UpperTrs',['../classgko_1_1solver_1_1UpperTrs.html',1,'gko::solver']]],
-  ['usecomposition_1994',['UseComposition',['../classgko_1_1UseComposition.html',1,'gko']]]
+  ['unary_5fminus_1990',['unary_minus',['../structgko_1_1accessor_1_1unary__minus.html',1,'gko::accessor']]],
+  ['unary_5fplus_1991',['unary_plus',['../structgko_1_1accessor_1_1unary__plus.html',1,'gko::accessor']]],
+  ['uniformcoarsening_1992',['UniformCoarsening',['../classgko_1_1multigrid_1_1UniformCoarsening.html',1,'gko::multigrid']]],
+  ['unsupportedmatrixproperty_1993',['UnsupportedMatrixProperty',['../classgko_1_1UnsupportedMatrixProperty.html',1,'gko']]],
+  ['updater_1994',['Updater',['../classgko_1_1stop_1_1Criterion_1_1Updater.html',1,'gko::stop::Criterion']]],
+  ['uppertrs_1995',['UpperTrs',['../classgko_1_1solver_1_1UpperTrs.html',1,'gko::solver']]],
+  ['usecomposition_1996',['UseComposition',['../classgko_1_1UseComposition.html',1,'gko']]]
 ];

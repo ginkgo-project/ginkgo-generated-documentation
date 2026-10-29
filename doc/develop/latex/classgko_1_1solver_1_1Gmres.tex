@@ -53,7 +53,7 @@ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbo
 std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} $>$ \mbox{\hyperlink{classgko_1_1solver_1_1Gmres_afb866babec77637ff75009b4393e7217}{conj\+\_\+transpose}} () const override
 \begin{DoxyCompactList}\small\item\em Returns a \mbox{\hyperlink{classgko_1_1LinOp}{Lin\+Op}} representing the conjugate transpose of the \mbox{\hyperlink{classgko_1_1Transposable}{Transposable}} object. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classgko_1_1solver_1_1Gmres_ab968c4bd9d71760b31842cb446b9f04e}{apply\+\_\+uses\+\_\+initial\+\_\+guess}} () const override
-\begin{DoxyCompactList}\small\item\em Return true as iterative solvers use the data in x as an initial guess. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Return true if the solver will use the initial guess provided by the user. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{classgko_1_1solver_1_1Gmres_a3a808fe82cdd1e988667a89d6982e740}{get\+\_\+krylov\+\_\+dim}} () const
 \begin{DoxyCompactList}\small\item\em Gets the Krylov dimension of the solver. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classgko_1_1solver_1_1Gmres_adf13991ee95a65952105d2be6659c7d3}{set\+\_\+krylov\+\_\+dim}} (\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} other)
@@ -73,6 +73,12 @@ static auto {\bfseries build} () -\/$>$ decltype(\mbox{\hyperlink{classgko_1_1so
 \item 
 static \mbox{\hyperlink{structgko_1_1solver_1_1Gmres_1_1parameters__type}{parameters\+\_\+type}} \mbox{\hyperlink{classgko_1_1solver_1_1Gmres_aeef96dbce2227d2a99e5abeb925f57e7}{parse}} (const \mbox{\hyperlink{classgko_1_1config_1_1pnode}{config\+::pnode}} \&config, const \mbox{\hyperlink{classgko_1_1config_1_1registry}{config\+::registry}} \&context, const \mbox{\hyperlink{classgko_1_1config_1_1type__descriptor}{config\+::type\+\_\+descriptor}} \&td\+\_\+for\+\_\+child=config\+::make\+\_\+type\+\_\+descriptor$<$ Value\+Type $>$())
 \begin{DoxyCompactList}\small\item\em Create the parameters from the property\+\_\+tree. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1solver_1_1Gmres_a434a7fe6620cbf6d46a43e7a008808d9}\label{classgko_1_1solver_1_1Gmres_a434a7fe6620cbf6d46a43e7a008808d9}} 
+class {\bfseries Enable\+Apply\+With\+Initial\+Guess$<$ Gmres $>$}
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -102,14 +108,18 @@ bool \mbox{\hyperlink{classgko_1_1solver_1_1Gmres}{gko\+::solver\+::\+Gmres}}$<$
 
 
 
-Return true as iterative solvers use the data in x as an initial guess. 
+Return true if the solver will use the initial guess provided by the user. 
 
 \begin{DoxyReturn}{Returns}
-true as iterative solvers use the data in x as an initial guess. 
+true if the solver was build with \mbox{\hyperlink{namespacegko_1_1solver_a82d21321745fbd3dc65c276d5838bb8aa1f5f6080965ed6d0a90e6b9ec599e441}{initial\+\_\+guess\+\_\+mode\+::provided}}. 
 \end{DoxyReturn}
 
 
 Reimplemented from \mbox{\hyperlink{classgko_1_1LinOp_a80967e89745c73e5df8640fe1c7e4aaa}{gko\+::\+Lin\+Op}}.
+
+
+
+References gko\+::solver\+::provided.
 
 \mbox{\Hypertarget{classgko_1_1solver_1_1Gmres_afb866babec77637ff75009b4393e7217}\label{classgko_1_1solver_1_1Gmres_afb866babec77637ff75009b4393e7217}} 
 \index{gko::solver::Gmres$<$ ValueType $>$@{gko::solver::Gmres$<$ ValueType $>$}!conj\_transpose@{conj\_transpose}}
