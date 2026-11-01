@@ -1,10 +1,15 @@
 var searchData=
 [
-  ['unary_5fminus_1990',['unary_minus',['../structgko_1_1accessor_1_1unary__minus.html',1,'gko::accessor']]],
-  ['unary_5fplus_1991',['unary_plus',['../structgko_1_1accessor_1_1unary__plus.html',1,'gko::accessor']]],
-  ['uniformcoarsening_1992',['UniformCoarsening',['../classgko_1_1multigrid_1_1UniformCoarsening.html',1,'gko::multigrid']]],
-  ['unsupportedmatrixproperty_1993',['UnsupportedMatrixProperty',['../classgko_1_1UnsupportedMatrixProperty.html',1,'gko']]],
-  ['updater_1994',['Updater',['../classgko_1_1stop_1_1Criterion_1_1Updater.html',1,'gko::stop::Criterion']]],
-  ['uppertrs_1995',['UpperTrs',['../classgko_1_1solver_1_1UpperTrs.html',1,'gko::solver']]],
-  ['usecomposition_1996',['UseComposition',['../classgko_1_1UseComposition.html',1,'gko']]]
+  ['umpire_5fpool_5fconfig_2010',['umpire_pool_config',['../structgko_1_1umpire__pool__config.html',1,'gko']]],
+  ['umpireallocatorbase_2011',['UmpireAllocatorBase',['../classgko_1_1UmpireAllocatorBase.html',1,'gko']]],
+  ['umpirecpuallocator_2012',['UmpireCpuAllocator',['../classgko_1_1UmpireCpuAllocator.html',1,'gko']]],
+  ['umpirecudaallocator_2013',['UmpireCudaAllocator',['../classgko_1_1UmpireCudaAllocator.html',1,'gko']]],
+  ['umpirehipallocator_2014',['UmpireHipAllocator',['../classgko_1_1UmpireHipAllocator.html',1,'gko']]],
+  ['unary_5fminus_2015',['unary_minus',['../structgko_1_1accessor_1_1unary__minus.html',1,'gko::accessor']]],
+  ['unary_5fplus_2016',['unary_plus',['../structgko_1_1accessor_1_1unary__plus.html',1,'gko::accessor']]],
+  ['uniformcoarsening_2017',['UniformCoarsening',['../classgko_1_1multigrid_1_1UniformCoarsening.html',1,'gko::multigrid']]],
+  ['unsupportedmatrixproperty_2018',['UnsupportedMatrixProperty',['../classgko_1_1UnsupportedMatrixProperty.html',1,'gko']]],
+  ['updater_2019',['Updater',['../classgko_1_1stop_1_1Criterion_1_1Updater.html',1,'gko::stop::Criterion']]],
+  ['uppertrs_2020',['UpperTrs',['../classgko_1_1solver_1_1UpperTrs.html',1,'gko::solver']]],
+  ['usecomposition_2021',['UseComposition',['../classgko_1_1UseComposition.html',1,'gko']]]
 ];

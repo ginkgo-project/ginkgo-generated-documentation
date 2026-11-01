@@ -1,0 +1,536 @@
+The Umpire shared pool example..
+
+This example depends on simple-\/solver.
+
+ \label{_umpire_shared_pool_Intro}%
+ \label{_umpire_shared_pool_Introduction}%
+\doxysection*{Introduction}
+
+This example shows how an application that manages its own memory with \href{https://github.com/LLNL/Umpire}{\texttt{ Umpire}} can have Ginkgo allocate from the very same pool.
+
+The application does the entire Umpire setup\+: it picks the memory resource, creates a {\ttfamily Quick\+Pool} over it, and registers that pool under a name of its own choosing. It then builds an executor with the matching Ginkgo allocator -- \mbox{\hyperlink{classgko_1_1UmpireCpuAllocator}{gko\+::\+Umpire\+Cpu\+Allocator}}, \mbox{\hyperlink{classgko_1_1UmpireCudaAllocator}{gko\+::\+Umpire\+Cuda\+Allocator}} or \mbox{\hyperlink{classgko_1_1UmpireHipAllocator}{gko\+::\+Umpire\+Hip\+Allocator}} -- which looks the pool up by that name in Umpire\textquotesingle{}s {\ttfamily Resource\+Manager}. From then on every Ginkgo allocation is served out of memory the application has already reserved, and the application sees Ginkgo\textquotesingle{}s usage in Umpire\textquotesingle{}s own statistics.
+
+The reason to share a pool is that the alternative wastes device memory\+: an application pool sized to the device leaves Ginkgo nothing to allocate, and sizing both of them to half the device wastes whichever half is idle.
+
+The example solves a 2D Poisson problem with CG and then checks what the pool saw\+: that it really served Ginkgo\textquotesingle{}s allocations, that they came out of memory the application had already reserved rather than growing the pool, and that nothing was left behind once the solve went out of scope.
+
+\label{_umpire_shared_pool_Notes}%
+\doxysubsubsection*{Notes }
+
+Ginkgo must be configured with {\ttfamily -\/D\+G\+I\+N\+K\+G\+O\+\_\+\+B\+U\+I\+L\+D\+\_\+\+U\+M\+P\+I\+RE=ON} for this example to be built, and the application has to link Umpire itself\+: Ginkgo links it privately and does not re-\/export it.
+
+Umpire\textquotesingle{}s pools are not stream-\/ordered, so sharing a device pool across streams needs an {\ttfamily Executor\+::synchronize()} before freed memory is handed out again. \label{_umpire_shared_pool_CommProg}%
+ \doxysection*{The commented program}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <cstddef>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <functional>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <umpire/ResourceManager.hpp>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <umpire/strategy/QuickPool.hpp>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
+\end{DoxyCode}
+
+
+The pool\textquotesingle{}s name is the only thing the application and Ginkgo have to agree on\+: Ginkgo looks the pool up by name in Umpire\textquotesingle{}s Resource\+Manager.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{char} pool\_name[] = \textcolor{stringliteral}{"application\_pool"};}
+\DoxyCodeLine{}
+\DoxyCodeLine{constexpr std::size\_t KiB = std::size\_t\{1\} << 10;}
+\DoxyCodeLine{constexpr std::size\_t MiB = std::size\_t\{1\} << 20;}
+\end{DoxyCode}
+
+
+Creates a 2D Poisson matrix (five-\/point stencil) on a grid x grid grid, with the nonzeros of every row in increasing column order.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType, \textcolor{keyword}{typename} IndexType>}
+\DoxyCodeLine{\mbox{\hyperlink{structgko_1_1matrix__data}{gko::matrix\_data<ValueType, IndexType>}} generate\_2d\_poisson(IndexType grid)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} size = static\_cast<gko::size\_type>(grid) * grid;}
+\DoxyCodeLine{    \mbox{\hyperlink{structgko_1_1matrix__data}{gko::matrix\_data<ValueType, IndexType>}} data\{\mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}\{size, size\}\};}
+\DoxyCodeLine{    \textcolor{keywordflow}{for} (IndexType j = 0; j < grid; ++j) \{}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (IndexType i = 0; i < grid; ++i) \{}
+\DoxyCodeLine{            \textcolor{keyword}{const} \textcolor{keyword}{auto} row = j * grid + i;}
+\DoxyCodeLine{            \textcolor{keywordflow}{if} (j > 0) \{}
+\DoxyCodeLine{                data.nonzeros.emplace\_back(row, row -\/ grid, ValueType\{-\/1\});}
+\DoxyCodeLine{            \}}
+\DoxyCodeLine{            \textcolor{keywordflow}{if} (i > 0) \{}
+\DoxyCodeLine{                data.nonzeros.emplace\_back(row, row -\/ 1, ValueType\{-\/1\});}
+\DoxyCodeLine{            \}}
+\DoxyCodeLine{            data.nonzeros.emplace\_back(row, row, ValueType\{4\});}
+\DoxyCodeLine{            \textcolor{keywordflow}{if} (i < grid -\/ 1) \{}
+\DoxyCodeLine{                data.nonzeros.emplace\_back(row, row + 1, ValueType\{-\/1\});}
+\DoxyCodeLine{            \}}
+\DoxyCodeLine{            \textcolor{keywordflow}{if} (j < grid -\/ 1) \{}
+\DoxyCodeLine{                data.nonzeros.emplace\_back(row, row + grid, ValueType\{-\/1\});}
+\DoxyCodeLine{            \}}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} data;}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+doc/results.\+dox contains the P\+A\+SS lines, so a F\+A\+IL also fails the example\textquotesingle{}s test, which ignores the numbers printed above them.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} check(\textcolor{keyword}{const} \textcolor{keywordtype}{char}* what, \textcolor{keywordtype}{bool} ok)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    std::cout << (ok ? \textcolor{stringliteral}{"PASS: "} : \textcolor{stringliteral}{"FAIL: "}) << what << std::endl;}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} ok;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
+\DoxyCodeLine{\{}
+\end{DoxyCode}
+
+
+Some shortcuts
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using} ValueType = double;}
+\DoxyCodeLine{\textcolor{keyword}{using} RealValueType = \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} IndexType = int;}
+\DoxyCodeLine{\textcolor{keyword}{using} vec = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} real\_vec = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<RealValueType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} mtx = \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<ValueType, IndexType>}};}
+\DoxyCodeLine{\textcolor{keyword}{using} cg = \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{gko::solver::Cg<ValueType>}};}
+\end{DoxyCode}
+
+
+Print the ginkgo version information.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::cout << \mbox{\hyperlink{classgko_1_1version__info_a6daeb8a087cfb57fa055526fc133d8eb}{gko::version\_info::get}}() << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordflow}{if} (argc == 2 \&\& std::string(argv[1]) == \textcolor{stringliteral}{"-\/-\/help"}) \{}
+\DoxyCodeLine{    std::cerr << \textcolor{stringliteral}{"Usage: "} << argv[0] << \textcolor{stringliteral}{" [executor]"} << std::endl;}
+\DoxyCodeLine{    std::exit(-\/1);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{const} std::string executor\_string = argc >= 2 ? argv[1] : \textcolor{stringliteral}{"reference"};}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{bool} on\_device =}
+\DoxyCodeLine{    executor\_string == \textcolor{stringliteral}{"cuda"} || executor\_string == \textcolor{stringliteral}{"hip"};}
+\end{DoxyCode}
+
+
+Step 1\+: the application sets Umpire up on its own, exactly as it would without Ginkgo.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto}\& resource\_manager = umpire::ResourceManager::getInstance();}
+\end{DoxyCode}
+
+
+A plain \char`\"{}\+D\+E\+V\+I\+C\+E\char`\"{} binds to whichever device is current when Umpire first creates it, which Ginkgo then refuses if its executor uses another one.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} std::string resource = on\_device ? \textcolor{stringliteral}{"DEVICE::0"} : \textcolor{stringliteral}{"HOST"};}
+\end{DoxyCode}
+
+
+Umpire aligns to 16 bytes by default; 256 is what cuda\+Malloc and hip\+Malloc hand out.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto} pool = resource\_manager.makeAllocator<umpire::strategy::QuickPool>(}
+\DoxyCodeLine{    pool\_name, resource\_manager.getAllocator(resource), 128 * MiB, 16 * MiB,}
+\DoxyCodeLine{    256);}
+\end{DoxyCode}
+
+
+Memory the application keeps for itself.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}* application\_buffer = pool.allocate(1 * MiB);}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} reserved\_before = pool.getActualSize();}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} in\_use\_before = pool.getCurrentSize();}
+\end{DoxyCode}
+
+
+Step 2\+: hand the pool to Ginkgo. The device executors keep Ginkgo\textquotesingle{}s default allocator for their master, so a device pool only ever sees device allocations.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} std::map<std::string, std::function<std::shared\_ptr<gko::Executor>()>>}
+\DoxyCodeLine{    exec\_map\{}
+\DoxyCodeLine{        \{\textcolor{stringliteral}{"reference"},}
+\DoxyCodeLine{         [] \{}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} gko::ReferenceExecutor::create(}
+\DoxyCodeLine{                 std::make\_shared<gko::UmpireCpuAllocator>(pool\_name));}
+\DoxyCodeLine{         \}\},}
+\DoxyCodeLine{        \{\textcolor{stringliteral}{"omp"},}
+\DoxyCodeLine{         [] \{}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}(}
+\DoxyCodeLine{                 std::make\_shared<gko::UmpireCpuAllocator>(pool\_name));}
+\DoxyCodeLine{         \}\},}
+\DoxyCodeLine{        \{\textcolor{stringliteral}{"cuda"},}
+\DoxyCodeLine{         [] \{}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a6c423656c7c0eb53810cb77bb4a66d15}{gko::CudaExecutor::create}}(}
+\DoxyCodeLine{                 0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}(),}
+\DoxyCodeLine{                 std::make\_shared<gko::UmpireCudaAllocator>(pool\_name));}
+\DoxyCodeLine{         \}\},}
+\DoxyCodeLine{        \{\textcolor{stringliteral}{"hip"}, [] \{}
+\DoxyCodeLine{             \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_aa0701fe1303e03a8331da7e95008100d}{gko::HipExecutor::create}}(}
+\DoxyCodeLine{                 0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}(),}
+\DoxyCodeLine{                 std::make\_shared<gko::UmpireHipAllocator>(pool\_name));}
+\DoxyCodeLine{         \}\}\};}
+\end{DoxyCode}
+
+
+executor where Ginkgo will perform the computation
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} exec = exec\_map.at(executor\_string)();  \textcolor{comment}{// throws if not valid}}
+\end{DoxyCode}
+
+
+Step 3\+: use Ginkgo as usual. Every allocation below comes from the application\textquotesingle{}s pool.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} IndexType grid\_points = 64;}
+\DoxyCodeLine{\textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} \mbox{\hyperlink{namespacegko_1_1stop_afcbdb7495467cfc7e059209e53144989}{max\_iters}} = 1000u;}
+\DoxyCodeLine{\textcolor{keyword}{const} RealValueType reduction\_factor\{1e-\/10\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::size\_t in\_use\_during\{\};}
+\DoxyCodeLine{std::size\_t reserved\_during\{\};}
+\DoxyCodeLine{std::size\_t allocations\_during\{\};}
+\DoxyCodeLine{\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} iterations\{\};}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} converged\{\};}
+\DoxyCodeLine{RealValueType relative\_residual\{\};}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keyword}{auto} A = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(mtx::create(exec));}
+\DoxyCodeLine{    A-\/>read(generate\_2d\_poisson<ValueType, IndexType>(grid\_points));}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} size = A-\/>get\_size()[0];}
+\DoxyCodeLine{    \textcolor{keyword}{auto} b = vec::create(exec, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}\{size, 1\});}
+\DoxyCodeLine{    \textcolor{keyword}{auto} x = vec::create(exec, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}\{size, 1\});}
+\DoxyCodeLine{    b-\/>fill(1.0);}
+\DoxyCodeLine{    x-\/>fill(0.0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{auto} logger = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(\mbox{\hyperlink{classgko_1_1log_1_1Convergence}{gko::log::Convergence<ValueType>::create}}());}
+\DoxyCodeLine{    \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}} =}
+\DoxyCodeLine{        cg::build()}
+\DoxyCodeLine{            .with\_criteria(}
+\DoxyCodeLine{                gko::stop::Iteration::build().with\_max\_iters(max\_iters),}
+\DoxyCodeLine{                \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                    .with\_reduction\_factor(reduction\_factor))}
+\DoxyCodeLine{            .on(exec)}
+\DoxyCodeLine{            -\/>generate(A);}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}}-\/>add\_logger(logger);}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}}-\/>apply(b, x);}
+\DoxyCodeLine{    exec-\/>\mbox{\hyperlink{classgko_1_1Executor_a24eeee7648c0f0fd07c9866d07154875}{synchronize}}();}
+\end{DoxyCode}
+
+
+Read while every Ginkgo object of the solve is still alive.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{in\_use\_during = pool.getCurrentSize();}
+\DoxyCodeLine{reserved\_during = pool.getActualSize();}
+\DoxyCodeLine{allocations\_during = pool.getAllocationCount();}
+\DoxyCodeLine{iterations = logger-\/>get\_num\_iterations();}
+\DoxyCodeLine{converged = logger-\/>has\_converged();}
+\end{DoxyCode}
+
+
+the explicit residual norm, $\vert$$\vert$b -\/ A x$\vert$$\vert$ / $\vert$$\vert$b$\vert$$\vert$
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_a0059e27f8f4bc348ff65c1e60caf47c8}{one}} = gko::initialize<vec>(\{1.0\}, exec);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} neg\_one = gko::initialize<vec>(\{-\/1.0\}, exec);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} residual = \mbox{\hyperlink{namespacegko_adc9a73d088d88d5dfdaf63aff9e96012}{gko::clone}}(b);}
+\DoxyCodeLine{    A-\/>apply(neg\_one, x, one, residual);}
+\DoxyCodeLine{    \textcolor{keyword}{auto} residual\_norm = real\_vec::create(exec, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}\{1, 1\});}
+\DoxyCodeLine{    \textcolor{keyword}{auto} rhs\_norm = real\_vec::create(exec, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}\{1, 1\});}
+\DoxyCodeLine{    residual-\/>compute\_norm2(residual\_norm);}
+\DoxyCodeLine{    b-\/>compute\_norm2(rhs\_norm);}
+\DoxyCodeLine{    relative\_residual =}
+\DoxyCodeLine{        exec-\/>\mbox{\hyperlink{classgko_1_1Executor_ab5ee27c7997a4e109831e27c42242073}{copy\_val\_to\_host}}(residual\_norm-\/>get\_const\_values()) /}
+\DoxyCodeLine{        exec-\/>\mbox{\hyperlink{classgko_1_1Executor_ab5ee27c7997a4e109831e27c42242073}{copy\_val\_to\_host}}(rhs\_norm-\/>get\_const\_values());}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} in\_use\_after = pool.getCurrentSize();}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keyword}{auto} reserved\_after = pool.getActualSize();}
+\DoxyCodeLine{}
+\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"The application reserved "} << reserved\_before / MiB}
+\DoxyCodeLine{          << \textcolor{stringliteral}{" MiB in its Umpire pool and was holding "}}
+\DoxyCodeLine{          << in\_use\_before / MiB << \textcolor{stringliteral}{" MiB of it before Ginkgo started."}}
+\DoxyCodeLine{          << std::endl;}
+\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"During the solve the pool was holding "} << in\_use\_during / KiB}
+\DoxyCodeLine{          << \textcolor{stringliteral}{" KiB in "} << allocations\_during}
+\DoxyCodeLine{          << \textcolor{stringliteral}{" live allocations, one of them the application's own."}}
+\DoxyCodeLine{          << std::endl;}
+\DoxyCodeLine{std::cout << \textcolor{stringliteral}{"CG stopped after "} << iterations}
+\DoxyCodeLine{          << \textcolor{stringliteral}{" iterations at a relative residual of "} << relative\_residual}
+\DoxyCodeLine{          << \textcolor{stringliteral}{"."} << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} ok = \textcolor{keyword}{true};}
+\DoxyCodeLine{ok \&= check(\textcolor{stringliteral}{"Ginkgo allocated from the application's pool"},}
+\DoxyCodeLine{            in\_use\_during > in\_use\_before);}
+\DoxyCodeLine{ok \&= check(\textcolor{stringliteral}{"Ginkgo only used memory the application had reserved"},}
+\DoxyCodeLine{            reserved\_during == reserved\_before);}
+\DoxyCodeLine{ok \&= check(}
+\DoxyCodeLine{    \textcolor{stringliteral}{"Ginkgo returned everything it had allocated"},}
+\DoxyCodeLine{    in\_use\_after == in\_use\_before \&\& reserved\_after == reserved\_before);}
+\end{DoxyCode}
+
+
+The stopping criterion watches the implicit residual, so the explicit one is only expected to be of the same order of magnitude.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    ok \&= check(\textcolor{stringliteral}{"the solve converged"},}
+\DoxyCodeLine{                converged \&\& relative\_residual <= 100 * reduction\_factor);}
+\DoxyCodeLine{}
+\DoxyCodeLine{    pool.deallocate(application\_buffer);}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (!ok) \{}
+\DoxyCodeLine{        std::cerr << \textcolor{stringliteral}{"The Umpire integration did not behave as expected."}}
+\DoxyCodeLine{                  << std::endl;}
+\DoxyCodeLine{        \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+ \label{_umpire_shared_pool_Results}%
+\doxysection*{Results}
+
+This is the expected output\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{The application reserved 128 MiB in its Umpire pool and was holding 1 MiB of it before Ginkgo started.}
+\DoxyCodeLine{During the solve the pool was holding 1501 KiB in 19 live allocations, \mbox{\hyperlink{namespacegko_a0059e27f8f4bc348ff65c1e60caf47c8}{one}} of them the application\textcolor{stringliteral}{'s own.}}
+\DoxyCodeLine{\textcolor{stringliteral}{CG stopped after 132 iterations at a relative residual of 9.28544e-\/11.}}
+\DoxyCodeLine{\textcolor{stringliteral}{PASS: Ginkgo allocated from the application'}s pool}
+\DoxyCodeLine{PASS: Ginkgo only used \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27acd69b4957f06cd818d7bf3d61980e291}{memory}} the application had reserved}
+\DoxyCodeLine{PASS: Ginkgo returned everything it had allocated}
+\DoxyCodeLine{PASS: the solve converged}
+\end{DoxyCode}
+
+
+\label{_umpire_shared_pool_Commentsaboutprogramminganddebugging}%
+\doxysubsubsection*{Comments about programming and debugging }
+
+\label{_umpire_shared_pool_PlainProg}%
+ \doxysection*{The plain program}
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <cstddef>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <functional>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <umpire/ResourceManager.hpp>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <umpire/strategy/QuickPool.hpp>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <ginkgo/ginkgo.hpp>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{const} \textcolor{keywordtype}{char} pool\_name[] = \textcolor{stringliteral}{"application\_pool"};}
+\DoxyCodeLine{}
+\DoxyCodeLine{constexpr std::size\_t KiB = std::size\_t\{1\} << 10;}
+\DoxyCodeLine{constexpr std::size\_t MiB = std::size\_t\{1\} << 20;}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType, \textcolor{keyword}{typename} IndexType>}
+\DoxyCodeLine{\mbox{\hyperlink{structgko_1_1matrix__data}{gko::matrix\_data<ValueType, IndexType>}} generate\_2d\_poisson(IndexType grid)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} size = static\_cast<gko::size\_type>(grid) * grid;}
+\DoxyCodeLine{    \mbox{\hyperlink{structgko_1_1matrix__data}{gko::matrix\_data<ValueType, IndexType>}} data\{\mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}\{size, size\}\};}
+\DoxyCodeLine{    \textcolor{keywordflow}{for} (IndexType j = 0; j < grid; ++j) \{}
+\DoxyCodeLine{        \textcolor{keywordflow}{for} (IndexType i = 0; i < grid; ++i) \{}
+\DoxyCodeLine{            \textcolor{keyword}{const} \textcolor{keyword}{auto} row = j * grid + i;}
+\DoxyCodeLine{            \textcolor{keywordflow}{if} (j > 0) \{}
+\DoxyCodeLine{                data.nonzeros.emplace\_back(row, row -\/ grid, ValueType\{-\/1\});}
+\DoxyCodeLine{            \}}
+\DoxyCodeLine{            \textcolor{keywordflow}{if} (i > 0) \{}
+\DoxyCodeLine{                data.nonzeros.emplace\_back(row, row -\/ 1, ValueType\{-\/1\});}
+\DoxyCodeLine{            \}}
+\DoxyCodeLine{            data.nonzeros.emplace\_back(row, row, ValueType\{4\});}
+\DoxyCodeLine{            \textcolor{keywordflow}{if} (i < grid -\/ 1) \{}
+\DoxyCodeLine{                data.nonzeros.emplace\_back(row, row + 1, ValueType\{-\/1\});}
+\DoxyCodeLine{            \}}
+\DoxyCodeLine{            \textcolor{keywordflow}{if} (j < grid -\/ 1) \{}
+\DoxyCodeLine{                data.nonzeros.emplace\_back(row, row + grid, ValueType\{-\/1\});}
+\DoxyCodeLine{            \}}
+\DoxyCodeLine{        \}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} data;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} check(\textcolor{keyword}{const} \textcolor{keywordtype}{char}* what, \textcolor{keywordtype}{bool} ok)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    std::cout << (ok ? \textcolor{stringliteral}{"PASS: "} : \textcolor{stringliteral}{"FAIL: "}) << what << std::endl;}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} ok;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int} main(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[])}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{keyword}{using} ValueType = double;}
+\DoxyCodeLine{    \textcolor{keyword}{using} RealValueType = \mbox{\hyperlink{namespacegko_afd46d554050c4ae90e84ea4fcd9a41f3}{gko::remove\_complex<ValueType>}};}
+\DoxyCodeLine{    \textcolor{keyword}{using} IndexType = int;}
+\DoxyCodeLine{    \textcolor{keyword}{using} vec = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<ValueType>}};}
+\DoxyCodeLine{    \textcolor{keyword}{using} real\_vec = \mbox{\hyperlink{classgko_1_1matrix_1_1Dense}{gko::matrix::Dense<RealValueType>}};}
+\DoxyCodeLine{    \textcolor{keyword}{using} mtx = \mbox{\hyperlink{classgko_1_1matrix_1_1Csr}{gko::matrix::Csr<ValueType, IndexType>}};}
+\DoxyCodeLine{    \textcolor{keyword}{using} cg = \mbox{\hyperlink{classgko_1_1solver_1_1Cg}{gko::solver::Cg<ValueType>}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{    std::cout << \mbox{\hyperlink{classgko_1_1version__info_a6daeb8a087cfb57fa055526fc133d8eb}{gko::version\_info::get}}() << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (argc == 2 \&\& std::string(argv[1]) == \textcolor{stringliteral}{"-\/-\/help"}) \{}
+\DoxyCodeLine{        std::cerr << \textcolor{stringliteral}{"Usage: "} << argv[0] << \textcolor{stringliteral}{" [executor]"} << std::endl;}
+\DoxyCodeLine{        std::exit(-\/1);}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{const} std::string executor\_string = argc >= 2 ? argv[1] : \textcolor{stringliteral}{"reference"};}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keywordtype}{bool} on\_device =}
+\DoxyCodeLine{        executor\_string == \textcolor{stringliteral}{"cuda"} || executor\_string == \textcolor{stringliteral}{"hip"};}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{auto}\& resource\_manager = umpire::ResourceManager::getInstance();}
+\DoxyCodeLine{    \textcolor{keyword}{const} std::string resource = on\_device ? \textcolor{stringliteral}{"DEVICE::0"} : \textcolor{stringliteral}{"HOST"};}
+\DoxyCodeLine{    \textcolor{keyword}{auto} pool = resource\_manager.makeAllocator<umpire::strategy::QuickPool>(}
+\DoxyCodeLine{        pool\_name, resource\_manager.getAllocator(resource), 128 * MiB, 16 * MiB,}
+\DoxyCodeLine{        256);}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keywordtype}{void}* application\_buffer = pool.allocate(1 * MiB);}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} reserved\_before = pool.getActualSize();}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} in\_use\_before = pool.getCurrentSize();}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{const} std::map<std::string, std::function<std::shared\_ptr<gko::Executor>()>>}
+\DoxyCodeLine{        exec\_map\{}
+\DoxyCodeLine{            \{\textcolor{stringliteral}{"reference"},}
+\DoxyCodeLine{             [] \{}
+\DoxyCodeLine{                 \textcolor{keywordflow}{return} gko::ReferenceExecutor::create(}
+\DoxyCodeLine{                     std::make\_shared<gko::UmpireCpuAllocator>(pool\_name));}
+\DoxyCodeLine{             \}\},}
+\DoxyCodeLine{            \{\textcolor{stringliteral}{"omp"},}
+\DoxyCodeLine{             [] \{}
+\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}(}
+\DoxyCodeLine{                     std::make\_shared<gko::UmpireCpuAllocator>(pool\_name));}
+\DoxyCodeLine{             \}\},}
+\DoxyCodeLine{            \{\textcolor{stringliteral}{"cuda"},}
+\DoxyCodeLine{             [] \{}
+\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1CudaExecutor_a6c423656c7c0eb53810cb77bb4a66d15}{gko::CudaExecutor::create}}(}
+\DoxyCodeLine{                     0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}(),}
+\DoxyCodeLine{                     std::make\_shared<gko::UmpireCudaAllocator>(pool\_name));}
+\DoxyCodeLine{             \}\},}
+\DoxyCodeLine{            \{\textcolor{stringliteral}{"hip"}, [] \{}
+\DoxyCodeLine{                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classgko_1_1HipExecutor_aa0701fe1303e03a8331da7e95008100d}{gko::HipExecutor::create}}(}
+\DoxyCodeLine{                     0, \mbox{\hyperlink{classgko_1_1OmpExecutor_a8930142a1913bcbcac4fb6c917f930d9}{gko::OmpExecutor::create}}(),}
+\DoxyCodeLine{                     std::make\_shared<gko::UmpireHipAllocator>(pool\_name));}
+\DoxyCodeLine{             \}\}\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} exec = exec\_map.at(executor\_string)();  \textcolor{comment}{// throws if not valid}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{const} IndexType grid\_points = 64;}
+\DoxyCodeLine{    \textcolor{keyword}{const} \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} \mbox{\hyperlink{namespacegko_1_1stop_afcbdb7495467cfc7e059209e53144989}{max\_iters}} = 1000u;}
+\DoxyCodeLine{    \textcolor{keyword}{const} RealValueType reduction\_factor\{1e-\/10\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{    std::size\_t in\_use\_during\{\};}
+\DoxyCodeLine{    std::size\_t reserved\_during\{\};}
+\DoxyCodeLine{    std::size\_t allocations\_during\{\};}
+\DoxyCodeLine{    \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{gko::size\_type}} iterations\{\};}
+\DoxyCodeLine{    \textcolor{keywordtype}{bool} converged\{\};}
+\DoxyCodeLine{    RealValueType relative\_residual\{\};}
+\DoxyCodeLine{    \{}
+\DoxyCodeLine{        \textcolor{keyword}{auto} A = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(mtx::create(exec));}
+\DoxyCodeLine{        A-\/>read(generate\_2d\_poisson<ValueType, IndexType>(grid\_points));}
+\DoxyCodeLine{        \textcolor{keyword}{const} \textcolor{keyword}{auto} size = A-\/>get\_size()[0];}
+\DoxyCodeLine{        \textcolor{keyword}{auto} b = vec::create(exec, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}\{size, 1\});}
+\DoxyCodeLine{        \textcolor{keyword}{auto} x = vec::create(exec, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}\{size, 1\});}
+\DoxyCodeLine{        b-\/>fill(1.0);}
+\DoxyCodeLine{        x-\/>fill(0.0);}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{keyword}{auto} logger = \mbox{\hyperlink{namespacegko_a3ce296f73db0ff398bdea6009a3a5c58}{gko::share}}(\mbox{\hyperlink{classgko_1_1log_1_1Convergence}{gko::log::Convergence<ValueType>::create}}());}
+\DoxyCodeLine{        \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}} =}
+\DoxyCodeLine{            cg::build()}
+\DoxyCodeLine{                .with\_criteria(}
+\DoxyCodeLine{                    gko::stop::Iteration::build().with\_max\_iters(max\_iters),}
+\DoxyCodeLine{                    \mbox{\hyperlink{classgko_1_1stop_1_1ResidualNorm}{gko::stop::ResidualNorm<ValueType>::build}}()}
+\DoxyCodeLine{                        .with\_reduction\_factor(reduction\_factor))}
+\DoxyCodeLine{                .on(exec)}
+\DoxyCodeLine{                -\/>generate(A);}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}}-\/>add\_logger(logger);}
+\DoxyCodeLine{        \mbox{\hyperlink{namespacegko_1_1log_a15f71654c6c4f4defc95f9359343fa27a7cbf673200498a0d1324f4330825202a}{solver}}-\/>apply(b, x);}
+\DoxyCodeLine{        exec-\/>\mbox{\hyperlink{classgko_1_1Executor_a24eeee7648c0f0fd07c9866d07154875}{synchronize}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{        in\_use\_during = pool.getCurrentSize();}
+\DoxyCodeLine{        reserved\_during = pool.getActualSize();}
+\DoxyCodeLine{        allocations\_during = pool.getAllocationCount();}
+\DoxyCodeLine{        iterations = logger-\/>get\_num\_iterations();}
+\DoxyCodeLine{        converged = logger-\/>has\_converged();}
+\DoxyCodeLine{}
+\DoxyCodeLine{        \textcolor{keyword}{auto} \mbox{\hyperlink{namespacegko_a0059e27f8f4bc348ff65c1e60caf47c8}{one}} = gko::initialize<vec>(\{1.0\}, exec);}
+\DoxyCodeLine{        \textcolor{keyword}{auto} neg\_one = gko::initialize<vec>(\{-\/1.0\}, exec);}
+\DoxyCodeLine{        \textcolor{keyword}{auto} residual = \mbox{\hyperlink{namespacegko_adc9a73d088d88d5dfdaf63aff9e96012}{gko::clone}}(b);}
+\DoxyCodeLine{        A-\/>apply(neg\_one, x, one, residual);}
+\DoxyCodeLine{        \textcolor{keyword}{auto} residual\_norm = real\_vec::create(exec, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}\{1, 1\});}
+\DoxyCodeLine{        \textcolor{keyword}{auto} rhs\_norm = real\_vec::create(exec, \mbox{\hyperlink{structgko_1_1dim}{gko::dim<2>}}\{1, 1\});}
+\DoxyCodeLine{        residual-\/>compute\_norm2(residual\_norm);}
+\DoxyCodeLine{        b-\/>compute\_norm2(rhs\_norm);}
+\DoxyCodeLine{        relative\_residual =}
+\DoxyCodeLine{            exec-\/>\mbox{\hyperlink{classgko_1_1Executor_ab5ee27c7997a4e109831e27c42242073}{copy\_val\_to\_host}}(residual\_norm-\/>get\_const\_values()) /}
+\DoxyCodeLine{            exec-\/>\mbox{\hyperlink{classgko_1_1Executor_ab5ee27c7997a4e109831e27c42242073}{copy\_val\_to\_host}}(rhs\_norm-\/>get\_const\_values());}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} in\_use\_after = pool.getCurrentSize();}
+\DoxyCodeLine{    \textcolor{keyword}{const} \textcolor{keyword}{auto} reserved\_after = pool.getActualSize();}
+\DoxyCodeLine{}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"The application reserved "} << reserved\_before / MiB}
+\DoxyCodeLine{              << \textcolor{stringliteral}{" MiB in its Umpire pool and was holding "}}
+\DoxyCodeLine{              << in\_use\_before / MiB << \textcolor{stringliteral}{" MiB of it before Ginkgo started."}}
+\DoxyCodeLine{              << std::endl;}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"During the solve the pool was holding "} << in\_use\_during / KiB}
+\DoxyCodeLine{              << \textcolor{stringliteral}{" KiB in "} << allocations\_during}
+\DoxyCodeLine{              << \textcolor{stringliteral}{" live allocations, one of them the application's own."}}
+\DoxyCodeLine{              << std::endl;}
+\DoxyCodeLine{    std::cout << \textcolor{stringliteral}{"CG stopped after "} << iterations}
+\DoxyCodeLine{              << \textcolor{stringliteral}{" iterations at a relative residual of "} << relative\_residual}
+\DoxyCodeLine{              << \textcolor{stringliteral}{"."} << std::endl;}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keywordtype}{bool} ok = \textcolor{keyword}{true};}
+\DoxyCodeLine{    ok \&= check(\textcolor{stringliteral}{"Ginkgo allocated from the application's pool"},}
+\DoxyCodeLine{                in\_use\_during > in\_use\_before);}
+\DoxyCodeLine{    ok \&= check(\textcolor{stringliteral}{"Ginkgo only used memory the application had reserved"},}
+\DoxyCodeLine{                reserved\_during == reserved\_before);}
+\DoxyCodeLine{    ok \&= check(}
+\DoxyCodeLine{        \textcolor{stringliteral}{"Ginkgo returned everything it had allocated"},}
+\DoxyCodeLine{        in\_use\_after == in\_use\_before \&\& reserved\_after == reserved\_before);}
+\DoxyCodeLine{    ok \&= check(\textcolor{stringliteral}{"the solve converged"},}
+\DoxyCodeLine{                converged \&\& relative\_residual <= 100 * reduction\_factor);}
+\DoxyCodeLine{}
+\DoxyCodeLine{    pool.deallocate(application\_buffer);}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (!ok) \{}
+\DoxyCodeLine{        std::cerr << \textcolor{stringliteral}{"The Umpire integration did not behave as expected."}}
+\DoxyCodeLine{                  << std::endl;}
+\DoxyCodeLine{        \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\}}
+\end{DoxyCodeInclude}
+ 

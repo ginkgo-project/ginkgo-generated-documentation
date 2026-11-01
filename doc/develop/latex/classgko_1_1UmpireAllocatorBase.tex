@@ -1,0 +1,76 @@
+\hypertarget{classgko_1_1UmpireAllocatorBase}{}\doxysection{gko\+::Umpire\+Allocator\+Base Class Reference}
+\label{classgko_1_1UmpireAllocatorBase}\index{gko::UmpireAllocatorBase@{gko::UmpireAllocatorBase}}
+
+
+Common base of the Umpire-\/backed allocators, which forward to a named allocator in \href{https://github.com/LLNL/Umpire}{\texttt{ Umpire}}\textquotesingle{}s Resource\+Manager.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/base/memory.\+hpp$>$}
+
+
+
+Inheritance diagram for gko\+::Umpire\+Allocator\+Base\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1UmpireAllocatorBase__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgko_1_1UmpireAllocatorBase_a33b3376bf7ab694e910207a3a6da1d12}\label{classgko_1_1UmpireAllocatorBase_a33b3376bf7ab694e910207a3a6da1d12}} 
+const std\+::string \& \mbox{\hyperlink{classgko_1_1UmpireAllocatorBase_a33b3376bf7ab694e910207a3a6da1d12}{get\+\_\+name}} () const
+\begin{DoxyCompactList}\small\item\em Name of the underlying Umpire allocator. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1UmpireAllocatorBase_aee5c01ab83161c36812badb9eea7b746}\label{classgko_1_1UmpireAllocatorBase_aee5c01ab83161c36812badb9eea7b746}} 
+\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{classgko_1_1UmpireAllocatorBase_aee5c01ab83161c36812badb9eea7b746}{get\+\_\+current\+\_\+size}} () const
+\begin{DoxyCompactList}\small\item\em Bytes currently allocated from the Umpire allocator and not yet deallocated, by any of its users (not only through this object). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{classgko_1_1UmpireAllocatorBase_af89ff3a88fda5946ab544c9a047d0c0f}{get\+\_\+actual\+\_\+size}} () const
+\begin{DoxyCompactList}\small\item\em Bytes the Umpire allocator holds from its memory resource. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1UmpireAllocatorBase_aa78d7f225d5c459adfb5aca19e2db13b}\label{classgko_1_1UmpireAllocatorBase_aa78d7f225d5c459adfb5aca19e2db13b}} 
+\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{classgko_1_1UmpireAllocatorBase_aa78d7f225d5c459adfb5aca19e2db13b}{get\+\_\+high\+\_\+watermark}} () const
+\begin{DoxyCompactList}\small\item\em Largest value \mbox{\hyperlink{classgko_1_1UmpireAllocatorBase_aee5c01ab83161c36812badb9eea7b746}{get\+\_\+current\+\_\+size()}} has reached so far. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1UmpireAllocatorBase_a1bf73645c2da49e8be3d5163f65486b2}\label{classgko_1_1UmpireAllocatorBase_a1bf73645c2da49e8be3d5163f65486b2}} 
+\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{classgko_1_1UmpireAllocatorBase_a1bf73645c2da49e8be3d5163f65486b2}{get\+\_\+allocation\+\_\+count}} () const
+\begin{DoxyCompactList}\small\item\em Number of allocations from the Umpire allocator that are still live. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgko_1_1UmpireAllocatorBase_a4361bd7e4ecbbc223262268e05b0f3a9}\label{classgko_1_1UmpireAllocatorBase_a4361bd7e4ecbbc223262268e05b0f3a9}} 
+void \mbox{\hyperlink{classgko_1_1UmpireAllocatorBase_a4361bd7e4ecbbc223262268e05b0f3a9}{release}} ()
+\begin{DoxyCompactList}\small\item\em Returns the pool\textquotesingle{}s completely unused blocks to its memory resource. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Common base of the Umpire-\/backed allocators, which forward to a named allocator in \href{https://github.com/LLNL/Umpire}{\texttt{ Umpire}}\textquotesingle{}s Resource\+Manager. 
+
+
+\begin{DoxyItemize}
+\item Statistics cover everything allocated from the Umpire allocator.
+\item Alignment is not checked (application-\/built pools\+: 16 bytes by default).
+\item Not serialized by executors; share a pool across threads only if it is thread-\/safe (\mbox{\hyperlink{structgko_1_1umpire__pool__config_a5ad2d9aa3bf0a0d93b059b378ad9044a}{umpire\+\_\+pool\+\_\+config\+::thread\+\_\+safe}}).
+\item Each process, hence each M\+PI rank, has its own Resource\+Manager and pools.
+\item The accessors are deliberately not noexcept\+: without Umpire they throw \mbox{\hyperlink{classgko_1_1NotCompiled}{Not\+Compiled}}.
+\end{DoxyItemize}
+
+\begin{DoxyWarning}{Warning}
+Pools are not stream-\/ordered\+: deallocate() frees immediately while Ginkgo\textquotesingle{}s kernels may still use the memory. Call \mbox{\hyperlink{classgko_1_1Executor_a24eeee7648c0f0fd07c9866d07154875}{Executor\+::synchronize()}} before sharing a device pool across streams. 
+\end{DoxyWarning}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classgko_1_1UmpireAllocatorBase_af89ff3a88fda5946ab544c9a047d0c0f}\label{classgko_1_1UmpireAllocatorBase_af89ff3a88fda5946ab544c9a047d0c0f}} 
+\index{gko::UmpireAllocatorBase@{gko::UmpireAllocatorBase}!get\_actual\_size@{get\_actual\_size}}
+\index{get\_actual\_size@{get\_actual\_size}!gko::UmpireAllocatorBase@{gko::UmpireAllocatorBase}}
+\doxysubsubsection{\texorpdfstring{get\_actual\_size()}{get\_actual\_size()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} gko\+::\+Umpire\+Allocator\+Base\+::get\+\_\+actual\+\_\+size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Bytes the Umpire allocator holds from its memory resource. 
+
+For a pool, this includes reserved memory that is not currently allocated, so it is at least \mbox{\hyperlink{classgko_1_1UmpireAllocatorBase_aee5c01ab83161c36812badb9eea7b746}{get\+\_\+current\+\_\+size()}}. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/base/memory.\+hpp\end{DoxyCompactItemize}

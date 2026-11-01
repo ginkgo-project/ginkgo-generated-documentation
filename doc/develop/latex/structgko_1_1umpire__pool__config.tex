@@ -1,0 +1,102 @@
+\hypertarget{structgko_1_1umpire__pool__config}{}\doxysection{gko\+::umpire\+\_\+pool\+\_\+config Struct Reference}
+\label{structgko_1_1umpire__pool__config}\index{gko::umpire\_pool\_config@{gko::umpire\_pool\_config}}
+
+
+Configuration for a pool created by \mbox{\hyperlink{namespacegko_a34bec7bb2641d9517e9bb1ee1bef1681}{make\+\_\+umpire\+\_\+cpu\+\_\+pool()}}, \mbox{\hyperlink{namespacegko_a5b338ead111f24a75be0137dc86111e5}{make\+\_\+umpire\+\_\+cuda\+\_\+pool()}} or \mbox{\hyperlink{namespacegko_aadb70ef53c27ababe45b80d6cba01124}{make\+\_\+umpire\+\_\+hip\+\_\+pool()}}.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/base/memory.\+hpp$>$}
+
+
+
+Collaboration diagram for gko\+::umpire\+\_\+pool\+\_\+config\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=216pt]{structgko_1_1umpire__pool__config__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{structgko_1_1umpire__pool__config_af5df672642e353dd0007e7a1afff185f}{resource}} = \char`\"{}\char`\"{}
+\begin{DoxyCompactList}\small\item\em Umpire memory resource to pool over; empty means \char`\"{}\+H\+O\+S\+T\char`\"{} for C\+PU and \char`\"{}\+D\+E\+V\+I\+C\+E\char`\"{} for C\+U\+D\+A/\+H\+IP. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{structgko_1_1umpire__pool__config_a41e9aeccfe98ee521971e650f4a73925}{initial\+\_\+block\+\_\+size}} = \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}\{512\} $<$$<$ 20
+\begin{DoxyCompactList}\small\item\em Size in bytes of the pool\textquotesingle{}s first block, requested on first allocation. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structgko_1_1umpire__pool__config_a086ab455fbb47e88e9decabb1b347f22}\label{structgko_1_1umpire__pool__config_a086ab455fbb47e88e9decabb1b347f22}} 
+\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{structgko_1_1umpire__pool__config_a086ab455fbb47e88e9decabb1b347f22}{growth\+\_\+block\+\_\+size}} = \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}\{64\} $<$$<$ 20
+\begin{DoxyCompactList}\small\item\em Minimum bytes per subsequent growth. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} \mbox{\hyperlink{structgko_1_1umpire__pool__config_a116a67dcbb962db0fe5d98bffd89d521}{alignment}} = 256
+\begin{DoxyCompactList}\small\item\em Allocation alignment, matching cuda\+Malloc/hip\+Malloc rather than Umpire\textquotesingle{}s 16-\/byte default. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structgko_1_1umpire__pool__config_af70c8034af441a4d2871e21a122d9d81}{tracked}} = true
+\begin{DoxyCompactList}\small\item\em Register each allocation in Umpire\textquotesingle{}s tracking registry. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structgko_1_1umpire__pool__config_a5ad2d9aa3bf0a0d93b059b378ad9044a}{thread\+\_\+safe}} = false
+\begin{DoxyCompactList}\small\item\em Wrap the pool in Umpire\textquotesingle{}s Thread\+Safe\+Allocator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Configuration for a pool created by \mbox{\hyperlink{namespacegko_a34bec7bb2641d9517e9bb1ee1bef1681}{make\+\_\+umpire\+\_\+cpu\+\_\+pool()}}, \mbox{\hyperlink{namespacegko_a5b338ead111f24a75be0137dc86111e5}{make\+\_\+umpire\+\_\+cuda\+\_\+pool()}} or \mbox{\hyperlink{namespacegko_aadb70ef53c27ababe45b80d6cba01124}{make\+\_\+umpire\+\_\+hip\+\_\+pool()}}. 
+
+The pool stays registered with Umpire, and keeps its reserved memory, until release() is called or the program exits. 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{structgko_1_1umpire__pool__config_a116a67dcbb962db0fe5d98bffd89d521}\label{structgko_1_1umpire__pool__config_a116a67dcbb962db0fe5d98bffd89d521}} 
+\index{gko::umpire\_pool\_config@{gko::umpire\_pool\_config}!alignment@{alignment}}
+\index{alignment@{alignment}!gko::umpire\_pool\_config@{gko::umpire\_pool\_config}}
+\doxysubsubsection{\texorpdfstring{alignment}{alignment}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} gko\+::umpire\+\_\+pool\+\_\+config\+::alignment = 256}
+
+
+
+Allocation alignment, matching cuda\+Malloc/hip\+Malloc rather than Umpire\textquotesingle{}s 16-\/byte default. 
+
+Must be a nonzero power of two. Applies only to pools created by make\+\_\+umpire\+\_\+$\ast$\+\_\+pool(). \mbox{\Hypertarget{structgko_1_1umpire__pool__config_a41e9aeccfe98ee521971e650f4a73925}\label{structgko_1_1umpire__pool__config_a41e9aeccfe98ee521971e650f4a73925}} 
+\index{gko::umpire\_pool\_config@{gko::umpire\_pool\_config}!initial\_block\_size@{initial\_block\_size}}
+\index{initial\_block\_size@{initial\_block\_size}!gko::umpire\_pool\_config@{gko::umpire\_pool\_config}}
+\doxysubsubsection{\texorpdfstring{initial\_block\_size}{initial\_block\_size}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} gko\+::umpire\+\_\+pool\+\_\+config\+::initial\+\_\+block\+\_\+size = \mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}}\{512\} $<$$<$ 20}
+
+
+
+Size in bytes of the pool\textquotesingle{}s first block, requested on first allocation. 
+
+Each M\+PI rank has its own pool, so divide the budget by the number of ranks sharing a G\+PU or node. \mbox{\Hypertarget{structgko_1_1umpire__pool__config_af5df672642e353dd0007e7a1afff185f}\label{structgko_1_1umpire__pool__config_af5df672642e353dd0007e7a1afff185f}} 
+\index{gko::umpire\_pool\_config@{gko::umpire\_pool\_config}!resource@{resource}}
+\index{resource@{resource}!gko::umpire\_pool\_config@{gko::umpire\_pool\_config}}
+\doxysubsubsection{\texorpdfstring{resource}{resource}}
+{\footnotesize\ttfamily std\+::string gko\+::umpire\+\_\+pool\+\_\+config\+::resource = \char`\"{}\char`\"{}}
+
+
+
+Umpire memory resource to pool over; empty means \char`\"{}\+H\+O\+S\+T\char`\"{} for C\+PU and \char`\"{}\+D\+E\+V\+I\+C\+E\char`\"{} for C\+U\+D\+A/\+H\+IP. 
+
+May be device-\/qualified (\char`\"{}\+D\+E\+V\+I\+C\+E\+::1\char`\"{}).
+
+A plain \char`\"{}\+D\+E\+V\+I\+C\+E\char`\"{} binds to whichever device is current when Umpire first creates it, so a mismatched executor throws. Multi-\/\+G\+PU users should pass \char`\"{}\+D\+E\+V\+I\+C\+E\+::$<$id$>$\char`\"{}. \mbox{\Hypertarget{structgko_1_1umpire__pool__config_a5ad2d9aa3bf0a0d93b059b378ad9044a}\label{structgko_1_1umpire__pool__config_a5ad2d9aa3bf0a0d93b059b378ad9044a}} 
+\index{gko::umpire\_pool\_config@{gko::umpire\_pool\_config}!thread\_safe@{thread\_safe}}
+\index{thread\_safe@{thread\_safe}!gko::umpire\_pool\_config@{gko::umpire\_pool\_config}}
+\doxysubsubsection{\texorpdfstring{thread\_safe}{thread\_safe}}
+{\footnotesize\ttfamily bool gko\+::umpire\+\_\+pool\+\_\+config\+::thread\+\_\+safe = false}
+
+
+
+Wrap the pool in Umpire\textquotesingle{}s Thread\+Safe\+Allocator. 
+
+Set this if the pool is used from several threads. The unwrapped pool is registered as {\ttfamily $<$name$>$\+\_\+pool}, and {\ttfamily name} refers to the wrapper. \mbox{\Hypertarget{structgko_1_1umpire__pool__config_af70c8034af441a4d2871e21a122d9d81}\label{structgko_1_1umpire__pool__config_af70c8034af441a4d2871e21a122d9d81}} 
+\index{gko::umpire\_pool\_config@{gko::umpire\_pool\_config}!tracked@{tracked}}
+\index{tracked@{tracked}!gko::umpire\_pool\_config@{gko::umpire\_pool\_config}}
+\doxysubsubsection{\texorpdfstring{tracked}{tracked}}
+{\footnotesize\ttfamily bool gko\+::umpire\+\_\+pool\+\_\+config\+::tracked = true}
+
+
+
+Register each allocation in Umpire\textquotesingle{}s tracking registry. 
+
+If false, the size/watermark/count getters report 0, and deallocating a foreign pointer is undefined behaviour instead of a reported error. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/base/memory.\+hpp\end{DoxyCompactItemize}

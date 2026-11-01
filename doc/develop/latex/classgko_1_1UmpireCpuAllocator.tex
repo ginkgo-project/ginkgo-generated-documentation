@@ -1,0 +1,76 @@
+\hypertarget{classgko_1_1UmpireCpuAllocator}{}\doxysection{gko\+::Umpire\+Cpu\+Allocator Class Reference}
+\label{classgko_1_1UmpireCpuAllocator}\index{gko::UmpireCpuAllocator@{gko::UmpireCpuAllocator}}
+
+
+\mbox{\hyperlink{classgko_1_1Allocator}{Allocator}} using a named Umpire allocator over a host-\/accessible resource.  
+
+
+
+
+{\ttfamily \#include $<$ginkgo/core/base/memory.\+hpp$>$}
+
+
+
+Inheritance diagram for gko\+::Umpire\+Cpu\+Allocator\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1UmpireCpuAllocator__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for gko\+::Umpire\+Cpu\+Allocator\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgko_1_1UmpireCpuAllocator__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgko_1_1UmpireCpuAllocator_a91be54a5b4e84a06be1319dc050a9853}{Umpire\+Cpu\+Allocator}} (std\+::string name)
+\item 
+\mbox{\Hypertarget{classgko_1_1UmpireCpuAllocator_aec723900c39d6965b37d91ff88943415}\label{classgko_1_1UmpireCpuAllocator_aec723900c39d6965b37d91ff88943415}} 
+void $\ast$ {\bfseries allocate} (\mbox{\hyperlink{namespacegko_a6e5c95df0ae4e47aab2f604a22d98ee7}{size\+\_\+type}} num\+\_\+bytes) override
+\item 
+\mbox{\Hypertarget{classgko_1_1UmpireCpuAllocator_a7d50d75fdd35c6d1e09f6ea8ef6cba0b}\label{classgko_1_1UmpireCpuAllocator_a7d50d75fdd35c6d1e09f6ea8ef6cba0b}} 
+void {\bfseries deallocate} (void $\ast$ptr) override
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{classgko_1_1Allocator}{Allocator}} using a named Umpire allocator over a host-\/accessible resource. 
+
+\begin{DoxyWarning}{Warning}
+Umpire\textquotesingle{}s Resource\+Manager is a function-\/local static and this class holds a non-\/owning handle into it, so an \mbox{\hyperlink{classgko_1_1Executor}{Executor}} using it must not outlive main() (e.\+g. in a global shared\+\_\+ptr). The same holds for \mbox{\hyperlink{classgko_1_1UmpireCudaAllocator}{Umpire\+Cuda\+Allocator}} and \mbox{\hyperlink{classgko_1_1UmpireHipAllocator}{Umpire\+Hip\+Allocator}}. 
+\end{DoxyWarning}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classgko_1_1UmpireCpuAllocator_a91be54a5b4e84a06be1319dc050a9853}\label{classgko_1_1UmpireCpuAllocator_a91be54a5b4e84a06be1319dc050a9853}} 
+\index{gko::UmpireCpuAllocator@{gko::UmpireCpuAllocator}!UmpireCpuAllocator@{UmpireCpuAllocator}}
+\index{UmpireCpuAllocator@{UmpireCpuAllocator}!gko::UmpireCpuAllocator@{gko::UmpireCpuAllocator}}
+\doxysubsubsection{\texorpdfstring{UmpireCpuAllocator()}{UmpireCpuAllocator()}}
+{\footnotesize\ttfamily gko\+::\+Umpire\+Cpu\+Allocator\+::\+Umpire\+Cpu\+Allocator (\begin{DoxyParamCaption}\item[{std\+::string}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & name of an allocator registered with Umpire.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \mbox{\hyperlink{classgko_1_1Error}{Error}}} & if {\ttfamily name} is not registered, or its resource is not host-\/accessible. \\
+\hline
+{\em \mbox{\hyperlink{classgko_1_1NotCompiled}{Not\+Compiled}}} & if Ginkgo was built without Umpire. \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+ginkgo/core/base/memory.\+hpp\end{DoxyCompactItemize}
