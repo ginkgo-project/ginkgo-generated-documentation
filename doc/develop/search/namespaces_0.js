@@ -1,18 +1,18 @@
 var searchData=
 [
-  ['accessor_2055',['accessor',['../namespacegko_1_1accessor.html',1,'gko']]],
-  ['distributed_2056',['distributed',['../namespacegko_1_1experimental_1_1distributed.html',1,'gko::experimental']]],
-  ['factorization_2057',['factorization',['../namespacegko_1_1factorization.html',1,'gko']]],
-  ['gko_2058',['gko',['../namespacegko.html',1,'']]],
-  ['log_2059',['log',['../namespacegko_1_1batch_1_1log.html',1,'gko::batch::log'],['../namespacegko_1_1log.html',1,'gko::log']]],
-  ['matrix_2060',['matrix',['../namespacegko_1_1matrix.html',1,'gko']]],
-  ['mpi_2061',['mpi',['../namespacegko_1_1experimental_1_1mpi.html',1,'gko::experimental']]],
-  ['multigrid_2062',['multigrid',['../namespacegko_1_1multigrid.html',1,'gko::multigrid'],['../namespacegko_1_1solver_1_1multigrid.html',1,'gko::solver::multigrid']]],
-  ['name_5fdemangling_2063',['name_demangling',['../namespacegko_1_1name__demangling.html',1,'gko']]],
-  ['preconditioner_2064',['preconditioner',['../namespacegko_1_1experimental_1_1distributed_1_1preconditioner.html',1,'gko::experimental::distributed::preconditioner'],['../namespacegko_1_1preconditioner.html',1,'gko::preconditioner']]],
-  ['reorder_2065',['reorder',['../namespacegko_1_1experimental_1_1reorder.html',1,'gko::experimental::reorder'],['../namespacegko_1_1reorder.html',1,'gko::reorder']]],
-  ['solver_2066',['solver',['../namespacegko_1_1solver.html',1,'gko']]],
-  ['stop_2067',['stop',['../namespacegko_1_1stop.html',1,'gko']]],
-  ['syn_2068',['syn',['../namespacegko_1_1syn.html',1,'gko']]],
-  ['xstd_2069',['xstd',['../namespacegko_1_1xstd.html',1,'gko']]]
+  ['accessor_2056',['accessor',['../namespacegko_1_1accessor.html',1,'gko']]],
+  ['distributed_2057',['distributed',['../namespacegko_1_1experimental_1_1distributed.html',1,'gko::experimental']]],
+  ['factorization_2058',['factorization',['../namespacegko_1_1factorization.html',1,'gko']]],
+  ['gko_2059',['gko',['../namespacegko.html',1,'']]],
+  ['log_2060',['log',['../namespacegko_1_1batch_1_1log.html',1,'gko::batch::log'],['../namespacegko_1_1log.html',1,'gko::log']]],
+  ['matrix_2061',['matrix',['../namespacegko_1_1matrix.html',1,'gko']]],
+  ['mpi_2062',['mpi',['../namespacegko_1_1experimental_1_1mpi.html',1,'gko::experimental']]],
+  ['multigrid_2063',['multigrid',['../namespacegko_1_1multigrid.html',1,'gko::multigrid'],['../namespacegko_1_1solver_1_1multigrid.html',1,'gko::solver::multigrid']]],
+  ['name_5fdemangling_2064',['name_demangling',['../namespacegko_1_1name__demangling.html',1,'gko']]],
+  ['preconditioner_2065',['preconditioner',['../namespacegko_1_1experimental_1_1distributed_1_1preconditioner.html',1,'gko::experimental::distributed::preconditioner'],['../namespacegko_1_1preconditioner.html',1,'gko::preconditioner']]],
+  ['reorder_2066',['reorder',['../namespacegko_1_1experimental_1_1reorder.html',1,'gko::experimental::reorder'],['../namespacegko_1_1reorder.html',1,'gko::reorder']]],
+  ['solver_2067',['solver',['../namespacegko_1_1solver.html',1,'gko']]],
+  ['stop_2068',['stop',['../namespacegko_1_1stop.html',1,'gko']]],
+  ['syn_2069',['syn',['../namespacegko_1_1syn.html',1,'gko']]],
+  ['xstd_2070',['xstd',['../namespacegko_1_1xstd.html',1,'gko']]]
 ];
